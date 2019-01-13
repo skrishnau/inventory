@@ -41,8 +41,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Bills\Formats\BillFormatService.cs" />
+    <Compile Include="Bills\Formats\IBillFormatService.cs" />
+    <Compile Include="Bills\Generation\BillGenerationService.cs" />
+    <Compile Include="Bills\Generation\IBillGenerationService.cs" />
+    <Compile Include="Bills\SampleBills\ISampleBillService.cs" />
+    <Compile Include="Bills\SampleBills\SampleBillService.cs" />
+    <Compile Include="Clients\Details\ClientDetailService.cs" />
+    <Compile Include="Clients\Details\IClientDetailService.cs" />
+    <Compile Include="Clients\Reports\ClientReportService.cs" />
+    <Compile Include="Clients\Reports\IClientReportService.cs" />
+    <Compile Include="Common\Leads\ILeadService.cs" />
+    <Compile Include="Common\Leads\LeadService.cs" />
+    <Compile Include="Customers\Details\CustomerDetailService.cs" />
+    <Compile Include="Customers\Details\ICustomerDetailService.cs" />
+    <Compile Include="Customers\Reports\CustomerReportService.cs" />
+    <Compile Include="Customers\Reports\ICustomerReportService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchases\PurchaseOrders\IPurchaseOrderService.cs" />
+    <Compile Include="Purchases\PurchaseOrders\PurchaseOrderService.cs" />
+    <Compile Include="Reports\Admin\AdminReportService.cs" />
+    <Compile Include="Reports\Admin\IAdminReportService.cs" />
+    <Compile Include="Reports\Crashes\CrashReportService.cs" />
+    <Compile Include="Reports\Crashes\ICrashReportService.cs" />
+    <Compile Include="Sales\SalesOrders\ISalesOrderService.cs" />
+    <Compile Include="Sales\SalesOrders\SalesOrderService.cs" />
+    <Compile Include="Users\Accounts\AccountService.cs" />
+    <Compile Include="Users\Accounts\IAccountService.cs" />
+    <Compile Include="Users\Roles\IRoleService.cs" />
+    <Compile Include="Users\Roles\RoleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.csproj">
@@ -53,6 +80,10 @@
       <Project>{89adf5f7-d19e-4350-ba1e-2f04fba05df1}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

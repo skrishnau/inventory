@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database
+namespace Service.Reports.Crashes
 {
-    public class Class1
+    public interface ICrashReportService
     {
     }
 }

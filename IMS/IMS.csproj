@@ -72,15 +72,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Inventory\" />
-    <Folder Include="Forms\Master\" />
-    <Folder Include="Forms\Purchase\" />
-    <Folder Include="Forms\Sales\" />
+    <Folder Include="Bills\" />
+    <Folder Include="Common\" />
+    <Folder Include="Master\" />
+    <Folder Include="Purchases\" />
+    <Folder Include="Sales\" />
+    <Folder Include="Settings\" />
+    <Folder Include="Shared\" />
+    <Folder Include="Users\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj">

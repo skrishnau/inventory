@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service
+namespace DTO.Purchases
 {
-    public class Class1
+    class PurchaseOrderModel
     {
     }
 }
