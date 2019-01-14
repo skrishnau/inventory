@@ -9,5 +9,6 @@ namespace Infrastructure.Entities.Clients
     public class Client
     {
         public int Id { get; set; }
+
     }
 }

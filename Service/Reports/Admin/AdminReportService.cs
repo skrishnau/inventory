@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.Reports.Admin
 {
-    public class AdminReportService
+    public class AdminReportService:IAdminReportService
     {
     }
 }

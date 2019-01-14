@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.Purchases.PurchaseOrders
 {
-    public class PurchaseOrderService
+    public class PurchaseOrderService:IPurchaseOrderService
     {
     }
 }
