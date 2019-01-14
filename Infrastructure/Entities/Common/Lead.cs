@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTO.Sales
+namespace Infrastructure.Entities.Common
 {
-    class SalesReportModel
+    public class Lead
     {
+        public int Id { get; set; }
     }
 }

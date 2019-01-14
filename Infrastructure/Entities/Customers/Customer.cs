@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTO.Customers
+namespace Infrastructure.Entities.Customers
 {
-    class CustomerDetailModel
+    public class Customer
     {
+        public int Id { get; set; }
     }
 }

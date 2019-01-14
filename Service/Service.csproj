@@ -72,13 +72,13 @@
     <Compile Include="Users\Roles\RoleService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Database\Database.csproj">
-      <Project>{158008d1-d69c-43f0-80af-6a4a395c707b}</Project>
-      <Name>Database</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{89adf5f7-d19e-4350-ba1e-2f04fba05df1}</Project>
       <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
+      <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

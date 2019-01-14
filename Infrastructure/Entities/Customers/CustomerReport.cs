@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Bills
+namespace Infrastructure.Entities.Customers
 {
-    class Bill
+    public class CustomerReport
     {
+        public int Id { get; set; }
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Users
+namespace Infrastructure.Entities.Bills
 {
-    class User
+    public class Bill
     {
-    }
+        public int Id { get; set; }
+    } 
 }

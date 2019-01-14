@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Common
+namespace Infrastructure.Entities.Purchases
 {
-    class Lead
+    public class Purchase
     {
+        public int Id { get; set; }
     }
 }

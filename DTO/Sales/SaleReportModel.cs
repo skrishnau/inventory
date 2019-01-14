@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTO.Clients
+namespace DTO.Sales
 {
-    class ClientDetailModel
+    public class SaleReportModel
     {
     }
 }

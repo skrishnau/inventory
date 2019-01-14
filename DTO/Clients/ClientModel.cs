@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Purchases
+namespace DTO.Clients
 {
-    class PurchaseOrder
+    public class ClientModel
     {
     }
 }

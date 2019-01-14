@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Sales
+namespace DTO.Customers
 {
-    class SaleOder
+    public class CustomerModel
     {
+
     }
 }
