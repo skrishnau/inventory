@@ -9,5 +9,6 @@ namespace Infrastructure.Entities.Common
     public class Lead
     {
         public int Id { get; set; }
+        //No idea :D
     }
 }
