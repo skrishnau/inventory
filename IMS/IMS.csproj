@@ -80,6 +80,8 @@
   <ItemGroup>
     <Folder Include="Bills\" />
     <Folder Include="Common\" />
+    <Folder Include="Dependency\" />
+    <Folder Include="Forms\" />
     <Folder Include="Master\" />
     <Folder Include="Purchases\" />
     <Folder Include="Sales\" />
