@@ -52,15 +52,18 @@
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
-    <Compile Include="Entities\Clients\Client.cs" />
-    <Compile Include="Entities\Clients\ClientReport.cs" />
+    <Compile Include="Entities\Suppliers\Supplier.cs" />
+    <Compile Include="Entities\Suppliers\SupplierReport.cs" />
     <Compile Include="Entities\Common\Lead.cs" />
     <Compile Include="Entities\Customers\Customer.cs" />
     <Compile Include="Entities\Customers\CustomerReport.cs" />
     <Compile Include="Entities\Purchases\Purchase.cs" />
     <Compile Include="Entities\Purchases\PurchaseOrder.cs" />
+    <Compile Include="Entities\Purchases\Receipt.cs" />
+    <Compile Include="Entities\Sales\Invoice.cs" />
     <Compile Include="Entities\Sales\Sale.cs" />
-    <Compile Include="Entities\Sales\SaleOder.cs" />
+    <Compile Include="Entities\Sales\SaleItem.cs" />
+    <Compile Include="Entities\Sales\SaleOrder.cs" />
     <Compile Include="Entities\Users\User.cs" />
     <Compile Include="Migrations\201901141520464_initial_migration.cs" />
     <Compile Include="Migrations\201901141520464_initial_migration.Designer.cs">

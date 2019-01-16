@@ -1,7 +1,7 @@
 namespace Infrastructure.Context
 {
     using Infrastructure.Entities.Bills;
-    using Infrastructure.Entities.Clients;
+    using Infrastructure.Entities.Suppliers;
     using Infrastructure.Entities.Common;
     using Infrastructure.Entities.Customers;
     using Infrastructure.Entities.Purchases;
@@ -32,8 +32,8 @@ namespace Infrastructure.Context
        
         public virtual DbSet<Bill> Bill { get; set; }
 
-        public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<ClientReport> ClientReport { get; set; }
+        public virtual DbSet<Supplier> Client { get; set; }
+        public virtual DbSet<SupplierReport> ClientReport { get; set; }
 
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<CustomerReport> CustomerReport { get; set; }
@@ -44,7 +44,7 @@ namespace Infrastructure.Context
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
 
         public virtual DbSet<Sale> Sales { get; set; }
-        public virtual DbSet<SaleOder> SaleOrder { get; set; }
+        public virtual DbSet<SaleOrder> SaleOrder { get; set; }
 
         public virtual DbSet<User> User { get; set; }
 
