@@ -52,7 +52,12 @@
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
+    <Compile Include="Entities\Items\Item.cs" />
+    <Compile Include="Entities\Products\Brand.cs" />
+    <Compile Include="Entities\Products\Product.cs" />
+    <Compile Include="Entities\Products\ProductCategory.cs" />
     <Compile Include="Entities\Suppliers\Supplier.cs" />
+    <Compile Include="Entities\Products\ProductSupplier.cs" />
     <Compile Include="Entities\Suppliers\SupplierReport.cs" />
     <Compile Include="Entities\Common\Lead.cs" />
     <Compile Include="Entities\Customers\Customer.cs" />
