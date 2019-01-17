@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Suppliers
 {
-    public class SupplierReport
+    public class SupplierReport //why's that for?
     {
         public int Id { get; set; }
+        
     }
 }

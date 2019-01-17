@@ -10,11 +10,11 @@ namespace Infrastructure.Entities.Products
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } // textbox 
 
-        public int ProductCategoryId { get; set; }
+        public int ProductCategoryId { get; set; } //dropdown
 
-        public int BrandId { get; set; }
+        public int BrandId { get; set; } // dropdown
 
         // current informations
 
@@ -25,7 +25,7 @@ namespace Infrastructure.Entities.Products
         public decimal LatestUnitSellPrice { get; set; }
 
 
-        // Alerts
+        // Alerts // checkbox
         public bool ShowStockAlerts { get; set; }
 
         public int MinStockCountForAlert { get; set; }

@@ -16,7 +16,5 @@ namespace Infrastructure.Entities.Products
         public string Name { get; set; }
 
         public DateTime? DeletedAt { get; set; }
-
-
     }
 }

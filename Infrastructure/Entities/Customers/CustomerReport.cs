@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Customers
 {
-    public class CustomerReport
+    public class CustomerReport //??
     {
         public int Id { get; set; }
     }
