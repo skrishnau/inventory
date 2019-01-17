@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{859FD5E9-B5EA-4DBB-9E61-94314FF244EA}</ProjectGuid>
+    <ProjectGuid>{C0D2A3BF-BC39-40AC-BD00-354629BB175E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Service</RootNamespace>
-    <AssemblyName>Service</AssemblyName>
+    <RootNamespace>ViewModel</RootNamespace>
+    <AssemblyName>ViewModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,36 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Bills\Formats\BillFormatService.cs" />
-    <Compile Include="Core\Bills\Formats\IBillFormatService.cs" />
-    <Compile Include="Core\Bills\Generation\BillGenerationService.cs" />
-    <Compile Include="Core\Bills\Generation\IBillGenerationService.cs" />
-    <Compile Include="Core\Bills\SampleBills\ISampleBillService.cs" />
-    <Compile Include="Core\Bills\SampleBills\SampleBillService.cs" />
-    <Compile Include="Core\Clients\Details\ClientDetailService.cs" />
-    <Compile Include="Core\Clients\Details\IClientDetailService.cs" />
-    <Compile Include="Core\Clients\Reports\ClientReportService.cs" />
-    <Compile Include="Core\Clients\Reports\IClientReportService.cs" />
-    <Compile Include="Core\Common\Leads\ILeadService.cs" />
-    <Compile Include="Core\Common\Leads\LeadService.cs" />
-    <Compile Include="Core\Customers\Details\CustomerDetailService.cs" />
-    <Compile Include="Core\Customers\Details\ICustomerDetailService.cs" />
-    <Compile Include="Core\Customers\Reports\CustomerReportService.cs" />
-    <Compile Include="Core\Customers\Reports\ICustomerReportService.cs" />
+    <Compile Include="Core\Bills\BillFormatModel.cs" />
+    <Compile Include="Core\Bills\BillGenerationModel.cs" />
+    <Compile Include="Core\Clients\ClientModel.cs" />
+    <Compile Include="Core\Clients\ClientReportModel.cs" />
+    <Compile Include="Core\Common\LeadModel.cs" />
+    <Compile Include="Core\Customers\CustomerModel.cs" />
+    <Compile Include="Core\Customers\CustomerReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Purchases\PurchaseOrders\IPurchaseOrderService.cs" />
-    <Compile Include="Core\Purchases\PurchaseOrders\PurchaseOrderService.cs" />
-    <Compile Include="Core\Reports\Admin\AdminReportService.cs" />
-    <Compile Include="Core\Reports\Admin\IAdminReportService.cs" />
-    <Compile Include="Core\Reports\Crashes\CrashReportService.cs" />
-    <Compile Include="Core\Reports\Crashes\ICrashReportService.cs" />
-    <Compile Include="Core\Sales\SalesOrders\ISalesOrderService.cs" />
-    <Compile Include="Core\Sales\SalesOrders\SalesOrderService.cs" />
-    <Compile Include="Core\Users\Accounts\AccountService.cs" />
-    <Compile Include="Core\Users\Accounts\IAccountService.cs" />
-    <Compile Include="Core\Users\Roles\IRoleService.cs" />
-    <Compile Include="Core\Users\Roles\RoleService.cs" />
-    <Compile Include="Utility\DateUtilityService.cs" />
+    <Compile Include="Core\Purchases\PurchaseModel.cs" />
+    <Compile Include="Core\Purchases\PurchaseOrderModel.cs" />
+    <Compile Include="Core\Purchases\PurchaseReportModel.cs" />
+    <Compile Include="Core\Sales\SaleModel.cs" />
+    <Compile Include="Core\Sales\SaleOrderModel.cs" />
+    <Compile Include="Core\Sales\SaleReportModel.cs" />
+    <Compile Include="Core\Users\UserModel.cs" />
+    <Compile Include="Utility\MessageModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
@@ -78,7 +64,6 @@
       <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Readme.md" />
   </ItemGroup>

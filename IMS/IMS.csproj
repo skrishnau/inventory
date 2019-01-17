@@ -90,10 +90,6 @@
     <Folder Include="Users\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DTO\DTO.csproj">
-      <Project>{89adf5f7-d19e-4350-ba1e-2f04fba05df1}</Project>
-      <Name>DTO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{859fd5e9-b5ea-4dbb-9e61-94314ff244ea}</Project>
       <Name>Service</Name>

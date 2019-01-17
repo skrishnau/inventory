@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
+    <Compile Include="Entities\Common\Settings.cs" />
     <Compile Include="Entities\Items\Item.cs" />
     <Compile Include="Entities\Products\Brand.cs" />
     <Compile Include="Entities\Products\Product.cs" />
