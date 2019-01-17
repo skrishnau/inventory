@@ -52,6 +52,9 @@
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
+    <Compile Include="Entities\Business\Branch.cs" />
+    <Compile Include="Entities\Business\UserBrach.cs" />
+    <Compile Include="Entities\Business\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
     <Compile Include="Entities\Items\Item.cs" />
     <Compile Include="Entities\Products\Brand.cs" />
@@ -70,6 +73,8 @@
     <Compile Include="Entities\Sales\Sale.cs" />
     <Compile Include="Entities\Sales\SaleItem.cs" />
     <Compile Include="Entities\Sales\SaleOrder.cs" />
+    <Compile Include="Entities\Users\Permission.cs" />
+    <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
     <Compile Include="Migrations\201901141520464_initial_migration.cs" />
     <Compile Include="Migrations\201901141520464_initial_migration.Designer.cs">
@@ -88,5 +93,6 @@
       <DependentUpon>201901141520464_initial_migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
