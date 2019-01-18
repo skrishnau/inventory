@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Sales
 {
-
     /// <summary>
     /// How do we implement discount scheme? 
     /// </summary>

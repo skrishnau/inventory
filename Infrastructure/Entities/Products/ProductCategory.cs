@@ -17,7 +17,11 @@ namespace Infrastructure.Entities.Products
         // implement N tier 
         public int? ParentProductCategoryId { get; set; }
 
+        // time stamps
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
+
 
         // -------------------- Table Objects -------------------- //
 

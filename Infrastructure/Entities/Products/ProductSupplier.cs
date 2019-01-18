@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Products
 {
+    /// <summary>
+    /// One product is supplied by many suppliers & one supplier supplies many products
+    /// </summary>
     public class ProductSupplier
     {
         public int Id { get; set; }

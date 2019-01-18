@@ -17,9 +17,12 @@ namespace Infrastructure.Entities.Users
         public string Name { get; set; }
         // to indicate if this is defined by system and non-editable by users
         public bool isSystemDefined { get; set; }
+        
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
+
+
     }
 }
