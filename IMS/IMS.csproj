@@ -76,8 +76,17 @@
     <Compile Include="Forms\Products\Create\UC\AddProductUC.Designer.cs">
       <DependentUpon>AddProductUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Products\Listing\ProductListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\Listing\ProductListUC.Designer.cs">
+      <DependentUpon>ProductListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Products\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +99,9 @@
     <EmbeddedResource Include="Forms\Products\Create\UC\AddProductUC.resx">
       <DependentUpon>AddProductUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Products\Listing\ProductListUC.resx">
+      <DependentUpon>ProductListUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -98,6 +110,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -133,6 +146,9 @@
       <Project>{c0d2a3bf-bc39-40ac-bd00-354629bb175e}</Project>
       <Name>ViewModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product-design.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
