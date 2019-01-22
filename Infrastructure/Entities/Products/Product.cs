@@ -46,7 +46,5 @@ namespace Infrastructure.Entities.Products
         public virtual ProductCategory ProductCategory { get; set; }
 
         public virtual Brand Brand { get; set; }
-
-
     }
 }

@@ -52,8 +52,44 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Products\Create\ProductCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\Create\ProductCreate.Designer.cs">
+      <DependentUpon>ProductCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Products\Create\UC\AddBrandUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\Create\UC\AddBrandUC.Designer.cs">
+      <DependentUpon>AddBrandUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Products\Create\UC\AddCategoryUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\Create\UC\AddCategoryUC.Designer.cs">
+      <DependentUpon>AddCategoryUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Products\Create\UC\AddProductUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\Create\UC\AddProductUC.Designer.cs">
+      <DependentUpon>AddProductUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Products\Create\ProductCreate.resx">
+      <DependentUpon>ProductCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Products\Create\UC\AddBrandUC.resx">
+      <DependentUpon>AddBrandUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Products\Create\UC\AddCategoryUC.resx">
+      <DependentUpon>AddCategoryUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Products\Create\UC\AddProductUC.resx">
+      <DependentUpon>AddProductUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,16 +114,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bills\" />
-    <Folder Include="Common\" />
     <Folder Include="Dependency\" />
-    <Folder Include="Forms\" />
+    <Folder Include="Forms\Bills\" />
+    <Folder Include="Forms\Common\" />
+    <Folder Include="Forms\Purchases\" />
+    <Folder Include="Forms\Settings\" />
+    <Folder Include="Forms\Shared\" />
+    <Folder Include="Forms\Users\" />
     <Folder Include="Master\" />
-    <Folder Include="Purchases\" />
     <Folder Include="Sales\" />
-    <Folder Include="Settings\" />
-    <Folder Include="Shared\" />
-    <Folder Include="Users\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Service\Service.csproj">

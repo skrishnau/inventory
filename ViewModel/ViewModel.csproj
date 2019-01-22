@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,8 +45,20 @@
   <ItemGroup>
     <Compile Include="Core\Bills\BillFormatModel.cs" />
     <Compile Include="Core\Bills\BillGenerationModel.cs" />
+    <Compile Include="Core\Clients\ClientAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\Clients\ClientAddEdit.Designer.cs">
+      <DependentUpon>ClientAddEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Clients\ClientModel.cs" />
     <Compile Include="Core\Clients\ClientReportModel.cs" />
+    <Compile Include="Core\Clients\ClientsListingUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\Clients\ClientsListingUC.Designer.cs">
+      <DependentUpon>ClientsListingUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Common\LeadModel.cs" />
     <Compile Include="Core\Customers\CustomerModel.cs" />
     <Compile Include="Core\Customers\CustomerReportModel.cs" />
@@ -66,6 +80,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Clients\ClientAddEdit.resx">
+      <DependentUpon>ClientAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Clients\ClientsListingUC.resx">
+      <DependentUpon>ClientsListingUC.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
