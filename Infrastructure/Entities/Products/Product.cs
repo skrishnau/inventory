@@ -13,7 +13,7 @@ namespace Infrastructure.Entities.Products
         public string Name { get; set; }
         // TODO:: implement Many-to-Many realtion later in version 2 
         // (i.e. one product can be in multiple categories)
-        public int ProductCategoryId { get; set; }
+        public int CategoryId { get; set; }
         // brand; one product belongs to one brand 
         public int BrandId { get; set; }
 
@@ -41,7 +41,7 @@ namespace Infrastructure.Entities.Products
 
 
         // ------ table objects ------ //
-        public virtual ProductCategory ProductCategory { get; set; }
+        public virtual Category Category { get; set; }
 
         public virtual Brand Brand { get; set; }
 

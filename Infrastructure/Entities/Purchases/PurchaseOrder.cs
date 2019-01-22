@@ -9,10 +9,8 @@ namespace Infrastructure.Entities.Purchases
     public class PurchaseOrder
     {
         public int Id { get; set; }
+        public int LotNumber { get; set; }
         public int PurchaseLotId { get; set; }
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
-        public decimal PricePerUnit { get; set; }
-        public decimal TotalPrice { get; set; }
+        
     }
 }

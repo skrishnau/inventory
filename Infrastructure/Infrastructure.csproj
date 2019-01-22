@@ -54,6 +54,11 @@
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
+    <Compile Include="Entities\Products\Option.cs" />
+    <Compile Include="Entities\Products\ProductOption.cs" />
+    <Compile Include="Entities\Products\ProductVariant.cs" />
+    <Compile Include="Entities\Products\ProductVariantValue.cs" />
+    <Compile Include="Entities\Purchases\PurchaseItem.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Business\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
@@ -61,7 +66,7 @@
     <Compile Include="Entities\Items\Item.cs" />
     <Compile Include="Entities\Products\Brand.cs" />
     <Compile Include="Entities\Products\Product.cs" />
-    <Compile Include="Entities\Products\ProductCategory.cs" />
+    <Compile Include="Entities\Products\Category.cs" />
     <Compile Include="Entities\Suppliers\Supplier.cs" />
     <Compile Include="Entities\Products\ProductSupplier.cs" />
     <Compile Include="Entities\Suppliers\SupplierReport.cs" />

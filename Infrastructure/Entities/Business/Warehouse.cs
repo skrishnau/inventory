@@ -8,7 +8,7 @@ namespace Infrastructure.Entities.Business
 {
     /// <summary>
     /// Generally warehouse is used as hub between import and supply 
-    ///         or to store stocks in chunks. 
+    ///             or to store stocks in chunks. 
     /// Warehouse is independent of Branch but we could relate 
     ///     these as "Warehouse nearest to the branches". 
     ///     This concept will help to move stocks from a warehouse to nearest branch only
