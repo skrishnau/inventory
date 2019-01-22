@@ -5,16 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Entities.Sales
+namespace Infrastructure.Entities.Purchases
 {
-    /// <summary>
-    /// How do we implement discount scheme? 
-    /// </summary>
-    public class SaleItem
+    public class PurchaseItem
     {
         public int Id { get; set; }
-        // to which sale transaction does this item belongs 
-        public int SaleId { get; set; }
+        // to which purchase transaction does this item belongs 
+        public int PurchaseId { get; set; }
         // the product
         public int ProductId { get; set; }
         // no of items
@@ -27,9 +24,8 @@ namespace Infrastructure.Entities.Sales
         public DateTime? DeletedAt { get; set; }
 
         // ================= Table Objects ==================== //
-        public virtual Sale Sale { get; set; }
+        public virtual Purchase Purchase { get; set; }
 
         public virtual Product Product { get; set; }
-
     }
 }

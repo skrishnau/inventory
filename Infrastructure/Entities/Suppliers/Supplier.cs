@@ -12,6 +12,7 @@ namespace Infrastructure.Entities.Suppliers
         public int Id { get; set; }
         // Basic info of every Customer and Supplier are entered in User table 
         public int UserId { get; set; }
+
         // supplier specific informations
         public string Fax { get; set; }
         public string Website { get; set; }
@@ -24,7 +25,7 @@ namespace Infrastructure.Entities.Suppliers
 
     }
 
-
+    // TODO: analyze below concepts later::
     //business size
     //client type
     //client status {good, bad, black_listed}

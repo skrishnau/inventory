@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Infrastructure.Entities.Sales
 {
     /// <summary>
-    /// For Orders. i.e. for transactions that are pre-ordered. (i.e. not on the spot)
+    /// For Orders. i.e. for transactions that are pre-ordered. (i.e. not on the POS)
     /// Need to record Sales Order because it has different process than sales from shop
     /// </summary>
     public class SaleOrder

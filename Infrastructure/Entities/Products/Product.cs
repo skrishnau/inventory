@@ -11,18 +11,19 @@ namespace Infrastructure.Entities.Products
         public int Id { get; set; }
         // product name
         public string Name { get; set; }
-        // implement Many-to-Many realtion later in version 2 
+        // TODO:: implement Many-to-Many realtion later in version 2 
         // (i.e. one product can be in multiple categories)
-        public int ProductCategoryId { get; set; }
+        public int CategoryId { get; set; }
         // brand; one product belongs to one brand 
         public int BrandId { get; set; }
 
         // ==== current informations (calculated at runtime) ==== //
 
+        // stock quantity
         public decimal QuantityInStock { get; set; }
-
+        // lastly purchase price of the same product
         public decimal LatestUnitCostPrice { get; set; }
-
+        // lastly selling price of the same product
         public decimal LatestUnitSellPrice { get; set; }
 
 
@@ -33,17 +34,14 @@ namespace Infrastructure.Entities.Products
         // Min. stock count which triggers alert
         public int MinStockCountForAlert { get; set; }
 
-
+        // time stamps
         public DateTime CreatedAt { get; set; }
-
         public DateTime UpdatedAt { get; set; }
-
         public DateTime? DeletedAt { get; set; }
 
 
-
         // ------ table objects ------ //
-        public virtual ProductCategory ProductCategory { get; set; }
+        public virtual Category Category { get; set; }
 
         public virtual Brand Brand { get; set; }
     }

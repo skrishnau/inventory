@@ -12,9 +12,12 @@ namespace Infrastructure.Entities.Products
    public class Brand
     {
         public int Id { get; set; }
-
+        // brand name
         public string Name { get; set; }
 
+        // time stamps
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Entities.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,12 @@ namespace Infrastructure.Entities.Customers
         public int UserId { get; set; }
 
         // location will be implemented in future version (pin-point location -- coordinates etc.)
-        // for delivery purposes; many locations could be entered and one of them as current
-        // location is in one-to-many relation
+        // for delivery purposes; many locations could be entered and one of them set as current
+        //  location... Customer is in one-to-many relation with location
 
-       
 
+        // ====== Table objects ====== //
+        public virtual User User { get; set; }
 
     }
 }

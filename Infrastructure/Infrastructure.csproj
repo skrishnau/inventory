@@ -53,13 +53,20 @@
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
-    <Compile Include="Entities\Business\UserBrach.cs" />
+    <Compile Include="Entities\Business\Counter.cs" />
+    <Compile Include="Entities\Products\Option.cs" />
+    <Compile Include="Entities\Products\ProductOption.cs" />
+    <Compile Include="Entities\Products\ProductVariant.cs" />
+    <Compile Include="Entities\Products\ProductVariantValue.cs" />
+    <Compile Include="Entities\Purchases\PurchaseItem.cs" />
+    <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Business\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
+    <Compile Include="Entities\Common\SystemAction.cs" />
     <Compile Include="Entities\Items\Item.cs" />
     <Compile Include="Entities\Products\Brand.cs" />
     <Compile Include="Entities\Products\Product.cs" />
-    <Compile Include="Entities\Products\ProductCategory.cs" />
+    <Compile Include="Entities\Products\Category.cs" />
     <Compile Include="Entities\Suppliers\Supplier.cs" />
     <Compile Include="Entities\Products\ProductSupplier.cs" />
     <Compile Include="Entities\Suppliers\SupplierReport.cs" />
@@ -69,7 +76,6 @@
     <Compile Include="Entities\Purchases\Purchase.cs" />
     <Compile Include="Entities\Purchases\PurchaseOrder.cs" />
     <Compile Include="Entities\Purchases\Receipt.cs" />
-    <Compile Include="Entities\Sales\Invoice.cs" />
     <Compile Include="Entities\Sales\Sale.cs" />
     <Compile Include="Entities\Sales\SaleItem.cs" />
     <Compile Include="Entities\Sales\SaleOrder.cs" />
@@ -93,6 +99,8 @@
       <DependentUpon>201901141520464_initial_migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Entities\zForNextVersion\Readme.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
