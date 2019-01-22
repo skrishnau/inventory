@@ -15,7 +15,7 @@ namespace Infrastructure.Entities.Products
         // name of the category; should be unique
         public string Name { get; set; }
         // implement N tier 
-        public int ParentProductCategoryId { get; set; }
+        public int? ParentProductCategoryId { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 

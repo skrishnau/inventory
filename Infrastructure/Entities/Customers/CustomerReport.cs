@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Customers
 {
-    public class CustomerReport //??
+    /// <summary>
+    /// not implemented yet...
+    /// </summary>
+    public class CustomerReport
     {
         public int Id { get; set; }
     }
