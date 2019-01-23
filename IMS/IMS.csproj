@@ -52,6 +52,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Customer\Create\CustomerCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Customer\Create\CustomerCreate.Designer.cs">
+      <DependentUpon>CustomerCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Customer\Create\UC\AddCustomerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Customer\Create\UC\AddCustomerUC.Designer.cs">
+      <DependentUpon>AddCustomerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Products\Create\ProductCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,8 +88,26 @@
     <Compile Include="Forms\Products\Create\UC\AddProductUC.Designer.cs">
       <DependentUpon>AddProductUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Suppliers\Create\SupplierCreate.Designer.cs">
+      <DependentUpon>SupplierCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.Designer.cs">
+      <DependentUpon>AddSupplierUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Customer\Create\CustomerCreate.resx">
+      <DependentUpon>CustomerCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Customer\Create\UC\AddCustomerUC.resx">
+      <DependentUpon>AddCustomerUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Products\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Products\Create\UC\AddProductUC.resx">
       <DependentUpon>AddProductUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Suppliers\Create\UC\AddSupplierUC.resx">
+      <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
