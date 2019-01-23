@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.addProductUC1 = new IMS.Forms.Create.UC.AddProductUC();
             this.SuspendLayout();
+            // 
+            // addProductUC1
+            // 
+            this.addProductUC1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addProductUC1.Location = new System.Drawing.Point(0, 0);
+            this.addProductUC1.Margin = new System.Windows.Forms.Padding(2);
+            this.addProductUC1.Name = "addProductUC1";
+            this.addProductUC1.Padding = new System.Windows.Forms.Padding(2);
+            this.addProductUC1.Size = new System.Drawing.Size(577, 291);
+            this.addProductUC1.TabIndex = 0;
             // 
             // ProductCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 362);
+            this.ClientSize = new System.Drawing.Size(577, 291);
+            this.Controls.Add(this.addProductUC1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ProductCreate";
             this.Text = "ProductCreate";
             this.ResumeLayout(false);
@@ -42,5 +55,7 @@
         }
 
         #endregion
+
+        private UC.AddProductUC addProductUC1;
     }
 }
