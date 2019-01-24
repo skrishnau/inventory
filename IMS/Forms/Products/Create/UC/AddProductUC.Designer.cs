@@ -64,6 +64,8 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel7 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -73,12 +75,13 @@
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbProductName
             // 
             this.tbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbProductName.Location = new System.Drawing.Point(113, 2);
+            this.tbProductName.Location = new System.Drawing.Point(114, 2);
             this.tbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.tbProductName.Name = "tbProductName";
             this.tbProductName.Size = new System.Drawing.Size(150, 21);
@@ -122,7 +125,7 @@
             // cbCategory
             // 
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(113, 33);
+            this.cbCategory.Location = new System.Drawing.Point(114, 33);
             this.cbCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(150, 21);
@@ -131,7 +134,7 @@
             // cbBrand
             // 
             this.cbBrand.FormattingEnabled = true;
-            this.cbBrand.Location = new System.Drawing.Point(113, 64);
+            this.cbBrand.Location = new System.Drawing.Point(114, 64);
             this.cbBrand.Margin = new System.Windows.Forms.Padding(2);
             this.cbBrand.Name = "cbBrand";
             this.cbBrand.Size = new System.Drawing.Size(150, 21);
@@ -238,7 +241,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.80929F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.19071F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbProductName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
@@ -262,9 +265,9 @@
             this.btnAddCategory.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_52px;
             this.btnAddCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddCategory.Location = new System.Drawing.Point(268, 34);
+            this.btnAddCategory.Location = new System.Drawing.Point(272, 34);
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(34, 25);
+            this.btnAddCategory.Size = new System.Drawing.Size(30, 25);
             this.btnAddCategory.TabIndex = 20;
             this.toolTip1.SetToolTip(this.btnAddCategory, "Add Category");
             this.btnAddCategory.UseVisualStyleBackColor = true;
@@ -274,9 +277,9 @@
             this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_52px;
             this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddBrand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddBrand.Location = new System.Drawing.Point(268, 65);
+            this.btnAddBrand.Location = new System.Drawing.Point(272, 65);
             this.btnAddBrand.Name = "btnAddBrand";
-            this.btnAddBrand.Size = new System.Drawing.Size(34, 27);
+            this.btnAddBrand.Size = new System.Drawing.Size(30, 27);
             this.btnAddBrand.TabIndex = 21;
             this.toolTip1.SetToolTip(this.btnAddBrand, "Add Brand");
             this.btnAddBrand.UseVisualStyleBackColor = true;
@@ -459,12 +462,36 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.panel5);
             this.panel7.Controls.Add(this.panel2);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(2, 37);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(577, 317);
             this.panel7.TabIndex = 35;
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.label15);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(317, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(260, 114);
+            this.panel5.TabIndex = 35;
+            // 
+            // label15
+            // 
+            this.label15.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.label15.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(0, 0);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(258, 23);
+            this.label15.TabIndex = 32;
+            this.label15.Text = "SKU";
+            this.toolTip1.SetToolTip(this.label15, "Stock Keeping Unit");
             // 
             // AddProductUC
             // 
@@ -490,6 +517,7 @@
             this.panel6.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -530,5 +558,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label15;
     }
 }

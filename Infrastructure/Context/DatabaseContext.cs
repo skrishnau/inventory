@@ -10,6 +10,7 @@ namespace Infrastructure.Context
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using Infrastructure.Entities.Products;
 
     public class DatabaseContext : DbContext
     {
@@ -43,12 +44,14 @@ namespace Infrastructure.Context
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
 
+        public virtual DbSet<Brand> Brand { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SaleOrder> SaleOrder { get; set; }
 
         public virtual DbSet<User> User { get; set; }
-
-
 
     }
 

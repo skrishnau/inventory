@@ -24,6 +24,13 @@ namespace IMS.Forms.Create.UC
         private void InitializeListeners()
         {
             btnSave.Click += BtnSave_Click;
+            btnAddBrand.Click += BtnAddBrand_Click;
+        }
+
+        private void BtnAddBrand_Click(object sender, EventArgs e)
+        {
+            var addBrandUc = new AddBrandUC();
+            addBrandUc.Show();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
