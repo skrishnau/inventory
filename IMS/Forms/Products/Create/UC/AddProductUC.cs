@@ -12,14 +12,23 @@ namespace IMS.Forms.Create.UC
 {
     public partial class AddProductUC : UserControl
     {
+
+
         public AddProductUC()
         {
             InitializeComponent();
+
+            InitializeListeners();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void InitializeListeners()
         {
+            btnSave.Click += BtnSave_Click;
+        }
 
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

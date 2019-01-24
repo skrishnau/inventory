@@ -39,13 +39,14 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnProducts = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.btnProducts = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -129,34 +130,9 @@
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panel2.Controls.Add(this.btnProducts);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(2, 84);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.panel2.Size = new System.Drawing.Size(45, 345);
-            this.panel2.TabIndex = 0;
-            // 
-            // btnProducts
-            // 
-            this.btnProducts.BackgroundImage = global::IMS.Properties.Resources.icons8_Flour_64px;
-            this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnProducts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnProducts.Location = new System.Drawing.Point(3, 3);
-            this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(39, 39);
-            this.btnProducts.TabIndex = 0;
-            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnProducts, "Products");
-            this.btnProducts.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Image = global::IMS.Properties.Resources.product_design;
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(91, 57);
@@ -165,9 +141,21 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel2.Controls.Add(this.btnProducts);
+            this.panel2.Controls.Add(this.btnHome);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(2, 84);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(3);
+            this.panel2.Size = new System.Drawing.Size(36, 345);
+            this.panel2.TabIndex = 0;
+            // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(47, 84);
+            this.splitter2.Location = new System.Drawing.Point(38, 84);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(3, 345);
             this.splitter2.TabIndex = 3;
@@ -185,10 +173,36 @@
             // pnlBody
             // 
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(50, 84);
+            this.pnlBody.Location = new System.Drawing.Point(41, 84);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(774, 345);
+            this.pnlBody.Size = new System.Drawing.Size(783, 345);
             this.pnlBody.TabIndex = 5;
+            // 
+            // btnProducts
+            // 
+            this.btnProducts.BackgroundImage = global::IMS.Properties.Resources.icons8_Product_48px_1;
+            this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnProducts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnProducts.Location = new System.Drawing.Point(3, 33);
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.Size = new System.Drawing.Size(30, 30);
+            this.btnProducts.TabIndex = 0;
+            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnProducts, "Products");
+            this.btnProducts.UseVisualStyleBackColor = true;
+            // 
+            // btnHome
+            // 
+            this.btnHome.BackgroundImage = global::IMS.Properties.Resources.icons8_Home_40px;
+            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHome.Location = new System.Drawing.Point(3, 3);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(30, 30);
+            this.btnHome.TabIndex = 1;
+            this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnHome, "Home");
+            this.btnHome.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -235,6 +249,7 @@
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Panel pnlBody;
+        private System.Windows.Forms.Button btnHome;
     }
 }
 
