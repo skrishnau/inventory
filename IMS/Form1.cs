@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IMS.Forms.Products.Listing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,20 @@ namespace IMS
         public Form1()
         {
             InitializeComponent();
+
+            InitializeEvents();
+
+        }
+
+        private void InitializeEvents()
+        {
+            btnProducts.Click += BtnProducts_Click;
+        }
+
+        private void BtnProducts_Click(object sender, EventArgs e)
+        {
+            splitContainer.Panel2.Controls.Clear();
+            splitContainer.Panel2.Controls.Add(new ProductListUC());
         }
     }
 }

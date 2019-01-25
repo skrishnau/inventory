@@ -15,11 +15,11 @@ namespace Infrastructure.Entities.Products
         public int Id { get; set; }
         public string Name { get; set; }
         public string DispalyName { get; set; }
-        // types: predefined types (Color, Size, etc}
+        // types: predefined types "Multiple Choice", "Single Select"
         public string Type { get; set; }
 
         // json formatted values. This column is used to store values in case of multiple choice type
-        // Color{Black, Blue, Red}, Size{XL, L, SM}
+        // e.g. for Color the values can be Black, Blue and Red, for Size the values can be XL, L, SM
         public string Values { get; set; }
         
 

@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 namespace Infrastructure.Entities.Products
 {
     /// <summary>
-    /// The options(attributes) that a product has; These options will have values 
-    /// when product variant is created. in return those values will be used to generate SKU
+    /// This table stores various options for a product... e.g. T-shirt may have options: Color, Size, Fabric, etc.
     /// </summary>
     public class ProductOption
     {
         public int Id { get; set; }
-        // to which product this sku belongs to 
+        // product .. e.g. T-shirt
         public int ProductId { get; set; }
-       
+       // option . e.g. "Color", 
         public int OptionId { get; set; }
 
         // json formatted values of the option; user many add additional values for product specific
+        // e.g. "Color" option for a T-shirt can be "Blue", "Black" and "Red". The user will 
+        //      choose one of these options while adding inventory items
         public string Values { get; set; }
 
         // time stamps
