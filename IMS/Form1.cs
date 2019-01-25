@@ -28,8 +28,10 @@ namespace IMS
 
         private void BtnProducts_Click(object sender, EventArgs e)
         {
-            splitContainer.Panel2.Controls.Clear();
-            splitContainer.Panel2.Controls.Add(new ProductListUC());
+            pnlBody.Controls.Clear();
+            var productListUC= new ProductListUC();
+            productListUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(productListUC);
         }
     }
 }
