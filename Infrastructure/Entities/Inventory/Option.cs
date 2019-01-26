@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Entities.Products
+namespace Infrastructure.Entities.Inventory
 {
     /// <summary>
     /// Product's variant types are stored in this table

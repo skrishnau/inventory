@@ -1,11 +1,11 @@
-﻿using Infrastructure.Entities.Products;
+﻿using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Entities.Products
+namespace Infrastructure.Entities.Inventory
 {
     /// <summary>
     /// This table stores various options for a product... e.g. T-shirt may have options: Color, Size, Fabric, etc.

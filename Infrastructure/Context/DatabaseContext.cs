@@ -10,7 +10,7 @@ namespace Infrastructure.Context
     using System;
     using System.Data.Entity;
     using System.Linq;
-    using Infrastructure.Entities.Products;
+    using Infrastructure.Entities.Inventory;
     using System.Data.Entity.ModelConfiguration.Conventions;
 
     public class DatabaseContext : DbContext

@@ -1,4 +1,4 @@
-﻿using Service.Core.Product.Details;
+﻿using Service.Core.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +14,12 @@ namespace IMS.Forms.Inventory.Create
 {
     public partial class CategoryCreate : Form
     {
-        private readonly IProductService productService;
+        private readonly IInventoryService productService;
 
-        public CategoryCreate()
+        // inject in constructor
+        public CategoryCreate(IInventoryService productService)
         {
-            productService = new ProductService(); // later inject this in constructor
+            this.productService = productService;
 
             InitializeComponent();
 

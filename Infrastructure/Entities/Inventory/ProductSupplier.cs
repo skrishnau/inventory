@@ -1,4 +1,4 @@
-﻿using Infrastructure.Entities.Products;
+﻿using Infrastructure.Entities.Inventory;
 using Infrastructure.Entities.Suppliers;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Entities.Products
+namespace Infrastructure.Entities.Inventory
 {
     /// <summary>
     /// One product is supplied by many suppliers & one supplier supplies many products

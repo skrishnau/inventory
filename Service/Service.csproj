@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Base\AppDatabase.cs" />
     <Compile Include="Core\Bills\Formats\BillFormatService.cs" />
     <Compile Include="Core\Bills\Formats\IBillFormatService.cs" />
     <Compile Include="Core\Bills\Generation\BillGenerationService.cs" />
@@ -65,8 +64,8 @@
     <Compile Include="Core\Customers\Details\ICustomerDetailService.cs" />
     <Compile Include="Core\Customers\Reports\CustomerReportService.cs" />
     <Compile Include="Core\Customers\Reports\ICustomerReportService.cs" />
-    <Compile Include="Core\Product\Details\IProductService.cs" />
-    <Compile Include="Core\Product\Details\ProductService.cs" />
+    <Compile Include="Core\Inventory\IInventoryService.cs" />
+    <Compile Include="Core\Inventory\InventoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Purchases\PurchaseOrders\IPurchaseOrderService.cs" />
     <Compile Include="Core\Purchases\PurchaseOrders\PurchaseOrderService.cs" />
@@ -92,7 +91,9 @@
       <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\Base\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

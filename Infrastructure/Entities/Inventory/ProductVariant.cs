@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Entities.Products
+namespace Infrastructure.Entities.Inventory
 {
     /// <summary>
     /// A product's variant. i.e. different types in the same product

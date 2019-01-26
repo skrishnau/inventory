@@ -1,4 +1,4 @@
-﻿namespace IMS.Forms.Inventory.Listing
+﻿namespace IMS.Forms.Inventory
 {
     partial class InventoryUC
     {

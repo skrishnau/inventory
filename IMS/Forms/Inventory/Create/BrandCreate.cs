@@ -1,4 +1,4 @@
-﻿using Service.Core.Product.Details;
+﻿using Service.Core.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,18 +14,18 @@ namespace IMS.Forms.Inventory.Create
 {
     public partial class BrandCreate : Form
     {
-        private readonly IProductService productService;
+        private readonly IInventoryService productService;
 
-        public BrandCreate()
+        public BrandCreate(IInventoryService productService)
         {
-            productService = new ProductService(); // later inject this in constructor
+            this.productService = productService;
 
             InitializeComponent();
 
             InitializeEvents();
         }
 
-       
+
 
         private void InitializeEvents()
         {
@@ -38,7 +38,7 @@ namespace IMS.Forms.Inventory.Create
         private void BrandCreate_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.Manual;
-            var point = new Point(MousePosition.X +15, MousePosition.Y );
+            var point = new Point(MousePosition.X + 15, MousePosition.Y);
             this.Location = point;
         }
 

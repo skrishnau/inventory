@@ -39,6 +39,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.4.3\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -101,10 +104,10 @@
     <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.Designer.cs">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Listing\InventoryUC.cs">
+    <Compile Include="Forms\Inventory\InventoryUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Listing\InventoryUC.Designer.cs">
+    <Compile Include="Forms\Inventory\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -130,7 +133,7 @@
     <EmbeddedResource Include="Forms\Suppliers\Create\UC\AddSupplierUC.resx">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Listing\InventoryUC.resx">
+    <EmbeddedResource Include="Forms\Inventory\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -170,6 +173,10 @@
     <Folder Include="Sales\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{7B41B468-A95F-4036-9563-D86460E3F341}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{859fd5e9-b5ea-4dbb-9e61-94314ff244ea}</Project>
       <Name>Service</Name>

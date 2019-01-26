@@ -88,7 +88,7 @@
             this.label15.Location = new System.Drawing.Point(0, 0);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(290, 23);
+            this.label15.Size = new System.Drawing.Size(318, 23);
             this.label15.TabIndex = 32;
             this.label15.Text = "Product Options";
             this.toolTip1.SetToolTip(this.label15, "Stock Keeping Unit");
@@ -141,7 +141,7 @@
             this.tbUnitCost.Location = new System.Drawing.Point(152, 2);
             this.tbUnitCost.Margin = new System.Windows.Forms.Padding(2);
             this.tbUnitCost.Name = "tbUnitCost";
-            this.tbUnitCost.Size = new System.Drawing.Size(85, 21);
+            this.tbUnitCost.Size = new System.Drawing.Size(146, 21);
             this.tbUnitCost.TabIndex = 21;
             this.tbUnitCost.Text = "0.0";
             // 
@@ -163,7 +163,7 @@
             this.tbSellPrice.Location = new System.Drawing.Point(152, 28);
             this.tbSellPrice.Margin = new System.Windows.Forms.Padding(2);
             this.tbSellPrice.Name = "tbSellPrice";
-            this.tbSellPrice.Size = new System.Drawing.Size(85, 21);
+            this.tbSellPrice.Size = new System.Drawing.Size(146, 21);
             this.tbSellPrice.TabIndex = 23;
             this.tbSellPrice.Text = "0.0";
             // 
@@ -287,7 +287,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.80929F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.19071F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbProductName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
@@ -320,10 +320,10 @@
             // tbProductName
             // 
             this.tbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbProductName.Location = new System.Drawing.Point(113, 2);
+            this.tbProductName.Location = new System.Drawing.Point(111, 2);
             this.tbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.tbProductName.Name = "tbProductName";
-            this.tbProductName.Size = new System.Drawing.Size(132, 21);
+            this.tbProductName.Size = new System.Drawing.Size(149, 21);
             this.tbProductName.TabIndex = 11;
             // 
             // label1
@@ -340,10 +340,10 @@
             // cbCategory
             // 
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(113, 33);
+            this.cbCategory.Location = new System.Drawing.Point(111, 33);
             this.cbCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(132, 21);
+            this.cbCategory.Size = new System.Drawing.Size(149, 21);
             this.cbCategory.TabIndex = 17;
             // 
             // label5
@@ -360,10 +360,10 @@
             // cbBrand
             // 
             this.cbBrand.FormattingEnabled = true;
-            this.cbBrand.Location = new System.Drawing.Point(113, 64);
+            this.cbBrand.Location = new System.Drawing.Point(111, 64);
             this.cbBrand.Margin = new System.Windows.Forms.Padding(2);
             this.cbBrand.Name = "cbBrand";
-            this.cbBrand.Size = new System.Drawing.Size(132, 21);
+            this.cbBrand.Size = new System.Drawing.Size(149, 21);
             this.cbBrand.TabIndex = 19;
             // 
             // btnAddCategory
@@ -371,9 +371,9 @@
             this.btnAddCategory.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
             this.btnAddCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddCategory.Location = new System.Drawing.Point(268, 34);
+            this.btnAddCategory.Location = new System.Drawing.Point(265, 34);
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(30, 25);
+            this.btnAddCategory.Size = new System.Drawing.Size(33, 25);
             this.btnAddCategory.TabIndex = 20;
             this.toolTip1.SetToolTip(this.btnAddCategory, "Add Category");
             this.btnAddCategory.UseVisualStyleBackColor = true;
@@ -383,9 +383,9 @@
             this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
             this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddBrand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddBrand.Location = new System.Drawing.Point(268, 65);
+            this.btnAddBrand.Location = new System.Drawing.Point(265, 65);
             this.btnAddBrand.Name = "btnAddBrand";
-            this.btnAddBrand.Size = new System.Drawing.Size(30, 27);
+            this.btnAddBrand.Size = new System.Drawing.Size(33, 27);
             this.btnAddBrand.TabIndex = 21;
             this.toolTip1.SetToolTip(this.btnAddBrand, "Add Brand");
             this.btnAddBrand.UseVisualStyleBackColor = true;
@@ -442,7 +442,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(605, 317);
+            this.panel7.Size = new System.Drawing.Size(633, 317);
             this.panel7.TabIndex = 38;
             // 
             // panel8
@@ -452,7 +452,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(313, 221);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(292, 85);
+            this.panel8.Size = new System.Drawing.Size(320, 85);
             this.panel8.TabIndex = 36;
             // 
             // label3
@@ -463,7 +463,7 @@
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(290, 23);
+            this.label3.Size = new System.Drawing.Size(318, 23);
             this.label3.TabIndex = 32;
             this.label3.Text = "SKU";
             this.toolTip1.SetToolTip(this.label3, "Stock Keeping Unit");
@@ -475,7 +475,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(313, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(292, 221);
+            this.panel5.Size = new System.Drawing.Size(320, 221);
             this.panel5.TabIndex = 35;
             // 
             // btnCancel
@@ -501,16 +501,16 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 321);
+            this.panel1.Location = new System.Drawing.Point(0, 324);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(605, 37);
+            this.panel1.Size = new System.Drawing.Size(633, 37);
             this.panel1.TabIndex = 37;
             // 
             // ProductCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 358);
+            this.ClientSize = new System.Drawing.Size(633, 361);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

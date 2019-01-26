@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Products;
 
-namespace Service.Core.Product.Details
+namespace Service.Core.Inventory
 {
-    public interface IProductService
+    public interface IInventoryService
     {
         void AddBrand(BrandModel brand);
 
@@ -16,7 +16,9 @@ namespace Service.Core.Product.Details
         void AddProduct(ProductModel product);
 
         List<BrandModel> GetBrandList();
+
         List<CategoryModel> GetCategoryList();
+
         List<ProductModel> GetProductList();
     }
 }

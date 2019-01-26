@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Service.Core.Inventory;
+using SimpleInjector.Lifestyles;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,12 @@ namespace IMS.Forms.Inventory.Create
 {
     public partial class ProductCreate : Form
     {
-        //private readonly ProductService productService;
-        public ProductCreate()
+        private readonly IInventoryService productService;
+
+        public ProductCreate(IInventoryService productService)
         {
+            this.productService = productService;
+
             InitializeComponent();
 
             InitializeListeners();
@@ -29,14 +34,15 @@ namespace IMS.Forms.Inventory.Create
 
         private void BtnAddCategory_Click(object sender, EventArgs e)
         {
-            var categoryCreate = new CategoryCreate();
+
+            var categoryCreate = Program.container.GetInstance<CategoryCreate>();
             categoryCreate.StartPosition = FormStartPosition.CenterParent;
             categoryCreate.ShowDialog();
         }
 
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
-            var brandCreate = new BrandCreate();
+            var brandCreate = Program.container.GetInstance<BrandCreate>();
             brandCreate.StartPosition = FormStartPosition.CenterParent;
             brandCreate.ShowDialog();
         }
