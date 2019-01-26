@@ -1,4 +1,4 @@
-﻿using IMS.Forms.Products.Listing;
+﻿using IMS.Forms.Inventory.Listing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +29,7 @@ namespace IMS
         private void BtnProducts_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
-            var productListUC= new ProductListUC();
+            var productListUC= new InventoryUC();
             productListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(productListUC);
         }

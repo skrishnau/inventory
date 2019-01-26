@@ -180,15 +180,15 @@
             // 
             // btnProducts
             // 
-            this.btnProducts.BackgroundImage = global::IMS.Properties.Resources.icons8_Product_48px_1;
+            this.btnProducts.BackgroundImage = global::IMS.Properties.Resources.icons8_Commodity_50px;
             this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnProducts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnProducts.Location = new System.Drawing.Point(3, 33);
+            this.btnProducts.Location = new System.Drawing.Point(3, 21);
             this.btnProducts.Name = "btnProducts";
             this.btnProducts.Size = new System.Drawing.Size(30, 30);
             this.btnProducts.TabIndex = 0;
             this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnProducts, "Products");
+            this.toolTip1.SetToolTip(this.btnProducts, "Inventory");
             this.btnProducts.UseVisualStyleBackColor = true;
             // 
             // btnHome
@@ -198,7 +198,7 @@
             this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnHome.Location = new System.Drawing.Point(3, 3);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(30, 30);
+            this.btnHome.Size = new System.Drawing.Size(30, 18);
             this.btnHome.TabIndex = 1;
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnHome, "Home");

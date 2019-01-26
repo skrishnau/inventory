@@ -33,7 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,29 +71,23 @@
     <Compile Include="Forms\Customer\Create\UC\AddCustomerUC.Designer.cs">
       <DependentUpon>AddCustomerUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Products\Create\ProductCreate.cs">
+    <Compile Include="Forms\Inventory\Create\BrandCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Products\Create\ProductCreate.Designer.cs">
+    <Compile Include="Forms\Inventory\Create\BrandCreate.Designer.cs">
+      <DependentUpon>BrandCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Create\CategoryCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Create\CategoryCreate.Designer.cs">
+      <DependentUpon>CategoryCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Create\ProductCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Create\ProductCreate.Designer.cs">
       <DependentUpon>ProductCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Products\Create\UC\AddBrandUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Products\Create\UC\AddBrandUC.Designer.cs">
-      <DependentUpon>AddBrandUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Products\Create\UC\AddCategoryUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Products\Create\UC\AddCategoryUC.Designer.cs">
-      <DependentUpon>AddCategoryUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Products\Create\UC\AddProductUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Products\Create\UC\AddProductUC.Designer.cs">
-      <DependentUpon>AddProductUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
       <SubType>Form</SubType>
@@ -100,11 +101,11 @@
     <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.Designer.cs">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Products\Listing\ProductListUC.cs">
+    <Compile Include="Forms\Inventory\Listing\InventoryUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Products\Listing\ProductListUC.Designer.cs">
-      <DependentUpon>ProductListUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Listing\InventoryUC.Designer.cs">
+      <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,38 +118,36 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Products\Create\ProductCreate.resx">
+    <EmbeddedResource Include="Forms\Inventory\Create\BrandCreate.resx">
+      <DependentUpon>BrandCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Create\CategoryCreate.resx">
+      <DependentUpon>CategoryCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Products\Create\UC\AddBrandUC.resx">
-      <DependentUpon>AddBrandUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Products\Create\UC\AddCategoryUC.resx">
-      <DependentUpon>AddCategoryUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Products\Create\UC\AddProductUC.resx">
-      <DependentUpon>AddProductUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\UC\AddSupplierUC.resx">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Products\Listing\ProductListUC.resx">
-      <DependentUpon>ProductListUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Listing\InventoryUC.resx">
+      <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -181,25 +180,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\product-design.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Flour_64px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Plus_50px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Add_64px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Plus_Math_52px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Product_48px_1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icons8_Home_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Lipstick_48px_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Commodity_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

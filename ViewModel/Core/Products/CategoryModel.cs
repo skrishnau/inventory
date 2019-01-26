@@ -22,13 +22,19 @@ namespace ViewModel.Core.Products
 
         // -------------------- Table Objects -------------------- //
 
-        public virtual Category ParentCategory { get; set; }
+        public virtual CategoryModel ParentCategory { get; set; }
 
         public  Category ToEntity()
         {
             return new Category
             {
-                CreatedAt = CreatedAt
+                CreatedAt = CreatedAt,
+                DeletedAt = DeletedAt,
+                UpdatedAt = UpdatedAt,
+                ParentCategoryId = ParentCategoryId,
+                Name = Name,
+                Id = Id,
+                
             };
         }
     }

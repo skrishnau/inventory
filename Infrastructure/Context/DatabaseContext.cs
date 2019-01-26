@@ -11,6 +11,7 @@ namespace Infrastructure.Context
     using System.Data.Entity;
     using System.Linq;
     using Infrastructure.Entities.Products;
+    using System.Data.Entity.ModelConfiguration.Conventions;
 
     public class DatabaseContext : DbContext
     {
@@ -33,13 +34,11 @@ namespace Infrastructure.Context
        
         public virtual DbSet<Bill> Bill { get; set; }
 
-        public virtual DbSet<Supplier> Client { get; set; }
-        public virtual DbSet<SupplierReport> ClientReport { get; set; }
 
         public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<CustomerReport> CustomerReport { get; set; }
+       // public virtual DbSet<CustomerReport> CustomerReport { get; set; }
 
-        public virtual DbSet<Lead> Lead { get; set; }
+      //  public virtual DbSet<Lead> Lead { get; set; }
 
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
@@ -51,7 +50,26 @@ namespace Infrastructure.Context
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SaleOrder> SaleOrder { get; set; }
 
+        public virtual DbSet<Supplier> Supplier { get; set; }
+        // public virtual DbSet<SupplierReport> ClientReport { get; set; }
+
         public virtual DbSet<User> User { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // for now cascade delete is removed for all entities
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Add<CascadeDeleteAttributeConvention>();
+
+            //modelBuilder.Entity<Supplier>()
+            //    .HasRequired<User>(s=>s.User)
+            //    .WithMany()
+            //    .WillCascadeOnDelete(false);
+        }
+
+       
 
     }
 

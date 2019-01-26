@@ -18,7 +18,7 @@ namespace ViewModel.Core.Products
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
-        internal Brand ToEntity()
+        public  Brand ToEntity()
         {
             return new Brand
             {

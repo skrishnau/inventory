@@ -82,9 +82,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201901141520464_initial_migration.cs" />
-    <Compile Include="Migrations\201901141520464_initial_migration.Designer.cs">
-      <DependentUpon>201901141520464_initial_migration.cs</DependentUpon>
+    <Compile Include="Migrations\201901260855562_init-with-product.cs" />
+    <Compile Include="Migrations\201901260855562_init-with-product.Designer.cs">
+      <DependentUpon>201901260855562_init-with-product.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,12 +95,12 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901141520464_initial_migration.resx">
-      <DependentUpon>201901141520464_initial_migration.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Entities\zForNextVersion\Readme.txt" />
+    <EmbeddedResource Include="Migrations\201901260855562_init-with-product.resx">
+      <DependentUpon>201901260855562_init-with-product.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

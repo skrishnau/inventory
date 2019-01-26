@@ -20,6 +20,7 @@ namespace Infrastructure.Entities.Suppliers
         public string ContactPersonName { get; set; }
 
         // ==== table objects ==== //
+        
         public virtual User User { get; set; }
 
 
