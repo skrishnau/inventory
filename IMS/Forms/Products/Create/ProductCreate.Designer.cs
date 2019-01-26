@@ -35,19 +35,19 @@
             // 
             this.addProductUC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addProductUC1.Location = new System.Drawing.Point(0, 0);
-            this.addProductUC1.Margin = new System.Windows.Forms.Padding(2);
+            this.addProductUC1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addProductUC1.Name = "addProductUC1";
-            this.addProductUC1.Padding = new System.Windows.Forms.Padding(2);
-            this.addProductUC1.Size = new System.Drawing.Size(588, 420);
+            this.addProductUC1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addProductUC1.Size = new System.Drawing.Size(462, 522);
             this.addProductUC1.TabIndex = 0;
             // 
             // ProductCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 420);
+            this.ClientSize = new System.Drawing.Size(462, 522);
             this.Controls.Add(this.addProductUC1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ProductCreate";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ProductCreate";

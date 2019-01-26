@@ -129,6 +129,9 @@
     <EmbeddedResource Include="Forms\Products\Create\UC\AddProductUC.resx">
       <DependentUpon>AddProductUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Suppliers\Create\SupplierCreate.resx">
+      <DependentUpon>SupplierCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\UC\AddSupplierUC.resx">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </EmbeddedResource>
