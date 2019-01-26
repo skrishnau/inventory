@@ -1,4 +1,4 @@
-﻿using Infrastructure.Entities.Products;
+﻿using Infrastructure.Entities.Inventory;
 using Infrastructure.Entities.Purchases;
 using System;
 using System.Collections.Generic;

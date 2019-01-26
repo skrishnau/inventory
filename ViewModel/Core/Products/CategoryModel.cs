@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure.Entities.Products;
+using Infrastructure.Entities.Inventory;
 
 namespace ViewModel.Core.Products
 {
@@ -22,13 +22,19 @@ namespace ViewModel.Core.Products
 
         // -------------------- Table Objects -------------------- //
 
-        public virtual Category ParentCategory { get; set; }
+        public virtual CategoryModel ParentCategory { get; set; }
 
         public  Category ToEntity()
         {
             return new Category
             {
-                CreatedAt = CreatedAt
+                CreatedAt = CreatedAt,
+                DeletedAt = DeletedAt,
+                UpdatedAt = UpdatedAt,
+                ParentCategoryId = ParentCategoryId,
+                Name = Name,
+                Id = Id,
+                
             };
         }
     }

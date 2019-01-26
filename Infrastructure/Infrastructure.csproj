@@ -54,21 +54,21 @@
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
-    <Compile Include="Entities\Products\Option.cs" />
-    <Compile Include="Entities\Products\ProductOption.cs" />
-    <Compile Include="Entities\Products\ProductVariant.cs" />
-    <Compile Include="Entities\Products\ProductVariantValue.cs" />
+    <Compile Include="Entities\Inventory\Option.cs" />
+    <Compile Include="Entities\Inventory\ProductOption.cs" />
+    <Compile Include="Entities\Inventory\ProductVariant.cs" />
+    <Compile Include="Entities\Inventory\ProductVariantValue.cs" />
     <Compile Include="Entities\Purchases\PurchaseItem.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Business\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
     <Compile Include="Entities\Common\SystemAction.cs" />
     <Compile Include="Entities\Items\Item.cs" />
-    <Compile Include="Entities\Products\Brand.cs" />
-    <Compile Include="Entities\Products\Product.cs" />
-    <Compile Include="Entities\Products\Category.cs" />
+    <Compile Include="Entities\Inventory\Brand.cs" />
+    <Compile Include="Entities\Inventory\Product.cs" />
+    <Compile Include="Entities\Inventory\Category.cs" />
     <Compile Include="Entities\Suppliers\Supplier.cs" />
-    <Compile Include="Entities\Products\ProductSupplier.cs" />
+    <Compile Include="Entities\Inventory\ProductSupplier.cs" />
     <Compile Include="Entities\Suppliers\SupplierReport.cs" />
     <Compile Include="Entities\Common\Lead.cs" />
     <Compile Include="Entities\Customers\Customer.cs" />
@@ -82,9 +82,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201901141520464_initial_migration.cs" />
-    <Compile Include="Migrations\201901141520464_initial_migration.Designer.cs">
-      <DependentUpon>201901141520464_initial_migration.cs</DependentUpon>
+    <Compile Include="Migrations\201901260855562_init-with-product.cs" />
+    <Compile Include="Migrations\201901260855562_init-with-product.Designer.cs">
+      <DependentUpon>201901260855562_init-with-product.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,12 +95,12 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901141520464_initial_migration.resx">
-      <DependentUpon>201901141520464_initial_migration.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Entities\zForNextVersion\Readme.txt" />
+    <EmbeddedResource Include="Migrations\201901260855562_init-with-product.resx">
+      <DependentUpon>201901260855562_init-with-product.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

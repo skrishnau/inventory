@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure.Entities.Inventory;
 
-namespace ViewModel.Core.Products
+namespace Infrastructure.Entities.Inventory
 {
-    public class BrandModel
+    /// <summary>
+    /// Brands; e.g. Xiaomi, Samsung, Nike; They have many products
+    /// </summary>
+   public class Brand
     {
         public int Id { get; set; }
         // brand name
@@ -17,19 +19,6 @@ namespace ViewModel.Core.Products
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-
-        public  Brand ToEntity()
-        {
-            return new Brand
-            {
-                CreatedAt = CreatedAt,
-                DeletedAt = DeletedAt,
-                Id = Id,
-                Name = Name,
-                UpdatedAt = UpdatedAt
-            };
-        }
     }
 
-  
 }

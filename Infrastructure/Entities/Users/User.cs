@@ -49,5 +49,7 @@ namespace Infrastructure.Entities.Users
         // ============= Table objects ===============//
         public virtual Role Role { get; set; }
 
+        public virtual ICollection<Suppliers.Supplier> Suppliers { get; set; }
+
     }
 }
