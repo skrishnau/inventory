@@ -136,6 +136,9 @@
     <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Suppliers\Create\SupplierCreate.resx">
+      <DependentUpon>SupplierCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Lists\CategoryListUC.resx">
       <DependentUpon>CategoryListUC.cs</DependentUpon>
     </EmbeddedResource>
