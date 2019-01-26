@@ -92,6 +92,12 @@
     <Compile Include="Forms\Inventory\Create\ProductCreate.Designer.cs">
       <DependentUpon>ProductCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Lists\CategoryListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Lists\CategoryListUC.Designer.cs">
+      <DependentUpon>CategoryListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Lists\CategoryListUC.resx">
+      <DependentUpon>CategoryListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\UC\AddSupplierUC.resx">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>

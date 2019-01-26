@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory
             this.productService = productService;
 
             InitializeComponent();
-            
+
             InitializeListeners();
             PopulateBrandData();
             PopulateCategoryData();
@@ -36,6 +36,7 @@ namespace IMS.Forms.Inventory
             btnAddProduct.Click += BtnAddProduct_Click;
             btnAddBrand.Click += BtnAddBrand_Click;
             btnAddCategory.Click += BtnAddCategory_Click;
+            treeCategories.AfterSelect += TreeCategories_AfterSelect;
         }
 
         private void BtnAddCategory_Click(object sender, EventArgs e)
@@ -71,6 +72,11 @@ namespace IMS.Forms.Inventory
             }
         }
 
+        private void TreeCategories_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // show the detail
+        }
+
         private void PopulateBrandData()
         {
             dgvBrandList.AutoGenerateColumns = false;
@@ -81,8 +87,19 @@ namespace IMS.Forms.Inventory
         private void PopulateCategoryData()
         {
             dgvCategoryList.AutoGenerateColumns = false;
-            var categories= productService.GetCategoryList();
+            var categories = productService.GetCategoryList();
             dgvCategoryList.DataSource = categories;
+
+            foreach (var cat in categories)
+            {
+                treeCategories.Nodes.Add(new TreeNode
+                {
+                    Text = cat.Name,
+                    Name = "category-" + cat.Name + "-" + cat.Id,
+                    
+                });
+            }
+
         }
 
 

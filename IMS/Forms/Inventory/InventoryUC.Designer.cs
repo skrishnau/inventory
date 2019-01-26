@@ -44,22 +44,23 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnAddProduct = new System.Windows.Forms.Button();
             this.tabCategories = new System.Windows.Forms.TabPage();
             this.dgvCategoryList = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnAddCategory = new System.Windows.Forms.Button();
             this.tabBrands = new System.Windows.Forms.TabPage();
             this.dgvBrandList = new System.Windows.Forms.DataGridView();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnAddBrand = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAddProduct = new System.Windows.Forms.Button();
+            this.btnAddCategory = new System.Windows.Forms.Button();
+            this.btnAddBrand = new System.Windows.Forms.Button();
+            this.treeCategories = new System.Windows.Forms.TreeView();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabProducts.SuspendLayout();
@@ -174,19 +175,9 @@
             this.label2.Text = "Products";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnAddProduct
-            // 
-            this.btnAddProduct.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
-            this.btnAddProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddProduct.Location = new System.Drawing.Point(121, 2);
-            this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(28, 28);
-            this.btnAddProduct.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.btnAddProduct, "Add Product");
-            this.btnAddProduct.UseVisualStyleBackColor = true;
-            // 
             // tabCategories
             // 
+            this.tabCategories.Controls.Add(this.treeCategories);
             this.tabCategories.Controls.Add(this.dgvCategoryList);
             this.tabCategories.Controls.Add(this.panel4);
             this.tabCategories.Location = new System.Drawing.Point(4, 25);
@@ -217,8 +208,8 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCategoryList.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvCategoryList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCategoryList.Location = new System.Drawing.Point(3, 36);
+            this.dgvCategoryList.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dgvCategoryList.Location = new System.Drawing.Point(426, 36);
             this.dgvCategoryList.Name = "dgvCategoryList";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
@@ -228,7 +219,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCategoryList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvCategoryList.Size = new System.Drawing.Size(640, 277);
+            this.dgvCategoryList.Size = new System.Drawing.Size(217, 277);
             this.dgvCategoryList.TabIndex = 4;
             // 
             // dataGridViewTextBoxColumn1
@@ -260,17 +251,6 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Categories";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnAddCategory
-            // 
-            this.btnAddCategory.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
-            this.btnAddCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddCategory.Location = new System.Drawing.Point(121, 2);
-            this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(28, 28);
-            this.btnAddCategory.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.btnAddCategory, "Add Category");
-            this.btnAddCategory.UseVisualStyleBackColor = true;
             // 
             // tabBrands
             // 
@@ -328,17 +308,6 @@
             this.panel3.Size = new System.Drawing.Size(640, 33);
             this.panel3.TabIndex = 2;
             // 
-            // btnAddBrand
-            // 
-            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
-            this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddBrand.Location = new System.Drawing.Point(121, 2);
-            this.btnAddBrand.Name = "btnAddBrand";
-            this.btnAddBrand.Size = new System.Drawing.Size(28, 28);
-            this.btnAddBrand.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.btnAddBrand, "Add Brand");
-            this.btnAddBrand.UseVisualStyleBackColor = true;
-            // 
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Left;
@@ -371,6 +340,47 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(654, 10);
             this.panel1.TabIndex = 1;
+            // 
+            // btnAddProduct
+            // 
+            this.btnAddProduct.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAddProduct.Location = new System.Drawing.Point(121, 2);
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(28, 28);
+            this.btnAddProduct.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.btnAddProduct, "Add Product");
+            this.btnAddProduct.UseVisualStyleBackColor = true;
+            // 
+            // btnAddCategory
+            // 
+            this.btnAddCategory.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAddCategory.Location = new System.Drawing.Point(121, 2);
+            this.btnAddCategory.Name = "btnAddCategory";
+            this.btnAddCategory.Size = new System.Drawing.Size(28, 28);
+            this.btnAddCategory.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btnAddCategory, "Add Category");
+            this.btnAddCategory.UseVisualStyleBackColor = true;
+            // 
+            // btnAddBrand
+            // 
+            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAddBrand.Location = new System.Drawing.Point(121, 2);
+            this.btnAddBrand.Name = "btnAddBrand";
+            this.btnAddBrand.Size = new System.Drawing.Size(28, 28);
+            this.btnAddBrand.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btnAddBrand, "Add Brand");
+            this.btnAddBrand.UseVisualStyleBackColor = true;
+            // 
+            // treeCategories
+            // 
+            this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeCategories.Location = new System.Drawing.Point(3, 36);
+            this.treeCategories.Name = "treeCategories";
+            this.treeCategories.Size = new System.Drawing.Size(423, 277);
+            this.treeCategories.TabIndex = 5;
             // 
             // InventoryUC
             // 
@@ -421,5 +431,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.TreeView treeCategories;
     }
 }
