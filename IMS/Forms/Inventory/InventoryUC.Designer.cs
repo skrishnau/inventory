@@ -182,26 +182,12 @@
             this.dgvCategoryList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCategoryList.Location = new System.Drawing.Point(4, 45);
             this.dgvCategoryList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCategoryList.DefaultCellStyle = dataGridViewCellStyle5;
+           
             this.dgvCategoryList.Dock = System.Windows.Forms.DockStyle.Right;
             this.dgvCategoryList.Location = new System.Drawing.Point(426, 36);
             this.dgvCategoryList.Name = "dgvCategoryList";
             this.dgvCategoryList.Size = new System.Drawing.Size(856, 342);
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategoryList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+           
             this.dgvCategoryList.Size = new System.Drawing.Size(217, 277);
             this.dgvCategoryList.TabIndex = 4;
             // 
