@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Entities.Inventory;
 
-namespace ViewModel.Core.Products
+namespace ViewModel.Core.Inventory
 {
     public class BrandModel
     {

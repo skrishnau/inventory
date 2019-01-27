@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModel.Core.Products;
+using ViewModel.Core.Inventory;
 
 namespace Service.Core.Inventory
 {
     public interface IInventoryService
     {
-        void AddBrand(BrandModel brand);
+        void AddUpdateBrand(BrandModel brand);
 
-        void AddCategory(CategoryModel category);
+        void AddUpdateCategory(CategoryModel category);
 
         void AddProduct(ProductModel product);
 
         List<BrandModel> GetBrandList();
 
-        List<CategoryModel> GetCategoryList();
+        List<CategoryModel> GetCategoryList(int? parentCategoryId);
 
         List<ProductModel> GetProductList();
+
+        void DeleteCategory(CategoryModel categoryModel);
     }
 }

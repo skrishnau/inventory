@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using IMS.Forms.Inventory.Create;
 using Service.Core.Inventory;
 using SimpleInjector.Lifestyles;
+using ViewModel.Core.Inventory;
+using IMS.Forms.Inventory.Lists;
+using IMS.Forms.Inventory.Lists.Category;
 
 namespace IMS.Forms.Inventory
 {
@@ -24,31 +27,28 @@ namespace IMS.Forms.Inventory
 
             InitializeComponent();
 
-            InitializeListeners();
+            AddUserControls();
+
+            InitializeEvents();
             PopulateBrandData();
-            PopulateCategoryData();
             PopulateProductData();
         }
 
+        private void AddUserControls()
+        {
+            var categoryListUC = Program.container.GetInstance<CategoryListUC>();
+            categoryListUC.Dock = DockStyle.Fill;
+            tabCategories.Controls.Add(categoryListUC);
+        }
 
-        private void InitializeListeners()
+        private void InitializeEvents()
         {
             btnAddProduct.Click += BtnAddProduct_Click;
             btnAddBrand.Click += BtnAddBrand_Click;
-            btnAddCategory.Click += BtnAddCategory_Click;
-            treeCategories.AfterSelect += TreeCategories_AfterSelect;
+           
         }
 
-        private void BtnAddCategory_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var categoryCreate = Program.container.GetInstance<CategoryCreate>();
-                categoryCreate.ShowInTaskbar = false;
-                categoryCreate.ShowDialog();
-                PopulateCategoryData();
-            }
-        }
+    
 
         private void BtnAddBrand_Click(object sender, EventArgs e)
         {
@@ -72,10 +72,7 @@ namespace IMS.Forms.Inventory
             }
         }
 
-        private void TreeCategories_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            // show the detail
-        }
+       
 
         private void PopulateBrandData()
         {
@@ -84,23 +81,7 @@ namespace IMS.Forms.Inventory
             dgvBrandList.DataSource = brands;
         }
 
-        private void PopulateCategoryData()
-        {
-            dgvCategoryList.AutoGenerateColumns = false;
-            var categories = productService.GetCategoryList();
-            dgvCategoryList.DataSource = categories;
-
-            foreach (var cat in categories)
-            {
-                treeCategories.Nodes.Add(new TreeNode
-                {
-                    Text = cat.Name,
-                    Name = "category-" + cat.Name + "-" + cat.Id,
-                    
-                });
-            }
-
-        }
+       
 
 
         private void PopulateProductData()

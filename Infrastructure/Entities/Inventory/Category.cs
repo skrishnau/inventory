@@ -26,5 +26,7 @@ namespace Infrastructure.Entities.Inventory
         // -------------------- Table Objects -------------------- //
 
         public virtual Category ParentCategory { get; set; }
+
+        public virtual ICollection<Category> SubCategories { get; set; }
     }
 }

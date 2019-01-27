@@ -5,16 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Entities.Inventory;
 
-namespace ViewModel.Core.Products
+namespace ViewModel.Core.Inventory
 {
     public class CategoryModel
     {
-        public int Id { get; set; }
-        // name of the category; should be unique
-        public string Name { get; set; }
-        // implement N tier 
-        public int? ParentCategoryId { get; set; }
+        public CategoryModel()
+        {
+            SuCategories = new List<CategoryModel>();
+        }
 
+        public int Id { get; set; }
+        public string Name { get; set; }
+        
+        public int? ParentCategoryId { get; set; }
+        public string ParentCategory { get; set; }
+        public List<CategoryModel> SuCategories { get; set; }
+        
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
@@ -22,7 +28,6 @@ namespace ViewModel.Core.Products
 
         // -------------------- Table Objects -------------------- //
 
-        public virtual CategoryModel ParentCategory { get; set; }
 
         public  Category ToEntity()
         {
@@ -34,7 +39,6 @@ namespace ViewModel.Core.Products
                 ParentCategoryId = ParentCategoryId,
                 Name = Name,
                 Id = Id,
-                
             };
         }
     }
