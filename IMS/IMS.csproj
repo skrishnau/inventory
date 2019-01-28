@@ -86,11 +86,27 @@
     <Compile Include="Forms\Inventory\Create\CategoryCreate.Designer.cs">
       <DependentUpon>CategoryCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Lists\Category\CategoryEditControlPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Lists\Category\CategoryEditControlPanel.Designer.cs">
+      <DependentUpon>CategoryEditControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Create\ProductCreate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\Create\ProductCreate.Designer.cs">
       <DependentUpon>ProductCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Lists\Category\CategoryListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Lists\Category\CategoryListUC.Designer.cs">
+      <DependentUpon>CategoryListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Lists\Category\TreeNodeCategory.cs" />
+    <Compile Include="Forms\Inventory\Lists\Category\TreeViewCategory.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
       <SubType>Form</SubType>
@@ -127,11 +143,17 @@
     <EmbeddedResource Include="Forms\Inventory\Create\CategoryCreate.resx">
       <DependentUpon>CategoryCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Lists\Category\CategoryEditControlPanel.resx">
+      <DependentUpon>CategoryEditControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\SupplierCreate.resx">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Lists\Category\CategoryListUC.resx">
+      <DependentUpon>CategoryListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\UC\AddSupplierUC.resx">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
@@ -200,6 +222,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Commodity_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_Row_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Edit_Row_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_Row_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Edit_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_Bin_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_Bin_16px.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_User_50px.png" />

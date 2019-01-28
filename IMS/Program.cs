@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IMS.Forms.Inventory.Lists;
+using IMS.Forms.Inventory.Lists.Category;
 
 namespace IMS
 {
@@ -59,7 +61,7 @@ namespace IMS
             container.Register<CategoryCreate>(Lifestyle.Scoped);
             container.Register<ProductCreate>(Lifestyle.Scoped);
             container.Register<InventoryUC>(Lifestyle.Scoped);
-
+            container.Register<CategoryListUC>(Lifestyle.Scoped);
 
             // Optionally verify the container.
             container.Verify();

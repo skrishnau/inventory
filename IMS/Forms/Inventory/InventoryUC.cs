@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using IMS.Forms.Inventory.Create;
 using Service.Core.Inventory;
 using SimpleInjector.Lifestyles;
+using ViewModel.Core.Inventory;
+using IMS.Forms.Inventory.Lists;
+using IMS.Forms.Inventory.Lists.Category;
 
 namespace IMS.Forms.Inventory
 {
@@ -23,31 +26,29 @@ namespace IMS.Forms.Inventory
             this.productService = productService;
 
             InitializeComponent();
-            
-            InitializeListeners();
+
+            AddUserControls();
+
+            InitializeEvents();
             PopulateBrandData();
-            PopulateCategoryData();
             PopulateProductData();
         }
 
+        private void AddUserControls()
+        {
+            var categoryListUC = Program.container.GetInstance<CategoryListUC>();
+            categoryListUC.Dock = DockStyle.Fill;
+            tabCategories.Controls.Add(categoryListUC);
+        }
 
-        private void InitializeListeners()
+        private void InitializeEvents()
         {
             btnAddProduct.Click += BtnAddProduct_Click;
             btnAddBrand.Click += BtnAddBrand_Click;
-            btnAddCategory.Click += BtnAddCategory_Click;
+           
         }
 
-        private void BtnAddCategory_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var categoryCreate = Program.container.GetInstance<CategoryCreate>();
-                categoryCreate.ShowInTaskbar = false;
-                categoryCreate.ShowDialog();
-                PopulateCategoryData();
-            }
-        }
+    
 
         private void BtnAddBrand_Click(object sender, EventArgs e)
         {
@@ -71,6 +72,8 @@ namespace IMS.Forms.Inventory
             }
         }
 
+       
+
         private void PopulateBrandData()
         {
             dgvBrandList.AutoGenerateColumns = false;
@@ -78,12 +81,7 @@ namespace IMS.Forms.Inventory
             dgvBrandList.DataSource = brands;
         }
 
-        private void PopulateCategoryData()
-        {
-            dgvCategoryList.AutoGenerateColumns = false;
-            var categories= productService.GetCategoryList();
-            dgvCategoryList.DataSource = categories;
-        }
+       
 
 
         private void PopulateProductData()

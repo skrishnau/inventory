@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ViewModel.Core.Products;
+using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Create
 {
@@ -53,7 +53,7 @@ namespace IMS.Forms.Inventory.Create
             {
                 Name = tbBrandName.Text
             };
-            productService.AddBrand(brandModel);
+            productService.AddUpdateBrand(brandModel);
             this.Close();
         }
 
