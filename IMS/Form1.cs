@@ -24,6 +24,12 @@ namespace IMS
         private void InitializeEvents()
         {
             btnProducts.Click += BtnProducts_Click;
+            btnCustomer.Click += BtnCustomer_Click;
+        }
+
+        private void BtnCustomer_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void BtnProducts_Click(object sender, EventArgs e)
