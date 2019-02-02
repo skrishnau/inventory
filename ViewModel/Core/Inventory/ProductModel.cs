@@ -36,9 +36,9 @@ namespace ViewModel.Core.Inventory
         {
             return new Product()
             {
-                Brand = Brand.ToEntity(),
+                //Brand = Brand.ToEntity(),
                 BrandId = BrandId,
-                Category = Category.ToEntity(),
+                //Category = Category.ToEntity(),
                 CategoryId = CategoryId,
                 CreatedAt = CreatedAt,
                 DeletedAt = DeletedAt,

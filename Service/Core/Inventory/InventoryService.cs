@@ -86,11 +86,11 @@ namespace Service.Core.Inventory
                     Id = x.Id,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
-                    ParentCategory = (x.ParentCategory == null? "": x.ParentCategory.Name)
+                    ParentCategory = (x.ParentCategory == null ? "" : x.ParentCategory.Name)
 
                 }).ToList();
 
-            foreach(var cat in cats)
+            foreach (var cat in cats)
             {
                 cat.SuCategories = GetCategoryList(cat.Id);  // TODO:: use property "SubCategories" of the entity instead of recursive call
             }
@@ -148,5 +148,23 @@ namespace Service.Core.Inventory
                 _context.SaveChanges();
             }
         }
+
+        public CategoryModel GetCategory(string name)
+        {
+            name = name.Trim();
+            var cat = _context.Category.FirstOrDefault(x => x.DeletedAt == null && x.Name == name);
+
+            return new CategoryModel
+            {
+                Name = cat.Name,
+                ParentCategoryId = cat.ParentCategoryId,
+                UpdatedAt = cat.UpdatedAt,
+                CreatedAt = cat.CreatedAt,
+                DeletedAt = cat.DeletedAt,
+                Id = cat.Id
+            };
+        }
     }
 }
+
+

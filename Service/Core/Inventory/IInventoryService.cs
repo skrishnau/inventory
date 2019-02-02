@@ -22,5 +22,7 @@ namespace Service.Core.Inventory
         List<ProductModel> GetProductList();
 
         void DeleteCategory(CategoryModel categoryModel);
+
+        CategoryModel GetCategory(string v);
     }
 }

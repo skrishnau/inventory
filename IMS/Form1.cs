@@ -25,6 +25,7 @@ namespace IMS
         {
             btnProducts.Click += BtnProducts_Click;
             btnCustomer.Click += BtnCustomer_Click;
+            btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
         }
 
         private void BtnCustomer_Click(object sender, EventArgs e)
@@ -39,5 +40,14 @@ namespace IMS
             productListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(productListUC);
         }
+
+        private void BtnPurchaseOrder_Click(object sender, EventArgs e)
+        {
+            //var purchaseOrderForm = new PurchaseOrderForm();
+            //purchaseOrderForm.ShowDialog();
+        }
+
+
+
     }
 }
