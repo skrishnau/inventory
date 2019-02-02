@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Inventory.Lists;
 using IMS.Forms.Inventory.Lists.Category;
+using IMS.Forms.Purchases;
 
 namespace IMS
 {
@@ -62,6 +63,7 @@ namespace IMS
             container.Register<ProductCreate>(Lifestyle.Scoped);
             container.Register<InventoryUC>(Lifestyle.Scoped);
             container.Register<CategoryListUC>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderForm>(Lifestyle.Scoped);
 
             // Optionally verify the container.
             container.Verify();

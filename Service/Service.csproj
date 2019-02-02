@@ -80,6 +80,7 @@
     <Compile Include="Core\Users\Roles\IRoleService.cs" />
     <Compile Include="Core\Users\Roles\RoleService.cs" />
     <Compile Include="Utility\DateUtilityService.cs" />
+    <Compile Include="Utility\ProductOptionTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">

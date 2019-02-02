@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Inventory;
+using IMS.Forms.Purchases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,8 +44,8 @@ namespace IMS
 
         private void BtnPurchaseOrder_Click(object sender, EventArgs e)
         {
-            //var purchaseOrderForm = new PurchaseOrderForm();
-            //purchaseOrderForm.ShowDialog();
+            var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderForm>();//new PurchaseOrderForm();
+            purchaseOrderForm.ShowDialog();
         }
 
 

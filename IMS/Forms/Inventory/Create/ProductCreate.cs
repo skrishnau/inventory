@@ -71,6 +71,13 @@ namespace IMS.Forms.Inventory.Create
 
             tbProductName.Validating += TbProductName_Validating;
             cbCategory.Validating += CbCategory_Validating;
+
+            //btnAddOption.Click += BtnAddOption_Click;
+        }
+
+        private void BtnAddOption_Click(object sender, EventArgs e)
+        {
+            
         }
 
 
