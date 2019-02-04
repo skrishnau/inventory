@@ -184,9 +184,6 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Common\" />
