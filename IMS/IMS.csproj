@@ -108,6 +108,24 @@
     <Compile Include="Forms\Inventory\Lists\Category\TreeViewCategory.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Inventory\Products\Options\ColorOptionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\Options\ColorOptionUC.Designer.cs">
+      <DependentUpon>ColorOptionUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductOptionUC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductOptionUC.Designer.cs">
+      <DependentUpon>ProductOptionUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Purchases\PurchaseOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Purchases\PurchaseOrderForm.Designer.cs">
+      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +167,15 @@
     <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\Options\ColorOptionUC.resx">
+      <DependentUpon>ColorOptionUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\ProductOptionUC.resx">
+      <DependentUpon>ProductOptionUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Purchases\PurchaseOrderForm.resx">
+      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\SupplierCreate.resx">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +193,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -187,7 +215,6 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Common\" />
-    <Folder Include="Forms\Purchases\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Forms\Users\" />

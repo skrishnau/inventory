@@ -32,16 +32,16 @@
             this.label15 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbSellPrice = new System.Windows.Forms.NumericUpDown();
+            this.tbUnitCost = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
-            this.tbUnitCost = new System.Windows.Forms.MaskedTextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbSellPrice = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbStockThreshold = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbStockThreshold = new System.Windows.Forms.MaskedTextBox();
             this.checkboxShowStockAlert = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -53,8 +53,6 @@
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cbBrand = new System.Windows.Forms.ComboBox();
-            this.btnAddCategory = new System.Windows.Forms.Button();
-            this.btnAddBrand = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter2 = new System.Windows.Forms.Splitter();
@@ -67,10 +65,14 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSellPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbUnitCost)).BeginInit();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbStockThreshold)).BeginInit();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -78,6 +80,7 @@
             this.panel8.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label15
@@ -110,10 +113,10 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tbUnitCost, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tbSellPrice, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tbUnitCost, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 23);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -122,6 +125,22 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(301, 53);
             this.tableLayoutPanel2.TabIndex = 31;
+            // 
+            // tbSellPrice
+            // 
+            this.tbSellPrice.Enabled = false;
+            this.tbSellPrice.Location = new System.Drawing.Point(153, 29);
+            this.tbSellPrice.Name = "tbSellPrice";
+            this.tbSellPrice.Size = new System.Drawing.Size(145, 20);
+            this.tbSellPrice.TabIndex = 33;
+            // 
+            // tbUnitCost
+            // 
+            this.tbUnitCost.Enabled = false;
+            this.tbUnitCost.Location = new System.Drawing.Point(153, 3);
+            this.tbUnitCost.Name = "tbUnitCost";
+            this.tbUnitCost.Size = new System.Drawing.Size(145, 20);
+            this.tbUnitCost.TabIndex = 33;
             // 
             // label6
             // 
@@ -134,17 +153,6 @@
             this.label6.TabIndex = 20;
             this.label6.Text = "Unit Cost";
             // 
-            // tbUnitCost
-            // 
-            this.tbUnitCost.Enabled = false;
-            this.tbUnitCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUnitCost.Location = new System.Drawing.Point(152, 2);
-            this.tbUnitCost.Margin = new System.Windows.Forms.Padding(2);
-            this.tbUnitCost.Name = "tbUnitCost";
-            this.tbUnitCost.Size = new System.Drawing.Size(146, 21);
-            this.tbUnitCost.TabIndex = 21;
-            this.tbUnitCost.Text = "0.0";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -155,17 +163,6 @@
             this.label7.Size = new System.Drawing.Size(59, 15);
             this.label7.TabIndex = 22;
             this.label7.Text = "Sell Price";
-            // 
-            // tbSellPrice
-            // 
-            this.tbSellPrice.Enabled = false;
-            this.tbSellPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSellPrice.Location = new System.Drawing.Point(152, 28);
-            this.tbSellPrice.Margin = new System.Windows.Forms.Padding(2);
-            this.tbSellPrice.Name = "tbSellPrice";
-            this.tbSellPrice.Size = new System.Drawing.Size(146, 21);
-            this.tbSellPrice.TabIndex = 23;
-            this.tbSellPrice.Text = "0.0";
             // 
             // label4
             // 
@@ -205,8 +202,8 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tbStockThreshold, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.checkboxShowStockAlert, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label9, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -218,6 +215,13 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(301, 61);
             this.tableLayoutPanel3.TabIndex = 31;
             // 
+            // tbStockThreshold
+            // 
+            this.tbStockThreshold.Location = new System.Drawing.Point(153, 33);
+            this.tbStockThreshold.Name = "tbStockThreshold";
+            this.tbStockThreshold.Size = new System.Drawing.Size(145, 20);
+            this.tbStockThreshold.TabIndex = 33;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -228,15 +232,6 @@
             this.label8.Size = new System.Drawing.Size(98, 15);
             this.label8.TabIndex = 24;
             this.label8.Text = "Show Stock Alert";
-            // 
-            // tbStockThreshold
-            // 
-            this.tbStockThreshold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbStockThreshold.Location = new System.Drawing.Point(152, 32);
-            this.tbStockThreshold.Margin = new System.Windows.Forms.Padding(2);
-            this.tbStockThreshold.Name = "tbStockThreshold";
-            this.tbStockThreshold.Size = new System.Drawing.Size(147, 21);
-            this.tbStockThreshold.TabIndex = 27;
             // 
             // checkboxShowStockAlert
             // 
@@ -287,15 +282,13 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.80929F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.19071F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbProductName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbCategory, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.cbBrand, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnAddCategory, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnAddBrand, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 23);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -320,10 +313,10 @@
             // tbProductName
             // 
             this.tbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbProductName.Location = new System.Drawing.Point(111, 2);
+            this.tbProductName.Location = new System.Drawing.Point(119, 2);
             this.tbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.tbProductName.Name = "tbProductName";
-            this.tbProductName.Size = new System.Drawing.Size(149, 21);
+            this.tbProductName.Size = new System.Drawing.Size(158, 21);
             this.tbProductName.TabIndex = 11;
             // 
             // label1
@@ -340,10 +333,10 @@
             // cbCategory
             // 
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(111, 33);
+            this.cbCategory.Location = new System.Drawing.Point(119, 33);
             this.cbCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(149, 21);
+            this.cbCategory.Size = new System.Drawing.Size(158, 21);
             this.cbCategory.TabIndex = 17;
             // 
             // label5
@@ -360,35 +353,11 @@
             // cbBrand
             // 
             this.cbBrand.FormattingEnabled = true;
-            this.cbBrand.Location = new System.Drawing.Point(111, 64);
+            this.cbBrand.Location = new System.Drawing.Point(119, 64);
             this.cbBrand.Margin = new System.Windows.Forms.Padding(2);
             this.cbBrand.Name = "cbBrand";
-            this.cbBrand.Size = new System.Drawing.Size(149, 21);
+            this.cbBrand.Size = new System.Drawing.Size(158, 21);
             this.cbBrand.TabIndex = 19;
-            // 
-            // btnAddCategory
-            // 
-            this.btnAddCategory.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
-            this.btnAddCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddCategory.Location = new System.Drawing.Point(265, 34);
-            this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(33, 25);
-            this.btnAddCategory.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.btnAddCategory, "Add Category");
-            this.btnAddCategory.UseVisualStyleBackColor = true;
-            // 
-            // btnAddBrand
-            // 
-            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
-            this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddBrand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddBrand.Location = new System.Drawing.Point(265, 65);
-            this.btnAddBrand.Name = "btnAddBrand";
-            this.btnAddBrand.Size = new System.Drawing.Size(33, 27);
-            this.btnAddBrand.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.btnAddBrand, "Add Brand");
-            this.btnAddBrand.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
@@ -506,6 +475,10 @@
             this.panel1.Size = new System.Drawing.Size(633, 37);
             this.panel1.TabIndex = 37;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ProductCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,9 +496,12 @@
             this.panel3.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSellPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbUnitCost)).EndInit();
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbStockThreshold)).EndInit();
             this.panel6.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -534,6 +510,7 @@
             this.panel8.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -545,15 +522,12 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.MaskedTextBox tbUnitCost;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.MaskedTextBox tbSellPrice;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.MaskedTextBox tbStockThreshold;
         private System.Windows.Forms.CheckBox checkboxShowStockAlert;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
@@ -565,8 +539,6 @@
         private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbBrand;
-        private System.Windows.Forms.Button btnAddCategory;
-        private System.Windows.Forms.Button btnAddBrand;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Splitter splitter2;
@@ -578,5 +550,9 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.NumericUpDown tbSellPrice;
+        private System.Windows.Forms.NumericUpDown tbUnitCost;
+        private System.Windows.Forms.NumericUpDown tbStockThreshold;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

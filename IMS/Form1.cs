@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Inventory;
+using IMS.Forms.Purchases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,7 @@ namespace IMS
         {
             btnProducts.Click += BtnProducts_Click;
             btnCustomer.Click += BtnCustomer_Click;
+            btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
         }
 
         private void BtnCustomer_Click(object sender, EventArgs e)
@@ -39,5 +41,14 @@ namespace IMS
             productListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(productListUC);
         }
+
+        private void BtnPurchaseOrder_Click(object sender, EventArgs e)
+        {
+            var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderForm>();//new PurchaseOrderForm();
+            purchaseOrderForm.ShowDialog();
+        }
+
+
+
     }
 }
