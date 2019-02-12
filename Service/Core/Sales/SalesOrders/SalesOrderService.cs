@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.Core.Sales.SalesOrders
 {
-    public class SalesOrderService:ISalesOrderService
+    public class SalesOrderService1:ISalesOrderService
     {
     }
 }

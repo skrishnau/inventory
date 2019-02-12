@@ -20,7 +20,7 @@ namespace IMS.Forms.Inventory.Create
         public ProductCreate(IInventoryService inventoryService)
         {
             this._inventoryService = inventoryService;
-
+           
             InitializeComponent();
 
             PopulateCategoryCombo();

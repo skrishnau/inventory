@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace IMS.Forms.Suppliers.Create.UC
 {
-    public partial class AddSupplierUC : UserControl
+    public partial class AddSupplierUC : Form
     {
         public AddSupplierUC()
         {

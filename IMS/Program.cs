@@ -1,5 +1,6 @@
 ﻿using IMS.Forms.Inventory.Create;
 using IMS.Forms.Inventory;
+using IMS.Forms.Customer;
 using Infrastructure.Context;
 using Service.Core.Inventory;
 using SimpleInjector;
@@ -12,6 +13,10 @@ using System.Windows.Forms;
 using IMS.Forms.Inventory.Lists;
 using IMS.Forms.Inventory.Lists.Category;
 using IMS.Forms.Purchases;
+using IMS.Forms.Suppliers;
+using Service.Core.LDAP;
+using Service.Core.Suppliers;
+using Service.Core.Customers;
 
 namespace IMS
 {
@@ -53,6 +58,10 @@ namespace IMS
             // container.Register<IUserContext, WinFormsUserContext>();
             container.Register<DatabaseContext>(Lifestyle.Singleton);
             container.Register<IInventoryService, InventoryService>(Lifestyle.Singleton);
+            container.Register<ILDapService, ActiveDirectory>(Lifestyle.Singleton);
+
+            container.Register<ISupplierService, SupplierService>(Lifestyle.Singleton);
+            container.Register<ICustomerService, CustomerService>(Lifestyle.Singleton);
 
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //
@@ -62,8 +71,13 @@ namespace IMS
             container.Register<CategoryCreate>(Lifestyle.Scoped);
             container.Register<ProductCreate>(Lifestyle.Scoped);
             container.Register<InventoryUC>(Lifestyle.Scoped);
+            container.Register<SupplierUC>(Lifestyle.Scoped);
             container.Register<CategoryListUC>(Lifestyle.Scoped);
             container.Register<PurchaseOrderForm>(Lifestyle.Scoped);
+            container.Register<CustomerUC>(Lifestyle.Scoped);
+
+
+
 
             // Optionally verify the container.
             container.Verify();

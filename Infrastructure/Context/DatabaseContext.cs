@@ -55,7 +55,6 @@ namespace Infrastructure.Context
 
         public virtual DbSet<User> User { get; set; }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // for now cascade delete is removed for all entities

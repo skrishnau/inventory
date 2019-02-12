@@ -19,6 +19,8 @@ namespace Infrastructure.Entities.Inventory
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; } 
     }
 
 }

@@ -11,7 +11,7 @@ namespace Infrastructure.Entities.Suppliers
     {
         public int Id { get; set; }
         // Basic info of every Customer and Supplier are entered in User table 
-        public int UserId { get; set; }
+        public int BasicInfoId { get; set; }
 
         // supplier specific informations
         public string Fax { get; set; }
@@ -21,7 +21,7 @@ namespace Infrastructure.Entities.Suppliers
 
         // ==== table objects ==== //
         
-        public virtual User User { get; set; }
+        public virtual BasicInfo BasicInfo { get; set; }
 
 
     }

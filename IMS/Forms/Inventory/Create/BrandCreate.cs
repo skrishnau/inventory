@@ -14,11 +14,11 @@ namespace IMS.Forms.Inventory.Create
 {
     public partial class BrandCreate : Form
     {
-        private readonly IInventoryService productService;
+        private readonly IInventoryService inventoryService;
 
-        public BrandCreate(IInventoryService productService)
+        public BrandCreate(IInventoryService inventoryService)
         {
-            this.productService = productService;
+            this.inventoryService = inventoryService;
 
             InitializeComponent();
 
@@ -29,8 +29,8 @@ namespace IMS.Forms.Inventory.Create
 
         private void InitializeEvents()
         {
-            btnSave.Click += BtnSave_Click;
-            btnCancel.Click += BtnCancel_Click;
+           // btnSave.Click += BtnSave_Click;
+            //btnCancel.Click += BtnCancel_Click;
 
             this.Load += BrandCreate_Load;
         }
@@ -40,6 +40,7 @@ namespace IMS.Forms.Inventory.Create
             this.StartPosition = FormStartPosition.Manual;
             var point = new Point(MousePosition.X + 15, MousePosition.Y);
             this.Location = point;
+          
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -53,13 +54,20 @@ namespace IMS.Forms.Inventory.Create
             {
                 Name = tbBrandName.Text
             };
-            productService.AddUpdateBrand(brandModel);
+            inventoryService.AddUpdateBrand(brandModel);
             this.Close();
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void BrandCreate_Paint(object sender, PaintEventArgs e)
+        {
+            var pen = new Pen(Color.Blue, 2);
+            var rect = new Rectangle(1, 1, 100, 100);
+            e.Graphics.DrawRectangle(pen, rect);
         }
     }
 }

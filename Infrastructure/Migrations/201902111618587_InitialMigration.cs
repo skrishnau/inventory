@@ -3,7 +3,7 @@ namespace Infrastructure.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial_migration : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -31,85 +31,6 @@ namespace Infrastructure.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Categories",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        ParentCategoryId = c.Int(),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.ParentCategoryId)
-                .Index(t => t.ParentCategoryId);
-            
-            CreateTable(
-                "dbo.Customers",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.UserId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.Users",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Username = c.String(),
-                        Password = c.String(),
-                        Name = c.String(),
-                        Email = c.String(),
-                        DOB = c.DateTime(),
-                        Address = c.String(),
-                        Phone = c.String(),
-                        Gender = c.String(),
-                        IsMarried = c.Boolean(),
-                        UserType = c.String(),
-                        CanLogin = c.Boolean(nullable: false),
-                        RoleId = c.Int(nullable: false),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Roles", t => t.RoleId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.Roles",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        isSystemDefined = c.Boolean(nullable: false),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Suppliers",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
-                        Fax = c.String(),
-                        Website = c.String(),
-                        PhoneSecond = c.String(),
-                        ContactPersonName = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.UserId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
                 "dbo.Products",
                 c => new
                     {
@@ -133,6 +54,33 @@ namespace Infrastructure.Migrations
                 .Index(t => t.BrandId);
             
             CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        ParentCategoryId = c.Int(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        DeletedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.ParentCategoryId)
+                .Index(t => t.ParentCategoryId);
+            
+            CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        DeliveryAddress = c.String(),
+                        BasicInfo_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BasicInfoes", t => t.BasicInfo_Id)
+                .Index(t => t.BasicInfo_Id);
+            
+            CreateTable(
                 "dbo.Purchases",
                 c => new
                     {
@@ -146,6 +94,40 @@ namespace Infrastructure.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Suppliers", t => t.SupplierId)
                 .Index(t => t.SupplierId);
+            
+            CreateTable(
+                "dbo.Suppliers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        BasicInfoId = c.Int(nullable: false),
+                        Fax = c.String(),
+                        Website = c.String(),
+                        PhoneSecond = c.String(),
+                        ContactPersonName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BasicInfoes", t => t.BasicInfoId)
+                .Index(t => t.BasicInfoId);
+            
+            CreateTable(
+                "dbo.BasicInfoes",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        IsCompany = c.Boolean(nullable: false),
+                        Name = c.String(),
+                        Email = c.String(),
+                        DOB = c.DateTime(),
+                        Address = c.String(),
+                        Phone = c.String(),
+                        Gender = c.String(),
+                        IsMarried = c.Boolean(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        DeletedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.PurchaseOrders",
@@ -179,6 +161,24 @@ namespace Infrastructure.Migrations
                 .Index(t => t.CreatedById)
                 .Index(t => t.RequestedById)
                 .Index(t => t.ApprovedById);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Username = c.String(),
+                        Password = c.String(),
+                        BasicInfoId = c.Int(nullable: false),
+                        UserType = c.String(),
+                        CanLogin = c.Boolean(nullable: false),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        DeletedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BasicInfoes", t => t.BasicInfoId)
+                .Index(t => t.BasicInfoId);
             
             CreateTable(
                 "dbo.Warehouses",
@@ -245,40 +245,40 @@ namespace Infrastructure.Migrations
             DropForeignKey("dbo.PurchaseOrders", "PurchaseId", "dbo.Purchases");
             DropForeignKey("dbo.PurchaseOrders", "CreatedById", "dbo.Users");
             DropForeignKey("dbo.PurchaseOrders", "ApprovedById", "dbo.Users");
+            DropForeignKey("dbo.Users", "BasicInfoId", "dbo.BasicInfoes");
             DropForeignKey("dbo.Purchases", "SupplierId", "dbo.Suppliers");
+            DropForeignKey("dbo.Suppliers", "BasicInfoId", "dbo.BasicInfoes");
+            DropForeignKey("dbo.Customers", "BasicInfo_Id", "dbo.BasicInfoes");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.Products", "BrandId", "dbo.Brands");
-            DropForeignKey("dbo.Customers", "UserId", "dbo.Users");
-            DropForeignKey("dbo.Suppliers", "UserId", "dbo.Users");
-            DropForeignKey("dbo.Users", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.Categories", "ParentCategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Products", "BrandId", "dbo.Brands");
             DropIndex("dbo.Sales", new[] { "CustomerId" });
             DropIndex("dbo.Warehouses", new[] { "Branch_Id" });
+            DropIndex("dbo.Users", new[] { "BasicInfoId" });
             DropIndex("dbo.PurchaseOrders", new[] { "ApprovedById" });
             DropIndex("dbo.PurchaseOrders", new[] { "RequestedById" });
             DropIndex("dbo.PurchaseOrders", new[] { "CreatedById" });
             DropIndex("dbo.PurchaseOrders", new[] { "WarehouseId" });
             DropIndex("dbo.PurchaseOrders", new[] { "SupplierId" });
             DropIndex("dbo.PurchaseOrders", new[] { "PurchaseId" });
+            DropIndex("dbo.Suppliers", new[] { "BasicInfoId" });
             DropIndex("dbo.Purchases", new[] { "SupplierId" });
+            DropIndex("dbo.Customers", new[] { "BasicInfo_Id" });
+            DropIndex("dbo.Categories", new[] { "ParentCategoryId" });
             DropIndex("dbo.Products", new[] { "BrandId" });
             DropIndex("dbo.Products", new[] { "CategoryId" });
-            DropIndex("dbo.Suppliers", new[] { "UserId" });
-            DropIndex("dbo.Users", new[] { "RoleId" });
-            DropIndex("dbo.Customers", new[] { "UserId" });
-            DropIndex("dbo.Categories", new[] { "ParentCategoryId" });
             DropTable("dbo.Sales");
             DropTable("dbo.SaleOrders");
             DropTable("dbo.Branches");
             DropTable("dbo.Warehouses");
-            DropTable("dbo.PurchaseOrders");
-            DropTable("dbo.Purchases");
-            DropTable("dbo.Products");
-            DropTable("dbo.Suppliers");
-            DropTable("dbo.Roles");
             DropTable("dbo.Users");
+            DropTable("dbo.PurchaseOrders");
+            DropTable("dbo.BasicInfoes");
+            DropTable("dbo.Suppliers");
+            DropTable("dbo.Purchases");
             DropTable("dbo.Customers");
             DropTable("dbo.Categories");
+            DropTable("dbo.Products");
             DropTable("dbo.Brands");
             DropTable("dbo.Bills");
         }

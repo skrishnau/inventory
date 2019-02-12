@@ -59,6 +59,7 @@
     <Compile Include="Entities\Inventory\ProductVariant.cs" />
     <Compile Include="Entities\Inventory\ProductVariantValue.cs" />
     <Compile Include="Entities\Purchases\PurchaseItem.cs" />
+    <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Business\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
@@ -82,14 +83,19 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201901261543045_initial_migration.cs" />
-    <Compile Include="Migrations\201901261543045_initial_migration.Designer.cs">
-      <DependentUpon>201901261543045_initial_migration.cs</DependentUpon>
+    <Compile Include="Migrations\201902111618587_InitialMigration.cs" />
+    <Compile Include="Migrations\201902111618587_InitialMigration.Designer.cs">
+      <DependentUpon>201902111618587_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902111640050_add_basicinfo_to_customer_model.cs" />
+    <Compile Include="Migrations\201902111640050_add_basicinfo_to_customer_model.Designer.cs">
+      <DependentUpon>201902111640050_add_basicinfo_to_customer_model.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
@@ -97,8 +103,11 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901261543045_initial_migration.resx">
-      <DependentUpon>201901261543045_initial_migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902111618587_InitialMigration.resx">
+      <DependentUpon>201902111618587_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902111640050_add_basicinfo_to_customer_model.resx">
+      <DependentUpon>201902111640050_add_basicinfo_to_customer_model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

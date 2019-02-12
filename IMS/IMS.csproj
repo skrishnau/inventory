@@ -74,6 +74,12 @@
     <Compile Include="Forms\Customer\Create\UC\AddCustomerUC.Designer.cs">
       <DependentUpon>AddCustomerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Customer\CustomerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Customer\CustomerUC.Designer.cs">
+      <DependentUpon>CustomerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Create\BrandCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,7 +139,7 @@
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.Designer.cs">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
@@ -143,6 +149,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Suppliers\SupplierUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Suppliers\SupplierUC.Designer.cs">
+      <DependentUpon>SupplierUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Customer\CustomerUC.resx">
+      <DependentUpon>CustomerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\BrandCreate.resx">
       <DependentUpon>BrandCreate.cs</DependentUpon>
@@ -188,6 +203,9 @@
     <EmbeddedResource Include="Forms\Inventory\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Suppliers\SupplierUC.resx">
+      <DependentUpon>SupplierUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -215,6 +233,7 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Common\" />
+    <Folder Include="Forms\Inventory\Warehouses\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Forms\Users\" />
@@ -223,7 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{7B41B468-A95F-4036-9563-D86460E3F341}</Project>
+      <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
