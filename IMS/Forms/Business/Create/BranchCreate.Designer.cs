@@ -1,6 +1,6 @@
-﻿namespace IMS.Forms.Inventory.Create
+﻿namespace IMS.Forms.Business.Create
 {
-    partial class BrandCreate
+    partial class BranchCreate
     {
         /// <summary>
         /// Required designer variable.
@@ -30,66 +30,62 @@
         {
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.tbBrandName = new System.Windows.Forms.MaskedTextBox();
+            this.tbBranchName = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(293, 69);
+            this.btnCancel.Location = new System.Drawing.Point(296, 66);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
-            this.btnCancel.TabIndex = 25;
+            this.btnCancel.TabIndex = 29;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(147, 69);
+            this.btnSave.Location = new System.Drawing.Point(150, 66);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
-            this.btnSave.TabIndex = 24;
+            this.btnSave.TabIndex = 28;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // tbBrandName
+            // tbBranchName
             // 
-            this.tbBrandName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBrandName.Location = new System.Drawing.Point(147, 14);
-            this.tbBrandName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbBrandName.Name = "tbBrandName";
-            this.tbBrandName.Size = new System.Drawing.Size(245, 24);
-            this.tbBrandName.TabIndex = 23;
+            this.tbBranchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBranchName.Location = new System.Drawing.Point(150, 11);
+            this.tbBranchName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbBranchName.Name = "tbBranchName";
+            this.tbBranchName.Size = new System.Drawing.Size(245, 24);
+            this.tbBranchName.TabIndex = 27;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 17);
+            this.label2.Location = new System.Drawing.Point(14, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 18);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Brand Name";
+            this.label2.Size = new System.Drawing.Size(99, 18);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Branch Name";
             // 
-            // BrandCreate
+            // BranchCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 107);
+            this.ClientSize = new System.Drawing.Size(428, 114);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.tbBrandName);
+            this.Controls.Add(this.tbBranchName);
             this.Controls.Add(this.label2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "BrandCreate";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "BrandCreate";
-            //this.Paint += new System.Windows.Forms.PaintEventHandler(this.BrandCreate_Paint);
+            this.Name = "BranchCreate";
+            this.Text = "BranchCreate";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,7 +95,7 @@
 
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.MaskedTextBox tbBrandName;
+        private System.Windows.Forms.MaskedTextBox tbBranchName;
         private System.Windows.Forms.Label label2;
     }
 }

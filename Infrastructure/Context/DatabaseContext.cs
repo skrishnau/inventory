@@ -12,6 +12,7 @@ namespace Infrastructure.Context
     using System.Linq;
     using Infrastructure.Entities.Inventory;
     using System.Data.Entity.ModelConfiguration.Conventions;
+    using Infrastructure.Entities.Business;
 
     public class DatabaseContext : DbContext
     {
@@ -31,14 +32,14 @@ namespace Infrastructure.Context
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
-       
+
         public virtual DbSet<Bill> Bill { get; set; }
 
 
         public virtual DbSet<Customer> Customer { get; set; }
-       // public virtual DbSet<CustomerReport> CustomerReport { get; set; }
+        // public virtual DbSet<CustomerReport> CustomerReport { get; set; }
 
-      //  public virtual DbSet<Lead> Lead { get; set; }
+        //  public virtual DbSet<Lead> Lead { get; set; }
 
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
@@ -54,6 +55,12 @@ namespace Infrastructure.Context
         // public virtual DbSet<SupplierReport> ClientReport { get; set; }
 
         public virtual DbSet<User> User { get; set; }
+
+        public virtual DbSet<Branch> Branch {get; set;}
+
+        public virtual DbSet<Counter> Counter { get; set; }
+
+        public virtual DbSet<Warehouse> Warehouse { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -17,6 +17,8 @@ using IMS.Forms.Suppliers;
 using Service.Core.LDAP;
 using Service.Core.Suppliers;
 using Service.Core.Customers;
+using IMS.Forms.Business;
+using Service.Core.Business;
 
 namespace IMS
 {
@@ -63,6 +65,8 @@ namespace IMS
             container.Register<ISupplierService, SupplierService>(Lifestyle.Singleton);
             container.Register<ICustomerService, CustomerService>(Lifestyle.Singleton);
 
+            container.Register<IBusinessService, BusinessService>(Lifestyle.Singleton);
+
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //
             container.Register<Form1>(Lifestyle.Scoped);
@@ -75,6 +79,7 @@ namespace IMS
             container.Register<CategoryListUC>(Lifestyle.Scoped);
             container.Register<PurchaseOrderForm>(Lifestyle.Scoped);
             container.Register<CustomerUC>(Lifestyle.Scoped);
+            container.Register<BusinessUC>(Lifestyle.Scoped);
 
 
 

@@ -54,6 +54,8 @@
     <Compile Include="Core\Bills\Generation\IBillGenerationService.cs" />
     <Compile Include="Core\Bills\SampleBills\ISampleBillService.cs" />
     <Compile Include="Core\Bills\SampleBills\SampleBillService.cs" />
+    <Compile Include="Core\Business\BusinessService.cs" />
+    <Compile Include="Core\Business\IBusinessService.cs" />
     <Compile Include="Core\Clients\Details\ClientDetailService.cs" />
     <Compile Include="Core\Clients\Details\IClientDetailService.cs" />
     <Compile Include="Core\Clients\Reports\ClientReportService.cs" />

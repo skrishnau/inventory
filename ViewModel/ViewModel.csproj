@@ -64,6 +64,9 @@
   <ItemGroup>
     <Compile Include="Core\Bills\BillFormatModel.cs" />
     <Compile Include="Core\Bills\BillGenerationModel.cs" />
+    <Compile Include="Core\Business\BranchModel.cs" />
+    <Compile Include="Core\Business\CounterModel.cs" />
+    <Compile Include="Core\Business\WarehouseModel.cs" />
     <Compile Include="Core\Clients\ClientAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>

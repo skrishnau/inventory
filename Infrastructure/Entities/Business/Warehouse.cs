@@ -18,6 +18,8 @@ namespace Infrastructure.Entities.Business
         public int Id { get; set; }
         // location of the warehouse
         public string Location { get; set; }
+
+        public int BranchId { get; set; }
         // warehouse code;
         public string Code { get; set; }
 

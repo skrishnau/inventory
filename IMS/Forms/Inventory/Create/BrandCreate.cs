@@ -63,11 +63,11 @@ namespace IMS.Forms.Inventory.Create
             this.Close();
         }
 
-        private void BrandCreate_Paint(object sender, PaintEventArgs e)
+       /* private void BrandCreate_Paint(object sender, PaintEventArgs e)
         {
             var pen = new Pen(Color.Blue, 2);
             var rect = new Rectangle(1, 1, 100, 100);
             e.Graphics.DrawRectangle(pen, rect);
-        }
+        } */
     }
 }

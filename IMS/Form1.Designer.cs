@@ -42,6 +42,8 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.btnPurchaseOrder = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnBusiness = new System.Windows.Forms.Button();
+            this.btnCustomer = new System.Windows.Forms.Button();
             this.btnSupplier = new System.Windows.Forms.Button();
             this.btnProducts = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
@@ -49,7 +51,6 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.btnCustomer = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -154,6 +155,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel2.Controls.Add(this.btnBusiness);
             this.panel2.Controls.Add(this.btnCustomer);
             this.panel2.Controls.Add(this.btnSupplier);
             this.panel2.Controls.Add(this.btnProducts);
@@ -165,6 +167,36 @@
             this.panel2.Padding = new System.Windows.Forms.Padding(4);
             this.panel2.Size = new System.Drawing.Size(48, 499);
             this.panel2.TabIndex = 0;
+            // 
+            // btnBusiness
+            // 
+            this.btnBusiness.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBusiness.BackgroundImage")));
+            this.btnBusiness.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBusiness.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBusiness.Location = new System.Drawing.Point(4, 137);
+            this.btnBusiness.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBusiness.Name = "btnBusiness";
+            this.btnBusiness.Size = new System.Drawing.Size(40, 37);
+            this.btnBusiness.TabIndex = 4;
+            this.btnBusiness.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnBusiness, "Customer");
+            this.btnBusiness.UseVisualStyleBackColor = true;
+            this.btnBusiness.Click += new System.EventHandler(this.btnBusiness_Click);
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.BackgroundImage = global::IMS.Properties.Resources.icons8_User_50px;
+            this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCustomer.Location = new System.Drawing.Point(4, 100);
+            this.btnCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Size = new System.Drawing.Size(40, 37);
+            this.btnCustomer.TabIndex = 3;
+            this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnCustomer, "Customer");
+            this.btnCustomer.UseVisualStyleBackColor = true;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // btnSupplier
             // 
@@ -237,21 +269,6 @@
             this.pnlBody.Size = new System.Drawing.Size(1043, 499);
             this.pnlBody.TabIndex = 5;
             // 
-            // btnCustomer
-            // 
-            this.btnCustomer.BackgroundImage = global::IMS.Properties.Resources.icons8_User_50px;
-            this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCustomer.Location = new System.Drawing.Point(4, 100);
-            this.btnCustomer.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(40, 37);
-            this.btnCustomer.TabIndex = 3;
-            this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnCustomer, "Customer");
-            this.btnCustomer.UseVisualStyleBackColor = true;
-            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -301,6 +318,7 @@
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Button btnSupplier;
         private System.Windows.Forms.Button btnCustomer;
+        private System.Windows.Forms.Button btnBusiness;
     }
 }
 

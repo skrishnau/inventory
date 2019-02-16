@@ -62,6 +62,30 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Business\BusinessUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\BusinessUC.Designer.cs">
+      <DependentUpon>BusinessUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Business\Create\BranchCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\Create\BranchCreate.Designer.cs">
+      <DependentUpon>BranchCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Business\Create\CounterCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\Create\CounterCreate.Designer.cs">
+      <DependentUpon>CounterCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Business\Create\WarehouseCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\Create\WarehouseCreate.Designer.cs">
+      <DependentUpon>WarehouseCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Customer\Create\CustomerCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +182,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
+      <DependentUpon>BusinessUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Business\Create\BranchCreate.resx">
+      <DependentUpon>BranchCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Business\Create\CounterCreate.resx">
+      <DependentUpon>CounterCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Business\Create\WarehouseCreate.resx">
+      <DependentUpon>WarehouseCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Customer\Create\CustomerCreate.resx">
       <DependentUpon>CustomerCreate.cs</DependentUpon>
     </EmbeddedResource>

@@ -91,6 +91,18 @@
     <Compile Include="Migrations\201902111640050_add_basicinfo_to_customer_model.Designer.cs">
       <DependentUpon>201902111640050_add_basicinfo_to_customer_model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902141039116_error_fix.cs" />
+    <Compile Include="Migrations\201902141039116_error_fix.Designer.cs">
+      <DependentUpon>201902141039116_error_fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902150927047_error_fix1.cs" />
+    <Compile Include="Migrations\201902150927047_error_fix1.Designer.cs">
+      <DependentUpon>201902150927047_error_fix1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902151534123_add warehouse Icollection to branch table.cs" />
+    <Compile Include="Migrations\201902151534123_add warehouse Icollection to branch table.Designer.cs">
+      <DependentUpon>201902151534123_add warehouse Icollection to branch table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,6 +120,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902111640050_add_basicinfo_to_customer_model.resx">
       <DependentUpon>201902111640050_add_basicinfo_to_customer_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902141039116_error_fix.resx">
+      <DependentUpon>201902141039116_error_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902150927047_error_fix1.resx">
+      <DependentUpon>201902150927047_error_fix1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902151534123_add warehouse Icollection to branch table.resx">
+      <DependentUpon>201902151534123_add warehouse Icollection to branch table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
