@@ -18,12 +18,12 @@ namespace IMS.Forms.Inventory
 {
     public partial class InventoryUC : UserControl
     {
-        private readonly IInventoryService productService;
+        private readonly IInventoryService inventoryService;
 
         // dependency injection
-        public InventoryUC(IInventoryService productService)
+        public InventoryUC(IInventoryService inventoryService)
         {
-            this.productService = productService;
+            this.inventoryService = inventoryService;
 
             InitializeComponent();
 
@@ -32,6 +32,7 @@ namespace IMS.Forms.Inventory
             InitializeEvents();
             PopulateBrandData();
             PopulateProductData();
+            PopulateAttributetData();
         }
 
         private void AddUserControls()
@@ -77,7 +78,7 @@ namespace IMS.Forms.Inventory
         private void PopulateBrandData()
         {
             dgvBrandList.AutoGenerateColumns = false;
-            var brands = productService.GetBrandList();
+            var brands = inventoryService.GetBrandList();
             dgvBrandList.DataSource = brands;
         }
 
@@ -87,9 +88,25 @@ namespace IMS.Forms.Inventory
         private void PopulateProductData()
         {
             dgvProductList.AutoGenerateColumns = false;
-            var products = productService.GetProductList();
+            var products = inventoryService.GetProductList();
             dgvProductList.DataSource = products;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var attributeCreate = Program.container.GetInstance<AttributeCreate>();
+                attributeCreate.ShowInTaskbar = false;
+                attributeCreate.ShowDialog();
+                PopulateAttributetData();
+            }
+        }
+        void PopulateAttributetData()
+        {
+            dataGridView1.AutoGenerateColumns = false;
+            var attributes = inventoryService.GetAttributeList();
+            dataGridView1.DataSource = attributes;
+        }
     }
 }

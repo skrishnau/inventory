@@ -44,9 +44,16 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddBrand = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.tabAttributes = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.AttributeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabProducts.SuspendLayout();
@@ -55,6 +62,9 @@
             this.tabBrands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBrandList)).BeginInit();
             this.panel3.SuspendLayout();
+            this.tabAttributes.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -73,6 +83,7 @@
             this.tabControl1.Controls.Add(this.tabProducts);
             this.tabControl1.Controls.Add(this.tabCategories);
             this.tabControl1.Controls.Add(this.tabBrands);
+            this.tabControl1.Controls.Add(this.tabAttributes);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -230,6 +241,49 @@
             this.label4.Text = "Brands";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tabAttributes
+            // 
+            this.tabAttributes.Controls.Add(this.dataGridView1);
+            this.tabAttributes.Controls.Add(this.panel4);
+            this.tabAttributes.Location = new System.Drawing.Point(4, 29);
+            this.tabAttributes.Name = "tabAttributes";
+            this.tabAttributes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAttributes.Size = new System.Drawing.Size(549, 450);
+            this.tabAttributes.TabIndex = 3;
+            this.tabAttributes.Text = "Attributes";
+            this.tabAttributes.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(543, 61);
+            this.panel4.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Location = new System.Drawing.Point(118, 15);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(28, 28);
+            this.button1.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.button1, "Add Brand");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(14, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 28);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Attributes";
+            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.SystemColors.WindowFrame;
@@ -253,6 +307,34 @@
             this.panel1.Size = new System.Drawing.Size(557, 12);
             this.panel1.TabIndex = 1;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AttributeName,
+            this.Value});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 64);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(543, 383);
+            this.dataGridView1.TabIndex = 1;
+            // 
+            // AttributeName
+            // 
+            this.AttributeName.DataPropertyName = "Name";
+            this.AttributeName.HeaderText = "AttributeName";
+            this.AttributeName.Name = "AttributeName";
+            this.AttributeName.Width = 300;
+            // 
+            // Value
+            // 
+            this.Value.DataPropertyName = "Value";
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            this.Value.Width = 200;
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -272,6 +354,9 @@
             this.tabBrands.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBrandList)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.tabAttributes.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -295,5 +380,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabPage tabAttributes;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AttributeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
     }
 }

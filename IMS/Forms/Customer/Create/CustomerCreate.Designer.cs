@@ -216,6 +216,8 @@
             // 
             // cbGender
             // 
+            this.cbGender.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbGender.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbGender.FormattingEnabled = true;
             this.cbGender.Items.AddRange(new object[] {
             "Male",

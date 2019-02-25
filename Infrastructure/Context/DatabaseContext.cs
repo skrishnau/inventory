@@ -62,6 +62,9 @@ namespace Infrastructure.Context
 
         public virtual DbSet<Warehouse> Warehouse { get; set; }
 
+        public virtual DbSet<Entities.Inventory.Attribute> Attribute { get; set; }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // for now cascade delete is removed for all entities

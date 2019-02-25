@@ -84,8 +84,10 @@
     <Compile Include="Core\Common\LeadModel.cs" />
     <Compile Include="Core\Customers\CustomerModel.cs" />
     <Compile Include="Core\Customers\CustomerReportModel.cs" />
+    <Compile Include="Core\Inventory\AttributeModel.cs" />
     <Compile Include="Core\Inventory\BrandModel.cs" />
     <Compile Include="Core\Inventory\CategoryModel.cs" />
+    <Compile Include="Core\Inventory\ProductAttributeModel.cs" />
     <Compile Include="Core\Inventory\ProductModel.cs" />
     <Compile Include="Core\Suppliers\SupplierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

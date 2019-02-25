@@ -41,8 +41,9 @@
             this.panel4.Controls.Add(this.btnAddCategory);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(659, 33);
+            this.panel4.Size = new System.Drawing.Size(879, 41);
             this.panel4.TabIndex = 3;
             // 
             // label3
@@ -50,9 +51,10 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Left;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.label3.Size = new System.Drawing.Size(117, 33);
+            this.label3.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
+            this.label3.Size = new System.Drawing.Size(156, 41);
             this.label3.TabIndex = 3;
             this.label3.Text = "Categories";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -61,28 +63,31 @@
             // 
             this.btnAddCategory.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
             this.btnAddCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddCategory.Location = new System.Drawing.Point(147, 5);
+            this.btnAddCategory.Location = new System.Drawing.Point(196, 6);
+            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(21, 23);
+            this.btnAddCategory.Size = new System.Drawing.Size(28, 28);
             this.btnAddCategory.TabIndex = 1;
             this.btnAddCategory.UseVisualStyleBackColor = true;
             // 
             // treeView
             // 
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView.Location = new System.Drawing.Point(0, 33);
+            this.treeView.Location = new System.Drawing.Point(0, 41);
+            this.treeView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(659, 313);
+            this.treeView.Size = new System.Drawing.Size(879, 385);
             this.treeView.TabIndex = 4;
             // 
             // CategoryListUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.treeView);
             this.Controls.Add(this.panel4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CategoryListUC";
-            this.Size = new System.Drawing.Size(659, 346);
+            this.Size = new System.Drawing.Size(879, 426);
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 

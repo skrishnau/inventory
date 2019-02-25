@@ -37,7 +37,5 @@ namespace Infrastructure.Entities.Users
         //public virtual Role Role { get; set; }
 
         public virtual BasicInfo BasicInfo { get; set; }
-
-
     }
 }

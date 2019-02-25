@@ -42,6 +42,7 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.btnPurchaseOrder = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnUser = new System.Windows.Forms.Button();
             this.btnBusiness = new System.Windows.Forms.Button();
             this.btnCustomer = new System.Windows.Forms.Button();
             this.btnSupplier = new System.Windows.Forms.Button();
@@ -155,6 +156,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel2.Controls.Add(this.btnUser);
             this.panel2.Controls.Add(this.btnBusiness);
             this.panel2.Controls.Add(this.btnCustomer);
             this.panel2.Controls.Add(this.btnSupplier);
@@ -165,33 +167,48 @@
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.panel2.Size = new System.Drawing.Size(48, 499);
+            this.panel2.Size = new System.Drawing.Size(84, 499);
             this.panel2.TabIndex = 0;
+            // 
+            // btnUser
+            // 
+            this.btnUser.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUser.BackgroundImage")));
+            this.btnUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnUser.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnUser.Location = new System.Drawing.Point(4, 379);
+            this.btnUser.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUser.Name = "btnUser";
+            this.btnUser.Size = new System.Drawing.Size(76, 75);
+            this.btnUser.TabIndex = 5;
+            this.btnUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnUser, "User");
+            this.btnUser.UseVisualStyleBackColor = true;
+            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
             // 
             // btnBusiness
             // 
             this.btnBusiness.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBusiness.BackgroundImage")));
-            this.btnBusiness.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnBusiness.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnBusiness.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnBusiness.Location = new System.Drawing.Point(4, 137);
+            this.btnBusiness.Location = new System.Drawing.Point(4, 304);
             this.btnBusiness.Margin = new System.Windows.Forms.Padding(4);
             this.btnBusiness.Name = "btnBusiness";
-            this.btnBusiness.Size = new System.Drawing.Size(40, 37);
+            this.btnBusiness.Size = new System.Drawing.Size(76, 75);
             this.btnBusiness.TabIndex = 4;
             this.btnBusiness.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnBusiness, "Customer");
+            this.toolTip1.SetToolTip(this.btnBusiness, "Business");
             this.btnBusiness.UseVisualStyleBackColor = true;
             this.btnBusiness.Click += new System.EventHandler(this.btnBusiness_Click);
             // 
             // btnCustomer
             // 
             this.btnCustomer.BackgroundImage = global::IMS.Properties.Resources.icons8_User_50px;
-            this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCustomer.Location = new System.Drawing.Point(4, 100);
+            this.btnCustomer.Location = new System.Drawing.Point(4, 229);
             this.btnCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(40, 37);
+            this.btnCustomer.Size = new System.Drawing.Size(76, 75);
             this.btnCustomer.TabIndex = 3;
             this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnCustomer, "Customer");
@@ -201,12 +218,12 @@
             // btnSupplier
             // 
             this.btnSupplier.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSupplier.BackgroundImage")));
-            this.btnSupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSupplier.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSupplier.Location = new System.Drawing.Point(4, 63);
+            this.btnSupplier.Location = new System.Drawing.Point(4, 154);
             this.btnSupplier.Margin = new System.Windows.Forms.Padding(4);
             this.btnSupplier.Name = "btnSupplier";
-            this.btnSupplier.Size = new System.Drawing.Size(40, 37);
+            this.btnSupplier.Size = new System.Drawing.Size(76, 75);
             this.btnSupplier.TabIndex = 2;
             this.btnSupplier.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnSupplier, "Supplier");
@@ -215,13 +232,14 @@
             // 
             // btnProducts
             // 
+            this.btnProducts.AutoSize = true;
             this.btnProducts.BackgroundImage = global::IMS.Properties.Resources.icons8_Commodity_50px;
-            this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnProducts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnProducts.Location = new System.Drawing.Point(4, 26);
+            this.btnProducts.Location = new System.Drawing.Point(4, 79);
             this.btnProducts.Margin = new System.Windows.Forms.Padding(4);
             this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(40, 37);
+            this.btnProducts.Size = new System.Drawing.Size(76, 75);
             this.btnProducts.TabIndex = 0;
             this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnProducts, "Inventory");
@@ -230,12 +248,12 @@
             // btnHome
             // 
             this.btnHome.BackgroundImage = global::IMS.Properties.Resources.icons8_Home_40px;
-            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnHome.Location = new System.Drawing.Point(4, 4);
             this.btnHome.Margin = new System.Windows.Forms.Padding(4);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(40, 22);
+            this.btnHome.Size = new System.Drawing.Size(76, 75);
             this.btnHome.TabIndex = 1;
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnHome, "Home");
@@ -243,7 +261,7 @@
             // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(51, 102);
+            this.splitter2.Location = new System.Drawing.Point(87, 102);
             this.splitter2.Margin = new System.Windows.Forms.Padding(4);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(4, 499);
@@ -263,10 +281,10 @@
             // pnlBody
             // 
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(55, 102);
+            this.pnlBody.Location = new System.Drawing.Point(91, 102);
             this.pnlBody.Margin = new System.Windows.Forms.Padding(4);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(1043, 499);
+            this.pnlBody.Size = new System.Drawing.Size(1007, 499);
             this.pnlBody.TabIndex = 5;
             // 
             // Form1
@@ -291,6 +309,7 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,6 +338,7 @@
         private System.Windows.Forms.Button btnSupplier;
         private System.Windows.Forms.Button btnCustomer;
         private System.Windows.Forms.Button btnBusiness;
+        private System.Windows.Forms.Button btnUser;
     }
 }
 

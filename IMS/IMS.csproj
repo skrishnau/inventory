@@ -104,6 +104,12 @@
     <Compile Include="Forms\Customer\CustomerUC.Designer.cs">
       <DependentUpon>CustomerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Create\AttributeCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Create\AttributeCreate.Designer.cs">
+      <DependentUpon>AttributeCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Create\BrandCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Create\CategoryCreate.Designer.cs">
       <DependentUpon>CategoryCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Create\ProductAttributeCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Create\ProductAttributeCreate.Designer.cs">
+      <DependentUpon>ProductAttributeCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Lists\Category\CategoryEditControlPanel.cs">
       <SubType>UserControl</SubType>
@@ -180,6 +192,18 @@
     <Compile Include="Forms\Suppliers\SupplierUC.Designer.cs">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Users\Create\UserCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Users\Create\UserCreate.Designer.cs">
+      <DependentUpon>UserCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Users\UserUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Users\UserUC.Designer.cs">
+      <DependentUpon>UserUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
@@ -205,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Customer\CustomerUC.resx">
       <DependentUpon>CustomerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Create\AttributeCreate.resx">
+      <DependentUpon>AttributeCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\BrandCreate.resx">
       <DependentUpon>BrandCreate.cs</DependentUpon>
@@ -242,6 +269,12 @@
     <EmbeddedResource Include="Forms\Suppliers\SupplierUC.resx">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Users\Create\UserCreate.resx">
+      <DependentUpon>UserCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Users\UserUC.resx">
+      <DependentUpon>UserUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -272,7 +305,6 @@
     <Folder Include="Forms\Inventory\Warehouses\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
-    <Folder Include="Forms\Users\" />
     <Folder Include="Master\" />
     <Folder Include="Sales\" />
   </ItemGroup>

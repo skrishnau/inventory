@@ -164,6 +164,67 @@ namespace Service.Core.Inventory
                 Id = cat.Id
             };
         }
+
+        public void AddOrUpdateAttribute(AttributeModel attributeModel)
+        {
+            var dbEntity = _context.Attribute.FirstOrDefault(x => x.Id == attributeModel.Id);
+            if (dbEntity == null)
+            {
+                var attributeEntity = attributeModel.ToEntity();
+                attributeEntity.CreatedAt = DateTime.Now;
+                attributeEntity.UpdatedAt = DateTime.Now;
+                _context.Attribute.Add(attributeEntity);
+            }
+            else
+            {
+                dbEntity.Name = attributeModel.Name;
+                dbEntity.Value = attributeModel.Value;
+                dbEntity.UpdatedAt = DateTime.Now; 
+            }
+            _context.SaveChanges();
+        }
+
+        public List<AttributeModel> GetDistinctAttributes()
+        {
+            var list = new List<AttributeModel>();
+            var attributesGroup = _context.Attribute
+             .Where(x => x.DeletedAt == null)
+             .GroupBy(x => x.Name);
+            // attributeGroup is a dictionary of <string, Attribute>; {(Color, {obj, obj}), (CC, {obj, obj, obj})}
+            foreach (var grp in attributesGroup)
+            {
+                var name = grp.Key;
+                list.Add(new AttributeModel
+                {
+                    Name = name
+                });
+                //foreach(var att in grp)
+                //{
+                //}
+            }
+            return list;
+        }
+
+        public List<AttributeModel> GetAttributeList()
+        {
+            
+           
+
+            var attributes = _context.Attribute
+               .Where(x => x.DeletedAt == null)
+               .OrderBy(x=>x.Name)
+               .Select(x => new AttributeModel()
+               {
+                   Name = x.Name,
+                   Id = x.Id,
+                   Value = x.Value,
+                   CreatedAt = x.CreatedAt,
+                   UpdatedAt = x.UpdatedAt
+               })
+               .ToList();
+
+            return attributes;
+        }
     }
 }
 

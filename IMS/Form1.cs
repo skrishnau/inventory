@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Suppliers;
 using IMS.Forms.Business;
+using IMS.Forms.Users;
 
 namespace IMS
 {
@@ -69,6 +70,14 @@ namespace IMS
             pnlBody.Controls.Clear();
             businessUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(businessUC);
+        }
+
+        private void btnUser_Click(object sender, EventArgs e)
+        {
+            var userUC = Program.container.GetInstance<UserUC>();
+            pnlBody.Controls.Clear();
+            userUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(userUC);
         }
     }
 }

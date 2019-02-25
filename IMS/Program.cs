@@ -19,6 +19,9 @@ using Service.Core.Suppliers;
 using Service.Core.Customers;
 using IMS.Forms.Business;
 using Service.Core.Business;
+using IMS.Forms.Users;
+using IMS.Forms.Users.Create;
+using Service.Core.Users;
 
 namespace IMS
 {
@@ -67,6 +70,8 @@ namespace IMS
 
             container.Register<IBusinessService, BusinessService>(Lifestyle.Singleton);
 
+            container.Register<IUserService, UserService>(Lifestyle.Singleton);
+
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //
             container.Register<Form1>(Lifestyle.Scoped);
@@ -80,6 +85,8 @@ namespace IMS
             container.Register<PurchaseOrderForm>(Lifestyle.Scoped);
             container.Register<CustomerUC>(Lifestyle.Scoped);
             container.Register<BusinessUC>(Lifestyle.Scoped);
+            container.Register<UserUC>(Lifestyle.Scoped);
+            container.Register<UserCreate>(Lifestyle.Scoped);
 
 
 

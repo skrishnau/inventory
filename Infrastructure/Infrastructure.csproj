@@ -54,7 +54,9 @@
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
+    <Compile Include="Entities\Inventory\Attribute.cs" />
     <Compile Include="Entities\Inventory\Option.cs" />
+    <Compile Include="Entities\Inventory\ProductAttribute.cs" />
     <Compile Include="Entities\Inventory\ProductOption.cs" />
     <Compile Include="Entities\Inventory\ProductVariant.cs" />
     <Compile Include="Entities\Inventory\ProductVariantValue.cs" />
@@ -103,6 +105,10 @@
     <Compile Include="Migrations\201902151534123_add warehouse Icollection to branch table.Designer.cs">
       <DependentUpon>201902151534123_add warehouse Icollection to branch table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902251002042_attribute_added.cs" />
+    <Compile Include="Migrations\201902251002042_attribute_added.Designer.cs">
+      <DependentUpon>201902251002042_attribute_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902151534123_add warehouse Icollection to branch table.resx">
       <DependentUpon>201902151534123_add warehouse Icollection to branch table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251002042_attribute_added.resx">
+      <DependentUpon>201902251002042_attribute_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

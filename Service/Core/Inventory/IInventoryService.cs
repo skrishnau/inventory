@@ -24,5 +24,13 @@ namespace Service.Core.Inventory
         void DeleteCategory(CategoryModel categoryModel);
 
         CategoryModel GetCategory(string v);
+
+        void AddOrUpdateAttribute(AttributeModel attributeModel);
+
+        List<AttributeModel> GetAttributeList();
+
+        List<AttributeModel> GetDistinctAttributes();
+        
+
     }
 }
