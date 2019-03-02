@@ -109,7 +109,6 @@ namespace Service.Core.Inventory
                 .Select(x => new ProductModel()
                 {
                     Name = x.Name,
-                    BrandId = x.BrandId,
                     Id = x.Id,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt

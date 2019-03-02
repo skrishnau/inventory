@@ -13,6 +13,8 @@ namespace ViewModel.Core.Inventory
         // brand name
         public string Name { get; set; }
 
+        public int ProductId { get; set; }
+
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
@@ -22,6 +24,7 @@ namespace ViewModel.Core.Inventory
         {
             return new Brand
             {
+                ProductId = ProductId,
                 CreatedAt = CreatedAt,
                 DeletedAt = DeletedAt,
                 Id = Id,

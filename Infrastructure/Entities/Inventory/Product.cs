@@ -14,8 +14,6 @@ namespace Infrastructure.Entities.Inventory
         // TODO:: implement Many-to-Many realtion later in version 2 
         // (i.e. one product can be in multiple categories)
         public int CategoryId { get; set; }
-        // brand; one product belongs to one brand 
-        public int BrandId { get; set; }
 
         // ==== current informations (calculated at runtime) ==== //
 
@@ -43,6 +41,6 @@ namespace Infrastructure.Entities.Inventory
         // ------ table objects ------ //
         public virtual Category Category { get; set; }
 
-        public virtual Brand Brand { get; set; }
+        public virtual ICollection<Brand> Brands { get; set; }
     }
 }

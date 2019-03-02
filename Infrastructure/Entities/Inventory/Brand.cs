@@ -15,12 +15,14 @@ namespace Infrastructure.Entities.Inventory
         // brand name
         public string Name { get; set; }
 
+        public int ProductId { get; set; }
+
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; } 
+        public virtual Product Product { get; set; } 
     }
 
 }
