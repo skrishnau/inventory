@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gvBranch = new System.Windows.Forms.DataGridView();
-            this.BranchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAddBrand = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,13 +51,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gvWarehouse = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnAddWarehouse = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Branch_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CanMoveStocksToBranch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnAddWarehouse = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.colbranchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvBranch)).BeginInit();
@@ -72,9 +77,8 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(761, 46);
+            this.label1.Size = new System.Drawing.Size(571, 37);
             this.label1.TabIndex = 1;
             this.label1.Text = "Business";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -87,10 +91,11 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 46);
+            this.tabControl1.Location = new System.Drawing.Point(0, 37);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(761, 723);
+            this.tabControl1.Size = new System.Drawing.Size(571, 588);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 2;
             // 
@@ -98,52 +103,63 @@
             // 
             this.tabPage1.Controls.Add(this.gvBranch);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(753, 690);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Size = new System.Drawing.Size(563, 559);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Branch";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // gvBranch
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvBranch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvBranch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvBranch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.BranchName});
+            this.colbranchName});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvBranch.DefaultCellStyle = dataGridViewCellStyle2;
             this.gvBranch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvBranch.Location = new System.Drawing.Point(3, 63);
+            this.gvBranch.Location = new System.Drawing.Point(2, 51);
+            this.gvBranch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gvBranch.Name = "gvBranch";
             this.gvBranch.RowTemplate.Height = 24;
             this.gvBranch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvBranch.Size = new System.Drawing.Size(747, 624);
+            this.gvBranch.Size = new System.Drawing.Size(559, 506);
             this.gvBranch.TabIndex = 1;
-            // 
-            // BranchName
-            // 
-            this.BranchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BranchName.DataPropertyName = "Name";
-            this.BranchName.HeaderText = "BranchName";
-            this.BranchName.Name = "BranchName";
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnAddBrand);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(747, 60);
+            this.panel1.Size = new System.Drawing.Size(559, 49);
             this.panel1.TabIndex = 0;
             // 
             // btnAddBrand
             // 
             this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
             this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddBrand.Location = new System.Drawing.Point(142, 16);
-            this.btnAddBrand.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddBrand.Location = new System.Drawing.Point(106, 13);
             this.btnAddBrand.Name = "btnAddBrand";
-            this.btnAddBrand.Size = new System.Drawing.Size(28, 28);
+            this.btnAddBrand.Size = new System.Drawing.Size(21, 23);
             this.btnAddBrand.TabIndex = 2;
             this.btnAddBrand.UseVisualStyleBackColor = true;
             this.btnAddBrand.Click += new System.EventHandler(this.btnAddBrand_Click);
@@ -152,8 +168,9 @@
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Left;
             this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 60);
+            this.label2.Size = new System.Drawing.Size(81, 49);
             this.label2.TabIndex = 0;
             this.label2.Text = "Branch";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,27 +179,45 @@
             // 
             this.tabPage2.Controls.Add(this.gvCounter);
             this.tabPage2.Controls.Add(this.panel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(753, 690);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Size = new System.Drawing.Size(563, 558);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Counter";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // gvCounter
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvCounter.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvCounter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvCounter.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CounterName,
             this.BranchId,
             this.OutOfOrder});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvCounter.DefaultCellStyle = dataGridViewCellStyle4;
             this.gvCounter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvCounter.Location = new System.Drawing.Point(3, 63);
+            this.gvCounter.Location = new System.Drawing.Point(2, 51);
+            this.gvCounter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gvCounter.Name = "gvCounter";
             this.gvCounter.RowTemplate.Height = 24;
             this.gvCounter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvCounter.Size = new System.Drawing.Size(747, 624);
+            this.gvCounter.Size = new System.Drawing.Size(559, 505);
             this.gvCounter.TabIndex = 3;
             // 
             // CounterName
@@ -210,19 +245,19 @@
             this.panel2.Controls.Add(this.btnAddCounter);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(747, 60);
+            this.panel2.Size = new System.Drawing.Size(559, 49);
             this.panel2.TabIndex = 2;
             // 
             // btnAddCounter
             // 
             this.btnAddCounter.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
             this.btnAddCounter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddCounter.Location = new System.Drawing.Point(142, 16);
-            this.btnAddCounter.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddCounter.Location = new System.Drawing.Point(106, 13);
             this.btnAddCounter.Name = "btnAddCounter";
-            this.btnAddCounter.Size = new System.Drawing.Size(28, 28);
+            this.btnAddCounter.Size = new System.Drawing.Size(21, 23);
             this.btnAddCounter.TabIndex = 2;
             this.btnAddCounter.UseVisualStyleBackColor = true;
             this.btnAddCounter.Click += new System.EventHandler(this.btnAddCounter_Click);
@@ -231,8 +266,9 @@
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Left;
             this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 60);
+            this.label3.Size = new System.Drawing.Size(81, 49);
             this.label3.TabIndex = 0;
             this.label3.Text = "Counter";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -241,66 +277,44 @@
             // 
             this.tabPage3.Controls.Add(this.gvWarehouse);
             this.tabPage3.Controls.Add(this.panel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(753, 690);
+            this.tabPage3.Size = new System.Drawing.Size(563, 558);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Warehouse";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // gvWarehouse
             // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvWarehouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.gvWarehouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvWarehouse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Location,
             this.Branch_ID,
             this.Code,
             this.CanMoveStocksToBranch});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvWarehouse.DefaultCellStyle = dataGridViewCellStyle6;
             this.gvWarehouse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvWarehouse.Location = new System.Drawing.Point(0, 60);
+            this.gvWarehouse.Location = new System.Drawing.Point(0, 49);
+            this.gvWarehouse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gvWarehouse.Name = "gvWarehouse";
             this.gvWarehouse.RowTemplate.Height = 24;
-            this.gvWarehouse.Size = new System.Drawing.Size(753, 630);
+            this.gvWarehouse.Size = new System.Drawing.Size(563, 509);
             this.gvWarehouse.TabIndex = 3;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.btnAddWarehouse);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(753, 60);
-            this.panel3.TabIndex = 2;
-            // 
-            // btnAddWarehouse
-            // 
-            this.btnAddWarehouse.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
-            this.btnAddWarehouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddWarehouse.Location = new System.Drawing.Point(142, 16);
-            this.btnAddWarehouse.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddWarehouse.Name = "btnAddWarehouse";
-            this.btnAddWarehouse.Size = new System.Drawing.Size(28, 28);
-            this.btnAddWarehouse.TabIndex = 2;
-            this.btnAddWarehouse.UseVisualStyleBackColor = true;
-            this.btnAddWarehouse.Click += new System.EventHandler(this.btnAddWarehouse_Click);
-            // 
-            // label4
-            // 
-            this.label4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 60);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Warehouse";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Location
-            // 
-            this.Location.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Location.DataPropertyName = "Location";
-            this.Location.HeaderText = "Location";
-            this.Location.Name = "Location";
             // 
             // Branch_ID
             // 
@@ -321,14 +335,55 @@
             this.CanMoveStocksToBranch.Name = "CanMoveStocksToBranch";
             this.CanMoveStocksToBranch.Width = 150;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnAddWarehouse);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(563, 49);
+            this.panel3.TabIndex = 2;
+            // 
+            // btnAddWarehouse
+            // 
+            this.btnAddWarehouse.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddWarehouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAddWarehouse.Location = new System.Drawing.Point(106, 13);
+            this.btnAddWarehouse.Name = "btnAddWarehouse";
+            this.btnAddWarehouse.Size = new System.Drawing.Size(21, 23);
+            this.btnAddWarehouse.TabIndex = 2;
+            this.btnAddWarehouse.UseVisualStyleBackColor = true;
+            this.btnAddWarehouse.Click += new System.EventHandler(this.btnAddWarehouse_Click);
+            // 
+            // label4
+            // 
+            this.label4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 49);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Warehouse";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // colbranchName
+            // 
+            this.colbranchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colbranchName.DataPropertyName = "Name";
+            this.colbranchName.HeaderText = "BranchName";
+            this.colbranchName.Name = "colbranchName";
+            // 
             // BusinessUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BusinessUC";
-            this.Size = new System.Drawing.Size(761, 769);
+            this.Size = new System.Drawing.Size(571, 625);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvBranch)).EndInit();
@@ -362,13 +417,13 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnAddWarehouse;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BranchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn CounterName;
         private System.Windows.Forms.DataGridViewTextBoxColumn BranchId;
         private System.Windows.Forms.DataGridViewTextBoxColumn OutOfOrder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn Location;
         private System.Windows.Forms.DataGridViewTextBoxColumn Branch_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn CanMoveStocksToBranch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colbranchName;
     }
 }

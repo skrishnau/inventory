@@ -21,6 +21,8 @@ namespace Service.Core.Inventory
 
         List<ProductModel> GetProductList();
 
+        List<ProductModelForGridView> GetProductListForGridView();
+
         void DeleteCategory(CategoryModel categoryModel);
 
         CategoryModel GetCategory(string v);
@@ -30,7 +32,7 @@ namespace Service.Core.Inventory
         List<AttributeModel> GetAttributeList();
 
         List<AttributeModel> GetDistinctAttributes();
-        
+
 
     }
 }

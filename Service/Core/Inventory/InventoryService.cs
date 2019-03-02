@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Context;
+using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,6 +119,52 @@ namespace Service.Core.Inventory
 
             return cats;
         }
+
+        public List<ProductModelForGridView> GetProductListForGridView()
+        {
+            var cats = _context.Product
+                .Where(x => x.DeletedAt == null);
+            var list = new List<ProductModelForGridView>();
+            foreach(var x in cats)
+            {
+                list.Add(new ProductModelForGridView
+                {
+                    Name = x.Name,
+                    Id = x.Id,
+                    CreatedAt = GetDateShortString(x.CreatedAt),
+                    UpdatedAt = GetDateShortString(x.UpdatedAt),
+                    Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
+                    Category = x.Category.Name,
+                    MinStockCountForAlert = x.MinStockCountForAlert,
+                    QuantityInStocks = x.QuantityInStock,
+                    ShowStockAlerts = x.ShowStockAlerts
+                });
+            }
+            return list;
+        }
+
+        private string GetDateShortString(DateTime date)
+        {
+            return date.ToShortDateString();
+        }
+
+        public string GetBrandListCommaSeparatedString(List<Brand> brands)
+        {
+            var builder = new StringBuilder();
+            for(var b=0; b<brands.Count; b++)
+            {
+
+                builder.Append(brands[b].Name);
+                if (b < brands.Count - 2)
+                    builder.Append(", ");
+                if (b == brands.Count - 2)
+                    builder.Append(" , ");// &
+
+            }
+            return builder.ToString();
+        }
+
+
 
         public void DeleteCategory(CategoryModel categoryModel)
         {

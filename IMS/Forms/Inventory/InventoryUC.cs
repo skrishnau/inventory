@@ -88,7 +88,7 @@ namespace IMS.Forms.Inventory
         private void PopulateProductData()
         {
             dgvProductList.AutoGenerateColumns = false;
-            var products = inventoryService.GetProductList();
+            var products = inventoryService.GetProductListForGridView();
             dgvProductList.DataSource = products;
         }
 

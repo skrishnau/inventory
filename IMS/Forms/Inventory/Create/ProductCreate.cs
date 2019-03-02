@@ -1,4 +1,5 @@
-﻿using Service.Core.Inventory;
+﻿using IMS.Forms.Common;
+using Service.Core.Inventory;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Create
@@ -17,10 +19,15 @@ namespace IMS.Forms.Inventory.Create
     {
         private readonly IInventoryService _inventoryService;
 
+        private int Id;
+        private List<BrandModel> _brands;
+
         public ProductCreate(IInventoryService inventoryService)
         {
             this._inventoryService = inventoryService;
-           
+
+            _brands = _inventoryService.GetBrandList();
+
             InitializeComponent();
 
             PopulateCategoryCombo();
@@ -28,7 +35,9 @@ namespace IMS.Forms.Inventory.Create
             PopulateBrandCombo();
 
             InitializeEvents();
+
         }
+
 
         private void PopulateCategoryCombo()
         {
@@ -57,15 +66,15 @@ namespace IMS.Forms.Inventory.Create
         {
             cbBrand.FlatStyle = FlatStyle.Popup;
             cbBrand.DropDownStyle = ComboBoxStyle.DropDownList;
-            var brands = _inventoryService.GetBrandList();
+            
             cbBrand.ValueMember = "Id";
             cbBrand.DisplayMember = "Name";
-            cbBrand.DataSource = brands;
+            cbBrand.DataSource = _brands;
         }
 
         private void InitializeEvents()
         {
-            btnSave.Click += btnSave_Click;
+            //btnSave.Click += btnSave_Click;
             //btnAddBrand.Click += btnAddBrand_Click;
             //btnAddCategory.Click += BtnAddCategory_Click;
 
@@ -77,7 +86,7 @@ namespace IMS.Forms.Inventory.Create
 
         private void BtnAddOption_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -98,25 +107,42 @@ namespace IMS.Forms.Inventory.Create
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            SaveProduct();
+        }
+
+        private string errorMessage = "Please Fill all required Fields";
+
+        private void SaveProduct()
+        {
             ProductModel product = null;
             try
             {
                 var valName = ValidateProductName();
                 var valCategory = ValidateCategory();
-                var valBrand = ValidateBrand();
-                if (!(valName && valCategory && valBrand))
+                if (!(valName && valCategory))
                 {
+                    ShowPopupMessage("Unfilled Inputs", "Please fill all the required fields");
+                    return;
+                }
+                var brands = GetBrands();
+                if(brands == null)
+                {
+                    ShowPopupMessage("Missing Brand Names", "Some of the brands are without name!");
+                    return;
+                } else if (!IsBrandNamesUnique(brands))
+                {
+                    ShowPopupMessage("Duplicate Brands", "There are duplicate Brand names in the list");
                     return;
                 }
 
                 var category = _inventoryService.GetCategory(cbCategory.SelectedItem.ToString());
                 product = new ProductModel()
                 {
-                    BrandId = ((BrandModel)cbBrand.SelectedItem).Id,
+                    Brands = brands, // GetBrands(), //((BrandModel)cbBrand.SelectedItem).Id,
                     CategoryId = category.Id,
                     CreatedAt = DateTime.Now,
                     MinStockCountForAlert = int.Parse(tbStockThreshold.Text),
-                    ShowStockAlerts = checkboxShowStockAlert.Checked,
+                    ShowStockAlerts = cbShowStockAlert.Checked,
                     Name = tbProductName.Text,
                     UpdatedAt = DateTime.Now,
                 };
@@ -127,6 +153,68 @@ namespace IMS.Forms.Inventory.Create
                 _inventoryService.AddProduct(product);
                 this.Close();
             }
+        }
+
+        private bool IsBrandNamesUnique(List<BrandModel> brands)
+        {
+            
+            for(int i=0; i<brands.Count; i++)
+            {
+                var otherBrands = new List<BrandModel>();
+                if (i > 0)
+                {
+                    // get lower limits
+                    otherBrands.AddRange(brands.GetRange(0, i));
+                }
+                if (i < brands.Count - 1)
+                {
+                    // get upper limits
+                    otherBrands.AddRange(brands.GetRange(i + 1, brands.Count - 1 - i));
+                }
+                if (otherBrands.Any(x => x.Name.Equals(brands[i].Name)))
+                    return false;
+            }
+            return true;
+        }
+
+        private void ShowPopupMessage(string title, string message)
+        {
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Properties.Resources.icons8_Lipstick_48px_3;
+            popup.TitleColor = Color.Coral;
+            popup.ContentColor = Color.Red;
+            popup.Size = new Size(300, 50);
+            popup.ShowGrip = false;
+            popup.TitleText = title;
+            popup.ContentText = message;
+            popup.Popup();// show 
+            this.Focus(); // return the focus to the current form
+
+        }
+        private List<BrandModel> GetBrands()
+        {
+            var list = new List<BrandModel>();
+            foreach (var brandControl in pnlBrandsBody.Controls)
+            {
+                var inputUc = (TextBoxWithDeleteUC)brandControl;
+                if (inputUc != null)
+                {
+                    if (string.IsNullOrEmpty(inputUc.InputText))
+                    {
+                        return null;
+                    }
+                    var brandModel = new BrandModel()
+                    {
+                        Id = inputUc.Id,
+                        CreatedAt = inputUc.Id == 0 ? DateTime.Now : inputUc.CreatedAt,
+                        UpdatedAt = DateTime.Now,
+                        Name = inputUc.InputText,
+                        ProductId = Id,
+                    };
+                    list.Add(brandModel);
+                }
+            }
+            return list;
         }
 
 
@@ -164,19 +252,50 @@ namespace IMS.Forms.Inventory.Create
             return true;
         }
 
-        private bool ValidateBrand()
-        {
-            if (cbBrand.SelectedItem == null)
-            {
-                errorProvider1.SetError(cbBrand, "Required");
-                return false;
-            }
-            errorProvider1.SetError(cbBrand, "");
-            return true;
-        }
+        //private bool ValidateBrand()
+        //{
+        //    if (cbBrand.SelectedItem == null)
+        //    {
+        //        errorProvider1.SetError(cbBrand, "Required");
+        //        return false;
+        //    }
+        //    errorProvider1.SetError(cbBrand, "");
+        //    return true;
+        //}
+
 
         #endregion
 
+        private void btnAddBrand_Click(object sender, EventArgs e)
+        {
+            var brandEachItem = new TextBoxWithDeleteUC();
+            brandEachItem.DataSource = _brands.Select(x => x.Name).Distinct().ToList();
+            brandEachItem.OnRemoveClicked += BrandEachItem_OnRemoveClicked;
+            //brandEachItem.Dock = DockStyle.Top;
+            pnlBrandsBody.Controls.Add(brandEachItem);
+        }
 
+        private void BrandEachItem_OnRemoveClicked(object sender, EventArgs e)
+        {
+            pnlBrandsBody.Controls.Remove((TextBoxWithDeleteUC)sender);
+        }
+
+        private void btnAttributeAdd_Click(object sender, EventArgs e)
+        {
+            var attributeEachItem = new TextBoxWithDeleteUC();
+            attributeEachItem.OnRemoveClicked += AttributeEachItem_OnRemoveClicked;
+            attributeEachItem.Dock = DockStyle.Top;
+            pnlAttributesBody.Controls.Add(attributeEachItem);
+        }
+
+        private void AttributeEachItem_OnRemoveClicked(object sender, EventArgs e)
+        {
+            pnlAttributesBody.Controls.Remove((TextBoxWithDeleteUC)sender);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
