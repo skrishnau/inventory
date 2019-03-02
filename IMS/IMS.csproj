@@ -104,6 +104,12 @@
     <Compile Include="Forms\Customer\CustomerUC.Designer.cs">
       <DependentUpon>CustomerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\AddAttributeValueUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\AddAttributeValueUC.Designer.cs">
+      <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Create\AttributeCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Customer\CustomerUC.resx">
       <DependentUpon>CustomerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\AddAttributeValueUC.resx">
+      <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\AttributeCreate.resx">
       <DependentUpon>AttributeCreate.cs</DependentUpon>
@@ -357,6 +366,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_User_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Close_Window_50px_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

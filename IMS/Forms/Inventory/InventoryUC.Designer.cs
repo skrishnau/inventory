@@ -45,15 +45,16 @@
             this.btnAddBrand = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tabAttributes = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.AttributeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.AttributeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabProducts.SuspendLayout();
@@ -63,8 +64,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBrandList)).BeginInit();
             this.panel3.SuspendLayout();
             this.tabAttributes.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -253,8 +254,37 @@
             this.tabAttributes.Text = "Attributes";
             this.tabAttributes.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AttributeName,
+            this.Value});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 64);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(543, 383);
+            this.dataGridView1.TabIndex = 1;
+            // 
+            // AttributeName
+            // 
+            this.AttributeName.DataPropertyName = "Name";
+            this.AttributeName.HeaderText = "AttributeName";
+            this.AttributeName.Name = "AttributeName";
+            this.AttributeName.Width = 300;
+            // 
+            // Value
+            // 
+            this.Value.DataPropertyName = "Value";
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            this.Value.Width = 200;
+            // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnEdit);
             this.panel4.Controls.Add(this.button1);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -262,6 +292,16 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(543, 61);
             this.panel4.TabIndex = 0;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(182, 19);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // button1
             // 
@@ -272,7 +312,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(28, 28);
             this.button1.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.button1, "Add Brand");
+            this.toolTip1.SetToolTip(this.button1, "Add Attribute");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -307,34 +347,6 @@
             this.panel1.Size = new System.Drawing.Size(557, 12);
             this.panel1.TabIndex = 1;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.AttributeName,
-            this.Value});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 64);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(543, 383);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // AttributeName
-            // 
-            this.AttributeName.DataPropertyName = "Name";
-            this.AttributeName.HeaderText = "AttributeName";
-            this.AttributeName.Name = "AttributeName";
-            this.AttributeName.Width = 300;
-            // 
-            // Value
-            // 
-            this.Value.DataPropertyName = "Value";
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
-            this.Value.Width = 200;
-            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -355,8 +367,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBrandList)).EndInit();
             this.panel3.ResumeLayout(false);
             this.tabAttributes.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -387,5 +399,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn AttributeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

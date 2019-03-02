@@ -15,6 +15,10 @@ namespace IMS.Forms.Inventory.Create
     public partial class AttributeCreate : Form
     {
         private readonly IInventoryService inventoryService;
+
+        private int attributeId;
+
+
         public AttributeCreate(IInventoryService inventoryService)
         {
             this.inventoryService = inventoryService;
@@ -38,37 +42,64 @@ namespace IMS.Forms.Inventory.Create
             cbAttributeName.ValueMember = "Id";
             cbAttributeName.DisplayMember = "Name";
         }
-        
+
+        public void SetData(AttributeModel attributeModel)
+        {
+            attributeId = attributeModel.Id;
+            tbValue.Text = attributeModel.Value;
+            cbAttributeName.Text = attributeModel.Name;
+
+        }
 
 
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(tbValue.Text == "")
+            bool isValid = ValidateAttribute();
+
+            if (isValid)
+            {
+                // save
+                var attributeModel = new AttributeModel
+                {
+                    Id = attributeId,
+                    Name = cbAttributeName.Text,
+                    Value = tbValue.Text
+                };
+                if (!inventoryService.AddOrUpdateAttribute(attributeModel))
+                {
+                    MessageBox.Show("Attribute-Value combo alreary in a database.");
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+        }
+
+        private bool ValidateAttribute()
+        {
+            if (tbValue.Text == "")
             {
                 tbValue.BackColor = Color.LightPink;
-                return;
+                return false;
             }
-            if(cbAttributeName.Text == "")
+            if (cbAttributeName.Text == "")
             {
                 cbAttributeName.BackColor = Color.LightPink;
-                return;
+                return false;
             }
-
-            var attributeModel = new AttributeModel
-            {
-                Name = cbAttributeName.Text,
-                Value = tbValue.Text
-            };
-            inventoryService.AddOrUpdateAttribute(attributeModel);
-           // this.Close();
+            return true;
         }
-        
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
 
         }
+       
+        
+
     }
 }
