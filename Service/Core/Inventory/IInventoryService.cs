@@ -25,7 +25,7 @@ namespace Service.Core.Inventory
 
         CategoryModel GetCategory(string v);
 
-        void AddOrUpdateAttribute(AttributeModel attributeModel);
+        bool AddOrUpdateAttribute(AttributeModel attributeModel);
 
         List<AttributeModel> GetAttributeList();
 

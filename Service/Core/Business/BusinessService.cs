@@ -16,6 +16,7 @@ namespace Service.Core.Business
         {
             _context = context;
         }
+
         public void AddOrUpdateBranch(BranchModel branch)
         {
             var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branch.Id);

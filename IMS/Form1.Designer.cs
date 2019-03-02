@@ -327,7 +327,6 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnProducts;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Button btnPurchaseOrder;
@@ -339,6 +338,7 @@
         private System.Windows.Forms.Button btnCustomer;
         private System.Windows.Forms.Button btnBusiness;
         private System.Windows.Forms.Button btnUser;
+        private System.Windows.Forms.Button btnProducts;
     }
 }
 

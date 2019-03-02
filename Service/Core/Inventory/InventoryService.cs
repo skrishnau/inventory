@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
+//using System.Windows.
 
 namespace Service.Core.Inventory
 {
@@ -15,7 +16,7 @@ namespace Service.Core.Inventory
 
         public InventoryService(DatabaseContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public void AddUpdateBrand(BrandModel brand)
@@ -165,23 +166,43 @@ namespace Service.Core.Inventory
             };
         }
 
-        public void AddOrUpdateAttribute(AttributeModel attributeModel)
+        public bool AddOrUpdateAttribute(AttributeModel attributeModel)
         {
             var dbEntity = _context.Attribute.FirstOrDefault(x => x.Id == attributeModel.Id);
+            var list = GetAttributeList();
             if (dbEntity == null)
             {
                 var attributeEntity = attributeModel.ToEntity();
-                attributeEntity.CreatedAt = DateTime.Now;
-                attributeEntity.UpdatedAt = DateTime.Now;
-                _context.Attribute.Add(attributeEntity);
+                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
+                if(existingData == null)
+                {
+                    // then add
+                    attributeEntity.CreatedAt = DateTime.Now;
+                    attributeEntity.UpdatedAt = DateTime.Now;
+                    _context.Attribute.Add(attributeEntity);
+                } else
+                {
+                    // don't add
+                    return false;
+                }
             }
             else
             {
-                dbEntity.Name = attributeModel.Name;
-                dbEntity.Value = attributeModel.Value;
-                dbEntity.UpdatedAt = DateTime.Now; 
+                //edit 
+                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
+               if(existingData == null)
+                {
+                    // edit
+                    dbEntity.Name = attributeModel.Name;
+                    dbEntity.Value = attributeModel.Value;
+                    dbEntity.UpdatedAt = DateTime.Now;
+                } else
+                {
+                    return false;
+                }
             }
             _context.SaveChanges();
+            return true;
         }
 
         public List<AttributeModel> GetDistinctAttributes()

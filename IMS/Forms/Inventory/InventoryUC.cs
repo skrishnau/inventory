@@ -108,5 +108,30 @@ namespace IMS.Forms.Inventory
             var attributes = inventoryService.GetAttributeList();
             dataGridView1.DataSource = attributes;
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
+            {
+                var attribute = (ViewModel.Core.Inventory.AttributeModel)dataGridView1.SelectedRows[0].DataBoundItem;
+                //button1_Click(sender, e);
+                using (AsyncScopedLifestyle.BeginScope(Program.container))
+                {
+                    var attributeCreate = Program.container.GetInstance<AttributeCreate>();
+                    attributeCreate.ShowInTaskbar = false;
+                    attributeCreate.SetData(attribute);
+                    attributeCreate.ShowDialog();
+                    PopulateAttributetData();
+                }
+
+              
+
+              //  PopulateAttributetData();
+            }
+            else
+            {
+                MessageBox.Show("Please Select Row!!!");
+            }
+        }
     }
 }
