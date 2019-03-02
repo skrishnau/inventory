@@ -89,6 +89,7 @@
     <Compile Include="Forms\Business\Create\WarehouseCreate.Designer.cs">
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\PopupMessage.cs" />
     <Compile Include="Forms\Customer\Create\CustomerCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +119,18 @@
     </Compile>
     <Compile Include="Forms\Common\TextBoxWithDeleteUC.Designer.cs">
       <DependentUpon>TextBoxWithDeleteUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\OptionChoose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\OptionChoose.Designer.cs">
+      <DependentUpon>OptionChoose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\OptionViewUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\OptionViewUC.Designer.cs">
+      <DependentUpon>OptionViewUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Create\AttributeCreate.cs">
       <SubType>Form</SubType>
@@ -164,12 +177,6 @@
     <Compile Include="Forms\Inventory\Lists\Category\TreeNodeCategory.cs" />
     <Compile Include="Forms\Inventory\Lists\Category\TreeViewCategory.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Products\Options\ColorOptionUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Products\Options\ColorOptionUC.Designer.cs">
-      <DependentUpon>ColorOptionUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Products\ProductOptionUC.cs">
       <SubType>Form</SubType>
@@ -251,6 +258,12 @@
     <EmbeddedResource Include="Forms\Common\TextBoxWithDeleteUC.resx">
       <DependentUpon>TextBoxWithDeleteUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Attributes\OptionChoose.resx">
+      <DependentUpon>OptionChoose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Attributes\OptionViewUC.resx">
+      <DependentUpon>OptionViewUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\AttributeCreate.resx">
       <DependentUpon>AttributeCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -265,9 +278,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Products\Options\ColorOptionUC.resx">
-      <DependentUpon>ColorOptionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\ProductOptionUC.resx">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
@@ -324,7 +334,6 @@
   <ItemGroup>
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
-    <Folder Include="Forms\Inventory\Brands\" />
     <Folder Include="Forms\Inventory\Warehouses\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
@@ -383,6 +392,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Close_Window_50px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Info_52px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Error_52px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Ok_52px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Goal_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_More_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

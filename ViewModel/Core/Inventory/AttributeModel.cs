@@ -34,4 +34,18 @@ namespace ViewModel.Core.Inventory
             };
         }
     }
+
+    public class OptionModel
+    {
+        public string Name { get; set; }
+        public List<OptionValueModel> OptionValues { get; set; }
+    }
+
+    public class OptionValueModel
+    {
+        public int Id { get; set; }
+        public string OptionName { get; set; }
+        public string Value { get; set; }
+
+    }
 }

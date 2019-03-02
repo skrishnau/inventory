@@ -29,6 +29,10 @@ namespace ViewModel.Core.Inventory
         public virtual CategoryModel Category { get; set; }
         public virtual List<BrandModel> Brands { get; set; }
 
+        //public virtual List<AttributeModel> OptionValues { get; set; }
+
+        public virtual List<ProductOptionModel> ProductOptions { get; set; }
+
 
         public Product ToEntity()
         {
@@ -37,6 +41,14 @@ namespace ViewModel.Core.Inventory
             {
                 brandEntities.Add(b.ToEntity());
             }
+
+            var optionEntities = new List<Infrastructure.Entities.Inventory.ProductAttribute>();
+            foreach(var val in ProductOptions)
+            {
+                optionEntities.Add(val.ToEntity());
+            }
+
+
             return new Product()
             {
                 //Category = Category.ToEntity(),
@@ -51,7 +63,8 @@ namespace ViewModel.Core.Inventory
                 QuantityInStock = QuantityInStock,
                 ShowStockAlerts = ShowStockAlerts,
                 UpdatedAt = UpdatedAt,
-                Brands = brandEntities
+                Brands = brandEntities,
+                ProductAttributes = optionEntities,
             };
         }
     }
@@ -62,6 +75,7 @@ namespace ViewModel.Core.Inventory
         public string Name { get; set; }
         public string Category { get; set; }
         public string Brands { get; set; }
+        public string OptionValues { get; set; }
         public bool ShowStockAlerts { get; set; }
         public decimal QuantityInStocks { get; set; }
         public int MinStockCountForAlert { get; set; }

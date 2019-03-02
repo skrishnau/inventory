@@ -32,37 +32,40 @@ namespace Infrastructure.Context
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
-
+        // ===================== BILL MODULE ================== //
         public virtual DbSet<Bill> Bill { get; set; }
 
 
-        public virtual DbSet<Customer> Customer { get; set; }
-        // public virtual DbSet<CustomerReport> CustomerReport { get; set; }
+        // =================== BUSINESS MODULE ===================== //
+        public virtual DbSet<Branch> Branch { get; set; }
+        public virtual DbSet<Counter> Counter { get; set; }
+        public virtual DbSet<Warehouse> Warehouse { get; set; }
 
+
+        // =================== HRM MODULE ======================//
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Supplier> Supplier { get; set; }
         //  public virtual DbSet<Lead> Lead { get; set; }
+
+
+        // ================== INVENTORY MODULE ================== //
+        public virtual DbSet<Brand> Brand { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Entities.Inventory.Attribute> Attribute { get; set; }
+        public virtual DbSet<ProductAttribute> ProductAttribute { get; set; }
+
+        
+        // ===================== TRANSACTION MODULE ==================== //
+        public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<SaleOrder> SaleOrder { get; set; }
 
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
 
-        public virtual DbSet<Brand> Brand { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
 
-        public virtual DbSet<Sale> Sales { get; set; }
-        public virtual DbSet<SaleOrder> SaleOrder { get; set; }
 
-        public virtual DbSet<Supplier> Supplier { get; set; }
-        // public virtual DbSet<SupplierReport> ClientReport { get; set; }
-
-        public virtual DbSet<User> User { get; set; }
-
-        public virtual DbSet<Branch> Branch {get; set;}
-
-        public virtual DbSet<Counter> Counter { get; set; }
-
-        public virtual DbSet<Warehouse> Warehouse { get; set; }
-
-        public virtual DbSet<Entities.Inventory.Attribute> Attribute { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -78,7 +81,7 @@ namespace Infrastructure.Context
             //    .WillCascadeOnDelete(false);
         }
 
-       
+
 
     }
 

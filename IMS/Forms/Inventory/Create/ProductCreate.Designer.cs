@@ -51,11 +51,9 @@
             this.tbProductName = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbCategory = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbBrand = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.pnlAttributesBody = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.btnAttributeAdd = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label11 = new System.Windows.Forms.Label();
@@ -64,6 +62,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel9 = new System.Windows.Forms.Panel();
+            this.pnlBrandsBody = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btnAddBrand = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDetails = new System.Windows.Forms.TabPage();
@@ -71,9 +71,7 @@
             this.tabPageAttributes = new System.Windows.Forms.TabPage();
             this.tabPageAlerts = new System.Windows.Forms.TabPage();
             this.tabPrices = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.pnlBrandsBody = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlAttributesBody = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSellPrice)).BeginInit();
@@ -84,17 +82,17 @@
             this.panel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel9.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDetails.SuspendLayout();
             this.tabPageBrands.SuspendLayout();
             this.tabPageAttributes.SuspendLayout();
             this.tabPageAlerts.SuspendLayout();
             this.tabPrices.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // label15
@@ -120,7 +118,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(509, 375);
+            this.panel3.Size = new System.Drawing.Size(555, 263);
             this.panel3.TabIndex = 32;
             // 
             // tableLayoutPanel2
@@ -138,13 +136,13 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(507, 53);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(553, 53);
             this.tableLayoutPanel2.TabIndex = 31;
             // 
             // tbSellPrice
             // 
             this.tbSellPrice.Enabled = false;
-            this.tbSellPrice.Location = new System.Drawing.Point(267, 29);
+            this.tbSellPrice.Location = new System.Drawing.Point(279, 29);
             this.tbSellPrice.Name = "tbSellPrice";
             this.tbSellPrice.Size = new System.Drawing.Size(145, 20);
             this.tbSellPrice.TabIndex = 33;
@@ -152,7 +150,7 @@
             // tbUnitCost
             // 
             this.tbUnitCost.Enabled = false;
-            this.tbUnitCost.Location = new System.Drawing.Point(267, 3);
+            this.tbUnitCost.Location = new System.Drawing.Point(279, 3);
             this.tbUnitCost.Name = "tbUnitCost";
             this.tbUnitCost.Size = new System.Drawing.Size(145, 20);
             this.tbUnitCost.TabIndex = 33;
@@ -187,7 +185,7 @@
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(507, 23);
+            this.label4.Size = new System.Drawing.Size(553, 23);
             this.label4.TabIndex = 32;
             this.label4.Text = "Prices";
             // 
@@ -195,7 +193,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label10.Location = new System.Drawing.Point(0, 360);
+            this.label10.Location = new System.Drawing.Point(0, 248);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(164, 13);
             this.label10.TabIndex = 34;
@@ -209,7 +207,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(555, 201);
+            this.panel4.Size = new System.Drawing.Size(555, 263);
             this.panel4.TabIndex = 33;
             // 
             // tableLayoutPanel3
@@ -290,7 +288,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(555, 201);
+            this.panel6.Size = new System.Drawing.Size(555, 263);
             this.panel6.TabIndex = 34;
             // 
             // tableLayoutPanel1
@@ -302,8 +300,6 @@
             this.tableLayoutPanel1.Controls.Add(this.tbProductName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbCategory, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cbBrand, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -354,26 +350,6 @@
             this.cbCategory.Size = new System.Drawing.Size(157, 21);
             this.cbCategory.TabIndex = 17;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(2, 62);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 15);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Brand";
-            // 
-            // cbBrand
-            // 
-            this.cbBrand.FormattingEnabled = true;
-            this.cbBrand.Location = new System.Drawing.Point(278, 64);
-            this.cbBrand.Margin = new System.Windows.Forms.Padding(2);
-            this.cbBrand.Name = "cbBrand";
-            this.cbBrand.Size = new System.Drawing.Size(157, 21);
-            this.cbBrand.TabIndex = 19;
-            // 
             // label14
             // 
             this.label14.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -396,17 +372,17 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(555, 201);
+            this.panel5.Size = new System.Drawing.Size(555, 263);
             this.panel5.TabIndex = 35;
             // 
-            // pnlAttributesBody
+            // panel7
             // 
-            this.pnlAttributesBody.AutoScroll = true;
-            this.pnlAttributesBody.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAttributesBody.Location = new System.Drawing.Point(0, 60);
-            this.pnlAttributesBody.Name = "pnlAttributesBody";
-            this.pnlAttributesBody.Size = new System.Drawing.Size(171, 139);
-            this.pnlAttributesBody.TabIndex = 35;
+            this.panel7.Controls.Add(this.btnAttributeAdd);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 28);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(553, 32);
+            this.panel7.TabIndex = 36;
             // 
             // btnAttributeAdd
             // 
@@ -458,7 +434,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 236);
+            this.panel1.Location = new System.Drawing.Point(0, 298);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(569, 37);
             this.panel1.TabIndex = 37;
@@ -476,8 +452,26 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(555, 201);
+            this.panel9.Size = new System.Drawing.Size(555, 263);
             this.panel9.TabIndex = 37;
+            // 
+            // pnlBrandsBody
+            // 
+            this.pnlBrandsBody.AutoScroll = true;
+            this.pnlBrandsBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBrandsBody.Location = new System.Drawing.Point(0, 59);
+            this.pnlBrandsBody.Name = "pnlBrandsBody";
+            this.pnlBrandsBody.Size = new System.Drawing.Size(553, 202);
+            this.pnlBrandsBody.TabIndex = 36;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnAddBrand);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 28);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(553, 31);
+            this.panel2.TabIndex = 35;
             // 
             // btnAddBrand
             // 
@@ -503,7 +497,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(569, 236);
+            this.tabControl1.Size = new System.Drawing.Size(569, 298);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 33;
             // 
@@ -513,7 +507,7 @@
             this.tabPageDetails.Location = new System.Drawing.Point(4, 25);
             this.tabPageDetails.Name = "tabPageDetails";
             this.tabPageDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDetails.Size = new System.Drawing.Size(561, 207);
+            this.tabPageDetails.Size = new System.Drawing.Size(561, 269);
             this.tabPageDetails.TabIndex = 0;
             this.tabPageDetails.Text = "Details";
             this.tabPageDetails.UseVisualStyleBackColor = true;
@@ -524,7 +518,7 @@
             this.tabPageBrands.Location = new System.Drawing.Point(4, 25);
             this.tabPageBrands.Name = "tabPageBrands";
             this.tabPageBrands.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBrands.Size = new System.Drawing.Size(561, 207);
+            this.tabPageBrands.Size = new System.Drawing.Size(561, 269);
             this.tabPageBrands.TabIndex = 1;
             this.tabPageBrands.Text = "Brands";
             this.tabPageBrands.UseVisualStyleBackColor = true;
@@ -535,7 +529,7 @@
             this.tabPageAttributes.Location = new System.Drawing.Point(4, 25);
             this.tabPageAttributes.Name = "tabPageAttributes";
             this.tabPageAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAttributes.Size = new System.Drawing.Size(561, 207);
+            this.tabPageAttributes.Size = new System.Drawing.Size(561, 269);
             this.tabPageAttributes.TabIndex = 3;
             this.tabPageAttributes.Text = "Attributes";
             this.tabPageAttributes.UseVisualStyleBackColor = true;
@@ -546,7 +540,7 @@
             this.tabPageAlerts.Location = new System.Drawing.Point(4, 25);
             this.tabPageAlerts.Name = "tabPageAlerts";
             this.tabPageAlerts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAlerts.Size = new System.Drawing.Size(561, 207);
+            this.tabPageAlerts.Size = new System.Drawing.Size(561, 269);
             this.tabPageAlerts.TabIndex = 2;
             this.tabPageAlerts.Text = "Alerts";
             this.tabPageAlerts.UseVisualStyleBackColor = true;
@@ -557,43 +551,24 @@
             this.tabPrices.Location = new System.Drawing.Point(4, 25);
             this.tabPrices.Name = "tabPrices";
             this.tabPrices.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPrices.Size = new System.Drawing.Size(515, 381);
+            this.tabPrices.Size = new System.Drawing.Size(561, 269);
             this.tabPrices.TabIndex = 4;
             this.tabPrices.Text = "Prices";
             this.tabPrices.UseVisualStyleBackColor = true;
             // 
-            // panel2
+            // pnlAttributesBody
             // 
-            this.panel2.Controls.Add(this.btnAddBrand);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(553, 31);
-            this.panel2.TabIndex = 35;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.btnAttributeAdd);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 28);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(553, 32);
-            this.panel7.TabIndex = 36;
-            // 
-            // pnlBrandsBody
-            // 
-            this.pnlBrandsBody.AutoScroll = true;
-            this.pnlBrandsBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBrandsBody.Location = new System.Drawing.Point(0, 59);
-            this.pnlBrandsBody.Name = "pnlBrandsBody";
-            this.pnlBrandsBody.Size = new System.Drawing.Size(553, 140);
-            this.pnlBrandsBody.TabIndex = 36;
+            this.pnlAttributesBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAttributesBody.Location = new System.Drawing.Point(0, 60);
+            this.pnlAttributesBody.Name = "pnlAttributesBody";
+            this.pnlAttributesBody.Size = new System.Drawing.Size(553, 201);
+            this.pnlAttributesBody.TabIndex = 37;
             // 
             // ProductCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 273);
+            this.ClientSize = new System.Drawing.Size(569, 335);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -616,17 +591,17 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel5.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel9.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageDetails.ResumeLayout(false);
             this.tabPageBrands.ResumeLayout(false);
             this.tabPageAttributes.ResumeLayout(false);
             this.tabPageAlerts.ResumeLayout(false);
             this.tabPrices.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -653,8 +628,6 @@
         private System.Windows.Forms.MaskedTextBox tbProductName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbCategory;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbBrand;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button btnCancel;
@@ -667,7 +640,6 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button btnAddBrand;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Panel pnlAttributesBody;
         private System.Windows.Forms.Button btnAttributeAdd;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageDetails;
@@ -678,5 +650,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel pnlBrandsBody;
+        private System.Windows.Forms.FlowLayoutPanel pnlAttributesBody;
     }
 }

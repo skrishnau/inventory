@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Inventory
 {
-    class ProductAttribute
+    public class ProductAttribute
     {
         public int Id { get; set; }
 
@@ -18,5 +18,10 @@ namespace Infrastructure.Entities.Inventory
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
+
+        public virtual Product Product { get; set; }
+
+        public virtual Attribute Attribute { get; set; }
+
     }
 }

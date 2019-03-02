@@ -33,6 +33,6 @@ namespace Service.Core.Inventory
 
         List<AttributeModel> GetDistinctAttributes();
 
-
+        List<OptionModel> GetOptionList();
     }
 }

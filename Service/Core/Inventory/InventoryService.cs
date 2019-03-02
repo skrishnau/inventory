@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 //using System.Windows.
+using System.Data.Entity;
 
 namespace Service.Core.Inventory
 {
@@ -123,9 +124,12 @@ namespace Service.Core.Inventory
         public List<ProductModelForGridView> GetProductListForGridView()
         {
             var cats = _context.Product
+                .Include(x=>x.ProductAttributes)
+                .Include(x=>x.ProductAttributes.Select(y=>y.Attribute))
+                .Include(x=>x.Brands)
                 .Where(x => x.DeletedAt == null);
             var list = new List<ProductModelForGridView>();
-            foreach(var x in cats)
+            foreach (var x in cats)
             {
                 list.Add(new ProductModelForGridView
                 {
@@ -134,6 +138,7 @@ namespace Service.Core.Inventory
                     CreatedAt = GetDateShortString(x.CreatedAt),
                     UpdatedAt = GetDateShortString(x.UpdatedAt),
                     Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
+                    OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
                     Category = x.Category.Name,
                     MinStockCountForAlert = x.MinStockCountForAlert,
                     QuantityInStocks = x.QuantityInStock,
@@ -141,6 +146,27 @@ namespace Service.Core.Inventory
                 });
             }
             return list;
+        }
+
+        private string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductAttribute> list)
+        {
+            var builder = new StringBuilder();
+            
+            foreach(var option in list.OrderBy(x=>x.Attribute.Name).GroupBy(x=>x.Attribute.Name))
+            {
+                builder.Append(option.Key);
+                builder.Append(": ");
+
+                for(var v=0; v<option.Count();v++)
+                {
+                    builder.Append(option.ElementAt(v).Attribute.Value);
+                    if (v <= option.Count() - 2)
+                        builder.Append(", ");
+                }
+                builder.Append(" ; ");
+            }
+
+            return builder.ToString();
         }
 
         private string GetDateShortString(DateTime date)
@@ -151,7 +177,7 @@ namespace Service.Core.Inventory
         public string GetBrandListCommaSeparatedString(List<Brand> brands)
         {
             var builder = new StringBuilder();
-            for(var b=0; b<brands.Count; b++)
+            for (var b = 0; b < brands.Count; b++)
             {
 
                 builder.Append(brands[b].Name);
@@ -220,13 +246,14 @@ namespace Service.Core.Inventory
             {
                 var attributeEntity = attributeModel.ToEntity();
                 var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
-                if(existingData == null)
+                if (existingData == null)
                 {
                     // then add
                     attributeEntity.CreatedAt = DateTime.Now;
                     attributeEntity.UpdatedAt = DateTime.Now;
                     _context.Attribute.Add(attributeEntity);
-                } else
+                }
+                else
                 {
                     // don't add
                     return false;
@@ -236,13 +263,14 @@ namespace Service.Core.Inventory
             {
                 //edit 
                 var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
-               if(existingData == null)
+                if (existingData == null)
                 {
                     // edit
                     dbEntity.Name = attributeModel.Name;
                     dbEntity.Value = attributeModel.Value;
                     dbEntity.UpdatedAt = DateTime.Now;
-                } else
+                }
+                else
                 {
                     return false;
                 }
@@ -263,7 +291,7 @@ namespace Service.Core.Inventory
                 var name = grp.Key;
                 list.Add(new AttributeModel
                 {
-                    Name = name
+                    Name = name,
                 });
                 //foreach(var att in grp)
                 //{
@@ -274,12 +302,9 @@ namespace Service.Core.Inventory
 
         public List<AttributeModel> GetAttributeList()
         {
-            
-           
-
             var attributes = _context.Attribute
                .Where(x => x.DeletedAt == null)
-               .OrderBy(x=>x.Name)
+               .OrderBy(x => x.Name)
                .Select(x => new AttributeModel()
                {
                    Name = x.Name,
@@ -291,6 +316,28 @@ namespace Service.Core.Inventory
                .ToList();
 
             return attributes;
+        }
+        public List<OptionModel> GetOptionList()
+        {
+            var attributes = _context.Attribute
+                .Where(x => x.DeletedAt == null)
+                .OrderBy(x => x.Name)
+                .GroupBy(x => x.Name);
+            var list = new List<OptionModel>();
+            foreach (var att in attributes)
+            {
+                list.Add(new OptionModel()
+                {
+                    Name = att.Key,
+                    OptionValues = att.Select(x => new OptionValueModel()
+                    {
+                        Id = x.Id,
+                        OptionName = x.Name,
+                        Value = x.Value
+                    }).ToList(),
+                });
+            }
+            return list;
         }
     }
 }

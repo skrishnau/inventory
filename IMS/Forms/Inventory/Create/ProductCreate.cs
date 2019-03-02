@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Common;
+using IMS.Forms.Inventory.Attributes;
 using Service.Core.Inventory;
 using SimpleInjector.Lifestyles;
 using System;
@@ -20,19 +21,20 @@ namespace IMS.Forms.Inventory.Create
         private readonly IInventoryService _inventoryService;
 
         private int Id;
-        private List<BrandModel> _brands;
+        private List<BrandModel> _brandsList;
+        private List<OptionModel> _optionsList;
 
         public ProductCreate(IInventoryService inventoryService)
         {
             this._inventoryService = inventoryService;
 
-            _brands = _inventoryService.GetBrandList();
+            _brandsList = _inventoryService.GetBrandList();
+
+            _optionsList = _inventoryService.GetOptionList();
 
             InitializeComponent();
 
             PopulateCategoryCombo();
-
-            PopulateBrandCombo();
 
             InitializeEvents();
 
@@ -60,16 +62,6 @@ namespace IMS.Forms.Inventory.Create
             {
                 AddCategoryToCombo(sub.Id, sub, spaces == null ? "" : spaces + "   ");
             }
-        }
-
-        private void PopulateBrandCombo()
-        {
-            cbBrand.FlatStyle = FlatStyle.Popup;
-            cbBrand.DropDownStyle = ComboBoxStyle.DropDownList;
-            
-            cbBrand.ValueMember = "Id";
-            cbBrand.DisplayMember = "Name";
-            cbBrand.DataSource = _brands;
         }
 
         private void InitializeEvents()
@@ -121,20 +113,31 @@ namespace IMS.Forms.Inventory.Create
                 var valCategory = ValidateCategory();
                 if (!(valName && valCategory))
                 {
-                    ShowPopupMessage("Unfilled Inputs", "Please fill all the required fields");
+                    PopupMessage.ShowPopupMessage("Unfilled Inputs", "Please fill all the required fields", PopupMessageType.ERROR);
+                    this.Focus(); // return the focus to the current form
                     return;
                 }
                 var brands = GetBrands();
-                if(brands == null)
+                if (brands == null)
                 {
-                    ShowPopupMessage("Missing Brand Names", "Some of the brands are without name!");
+                    PopupMessage.ShowPopupMessage("Missing Brand Names", "Some of the brands are without name!", PopupMessageType.ERROR);
+                    this.Focus(); // return the focus to the current form
                     return;
-                } else if (!IsBrandNamesUnique(brands))
+                }
+                else if (!IsBrandNamesUnique(brands))
                 {
-                    ShowPopupMessage("Duplicate Brands", "There are duplicate Brand names in the list");
+                    PopupMessage.ShowPopupMessage("Duplicate Brands", "There are duplicate Brand names in the list", PopupMessageType.INFO);
+                    this.Focus(); // return the focus to the current form
                     return;
                 }
 
+                var options = GetOptions();
+                if(options.Count == 0)
+                {
+                    PopupMessage.ShowPopupMessage("No Attribute", "You haven't added any attributes. Attributes describe the product.", PopupMessageType.NONE);
+                    this.Focus();
+                    return;
+                }
                 var category = _inventoryService.GetCategory(cbCategory.SelectedItem.ToString());
                 product = new ProductModel()
                 {
@@ -145,20 +148,48 @@ namespace IMS.Forms.Inventory.Create
                     ShowStockAlerts = cbShowStockAlert.Checked,
                     Name = tbProductName.Text,
                     UpdatedAt = DateTime.Now,
+                    ProductOptions = options,
                 };
             }
             catch (Exception ex) { throw; }
             if (product != null)
             {
                 _inventoryService.AddProduct(product);
+                PopupMessage.ShowPopupMessage("Save Success", "Product has been saved successfully", PopupMessageType.SUCCESS);
                 this.Close();
             }
         }
 
+        private List<ProductOptionModel> GetOptions()
+        {
+            var list = new List<ProductOptionModel>();
+            foreach (var control in pnlAttributesBody.Controls)
+            {
+                var optionViewUc = (OptionViewUC)control;
+                if (optionViewUc != null)
+                {
+                    foreach (var optionValue in optionViewUc.OptionModel.OptionValues)
+                    {
+                        var model = new ProductOptionModel()
+                        {
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
+                            //Id = optionValue.Id,
+                            AttributeId = optionValue.Id,
+                            
+                        };
+                        list.Add(model);
+                    }
+
+                }
+            }
+            return list;
+        }
+
         private bool IsBrandNamesUnique(List<BrandModel> brands)
         {
-            
-            for(int i=0; i<brands.Count; i++)
+
+            for (int i = 0; i < brands.Count; i++)
             {
                 var otherBrands = new List<BrandModel>();
                 if (i > 0)
@@ -171,26 +202,13 @@ namespace IMS.Forms.Inventory.Create
                     // get upper limits
                     otherBrands.AddRange(brands.GetRange(i + 1, brands.Count - 1 - i));
                 }
-                if (otherBrands.Any(x => x.Name.Equals(brands[i].Name)))
+                if (otherBrands.Any(x => x.Name.Equals(brands[i].Name, StringComparison.CurrentCultureIgnoreCase)))
                     return false;
             }
             return true;
         }
 
-        private void ShowPopupMessage(string title, string message)
-        {
-            PopupNotifier popup = new PopupNotifier();
-            popup.Image = Properties.Resources.icons8_Lipstick_48px_3;
-            popup.TitleColor = Color.Coral;
-            popup.ContentColor = Color.Red;
-            popup.Size = new Size(300, 50);
-            popup.ShowGrip = false;
-            popup.TitleText = title;
-            popup.ContentText = message;
-            popup.Popup();// show 
-            this.Focus(); // return the focus to the current form
 
-        }
         private List<BrandModel> GetBrands()
         {
             var list = new List<BrandModel>();
@@ -269,7 +287,7 @@ namespace IMS.Forms.Inventory.Create
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
             var brandEachItem = new TextBoxWithDeleteUC();
-            brandEachItem.DataSource = _brands.Select(x => x.Name).Distinct().ToList();
+            brandEachItem.DataSource = _brandsList.Select(x => x.Name).Distinct().ToList();
             brandEachItem.OnRemoveClicked += BrandEachItem_OnRemoveClicked;
             //brandEachItem.Dock = DockStyle.Top;
             pnlBrandsBody.Controls.Add(brandEachItem);
@@ -282,15 +300,26 @@ namespace IMS.Forms.Inventory.Create
 
         private void btnAttributeAdd_Click(object sender, EventArgs e)
         {
-            var attributeEachItem = new TextBoxWithDeleteUC();
-            attributeEachItem.OnRemoveClicked += AttributeEachItem_OnRemoveClicked;
-            attributeEachItem.Dock = DockStyle.Top;
-            pnlAttributesBody.Controls.Add(attributeEachItem);
+            //var attributeEachItem = new TextBoxWithDeleteUC();
+            //attributeEachItem.OnRemoveClicked += AttributeEachItem_OnRemoveClicked;
+            //attributeEachItem.Dock = DockStyle.Top;
+            //pnlAttributesBody.Controls.Add(attributeEachItem);
+            var optionChooseForm = new OptionChoose();
+            optionChooseForm.DataSource = _optionsList;
+            optionChooseForm.OptionSelected += OptionChooseForm_OptionSelected;
+            optionChooseForm.ShowDialog();
         }
 
-        private void AttributeEachItem_OnRemoveClicked(object sender, EventArgs e)
+        private void OptionChooseForm_OptionSelected(object sender, OptionChooseEventArgs e)
         {
-            pnlAttributesBody.Controls.Remove((TextBoxWithDeleteUC)sender);
+            var optionViewUC = new OptionViewUC(e.Option);
+            optionViewUC.OnRemoveClicked += OptionViewUC_RemoveClicked;
+            pnlAttributesBody.Controls.Add(optionViewUC);
+        }
+
+        private void OptionViewUC_RemoveClicked(object sender, EventArgs e)
+        {
+            pnlAttributesBody.Controls.Remove((OptionViewUC)sender);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

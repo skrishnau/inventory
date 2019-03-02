@@ -42,5 +42,7 @@ namespace Infrastructure.Entities.Inventory
         public virtual Category Category { get; set; }
 
         public virtual ICollection<Brand> Brands { get; set; }
+
+        public virtual ICollection<ProductAttribute> ProductAttributes{ get; set; }
     }
 }

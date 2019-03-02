@@ -153,6 +153,26 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Error_52px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Error_52px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Goal_50px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Goal_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Home_40px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Home_40px", resourceCulture);
@@ -163,9 +183,39 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Info_52px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Info_52px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Lipstick_48px_3 {
             get {
                 object obj = ResourceManager.GetObject("icons8_Lipstick_48px_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_More_50px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_More_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Ok_52px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Ok_52px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
