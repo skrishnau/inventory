@@ -29,6 +29,8 @@ namespace Service.Core.Inventory
 
         bool AddOrUpdateAttribute(AttributeModel attributeModel);
 
+        ProductModelForGridView GetProduct(int productId);
+
         List<AttributeModel> GetAttributeList();
 
         List<AttributeModel> GetDistinctAttributes();

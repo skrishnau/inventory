@@ -94,6 +94,10 @@
     <Compile Include="Utility\ProductOptionTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{88ab3cf7-bd72-49f4-89c4-bac874042636}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
       <Name>Infrastructure</Name>

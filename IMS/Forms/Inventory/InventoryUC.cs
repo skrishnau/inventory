@@ -13,12 +13,15 @@ using SimpleInjector.Lifestyles;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Inventory.Lists;
 using IMS.Forms.Inventory.Lists.Category;
+using IMS.Forms.Inventory.SKU;
 
 namespace IMS.Forms.Inventory
 {
     public partial class InventoryUC : UserControl
     {
         private readonly IInventoryService inventoryService;
+
+        private ProductModelForGridView _selectedProduct;
 
         // dependency injection
         public InventoryUC(IInventoryService inventoryService)
@@ -226,7 +229,7 @@ namespace IMS.Forms.Inventory
             if (dgvProductList.SelectedRows.Count > 0)
             {
                 var data = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
-
+                _selectedProduct = data;
                 lblProductName.Text = data.Name;
 
             }
@@ -234,7 +237,8 @@ namespace IMS.Forms.Inventory
 
         private void btnEditSKU_Click(object sender, EventArgs e)
         {
-
+            var skuEditForm = new SkuEditForm(inventoryService, _selectedProduct.Id);
+            skuEditForm.ShowDialog();
         }
     }
 }

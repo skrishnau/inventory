@@ -14,7 +14,6 @@ namespace IMS.Forms.Inventory.Attributes
     public partial class AddAttributeValueUC : UserControl
     {
         public event EventHandler<EventArgs> OnDeleteButtonClicked;
-        Button btn;
         public AddAttributeValueUC()
         {
             InitializeComponent();

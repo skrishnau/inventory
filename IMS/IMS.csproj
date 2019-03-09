@@ -90,6 +90,12 @@
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Common\PopupMessage.cs" />
+    <Compile Include="Forms\Common\ThreeComboBoxes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\ThreeComboBoxes.Designer.cs">
+      <DependentUpon>ThreeComboBoxes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Customer\Create\CustomerCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +190,12 @@
     <Compile Include="Forms\Inventory\Products\ProductOptionUC.Designer.cs">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\SKU\SkuEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\SKU\SkuEditForm.Designer.cs">
+      <DependentUpon>SkuEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +270,9 @@
     <EmbeddedResource Include="Forms\Business\Create\WarehouseCreate.resx">
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\ThreeComboBoxes.resx">
+      <DependentUpon>ThreeComboBoxes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Customer\Create\CustomerCreate.resx">
       <DependentUpon>CustomerCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -299,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\ProductOptionUC.resx">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\SKU\SkuEditForm.resx">
+      <DependentUpon>SkuEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.resx">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
@@ -362,8 +380,8 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Warehouses\" />
-    <Folder Include="Forms\Sales\" />
     <Folder Include="Forms\Purchases\Direct\" />
+    <Folder Include="Forms\Sales\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 //using System.Windows.
 using System.Data.Entity;
+using DTO.Core.Inventory;
 
 namespace Service.Core.Inventory
 {
@@ -124,71 +125,33 @@ namespace Service.Core.Inventory
         public List<ProductModelForGridView> GetProductListForGridView()
         {
             var cats = _context.Product
-                .Include(x=>x.ProductAttributes)
-                .Include(x=>x.ProductAttributes.Select(y=>y.Option))
-                .Include(x=>x.Brands)
+                .Include(x => x.ProductAttributes)
+                .Include(x => x.ProductAttributes.Select(y => y.Option))
+                .Include(x => x.Brands)
                 .Where(x => x.DeletedAt == null);
             var list = new List<ProductModelForGridView>();
             foreach (var x in cats)
             {
-                list.Add(new ProductModelForGridView
-                {
-                    Name = x.Name,
-                    Id = x.Id,
-                    CreatedAt = GetDateShortString(x.CreatedAt),
-                    UpdatedAt = GetDateShortString(x.UpdatedAt),
-                    Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
-                    OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
-                    Category = x.Category.Name,
-                    MinStockCountForAlert = x.MinStockCountForAlert,
-                    QuantityInStocks = x.QuantityInStock,
-                    ShowStockAlerts = x.ShowStockAlerts
-                });
+                list.Add(ProductMapper.MapToProductModelForGridView(x)
+                //    new ProductModelForGridView
+                //{
+                //    Name = x.Name,
+                //    Id = x.Id,
+                //    CreatedAt = GetDateShortString(x.CreatedAt),
+                //    UpdatedAt = GetDateShortString(x.UpdatedAt),
+                //    Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
+                //    OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
+                //    Category = x.Category.Name,
+                //    MinStockCountForAlert = x.MinStockCountForAlert,
+                //    QuantityInStocks = x.QuantityInStock,
+                //    ShowStockAlerts = x.ShowStockAlerts
+                //}
+                    );
             }
             return list;
         }
 
-        private string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductOption> list)
-        {
-            var builder = new StringBuilder();
-            
-            foreach(var option in list.OrderBy(x=>x.Option.Name).GroupBy(x=>x.Option.Name))
-            {
-                builder.Append(option.Key);
-                builder.Append(": ");
 
-                for(var v=0; v<option.Count();v++)
-                {
-                    builder.Append(option.ElementAt(v).Option.Value);
-                    if (v <= option.Count() - 2)
-                        builder.Append(", ");
-                }
-                builder.Append(" ; ");
-            }
-
-            return builder.ToString();
-        }
-
-        private string GetDateShortString(DateTime date)
-        {
-            return date.ToShortDateString();
-        }
-
-        public string GetBrandListCommaSeparatedString(List<Brand> brands)
-        {
-            var builder = new StringBuilder();
-            for (var b = 0; b < brands.Count; b++)
-            {
-
-                builder.Append(brands[b].Name);
-                if (b < brands.Count - 2)
-                    builder.Append(", ");
-                if (b == brands.Count - 2)
-                    builder.Append(" , ");// &
-
-            }
-            return builder.ToString();
-        }
 
 
 
@@ -261,7 +224,7 @@ namespace Service.Core.Inventory
                     existingData.UpdatedAt = DateTime.Now;
                     //_context.SaveChanges();
                     // don't add
-                   // return true;
+                    // return true;
                     // return false;
 
                 }
@@ -269,7 +232,7 @@ namespace Service.Core.Inventory
             else
             {
                 //edit 
-                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id );
+                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
                 if (existingData == null)
                 {
                     // edit
@@ -284,7 +247,7 @@ namespace Service.Core.Inventory
                 {
                     dbEntity.DeletedAt = null;
                 }*/
-                else 
+                else
                 {
                     return false;
                 }
@@ -357,18 +320,25 @@ namespace Service.Core.Inventory
         public void DeleteAttribute(AttributeModel attributeModel)
         {
             var dbEntity = _context.Attribute.FirstOrDefault(x => x.Id == attributeModel.Id);
-            
+
             if (dbEntity != null)
             {
                 dbEntity.DeletedAt = DateTime.Now;
             }
-            
+
             _context.SaveChanges();
-            
+
         }
 
+        public ProductModelForGridView GetProduct(int productId)
+        {
+            var x = _context.Product.Find(productId);
+            if (x == null)
+                return null;
+            return ProductMapper.MapToProductModelForGridView(x);
+        }
     }
-    }
+}
 
 
 
