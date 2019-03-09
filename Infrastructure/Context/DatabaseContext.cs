@@ -53,8 +53,8 @@ namespace Infrastructure.Context
         public virtual DbSet<Brand> Brand { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<Entities.Inventory.Attribute> Attribute { get; set; }
-        public virtual DbSet<ProductAttribute> ProductAttribute { get; set; }
+        public virtual DbSet<Entities.Inventory.Option> Attribute { get; set; }
+        public virtual DbSet<ProductOption> ProductAttribute { get; set; }
 
         
         // ===================== TRANSACTION MODULE ==================== //
@@ -63,6 +63,7 @@ namespace Infrastructure.Context
 
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
+        public virtual DbSet<BasicInfo> BasicInfo { get; set; }
 
 
 

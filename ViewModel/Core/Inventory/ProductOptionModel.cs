@@ -21,11 +21,11 @@ namespace ViewModel.Core.Inventory
         public DateTime? DeletedAt { get; set; }
 
 
-        public ProductAttribute ToEntity()
+        public ProductOption ToEntity()
         {
-            return new ProductAttribute()
+            return new ProductOption()
             {
-                AttributeId = AttributeId,
+                OptionId = AttributeId,
                 CreatedAt = CreatedAt,
                 DeletedAt = DeletedAt,
                 ProductId = ProductId,

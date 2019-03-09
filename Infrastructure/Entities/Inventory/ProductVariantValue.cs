@@ -13,8 +13,9 @@ namespace Infrastructure.Entities.Inventory
         public int ProductVariantId { get; set; }
         // otpion . e.g. color
         public int OptionId { get; set; }
+       
         // option's value: e.g. Red
-        public string Value { get; set; }
+       // public string Value { get; set; }
 
 
         // ===== Table Objects ===== //

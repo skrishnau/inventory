@@ -13,5 +13,9 @@ namespace Service.Core.Users
 
         List<UserModel> GetUserList();
 
+        void AddOrUpdateBasicInfo(BasicInfoModel basicInfoModel);
+
+        List<BasicInfoModel> GetBasicInfoList();
+
     }
 }

@@ -33,6 +33,8 @@ namespace IMS.Forms.Inventory
             PopulateBrandData();
             PopulateProductData();
             PopulateAttributetData();
+
+
         }
 
         private void AddUserControls()
@@ -46,10 +48,37 @@ namespace IMS.Forms.Inventory
         {
             btnAddProduct.Click += BtnAddProduct_Click;
             btnAddBrand.Click += BtnAddBrand_Click;
-           
+            dgvProductList.CellContentDoubleClick += DgvProductList_CellContentDoubleClick;
+            dgvAttributeList.CellDoubleClick += DgvAttributeList_CellDoubleClick;
+            dgvAttributeList.CellMouseDown += dgvAttributeList_MouseClick;
+            //dgvAttributeList.
         }
 
-    
+        private void DgvAttributeList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0)
+            {
+                var attributes = (AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
+                tbAttributeName.Text = attributes.Name.ToString();
+                tbValue.Text = attributes.Value.ToString();
+
+            }
+        }
+
+        private void DgvProductList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvProductList.SelectedRows != null && dgvProductList.SelectedRows.Count > 0)
+            {
+                var product = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
+
+                lblProductName.Text = product.Name;//.ToString();
+
+                //tbProductName.Text = products.Name.ToString();
+                //tbAttributes.Text = 
+
+
+            }
+        }
 
         private void BtnAddBrand_Click(object sender, EventArgs e)
         {
@@ -73,7 +102,7 @@ namespace IMS.Forms.Inventory
             }
         }
 
-       
+
 
         private void PopulateBrandData()
         {
@@ -82,7 +111,7 @@ namespace IMS.Forms.Inventory
             dgvBrandList.DataSource = brands;
         }
 
-       
+
 
 
         private void PopulateProductData()
@@ -104,16 +133,16 @@ namespace IMS.Forms.Inventory
         }
         void PopulateAttributetData()
         {
-            dataGridView1.AutoGenerateColumns = false;
+            dgvAttributeList.AutoGenerateColumns = false;
             var attributes = inventoryService.GetAttributeList();
-            dataGridView1.DataSource = attributes;
+            dgvAttributeList.DataSource = attributes;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
+            if (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0)
             {
-                var attribute = (ViewModel.Core.Inventory.AttributeModel)dataGridView1.SelectedRows[0].DataBoundItem;
+                var attribute = (ViewModel.Core.Inventory.AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
                 //button1_Click(sender, e);
                 using (AsyncScopedLifestyle.BeginScope(Program.container))
                 {
@@ -124,14 +153,88 @@ namespace IMS.Forms.Inventory
                     PopulateAttributetData();
                 }
 
-              
 
-              //  PopulateAttributetData();
+
+                //  PopulateAttributetData();
             }
             else
             {
                 MessageBox.Show("Please Select Row!!!");
             }
+        }
+
+        // Mouse right click event handler for datagridview
+        private void dgvAttributeList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenu menu = new ContextMenu();
+                menu.MenuItems.Add(new MenuItem("Edit"));
+                menu.MenuItems.Add(new MenuItem("Delete"));
+
+                int currentMouseOverRow = dgvAttributeList.HitTest(e.X, e.Y).RowIndex;
+
+                if (currentMouseOverRow >= 0)
+                {
+
+                }
+            }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0)
+            {
+                var attribute = (ViewModel.Core.Inventory.AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
+                //button1_Click(sender, e);
+                using (AsyncScopedLifestyle.BeginScope(Program.container))
+                {
+                    var attributeCreate = Program.container.GetInstance<AttributeCreate>();
+                    attributeCreate.ShowInTaskbar = false;
+                    attributeCreate.SetData(attribute);
+                    attributeCreate.ShowDialog();
+                    PopulateAttributetData();
+                }
+
+
+
+                //  PopulateAttributetData();
+            }
+            else
+            {
+                MessageBox.Show("Please Select Row!!!");
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0)
+            {
+                var attribute = (ViewModel.Core.Inventory.AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
+                inventoryService.DeleteAttribute(attribute);
+                PopulateAttributetData();
+            }
+        }
+
+        private void dgvProductList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvProductList_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvProductList.SelectedRows.Count > 0)
+            {
+                var data = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
+
+                lblProductName.Text = data.Name;
+
+            }
+        }
+
+        private void btnEditSKU_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

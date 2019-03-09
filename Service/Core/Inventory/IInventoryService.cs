@@ -34,5 +34,7 @@ namespace Service.Core.Inventory
         List<AttributeModel> GetDistinctAttributes();
 
         List<OptionModel> GetOptionList();
+
+        void DeleteAttribute(AttributeModel attributeModel);
     }
 }

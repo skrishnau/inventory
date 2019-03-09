@@ -42,7 +42,7 @@ namespace ViewModel.Core.Inventory
                 brandEntities.Add(b.ToEntity());
             }
 
-            var optionEntities = new List<Infrastructure.Entities.Inventory.ProductAttribute>();
+            var optionEntities = new List<Infrastructure.Entities.Inventory.ProductOption>();
             foreach(var val in ProductOptions)
             {
                 optionEntities.Add(val.ToEntity());

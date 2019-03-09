@@ -20,10 +20,10 @@ namespace ViewModel.Core.Inventory
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
-        public Infrastructure.Entities.Inventory.Attribute ToEntity()
+        public Infrastructure.Entities.Inventory.Option ToEntity()
         {
             //return null;
-            return new Infrastructure.Entities.Inventory.Attribute
+            return new Infrastructure.Entities.Inventory.Option
             {
                 CreatedAt = CreatedAt,
                 DeletedAt = DeletedAt,

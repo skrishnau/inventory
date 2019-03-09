@@ -43,6 +43,6 @@ namespace Infrastructure.Entities.Inventory
 
         public virtual ICollection<Brand> Brands { get; set; }
 
-        public virtual ICollection<ProductAttribute> ProductAttributes{ get; set; }
+        public virtual ICollection<ProductOption> ProductAttributes{ get; set; }
     }
 }

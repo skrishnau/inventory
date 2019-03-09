@@ -63,6 +63,16 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Add_50px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Add_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Add_Row_16px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Add_Row_16px", resourceCulture);
@@ -136,6 +146,16 @@ namespace IMS.Properties {
         internal static System.Drawing.Bitmap icons8_Edit_16px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Edit_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Edit_Property_50px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Edit_Property_50px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
