@@ -37,6 +37,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAddAttributeValue = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panelAttribute = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,14 +65,14 @@
             this.cbAttributeName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbAttributeName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbAttributeName.FormattingEnabled = true;
-            this.cbAttributeName.Location = new System.Drawing.Point(102, 3);
+            this.cbAttributeName.Location = new System.Drawing.Point(208, 3);
             this.cbAttributeName.Name = "cbAttributeName";
             this.cbAttributeName.Size = new System.Drawing.Size(128, 24);
             this.cbAttributeName.TabIndex = 3;
             // 
             // tbValue
             // 
-            this.tbValue.Location = new System.Drawing.Point(102, 40);
+            this.tbValue.Location = new System.Drawing.Point(208, 40);
             this.tbValue.Name = "tbValue";
             this.tbValue.Size = new System.Drawing.Size(128, 22);
             this.tbValue.TabIndex = 4;
@@ -101,21 +102,22 @@
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 76);
+            this.panel1.Location = new System.Drawing.Point(5, 298);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(298, 48);
+            this.panel1.Size = new System.Drawing.Size(619, 48);
             this.panel1.TabIndex = 8;
             // 
             // btnAddAttributeValue
             // 
             this.btnAddAttributeValue.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
             this.btnAddAttributeValue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddAttributeValue.Location = new System.Drawing.Point(250, 41);
+            this.btnAddAttributeValue.Location = new System.Drawing.Point(514, 41);
             this.btnAddAttributeValue.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddAttributeValue.Name = "btnAddAttributeValue";
             this.btnAddAttributeValue.Size = new System.Drawing.Size(28, 22);
             this.btnAddAttributeValue.TabIndex = 9;
             this.btnAddAttributeValue.UseVisualStyleBackColor = true;
+            this.btnAddAttributeValue.Click += new System.EventHandler(this.btnAddAttributeValue_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -134,14 +136,25 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(298, 74);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(619, 74);
             this.tableLayoutPanel1.TabIndex = 10;
+            // 
+            // panelAttribute
+            // 
+            this.panelAttribute.AutoScroll = true;
+            this.panelAttribute.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAttribute.Location = new System.Drawing.Point(5, 79);
+            this.panelAttribute.Margin = new System.Windows.Forms.Padding(4);
+            this.panelAttribute.Name = "panelAttribute";
+            this.panelAttribute.Size = new System.Drawing.Size(619, 219);
+            this.panelAttribute.TabIndex = 37;
             // 
             // AttributeCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(308, 129);
+            this.ClientSize = new System.Drawing.Size(629, 351);
+            this.Controls.Add(this.panelAttribute);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Name = "AttributeCreate";
@@ -164,5 +177,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAddAttributeValue;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel panelAttribute;
     }
 }

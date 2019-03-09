@@ -13,15 +13,16 @@ namespace Infrastructure.Entities.Inventory
     public class Option
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
-        public string DispalyName { get; set; }
-        // types: predefined types "Multiple Choice", "Single Select"
-        public string Type { get; set; }
 
-        // json formatted values. This column is used to store values in case of multiple choice type
-        // e.g. for Color the values can be Black, Blue and Red, for Size the values can be XL, L, SM
-        public string Values { get; set; }
-        
+        public string Value { get; set; }
 
+        // time stamps
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
+
+        public virtual ICollection<ProductOption> ProductOptions{ get; set; }
     }
 }

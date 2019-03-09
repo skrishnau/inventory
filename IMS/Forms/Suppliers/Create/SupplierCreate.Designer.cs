@@ -56,7 +56,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 87);
+            this.label4.Location = new System.Drawing.Point(3, 111);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 17);
             this.label4.TabIndex = 3;
@@ -65,7 +65,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 58);
+            this.label5.Location = new System.Drawing.Point(3, 74);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 17);
             this.label5.TabIndex = 4;
@@ -74,7 +74,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 29);
+            this.label6.Location = new System.Drawing.Point(3, 37);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 17);
             this.label6.TabIndex = 5;
@@ -101,26 +101,26 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(313, 119);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(313, 148);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(128, 90);
+            this.tbEmail.Location = new System.Drawing.Point(128, 114);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(171, 22);
             this.tbEmail.TabIndex = 9;
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(128, 61);
+            this.tbPhone.Location = new System.Drawing.Point(128, 77);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(171, 22);
             this.tbPhone.TabIndex = 8;
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(128, 32);
+            this.tbAddress.Location = new System.Drawing.Point(128, 40);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(171, 22);
             this.tbAddress.TabIndex = 7;
@@ -137,7 +137,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 119);
+            this.panel1.Location = new System.Drawing.Point(0, 148);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(313, 53);
             this.panel1.TabIndex = 7;
@@ -166,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 172);
+            this.ClientSize = new System.Drawing.Size(313, 201);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

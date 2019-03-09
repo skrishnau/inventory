@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IMS.Forms.Inventory.Attributes;
 using Service.Core.Inventory;
 using ViewModel.Core.Inventory;
 
@@ -15,6 +16,8 @@ namespace IMS.Forms.Inventory.Create
     public partial class AttributeCreate : Form
     {
         private readonly IInventoryService inventoryService;
+
+        private List<AttributeModel> _attributeList;
 
         private int attributeId;
 
@@ -25,6 +28,8 @@ namespace IMS.Forms.Inventory.Create
             InitializeComponent();
             PopulateAttributeNameCombo();
             this.Load += AttributeCreate_Load;
+            _attributeList = this.inventoryService.GetAttributeList();
+            
         }
 
         private void AttributeCreate_Load(object sender, EventArgs e)
@@ -98,8 +103,23 @@ namespace IMS.Forms.Inventory.Create
             this.Close();
 
         }
-       
-        
 
+        private void btnAddAttributeValue_Click(object sender, EventArgs e)
+        {
+            var addAttribute = new AddAttributeValueUC();
+            addAttribute.OnDeleteButtonClicked += AddAttribute_OnDeleteButtonClicked;
+           // addAttribute.ParentPanel = panelAttribute;
+            panelAttribute.Controls.Add(addAttribute);
+        }
+
+        private void AddAttribute_OnDeleteButtonClicked(object sender, EventArgs e)
+        {
+            panelAttribute.Controls.Remove((AddAttributeValueUC)sender);
+        }
+
+        private void AddAttributeValue_OnRemoveClicked(object sender, EventArgs e)
+        {
+            panelAttribute.Controls.Remove((AddAttributeValueUC)sender);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace IMS.Forms.Users.Create
         {
             this.userService = userService;
             InitializeComponent();
-          //  PopulateBasicInfoCombo();
+            PopulateBasicInfoCombo();
 
         }
 
@@ -43,15 +43,12 @@ namespace IMS.Forms.Users.Create
         {
             this.Close();
         }
-        //private void PopulateBasicInfoCombo()
-        //{
-        //    cbBasicinfo.FlatStyle = FlatStyle.Popup;
-        //    cbBasicinfo.DropDownStyle = ComboBoxStyle.DropDownList;
-        //    var basicInfo = businessService.GetBranchList();
-        //    cbBranchId.DataSource = branches;
-        //    cbBranchId.ValueMember = "Id";
-        //    cbBranchId.DisplayMember = "Name";
-        //    //cbBranchId.SelectedIndex = 0;
-        //}
+        private void PopulateBasicInfoCombo()
+        {
+            var basicInfo = userService.GetBasicInfoList();
+            cbBasicinfo.DataSource = basicInfo;
+            cbBasicinfo.ValueMember = "Id";
+            cbBasicinfo.DisplayMember = "Id";
+        }
     }
 }

@@ -125,7 +125,7 @@ namespace Service.Core.Inventory
         {
             var cats = _context.Product
                 .Include(x=>x.ProductAttributes)
-                .Include(x=>x.ProductAttributes.Select(y=>y.Attribute))
+                .Include(x=>x.ProductAttributes.Select(y=>y.Option))
                 .Include(x=>x.Brands)
                 .Where(x => x.DeletedAt == null);
             var list = new List<ProductModelForGridView>();
@@ -148,18 +148,18 @@ namespace Service.Core.Inventory
             return list;
         }
 
-        private string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductAttribute> list)
+        private string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductOption> list)
         {
             var builder = new StringBuilder();
             
-            foreach(var option in list.OrderBy(x=>x.Attribute.Name).GroupBy(x=>x.Attribute.Name))
+            foreach(var option in list.OrderBy(x=>x.Option.Name).GroupBy(x=>x.Option.Name))
             {
                 builder.Append(option.Key);
                 builder.Append(": ");
 
                 for(var v=0; v<option.Count();v++)
                 {
-                    builder.Append(option.ElementAt(v).Attribute.Value);
+                    builder.Append(option.ElementAt(v).Option.Value);
                     if (v <= option.Count() - 2)
                         builder.Append(", ");
                 }
@@ -244,6 +244,7 @@ namespace Service.Core.Inventory
             var list = GetAttributeList();
             if (dbEntity == null)
             {
+                // add
                 var attributeEntity = attributeModel.ToEntity();
                 var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
                 if (existingData == null)
@@ -251,26 +252,39 @@ namespace Service.Core.Inventory
                     // then add
                     attributeEntity.CreatedAt = DateTime.Now;
                     attributeEntity.UpdatedAt = DateTime.Now;
+
                     _context.Attribute.Add(attributeEntity);
                 }
                 else
                 {
+                    existingData.DeletedAt = null;
+                    existingData.UpdatedAt = DateTime.Now;
+                    //_context.SaveChanges();
                     // don't add
-                    return false;
+                   // return true;
+                    // return false;
+
                 }
             }
             else
             {
                 //edit 
-                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
+                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id );
                 if (existingData == null)
                 {
                     // edit
                     dbEntity.Name = attributeModel.Name;
                     dbEntity.Value = attributeModel.Value;
                     dbEntity.UpdatedAt = DateTime.Now;
+                    // if data is already in a db but in deleted state undelete it
+                    //dbEntity.DeletedAt = null;
                 }
-                else
+                /*
+                else if(existingData.DeletedAt != null)
+                {
+                    dbEntity.DeletedAt = null;
+                }*/
+                else 
                 {
                     return false;
                 }
@@ -339,7 +353,22 @@ namespace Service.Core.Inventory
             }
             return list;
         }
+
+        public void DeleteAttribute(AttributeModel attributeModel)
+        {
+            var dbEntity = _context.Attribute.FirstOrDefault(x => x.Id == attributeModel.Id);
+            
+            if (dbEntity != null)
+            {
+                dbEntity.DeletedAt = DateTime.Now;
+            }
+            
+            _context.SaveChanges();
+            
+        }
+
     }
-}
+    }
+
 
 

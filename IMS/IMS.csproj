@@ -108,17 +108,17 @@
     <Compile Include="Forms\Customer\CustomerUC.Designer.cs">
       <DependentUpon>CustomerUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\AddAttributeValueUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\AddAttributeValueUC.Designer.cs">
-      <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Common\TextBoxWithDeleteUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Common\TextBoxWithDeleteUC.Designer.cs">
       <DependentUpon>TextBoxWithDeleteUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\AddAttributeValueUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\AddAttributeValueUC.Designer.cs">
+      <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Attributes\OptionChoose.cs">
       <SubType>Form</SubType>
@@ -214,6 +214,12 @@
     <Compile Include="Forms\Suppliers\SupplierUC.Designer.cs">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Users\Create\BasicInfoCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Users\Create\BasicInfoCreate.Designer.cs">
+      <DependentUpon>BasicInfoCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Users\Create\UserCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +234,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\DirectSale\Create\SaleItemCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\DirectSale\Create\SaleItemCreate.Designer.cs">
+      <DependentUpon>SaleItemCreate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
       <DependentUpon>BusinessUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -252,11 +264,11 @@
     <EmbeddedResource Include="Forms\Customer\CustomerUC.resx">
       <DependentUpon>CustomerUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\AddAttributeValueUC.resx">
-      <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\TextBoxWithDeleteUC.resx">
       <DependentUpon>TextBoxWithDeleteUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Attributes\AddAttributeValueUC.resx">
+      <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Attributes\OptionChoose.resx">
       <DependentUpon>OptionChoose.cs</DependentUpon>
@@ -300,6 +312,9 @@
     <EmbeddedResource Include="Forms\Suppliers\SupplierUC.resx">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Users\Create\BasicInfoCreate.resx">
+      <DependentUpon>BasicInfoCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Users\Create\UserCreate.resx">
       <DependentUpon>UserCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -310,6 +325,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\DirectSale\Create\SaleItemCreate.resx">
+      <DependentUpon>SaleItemCreate.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
@@ -335,10 +353,10 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Warehouses\" />
+    <Folder Include="Forms\Sales\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />
-    <Folder Include="Sales\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
@@ -407,6 +425,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_More_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Edit_Property_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
