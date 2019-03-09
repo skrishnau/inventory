@@ -87,6 +87,7 @@ namespace IMS
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);
+            
 
 
 

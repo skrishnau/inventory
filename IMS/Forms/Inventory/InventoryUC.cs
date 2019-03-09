@@ -13,6 +13,7 @@ using SimpleInjector.Lifestyles;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Inventory.Lists;
 using IMS.Forms.Inventory.Lists.Category;
+using System.Threading;
 
 namespace IMS.Forms.Inventory
 {
@@ -228,6 +229,16 @@ namespace IMS.Forms.Inventory
                 var data = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
 
                 lblProductName.Text = data.Name;
+                lblCategory.Text = data.Category;
+                lblBrandName.Text = data.Brands;
+                var attributeList = inventoryService.GetAttributeList(data.Id);
+                lblProperties.Text = "";
+
+                foreach(var att in attributeList)
+                {
+
+                    lblProperties.Text += att.Name + " " + att.Value + "\n";
+                }
 
             }
         }

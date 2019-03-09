@@ -36,5 +36,6 @@ namespace Service.Core.Inventory
         List<OptionModel> GetOptionList();
 
         void DeleteAttribute(AttributeModel attributeModel);
+        List<AttributeModel> GetAttributeList(int id);
     }
 }
