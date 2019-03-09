@@ -330,6 +330,18 @@ namespace Service.Core.Inventory
 
         }
 
+        public List<AttributeModel> GetAttributeList(int productId)
+        {
+            var attributes = _context.ProductAttribute.Where(x => x.ProductId == productId && x.DeletedAt == null).Select(x =>
+                new AttributeModel
+                {
+                    Id = x.OptionId,
+                    Name = x.Option.Name,
+                    Value = x.Option.Value
+                    
+                }).ToList();
+            return attributes;
+        }
         public ProductModelForGridView GetProduct(int productId)
         {
             var x = _context.Product.Find(productId);

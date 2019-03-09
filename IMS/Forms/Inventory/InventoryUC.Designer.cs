@@ -49,9 +49,9 @@
             this.colUpdatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStocksCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnl = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblBrandName = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblCategory = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblProductName = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -82,6 +82,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnEditSKU = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblProperties = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabProducts.SuspendLayout();
@@ -164,8 +166,8 @@
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn2.HeaderText = "Product";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -235,10 +237,12 @@
             // 
             // pnl
             // 
-            this.pnl.Controls.Add(this.btnEditSKU);
-            this.pnl.Controls.Add(this.label8);
-            this.pnl.Controls.Add(this.label7);
+            this.pnl.Controls.Add(this.lblProperties);
             this.pnl.Controls.Add(this.label6);
+            this.pnl.Controls.Add(this.btnEditSKU);
+            this.pnl.Controls.Add(this.lblBrandName);
+            this.pnl.Controls.Add(this.label7);
+            this.pnl.Controls.Add(this.lblCategory);
             this.pnl.Controls.Add(this.label5);
             this.pnl.Controls.Add(this.lblProductName);
             this.pnl.Dock = System.Windows.Forms.DockStyle.Right;
@@ -247,47 +251,51 @@
             this.pnl.Size = new System.Drawing.Size(469, 518);
             this.pnl.TabIndex = 5;
             // 
-            // label8
+            // lblBrandName
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(40, 145);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(118, 17);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "BrandName Here";
+            this.lblBrandName.AutoSize = true;
+            this.lblBrandName.Location = new System.Drawing.Point(136, 89);
+            this.lblBrandName.Name = "lblBrandName";
+            this.lblBrandName.Size = new System.Drawing.Size(118, 17);
+            this.lblBrandName.TabIndex = 4;
+            this.lblBrandName.Text = "BrandName Here";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(49, 202);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(43, 134);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 17);
+            this.label7.Size = new System.Drawing.Size(96, 20);
             this.label7.TabIndex = 3;
             this.label7.Text = "Properties";
             // 
-            // label6
+            // lblCategory
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(136, 79);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 17);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Category Here";
+            this.lblCategory.AutoSize = true;
+            this.lblCategory.Location = new System.Drawing.Point(136, 52);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(100, 17);
+            this.lblCategory.TabIndex = 2;
+            this.lblCategory.Text = "Category Here";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(43, 67);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(43, 50);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 17);
+            this.label5.Size = new System.Drawing.Size(84, 20);
             this.label5.TabIndex = 1;
             this.label5.Text = "Category";
             // 
             // lblProductName
             // 
-            this.lblProductName.Location = new System.Drawing.Point(37, 26);
+            this.lblProductName.AutoSize = true;
+            this.lblProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductName.Location = new System.Drawing.Point(26, 4);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(132, 17);
+            this.lblProductName.Size = new System.Drawing.Size(172, 29);
             this.lblProductName.TabIndex = 0;
             this.lblProductName.Text = "ProductName";
             // 
@@ -564,13 +572,31 @@
             // 
             // btnEditSKU
             // 
-            this.btnEditSKU.Location = new System.Drawing.Point(82, 307);
+            this.btnEditSKU.Location = new System.Drawing.Point(194, 470);
             this.btnEditSKU.Name = "btnEditSKU";
             this.btnEditSKU.Size = new System.Drawing.Size(75, 23);
             this.btnEditSKU.TabIndex = 5;
             this.btnEditSKU.Text = "Edit SKU";
             this.btnEditSKU.UseVisualStyleBackColor = true;
             this.btnEditSKU.Click += new System.EventHandler(this.btnEditSKU_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(43, 87);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 20);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Brand";
+            // 
+            // lblProperties
+            // 
+            this.lblProperties.Location = new System.Drawing.Point(122, 184);
+            this.lblProperties.Name = "lblProperties";
+            this.lblProperties.Size = new System.Drawing.Size(212, 209);
+            this.lblProperties.TabIndex = 7;
+            this.lblProperties.Text = "properties Here";
             // 
             // InventoryUC
             // 
@@ -643,11 +669,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AttributeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.Label lblProductName;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblBrandName;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button btnEditSKU;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblProperties;
     }
 }
