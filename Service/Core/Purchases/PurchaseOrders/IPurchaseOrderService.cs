@@ -8,5 +8,7 @@ namespace Service.Core.Purchases.PurchaseOrders
 {
     public interface IPurchaseOrderService
     {
+        int GetNextLotNumber();
+        
     }
 }
