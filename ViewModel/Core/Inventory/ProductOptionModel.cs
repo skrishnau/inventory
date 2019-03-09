@@ -13,7 +13,7 @@ namespace ViewModel.Core.Inventory
 
         public int ProductId { get; set; }
 
-        public int AttributeId { get; set; }
+        public int OptionId { get; set; }
 
         // time stamps
         public DateTime CreatedAt { get; set; }
@@ -25,7 +25,7 @@ namespace ViewModel.Core.Inventory
         {
             return new ProductOption()
             {
-                OptionId = AttributeId,
+                OptionId = OptionId,
                 CreatedAt = CreatedAt,
                 DeletedAt = DeletedAt,
                 ProductId = ProductId,

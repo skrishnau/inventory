@@ -14,7 +14,7 @@ using ViewModel.Core.Inventory;
 using IMS.Forms.Inventory.Lists;
 using IMS.Forms.Inventory.Lists.Category;
 using System.Threading;
-using IMS.Forms.Inventory.SKU;
+using IMS.Forms.Inventory.Variants;
 
 namespace IMS.Forms.Inventory
 {
@@ -234,10 +234,10 @@ namespace IMS.Forms.Inventory
                 lblProductName.Text = data.Name;
                 lblCategory.Text = data.Category;
                 lblBrandName.Text = data.Brands;
-                var attributeList = inventoryService.GetAttributeList(data.Id);
+                var attributeList = inventoryService.GetOptionList(data.Id);
                 lblProperties.Text = "";
 
-                foreach(var att in attributeList)
+                foreach (var att in attributeList)
                 {
 
                     lblProperties.Text += att.Name + " " + att.Value + "\n";
@@ -248,8 +248,9 @@ namespace IMS.Forms.Inventory
 
         private void btnEditSKU_Click(object sender, EventArgs e)
         {
-            var skuEditForm = new SkuEditForm(inventoryService, _selectedProduct.Id);
+            var skuEditForm = new VariantEditForm(inventoryService, _selectedProduct.Id);
             skuEditForm.ShowDialog();
+            PopulateProductData();
         }
     }
 }

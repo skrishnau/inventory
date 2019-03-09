@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Inventory
 {
-    public class ProductVariantValue
+    public class VariantOption
     {
         public int Id { get; set; }
         // each variation 
-        public int ProductVariantId { get; set; }
+        public int VariantId { get; set; }
         // otpion . e.g. color
         public int OptionId { get; set; }
        
@@ -19,7 +19,7 @@ namespace Infrastructure.Entities.Inventory
 
 
         // ===== Table Objects ===== //
-        public virtual ProductVariant ProductVariant { get; set; }
+        public virtual Variant Variant { get; set; }
 
         public virtual Option Option { get; set; }
     }

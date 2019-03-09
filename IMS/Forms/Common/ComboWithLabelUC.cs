@@ -10,9 +10,13 @@ using System.Windows.Forms;
 
 namespace IMS.Forms.Common
 {
-    public partial class ThreeComboBoxes : UserControl
+    public partial class ComboWithLabelUC : UserControl
     {
-        public ThreeComboBoxes()
+        // Id in case of edit
+        public int Id { get; set; }
+
+
+        public ComboWithLabelUC()
         {
             InitializeComponent();
         }

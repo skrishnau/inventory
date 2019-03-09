@@ -33,11 +33,14 @@ namespace Service.Core.Inventory
 
         List<AttributeModel> GetAttributeList();
 
-        List<AttributeModel> GetDistinctAttributes();
+        List<OptionModel> GetDistinctAttributes();
 
         List<OptionModel> GetOptionList();
 
         void DeleteAttribute(AttributeModel attributeModel);
-        List<AttributeModel> GetAttributeList(int id);
+
+        List<AttributeModel> GetOptionList(int productId);
+
+        void SaveVariant(VariantModel variantModel);
     }
 }

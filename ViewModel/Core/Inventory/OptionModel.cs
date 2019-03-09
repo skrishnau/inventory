@@ -27,10 +27,10 @@ namespace ViewModel.Core.Inventory
             {
                 CreatedAt = CreatedAt,
                 DeletedAt = DeletedAt,
-                 Id = Id,
-                 Name = Name,
-                 Value = Value,
-                 UpdatedAt = UpdatedAt
+                Id = Id,
+                Name = Name,
+                Value = Value,
+                UpdatedAt = UpdatedAt
             };
         }
     }
@@ -48,4 +48,5 @@ namespace ViewModel.Core.Inventory
         public string Value { get; set; }
 
     }
+
 }

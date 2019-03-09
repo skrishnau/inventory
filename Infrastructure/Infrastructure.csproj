@@ -56,8 +56,8 @@
     <Compile Include="Entities\Business\Counter.cs" />
     <Compile Include="Entities\Inventory\Option.cs" />
     <Compile Include="Entities\Inventory\ProductOption.cs" />
-    <Compile Include="Entities\Inventory\ProductVariant.cs" />
-    <Compile Include="Entities\Inventory\ProductVariantValue.cs" />
+    <Compile Include="Entities\Inventory\Variant.cs" />
+    <Compile Include="Entities\Inventory\VariantOption.cs" />
     <Compile Include="Entities\Purchases\PurchaseItem.cs" />
     <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201903041605377_attribute_renametooption.Designer.cs">
       <DependentUpon>201903041605377_attribute_renametooption.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.cs" />
+    <Compile Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.Designer.cs">
+      <DependentUpon>201903091709521_Variant_and_VariantOption_tables_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -157,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903041605377_attribute_renametooption.resx">
       <DependentUpon>201903041605377_attribute_renametooption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.resx">
+      <DependentUpon>201903091709521_Variant_and_VariantOption_tables_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

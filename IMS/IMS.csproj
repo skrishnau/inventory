@@ -90,11 +90,11 @@
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Common\PopupMessage.cs" />
-    <Compile Include="Forms\Common\ThreeComboBoxes.cs">
+    <Compile Include="Forms\Common\ComboWithLabelUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Common\ThreeComboBoxes.Designer.cs">
-      <DependentUpon>ThreeComboBoxes.cs</DependentUpon>
+    <Compile Include="Forms\Common\ComboWithLabelUC.Designer.cs">
+      <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Customer\Create\CustomerCreate.cs">
       <SubType>Form</SubType>
@@ -190,11 +190,11 @@
     <Compile Include="Forms\Inventory\Products\ProductOptionUC.Designer.cs">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\SKU\SkuEditForm.cs">
+    <Compile Include="Forms\Inventory\Variants\VariantEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\SKU\SkuEditForm.Designer.cs">
-      <DependentUpon>SkuEditForm.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Variants\VariantEditForm.Designer.cs">
+      <DependentUpon>VariantEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.cs">
       <SubType>Form</SubType>
@@ -270,8 +270,8 @@
     <EmbeddedResource Include="Forms\Business\Create\WarehouseCreate.resx">
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Common\ThreeComboBoxes.resx">
-      <DependentUpon>ThreeComboBoxes.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Common\ComboWithLabelUC.resx">
+      <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Customer\Create\CustomerCreate.resx">
       <DependentUpon>CustomerCreate.cs</DependentUpon>
@@ -315,8 +315,8 @@
     <EmbeddedResource Include="Forms\Inventory\Products\ProductOptionUC.resx">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\SKU\SkuEditForm.resx">
-      <DependentUpon>SkuEditForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Variants\VariantEditForm.resx">
+      <DependentUpon>VariantEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.resx">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>

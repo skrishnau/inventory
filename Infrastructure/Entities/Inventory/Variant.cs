@@ -10,7 +10,7 @@ namespace Infrastructure.Entities.Inventory
     /// A product's variant. i.e. different types in the same product
     /// For e.g. : the SKU for purple Ugg boots in the Bailey Bow style, size 6, may read UGG-BB-PUR-06
     /// </summary>
-    public class ProductVariant
+    public class Variant
     {
         public int Id { get; set; }
         // product
@@ -30,9 +30,16 @@ namespace Infrastructure.Entities.Inventory
         // lastly selling price of the same product
         public decimal LatestUnitSellPrice { get; set; }
 
+        // ========== Alerts ========== //
+        // whether to show alerts for this product's stock count; if null then take Product's (same) column data
+        public bool? ShowStockAlerts { get; set; }
+        // Min. stock count which triggers alert; if null then take Product's (same) column data
+        public int? MinStockCountForAlert { get; set; }
+
 
         // ====== Table Objects ====== //
-        public ICollection<ProductVariantValue> ProductVariantValues { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual ICollection<VariantOption> VariantOptions { get; set; }
       
     }
 }

@@ -175,7 +175,7 @@ namespace IMS.Forms.Inventory.Create
                             CreatedAt = DateTime.Now,
                             UpdatedAt = DateTime.Now,
                             //Id = optionValue.Id,
-                            AttributeId = optionValue.Id,
+                            OptionId = optionValue.Id,
                             
                         };
                         list.Add(model);

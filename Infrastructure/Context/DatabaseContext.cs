@@ -53,8 +53,10 @@ namespace Infrastructure.Context
         public virtual DbSet<Brand> Brand { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<Entities.Inventory.Option> Attribute { get; set; }
-        public virtual DbSet<ProductOption> ProductAttribute { get; set; }
+        public virtual DbSet<Option> Option { get; set; }
+        public virtual DbSet<ProductOption> ProductOption { get; set; }
+        public virtual DbSet<Variant> Variant { get; set; }
+        public virtual DbSet<VariantOption> VariantOption { get; set; }
 
         
         // ===================== TRANSACTION MODULE ==================== //

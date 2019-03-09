@@ -44,5 +44,7 @@ namespace Infrastructure.Entities.Inventory
         public virtual ICollection<Brand> Brands { get; set; }
 
         public virtual ICollection<ProductOption> ProductAttributes{ get; set; }
+
+        public virtual ICollection<Variant> Variants { get; set; }
     }
 }

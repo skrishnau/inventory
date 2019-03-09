@@ -203,20 +203,20 @@ namespace Service.Core.Inventory
 
         public bool AddOrUpdateAttribute(AttributeModel attributeModel)
         {
-            var dbEntity = _context.Attribute.FirstOrDefault(x => x.Id == attributeModel.Id);
+            var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
             var list = GetAttributeList();
             if (dbEntity == null)
             {
                 // add
                 var attributeEntity = attributeModel.ToEntity();
-                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
+                var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
                 if (existingData == null)
                 {
                     // then add
                     attributeEntity.CreatedAt = DateTime.Now;
                     attributeEntity.UpdatedAt = DateTime.Now;
 
-                    _context.Attribute.Add(attributeEntity);
+                    _context.Option.Add(attributeEntity);
                 }
                 else
                 {
@@ -232,7 +232,7 @@ namespace Service.Core.Inventory
             else
             {
                 //edit 
-                var existingData = _context.Attribute.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
+                var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
                 if (existingData == null)
                 {
                     // edit
@@ -256,17 +256,17 @@ namespace Service.Core.Inventory
             return true;
         }
 
-        public List<AttributeModel> GetDistinctAttributes()
+        public List<OptionModel> GetDistinctAttributes()
         {
-            var list = new List<AttributeModel>();
-            var attributesGroup = _context.Attribute
+            var list = new List<OptionModel>();
+            var attributesGroup = _context.Option
              .Where(x => x.DeletedAt == null)
              .GroupBy(x => x.Name);
             // attributeGroup is a dictionary of <string, Attribute>; {(Color, {obj, obj}), (CC, {obj, obj, obj})}
             foreach (var grp in attributesGroup)
             {
                 var name = grp.Key;
-                list.Add(new AttributeModel
+                list.Add(new OptionModel
                 {
                     Name = name,
                 });
@@ -279,7 +279,7 @@ namespace Service.Core.Inventory
 
         public List<AttributeModel> GetAttributeList()
         {
-            var attributes = _context.Attribute
+            var attributes = _context.Option
                .Where(x => x.DeletedAt == null)
                .OrderBy(x => x.Name)
                .Select(x => new AttributeModel()
@@ -296,7 +296,7 @@ namespace Service.Core.Inventory
         }
         public List<OptionModel> GetOptionList()
         {
-            var attributes = _context.Attribute
+            var attributes = _context.Option
                 .Where(x => x.DeletedAt == null)
                 .OrderBy(x => x.Name)
                 .GroupBy(x => x.Name);
@@ -319,7 +319,7 @@ namespace Service.Core.Inventory
 
         public void DeleteAttribute(AttributeModel attributeModel)
         {
-            var dbEntity = _context.Attribute.FirstOrDefault(x => x.Id == attributeModel.Id);
+            var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
 
             if (dbEntity != null)
             {
@@ -330,24 +330,31 @@ namespace Service.Core.Inventory
 
         }
 
-        public List<AttributeModel> GetAttributeList(int productId)
+        public List<AttributeModel> GetOptionList(int productId)
         {
-            var attributes = _context.ProductAttribute.Where(x => x.ProductId == productId && x.DeletedAt == null).Select(x =>
-                new AttributeModel
+            var attributes = _context.ProductOption
+                .Where(x => x.ProductId == productId && x.DeletedAt == null)
+                .Select(x => new AttributeModel
                 {
                     Id = x.OptionId,
                     Name = x.Option.Name,
                     Value = x.Option.Value
-                    
+
                 }).ToList();
             return attributes;
         }
         public ProductModelForGridView GetProduct(int productId)
         {
-            var x = _context.Product.Find(productId);
-            if (x == null)
+            var product = _context.Product.Find(productId);
+            if (product == null)
                 return null;
-            return ProductMapper.MapToProductModelForGridView(x);
+            return ProductMapper.MapToProductModelForGridView(product);
+        }
+
+        public void SaveVariant(VariantModel variantModel)
+        {
+            _context.Variant.Add(VariantMapper.MapToEntityForAdd(variantModel));
+            _context.SaveChanges();
         }
     }
 }
