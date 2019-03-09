@@ -31,15 +31,23 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabProducts = new System.Windows.Forms.TabPage();
             this.dgvProductList = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBrands = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOptions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colShowStockAlerts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMinStockCountForAlert = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUpdatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStocksCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddProduct = new System.Windows.Forms.Button();
@@ -61,14 +69,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBrands = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOptions = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colShowStockAlerts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMinStockCountForAlert = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUpdatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStocksCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabProducts.SuspendLayout();
@@ -88,7 +88,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 47);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(628, 393);
+            this.panel2.Size = new System.Drawing.Size(666, 393);
             this.panel2.TabIndex = 2;
             // 
             // tabControl1
@@ -104,7 +104,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(628, 393);
+            this.tabControl1.Size = new System.Drawing.Size(666, 393);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
@@ -115,7 +115,7 @@
             this.tabProducts.Location = new System.Drawing.Point(4, 25);
             this.tabProducts.Name = "tabProducts";
             this.tabProducts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProducts.Size = new System.Drawing.Size(620, 364);
+            this.tabProducts.Size = new System.Drawing.Size(658, 364);
             this.tabProducts.TabIndex = 0;
             this.tabProducts.Text = "Products";
             // 
@@ -151,8 +151,80 @@
             this.dgvProductList.Location = new System.Drawing.Point(3, 48);
             this.dgvProductList.Name = "dgvProductList";
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductList.Size = new System.Drawing.Size(614, 313);
+            this.dgvProductList.Size = new System.Drawing.Size(652, 313);
             this.dgvProductList.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Product";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 69;
+            // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCategory.DataPropertyName = "Category";
+            this.colCategory.HeaderText = "Category";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.Width = 74;
+            // 
+            // colBrands
+            // 
+            this.colBrands.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colBrands.DataPropertyName = "Brands";
+            this.colBrands.HeaderText = "Brands";
+            this.colBrands.Name = "colBrands";
+            this.colBrands.ReadOnly = true;
+            // 
+            // colOptions
+            // 
+            this.colOptions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colOptions.DataPropertyName = "OptionValues";
+            this.colOptions.HeaderText = "Attributes";
+            this.colOptions.Name = "colOptions";
+            this.colOptions.ReadOnly = true;
+            // 
+            // colShowStockAlerts
+            // 
+            this.colShowStockAlerts.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colShowStockAlerts.DataPropertyName = "ShowStockAlerts";
+            this.colShowStockAlerts.HeaderText = "Alerts";
+            this.colShowStockAlerts.Name = "colShowStockAlerts";
+            this.colShowStockAlerts.ReadOnly = true;
+            this.colShowStockAlerts.Width = 58;
+            // 
+            // colMinStockCountForAlert
+            // 
+            this.colMinStockCountForAlert.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colMinStockCountForAlert.DataPropertyName = "MinStockCountForAlert ";
+            this.colMinStockCountForAlert.HeaderText = "Alert Threshold";
+            this.colMinStockCountForAlert.Name = "colMinStockCountForAlert";
+            this.colMinStockCountForAlert.ReadOnly = true;
+            this.colMinStockCountForAlert.Width = 95;
+            // 
+            // colUpdatedAt
+            // 
+            this.colUpdatedAt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colUpdatedAt.DataPropertyName = "UpdatedAt ";
+            this.colUpdatedAt.HeaderText = "Updated At";
+            this.colUpdatedAt.Name = "colUpdatedAt";
+            this.colUpdatedAt.ReadOnly = true;
+            this.colUpdatedAt.Width = 79;
+            // 
+            // colStocksCount
+            // 
+            this.colStocksCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colStocksCount.DataPropertyName = "QuantityInStocks ";
+            this.colStocksCount.HeaderText = "Stocks Count";
+            this.colStocksCount.Name = "colStocksCount";
+            this.colStocksCount.ReadOnly = true;
+            this.colStocksCount.Width = 88;
             // 
             // panel5
             // 
@@ -161,7 +233,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(614, 45);
+            this.panel5.Size = new System.Drawing.Size(652, 45);
             this.panel5.TabIndex = 3;
             // 
             // label2
@@ -385,7 +457,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(628, 37);
+            this.label1.Size = new System.Drawing.Size(666, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "Inventory";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -395,80 +467,8 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 37);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(628, 10);
+            this.panel1.Size = new System.Drawing.Size(666, 10);
             this.panel1.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Product";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 69;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCategory.DataPropertyName = "Category";
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 74;
-            // 
-            // colBrands
-            // 
-            this.colBrands.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colBrands.DataPropertyName = "Brands";
-            this.colBrands.HeaderText = "Brands";
-            this.colBrands.Name = "colBrands";
-            this.colBrands.ReadOnly = true;
-            // 
-            // colOptions
-            // 
-            this.colOptions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colOptions.DataPropertyName = "OptionValues";
-            this.colOptions.HeaderText = "Attributes";
-            this.colOptions.Name = "colOptions";
-            this.colOptions.ReadOnly = true;
-            // 
-            // colShowStockAlerts
-            // 
-            this.colShowStockAlerts.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colShowStockAlerts.DataPropertyName = "ShowStockAlerts";
-            this.colShowStockAlerts.HeaderText = "Alerts";
-            this.colShowStockAlerts.Name = "colShowStockAlerts";
-            this.colShowStockAlerts.ReadOnly = true;
-            this.colShowStockAlerts.Width = 58;
-            // 
-            // colMinStockCountForAlert
-            // 
-            this.colMinStockCountForAlert.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colMinStockCountForAlert.DataPropertyName = "MinStockCountForAlert ";
-            this.colMinStockCountForAlert.HeaderText = "Alert Threshold";
-            this.colMinStockCountForAlert.Name = "colMinStockCountForAlert";
-            this.colMinStockCountForAlert.ReadOnly = true;
-            this.colMinStockCountForAlert.Width = 95;
-            // 
-            // colUpdatedAt
-            // 
-            this.colUpdatedAt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colUpdatedAt.DataPropertyName = "UpdatedAt ";
-            this.colUpdatedAt.HeaderText = "Updated At";
-            this.colUpdatedAt.Name = "colUpdatedAt";
-            this.colUpdatedAt.ReadOnly = true;
-            this.colUpdatedAt.Width = 79;
-            // 
-            // colStocksCount
-            // 
-            this.colStocksCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colStocksCount.DataPropertyName = "QuantityInStocks ";
-            this.colStocksCount.HeaderText = "Stocks Count";
-            this.colStocksCount.Name = "colStocksCount";
-            this.colStocksCount.ReadOnly = true;
-            this.colStocksCount.Width = 88;
             // 
             // InventoryUC
             // 
@@ -479,7 +479,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Name = "InventoryUC";
-            this.Size = new System.Drawing.Size(628, 440);
+            this.Size = new System.Drawing.Size(666, 440);
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabProducts.ResumeLayout(false);

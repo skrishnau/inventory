@@ -184,6 +184,12 @@
     <Compile Include="Forms\Inventory\Products\ProductOptionUC.Designer.cs">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.Designer.cs">
+      <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Purchases\PurchaseOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,6 +288,9 @@
     <EmbeddedResource Include="Forms\Inventory\Products\ProductOptionUC.resx">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.resx">
+      <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchases\PurchaseOrderForm.resx">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -335,6 +344,7 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Warehouses\" />
+    <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />
