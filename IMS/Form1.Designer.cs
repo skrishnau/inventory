@@ -39,6 +39,7 @@
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDirectSale = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.btnPurchaseOrder = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -53,6 +54,7 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.btnSales = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -61,9 +63,10 @@
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(2, 484);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 639);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(822, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1116, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -79,7 +82,8 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(2, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(822, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1116, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -121,13 +125,26 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnDirectSale);
             this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.btnPurchaseOrder);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(2, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(822, 57);
+            this.panel1.Size = new System.Drawing.Size(1116, 70);
             this.panel1.TabIndex = 2;
+            // 
+            // btnDirectSale
+            // 
+            this.btnDirectSale.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDirectSale.Location = new System.Drawing.Point(125, 0);
+            this.btnDirectSale.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDirectSale.Name = "btnDirectSale";
+            this.btnDirectSale.Size = new System.Drawing.Size(121, 70);
+            this.btnDirectSale.TabIndex = 3;
+            this.btnDirectSale.Text = "Direct Sale";
+            this.btnDirectSale.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDirectSale.UseVisualStyleBackColor = true;
             // 
             // splitter1
             // 
@@ -153,6 +170,7 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panel2.Controls.Add(this.btnPurchases);
+            this.panel2.Controls.Add(this.btnSales);
             this.panel2.Controls.Add(this.btnUser);
             this.panel2.Controls.Add(this.btnBusiness);
             this.panel2.Controls.Add(this.btnCustomer);
@@ -162,8 +180,8 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(2, 84);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.panel2.Size = new System.Drawing.Size(63, 400);
+            this.panel2.Padding = new System.Windows.Forms.Padding(4);
+            this.panel2.Size = new System.Drawing.Size(84, 537);
             this.panel2.TabIndex = 0;
             // 
             // btnPurchases
@@ -267,7 +285,7 @@
             // 
             this.splitter2.Location = new System.Drawing.Point(65, 84);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 400);
+            this.splitter2.Size = new System.Drawing.Size(4, 537);
             this.splitter2.TabIndex = 3;
             this.splitter2.TabStop = false;
             // 
@@ -276,7 +294,7 @@
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter3.Location = new System.Drawing.Point(2, 81);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(822, 3);
+            this.splitter3.Size = new System.Drawing.Size(1116, 4);
             this.splitter3.TabIndex = 4;
             this.splitter3.TabStop = false;
             // 
@@ -285,14 +303,29 @@
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(68, 84);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(756, 400);
+            this.pnlBody.Size = new System.Drawing.Size(1028, 537);
             this.pnlBody.TabIndex = 5;
+            // 
+            // btnSales
+            // 
+            this.btnSales.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSales.BackgroundImage")));
+            this.btnSales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSales.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSales.Location = new System.Drawing.Point(4, 454);
+            this.btnSales.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSales.Name = "btnSales";
+            this.btnSales.Size = new System.Drawing.Size(76, 75);
+            this.btnSales.TabIndex = 6;
+            this.btnSales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnSales, "User");
+            this.btnSales.UseVisualStyleBackColor = true;
+            this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 506);
+            this.ClientSize = new System.Drawing.Size(1122, 661);
             this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.panel2);
@@ -339,6 +372,8 @@
         private System.Windows.Forms.Button btnBusiness;
         private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Button btnProducts;
+        private System.Windows.Forms.Button btnDirectSale;
+        private System.Windows.Forms.Button btnSales;
         private System.Windows.Forms.Button btnPurchases;
     }
 }

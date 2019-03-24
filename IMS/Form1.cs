@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using IMS.Forms.Suppliers;
 using IMS.Forms.Business;
 using IMS.Forms.Users;
+using IMS.Forms.Sales;
 using SimpleInjector.Lifestyles;
 
 namespace IMS
@@ -32,8 +33,15 @@ namespace IMS
             btnProducts.Click += BtnProducts_Click;
             btnSupplier.Click += btnSupplier_Click;
             btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
+            btnDirectSale.Click += BtnDirectSale_Click;
         }
 
+        private void BtnDirectSale_Click(object sender, EventArgs e)
+        {
+            var directSaleForm = Program.container.GetInstance<DirectSaleForm>();
+            directSaleForm.ShowDialog();
+
+        }
 
         private void BtnProducts_Click(object sender, EventArgs e)
         {
@@ -90,6 +98,14 @@ namespace IMS
             pnlBody.Controls.Clear();
             purchaseListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(purchaseListUC);
+        }
+
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+            var saleUC = Program.container.GetInstance<SaleUC>();
+            pnlBody.Controls.Clear();
+            saleUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(saleUC);
         }
     }
 }

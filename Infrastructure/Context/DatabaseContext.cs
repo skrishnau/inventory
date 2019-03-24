@@ -63,6 +63,7 @@ namespace Infrastructure.Context
         // ===================== TRANSACTION MODULE ==================== //
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SaleOrder> SaleOrder { get; set; }
+        public virtual DbSet<SaleItem> SaleItems { get; set; }
 
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
         public virtual DbSet<Purchase> Purchase { get; set; }

@@ -83,45 +83,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201902111618587_InitialMigration.cs" />
-    <Compile Include="Migrations\201902111618587_InitialMigration.Designer.cs">
-      <DependentUpon>201902111618587_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902111640050_add_basicinfo_to_customer_model.cs" />
-    <Compile Include="Migrations\201902111640050_add_basicinfo_to_customer_model.Designer.cs">
-      <DependentUpon>201902111640050_add_basicinfo_to_customer_model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902141039116_error_fix.cs" />
-    <Compile Include="Migrations\201902141039116_error_fix.Designer.cs">
-      <DependentUpon>201902141039116_error_fix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902150927047_error_fix1.cs" />
-    <Compile Include="Migrations\201902150927047_error_fix1.Designer.cs">
-      <DependentUpon>201902150927047_error_fix1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902151534123_add warehouse Icollection to branch table.cs" />
-    <Compile Include="Migrations\201902151534123_add warehouse Icollection to branch table.Designer.cs">
-      <DependentUpon>201902151534123_add warehouse Icollection to branch table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902251002042_attribute_added.cs" />
-    <Compile Include="Migrations\201902251002042_attribute_added.Designer.cs">
-      <DependentUpon>201902251002042_attribute_added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903020355212_ProductId_added_in_Brand_table.cs" />
-    <Compile Include="Migrations\201903020355212_ProductId_added_in_Brand_table.Designer.cs">
-      <DependentUpon>201903020355212_ProductId_added_in_Brand_table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903021902300_ProductAttribute_added.cs" />
-    <Compile Include="Migrations\201903021902300_ProductAttribute_added.Designer.cs">
-      <DependentUpon>201903021902300_ProductAttribute_added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903041605377_attribute_renametooption.cs" />
-    <Compile Include="Migrations\201903041605377_attribute_renametooption.Designer.cs">
-      <DependentUpon>201903041605377_attribute_renametooption.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.cs" />
-    <Compile Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.Designer.cs">
-      <DependentUpon>201903091709521_Variant_and_VariantOption_tables_added.cs</DependentUpon>
+    <Compile Include="Migrations\201903241508030_InitialMig.cs" />
+    <Compile Include="Migrations\201903241508030_InitialMig.Designer.cs">
+      <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.cs" />
     <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.Designer.cs">
@@ -135,7 +99,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
@@ -143,35 +109,8 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902111618587_InitialMigration.resx">
-      <DependentUpon>201902111618587_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902111640050_add_basicinfo_to_customer_model.resx">
-      <DependentUpon>201902111640050_add_basicinfo_to_customer_model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902141039116_error_fix.resx">
-      <DependentUpon>201902141039116_error_fix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902150927047_error_fix1.resx">
-      <DependentUpon>201902150927047_error_fix1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902151534123_add warehouse Icollection to branch table.resx">
-      <DependentUpon>201902151534123_add warehouse Icollection to branch table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902251002042_attribute_added.resx">
-      <DependentUpon>201902251002042_attribute_added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903020355212_ProductId_added_in_Brand_table.resx">
-      <DependentUpon>201903020355212_ProductId_added_in_Brand_table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903021902300_ProductAttribute_added.resx">
-      <DependentUpon>201903021902300_ProductAttribute_added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903041605377_attribute_renametooption.resx">
-      <DependentUpon>201903041605377_attribute_renametooption.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.resx">
-      <DependentUpon>201903091709521_Variant_and_VariantOption_tables_added.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903241508030_InitialMig.resx">
+      <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903201321288_PurchaseTableUpdated.resx">
       <DependentUpon>201903201321288_PurchaseTableUpdated.cs</DependentUpon>

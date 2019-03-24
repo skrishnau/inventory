@@ -43,6 +43,10 @@ namespace Service.Core.Inventory
 
         void SaveVariant(VariantModel variantModel);
 
+        List<VariantModel> GetVariantList();
+
+        VariantModel GetVariantBySKU(string sku);
+
         VariantModel GetVariantById(string sku);
 
 

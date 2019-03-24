@@ -73,6 +73,8 @@
     <Compile Include="Core\LDAP\ActiveDirectory.cs" />
     <Compile Include="Core\LDAP\ILDapService.cs" />
     <Compile Include="Core\LDAP\OpenLDap.cs" />
+    <Compile Include="Core\Sales\ISaleService.cs" />
+    <Compile Include="Core\Sales\SaleService.cs" />
     <Compile Include="Core\Suppliers\ISupplierService.cs" />
     <Compile Include="Core\Suppliers\SupplierService.cs" />
     <Compile Include="Core\Users\IUserService.cs" />
