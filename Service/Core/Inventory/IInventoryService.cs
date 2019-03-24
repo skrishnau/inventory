@@ -42,5 +42,9 @@ namespace Service.Core.Inventory
         List<AttributeModel> GetOptionList(int productId);
 
         void SaveVariant(VariantModel variantModel);
+
+        List<VariantModel> GetVariantList();
+
+        VariantModel GetVariantBySKU(string sku);
     }
 }

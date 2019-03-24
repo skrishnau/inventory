@@ -16,20 +16,24 @@ namespace Infrastructure.Entities.Sales
         // to which sale transaction does this item belongs 
         public int SaleId { get; set; }
         // the product
-        public int ProductId { get; set; }
+        public int VariantId { get; set; }
         // no of items
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         // implement discount in rate in version 2
         public decimal Rate { get; set; }
         // totalAmount = quantity * rate 
         public decimal TotalAmount { get; set; }
+
+        public string ItemDescription { get; set; }
+
+        public string SKU { get; set; }
         // an item can be cancelled by customer at any point during transaction
         public DateTime? DeletedAt { get; set; }
 
         // ================= Table Objects ==================== //
         public virtual Sale Sale { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual Variant Variant { get; set; }
 
     }
 }

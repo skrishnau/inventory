@@ -37,8 +37,16 @@ namespace IMS.Forms.Inventory
             PopulateBrandData();
             PopulateProductData();
             PopulateAttributetData();
+            PopulateSKUGridView();
 
 
+        }
+
+        public void PopulateSKUGridView()
+        {
+            var skus = inventoryService.GetVariantList();
+            dgvSKUListing.AutoGenerateColumns = false;
+            dgvSKUListing.DataSource = skus;
         }
 
         private void AddUserControls()
@@ -252,5 +260,7 @@ namespace IMS.Forms.Inventory
             skuEditForm.ShowDialog();
             PopulateProductData();
         }
+
+       
     }
 }

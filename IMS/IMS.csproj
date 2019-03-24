@@ -208,6 +208,24 @@
     <Compile Include="Forms\Purchases\PurchaseOrderForm.Designer.cs">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sales\DirectSaleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\DirectSaleForm.Designer.cs">
+      <DependentUpon>DirectSaleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sales\NewItemAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\NewItemAddForm.Designer.cs">
+      <DependentUpon>NewItemAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sales\SaleUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\SaleUC.Designer.cs">
+      <DependentUpon>SaleUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +342,15 @@
     <EmbeddedResource Include="Forms\Purchases\PurchaseOrderForm.resx">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\DirectSaleForm.resx">
+      <DependentUpon>DirectSaleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\NewItemAddForm.resx">
+      <DependentUpon>NewItemAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\SaleUC.resx">
+      <DependentUpon>SaleUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\SupplierCreate.resx">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -381,7 +408,6 @@
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Warehouses\" />
     <Folder Include="Forms\Purchases\Direct\" />
-    <Folder Include="Forms\Sales\" />
     <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />

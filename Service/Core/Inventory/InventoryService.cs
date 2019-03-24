@@ -356,6 +356,33 @@ namespace Service.Core.Inventory
             _context.Variant.Add(VariantMapper.MapToEntityForAdd(variantModel));
             _context.SaveChanges();
         }
+
+        public List<VariantModel> GetVariantList()
+        {
+            var variants = _context.Variant.
+                Select(x => new VariantModel()
+                {
+                    Id = x.Id,
+                    LatestUnitCostPrice = x.LatestUnitCostPrice,
+                    LatestUnitSellPrice = x.LatestUnitSellPrice,
+                    MinStockCountForAlert = x.MinStockCountForAlert,
+                    ProductId = x.ProductId,
+                    QuantityInStock = x.QuantityInStock,
+                    ShowStockAlerts = x.ShowStockAlerts,
+                    SKU = x.SKU
+
+                }).ToList();
+            return variants;
+        }
+
+        public VariantModel GetVariantBySKU(string sku)
+        {
+            var sss = _context.Variant.FirstOrDefault(x => x.SKU == sku);
+            if (sss == null)
+                return null;
+            return DTO.Core.Inventory.VariantMapper.MapToVariatModel(sss);
+        }
+
     }
 }
 

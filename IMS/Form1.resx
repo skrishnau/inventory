@@ -124,6 +124,47 @@
     <value>133, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSales.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>248, 17</value>
+  </metadata>
   <data name="btnUser.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAC8xJREFUaEPd
@@ -180,9 +221,6 @@
         /xdAXGPKk/8POXHi30U1rGHUkVKwAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>248, 17</value>
-  </metadata>
   <data name="btnBusiness.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAABsBJREFUaEPt

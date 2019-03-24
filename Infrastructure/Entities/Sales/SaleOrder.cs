@@ -18,5 +18,7 @@ namespace Infrastructure.Entities.Sales
 
         // ... still needs implementations
 
+
+
     }
 }

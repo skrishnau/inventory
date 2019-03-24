@@ -23,6 +23,8 @@ using IMS.Forms.Users;
 using IMS.Forms.Users.Create;
 using Service.Core.Users;
 using Service.Core.Purchases.PurchaseOrders;
+using IMS.Forms.Sales;
+using Service.Core.Sales;
 
 namespace IMS
 {
@@ -75,6 +77,8 @@ namespace IMS
 
             container.Register<IPurchaseOrderService, PurchaseOrderService>(Lifestyle.Singleton);
 
+            container.Register<ISaleService, SaleService>(Lifestyle.Singleton);
+
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //
             container.Register<Form1>(Lifestyle.Scoped);
@@ -90,6 +94,9 @@ namespace IMS
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);
+            container.Register<DirectSaleForm>(Lifestyle.Scoped);
+            container.Register<NewItemAddForm>(Lifestyle.Scoped);
+            container.Register<SaleUC>(Lifestyle.Scoped);
             
 
 
