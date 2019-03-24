@@ -202,6 +202,12 @@
     <Compile Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.Designer.cs">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Purchases\PurchaseListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Purchases\PurchaseListUC.Designer.cs">
+      <DependentUpon>PurchaseListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Purchases\PurchaseOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.resx">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Purchases\PurchaseListUC.resx">
+      <DependentUpon>PurchaseListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchases\PurchaseOrderForm.resx">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
@@ -459,6 +468,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Edit_Property_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Buy_48px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

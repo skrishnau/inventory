@@ -29,7 +29,7 @@ namespace DTO.Core.Inventory
                 MinStockCountForAlert = x.MinStockCountForAlert,
                 QuantityInStocks = x.QuantityInStock,
                 ShowStockAlerts = x.ShowStockAlerts,
-                VariantCount = x.Variants.Count
+                VariantCount = x.Variants == null ? 0: x.Variants.Count
             };
         }
 

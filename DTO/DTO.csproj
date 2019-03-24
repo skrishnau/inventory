@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Core\Inventory\ProductMapper.cs" />
     <Compile Include="Core\Inventory\VariantMapper.cs" />
+    <Compile Include="Core\Purchases\PurchaseItemMapper.cs" />
+    <Compile Include="Core\Purchases\PurchaseMapper.cs" />
+    <Compile Include="Core\Purchases\PurchaseOrderMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

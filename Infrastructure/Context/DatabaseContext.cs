@@ -46,6 +46,7 @@ namespace Infrastructure.Context
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
+        public virtual DbSet<BasicInfo> BasicInfo { get; set; }
         //  public virtual DbSet<Lead> Lead { get; set; }
 
 
@@ -63,9 +64,10 @@ namespace Infrastructure.Context
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SaleOrder> SaleOrder { get; set; }
 
-        public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
-        public virtual DbSet<BasicInfo> BasicInfo { get; set; }
+        public virtual DbSet<Purchase> Purchase { get; set; }
+        public virtual DbSet<PurchaseItem> PurchaseItem { get; set; }
+
 
 
 

@@ -13,9 +13,9 @@ namespace Infrastructure.Entities.Purchases
         // to which purchase transaction does this item belongs 
         public int PurchaseId { get; set; }
         // the product
-        public int ProductId { get; set; }
+        public int VariantId { get; set; }
         // no of items
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         // implement discount in rate in version 2
         public decimal Rate { get; set; }
         // totalAmount = quantity * rate 
@@ -26,6 +26,6 @@ namespace Infrastructure.Entities.Purchases
         // ================= Table Objects ==================== //
         public virtual Purchase Purchase { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual Variant Variant{ get; set; }
     }
 }

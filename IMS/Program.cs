@@ -70,10 +70,8 @@ namespace IMS
             container.Register<ICustomerService, CustomerService>(Lifestyle.Singleton);
 
             container.Register<IBusinessService, BusinessService>(Lifestyle.Singleton);
-
             container.Register<IUserService, UserService>(Lifestyle.Singleton);
-
-            container.Register<IPurchaseOrderService, PurchaseOrderService>(Lifestyle.Singleton);
+            container.Register<IPurchaseService, PurchaseService>(Lifestyle.Singleton);
 
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //
@@ -90,11 +88,9 @@ namespace IMS
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);
+
+            container.Register<PurchaseListUC>(Lifestyle.Scoped);
             
-
-
-
-
             // Optionally verify the container.
             container.Verify();
         }

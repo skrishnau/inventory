@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Entities.Inventory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace Infrastructure.Entities.Purchases
         public DateTime? DeletedAt { get; set; }
 
         //============= table objects ===============//
-
         public virtual Suppliers.Supplier Supplier { get; set; }
+        public virtual ICollection<PurchaseItem> PurchaseItems { get; set; }
     }
 }

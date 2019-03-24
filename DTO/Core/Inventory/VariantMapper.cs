@@ -28,5 +28,22 @@ namespace DTO.Core.Inventory
                 
             };
         }
+
+        public static VariantModel MapToVariantModel(Variant variant)
+        {
+            return new VariantModel()
+            {
+                Id = variant.Id,
+                LatestUnitCostPrice = variant.LatestUnitCostPrice,
+                LatestUnitSellPrice = variant.LatestUnitSellPrice,
+                MinStockCountForAlert = variant.MinStockCountForAlert,
+                OptionIds = variant.VariantOptions.Select(x=>x.OptionId).ToList(),
+                ProductId = variant.ProductId,
+                QuantityInStock = variant.QuantityInStock,
+                ShowStockAlerts = variant.ShowStockAlerts,
+                SKU = variant.SKU,
+                
+            };
+        }
     }
 }

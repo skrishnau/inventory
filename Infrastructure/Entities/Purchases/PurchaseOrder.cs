@@ -30,7 +30,7 @@ namespace Infrastructure.Entities.Purchases
         public DateTime? ClosedOn{ get; set; }
 
         // ========= User information ======== //
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
         public int? RequestedById { get; set; }
         public int? ApprovedById { get; set; }
 

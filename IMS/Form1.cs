@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using IMS.Forms.Suppliers;
 using IMS.Forms.Business;
 using IMS.Forms.Users;
+using SimpleInjector.Lifestyles;
 
 namespace IMS
 {
@@ -29,7 +30,7 @@ namespace IMS
         private void InitializeEvents()
         {
             btnProducts.Click += BtnProducts_Click;
-            btnSupplier.Click += btnSupplier_Click; 
+            btnSupplier.Click += btnSupplier_Click;
             btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
         }
 
@@ -44,8 +45,11 @@ namespace IMS
 
         private void BtnPurchaseOrder_Click(object sender, EventArgs e)
         {
-            var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderForm>();//new PurchaseOrderForm();
-            purchaseOrderForm.ShowDialog();
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderForm>();//new PurchaseOrderForm();
+                purchaseOrderForm.ShowDialog();
+            }
         }
 
         private void btnSupplier_Click(object sender, EventArgs e)
@@ -78,6 +82,14 @@ namespace IMS
             pnlBody.Controls.Clear();
             userUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(userUC);
+        }
+
+        private void btnPurchases_Click(object sender, EventArgs e)
+        {
+            var purchaseListUC = Program.container.GetInstance<PurchaseListUC>();
+            pnlBody.Controls.Clear();
+            purchaseListUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(purchaseListUC);
         }
     }
 }

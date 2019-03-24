@@ -356,6 +356,16 @@ namespace Service.Core.Inventory
             _context.Variant.Add(VariantMapper.MapToEntityForAdd(variantModel));
             _context.SaveChanges();
         }
+
+        public VariantModel GetVariantById(string sku)
+        {
+            var variant = _context.Variant.FirstOrDefault(x => x.SKU == sku);
+            if (variant == null)
+                return null;
+            return VariantMapper.MapToVariantModel(variant);
+        }
+
+
     }
 }
 

@@ -123,6 +123,14 @@
     <Compile Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.Designer.cs">
       <DependentUpon>201903091709521_Variant_and_VariantOption_tables_added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.cs" />
+    <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.Designer.cs">
+      <DependentUpon>201903201321288_PurchaseTableUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903201418034_ColumnTypeChanges.cs" />
+    <Compile Include="Migrations\201903201418034_ColumnTypeChanges.Designer.cs">
+      <DependentUpon>201903201418034_ColumnTypeChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,6 +172,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903091709521_Variant_and_VariantOption_tables_added.resx">
       <DependentUpon>201903091709521_Variant_and_VariantOption_tables_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903201321288_PurchaseTableUpdated.resx">
+      <DependentUpon>201903201321288_PurchaseTableUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903201418034_ColumnTypeChanges.resx">
+      <DependentUpon>201903201418034_ColumnTypeChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
