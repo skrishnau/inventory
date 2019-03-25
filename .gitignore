@@ -261,4 +261,7 @@ __pycache__/
 *.pyc
 
 # Ignore AppConfig files
-App.config
+[Aa]pp.config
+
+#Ignore Migrations folder
+[Ii]nfrastructure/[Mm]igrations
