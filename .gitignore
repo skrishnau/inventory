@@ -264,4 +264,5 @@ __pycache__/
 [Aa]pp.config
 
 #Ignore Migrations folder
-[Ii]nfrastructure/[Mm]igrations
+#dont do this or there will be conflicts in csproj
+#[Ii]nfrastructure/[Mm]igrations 
