@@ -15,6 +15,7 @@ using IMS.Forms.Business;
 using IMS.Forms.Users;
 using IMS.Forms.Sales;
 using SimpleInjector.Lifestyles;
+using IMS.Forms.Settings;
 
 namespace IMS
 {
@@ -106,6 +107,13 @@ namespace IMS
             pnlBody.Controls.Clear();
             saleUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(saleUC);
+        }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            var settingsForm = Program.container.GetInstance<SettingsForm>();
+            settingsForm.ShowDialog();
+
         }
     }
 }

@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Settings\AppSettingModel.cs" />
     <Compile Include="Core\Bills\BillFormatModel.cs" />
     <Compile Include="Core\Bills\BillGenerationModel.cs" />
     <Compile Include="Core\Business\BranchModel.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Core\Inventory\VariantModel.cs" />
     <Compile Include="Core\Sales\SaleItemModel.cs" />
     <Compile Include="Core\Purchases\PurchaseItemModel.cs" />
+    <Compile Include="Core\Settings\BillSettingsModel.cs" />
     <Compile Include="Core\Suppliers\SupplierModel.cs" />
     <Compile Include="Core\Users\BasicInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

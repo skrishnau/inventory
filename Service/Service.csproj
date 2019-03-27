@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Settings\AppSettingService.cs" />
+    <Compile Include="Core\Settings\IAppSettingService.cs" />
     <Compile Include="Core\Bills\Formats\BillFormatService.cs" />
     <Compile Include="Core\Bills\Formats\IBillFormatService.cs" />
     <Compile Include="Core\Bills\Generation\BillGenerationService.cs" />
