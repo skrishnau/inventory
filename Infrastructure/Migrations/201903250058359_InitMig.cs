@@ -3,7 +3,7 @@ namespace Infrastructure.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMig : DbMigration
+    public partial class InitMig : DbMigration
     {
         public override void Up()
         {
@@ -236,6 +236,24 @@ namespace Infrastructure.Migrations
                 .Index(t => t.SupplierId);
             
             CreateTable(
+                "dbo.PurchaseItems",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PurchaseId = c.Int(nullable: false),
+                        VariantId = c.Int(nullable: false),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Rate = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DeletedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Purchases", t => t.PurchaseId)
+                .ForeignKey("dbo.Variants", t => t.VariantId)
+                .Index(t => t.PurchaseId)
+                .Index(t => t.VariantId);
+            
+            CreateTable(
                 "dbo.PurchaseOrders",
                 c => new
                     {
@@ -249,7 +267,7 @@ namespace Infrastructure.Migrations
                         PromisedDate = c.DateTime(),
                         ReceivedDate = c.DateTime(),
                         ClosedOn = c.DateTime(),
-                        CreatedById = c.Int(nullable: false),
+                        CreatedById = c.Int(),
                         RequestedById = c.Int(),
                         ApprovedById = c.Int(),
                         Note = c.String(),
@@ -350,6 +368,8 @@ namespace Infrastructure.Migrations
             DropForeignKey("dbo.PurchaseOrders", "ApprovedById", "dbo.Users");
             DropForeignKey("dbo.Users", "BasicInfoId", "dbo.BasicInfoes");
             DropForeignKey("dbo.Purchases", "SupplierId", "dbo.Suppliers");
+            DropForeignKey("dbo.PurchaseItems", "VariantId", "dbo.Variants");
+            DropForeignKey("dbo.PurchaseItems", "PurchaseId", "dbo.Purchases");
             DropForeignKey("dbo.Counters", "BranchId", "dbo.Branches");
             DropForeignKey("dbo.VariantOptions", "VariantId", "dbo.Variants");
             DropForeignKey("dbo.VariantOptions", "OptionId", "dbo.Options");
@@ -372,6 +392,8 @@ namespace Infrastructure.Migrations
             DropIndex("dbo.PurchaseOrders", new[] { "WarehouseId" });
             DropIndex("dbo.PurchaseOrders", new[] { "SupplierId" });
             DropIndex("dbo.PurchaseOrders", new[] { "PurchaseId" });
+            DropIndex("dbo.PurchaseItems", new[] { "VariantId" });
+            DropIndex("dbo.PurchaseItems", new[] { "PurchaseId" });
             DropIndex("dbo.Purchases", new[] { "SupplierId" });
             DropIndex("dbo.Counters", new[] { "BranchId" });
             DropIndex("dbo.VariantOptions", new[] { "OptionId" });
@@ -390,6 +412,7 @@ namespace Infrastructure.Migrations
             DropTable("dbo.SaleItems");
             DropTable("dbo.Users");
             DropTable("dbo.PurchaseOrders");
+            DropTable("dbo.PurchaseItems");
             DropTable("dbo.Purchases");
             DropTable("dbo.Counters");
             DropTable("dbo.VariantOptions");

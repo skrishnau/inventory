@@ -380,7 +380,7 @@ namespace Service.Core.Inventory
             var sss = _context.Variant.FirstOrDefault(x => x.SKU == sku);
             if (sss == null)
                 return null;
-            return DTO.Core.Inventory.VariantMapper.MapToVariatModel(sss);
+            return DTO.Core.Inventory.VariantMapper.MapToVariantModel(sss);
         }
 
 

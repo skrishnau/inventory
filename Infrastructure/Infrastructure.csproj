@@ -83,17 +83,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201903241508030_InitialMig.cs" />
-    <Compile Include="Migrations\201903241508030_InitialMig.Designer.cs">
-      <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.cs" />
-    <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.Designer.cs">
-      <DependentUpon>201903201321288_PurchaseTableUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903201418034_ColumnTypeChanges.cs" />
-    <Compile Include="Migrations\201903201418034_ColumnTypeChanges.Designer.cs">
-      <DependentUpon>201903201418034_ColumnTypeChanges.cs</DependentUpon>
+    <Compile Include="Migrations\201903250058359_InitMig.cs" />
+    <Compile Include="Migrations\201903250058359_InitMig.Designer.cs">
+      <DependentUpon>201903250058359_InitMig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,14 +101,8 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903241508030_InitialMig.resx">
-      <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903201321288_PurchaseTableUpdated.resx">
-      <DependentUpon>201903201321288_PurchaseTableUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903201418034_ColumnTypeChanges.resx">
-      <DependentUpon>201903201418034_ColumnTypeChanges.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903250058359_InitMig.resx">
+      <DependentUpon>201903250058359_InitMig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

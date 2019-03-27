@@ -7,13 +7,13 @@ namespace Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PurchaseTableUpdated : IMigrationMetadata
+    public sealed partial class InitMig : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PurchaseTableUpdated));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitMig));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903201321288_PurchaseTableUpdated"; }
+            get { return "201903250058359_InitMig"; }
         }
         
         string IMigrationMetadata.Source
