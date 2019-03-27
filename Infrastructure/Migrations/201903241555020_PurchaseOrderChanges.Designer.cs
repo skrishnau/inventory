@@ -7,13 +7,13 @@ namespace Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PurchaseTableUpdated : IMigrationMetadata
+    public sealed partial class PurchaseOrderChanges : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PurchaseTableUpdated));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PurchaseOrderChanges));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903201321288_PurchaseTableUpdated"; }
+            get { return "201903241555020_PurchaseOrderChanges"; }
         }
         
         string IMigrationMetadata.Source

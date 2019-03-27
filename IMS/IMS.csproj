@@ -232,6 +232,12 @@
     <Compile Include="Forms\Sales\SaleUC.Designer.cs">
       <DependentUpon>SaleUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Settings\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -360,6 +366,9 @@
     <EmbeddedResource Include="Forms\Sales\SaleUC.resx">
       <DependentUpon>SaleUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers\Create\SupplierCreate.resx">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -416,8 +425,8 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Warehouses\" />
+    <Folder Include="Forms\NewFolder1\" />
     <Folder Include="Forms\Purchases\Direct\" />
-    <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />
   </ItemGroup>
@@ -497,6 +506,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Buy_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Settings_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

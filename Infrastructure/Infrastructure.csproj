@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
+    <Compile Include="Entities\AppSettings\AppSetting.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
@@ -87,13 +88,13 @@
     <Compile Include="Migrations\201903241508030_InitialMig.Designer.cs">
       <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.cs" />
-    <Compile Include="Migrations\201903201321288_PurchaseTableUpdated.Designer.cs">
-      <DependentUpon>201903201321288_PurchaseTableUpdated.cs</DependentUpon>
+    <Compile Include="Migrations\201903241555020_PurchaseOrderChanges.cs" />
+    <Compile Include="Migrations\201903241555020_PurchaseOrderChanges.Designer.cs">
+      <DependentUpon>201903241555020_PurchaseOrderChanges.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903201418034_ColumnTypeChanges.cs" />
-    <Compile Include="Migrations\201903201418034_ColumnTypeChanges.Designer.cs">
-      <DependentUpon>201903201418034_ColumnTypeChanges.cs</DependentUpon>
+    <Compile Include="Migrations\201903261555078_AppSettingsTableAdded.cs" />
+    <Compile Include="Migrations\201903261555078_AppSettingsTableAdded.Designer.cs">
+      <DependentUpon>201903261555078_AppSettingsTableAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,11 +113,11 @@
     <EmbeddedResource Include="Migrations\201903241508030_InitialMig.resx">
       <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903201321288_PurchaseTableUpdated.resx">
-      <DependentUpon>201903201321288_PurchaseTableUpdated.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903241555020_PurchaseOrderChanges.resx">
+      <DependentUpon>201903241555020_PurchaseOrderChanges.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903201418034_ColumnTypeChanges.resx">
-      <DependentUpon>201903201418034_ColumnTypeChanges.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903261555078_AppSettingsTableAdded.resx">
+      <DependentUpon>201903261555078_AppSettingsTableAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

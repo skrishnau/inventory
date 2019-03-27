@@ -3,10 +3,11 @@ namespace Infrastructure.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class PurchaseTableUpdated : DbMigration
+    public partial class PurchaseOrderChanges : DbMigration
     {
         public override void Up()
         {
+            DropIndex("dbo.PurchaseOrders", new[] { "CreatedById" });
             CreateTable(
                 "dbo.PurchaseItems",
                 c => new
@@ -25,15 +26,20 @@ namespace Infrastructure.Migrations
                 .Index(t => t.PurchaseId)
                 .Index(t => t.VariantId);
             
+            AlterColumn("dbo.PurchaseOrders", "CreatedById", c => c.Int());
+            CreateIndex("dbo.PurchaseOrders", "CreatedById");
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.PurchaseItems", "VariantId", "dbo.Variants");
             DropForeignKey("dbo.PurchaseItems", "PurchaseId", "dbo.Purchases");
+            DropIndex("dbo.PurchaseOrders", new[] { "CreatedById" });
             DropIndex("dbo.PurchaseItems", new[] { "VariantId" });
             DropIndex("dbo.PurchaseItems", new[] { "PurchaseId" });
+            AlterColumn("dbo.PurchaseOrders", "CreatedById", c => c.Int(nullable: false));
             DropTable("dbo.PurchaseItems");
+            CreateIndex("dbo.PurchaseOrders", "CreatedById");
         }
     }
 }

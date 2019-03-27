@@ -13,6 +13,7 @@ namespace Infrastructure.Context
     using Infrastructure.Entities.Inventory;
     using System.Data.Entity.ModelConfiguration.Conventions;
     using Infrastructure.Entities.Business;
+    using Infrastructure.Entities.AppSettings;
 
     public class DatabaseContext : DbContext
     {
@@ -68,6 +69,9 @@ namespace Infrastructure.Context
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
         public virtual DbSet<Purchase> Purchase { get; set; }
         public virtual DbSet<PurchaseItem> PurchaseItem { get; set; }
+
+
+        public virtual DbSet<AppSetting> AppSetting { get; set; }
 
 
 

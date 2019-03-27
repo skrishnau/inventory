@@ -44,7 +44,7 @@ namespace IMS.Forms.Inventory.Create
             var attribute = inventoryService.GetDistinctAttributes();
             //var attribute = inventoryService. ;
             cbAttributeName.DataSource = attribute;
-            cbAttributeName.ValueMember = "Id";
+            //cbAttributeName.ValueMember = "Id";
             cbAttributeName.DisplayMember = "Name";
         }
 
