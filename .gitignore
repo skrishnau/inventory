@@ -261,4 +261,8 @@ __pycache__/
 *.pyc
 
 # Ignore AppConfig files
-App.config
+[Aa]pp.config
+
+#Ignore Migrations folder
+#dont do this or there will be conflicts in csproj
+#[Ii]nfrastructure/[Mm]igrations 
