@@ -12,6 +12,7 @@ namespace Infrastructure.Entities.AppSettings
         public string Name { get; set; }
         public string DisplayName { get; set; }
         public string Value { get; set; }
+        public string Group { get; set; }
 
         // time stamps
         public DateTime CreatedAt { get; set; }

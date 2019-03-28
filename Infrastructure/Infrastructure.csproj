@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201903261555078_AppSettingsTableAdded.Designer.cs">
       <DependentUpon>201903261555078_AppSettingsTableAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.cs" />
+    <Compile Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.Designer.cs">
+      <DependentUpon>201903270925045_GroupCOlumnAddedInAppSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903261555078_AppSettingsTableAdded.resx">
       <DependentUpon>201903261555078_AppSettingsTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.resx">
+      <DependentUpon>201903270925045_GroupCOlumnAddedInAppSetting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

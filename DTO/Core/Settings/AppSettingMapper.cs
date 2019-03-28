@@ -18,7 +18,8 @@ namespace DTO.Core.Settings
                 DisplayName = model.DisplayName,
                 Id = model.Id,
                 Name = model.Name,
-                Value = model.Value
+                Value = model.Value,
+                Group = model.Group
             };
 
         }
@@ -30,7 +31,8 @@ namespace DTO.Core.Settings
                 DisplayName = setting.DisplayName,
                 Id = setting.Id,
                 Name = setting.Name,
-                Value = setting.Value
+                Value = setting.Value,
+                Group = setting.Group
             };
         }
     }

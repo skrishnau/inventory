@@ -25,7 +25,13 @@ namespace Service.Core.Settings
         /// </summary>
         BillSettingsModel GetBillSettings();
 
+        CompanyInfoSettingModel GetCompanyInfoSetting();
+
         void AddOrUpdateAppSetting();
+
+        bool SaveBillSetting(BillSettingsModel model);
+
+        bool SaveCompanyInfoSetting(CompanyInfoSettingModel model);
 
         
     }
