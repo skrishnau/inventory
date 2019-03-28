@@ -84,17 +84,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201903241508030_InitialMig.cs" />
-    <Compile Include="Migrations\201903241508030_InitialMig.Designer.cs">
-      <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903241555020_PurchaseOrderChanges.cs" />
-    <Compile Include="Migrations\201903241555020_PurchaseOrderChanges.Designer.cs">
-      <DependentUpon>201903241555020_PurchaseOrderChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903261555078_AppSettingsTableAdded.cs" />
-    <Compile Include="Migrations\201903261555078_AppSettingsTableAdded.Designer.cs">
-      <DependentUpon>201903261555078_AppSettingsTableAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201903250058359_InitMig.cs" />
+    <Compile Include="Migrations\201903250058359_InitMig.Designer.cs">
+      <DependentUpon>201903250058359_InitMig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.cs" />
     <Compile Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.Designer.cs">
@@ -114,14 +106,8 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903241508030_InitialMig.resx">
-      <DependentUpon>201903241508030_InitialMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903241555020_PurchaseOrderChanges.resx">
-      <DependentUpon>201903241555020_PurchaseOrderChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903261555078_AppSettingsTableAdded.resx">
-      <DependentUpon>201903261555078_AppSettingsTableAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903250058359_InitMig.resx">
+      <DependentUpon>201903250058359_InitMig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.resx">
       <DependentUpon>201903270925045_GroupCOlumnAddedInAppSetting.cs</DependentUpon>

@@ -107,7 +107,7 @@
       <Name>Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
-      <Project>{C0D2A3BF-BC39-40AC-BD00-354629BB175E}</Project>
+      <Project>{c0d2a3bf-bc39-40ac-bd00-354629bb175e}</Project>
       <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
