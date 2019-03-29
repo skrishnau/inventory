@@ -155,7 +155,7 @@
             // 
             // btnAddBrand
             // 
-            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddBrand.Location = new System.Drawing.Point(106, 13);
             this.btnAddBrand.Name = "btnAddBrand";
@@ -253,7 +253,7 @@
             // 
             // btnAddCounter
             // 
-            this.btnAddCounter.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddCounter.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAddCounter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddCounter.Location = new System.Drawing.Point(106, 13);
             this.btnAddCounter.Name = "btnAddCounter";
@@ -348,7 +348,7 @@
             // 
             // btnAddWarehouse
             // 
-            this.btnAddWarehouse.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddWarehouse.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAddWarehouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddWarehouse.Location = new System.Drawing.Point(106, 13);
             this.btnAddWarehouse.Name = "btnAddWarehouse";

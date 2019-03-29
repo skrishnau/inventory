@@ -36,10 +36,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(296, 66);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(222, 54);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 29;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -47,10 +46,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(150, 66);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Location = new System.Drawing.Point(112, 54);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 28);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 28;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -59,33 +57,41 @@
             // tbBranchName
             // 
             this.tbBranchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBranchName.Location = new System.Drawing.Point(150, 11);
-            this.tbBranchName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbBranchName.Location = new System.Drawing.Point(112, 9);
+            this.tbBranchName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbBranchName.Name = "tbBranchName";
-            this.tbBranchName.Size = new System.Drawing.Size(245, 24);
+            this.tbBranchName.Size = new System.Drawing.Size(185, 21);
             this.tbBranchName.TabIndex = 27;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 14);
+            this.label2.Location = new System.Drawing.Point(15, 16);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 18);
+            this.label2.Size = new System.Drawing.Size(83, 15);
             this.label2.TabIndex = 26;
             this.label2.Text = "Branch Name";
             // 
             // BranchCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 114);
+            this.ClientSize = new System.Drawing.Size(321, 93);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tbBranchName);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "BranchCreate";
-            this.Text = "BranchCreate";
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Branch Create";
             this.ResumeLayout(false);
             this.PerformLayout();
 

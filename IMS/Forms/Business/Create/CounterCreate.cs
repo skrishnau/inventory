@@ -20,6 +20,13 @@ namespace IMS.Forms.Business.Create
             this.businessService = businessService;
             InitializeComponent();
             PopulateBranchCombo();
+
+            this.Load += CounterCreate_Load;
+        }
+
+        private void CounterCreate_Load(object sender, EventArgs e)
+        {
+            tbName.Focus();
         }
 
         private void PopulateBranchCombo()

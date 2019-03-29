@@ -39,15 +39,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbBranch = new System.Windows.Forms.ComboBox();
             this.cbCanMoveStock = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(165, 170);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(101, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 29;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -55,10 +56,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(20, 170);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Location = new System.Drawing.Point(10, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 28);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 28;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -67,19 +67,20 @@
             // tbLocation
             // 
             this.tbLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLocation.Location = new System.Drawing.Point(122, 2);
-            this.tbLocation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbLocation.Location = new System.Drawing.Point(95, 2);
+            this.tbLocation.Margin = new System.Windows.Forms.Padding(2);
             this.tbLocation.Name = "tbLocation";
-            this.tbLocation.Size = new System.Drawing.Size(219, 24);
+            this.tbLocation.Size = new System.Drawing.Size(165, 21);
             this.tbLocation.TabIndex = 27;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Location = new System.Drawing.Point(2, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 18);
+            this.label2.Size = new System.Drawing.Size(54, 15);
             this.label2.TabIndex = 26;
             this.label2.Text = "Location";
             // 
@@ -96,32 +97,35 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.cbBranch, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbCanMoveStock, 1, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 23);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 5);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(344, 132);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(270, 123);
             this.tableLayoutPanel1.TabIndex = 30;
             // 
             // tbCode
             // 
             this.tbCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCode.Location = new System.Drawing.Point(122, 68);
-            this.tbCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbCode.Location = new System.Drawing.Point(95, 62);
+            this.tbCode.Margin = new System.Windows.Forms.Padding(2);
             this.tbCode.Name = "tbCode";
-            this.tbCode.Size = new System.Drawing.Size(219, 24);
+            this.tbCode.Size = new System.Drawing.Size(165, 21);
             this.tbCode.TabIndex = 31;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 33);
+            this.label1.Location = new System.Drawing.Point(2, 30);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 18);
+            this.label1.Size = new System.Drawing.Size(46, 15);
             this.label1.TabIndex = 27;
             this.label1.Text = "Branch";
             // 
@@ -129,9 +133,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 66);
+            this.label4.Location = new System.Drawing.Point(2, 60);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 18);
+            this.label4.Size = new System.Drawing.Size(36, 15);
             this.label4.TabIndex = 29;
             this.label4.Text = "Code";
             // 
@@ -139,41 +144,61 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 99);
+            this.label3.Location = new System.Drawing.Point(2, 90);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 33);
+            this.label3.Size = new System.Drawing.Size(89, 30);
             this.label3.TabIndex = 28;
             this.label3.Text = "CanMoveStockToBranch";
             // 
             // cbBranch
             // 
             this.cbBranch.FormattingEnabled = true;
-            this.cbBranch.Location = new System.Drawing.Point(122, 36);
+            this.cbBranch.Location = new System.Drawing.Point(95, 32);
+            this.cbBranch.Margin = new System.Windows.Forms.Padding(2);
             this.cbBranch.Name = "cbBranch";
-            this.cbBranch.Size = new System.Drawing.Size(219, 24);
+            this.cbBranch.Size = new System.Drawing.Size(165, 21);
             this.cbBranch.TabIndex = 32;
             // 
             // cbCanMoveStock
             // 
             this.cbCanMoveStock.AutoSize = true;
-            this.cbCanMoveStock.Location = new System.Drawing.Point(122, 102);
+            this.cbCanMoveStock.Location = new System.Drawing.Point(95, 92);
+            this.cbCanMoveStock.Margin = new System.Windows.Forms.Padding(2);
             this.cbCanMoveStock.Name = "cbCanMoveStock";
-            this.cbCanMoveStock.Size = new System.Drawing.Size(18, 17);
+            this.cbCanMoveStock.Size = new System.Drawing.Size(15, 14);
             this.cbCanMoveStock.TabIndex = 33;
             this.cbCanMoveStock.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSave);
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(5, 128);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(270, 34);
+            this.panel1.TabIndex = 31;
+            // 
             // WarehouseCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 205);
+            this.ClientSize = new System.Drawing.Size(280, 167);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "WarehouseCreate";
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WarehouseCreate";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -191,5 +216,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbBranch;
         private System.Windows.Forms.CheckBox cbCanMoveStock;
+        private System.Windows.Forms.Panel panel1;
     }
 }

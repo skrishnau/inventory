@@ -28,15 +28,15 @@ namespace IMS.Forms.Inventory.Create
             InitializeComponent();
             PopulateAttributeNameCombo();
             this.Load += AttributeCreate_Load;
+
             _attributeList = this.inventoryService.GetAttributeList();
             
         }
 
         private void AttributeCreate_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.Manual;
-            var point = new Point(MousePosition.X + 15, MousePosition.Y);
-            this.Location = point;
+           // focus the first element when the form loads
+            cbAttributeName.Focus();
         }
 
         void PopulateAttributeNameCombo()
@@ -53,7 +53,7 @@ namespace IMS.Forms.Inventory.Create
             attributeId = attributeModel.Id;
             tbValue.Text = attributeModel.Value;
             cbAttributeName.Text = attributeModel.Name;
-
+            this.Text = "Edit Attribute";
         }
 
 

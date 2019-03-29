@@ -89,6 +89,18 @@
     <Compile Include="Forms\Business\Create\WarehouseCreate.Designer.cs">
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Display\BodyTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\BodyTemplate.Designer.cs">
+      <DependentUpon>BodyTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Common\Display\SubHeadingTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\SubHeadingTemplate.Designer.cs">
+      <DependentUpon>SubHeadingTemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Common\PopupMessage.cs" />
     <Compile Include="Forms\Common\ComboWithLabelUC.cs">
       <SubType>UserControl</SubType>
@@ -96,23 +108,53 @@
     <Compile Include="Forms\Common\ComboWithLabelUC.Designer.cs">
       <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Customer\Create\CustomerCreate.cs">
+    <Compile Include="Forms\Generals\Branches\BranchListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Generals\Branches\BranchListUC.Designer.cs">
+      <DependentUpon>BranchListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Generals\GeneralMenuBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Generals\GeneralMenuBar.Designer.cs">
+      <DependentUpon>GeneralMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Generals\GeneralUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Generals\GeneralUC.Designer.cs">
+      <DependentUpon>GeneralUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Warehouses\WarehouseListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Warehouses\WarehouseListUC.Designer.cs">
+      <DependentUpon>WarehouseListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\POS\Counters\CounterListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\POS\Counters\CounterListUC.Designer.cs">
+      <DependentUpon>CounterListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\POS\Customers\CustomerCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Customer\Create\CustomerCreate.Designer.cs">
+    <Compile Include="Forms\POS\Customers\CustomerCreate.Designer.cs">
       <DependentUpon>CustomerCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Customer\Create\UC\AddCustomerUC.cs">
+    <Compile Include="Forms\POS\Customers\UC\AddCustomerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Customer\Create\UC\AddCustomerUC.Designer.cs">
+    <Compile Include="Forms\POS\Customers\UC\AddCustomerUC.Designer.cs">
       <DependentUpon>AddCustomerUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Customer\CustomerUC.cs">
+    <Compile Include="Forms\POS\Customers\CustomerListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Customer\CustomerUC.Designer.cs">
-      <DependentUpon>CustomerUC.cs</DependentUpon>
+    <Compile Include="Forms\POS\Customers\CustomerListUC.Designer.cs">
+      <DependentUpon>CustomerListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Common\TextBoxWithDeleteUC.cs">
       <SubType>UserControl</SubType>
@@ -120,11 +162,23 @@
     <Compile Include="Forms\Common\TextBoxWithDeleteUC.Designer.cs">
       <DependentUpon>TextBoxWithDeleteUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Dashboard\DashboardUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Dashboard\DashboardUC.Designer.cs">
+      <DependentUpon>DashboardUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Attributes\AddAttributeValueUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\Attributes\AddAttributeValueUC.Designer.cs">
       <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\AttributeListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Attributes\AttributeListUC.Designer.cs">
+      <DependentUpon>AttributeListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Attributes\OptionChoose.cs">
       <SubType>Form</SubType>
@@ -137,6 +191,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Attributes\OptionViewUC.Designer.cs">
       <DependentUpon>OptionViewUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Brands\BrandListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Brands\BrandListUC.Designer.cs">
+      <DependentUpon>BrandListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Create\AttributeCreate.cs">
       <SubType>Form</SubType>
@@ -162,10 +222,16 @@
     <Compile Include="Forms\Inventory\Create\ProductAttributeCreate.Designer.cs">
       <DependentUpon>ProductAttributeCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Lists\Category\CategoryEditControlPanel.cs">
+    <Compile Include="Forms\Inventory\InventoryMenuBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Lists\Category\CategoryEditControlPanel.Designer.cs">
+    <Compile Include="Forms\Inventory\InventoryMenuBar.Designer.cs">
+      <DependentUpon>InventoryMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Categories\CategoryEditControlPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Categories\CategoryEditControlPanel.Designer.cs">
       <DependentUpon>CategoryEditControlPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Create\ProductCreate.cs">
@@ -174,15 +240,21 @@
     <Compile Include="Forms\Inventory\Create\ProductCreate.Designer.cs">
       <DependentUpon>ProductCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Lists\Category\CategoryListUC.cs">
+    <Compile Include="Forms\Inventory\Categories\CategoryListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Lists\Category\CategoryListUC.Designer.cs">
+    <Compile Include="Forms\Inventory\Categories\CategoryListUC.Designer.cs">
       <DependentUpon>CategoryListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Lists\Category\TreeNodeCategory.cs" />
-    <Compile Include="Forms\Inventory\Lists\Category\TreeViewCategory.cs">
+    <Compile Include="Forms\Inventory\Categories\TreeNodeCategory.cs" />
+    <Compile Include="Forms\Inventory\Categories\TreeViewCategory.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductListUC.Designer.cs">
+      <DependentUpon>ProductListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Products\ProductOptionUC.cs">
       <SubType>Form</SubType>
@@ -196,40 +268,52 @@
     <Compile Include="Forms\Inventory\Variants\VariantEditForm.Designer.cs">
       <DependentUpon>VariantEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.cs">
+    <Compile Include="Forms\Inventory\Purchases\Order\PurchaseOrderAddItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.Designer.cs">
+    <Compile Include="Forms\Inventory\Purchases\Order\PurchaseOrderAddItemForm.Designer.cs">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Purchases\PurchaseListUC.cs">
+    <Compile Include="Forms\Inventory\Purchases\PurchaseListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Purchases\PurchaseListUC.Designer.cs">
+    <Compile Include="Forms\Inventory\Purchases\PurchaseListUC.Designer.cs">
       <DependentUpon>PurchaseListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Purchases\PurchaseOrderForm.cs">
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Purchases\PurchaseOrderForm.Designer.cs">
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderForm.Designer.cs">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Sales\DirectSaleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Sales\DirectSaleForm.Designer.cs">
-      <DependentUpon>DirectSaleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Sales\NewItemAddForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Sales\NewItemAddForm.Designer.cs">
-      <DependentUpon>NewItemAddForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Sales\SaleUC.cs">
+    <Compile Include="Forms\POS\PosMenuBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Sales\SaleUC.Designer.cs">
+    <Compile Include="Forms\POS\PosMenuBar.Designer.cs">
+      <DependentUpon>PosMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\POS\PosUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\POS\PosUC.Designer.cs">
+      <DependentUpon>PosUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\POS\Sales\DirectSaleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\POS\Sales\DirectSaleForm.Designer.cs">
+      <DependentUpon>DirectSaleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\POS\Sales\NewItemAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\POS\Sales\NewItemAddForm.Designer.cs">
+      <DependentUpon>NewItemAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\POS\Sales\SaleUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\POS\Sales\SaleUC.Designer.cs">
       <DependentUpon>SaleUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Settings\SettingsForm.cs">
@@ -238,16 +322,16 @@
     <Compile Include="Forms\Settings\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Suppliers\Create\SupplierCreate.cs">
+    <Compile Include="Forms\Inventory\Suppliers\SupplierCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Suppliers\Create\SupplierCreate.Designer.cs">
+    <Compile Include="Forms\Inventory\Suppliers\SupplierCreate.Designer.cs">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.cs">
+    <Compile Include="Forms\Inventory\Suppliers\UC\AddSupplierUC.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Suppliers\Create\UC\AddSupplierUC.Designer.cs">
+    <Compile Include="Forms\Inventory\Suppliers\UC\AddSupplierUC.Designer.cs">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\InventoryUC.cs">
@@ -256,29 +340,47 @@
     <Compile Include="Forms\Inventory\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Suppliers\SupplierUC.cs">
+    <Compile Include="Forms\Inventory\Suppliers\SupplierUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Suppliers\SupplierUC.Designer.cs">
+    <Compile Include="Forms\Inventory\Suppliers\SupplierUC.Designer.cs">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Users\Create\BasicInfoCreate.cs">
+    <Compile Include="Forms\UserManagement\Create\BasicInfoCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Users\Create\BasicInfoCreate.Designer.cs">
+    <Compile Include="Forms\UserManagement\Create\BasicInfoCreate.Designer.cs">
       <DependentUpon>BasicInfoCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Users\Create\UserCreate.cs">
+    <Compile Include="Forms\UserManagement\Create\UserCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Users\Create\UserCreate.Designer.cs">
+    <Compile Include="Forms\UserManagement\Create\UserCreate.Designer.cs">
       <DependentUpon>UserCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Users\UserUC.cs">
+    <Compile Include="Forms\UserManagement\UserManagementMenuBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Users\UserUC.Designer.cs">
-      <DependentUpon>UserUC.cs</DependentUpon>
+    <Compile Include="Forms\UserManagement\UserManagementMenuBar.Designer.cs">
+      <DependentUpon>UserManagementMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserManagement\UserManagementUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserManagement\UserManagementUC.Designer.cs">
+      <DependentUpon>UserManagementUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Dashboard\DashboardMenuBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Dashboard\DashboardMenuBar.Designer.cs">
+      <DependentUpon>DashboardMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserManagement\Users\UserListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserManagement\Users\UserListUC.Designer.cs">
+      <DependentUpon>UserListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -303,29 +405,59 @@
     <EmbeddedResource Include="Forms\Common\ComboWithLabelUC.resx">
       <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customer\Create\CustomerCreate.resx">
+    <EmbeddedResource Include="Forms\Common\Display\BodyTemplate.resx">
+      <DependentUpon>BodyTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Display\SubHeadingTemplate.resx">
+      <DependentUpon>SubHeadingTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Generals\Branches\BranchListUC.resx">
+      <DependentUpon>BranchListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Generals\GeneralMenuBar.resx">
+      <DependentUpon>GeneralMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Generals\GeneralUC.resx">
+      <DependentUpon>GeneralUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseListUC.resx">
+      <DependentUpon>WarehouseListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\POS\Counters\CounterListUC.resx">
+      <DependentUpon>CounterListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\POS\Customers\CustomerCreate.resx">
       <DependentUpon>CustomerCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customer\Create\UC\AddCustomerUC.resx">
+    <EmbeddedResource Include="Forms\POS\Customers\UC\AddCustomerUC.resx">
       <DependentUpon>AddCustomerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customer\CustomerUC.resx">
-      <DependentUpon>CustomerUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\POS\Customers\CustomerListUC.resx">
+      <DependentUpon>CustomerListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\TextBoxWithDeleteUC.resx">
       <DependentUpon>TextBoxWithDeleteUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dashboard\DashboardUC.resx">
+      <DependentUpon>DashboardUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Attributes\AddAttributeValueUC.resx">
       <DependentUpon>AddAttributeValueUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Attributes\AttributeListUC.resx">
+      <DependentUpon>AttributeListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Attributes\OptionChoose.resx">
       <DependentUpon>OptionChoose.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Attributes\OptionViewUC.resx">
       <DependentUpon>OptionViewUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Brands\BrandListUC.resx">
+      <DependentUpon>BrandListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\AttributeCreate.resx">
       <DependentUpon>AttributeCreate.cs</DependentUpon>
@@ -336,11 +468,17 @@
     <EmbeddedResource Include="Forms\Inventory\Create\CategoryCreate.resx">
       <DependentUpon>CategoryCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Lists\Category\CategoryEditControlPanel.resx">
+    <EmbeddedResource Include="Forms\Inventory\InventoryMenuBar.resx">
+      <DependentUpon>InventoryMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Categories\CategoryEditControlPanel.resx">
       <DependentUpon>CategoryEditControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
       <DependentUpon>ProductCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\ProductListUC.resx">
+      <DependentUpon>ProductListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\ProductOptionUC.resx">
       <DependentUpon>ProductOptionUC.cs</DependentUpon>
@@ -348,50 +486,65 @@
     <EmbeddedResource Include="Forms\Inventory\Variants\VariantEditForm.resx">
       <DependentUpon>VariantEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Purchases\Order\PurchaseOrderAddItemForm.resx">
+    <EmbeddedResource Include="Forms\Inventory\Purchases\Order\PurchaseOrderAddItemForm.resx">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Purchases\PurchaseListUC.resx">
+    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseListUC.resx">
       <DependentUpon>PurchaseListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Purchases\PurchaseOrderForm.resx">
+    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderForm.resx">
       <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Sales\DirectSaleForm.resx">
+    <EmbeddedResource Include="Forms\POS\PosMenuBar.resx">
+      <DependentUpon>PosMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\POS\PosUC.resx">
+      <DependentUpon>PosUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\POS\Sales\DirectSaleForm.resx">
       <DependentUpon>DirectSaleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Sales\NewItemAddForm.resx">
+    <EmbeddedResource Include="Forms\POS\Sales\NewItemAddForm.resx">
       <DependentUpon>NewItemAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Sales\SaleUC.resx">
+    <EmbeddedResource Include="Forms\POS\Sales\SaleUC.resx">
       <DependentUpon>SaleUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Suppliers\Create\SupplierCreate.resx">
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierCreate.resx">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Lists\Category\CategoryListUC.resx">
+    <EmbeddedResource Include="Forms\Inventory\Categories\CategoryListUC.resx">
       <DependentUpon>CategoryListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Suppliers\Create\UC\AddSupplierUC.resx">
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\UC\AddSupplierUC.resx">
       <DependentUpon>AddSupplierUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Suppliers\SupplierUC.resx">
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierUC.resx">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Users\Create\BasicInfoCreate.resx">
+    <EmbeddedResource Include="Forms\UserManagement\Create\BasicInfoCreate.resx">
       <DependentUpon>BasicInfoCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Users\Create\UserCreate.resx">
+    <EmbeddedResource Include="Forms\UserManagement\Create\UserCreate.resx">
       <DependentUpon>UserCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Users\UserUC.resx">
-      <DependentUpon>UserUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserManagement\UserManagementMenuBar.resx">
+      <DependentUpon>UserManagementMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserManagement\UserManagementUC.resx">
+      <DependentUpon>UserManagementUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Dashboard\DashboardMenuBar.resx">
+      <DependentUpon>DashboardMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserManagement\Users\UserListUC.resx">
+      <DependentUpon>UserListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -424,11 +577,9 @@
   <ItemGroup>
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
-    <Folder Include="Forms\Inventory\Warehouses\" />
-    <Folder Include="Forms\NewFolder1\" />
-    <Folder Include="Forms\Purchases\Direct\" />
-    <Folder Include="Forms\Shared\" />
+    <Folder Include="Forms\Inventory\Purchases\Direct\" />
     <Folder Include="Master\" />
+    <Folder Include="MenuBars\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
@@ -509,6 +660,90 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Settings_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_Shopping_Cart_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Shopping_Cart_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Clear_Shopping_Cart_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Checkout_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_Shopping_Cart_24px_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Pull_Down_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Drag_List_Up_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Pull_Down_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Drag_List_Up_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Double_Up_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Double_Down_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Edit_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Edit_16px_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_Math_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Remove_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Speed_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Trolley_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_User_Account_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Pointer_24px_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Gear_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Info_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Pie_Chart_26px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Pie_Chart_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Home_Automation_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Information_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_View_More_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Ok_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Error_24px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

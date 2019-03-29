@@ -17,26 +17,26 @@ namespace IMS.Forms.Common
             // default customization
             var titleColor = Color.Black;
             var contentColor = Color.DarkGray;
-            Bitmap image = Properties.Resources.icons8_More_50px;
+            Bitmap image = Properties.Resources.icons8_View_More_24px;
 
             // customization wrt messageType
             if (messageType == PopupMessageType.ERROR)
             {
                 titleColor = Color.Coral;
                 contentColor = Color.Red;
-                image = Properties.Resources.icons8_Error_52px;
+                image = Properties.Resources.icons8_Error_24px;
             }
             else if (messageType == PopupMessageType.INFO)
             {
                 titleColor = Color.BlueViolet;
                 contentColor = Color.DarkBlue;
-                image = Properties.Resources.icons8_Info_52px;
+                image = Properties.Resources.icons8_Info_24px;
             }
             else if(messageType == PopupMessageType.SUCCESS)
             {
                 titleColor = Color.Green;
                 contentColor = Color.DarkGreen;
-                image = Properties.Resources.icons8_Ok_52px;
+                image = Properties.Resources.icons8_Ok_24px;
             }
             popup.Image = image;//Properties.Resources.icons8_Lipstick_48px_3;
             popup.TitleColor = titleColor;

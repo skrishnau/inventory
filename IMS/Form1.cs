@@ -1,21 +1,16 @@
 ﻿using IMS.Forms.Inventory;
 using IMS.Forms.Purchases;
-using IMS.Forms.Customer;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using IMS.Forms.Suppliers;
 using IMS.Forms.Business;
 using IMS.Forms.Users;
-using IMS.Forms.Sales;
-using SimpleInjector.Lifestyles;
 using IMS.Forms.Settings;
+using IMS.Forms.Dashboard;
+using IMS.Forms.Inventory.Suppliers;
+using IMS.Forms.POS;
+using IMS.Forms.POS.Customers;
+using IMS.Forms.Generals;
+using IMS.Forms.UserManagement;
 
 namespace IMS
 {
@@ -26,25 +21,31 @@ namespace IMS
             InitializeComponent();
 
             InitializeEvents();
+            // open dashboard at first initialization
+            DisplayDashboard();
 
         }
 
         private void InitializeEvents()
         {
-            btnProducts.Click += BtnProducts_Click;
-            btnSupplier.Click += btnSupplier_Click;
-            btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
-            btnDirectSale.Click += BtnDirectSale_Click;
+            btnInventory.Click += BtnInventory_Click;
+            btnGeneral.Click += BtnGeneral_Click;
+            btnUserManagement.Click += btnUserManagement_Click;
+
+            //btnSupplier.Click += btnSupplier_Click;
+            //btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
+            //btnDirectSale.Click += BtnDirectSale_Click;
         }
 
-        private void BtnDirectSale_Click(object sender, EventArgs e)
+        private void BtnGeneral_Click(object sender, EventArgs e)
         {
-            var directSaleForm = Program.container.GetInstance<DirectSaleForm>();
-            directSaleForm.ShowDialog();
-
+            pnlBody.Controls.Clear();
+            var productListUC = Program.container.GetInstance<GeneralUC>();//new InventoryUC();
+            productListUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(productListUC);
         }
 
-        private void BtnProducts_Click(object sender, EventArgs e)
+        private void BtnInventory_Click(object sender, EventArgs e)
         {
             pnlBody.Controls.Clear();
             var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
@@ -52,42 +53,48 @@ namespace IMS
             pnlBody.Controls.Add(productListUC);
         }
 
-        private void BtnPurchaseOrder_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderForm>();//new PurchaseOrderForm();
-                purchaseOrderForm.ShowDialog();
-            }
-        }
+        //private void BtnPurchaseOrder_Click(object sender, EventArgs e)
+        //{
+        //    using (AsyncScopedLifestyle.BeginScope(Program.container))
+        //    {
+        //        var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderForm>();//new PurchaseOrderForm();
+        //        purchaseOrderForm.ShowDialog();
+        //    }
+        //}
 
-        private void btnSupplier_Click(object sender, EventArgs e)
-        {
-            pnlBody.Controls.Clear();
-            var supplierListUC = Program.container.GetInstance<SupplierUC>();//new SupplierUC();//
-            supplierListUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(supplierListUC);
-        }
+        //private void BtnDirectSale_Click(object sender, EventArgs e)
+        //{
+        //    var directSaleForm = Program.container.GetInstance<DirectSaleForm>();
+        //    directSaleForm.ShowDialog();
+        //}
 
-        private void btnCustomer_Click(object sender, EventArgs e)
-        {
-            pnlBody.Controls.Clear();
-            var customerListUC = Program.container.GetInstance<CustomerUC>();
-            customerListUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(customerListUC);
-        }
+        //private void btnSupplier_Click(object sender, EventArgs e)
+        //{
+        //    pnlBody.Controls.Clear();
+        //    var supplierListUC = Program.container.GetInstance<SupplierUC>();//new SupplierUC();//
+        //    supplierListUC.Dock = DockStyle.Fill;
+        //    pnlBody.Controls.Add(supplierListUC);
+        //}
 
-        private void btnBusiness_Click(object sender, EventArgs e)
-        {
-            var businessUC = Program.container.GetInstance<BusinessUC>();
-            pnlBody.Controls.Clear();
-            businessUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(businessUC);
-        }
+        //private void btnCustomer_Click(object sender, EventArgs e)
+        //{
+        //    pnlBody.Controls.Clear();
+        //    var customerListUC = Program.container.GetInstance<CustomerUC>();
+        //    customerListUC.Dock = DockStyle.Fill;
+        //    pnlBody.Controls.Add(customerListUC);
+        //}
 
-        private void btnUser_Click(object sender, EventArgs e)
+        //private void btnBusiness_Click(object sender, EventArgs e)
+        //{
+        //    var businessUC = Program.container.GetInstance<BusinessUC>();
+        //    pnlBody.Controls.Clear();
+        //    businessUC.Dock = DockStyle.Fill;
+        //    pnlBody.Controls.Add(businessUC);
+        //}
+
+        private void btnUserManagement_Click(object sender, EventArgs e)
         {
-            var userUC = Program.container.GetInstance<UserUC>();
+            var userUC = Program.container.GetInstance<UserManagementUC>();
             pnlBody.Controls.Clear();
             userUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(userUC);
@@ -103,16 +110,41 @@ namespace IMS
 
         private void btnSales_Click(object sender, EventArgs e)
         {
-            var saleUC = Program.container.GetInstance<SaleUC>();
+            //var saleUC = Program.container.GetInstance<SaleUC>();
+            var posUC = Program.container.GetInstance<PosUC>();
             pnlBody.Controls.Clear();
-            saleUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(saleUC);
+            posUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(posUC);
         }
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
             var settingsForm = Program.container.GetInstance<SettingsForm>();
             settingsForm.ShowDialog();
+
+        }
+
+        private void btnDirectSale_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            DisplayDashboard();
+        }
+
+        private void DisplayDashboard()
+        {
+            // add the body
+            pnlBody.Controls.Clear();
+            var dashBoardUC = Program.container.GetInstance<DashboardUC>();
+            dashBoardUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(dashBoardUC);
+        }
+
+        private void btnSupplier_Click_1(object sender, EventArgs e)
+        {
 
         }
     }

@@ -107,12 +107,6 @@
     <Compile Include="Utility\MessageModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
@@ -124,6 +118,12 @@
     <EmbeddedResource Include="Core\Clients\ClientsListingUC.resx">
       <DependentUpon>ClientsListingUC.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -29,350 +29,197 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDirectSale = new System.Windows.Forms.Button();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.btnPurchaseOrder = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.splitter3 = new System.Windows.Forms.Splitter();
-            this.pnlBody = new System.Windows.Forms.Panel();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
-            this.btnPurchases = new System.Windows.Forms.Button();
-            this.btnSales = new System.Windows.Forms.Button();
-            this.btnUser = new System.Windows.Forms.Button();
-            this.btnBusiness = new System.Windows.Forms.Button();
-            this.btnCustomer = new System.Windows.Forms.Button();
-            this.btnSupplier = new System.Windows.Forms.Button();
-            this.btnProducts = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.btnReport = new System.Windows.Forms.Button();
+            this.btnUserManagement = new System.Windows.Forms.Button();
+            this.btnPOS = new System.Windows.Forms.Button();
+            this.btnInventory = new System.Windows.Forms.Button();
+            this.btnGeneral = new System.Windows.Forms.Button();
+            this.btnDashboard = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlBody = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.DarkSlateGray;
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(3, 792);
+            this.statusStrip1.Location = new System.Drawing.Point(74, 416);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 25, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1490, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(531, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.viewToolStripMenuItem,
-            this.viewToolStripMenuItem1,
-            this.toolsToolStripMenuItem,
-            this.windowToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(11, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1490, 28);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.viewToolStripMenuItem.Text = "Edit";
-            // 
-            // viewToolStripMenuItem1
-            // 
-            this.viewToolStripMenuItem1.Name = "viewToolStripMenuItem1";
-            this.viewToolStripMenuItem1.Size = new System.Drawing.Size(53, 24);
-            this.viewToolStripMenuItem1.Text = "View";
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
-            this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // windowToolStripMenuItem
-            // 
-            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
-            this.windowToolStripMenuItem.Text = "Window";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnDirectSale);
-            this.panel1.Controls.Add(this.splitter1);
-            this.panel1.Controls.Add(this.btnPurchaseOrder);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 28);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1490, 86);
-            this.panel1.TabIndex = 2;
-            // 
-            // btnDirectSale
-            // 
-            this.btnDirectSale.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnDirectSale.Location = new System.Drawing.Point(125, 0);
-            this.btnDirectSale.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.btnDirectSale.Name = "btnDirectSale";
-            this.btnDirectSale.Size = new System.Drawing.Size(161, 86);
-            this.btnDirectSale.TabIndex = 3;
-            this.btnDirectSale.Text = "Direct Sale";
-            this.btnDirectSale.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDirectSale.UseVisualStyleBackColor = true;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.splitter1.Location = new System.Drawing.Point(121, 0);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(4, 86);
-            this.splitter1.TabIndex = 2;
-            this.splitter1.TabStop = false;
-            // 
-            // btnPurchaseOrder
-            // 
-            this.btnPurchaseOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPurchaseOrder.Location = new System.Drawing.Point(0, 0);
-            this.btnPurchaseOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnPurchaseOrder.Name = "btnPurchaseOrder";
-            this.btnPurchaseOrder.Size = new System.Drawing.Size(121, 86);
-            this.btnPurchaseOrder.TabIndex = 1;
-            this.btnPurchaseOrder.Text = "Purchase Order";
-            this.btnPurchaseOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPurchaseOrder.UseVisualStyleBackColor = true;
-            // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel2.BackColor = System.Drawing.Color.LightSlateGray;
+            this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.btnSetting);
-            this.panel2.Controls.Add(this.btnPurchases);
-            this.panel2.Controls.Add(this.btnSales);
-            this.panel2.Controls.Add(this.btnUser);
-            this.panel2.Controls.Add(this.btnBusiness);
-            this.panel2.Controls.Add(this.btnCustomer);
-            this.panel2.Controls.Add(this.btnSupplier);
-            this.panel2.Controls.Add(this.btnProducts);
-            this.panel2.Controls.Add(this.btnHome);
+            this.panel2.Controls.Add(this.btnReport);
+            this.panel2.Controls.Add(this.btnUserManagement);
+            this.panel2.Controls.Add(this.btnPOS);
+            this.panel2.Controls.Add(this.btnInventory);
+            this.panel2.Controls.Add(this.btnGeneral);
+            this.panel2.Controls.Add(this.btnDashboard);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(3, 119);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel2.Location = new System.Drawing.Point(2, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.panel2.Size = new System.Drawing.Size(112, 673);
+            this.panel2.Padding = new System.Windows.Forms.Padding(4);
+            this.panel2.Size = new System.Drawing.Size(72, 438);
             this.panel2.TabIndex = 0;
             // 
-            // splitter2
+            // btnHelp
             // 
-            this.splitter2.Location = new System.Drawing.Point(115, 119);
-            this.splitter2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 673);
-            this.splitter2.TabIndex = 3;
-            this.splitter2.TabStop = false;
-            // 
-            // splitter3
-            // 
-            this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter3.Location = new System.Drawing.Point(3, 114);
-            this.splitter3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(1490, 5);
-            this.splitter3.TabIndex = 4;
-            this.splitter3.TabStop = false;
-            // 
-            // pnlBody
-            // 
-            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(120, 119);
-            this.pnlBody.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(1373, 673);
-            this.pnlBody.TabIndex = 5;
+            this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHelp.Image = global::IMS.Properties.Resources.icons8_Information_24px;
+            this.btnHelp.Location = new System.Drawing.Point(4, 354);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(64, 50);
+            this.btnHelp.TabIndex = 8;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnHelp, "Settings");
+            this.btnHelp.UseVisualStyleBackColor = true;
             // 
             // btnSetting
             // 
-            this.btnSetting.BackgroundImage = global::IMS.Properties.Resources.icons8_Settings_50px;
             this.btnSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSetting.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSetting.Location = new System.Drawing.Point(5, 622);
-            this.btnSetting.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSetting.Image = global::IMS.Properties.Resources.icons8_Gear_24px;
+            this.btnSetting.Location = new System.Drawing.Point(4, 304);
             this.btnSetting.Name = "btnSetting";
-            this.btnSetting.Size = new System.Drawing.Size(102, 75);
+            this.btnSetting.Size = new System.Drawing.Size(64, 50);
             this.btnSetting.TabIndex = 7;
+            this.btnSetting.Text = "Settings";
+            this.btnSetting.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnSetting, "Settings");
             this.btnSetting.UseVisualStyleBackColor = true;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
-            // btnPurchases
+            // btnReport
             // 
-            this.btnPurchases.BackgroundImage = global::IMS.Properties.Resources.icons8_Buy_48px;
-            this.btnPurchases.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPurchases.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPurchases.Location = new System.Drawing.Point(5, 547);
-            this.btnPurchases.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPurchases.Name = "btnPurchases";
-            this.btnPurchases.Size = new System.Drawing.Size(102, 75);
-            this.btnPurchases.TabIndex = 6;
-            this.btnPurchases.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnPurchases, "Purchases");
-            this.btnPurchases.UseVisualStyleBackColor = true;
-            this.btnPurchases.Click += new System.EventHandler(this.btnPurchases_Click);
+            this.btnReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnReport.Image = global::IMS.Properties.Resources.icons8_Pie_Chart_24px;
+            this.btnReport.Location = new System.Drawing.Point(4, 254);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(64, 50);
+            this.btnReport.TabIndex = 9;
+            this.btnReport.Text = "Reports";
+            this.btnReport.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnReport, "User");
+            this.btnReport.UseVisualStyleBackColor = true;
             // 
-            // btnSales
+            // btnUserManagement
             // 
-            this.btnSales.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSales.BackgroundImage")));
-            this.btnSales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSales.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSales.Location = new System.Drawing.Point(5, 455);
-            this.btnSales.Margin = new System.Windows.Forms.Padding(5);
-            this.btnSales.Name = "btnSales";
-            this.btnSales.Size = new System.Drawing.Size(102, 92);
-            this.btnSales.TabIndex = 6;
-            this.btnSales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnSales, "User");
-            this.btnSales.UseVisualStyleBackColor = true;
-            this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
+            this.btnUserManagement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnUserManagement.Image = global::IMS.Properties.Resources.icons8_User_Account_24px;
+            this.btnUserManagement.Location = new System.Drawing.Point(4, 204);
+            this.btnUserManagement.Name = "btnUserManagement";
+            this.btnUserManagement.Size = new System.Drawing.Size(64, 50);
+            this.btnUserManagement.TabIndex = 5;
+            this.btnUserManagement.Text = "Users";
+            this.btnUserManagement.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnUserManagement, "User Management");
+            this.btnUserManagement.UseVisualStyleBackColor = true;
             // 
-            // btnUser
+            // btnPOS
             // 
-            this.btnUser.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUser.BackgroundImage")));
-            this.btnUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnUser.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUser.Location = new System.Drawing.Point(5, 380);
-            this.btnUser.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUser.Name = "btnUser";
-            this.btnUser.Size = new System.Drawing.Size(102, 75);
-            this.btnUser.TabIndex = 5;
-            this.btnUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnUser, "User");
-            this.btnUser.UseVisualStyleBackColor = true;
-            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
+            this.btnPOS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnPOS.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPOS.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
+            this.btnPOS.Location = new System.Drawing.Point(4, 154);
+            this.btnPOS.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPOS.Name = "btnPOS";
+            this.btnPOS.Size = new System.Drawing.Size(64, 50);
+            this.btnPOS.TabIndex = 6;
+            this.btnPOS.Text = "POS";
+            this.btnPOS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPOS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnPOS, "Point of Sale");
+            this.btnPOS.UseVisualStyleBackColor = true;
+            this.btnPOS.Click += new System.EventHandler(this.btnSales_Click);
             // 
-            // btnBusiness
+            // btnInventory
             // 
-            this.btnBusiness.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBusiness.BackgroundImage")));
-            this.btnBusiness.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnBusiness.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnBusiness.Location = new System.Drawing.Point(5, 305);
-            this.btnBusiness.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBusiness.Name = "btnBusiness";
-            this.btnBusiness.Size = new System.Drawing.Size(102, 75);
-            this.btnBusiness.TabIndex = 4;
-            this.btnBusiness.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnBusiness, "Business");
-            this.btnBusiness.UseVisualStyleBackColor = true;
-            this.btnBusiness.Click += new System.EventHandler(this.btnBusiness_Click);
+            this.btnInventory.AutoSize = true;
+            this.btnInventory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnInventory.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnInventory.Image = global::IMS.Properties.Resources.icons8_Trolley_24px;
+            this.btnInventory.Location = new System.Drawing.Point(4, 104);
+            this.btnInventory.Name = "btnInventory";
+            this.btnInventory.Size = new System.Drawing.Size(64, 50);
+            this.btnInventory.TabIndex = 0;
+            this.btnInventory.Text = "Inventory";
+            this.btnInventory.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnInventory, "Inventory");
+            this.btnInventory.UseVisualStyleBackColor = true;
             // 
-            // btnCustomer
+            // btnGeneral
             // 
-            this.btnCustomer.BackgroundImage = global::IMS.Properties.Resources.icons8_User_50px;
-            this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCustomer.Location = new System.Drawing.Point(5, 230);
-            this.btnCustomer.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(102, 75);
-            this.btnCustomer.TabIndex = 3;
-            this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnCustomer, "Customer");
-            this.btnCustomer.UseVisualStyleBackColor = true;
-            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
+            this.btnGeneral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnGeneral.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnGeneral.Image = global::IMS.Properties.Resources.icons8_Home_Automation_24px;
+            this.btnGeneral.Location = new System.Drawing.Point(4, 54);
+            this.btnGeneral.Name = "btnGeneral";
+            this.btnGeneral.Size = new System.Drawing.Size(64, 50);
+            this.btnGeneral.TabIndex = 10;
+            this.btnGeneral.Text = "General";
+            this.btnGeneral.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnGeneral.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnGeneral, "Settings");
+            this.btnGeneral.UseVisualStyleBackColor = true;
             // 
-            // btnSupplier
+            // btnDashboard
             // 
-            this.btnSupplier.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSupplier.BackgroundImage")));
-            this.btnSupplier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSupplier.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSupplier.Location = new System.Drawing.Point(5, 155);
-            this.btnSupplier.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSupplier.Name = "btnSupplier";
-            this.btnSupplier.Size = new System.Drawing.Size(102, 75);
-            this.btnSupplier.TabIndex = 2;
-            this.btnSupplier.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnSupplier, "Supplier");
-            this.btnSupplier.UseVisualStyleBackColor = true;
-            this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
+            this.btnDashboard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnDashboard.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDashboard.Image = global::IMS.Properties.Resources.icons8_Speed_24px;
+            this.btnDashboard.Location = new System.Drawing.Point(4, 4);
+            this.btnDashboard.Name = "btnDashboard";
+            this.btnDashboard.Size = new System.Drawing.Size(64, 50);
+            this.btnDashboard.TabIndex = 1;
+            this.btnDashboard.Text = "Dashboard";
+            this.btnDashboard.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnDashboard, "Dashboard");
+            this.btnDashboard.UseVisualStyleBackColor = true;
+            this.btnDashboard.Click += new System.EventHandler(this.btnHome_Click);
             // 
-            // btnProducts
+            // pnlBody
             // 
-            this.btnProducts.AutoSize = true;
-            this.btnProducts.BackgroundImage = global::IMS.Properties.Resources.icons8_Commodity_50px;
-            this.btnProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnProducts.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnProducts.Location = new System.Drawing.Point(5, 80);
-            this.btnProducts.Margin = new System.Windows.Forms.Padding(4);
-            this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(102, 75);
-            this.btnProducts.TabIndex = 0;
-            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnProducts, "Inventory");
-            this.btnProducts.UseVisualStyleBackColor = true;
-            // 
-            // btnHome
-            // 
-            this.btnHome.BackgroundImage = global::IMS.Properties.Resources.icons8_Home_40px;
-            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnHome.Location = new System.Drawing.Point(5, 5);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(4);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(102, 75);
-            this.btnHome.TabIndex = 1;
-            this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnHome, "Home");
-            this.btnHome.UseVisualStyleBackColor = true;
+            this.pnlBody.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBody.Location = new System.Drawing.Point(74, 0);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(531, 416);
+            this.pnlBody.TabIndex = 5;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1496, 814);
+            this.ClientSize = new System.Drawing.Size(607, 438);
             this.Controls.Add(this.pnlBody);
-            this.Controls.Add(this.splitter2);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.splitter3);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Controls.Add(this.panel2);
             this.Name = "Form1";
-            this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.Text = "Form1";
+            this.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Text = "IMS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -383,31 +230,17 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Button btnPurchaseOrder;
-        private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Panel pnlBody;
-        private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.Button btnSupplier;
-        private System.Windows.Forms.Button btnCustomer;
-        private System.Windows.Forms.Button btnBusiness;
-        private System.Windows.Forms.Button btnUser;
-        private System.Windows.Forms.Button btnProducts;
-        private System.Windows.Forms.Button btnDirectSale;
-        private System.Windows.Forms.Button btnSales;
-        private System.Windows.Forms.Button btnPurchases;
+        private System.Windows.Forms.Button btnDashboard;
+        private System.Windows.Forms.Button btnUserManagement;
+        private System.Windows.Forms.Button btnInventory;
+        private System.Windows.Forms.Button btnPOS;
         private System.Windows.Forms.Button btnSetting;
+        private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Button btnGeneral;
     }
 }
 

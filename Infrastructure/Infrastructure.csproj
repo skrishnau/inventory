@@ -84,9 +84,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201903250058359_InitMig.cs" />
-    <Compile Include="Migrations\201903250058359_InitMig.Designer.cs">
-      <DependentUpon>201903250058359_InitMig.cs</DependentUpon>
+    <Compile Include="Migrations\201903270954581_InitMig.cs" />
+    <Compile Include="Migrations\201903270954581_InitMig.Designer.cs">
+      <DependentUpon>201903270954581_InitMig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,8 +102,8 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903250058359_InitMig.resx">
-      <DependentUpon>201903250058359_InitMig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903270954581_InitMig.resx">
+      <DependentUpon>201903270954581_InitMig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

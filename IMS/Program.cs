@@ -1,19 +1,13 @@
 ﻿using IMS.Forms.Inventory.Create;
 using IMS.Forms.Inventory;
-using IMS.Forms.Customer;
 using Infrastructure.Context;
 using Service.Core.Inventory;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using IMS.Forms.Inventory.Lists;
-using IMS.Forms.Inventory.Lists.Category;
+using IMS.Forms.Inventory.Categories;
 using IMS.Forms.Purchases;
-using IMS.Forms.Suppliers;
 using Service.Core.LDAP;
 using Service.Core.Suppliers;
 using Service.Core.Customers;
@@ -27,6 +21,19 @@ using IMS.Forms.Sales;
 using Service.Core.Sales;
 using IMS.Forms.Settings;
 using Service.Core.Settings;
+using IMS.Forms.Dashboard;
+using IMS.Forms.Inventory.Attributes;
+using IMS.Forms.Inventory.Products;
+using IMS.Forms.Inventory.Suppliers;
+using IMS.Forms.POS;
+using IMS.Forms.POS.Customers;
+using IMS.Forms.Inventory.Warehouses;
+using IMS.Forms.POS.Counters;
+using IMS.Forms.Generals;
+using IMS.Forms.Generals.Branches;
+using IMS.Forms.Business.Create;
+using IMS.Forms.UserManagement;
+using IMS.Forms.UserManagement.Users;
 
 namespace IMS
 {
@@ -84,29 +91,53 @@ namespace IMS
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //
             container.Register<Form1>(Lifestyle.Scoped);
-            // --- inventory related --- //
-            container.Register<BrandCreate>(Lifestyle.Scoped);
-            container.Register<CategoryCreate>(Lifestyle.Scoped);
-            container.Register<ProductCreate>(Lifestyle.Scoped);
+
+            // ======================= Modules registration ====================== //
+            container.Register<GeneralUC>(Lifestyle.Scoped);
+            container.Register<GeneralMenuBar>(Lifestyle.Scoped);
+
+            container.Register<DashboardUC>(Lifestyle.Scoped);
+            container.Register<DashboardMenuBar>(Lifestyle.Scoped);
+
             container.Register<InventoryUC>(Lifestyle.Scoped);
-            container.Register<SupplierUC>(Lifestyle.Scoped);
+            container.Register<InventoryMenuBar>(Lifestyle.Scoped);
+
+            container.Register<PosUC>(Lifestyle.Scoped);
+            container.Register<PosMenuBar>(Lifestyle.Scoped);
+
+            container.Register<UserManagementUC>(Lifestyle.Scoped);
+            container.Register<UserManagementMenuBar>(Lifestyle.Scoped);
+
+            // --- General Related --- //
+            container.Register<ProductListUC>(Lifestyle.Scoped);
+            container.Register<ProductCreate>(Lifestyle.Scoped);
             container.Register<CategoryListUC>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderForm>(Lifestyle.Scoped);
-            container.Register<CustomerUC>(Lifestyle.Scoped);
-            container.Register<BusinessUC>(Lifestyle.Scoped);
-            container.Register<UserUC>(Lifestyle.Scoped);
-            container.Register<UserCreate>(Lifestyle.Scoped);
+            container.Register<CategoryCreate>(Lifestyle.Scoped);
+            container.Register<AttributeListUC>(Lifestyle.Scoped);
+            container.Register<BranchListUC>(Lifestyle.Scoped);
+            container.Register<BranchCreate>(Lifestyle.Scoped);
+
+            // --- inventory related --- //
+            container.Register<PurchaseListUC>(Lifestyle.Scoped);
+            container.Register<WarehouseListUC>(Lifestyle.Scoped);
+
+            // --- POS related --- //
+            container.Register<CounterListUC>(Lifestyle.Scoped);
             container.Register<DirectSaleForm>(Lifestyle.Scoped);
+
+            // --- User Related --- //
+            container.Register<UserListUC>(Lifestyle.Scoped);
+
+            container.Register<BrandCreate>(Lifestyle.Scoped);
+            container.Register<SupplierUC>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderForm>(Lifestyle.Scoped);
+            container.Register<CustomerListUC>(Lifestyle.Scoped);
+            container.Register<BusinessUC>(Lifestyle.Scoped);
+            container.Register<UserCreate>(Lifestyle.Scoped);
             container.Register<NewItemAddForm>(Lifestyle.Scoped);
             container.Register<SaleUC>(Lifestyle.Scoped);
             container.Register<SettingsForm>(Lifestyle.Scoped);
-            
 
-
-
-
-
-            container.Register<PurchaseListUC>(Lifestyle.Scoped);
             
             // Optionally verify the container.
             container.Verify();

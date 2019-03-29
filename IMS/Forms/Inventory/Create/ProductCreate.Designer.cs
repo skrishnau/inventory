@@ -557,7 +557,7 @@
             // 
             // btnAddBrand
             // 
-            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddBrand.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnAddBrand.Location = new System.Drawing.Point(5, 4);
@@ -570,7 +570,7 @@
             // 
             // btnAttributeAdd
             // 
-            this.btnAttributeAdd.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAttributeAdd.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAttributeAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAttributeAdd.Location = new System.Drawing.Point(7, 5);
             this.btnAttributeAdd.Margin = new System.Windows.Forms.Padding(4);
