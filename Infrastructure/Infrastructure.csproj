@@ -55,10 +55,9 @@
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
-    <Compile Include="Entities\Inventory\Option.cs" />
-    <Compile Include="Entities\Inventory\ProductOption.cs" />
+    <Compile Include="Entities\Inventory\ProductAttribute.cs" />
     <Compile Include="Entities\Inventory\Variant.cs" />
-    <Compile Include="Entities\Inventory\VariantOption.cs" />
+    <Compile Include="Entities\Inventory\VariantAttribute.cs" />
     <Compile Include="Entities\Purchases\PurchaseItem.cs" />
     <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />

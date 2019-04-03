@@ -73,9 +73,10 @@ namespace IMS.Forms.Inventory.Create
 
         private void CategoryCreate_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.Manual;
-            var point = new Point(MousePosition.X + 15, MousePosition.Y);
-            this.Location = point;
+            //this.StartPosition = FormStartPosition.Manual;
+            //var point = new Point(MousePosition.X + 15, MousePosition.Y);
+            //this.Location = point;
+            tbCategory.Focus();
         }
 
         private void BtnSave_Click(object sender, EventArgs e)

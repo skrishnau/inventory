@@ -18,13 +18,12 @@ namespace DTO.Core.Inventory
                 //LatestUnitCostPrice = model.LatestUnitCostPrice,
                 MinStockCountForAlert = model.MinStockCountForAlert,
                 ProductId = model.ProductId,
-                ShowStockAlerts = model.ShowStockAlerts,
+                Alert = model.ShowStockAlerts,
                 SKU = model.SKU,
-                VariantOptions = model.OptionIds.Select(x=> new VariantOption
-                {
-                    OptionId = x,
-                    
-                }).ToList(),
+                //VariantAttributes = model.OptionIds.Select(x=> new VariantAttribute
+                //{
+                //    OptionId = x,
+                //}).ToList(),
                 
             };
         }
@@ -37,10 +36,10 @@ namespace DTO.Core.Inventory
                 LatestUnitCostPrice = variant.LatestUnitCostPrice,
                 LatestUnitSellPrice = variant.LatestUnitSellPrice,
                 MinStockCountForAlert = variant.MinStockCountForAlert,
-                OptionIds = variant.VariantOptions.Select(x=>x.OptionId).ToList(),
+                //OptionIds = variant.VariantAttributes.Select(x=>x.OptionId).ToList(),
                 ProductId = variant.ProductId,
                 QuantityInStock = variant.QuantityInStock,
-                ShowStockAlerts = variant.ShowStockAlerts,
+                ShowStockAlerts = variant.Alert,
                 SKU = variant.SKU,
                 
             };

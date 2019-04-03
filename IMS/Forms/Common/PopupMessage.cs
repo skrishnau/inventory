@@ -10,37 +10,16 @@ namespace IMS.Forms.Common
 {
     public class PopupMessage
     {
-        // By Rajkumar:
-        public static void FancyPopupMessage(string title, string message, PopupMessageType popupMessageType, PopUpLocation popUpLocation)
+        public static void ShowSaveSuccessMessage()
         {
-            PopupNotifier notifier = new PopupNotifier();
-            
-
-            switch (popupMessageType)
-            {
-                case PopupMessageType.ERROR:
-                    notifier.BodyColor = Color.Red;
-                    notifier.ContentColor = Color.White;
-                    
-                    break;
-                default:
-
-                    break;
-            }
+            ShowPopupMessage("Success!", "Saved successfully.", PopupMessageType.SUCCESS);
         }
 
-        internal void SetLocation(PopUpLocation popUpLocation)
+        public static void ShowMissingInputsMessage()
         {
-
+            ShowPopupMessage("Error!", "Some required fields are missing.", PopupMessageType.ERROR);
         }
 
-
-
-
-
-
-
-        // BY SK.
         public static void ShowPopupMessage(string title, string message, PopupMessageType messageType)
         {
             PopupNotifier popup = new PopupNotifier();
@@ -48,26 +27,26 @@ namespace IMS.Forms.Common
             // default customization
             var titleColor = Color.Black;
             var contentColor = Color.DarkGray;
-            Bitmap image = Properties.Resources.icons8_More_50px;
+            Bitmap image = Properties.Resources.icons8_View_More_24px;
 
             // customization wrt messageType
             if (messageType == PopupMessageType.ERROR)
             {
                 titleColor = Color.Coral;
                 contentColor = Color.Red;
-                image = Properties.Resources.icons8_Error_52px;
+                image = Properties.Resources.icons8_Error_24px;
             }
             else if (messageType == PopupMessageType.INFO)
             {
                 titleColor = Color.BlueViolet;
                 contentColor = Color.DarkBlue;
-                image = Properties.Resources.icons8_Info_52px;
+                image = Properties.Resources.icons8_Info_24px;
             }
             else if (messageType == PopupMessageType.SUCCESS)
             {
                 titleColor = Color.Green;
                 contentColor = Color.DarkGreen;
-                image = Properties.Resources.icons8_Ok_52px;
+                image = Properties.Resources.icons8_Ok_24px;
             }
             popup.Image = image;//Properties.Resources.icons8_Lipstick_48px_3;
             popup.TitleColor = titleColor;

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Business\BranchMapper.cs" />
+    <Compile Include="Core\Business\CounterMapper.cs" />
+    <Compile Include="Core\Business\WarehouseMapper.cs" />
     <Compile Include="Core\Settings\AppSettingMapper.cs" />
     <Compile Include="Core\Inventory\ProductMapper.cs" />
     <Compile Include="Core\Inventory\VariantMapper.cs" />

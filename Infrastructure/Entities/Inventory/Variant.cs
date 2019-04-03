@@ -32,14 +32,15 @@ namespace Infrastructure.Entities.Inventory
 
         // ========== Alerts ========== //
         // whether to show alerts for this product's stock count; if null then take Product's (same) column data
-        public bool? ShowStockAlerts { get; set; }
+        public bool? Alert { get; set; }
         // Min. stock count which triggers alert; if null then take Product's (same) column data
         public int? MinStockCountForAlert { get; set; }
 
 
         // ====== Table Objects ====== //
         public virtual Product Product { get; set; }
-        public virtual ICollection<VariantOption> VariantOptions { get; set; }
+
+        public virtual ICollection<VariantAttribute> VariantAttributes { get; set; }
       
     }
 }

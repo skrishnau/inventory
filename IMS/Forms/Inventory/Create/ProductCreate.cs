@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Common;
+using IMS.Forms.Common.Dialogs;
 using IMS.Forms.Inventory.Attributes;
 using Service.Core.Inventory;
 using SimpleInjector.Lifestyles;
@@ -18,11 +19,15 @@ namespace IMS.Forms.Inventory.Create
 {
     public partial class ProductCreate : Form
     {
+        public readonly static string COL_NAME_PREFIX = "col";
         private readonly IInventoryService _inventoryService;
 
         private int Id;
         private List<BrandModel> _brandsList;
-        private List<OptionModel> _optionsList;
+        //private List<OptionModel> _optionsList;
+
+        // track the start index of dynamic attributes
+        private List<ProductAttributeModel> _productAttributes = new List<ProductAttributeModel>();
 
         public ProductCreate(IInventoryService inventoryService)
         {
@@ -30,7 +35,7 @@ namespace IMS.Forms.Inventory.Create
 
             _brandsList = _inventoryService.GetBrandList();
 
-            _optionsList = _inventoryService.GetOptionList();
+            //_optionsList = _inventoryService.GetOptionList();
 
             InitializeComponent();
 
@@ -82,31 +87,76 @@ namespace IMS.Forms.Inventory.Create
         }
 
 
-        //private void BtnAddCategory_Click(object sender, EventArgs e)
-        //{
-
-        //    var categoryCreate = Program.container.GetInstance<CategoryCreate>();
-        //    categoryCreate.StartPosition = FormStartPosition.CenterParent;
-        //    categoryCreate.ShowDialog();
-        //}
-
-        //private void btnAddBrand_Click(object sender, EventArgs e)
-        //{
-        //    var brandCreate = Program.container.GetInstance<BrandCreate>();
-        //    brandCreate.StartPosition = FormStartPosition.CenterParent;
-        //    brandCreate.ShowDialog();
-        //}
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            SaveProduct();
+            SaveProduct1();
         }
 
-        private string errorMessage = "Please Fill all required Fields";
+        private void SaveProduct1()
+        {
+            if (IsModelValid())
+            {
+                var category = _inventoryService.GetCategory(cbCategory.SelectedItem.ToString());
+                var variants = GetVariants();
+                var product = new ProductModelForSave()
+                {
+                    // Brands = brands, // GetBrands(), //((BrandModel)cbBrand.SelectedItem).Id,
+                    CategoryId = category.Id,
+                    MinStockCountForAlert = int.Parse(tbStockThreshold.Text),
+                    ShowStockAlerts = cbShowStockAlert.Checked,
+                    Name = tbProductName.Text,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    // ProductOptions = options,
+                    Variants = variants,
+                    //LatestUnitCostPrice
+                };
+                product.ProductAttributes = _productAttributes;
+                _inventoryService.AddProduct(product);
+                PopupMessage.ShowSaveSuccessMessage();
+                this.Close();
+            }
+        }
+
+        private List<ProductVariantModel> GetVariants()
+        {
+            var variants = new List<ProductVariantModel>();
+            for (int r = 0; r < dgvVariants.RowCount - 1; r++)
+            {
+                DataGridViewRow row = dgvVariants.Rows[r];
+                var variant = new ProductVariantModel();
+                variant.SKU = row.Cells[colSKU.Name].Value.ToString();
+                variant.Alert = bool.Parse(((DataGridViewCheckBoxCell)row.Cells[colAlert.Name]).Value.ToString());
+                variant.AlertThreshold = int.Parse(((DataGridViewCell)row.Cells[colAlertThreshold.Name]).Value.ToString());
+                foreach (var attribute in _productAttributes)
+                {
+                    // add to the dictionary
+                    variant.Attributes.Add(attribute.Attribute, row.Cells[COL_NAME_PREFIX+attribute.Attribute].Value.ToString());
+                }
+                variants.Add(variant);
+            }
+
+            return variants;
+        }
+
+        private bool IsModelValid()
+        {
+            var valName = ValidateProductName();
+            var valCategory = ValidateCategory();
+            if (!(valName && valCategory))
+            {
+                PopupMessage.ShowMissingInputsMessage();
+                this.Focus(); // return the focus to the current form
+                return false;
+            }
+            return true;
+        }
+
 
         private void SaveProduct()
         {
-            ProductModel product = null;
+            ProductModelForSave product = null;
             try
             {
                 var valName = ValidateProductName();
@@ -131,15 +181,15 @@ namespace IMS.Forms.Inventory.Create
                     return;
                 }
 
-                var options = GetOptions();
-                if(options.Count == 0)
-                {
-                    PopupMessage.ShowPopupMessage("No Attribute", "You haven't added any attributes. Attributes describe the product.", PopupMessageType.NONE);
-                    this.Focus();
-                    return;
-                }
+                //var options = GetOptions();
+                //if (options.Count == 0)
+                //{
+                //    PopupMessage.ShowPopupMessage("No Attribute", "You haven't added any attributes. Attributes describe the product.", PopupMessageType.NONE);
+                //    this.Focus();
+                //    return;
+                //}
                 var category = _inventoryService.GetCategory(cbCategory.SelectedItem.ToString());
-                product = new ProductModel()
+                product = new ProductModelForSave()
                 {
                     Brands = brands, // GetBrands(), //((BrandModel)cbBrand.SelectedItem).Id,
                     CategoryId = category.Id,
@@ -148,7 +198,7 @@ namespace IMS.Forms.Inventory.Create
                     ShowStockAlerts = cbShowStockAlert.Checked,
                     Name = tbProductName.Text,
                     UpdatedAt = DateTime.Now,
-                    ProductOptions = options,
+                    // ProductOptions = options,
                 };
             }
             catch (Exception ex) { throw; }
@@ -160,31 +210,7 @@ namespace IMS.Forms.Inventory.Create
             }
         }
 
-        private List<ProductOptionModel> GetOptions()
-        {
-            var list = new List<ProductOptionModel>();
-            foreach (var control in pnlAttributesBody.Controls)
-            {
-                var optionViewUc = (OptionViewUC)control;
-                if (optionViewUc != null)
-                {
-                    foreach (var optionValue in optionViewUc.OptionModel.OptionValues)
-                    {
-                        var model = new ProductOptionModel()
-                        {
-                            CreatedAt = DateTime.Now,
-                            UpdatedAt = DateTime.Now,
-                            //Id = optionValue.Id,
-                            OptionId = optionValue.Id,
-                            
-                        };
-                        list.Add(model);
-                    }
 
-                }
-            }
-            return list;
-        }
 
         private bool IsBrandNamesUnique(List<BrandModel> brands)
         {
@@ -298,33 +324,129 @@ namespace IMS.Forms.Inventory.Create
             pnlBrandsBody.Controls.Remove((TextBoxWithDeleteUC)sender);
         }
 
-        private void btnAttributeAdd_Click(object sender, EventArgs e)
-        {
-            //var attributeEachItem = new TextBoxWithDeleteUC();
-            //attributeEachItem.OnRemoveClicked += AttributeEachItem_OnRemoveClicked;
-            //attributeEachItem.Dock = DockStyle.Top;
-            //pnlAttributesBody.Controls.Add(attributeEachItem);
-            var optionChooseForm = new OptionChoose();
-            optionChooseForm.DataSource = _optionsList;
-            optionChooseForm.OptionSelected += OptionChooseForm_OptionSelected;
-            optionChooseForm.ShowDialog();
-        }
 
-        private void OptionChooseForm_OptionSelected(object sender, OptionChooseEventArgs e)
-        {
-            var optionViewUC = new OptionViewUC(e.Option);
-            optionViewUC.OnRemoveClicked += OptionViewUC_RemoveClicked;
-            pnlAttributesBody.Controls.Add(optionViewUC);
-        }
-
-        private void OptionViewUC_RemoveClicked(object sender, EventArgs e)
-        {
-            pnlAttributesBody.Controls.Remove((OptionViewUC)sender);
-        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        // for variant
+        private void btnAddAttribute_Click(object sender, EventArgs e)
+        {
+            var dialog = new MessageBoxWithInput();
+            dialog.lblMessage.Text = "Enter attribute that describes this product,\n e.g. \"Color\", \"Fabric\", \"Style\", etc.";
+            dialog.lblLabel.Text = "Attribute";
+            dialog.Text = "Attribute";
+            dialog.DoneClicked += Dialog_DoneClicked;
+            dialog.ShowDialog();
+        }
+
+        private void Dialog_DoneClicked(object sender, StringEventArgs e)
+        {
+            // check if the column already exists
+            foreach (DataGridViewColumn col in dgvVariants.Columns)
+            {
+                if (col.HeaderText == e.Input)
+                {
+                    PopupMessage.ShowPopupMessage("Duplicate Attribute!", "The attribute already exists in the product!", PopupMessageType.INFO);
+                    return;
+                }
+            }
+            // get the data ; add column in the grid view
+            var column = new DataGridViewColumn();
+            column.Name = COL_NAME_PREFIX + e.Input;
+            column.HeaderText = e.Input;
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
+            column.CellTemplate = new DataGridViewTextBoxCell();
+            dgvVariants.Columns.Add(column);
+            _productAttributes.Add(new ProductAttributeModel
+            {
+                Attribute = e.Input,
+            });
+            //column.inde
+        }
     }
 }
+
+//private void btnAttributeAdd_Click(object sender, EventArgs e)
+//{
+//    //var attributeEachItem = new TextBoxWithDeleteUC();
+//    //attributeEachItem.OnRemoveClicked += AttributeEachItem_OnRemoveClicked;
+//    //attributeEachItem.Dock = DockStyle.Top;
+//    //pnlAttributesBody.Controls.Add(attributeEachItem);
+//    var optionChooseForm = new OptionChoose();
+//    optionChooseForm.DataSource = _optionsList;
+//    optionChooseForm.OptionSelected += OptionChooseForm_OptionSelected;
+//    optionChooseForm.ShowDialog();
+//}
+
+//private void OptionChooseForm_OptionSelected(object sender, OptionChooseEventArgs e)
+//{
+//    var optionViewUC = new OptionViewUC(e.Option);
+//    optionViewUC.OnRemoveClicked += OptionViewUC_RemoveClicked;
+//    pnlAttributesBody.Controls.Add(optionViewUC);
+//}
+
+//private void OptionViewUC_RemoveClicked(object sender, EventArgs e)
+//{
+//    pnlAttributesBody.Controls.Remove((OptionViewUC)sender);
+//}
+
+//private List<ProductOptionModel> GetOptions()
+//{
+//    var list = new List<ProductOptionModel>();
+//    foreach (var control in pnlAttributesBody.Controls)
+//    {
+//        var optionViewUc = (OptionViewUC)control;
+//        if (optionViewUc != null)
+//        {
+//            foreach (var optionValue in optionViewUc.OptionModel.OptionValues)
+//            {
+//                var model = new ProductOptionModel()
+//                {
+//                    CreatedAt = DateTime.Now,
+//                    UpdatedAt = DateTime.Now,
+//                    //Id = optionValue.Id,
+//                    OptionId = optionValue.Id,
+
+//                };
+//                list.Add(model);
+//            }
+
+//        }
+//    }
+//    return list;
+//}
+
+
+
+//private void BtnAddCategory_Click(object sender, EventArgs e)
+//{
+
+//    var categoryCreate = Program.container.GetInstance<CategoryCreate>();
+//    categoryCreate.StartPosition = FormStartPosition.CenterParent;
+//    categoryCreate.ShowDialog();
+//}
+
+//private void btnAddBrand_Click(object sender, EventArgs e)
+//{
+//    var brandCreate = Program.container.GetInstance<BrandCreate>();
+//    brandCreate.StartPosition = FormStartPosition.CenterParent;
+//    brandCreate.ShowDialog();
+//}
+
+
+
+//private List<ProductAttributeModel> GetProductAttributes()
+//{
+//    var list = new List<ProductAttributeModel>();
+//    foreach(var att in _attributeList)
+//    {
+//        list.Add(new ProductAttributeModel()
+//        {
+//            Attribute = att.Attribute,
+//        });
+//    }
+//    return list;
+//}

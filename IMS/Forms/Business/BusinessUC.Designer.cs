@@ -145,7 +145,7 @@
             // 
             // btnAddBrand
             // 
-            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddBrand.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAddBrand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddBrand.Location = new System.Drawing.Point(141, 16);
             this.btnAddBrand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -227,7 +227,7 @@
             // 
             // btnAddCounter
             // 
-            this.btnAddCounter.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddCounter.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAddCounter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddCounter.Location = new System.Drawing.Point(141, 16);
             this.btnAddCounter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -306,7 +306,7 @@
             // 
             // btnAddWarehouse
             // 
-            this.btnAddWarehouse.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_48px;
+            this.btnAddWarehouse.BackgroundImage = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
             this.btnAddWarehouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddWarehouse.Location = new System.Drawing.Point(141, 16);
             this.btnAddWarehouse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);

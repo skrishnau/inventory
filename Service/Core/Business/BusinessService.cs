@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTO.Core.Business;
 using Infrastructure.Context;
 using Infrastructure.Entities.Business;
 using ViewModel.Core.Business;

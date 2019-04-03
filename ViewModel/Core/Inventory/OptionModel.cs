@@ -7,7 +7,7 @@ using Infrastructure.Entities.Inventory;
 
 namespace ViewModel.Core.Inventory
 {
-    public class AttributeModel
+    /*public class AttributeModel
     {
         public int Id { get; set; }
 
@@ -34,6 +34,7 @@ namespace ViewModel.Core.Inventory
             };
         }
     }
+    */
 
     public class OptionModel
     {

@@ -89,7 +89,7 @@
     <Compile Include="Core\Inventory\BrandModel.cs" />
     <Compile Include="Core\Inventory\CategoryModel.cs" />
     <Compile Include="Core\Inventory\ProductModel.cs" />
-    <Compile Include="Core\Inventory\ProductOptionModel.cs" />
+    <Compile Include="Core\Inventory\ProductAttributeModel.cs" />
     <Compile Include="Core\Inventory\VariantModel.cs" />
     <Compile Include="Core\Sales\SaleItemModel.cs" />
     <Compile Include="Core\Purchases\PurchaseItemModel.cs" />
@@ -109,12 +109,6 @@
     <Compile Include="Utility\MessageModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
@@ -127,6 +121,11 @@
       <DependentUpon>ClientsListingUC.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

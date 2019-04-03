@@ -22,5 +22,6 @@ namespace Infrastructure.Entities.Business
         public DateTime? DeletedAt { get; set; }
 
         public virtual ICollection<Warehouse> Warehouses { get; set; }
+        public virtual ICollection<Counter> Counters { get; set; }
     }
 }

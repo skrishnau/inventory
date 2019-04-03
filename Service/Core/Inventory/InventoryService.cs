@@ -56,9 +56,46 @@ namespace Service.Core.Inventory
             _context.SaveChanges();
         }
 
-        public void AddProduct(ProductModel product)
+
+        public void AddProduct(ProductModelForSave product)
         {
+            // save the attributes
             var productEntity = product.ToEntity();
+            productEntity.ProductAttributes = new List<ProductAttribute>();
+            productEntity.Variants = new List<Variant>();
+            foreach (var pa in product.ProductAttributes)
+            {
+                var paEntity = new ProductAttribute()
+                {
+                    Attribute = pa.Attribute,
+                };
+                productEntity.ProductAttributes.Add(paEntity);
+            }
+
+            foreach (var variant in product.Variants)
+            {
+                // variant
+                var variantEntity = new Variant()
+                {
+                    SKU = variant.SKU,
+                    Id = variant.Id,
+                    MinStockCountForAlert = variant.AlertThreshold,
+                    Alert = variant.Alert,
+                    
+                };
+                variantEntity.VariantAttributes = new List<VariantAttribute>();
+                // variant attributes
+                foreach (var att in variant.Attributes)
+                {
+                    var vaEntity = new VariantAttribute()
+                    {
+                        Value = att.Value,
+                        ProductAttribute = productEntity.ProductAttributes.FirstOrDefault(x => x.Attribute == att.Key),                        
+                    };
+                    variantEntity.VariantAttributes.Add(vaEntity);
+                }
+                productEntity.Variants.Add(variantEntity);
+            }
             _context.Product.Add(productEntity);
             _context.SaveChanges();
         }
@@ -106,11 +143,11 @@ namespace Service.Core.Inventory
 
         //}
 
-        public List<ProductModel> GetProductList()
+        public List<ProductModelForSave> GetProductList()
         {
             var cats = _context.Product
                 .Where(x => x.DeletedAt == null)
-                .Select(x => new ProductModel()
+                .Select(x => new ProductModelForSave()
                 {
                     Name = x.Name,
                     Id = x.Id,
@@ -124,29 +161,15 @@ namespace Service.Core.Inventory
 
         public List<ProductModelForGridView> GetProductListForGridView()
         {
-            var cats = _context.Product
+            var products = _context.Product
                 .Include(x => x.ProductAttributes)
-                .Include(x => x.ProductAttributes.Select(y => y.Option))
+                //.Include(x => x.ProductAttributes.Select(y => y.Option))
                 .Include(x => x.Brands)
                 .Where(x => x.DeletedAt == null);
             var list = new List<ProductModelForGridView>();
-            foreach (var x in cats)
+            foreach (var x in products)
             {
-                list.Add(ProductMapper.MapToProductModelForGridView(x)
-                //    new ProductModelForGridView
-                //{
-                //    Name = x.Name,
-                //    Id = x.Id,
-                //    CreatedAt = GetDateShortString(x.CreatedAt),
-                //    UpdatedAt = GetDateShortString(x.UpdatedAt),
-                //    Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
-                //    OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
-                //    Category = x.Category.Name,
-                //    MinStockCountForAlert = x.MinStockCountForAlert,
-                //    QuantityInStocks = x.QuantityInStock,
-                //    ShowStockAlerts = x.ShowStockAlerts
-                //}
-                    );
+                list.Add(ProductMapper.MapToProductModelForGridView(x));
             }
             return list;
         }
@@ -175,7 +198,7 @@ namespace Service.Core.Inventory
             }
         }
 
-        public void DeleteProduct(ProductModel produtModel)
+        public void DeleteProduct(ProductModelForSave produtModel)
         {
             var dbEntity = _context.Product.FirstOrDefault(x => x.Id == produtModel.Id);
             if (dbEntity != null)
@@ -201,62 +224,7 @@ namespace Service.Core.Inventory
             };
         }
 
-        public bool AddOrUpdateAttribute(AttributeModel attributeModel)
-        {
-            var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
-            var list = GetAttributeList();
-            if (dbEntity == null)
-            {
-                // add
-                var attributeEntity = attributeModel.ToEntity();
-                var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
-                if (existingData == null)
-                {
-                    // then add
-                    attributeEntity.CreatedAt = DateTime.Now;
-                    attributeEntity.UpdatedAt = DateTime.Now;
-
-                    _context.Option.Add(attributeEntity);
-                }
-                else
-                {
-                    existingData.DeletedAt = null;
-                    existingData.UpdatedAt = DateTime.Now;
-                    //_context.SaveChanges();
-                    // don't add
-                    // return true;
-                    // return false;
-
-                }
-            }
-            else
-            {
-                //edit 
-                var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
-                if (existingData == null)
-                {
-                    // edit
-                    dbEntity.Name = attributeModel.Name;
-                    dbEntity.Value = attributeModel.Value;
-                    dbEntity.UpdatedAt = DateTime.Now;
-                    // if data is already in a db but in deleted state undelete it
-                    //dbEntity.DeletedAt = null;
-                }
-                /*
-                else if(existingData.DeletedAt != null)
-                {
-                    dbEntity.DeletedAt = null;
-                }*/
-                else
-                {
-                    return false;
-                }
-            }
-            _context.SaveChanges();
-            return true;
-        }
-
-        public List<OptionModel> GetDistinctAttributes()
+        /*public List<OptionModel> GetDistinctAttributes()
         {
             var list = new List<OptionModel>();
             var attributesGroup = _context.Option
@@ -275,74 +243,77 @@ namespace Service.Core.Inventory
                 //}
             }
             return list;
-        }
+        }*/
 
-        public List<AttributeModel> GetAttributeList()
-        {
-            var attributes = _context.Option
-               .Where(x => x.DeletedAt == null)
-               .OrderBy(x => x.Name)
-               .Select(x => new AttributeModel()
-               {
-                   Name = x.Name,
-                   Id = x.Id,
-                   Value = x.Value,
-                   CreatedAt = x.CreatedAt,
-                   UpdatedAt = x.UpdatedAt
-               })
-               .ToList();
-
-            return attributes;
-        }
-        public List<OptionModel> GetOptionList()
-        {
-            var attributes = _context.Option
+        /* public List<AttributeModel> GetAttributeList()
+         {
+             var attributes = _context.Option
                 .Where(x => x.DeletedAt == null)
                 .OrderBy(x => x.Name)
-                .GroupBy(x => x.Name);
-            var list = new List<OptionModel>();
-            foreach (var att in attributes)
-            {
-                list.Add(new OptionModel()
+                .Select(x => new AttributeModel()
                 {
-                    Name = att.Key,
-                    OptionValues = att.Select(x => new OptionValueModel()
-                    {
-                        Id = x.Id,
-                        OptionName = x.Name,
-                        Value = x.Value
-                    }).ToList(),
-                });
-            }
-            return list;
-        }
+                    Name = x.Name,
+                    Id = x.Id,
+                    Value = x.Value,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt
+                })
+                .ToList();
 
-        public void DeleteAttribute(AttributeModel attributeModel)
-        {
-            var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
+             return attributes;
+         }
+         */
+        /* public List<OptionModel> GetOptionList()
+         {
+             var attributes = _context.Option
+                 .Where(x => x.DeletedAt == null)
+                 .OrderBy(x => x.Name)
+                 .GroupBy(x => x.Name);
+             var list = new List<OptionModel>();
+             foreach (var att in attributes)
+             {
+                 list.Add(new OptionModel()
+                 {
+                     Name = att.Key,
+                     OptionValues = att.Select(x => new OptionValueModel()
+                     {
+                         Id = x.Id,
+                         OptionName = x.Name,
+                         Value = x.Value
+                     }).ToList(),
+                 });
+             }
+             return list;
+         }
+         */
 
-            if (dbEntity != null)
-            {
-                dbEntity.DeletedAt = DateTime.Now;
-            }
+        /*  public void DeleteAttribute(AttributeModel attributeModel)
+          {
+              var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
 
-            _context.SaveChanges();
+              if (dbEntity != null)
+              {
+                  dbEntity.DeletedAt = DateTime.Now;
+              }
 
-        }
+              _context.SaveChanges();
 
-        public List<AttributeModel> GetOptionList(int productId)
-        {
-            var attributes = _context.ProductOption
-                .Where(x => x.ProductId == productId && x.DeletedAt == null)
-                .Select(x => new AttributeModel
-                {
-                    Id = x.OptionId,
-                    Name = x.Option.Name,
-                    Value = x.Option.Value
+          }*/
 
-                }).ToList();
-            return attributes;
-        }
+        /* public List<AttributeModel> GetOptionList(int productId)
+         {
+             var attributes = _context.ProductOption
+                 .Where(x => x.ProductId == productId && x.DeletedAt == null)
+                 .Select(x => new AttributeModel
+                 {
+                     Id = x.OptionId,
+                     Name = x.Option.Name,
+                     Value = x.Option.Value
+
+                 }).ToList();
+             return attributes;
+         }
+         */
         public ProductModelForGridView GetProduct(int productId)
         {
             var product = _context.Product.Find(productId);
@@ -368,7 +339,7 @@ namespace Service.Core.Inventory
                     MinStockCountForAlert = x.MinStockCountForAlert,
                     ProductId = x.ProductId,
                     QuantityInStock = x.QuantityInStock,
-                    ShowStockAlerts = x.ShowStockAlerts,
+                    ShowStockAlerts = x.Alert,
                     SKU = x.SKU
 
                 }).ToList();
@@ -392,6 +363,56 @@ namespace Service.Core.Inventory
             return VariantMapper.MapToVariantModel(variant);
         }
 
+
+        /*  public bool AddOrUpdateAttribute(AttributeModel attributeModel)
+      {
+          var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
+          var list = GetAttributeList();
+          if (dbEntity == null)
+          {
+              // add
+              var attributeEntity = attributeModel.ToEntity();
+              var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
+              if (existingData == null)
+              {
+                  // then add
+                  attributeEntity.CreatedAt = DateTime.Now;
+                  attributeEntity.UpdatedAt = DateTime.Now;
+
+                  _context.Option.Add(attributeEntity);
+              }
+              else
+              {
+                  existingData.DeletedAt = null;
+                  existingData.UpdatedAt = DateTime.Now;
+                  //_context.SaveChanges();
+                  // don't add
+                  // return true;
+                  // return false;
+
+              }
+          }
+          else
+          {
+              //edit 
+              var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
+              if (existingData == null)
+              {
+                  // edit
+                  dbEntity.Name = attributeModel.Name;
+                  dbEntity.Value = attributeModel.Value;
+                  dbEntity.UpdatedAt = DateTime.Now;
+                  // if data is already in a db but in deleted state undelete it
+                  //dbEntity.DeletedAt = null;
+              }
+              else
+              {
+                  return false;
+              }
+          }
+          _context.SaveChanges();
+          return true;
+      }*/
 
     }
 }
