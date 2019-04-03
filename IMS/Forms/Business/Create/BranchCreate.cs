@@ -20,12 +20,12 @@ namespace IMS.Forms.Business.Create
     {
         private readonly IBusinessService businessService;
         private readonly IDatabaseChangeListener _listener;
-        public BranchCreate(IBusinessService businessService, IDatabaseChangeListener listener)
 
         private int branchId;
         // private int warehouseId;
 
         
+        public BranchCreate(IBusinessService businessService, IDatabaseChangeListener listener)
         {
             this.businessService = businessService;
             this._listener = listener;
@@ -98,7 +98,7 @@ namespace IMS.Forms.Business.Create
             if (tbBranchName.Text == "")
             {
                 tbBranchName.BackColor = Color.LightPink;
-                return;
+                return false;
             }
             var branchModel = new BranchModel
             {

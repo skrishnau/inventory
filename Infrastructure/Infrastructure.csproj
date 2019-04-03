@@ -83,17 +83,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.cs" />
-    <Compile Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.Designer.cs">
-      <DependentUpon>201903270925045_GroupCOlumnAddedInAppSetting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903291014147_IsMarried_changed_to_string.cs" />
-    <Compile Include="Migrations\201903291014147_IsMarried_changed_to_string.Designer.cs">
-      <DependentUpon>201903291014147_IsMarried_changed_to_string.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904011546361_UserInfo Updated.cs" />
-    <Compile Include="Migrations\201904011546361_UserInfo Updated.Designer.cs">
-      <DependentUpon>201904011546361_UserInfo Updated.cs</DependentUpon>
+    <Compile Include="Migrations\201904031243567_InitialMigration.cs" />
+    <Compile Include="Migrations\201904031243567_InitialMigration.Designer.cs">
+      <DependentUpon>201904031243567_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,14 +101,8 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903270925045_GroupCOlumnAddedInAppSetting.resx">
-      <DependentUpon>201903270925045_GroupCOlumnAddedInAppSetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903291014147_IsMarried_changed_to_string.resx">
-      <DependentUpon>201903291014147_IsMarried_changed_to_string.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904011546361_UserInfo Updated.resx">
-      <DependentUpon>201904011546361_UserInfo Updated.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904031243567_InitialMigration.resx">
+      <DependentUpon>201904031243567_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

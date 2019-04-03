@@ -584,6 +584,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\Sales\SaleUC.resx">
       <DependentUpon>SaleUC.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
@@ -653,7 +654,6 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Purchases\Direct\" />
-    <Folder Include="Forms\Inventory\Warehouses\" />
     <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />

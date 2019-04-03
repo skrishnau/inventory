@@ -34,7 +34,7 @@ namespace Service.Core.Business
                 _context.Branch.Add(branchEntity);
                 if (branchEntity.Warehouses == null)
                     branchEntity.Warehouses = new List<Warehouse>();
-                var warehouseEntity = branch.Warehouses[0].ToEntity();
+                var warehouseEntity = branch.Warehouses.ElementAt(0).ToEntity();
                 warehouseEntity.CreatedAt = DateTime.Now;
                 warehouseEntity.UpdatedAt = DateTime.Now;
                 branchEntity.Warehouses.Add(warehouseEntity);

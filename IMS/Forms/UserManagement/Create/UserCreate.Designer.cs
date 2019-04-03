@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.cbBasicinfo = new System.Windows.Forms.ComboBox();
+            this.cbCanLogin = new System.Windows.Forms.CheckBox();
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -557,5 +560,8 @@
         private System.Windows.Forms.TextBox tbAddress;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.CheckBox cbCanLogin;
+        private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.ComboBox cbBasicinfo;
     }
 }

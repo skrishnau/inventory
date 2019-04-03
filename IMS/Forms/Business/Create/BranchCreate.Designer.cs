@@ -243,6 +243,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblNote;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Label label1;
+       // private System.Windows.Forms.Label label1;
     }
 }
