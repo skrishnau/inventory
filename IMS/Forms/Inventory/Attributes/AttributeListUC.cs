@@ -55,8 +55,8 @@ namespace IMS.Forms.Inventory.Attributes
         void PopulateAttributetData()
         {
             dgvAttributeList.AutoGenerateColumns = false;
-            var attributes = inventoryService.GetAttributeList();
-            dgvAttributeList.DataSource = attributes;
+            //var attributes = inventoryService.GetAttributeList();
+            //dgvAttributeList.DataSource = attributes;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -71,29 +71,29 @@ namespace IMS.Forms.Inventory.Attributes
 
         private void ShowAddEditDialog(bool isEditMode)
         {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var attributeCreate = Program.container.GetInstance<AttributeCreate>();
-                attributeCreate.ShowInTaskbar = false;
-                // if isEditMode then get the data from gridview
-                if (isEditMode && (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0))
-                {
-                    var attribute = (AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
-                    attributeCreate.SetData(attribute);
-                }
-                attributeCreate.ShowDialog();
-                PopulateAttributetData();
-            }
+            //using (AsyncScopedLifestyle.BeginScope(Program.container))
+            //{
+            //    var attributeCreate = Program.container.GetInstance<AttributeCreate>();
+            //    attributeCreate.ShowInTaskbar = false;
+            //    // if isEditMode then get the data from gridview
+            //    if (isEditMode && (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0))
+            //    {
+            //        var attribute = (AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
+            //        attributeCreate.SetData(attribute);
+            //    }
+            //    attributeCreate.ShowDialog();
+            //    PopulateAttributetData();
+            //}
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0)
-            {
-                var attribute = (ViewModel.Core.Inventory.AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
-                inventoryService.DeleteAttribute(attribute);
-                PopulateAttributetData();
-            }
+            //if (dgvAttributeList.SelectedRows != null && dgvAttributeList.SelectedRows.Count > 0)
+            //{
+            //    var attribute = (ViewModel.Core.Inventory.AttributeModel)dgvAttributeList.SelectedRows[0].DataBoundItem;
+            //    inventoryService.DeleteAttribute(attribute);
+            //    PopulateAttributetData();
+            //}
         }
 
         // Mouse right click event handler for datagridview

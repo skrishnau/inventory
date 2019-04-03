@@ -13,13 +13,13 @@ namespace Service.Core.Inventory
 
         void AddUpdateCategory(CategoryModel category);
 
-        void AddProduct(ProductModel product);
+        void AddProduct(ProductModelForSave product);
 
         List<BrandModel> GetBrandList();
 
         List<CategoryModel> GetCategoryList(int? parentCategoryId);
 
-        List<ProductModel> GetProductList();
+        List<ProductModelForSave> GetProductList();
 
         List<ProductModelForGridView> GetProductListForGridView();
 
@@ -27,19 +27,17 @@ namespace Service.Core.Inventory
 
         CategoryModel GetCategory(string v);
 
-        bool AddOrUpdateAttribute(AttributeModel attributeModel);
-
         ProductModelForGridView GetProduct(int productId);
 
-        List<AttributeModel> GetAttributeList();
+        //List<AttributeModel> GetAttributeList();
 
-        List<OptionModel> GetDistinctAttributes();
+        // List<OptionModel> GetDistinctAttributes();
 
-        List<OptionModel> GetOptionList();
+        // List<OptionModel> GetOptionList();
 
-        void DeleteAttribute(AttributeModel attributeModel);
+        // void DeleteAttribute(AttributeModel attributeModel);
 
-        List<AttributeModel> GetOptionList(int productId);
+        // List<AttributeModel> GetOptionList(int productId);
 
         void SaveVariant(VariantModel variantModel);
 
@@ -50,5 +48,8 @@ namespace Service.Core.Inventory
         VariantModel GetVariantById(string sku);
 
 
+        //        bool AddOrUpdateAttribute(AttributeModel attributeModel);
+
     }
 }
+

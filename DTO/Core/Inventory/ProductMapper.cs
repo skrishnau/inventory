@@ -10,7 +10,7 @@ namespace DTO.Core.Inventory
 {
     public static class ProductMapper
     {
-        public static Product MapToEntity(ProductModel productModel)
+        public static Product MapToEntity(ProductModelForSave productModel)
         {
             return productModel.ToEntity();
         }
@@ -24,35 +24,33 @@ namespace DTO.Core.Inventory
                 CreatedAt = GetDateShortString(x.CreatedAt),
                 UpdatedAt = GetDateShortString(x.UpdatedAt),
                 Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
-                OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
+               // OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
                 Category = x.Category.Name,
-                MinStockCountForAlert = x.MinStockCountForAlert,
+                MinStockCountForAlert = x.AlertThreshold,
                 QuantityInStocks = x.QuantityInStock,
-                ShowStockAlerts = x.ShowStockAlerts,
+                ShowStockAlerts = x.Alert,
                 VariantCount = x.Variants == null ? 0: x.Variants.Count
             };
         }
 
-        public static string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductOption> list)
-        {
-            var builder = new StringBuilder();
+        //public static string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductAttribute> list)
+        //{
+        //    var builder = new StringBuilder();
+        //    foreach (var option in list.OrderBy(x => x.Option.Name).GroupBy(x => x.Option.Name))
+        //    {
+        //        builder.Append(option.Key);
+        //        builder.Append(": ");
 
-            foreach (var option in list.OrderBy(x => x.Option.Name).GroupBy(x => x.Option.Name))
-            {
-                builder.Append(option.Key);
-                builder.Append(": ");
-
-                for (var v = 0; v < option.Count(); v++)
-                {
-                    builder.Append(option.ElementAt(v).Option.Value);
-                    if (v <= option.Count() - 2)
-                        builder.Append(", ");
-                }
-                builder.Append(" ; ");
-            }
-
-            return builder.ToString();
-        }
+        //        for (var v = 0; v < option.Count(); v++)
+        //        {
+        //            builder.Append(option.ElementAt(v).Option.Value);
+        //            if (v <= option.Count() - 2)
+        //                builder.Append(", ");
+        //        }
+        //        builder.Append(" ; ");
+        //    }
+        //    return builder.ToString();
+        //}
 
         public static string GetDateShortString(DateTime date)
         {

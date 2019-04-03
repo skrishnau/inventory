@@ -55,10 +55,9 @@
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
-    <Compile Include="Entities\Inventory\Option.cs" />
-    <Compile Include="Entities\Inventory\ProductOption.cs" />
+    <Compile Include="Entities\Inventory\ProductAttribute.cs" />
     <Compile Include="Entities\Inventory\Variant.cs" />
-    <Compile Include="Entities\Inventory\VariantOption.cs" />
+    <Compile Include="Entities\Inventory\VariantAttribute.cs" />
     <Compile Include="Entities\Purchases\PurchaseItem.cs" />
     <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
@@ -84,9 +83,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201903270954581_InitMig.cs" />
-    <Compile Include="Migrations\201903270954581_InitMig.Designer.cs">
-      <DependentUpon>201903270954581_InitMig.cs</DependentUpon>
+    <Compile Include="Migrations\201904020919217_InitalMigration.cs" />
+    <Compile Include="Migrations\201904020919217_InitalMigration.Designer.cs">
+      <DependentUpon>201904020919217_InitalMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,8 +101,8 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903270954581_InitMig.resx">
-      <DependentUpon>201903270954581_InitMig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904020919217_InitalMigration.resx">
+      <DependentUpon>201904020919217_InitalMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

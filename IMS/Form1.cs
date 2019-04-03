@@ -11,6 +11,7 @@ using IMS.Forms.POS;
 using IMS.Forms.POS.Customers;
 using IMS.Forms.Generals;
 using IMS.Forms.UserManagement;
+using IMS.Forms.Orders;
 
 namespace IMS
 {
@@ -22,7 +23,11 @@ namespace IMS
 
             InitializeEvents();
             // open dashboard at first initialization
-            DisplayDashboard();
+            //DisplayDashboard();
+            btnHome_Click(btnDashboard, EventArgs.Empty);
+
+            btnScrollUp.FlatStyle = FlatStyle.Flat;
+            btnScrollDown.FlatStyle = FlatStyle.Flat;
 
         }
 
@@ -31,14 +36,24 @@ namespace IMS
             btnInventory.Click += BtnInventory_Click;
             btnGeneral.Click += BtnGeneral_Click;
             btnUserManagement.Click += btnUserManagement_Click;
-
+            btnOrders.Click += BtnOrders_Click;
             //btnSupplier.Click += btnSupplier_Click;
             //btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
             //btnDirectSale.Click += BtnDirectSale_Click;
         }
 
+        private void BtnOrders_Click(object sender, EventArgs e)
+        {
+            SetButtonSelection(sender);
+            pnlBody.Controls.Clear();
+            var productListUC = Program.container.GetInstance<OrdersUC>();//new InventoryUC();
+            productListUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(productListUC);
+        }
+
         private void BtnGeneral_Click(object sender, EventArgs e)
         {
+            SetButtonSelection(sender);
             pnlBody.Controls.Clear();
             var productListUC = Program.container.GetInstance<GeneralUC>();//new InventoryUC();
             productListUC.Dock = DockStyle.Fill;
@@ -47,6 +62,7 @@ namespace IMS
 
         private void BtnInventory_Click(object sender, EventArgs e)
         {
+            SetButtonSelection(sender);
             pnlBody.Controls.Clear();
             var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
             productListUC.Dock = DockStyle.Fill;
@@ -94,6 +110,7 @@ namespace IMS
 
         private void btnUserManagement_Click(object sender, EventArgs e)
         {
+            SetButtonSelection(sender);
             var userUC = Program.container.GetInstance<UserManagementUC>();
             pnlBody.Controls.Clear();
             userUC.Dock = DockStyle.Fill;
@@ -102,6 +119,7 @@ namespace IMS
 
         private void btnPurchases_Click(object sender, EventArgs e)
         {
+            SetButtonSelection(sender);
             var purchaseListUC = Program.container.GetInstance<PurchaseListUC>();
             pnlBody.Controls.Clear();
             purchaseListUC.Dock = DockStyle.Fill;
@@ -111,6 +129,7 @@ namespace IMS
         private void btnSales_Click(object sender, EventArgs e)
         {
             //var saleUC = Program.container.GetInstance<SaleUC>();
+            SetButtonSelection(sender);
             var posUC = Program.container.GetInstance<PosUC>();
             pnlBody.Controls.Clear();
             posUC.Dock = DockStyle.Fill;
@@ -119,6 +138,7 @@ namespace IMS
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
+            SetButtonSelection(sender);
             var settingsForm = Program.container.GetInstance<SettingsForm>();
             settingsForm.ShowDialog();
 
@@ -131,11 +151,7 @@ namespace IMS
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            DisplayDashboard();
-        }
-
-        private void DisplayDashboard()
-        {
+            SetButtonSelection(sender);
             // add the body
             pnlBody.Controls.Clear();
             var dashBoardUC = Program.container.GetInstance<DashboardUC>();
@@ -146,6 +162,33 @@ namespace IMS
         private void btnSupplier_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void SetButtonSelection(object button)
+        {
+            var btn = button as Button;
+            if (btn != null)
+            {
+                ClearButtonSelection();
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+                //btn.BackColor = System.Drawing.SystemColors.ControlLight;
+            }
+        }
+
+        private void ClearButtonSelection()
+        {
+            foreach(var control in pnlSidebarBody.Controls)
+            {
+                var btn = control as Button;
+                if (btn != null)
+                {
+                    // clear the selection style
+                    btn.FlatStyle = FlatStyle.Standard;//System.Drawing.SystemColors.Control;
+                    btn.ForeColor = System.Drawing.SystemColors.ControlText;
+                    //btn.BackColor = System.Drawing.SystemColors.ControlLight;
+                }
+            }
         }
     }
 }

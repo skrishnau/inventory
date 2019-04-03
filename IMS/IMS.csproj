@@ -89,6 +89,18 @@
     <Compile Include="Forms\Business\Create\WarehouseCreate.Designer.cs">
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Buttons\ButtonZ.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Buttons\PlainButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Dialogs\MessageBoxWithInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Dialogs\MessageBoxWithInput.Designer.cs">
+      <DependentUpon>MessageBoxWithInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Common\Display\BodyTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,6 +120,9 @@
     <Compile Include="Forms\Common\ComboWithLabelUC.Designer.cs">
       <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\VerticalSplitter.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Generals\Branches\BranchListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,11 +141,41 @@
     <Compile Include="Forms\Generals\GeneralUC.Designer.cs">
       <DependentUpon>GeneralUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Adjustments\DirectReceiveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Adjustments\DirectReceiveForm.Designer.cs">
+      <DependentUpon>DirectReceiveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transfers\InventoryTransfersListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transfers\InventoryTransfersListUC.Designer.cs">
+      <DependentUpon>InventoryTransfersListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transfers\TransferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transfers\TransferForm.Designer.cs">
+      <DependentUpon>TransferForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Warehouses\WarehouseListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\Warehouses\WarehouseListUC.Designer.cs">
       <DependentUpon>WarehouseListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Orders\OrdersMenuBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Orders\OrdersMenuBar.Designer.cs">
+      <DependentUpon>OrdersMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Orders\OrdersUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Orders\OrdersUC.Designer.cs">
+      <DependentUpon>OrdersUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\POS\Counters\CounterListUC.cs">
       <SubType>UserControl</SubType>
@@ -382,6 +427,9 @@
     <Compile Include="Forms\UserManagement\Users\UserListUC.Designer.cs">
       <DependentUpon>UserListUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listeners\Business\BranchListener.cs" />
+    <Compile Include="Listeners\DatabaseChangeListener.cs" />
+    <Compile Include="Listeners\IDatabaseChangeListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sales\DirectSale\Create\SaleItemCreate.cs">
@@ -405,6 +453,9 @@
     <EmbeddedResource Include="Forms\Common\ComboWithLabelUC.resx">
       <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Dialogs\MessageBoxWithInput.resx">
+      <DependentUpon>MessageBoxWithInput.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\Display\BodyTemplate.resx">
       <DependentUpon>BodyTemplate.cs</DependentUpon>
     </EmbeddedResource>
@@ -420,8 +471,23 @@
     <EmbeddedResource Include="Forms\Generals\GeneralUC.resx">
       <DependentUpon>GeneralUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Adjustments\DirectReceiveForm.resx">
+      <DependentUpon>DirectReceiveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transfers\InventoryTransfersListUC.resx">
+      <DependentUpon>InventoryTransfersListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transfers\TransferForm.resx">
+      <DependentUpon>TransferForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseListUC.resx">
       <DependentUpon>WarehouseListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Orders\OrdersMenuBar.resx">
+      <DependentUpon>OrdersMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Orders\OrdersUC.resx">
+      <DependentUpon>OrdersUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\Counters\CounterListUC.resx">
       <DependentUpon>CounterListUC.cs</DependentUpon>
@@ -579,7 +645,6 @@
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Purchases\Direct\" />
     <Folder Include="Master\" />
-    <Folder Include="MenuBars\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
@@ -744,6 +809,123 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Error_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_New_Product_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Product_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_Camera_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_Folder_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_Database_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Product_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Cactus_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Merge_Git_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Category_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Categorize_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Bar_Chart_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_User_Male_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Combo_Chart_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Hashtag_Activity_Grid_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Handshake_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Combo_Chart_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_Bin_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_Shield_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Staff_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Order_History_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Supplier_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Warehouse_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Energy_Meter_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Set_As_Resume_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Inventory_Flow_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Flow_Chart_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Receive_Cash_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Data_Transfer_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Traffic_Light_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Ingredients_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Todo_List_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Create_Order_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Purchase_Order_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Purchase_Order_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Scales_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Packaging_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Adjust_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_In_Transit_52px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_In_Transit_24px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -40,30 +40,28 @@ namespace IMS.Forms.Inventory.Variants
            // lblProductName.Text = product.Name;
 
             // get Product Attributes
-            var options = _inventoryService.GetOptionList(product.Id);
+            //var options = _inventoryService.GetOptionList(product.Id);
+            //foreach (var optionGroup in options.GroupBy(x => x.Name))
+            //{
+            //    var comboWithLabel = new ComboWithLabelUC();
+            //    comboWithLabel.lblLabel.Text = optionGroup.Key;
+            //    var groupedOptions = optionGroup.ToList();
 
+            //    // insert empty to allow users not to select some attributes
+            //    groupedOptions.Insert(0, new ViewModel.Core.Inventory.AttributeModel
+            //    {
+            //        Id = 0,
+            //        Value = "",
+            //        Name = ""
+            //    });
+            //    comboWithLabel.cbCombo.DataSource = groupedOptions; // optionGroup.ToList();
+            //    comboWithLabel.cbCombo.ValueMember = "Id";
+            //    comboWithLabel.cbCombo.DisplayMember = "Value";
+            //    comboWithLabel.cbCombo.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            foreach (var optionGroup in options.GroupBy(x => x.Name))
-            {
-                var comboWithLabel = new ComboWithLabelUC();
-                comboWithLabel.lblLabel.Text = optionGroup.Key;
-                var groupedOptions = optionGroup.ToList();
+            //    pnlOptions.Controls.Add(comboWithLabel);
 
-                // insert empty to allow users not to select some attributes
-                groupedOptions.Insert(0, new ViewModel.Core.Inventory.AttributeModel
-                {
-                    Id = 0,
-                    Value = "",
-                    Name = ""
-                });
-                comboWithLabel.cbCombo.DataSource = groupedOptions; // optionGroup.ToList();
-                comboWithLabel.cbCombo.ValueMember = "Id";
-                comboWithLabel.cbCombo.DisplayMember = "Value";
-                comboWithLabel.cbCombo.DropDownStyle = ComboBoxStyle.DropDownList;
-
-                pnlOptions.Controls.Add(comboWithLabel);
-
-            }
+            //}
         }
 
         private void btnSave_Click(object sender, EventArgs e)

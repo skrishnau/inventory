@@ -3,7 +3,7 @@ namespace Infrastructure.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitMig : DbMigration
+    public partial class InitalMigration : DbMigration
     {
         public override void Up()
         {
@@ -132,8 +132,8 @@ namespace Infrastructure.Migrations
                         QuantityInStock = c.Decimal(nullable: false, precision: 18, scale: 2),
                         LatestUnitCostPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         LatestUnitSellPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        ShowStockAlerts = c.Boolean(nullable: false),
-                        MinStockCountForAlert = c.Int(nullable: false),
+                        Alert = c.Boolean(nullable: false),
+                        AlertThreshold = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                         DeletedAt = c.DateTime(),
@@ -158,34 +158,31 @@ namespace Infrastructure.Migrations
                 .Index(t => t.ParentCategoryId);
             
             CreateTable(
-                "dbo.ProductOptions",
+                "dbo.ProductAttributes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         ProductId = c.Int(nullable: false),
-                        OptionId = c.Int(nullable: false),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(),
+                        Attribute = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Options", t => t.OptionId)
                 .ForeignKey("dbo.Products", t => t.ProductId)
-                .Index(t => t.ProductId)
-                .Index(t => t.OptionId);
+                .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.Options",
+                "dbo.VariantAttributes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        VariantId = c.Int(nullable: false),
+                        ProductAttributeId = c.Int(nullable: false),
                         Value = c.String(),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ProductAttributes", t => t.ProductAttributeId)
+                .ForeignKey("dbo.Variants", t => t.VariantId)
+                .Index(t => t.VariantId)
+                .Index(t => t.ProductAttributeId);
             
             CreateTable(
                 "dbo.Variants",
@@ -197,26 +194,12 @@ namespace Infrastructure.Migrations
                         QuantityInStock = c.Decimal(nullable: false, precision: 18, scale: 2),
                         LatestUnitCostPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         LatestUnitSellPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        ShowStockAlerts = c.Boolean(),
+                        Alert = c.Boolean(),
                         MinStockCountForAlert = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Products", t => t.ProductId)
                 .Index(t => t.ProductId);
-            
-            CreateTable(
-                "dbo.VariantOptions",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        VariantId = c.Int(nullable: false),
-                        OptionId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Options", t => t.OptionId)
-                .ForeignKey("dbo.Variants", t => t.VariantId)
-                .Index(t => t.VariantId)
-                .Index(t => t.OptionId);
             
             CreateTable(
                 "dbo.Counters",
@@ -385,11 +368,10 @@ namespace Infrastructure.Migrations
             DropForeignKey("dbo.PurchaseItems", "VariantId", "dbo.Variants");
             DropForeignKey("dbo.PurchaseItems", "PurchaseId", "dbo.Purchases");
             DropForeignKey("dbo.Counters", "BranchId", "dbo.Branches");
-            DropForeignKey("dbo.VariantOptions", "VariantId", "dbo.Variants");
-            DropForeignKey("dbo.VariantOptions", "OptionId", "dbo.Options");
+            DropForeignKey("dbo.VariantAttributes", "VariantId", "dbo.Variants");
             DropForeignKey("dbo.Variants", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.ProductOptions", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.ProductOptions", "OptionId", "dbo.Options");
+            DropForeignKey("dbo.VariantAttributes", "ProductAttributeId", "dbo.ProductAttributes");
+            DropForeignKey("dbo.ProductAttributes", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Categories", "ParentCategoryId", "dbo.Categories");
             DropForeignKey("dbo.Brands", "ProductId", "dbo.Products");
@@ -410,11 +392,10 @@ namespace Infrastructure.Migrations
             DropIndex("dbo.PurchaseItems", new[] { "PurchaseId" });
             DropIndex("dbo.Purchases", new[] { "SupplierId" });
             DropIndex("dbo.Counters", new[] { "BranchId" });
-            DropIndex("dbo.VariantOptions", new[] { "OptionId" });
-            DropIndex("dbo.VariantOptions", new[] { "VariantId" });
             DropIndex("dbo.Variants", new[] { "ProductId" });
-            DropIndex("dbo.ProductOptions", new[] { "OptionId" });
-            DropIndex("dbo.ProductOptions", new[] { "ProductId" });
+            DropIndex("dbo.VariantAttributes", new[] { "ProductAttributeId" });
+            DropIndex("dbo.VariantAttributes", new[] { "VariantId" });
+            DropIndex("dbo.ProductAttributes", new[] { "ProductId" });
             DropIndex("dbo.Categories", new[] { "ParentCategoryId" });
             DropIndex("dbo.Products", new[] { "CategoryId" });
             DropIndex("dbo.Brands", new[] { "ProductId" });
@@ -429,10 +410,9 @@ namespace Infrastructure.Migrations
             DropTable("dbo.PurchaseItems");
             DropTable("dbo.Purchases");
             DropTable("dbo.Counters");
-            DropTable("dbo.VariantOptions");
             DropTable("dbo.Variants");
-            DropTable("dbo.Options");
-            DropTable("dbo.ProductOptions");
+            DropTable("dbo.VariantAttributes");
+            DropTable("dbo.ProductAttributes");
             DropTable("dbo.Categories");
             DropTable("dbo.Products");
             DropTable("dbo.Brands");

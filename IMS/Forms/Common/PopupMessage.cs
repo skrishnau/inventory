@@ -10,6 +10,16 @@ namespace IMS.Forms.Common
 {
     public class PopupMessage
     {
+        public static void ShowSaveSuccessMessage()
+        {
+            ShowPopupMessage("Success!", "Saved successfully.", PopupMessageType.SUCCESS);
+        }
+
+        public static void ShowMissingInputsMessage()
+        {
+            ShowPopupMessage("Error!", "Some required fields are missing.", PopupMessageType.ERROR);
+        }
+
         public static void ShowPopupMessage(string title, string message, PopupMessageType messageType)
         {
             PopupNotifier popup = new PopupNotifier();

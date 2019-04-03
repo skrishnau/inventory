@@ -17,7 +17,7 @@ namespace IMS.Forms.Inventory.Create
     {
         private readonly IInventoryService inventoryService;
 
-        private List<AttributeModel> _attributeList;
+       // private List<AttributeModel> _attributeList;
 
         private int attributeId;
 
@@ -26,10 +26,10 @@ namespace IMS.Forms.Inventory.Create
         {
             this.inventoryService = inventoryService;
             InitializeComponent();
-            PopulateAttributeNameCombo();
+          //  PopulateAttributeNameCombo();
             this.Load += AttributeCreate_Load;
 
-            _attributeList = this.inventoryService.GetAttributeList();
+            //_attributeList = this.inventoryService.GetAttributeList();
             
         }
 
@@ -39,48 +39,48 @@ namespace IMS.Forms.Inventory.Create
             cbAttributeName.Focus();
         }
 
-        void PopulateAttributeNameCombo()
-        {
-            var attribute = inventoryService.GetDistinctAttributes();
-            //var attribute = inventoryService. ;
-            cbAttributeName.DataSource = attribute;
-            //cbAttributeName.ValueMember = "Id";
-            cbAttributeName.DisplayMember = "Name";
-        }
+        //void PopulateAttributeNameCombo()
+        //{
+        //    var attribute = inventoryService.GetDistinctAttributes();
+        //    //var attribute = inventoryService. ;
+        //    cbAttributeName.DataSource = attribute;
+        //    //cbAttributeName.ValueMember = "Id";
+        //    cbAttributeName.DisplayMember = "Name";
+        //}
 
-        public void SetData(AttributeModel attributeModel)
-        {
-            attributeId = attributeModel.Id;
-            tbValue.Text = attributeModel.Value;
-            cbAttributeName.Text = attributeModel.Name;
-            this.Text = "Edit Attribute";
-        }
+        //public void SetData(AttributeModel attributeModel)
+        //{
+        //    attributeId = attributeModel.Id;
+        //    tbValue.Text = attributeModel.Value;
+        //    cbAttributeName.Text = attributeModel.Name;
+        //    this.Text = "Edit Attribute";
+        //}
 
 
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            bool isValid = ValidateAttribute();
+        //private void btnSave_Click(object sender, EventArgs e)
+        //{
+        //    bool isValid = ValidateAttribute();
 
-            if (isValid)
-            {
-                // save
-                var attributeModel = new AttributeModel
-                {
-                    Id = attributeId,
-                    Name = cbAttributeName.Text,
-                    Value = tbValue.Text
-                };
-                if (!inventoryService.AddOrUpdateAttribute(attributeModel))
-                {
-                    MessageBox.Show("Attribute-Value combo alreary in a database.");
-                }
-                else
-                {
-                    this.Close();
-                }
-            }
-        }
+        //    if (isValid)
+        //    {
+        //        // save
+        //        var attributeModel = new AttributeModel
+        //        {
+        //            Id = attributeId,
+        //            Name = cbAttributeName.Text,
+        //            Value = tbValue.Text
+        //        };
+        //        if (!inventoryService.AddOrUpdateAttribute(attributeModel))
+        //        {
+        //            MessageBox.Show("Attribute-Value combo alreary in a database.");
+        //        }
+        //        else
+        //        {
+        //            this.Close();
+        //        }
+        //    }
+        //}
 
         private bool ValidateAttribute()
         {

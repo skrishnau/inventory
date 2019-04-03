@@ -116,14 +116,14 @@ namespace IMS.Forms.Inventory.Products
                 lblProductName.Text = data.Name;
                 lblCategory.Text = data.Category;
                 lblBrandName.Text = data.Brands;
-                var attributeList = inventoryService.GetOptionList(data.Id);
+               // var attributeList = inventoryService.GetOptionList(data.Id);
                 lblProperties.Text = "";
 
-                foreach (var att in attributeList)
-                {
+                //foreach (var att in attributeList)
+                //{
 
-                    lblProperties.Text += att.Name + " " + att.Value + "\n";
-                }
+                //    lblProperties.Text += att.Name + " " + att.Value + "\n";
+                //}
 
             }
         }

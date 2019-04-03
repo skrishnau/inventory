@@ -21,6 +21,8 @@ using IMS.Forms.Inventory.Suppliers;
 using IMS.Forms.Inventory.Attributes;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.Business.Create;
+using IMS.Forms.Inventory.Adjustments;
+using IMS.Forms.Inventory.Transfers;
 
 namespace IMS.Forms.Inventory
 {
@@ -59,9 +61,15 @@ namespace IMS.Forms.Inventory
         {
            
             // order
-            _menubar.btnOrderList.Click += BtnOrderList_Click;
-            _menubar.btnNewOrder.Click += BtnNewOrder_Click;
+            //_menubar.btnOrderList.Click += BtnOrderList_Click;
+            //_menubar.btnNewOrder.Click += BtnNewOrder_Click;
+
+            // adjustments
             _menubar.btnDirectReceive.Click += BtnDirectReceive_Click;
+
+            // transfers
+            _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
+            _menubar.btnTransfer.Click += BtnTransfer_Click;
             // supplier
             _menubar.btnSupplierList.Click += BtnSupplierList_Click;
             _menubar.btnNewSupplier.Click += BtnNewSupplier_Click;
@@ -69,7 +77,36 @@ namespace IMS.Forms.Inventory
             _menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
             _menubar.btnNewWarehouse.Click += BtnNewWarehouse_Click;
         }
-        
+
+        #region Transfers
+
+        private void BtnTransfer_Click(object sender, EventArgs e)
+        {
+            // show transfer dialog
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var transferForm = Program.container.GetInstance<TransferForm>();
+                transferForm.ShowDialog();
+            }
+        }
+
+        private void BtnInventoryTransfers_Click(object sender, EventArgs e)
+        {
+            // show the list
+            _bodyTemplate.pnlBody.Controls.Clear();
+            var transferListUC = Program.container.GetInstance<InventoryTransfersListUC>();
+            transferListUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(transferListUC);
+            // set selection
+            _menubar.ClearSelection();
+            _menubar.btnSupplierList.FlatStyle = FlatStyle.Flat;
+
+        }
+
+        #endregion
+
+
+
         #region Supplier
 
         private void BtnSupplierList_Click(object sender, EventArgs e)
@@ -98,33 +135,17 @@ namespace IMS.Forms.Inventory
 
 
 
-        #region Order
-
-        private void BtnOrderList_Click(object sender, EventArgs e)
-        {
-            var purchaseListUC = Program.container.GetInstance<PurchaseListUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            purchaseListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(purchaseListUC);
-            // set selection
-            _menubar.ClearSelection();
-            _menubar.btnOrderList.FlatStyle = FlatStyle.Flat;
-        }
-
-        private void BtnNewOrder_Click(object sender, EventArgs e)
+        #region Adjustments
+        
+        private void BtnDirectReceive_Click(object sender, EventArgs e)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var orderCreate = Program.container.GetInstance<PurchaseOrderForm>();
-                orderCreate.ShowInTaskbar = false;
-                orderCreate.ShowDialog();
+                var directReceiveForm = Program.container.GetInstance<DirectReceiveForm>();
+                directReceiveForm.ShowDialog();
             }
         }
 
-        private void BtnDirectReceive_Click(object sender, EventArgs e)
-        {
-
-        }
 
         #endregion
 

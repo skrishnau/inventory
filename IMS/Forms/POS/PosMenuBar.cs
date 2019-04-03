@@ -21,7 +21,6 @@ namespace IMS.Forms.POS
 
         internal void ClearSelection()
         {
-            btnOrderList.FlatStyle = FlatStyle.Standard;
             btnCustomerList.FlatStyle = FlatStyle.Standard;
         }
     }

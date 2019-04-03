@@ -40,9 +40,7 @@ namespace IMS.Forms.POS
 
         private void InitializeMenuBarButtonEvents()
         {
-            // order
-            _menubar.btnOrderList.Click += BtnOrderList_Click;
-            _menubar.btnNewOrder.Click += BtnNewOrder_Click;
+           
             // direct
             _menubar.btnDirectSell.Click += BtnDirectSell_Click;
             // customer
@@ -57,26 +55,7 @@ namespace IMS.Forms.POS
 
 
 
-        #region Orders
-
-        private void BtnOrderList_Click(object sender, EventArgs e)
-        {
-            _bodyTemplate.pnlBody.Controls.Clear();
-            var saleUc = Program.container.GetInstance<SaleUC>();
-            saleUc.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(saleUc);
-            // set selection
-            _menubar.ClearSelection();
-            _menubar.btnOrderList.FlatStyle = FlatStyle.Flat;
-
-        }
-
-        private void BtnNewOrder_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
+       
 
 
         private void BtnDirectSell_Click(object sender, EventArgs e)

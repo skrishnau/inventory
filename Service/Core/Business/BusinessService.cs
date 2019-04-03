@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTO.Core.Business;
 using Infrastructure.Context;
+using Infrastructure.Entities.Business;
 using ViewModel.Core.Business;
 
 namespace Service.Core.Business
@@ -22,7 +24,8 @@ namespace Service.Core.Business
             var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branch.Id);
             if(dbEntity == null)
             {
-                var branchEntity = branch.ToEntity();
+                var branchEntity = BranchMapper.MapToEntity(branch);//branch.ToEntity();
+                
                 branchEntity.CreatedAt = DateTime.Now;
                 branchEntity.UpdatedAt = DateTime.Now;
                 _context.Branch.Add(branchEntity);

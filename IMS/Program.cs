@@ -34,6 +34,10 @@ using IMS.Forms.Generals.Branches;
 using IMS.Forms.Business.Create;
 using IMS.Forms.UserManagement;
 using IMS.Forms.UserManagement.Users;
+using IMS.Listeners;
+using IMS.Forms.Orders;
+using IMS.Forms.Inventory.Adjustments;
+using IMS.Forms.Inventory.Transfers;
 
 namespace IMS
 {
@@ -74,6 +78,9 @@ namespace IMS
             // container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Singleton);
             // container.Register<IUserContext, WinFormsUserContext>();
             container.Register<DatabaseContext>(Lifestyle.Singleton);
+            // change listener
+            container.Register<IDatabaseChangeListener, DatabaseChangeListener>(Lifestyle.Singleton);
+
             container.Register<IInventoryService, InventoryService>(Lifestyle.Singleton);
             container.Register<ILDapService, ActiveDirectory>(Lifestyle.Singleton);
 
@@ -101,6 +108,9 @@ namespace IMS
 
             container.Register<InventoryUC>(Lifestyle.Scoped);
             container.Register<InventoryMenuBar>(Lifestyle.Scoped);
+
+            container.Register<OrdersUC>(Lifestyle.Scoped);
+            container.Register<OrdersMenuBar>(Lifestyle.Scoped);
 
             container.Register<PosUC>(Lifestyle.Scoped);
             container.Register<PosMenuBar>(Lifestyle.Scoped);
@@ -138,7 +148,14 @@ namespace IMS
             container.Register<SaleUC>(Lifestyle.Scoped);
             container.Register<SettingsForm>(Lifestyle.Scoped);
 
-            
+            // adjustments
+            container.Register<DirectReceiveForm>(Lifestyle.Scoped);
+
+            // transfers
+            container.Register<InventoryTransfersListUC>(Lifestyle.Scoped);
+            container.Register<TransferForm>(Lifestyle.Scoped);
+
+
             // Optionally verify the container.
             container.Verify();
         }

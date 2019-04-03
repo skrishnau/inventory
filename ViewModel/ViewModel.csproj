@@ -89,7 +89,7 @@
     <Compile Include="Core\Inventory\BrandModel.cs" />
     <Compile Include="Core\Inventory\CategoryModel.cs" />
     <Compile Include="Core\Inventory\ProductModel.cs" />
-    <Compile Include="Core\Inventory\ProductOptionModel.cs" />
+    <Compile Include="Core\Inventory\ProductAttributeModel.cs" />
     <Compile Include="Core\Inventory\VariantModel.cs" />
     <Compile Include="Core\Sales\SaleItemModel.cs" />
     <Compile Include="Core\Purchases\PurchaseItemModel.cs" />

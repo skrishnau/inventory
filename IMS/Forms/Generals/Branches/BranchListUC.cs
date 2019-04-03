@@ -11,18 +11,34 @@ using IMS.Forms.Common.Display;
 using IMS.Forms.Business.Create;
 using SimpleInjector.Lifestyles;
 using Service.Core.Business;
+using IMS.Listeners;
+using IMS.Listeners.Business;
 
 namespace IMS.Forms.Generals.Branches
 {
     public partial class BranchListUC : UserControl
     {
         private readonly IBusinessService _businessService;
-        public BranchListUC(IBusinessService businessService)
+        private readonly IDatabaseChangeListener _listener;
+        public BranchListUC(IBusinessService businessService, IDatabaseChangeListener listener)
         {
             _businessService = businessService;
+            _listener = listener;
+
             InitializeComponent();
 
             InitializeHeader();
+
+            PopulateBranchData();
+
+            _listener.BranchUpdated += _listener_OnBranchUpdate;
+        }
+
+        // other functions update the list via event
+        private void _listener_OnBranchUpdate(object sender, BranchEventArgs e)
+        {
+            // TODO: update the record specifically
+            PopulateBranchData();
         }
 
         private void InitializeHeader()
@@ -48,7 +64,7 @@ namespace IMS.Forms.Generals.Branches
             {
                 var branchCreate = Program.container.GetInstance<BranchCreate>();
                 branchCreate.ShowDialog();
-                PopulateBranchData();
+                //PopulateBranchData();
             }
         }
 
