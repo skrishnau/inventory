@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Context;
+using Infrastructure.Entities.Business;
 using ViewModel.Core.Business;
 
 namespace Service.Core.Business
@@ -12,28 +13,50 @@ namespace Service.Core.Business
     {
         private readonly DatabaseContext _context;
 
-        public BusinessService( DatabaseContext context)
+        public BusinessService(DatabaseContext context)
         {
             _context = context;
         }
 
-        public void AddOrUpdateBranch(BranchModel branch)
+        public int AddOrUpdateBranch(BranchModel branch)
         {
             var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branch.Id);
-            if(dbEntity == null)
+            if (dbEntity == null)
             {
+                var entity = _context.Branch.FirstOrDefault(x => x.Name == branch.Name);
+                if (entity != null)
+                    return 0;
+                // branch save
                 var branchEntity = branch.ToEntity();
                 branchEntity.CreatedAt = DateTime.Now;
                 branchEntity.UpdatedAt = DateTime.Now;
                 _context.Branch.Add(branchEntity);
+                if (branchEntity.Warehouses == null)
+                    branchEntity.Warehouses = new List<Warehouse>();
+                var warehouseEntity = branch.Warehouses[0].ToEntity();
+                warehouseEntity.CreatedAt = DateTime.Now;
+                warehouseEntity.UpdatedAt = DateTime.Now;
+                branchEntity.Warehouses.Add(warehouseEntity);
+
+                _context.SaveChanges();
+                // warehouse save
+               /* warehouseEntity.BranchId = branchEntity.Id;
+                warehouseEntity.CreatedAt = DateTime.Now;
+                warehouseEntity.UpdatedAt = DateTime.Now;
+                _context.Warehouse.Add(warehouseEntity);
+                _context.SaveChanges();*/
+                //entity = _context.Branch.FirstOrDefault(x => x.Name == branch.Name);
+                return branchEntity.Id;
             }
             else
             {
                 dbEntity.Name = branch.Name;
                 dbEntity.UpdatedAt = DateTime.Now;
+                _context.SaveChanges();
+                return dbEntity.Id;
             }
-            _context.SaveChanges();
-            
+
+
         }
 
         public void AddOrUpdateCounter(CounterModel counter)
@@ -66,6 +89,7 @@ namespace Service.Core.Business
                 warehouseEntity.CreatedAt = DateTime.Now;
                 warehouseEntity.UpdatedAt = DateTime.Now;
                 _context.Warehouse.Add(warehouseEntity);
+                //_context.SaveChanges();
             }
             else
             {
@@ -77,6 +101,16 @@ namespace Service.Core.Business
             }
             _context.SaveChanges();
 
+        }
+
+        public void DeleteBranch(BranchModel model)
+        {
+            var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == model.Id);
+            if (dbEntity != null)
+            {
+                dbEntity.DeletedAt = DateTime.Now;
+                _context.SaveChanges();
+            }
         }
 
         public List<BranchModel> GetBranchList()

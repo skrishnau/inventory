@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using SimpleInjector.Lifestyles;
 using IMS.Forms.Users.Create;
 using Service.Core.Users;
+using ViewModel.Core.Users;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Users
 {
@@ -82,9 +84,34 @@ namespace IMS.Forms.Users
                 var userCreate = Program.container.GetInstance<UserCreate>();
                 userCreate.ShowDialog();
                 Populate();
+                PopulateBasicInfoData();
             }
         }
 
-        
+        private void btnEditUser_Click(object sender, EventArgs e)
+        {
+            var user = (UserModel)gvUserList.SelectedRows[0].DataBoundItem;
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var userCreate = Program.container.GetInstance<UserCreate>();
+                userCreate.PopulateUserForm(user);
+                userCreate.ShowDialog();
+                Populate();
+                PopulateBasicInfoData();
+            }
+        }
+
+        private void btnDeleteUser_Click(object sender, EventArgs e)
+        {
+            var user = (UserModel)gvUserList.SelectedRows[0].DataBoundItem;
+            var delete = MessageBox.Show(this, "Do you want to delete the user " + user.Name + "?", "Delete User???", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (delete.Equals(DialogResult.Yes))
+            {
+                userService.DeleteUser(user);
+                PopupMessage.ShowPopupMessage("Delete Success", "User is Successsfully Deleted", PopupMessageType.SUCCESS);
+                Populate();
+            }
+                
+        }
     }
 }

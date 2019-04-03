@@ -32,11 +32,12 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.tbBranchName = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(296, 66);
+            this.btnCancel.Location = new System.Drawing.Point(295, 105);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
@@ -47,7 +48,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(150, 66);
+            this.btnSave.Location = new System.Drawing.Point(150, 105);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
@@ -75,11 +76,21 @@
             this.label2.TabIndex = 26;
             this.label2.Text = "Branch Name";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(413, 17);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Note: Warehouse with the same name as branch will be created.";
+            // 
             // BranchCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 114);
+            this.ClientSize = new System.Drawing.Size(448, 151);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tbBranchName);
@@ -97,5 +108,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.MaskedTextBox tbBranchName;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

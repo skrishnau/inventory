@@ -16,7 +16,7 @@ namespace ViewModel.Core.Customers
         public string Address { get; set; }   
         public string Phone { get; set; }
         public string Gender { get; set; }
-        public bool? IsMarried { get; set; }
+        public string IsMarried { get; set; }
         public int BasicInfoId { get; set; }
 
         // customer specific information 

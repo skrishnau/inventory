@@ -25,7 +25,7 @@ namespace ViewModel.Core.Suppliers
         // Gender will be empty in case of companies
         public string Gender { get; set; }
         // null if user doesn't want to provide or if its company
-        public bool? IsMarried { get; set; }
+        public string IsMarried { get; set; }
         // Basic info of every Customer and Supplier are entered in User table 
         public int BasicInfoId { get; set; }
 

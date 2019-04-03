@@ -10,6 +10,37 @@ namespace IMS.Forms.Common
 {
     public class PopupMessage
     {
+        // By Rajkumar:
+        public static void FancyPopupMessage(string title, string message, PopupMessageType popupMessageType, PopUpLocation popUpLocation)
+        {
+            PopupNotifier notifier = new PopupNotifier();
+            
+
+            switch (popupMessageType)
+            {
+                case PopupMessageType.ERROR:
+                    notifier.BodyColor = Color.Red;
+                    notifier.ContentColor = Color.White;
+                    
+                    break;
+                default:
+
+                    break;
+            }
+        }
+
+        internal void SetLocation(PopUpLocation popUpLocation)
+        {
+
+        }
+
+
+
+
+
+
+
+        // BY SK.
         public static void ShowPopupMessage(string title, string message, PopupMessageType messageType)
         {
             PopupNotifier popup = new PopupNotifier();
@@ -32,7 +63,7 @@ namespace IMS.Forms.Common
                 contentColor = Color.DarkBlue;
                 image = Properties.Resources.icons8_Info_52px;
             }
-            else if(messageType == PopupMessageType.SUCCESS)
+            else if (messageType == PopupMessageType.SUCCESS)
             {
                 titleColor = Color.Green;
                 contentColor = Color.DarkGreen;
@@ -54,6 +85,14 @@ namespace IMS.Forms.Common
         INFO, // has blue color as a template
         SUCCESS, // has green color as a template
         ERROR, // has red color as a template
-        NONE // has black/white template
+        NONE, // has black/white template
+        WARNING //has lightpink color 
+    }
+
+    public enum PopUpLocation
+    {
+        TOP, BOTTOM, LEFT, RIGHT, CENTER,
+        TOPLEFT, TOPRIGHT,
+        BOTTOMLEFT, BOTTOMRIGHT
     }
 }

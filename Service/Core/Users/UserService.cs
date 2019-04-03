@@ -11,6 +11,7 @@ namespace Service.Core.Users
     public class UserService : IUserService 
     {
         private readonly DatabaseContext _context;
+
         public UserService(DatabaseContext context)
         {
             _context = context;
@@ -60,10 +61,40 @@ namespace Service.Core.Users
                 dbEntity.Password = userModel.Password;
                 dbEntity.Username = userModel.Username;
                 dbEntity.UserType = userModel.UserType;
-                dbEntity.BasicInfoId = userModel.BasicInfoId;
+                dbEntity.BasicInfo.Address = userModel.Address;
+                dbEntity.BasicInfo.UpdatedAt = DateTime.Now;
+                dbEntity.BasicInfo.DOB = userModel.DOB;
+                dbEntity.BasicInfo.Email = userModel.Email;
+                dbEntity.BasicInfo.Gender = userModel.Gender;
+                dbEntity.BasicInfo.IsCompany = userModel.IsCompany;
+                dbEntity.BasicInfo.IsMarried = userModel.IsMarried;
+                dbEntity.BasicInfo.Name = userModel.Name;
+                dbEntity.BasicInfo.Phone = userModel.Phone;
+                dbEntity.BasicInfo.Website = userModel.Website;
+
+               // dbEntity.BasicInfoId = userModel.BasicInfoId;
                 dbEntity.CanLogin = userModel.CanLogin;
+                //dbEntity.Id = userModel.Id;
             }
             _context.SaveChanges();
+        }
+
+        public void DeleteUser(UserModel user)
+        {
+            var dbEntity = _context.User.FirstOrDefault(x => x.Id == user.Id);
+            if(dbEntity != null)
+            {
+                //var basicInfoId = dbEntity.BasicInfo.Id;
+                dbEntity.DeletedAt = DateTime.Now;
+                //dbEntity.BasicInfo.DeletedAt = DateTime.Now;
+                dbEntity.CanLogin = false;
+                //var basicInfoEntity = _context.BasicInfo.FirstOrDefault(y => y.Id == basicInfoId);
+                //if(basicInfoEntity != null)
+                //{
+                //    basicInfoEntity.DeletedAt = DateTime.Now;
+                //}
+                _context.SaveChanges();
+            }
         }
 
         public List<BasicInfoModel> GetBasicInfoList()
@@ -81,8 +112,7 @@ namespace Service.Core.Users
                    Email = x.Email,
                    Gender = x.Gender,
                    IsCompany = x.IsCompany,
-                   
-
+                   Website = x.Website,
 
                })
                .ToList();
@@ -100,7 +130,16 @@ namespace Service.Core.Users
                     Password = x.Password,
                     Username = x.Username,
                     UserType = x.UserType,
-                    Id = x.Id
+                    Id = x.Id,
+                    Name = x.BasicInfo.Name,
+                    Email = x.BasicInfo.Email,
+                    DOB = x.BasicInfo.DOB,
+                    IsCompany = x.BasicInfo.IsCompany,
+                    IsMarried = x.BasicInfo.IsMarried,
+                    Phone = x.BasicInfo.Phone,
+                    Website =x.BasicInfo.Website,
+                    Gender = x.BasicInfo.Gender,
+                    Address = x.BasicInfo.Address,
 
 
                 })

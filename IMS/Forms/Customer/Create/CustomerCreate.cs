@@ -34,7 +34,7 @@ namespace IMS.Forms.Customer.Create
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 DeliveryAddress = tbDeliveryAddress.Text,
-                IsMarried = bool.Parse(cbIsMarried.Text)
+                IsMarried = cbIsMarried.Text
             };
 
             customerService.AddOrUpdateCustomer(model);

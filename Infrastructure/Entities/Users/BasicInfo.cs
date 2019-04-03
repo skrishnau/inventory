@@ -25,7 +25,9 @@ namespace Infrastructure.Entities.Users
         // Gender will be empty in case of companies
         public string Gender { get; set; }
         // null if user doesn't want to provide or if its company
-        public bool? IsMarried { get; set; }
+        public string IsMarried { get; set; }
+
+        public string Website { get; set; }
         
         
         // time stamps

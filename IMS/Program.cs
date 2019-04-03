@@ -27,6 +27,7 @@ using IMS.Forms.Sales;
 using Service.Core.Sales;
 using IMS.Forms.Settings;
 using Service.Core.Settings;
+using IMS.Forms.Business.Delete;
 
 namespace IMS
 {
@@ -100,6 +101,7 @@ namespace IMS
             container.Register<NewItemAddForm>(Lifestyle.Scoped);
             container.Register<SaleUC>(Lifestyle.Scoped);
             container.Register<SettingsForm>(Lifestyle.Scoped);
+           // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
             
 
 

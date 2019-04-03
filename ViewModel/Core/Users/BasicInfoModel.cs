@@ -15,11 +15,12 @@ namespace ViewModel.Core.Users
         //basic informations
         public string Name { get; set; }
         public string Email { get; set; }
+        public string Website { get; set; }
         public DateTime? DOB { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Gender { get; set; }
-        public bool? IsMarried { get; set; }
+        public string IsMarried { get; set; }
 
         // time stamps 
         public DateTime CreatedAt { get; set; }
@@ -41,7 +42,9 @@ namespace ViewModel.Core.Users
                 IsMarried = IsMarried,
                 Name = Name,
                 Phone = Phone,
-                UpdatedAt = UpdatedAt
+                UpdatedAt = UpdatedAt,
+                Website = Website,
+                
             };
         }
 

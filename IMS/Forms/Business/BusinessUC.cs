@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using IMS.Forms.Business.Create;
 using SimpleInjector.Lifestyles;
 using Service.Core.Business;
+using ViewModel.Core.Business;
+using IMS.Forms.Business.Delete;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Business
 {
@@ -34,6 +37,10 @@ namespace IMS.Forms.Business
                 branchCreate.ShowInTaskbar = false;
                 branchCreate.ShowDialog();
                 PopulateBranchData();
+
+                //Also populate warehousedata since warehouse with same name is created
+                // when new branch is added
+                PopulateWarehouseData();
 
             }
                 
@@ -82,6 +89,46 @@ namespace IMS.Forms.Business
                 wareHouseCreate.ShowInTaskbar = false;
                 wareHouseCreate.ShowDialog();
                 PopulateWarehouseData();
+            }
+        }
+
+        //edit branch
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var branch = (BranchModel)gvBranch.SelectedRows[0].DataBoundItem;
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var branchCreate = Program.container.GetInstance<BranchCreate>();
+                branchCreate.ShowInTaskbar = false;
+                branchCreate.SetData(branch);
+                branchCreate.ShowDialog();
+                PopulateBranchData();
+            }
+        }
+
+        private void btnDeleteBranch_Click(object sender, EventArgs e)
+        {
+            var  branch = (BranchModel)gvBranch.SelectedRows[0].DataBoundItem;
+            /*using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var branchDelete = Program.container.GetInstance<BranchDeleteConfirmationForm>();
+                branchDelete.ShowInTaskbar = false;
+                branchDelete.SetData(branch);
+                branchDelete.ShowDialog();
+                PopulateBranchData();
+            } */
+            //var branchDelete = new BranchDeleteConfirmationForm(businessService, branch);
+
+            var result = MessageBox.Show(this, "Are you sure to delete branch " + branch.Name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result.Equals(DialogResult.Yes))
+            {
+                //branchDelete.ShowInTaskbar = false;
+                //branchDelete.SetData(branch);
+                //branchDelete.ShowDialog();
+                businessService.DeleteBranch(branch);
+                //MessageBox.Show("Branch Deleted!!!");
+                PopupMessage.ShowPopupMessage("Delete Success", "Branch is successfully deleted!", PopupMessageType.SUCCESS);
+                PopulateBranchData();
             }
         }
     }

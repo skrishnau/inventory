@@ -89,6 +89,12 @@
     <Compile Include="Forms\Business\Create\WarehouseCreate.Designer.cs">
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Business\Delete\BranchDeleteConfirmationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Business\Delete\BranchDeleteConfirmationForm.Designer.cs">
+      <DependentUpon>BranchDeleteConfirmationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Common\PopupMessage.cs" />
     <Compile Include="Forms\Common\ComboWithLabelUC.cs">
       <SubType>UserControl</SubType>
@@ -300,6 +306,9 @@
     <EmbeddedResource Include="Forms\Business\Create\WarehouseCreate.resx">
       <DependentUpon>WarehouseCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Business\Delete\BranchDeleteConfirmationForm.resx">
+      <DependentUpon>BranchDeleteConfirmationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\ComboWithLabelUC.resx">
       <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -425,7 +434,6 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Warehouses\" />
-    <Folder Include="Forms\NewFolder1\" />
     <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />

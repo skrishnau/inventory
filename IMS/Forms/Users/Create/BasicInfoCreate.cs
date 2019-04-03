@@ -48,7 +48,7 @@ namespace IMS.Forms.Users.Create
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 IsCompany = cbIsCompany.Checked,
-                IsMarried = false,
+                IsMarried = "",
                 Name = tbName.Text,
                 Phone = tbPhone.Text,
                 Id = basicInfoId

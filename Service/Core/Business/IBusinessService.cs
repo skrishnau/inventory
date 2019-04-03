@@ -9,7 +9,7 @@ namespace Service.Core.Business
 {
     public interface IBusinessService
     {
-        void AddOrUpdateBranch(BranchModel branch);
+        int AddOrUpdateBranch(BranchModel branch);
 
         void AddOrUpdateCounter(CounterModel counter);
 
@@ -20,6 +20,6 @@ namespace Service.Core.Business
         List<CounterModel> GetCounterList();
 
         List<WarehouseModel> GetWarehouseList();
-
+        void DeleteBranch(BranchModel model);
     }
 }

@@ -18,6 +18,9 @@ namespace ViewModel.Core.Business
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
+
+        public List<WarehouseModel> Warehouses { get; set; }
+
         public Branch ToEntity()
         {
             return new Branch

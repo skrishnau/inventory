@@ -32,12 +32,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gvUserList = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
+            this.btnEditUser = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -53,6 +50,19 @@
             this.btnEditBasicInfo = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddBasicInfo = new System.Windows.Forms.Button();
+            this.UsersName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gender1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsMarried1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsCompany1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Website1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserType1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CanLogIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUserList)).BeginInit();
@@ -103,11 +113,19 @@
             // 
             this.gvUserList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvUserList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.UsersName,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
+            this.DOB,
+            this.Gender1,
+            this.IsMarried1,
+            this.IsCompany1,
+            this.Phone1,
+            this.Email1,
+            this.Website1,
+            this.UserType1,
+            this.CanLogIn,
+            this.dataGridViewTextBoxColumn3});
             this.gvUserList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvUserList.Location = new System.Drawing.Point(3, 72);
             this.gvUserList.Name = "gvUserList";
@@ -116,39 +134,10 @@
             this.gvUserList.Size = new System.Drawing.Size(747, 617);
             this.gvUserList.TabIndex = 12;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Username";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Username";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Password";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Password";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "BasicInfoId";
-            this.dataGridViewTextBoxColumn3.HeaderText = "BasicInfo";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "UserType";
-            this.dataGridViewTextBoxColumn4.HeaderText = "User Type";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "CanLogin";
-            this.dataGridViewTextBoxColumn5.HeaderText = "CanLogin";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnDeleteUser);
+            this.panel2.Controls.Add(this.btnEditUser);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -156,6 +145,26 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(747, 69);
             this.panel2.TabIndex = 11;
+            // 
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Location = new System.Drawing.Point(319, 26);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteUser.TabIndex = 7;
+            this.btnDeleteUser.Text = "Delete";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
+            // 
+            // btnEditUser
+            // 
+            this.btnEditUser.Location = new System.Drawing.Point(216, 23);
+            this.btnEditUser.Name = "btnEditUser";
+            this.btnEditUser.Size = new System.Drawing.Size(76, 29);
+            this.btnEditUser.TabIndex = 6;
+            this.btnEditUser.Text = "Edit";
+            this.btnEditUser.UseVisualStyleBackColor = true;
+            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
             // 
             // label3
             // 
@@ -304,6 +313,93 @@
             this.btnAddBasicInfo.UseVisualStyleBackColor = true;
             this.btnAddBasicInfo.Click += new System.EventHandler(this.btnAddBasicInfo_Click);
             // 
+            // UsersName
+            // 
+            this.UsersName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UsersName.DataPropertyName = "Name";
+            this.UsersName.HeaderText = "Name";
+            this.UsersName.Name = "UsersName";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Username";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Username";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 152;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Password";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Password";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // DOB
+            // 
+            this.DOB.DataPropertyName = "DOB";
+            this.DOB.HeaderText = "DOB/Estd";
+            this.DOB.Name = "DOB";
+            this.DOB.Visible = false;
+            // 
+            // Gender1
+            // 
+            this.Gender1.DataPropertyName = "Gender";
+            this.Gender1.HeaderText = "Gender";
+            this.Gender1.Name = "Gender1";
+            this.Gender1.Visible = false;
+            // 
+            // IsMarried1
+            // 
+            this.IsMarried1.DataPropertyName = "IsMarried";
+            this.IsMarried1.HeaderText = "IsMarried";
+            this.IsMarried1.Name = "IsMarried1";
+            this.IsMarried1.Visible = false;
+            // 
+            // IsCompany1
+            // 
+            this.IsCompany1.DataPropertyName = "IsCompany";
+            this.IsCompany1.HeaderText = "IsCompany";
+            this.IsCompany1.Name = "IsCompany1";
+            // 
+            // Phone1
+            // 
+            this.Phone1.DataPropertyName = "Phone";
+            this.Phone1.HeaderText = "Phone";
+            this.Phone1.Name = "Phone1";
+            // 
+            // Email1
+            // 
+            this.Email1.DataPropertyName = "Email";
+            this.Email1.HeaderText = "Email";
+            this.Email1.Name = "Email1";
+            // 
+            // Website1
+            // 
+            this.Website1.DataPropertyName = "Website";
+            this.Website1.HeaderText = "Website";
+            this.Website1.Name = "Website1";
+            // 
+            // UserType1
+            // 
+            this.UserType1.DataPropertyName = "UserType";
+            this.UserType1.HeaderText = "UserType";
+            this.UserType1.Name = "UserType1";
+            // 
+            // CanLogIn
+            // 
+            this.CanLogIn.DataPropertyName = "CanLogIn";
+            this.CanLogIn.HeaderText = "CanLogIn";
+            this.CanLogIn.Name = "CanLogIn";
+            this.CanLogIn.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "BasicInfoId";
+            this.dataGridViewTextBoxColumn3.HeaderText = "BasicInfo";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Visible = false;
+            // 
             // UserUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -328,11 +424,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView gvUserList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
@@ -349,5 +440,20 @@
         private System.Windows.Forms.Button btnEditBasicInfo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddBasicInfo;
+        private System.Windows.Forms.Button btnEditUser;
+        private System.Windows.Forms.Button btnDeleteUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UsersName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DOB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gender1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsMarried1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsCompany1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Website1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserType1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CanLogIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
     }
 }

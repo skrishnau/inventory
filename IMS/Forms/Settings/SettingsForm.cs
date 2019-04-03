@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IMS.Forms.Common;
 using Infrastructure.Context;
 using Service.Core.Settings;
 using ViewModel.Core.Settings;
@@ -102,7 +103,7 @@ namespace IMS.Forms.Settings
             };
 
             if (appSettingService.SaveCompanyInfoSetting(companyInfoSettingModel))
-                MessageBox.Show("Company Info Updated!!!");
+                PopupMessage.ShowPopupMessage("Update Success", "Company Setting Successfully Updated", PopupMessageType.SUCCESS);
         }
     }
 }

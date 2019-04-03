@@ -29,6 +29,8 @@ namespace ViewModel.Core.Users
         public string Name { get; set; }
         // email address of the user to which the system sends mails to mail subscribers
         public string Email { get; set; }
+
+        public string Website { get; set; }
         // Registration Date in case of company; or birth date in case of person
         public DateTime? DOB { get; set; }
         // Address of User; in case of company its Business Location
@@ -38,7 +40,7 @@ namespace ViewModel.Core.Users
         // Gender will be empty in case of companies
         public string Gender { get; set; }
         // null if user doesn't want to provide or if its company
-        public bool? IsMarried { get; set; }
+        public string IsMarried { get; set; }
 
         public bool IsCompany { get; set; }
         // Basic info of every Customer and Supplier are entered in User table 
@@ -69,7 +71,8 @@ namespace ViewModel.Core.Users
                     Gender = Gender,
                     Name = Name,
                     Phone = Phone,
-                    UpdatedAt = UpdatedAt
+                    UpdatedAt = UpdatedAt,
+                    Website = Website,
                     
                 },
 

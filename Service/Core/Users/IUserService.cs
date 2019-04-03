@@ -16,6 +16,6 @@ namespace Service.Core.Users
         void AddOrUpdateBasicInfo(BasicInfoModel basicInfoModel);
 
         List<BasicInfoModel> GetBasicInfoList();
-
+        void DeleteUser(UserModel user);
     }
 }
