@@ -1,9 +1,11 @@
 ﻿using Infrastructure.Entities.Inventory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 
 namespace DTO.Core.Inventory
@@ -24,12 +26,12 @@ namespace DTO.Core.Inventory
                 CreatedAt = GetDateShortString(x.CreatedAt),
                 UpdatedAt = GetDateShortString(x.UpdatedAt),
                 Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
-               // OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
+                // OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
                 Category = x.Category.Name,
                 MinStockCountForAlert = x.AlertThreshold,
                 QuantityInStocks = x.QuantityInStock,
                 ShowStockAlerts = x.Alert,
-                VariantCount = x.Variants == null ? 0: x.Variants.Count
+                VariantCount = x.Variants == null ? 0 : x.Variants.Count
             };
         }
 
@@ -71,6 +73,72 @@ namespace DTO.Core.Inventory
 
             }
             return builder.ToString();
+        }
+
+        public static ProductModel MapToProductModel(Product product)
+        {
+            return new ProductModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+            };
+        }
+
+        public static ProductModelForSave MapToProductModelForSave(Product product)
+        {
+            return new ProductModelForSave()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                ProductAttributes = MapToProductAttributeModel(product.ProductAttributes),
+                Brands = BrandMapper.MapToBrandModel(product.Brands.Where(x=>x.DeletedAt==null).ToList()),
+                CategoryId = product.CategoryId,
+                Category = CategoryMapper.MapToCategoryModel(product.Category),
+                CreatedAt = product.CreatedAt,
+                DeletedAt = product.DeletedAt,
+                UpdatedAt = product.UpdatedAt,
+                ShowStockAlerts = product.Alert,
+                MinStockCountForAlert = product.AlertThreshold,
+                Variants = MapToProductVariant(product.Variants),
+            };
+        }
+
+        private static List<ProductVariantModel> MapToProductVariant(ICollection<Variant> variants)
+        {
+            var list = new List<ProductVariantModel>();
+            foreach (var vari in variants)
+            {
+                var mod = new ProductVariantModel()
+                {
+                    Alert = vari.Alert ?? false,
+                    AlertThreshold = vari.MinStockCountForAlert ?? 0,
+                    Id = vari.Id,
+                    SKU = vari.SKU,
+                    Attributes = JsonConvert.DeserializeObject<List<NameValuePair>>(vari.AttributesJSON),
+                };
+                // parse attribute json
+                // foreach (var att in vari.VariantAttributes)
+                // {
+                //     mod.Attributes.Add(new NameValuePair(att.ProductAttribute.Attribute, att.Value));
+                // }
+                list.Add(mod);
+            }
+            return list;
+        }
+
+        public static List<ProductAttributeModel> MapToProductAttributeModel(ICollection<ProductAttribute> collection)
+        {
+            var list = new List<ProductAttributeModel>();
+            foreach (var col in collection)
+            {
+                list.Add(new ProductAttributeModel()
+                {
+                    Attribute = col.Attribute,
+                    Id = col.Id,
+                    ProductId = col.ProductId
+                });
+            }
+            return list;
         }
     }
 }

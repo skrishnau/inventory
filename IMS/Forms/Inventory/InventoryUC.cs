@@ -59,7 +59,11 @@ namespace IMS.Forms.Inventory
 
         private void InitializeMenubarButtonEvents()
         {
-           
+            // product
+            _menubar.btnProductList.Click += BtnProductList_Click;
+            _menubar.btnCategoryList.Click += BtnCategoryList_Click;
+            // _menubar.btnNewProduct.Click += BtnNewProduct_Click;
+
             // order
             //_menubar.btnOrderList.Click += BtnOrderList_Click;
             //_menubar.btnNewOrder.Click += BtnNewOrder_Click;
@@ -72,11 +76,35 @@ namespace IMS.Forms.Inventory
             _menubar.btnTransfer.Click += BtnTransfer_Click;
             // supplier
             _menubar.btnSupplierList.Click += BtnSupplierList_Click;
-            _menubar.btnNewSupplier.Click += BtnNewSupplier_Click;
             // warehouse
             _menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
-            _menubar.btnNewWarehouse.Click += BtnNewWarehouse_Click;
         }
+
+        #region Products
+
+        private void BtnProductList_Click(object sender, EventArgs e)
+        {
+            var productListUC = Program.container.GetInstance<ProductListUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            productListUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(productListUC);
+
+            _menubar.ClearSelection();
+            _menubar.btnProductList.FlatStyle = FlatStyle.Flat;
+        }
+
+        private void BtnCategoryList_Click(object sender, EventArgs e)
+        {
+            var categoryListUC = Program.container.GetInstance<CategoryListUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            categoryListUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(categoryListUC);
+
+            _menubar.ClearSelection();
+            _menubar.btnCategoryList.FlatStyle = FlatStyle.Flat;
+        }
+
+        #endregion
 
         #region Transfers
 
@@ -120,16 +148,6 @@ namespace IMS.Forms.Inventory
             _menubar.btnSupplierList.FlatStyle = FlatStyle.Flat;
         }
 
-        private void BtnNewSupplier_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var supplierCreate = Program.container.GetInstance<SupplierCreate>();// (supplier);
-                supplierCreate.ShowInTaskbar = false;
-                supplierCreate.ShowDialog();
-            }
-        }
-
         #endregion
 
 
@@ -163,18 +181,29 @@ namespace IMS.Forms.Inventory
             _menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
-        private void BtnNewWarehouse_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var wareHouseCreate = Program.container.GetInstance<WarehouseCreate>();
-                wareHouseCreate.ShowInTaskbar = false;
-                wareHouseCreate.ShowDialog();
-                //PopulateWarehouseData();
-            }
-        }
-
         #endregion
 
     }
 }
+
+
+//private void BtnNewSupplier_Click(object sender, EventArgs e)
+//{
+//    using (AsyncScopedLifestyle.BeginScope(Program.container))
+//    {
+//        var supplierCreate = Program.container.GetInstance<SupplierCreate>();// (supplier);
+//        supplierCreate.ShowInTaskbar = false;
+//        supplierCreate.ShowDialog();
+//    }
+//}
+
+//private void BtnNewWarehouse_Click(object sender, EventArgs e)
+//{
+//    using (AsyncScopedLifestyle.BeginScope(Program.container))
+//    {
+//        var wareHouseCreate = Program.container.GetInstance<WarehouseCreate>();
+//        wareHouseCreate.ShowInTaskbar = false;
+//        wareHouseCreate.ShowDialog();
+//        //PopulateWarehouseData();
+//    }
+//}

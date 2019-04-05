@@ -36,11 +36,18 @@ namespace Infrastructure.Entities.Inventory
         // Min. stock count which triggers alert; if null then take Product's (same) column data
         public int? MinStockCountForAlert { get; set; }
 
+        public string AttributesJSON { get; set; }
+
+        // time stamps
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
         // ====== Table Objects ====== //
         public virtual Product Product { get; set; }
+       
 
-        public virtual ICollection<VariantAttribute> VariantAttributes { get; set; }
-      
+        //  public virtual ICollection<VariantAttribute> VariantAttributes { get; set; }
+
     }
 }

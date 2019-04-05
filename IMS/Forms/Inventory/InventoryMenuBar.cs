@@ -20,8 +20,9 @@ namespace IMS.Forms.Inventory
 
         public void ClearSelection()
         {
+            btnProductList.FlatStyle = FlatStyle.Standard;
+            btnCategoryList.FlatStyle = FlatStyle.Standard;
             btnSupplierList.FlatStyle = FlatStyle.Standard;
-           // btnOrderList.FlatStyle = FlatStyle.Standard;
             btnWarehouseList.FlatStyle = FlatStyle.Standard;
         }
 

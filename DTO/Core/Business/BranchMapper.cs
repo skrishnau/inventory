@@ -25,5 +25,20 @@ namespace DTO.Core.Business
             return branchEntity;
         }
 
+        public static BranchModel MapToBranchModel(Branch branch)
+        {
+            var branchModel = new BranchModel
+            {
+                CreatedAt = branch.CreatedAt,
+                DeletedAt = branch.DeletedAt,
+                Id = branch.Id,
+                Name = branch.Name,
+                UpdatedAt = branch.UpdatedAt
+            };
+            //branchEntity.Warehouses = WarehouseMapper.MapToEntity(branch.Warehouses);
+            //branchEntity.Counters = CounterMapper.MapToEntity(branch.Counters);
+            return branchModel;
+        }
+
     }
 }

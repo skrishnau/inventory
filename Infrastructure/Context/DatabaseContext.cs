@@ -57,7 +57,7 @@ namespace Infrastructure.Context
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttribute { get; set; }
         public virtual DbSet<Variant> Variant { get; set; }
-        public virtual DbSet<VariantAttribute> VariantAttribute { get; set; }
+       // public virtual DbSet<VariantAttribute> VariantAttribute { get; set; }
 
         
         // ===================== TRANSACTION MODULE ==================== //

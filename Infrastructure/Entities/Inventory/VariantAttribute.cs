@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Inventory
 {
+    [Obsolete("Will not be used in this version", true)]
     public class VariantAttribute
     {
         public int Id { get; set; }

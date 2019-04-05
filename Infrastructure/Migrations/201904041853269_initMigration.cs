@@ -3,7 +3,7 @@ namespace Infrastructure.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class initMigration : DbMigration
     {
         public override void Up()
         {
@@ -188,21 +188,6 @@ namespace Infrastructure.Migrations
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.VariantAttributes",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        VariantId = c.Int(nullable: false),
-                        ProductAttributeId = c.Int(nullable: false),
-                        Value = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ProductAttributes", t => t.ProductAttributeId)
-                .ForeignKey("dbo.Variants", t => t.VariantId)
-                .Index(t => t.VariantId)
-                .Index(t => t.ProductAttributeId);
-            
-            CreateTable(
                 "dbo.Variants",
                 c => new
                     {
@@ -214,6 +199,10 @@ namespace Infrastructure.Migrations
                         LatestUnitSellPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Alert = c.Boolean(),
                         MinStockCountForAlert = c.Int(),
+                        AttributesJSON = c.String(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Products", t => t.ProductId)
@@ -369,9 +358,7 @@ namespace Infrastructure.Migrations
             DropForeignKey("dbo.Purchases", "SupplierId", "dbo.Suppliers");
             DropForeignKey("dbo.PurchaseItems", "VariantId", "dbo.Variants");
             DropForeignKey("dbo.PurchaseItems", "PurchaseId", "dbo.Purchases");
-            DropForeignKey("dbo.VariantAttributes", "VariantId", "dbo.Variants");
             DropForeignKey("dbo.Variants", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.VariantAttributes", "ProductAttributeId", "dbo.ProductAttributes");
             DropForeignKey("dbo.ProductAttributes", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Categories", "ParentCategoryId", "dbo.Categories");
@@ -394,8 +381,6 @@ namespace Infrastructure.Migrations
             DropIndex("dbo.PurchaseItems", new[] { "PurchaseId" });
             DropIndex("dbo.Purchases", new[] { "SupplierId" });
             DropIndex("dbo.Variants", new[] { "ProductId" });
-            DropIndex("dbo.VariantAttributes", new[] { "ProductAttributeId" });
-            DropIndex("dbo.VariantAttributes", new[] { "VariantId" });
             DropIndex("dbo.ProductAttributes", new[] { "ProductId" });
             DropIndex("dbo.Categories", new[] { "ParentCategoryId" });
             DropIndex("dbo.Products", new[] { "CategoryId" });
@@ -412,7 +397,6 @@ namespace Infrastructure.Migrations
             DropTable("dbo.PurchaseItems");
             DropTable("dbo.Purchases");
             DropTable("dbo.Variants");
-            DropTable("dbo.VariantAttributes");
             DropTable("dbo.ProductAttributes");
             DropTable("dbo.Categories");
             DropTable("dbo.Products");

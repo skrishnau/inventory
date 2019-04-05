@@ -20,8 +20,7 @@ namespace IMS.Forms.Generals
 
         public void ClearSelection()
         {
-            btnProductList.FlatStyle = FlatStyle.Standard;
-            btnCategoryList.FlatStyle = FlatStyle.Standard;
+          
            // btnAttributeList.FlatStyle = FlatStyle.Standard;
             btnBranchList.FlatStyle = FlatStyle.Standard;
         }

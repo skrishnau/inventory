@@ -30,12 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.gvBranch = new System.Windows.Forms.DataGridView();
+            this.dgvBranch = new System.Windows.Forms.DataGridView();
             this.colbranchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gvBranch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBranch)).BeginInit();
             this.SuspendLayout();
             // 
-            // gvBranch
+            // dgvBranch
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -44,9 +44,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvBranch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gvBranch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvBranch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvBranch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvBranch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBranch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colbranchName});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -55,15 +55,15 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvBranch.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gvBranch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvBranch.Location = new System.Drawing.Point(0, 0);
-            this.gvBranch.Margin = new System.Windows.Forms.Padding(2);
-            this.gvBranch.Name = "gvBranch";
-            this.gvBranch.RowTemplate.Height = 24;
-            this.gvBranch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvBranch.Size = new System.Drawing.Size(301, 232);
-            this.gvBranch.TabIndex = 2;
+            this.dgvBranch.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvBranch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBranch.Location = new System.Drawing.Point(0, 0);
+            this.dgvBranch.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvBranch.Name = "dgvBranch";
+            this.dgvBranch.RowTemplate.Height = 24;
+            this.dgvBranch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBranch.Size = new System.Drawing.Size(301, 232);
+            this.dgvBranch.TabIndex = 2;
             // 
             // colbranchName
             // 
@@ -76,17 +76,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gvBranch);
+            this.Controls.Add(this.dgvBranch);
             this.Name = "BranchListUC";
             this.Size = new System.Drawing.Size(301, 232);
-            ((System.ComponentModel.ISupportInitialize)(this.gvBranch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBranch)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView gvBranch;
+        private System.Windows.Forms.DataGridView dgvBranch;
         private System.Windows.Forms.DataGridViewTextBoxColumn colbranchName;
     }
 }

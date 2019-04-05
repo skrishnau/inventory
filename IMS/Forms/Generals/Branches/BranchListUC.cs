@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Common.Display;
 using IMS.Forms.Business.Create;
 using SimpleInjector.Lifestyles;
 using Service.Core.Business;
-using IMS.Listeners;
-using IMS.Listeners.Business;
+using Service.Listeners;
+using Service.Listeners.Business;
+using ViewModel.Core.Business;
 
 namespace IMS.Forms.Generals.Branches
 {
@@ -20,6 +14,10 @@ namespace IMS.Forms.Generals.Branches
     {
         private readonly IBusinessService _businessService;
         private readonly IDatabaseChangeListener _listener;
+        SubHeadingTemplate _header;
+
+        private BranchModel _SelectedBranchModel;
+
         public BranchListUC(IBusinessService businessService, IDatabaseChangeListener listener)
         {
             _businessService = businessService;
@@ -31,8 +29,36 @@ namespace IMS.Forms.Generals.Branches
 
             PopulateBranchData();
 
+            InitializeEvents();
+
             _listener.BranchUpdated += _listener_OnBranchUpdate;
         }
+
+        private void InitializeEvents()
+        {
+            dgvBranch.SelectionChanged += DgvBranch_SelectionChanged;
+        }
+
+        private void DgvBranch_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvBranch.SelectedRows.Count > 0)
+            {
+                _SelectedBranchModel = dgvBranch.SelectedRows[0].DataBoundItem as BranchModel;
+            }
+            else
+            {
+                _SelectedBranchModel = null;
+            }
+            HideShowEditDeleteButtons();
+        }
+
+        private void HideShowEditDeleteButtons()
+        {
+            var visible = _SelectedBranchModel != null;//dgvBranch.SelectedRows.Count > 0;
+            _header.btnDelete.Visible = visible;
+            _header.btnEdit.Visible = visible;
+        }
+
 
         // other functions update the list via event
         private void _listener_OnBranchUpdate(object sender, BranchEventArgs e)
@@ -43,12 +69,12 @@ namespace IMS.Forms.Generals.Branches
 
         private void InitializeHeader()
         {
-            var _header = SubHeadingTemplate.Instance;
+            _header = SubHeadingTemplate.Instance;
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnNew_Click;
-            _header.btnEdit.Visible = true;
+            //_header.btnEdit.Visible = true;
             _header.btnEdit.Click += BtnEdit_Click;
-            _header.btnDelete.Visible = true;
+            //_header.btnDelete.Visible = true;
             _header.btnDelete.Click += BtnDelete_Click;
             // add
             this.Controls.Add(_header);
@@ -70,19 +96,26 @@ namespace IMS.Forms.Generals.Branches
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-
+            // edit
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-
+            if (_SelectedBranchModel != null)
+            {
+                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _businessService.DeleteBranch(_SelectedBranchModel.Id);
+                }
+            }
         }
 
         private void PopulateBranchData()
         {
-            gvBranch.AutoGenerateColumns = false;
+            dgvBranch.AutoGenerateColumns = false;
             var branchs = _businessService.GetBranchList();
-            gvBranch.DataSource = branchs;
+            dgvBranch.DataSource = branchs;
         }
 
     }

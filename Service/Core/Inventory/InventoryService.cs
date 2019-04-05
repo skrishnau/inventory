@@ -3,12 +3,12 @@ using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
-//using System.Windows.
 using System.Data.Entity;
 using DTO.Core.Inventory;
+using Service.Listeners;
+using Service.Listeners.Inventory;
+using Newtonsoft.Json;
 
 namespace Service.Core.Inventory
 {
@@ -16,10 +16,12 @@ namespace Service.Core.Inventory
     {
 
         private readonly DatabaseContext _context;
+        private readonly IDatabaseChangeListener _listener;
 
-        public InventoryService(DatabaseContext context)
+        public InventoryService(DatabaseContext context, IDatabaseChangeListener listener)
         {
             _context = context;
+            _listener = listener;
         }
 
         public void AddUpdateBrand(BrandModel brand)
@@ -43,61 +45,171 @@ namespace Service.Core.Inventory
         public void AddUpdateCategory(CategoryModel category)
         {
             var dbEntity = _context.Category.FirstOrDefault(x => x.Id == category.Id);
+            var catEventArgs = CategoryEventArgs.Instance;
             if (dbEntity == null)
             {
-                var categoryEntity = category.ToEntity();
-                _context.Category.Add(categoryEntity);
+                dbEntity = category.ToEntity();
+                _context.Category.Add(dbEntity);
+                catEventArgs.Mode = Utility.UpdateMode.ADD;
             }
             else
             {
                 dbEntity.Name = category.Name;
                 dbEntity.UpdatedAt = DateTime.Now; // category.UpdatedAt;
+                catEventArgs.Mode = Utility.UpdateMode.EDIT;
             }
             _context.SaveChanges();
+            catEventArgs.Category = CategoryMapper.MapToCategoryModel(dbEntity);
+            _listener.TriggerCategoryUpdateEvent(null, catEventArgs);
+
+        }
+
+        public void AddUpdateProduct(ProductModelForSave product)
+        {
+            var now = DateTime.Now;
+
+            var productEntity = _context.Product
+                .Include(x => x.ProductAttributes)
+                .FirstOrDefault(x => x.Id == product.Id);
+
+            ProductEventArgs eventArgs = ProductEventArgs.Instance; ;
+
+            if (productEntity == null)
+            {
+                // add
+                productEntity = product.ToEntity();
+                productEntity.ProductAttributes = new List<ProductAttribute>();
+                productEntity.Variants = new List<Variant>();
+                productEntity.Brands = new List<Brand>();
+                _context.Product.Add(productEntity);
+                eventArgs.Mode = Utility.UpdateMode.ADD;
+            }
+            else
+            {
+                // udpate
+                productEntity.Name = product.Name;
+                productEntity.UpdatedAt = DateTime.Now;
+                productEntity.Alert = product.ShowStockAlerts;
+                productEntity.AlertThreshold = product.MinStockCountForAlert;
+                productEntity.CategoryId = product.CategoryId;
+                eventArgs.Mode = Utility.UpdateMode.EDIT;
+            }
+            AssignBrandForSave(productEntity, product, now);
+            AssignProductAttributesForSave(productEntity, product, now);
+            AssignVariantsForSave(productEntity, product, now);
+
+            _context.SaveChanges();
+
+            eventArgs.ProductModel = ProductMapper.MapToProductModel(productEntity);
+            _listener.TriggerProductUpdateEvent(null, eventArgs);
+        }
+
+        private void AssignVariantsForSave(Product productEntity, ProductModelForSave product, DateTime now)
+        {
+            // remove the deleted variants
+            for (int v = 0; v < productEntity.Variants.Count; v++)
+            {
+                var variEnity = productEntity.Variants.ElementAt(v);
+                if (!product.Variants.Any(x => x.Id == variEnity.Id))
+                {
+                    variEnity.DeletedAt = now;
+                }
+            }
+            // add/update
+            foreach (var vari in product.Variants)
+            {
+                Variant variantEntity;
+                if (vari.Id == 0)
+                {
+                    // add
+                    variantEntity = vari.ToEntity();
+                    variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
+                    productEntity.Variants.Add(variantEntity);
+                    variantEntity.CreatedAt = now;
+                    variantEntity.UpdatedAt = now;
+                }
+
+                else
+                {
+                    variantEntity = productEntity.Variants.FirstOrDefault(x => x.Id == vari.Id);
+                    variantEntity.Alert = vari.Alert;
+                    variantEntity.MinStockCountForAlert = vari.AlertThreshold;
+                    variantEntity.SKU = vari.SKU;
+                    variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
+                    variantEntity.UpdatedAt = now;
+                }
+            }
         }
 
 
-        public void AddProduct(ProductModelForSave product)
+        private void AssignProductAttributesForSave(Product productEntity, ProductModelForSave product, DateTime now)
         {
-            // save the attributes
-            var productEntity = product.ToEntity();
-            productEntity.ProductAttributes = new List<ProductAttribute>();
-            productEntity.Variants = new List<Variant>();
+            // dbEntity.ProductAttributes
+            for (var p = 0; p < productEntity.ProductAttributes.Count; p++)
+            {
+                var paEntity = productEntity.ProductAttributes.ElementAt(p);
+                var stillExists = product.ProductAttributes.FirstOrDefault(x => x.Id == paEntity.Id);
+                if (stillExists == null)
+                {
+                    // means its deleted by user
+                    productEntity.ProductAttributes.Remove(paEntity);
+                    // decrement cause one entity is removed hence another is in that index
+                    p--;
+                }
+            }
             foreach (var pa in product.ProductAttributes)
             {
-                var paEntity = new ProductAttribute()
+                ProductAttribute paEntity;
+                if (pa.Id == 0)
                 {
-                    Attribute = pa.Attribute,
-                };
-                productEntity.ProductAttributes.Add(paEntity);
-            }
-
-            foreach (var variant in product.Variants)
-            {
-                // variant
-                var variantEntity = new Variant()
-                {
-                    SKU = variant.SKU,
-                    Id = variant.Id,
-                    MinStockCountForAlert = variant.AlertThreshold,
-                    Alert = variant.Alert,
-                    
-                };
-                variantEntity.VariantAttributes = new List<VariantAttribute>();
-                // variant attributes
-                foreach (var att in variant.Attributes)
-                {
-                    var vaEntity = new VariantAttribute()
-                    {
-                        Value = att.Value,
-                        ProductAttribute = productEntity.ProductAttributes.FirstOrDefault(x => x.Attribute == att.Key),                        
-                    };
-                    variantEntity.VariantAttributes.Add(vaEntity);
+                    // add
+                    paEntity = pa.ToEntity();
+                    productEntity.ProductAttributes.Add(paEntity);
                 }
-                productEntity.Variants.Add(variantEntity);
+                else
+                {
+                    // update
+                    paEntity = productEntity.ProductAttributes.FirstOrDefault(x => x.Id == pa.Id);
+                    paEntity.Attribute = pa.Attribute;
+                }
             }
-            _context.Product.Add(productEntity);
-            _context.SaveChanges();
+        }
+
+        private void AssignBrandForSave(Product productEntity, ProductModelForSave product, DateTime now)
+        {
+            //dbEntity.Brands
+            foreach (var brand in product.Brands)
+            {
+                // since brand is directly entered in textbox separated by comma, we don't have ids
+                // so lets differentiate names
+
+                Brand brandEntity = productEntity.Brands.FirstOrDefault(x=>x.Name == brand.Name);
+                if(brandEntity == null)
+                {
+                    // then add new; else no need to update
+                    brandEntity = brand.ToEntity();
+                    brandEntity.CreatedAt = now;
+                    brandEntity.UpdatedAt = now;
+                    productEntity.Brands.Add(brandEntity);
+                }
+                //else 
+                //{
+                //    if (brandEntity.Id == 0)
+                //    {
+                //        productEntity.Brands.Remove(brandEntity);
+                //        // add
+                //    } 
+                //}
+            }
+            // remove all other brands which don't have same updatedAt date
+            foreach (var brandEntity in productEntity.Brands)
+            {
+                if (!product.Brands.Any(x=>x.Name == brandEntity.Name))
+                {
+                    // remove
+                    brandEntity.DeletedAt = now;
+                }
+            }
         }
 
         public List<BrandModel> GetBrandList()
@@ -138,11 +250,6 @@ namespace Service.Core.Inventory
             return cats;
         }
 
-        //public List<CategoryModel> GetSubCategoryList(int parentCategoryId)
-        //{
-
-        //}
-
         public List<ProductModelForSave> GetProductList()
         {
             var cats = _context.Product
@@ -173,10 +280,6 @@ namespace Service.Core.Inventory
             }
             return list;
         }
-
-
-
-
 
         public void DeleteCategory(CategoryModel categoryModel)
         {
@@ -224,102 +327,23 @@ namespace Service.Core.Inventory
             };
         }
 
-        /*public List<OptionModel> GetDistinctAttributes()
-        {
-            var list = new List<OptionModel>();
-            var attributesGroup = _context.Option
-             .Where(x => x.DeletedAt == null)
-             .GroupBy(x => x.Name);
-            // attributeGroup is a dictionary of <string, Attribute>; {(Color, {obj, obj}), (CC, {obj, obj, obj})}
-            foreach (var grp in attributesGroup)
-            {
-                var name = grp.Key;
-                list.Add(new OptionModel
-                {
-                    Name = name,
-                });
-                //foreach(var att in grp)
-                //{
-                //}
-            }
-            return list;
-        }*/
 
-        /* public List<AttributeModel> GetAttributeList()
-         {
-             var attributes = _context.Option
-                .Where(x => x.DeletedAt == null)
-                .OrderBy(x => x.Name)
-                .Select(x => new AttributeModel()
-                {
-                    Name = x.Name,
-                    Id = x.Id,
-                    Value = x.Value,
-                    CreatedAt = x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt
-                })
-                .ToList();
-
-             return attributes;
-         }
-         */
-        /* public List<OptionModel> GetOptionList()
-         {
-             var attributes = _context.Option
-                 .Where(x => x.DeletedAt == null)
-                 .OrderBy(x => x.Name)
-                 .GroupBy(x => x.Name);
-             var list = new List<OptionModel>();
-             foreach (var att in attributes)
-             {
-                 list.Add(new OptionModel()
-                 {
-                     Name = att.Key,
-                     OptionValues = att.Select(x => new OptionValueModel()
-                     {
-                         Id = x.Id,
-                         OptionName = x.Name,
-                         Value = x.Value
-                     }).ToList(),
-                 });
-             }
-             return list;
-         }
-         */
-
-        /*  public void DeleteAttribute(AttributeModel attributeModel)
-          {
-              var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
-
-              if (dbEntity != null)
-              {
-                  dbEntity.DeletedAt = DateTime.Now;
-              }
-
-              _context.SaveChanges();
-
-          }*/
-
-        /* public List<AttributeModel> GetOptionList(int productId)
-         {
-             var attributes = _context.ProductOption
-                 .Where(x => x.ProductId == productId && x.DeletedAt == null)
-                 .Select(x => new AttributeModel
-                 {
-                     Id = x.OptionId,
-                     Name = x.Option.Name,
-                     Value = x.Option.Value
-
-                 }).ToList();
-             return attributes;
-         }
-         */
         public ProductModelForGridView GetProduct(int productId)
         {
             var product = _context.Product.Find(productId);
             if (product == null)
                 return null;
             return ProductMapper.MapToProductModelForGridView(product);
+        }
+
+        public ProductModelForSave GetProductForEdit(int productId)
+        {
+            var product = _context.Product
+                .Include(x => x.Variants)
+                .FirstOrDefault(x => x.Id == productId);
+            if (product == null)
+                return null;
+            return ProductMapper.MapToProductModelForSave(product);
         }
 
         public void SaveVariant(VariantModel variantModel)
@@ -363,59 +387,206 @@ namespace Service.Core.Inventory
             return VariantMapper.MapToVariantModel(variant);
         }
 
+        public void DeleteProduct(int id)
+        {
+            var product = _context.Product.Find(id);
+            if (product != null)
+            {
+                product.DeletedAt = DateTime.Now;
+                _context.SaveChanges();
+                var args = new ProductEventArgs(ProductMapper.MapToProductModel(product));
+                _listener.TriggerProductUpdateEvent(null, args);
+            }
+        }
 
-        /*  public bool AddOrUpdateAttribute(AttributeModel attributeModel)
-      {
-          var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
-          var list = GetAttributeList();
-          if (dbEntity == null)
-          {
-              // add
-              var attributeEntity = attributeModel.ToEntity();
-              var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
-              if (existingData == null)
-              {
-                  // then add
-                  attributeEntity.CreatedAt = DateTime.Now;
-                  attributeEntity.UpdatedAt = DateTime.Now;
 
-                  _context.Option.Add(attributeEntity);
-              }
-              else
-              {
-                  existingData.DeletedAt = null;
-                  existingData.UpdatedAt = DateTime.Now;
-                  //_context.SaveChanges();
-                  // don't add
-                  // return true;
-                  // return false;
 
-              }
-          }
-          else
-          {
-              //edit 
-              var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
-              if (existingData == null)
-              {
-                  // edit
-                  dbEntity.Name = attributeModel.Name;
-                  dbEntity.Value = attributeModel.Value;
-                  dbEntity.UpdatedAt = DateTime.Now;
-                  // if data is already in a db but in deleted state undelete it
-                  //dbEntity.DeletedAt = null;
-              }
-              else
-              {
-                  return false;
-              }
-          }
-          _context.SaveChanges();
-          return true;
-      }*/
 
     }
 }
 
 
 
+/*public List<OptionModel> GetDistinctAttributes()
+{
+    var list = new List<OptionModel>();
+    var attributesGroup = _context.Option
+     .Where(x => x.DeletedAt == null)
+     .GroupBy(x => x.Name);
+    // attributeGroup is a dictionary of <string, Attribute>; {(Color, {obj, obj}), (CC, {obj, obj, obj})}
+    foreach (var grp in attributesGroup)
+    {
+        var name = grp.Key;
+        list.Add(new OptionModel
+        {
+            Name = name,
+        });
+        //foreach(var att in grp)
+        //{
+        //}
+    }
+    return list;
+}*/
+
+/* public List<AttributeModel> GetAttributeList()
+ {
+     var attributes = _context.Option
+        .Where(x => x.DeletedAt == null)
+        .OrderBy(x => x.Name)
+        .Select(x => new AttributeModel()
+        {
+            Name = x.Name,
+            Id = x.Id,
+            Value = x.Value,
+            CreatedAt = x.CreatedAt,
+            UpdatedAt = x.UpdatedAt
+        })
+        .ToList();
+
+     return attributes;
+ }
+ */
+/* public List<OptionModel> GetOptionList()
+ {
+     var attributes = _context.Option
+         .Where(x => x.DeletedAt == null)
+         .OrderBy(x => x.Name)
+         .GroupBy(x => x.Name);
+     var list = new List<OptionModel>();
+     foreach (var att in attributes)
+     {
+         list.Add(new OptionModel()
+         {
+             Name = att.Key,
+             OptionValues = att.Select(x => new OptionValueModel()
+             {
+                 Id = x.Id,
+                 OptionName = x.Name,
+                 Value = x.Value
+             }).ToList(),
+         });
+     }
+     return list;
+ }
+ */
+
+/*  public void DeleteAttribute(AttributeModel attributeModel)
+  {
+      var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
+
+      if (dbEntity != null)
+      {
+          dbEntity.DeletedAt = DateTime.Now;
+      }
+
+      _context.SaveChanges();
+
+  }*/
+
+/* public List<AttributeModel> GetOptionList(int productId)
+ {
+     var attributes = _context.ProductOption
+         .Where(x => x.ProductId == productId && x.DeletedAt == null)
+         .Select(x => new AttributeModel
+         {
+             Id = x.OptionId,
+             Name = x.Option.Name,
+             Value = x.Option.Value
+
+         }).ToList();
+     return attributes;
+ }
+ */
+
+
+
+/*  public bool AddOrUpdateAttribute(AttributeModel attributeModel)
+{
+    var dbEntity = _context.Option.FirstOrDefault(x => x.Id == attributeModel.Id);
+    var list = GetAttributeList();
+    if (dbEntity == null)
+    {
+        // add
+        var attributeEntity = attributeModel.ToEntity();
+        var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeEntity.Name && attributeEntity.Value == l.Value);
+        if (existingData == null)
+        {
+            // then add
+            attributeEntity.CreatedAt = DateTime.Now;
+            attributeEntity.UpdatedAt = DateTime.Now;
+
+            _context.Option.Add(attributeEntity);
+        }
+        else
+        {
+            existingData.DeletedAt = null;
+            existingData.UpdatedAt = DateTime.Now;
+            //_context.SaveChanges();
+            // don't add
+            // return true;
+            // return false;
+
+        }
+    }
+    else
+    {
+        //edit 
+        var existingData = _context.Option.FirstOrDefault(l => l.Name == attributeModel.Name && l.Value == attributeModel.Value && l.Id != attributeModel.Id);
+        if (existingData == null)
+        {
+            // edit
+            dbEntity.Name = attributeModel.Name;
+            dbEntity.Value = attributeModel.Value;
+            dbEntity.UpdatedAt = DateTime.Now;
+            // if data is already in a db but in deleted state undelete it
+            //dbEntity.DeletedAt = null;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    _context.SaveChanges();
+    return true;
+}*/
+
+
+//public List<CategoryModel> GetSubCategoryList(int parentCategoryId)
+//{
+
+//}
+
+/* public void AddProduct(ProductModelForSave product)
+ {
+     // save the attributes
+     var productEntity = product.ToEntity();
+
+     productEntity.ProductAttributes = new List<ProductAttribute>();
+     productEntity.Variants = new List<Variant>();
+     productEntity.Brands = new List<Brand>();
+     // brands
+     foreach (var b in product.Brands)
+     {
+         productEntity.Brands.Add(b.ToEntity());
+     }
+     // attributes
+     foreach (var pa in product.ProductAttributes)
+     {
+         var paEntity = new ProductAttribute()
+         {
+             Attribute = pa.Attribute,
+         };
+         productEntity.ProductAttributes.Add(paEntity);
+     }
+     // variants
+     foreach (var variant in product.Variants)
+     {
+         // variant
+         var variantEntity = variant.ToEntity();
+         variantEntity.AttributesJSON = JsonConvert.SerializeObject(variant.Attributes);
+         productEntity.Variants.Add(variantEntity);
+     }
+     _context.Product.Add(productEntity);
+     _context.SaveChanges();
+     _listener.TriggerProductUpdateEvent(null, null);
+ }*/

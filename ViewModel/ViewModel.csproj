@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Common\NameValuePair.cs" />
     <Compile Include="Core\Settings\AppSettingModel.cs" />
     <Compile Include="Core\Bills\BillFormatModel.cs" />
     <Compile Include="Core\Bills\BillGenerationModel.cs" />

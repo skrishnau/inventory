@@ -1,15 +1,29 @@
-﻿using System;
+﻿using Service.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Business;
 
-namespace IMS.Listeners.Business
+namespace Service.Listeners.Business
 {
     public class BranchEventArgs : EventArgs
     {
+        // model in this event args
         public BranchModel BranchModel { get; set; }
+        // mode
+        public UpdateMode Mode { get; set; }
+
+        // private empty constructor
+        private BranchEventArgs() { }
+        // public parameterized constructor
+        public BranchEventArgs(BranchModel branch)
+        {
+            BranchModel = branch;
+        }
+        // static Instance generator
+        public static BranchEventArgs Instance { get { return new BranchEventArgs(); } }
     }
 
     public class BranchListener

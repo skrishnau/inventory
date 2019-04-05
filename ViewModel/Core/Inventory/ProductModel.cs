@@ -4,9 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Common;
 
 namespace ViewModel.Core.Inventory
 {
+    // basic model. add more properties if needed
+    public class ProductModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
     public class ProductModelForSave
     {
 
@@ -47,19 +55,6 @@ namespace ViewModel.Core.Inventory
 
         public Product ToEntity()
         {
-            var brandEntities = new List<Brand>();
-            foreach (var b in Brands)
-            {
-                brandEntities.Add(b.ToEntity());
-            }
-
-            //var optionEntities = new List<Infrastructure.Entities.Inventory.ProductAttribute>();
-            //foreach (var val in ProductAttributes)
-            //{
-            //    optionEntities.Add(val.ToEntity());
-            //}
-
-
             return new Product()
             {
                 Name = Name,
@@ -69,9 +64,6 @@ namespace ViewModel.Core.Inventory
                 Alert = ShowStockAlerts,
                 CreatedAt = CreatedAt,
                 UpdatedAt = UpdatedAt,
-                Brands = brandEntities,
-               // ProductAttributes = optionEntities,
-
             };
         }
     }
@@ -81,7 +73,7 @@ namespace ViewModel.Core.Inventory
     {
         public ProductVariantModel()
         {
-            Attributes = new Dictionary<string, string>();
+            Attributes = new List<NameValuePair>();//new Dictionary<string, string>();
         }
         public int Id { get; set; }
         public string SKU { get; set; }
@@ -89,7 +81,20 @@ namespace ViewModel.Core.Inventory
         public bool Alert { get; set; }
         public int AlertThreshold { get; set; }
 
-        public Dictionary<string, string> Attributes { get; set; }
+       // public Dictionary<string, string> Attributes { get; set; }
+       public List<NameValuePair> Attributes { get; set; }
+
+        public Variant ToEntity()
+        {
+            return new Variant()
+            {
+                SKU = SKU,
+                Id = Id,
+                MinStockCountForAlert = AlertThreshold,
+                Alert = Alert,
+
+            };
+        }
 
     }
 

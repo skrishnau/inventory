@@ -433,9 +433,6 @@
     <Compile Include="Forms\UserManagement\Users\UserListUC.Designer.cs">
       <DependentUpon>UserListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listeners\Business\BranchListener.cs" />
-    <Compile Include="Listeners\DatabaseChangeListener.cs" />
-    <Compile Include="Listeners\IDatabaseChangeListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sales\DirectSale\Create\SaleItemCreate.cs">

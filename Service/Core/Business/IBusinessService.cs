@@ -20,6 +20,6 @@ namespace Service.Core.Business
         List<CounterModel> GetCounterList();
 
         List<WarehouseModel> GetWarehouseList();
-        void DeleteBranch(BranchModel model);
+        void DeleteBranch(int branchId);
     }
 }

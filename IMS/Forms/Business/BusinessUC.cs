@@ -125,7 +125,7 @@ namespace IMS.Forms.Business
                 //branchDelete.ShowInTaskbar = false;
                 //branchDelete.SetData(branch);
                 //branchDelete.ShowDialog();
-                businessService.DeleteBranch(branch);
+                businessService.DeleteBranch(branch.Id);
                 //MessageBox.Show("Branch Deleted!!!");
                 PopupMessage.ShowPopupMessage("Delete Success", "Branch is successfully deleted!", PopupMessageType.SUCCESS);
                 PopulateBranchData();

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DTO.Core.Business;
 using Infrastructure.Context;
 using Infrastructure.Entities.Business;
+using Service.Listeners;
+using Service.Listeners.Business;
 using ViewModel.Core.Business;
 
 namespace Service.Core.Business
@@ -13,10 +15,12 @@ namespace Service.Core.Business
     public class BusinessService : IBusinessService
     {
         private readonly DatabaseContext _context;
+        private readonly IDatabaseChangeListener _listener;
 
-        public BusinessService(DatabaseContext context)
+        public BusinessService(DatabaseContext context, IDatabaseChangeListener listener)
         {
             _context = context;
+            _listener = listener;
         }
 
         public int AddOrUpdateBranch(BranchModel branch)
@@ -28,16 +32,16 @@ namespace Service.Core.Business
                 if (entity != null)
                     return 0;
                 // branch save
-                var branchEntity = branch.ToEntity();
-                branchEntity.CreatedAt = DateTime.Now;
-                branchEntity.UpdatedAt = DateTime.Now;
-                _context.Branch.Add(branchEntity);
-                if (branchEntity.Warehouses == null)
-                    branchEntity.Warehouses = new List<Warehouse>();
+                dbEntity = branch.ToEntity();
+                dbEntity.CreatedAt = DateTime.Now;
+                dbEntity.UpdatedAt = DateTime.Now;
+                _context.Branch.Add(dbEntity);
+                if (dbEntity.Warehouses == null)
+                    dbEntity.Warehouses = new List<Warehouse>();
                 var warehouseEntity = branch.Warehouses.ElementAt(0).ToEntity();
                 warehouseEntity.CreatedAt = DateTime.Now;
                 warehouseEntity.UpdatedAt = DateTime.Now;
-                branchEntity.Warehouses.Add(warehouseEntity);
+                dbEntity.Warehouses.Add(warehouseEntity);
 
                 _context.SaveChanges();
                 // warehouse save
@@ -47,17 +51,16 @@ namespace Service.Core.Business
                 _context.Warehouse.Add(warehouseEntity);
                 _context.SaveChanges();*/
                 //entity = _context.Branch.FirstOrDefault(x => x.Name == branch.Name);
-                return branchEntity.Id;
             }
             else
             {
                 dbEntity.Name = branch.Name;
                 dbEntity.UpdatedAt = DateTime.Now;
                 _context.SaveChanges();
-                return dbEntity.Id;
             }
 
-
+            _listener.TriggerBranchUpdateEvent(this, new BranchEventArgs(BranchMapper.MapToBranchModel(dbEntity)));
+            return dbEntity.Id;
         }
 
         public void AddOrUpdateCounter(CounterModel counter)
@@ -104,9 +107,9 @@ namespace Service.Core.Business
 
         }
 
-        public void DeleteBranch(BranchModel model)
+        public void DeleteBranch(int branchId)
         {
-            var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == model.Id);
+            var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branchId);
             if (dbEntity != null)
             {
                 dbEntity.DeletedAt = DateTime.Now;

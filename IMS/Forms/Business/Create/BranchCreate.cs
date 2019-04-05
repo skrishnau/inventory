@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Common;
-using IMS.Listeners;
-using IMS.Listeners.Business;
 using Service.Core.Business;
+using Service.Listeners;
+using Service.Listeners.Business;
 using ViewModel.Core.Business;
-using static IMS.Listeners.Business.BranchListener;
 
 namespace IMS.Forms.Business.Create
 {
@@ -84,7 +79,6 @@ namespace IMS.Forms.Business.Create
 
                 businessService.AddOrUpdateBranch(branchModel);
                 this.Close();
-                _listener.UpdateBranch(this, new BranchEventArgs());
             }
             else
             {

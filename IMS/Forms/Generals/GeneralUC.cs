@@ -48,10 +48,8 @@ namespace IMS.Forms.Generals
 
         private void InitializeMenuBarButtonEvents()
         {
-            // product
-            _menubar.btnProductList.Click += BtnProductList_Click;
-           // _menubar.btnNewProduct.Click += BtnNewProduct_Click;
-            _menubar.btnCategoryList.Click += BtnCategoryList_Click;
+           
+
             //_menubar.btnNewCategory.Click += BtnNewCategory_Click;
             //_menubar.btnAttributeList.Click += BtnAttributeList_Click;
             //_menubar.btnNewAttribute.Click += BtnNewAttribute_Click;
@@ -65,27 +63,7 @@ namespace IMS.Forms.Generals
 
         #region Product
 
-        private void BtnProductList_Click(object sender, EventArgs e)
-        {
-            var productListUC = Program.container.GetInstance<ProductListUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            productListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(productListUC);
-
-            _menubar.ClearSelection();
-            _menubar.btnProductList.FlatStyle = FlatStyle.Flat;
-        }
-
-        private void BtnCategoryList_Click(object sender, EventArgs e)
-        {
-            var categoryListUC = Program.container.GetInstance<CategoryListUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            categoryListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(categoryListUC);
-
-            _menubar.ClearSelection();
-            _menubar.btnCategoryList.FlatStyle = FlatStyle.Flat;
-        }
+      
 
         //private void BtnAttributeList_Click(object sender, EventArgs e)
         //{

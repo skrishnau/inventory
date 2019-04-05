@@ -18,7 +18,8 @@ namespace Infrastructure.Entities.Inventory
         public string Attribute { get; set; }
         
         public virtual Product Product { get; set; }
-        public virtual ICollection<VariantAttribute> VariantAttributes { get; set; }
+
+       // public virtual ICollection<VariantAttribute> VariantAttributes { get; set; }
 
     }
 }

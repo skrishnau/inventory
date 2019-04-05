@@ -28,12 +28,13 @@ namespace IMS.Forms.Inventory.Create
             InitializeComponent();
 
             InitializeEvents();
+
+            this.ActiveControl = tbCategory;
         }
 
         private void InitializeEvents()
         {
             btnSave.Click += BtnSave_Click;
-            btnCancel.Click += BtnCancel_Click;
 
             this.Load += CategoryCreate_Load;
         }
@@ -121,13 +122,7 @@ namespace IMS.Forms.Inventory.Create
             }
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
-
+        
     }
 
     public enum CategoryUpdateType

@@ -13,135 +13,184 @@ using IMS.Forms.Inventory.Create;
 using IMS.Forms.Inventory.Variants;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Common.Display;
+using Service.Listeners;
 
 namespace IMS.Forms.Inventory.Products
 {
     public partial class ProductListUC : UserControl
     {
-        private readonly IInventoryService inventoryService;
+        private readonly IInventoryService _inventoryService;
+        private readonly IDatabaseChangeListener _listener;
 
         private ProductModelForGridView _selectedProduct;
         private SubHeadingTemplate _header;
 
-        public ProductListUC(IInventoryService inventoryService)
+        public ProductListUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
-            this.inventoryService = inventoryService;
+            this._inventoryService = inventoryService;
+            this._listener = listener;
 
             InitializeComponent();
             // use Header template to display header.
             InitializeHeader();
 
-             PopulateProductData();
-            PopulateSKUGridView();
+            PopulateProductData();
 
-            dgvProductList.CellContentDoubleClick += DgvProductList_CellContentDoubleClick;
+            InitializeEvents();
+            InitializeListeners();
+        }
 
+        private void InitializeListeners()
+        {
+            _listener.ProductUpdated += _listener_ProductUpdated;
+        }
+
+        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        {
+            PopulateProductData();
+        }
+
+        private void InitializeEvents()
+        {
+            dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
+        }
+
+        private void DgvProductList_SelectionChanged(object sender, EventArgs e)
+        {
+            // populate detail 
+            PopulateProductDetail();
+
+        }
+
+        private void PopulateProductDetail()
+        {
+            // show product detail view
+            if (dgvProductList.SelectedRows.Count > 0)
+            {
+                // show edit and delete buttons
+                _header.btnEdit.Visible = true;
+                _header.btnDelete.Visible = true;
+
+                var data = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
+
+                var model = _inventoryService.GetProductForEdit(data.Id);
+                if (model != null)
+                {
+                    pnlProductDetail.Visible = true;
+                    _selectedProduct = data;
+                    lblProductName.Text = data.Name;
+                    lblCategory.Text = data.Category;
+                    // brand
+                    lblBrands.Text = "";
+                    foreach (var brand in model.Brands)
+                    {
+                        lblBrands.Text += brand.Name + ", ";
+                    }
+                    // attributes
+                    lblAttributes.Text = "";
+                    foreach (var att in model.ProductAttributes)
+                    {
+                        lblAttributes.Text += att.Attribute + ", ";
+                    }
+                    dgvSKUListing.AutoGenerateColumns = false;
+                    dgvSKUListing.DataSource = model.Variants;
+                }
+                else
+                {
+                    pnlProductDetail.Visible = false;
+                    // show edit and delete buttons
+                    _header.btnEdit.Visible = false;
+                    _header.btnDelete.Visible = false;
+                }
+            }
+            else
+            {
+                pnlProductDetail.Visible = false;
+                // show edit and delete buttons
+                _header.btnEdit.Visible = false;
+                _header.btnDelete.Visible = false;
+            }
         }
 
         private void InitializeHeader()
         {
             _header = SubHeadingTemplate.Instance;
             _header.btnNew.Visible = true;
-            _header.btnNew.Click += BtnAddProduct_Click;
+            _header.btnNew.Click += BtnNew_Click;
+            _header.btnEdit.Click += BtnEdit_Click;
+            _header.btnDelete.Click += BtnDelete_Click;
             this.Controls.Add(_header);
             _header.SendToBack();
             // header text
             _header.lblHeading.Text = "Products";
         }
-
-        public void PopulateSKUGridView()
+        
+        private void BtnNew_Click(object sender, EventArgs e)
         {
-            var skus = inventoryService.GetVariantList();
-            dgvSKUListing.AutoGenerateColumns = false;
-            dgvSKUListing.DataSource = skus;
+            ShowProductAddEditDialog(0);
         }
 
-        private void btnEditSKU_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-            //var skuEditForm = new VariantEditForm(inventoryService, _selectedProduct.Id);
-            //skuEditForm.ShowDialog();
-            //PopulateProductData();
+            // get the id from selected row
+            if (_selectedProduct != null)
+            {
+                ShowProductAddEditDialog(_selectedProduct.Id);
+            }
+        }
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (_selectedProduct != null)
+            {
+                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
+                if (dialogResult.Equals(DialogResult.Yes))
+                {
+                    // delete
+                    _inventoryService.DeleteProduct(_selectedProduct.Id);
+                }
+            }
         }
 
-        private void BtnAddProduct_Click(object sender, EventArgs e)
-        {
-            ShowProductAddDialog();
-        }
-
-        private void ShowProductAddDialog()
+        private void ShowProductAddEditDialog(int productId)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var productCreate = Program.container.GetInstance<ProductCreate>();
-                productCreate.ShowInTaskbar = false;
+                productCreate.SetDataForEdit(productId);
                 productCreate.ShowDialog();
-                PopulateProductData();
             }
         }
 
         private void PopulateProductData()
         {
             dgvProductList.AutoGenerateColumns = false;
-            var products = inventoryService.GetProductListForGridView();
+            var products = _inventoryService.GetProductListForGridView();
             dgvProductList.DataSource = products;
         }
-
-
-        private void DgvProductList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvProductList.SelectedRows != null && dgvProductList.SelectedRows.Count > 0)
-            {
-                var product = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
-
-                lblProductName.Text = product.Name;//.ToString();
-
-                //tbProductName.Text = products.Name.ToString();
-                //tbAttributes.Text = 
-
-
-            }
-        }
-
-        private void dgvProductList_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dgvProductList_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvProductList.SelectedRows.Count > 0)
-            {
-                var data = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
-                _selectedProduct = data;
-                lblProductName.Text = data.Name;
-                lblCategory.Text = data.Category;
-                lblBrandName.Text = data.Brands;
-               // var attributeList = inventoryService.GetOptionList(data.Id);
-                lblProperties.Text = "";
-
-                //foreach (var att in attributeList)
-                //{
-
-                //    lblProperties.Text += att.Name + " " + att.Value + "\n";
-                //}
-
-            }
-        }
-
-        private void btnAddProduct_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        //private void BtnAddProduct_Click(object sender, EventArgs e)
-        //{
-        //    using (AsyncScopedLifestyle.BeginScope(Program.container))
-        //    {
-        //        var productCreate = Program.container.GetInstance<ProductCreate>();
-        //        productCreate.ShowInTaskbar = false;
-        //        productCreate.ShowDialog();
-        //        PopulateProductData();
-        //    }
-        //}
+       
     }
 }
+
+
+//private void btnEditSKU_Click(object sender, EventArgs e)
+//{
+//    // var skuEditForm = new VariantEditForm(inventoryService, _selectedProduct.Id);
+//    //skuEditForm.ShowDialog();
+//}
+
+//private void BtnAddProduct_Click(object sender, EventArgs e)
+//{
+//    using (AsyncScopedLifestyle.BeginScope(Program.container))
+//    {
+//        var productCreate = Program.container.GetInstance<ProductCreate>();
+//        productCreate.ShowInTaskbar = false;
+//        productCreate.ShowDialog();
+//    }
+//}
+
+//public void PopulateSKUGridView()
+//{
+//    var skus = _inventoryService.GetVariantList();
+//    dgvSKUListing.AutoGenerateColumns = false;
+//    dgvSKUListing.DataSource = skus;
+//}
