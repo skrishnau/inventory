@@ -11,32 +11,75 @@ using IMS.Forms.Common.Display;
 using IMS.Forms.Business.Create;
 using SimpleInjector.Lifestyles;
 using Service.Core.Business;
+using ViewModel.Core.Business;
+using Service.Listeners;
+using Service.DbEventArgs;
 
 namespace IMS.Forms.Inventory.Warehouses
 {
     public partial class WarehouseListUC : UserControl
     {
         private readonly IBusinessService _businessService;
+        private readonly IDatabaseChangeListener _listener;
+        private SubHeadingTemplate _header;
+        private WarehouseModel _selectedWarehouseModel;
 
-        public WarehouseListUC(IBusinessService businessService)
+        public WarehouseListUC(IBusinessService businessService, IDatabaseChangeListener listener)
         {
             this._businessService = businessService;
+            _listener = listener;
 
             InitializeComponent();
 
             InitializeHeader();
 
+            InitializeControlEvents();
+
+            InitializeListeners();
+
             PopulateWarehouseData();
         }
 
+        #region Population Funcions
+
+        private void PopulateWarehouseData()
+        {
+            dgvWarehouse.AutoGenerateColumns = false;
+            var warehouses = _businessService.GetWarehouseList();
+            dgvWarehouse.DataSource = warehouses;
+        }
+
+        private void ShowHideEditDeleteButtons()
+        {
+            var visible = _selectedWarehouseModel != null;
+            _header.btnEdit.Visible = visible;
+            _header.btnDelete.Visible = visible;
+        }
+
+        private void ShowAddEditDialog(bool isEditMode)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var wareHouseCreate = Program.container.GetInstance<WarehouseCreate>();
+                wareHouseCreate.SetDataForEdit(isEditMode ? _selectedWarehouseModel == null ? 0 : _selectedWarehouseModel.Id : 0);
+                wareHouseCreate.ShowDialog();
+            }
+        }
+
+
+
+        #endregion
+
+
+
+        #region Initialization Functions
+
         private void InitializeHeader()
         {
-            var _header = SubHeadingTemplate.Instance;
+            _header = SubHeadingTemplate.Instance;
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnNew_Click;
-            _header.btnEdit.Visible = true;
             _header.btnEdit.Click += BtnEdit_Click;
-            _header.btnDelete.Visible = true;
             _header.btnDelete.Click += BtnDelete_Click;
             // add
             this.Controls.Add(_header);
@@ -46,32 +89,72 @@ namespace IMS.Forms.Inventory.Warehouses
 
         }
 
+        private void InitializeControlEvents()
+        {
+            dgvWarehouse.SelectionChanged += DgvWarehouse_SelectionChanged;
+        }
+
+        private void InitializeListeners()
+        {
+            // first remove earlier if any then add; to ensure single callback 
+            _listener.WarehouseUpdated -= _listener_WarehouseUpdated;
+            _listener.WarehouseUpdated += _listener_WarehouseUpdated;
+        }
+
+        #endregion
+
+
+        #region  Events
+
+        private void _listener_WarehouseUpdated(object sender, BaseEventArgs<WarehouseModel> e)
+        {
+            PopulateWarehouseData();
+        }
+
+        private void DgvWarehouse_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvWarehouse.SelectedRows.Count > 0)
+            {
+
+                _selectedWarehouseModel = dgvWarehouse.SelectedRows[0].DataBoundItem as WarehouseModel;
+            }
+            else
+            {
+                _selectedWarehouseModel = null;
+            }
+            ShowHideEditDeleteButtons();
+        }
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var wareHouseCreate = Program.container.GetInstance<WarehouseCreate>();
-                wareHouseCreate.ShowInTaskbar = false;
-                wareHouseCreate.ShowDialog();
-                PopulateWarehouseData();
-            }
+            ShowAddEditDialog(false);
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-
+            if (_selectedWarehouseModel != null)
+            {
+                ShowAddEditDialog(true);
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
+            if (_selectedWarehouseModel != null)
+            {
+                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
+                if (dialogResult.Equals(DialogResult.Yes))
+                {
+                    _businessService.DeleteWarehouse(_selectedWarehouseModel.Id);
+                }
+            }
         }
 
-        private void PopulateWarehouseData()
-        {
-            gvWarehouse.AutoGenerateColumns = false;
-            var warehouses = _businessService.GetWarehouseList();
-            gvWarehouse.DataSource = warehouses;
-        }
+        #endregion
+
+
+
+
+
     }
 }

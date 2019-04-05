@@ -30,15 +30,19 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.gvWarehouse = new System.Windows.Forms.DataGridView();
-            this.Branch_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CanMoveStocksToBranch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWarehouse)).BeginInit();
+            this.dgvWarehouse = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colMixedProduct = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colStaging = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWarehouse)).BeginInit();
             this.SuspendLayout();
             // 
-            // gvWarehouse
+            // dgvWarehouse
             // 
+            this.dgvWarehouse.AllowUserToAddRows = false;
+            this.dgvWarehouse.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -46,12 +50,14 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvWarehouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gvWarehouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvWarehouse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Branch_ID,
-            this.Code,
-            this.CanMoveStocksToBranch});
+            this.dgvWarehouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvWarehouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWarehouse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colId,
+            this.colLocation,
+            this.colHold,
+            this.colMixedProduct,
+            this.colStaging});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -59,51 +65,73 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvWarehouse.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gvWarehouse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvWarehouse.Location = new System.Drawing.Point(0, 0);
-            this.gvWarehouse.Margin = new System.Windows.Forms.Padding(2);
-            this.gvWarehouse.Name = "gvWarehouse";
-            this.gvWarehouse.RowTemplate.Height = 24;
-            this.gvWarehouse.Size = new System.Drawing.Size(452, 305);
-            this.gvWarehouse.TabIndex = 4;
+            this.dgvWarehouse.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvWarehouse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvWarehouse.Location = new System.Drawing.Point(0, 0);
+            this.dgvWarehouse.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvWarehouse.Name = "dgvWarehouse";
+            this.dgvWarehouse.ReadOnly = true;
+            this.dgvWarehouse.RowTemplate.Height = 24;
+            this.dgvWarehouse.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvWarehouse.Size = new System.Drawing.Size(452, 305);
+            this.dgvWarehouse.TabIndex = 4;
             // 
-            // Branch_ID
+            // colId
             // 
-            this.Branch_ID.DataPropertyName = "BranchId";
-            this.Branch_ID.HeaderText = "BranchId";
-            this.Branch_ID.Name = "Branch_ID";
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
             // 
-            // Code
+            // colLocation
             // 
-            this.Code.DataPropertyName = "Code";
-            this.Code.HeaderText = "Code";
-            this.Code.Name = "Code";
+            this.colLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colLocation.DataPropertyName = "Location";
+            this.colLocation.HeaderText = "Location";
+            this.colLocation.Name = "colLocation";
+            this.colLocation.ReadOnly = true;
             // 
-            // CanMoveStocksToBranch
+            // colHold
             // 
-            this.CanMoveStocksToBranch.DataPropertyName = "CanMoveStocksToBranch";
-            this.CanMoveStocksToBranch.HeaderText = "CanMoveStocksToBranch";
-            this.CanMoveStocksToBranch.Name = "CanMoveStocksToBranch";
-            this.CanMoveStocksToBranch.Width = 150;
+            this.colHold.DataPropertyName = "Hold";
+            this.colHold.HeaderText = "Hold";
+            this.colHold.Name = "colHold";
+            this.colHold.ReadOnly = true;
+            // 
+            // colMixedProduct
+            // 
+            this.colMixedProduct.DataPropertyName = "MixedProduct";
+            this.colMixedProduct.HeaderText = "Mixed Product";
+            this.colMixedProduct.Name = "colMixedProduct";
+            this.colMixedProduct.ReadOnly = true;
+            // 
+            // colStaging
+            // 
+            this.colStaging.DataPropertyName = "Staging";
+            this.colStaging.HeaderText = "Staging";
+            this.colStaging.Name = "colStaging";
+            this.colStaging.ReadOnly = true;
             // 
             // WarehouseListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gvWarehouse);
+            this.Controls.Add(this.dgvWarehouse);
             this.Name = "WarehouseListUC";
             this.Size = new System.Drawing.Size(452, 305);
-            ((System.ComponentModel.ISupportInitialize)(this.gvWarehouse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWarehouse)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView gvWarehouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Branch_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CanMoveStocksToBranch;
+        private System.Windows.Forms.DataGridView dgvWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colHold;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colMixedProduct;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colStaging;
     }
 }

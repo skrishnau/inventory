@@ -10,28 +10,22 @@ namespace ViewModel.Core.Business
     public class WarehouseModel
     {
         public int Id { get; set; }
+
         public string Location { get; set; }
-        public string Code { get; set; }
-        public int BranchId { get; set; }
-        public bool CanMoveStocksToBranch { get; set; }
 
-        // time stamps
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
-
+        public bool Hold { get; set; }
+        public bool MixedProduct { get; set; }
+        public bool Staging { get; set; }
 
         public Warehouse ToEntity()
         {
             return new Warehouse
             {
                 Id = Id,
-                CreatedAt = CreatedAt,
-                UpdatedAt = UpdatedAt,
+                Hold = Hold,
+                MixedProduct = MixedProduct,
                 Location = Location,
-                Code = Code,
-                CanMoveStocksToBranch = CanMoveStocksToBranch,
-                BranchId = BranchId,
+                Staging = Staging,
             };
 
         }

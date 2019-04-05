@@ -20,7 +20,7 @@ namespace DTO.Core.Business
                 Name = branch.Name,
                 UpdatedAt = branch.UpdatedAt
             };
-            branchEntity.Warehouses = WarehouseMapper.MapToEntity(branch.Warehouses);
+            //branchEntity.Warehouses = WarehouseMapper.MapToEntity(branch.Warehouses);
             branchEntity.Counters = CounterMapper.MapToEntity(branch.Counters);
             return branchEntity;
         }

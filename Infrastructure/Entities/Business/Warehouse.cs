@@ -16,19 +16,17 @@ namespace Infrastructure.Entities.Business
     public class Warehouse
     {
         public int Id { get; set; }
+
         // location of the warehouse
         public string Location { get; set; }
 
-        public int BranchId { get; set; }
-        // warehouse code;
-        public string Code { get; set; }
-
-        // ========== Settings ============ //
-        // whether this warehouse can directly transfer its stocks to branches
-        // if false then this warehouse will only transfer its stocks to another warehouse only
-        public bool CanMoveStocksToBranch { get; set; }
-        // public bool ShouldMoveStocksToNearestBranchOnly { get; set;}
-
+        // Can hold the stocks
+        public bool Hold { get; set; }
+        // if this warehouse can hold Mixed Products. the first inbound product can only be added until all removed
+        public bool MixedProduct { get; set; }
+        //StagingLocation: An area reserved for inventory that is ready for final assembly or transport.
+        //Read more: http://www.businessdictionary.com/definition/staging-location.html
+        public bool Staging { get; set; }
 
         // time stamps
         public DateTime CreatedAt { get; set; }
@@ -36,7 +34,7 @@ namespace Infrastructure.Entities.Business
         public DateTime? DeletedAt { get; set; }
 
         // ============== Table Objects ==============//
-        public virtual Branch Branch { get; set; }
+        //  public virtual Branch Branch { get; set; }
 
     }
 }

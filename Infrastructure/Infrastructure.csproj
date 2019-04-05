@@ -87,6 +87,14 @@
     <Compile Include="Migrations\201904041853269_initMigration.Designer.cs">
       <DependentUpon>201904041853269_initMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904051808038_WarehouseUpdated.cs" />
+    <Compile Include="Migrations\201904051808038_WarehouseUpdated.Designer.cs">
+      <DependentUpon>201904051808038_WarehouseUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904051814397_WarehouseUpdatedAgain.cs" />
+    <Compile Include="Migrations\201904051814397_WarehouseUpdatedAgain.Designer.cs">
+      <DependentUpon>201904051814397_WarehouseUpdatedAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,6 +111,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904041853269_initMigration.resx">
       <DependentUpon>201904041853269_initMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904051808038_WarehouseUpdated.resx">
+      <DependentUpon>201904051808038_WarehouseUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904051814397_WarehouseUpdatedAgain.resx">
+      <DependentUpon>201904051814397_WarehouseUpdatedAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,9 +18,10 @@ namespace Service.Listeners.Business
         // private empty constructor
         private BranchEventArgs() { }
         // public parameterized constructor
-        public BranchEventArgs(BranchModel branch)
+        public BranchEventArgs(BranchModel branch, UpdateMode mode)
         {
             BranchModel = branch;
+            Mode = mode;
         }
         // static Instance generator
         public static BranchEventArgs Instance { get { return new BranchEventArgs(); } }

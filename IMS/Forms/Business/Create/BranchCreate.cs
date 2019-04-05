@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using IMS.Forms.Common;
 using Service.Core.Business;
 using Service.Listeners;
-using Service.Listeners.Business;
 using ViewModel.Core.Business;
 
 namespace IMS.Forms.Business.Create
@@ -14,26 +11,106 @@ namespace IMS.Forms.Business.Create
     public partial class BranchCreate : Form
     {
         private readonly IBusinessService businessService;
-        private readonly IDatabaseChangeListener _listener;
 
         private int branchId;
         // private int warehouseId;
-
-        
-        public BranchCreate(IBusinessService businessService, IDatabaseChangeListener listener)
+        public BranchCreate(IBusinessService businessService)
         {
             this.businessService = businessService;
-            this._listener = listener;
             InitializeComponent();
             this.ActiveControl = tbBranchName;
 
-            AddValidation();
+            InitializateValidation();
         }
 
-        private void AddValidation()
+
+
+        #region Initialization Functions
+
+        private void InitializateValidation()
         {
             tbBranchName.Validating += TbBranchName_Validating;
         }
+
+        #endregion
+
+
+
+        #region Populating Functions
+
+        public void SetData(BranchModel branch)
+        {
+            if (branch != null)
+            {
+                branchId = branch.Id;
+                tbBranchName.Text = branch.Name;
+                lblNote.Visible = false;
+                this.Height = this.Height - 35;
+                this.Text = "Branch Edit (" + branch.Name +")";
+            }
+            else
+            {
+                branchId = 0;
+                tbBranchName.Text = "";
+            }
+        }
+
+        #endregion
+
+
+
+        #region Data Save Functions
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void Save()
+        {
+            if (IsModelValid())
+            {
+                var branchModel = new BranchModel
+                {
+                    Name = tbBranchName.Text,
+                    Id = branchId,
+                };
+                //branchModel.Warehouses.Add(new WarehouseModel()
+                //{
+                //    CanMoveStocksToBranch = true,
+                //    Code = tbBranchName.Text + "-W-01",// tbWarehouse.Text,
+                //    CreatedAt = DateTime.Now,
+                //    Location = tbBranchName.Text,
+                //    UpdatedAt = DateTime.Now,
+                //});
+
+                branchModel.Counters.Add(new CounterModel()
+                {
+                    UpdatedAt = DateTime.Now,
+                    CreatedAt = DateTime.Now,
+                    Name = tbBranchName.Text + "-C-01", // tbCounter.Text,
+                    OutOfOrder = false,
+                });
+
+                businessService.AddOrUpdateBranch(branchModel);
+                this.Close();
+            }
+            else
+            {
+                PopupMessage.ShowMissingInputsMessage();
+            }
+        }
+
+        private bool IsModelValid()
+        {
+            return ValidateBranch();
+        }
+
+        #endregion
+
+
+
+        #region Validations
 
         private void TbBranchName_Validating(object sender, CancelEventArgs e)
         {
@@ -51,120 +128,23 @@ namespace IMS.Forms.Business.Create
             return true;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (IsModelValid())
-            {
-                var branchModel = new BranchModel
-                {
-                    Name = tbBranchName.Text,
+        #endregion
 
-                };
-                branchModel.Warehouses.Add(new WarehouseModel()
-                {
-                    CanMoveStocksToBranch = true,
-                    Code = tbWarehouse.Text,
-                    CreatedAt = DateTime.Now,
-                    Location = tbBranchName.Text,
-                    UpdatedAt = DateTime.Now,
-                });
-
-                branchModel.Counters.Add(new CounterModel()
-                {
-                    UpdatedAt = DateTime.Now,
-                    CreatedAt = DateTime.Now,
-                    Name = tbCounter.Text,
-                    OutOfOrder = false,
-                });
-
-                businessService.AddOrUpdateBranch(branchModel);
-                this.Close();
-            }
-            else
-            {
-                PopupMessage.ShowMissingInputsMessage();
-            }
-        }
-
-        private bool IsModelValid()
-        {
-            return ValidateBranch();
-            if (tbBranchName.Text == "")
-            {
-                tbBranchName.BackColor = Color.LightPink;
-                return false;
-            }
-            var branchModel = new BranchModel
-            {
-                Name = tbBranchName.Text,
-                Id = branchId,
-                Warehouses = new List<WarehouseModel>()
-                {
-                    new WarehouseModel()
-                    {
-                        //Id = warehouseId,
-                       // BranchId = update,
-                        CanMoveStocksToBranch = true,
-                        Code = tbBranchName.Text + "Warehouse",
-                        Location = tbBranchName.Text,
-
-                    }
-                }
-            };
-
-            var update = businessService.AddOrUpdateBranch(branchModel);
-
-            /*
-            if (update == 0)
-            {
-                MessageBox.Show(this, "Branch Name " + tbBranchName.Text + " is already in database.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //MessageBox.Show("Branch Name " + tbBranchName.Text + " is already in database.");
-                return;
-            }
-            //var branchEntity = businessService.GetBranchWithId()
-
-            // to add warehouse
-            var warehouseModel = new WarehouseModel()
-            {
-                //Id = warehouseId,
-                BranchId = update,
-                CanMoveStocksToBranch = true,
-                Code = tbBranchName.Text + "Warehouse",
-                Location = tbBranchName.Text,
-
-            };
-
-            businessService.AddOrUpdateWarehouse(warehouseModel);
-            */
-            this.Close();
-
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void tbBranchName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            string branchShortcutName = "";
-            // get first four letters of branch and append with W-01
-            if (tbBranchName.Text.Length > 4)
-            {
-                branchShortcutName = tbBranchName.Text.Substring(0, 4);
-            }
-            else
-            {
-                branchShortcutName = tbBranchName.Text;
-            }
-            tbWarehouse.Text = branchShortcutName + "-W-01";
-            tbCounter.Text = branchShortcutName + "-C-01";
-        }
-
-        internal void SetData(BranchModel branch)
-        {
-            branchId = branch.Id;
-            tbBranchName.Text = branch.Name;
-        }
     }
 }
+
+//private void tbBranchName_KeyPress(object sender, KeyPressEventArgs e)
+//{
+//    string branchShortcutName = "";
+//    // get first four letters of branch and append with W-01
+//    if (tbBranchName.Text.Length > 4)
+//    {
+//        branchShortcutName = tbBranchName.Text.Substring(0, 4);
+//    }
+//    else
+//    {
+//        branchShortcutName = tbBranchName.Text;
+//    }
+//    tbWarehouse.Text = branchShortcutName + "-W-01";
+//    tbCounter.Text = branchShortcutName + "-C-01";
+//}

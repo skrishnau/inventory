@@ -1,6 +1,8 @@
-﻿using Service.Listeners.Business;
+﻿using Service.DbEventArgs;
+using Service.Listeners.Business;
 using Service.Listeners.Inventory;
 using System;
+using ViewModel.Core.Business;
 
 namespace Service.Listeners
 {
@@ -17,5 +19,11 @@ namespace Service.Listeners
         // category event and invoker
         event EventHandler<ProductEventArgs> ProductUpdated;
         void TriggerProductUpdateEvent(object sender, ProductEventArgs eventArgs);
+
+        // Warehouse
+        
+        event EventHandler<BaseEventArgs<WarehouseModel>> WarehouseUpdated;
+        void TriggerWarehouseUpdateEvent(object sender, BaseEventArgs<WarehouseModel> eventArgs);
+
     }
 }

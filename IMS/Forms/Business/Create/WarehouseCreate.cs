@@ -14,50 +14,96 @@ namespace IMS.Forms.Business.Create
 {
     public partial class WarehouseCreate : Form
     {
-        private readonly IBusinessService businessService;
+        private readonly IBusinessService _businessService;
+
+        private int _warehouseId;
+
         public WarehouseCreate(IBusinessService businessService)
         {
-            this.businessService = businessService;
+            this._businessService = businessService;
             InitializeComponent();
-            PopulateBranchCombo();
+
+            InitializeValidationEvents();
         }
 
-        public void PopulateBranchCombo()
+
+        #region Initializations
+
+        private void InitializeValidationEvents()
         {
-            cbBranch.FlatStyle = FlatStyle.Popup;
-            cbBranch.DropDownStyle = ComboBoxStyle.DropDownList;
-            var branches = businessService.GetBranchList();
-            cbBranch.DataSource = branches;
-            cbBranch.ValueMember = "Id";
-            cbBranch.DisplayMember = "Name";
+            tbLocation.Validated += TbLocation_Validated;
         }
+
+        #endregion
+
+
+        #region Validation Events & Functions
+
+        private void TbLocation_Validated(object sender, EventArgs e)
+        {
+            ValidateLocation();
+        }
+
+        private bool ValidateLocation()
+        {
+            if (string.IsNullOrEmpty(tbLocation.Text))
+            {
+                errorProvider1.SetError(tbLocation, "Required");
+                return false;
+            }
+            errorProvider1.SetError(tbLocation, "");
+            return true;
+        }
+
+        #endregion
+
+
+        #region Populate Functions
+
+        public void SetDataForEdit(int warehouseId)
+        {
+            WarehouseModel warehouse = _businessService.GetWarehouse(warehouseId);
+            if (warehouse != null)
+            {
+                this.Text = "Warehouse Edit (" + warehouse.Location + ")";
+                _warehouseId = warehouseId;
+                tbLocation.Text = warehouse.Location;
+                chkHold.Checked = warehouse.Hold;
+                chkMixedProduct.Checked = warehouse.MixedProduct;
+                chkStaging.Checked = warehouse.Staging;
+            }
+        }
+
+
+        #endregion
+
+
+        #region Save Functions
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(tbLocation.Text == "")
+            if (IsModelValid())
             {
-                tbLocation.BackColor = Color.LightPink;
-                return;
+                var warehouseModel = new WarehouseModel
+                {
+                    Id = _warehouseId,
+                    Location = tbLocation.Text,
+                    Hold = chkHold.Checked,
+                    MixedProduct = chkMixedProduct.Checked,
+                    Staging = chkStaging.Checked,
+                };
+                _businessService.AddOrUpdateWarehouse(warehouseModel);
+                this.Close();
             }
-            if(tbCode.Text == "")
-            {
-                tbCode.BackColor = Color.LightPink;
-                return;
-            }
-            var warehouseModel = new WarehouseModel
-            {
-                Location = tbLocation.Text,
-                Code = tbCode.Text,
-                BranchId = int.Parse(cbBranch.SelectedValue.ToString()),
-                CanMoveStocksToBranch = cbCanMoveStock.Checked
-            };
-            businessService.AddOrUpdateWarehouse(warehouseModel);
-            this.Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private bool IsModelValid()
         {
-            this.Close();
+            return ValidateLocation();
         }
+
+        #endregion
+
+
     }
 }

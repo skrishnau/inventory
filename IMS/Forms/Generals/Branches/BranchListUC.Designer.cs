@@ -32,11 +32,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvBranch = new System.Windows.Forms.DataGridView();
             this.colbranchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBranch)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvBranch
             // 
+            this.dgvBranch.AllowUserToAddRows = false;
+            this.dgvBranch.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -47,7 +50,8 @@
             this.dgvBranch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBranch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBranch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colbranchName});
+            this.colbranchName,
+            this.colId});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -60,6 +64,7 @@
             this.dgvBranch.Location = new System.Drawing.Point(0, 0);
             this.dgvBranch.Margin = new System.Windows.Forms.Padding(2);
             this.dgvBranch.Name = "dgvBranch";
+            this.dgvBranch.ReadOnly = true;
             this.dgvBranch.RowTemplate.Height = 24;
             this.dgvBranch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBranch.Size = new System.Drawing.Size(301, 232);
@@ -71,6 +76,15 @@
             this.colbranchName.DataPropertyName = "Name";
             this.colbranchName.HeaderText = "BranchName";
             this.colbranchName.Name = "colbranchName";
+            this.colbranchName.ReadOnly = true;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
             // 
             // BranchListUC
             // 
@@ -88,5 +102,6 @@
 
         private System.Windows.Forms.DataGridView dgvBranch;
         private System.Windows.Forms.DataGridViewTextBoxColumn colbranchName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
     }
 }

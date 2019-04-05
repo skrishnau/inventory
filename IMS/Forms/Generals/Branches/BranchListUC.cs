@@ -86,17 +86,26 @@ namespace IMS.Forms.Generals.Branches
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var branchCreate = Program.container.GetInstance<BranchCreate>();
-                branchCreate.ShowDialog();
-                //PopulateBranchData();
-            }
+            ShowAddEditDialog(false);
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             // edit
+            if (_SelectedBranchModel != null)
+            {
+                ShowAddEditDialog(true);
+            }
+        }
+
+        private void ShowAddEditDialog(bool isEditMode)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var branchCreate = Program.container.GetInstance<BranchCreate>();
+                branchCreate.SetData(isEditMode ? _SelectedBranchModel : null);
+                branchCreate.ShowDialog();
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)

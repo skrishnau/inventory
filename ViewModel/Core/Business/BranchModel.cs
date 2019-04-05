@@ -11,14 +11,14 @@ namespace ViewModel.Core.Business
     {
         public BranchModel()
         {
-            Warehouses = new List<WarehouseModel>();
+            //Warehouses = new List<WarehouseModel>();
             Counters = new List<CounterModel>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<WarehouseModel> Warehouses { get; set; }
+       // public ICollection<WarehouseModel> Warehouses { get; set; }
         public ICollection<CounterModel> Counters { get; set; }
 
 

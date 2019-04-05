@@ -24,14 +24,23 @@ namespace DTO.Core.Business
         {
             return new Warehouse()
             {
-                BranchId = wh.BranchId,
-                CanMoveStocksToBranch = wh.CanMoveStocksToBranch,
-                Code = wh.Code,
-                CreatedAt = wh.CreatedAt,
-                DeletedAt = wh.DeletedAt,
                 Id = wh.Id,
+                Hold = wh.Hold,
+                MixedProduct = wh.MixedProduct,
                 Location = wh.Location,
-                UpdatedAt = wh.UpdatedAt,
+                Staging = wh.Staging,
+            };
+        }
+
+        public static WarehouseModel MapToWarehouseModel(Warehouse warehouse)
+        {
+            return new WarehouseModel()
+            {
+                Hold = warehouse.Hold,
+                MixedProduct = warehouse.MixedProduct,
+                Id = warehouse.Id,
+                Location = warehouse.Location,
+                Staging = warehouse.Staging,
             };
         }
     }
