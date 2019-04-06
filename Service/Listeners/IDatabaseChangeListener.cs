@@ -3,6 +3,7 @@ using Service.Listeners.Business;
 using Service.Listeners.Inventory;
 using System;
 using ViewModel.Core.Business;
+using ViewModel.Core.Suppliers;
 
 namespace Service.Listeners
 {
@@ -21,9 +22,11 @@ namespace Service.Listeners
         void TriggerProductUpdateEvent(object sender, ProductEventArgs eventArgs);
 
         // Warehouse
-        
         event EventHandler<BaseEventArgs<WarehouseModel>> WarehouseUpdated;
         void TriggerWarehouseUpdateEvent(object sender, BaseEventArgs<WarehouseModel> eventArgs);
+        // supplier
+        event EventHandler<BaseEventArgs<SupplierModel>> SupplierUpdated;
+        void TriggerSupplierUpdateEvent(object sender, BaseEventArgs<SupplierModel> eventArgs);
 
     }
 }

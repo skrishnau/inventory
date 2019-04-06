@@ -3,6 +3,7 @@ using Service.Listeners.Business;
 using Service.Listeners.Inventory;
 using System;
 using ViewModel.Core.Business;
+using ViewModel.Core.Suppliers;
 
 namespace Service.Listeners
 {
@@ -13,6 +14,7 @@ namespace Service.Listeners
         public event EventHandler<CategoryEventArgs> CategoryUpdated;
         public event EventHandler<ProductEventArgs> ProductUpdated;
         public event EventHandler<BaseEventArgs<WarehouseModel>> WarehouseUpdated;
+        public event EventHandler<BaseEventArgs<SupplierModel>> SupplierUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -33,6 +35,11 @@ namespace Service.Listeners
         public void TriggerProductUpdateEvent(object sender, ProductEventArgs eventArgs)
         {
             ProductUpdated?.Invoke(sender, eventArgs);
+        }
+
+        public void TriggerSupplierUpdateEvent(object sender, BaseEventArgs<SupplierModel> eventArgs)
+        {
+            SupplierUpdated?.Invoke(sender, eventArgs);
         }
 
         public void TriggerWarehouseUpdateEvent(object sender, BaseEventArgs<WarehouseModel> eventArgs)

@@ -14,15 +14,11 @@ namespace Infrastructure.Entities.Suppliers
         public int BasicInfoId { get; set; }
 
         // supplier specific informations
-        public string Fax { get; set; }
-        public string Website { get; set; }
-        public string PhoneSecond { get; set; }
-        public string ContactPersonName { get; set; }
+        public string SalesPerson { get; set; }
+        public string MyCustomerAccount { get; set; }
 
         // ==== table objects ==== //
-        
         public virtual BasicInfo BasicInfo { get; set; }
-
 
     }
 

@@ -11,6 +11,7 @@ namespace Service.Core.Suppliers
     {
         void AddOrUpdateSupplier(SupplierModel supplierModel);
         List<SupplierModel> GetSupplierList();
-
+        SupplierModel GetSupplier(int supplierId);
+        void DeleteSupplier(int supplierId);
     }
 }

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
+using DTO.Core.Inventory;
 using Infrastructure.Context;
+using Service.DbEventArgs;
+using Service.Listeners;
 using ViewModel.Core.Suppliers;
 
 namespace Service.Core.Suppliers
@@ -11,53 +15,66 @@ namespace Service.Core.Suppliers
     public class SupplierService : ISupplierService
     {
         private readonly DatabaseContext _context;
-        public SupplierService( DatabaseContext context)
+        private readonly IDatabaseChangeListener _listener;
+
+        public SupplierService(DatabaseContext context, IDatabaseChangeListener listener)
         {
             _context = context;
+            _listener = listener;
         }
         public void AddOrUpdateSupplier(SupplierModel supplierModel)
         {
-            var dbEntity = _context.Supplier.FirstOrDefault(x => x.Id == supplierModel.Id);
-            if(dbEntity == null)
+            var now = DateTime.Now;
+            var dbEntity = _context.Supplier
+                .Include(x => x.BasicInfo)
+                .FirstOrDefault(x => x.Id == supplierModel.Id);
+            BaseEventArgs<SupplierModel> eventArgs = BaseEventArgs<SupplierModel>.Instance;
+            dbEntity = SupplierMapper.MapToEntity(supplierModel, dbEntity);
+            if (dbEntity.Id == 0)
             {
-                var supplierEntitiy = supplierModel.ToEntity();
-                _context.Supplier.Add(supplierEntitiy);
-                
+                // add
+                dbEntity.BasicInfo.CreatedAt = now;
+                dbEntity.BasicInfo.UpdatedAt = now;
+                _context.Supplier.Add(dbEntity);
+                eventArgs.Mode = Utility.UpdateMode.ADD;
             }
             else
             {
-                dbEntity.BasicInfo.Name = supplierModel.Name;
+                dbEntity.BasicInfo.UpdatedAt = now;
+                // update; not needed to assign cause Mapper has already assigned; just set the mode of eventArgs
+                eventArgs.Mode = Utility.UpdateMode.EDIT;
             }
             _context.SaveChanges();
+            eventArgs.Model = SupplierMapper.MapToSupplierModel(dbEntity);
+            _listener.TriggerSupplierUpdateEvent(null, eventArgs);
+        }
+
+        public void DeleteSupplier(int supplierId)
+        {
+            var entity = _context.Supplier.Find(supplierId);
+            if(entity != null)
+            {
+                entity.BasicInfo.DeletedAt = DateTime.Now;
+                _context.SaveChanges();
+                var args = new BaseEventArgs<SupplierModel>(SupplierMapper.MapToSupplierModel(entity), Utility.UpdateMode.DELETE);
+                _listener.TriggerSupplierUpdateEvent(null, args);
+            }
+        }
+
+        public SupplierModel GetSupplier(int supplierId)
+        {
+            var supplier = _context.Supplier.Find(supplierId);
+            if (supplier == null)
+                return null;
+            return SupplierMapper.MapToSupplierModel(supplier);
         }
 
         public List<SupplierModel> GetSupplierList()
         {
-            var supps = _context.Supplier
-                .Where(x => x.BasicInfo.DeletedAt == null)
-                .Select(x => new SupplierModel()
-                {
-                    Address = x.BasicInfo.Address,
-                    CreatedAt = x.BasicInfo.CreatedAt,
-                    ContactPersonName = x.ContactPersonName,
-                    DeletedAt = x.BasicInfo.DeletedAt,
-                    DOB = x.BasicInfo.DOB,
-                    Email = x.BasicInfo.Email,
-                    Fax = x.Fax,
-                    Gender = x.BasicInfo.Gender,
-                    IsCompany = x.BasicInfo.IsCompany,
-                    IsMarried = x.BasicInfo.IsMarried,
-                    Name = x.BasicInfo.Name,
-                    Phone = x.BasicInfo.Phone,
-                    PhoneSecond = x.PhoneSecond,
-                    UpdatedAt = x.BasicInfo.UpdatedAt,
-                    Website = x.Website,
-                    Id = x.Id
-
-
-                })
-                .ToList();
-            return supps;
+            var query = _context.Supplier
+                .Include(x => x.BasicInfo)
+                .Where(x => x.BasicInfo.DeletedAt == null);
+            return SupplierMapper.MapToSupplierModel(query);
         }
 
     }

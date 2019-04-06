@@ -49,6 +49,7 @@
     <Compile Include="Core\Business\WarehouseMapper.cs" />
     <Compile Include="Core\Inventory\BrandMapper.cs" />
     <Compile Include="Core\Inventory\CategoryMapper.cs" />
+    <Compile Include="Core\Inventory\SupplierMapper.cs" />
     <Compile Include="Core\Settings\AppSettingMapper.cs" />
     <Compile Include="Core\Inventory\ProductMapper.cs" />
     <Compile Include="Core\Inventory\VariantMapper.cs" />
@@ -69,6 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

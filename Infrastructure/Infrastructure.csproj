@@ -95,6 +95,10 @@
     <Compile Include="Migrations\201904051814397_WarehouseUpdatedAgain.Designer.cs">
       <DependentUpon>201904051814397_WarehouseUpdatedAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904060453045_SupplierUpdated.cs" />
+    <Compile Include="Migrations\201904060453045_SupplierUpdated.Designer.cs">
+      <DependentUpon>201904060453045_SupplierUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904051814397_WarehouseUpdatedAgain.resx">
       <DependentUpon>201904051814397_WarehouseUpdatedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904060453045_SupplierUpdated.resx">
+      <DependentUpon>201904060453045_SupplierUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
