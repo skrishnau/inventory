@@ -18,6 +18,7 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<SupplierModel>> SupplierUpdated;
         public event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
         public event EventHandler<BaseEventArgs<PackageModel>> PackageUpdated;
+        public event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -58,6 +59,11 @@ namespace Service.Listeners
         public void TriggerWarehouseUpdateEvent(object sender, BaseEventArgs<WarehouseModel> eventArgs)
         {
             WarehouseUpdated?.Invoke(sender, eventArgs);
+        }
+
+        public void TriggerAdjustmentCodeUpdateEvent(object sender, BaseEventArgs<AdjustmentCodeModel> eventArgs)
+        {
+            AdjustmentCodeUpdated?.Invoke(sender, eventArgs);
         }
     }
 }

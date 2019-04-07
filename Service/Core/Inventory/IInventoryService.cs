@@ -32,6 +32,7 @@ namespace Service.Core.Inventory
 
         ProductModelForSave GetProductForEdit(int productId);
 
+
         //List<AttributeModel> GetAttributeList();
 
         // List<OptionModel> GetDistinctAttributes();
@@ -61,6 +62,9 @@ namespace Service.Core.Inventory
 
         List<PackageModel> GetPackageList();
 
+        List<AdjustmentCodeModel> GetAdjustmentCodeList();
+
+        string SaveAdjustmentCode(AdjustmentCodeModel model);
 
         //        bool AddOrUpdateAttribute(AttributeModel attributeModel);
 

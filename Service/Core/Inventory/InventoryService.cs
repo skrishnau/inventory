@@ -478,6 +478,41 @@ namespace Service.Core.Inventory
             return PackageMapper.MapToModel(query);
         }
 
+        public List<AdjustmentCodeModel> GetAdjustmentCodeList()
+        {
+            var query = _context.AdjustmentCode.AsQueryable();
+            return AdjustmentCodeMapper.MapToModel(query);
+        }
+
+        public string SaveAdjustmentCode(AdjustmentCodeModel model)
+        {
+            var msg = "";
+            var args = BaseEventArgs<AdjustmentCodeModel>.Instance;
+            var duplicate = _context.AdjustmentCode.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
+            if (duplicate != null)
+            {
+                return "Same 'Adjustment Code' already exists";
+            }
+
+            // get the package
+            var entity = _context.AdjustmentCode.FirstOrDefault(x => x.Id == model.Id);
+            entity = AdjustmentCodeMapper.MapToEntity(model, entity);
+            if (model.Id == 0)
+            {
+                // add
+                _context.AdjustmentCode.Add(entity);
+                args.Mode = Utility.UpdateMode.ADD;
+            }
+            else
+            {
+                args.Mode = Utility.UpdateMode.EDIT;
+            }
+            _context.SaveChanges();
+            args.Model = AdjustmentCodeMapper.MapToModel(entity);
+            _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
+            return msg;
+        }
+
         #endregion
     }
 }

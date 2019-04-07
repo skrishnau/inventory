@@ -25,6 +25,7 @@ using IMS.Forms.Inventory.Adjustments;
 using IMS.Forms.Inventory.Transfers;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
+using IMS.Forms.Inventory.Settings.Adjustments;
 
 namespace IMS.Forms.Inventory
 {
@@ -83,8 +84,8 @@ namespace IMS.Forms.Inventory
             // settings
             _menubar.btnUom.Click += BtnUom_Click;
             _menubar.btnPackage.Click += BtnPackage_Click;
+            _menubar.btnAdjustmentCodes.Click += BtnAdjustmentCodes_Click;
         }
-
 
         #region Products
 
@@ -213,6 +214,18 @@ namespace IMS.Forms.Inventory
             _menubar.ClearSelection();
             //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
+
+        private void BtnAdjustmentCodes_Click(object sender, EventArgs e)
+        {
+            var packageUC = Program.container.GetInstance<AdjustmentCodeUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            packageUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(packageUC);
+            // set selection
+            _menubar.ClearSelection();
+            //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
+        }
+
 
         #endregion
     }

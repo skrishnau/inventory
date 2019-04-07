@@ -39,6 +39,7 @@ using IMS.Forms.Inventory.Transfers;
 using Service.Listeners;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
+using IMS.Forms.Inventory.Settings.Adjustments;
 
 namespace IMS
 {
@@ -133,6 +134,7 @@ namespace IMS
             container.Register<WarehouseListUC>(Lifestyle.Scoped);
             container.Register<UomUC>(Lifestyle.Scoped);
             container.Register<PackageUC>(Lifestyle.Scoped);
+            container.Register<AdjustmentCodeUC>(Lifestyle.Scoped);
 
             // --- POS related --- //
             container.Register<CounterListUC>(Lifestyle.Scoped);

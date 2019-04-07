@@ -159,6 +159,12 @@
     <Compile Include="Forms\Inventory\Packages\PackageUC.Designer.cs">
       <DependentUpon>PackageUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Settings\Adjustments\AdjustmentCodeUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\Adjustments\AdjustmentCodeUC.Designer.cs">
+      <DependentUpon>AdjustmentCodeUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Transfers\InventoryTransfersListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -495,6 +501,9 @@
     <EmbeddedResource Include="Forms\Inventory\Packages\PackageUC.resx">
       <DependentUpon>PackageUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\Adjustments\AdjustmentCodeUC.resx">
+      <DependentUpon>AdjustmentCodeUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transfers\InventoryTransfersListUC.resx">
       <DependentUpon>InventoryTransfersListUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -669,6 +678,7 @@
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\InventorySettings\" />
+    <Folder Include="Forms\Inventory\NewFolder1\" />
     <Folder Include="Forms\Inventory\Purchases\Direct\" />
     <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Shared\" />

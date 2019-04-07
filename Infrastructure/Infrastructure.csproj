@@ -55,6 +55,7 @@
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
+    <Compile Include="Entities\Inventory\AdjustmentCode.cs" />
     <Compile Include="Entities\Inventory\Package.cs" />
     <Compile Include="Entities\Inventory\ProductAttribute.cs" />
     <Compile Include="Entities\Inventory\Uom.cs" />
@@ -113,6 +114,10 @@
     <Compile Include="Migrations\201904071933396_PackageAdded.Designer.cs">
       <DependentUpon>201904071933396_PackageAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904072035140_AdjustmentCodeAdded.cs" />
+    <Compile Include="Migrations\201904072035140_AdjustmentCodeAdded.Designer.cs">
+      <DependentUpon>201904072035140_AdjustmentCodeAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -147,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904071933396_PackageAdded.resx">
       <DependentUpon>201904071933396_PackageAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904072035140_AdjustmentCodeAdded.resx">
+      <DependentUpon>201904072035140_AdjustmentCodeAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

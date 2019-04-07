@@ -35,6 +35,8 @@ namespace Service.Listeners
         // Package
         event EventHandler<BaseEventArgs<PackageModel>> PackageUpdated;
         void TriggerPackageUpdateEvent(object sender, BaseEventArgs<PackageModel> eventArgs);
-
+        // adj code
+        event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
+        void TriggerAdjustmentCodeUpdateEvent(object sender, BaseEventArgs<AdjustmentCodeModel> eventArgs);
     }
 }

@@ -25,8 +25,6 @@ namespace IMS.Forms.Inventory
             btnSupplierList.FlatStyle = FlatStyle.Standard;
             btnWarehouseList.FlatStyle = FlatStyle.Standard;
         }
-
-
     }
 
 }
