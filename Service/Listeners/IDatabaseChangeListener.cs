@@ -32,7 +32,9 @@ namespace Service.Listeners
         // UOM
         event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
         void TriggerUomUpdateEvent(object sender, BaseEventArgs<UomModel> eventArgs);
-
+        // Package
+        event EventHandler<BaseEventArgs<PackageModel>> PackageUpdated;
+        void TriggerPackageUpdateEvent(object sender, BaseEventArgs<PackageModel> eventArgs);
 
     }
 }

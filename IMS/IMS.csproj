@@ -153,6 +153,12 @@
     <Compile Include="Forms\Inventory\Adjustments\DirectReceiveForm.Designer.cs">
       <DependentUpon>DirectReceiveForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Packages\PackageUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Packages\PackageUC.Designer.cs">
+      <DependentUpon>PackageUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Transfers\InventoryTransfersListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -485,6 +491,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Adjustments\DirectReceiveForm.resx">
       <DependentUpon>DirectReceiveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Packages\PackageUC.resx">
+      <DependentUpon>PackageUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transfers\InventoryTransfersListUC.resx">
       <DependentUpon>InventoryTransfersListUC.cs</DependentUpon>

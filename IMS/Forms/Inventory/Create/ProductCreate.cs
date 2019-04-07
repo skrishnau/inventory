@@ -421,7 +421,6 @@ namespace IMS.Forms.Inventory.Create
         }
 
         #endregion
-
     }
 }
 

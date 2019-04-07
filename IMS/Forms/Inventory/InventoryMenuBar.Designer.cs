@@ -38,7 +38,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.btnPackage = new System.Windows.Forms.LinkLabel();
             this.btnUom = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnTraffic = new System.Windows.Forms.Button();
@@ -134,7 +134,7 @@
             // 
             this.groupBox1.Controls.Add(this.linkLabel4);
             this.groupBox1.Controls.Add(this.linkLabel3);
-            this.groupBox1.Controls.Add(this.linkLabel2);
+            this.groupBox1.Controls.Add(this.btnPackage);
             this.groupBox1.Controls.Add(this.btnUom);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(983, 2);
@@ -171,18 +171,18 @@
             this.linkLabel3.Text = "Adjustment Codes";
             this.linkLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // linkLabel2
+            // btnPackage
             // 
-            this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel2.Image = global::IMS.Properties.Resources.icons8_Packaging_16px;
-            this.linkLabel2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel2.Location = new System.Drawing.Point(5, 34);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(118, 16);
-            this.linkLabel2.TabIndex = 1;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Package";
-            this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnPackage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPackage.Image = global::IMS.Properties.Resources.icons8_Packaging_16px;
+            this.btnPackage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPackage.Location = new System.Drawing.Point(5, 34);
+            this.btnPackage.Name = "btnPackage";
+            this.btnPackage.Size = new System.Drawing.Size(118, 16);
+            this.btnPackage.TabIndex = 1;
+            this.btnPackage.TabStop = true;
+            this.btnPackage.Text = "Package";
+            this.btnPackage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnUom
             // 
@@ -475,7 +475,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnInventoryFlow;
         protected internal System.Windows.Forms.Button btnTraffic;
@@ -499,5 +498,6 @@
         private System.Windows.Forms.Splitter splitter7;
         private System.Windows.Forms.GroupBox gbSupplier;
         protected internal System.Windows.Forms.LinkLabel btnUom;
+        protected internal System.Windows.Forms.LinkLabel btnPackage;
     }
 }

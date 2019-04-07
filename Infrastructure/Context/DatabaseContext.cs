@@ -58,6 +58,7 @@ namespace Infrastructure.Context
         public virtual DbSet<ProductAttribute> ProductAttribute { get; set; }
         public virtual DbSet<Variant> Variant { get; set; }
         public virtual DbSet<Uom> Uom { get; set; }
+        public virtual DbSet<Package> Package { get; set; }
        // public virtual DbSet<VariantAttribute> VariantAttribute { get; set; }
 
         

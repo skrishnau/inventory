@@ -44,6 +44,7 @@ namespace Service.Core.Inventory
 
         void SaveVariant(VariantModel variantModel);
 
+
         List<VariantModel> GetVariantList();
 
         VariantModel GetVariantBySKU(string sku);
@@ -55,6 +56,10 @@ namespace Service.Core.Inventory
         void DeleteProduct(int id);
 
         List<UomModel> GetUomList();
+
+        string SavePackage(PackageModel package);
+
+        List<PackageModel> GetPackageList();
 
 
         //        bool AddOrUpdateAttribute(AttributeModel attributeModel);

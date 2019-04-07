@@ -398,7 +398,7 @@ namespace Service.Core.Inventory
         }
 
 
-        #region UOM
+        #region Settings
 
         public void SaveUom(UomModel model)
         {
@@ -441,6 +441,41 @@ namespace Service.Core.Inventory
         {
             var uoms = _context.Uom.AsQueryable();
             return UomMapper.MapToUomModel(uoms);
+        }
+
+        public string SavePackage(PackageModel package)
+        {
+            var msg = "";
+            var args = BaseEventArgs<PackageModel>.Instance;
+            var duplicate = _context.Package.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
+            if (duplicate != null)
+            {
+                return "Same 'Package' Name already exists";
+            }
+
+            // get the package
+            var entity = _context.Package.FirstOrDefault(x => x.Id == package.Id);
+            entity = PackageMapper.MapToEntity(package, entity);
+            if (package.Id == 0)
+            {
+                // add
+                _context.Package.Add(entity);
+                args.Mode = Utility.UpdateMode.ADD;
+            }
+            else
+            {
+                args.Mode = Utility.UpdateMode.EDIT;
+            }
+            _context.SaveChanges();
+            args.Model = PackageMapper.MapToModel(entity);
+            _listener.TriggerPackageUpdateEvent(null, args);
+            return msg;
+        }
+
+        public List<PackageModel> GetPackageList()
+        {
+            var query = _context.Package.AsQueryable();
+            return PackageMapper.MapToModel(query);
         }
 
         #endregion

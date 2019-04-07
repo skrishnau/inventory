@@ -57,6 +57,21 @@ namespace IMS.Forms.Common
             popup.ContentText = message;
             popup.Popup();// show 
         }
+
+        internal static void ShowErrorMessage(string msg)
+        {
+            ShowPopupMessage("Error!", msg, PopupMessageType.ERROR);
+        }
+
+        internal static void ShowSuccessMessage(string msg)
+        {
+            ShowPopupMessage("Success!", msg, PopupMessageType.SUCCESS);
+        }
+
+        internal static void ShowInfoMessage(string msg)
+        {
+            ShowPopupMessage("Alert!", msg, PopupMessageType.INFO);
+        }
     }
 
     public enum PopupMessageType
