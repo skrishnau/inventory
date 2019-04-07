@@ -23,6 +23,7 @@ using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.Business.Create;
 using IMS.Forms.Inventory.Adjustments;
 using IMS.Forms.Inventory.Transfers;
+using IMS.Forms.Inventory.UOM;
 
 namespace IMS.Forms.Inventory
 {
@@ -78,7 +79,10 @@ namespace IMS.Forms.Inventory
             _menubar.btnSupplierList.Click += BtnSupplierList_Click;
             // warehouse
             _menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
+            // settings
+            _menubar.btnUom.Click += BtnUom_Click;
         }
+
 
         #region Products
 
@@ -183,6 +187,22 @@ namespace IMS.Forms.Inventory
 
         #endregion
 
+
+        #region Settings
+
+
+        private void BtnUom_Click(object sender, EventArgs e)
+        {
+            var uomUC = Program.container.GetInstance<UomUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            uomUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(uomUC);
+            // set selection
+            _menubar.ClearSelection();
+            //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
+        }
+
+        #endregion
     }
 }
 

@@ -52,13 +52,13 @@
             this.tabPageDetails = new System.Windows.Forms.TabPage();
             this.tabPageVariants = new System.Windows.Forms.TabPage();
             this.dgvVariants = new System.Windows.Forms.DataGridView();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.btnAddAttribute = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.colVariantId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAlert = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAlertThreshold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.btnAddAttribute = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbStockThreshold)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -315,6 +315,30 @@
             this.dgvVariants.Size = new System.Drawing.Size(701, 257);
             this.dgvVariants.TabIndex = 1;
             // 
+            // colVariantId
+            // 
+            this.colVariantId.HeaderText = "Id";
+            this.colVariantId.Name = "colVariantId";
+            this.colVariantId.Visible = false;
+            // 
+            // colSKU
+            // 
+            this.colSKU.HeaderText = "SKU (Stock Keeping Unit)";
+            this.colSKU.Name = "colSKU";
+            this.colSKU.Width = 160;
+            // 
+            // colAlert
+            // 
+            this.colAlert.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colAlert.HeaderText = "Alert ?";
+            this.colAlert.Name = "colAlert";
+            this.colAlert.Width = 60;
+            // 
+            // colAlertThreshold
+            // 
+            this.colAlertThreshold.HeaderText = "Alert Threshold";
+            this.colAlertThreshold.Name = "colAlertThreshold";
+            // 
             // panel8
             // 
             this.panel8.Controls.Add(this.btnAddAttribute);
@@ -346,30 +370,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Variants";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // colVariantId
-            // 
-            this.colVariantId.HeaderText = "Id";
-            this.colVariantId.Name = "colVariantId";
-            this.colVariantId.Visible = false;
-            // 
-            // colSKU
-            // 
-            this.colSKU.HeaderText = "SKU (Stock Keeping Unit)";
-            this.colSKU.Name = "colSKU";
-            this.colSKU.Width = 160;
-            // 
-            // colAlert
-            // 
-            this.colAlert.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colAlert.HeaderText = "Alert ?";
-            this.colAlert.Name = "colAlert";
-            this.colAlert.Width = 60;
-            // 
-            // colAlertThreshold
-            // 
-            this.colAlertThreshold.HeaderText = "Alert Threshold";
-            this.colAlertThreshold.Name = "colAlertThreshold";
             // 
             // ProductCreate
             // 

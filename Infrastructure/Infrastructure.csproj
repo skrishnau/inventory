@@ -56,6 +56,7 @@
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
     <Compile Include="Entities\Inventory\ProductAttribute.cs" />
+    <Compile Include="Entities\Inventory\Uom.cs" />
     <Compile Include="Entities\Inventory\Variant.cs" />
     <Compile Include="Entities\Inventory\VariantAttribute.cs" />
     <Compile Include="Entities\Purchases\PurchaseItem.cs" />
@@ -99,6 +100,14 @@
     <Compile Include="Migrations\201904060453045_SupplierUpdated.Designer.cs">
       <DependentUpon>201904060453045_SupplierUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904070804014_UomAdded.cs" />
+    <Compile Include="Migrations\201904070804014_UomAdded.Designer.cs">
+      <DependentUpon>201904070804014_UomAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904071323279_UOM_Updated.cs" />
+    <Compile Include="Migrations\201904071323279_UOM_Updated.Designer.cs">
+      <DependentUpon>201904071323279_UOM_Updated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -124,6 +133,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904060453045_SupplierUpdated.resx">
       <DependentUpon>201904060453045_SupplierUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904070804014_UomAdded.resx">
+      <DependentUpon>201904070804014_UomAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904071323279_UOM_Updated.resx">
+      <DependentUpon>201904071323279_UOM_Updated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

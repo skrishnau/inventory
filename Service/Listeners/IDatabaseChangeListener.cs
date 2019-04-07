@@ -3,6 +3,7 @@ using Service.Listeners.Business;
 using Service.Listeners.Inventory;
 using System;
 using ViewModel.Core.Business;
+using ViewModel.Core.Inventory;
 using ViewModel.Core.Suppliers;
 
 namespace Service.Listeners
@@ -27,6 +28,11 @@ namespace Service.Listeners
         // supplier
         event EventHandler<BaseEventArgs<SupplierModel>> SupplierUpdated;
         void TriggerSupplierUpdateEvent(object sender, BaseEventArgs<SupplierModel> eventArgs);
+
+        // UOM
+        event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
+        void TriggerUomUpdateEvent(object sender, BaseEventArgs<UomModel> eventArgs);
+
 
     }
 }

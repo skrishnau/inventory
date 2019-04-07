@@ -165,6 +165,12 @@
     <Compile Include="Forms\Inventory\Transfers\TransferForm.Designer.cs">
       <DependentUpon>TransferForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\UOM\UomUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\UOM\UomUC.Designer.cs">
+      <DependentUpon>UomUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Warehouses\WarehouseListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -486,6 +492,9 @@
     <EmbeddedResource Include="Forms\Inventory\Transfers\TransferForm.resx">
       <DependentUpon>TransferForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\UOM\UomUC.resx">
+      <DependentUpon>UomUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseListUC.resx">
       <DependentUpon>WarehouseListUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -650,6 +659,7 @@
   <ItemGroup>
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
+    <Folder Include="Forms\Inventory\InventorySettings\" />
     <Folder Include="Forms\Inventory\Purchases\Direct\" />
     <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Shared\" />

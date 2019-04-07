@@ -50,6 +50,7 @@
     <Compile Include="Core\Inventory\BrandMapper.cs" />
     <Compile Include="Core\Inventory\CategoryMapper.cs" />
     <Compile Include="Core\Inventory\SupplierMapper.cs" />
+    <Compile Include="Core\Inventory\UomMapper.cs" />
     <Compile Include="Core\Settings\AppSettingMapper.cs" />
     <Compile Include="Core\Inventory\ProductMapper.cs" />
     <Compile Include="Core\Inventory\VariantMapper.cs" />

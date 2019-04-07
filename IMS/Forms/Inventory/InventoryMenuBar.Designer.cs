@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.splitter5 = new System.Windows.Forms.Splitter();
             this.gbActions = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.btnTransfer = new System.Windows.Forms.Button();
             this.btnDirectReceive = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -38,7 +39,7 @@
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.btnUom = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnTraffic = new System.Windows.Forms.Button();
             this.btnInventoryFlow = new System.Windows.Forms.Button();
@@ -56,9 +57,8 @@
             this.btnCategoryList = new System.Windows.Forms.Button();
             this.btnProductList = new System.Windows.Forms.Button();
             this.gbWarehouse = new System.Windows.Forms.GroupBox();
-            this.splitter7 = new System.Windows.Forms.Splitter();
             this.btnInventoryTransfers = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.splitter7 = new System.Windows.Forms.Splitter();
             this.gbSupplier = new System.Windows.Forms.GroupBox();
             this.gbActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -91,6 +91,19 @@
             this.gbActions.TabStop = false;
             this.gbActions.Text = "Actions";
             // 
+            // button3
+            // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button3.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
+            this.button3.Location = new System.Drawing.Point(129, 18);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(61, 66);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Locate Inventory";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // btnTransfer
             // 
             this.btnTransfer.Dock = System.Windows.Forms.DockStyle.Left;
@@ -122,7 +135,7 @@
             this.groupBox1.Controls.Add(this.linkLabel4);
             this.groupBox1.Controls.Add(this.linkLabel3);
             this.groupBox1.Controls.Add(this.linkLabel2);
-            this.groupBox1.Controls.Add(this.linkLabel1);
+            this.groupBox1.Controls.Add(this.btnUom);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(983, 2);
             this.groupBox1.Name = "groupBox1";
@@ -171,18 +184,18 @@
             this.linkLabel2.Text = "Package";
             this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // linkLabel1
+            // btnUom
             // 
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel1.Image = global::IMS.Properties.Resources.icons8_Scales_16px;
-            this.linkLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel1.Location = new System.Drawing.Point(5, 18);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(118, 16);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "UOM";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnUom.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnUom.Image = global::IMS.Properties.Resources.icons8_Scales_16px;
+            this.btnUom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUom.Location = new System.Drawing.Point(5, 18);
+            this.btnUom.Name = "btnUom";
+            this.btnUom.Size = new System.Drawing.Size(118, 16);
+            this.btnUom.TabIndex = 0;
+            this.btnUom.TabStop = true;
+            this.btnUom.Text = "UOM";
+            this.btnUom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox2
             // 
@@ -390,15 +403,6 @@
             this.gbWarehouse.TabStop = false;
             this.gbWarehouse.Text = "Warehouse";
             // 
-            // splitter7
-            // 
-            this.splitter7.Enabled = false;
-            this.splitter7.Location = new System.Drawing.Point(722, 2);
-            this.splitter7.Name = "splitter7";
-            this.splitter7.Size = new System.Drawing.Size(10, 89);
-            this.splitter7.TabIndex = 31;
-            this.splitter7.TabStop = false;
-            // 
             // btnInventoryTransfers
             // 
             this.btnInventoryTransfers.Dock = System.Windows.Forms.DockStyle.Left;
@@ -412,18 +416,14 @@
             this.btnInventoryTransfers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnInventoryTransfers.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // splitter7
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button3.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
-            this.button3.Location = new System.Drawing.Point(129, 18);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(61, 66);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Locate Inventory";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button3.UseVisualStyleBackColor = true;
+            this.splitter7.Enabled = false;
+            this.splitter7.Location = new System.Drawing.Point(722, 2);
+            this.splitter7.Name = "splitter7";
+            this.splitter7.Size = new System.Drawing.Size(10, 89);
+            this.splitter7.TabIndex = 31;
+            this.splitter7.TabStop = false;
             // 
             // gbSupplier
             // 
@@ -476,7 +476,6 @@
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnInventoryFlow;
         protected internal System.Windows.Forms.Button btnTraffic;
@@ -499,5 +498,6 @@
         protected internal System.Windows.Forms.Button btnInventoryTransfers;
         private System.Windows.Forms.Splitter splitter7;
         private System.Windows.Forms.GroupBox gbSupplier;
+        protected internal System.Windows.Forms.LinkLabel btnUom;
     }
 }

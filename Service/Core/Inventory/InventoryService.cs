@@ -9,6 +9,7 @@ using DTO.Core.Inventory;
 using Service.Listeners;
 using Service.Listeners.Inventory;
 using Newtonsoft.Json;
+using Service.DbEventArgs;
 
 namespace Service.Core.Inventory
 {
@@ -141,7 +142,6 @@ namespace Service.Core.Inventory
             }
         }
 
-
         private void AssignProductAttributesForSave(Product productEntity, ProductModelForSave product, DateTime now)
         {
             // dbEntity.ProductAttributes
@@ -183,8 +183,8 @@ namespace Service.Core.Inventory
                 // since brand is directly entered in textbox separated by comma, we don't have ids
                 // so lets differentiate names
 
-                Brand brandEntity = productEntity.Brands.FirstOrDefault(x=>x.Name == brand.Name);
-                if(brandEntity == null)
+                Brand brandEntity = productEntity.Brands.FirstOrDefault(x => x.Name == brand.Name);
+                if (brandEntity == null)
                 {
                     // then add new; else no need to update
                     brandEntity = brand.ToEntity();
@@ -204,7 +204,7 @@ namespace Service.Core.Inventory
             // remove all other brands which don't have same updatedAt date
             foreach (var brandEntity in productEntity.Brands)
             {
-                if (!product.Brands.Any(x=>x.Name == brandEntity.Name))
+                if (!product.Brands.Any(x => x.Name == brandEntity.Name))
                 {
                     // remove
                     brandEntity.DeletedAt = now;
@@ -327,7 +327,6 @@ namespace Service.Core.Inventory
             };
         }
 
-
         public ProductModelForGridView GetProduct(int productId)
         {
             var product = _context.Product.Find(productId);
@@ -378,7 +377,6 @@ namespace Service.Core.Inventory
             return DTO.Core.Inventory.VariantMapper.MapToVariantModel(sss);
         }
 
-
         public VariantModel GetVariantById(string sku)
         {
             var variant = _context.Variant.FirstOrDefault(x => x.SKU == sku);
@@ -400,8 +398,52 @@ namespace Service.Core.Inventory
         }
 
 
+        #region UOM
 
+        public void SaveUom(UomModel model)
+        {
+            var entity = _context.Uom.Find(model.Id);
+            entity = UomMapper.MapToEntity(model, entity);
+            var args = BaseEventArgs<UomModel>.Instance;
+            // add
+            if (model.Unit == model.BaseUnit)
+            {
+                // root uom
+                entity.BaseUnitId = null;// entity;
+            }
+            else
+            {
+                // find the unit 
+                var baseUomEntity = _context.Uom.FirstOrDefault(x => x.Unit == model.BaseUnit);
+                if (baseUomEntity != null)
+                {
+                    entity.BaseUnitId = baseUomEntity.Id;
+                    entity.BaseUnit = null;
+                }
+            }
 
+            if (model.Id == 0)
+            {
+                _context.Uom.Add(entity);
+                args.Mode = Utility.UpdateMode.ADD;
+            }
+            else
+            {
+                args.Mode = Utility.UpdateMode.EDIT;
+            }
+
+            _context.SaveChanges();
+            args.Model = UomMapper.MapToUomModel(entity);
+            _listener.TriggerUomUpdateEvent(null, args);
+        }
+
+        public List<UomModel> GetUomList()
+        {
+            var uoms = _context.Uom.AsQueryable();
+            return UomMapper.MapToUomModel(uoms);
+        }
+
+        #endregion
     }
 }
 
