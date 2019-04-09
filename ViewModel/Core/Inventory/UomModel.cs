@@ -9,10 +9,10 @@ namespace ViewModel.Core.Inventory
     public class UomModel
     {
         public int Id { get; set; }
-        public string Unit { get; set; }
+        public string Name { get; set; }// Unit
         public decimal Quantity { get; set; }
-        public string BaseUnit { get; set; }
-        public int? BaseUnitId { get; set; }
+        public string BaseUom { get; set; }
+        public int? BaseUomId { get; set; }
         public bool Use { get; set; }
     }
 }

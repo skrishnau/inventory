@@ -9,61 +9,42 @@ namespace Service.Core.Inventory
 {
     public interface IInventoryService
     {
+        List<BrandModel> GetBrandList();
         void AddUpdateBrand(BrandModel brand);
 
-        void AddUpdateCategory(CategoryModel category);
-
-        void AddUpdateProduct(ProductModelForSave product);
-
-
-        List<BrandModel> GetBrandList();
-
         List<CategoryModel> GetCategoryList(int? parentCategoryId);
-
-        List<ProductModelForSave> GetProductList();
-
-        List<ProductModelForGridView> GetProductListForGridView();
-
+        CategoryModel GetCategory(string v);
+        void AddUpdateCategory(CategoryModel category);
         void DeleteCategory(CategoryModel categoryModel);
 
-        CategoryModel GetCategory(string v);
-
+        List<ProductModelForGridView> GetProductListForGridView();
         ProductModelForGridView GetProduct(int productId);
-
         ProductModelForSave GetProductForEdit(int productId);
-
-
-        //List<AttributeModel> GetAttributeList();
-
-        // List<OptionModel> GetDistinctAttributes();
-
-        // List<OptionModel> GetOptionList();
-
-        // void DeleteAttribute(AttributeModel attributeModel);
-
-        // List<AttributeModel> GetOptionList(int productId);
-
-        void SaveVariant(VariantModel variantModel);
-
-
-        List<VariantModel> GetVariantList();
-
-        VariantModel GetVariantBySKU(string sku);
-
-        void SaveUom(UomModel data);
-
-        VariantModel GetVariantById(string sku);
-
+        List<ProductModelForSave> GetProductList();
+        void AddUpdateProduct(ProductModelForSave product);
         void DeleteProduct(int id);
 
-        List<UomModel> GetUomList();
+        //List<AttributeModel> GetAttributeList();
+        // List<OptionModel> GetDistinctAttributes();
+        // List<OptionModel> GetOptionList();
+        // void DeleteAttribute(AttributeModel attributeModel);
+        // List<AttributeModel> GetOptionList(int productId);
 
-        string SavePackage(PackageModel package);
+        VariantModel GetVariantById(string sku);
+        List<VariantModel> GetVariantList();
+        VariantModel GetVariantBySKU(string sku);
+        void SaveVariant(VariantModel variantModel);
+
+        List<UomModel> GetUomList();
+        List<UomModel> GetUomListUsableOnly();
+        void SaveUom(UomModel data);
 
         List<PackageModel> GetPackageList();
+        List<PackageModel> GetPackageListUsableOnly();
+        string SavePackage(PackageModel package);
 
         List<AdjustmentCodeModel> GetAdjustmentCodeList();
-
+        List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly();
         string SaveAdjustmentCode(AdjustmentCodeModel model);
 
         //        bool AddOrUpdateAttribute(AttributeModel attributeModel);

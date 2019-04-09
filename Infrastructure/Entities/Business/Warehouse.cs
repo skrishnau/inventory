@@ -18,7 +18,7 @@ namespace Infrastructure.Entities.Business
         public int Id { get; set; }
 
         // location of the warehouse
-        public string Location { get; set; }
+        public string Name { get; set; }
 
         // Can hold the stocks
         public bool Hold { get; set; }
@@ -27,7 +27,7 @@ namespace Infrastructure.Entities.Business
         //StagingLocation: An area reserved for inventory that is ready for final assembly or transport.
         //Read more: http://www.businessdictionary.com/definition/staging-location.html
         public bool Staging { get; set; }
-
+        public bool Use { get; set; }
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

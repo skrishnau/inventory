@@ -3,10 +3,22 @@ namespace Infrastructure.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initMigration : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.AdjustmentCodes",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Type = c.String(),
+                        AffectsDemand = c.Boolean(nullable: false),
+                        Use = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.AppSettings",
                 c => new
@@ -29,13 +41,15 @@ namespace Infrastructure.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         IsCompany = c.Boolean(nullable: false),
                         Name = c.String(),
-                        Email = c.String(),
-                        DOB = c.DateTime(),
                         Address = c.String(),
                         Phone = c.String(),
+                        Fax = c.String(),
+                        Email = c.String(),
+                        Website = c.String(),
                         Gender = c.String(),
                         IsMarried = c.String(),
-                        Website = c.String(),
+                        DOB = c.DateTime(),
+                        Notes = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                         DeletedAt = c.DateTime(),
@@ -60,10 +74,8 @@ namespace Infrastructure.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         BasicInfoId = c.Int(nullable: false),
-                        Fax = c.String(),
-                        Website = c.String(),
-                        PhoneSecond = c.String(),
-                        ContactPersonName = c.String(),
+                        SalesPerson = c.String(),
+                        MyCustomerAccount = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BasicInfoes", t => t.BasicInfoId)
@@ -109,23 +121,6 @@ namespace Infrastructure.Migrations
                 .Index(t => t.BranchId);
             
             CreateTable(
-                "dbo.Warehouses",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Location = c.String(),
-                        BranchId = c.Int(nullable: false),
-                        Code = c.String(),
-                        CanMoveStocksToBranch = c.Boolean(nullable: false),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        DeletedAt = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Branches", t => t.BranchId)
-                .Index(t => t.BranchId);
-            
-            CreateTable(
                 "dbo.Brands",
                 c => new
                     {
@@ -146,19 +141,71 @@ namespace Infrastructure.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        SKU = c.String(),
+                        Barcode = c.String(),
+                        Use = c.Boolean(nullable: false),
+                        HasVariants = c.Boolean(nullable: false),
+                        IsVariant = c.Boolean(nullable: false),
+                        ParentProductId = c.Int(),
                         CategoryId = c.Int(nullable: false),
-                        QuantityInStock = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        LatestUnitCostPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        LatestUnitSellPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Alert = c.Boolean(nullable: false),
-                        AlertThreshold = c.Int(nullable: false),
+                        PackageId = c.Int(nullable: false),
+                        BaseUomId = c.Int(nullable: false),
+                        UnitsInPackage = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        UnitNetWeight = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        UnitGrossWeight = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        IsBuy = c.Boolean(nullable: false),
+                        IsSell = c.Boolean(nullable: false),
+                        IsBuild = c.Boolean(nullable: false),
+                        IsNotMovable = c.Boolean(nullable: false),
+                        WarehouseId = c.Int(nullable: false),
+                        ReorderPoint = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ReorderQuantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ReorderAlert = c.Boolean(nullable: false),
+                        LeadDays = c.Int(nullable: false),
+                        EOQ = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        MonthlyDemand = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        AvailableQuantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        InStockQuantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        OnHoldQuantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CommittedQuantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        OnOrderQuantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        SupplyPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        MarkupPercent = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        RetailPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Label = c.String(),
+                        Manufacturer = c.String(),
+                        Brand = c.String(),
+                        Description = c.String(),
+                        AttributesJSON = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                         DeletedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Uoms", t => t.BaseUomId)
                 .ForeignKey("dbo.Categories", t => t.CategoryId)
-                .Index(t => t.CategoryId);
+                .ForeignKey("dbo.Packages", t => t.PackageId)
+                .ForeignKey("dbo.Products", t => t.ParentProductId)
+                .ForeignKey("dbo.Warehouses", t => t.WarehouseId)
+                .Index(t => t.ParentProductId)
+                .Index(t => t.CategoryId)
+                .Index(t => t.PackageId)
+                .Index(t => t.BaseUomId)
+                .Index(t => t.WarehouseId);
+            
+            CreateTable(
+                "dbo.Uoms",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Unit = c.String(),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        BaseUnitId = c.Int(),
+                        Use = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Uoms", t => t.BaseUnitId)
+                .Index(t => t.BaseUnitId);
             
             CreateTable(
                 "dbo.Categories",
@@ -174,6 +221,16 @@ namespace Infrastructure.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.ParentCategoryId)
                 .Index(t => t.ParentCategoryId);
+            
+            CreateTable(
+                "dbo.Packages",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Use = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.ProductAttributes",
@@ -207,6 +264,21 @@ namespace Infrastructure.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Products", t => t.ProductId)
                 .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.Warehouses",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Location = c.String(),
+                        Hold = c.Boolean(nullable: false),
+                        MixedProduct = c.Boolean(nullable: false),
+                        Staging = c.Boolean(nullable: false),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        DeletedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Purchases",
@@ -358,12 +430,16 @@ namespace Infrastructure.Migrations
             DropForeignKey("dbo.Purchases", "SupplierId", "dbo.Suppliers");
             DropForeignKey("dbo.PurchaseItems", "VariantId", "dbo.Variants");
             DropForeignKey("dbo.PurchaseItems", "PurchaseId", "dbo.Purchases");
+            DropForeignKey("dbo.Products", "WarehouseId", "dbo.Warehouses");
             DropForeignKey("dbo.Variants", "ProductId", "dbo.Products");
             DropForeignKey("dbo.ProductAttributes", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.Products", "ParentProductId", "dbo.Products");
+            DropForeignKey("dbo.Products", "PackageId", "dbo.Packages");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Categories", "ParentCategoryId", "dbo.Categories");
             DropForeignKey("dbo.Brands", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.Warehouses", "BranchId", "dbo.Branches");
+            DropForeignKey("dbo.Products", "BaseUomId", "dbo.Uoms");
+            DropForeignKey("dbo.Uoms", "BaseUnitId", "dbo.Uoms");
             DropForeignKey("dbo.Counters", "BranchId", "dbo.Branches");
             DropForeignKey("dbo.Suppliers", "BasicInfoId", "dbo.BasicInfoes");
             DropForeignKey("dbo.Customers", "BasicInfoId", "dbo.BasicInfoes");
@@ -383,9 +459,13 @@ namespace Infrastructure.Migrations
             DropIndex("dbo.Variants", new[] { "ProductId" });
             DropIndex("dbo.ProductAttributes", new[] { "ProductId" });
             DropIndex("dbo.Categories", new[] { "ParentCategoryId" });
+            DropIndex("dbo.Uoms", new[] { "BaseUnitId" });
+            DropIndex("dbo.Products", new[] { "WarehouseId" });
+            DropIndex("dbo.Products", new[] { "BaseUomId" });
+            DropIndex("dbo.Products", new[] { "PackageId" });
             DropIndex("dbo.Products", new[] { "CategoryId" });
+            DropIndex("dbo.Products", new[] { "ParentProductId" });
             DropIndex("dbo.Brands", new[] { "ProductId" });
-            DropIndex("dbo.Warehouses", new[] { "BranchId" });
             DropIndex("dbo.Counters", new[] { "BranchId" });
             DropIndex("dbo.Suppliers", new[] { "BasicInfoId" });
             DropIndex("dbo.Customers", new[] { "BasicInfoId" });
@@ -396,12 +476,14 @@ namespace Infrastructure.Migrations
             DropTable("dbo.PurchaseOrders");
             DropTable("dbo.PurchaseItems");
             DropTable("dbo.Purchases");
+            DropTable("dbo.Warehouses");
             DropTable("dbo.Variants");
             DropTable("dbo.ProductAttributes");
+            DropTable("dbo.Packages");
             DropTable("dbo.Categories");
+            DropTable("dbo.Uoms");
             DropTable("dbo.Products");
             DropTable("dbo.Brands");
-            DropTable("dbo.Warehouses");
             DropTable("dbo.Counters");
             DropTable("dbo.Branches");
             DropTable("dbo.Bills");
@@ -409,6 +491,7 @@ namespace Infrastructure.Migrations
             DropTable("dbo.Customers");
             DropTable("dbo.BasicInfoes");
             DropTable("dbo.AppSettings");
+            DropTable("dbo.AdjustmentCodes");
         }
     }
 }

@@ -17,9 +17,9 @@ namespace DTO.Core.Inventory
                 entity = new Uom();
 
             entity.Use = model.Use;
-            entity.Unit = model.Unit;
+            entity.Name = model.Name;
             entity.Quantity = model.Quantity;
-            entity.BaseUnitId = model.BaseUnitId;
+            entity.BaseUomId = model.BaseUomId;
             return entity;
         }
 
@@ -37,10 +37,10 @@ namespace DTO.Core.Inventory
         {
             return new UomModel()
             {
-                BaseUnit = uom.BaseUnit == null ? uom.Unit: uom.BaseUnit.Unit,
+                BaseUom = uom.BaseUom == null ? uom.Name: uom.BaseUom.Name,
                 Quantity = uom.Quantity,
-                BaseUnitId = uom.BaseUnitId,
-                Unit = uom.Unit,
+                BaseUomId = uom.BaseUomId,
+                Name = uom.Name,
                 Use = uom.Use,
                 Id = uom.Id
             };

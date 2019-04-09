@@ -9,13 +9,13 @@ namespace Infrastructure.Entities.Inventory
     public class Uom
     {
         public int Id { get; set; }
-        public string Unit { get; set; }
+        public string Name { get; set; } // Unit
         public decimal Quantity { get; set; }
         // nullable; if NULL then its the root
-        public int? BaseUnitId { get; set; }
+        public int? BaseUomId { get; set; }
         public bool Use { get; set; }
 
         // table Objects //
-        public Uom BaseUnit { get; set; }
+        public Uom BaseUom { get; set; }
     }
 }

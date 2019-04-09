@@ -65,9 +65,9 @@ namespace IMS.Forms.Business.Create
             WarehouseModel warehouse = _businessService.GetWarehouse(warehouseId);
             if (warehouse != null)
             {
-                this.Text = "Warehouse Edit (" + warehouse.Location + ")";
+                this.Text = "Warehouse Edit (" + warehouse.Name + ")";
                 _warehouseId = warehouseId;
-                tbLocation.Text = warehouse.Location;
+                tbLocation.Text = warehouse.Name;
                 chkHold.Checked = warehouse.Hold;
                 chkMixedProduct.Checked = warehouse.MixedProduct;
                 chkStaging.Checked = warehouse.Staging;
@@ -87,7 +87,7 @@ namespace IMS.Forms.Business.Create
                 var warehouseModel = new WarehouseModel
                 {
                     Id = _warehouseId,
-                    Location = tbLocation.Text,
+                    Name = tbLocation.Text,
                     Hold = chkHold.Checked,
                     MixedProduct = chkMixedProduct.Checked,
                     Staging = chkStaging.Checked,

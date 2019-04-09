@@ -27,19 +27,19 @@ namespace DTO.Core.Business
                 Id = wh.Id,
                 Hold = wh.Hold,
                 MixedProduct = wh.MixedProduct,
-                Location = wh.Location,
+                Name = wh.Name,
                 Staging = wh.Staging,
             };
         }
 
-        public static WarehouseModel MapToWarehouseModel(Warehouse warehouse)
+        public static WarehouseModel MapToWarehouseModel( Warehouse warehouse)
         {
             return new WarehouseModel()
             {
                 Hold = warehouse.Hold,
                 MixedProduct = warehouse.MixedProduct,
                 Id = warehouse.Id,
-                Location = warehouse.Location,
+                Name = warehouse.Name,
                 Staging = warehouse.Staging,
             };
         }

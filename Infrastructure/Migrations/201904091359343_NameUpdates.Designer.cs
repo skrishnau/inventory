@@ -7,13 +7,13 @@ namespace Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UOM_Updated : IMigrationMetadata
+    public sealed partial class NameUpdates : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UOM_Updated));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NameUpdates));
         
         string IMigrationMetadata.Id
         {
-            get { return "201904071323279_UOM_Updated"; }
+            get { return "201904091359343_NameUpdates"; }
         }
         
         string IMigrationMetadata.Source

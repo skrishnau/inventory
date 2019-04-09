@@ -87,7 +87,7 @@ namespace Service.Core.Business
             }
             else
             {
-                dbEntity.Location = warehouse.Location;
+                dbEntity.Name = warehouse.Name;
                 dbEntity.Hold = warehouse.Hold;
                 dbEntity.MixedProduct = warehouse.MixedProduct;
                 dbEntity.Staging = warehouse.Staging;
@@ -173,7 +173,7 @@ namespace Service.Core.Business
                    .Where(x => x.DeletedAt == null)
                    .Select(x => new WarehouseModel()
                    {
-                       Location = x.Location,
+                       Name = x.Name,
                        Id = x.Id,
                        Hold = x.Hold,
                        MixedProduct = x.MixedProduct,
@@ -182,6 +182,12 @@ namespace Service.Core.Business
                    .ToList();
 
             return warehouses;
+
+        }
+
+        public List<WarehouseModel> GetWarehouseListUsableOnly()
+        {
+            return GetWarehouseList();//.Where(x=>x.Use)
 
         }
     }

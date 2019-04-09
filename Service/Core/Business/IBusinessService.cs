@@ -9,22 +9,23 @@ namespace Service.Core.Business
 {
     public interface IBusinessService
     {
-        int AddOrUpdateBranch(BranchModel branch);
-
-        void AddOrUpdateCounter(CounterModel counter);
-
-        void AddOrUpdateWarehouse(WarehouseModel warehouse);
-
-        List<BranchModel> GetBranchList();
 
         List<CounterModel> GetCounterList();
+        void AddOrUpdateCounter(CounterModel counter);
 
-        List<WarehouseModel> GetWarehouseList();
 
+        int AddOrUpdateBranch(BranchModel branch);
+        List<BranchModel> GetBranchList();
         void DeleteBranch(int branchId);
 
-        WarehouseModel GetWarehouse(int warehouseId);
 
+        WarehouseModel GetWarehouse(int warehouseId);
+        List<WarehouseModel> GetWarehouseList();
+        List<WarehouseModel> GetWarehouseListUsableOnly();
+        void AddOrUpdateWarehouse(WarehouseModel warehouse);
         void DeleteWarehouse(int id);
+
+
+
     }
 }

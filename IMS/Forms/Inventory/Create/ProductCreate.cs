@@ -11,34 +11,54 @@ using System.Windows.Forms;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Common;
 using System.Linq;
+using Service.Core.Business;
+using Service.Core.Suppliers;
 
 namespace IMS.Forms.Inventory.Create
 {
+    // design link : https://support.vendhq.com/hc/en-us/articles/201379180-What-are-Product-Variants-and-How-Do-I-Set-Them-Up-
+
     public partial class ProductCreate : Form
     {
+        public static readonly string REQUIRED = "Required";
+
         public readonly static string COL_NAME_PREFIX = "col";
         // references
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
+        private readonly IBusinessService _businessService;
+        private readonly ISupplierService _supplierService;
+
         // variables
         private int _productId;
         // track the start index of dynamic attributes
         private List<ProductAttributeModel> _productAttributes = new List<ProductAttributeModel>();
 
-        public ProductCreate(IInventoryService inventoryService, IDatabaseChangeListener listener)
+        public ProductCreate(IInventoryService inventoryService, IDatabaseChangeListener listener, IBusinessService businessService, ISupplierService supplierService)
         {
-            this._inventoryService = inventoryService;
+            _inventoryService = inventoryService;
+            _businessService = businessService;
+            _supplierService = supplierService;
             _listener = listener;
 
             InitializeComponent();
-
-            PopulateCategoryCombo();
-
             InitializeEvents();
+            InitializeDatabaseChangeListeners();
+
+
+            this.Load += ProductCreate_Load;
+        }
+
+        private void ProductCreate_Load(object sender, EventArgs e)
+        {
             // active control
             this.ActiveControl = tbProductName;
-
-            InitializeDatabaseChangeListeners();
+            // call all the populating functions
+            PopulateCategoryCombo();
+            PopulateWarehouse();
+            PopulateSupplier();
+            PopulateUom();
+            PopulatePackage();
 
         }
 
@@ -51,12 +71,19 @@ namespace IMS.Forms.Inventory.Create
             //btnAddBrand.Click += btnAddBrand_Click;
             //btnAddCategory.Click += BtnAddCategory_Click;
 
-            tbProductName.Validating += TbProductName_Validating;
-            cbCategory.Validating += CbCategory_Validating;
+
+            cbCategory.Validating += RequiredField_Validating;
+            tbLabelCode.Validating += RequiredField_Validating;
+            tbProductName.Validating += RequiredField_Validating;
+            tbSKU.Validating += RequiredField_Validating;
+            cbPackage.Validating += RequiredField_Validating;
+            cbSupplier.Validating += RequiredField_Validating;
+            cbUom.Validating += RequiredField_Validating;
+            cbWarehouse.Validating += RequiredField_Validating;
 
             //btnAddOption.Click += BtnAddOption_Click;
             dgvVariants.EditingControlShowing += DgvVariants_EditingControlShowing;
-            
+
         }
 
         private void InitializeDatabaseChangeListeners()
@@ -81,12 +108,44 @@ namespace IMS.Forms.Inventory.Create
                     Id = _productId,
                     Brands = GetBrands(),
                     CategoryId = category.Id,
-                    MinStockCountForAlert = int.Parse(tbStockThreshold.Text),
-                    ShowStockAlerts = cbShowStockAlert.Checked,
+                    ReorderPoint = numReorderPoint.Value,
+                    ReorderAlert = true,
+
                     Name = tbProductName.Text,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
+
                     Variants = variants,
+                    AttributesJSON = "",
+                    Barcode = tbBarcode.Text,
+                    BaseUomId = int.Parse(cbUom.SelectedValue.ToString()),
+                    Brand = tbBrands.Text,
+                    Description = tbDescription.Text,
+                    EOQ = numEOQ.Value,
+                    HasVariants = rbProductWithVariants.Checked,
+                    IsBuild = chkIsBuild.Checked,
+                    IsBuy = chkIsBuy.Checked,
+                    IsNotMovable = chkIsNotMovable.Checked,
+                    IsSell = chkIsSell.Checked,
+                    Label = tbLabelCode.Text,
+                    LeadDays = (int)numLeadDays.Value,
+                    Manufacturer = tbManufacturer.Text,
+                    PackageId = int.Parse(cbPackage.SelectedValue.ToString()),
+
+                    ParentProductId = null,
+                    IsVariant = false,
+                    Use = true,
+
+                    //MarkupPercent = 
+                    MonthlyDemand = numMonthlyDemand.Value,
+                    SKU = tbSKU.Text,
+                    UnitNetWeight = numUnitNetWeight.Value,
+                    ReorderQuantity = numReorderQuantity.Value,
+                    MarkupPercent = numMarkupPercent.Value,
+                    RetailPrice = numRetailPrice.Value,
+                    SupplyPrice = numSupplyPrice.Value,
+                    UnitGrossWeight = numUnitGrossWeight.Value,
+                    UnitsInPackage = numUnitsInPackage.Value,
+                    WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString()),
+
                 };
                 product.ProductAttributes = _productAttributes;
                 _inventoryService.AddUpdateProduct(product);
@@ -120,27 +179,6 @@ namespace IMS.Forms.Inventory.Create
         private List<BrandModel> GetBrands()
         {
             var list = new List<BrandModel>();
-            // // when each branch is added via new Control TextBox
-            //foreach (var brandControl in pnlBrandsBody.Controls)
-            //{
-            //    var inputUc = (TextBoxWithDeleteUC)brandControl;
-            //    if (inputUc != null)
-            //    {
-            //        if (string.IsNullOrEmpty(inputUc.InputText))
-            //        {
-            //            return null;
-            //        }
-            //        var brandModel = new BrandModel()
-            //        {
-            //            Id = inputUc.Id,
-            //            CreatedAt = inputUc.Id == 0 ? DateTime.Now : inputUc.CreatedAt,
-            //            UpdatedAt = DateTime.Now,
-            //            Name = inputUc.InputText,
-            //            ProductId = Id,
-            //        };
-            //        list.Add(brandModel);
-            //    }
-            //}
 
             // new approach via textbox, comma separated
             var brandText = tbBrands.Text;
@@ -171,15 +209,31 @@ namespace IMS.Forms.Inventory.Create
 
         private bool IsModelValid()
         {
-            var valName = ValidateProductName();
-            var valCategory = ValidateCategory();
-            if (!(valName && valCategory))
+            // return Validate();
+
+            var nameValid = ValidateControl(tbProductName);
+            var skuValid = ValidateControl(tbSKU);
+            var categoryValid = ValidateControl(cbCategory);
+            var labelValid = ValidateControl(tbLabelCode);
+            var packageValid = ValidateControl(cbPackage);
+            var supplierValid = ValidateControl(cbSupplier);
+            var uomValid = ValidateControl(cbUom);
+            var warehouseValid = ValidateControl(cbWarehouse);
+
+            var allValid = nameValid &&
+                categoryValid &&
+                labelValid &&
+                packageValid &&
+                supplierValid &&
+                uomValid &&
+                warehouseValid;
+
+            if (!allValid)
             {
                 PopupMessage.ShowMissingInputsMessage();
                 this.Focus(); // return the focus to the current form
-                return false;
             }
-            return true;
+            return allValid;
         }
 
         #endregion
@@ -288,9 +342,9 @@ namespace IMS.Forms.Inventory.Create
             {
                 this.Text = "Edit Product (" + product.Name + ")";
                 tbProductName.Text = product.Name;
-                tbStockThreshold.Value = product.MinStockCountForAlert;
+                numReorderPoint.Value = product.ReorderPoint;
                 cbCategory.Text = product.Category.Name;
-                cbShowStockAlert.Checked = product.ShowStockAlerts;
+                //.Checked = product.ReorderAlert;
 
                 // variants
                 foreach (var prodAttr in product.ProductAttributes)
@@ -383,40 +437,99 @@ namespace IMS.Forms.Inventory.Create
             });
         }
 
+        private void PopulateWarehouse()
+        {
+            var warehouses = _businessService.GetWarehouseList();
+            cbWarehouse.DataSource = warehouses;
+            cbWarehouse.ValueMember = "Id";
+            cbWarehouse.DisplayMember = "Name";
+        }
+
+        private void PopulatePackage()
+        {
+            var packages = _inventoryService.GetPackageList();
+            cbPackage.DataSource = packages;
+            cbPackage.ValueMember = "Id";
+            cbPackage.DisplayMember = "Name";
+        }
+        private void PopulateUom()
+        {
+            var uoms = _inventoryService.GetUomList();
+            cbUom.DataSource = uoms;
+            cbUom.ValueMember = "Id";
+            cbUom.DisplayMember = "Name";
+        }
+
+        private void PopulateSupplier()
+        {
+            var suppliers = _supplierService.GetSupplierList();
+            cbSupplier.DataSource = suppliers;
+            cbSupplier.ValueMember = "Id";
+            cbSupplier.DisplayMember = "Name";
+        }
+
+
         #endregion
 
 
         #region Validation
 
-        private void CbCategory_Validating(object sender, CancelEventArgs e)
+
+        private void RequiredField_Validating(object sender, CancelEventArgs e)
         {
-            ValidateCategory();
+            ValidateControl(sender);
         }
 
-        private void TbProductName_Validating(object sender, CancelEventArgs e)
+        private bool ValidateControl(object sender)
         {
-            ValidateProductName();
-        }
-
-        private bool ValidateProductName()
-        {
-            if (tbProductName.Text.Trim() == "")
+            var type = sender.GetType();
+            if (type == typeof(TextBox))
             {
-                errorProvider1.SetError(tbProductName, "Required");
+                return ValidateTextBox((TextBox)sender);
+            }
+            else if (type == typeof(ComboBox))
+            {
+                return ValidateComboBox((ComboBox)sender);
+            }
+            else if (type == typeof(MaskedTextBox))
+            {
+                return ValidateMaskedTextBox((MaskedTextBox)sender);
+            }
+            return false;
+        }
+
+
+        private bool ValidateTextBox(TextBox textBox)
+        {
+            if (string.IsNullOrEmpty(textBox.Text.Trim()))
+            {
+                errorProvider1.SetError(textBox, REQUIRED);
                 return false;
             }
-            errorProvider1.SetError(tbProductName, "");
+            errorProvider1.SetError(textBox, string.Empty);
             return true;
         }
 
-        private bool ValidateCategory()
+        private bool ValidateMaskedTextBox(MaskedTextBox textBox)
         {
-            if (cbCategory.SelectedItem == null || (string)cbCategory.SelectedItem == "")
+            if (string.IsNullOrEmpty(textBox.Text.Trim()))
             {
-                errorProvider1.SetError(cbCategory, "Required");
+                errorProvider1.SetError(textBox, REQUIRED);
                 return false;
             }
-            errorProvider1.SetError(cbCategory, "");
+            errorProvider1.SetError(textBox, string.Empty);
+            return true;
+        }
+
+        private bool ValidateComboBox(ComboBox comboBox)
+        {
+            //if(string.IsNullOrEmpty(comboBox.SelectedText))
+            if (comboBox.SelectedItem == null)
+            {
+                errorProvider1.SetError(comboBox, REQUIRED);
+                return false;
+            }
+            errorProvider1.SetError(comboBox, string.Empty);
             return true;
         }
 

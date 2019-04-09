@@ -86,37 +86,13 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201904041853269_initMigration.cs" />
-    <Compile Include="Migrations\201904041853269_initMigration.Designer.cs">
-      <DependentUpon>201904041853269_initMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201904090541255_InitialMigration.cs" />
+    <Compile Include="Migrations\201904090541255_InitialMigration.Designer.cs">
+      <DependentUpon>201904090541255_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904051808038_WarehouseUpdated.cs" />
-    <Compile Include="Migrations\201904051808038_WarehouseUpdated.Designer.cs">
-      <DependentUpon>201904051808038_WarehouseUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904051814397_WarehouseUpdatedAgain.cs" />
-    <Compile Include="Migrations\201904051814397_WarehouseUpdatedAgain.Designer.cs">
-      <DependentUpon>201904051814397_WarehouseUpdatedAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904060453045_SupplierUpdated.cs" />
-    <Compile Include="Migrations\201904060453045_SupplierUpdated.Designer.cs">
-      <DependentUpon>201904060453045_SupplierUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904070804014_UomAdded.cs" />
-    <Compile Include="Migrations\201904070804014_UomAdded.Designer.cs">
-      <DependentUpon>201904070804014_UomAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904071323279_UOM_Updated.cs" />
-    <Compile Include="Migrations\201904071323279_UOM_Updated.Designer.cs">
-      <DependentUpon>201904071323279_UOM_Updated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904071933396_PackageAdded.cs" />
-    <Compile Include="Migrations\201904071933396_PackageAdded.Designer.cs">
-      <DependentUpon>201904071933396_PackageAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904072035140_AdjustmentCodeAdded.cs" />
-    <Compile Include="Migrations\201904072035140_AdjustmentCodeAdded.Designer.cs">
-      <DependentUpon>201904072035140_AdjustmentCodeAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201904091359343_NameUpdates.cs" />
+    <Compile Include="Migrations\201904091359343_NameUpdates.Designer.cs">
+      <DependentUpon>201904091359343_NameUpdates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,29 +108,11 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904041853269_initMigration.resx">
-      <DependentUpon>201904041853269_initMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904090541255_InitialMigration.resx">
+      <DependentUpon>201904090541255_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904051808038_WarehouseUpdated.resx">
-      <DependentUpon>201904051808038_WarehouseUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904051814397_WarehouseUpdatedAgain.resx">
-      <DependentUpon>201904051814397_WarehouseUpdatedAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904060453045_SupplierUpdated.resx">
-      <DependentUpon>201904060453045_SupplierUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904070804014_UomAdded.resx">
-      <DependentUpon>201904070804014_UomAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904071323279_UOM_Updated.resx">
-      <DependentUpon>201904071323279_UOM_Updated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904071933396_PackageAdded.resx">
-      <DependentUpon>201904071933396_PackageAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904072035140_AdjustmentCodeAdded.resx">
-      <DependentUpon>201904072035140_AdjustmentCodeAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904091359343_NameUpdates.resx">
+      <DependentUpon>201904091359343_NameUpdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

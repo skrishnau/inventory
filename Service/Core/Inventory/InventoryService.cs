@@ -65,43 +65,41 @@ namespace Service.Core.Inventory
 
         }
 
-        public void AddUpdateProduct(ProductModelForSave product)
+        public void AddUpdateProduct(ProductModelForSave model)
         {
             var now = DateTime.Now;
 
-            var productEntity = _context.Product
+            var entity = _context.Product
                 .Include(x => x.ProductAttributes)
-                .FirstOrDefault(x => x.Id == product.Id);
+                .FirstOrDefault(x => x.Id == model.Id);
 
             ProductEventArgs eventArgs = ProductEventArgs.Instance; ;
+            entity = ProductMapper.MapToEntity(model, entity);
 
-            if (productEntity == null)
+            if (entity.Id == 0)
             {
                 // add
-                productEntity = product.ToEntity();
-                productEntity.ProductAttributes = new List<ProductAttribute>();
-                productEntity.Variants = new List<Variant>();
-                productEntity.Brands = new List<Brand>();
-                _context.Product.Add(productEntity);
+                entity.CreatedAt = DateTime.Now;
+                entity.UpdatedAt = DateTime.Now;
+                entity.ProductAttributes = new List<ProductAttribute>();
+                entity.Variants = new List<Variant>();
+                entity.Brands = new List<Brand>();
+                _context.Product.Add(entity);
                 eventArgs.Mode = Utility.UpdateMode.ADD;
             }
             else
             {
                 // udpate
-                productEntity.Name = product.Name;
-                productEntity.UpdatedAt = DateTime.Now;
-                productEntity.Alert = product.ShowStockAlerts;
-                productEntity.AlertThreshold = product.MinStockCountForAlert;
-                productEntity.CategoryId = product.CategoryId;
+                entity.UpdatedAt = DateTime.Now;
                 eventArgs.Mode = Utility.UpdateMode.EDIT;
             }
-            AssignBrandForSave(productEntity, product, now);
-            AssignProductAttributesForSave(productEntity, product, now);
-            AssignVariantsForSave(productEntity, product, now);
+            AssignBrandForSave(entity, model, now);
+            AssignProductAttributesForSave(entity, model, now);
+            AssignVariantsForSave(entity, model, now);
 
             _context.SaveChanges();
 
-            eventArgs.ProductModel = ProductMapper.MapToProductModel(productEntity);
+            eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
             _listener.TriggerProductUpdateEvent(null, eventArgs);
         }
 
@@ -258,8 +256,8 @@ namespace Service.Core.Inventory
                 {
                     Name = x.Name,
                     Id = x.Id,
-                    CreatedAt = x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt
+                    //CreatedAt = x.CreatedAt,
+                    //UpdatedAt = x.UpdatedAt
                 })
                 .ToList();
 
@@ -406,19 +404,19 @@ namespace Service.Core.Inventory
             entity = UomMapper.MapToEntity(model, entity);
             var args = BaseEventArgs<UomModel>.Instance;
             // add
-            if (model.Unit == model.BaseUnit)
+            if (model.Name == model.BaseUom)
             {
                 // root uom
-                entity.BaseUnitId = null;// entity;
+                entity.BaseUomId = null;// entity;
             }
             else
             {
                 // find the unit 
-                var baseUomEntity = _context.Uom.FirstOrDefault(x => x.Unit == model.BaseUnit);
+                var baseUomEntity = _context.Uom.FirstOrDefault(x => x.Name == model.BaseUom);
                 if (baseUomEntity != null)
                 {
-                    entity.BaseUnitId = baseUomEntity.Id;
-                    entity.BaseUnit = null;
+                    entity.BaseUomId = baseUomEntity.Id;
+                    entity.BaseUom = null;
                 }
             }
 
@@ -511,6 +509,21 @@ namespace Service.Core.Inventory
             args.Model = AdjustmentCodeMapper.MapToModel(entity);
             _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
             return msg;
+        }
+
+        public List<UomModel> GetUomListUsableOnly()
+        {
+            return GetUomList().Where(x => x.Use).ToList();
+        }
+
+        public List<PackageModel> GetPackageListUsableOnly()
+        {
+            return GetPackageList().Where(x => x.Use).ToList();
+        }
+
+        public List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly()
+        {
+            return GetAdjustmentCodeList().Where(x => x.Use).ToList();
         }
 
         #endregion

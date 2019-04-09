@@ -34,10 +34,15 @@ namespace IMS.Forms.Inventory.Products
             // use Header template to display header.
             InitializeHeader();
 
-            PopulateProductData();
-
             InitializeEvents();
             InitializeListeners();
+
+            this.Load += ProductListUC_Load;
+        }
+
+        private void ProductListUC_Load(object sender, EventArgs e)
+        {
+            PopulateProductData();
         }
 
         private void InitializeListeners()

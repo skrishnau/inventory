@@ -11,7 +11,7 @@ namespace ViewModel.Core.Business
     {
         public int Id { get; set; }
 
-        public string Location { get; set; }
+        public string Name { get; set; }
 
         public bool Hold { get; set; }
         public bool MixedProduct { get; set; }
@@ -24,7 +24,7 @@ namespace ViewModel.Core.Business
                 Id = Id,
                 Hold = Hold,
                 MixedProduct = MixedProduct,
-                Location = Location,
+                Name = Name,
                 Staging = Staging,
             };
 

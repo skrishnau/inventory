@@ -10,6 +10,8 @@ namespace Infrastructure.Entities.Inventory
     /// A product's variant. i.e. different types in the same product
     /// For e.g. : the SKU for purple Ugg boots in the Bailey Bow style, size 6, may read UGG-BB-PUR-06
     /// </summary>
+    [Obsolete("Variant is replaced by Product itself. " +
+        "Now product's variant is also a Product")]
     public class Variant
     {
         public int Id { get; set; }
@@ -45,7 +47,7 @@ namespace Infrastructure.Entities.Inventory
 
         // ====== Table Objects ====== //
         public virtual Product Product { get; set; }
-       
+
 
         //  public virtual ICollection<VariantAttribute> VariantAttributes { get; set; }
 

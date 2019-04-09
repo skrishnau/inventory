@@ -83,10 +83,10 @@ namespace IMS.Forms.Inventory.UOM
         {
             var row = (DataGridViewRow)dgvUom.Rows[dgvUom.RowCount - 1].Clone();//new DataGridViewRow();
             row.Cells[colId.Index].Value = model.Id;
-            row.Cells[colUnit.Index].Value = model.Unit;
+            row.Cells[colUnit.Index].Value = model.Name;
             row.Cells[colQuantity.Index].Value = model.Quantity;
-            row.Cells[colBaseUnitId.Index].Value = model.BaseUnitId;
-            row.Cells[colBaseUnit.Index].Value = model.BaseUnit;
+            row.Cells[colBaseUnitId.Index].Value = model.BaseUomId;
+            row.Cells[colBaseUnit.Index].Value = model.BaseUom;
             row.Cells[colUse.Index].Value = model.Use;
             dgvUom.Rows.Add(row);
         }
@@ -258,9 +258,9 @@ namespace IMS.Forms.Inventory.UOM
             var model = new UomModel();
             var row = dgvUom.Rows[rowIndex];
             model.Id = int.Parse(GetIntegerCellValue(row, colId.Name));
-            model.Unit = GetStringCellValue(row, colUnit.Name);
-            model.BaseUnit = GetStringCellValue(row, colBaseUnit.Name);
-            model.BaseUnitId = int.Parse(GetIntegerCellValue(row, colBaseUnitId.Name));
+            model.Name = GetStringCellValue(row, colUnit.Name);
+            model.BaseUom = GetStringCellValue(row, colBaseUnit.Name);
+            model.BaseUomId = int.Parse(GetIntegerCellValue(row, colBaseUnitId.Name));
             model.Quantity = decimal.Parse(GetIntegerCellValue(row, colQuantity.Name));
             model.Use = bool.Parse(GetStringCellValue(row, colUse.Name));
             return model;
