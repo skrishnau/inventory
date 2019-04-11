@@ -61,13 +61,12 @@
     <Compile Include="Entities\Inventory\Uom.cs" />
     <Compile Include="Entities\Inventory\Variant.cs" />
     <Compile Include="Entities\Inventory\VariantAttribute.cs" />
-    <Compile Include="Entities\Purchases\PurchaseItem.cs" />
+    <Compile Include="Entities\Purchases\PurchaseOrderItem.cs" />
     <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Business\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
     <Compile Include="Entities\Common\SystemAction.cs" />
-    <Compile Include="Entities\Items\Item.cs" />
     <Compile Include="Entities\Inventory\Brand.cs" />
     <Compile Include="Entities\Inventory\Product.cs" />
     <Compile Include="Entities\Inventory\Category.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Entities\Common\Lead.cs" />
     <Compile Include="Entities\Customers\Customer.cs" />
     <Compile Include="Entities\Customers\CustomerReport.cs" />
-    <Compile Include="Entities\Purchases\Purchase.cs" />
     <Compile Include="Entities\Purchases\PurchaseOrder.cs" />
     <Compile Include="Entities\Purchases\Receipt.cs" />
     <Compile Include="Entities\Sales\Sale.cs" />
@@ -93,6 +91,22 @@
     <Compile Include="Migrations\201904091359343_NameUpdates.cs" />
     <Compile Include="Migrations\201904091359343_NameUpdates.Designer.cs">
       <DependentUpon>201904091359343_NameUpdates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904101130044_PurchaseOrderUpdated.cs" />
+    <Compile Include="Migrations\201904101130044_PurchaseOrderUpdated.Designer.cs">
+      <DependentUpon>201904101130044_PurchaseOrderUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904101726497_PurchaseOrderDateUpdates.cs" />
+    <Compile Include="Migrations\201904101726497_PurchaseOrderDateUpdates.Designer.cs">
+      <DependentUpon>201904101726497_PurchaseOrderDateUpdates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904101752314_POUPdaates.cs" />
+    <Compile Include="Migrations\201904101752314_POUPdaates.Designer.cs">
+      <DependentUpon>201904101752314_POUPdaates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904111000471_PurchaseUpdates.cs" />
+    <Compile Include="Migrations\201904111000471_PurchaseUpdates.Designer.cs">
+      <DependentUpon>201904111000471_PurchaseUpdates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +128,21 @@
     <EmbeddedResource Include="Migrations\201904091359343_NameUpdates.resx">
       <DependentUpon>201904091359343_NameUpdates.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904101130044_PurchaseOrderUpdated.resx">
+      <DependentUpon>201904101130044_PurchaseOrderUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904101726497_PurchaseOrderDateUpdates.resx">
+      <DependentUpon>201904101726497_PurchaseOrderDateUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904101752314_POUPdaates.resx">
+      <DependentUpon>201904101752314_POUPdaates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904111000471_PurchaseUpdates.resx">
+      <DependentUpon>201904111000471_PurchaseUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Items\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

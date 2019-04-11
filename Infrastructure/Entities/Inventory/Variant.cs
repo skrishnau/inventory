@@ -11,7 +11,7 @@ namespace Infrastructure.Entities.Inventory
     /// For e.g. : the SKU for purple Ugg boots in the Bailey Bow style, size 6, may read UGG-BB-PUR-06
     /// </summary>
     [Obsolete("Variant is replaced by Product itself. " +
-        "Now product's variant is also a Product")]
+        "Now product's variant is also a Product", true)]
     public class Variant
     {
         public int Id { get; set; }

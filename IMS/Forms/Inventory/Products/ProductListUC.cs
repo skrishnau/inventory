@@ -98,7 +98,7 @@ namespace IMS.Forms.Inventory.Products
                         lblAttributes.Text += att.Attribute + ", ";
                     }
                     dgvSKUListing.AutoGenerateColumns = false;
-                    dgvSKUListing.DataSource = model.Variants;
+                   // dgvSKUListing.DataSource = model.Variants;
                 }
                 else
                 {

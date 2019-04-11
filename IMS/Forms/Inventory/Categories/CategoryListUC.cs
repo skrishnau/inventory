@@ -29,6 +29,11 @@ namespace IMS.Forms.Inventory.Categories
 
             InitializeEvents();
 
+            this.Load += CategoryListUC_Load;
+        }
+
+        private void CategoryListUC_Load(object sender, EventArgs e)
+        {
             PopulateCategoryData();
         }
 

@@ -22,6 +22,13 @@ namespace IMS.Forms.Sales
             this.saleService = saleService;
             InitializeComponent();
 
+            this.Load += SaleUC_Load;
+
+           
+        }
+
+        private void SaleUC_Load(object sender, EventArgs e)
+        {
             InitializeHeader();
 
             InitializeEvents();

@@ -22,6 +22,14 @@ namespace IMS.Forms.Settings
         {
             this.appSettingService = appSettingService;
             InitializeComponent();
+
+            this.Load += SettingsForm_Load;
+
+           
+        }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
             PopulateBillSetting();
             PopulateCompanyInfoSetting();
         }

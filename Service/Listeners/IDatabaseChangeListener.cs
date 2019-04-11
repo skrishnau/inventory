@@ -4,6 +4,7 @@ using Service.Listeners.Inventory;
 using System;
 using ViewModel.Core.Business;
 using ViewModel.Core.Inventory;
+using ViewModel.Core.Purchases;
 using ViewModel.Core.Suppliers;
 
 namespace Service.Listeners
@@ -38,5 +39,8 @@ namespace Service.Listeners
         // adj code
         event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
         void TriggerAdjustmentCodeUpdateEvent(object sender, BaseEventArgs<AdjustmentCodeModel> eventArgs);
+        // purchase Order
+        event EventHandler<BaseEventArgs<PurchaseOrderModel>> PurchaseOrderUpdated;
+        void TriggerPurchaseOrderUpdateEvent(object p, BaseEventArgs<PurchaseOrderModel> eventArgs);
     }
 }

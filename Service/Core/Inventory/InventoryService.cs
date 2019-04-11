@@ -65,7 +65,7 @@ namespace Service.Core.Inventory
 
         }
 
-        public void AddUpdateProduct(ProductModelForSave model)
+        public void AddUpdateProduct(ProductModel model)
         {
             var now = DateTime.Now;
 
@@ -82,7 +82,7 @@ namespace Service.Core.Inventory
                 entity.CreatedAt = DateTime.Now;
                 entity.UpdatedAt = DateTime.Now;
                 entity.ProductAttributes = new List<ProductAttribute>();
-                entity.Variants = new List<Variant>();
+                //entity.Variants = new List<Variant>();
                 entity.Brands = new List<Brand>();
                 _context.Product.Add(entity);
                 eventArgs.Mode = Utility.UpdateMode.ADD;
@@ -95,7 +95,7 @@ namespace Service.Core.Inventory
             }
             AssignBrandForSave(entity, model, now);
             AssignProductAttributesForSave(entity, model, now);
-            AssignVariantsForSave(entity, model, now);
+            //  AssignVariantsForSave(entity, model, now);
 
             _context.SaveChanges();
 
@@ -103,44 +103,44 @@ namespace Service.Core.Inventory
             _listener.TriggerProductUpdateEvent(null, eventArgs);
         }
 
-        private void AssignVariantsForSave(Product productEntity, ProductModelForSave product, DateTime now)
-        {
-            // remove the deleted variants
-            for (int v = 0; v < productEntity.Variants.Count; v++)
-            {
-                var variEnity = productEntity.Variants.ElementAt(v);
-                if (!product.Variants.Any(x => x.Id == variEnity.Id))
-                {
-                    variEnity.DeletedAt = now;
-                }
-            }
-            // add/update
-            foreach (var vari in product.Variants)
-            {
-                Variant variantEntity;
-                if (vari.Id == 0)
-                {
-                    // add
-                    variantEntity = vari.ToEntity();
-                    variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
-                    productEntity.Variants.Add(variantEntity);
-                    variantEntity.CreatedAt = now;
-                    variantEntity.UpdatedAt = now;
-                }
+        //private void AssignVariantsForSave(Product productEntity, ProductModelForSave product, DateTime now)
+        //{
+        //    // remove the deleted variants
+        //    for (int v = 0; v < productEntity.Variants.Count; v++)
+        //    {
+        //        var variEnity = productEntity.Variants.ElementAt(v);
+        //        if (!product.Variants.Any(x => x.Id == variEnity.Id))
+        //        {
+        //            variEnity.DeletedAt = now;
+        //        }
+        //    }
+        //    // add/update
+        //    foreach (var vari in product.Variants)
+        //    {
+        //        Variant variantEntity;
+        //        if (vari.Id == 0)
+        //        {
+        //            // add
+        //            variantEntity = vari.ToEntity();
+        //            variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
+        //            productEntity.Variants.Add(variantEntity);
+        //            variantEntity.CreatedAt = now;
+        //            variantEntity.UpdatedAt = now;
+        //        }
 
-                else
-                {
-                    variantEntity = productEntity.Variants.FirstOrDefault(x => x.Id == vari.Id);
-                    variantEntity.Alert = vari.Alert;
-                    variantEntity.MinStockCountForAlert = vari.AlertThreshold;
-                    variantEntity.SKU = vari.SKU;
-                    variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
-                    variantEntity.UpdatedAt = now;
-                }
-            }
-        }
+        //        else
+        //        {
+        //            variantEntity = productEntity.Variants.FirstOrDefault(x => x.Id == vari.Id);
+        //            variantEntity.Alert = vari.Alert;
+        //            variantEntity.MinStockCountForAlert = vari.AlertThreshold;
+        //            variantEntity.SKU = vari.SKU;
+        //            variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
+        //            variantEntity.UpdatedAt = now;
+        //        }
+        //    }
+        //}
 
-        private void AssignProductAttributesForSave(Product productEntity, ProductModelForSave product, DateTime now)
+        private void AssignProductAttributesForSave(Product productEntity, ProductModel product, DateTime now)
         {
             // dbEntity.ProductAttributes
             for (var p = 0; p < productEntity.ProductAttributes.Count; p++)
@@ -173,7 +173,7 @@ namespace Service.Core.Inventory
             }
         }
 
-        private void AssignBrandForSave(Product productEntity, ProductModelForSave product, DateTime now)
+        private void AssignBrandForSave(Product productEntity, ProductModel product, DateTime now)
         {
             //dbEntity.Brands
             foreach (var brand in product.Brands)
@@ -248,11 +248,11 @@ namespace Service.Core.Inventory
             return cats;
         }
 
-        public List<ProductModelForSave> GetProductList()
+        public List<ProductModel> GetProductList()
         {
             var cats = _context.Product
                 .Where(x => x.DeletedAt == null)
-                .Select(x => new ProductModelForSave()
+                .Select(x => new ProductModel()
                 {
                     Name = x.Name,
                     Id = x.Id,
@@ -299,7 +299,7 @@ namespace Service.Core.Inventory
             }
         }
 
-        public void DeleteProduct(ProductModelForSave produtModel)
+        public void DeleteProduct(ProductModel produtModel)
         {
             var dbEntity = _context.Product.FirstOrDefault(x => x.Id == produtModel.Id);
             if (dbEntity != null)
@@ -333,55 +333,16 @@ namespace Service.Core.Inventory
             return ProductMapper.MapToProductModelForGridView(product);
         }
 
-        public ProductModelForSave GetProductForEdit(int productId)
+        public ProductModel GetProductForEdit(int productId)
         {
             var product = _context.Product
-                .Include(x => x.Variants)
+                //.Include(x => x.Variants)
                 .FirstOrDefault(x => x.Id == productId);
             if (product == null)
                 return null;
-            return ProductMapper.MapToProductModelForSave(product);
+            return ProductMapper.MapToProductModel(product);
         }
 
-        public void SaveVariant(VariantModel variantModel)
-        {
-            _context.Variant.Add(VariantMapper.MapToEntityForAdd(variantModel));
-            _context.SaveChanges();
-        }
-
-        public List<VariantModel> GetVariantList()
-        {
-            var variants = _context.Variant.
-                Select(x => new VariantModel()
-                {
-                    Id = x.Id,
-                    LatestUnitCostPrice = x.LatestUnitCostPrice,
-                    LatestUnitSellPrice = x.LatestUnitSellPrice,
-                    MinStockCountForAlert = x.MinStockCountForAlert,
-                    ProductId = x.ProductId,
-                    QuantityInStock = x.QuantityInStock,
-                    ShowStockAlerts = x.Alert,
-                    SKU = x.SKU
-
-                }).ToList();
-            return variants;
-        }
-
-        public VariantModel GetVariantBySKU(string sku)
-        {
-            var sss = _context.Variant.FirstOrDefault(x => x.SKU == sku);
-            if (sss == null)
-                return null;
-            return DTO.Core.Inventory.VariantMapper.MapToVariantModel(sss);
-        }
-
-        public VariantModel GetVariantById(string sku)
-        {
-            var variant = _context.Variant.FirstOrDefault(x => x.SKU == sku);
-            if (variant == null)
-                return null;
-            return VariantMapper.MapToVariantModel(variant);
-        }
 
         public void DeleteProduct(int id)
         {
@@ -524,6 +485,12 @@ namespace Service.Core.Inventory
         public List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly()
         {
             return GetAdjustmentCodeList().Where(x => x.Use).ToList();
+        }
+
+        public ProductModel GetProductBySKU(string sku)
+        {
+            var entity = _context.Product.FirstOrDefault(x => x.SKU == sku);
+            return entity == null ? null : ProductMapper.MapToProductModel(entity);
         }
 
         #endregion
@@ -715,3 +682,44 @@ namespace Service.Core.Inventory
      _context.SaveChanges();
      _listener.TriggerProductUpdateEvent(null, null);
  }*/
+
+
+//public void SaveVariant(VariantModel variantModel)
+//{
+//    _context.Variant.Add(VariantMapper.MapToEntityForAdd(variantModel));
+//    _context.SaveChanges();
+//}
+
+//public List<VariantModel> GetVariantList()
+//{
+//    var variants = _context.Variant.
+//        Select(x => new VariantModel()
+//        {
+//            Id = x.Id,
+//            LatestUnitCostPrice = x.LatestUnitCostPrice,
+//            LatestUnitSellPrice = x.LatestUnitSellPrice,
+//            MinStockCountForAlert = x.MinStockCountForAlert,
+//            ProductId = x.ProductId,
+//            QuantityInStock = x.QuantityInStock,
+//            ShowStockAlerts = x.Alert,
+//            SKU = x.SKU
+
+//        }).ToList();
+//    return variants;
+//}
+
+//public VariantModel GetVariantBySKU(string sku)
+//{
+//    var sss = _context.Variant.FirstOrDefault(x => x.SKU == sku);
+//    if (sss == null)
+//        return null;
+//    return DTO.Core.Inventory.VariantMapper.MapToVariantModel(sss);
+//}
+
+//public VariantModel GetVariantById(string sku)
+//{
+//    var variant = _context.Variant.FirstOrDefault(x => x.SKU == sku);
+//    if (variant == null)
+//        return null;
+//    return VariantMapper.MapToVariantModel(variant);
+//}

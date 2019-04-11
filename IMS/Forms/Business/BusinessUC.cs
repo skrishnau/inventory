@@ -24,6 +24,13 @@ namespace IMS.Forms.Business
         {
             this.businessService = businessService;
             InitializeComponent();
+            this.Load += BusinessUC_Load;
+
+           
+        }
+
+        private void BusinessUC_Load(object sender, EventArgs e)
+        {
             PopulateBranchData();
             PopulateCounterData();
             PopulateWarehouseData();

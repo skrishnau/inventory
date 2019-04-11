@@ -25,6 +25,13 @@ namespace IMS.Forms.POS.Counters
 
             InitializeComponent();
 
+            this.Load += CounterListUC_Load;
+
+           
+        }
+
+        private void CounterListUC_Load(object sender, EventArgs e)
+        {
             InitializeHeader();
 
             PopulateCounterData();

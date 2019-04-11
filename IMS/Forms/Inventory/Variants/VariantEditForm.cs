@@ -79,25 +79,25 @@ namespace IMS.Forms.Inventory.Variants
                 PopupMessage.ShowPopupMessage("Invalid Inputs", "Please fill out required fields", PopupMessageType.INFO);
                 return;
             }
-            var variantModel = new VariantModel()
-            {
-                Id = _id, // currently _id is zero since not assigned anywhere
-                SKU = tbSKU.Text,
-                ProductId = _productId,
-                //MinStockCountForAlert = tbStockThreshold.Value,
-                ShowStockAlerts = cbShowStockAlert.Checked,
+            //var variantModel = new VariantModel()
+            //{
+            //    Id = _id, // currently _id is zero since not assigned anywhere
+            //    SKU = tbSKU.Text,
+            //    ProductId = _productId,
+            //    //MinStockCountForAlert = tbStockThreshold.Value,
+            //    ShowStockAlerts = cbShowStockAlert.Checked,
 
-            };
-            foreach (ComboWithLabelUC control in pnlOptions.Controls)
-            {
-                var value = control.cbCombo.SelectedValue;
-                if (value != null)
-                {
-                    variantModel.OptionIds.Add((int)value);
-                }
-            }
-            _inventoryService.SaveVariant(variantModel);
-            this.Close();
+            //};
+            //foreach (ComboWithLabelUC control in pnlOptions.Controls)
+            //{
+            //    var value = control.cbCombo.SelectedValue;
+            //    if (value != null)
+            //    {
+            //        variantModel.OptionIds.Add((int)value);
+            //    }
+            //}
+            //_inventoryService.SaveVariant(variantModel);
+            //this.Close();
         }
 
         private bool ValidateData()

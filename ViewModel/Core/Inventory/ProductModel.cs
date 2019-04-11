@@ -10,13 +10,13 @@ using ViewModel.Core.Common;
 namespace ViewModel.Core.Inventory
 {
     // basic model. add more properties if needed
-    public class ProductModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+    //public class ProductModel
+    //{
+    //    public int Id { get; set; }
+    //    public string Name { get; set; }
+    //}
 
-    public class ProductModelForSave
+    public class ProductModel
     {
 
         public int Id { get; set; }
@@ -31,7 +31,7 @@ namespace ViewModel.Core.Inventory
         public bool IsVariant { get; set; }
         // parent product Id for variants
         public int? ParentProductId { get; set; }
-        public virtual ProductModelForSave ParentProduct { get; set; }
+        public virtual ProductModel ParentProduct { get; set; }
         public int CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
         public virtual CategoryModel Category { get; set; }
 
@@ -84,54 +84,26 @@ namespace ViewModel.Core.Inventory
         //public DateTime CreatedAt { get; set; }
         //public DateTime UpdatedAt { get; set; }
         //public DateTime? DeletedAt { get; set; }
-        
+
 
         // used for dynamic attributes adding and for adding SKU directly in Product Create
         public virtual List<ProductAttributeModel> ProductAttributes { get; set; }
-        public List<ProductVariantModel> Variants { get; set; }
+       // public List<ProductVariantModel> Variants { get; set; }
         public virtual List<BrandModel> Brands { get; set; }
 
 
 
-        public ProductModelForSave()
+        public ProductModel()
         {
             Category = new CategoryModel();
             Brands = new List<BrandModel>();
             ProductAttributes = new List<ProductAttributeModel>();
-            Variants = new List<ProductVariantModel>();
-        }
-       
-    }
-
-
-    public class ProductVariantModel
-    {
-        public ProductVariantModel()
-        {
-            Attributes = new List<NameValuePair>();//new Dictionary<string, string>();
-        }
-        public int Id { get; set; }
-        public string SKU { get; set; }
-
-        public bool Alert { get; set; }
-        public int AlertThreshold { get; set; }
-
-       // public Dictionary<string, string> Attributes { get; set; }
-       public List<NameValuePair> Attributes { get; set; }
-
-        public Variant ToEntity()
-        {
-            return new Variant()
-            {
-                SKU = SKU,
-                Id = Id,
-                MinStockCountForAlert = AlertThreshold,
-                Alert = Alert,
-
-            };
+            //Variants = new List<ProductVariantModel>();
         }
 
     }
+
+
 
     public class ProductModelForGridView
     {
@@ -151,3 +123,34 @@ namespace ViewModel.Core.Inventory
 
     }
 }
+
+
+
+//public class ProductVariantModel
+//{
+//    public ProductVariantModel()
+//    {
+//        Attributes = new List<NameValuePair>();//new Dictionary<string, string>();
+//    }
+//    public int Id { get; set; }
+//    public string SKU { get; set; }
+
+//    public bool Alert { get; set; }
+//    public int AlertThreshold { get; set; }
+
+//    // public Dictionary<string, string> Attributes { get; set; }
+//    public List<NameValuePair> Attributes { get; set; }
+
+//    public Variant ToEntity()
+//    {
+//        return new Variant()
+//        {
+//            SKU = SKU,
+//            Id = Id,
+//            MinStockCountForAlert = AlertThreshold,
+//            Alert = Alert,
+
+//        };
+//    }
+
+//}

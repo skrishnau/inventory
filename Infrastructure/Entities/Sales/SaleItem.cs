@@ -16,7 +16,7 @@ namespace Infrastructure.Entities.Sales
         // to which sale transaction does this item belongs 
         public int SaleId { get; set; }
         // the product
-        public int VariantId { get; set; }
+     //   public int VariantId { get; set; }
         // no of items
         public decimal Quantity { get; set; }
         // implement discount in rate in version 2
@@ -33,7 +33,7 @@ namespace Infrastructure.Entities.Sales
         // ================= Table Objects ==================== //
         public virtual Sale Sale { get; set; }
 
-        public virtual Variant Variant { get; set; }
+      //  public virtual Variant Variant { get; set; }
 
     }
 }

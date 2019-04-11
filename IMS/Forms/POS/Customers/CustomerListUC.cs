@@ -15,10 +15,18 @@ namespace IMS.Forms.POS.Customers
             this.customerService = customerService;
 
             InitializeComponent();
+
+            this.Load += CustomerListUC_Load;
+
+
+
+        }
+
+        private void CustomerListUC_Load(object sender, EventArgs e)
+        {
             InitializeHeader();
 
             Populate();
-
         }
 
         private void InitializeHeader()
@@ -28,14 +36,14 @@ namespace IMS.Forms.POS.Customers
             _header.btnNew.Visible = true;
             _header.btnNew.Click += btnAddCustomer_Click;
             _header.btnEdit.Visible = true;
-            _header.btnEdit.Click += BtnEdit_Click; 
+            _header.btnEdit.Click += BtnEdit_Click;
             _header.btnDelete.Visible = true;
-            _header.btnDelete.Click += BtnDelete_Click; ; 
+            _header.btnDelete.Click += BtnDelete_Click; ;
 
             this.Controls.Add(_header);
             _header.SendToBack();
         }
-        
+
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
@@ -49,7 +57,7 @@ namespace IMS.Forms.POS.Customers
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void ShowAddEditDialog(bool isEditMode)

@@ -126,6 +126,7 @@
     <Compile Include="Forms\Common\ComboWithLabelUC.Designer.cs">
       <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Validations\RequiredFieldValidator.cs" />
     <Compile Include="Forms\Common\VerticalSplitter.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -158,6 +159,18 @@
     </Compile>
     <Compile Include="Forms\Inventory\Packages\PackageUC.Designer.cs">
       <DependentUpon>PackageUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Purchases\Order\PurchaseOrderItemCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Purchases\Order\PurchaseOrderItemCreateForm.Designer.cs">
+      <DependentUpon>PurchaseOrderItemCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderDetailUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderDetailUC.Designer.cs">
+      <DependentUpon>PurchaseOrderDetailUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Settings\Adjustments\AdjustmentCodeUC.cs">
       <SubType>UserControl</SubType>
@@ -349,11 +362,11 @@
     <Compile Include="Forms\Inventory\Purchases\PurchaseListUC.Designer.cs">
       <DependentUpon>PurchaseListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderForm.cs">
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderForm.Designer.cs">
-      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderCreateForm.Designer.cs">
+      <DependentUpon>PurchaseOrderCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\POS\PosMenuBar.cs">
       <SubType>UserControl</SubType>
@@ -501,6 +514,12 @@
     <EmbeddedResource Include="Forms\Inventory\Packages\PackageUC.resx">
       <DependentUpon>PackageUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Purchases\Order\PurchaseOrderItemCreateForm.resx">
+      <DependentUpon>PurchaseOrderItemCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderDetailUC.resx">
+      <DependentUpon>PurchaseOrderDetailUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\Adjustments\AdjustmentCodeUC.resx">
       <DependentUpon>AdjustmentCodeUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -591,8 +610,8 @@
     <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseListUC.resx">
       <DependentUpon>PurchaseListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderForm.resx">
-      <DependentUpon>PurchaseOrderForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderCreateForm.resx">
+      <DependentUpon>PurchaseOrderCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\PosMenuBar.resx">
       <DependentUpon>PosMenuBar.cs</DependentUpon>

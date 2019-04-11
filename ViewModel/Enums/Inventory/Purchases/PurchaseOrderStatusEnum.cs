@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModel.Core.Purchases
+namespace ViewModel.Enums.Inventory.Purchases
 {
-    public class PurchaseReportModel
+    public enum PurchaseOrderStatusEnum
     {
+        Open, Sent, Received, Cancelled, 
     }
 }

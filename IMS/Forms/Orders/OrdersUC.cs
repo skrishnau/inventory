@@ -70,7 +70,7 @@ namespace IMS.Forms.Orders
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var orderCreate = Program.container.GetInstance<PurchaseOrderForm>();
+                var orderCreate = Program.container.GetInstance<PurchaseOrderCreateForm>();
                 orderCreate.ShowInTaskbar = false;
                 orderCreate.ShowDialog();
             }

@@ -31,10 +31,5 @@ namespace IMS.Forms.Purchases.Order
             this.Close();
         }
 
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

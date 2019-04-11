@@ -24,7 +24,13 @@ namespace IMS.Forms.Generals.Branches
             _listener = listener;
 
             InitializeComponent();
+            this.Load += BranchListUC_Load;
 
+
+        }
+
+        private void BranchListUC_Load(object sender, EventArgs e)
+        {
             InitializeHeader();
 
             PopulateBranchData();

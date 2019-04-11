@@ -40,6 +40,8 @@ using Service.Listeners;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
+using IMS.Forms.Inventory.Purchases;
+using IMS.Forms.Inventory.Purchases.Order;
 
 namespace IMS
 {
@@ -131,6 +133,9 @@ namespace IMS
 
             // --- inventory related --- //
             container.Register<PurchaseListUC>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderCreateForm>(Lifestyle.Scoped);
+
             container.Register<WarehouseListUC>(Lifestyle.Scoped);
             container.Register<UomUC>(Lifestyle.Scoped);
             container.Register<PackageUC>(Lifestyle.Scoped);
@@ -145,7 +150,6 @@ namespace IMS
 
             container.Register<BrandCreate>(Lifestyle.Scoped);
             container.Register<SupplierUC>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderForm>(Lifestyle.Scoped);
             container.Register<CustomerListUC>(Lifestyle.Scoped);
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);
@@ -164,6 +168,8 @@ namespace IMS
             // transfers
             container.Register<InventoryTransfersListUC>(Lifestyle.Scoped);
             container.Register<TransferForm>(Lifestyle.Scoped);
+
+            container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
 
 
 

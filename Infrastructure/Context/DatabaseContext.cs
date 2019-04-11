@@ -56,7 +56,7 @@ namespace Infrastructure.Context
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttribute { get; set; }
-        public virtual DbSet<Variant> Variant { get; set; }
+       // public virtual DbSet<Variant> Variant { get; set; }
         public virtual DbSet<Uom> Uom { get; set; }
         public virtual DbSet<Package> Package { get; set; }
         public virtual DbSet<AdjustmentCode> AdjustmentCode { get; set; }
@@ -69,8 +69,7 @@ namespace Infrastructure.Context
         public virtual DbSet<SaleItem> SaleItems { get; set; }
 
         public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
-        public virtual DbSet<Purchase> Purchase { get; set; }
-        public virtual DbSet<PurchaseItem> PurchaseItem { get; set; }
+        public virtual DbSet<PurchaseOrderItem> PurchaseOrderItem { get; set; }
 
         public virtual DbSet<AppSetting> AppSetting { get; set; }
 

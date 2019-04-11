@@ -30,7 +30,13 @@ namespace IMS.Forms.Inventory.Warehouses
             _listener = listener;
 
             InitializeComponent();
+            this.Load += WarehouseListUC_Load;
 
+           
+        }
+
+        private void WarehouseListUC_Load(object sender, EventArgs e)
+        {
             InitializeHeader();
 
             InitializeControlEvents();

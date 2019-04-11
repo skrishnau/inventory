@@ -13,7 +13,7 @@ namespace DTO.Core.Inventory
 {
     public static class ProductMapper
     {
-        public static Product MapToEntity(ProductModelForSave model, Product entity)
+        public static Product MapToEntity(ProductModel model, Product entity)
         {
             if (entity == null)
                 entity = new Product();
@@ -89,29 +89,10 @@ namespace DTO.Core.Inventory
                 MinStockCountForAlert = x.ReorderPoint,
                 QuantityInStocks = x.InStockQuantity,
                 ShowStockAlerts = x.ReorderAlert,
-                VariantCount = x.Variants == null ? 0 : x.Variants.Count
+                //VariantCount = x.Variants == null ? 0 : x.Variants.Count
             };
         }
-
-        //public static string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductAttribute> list)
-        //{
-        //    var builder = new StringBuilder();
-        //    foreach (var option in list.OrderBy(x => x.Option.Name).GroupBy(x => x.Option.Name))
-        //    {
-        //        builder.Append(option.Key);
-        //        builder.Append(": ");
-
-        //        for (var v = 0; v < option.Count(); v++)
-        //        {
-        //            builder.Append(option.ElementAt(v).Option.Value);
-        //            if (v <= option.Count() - 2)
-        //                builder.Append(", ");
-        //        }
-        //        builder.Append(" ; ");
-        //    }
-        //    return builder.ToString();
-        //}
-
+        
         public static string GetDateShortString(DateTime date)
         {
             return date.ToShortDateString();
@@ -133,26 +114,19 @@ namespace DTO.Core.Inventory
             return builder.ToString();
         }
 
-        public static ProductModel MapToProductModel(Product product)
+
+        public static ProductModel MapToProductModel(Product entity)
         {
-            return new ProductModel()
-            {
-                Id = product.Id,
-                Name = product.Name,
-            };
-        }
-        
-        public static ProductModelForSave MapToProductModelForSave(Product entity)
-        {
-            var model = new ProductModelForSave();
+            var model = new ProductModel();
             // basics
+            model.Id = entity.Id;
             model.Name = entity.Name;
             model.CategoryId = entity.CategoryId;
             model.Category = CategoryMapper.MapToCategoryModel(entity.Category);
             model.HasVariants = entity.HasVariants;
             model.IsVariant = entity.IsVariant;
             //entity.ParentProduct = model.ParentProduct;
-            model.ParentProduct = entity.ParentProduct == null? null: ProductMapper.MapToProductModelForSave(entity.ParentProduct);
+            model.ParentProduct = entity.ParentProduct == null ? null : ProductMapper.MapToProductModel(entity.ParentProduct);
             model.ParentProductId = entity.ParentProductId;
             model.SKU = entity.SKU;
             model.Use = entity.Use;
@@ -192,41 +166,17 @@ namespace DTO.Core.Inventory
             model.IsNotMovable = entity.IsNotMovable;
             model.IsSell = entity.IsSell;
             model.WarehouseId = entity.WarehouseId;
-            model.Warehouse = entity.Warehouse == null ? null :WarehouseMapper.MapToWarehouseModel(entity.Warehouse);
+            model.Warehouse = entity.Warehouse == null ? null : WarehouseMapper.MapToWarehouseModel(entity.Warehouse);
             // pricing
             model.RetailPrice = entity.RetailPrice;
             model.MarkupPercent = entity.MarkupPercent;
             model.SupplyPrice = entity.SupplyPrice;
             // collections
             model.ProductAttributes = MapToProductAttributeModel(entity.ProductAttributes);
-            model.Variants = MapToProductVariant(entity.Variants);
+            // model.Variants = MapToProductVariant(entity.Variants);
             return model;
         }
 
-
-
-        private static List<ProductVariantModel> MapToProductVariant(ICollection<Variant> variants)
-        {
-            var list = new List<ProductVariantModel>();
-            foreach (var vari in variants)
-            {
-                var mod = new ProductVariantModel()
-                {
-                    Alert = vari.Alert ?? false,
-                    AlertThreshold = vari.MinStockCountForAlert ?? 0,
-                    Id = vari.Id,
-                    SKU = vari.SKU,
-                    Attributes = JsonConvert.DeserializeObject<List<NameValuePair>>(vari.AttributesJSON),
-                };
-                // parse attribute json
-                // foreach (var att in vari.VariantAttributes)
-                // {
-                //     mod.Attributes.Add(new NameValuePair(att.ProductAttribute.Attribute, att.Value));
-                // }
-                list.Add(mod);
-            }
-            return list;
-        }
 
         public static List<ProductAttributeModel> MapToProductAttributeModel(ICollection<ProductAttribute> collection)
         {
@@ -244,3 +194,56 @@ namespace DTO.Core.Inventory
         }
     }
 }
+
+//public static ProductModel MapToProductModel(Product product)
+//{
+//    return new ProductModel()
+//    {
+//        Id = product.Id,
+//        Name = product.Name,
+//    };
+//}
+
+
+//private static List<ProductVariantModel> MapToProductVariant(ICollection<Variant> variants)
+//{
+//    var list = new List<ProductVariantModel>();
+//    foreach (var vari in variants)
+//    {
+//        var mod = new ProductVariantModel()
+//        {
+//            Alert = vari.Alert ?? false,
+//            AlertThreshold = vari.MinStockCountForAlert ?? 0,
+//            Id = vari.Id,
+//            SKU = vari.SKU,
+//            Attributes = JsonConvert.DeserializeObject<List<NameValuePair>>(vari.AttributesJSON),
+//        };
+//        // parse attribute json
+//        // foreach (var att in vari.VariantAttributes)
+//        // {
+//        //     mod.Attributes.Add(new NameValuePair(att.ProductAttribute.Attribute, att.Value));
+//        // }
+//        list.Add(mod);
+//    }
+//    return list;
+//}
+
+
+//public static string GetOptionValuesCommaSeparatedString(List<Infrastructure.Entities.Inventory.ProductAttribute> list)
+//{
+//    var builder = new StringBuilder();
+//    foreach (var option in list.OrderBy(x => x.Option.Name).GroupBy(x => x.Option.Name))
+//    {
+//        builder.Append(option.Key);
+//        builder.Append(": ");
+
+//        for (var v = 0; v < option.Count(); v++)
+//        {
+//            builder.Append(option.ElementAt(v).Option.Value);
+//            if (v <= option.Count() - 2)
+//                builder.Append(", ");
+//        }
+//        builder.Append(" ; ");
+//    }
+//    return builder.ToString();
+//}

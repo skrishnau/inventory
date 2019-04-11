@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Purchases;
 using System.Data.Entity;
+using Service.DbEventArgs;
+using Service.Listeners;
 
 namespace Service.Core.Purchases.PurchaseOrders
 {
@@ -16,42 +18,197 @@ namespace Service.Core.Purchases.PurchaseOrders
     {
 
         private DatabaseContext _context;
+        private readonly IDatabaseChangeListener _listener;
 
-        public PurchaseService(DatabaseContext context)
+        public PurchaseService(DatabaseContext context, IDatabaseChangeListener listener)
         {
             _context = context;
+            _listener = listener;
         }
 
-        public List<PurchaseOrderModelForGridView> GetAllPurchaseOrders()
+        public List<PurchaseOrderModel> GetAllPurchaseOrders()
         {
-            var purchases = _context.Purchase
+            var purchases = _context.PurchaseOrder
                 .Include(x => x.Supplier.BasicInfo)
-                .Include(x => x.PurchaseItems)
-                .Where(x => x.DeletedAt == null);
-           return PurchaseMapper.MapToPurchaseModelForGridView(purchases);
+                .Include(x => x.PurchaseOrderItems);
+            // return new List<PurchaseOrderModelForGridView>();
+            return PurchaseOrderMapper.MapToPurchaseOrderModel(purchases);
         }
 
         public int GetNextLotNumber()
         {
             int lotNo = _context.PurchaseOrder.Any() ? _context.PurchaseOrder.Max(x => x.LotNo) : 1;
-            return lotNo++;
+            return ++lotNo;
         }
 
-        public List<PurchaseItemModelForListing> GetPurchaseItems(int purchaseId)
+        public List<PurchaseOrderItemModel> GetPurchaseOrderItems(int purchaseOrderId)
         {
-            var query = _context.PurchaseItem
-                .Include(x=>x.Variant.Product)
-                .Where(x => x.PurchaseId == purchaseId && x.DeletedAt == null);
-            return PurchaseItemMapper.MapToPurhaseItemModelForListing(query);
-            
+            var query = _context.PurchaseOrderItem
+                .Include(x => x.Product)
+                .Where(x => x.PurchaseOrderId == purchaseOrderId);
+            return PurchaseOrderItemMapper.MapToPurhaseOrderItemModel(query);
         }
 
-        public bool SavePurchaseOrder(PurchaseOrderModel purchaseOrderModel)
+        public void SavePurchaseOrder(PurchaseOrderModel purchaseOrderModel)
         {
-            _context.PurchaseOrder.Add(PurchaseOrderMapper.MapToPurchaseOrderEntityForAdd(purchaseOrderModel));
+            var now = DateTime.Now;
+            var args = BaseEventArgs<PurchaseOrderModel>.Instance;
+            var entity = _context.PurchaseOrder.Find(purchaseOrderModel.Id);
+            entity = PurchaseOrderMapper.MapToPurchaseOrderEntityForAdd(purchaseOrderModel, entity);
+
+            if (entity.Id == 0)
+            {
+                entity.CreatedAt = now;
+                entity.UpdatedAt = now;
+                _context.PurchaseOrder.Add(entity);
+                args.Mode = Utility.UpdateMode.ADD;
+            }
+            else
+            {
+                entity.UpdatedAt = now;
+                args.Mode = Utility.UpdateMode.EDIT;
+            }
             _context.SaveChanges();
-            return true;
+            args.Model = PurchaseOrderMapper.MapToPurchaseOrderModel(entity);
+            _listener.TriggerPurchaseOrderUpdateEvent(null, args);
         }
+
+        public PurchaseOrderModel GetPurchaseOrder(int purchaseOrderId)
+        {
+            var entity = _context.PurchaseOrder
+                 .Include(x => x.Warehouse)
+                 .Include(x => x.Supplier)
+                 .Include(x => x.PurchaseOrderItems)
+                 .Include(x => x.ParentPurchaseOrder)
+                 .FirstOrDefault(x => x.Id == purchaseOrderId);
+            return PurchaseOrderMapper.MapToPurchaseOrderModel(entity);
+        }
+
+        public string SetSent(int purchaseOrderId)
+        {
+            var entity = _context.PurchaseOrder.Find(purchaseOrderId);
+            if (entity != null)
+            {
+                if (entity.IsOrderSent)
+                    return "The Order is already sent";
+                else if (entity.IsReceived)
+                    return "This order has already been received. No need to send!";
+                else if (entity.IsCancelled)
+                    return "This order is aleady cancelled. You can't send a cancelled order";
+                entity.IsOrderSent = true;
+                entity.OrderSentDate = DateTime.Now;
+                _context.SaveChanges();
+                var args = new BaseEventArgs<PurchaseOrderModel>(PurchaseOrderMapper.MapToPurchaseOrderModel(entity), Utility.UpdateMode.EDIT);
+                _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                return string.Empty;
+            }
+            return "The Purchase Order doesn't exist";
+        }
+
+        public string SetReceived(int purchaseOrderId)
+        {
+            var entity = _context.PurchaseOrder.Find(purchaseOrderId);
+            if (entity != null)
+            {
+                if (!entity.IsOrderSent)
+                    return "This order hasn't been sent yet. First send the order, then only you can receive against it.";
+                if (entity.IsCancelled)
+                    return "You can't receive a cancelled order. This order is cancelled.";
+                if (entity.IsReceived)
+                    return "Already received!";
+                entity.IsReceived = true;
+                entity.ReceivedDate = DateTime.Now;
+                _context.SaveChanges();
+                var args = new BaseEventArgs<PurchaseOrderModel>(PurchaseOrderMapper.MapToPurchaseOrderModel(entity), Utility.UpdateMode.EDIT);
+                _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                return string.Empty;
+            }
+            return "The Purchase Order doesn't exist";
+        }
+
+        public string SetCancelled(int purchaseOrderId)
+        {
+            var entity = _context.PurchaseOrder.Find(purchaseOrderId);
+            if (entity != null)
+            {
+                if (entity.IsReceived)
+                    return "You have already received against this order. You can't cancel it now.";
+                if (entity.IsCancelled)
+                    return "Already cancelled!";
+                entity.IsCancelled = true;
+                entity.CancelledDate = DateTime.Now;
+                _context.SaveChanges();
+                var args = new BaseEventArgs<PurchaseOrderModel>(PurchaseOrderMapper.MapToPurchaseOrderModel(entity), Utility.UpdateMode.EDIT);
+                _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                return string.Empty;
+            }
+            return "The Purchase Order doesn't exist";
+        }
+
+        public string SavePurchaseOrderItems(int purchaseOrderId, List<PurchaseOrderItemModel> items)
+        {
+            var poEntity = _context.PurchaseOrder.Find(purchaseOrderId);
+            if (poEntity == null)
+            {
+                return "The Purchase Order doesn't exist.";
+            }
+
+            // validate & assign productId in the items; check if the sku exists
+            foreach (var item in items)
+            {
+                if (item.Quantity <= 0)
+                {
+                    return "Some of the items have zero quantity. Quantity must be greater than zero";
+                }
+                if (item.Rate <= 0)
+                {
+                    return "Some of the items have zero rate. Rates must be greater than zero";
+                }
+                if (item.ProductId == 0)
+                {
+                    var productEntity = _context.Product.FirstOrDefault(x => x.SKU == item.SKU);
+                    if (productEntity == null)
+                    {
+                        return "Some of the items you provided are invalid!";
+                    }
+                    else
+                    {
+                        item.ProductId = productEntity.Id;
+                        item.TotalAmount = item.Rate * item.Quantity;
+                    }
+                }
+            }
+
+            var dbItems = _context.PurchaseOrderItem.Where(x => x.PurchaseOrderId == purchaseOrderId).ToList();
+            // first remove those that are not in the model list
+            for (var i = 0; i < dbItems.Count(); i++)
+            {
+                var entity = dbItems.ElementAt(i);
+                var stillExists = items.FirstOrDefault(x => x.Id == entity.Id);
+                if (stillExists == null)
+                {
+                    _context.PurchaseOrderItem.Remove(entity);
+                }
+            }
+            // second add/update
+            foreach (var item in items)
+            {
+                var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
+                entity = PurchaseOrderItemMapper.MapToEntity(item, entity);
+                if (entity.Id == 0)
+                {
+                    // add
+                    _context.PurchaseOrderItem.Add(entity);
+                }
+                // need not handle update cause entity is already assigned
+            }
+            _context.SaveChanges();
+            var model = PurchaseOrderMapper.MapToPurchaseOrderModel(poEntity);
+            var eventArgs = new BaseEventArgs<PurchaseOrderModel>(model, Utility.UpdateMode.EDIT);
+            _listener.TriggerPurchaseOrderUpdateEvent(null, eventArgs);
+            return string.Empty;
+        }
+
 
     }
 }

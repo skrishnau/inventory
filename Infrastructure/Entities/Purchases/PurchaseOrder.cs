@@ -10,41 +10,46 @@ namespace Infrastructure.Entities.Purchases
     public class PurchaseOrder
     {
         public int Id { get; set; }
-        // the corresponding purchase in which all the purchase detail of this purchaseOrder is stored
-        public int PurchaseId { get; set; }
-        // supplier from which the purchse is to be made
-        public int SupplierId { get; set; }
+        public string Name { get; set; }
+        public string OrderNumber { get; set; }
+        // in case of partial receive New Purchase Order is created and earlier is received
+        // the newly creaated purchase order will have parent Purchase OrderId
+        public int? ParentPurchaseOrderId { get; set; }
+        public virtual PurchaseOrder ParentPurchaseOrder { get; set; }
         // lot# ; incrementing...
         public int LotNo { get; set; }
-
-        public int? WarehouseId { get; set; }
-
-        // ===== Dates ====== //
-        public DateTime OrderDate { get; set; }
-        public DateTime RequestedDate { get; set; }
-        // promised date is entered either by supplier or by user upon consulting supplier
-        public DateTime? PromisedDate { get; set; }
-        // the date in which the purchse order was fulfilled. i.e. the products arrive at our location
-        public DateTime? ReceivedDate { get; set; }
-        // the date in which this order was closed
-        public DateTime? ClosedOn{ get; set; }
-
-        // ========= User information ======== //
-        public int? CreatedById { get; set; }
-        public int? RequestedById { get; set; }
-        public int? ApprovedById { get; set; }
-
-
-        public string Note { get; set; }
-        // ====== Table objects ====== //
-        public virtual Purchases.Purchase Purchase { get; set; }
+        public decimal TotalAmount { get; set; }
+        public int WarehouseId { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
+        // supplier's invoice
+        public string SupplierInvoice { get; set; }
+        // supplier can be "any"
+        public int? SupplierId { get; set; }
         public virtual Suppliers.Supplier Supplier { get; set; }
-        public virtual Users.User CreatedBy { get; set; }
-        public virtual Users.User RequestedBy { get; set; }
-        public virtual Users.User ApprovedBy { get; set; }
+        // ===== Dates ====== //
+        public DateTime ExpectedDate { get; set; }
 
-        public virtual Warehouse Warehouse{ get; set; }
+        // the order date is when the PO is sent
+        public bool IsOrderSent { get; set; }
+        public DateTime? OrderSentDate { get; set; }
+        // cancels/receives
+        public bool IsCancelled { get; set; }
+        public DateTime? CancelledDate { get; set; }
+        public bool IsReceived { get; set; }
+        public DateTime? ReceivedDate { get; set; }
+        public string Note { get; set; }
 
+        // timestamps
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+        public virtual ICollection<PurchaseOrderItem> PurchaseOrderItems { get; set; }
+
+
+        public PurchaseOrder()
+        {
+            PurchaseOrderItems = new List<PurchaseOrderItem>();
+        }
 
     }
 }

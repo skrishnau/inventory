@@ -22,6 +22,14 @@ namespace IMS.Forms.Inventory.Suppliers
             _listener = listener;
 
             InitializeComponent();
+
+            this.Load += SupplierUC_Load;
+
+           
+        }
+
+        private void SupplierUC_Load(object sender, EventArgs e)
+        {
             InitializeHeader();
             Populate();
 

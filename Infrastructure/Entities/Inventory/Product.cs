@@ -28,7 +28,7 @@ namespace Infrastructure.Entities.Inventory
         public virtual Product ParentProduct { get; set; }
         public int CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
         public virtual Category Category { get; set; }
-
+        public bool IsDiscontinued { get; set; }
         // ============== Package ============== //
         public int PackageId { get; set; }
         public virtual Package Package { get; set; }
@@ -82,14 +82,14 @@ namespace Infrastructure.Entities.Inventory
         // ------ table objects ------ //
         public virtual ICollection<Brand> Brands { get; set; }
         public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
-        public virtual ICollection<Variant> Variants { get; set; }
+      //  public virtual ICollection<Variant> Variants { get; set; }
 
 
         public Product()
         {
             ProductAttributes = new List<ProductAttribute>();
             Brands = new List<Brand>();
-            Variants = new List<Variant>();
+           // Variants = new List<Variant>();
         }
 
 

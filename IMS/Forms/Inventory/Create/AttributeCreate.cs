@@ -19,7 +19,7 @@ namespace IMS.Forms.Inventory.Create
 
        // private List<AttributeModel> _attributeList;
 
-        private int attributeId;
+        //private int attributeId;
 
 
         public AttributeCreate(IInventoryService inventoryService)

@@ -25,7 +25,7 @@ namespace IMS.Forms.Dashboard
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderForm>();//new PurchaseOrderForm();
+                var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderCreateForm>();//new PurchaseOrderForm();
                 purchaseOrderForm.ShowDialog();
             }
         }

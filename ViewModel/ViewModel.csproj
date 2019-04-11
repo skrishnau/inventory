@@ -102,11 +102,10 @@
     <Compile Include="Core\Settings\CompanyInfoSettingModel.cs" />
     <Compile Include="Core\Suppliers\SupplierModel.cs" />
     <Compile Include="Core\Users\BasicInfoModel.cs" />
+    <Compile Include="Enums\Inventory\Purchases\PurchaseOrderStatusEnum.cs" />
     <Compile Include="Enums\Settings\SettingsEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Purchases\PurchaseModel.cs" />
     <Compile Include="Core\Purchases\PurchaseOrderModel.cs" />
-    <Compile Include="Core\Purchases\PurchaseReportModel.cs" />
     <Compile Include="Core\Sales\SaleModel.cs" />
     <Compile Include="Core\Sales\SaleOrderModel.cs" />
     <Compile Include="Core\Sales\SaleReportModel.cs" />

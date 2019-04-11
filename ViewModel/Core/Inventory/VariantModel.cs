@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Core.Inventory
 {
+    [Obsolete("Variant is no longer used", true)]
     public class VariantModel
     {
 

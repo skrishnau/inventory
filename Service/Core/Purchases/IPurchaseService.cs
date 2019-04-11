@@ -12,11 +12,19 @@ namespace Service.Core.Purchases.PurchaseOrders
     {
         int GetNextLotNumber();
 
-        bool SavePurchaseOrder(PurchaseOrderModel purchaseOrderModel);
+        void SavePurchaseOrder(PurchaseOrderModel purchaseOrderModel);
 
-        List<PurchaseOrderModelForGridView> GetAllPurchaseOrders();
+        List<PurchaseOrderModel> GetAllPurchaseOrders();
 
-        List<PurchaseItemModelForListing> GetPurchaseItems(int purchaseId);
+        List<PurchaseOrderItemModel> GetPurchaseOrderItems(int purchaseId);
 
+        PurchaseOrderModel GetPurchaseOrder(int purchaseOrderId);
+
+
+        string SavePurchaseOrderItems(int purchaseOrderId, List<PurchaseOrderItemModel> items);
+
+        string SetSent(int purchaseOrderId);
+        string SetReceived(int purchaseOrderId);
+        string SetCancelled(int purchaseOrderId);
     }
 }

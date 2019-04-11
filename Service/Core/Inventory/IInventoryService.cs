@@ -19,9 +19,10 @@ namespace Service.Core.Inventory
 
         List<ProductModelForGridView> GetProductListForGridView();
         ProductModelForGridView GetProduct(int productId);
-        ProductModelForSave GetProductForEdit(int productId);
-        List<ProductModelForSave> GetProductList();
-        void AddUpdateProduct(ProductModelForSave product);
+        ProductModel GetProductForEdit(int productId);
+        List<ProductModel> GetProductList();
+        ProductModel GetProductBySKU(string sku);
+        void AddUpdateProduct(ProductModel product);
         void DeleteProduct(int id);
 
         //List<AttributeModel> GetAttributeList();
@@ -30,10 +31,10 @@ namespace Service.Core.Inventory
         // void DeleteAttribute(AttributeModel attributeModel);
         // List<AttributeModel> GetOptionList(int productId);
 
-        VariantModel GetVariantById(string sku);
-        List<VariantModel> GetVariantList();
-        VariantModel GetVariantBySKU(string sku);
-        void SaveVariant(VariantModel variantModel);
+        //VariantModel GetVariantById(string sku);
+        //List<VariantModel> GetVariantList();
+        //VariantModel GetVariantBySKU(string sku);
+        //void SaveVariant(VariantModel variantModel);
 
         List<UomModel> GetUomList();
         List<UomModel> GetUomListUsableOnly();
@@ -46,6 +47,7 @@ namespace Service.Core.Inventory
         List<AdjustmentCodeModel> GetAdjustmentCodeList();
         List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly();
         string SaveAdjustmentCode(AdjustmentCodeModel model);
+
 
         //        bool AddOrUpdateAttribute(AttributeModel attributeModel);
 

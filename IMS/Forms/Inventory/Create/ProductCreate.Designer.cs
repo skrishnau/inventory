@@ -47,6 +47,7 @@
             this.tbManufacturer = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.tbBarcode = new System.Windows.Forms.TextBox();
+            this.tbLabelCode = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
@@ -124,7 +125,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabDescription = new System.Windows.Forms.TabPage();
             this.tbDescription = new System.Windows.Forms.TextBox();
-            this.tbLabelCode = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -353,6 +353,13 @@
             this.tbBarcode.Name = "tbBarcode";
             this.tbBarcode.Size = new System.Drawing.Size(146, 20);
             this.tbBarcode.TabIndex = 48;
+            // 
+            // tbLabelCode
+            // 
+            this.tbLabelCode.Location = new System.Drawing.Point(132, 94);
+            this.tbLabelCode.Name = "tbLabelCode";
+            this.tbLabelCode.Size = new System.Drawing.Size(156, 20);
+            this.tbLabelCode.TabIndex = 49;
             // 
             // label14
             // 
@@ -1153,13 +1160,6 @@
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(686, 503);
             this.tbDescription.TabIndex = 0;
-            // 
-            // tbLabelCode
-            // 
-            this.tbLabelCode.Location = new System.Drawing.Point(132, 94);
-            this.tbLabelCode.Name = "tbLabelCode";
-            this.tbLabelCode.Size = new System.Drawing.Size(156, 20);
-            this.tbLabelCode.TabIndex = 49;
             // 
             // ProductCreate
             // 

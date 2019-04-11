@@ -13,6 +13,7 @@ using ViewModel.Core.Common;
 using System.Linq;
 using Service.Core.Business;
 using Service.Core.Suppliers;
+using IMS.Forms.Common.Validations;
 
 namespace IMS.Forms.Inventory.Create
 {
@@ -23,12 +24,14 @@ namespace IMS.Forms.Inventory.Create
         public static readonly string REQUIRED = "Required";
 
         public readonly static string COL_NAME_PREFIX = "col";
+
         // references
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
         private readonly ISupplierService _supplierService;
 
+        private RequiredFieldValidator _requiredValidator;
         // variables
         private int _productId;
         // track the start index of dynamic attributes
@@ -67,19 +70,21 @@ namespace IMS.Forms.Inventory.Create
 
         private void InitializeEvents()
         {
-            //btnSave.Click += btnSave_Click;
-            //btnAddBrand.Click += btnAddBrand_Click;
-            //btnAddCategory.Click += BtnAddCategory_Click;
+            //cbCategory.Validating += RequiredField_Validating;
+            //tbLabelCode.Validating += RequiredField_Validating;
+            //tbProductName.Validating += RequiredField_Validating;
+            //tbSKU.Validating += RequiredField_Validating;
+            //cbPackage.Validating += RequiredField_Validating;
+            //cbSupplier.Validating += RequiredField_Validating;
+            //cbUom.Validating += RequiredField_Validating;
+            //cbWarehouse.Validating += RequiredField_Validating;
 
+            var controls = new Control[]
+            {
+                cbCategory, tbLabelCode, tbProductName, tbSKU, cbPackage, cbSupplier, cbUom, cbWarehouse
+            };
+            _requiredValidator = new RequiredFieldValidator(errorProvider1, controls);
 
-            cbCategory.Validating += RequiredField_Validating;
-            tbLabelCode.Validating += RequiredField_Validating;
-            tbProductName.Validating += RequiredField_Validating;
-            tbSKU.Validating += RequiredField_Validating;
-            cbPackage.Validating += RequiredField_Validating;
-            cbSupplier.Validating += RequiredField_Validating;
-            cbUom.Validating += RequiredField_Validating;
-            cbWarehouse.Validating += RequiredField_Validating;
 
             //btnAddOption.Click += BtnAddOption_Click;
             dgvVariants.EditingControlShowing += DgvVariants_EditingControlShowing;
@@ -98,83 +103,89 @@ namespace IMS.Forms.Inventory.Create
 
         private void SaveProduct()
         {
-            if (IsModelValid())
+            var allValid = _requiredValidator.IsValid();
+            if (!allValid)
             {
-                // since category combo displays text only and doesn't hold id, hence get the category from db
-                var category = _inventoryService.GetCategory(cbCategory.SelectedItem.ToString());
-                var variants = GetVariants();
-                var product = new ProductModelForSave()
-                {
-                    Id = _productId,
-                    Brands = GetBrands(),
-                    CategoryId = category.Id,
-                    ReorderPoint = numReorderPoint.Value,
-                    ReorderAlert = true,
-
-                    Name = tbProductName.Text,
-
-                    Variants = variants,
-                    AttributesJSON = "",
-                    Barcode = tbBarcode.Text,
-                    BaseUomId = int.Parse(cbUom.SelectedValue.ToString()),
-                    Brand = tbBrands.Text,
-                    Description = tbDescription.Text,
-                    EOQ = numEOQ.Value,
-                    HasVariants = rbProductWithVariants.Checked,
-                    IsBuild = chkIsBuild.Checked,
-                    IsBuy = chkIsBuy.Checked,
-                    IsNotMovable = chkIsNotMovable.Checked,
-                    IsSell = chkIsSell.Checked,
-                    Label = tbLabelCode.Text,
-                    LeadDays = (int)numLeadDays.Value,
-                    Manufacturer = tbManufacturer.Text,
-                    PackageId = int.Parse(cbPackage.SelectedValue.ToString()),
-
-                    ParentProductId = null,
-                    IsVariant = false,
-                    Use = true,
-
-                    //MarkupPercent = 
-                    MonthlyDemand = numMonthlyDemand.Value,
-                    SKU = tbSKU.Text,
-                    UnitNetWeight = numUnitNetWeight.Value,
-                    ReorderQuantity = numReorderQuantity.Value,
-                    MarkupPercent = numMarkupPercent.Value,
-                    RetailPrice = numRetailPrice.Value,
-                    SupplyPrice = numSupplyPrice.Value,
-                    UnitGrossWeight = numUnitGrossWeight.Value,
-                    UnitsInPackage = numUnitsInPackage.Value,
-                    WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString()),
-
-                };
-                product.ProductAttributes = _productAttributes;
-                _inventoryService.AddUpdateProduct(product);
-                PopupMessage.ShowSaveSuccessMessage();
-                this.Close();
-            }
-        }
-
-        private List<ProductVariantModel> GetVariants()
-        {
-            var variants = new List<ProductVariantModel>();
-            for (int r = 0; r < dgvVariants.RowCount - 1; r++)
-            {
-                DataGridViewRow row = dgvVariants.Rows[r];
-                var variant = new ProductVariantModel();
-                variant.Id = int.Parse(row.Cells[colVariantId.Name].Value == null ? "0" : row.Cells[colVariantId.Name].Value.ToString());
-                variant.SKU = row.Cells[colSKU.Name].Value.ToString();
-                variant.Alert = bool.Parse(row.Cells[colAlert.Name].Value == null ? "False" : row.Cells[colAlert.Name].Value.ToString());
-                variant.AlertThreshold = int.Parse(row.Cells[colAlertThreshold.Name].Value == null ? "0" : row.Cells[colAlertThreshold.Name].Value.ToString());
-                foreach (var attribute in _productAttributes)
-                {
-                    // add to the dictionary
-                    variant.Attributes.Add(new NameValuePair(attribute.Attribute, row.Cells[COL_NAME_PREFIX + attribute.Attribute].Value.ToString()));
-                }
-                variants.Add(variant);
+                PopupMessage.ShowMissingInputsMessage();
+                this.Focus(); // return the focus to the current form
+                return;
             }
 
-            return variants;
+            // since category combo displays text only and doesn't hold id, hence get the category from db
+            var category = _inventoryService.GetCategory(cbCategory.SelectedItem.ToString());
+            //var variants = GetVariants();
+            var product = new ProductModel()
+            {
+                Id = _productId,
+                Brands = GetBrands(),
+                CategoryId = category.Id,
+                ReorderPoint = numReorderPoint.Value,
+                ReorderAlert = true,
+
+                Name = tbProductName.Text,
+
+                // Variants = variants,
+                AttributesJSON = "",
+                Barcode = tbBarcode.Text,
+                BaseUomId = int.Parse(cbUom.SelectedValue.ToString()),
+                Brand = tbBrands.Text,
+                Description = tbDescription.Text,
+                EOQ = numEOQ.Value,
+                HasVariants = rbProductWithVariants.Checked,
+                IsBuild = chkIsBuild.Checked,
+                IsBuy = chkIsBuy.Checked,
+                IsNotMovable = chkIsNotMovable.Checked,
+                IsSell = chkIsSell.Checked,
+                Label = tbLabelCode.Text,
+                LeadDays = (int)numLeadDays.Value,
+                Manufacturer = tbManufacturer.Text,
+                PackageId = int.Parse(cbPackage.SelectedValue.ToString()),
+
+                ParentProductId = null,
+                IsVariant = false,
+                Use = true,
+
+                //MarkupPercent = 
+                MonthlyDemand = numMonthlyDemand.Value,
+                SKU = tbSKU.Text,
+                UnitNetWeight = numUnitNetWeight.Value,
+                ReorderQuantity = numReorderQuantity.Value,
+                MarkupPercent = numMarkupPercent.Value,
+                RetailPrice = numRetailPrice.Value,
+                SupplyPrice = numSupplyPrice.Value,
+                UnitGrossWeight = numUnitGrossWeight.Value,
+                UnitsInPackage = numUnitsInPackage.Value,
+                WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString()),
+
+            };
+            product.ProductAttributes = _productAttributes;
+            _inventoryService.AddUpdateProduct(product);
+            PopupMessage.ShowSaveSuccessMessage();
+            this.Close();
+
         }
+
+        //private List<ProductVariantModel> GetVariants()
+        //{
+        //    var variants = new List<ProductVariantModel>();
+        //    for (int r = 0; r < dgvVariants.RowCount - 1; r++)
+        //    {
+        //        DataGridViewRow row = dgvVariants.Rows[r];
+        //        var variant = new ProductVariantModel();
+        //        variant.Id = int.Parse(row.Cells[colVariantId.Name].Value == null ? "0" : row.Cells[colVariantId.Name].Value.ToString());
+        //        variant.SKU = row.Cells[colSKU.Name].Value.ToString();
+        //        variant.Alert = bool.Parse(row.Cells[colAlert.Name].Value == null ? "False" : row.Cells[colAlert.Name].Value.ToString());
+        //        variant.AlertThreshold = int.Parse(row.Cells[colAlertThreshold.Name].Value == null ? "0" : row.Cells[colAlertThreshold.Name].Value.ToString());
+        //        foreach (var attribute in _productAttributes)
+        //        {
+        //            // add to the dictionary
+        //            variant.Attributes.Add(new NameValuePair(attribute.Attribute, row.Cells[COL_NAME_PREFIX + attribute.Attribute].Value.ToString()));
+        //        }
+        //        variants.Add(variant);
+        //    }
+
+        //    return variants;
+        //}
 
         private List<BrandModel> GetBrands()
         {
@@ -207,34 +218,35 @@ namespace IMS.Forms.Inventory.Create
             return list;
         }
 
-        private bool IsModelValid()
-        {
-            // return Validate();
+        //private bool IsModelValid()
+        //{
+        //    // return Validate();
 
-            var nameValid = ValidateControl(tbProductName);
-            var skuValid = ValidateControl(tbSKU);
-            var categoryValid = ValidateControl(cbCategory);
-            var labelValid = ValidateControl(tbLabelCode);
-            var packageValid = ValidateControl(cbPackage);
-            var supplierValid = ValidateControl(cbSupplier);
-            var uomValid = ValidateControl(cbUom);
-            var warehouseValid = ValidateControl(cbWarehouse);
+        //    //var nameValid = ValidateControl(tbProductName);
+        //    //var skuValid = ValidateControl(tbSKU);
+        //    //var categoryValid = ValidateControl(cbCategory);
+        //    //var labelValid = ValidateControl(tbLabelCode);
+        //    //var packageValid = ValidateControl(cbPackage);
+        //    //var supplierValid = ValidateControl(cbSupplier);
+        //    //var uomValid = ValidateControl(cbUom);
+        //    //var warehouseValid = ValidateControl(cbWarehouse);
 
-            var allValid = nameValid &&
-                categoryValid &&
-                labelValid &&
-                packageValid &&
-                supplierValid &&
-                uomValid &&
-                warehouseValid;
+        //    //var allValid = nameValid &&
+        //    //    categoryValid &&
+        //    //    labelValid &&
+        //    //    packageValid &&
+        //    //    supplierValid &&
+        //    //    uomValid &&
+        //    //    warehouseValid;
 
-            if (!allValid)
-            {
-                PopupMessage.ShowMissingInputsMessage();
-                this.Focus(); // return the focus to the current form
-            }
-            return allValid;
-        }
+        //    var allValid = _requiredValidator.IsValid();
+        //    if (!allValid)
+        //    {
+        //        PopupMessage.ShowMissingInputsMessage();
+        //        this.Focus(); // return the focus to the current form
+        //    }
+        //    return allValid;
+        //}
 
         #endregion
 
@@ -357,7 +369,7 @@ namespace IMS.Forms.Inventory.Create
                     tbBrands.Text += brand.Name + ", ";
                 }
 
-                PopulateVariants(product.Variants);
+                // PopulateVariants(product.Variants);
             }
 
         }
@@ -386,39 +398,39 @@ namespace IMS.Forms.Inventory.Create
             }
         }
 
-        private void PopulateVariants(List<ProductVariantModel> variants)
-        {
-            foreach (var vari in variants)
-            {
-                var row = new DataGridViewRow();
-                row.Cells.Add(new DataGridViewTextBoxCell()
-                {
-                    Value = vari.Id,
-                });
-                row.Cells.Add(new DataGridViewTextBoxCell()
-                {
-                    Value = vari.SKU,
-                });
-                row.Cells.Add(new DataGridViewCheckBoxCell()
-                {
-                    Value = vari.Alert,
-                });
-                row.Cells.Add(new DataGridViewTextBoxCell()
-                {
-                    Value = vari.AlertThreshold,
-                });
+        //private void PopulateVariants(List<ProductVariantModel> variants)
+        //{
+        //    foreach (var vari in variants)
+        //    {
+        //        var row = new DataGridViewRow();
+        //        row.Cells.Add(new DataGridViewTextBoxCell()
+        //        {
+        //            Value = vari.Id,
+        //        });
+        //        row.Cells.Add(new DataGridViewTextBoxCell()
+        //        {
+        //            Value = vari.SKU,
+        //        });
+        //        row.Cells.Add(new DataGridViewCheckBoxCell()
+        //        {
+        //            Value = vari.Alert,
+        //        });
+        //        row.Cells.Add(new DataGridViewTextBoxCell()
+        //        {
+        //            Value = vari.AlertThreshold,
+        //        });
 
-                foreach (var att in _productAttributes)
-                {
-                    var value = vari.Attributes.Find(x => x.Name == att.Attribute);
-                    row.Cells.Add(new DataGridViewTextBoxCell()
-                    {
-                        Value = value.Value
-                    });
-                }
-                dgvVariants.Rows.Add(row);
-            }
-        }
+        //        foreach (var att in _productAttributes)
+        //        {
+        //            var value = vari.Attributes.Find(x => x.Name == att.Attribute);
+        //            row.Cells.Add(new DataGridViewTextBoxCell()
+        //            {
+        //                Value = value.Value
+        //            });
+        //        }
+        //        dgvVariants.Rows.Add(row);
+        //    }
+        //}
 
         private void AddAttributeColumn(int attributeId, string attributeName)
         {
@@ -452,6 +464,7 @@ namespace IMS.Forms.Inventory.Create
             cbPackage.ValueMember = "Id";
             cbPackage.DisplayMember = "Name";
         }
+
         private void PopulateUom()
         {
             var uoms = _inventoryService.GetUomList();
@@ -472,68 +485,7 @@ namespace IMS.Forms.Inventory.Create
         #endregion
 
 
-        #region Validation
 
-
-        private void RequiredField_Validating(object sender, CancelEventArgs e)
-        {
-            ValidateControl(sender);
-        }
-
-        private bool ValidateControl(object sender)
-        {
-            var type = sender.GetType();
-            if (type == typeof(TextBox))
-            {
-                return ValidateTextBox((TextBox)sender);
-            }
-            else if (type == typeof(ComboBox))
-            {
-                return ValidateComboBox((ComboBox)sender);
-            }
-            else if (type == typeof(MaskedTextBox))
-            {
-                return ValidateMaskedTextBox((MaskedTextBox)sender);
-            }
-            return false;
-        }
-
-
-        private bool ValidateTextBox(TextBox textBox)
-        {
-            if (string.IsNullOrEmpty(textBox.Text.Trim()))
-            {
-                errorProvider1.SetError(textBox, REQUIRED);
-                return false;
-            }
-            errorProvider1.SetError(textBox, string.Empty);
-            return true;
-        }
-
-        private bool ValidateMaskedTextBox(MaskedTextBox textBox)
-        {
-            if (string.IsNullOrEmpty(textBox.Text.Trim()))
-            {
-                errorProvider1.SetError(textBox, REQUIRED);
-                return false;
-            }
-            errorProvider1.SetError(textBox, string.Empty);
-            return true;
-        }
-
-        private bool ValidateComboBox(ComboBox comboBox)
-        {
-            //if(string.IsNullOrEmpty(comboBox.SelectedText))
-            if (comboBox.SelectedItem == null)
-            {
-                errorProvider1.SetError(comboBox, REQUIRED);
-                return false;
-            }
-            errorProvider1.SetError(comboBox, string.Empty);
-            return true;
-        }
-
-        #endregion
     }
 }
 
@@ -725,3 +677,66 @@ private void SaveProduct()
 //    errorProvider1.SetError(cbBrand, "");
 //    return true;
 //}
+
+#region Validation
+
+//private void RequiredField_Validating(object sender, CancelEventArgs e)
+//{
+//    ValidateControl(sender);
+
+//}
+
+//private bool ValidateControl(object sender)
+//{
+//    var type = sender.GetType();
+//    if (type == typeof(TextBox))
+//    {
+//        return ValidateTextBox((TextBox)sender);
+//    }
+//    else if (type == typeof(ComboBox))
+//    {
+//        return ValidateComboBox((ComboBox)sender);
+//    }
+//    else if (type == typeof(MaskedTextBox))
+//    {
+//        return ValidateMaskedTextBox((MaskedTextBox)sender);
+//    }
+//    return false;
+//}
+
+
+//private bool ValidateTextBox(TextBox textBox)
+//{
+//    if (string.IsNullOrEmpty(textBox.Text.Trim()))
+//    {
+//        errorProvider1.SetError(textBox, REQUIRED);
+//        return false;
+//    }
+//    errorProvider1.SetError(textBox, string.Empty);
+//    return true;
+//}
+
+//private bool ValidateMaskedTextBox(MaskedTextBox textBox)
+//{
+//    if (string.IsNullOrEmpty(textBox.Text.Trim()))
+//    {
+//        errorProvider1.SetError(textBox, REQUIRED);
+//        return false;
+//    }
+//    errorProvider1.SetError(textBox, string.Empty);
+//    return true;
+//}
+
+//private bool ValidateComboBox(ComboBox comboBox)
+//{
+//    //if(string.IsNullOrEmpty(comboBox.SelectedText))
+//    if (comboBox.SelectedItem == null)
+//    {
+//        errorProvider1.SetError(comboBox, REQUIRED);
+//        return false;
+//    }
+//    errorProvider1.SetError(comboBox, string.Empty);
+//    return true;
+//}
+
+#endregion
