@@ -21,11 +21,12 @@ using IMS.Forms.Inventory.Suppliers;
 using IMS.Forms.Inventory.Attributes;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.Business.Create;
-using IMS.Forms.Inventory.Adjustments;
 using IMS.Forms.Inventory.Transfers;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
+using IMS.Forms.Inventory.Purchases.Receives;
+using IMS.Forms.Inventory.Products.WarehouseProducts;
 
 namespace IMS.Forms.Inventory
 {
@@ -85,6 +86,20 @@ namespace IMS.Forms.Inventory
             _menubar.btnUom.Click += BtnUom_Click;
             _menubar.btnPackage.Click += BtnPackage_Click;
             _menubar.btnAdjustmentCodes.Click += BtnAdjustmentCodes_Click;
+
+            _menubar.btnLocateInventory.Click += BtnLocateInventory_Click;
+        }
+
+        private void BtnLocateInventory_Click(object sender, EventArgs e)
+        {
+            var warehouseProductListUC = Program.container.GetInstance<WarehouseProductListUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            warehouseProductListUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(warehouseProductListUC);
+
+            _menubar.ClearSelection(sender);
+            _menubar.btnProductList.FlatStyle = FlatStyle.Flat;
+
         }
 
         #region Products
@@ -96,7 +111,7 @@ namespace IMS.Forms.Inventory
             productListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(productListUC);
 
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             _menubar.btnProductList.FlatStyle = FlatStyle.Flat;
         }
 
@@ -107,7 +122,7 @@ namespace IMS.Forms.Inventory
             categoryListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(categoryListUC);
 
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             _menubar.btnCategoryList.FlatStyle = FlatStyle.Flat;
         }
 
@@ -133,7 +148,7 @@ namespace IMS.Forms.Inventory
             transferListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(transferListUC);
             // set selection
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             _menubar.btnSupplierList.FlatStyle = FlatStyle.Flat;
 
         }
@@ -151,7 +166,7 @@ namespace IMS.Forms.Inventory
             supplierListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(supplierListUC);
             // set selection
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             _menubar.btnSupplierList.FlatStyle = FlatStyle.Flat;
         }
 
@@ -166,7 +181,7 @@ namespace IMS.Forms.Inventory
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var directReceiveForm = Program.container.GetInstance<DirectReceiveForm>();
+                var directReceiveForm = Program.container.GetInstance<ReceiveForm>();
                 directReceiveForm.ShowDialog();
             }
         }
@@ -184,7 +199,7 @@ namespace IMS.Forms.Inventory
             warehouseListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(warehouseListUC);
             // set selection
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             _menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
@@ -200,7 +215,7 @@ namespace IMS.Forms.Inventory
             uomUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(uomUC);
             // set selection
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
@@ -211,7 +226,7 @@ namespace IMS.Forms.Inventory
             packageUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(packageUC);
             // set selection
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
@@ -222,7 +237,7 @@ namespace IMS.Forms.Inventory
             packageUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(packageUC);
             // set selection
-            _menubar.ClearSelection();
+            _menubar.ClearSelection(sender);
             //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 

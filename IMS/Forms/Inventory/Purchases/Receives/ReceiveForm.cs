@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IMS.Forms.Inventory.Adjustments
+namespace IMS.Forms.Inventory.Purchases.Receives
 {
-    public partial class DirectReceiveForm : Form
+    public partial class ReceiveForm : Form
     {
-        public DirectReceiveForm()
+        public ReceiveForm()
         {
             InitializeComponent();
         }

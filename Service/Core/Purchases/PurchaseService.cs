@@ -11,6 +11,7 @@ using ViewModel.Core.Purchases;
 using System.Data.Entity;
 using Service.DbEventArgs;
 using Service.Listeners;
+using Infrastructure.Entities.Purchases;
 
 namespace Service.Core.Purchases.PurchaseOrders
 {
@@ -78,8 +79,10 @@ namespace Service.Core.Purchases.PurchaseOrders
             var entity = _context.PurchaseOrder
                  .Include(x => x.Warehouse)
                  .Include(x => x.Supplier)
-                 .Include(x => x.PurchaseOrderItems)
                  .Include(x => x.ParentPurchaseOrder)
+                 .Include(x => x.PurchaseOrderItems)
+                 .Include(x=>x.PurchaseOrderItems.Select(y=>y.Product))
+                 .Include(x=>x.PurchaseOrderItems.Select(y=>y.Warehouse))
                  .FirstOrDefault(x => x.Id == purchaseOrderId);
             return PurchaseOrderMapper.MapToPurchaseOrderModel(entity);
         }
@@ -118,12 +121,50 @@ namespace Service.Core.Purchases.PurchaseOrders
                     return "Already received!";
                 entity.IsReceived = true;
                 entity.ReceivedDate = DateTime.Now;
+
+                AddReceivedItemsToWarehouse(entity.PurchaseOrderItems);
+
                 _context.SaveChanges();
                 var args = new BaseEventArgs<PurchaseOrderModel>(PurchaseOrderMapper.MapToPurchaseOrderModel(entity), Utility.UpdateMode.EDIT);
                 _listener.TriggerPurchaseOrderUpdateEvent(null, args);
                 return string.Empty;
             }
             return "The Purchase Order doesn't exist";
+        }
+
+        private void AddReceivedItemsToWarehouse(ICollection<PurchaseOrderItem> items)
+        {
+            foreach (var item in items)
+            {
+                var product = _context.Product.Find(item.ProductId);
+                if (product != null)
+                {
+                    item.IsReceived = true;
+                    var wp = _context.WarehouseProduct.FirstOrDefault(x => x.ProductId == item.ProductId && x.WarehouseId == item.WarehouseId);
+                    if (wp == null)
+                    {
+                        wp = new Infrastructure.Entities.Inventory.WarehouseProduct()
+                        {
+                            ProductId = item.ProductId,
+                            InStockQuantity = item.Quantity,
+                            OnHoldQuantity = item.IsHold ? item.Quantity : 0,
+                            UpdatedAt = DateTime.Now,
+                            WarehouseId = item.WarehouseId,
+                        };
+                        _context.WarehouseProduct.Add(wp);
+                    }
+                    else
+                    {
+                        wp.UpdatedAt = DateTime.Now;
+                        wp.InStockQuantity += item.Quantity;
+                        wp.OnHoldQuantity += item.IsHold ? item.Quantity : 0;
+                    }
+                    // update the product 
+                    product.OnHoldQuantity += item.IsHold ? item.Quantity : 0;
+                    product.InStockQuantity += item.Quantity;
+                }
+            }
+            _context.SaveChanges();
         }
 
         public string SetCancelled(int purchaseOrderId)

@@ -58,9 +58,11 @@
     <Compile Include="Entities\Inventory\AdjustmentCode.cs" />
     <Compile Include="Entities\Inventory\Package.cs" />
     <Compile Include="Entities\Inventory\ProductAttribute.cs" />
+    <Compile Include="Entities\Inventory\Transfer.cs" />
     <Compile Include="Entities\Inventory\Uom.cs" />
     <Compile Include="Entities\Inventory\Variant.cs" />
     <Compile Include="Entities\Inventory\VariantAttribute.cs" />
+    <Compile Include="Entities\Inventory\WarehouseProduct.cs" />
     <Compile Include="Entities\Purchases\PurchaseOrderItem.cs" />
     <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
@@ -84,29 +86,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201904090541255_InitialMigration.cs" />
-    <Compile Include="Migrations\201904090541255_InitialMigration.Designer.cs">
-      <DependentUpon>201904090541255_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904091359343_NameUpdates.cs" />
-    <Compile Include="Migrations\201904091359343_NameUpdates.Designer.cs">
-      <DependentUpon>201904091359343_NameUpdates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904101130044_PurchaseOrderUpdated.cs" />
-    <Compile Include="Migrations\201904101130044_PurchaseOrderUpdated.Designer.cs">
-      <DependentUpon>201904101130044_PurchaseOrderUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904101726497_PurchaseOrderDateUpdates.cs" />
-    <Compile Include="Migrations\201904101726497_PurchaseOrderDateUpdates.Designer.cs">
-      <DependentUpon>201904101726497_PurchaseOrderDateUpdates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904101752314_POUPdaates.cs" />
-    <Compile Include="Migrations\201904101752314_POUPdaates.Designer.cs">
-      <DependentUpon>201904101752314_POUPdaates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904111000471_PurchaseUpdates.cs" />
-    <Compile Include="Migrations\201904111000471_PurchaseUpdates.Designer.cs">
-      <DependentUpon>201904111000471_PurchaseUpdates.cs</DependentUpon>
+    <Compile Include="Migrations\201904121417163_InitMig.cs" />
+    <Compile Include="Migrations\201904121417163_InitMig.Designer.cs">
+      <DependentUpon>201904121417163_InitMig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,27 +104,12 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904090541255_InitialMigration.resx">
-      <DependentUpon>201904090541255_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904091359343_NameUpdates.resx">
-      <DependentUpon>201904091359343_NameUpdates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904101130044_PurchaseOrderUpdated.resx">
-      <DependentUpon>201904101130044_PurchaseOrderUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904101726497_PurchaseOrderDateUpdates.resx">
-      <DependentUpon>201904101726497_PurchaseOrderDateUpdates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904101752314_POUPdaates.resx">
-      <DependentUpon>201904101752314_POUPdaates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904111000471_PurchaseUpdates.resx">
-      <DependentUpon>201904111000471_PurchaseUpdates.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\Items\" />
+    <EmbeddedResource Include="Migrations\201904121417163_InitMig.resx">
+      <DependentUpon>201904121417163_InitMig.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

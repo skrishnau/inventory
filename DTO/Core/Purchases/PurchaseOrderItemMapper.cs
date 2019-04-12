@@ -21,7 +21,9 @@ namespace DTO.Core.Purchases
             entity.Quantity = model.Quantity;
             entity.Rate = model.Rate;
             entity.TotalAmount = model.TotalAmount;
-
+            entity.IsReceived = model.IsReceived;
+            entity.IsHold = model.IsHold;
+            entity.WarehouseId = model.WarehouseId;
             return entity;
         }
 
@@ -37,7 +39,15 @@ namespace DTO.Core.Purchases
                     Rate = model.Rate,
                     TotalAmount = model.TotalAmount,
                     Product = model.Product.Name,
-                    SKU = model.Product.SKU
+                    SKU = model.Product.SKU,
+                    IsHold = model.IsHold,
+                    IsReceived = model.IsReceived,
+                    ProductId = model.ProductId,
+                    PurchaseOrderId = model.PurchaseOrderId,
+                    WarehouseId = model.WarehouseId,
+                    Warehouse = model.Warehouse.Name,
+                    InStock = model.Product.InStockQuantity,
+                    OnOrder = model.Product.OnOrderQuantity,
                 });
             }
             return list;

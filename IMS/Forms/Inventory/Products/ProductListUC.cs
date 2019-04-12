@@ -22,7 +22,7 @@ namespace IMS.Forms.Inventory.Products
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
-        private ProductModelForGridView _selectedProduct;
+        private ProductModel _selectedProduct;
         private SubHeadingTemplate _header;
 
         public ProductListUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
@@ -34,15 +34,14 @@ namespace IMS.Forms.Inventory.Products
             // use Header template to display header.
             InitializeHeader();
 
-            InitializeEvents();
-            InitializeListeners();
-
             this.Load += ProductListUC_Load;
         }
 
         private void ProductListUC_Load(object sender, EventArgs e)
         {
             PopulateProductData();
+            InitializeEvents();
+            InitializeListeners();
         }
 
         private void InitializeListeners()
@@ -76,7 +75,7 @@ namespace IMS.Forms.Inventory.Products
                 _header.btnEdit.Visible = true;
                 _header.btnDelete.Visible = true;
 
-                var data = (ProductModelForGridView)dgvProductList.SelectedRows[0].DataBoundItem;
+                var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
 
                 var model = _inventoryService.GetProductForEdit(data.Id);
                 if (model != null)

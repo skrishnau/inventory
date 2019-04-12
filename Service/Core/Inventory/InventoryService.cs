@@ -10,6 +10,7 @@ using Service.Listeners;
 using Service.Listeners.Inventory;
 using Newtonsoft.Json;
 using Service.DbEventArgs;
+using ViewModel.Core.Common;
 
 namespace Service.Core.Inventory
 {
@@ -248,33 +249,35 @@ namespace Service.Core.Inventory
             return cats;
         }
 
-        public List<ProductModel> GetProductList()
+        private IQueryable<Product> GetProductEntityList()
         {
-            var cats = _context.Product
-                .Where(x => x.DeletedAt == null)
-                .Select(x => new ProductModel()
-                {
-                    Name = x.Name,
-                    Id = x.Id,
-                    //CreatedAt = x.CreatedAt,
-                    //UpdatedAt = x.UpdatedAt
-                })
-                .ToList();
-
-            return cats;
+            return _context.Product
+                .Where(x => x.DeletedAt == null);
         }
 
-        public List<ProductModelForGridView> GetProductListForGridView()
+        public List<IdNamePair> GetProductIdNameList()
+        {
+            var products = GetProductEntityList()
+                .Select(x => new IdNamePair()
+                {
+                    Id = x.Id,
+                    Name = x.Name + " ("+x.SKU+")",
+                })
+                .ToList();
+            return products;
+        }
+
+        public List<ProductModel> GetProductListForGridView()
         {
             var products = _context.Product
                 .Include(x => x.ProductAttributes)
                 //.Include(x => x.ProductAttributes.Select(y => y.Option))
                 .Include(x => x.Brands)
                 .Where(x => x.DeletedAt == null);
-            var list = new List<ProductModelForGridView>();
+            var list = new List<ProductModel>();
             foreach (var x in products)
             {
-                list.Add(ProductMapper.MapToProductModelForGridView(x));
+                list.Add(ProductMapper.MapToProductModel(x));
             }
             return list;
         }
@@ -325,12 +328,12 @@ namespace Service.Core.Inventory
             };
         }
 
-        public ProductModelForGridView GetProduct(int productId)
+        public ProductModel GetProduct(int productId)
         {
             var product = _context.Product.Find(productId);
             if (product == null)
                 return null;
-            return ProductMapper.MapToProductModelForGridView(product);
+            return ProductMapper.MapToProductModel(product);
         }
 
         public ProductModel GetProductForEdit(int productId)
@@ -491,6 +494,20 @@ namespace Service.Core.Inventory
         {
             var entity = _context.Product.FirstOrDefault(x => x.SKU == sku);
             return entity == null ? null : ProductMapper.MapToProductModel(entity);
+        }
+
+        public List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId)
+        {
+
+            var wpList = _context.WarehouseProduct
+                .Include(x => x.Product)
+                .Include(x => x.Warehouse)
+                .Where(x => x.InStockQuantity > 0
+                    && (warehouseId == 0 || x.WarehouseId == warehouseId)
+                    && (productId == 0 || x.ProductId == productId))
+                .OrderBy(x => x.Warehouse.Name)
+                .ThenBy(x => x.Product.Name);
+            return WarehouseProductMapper.MapToModel(wpList);
         }
 
         #endregion

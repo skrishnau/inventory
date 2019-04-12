@@ -148,11 +148,17 @@
     <Compile Include="Forms\Generals\GeneralUC.Designer.cs">
       <DependentUpon>GeneralUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Adjustments\DirectReceiveForm.cs">
+    <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.Designer.cs">
+      <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Purchases\Receives\ReceiveForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Adjustments\DirectReceiveForm.Designer.cs">
-      <DependentUpon>DirectReceiveForm.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Purchases\Receives\ReceiveForm.Designer.cs">
+      <DependentUpon>ReceiveForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Packages\PackageUC.cs">
       <SubType>UserControl</SubType>
@@ -508,8 +514,11 @@
     <EmbeddedResource Include="Forms\Generals\GeneralUC.resx">
       <DependentUpon>GeneralUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Adjustments\DirectReceiveForm.resx">
-      <DependentUpon>DirectReceiveForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.resx">
+      <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Purchases\Receives\ReceiveForm.resx">
+      <DependentUpon>ReceiveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Packages\PackageUC.resx">
       <DependentUpon>PackageUC.cs</DependentUpon>
@@ -698,7 +707,6 @@
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\InventorySettings\" />
     <Folder Include="Forms\Inventory\NewFolder1\" />
-    <Folder Include="Forms\Inventory\Purchases\Direct\" />
     <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />

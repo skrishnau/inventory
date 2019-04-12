@@ -86,11 +86,11 @@
             // 
             // colLocation
             // 
-            this.colLocation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colLocation.DataPropertyName = "Location";
+            this.colLocation.DataPropertyName = "Name";
             this.colLocation.HeaderText = "Location";
             this.colLocation.Name = "colLocation";
             this.colLocation.ReadOnly = true;
+            this.colLocation.Width = 180;
             // 
             // colHold
             // 

@@ -31,15 +31,15 @@ namespace ViewModel.Core.Inventory
         public bool IsVariant { get; set; }
         // parent product Id for variants
         public int? ParentProductId { get; set; }
-        public virtual ProductModel ParentProduct { get; set; }
+        public  string ParentProduct { get; set; }
         public int CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
-        public virtual CategoryModel Category { get; set; }
+        public  string Category { get; set; }
 
         // ============== Package ============== //
         public int PackageId { get; set; }
-        public virtual PackageModel Package { get; set; }
+        public string Package { get; set; }
         public int BaseUomId { get; set; }
-        public virtual UomModel BaseUom { get; set; }
+        public string BaseUom { get; set; }
         public decimal UnitsInPackage { get; set; }
         public decimal UnitNetWeight { get; set; }
         public decimal UnitGrossWeight { get; set; }
@@ -50,7 +50,7 @@ namespace ViewModel.Core.Inventory
         public bool IsBuild { get; set; }
         public bool IsNotMovable { get; set; }
         public int WarehouseId { get; set; }
-        public virtual WarehouseModel Warehouse { get; set; }
+        public string Warehouse { get; set; }
 
         // ========= Replenishments ========== //
         public decimal ReorderPoint { get; set; }
@@ -63,7 +63,7 @@ namespace ViewModel.Core.Inventory
         public decimal MonthlyDemand { get; set; }
 
         // ==== current informations (calculated at runtime) ==== //
-        public decimal AvailableQuantity { get; set; }
+       // public decimal AvailableQuantity { get; set; }
         public decimal InStockQuantity { get; set; }
         public decimal OnHoldQuantity { get; set; }
         public decimal CommittedQuantity { get; set; }
@@ -95,7 +95,7 @@ namespace ViewModel.Core.Inventory
 
         public ProductModel()
         {
-            Category = new CategoryModel();
+           // Category = new CategoryModel();
             Brands = new List<BrandModel>();
             ProductAttributes = new List<ProductAttributeModel>();
             //Variants = new List<ProductVariantModel>();
@@ -105,23 +105,23 @@ namespace ViewModel.Core.Inventory
 
 
 
-    public class ProductModelForGridView
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public string Brands { get; set; }
-        public string OptionValues { get; set; }
-        public bool ShowStockAlerts { get; set; }
-        public decimal QuantityInStocks { get; set; }
-        public decimal MinStockCountForAlert { get; set; }
+    //public class ProductModelForGridView
+    //{
+    //    public int Id { get; set; }
+    //    public string Name { get; set; }
+    //    public string Category { get; set; }
+    //    public string Brands { get; set; }
+    //    public string OptionValues { get; set; }
+    //    public bool ShowStockAlerts { get; set; }
+    //    public decimal QuantityInStocks { get; set; }
+    //    public decimal MinStockCountForAlert { get; set; }
 
-        public string CreatedAt { get; set; }
-        public string UpdatedAt { get; set; }
+    //    public string CreatedAt { get; set; }
+    //    public string UpdatedAt { get; set; }
 
-        public int VariantCount { get; set; }
+    //    public int VariantCount { get; set; }
 
-    }
+    //}
 }
 
 

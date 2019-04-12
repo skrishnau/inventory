@@ -20,7 +20,12 @@ namespace ViewModel.Core.Purchases
         public decimal Quantity { get; set; }
         public decimal Rate { get; set; }
         public decimal TotalAmount { get; set; }
-        public DateTime? DeletedAt { get; set; }
+
+        public bool IsReceived { get; set; }
+        public bool IsHold { get; set; }
+
+        public int WarehouseId { get; set; }
+        public string Warehouse { get; set; }
 
     }
 

@@ -47,12 +47,13 @@
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblBrands = new System.Windows.Forms.Label();
             this.dgvProductList = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colVariantCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colShowStockAlerts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMinStockCountForAlert = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStocksCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBaseUom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOnHoldQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlProductDetail.SuspendLayout();
@@ -234,12 +235,13 @@
             this.dgvProductList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProductList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colId,
             this.dataGridViewTextBoxColumn2,
+            this.colSKU,
             this.colCategory,
-            this.colVariantCount,
-            this.colShowStockAlerts,
-            this.colMinStockCountForAlert,
-            this.colStocksCount});
+            this.colBaseUom,
+            this.colInStockQuantity,
+            this.colOnHoldQuantity});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -255,6 +257,13 @@
             this.dgvProductList.Size = new System.Drawing.Size(306, 511);
             this.dgvProductList.TabIndex = 7;
             // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.Visible = false;
+            // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -265,6 +274,12 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
+            // colSKU
+            // 
+            this.colSKU.DataPropertyName = "SKU";
+            this.colSKU.HeaderText = "SKU";
+            this.colSKU.Name = "colSKU";
+            // 
             // colCategory
             // 
             this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -274,41 +289,22 @@
             this.colCategory.ReadOnly = true;
             this.colCategory.Width = 74;
             // 
-            // colVariantCount
+            // colBaseUom
             // 
-            this.colVariantCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colVariantCount.DataPropertyName = "VariantCount";
-            this.colVariantCount.HeaderText = "Variants";
-            this.colVariantCount.Name = "colVariantCount";
-            this.colVariantCount.ReadOnly = true;
-            this.colVariantCount.Width = 70;
+            this.colBaseUom.HeaderText = "Base UOM";
+            this.colBaseUom.Name = "colBaseUom";
             // 
-            // colShowStockAlerts
+            // colInStockQuantity
             // 
-            this.colShowStockAlerts.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colShowStockAlerts.DataPropertyName = "ShowStockAlerts";
-            this.colShowStockAlerts.HeaderText = "Alerts";
-            this.colShowStockAlerts.Name = "colShowStockAlerts";
-            this.colShowStockAlerts.ReadOnly = true;
-            this.colShowStockAlerts.Width = 58;
+            this.colInStockQuantity.DataPropertyName = "InStockQuantity";
+            this.colInStockQuantity.HeaderText = "In Stock";
+            this.colInStockQuantity.Name = "colInStockQuantity";
             // 
-            // colMinStockCountForAlert
+            // colOnHoldQuantity
             // 
-            this.colMinStockCountForAlert.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colMinStockCountForAlert.DataPropertyName = "MinStockCountForAlert ";
-            this.colMinStockCountForAlert.HeaderText = "Alert Threshold";
-            this.colMinStockCountForAlert.Name = "colMinStockCountForAlert";
-            this.colMinStockCountForAlert.ReadOnly = true;
-            this.colMinStockCountForAlert.Width = 95;
-            // 
-            // colStocksCount
-            // 
-            this.colStocksCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colStocksCount.DataPropertyName = "QuantityInStocks ";
-            this.colStocksCount.HeaderText = "Stocks Count";
-            this.colStocksCount.Name = "colStocksCount";
-            this.colStocksCount.ReadOnly = true;
-            this.colStocksCount.Width = 88;
+            this.colOnHoldQuantity.DataPropertyName = "OnHoldQuantity";
+            this.colOnHoldQuantity.HeaderText = "On Hold";
+            this.colOnHoldQuantity.Name = "colOnHoldQuantity";
             // 
             // splitter1
             // 
@@ -362,14 +358,15 @@
         private System.Windows.Forms.DataGridView dgvProductList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colVariantCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colShowStockAlerts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMinStockCountForAlert;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStocksCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn SKU;
         private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBaseUom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOnHoldQuantity;
     }
 }

@@ -10,6 +10,7 @@ using Service.DbEventArgs;
 using Service.Listeners;
 using Service.Listeners.Business;
 using ViewModel.Core.Business;
+using ViewModel.Core.Common;
 
 namespace Service.Core.Business
 {
@@ -167,10 +168,15 @@ namespace Service.Core.Business
             return null;
         }
 
+        private IQueryable<Warehouse> GetWarehouseEntityList()
+        {
+            return _context.Warehouse
+                  .Where(x => x.DeletedAt == null);
+        }
+
         public List<WarehouseModel> GetWarehouseList()
         {
-            var warehouses = _context.Warehouse
-                   .Where(x => x.DeletedAt == null)
+            var warehouses = GetWarehouseEntityList()
                    .Select(x => new WarehouseModel()
                    {
                        Name = x.Name,
@@ -178,6 +184,20 @@ namespace Service.Core.Business
                        Hold = x.Hold,
                        MixedProduct = x.MixedProduct,
                        Staging = x.Staging
+                   })
+                   .ToList();
+
+            return warehouses;
+
+        }
+
+        public List<IdNamePair> GetWarehouseIdNameList()
+        {
+            var warehouses = GetWarehouseEntityList()
+                   .Select(x => new IdNamePair()
+                   {
+                       Id = x.Id,
+                       Name = x.Name,
                    })
                    .ToList();
 

@@ -31,12 +31,11 @@ namespace DTO.Core.Inventory
             entity.ReorderPoint = model.ReorderPoint;
             entity.ReorderQuantity = model.ReorderQuantity;
             entity.ReorderAlert = model.ReorderAlert;
-            // quanity
-            entity.AvailableQuantity = model.AvailableQuantity;
-            entity.CommittedQuantity = model.CommittedQuantity;
-            entity.InStockQuantity = model.InStockQuantity;
-            entity.OnHoldQuantity = model.OnHoldQuantity;
-            entity.OnOrderQuantity = model.OnOrderQuantity;
+            // quanity ------- Don't assign Quantity ---------- // 
+            //entity.CommittedQuantity = model.CommittedQuantity;
+            //entity.InStockQuantity = model.InStockQuantity;
+            //entity.OnHoldQuantity = model.OnHoldQuantity;
+            //entity.OnOrderQuantity = model.OnOrderQuantity;
             // extra info
             entity.AttributesJSON = model.AttributesJSON;
             entity.Barcode = model.Barcode;
@@ -75,24 +74,8 @@ namespace DTO.Core.Inventory
         }
 
 
-        public static ProductModelForGridView MapToProductModelForGridView(Product x)
-        {
-            return new ProductModelForGridView()
-            {
-                Name = x.Name,
-                Id = x.Id,
-                CreatedAt = GetDateShortString(x.CreatedAt),
-                UpdatedAt = GetDateShortString(x.UpdatedAt),
-                Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
-                // OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
-                Category = x.Category.Name,
-                MinStockCountForAlert = x.ReorderPoint,
-                QuantityInStocks = x.InStockQuantity,
-                ShowStockAlerts = x.ReorderAlert,
-                //VariantCount = x.Variants == null ? 0 : x.Variants.Count
-            };
-        }
-        
+
+
         public static string GetDateShortString(DateTime date)
         {
             return date.ToShortDateString();
@@ -122,11 +105,11 @@ namespace DTO.Core.Inventory
             model.Id = entity.Id;
             model.Name = entity.Name;
             model.CategoryId = entity.CategoryId;
-            model.Category = CategoryMapper.MapToCategoryModel(entity.Category);
+            model.Category = entity.Category == null ? "" : entity.Category.Name;// CategoryMapper.MapToCategoryModel(entity.Category);
             model.HasVariants = entity.HasVariants;
             model.IsVariant = entity.IsVariant;
             //entity.ParentProduct = model.ParentProduct;
-            model.ParentProduct = entity.ParentProduct == null ? null : ProductMapper.MapToProductModel(entity.ParentProduct);
+            model.ParentProduct = entity.ParentProduct == null ? "" : entity.ParentProduct.Name;// entity.ParentProduct == null ? null : ProductMapper.MapToProductModel(entity.ParentProduct);
             model.ParentProductId = entity.ParentProductId;
             model.SKU = entity.SKU;
             model.Use = entity.Use;
@@ -135,7 +118,7 @@ namespace DTO.Core.Inventory
             model.ReorderQuantity = entity.ReorderQuantity;
             model.ReorderAlert = entity.ReorderAlert;
             // quanity
-            model.AvailableQuantity = entity.AvailableQuantity;
+            // model.AvailableQuantity = entity.AvailableQuantity;
             model.CommittedQuantity = entity.CommittedQuantity;
             model.InStockQuantity = entity.InStockQuantity;
             model.OnHoldQuantity = entity.OnHoldQuantity;
@@ -150,9 +133,9 @@ namespace DTO.Core.Inventory
             model.Manufacturer = entity.Manufacturer;
             //package
             model.PackageId = entity.PackageId;
-            model.Package = PackageMapper.MapToModel(entity.Package);
+            model.Package = entity.Package == null ? "" : entity.Package.Name; //PackageMapper.MapToModel(entity.Package);
             model.BaseUomId = entity.BaseUomId;
-            model.BaseUom = UomMapper.MapToUomModel(entity.BaseUom);
+            model.BaseUom = entity.BaseUom == null ? "" : entity.BaseUom.Name;// UomMapper.MapToUomModel(entity.BaseUom);
             model.UnitsInPackage = entity.UnitsInPackage;
             model.UnitNetWeight = entity.UnitNetWeight;
             model.UnitGrossWeight = entity.UnitGrossWeight;
@@ -166,7 +149,7 @@ namespace DTO.Core.Inventory
             model.IsNotMovable = entity.IsNotMovable;
             model.IsSell = entity.IsSell;
             model.WarehouseId = entity.WarehouseId;
-            model.Warehouse = entity.Warehouse == null ? null : WarehouseMapper.MapToWarehouseModel(entity.Warehouse);
+            model.Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name;
             // pricing
             model.RetailPrice = entity.RetailPrice;
             model.MarkupPercent = entity.MarkupPercent;
@@ -246,4 +229,24 @@ namespace DTO.Core.Inventory
 //        builder.Append(" ; ");
 //    }
 //    return builder.ToString();
+//}
+
+
+
+//public static ProductModelForGridView MapToProductModelForGridView(Product x)
+//{
+//    return new ProductModelForGridView()
+//    {
+//        Name = x.Name,
+//        Id = x.Id,
+//        CreatedAt = GetDateShortString(x.CreatedAt),
+//        UpdatedAt = GetDateShortString(x.UpdatedAt),
+//        Brands = GetBrandListCommaSeparatedString(x.Brands.ToList()),
+//        // OptionValues = GetOptionValuesCommaSeparatedString(x.ProductAttributes.ToList()),
+//        Category = x.Category.Name,
+//        MinStockCountForAlert = x.ReorderPoint,
+//        QuantityInStocks = x.InStockQuantity,
+//        ShowStockAlerts = x.ReorderAlert,
+//        //VariantCount = x.Variants == null ? 0 : x.Variants.Count
+//    };
 //}

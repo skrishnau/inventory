@@ -63,6 +63,7 @@
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblNoItemsMessage = new System.Windows.Forms.Label();
@@ -372,7 +373,8 @@
             this.colOnOrder,
             this.colQuantity,
             this.colRate,
-            this.colTotal});
+            this.colTotal,
+            this.colIsHold});
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(10, 102);
             this.dgvItems.Margin = new System.Windows.Forms.Padding(2);
@@ -440,6 +442,17 @@
             this.colTotal.HeaderText = "Total";
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
+            // 
+            // colIsHold
+            // 
+            this.colIsHold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colIsHold.DataPropertyName = "IsHold";
+            this.colIsHold.HeaderText = "Hold ?";
+            this.colIsHold.Name = "colIsHold";
+            this.colIsHold.ReadOnly = true;
+            this.colIsHold.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colIsHold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colIsHold.Width = 63;
             // 
             // splitter1
             // 
@@ -540,5 +553,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
     }
 }

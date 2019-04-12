@@ -19,6 +19,7 @@ namespace IMS.Forms.Inventory.Purchases.Order
         private readonly IInventoryService _inventoryService;
         private readonly IPurchaseService _purchaseService;
 
+        private PurchaseOrderModel _purchaseOrder;
         private int _purchaseOrderId;
         private bool _isCellDirty;
 
@@ -62,6 +63,7 @@ namespace IMS.Forms.Inventory.Purchases.Order
         public void SetData(PurchaseOrderModel model)
         {
             _purchaseOrderId = model == null ? 0 : model.Id;
+            _purchaseOrder = model;
             if (model != null)
             {
                 // populate
@@ -88,6 +90,7 @@ namespace IMS.Forms.Inventory.Purchases.Order
                 row.Cells[this.colRate.Index].Value = item.Rate;
                 row.Cells[this.colSKU.Index].Value = item.SKU;
                 row.Cells[this.colTotal.Index].Value = item.TotalAmount;
+                row.Cells[this.colIsHold.Index].Value = item.IsHold;
                 dgvItems.Rows.Add(row);
             }
         }
@@ -124,7 +127,7 @@ namespace IMS.Forms.Inventory.Purchases.Order
                             row.Cells[e.ColumnIndex].ErrorText = string.Empty;
                             // populate
                             row.Cells[this.colProduct.Index].Value = product.Name;
-                            row.Cells[this.colInStock.Index].Value = product.AvailableQuantity;
+                            row.Cells[this.colInStock.Index].Value = product.InStockQuantity;
                             row.Cells[this.colOnOrder.Index].Value = product.OnOrderQuantity;
                             row.Cells[this.colRate.Index].Value = product.SupplyPrice;
                             UpdateTotalColumn(e);
@@ -224,6 +227,7 @@ namespace IMS.Forms.Inventory.Purchases.Order
                         row.ErrorText = "Rate can't be zero or less";
                         isValid = false;
                     }
+                    var isHold = row.Cells[colIsHold.Index].Value;
                     items.Add(new PurchaseOrderItemModel
                     {
                         Id = 0,
@@ -232,6 +236,9 @@ namespace IMS.Forms.Inventory.Purchases.Order
                         TotalAmount = rate * quantity,
                         ProductId = variant.Id,
                         Rate = rate, //variant.LatestUnitSellPrice,
+                        IsHold = isHold == null ? false: bool.Parse(isHold.ToString()),
+                        WarehouseId = _purchaseOrder.WarehouseId,
+                        
                     });
                 }
             }

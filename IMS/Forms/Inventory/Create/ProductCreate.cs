@@ -355,7 +355,7 @@ namespace IMS.Forms.Inventory.Create
                 this.Text = "Edit Product (" + product.Name + ")";
                 tbProductName.Text = product.Name;
                 numReorderPoint.Value = product.ReorderPoint;
-                cbCategory.Text = product.Category.Name;
+                cbCategory.Text = product.Category;
                 //.Checked = product.ReorderAlert;
 
                 // variants

@@ -57,8 +57,7 @@ namespace Infrastructure.Entities.Inventory
         public decimal MonthlyDemand { get; set; }
 
         // ==== current informations (calculated at runtime) ==== //
-        public decimal AvailableQuantity { get; set; }
-        public decimal InStockQuantity { get; set; }
+        public decimal InStockQuantity { get; set; } // in whole inventory; incl. Hold
         public decimal OnHoldQuantity { get; set; }
         public decimal CommittedQuantity { get; set; }
         public decimal OnOrderQuantity { get; set; }

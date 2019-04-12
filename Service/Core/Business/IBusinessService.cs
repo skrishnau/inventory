@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Business;
+using ViewModel.Core.Common;
 
 namespace Service.Core.Business
 {
@@ -21,6 +22,7 @@ namespace Service.Core.Business
 
         WarehouseModel GetWarehouse(int warehouseId);
         List<WarehouseModel> GetWarehouseList();
+        List<IdNamePair> GetWarehouseIdNameList();
         List<WarehouseModel> GetWarehouseListUsableOnly();
         void AddOrUpdateWarehouse(WarehouseModel warehouse);
         void DeleteWarehouse(int id);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 
 namespace Service.Core.Inventory
@@ -17,10 +18,10 @@ namespace Service.Core.Inventory
         void AddUpdateCategory(CategoryModel category);
         void DeleteCategory(CategoryModel categoryModel);
 
-        List<ProductModelForGridView> GetProductListForGridView();
-        ProductModelForGridView GetProduct(int productId);
+        List<ProductModel> GetProductListForGridView();
+        ProductModel GetProduct(int productId);
         ProductModel GetProductForEdit(int productId);
-        List<ProductModel> GetProductList();
+        List<IdNamePair> GetProductIdNameList();
         ProductModel GetProductBySKU(string sku);
         void AddUpdateProduct(ProductModel product);
         void DeleteProduct(int id);
@@ -38,6 +39,7 @@ namespace Service.Core.Inventory
 
         List<UomModel> GetUomList();
         List<UomModel> GetUomListUsableOnly();
+        List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId);
         void SaveUom(UomModel data);
 
         List<PackageModel> GetPackageList();

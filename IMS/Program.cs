@@ -34,7 +34,6 @@ using IMS.Forms.Business.Create;
 using IMS.Forms.UserManagement;
 using IMS.Forms.UserManagement.Users;
 using IMS.Forms.Orders;
-using IMS.Forms.Inventory.Adjustments;
 using IMS.Forms.Inventory.Transfers;
 using Service.Listeners;
 using IMS.Forms.Inventory.UOM;
@@ -42,6 +41,8 @@ using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Purchases;
 using IMS.Forms.Inventory.Purchases.Order;
+using IMS.Forms.Inventory.Purchases.Receives;
+using IMS.Forms.Inventory.Products.WarehouseProducts;
 
 namespace IMS
 {
@@ -135,6 +136,7 @@ namespace IMS
             container.Register<PurchaseListUC>(Lifestyle.Scoped);
             container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
             container.Register<PurchaseOrderCreateForm>(Lifestyle.Scoped);
+            container.Register<WarehouseProductListUC>(Lifestyle.Scoped);
 
             container.Register<WarehouseListUC>(Lifestyle.Scoped);
             container.Register<UomUC>(Lifestyle.Scoped);
@@ -158,7 +160,7 @@ namespace IMS
             container.Register<SettingsForm>(Lifestyle.Scoped);
 
             // adjustments
-            container.Register<DirectReceiveForm>(Lifestyle.Scoped);
+            container.Register<ReceiveForm>(Lifestyle.Scoped);
            // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
             
 

@@ -43,6 +43,7 @@
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pnlItemsSaveFooter.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
@@ -56,14 +57,14 @@
             this.pnlItemsSaveFooter.Location = new System.Drawing.Point(0, 424);
             this.pnlItemsSaveFooter.Margin = new System.Windows.Forms.Padding(2);
             this.pnlItemsSaveFooter.Name = "pnlItemsSaveFooter";
-            this.pnlItemsSaveFooter.Size = new System.Drawing.Size(894, 33);
+            this.pnlItemsSaveFooter.Size = new System.Drawing.Size(913, 33);
             this.pnlItemsSaveFooter.TabIndex = 11;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(801, 6);
+            this.btnCancel.Location = new System.Drawing.Point(820, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -73,7 +74,7 @@
             // btnSaveItems
             // 
             this.btnSaveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveItems.Location = new System.Drawing.Point(691, 6);
+            this.btnSaveItems.Location = new System.Drawing.Point(710, 6);
             this.btnSaveItems.Name = "btnSaveItems";
             this.btnSaveItems.Size = new System.Drawing.Size(92, 23);
             this.btnSaveItems.TabIndex = 0;
@@ -88,7 +89,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(894, 43);
+            this.panel1.Size = new System.Drawing.Size(913, 43);
             this.panel1.TabIndex = 13;
             // 
             // lblStatus
@@ -124,12 +125,13 @@
             this.colOnOrder,
             this.colQuantity,
             this.colRate,
-            this.colTotal});
+            this.colTotal,
+            this.colIsHold});
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 43);
             this.dgvItems.Margin = new System.Windows.Forms.Padding(2);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(894, 381);
+            this.dgvItems.Size = new System.Drawing.Size(913, 381);
             this.dgvItems.TabIndex = 14;
             // 
             // colId
@@ -186,11 +188,17 @@
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             // 
+            // colIsHold
+            // 
+            this.colIsHold.DataPropertyName = "IsHold";
+            this.colIsHold.HeaderText = "Hold ?";
+            this.colIsHold.Name = "colIsHold";
+            // 
             // PurchaseOrderItemCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 457);
+            this.ClientSize = new System.Drawing.Size(913, 457);
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlItemsSaveFooter);
@@ -225,5 +233,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
     }
 }
