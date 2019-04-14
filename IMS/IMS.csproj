@@ -196,6 +196,12 @@
     <Compile Include="Forms\Inventory\Transfers\TransferForm.Designer.cs">
       <DependentUpon>TransferForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.Designer.cs">
+      <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\UOM\UomUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -537,6 +543,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transfers\TransferForm.resx">
       <DependentUpon>TransferForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
+      <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\UOM\UomUC.resx">
       <DependentUpon>UomUC.cs</DependentUpon>
@@ -991,6 +1000,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_In_Transit_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Trolley_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Beer_Keg_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Wine_Tour_24px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

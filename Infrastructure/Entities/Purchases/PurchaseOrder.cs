@@ -11,7 +11,7 @@ namespace Infrastructure.Entities.Purchases
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string OrderNumber { get; set; }
+        public string ReferenceNumber { get; set; }
         // in case of partial receive New Purchase Order is created and earlier is received
         // the newly creaated purchase order will have parent Purchase OrderId
         public int? ParentPurchaseOrderId { get; set; }

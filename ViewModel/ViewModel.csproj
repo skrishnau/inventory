@@ -65,6 +65,7 @@
     <Compile Include="Core\Common\IdNamePair.cs" />
     <Compile Include="Core\Common\NameValuePair.cs" />
     <Compile Include="Core\Inventory\AdjustmentCodeModel.cs" />
+    <Compile Include="Core\Inventory\InventoryUnitModel.cs" />
     <Compile Include="Core\Inventory\PackageModel.cs" />
     <Compile Include="Core\Inventory\UomModel.cs" />
     <Compile Include="Core\Inventory\WarehouseProductModel.cs" />
@@ -103,7 +104,8 @@
     <Compile Include="Core\Settings\CompanyInfoSettingModel.cs" />
     <Compile Include="Core\Suppliers\SupplierModel.cs" />
     <Compile Include="Core\Users\BasicInfoModel.cs" />
-    <Compile Include="Enums\Inventory\Purchases\PurchaseOrderStatusEnum.cs" />
+    <Compile Include="Enums\Inventory\Adjustments.cs" />
+    <Compile Include="Enums\Inventory\Purchases\PurchaseOrder.cs" />
     <Compile Include="Enums\Settings\SettingsEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Purchases\PurchaseOrderModel.cs" />

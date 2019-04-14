@@ -23,6 +23,5 @@ namespace Infrastructure.Entities.Inventory
 
         public DateTime CreatedAt { get; set; }
 
-
     }
 }

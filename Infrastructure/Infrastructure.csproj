@@ -56,6 +56,8 @@
     <Compile Include="Entities\Business\Branch.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
     <Compile Include="Entities\Inventory\AdjustmentCode.cs" />
+    <Compile Include="Entities\Inventory\InventoryUnit.cs" />
+    <Compile Include="Entities\Inventory\Movement.cs" />
     <Compile Include="Entities\Inventory\Package.cs" />
     <Compile Include="Entities\Inventory\ProductAttribute.cs" />
     <Compile Include="Entities\Inventory\Transfer.cs" />
@@ -90,6 +92,18 @@
     <Compile Include="Migrations\201904121417163_InitMig.Designer.cs">
       <DependentUpon>201904121417163_InitMig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904140703067_PurchaseUpdatesAndInventoryUnit.cs" />
+    <Compile Include="Migrations\201904140703067_PurchaseUpdatesAndInventoryUnit.Designer.cs">
+      <DependentUpon>201904140703067_PurchaseUpdatesAndInventoryUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904140732500_PurchaseUpdatesAndInventoryUnit1.cs" />
+    <Compile Include="Migrations\201904140732500_PurchaseUpdatesAndInventoryUnit1.Designer.cs">
+      <DependentUpon>201904140732500_PurchaseUpdatesAndInventoryUnit1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904141015342_InventoryUnitsUpdates.cs" />
+    <Compile Include="Migrations\201904141015342_InventoryUnitsUpdates.Designer.cs">
+      <DependentUpon>201904141015342_InventoryUnitsUpdates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -109,6 +123,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904121417163_InitMig.resx">
       <DependentUpon>201904121417163_InitMig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904140703067_PurchaseUpdatesAndInventoryUnit.resx">
+      <DependentUpon>201904140703067_PurchaseUpdatesAndInventoryUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904140732500_PurchaseUpdatesAndInventoryUnit1.resx">
+      <DependentUpon>201904140732500_PurchaseUpdatesAndInventoryUnit1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904141015342_InventoryUnitsUpdates.resx">
+      <DependentUpon>201904141015342_InventoryUnitsUpdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

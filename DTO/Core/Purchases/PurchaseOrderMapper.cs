@@ -22,7 +22,7 @@ namespace DTO.Core.Purchases
             entity.LotNo = model.LotNumber;
             entity.Name = model.Name;
             entity.Note = model.Note;
-            entity.OrderNumber = model.OrderNumber;
+            entity.ReferenceNumber = model.OrderNumber;
             entity.SupplierId = model.SupplierId;
             entity.SupplierInvoice = model.SupplierInvoice;
             entity.WarehouseId = model.WarehouseId;
@@ -60,7 +60,7 @@ namespace DTO.Core.Purchases
             model.IsOrderSent = entity.IsOrderSent;
             model.OrderSentDate = entity.OrderSentDate;
             model.Name = entity.Name;
-            model.OrderNumber = entity.OrderNumber;
+            model.OrderNumber = entity.ReferenceNumber;
             // entity.ParentPurchaseOrder = model.ParentPurchaseOrder;
             model.ParentPurchaseOrderId = entity.ParentPurchaseOrderId;
             model.Supplier = entity.Supplier == null ? "" : entity.Supplier.BasicInfo.Name;

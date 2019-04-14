@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModel.Enums.Inventory.Purchases
+namespace ViewModel.Enums.Inventory
 {
-    public enum PurchaseOrderStatusEnum
+    public enum Adjustments
     {
-        Open, Sent, Received, Cancelled, 
+        PO_Receive, Damage, Cancelled, Disassembled, 
     }
 }

@@ -12,6 +12,7 @@ using System.Data.Entity;
 using Service.DbEventArgs;
 using Service.Listeners;
 using Infrastructure.Entities.Purchases;
+using Infrastructure.Entities.Inventory;
 
 namespace Service.Core.Purchases.PurchaseOrders
 {
@@ -81,8 +82,8 @@ namespace Service.Core.Purchases.PurchaseOrders
                  .Include(x => x.Supplier)
                  .Include(x => x.ParentPurchaseOrder)
                  .Include(x => x.PurchaseOrderItems)
-                 .Include(x=>x.PurchaseOrderItems.Select(y=>y.Product))
-                 .Include(x=>x.PurchaseOrderItems.Select(y=>y.Warehouse))
+                 .Include(x => x.PurchaseOrderItems.Select(y => y.Product))
+                 .Include(x => x.PurchaseOrderItems.Select(y => y.Warehouse))
                  .FirstOrDefault(x => x.Id == purchaseOrderId);
             return PurchaseOrderMapper.MapToPurchaseOrderModel(entity);
         }
@@ -110,6 +111,7 @@ namespace Service.Core.Purchases.PurchaseOrders
 
         public string SetReceived(int purchaseOrderId)
         {
+            var now = DateTime.Now;
             var entity = _context.PurchaseOrder.Find(purchaseOrderId);
             if (entity != null)
             {
@@ -120,9 +122,9 @@ namespace Service.Core.Purchases.PurchaseOrders
                 if (entity.IsReceived)
                     return "Already received!";
                 entity.IsReceived = true;
-                entity.ReceivedDate = DateTime.Now;
+                entity.ReceivedDate = now;
 
-                AddReceivedItemsToWarehouse(entity.PurchaseOrderItems);
+                AddReceivedItemsToWarehouse(entity.PurchaseOrderItems, now);
 
                 _context.SaveChanges();
                 var args = new BaseEventArgs<PurchaseOrderModel>(PurchaseOrderMapper.MapToPurchaseOrderModel(entity), Utility.UpdateMode.EDIT);
@@ -132,7 +134,7 @@ namespace Service.Core.Purchases.PurchaseOrders
             return "The Purchase Order doesn't exist";
         }
 
-        private void AddReceivedItemsToWarehouse(ICollection<PurchaseOrderItem> items)
+        private void AddReceivedItemsToWarehouse(ICollection<PurchaseOrderItem> items, DateTime now)
         {
             foreach (var item in items)
             {
@@ -140,6 +142,7 @@ namespace Service.Core.Purchases.PurchaseOrders
                 if (product != null)
                 {
                     item.IsReceived = true;
+                    AddPOReceiveToInventoryUnit(item, product, now);
                     var wp = _context.WarehouseProduct.FirstOrDefault(x => x.ProductId == item.ProductId && x.WarehouseId == item.WarehouseId);
                     if (wp == null)
                     {
@@ -250,6 +253,41 @@ namespace Service.Core.Purchases.PurchaseOrders
             return string.Empty;
         }
 
+
+        #region Inventory Units
+
+        public void AddPOReceiveToInventoryUnit(PurchaseOrderItem poItem, Product product, DateTime now)
+        {
+            
+            var invUnit = new InventoryUnit()
+            {
+                ExpirationDate = poItem.ExpirationDate,
+                GrossWeight = poItem.Quantity * product.UnitGrossWeight,
+                IsHold = poItem.IsHold,
+                IssueDate = null,
+                IssueReceipt = null,
+                IssueAdjustment = null,
+                LotNumber = poItem.LotNumber == 0 ? "" : poItem.LotNumber.ToString(),
+                NetWeight = poItem.Quantity * product.UnitNetWeight,
+                Notes = "",
+                PackageId = product.PackageId,
+                PackageQuantity = (Math.Ceiling(poItem.Quantity / (product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage))) + (product.UnitsInPackage == 0 ? 0 : (poItem.Quantity % product.UnitsInPackage)),
+                ProductId = poItem.ProductId,
+                ProductionDate = poItem.ProductionDate,
+                ReceiveDate = now,
+                ReceiveReceipt = poItem.ReferenceNumber,
+                ReceiveAdjustment = poItem.Adjustment,
+                Remark = null,
+                SupplierId = poItem.SupplierId,
+                SupplyPrice = poItem.Rate,
+                UnitQuantity = poItem.Quantity,
+                UomId = product.BaseUomId,
+                WarehouseId = poItem.WarehouseId,
+            };
+            _context.InventoryUnit.Add(invUnit);
+        }
+
+        #endregion
 
     }
 }

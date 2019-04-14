@@ -238,6 +238,12 @@ namespace IMS.Forms.Inventory.Purchases.Order
                         Rate = rate, //variant.LatestUnitSellPrice,
                         IsHold = isHold == null ? false: bool.Parse(isHold.ToString()),
                         WarehouseId = _purchaseOrder.WarehouseId,
+                        Adjustment = "PO Receive",//_purchaseOrder.Status
+                        ExpirationDate = null,
+                        LotNumber = _purchaseOrder.LotNumber,
+                        ProductionDate = null,
+                        SupplierId = _purchaseOrder.SupplierId,
+                        ReferenceNumber = _purchaseOrder.OrderNumber,
                         
                     });
                 }

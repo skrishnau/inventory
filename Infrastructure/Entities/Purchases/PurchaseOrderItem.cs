@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Entities.Business;
 using Infrastructure.Entities.Inventory;
+using Infrastructure.Entities.Suppliers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,16 @@ namespace Infrastructure.Entities.Purchases
         //public decimal Discount { get; set; }
         //public decimal Tax { get; set; }
 
+        public DateTime? ExpirationDate { get; set; }
+        public DateTime? ProductionDate { get; set; }
+
+        public int LotNumber { get; set; }
+        public string ReferenceNumber { get; set; }
+        public string Adjustment { get; set; }
+        
+        public int? SupplierId { get; set; }
+        public virtual Supplier Supplier { get; set; }
+        
 
         // items will be hard deleted; if the items need to be removed after "Sent" then cancel the whole order
         // an item can be cancelled by customer at any point during transaction

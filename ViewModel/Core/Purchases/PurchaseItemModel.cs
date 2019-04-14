@@ -27,6 +27,16 @@ namespace ViewModel.Core.Purchases
         public int WarehouseId { get; set; }
         public string Warehouse { get; set; }
 
+        public DateTime? ExpirationDate { get; set; }
+        public DateTime? ProductionDate { get; set; }
+
+        public int LotNumber { get; set; }
+        public string ReferenceNumber { get; set; }
+        public string Adjustment { get; set; }
+
+        public int? SupplierId { get; set; }
+        public string Supplier { get; set; }
+
     }
 
     //public class PurchaseItemModelForListing

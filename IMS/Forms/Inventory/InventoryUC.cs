@@ -27,6 +27,7 @@ using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Purchases.Receives;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
+using IMS.Forms.Inventory.Units;
 
 namespace IMS.Forms.Inventory
 {
@@ -88,6 +89,16 @@ namespace IMS.Forms.Inventory
             _menubar.btnAdjustmentCodes.Click += BtnAdjustmentCodes_Click;
 
             _menubar.btnLocateInventory.Click += BtnLocateInventory_Click;
+            _menubar.btnInventoryUnits.Click += BtnInventoryUnits_Click;
+        }
+
+        private void BtnInventoryUnits_Click(object sender, EventArgs e)
+        {
+            var inventoryUnitList = Program.container.GetInstance<InventoryUnitListUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            inventoryUnitList.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(inventoryUnitList);
+            _menubar.ClearSelection(sender);
         }
 
         private void BtnLocateInventory_Click(object sender, EventArgs e)
@@ -98,7 +109,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(warehouseProductListUC);
 
             _menubar.ClearSelection(sender);
-            _menubar.btnProductList.FlatStyle = FlatStyle.Flat;
 
         }
 
@@ -112,7 +122,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(productListUC);
 
             _menubar.ClearSelection(sender);
-            _menubar.btnProductList.FlatStyle = FlatStyle.Flat;
         }
 
         private void BtnCategoryList_Click(object sender, EventArgs e)
@@ -123,7 +132,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(categoryListUC);
 
             _menubar.ClearSelection(sender);
-            _menubar.btnCategoryList.FlatStyle = FlatStyle.Flat;
         }
 
         #endregion
@@ -149,7 +157,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(transferListUC);
             // set selection
             _menubar.ClearSelection(sender);
-            _menubar.btnSupplierList.FlatStyle = FlatStyle.Flat;
 
         }
 
@@ -167,7 +174,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(supplierListUC);
             // set selection
             _menubar.ClearSelection(sender);
-            _menubar.btnSupplierList.FlatStyle = FlatStyle.Flat;
         }
 
         #endregion
@@ -200,7 +206,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(warehouseListUC);
             // set selection
             _menubar.ClearSelection(sender);
-            _menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
         #endregion
@@ -216,7 +221,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(uomUC);
             // set selection
             _menubar.ClearSelection(sender);
-            //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
         private void BtnPackage_Click(object sender, EventArgs e)
@@ -227,7 +231,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(packageUC);
             // set selection
             _menubar.ClearSelection(sender);
-            //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
         private void BtnAdjustmentCodes_Click(object sender, EventArgs e)
@@ -238,7 +241,6 @@ namespace IMS.Forms.Inventory
             _bodyTemplate.pnlBody.Controls.Add(packageUC);
             // set selection
             _menubar.ClearSelection(sender);
-            //_menubar.btnWarehouseList.FlatStyle = FlatStyle.Flat;
         }
 
 

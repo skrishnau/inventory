@@ -63,6 +63,7 @@ namespace Infrastructure.Context
         // public virtual DbSet<VariantAttribute> VariantAttribute { get; set; }
         public virtual DbSet<Transfer> Transfer { get; set; }
         public virtual DbSet<WarehouseProduct> WarehouseProduct { get; set; }
+        public virtual DbSet<InventoryUnit> InventoryUnit { get; set; }
 
 
         // ===================== TRANSACTION MODULE ==================== //

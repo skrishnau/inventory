@@ -510,7 +510,21 @@ namespace Service.Core.Inventory
             return WarehouseProductMapper.MapToModel(wpList);
         }
 
+        public List<InventoryUnitModel> GetInventoryUnitList()
+        {
+            var query = _context.InventoryUnit
+                .Include(x => x.Product)
+                .Include(x => x.Package)
+                .Include(x => x.Supplier)
+                .Include(x => x.Uom)
+                .Include(x => x.Warehouse)
+                .AsQueryable();
+            return InventoryUnitMapper.MapToModel(query);
+        }
+
         #endregion
+
+
     }
 }
 

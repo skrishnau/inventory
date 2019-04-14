@@ -26,6 +26,8 @@ namespace Service.Core.Inventory
         void AddUpdateProduct(ProductModel product);
         void DeleteProduct(int id);
 
+        List<InventoryUnitModel> GetInventoryUnitList();
+
         //List<AttributeModel> GetAttributeList();
         // List<OptionModel> GetDistinctAttributes();
         // List<OptionModel> GetOptionList();

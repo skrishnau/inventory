@@ -32,7 +32,6 @@ namespace DTO.Core.Inventory
             return list;
         }
 
-
         public static AdjustmentCodeModel MapToModel(AdjustmentCode entity)
         {
             return new AdjustmentCodeModel()
