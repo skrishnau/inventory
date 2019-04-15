@@ -22,9 +22,9 @@ namespace Service.Core.Business
 
         WarehouseModel GetWarehouse(int warehouseId);
         List<WarehouseModel> GetWarehouseList();
-        List<IdNamePair> GetWarehouseIdNameList();
+        List<IdNamePair> GetWarehouseListForCombo();
         List<WarehouseModel> GetWarehouseListUsableOnly();
-        void AddOrUpdateWarehouse(WarehouseModel warehouse);
+        void AddOrUpdateWarehouse(WarehouseModel model);
         void DeleteWarehouse(int id);
 
 

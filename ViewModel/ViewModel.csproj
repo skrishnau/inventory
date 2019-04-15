@@ -89,7 +89,6 @@
     <Compile Include="Core\Clients\ClientsListingUC.Designer.cs">
       <DependentUpon>ClientsListingUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Common\LeadModel.cs" />
     <Compile Include="Core\Customers\CustomerModel.cs" />
     <Compile Include="Core\Customers\CustomerReportModel.cs" />
     <Compile Include="Core\Inventory\OptionModel.cs" />

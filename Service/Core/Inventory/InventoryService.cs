@@ -11,6 +11,7 @@ using Service.Listeners.Inventory;
 using Newtonsoft.Json;
 using Service.DbEventArgs;
 using ViewModel.Core.Common;
+using Service.Utility;
 
 namespace Service.Core.Inventory
 {
@@ -261,7 +262,7 @@ namespace Service.Core.Inventory
                 .Select(x => new IdNamePair()
                 {
                     Id = x.Id,
-                    Name = x.Name + " ("+x.SKU+")",
+                    Name = x.Name + " (" + x.SKU + ")",
                 })
                 .ToList();
             return products;
@@ -520,6 +521,122 @@ namespace Service.Core.Inventory
                 .Include(x => x.Warehouse)
                 .AsQueryable();
             return InventoryUnitMapper.MapToModel(query);
+        }
+
+        public void MergeInventoryUnits(List<InventoryUnitModel> list)
+        {
+            foreach (var invUnitGroup in list.GroupBy(x => x.ProductId))
+            {
+                var product = _context.Product.Find(invUnitGroup.Key);
+                if (product != null)
+                {
+                    if (invUnitGroup.Count() >= 2)
+                    {
+                        // means there are 2 or more items for this product
+                        var unitQuantity = 0M;
+                        var packageQuantity = 0M;
+                        InventoryUnit editingRecord = null;
+                        for (var i = 0; i < invUnitGroup.Count(); i++)
+                        {
+                            var dbEntity = _context.InventoryUnit.Find(invUnitGroup.ElementAt(i).Id);
+                            if (dbEntity != null)
+                            {
+                                unitQuantity += dbEntity.UnitQuantity;
+                                packageQuantity += dbEntity.PackageQuantity;
+                            }
+                            if (i < invUnitGroup.Count() - 1)
+                            {
+                                // remove
+                                _context.InventoryUnit.Remove(dbEntity);
+                                invUnitGroup.ElementAt(i).UpdateAction = UpdateMode.DELETE.ToString();
+                            }
+                            else
+                            {
+                                // get the last entity ; 
+                                // TODO:: assign the value from multiple entities to the newly created 
+                                editingRecord = dbEntity;
+                                invUnitGroup.ElementAt(i).UpdateAction = UpdateMode.EDIT.ToString();
+                            }
+                        }
+                        editingRecord.UnitQuantity = unitQuantity;
+                        //var unitsInPackage = product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage;
+                        //editingRecord.PackageQuantity = Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
+                        editingRecord.PackageQuantity = packageQuantity;
+                    }
+                }
+            }
+            _context.SaveChanges();
+            var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
+            _listener.TriggerInventoryUnitUpdateEvent(null, args);
+        }
+
+        public void MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> list)
+        {
+            var warehouseEntity = _context.Warehouse.Find(warehouseId);
+            if (warehouseEntity != null)
+            {
+                foreach (var iuModel in list)
+                {
+                    // first find
+                    var dbEntity = _context.InventoryUnit.Find(iuModel.Id);
+                    if (dbEntity != null)
+                    {
+                        dbEntity.WarehouseId = warehouseId;
+                    }
+                }
+            }
+            _context.SaveChanges();
+            var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
+            _listener.TriggerInventoryUnitUpdateEvent(null, args);
+        }
+
+
+        public void SplitInventoryUnit(List<decimal> quantitySplitList, InventoryUnitModel model)
+        {
+            //find
+            if (quantitySplitList.Count > 1)
+            {
+                var entity = _context.InventoryUnit.Find(model.Id);
+                if (entity != null)
+                {
+                    // split 
+                    if (entity.UnitQuantity == quantitySplitList.Sum())
+                    {
+                        var updatedEntryList = new List<InventoryUnit>();
+                        for (var q = 0; q < quantitySplitList.Count; q++)
+                        {
+                            var quantity = quantitySplitList[q];
+                            if (quantity > 0)
+                            {
+                                var unitsInPackage = entity.Product.UnitsInPackage == 0 ? 1 : entity.Product.UnitsInPackage;
+                                if (q == 0)
+                                {
+                                    // update the first entry 
+                                    entity.UnitQuantity = quantity;
+                                    entity.PackageQuantity = Math.Ceiling(quantity / unitsInPackage) + (quantity % unitsInPackage == 0 ? 0 : 1);
+                                }
+                                else
+                                {
+                                    // create new entry for the rest of the splits
+                                    var newEntity = InventoryUnitMapper.CloneEntity(entity);
+                                    newEntity.Id = 0;
+                                    newEntity.UnitQuantity = quantity;
+                                    newEntity.PackageQuantity = Math.Ceiling(quantity / unitsInPackage) + (quantity % unitsInPackage == 0 ? 0 : 1);
+                                    _context.InventoryUnit.Add(newEntity);
+                                }
+                            }
+                        }
+
+                        _context.SaveChanges();
+                        var list = InventoryUnitMapper.MapToModel(updatedEntryList);
+                        var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
+                        _listener.TriggerInventoryUnitUpdateEvent(null, args);
+                    }
+
+
+                }
+            }
+
         }
 
         #endregion

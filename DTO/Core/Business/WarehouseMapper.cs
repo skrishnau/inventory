@@ -10,29 +10,31 @@ namespace DTO.Core.Business
 {
     public static class WarehouseMapper
     {
-        internal static ICollection<Warehouse> MapToEntity(ICollection<WarehouseModel> warehouses)
+
+        public static Warehouse MapToEntity(WarehouseModel model, Warehouse entity)
         {
-            var list = new List<Warehouse>();
-            foreach(var wh in warehouses)
+            if (entity == null)
+                entity = new Warehouse();
+            entity.Name = model.Name;
+            entity.Hold = model.Hold;
+            entity.MixedProduct = model.MixedProduct;
+            entity.Staging = model.Staging;
+            entity.Use = model.Use;
+            return entity;
+        }
+
+        public static List<WarehouseModel> MapToModel(IQueryable<Warehouse> query)
+        {
+            var list = new List<WarehouseModel>();
+            foreach(var entity in query)
             {
-                list.Add(MapToEntity(wh));
+                list.Add(MapToModel(entity));
             }
+
             return list;
         }
 
-        internal static Warehouse MapToEntity(WarehouseModel wh)
-        {
-            return new Warehouse()
-            {
-                Id = wh.Id,
-                Hold = wh.Hold,
-                MixedProduct = wh.MixedProduct,
-                Name = wh.Name,
-                Staging = wh.Staging,
-            };
-        }
-
-        public static WarehouseModel MapToWarehouseModel( Warehouse warehouse)
+        public static WarehouseModel MapToModel( Warehouse warehouse)
         {
             return new WarehouseModel()
             {

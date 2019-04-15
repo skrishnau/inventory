@@ -196,6 +196,30 @@
     <Compile Include="Forms\Inventory\Transfers\TransferForm.Designer.cs">
       <DependentUpon>TransferForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryDisassembleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryDisassembleForm.Designer.cs">
+      <DependentUpon>InventoryDisassembleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryMergeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryMergeForm.Designer.cs">
+      <DependentUpon>InventoryMergeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryMoveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryMoveForm.Designer.cs">
+      <DependentUpon>InventoryMoveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventorySplitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventorySplitForm.Designer.cs">
+      <DependentUpon>InventorySplitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -543,6 +567,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transfers\TransferForm.resx">
       <DependentUpon>TransferForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryMergeForm.resx">
+      <DependentUpon>InventoryMergeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryMoveForm.resx">
+      <DependentUpon>InventoryMoveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventorySplitForm.resx">
+      <DependentUpon>InventorySplitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
       <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
@@ -1009,6 +1042,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Wine_Tour_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Merge_Files_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Split_Files_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Divider_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Merge_Horizontal_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Data_Transfer_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Move_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Postcard_With_Barcode_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Unity_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Product_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Sell_16px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

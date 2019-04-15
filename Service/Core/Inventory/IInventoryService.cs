@@ -45,12 +45,22 @@ namespace Service.Core.Inventory
         void SaveUom(UomModel data);
 
         List<PackageModel> GetPackageList();
+        void MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
         List<PackageModel> GetPackageListUsableOnly();
         string SavePackage(PackageModel package);
 
         List<AdjustmentCodeModel> GetAdjustmentCodeList();
         List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly();
         string SaveAdjustmentCode(AdjustmentCodeModel model);
+
+        // ===== Inventory Units ====== //
+        void MergeInventoryUnits(List<InventoryUnitModel> list);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="splitRule">Format: For "5" splitRule is "2+2+1"</param>
+        /// <param name="model"></param>
+        void SplitInventoryUnit(List<decimal> quantityList, InventoryUnitModel model);
 
 
         //        bool AddOrUpdateAttribute(AttributeModel attributeModel);

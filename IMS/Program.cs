@@ -43,6 +43,7 @@ using IMS.Forms.Inventory.Purchases;
 using IMS.Forms.Inventory.Purchases.Order;
 using IMS.Forms.Inventory.Purchases.Receives;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
+using IMS.Forms.Inventory.Units.Actions;
 
 namespace IMS
 {
@@ -162,16 +163,18 @@ namespace IMS
             // adjustments
             container.Register<ReceiveForm>(Lifestyle.Scoped);
            // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
-            
-
-
-
 
             // transfers
             container.Register<InventoryTransfersListUC>(Lifestyle.Scoped);
             container.Register<TransferForm>(Lifestyle.Scoped);
 
             container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
+
+            container.Register<InventoryDisassembleForm>(Lifestyle.Scoped);
+            container.Register<InventoryMergeForm>(Lifestyle.Scoped);
+            container.Register<InventorySplitForm>(Lifestyle.Scoped);
+
+            container.Register<InventoryMoveForm>(Lifestyle.Scoped);
 
 
 

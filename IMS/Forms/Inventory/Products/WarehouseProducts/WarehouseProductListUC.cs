@@ -75,7 +75,7 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
 
         private void PopulateWarehouses()
         {
-            var warehouses = _businessService.GetWarehouseIdNameList();
+            var warehouses = _businessService.GetWarehouseListForCombo();
             var allWarehouse = new IdNamePair{Id = 0, Name = " ---- All ---- "};
             warehouses.Insert(0, allWarehouse);
             cbWarehouse.DataSource = warehouses;

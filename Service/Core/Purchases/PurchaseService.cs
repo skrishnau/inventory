@@ -129,6 +129,7 @@ namespace Service.Core.Purchases.PurchaseOrders
                 _context.SaveChanges();
                 var args = new BaseEventArgs<PurchaseOrderModel>(PurchaseOrderMapper.MapToPurchaseOrderModel(entity), Utility.UpdateMode.EDIT);
                 _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                _listener.TriggerInventoryUnitUpdateEvent(null, null);
                 return string.Empty;
             }
             return "The Purchase Order doesn't exist";

@@ -74,29 +74,26 @@ namespace Service.Core.Business
             //throw new NotImplementedException();
         }
 
-        public void AddOrUpdateWarehouse(WarehouseModel warehouse)
+        public void AddOrUpdateWarehouse(WarehouseModel model)
         {
-            var dbEntity = _context.Warehouse.FirstOrDefault(x => x.Id == warehouse.Id);
+            var entity = _context.Warehouse.FirstOrDefault(x => x.Id == model.Id);
             BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
-            if (dbEntity == null)
+            entity = WarehouseMapper.MapToEntity(model, entity);
+
+            if (entity == null)
             {
-                dbEntity = warehouse.ToEntity();
-                dbEntity.CreatedAt = DateTime.Now;
-                dbEntity.UpdatedAt = DateTime.Now;
-                _context.Warehouse.Add(dbEntity);
+                entity.CreatedAt = DateTime.Now;
+                entity.UpdatedAt = DateTime.Now;
+                _context.Warehouse.Add(entity);
                 args.Mode = Utility.UpdateMode.ADD;
             }
             else
             {
-                dbEntity.Name = warehouse.Name;
-                dbEntity.Hold = warehouse.Hold;
-                dbEntity.MixedProduct = warehouse.MixedProduct;
-                dbEntity.Staging = warehouse.Staging;
-                dbEntity.UpdatedAt = DateTime.Now;
+                entity.UpdatedAt = DateTime.Now;
                 args.Mode = Utility.UpdateMode.EDIT;
             }
             _context.SaveChanges();
-            args.Model = WarehouseMapper.MapToWarehouseModel(dbEntity);
+            args.Model = WarehouseMapper.MapToModel(entity);
             _listener.TriggerWarehouseUpdateEvent(null, args);
         }
 
@@ -119,7 +116,7 @@ namespace Service.Core.Business
             {
                 warehouse.DeletedAt = DateTime.Now;
                 _context.SaveChanges();
-                var args = new BaseEventArgs<WarehouseModel>(WarehouseMapper.MapToWarehouseModel(warehouse), Utility.UpdateMode.DELETE);
+                var args = new BaseEventArgs<WarehouseModel>(WarehouseMapper.MapToModel(warehouse), Utility.UpdateMode.DELETE);
                 _listener.TriggerWarehouseUpdateEvent(null, args);
             }
         }
@@ -161,9 +158,9 @@ namespace Service.Core.Business
         public WarehouseModel GetWarehouse(int warehouseId)
         {
             var warehouse = _context.Warehouse.Find(warehouseId);
-            if(warehouse != null)
+            if (warehouse != null)
             {
-                return WarehouseMapper.MapToWarehouseModel(warehouse);
+                return WarehouseMapper.MapToModel(warehouse);
             }
             return null;
         }
@@ -176,24 +173,22 @@ namespace Service.Core.Business
 
         public List<WarehouseModel> GetWarehouseList()
         {
-            var warehouses = GetWarehouseEntityList()
-                   .Select(x => new WarehouseModel()
-                   {
-                       Name = x.Name,
-                       Id = x.Id,
-                       Hold = x.Hold,
-                       MixedProduct = x.MixedProduct,
-                       Staging = x.Staging
-                   })
+            //var warehouses = 
+            var warehouses = WarehouseMapper.MapToModel(GetWarehouseEntityList())
                    .ToList();
 
             return warehouses;
 
         }
 
-        public List<IdNamePair> GetWarehouseIdNameList()
+        /// <summary>
+        /// Returns list of "Use" able Warehouses only
+        /// </summary>
+        /// <returns>List of IdNamePair </returns>
+        public List<IdNamePair> GetWarehouseListForCombo()
         {
             var warehouses = GetWarehouseEntityList()
+                .Where(x => x.Use)
                    .Select(x => new IdNamePair()
                    {
                        Id = x.Id,

@@ -36,6 +36,7 @@
             this.colHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colMixedProduct = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colStaging = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehouse)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,8 @@
             this.colLocation,
             this.colHold,
             this.colMixedProduct,
-            this.colStaging});
+            this.colStaging,
+            this.colUse});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -73,7 +75,7 @@
             this.dgvWarehouse.ReadOnly = true;
             this.dgvWarehouse.RowTemplate.Height = 24;
             this.dgvWarehouse.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvWarehouse.Size = new System.Drawing.Size(452, 305);
+            this.dgvWarehouse.Size = new System.Drawing.Size(564, 305);
             this.dgvWarehouse.TabIndex = 4;
             // 
             // colId
@@ -113,13 +115,20 @@
             this.colStaging.Name = "colStaging";
             this.colStaging.ReadOnly = true;
             // 
+            // colUse
+            // 
+            this.colUse.DataPropertyName = "Use";
+            this.colUse.HeaderText = "Use";
+            this.colUse.Name = "colUse";
+            this.colUse.ReadOnly = true;
+            // 
             // WarehouseListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvWarehouse);
             this.Name = "WarehouseListUC";
-            this.Size = new System.Drawing.Size(452, 305);
+            this.Size = new System.Drawing.Size(564, 305);
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehouse)).EndInit();
             this.ResumeLayout(false);
 
@@ -133,5 +142,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colHold;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colMixedProduct;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colStaging;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
     }
 }

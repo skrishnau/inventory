@@ -43,6 +43,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.chkUse = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -95,6 +97,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.48148F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.51852F));
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.chkMixedProduct, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.chkHold, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -103,22 +106,24 @@
             this.tableLayoutPanel1.Controls.Add(this.tbLocation, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.chkStaging, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.chkUse, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 5);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(312, 123);
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(312, 142);
             this.tableLayoutPanel1.TabIndex = 30;
             // 
             // chkMixedProduct
             // 
             this.chkMixedProduct.AutoSize = true;
-            this.chkMixedProduct.Location = new System.Drawing.Point(131, 62);
+            this.chkMixedProduct.Location = new System.Drawing.Point(131, 58);
             this.chkMixedProduct.Margin = new System.Windows.Forms.Padding(2);
             this.chkMixedProduct.Name = "chkMixedProduct";
             this.chkMixedProduct.Size = new System.Drawing.Size(15, 14);
@@ -128,7 +133,7 @@
             // chkHold
             // 
             this.chkHold.AutoSize = true;
-            this.chkHold.Location = new System.Drawing.Point(131, 32);
+            this.chkHold.Location = new System.Drawing.Point(131, 30);
             this.chkHold.Margin = new System.Windows.Forms.Padding(2);
             this.chkHold.Name = "chkHold";
             this.chkHold.Size = new System.Drawing.Size(15, 14);
@@ -139,7 +144,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(2, 30);
+            this.label1.Location = new System.Drawing.Point(2, 28);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 15);
@@ -151,7 +156,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(2, 60);
+            this.label4.Location = new System.Drawing.Point(2, 56);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(99, 15);
@@ -162,7 +167,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(2, 90);
+            this.label3.Location = new System.Drawing.Point(2, 84);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 15);
@@ -172,7 +177,7 @@
             // chkStaging
             // 
             this.chkStaging.AutoSize = true;
-            this.chkStaging.Location = new System.Drawing.Point(131, 92);
+            this.chkStaging.Location = new System.Drawing.Point(131, 86);
             this.chkStaging.Margin = new System.Windows.Forms.Padding(2);
             this.chkStaging.Name = "chkStaging";
             this.chkStaging.Size = new System.Drawing.Size(15, 14);
@@ -184,7 +189,7 @@
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 128);
+            this.panel1.Location = new System.Drawing.Point(5, 147);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(312, 34);
             this.panel1.TabIndex = 31;
@@ -193,13 +198,34 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(2, 112);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 15);
+            this.label5.TabIndex = 58;
+            this.label5.Text = "Use ?";
+            // 
+            // chkUse
+            // 
+            this.chkUse.AutoSize = true;
+            this.chkUse.Location = new System.Drawing.Point(131, 114);
+            this.chkUse.Margin = new System.Windows.Forms.Padding(2);
+            this.chkUse.Name = "chkUse";
+            this.chkUse.Size = new System.Drawing.Size(15, 14);
+            this.chkUse.TabIndex = 59;
+            this.chkUse.UseVisualStyleBackColor = true;
+            // 
             // WarehouseCreate
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(322, 167);
+            this.ClientSize = new System.Drawing.Size(322, 186);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -235,5 +261,7 @@
         private System.Windows.Forms.CheckBox chkHold;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox chkUse;
     }
 }

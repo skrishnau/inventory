@@ -76,13 +76,13 @@
             this.lblLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblLabel.Location = new System.Drawing.Point(3, 0);
             this.lblLabel.Name = "lblLabel";
-            this.lblLabel.Size = new System.Drawing.Size(107, 42);
+            this.lblLabel.Size = new System.Drawing.Size(106, 42);
             this.lblLabel.TabIndex = 2;
             this.lblLabel.Text = "Label";
             // 
             // tbInput
             // 
-            this.tbInput.Location = new System.Drawing.Point(116, 3);
+            this.tbInput.Location = new System.Drawing.Point(115, 3);
             this.tbInput.Name = "tbInput";
             this.tbInput.Size = new System.Drawing.Size(159, 20);
             this.tbInput.TabIndex = 3;
@@ -130,7 +130,7 @@
             this.Padding = new System.Windows.Forms.Padding(5);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MessageBoxWithInput";
+            this.Text = "Input";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);

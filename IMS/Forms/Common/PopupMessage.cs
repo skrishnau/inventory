@@ -63,6 +63,11 @@ namespace IMS.Forms.Common
             ShowPopupMessage("Error!", msg, PopupMessageType.ERROR);
         }
 
+        //internal static void ShowInfoMessage(string msg)
+        //{
+        //    ShowPopupMessage("Info!", msg, PopupMessageType.INFO);
+        //}
+
         internal static void ShowSuccessMessage(string msg)
         {
             ShowPopupMessage("Success!", msg, PopupMessageType.SUCCESS);

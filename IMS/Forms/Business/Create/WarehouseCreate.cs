@@ -91,6 +91,7 @@ namespace IMS.Forms.Business.Create
                     Hold = chkHold.Checked,
                     MixedProduct = chkMixedProduct.Checked,
                     Staging = chkStaging.Checked,
+                    Use = chkUse.Checked,
                 };
                 _businessService.AddOrUpdateWarehouse(warehouseModel);
                 this.Close();

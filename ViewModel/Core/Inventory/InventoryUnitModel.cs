@@ -47,5 +47,11 @@ namespace ViewModel.Core.Inventory
         public string Remark { get; set; }
         public string Notes { get; set; }
 
+
+        /// <summary>
+        /// Update Action: "UpdateMode" enum; one of : EDIT, ADD, DELETE
+        /// </summary>
+        public string UpdateAction{ get; set; } 
+
     }
 }
