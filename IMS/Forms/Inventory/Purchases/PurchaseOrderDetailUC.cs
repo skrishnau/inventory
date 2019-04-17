@@ -15,6 +15,7 @@ using SimpleInjector.Lifestyles;
 using IMS.Forms.Purchases;
 using Service.Listeners;
 using IMS.Forms.Inventory.Purchases.Order;
+using IMS.Forms.Inventory.Units.Actions;
 
 namespace IMS.Forms.Inventory.Purchases
 {
@@ -52,7 +53,7 @@ namespace IMS.Forms.Inventory.Purchases
         {
             _listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
         }
-      
+
         #endregion
 
 
@@ -119,7 +120,7 @@ namespace IMS.Forms.Inventory.Purchases
                 }
             }
         }
-        
+
         private void DesignForOpen()
         {
             btnCancelOrder.Enabled = true;
@@ -127,7 +128,7 @@ namespace IMS.Forms.Inventory.Purchases
             btnEditDetails.Enabled = true;
             btnEditDetails.Visible = true;
             btnEditItems.Enabled = true;
-            btnEditItems.Visible= true;
+            btnEditItems.Visible = true;
             btnReceive.Enabled = false;
             btnReceive.Visible = false;
             btnSendOrder.Enabled = true;
@@ -179,12 +180,12 @@ namespace IMS.Forms.Inventory.Purchases
             btnSendOrder.Visible = false;
             lblStatus.Text = "( Received )";
         }
-        
+
         #endregion
 
 
         #region Actions Event Handlers
-        
+
         private void btnEditDetails_Click(object sender, EventArgs e)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
@@ -212,7 +213,7 @@ namespace IMS.Forms.Inventory.Purchases
                 MessageBox.Show("There aren't any items. Please add items to the order.", "No items!");
                 return;
             }
-            var dialogResult = MessageBox.Show(this, "Are you sure to send it to the Supplier? "+
+            var dialogResult = MessageBox.Show(this, "Are you sure to send it to the Supplier? " +
                 "You won't be able to edit the order after it's sent.", "Send?", MessageBoxButtons.YesNo);
             if (dialogResult.Equals(DialogResult.Yes))
             {
@@ -225,20 +226,13 @@ namespace IMS.Forms.Inventory.Purchases
             }
         }
 
-
-        #endregion
-
         private void btnReceive_Click(object sender, EventArgs e)
         {
-            var dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNo);
-            if (dialogResult.Equals(DialogResult.Yes))
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-               var msg = _purchaseService.SetReceived(_purchaseOrderId);
-                if (string.IsNullOrEmpty(msg))
-                    PopupMessage.ShowSuccessMessage("Successfully Received!");
-                else 
-                    PopupMessage.ShowErrorMessage(msg);
-                this.Focus();
+                var invReceiveForm = Program.container.GetInstance<InventoryReceiveForm>();
+                invReceiveForm.SetData(_purchaseOrderId);
+                invReceiveForm.ShowDialog();
             }
         }
 
@@ -255,6 +249,9 @@ namespace IMS.Forms.Inventory.Purchases
                 this.Focus();
             }
         }
+
+        #endregion
+
 
     }
 }

@@ -34,15 +34,16 @@ namespace DTO.Core.Business
             return list;
         }
 
-        public static WarehouseModel MapToModel( Warehouse warehouse)
+        public static WarehouseModel MapToModel( Warehouse entity)
         {
             return new WarehouseModel()
             {
-                Hold = warehouse.Hold,
-                MixedProduct = warehouse.MixedProduct,
-                Id = warehouse.Id,
-                Name = warehouse.Name,
-                Staging = warehouse.Staging,
+                Hold = entity.Hold,
+                MixedProduct = entity.MixedProduct,
+                Id = entity.Id,
+                Name = entity.Name,
+                Staging = entity.Staging,
+                Use = entity.Use,
             };
         }
     }

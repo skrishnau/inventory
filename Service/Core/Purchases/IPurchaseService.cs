@@ -17,6 +17,7 @@ namespace Service.Core.Purchases.PurchaseOrders
         List<PurchaseOrderModel> GetAllPurchaseOrders();
 
         List<PurchaseOrderItemModel> GetPurchaseOrderItems(int purchaseId);
+        List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<PurchaseOrderItemModel> models);
 
         PurchaseOrderModel GetPurchaseOrder(int purchaseOrderId);
 

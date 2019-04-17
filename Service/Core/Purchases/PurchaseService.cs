@@ -88,6 +88,11 @@ namespace Service.Core.Purchases.PurchaseOrders
             return PurchaseOrderMapper.MapToPurchaseOrderModel(entity);
         }
 
+        public List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<PurchaseOrderItemModel> models)
+        {
+            return PurchaseOrderItemMapper.MapToInventoryUnitModel(models);
+        }
+
         public string SetSent(int purchaseOrderId)
         {
             var entity = _context.PurchaseOrder.Find(purchaseOrderId);
@@ -150,8 +155,8 @@ namespace Service.Core.Purchases.PurchaseOrders
                         wp = new Infrastructure.Entities.Inventory.WarehouseProduct()
                         {
                             ProductId = item.ProductId,
-                            InStockQuantity = item.Quantity,
-                            OnHoldQuantity = item.IsHold ? item.Quantity : 0,
+                            InStockQuantity = item.UnitQuantity,
+                            OnHoldQuantity = item.IsHold ? item.UnitQuantity : 0,
                             UpdatedAt = DateTime.Now,
                             WarehouseId = item.WarehouseId,
                         };
@@ -160,12 +165,12 @@ namespace Service.Core.Purchases.PurchaseOrders
                     else
                     {
                         wp.UpdatedAt = DateTime.Now;
-                        wp.InStockQuantity += item.Quantity;
-                        wp.OnHoldQuantity += item.IsHold ? item.Quantity : 0;
+                        wp.InStockQuantity += item.UnitQuantity;
+                        wp.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
                     }
                     // update the product 
-                    product.OnHoldQuantity += item.IsHold ? item.Quantity : 0;
-                    product.InStockQuantity += item.Quantity;
+                    product.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
+                    product.InStockQuantity += item.UnitQuantity;
                 }
             }
             _context.SaveChanges();
@@ -201,7 +206,7 @@ namespace Service.Core.Purchases.PurchaseOrders
             // validate & assign productId in the items; check if the sku exists
             foreach (var item in items)
             {
-                if (item.Quantity <= 0)
+                if (item.UnitQuantity <= 0)
                 {
                     return "Some of the items have zero quantity. Quantity must be greater than zero";
                 }
@@ -219,7 +224,7 @@ namespace Service.Core.Purchases.PurchaseOrders
                     else
                     {
                         item.ProductId = productEntity.Id;
-                        item.TotalAmount = item.Rate * item.Quantity;
+                        item.TotalAmount = item.Rate * item.UnitQuantity;
                     }
                 }
             }
@@ -245,7 +250,7 @@ namespace Service.Core.Purchases.PurchaseOrders
                     // add
                     _context.PurchaseOrderItem.Add(entity);
                 }
-                // need not handle update cause entity is already assigned
+                // need not handle update cause entity is already assigned above (entity = Pur...; line)
             }
             _context.SaveChanges();
             var model = PurchaseOrderMapper.MapToPurchaseOrderModel(poEntity);
@@ -259,29 +264,29 @@ namespace Service.Core.Purchases.PurchaseOrders
 
         public void AddPOReceiveToInventoryUnit(PurchaseOrderItem poItem, Product product, DateTime now)
         {
-            
+
             var invUnit = new InventoryUnit()
             {
                 ExpirationDate = poItem.ExpirationDate,
-                GrossWeight = poItem.Quantity * product.UnitGrossWeight,
+                GrossWeight = poItem.UnitQuantity * product.UnitGrossWeight,
                 IsHold = poItem.IsHold,
                 IssueDate = null,
                 IssueReceipt = null,
                 IssueAdjustment = null,
-                LotNumber = poItem.LotNumber == 0 ? "" : poItem.LotNumber.ToString(),
-                NetWeight = poItem.Quantity * product.UnitNetWeight,
+                LotNumber = poItem.LotNumber,// == 0 ? "" : poItem.LotNumber.ToString(),
+                NetWeight = poItem.UnitQuantity * product.UnitNetWeight,
                 Notes = "",
                 PackageId = product.PackageId,
-                PackageQuantity = (Math.Ceiling(poItem.Quantity / (product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage))) + (product.UnitsInPackage == 0 ? 0 : (poItem.Quantity % product.UnitsInPackage)),
+                PackageQuantity = (Math.Ceiling(poItem.UnitQuantity / (product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage))) + (product.UnitsInPackage == 0 ? 0 : (poItem.UnitQuantity % product.UnitsInPackage)),
                 ProductId = poItem.ProductId,
                 ProductionDate = poItem.ProductionDate,
                 ReceiveDate = now,
-                ReceiveReceipt = poItem.ReferenceNumber,
+                ReceiveReceipt = poItem.Reference,
                 ReceiveAdjustment = poItem.Adjustment,
                 Remark = null,
                 SupplierId = poItem.SupplierId,
                 SupplyPrice = poItem.Rate,
-                UnitQuantity = poItem.Quantity,
+                UnitQuantity = poItem.UnitQuantity,
                 UomId = product.BaseUomId,
                 WarehouseId = poItem.WarehouseId,
             };

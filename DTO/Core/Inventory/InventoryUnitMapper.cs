@@ -105,5 +105,52 @@ namespace DTO.Core.Inventory
 
             };
         }
+
+        public static List<InventoryUnit> MapToEntity(List<InventoryUnitModel> modelList)
+        {
+            var entityList = new List<InventoryUnit>();
+            foreach(var model in modelList)
+            {
+                entityList.Add(MapToEntity(model));
+            }
+            return entityList;
+        }
+
+        public static InventoryUnit MapToEntity(InventoryUnitModel model)
+        {
+            return new InventoryUnit()
+            {
+                ExpirationDate = null, //model.ExpirationDate,
+                GrossWeight = model.GrossWeight,
+                Id = model.Id,
+                IsHold = model.IsHold,
+                IssueAdjustment = model.IssueAdjustment,
+                IssueDate = null,//model.IssueDate,
+                IssueReceipt = model.IssueReceipt,
+                LotNumber = model.LotNumber,
+                NetWeight = model.NetWeight,
+                Notes = model.Notes,
+                //Package  = model.Package,
+                PackageId = model.PackageId,
+                PackageQuantity = model.PackageQuantity,
+                //Product = model.Product,
+                ProductId= model.ProductId,
+                ProductionDate = null, //model.ProductionDate,
+                ReceiveAdjustment = model.ReceiveAdjustment,
+                ReceiveDate = null,//model.ReceiveDate,
+                ReceiveReceipt = model.ReceiveReceipt,
+                Remark = model.Remark,
+                //Supplier= model.Supplier,
+                SupplierId = model.SupplierId,
+                SupplyPrice = model.SupplyPrice,
+                TotalSupplyAmount = model.TotalSupplyAmount,
+                UnitQuantity = model.UnitQuantity,
+                //Uom = model.Uom,
+                UomId = model.UomId,
+                //Warehouse = model.Warehouse,
+                WarehouseId = model.WarehouseId,
+                
+            };
+        }
     }
 }

@@ -12,6 +12,7 @@ using IMS.Forms.Common;
 using ViewModel.Core.Inventory;
 using Service.Core.Inventory;
 using ViewModel.Core.Common;
+using IMS.Forms.Common.GridView;
 
 namespace IMS.Forms.Inventory.UOM
 {
@@ -29,12 +30,23 @@ namespace IMS.Forms.Inventory.UOM
 
             InitializeComponent();
 
-            InitializeHeader();
-
-            InitializeEvents();
+           
 
             this.Load += UomUC_Load;
 
+        }
+        GridViewColumnDecimalValidator _decimalValidator;
+
+        private void UomUC_Load(object sender, EventArgs e)
+        {
+            InitializeHeader();
+            InitializeEvents();
+            PopulateUomData();
+
+            // decimal column validations
+            _decimalValidator = new GridViewColumnDecimalValidator(dgvUom);
+            _decimalValidator.AddColumn(colQuantity, ColumnDataType.Decimal);
+            _decimalValidator.Validate();
         }
 
 
@@ -96,26 +108,24 @@ namespace IMS.Forms.Inventory.UOM
 
         #region Event Handlers
 
-        private void UomUC_Load(object sender, EventArgs e)
-        {
-            PopulateUomData();
-        }
 
         private void DgvUom_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
 
-            // decimal only in quantity column
-            e.Control.KeyPress -= new KeyPressEventHandler(UnitsColumn_KeyPress);
-            if (dgvUom.Columns[dgvUom.SelectedCells[0].ColumnIndex].Name == colQuantity.Name) // (dgvUom.CurrentCell.ColumnIndex == 2) //Desired Column
-            {
-                TextBox tb = e.Control as TextBox;
-                if (tb != null)
-                {
-                    tb.KeyPress += new KeyPressEventHandler(UnitsColumn_KeyPress);
-                }
-            }
+            //// decimal only in quantity column
+            //e.Control.KeyPress -= new KeyPressEventHandler(UnitsColumn_KeyPress);
+            //if (dgvUom.Columns[dgvUom.SelectedCells[0].ColumnIndex].Name == colQuantity.Name) // (dgvUom.CurrentCell.ColumnIndex == 2) //Desired Column
+            //{
+            //    TextBox tb = e.Control as TextBox;
+            //    if (tb != null)
+            //    {
+            //        tb.KeyPress += new KeyPressEventHandler(UnitsColumn_KeyPress);
+            //    }
+            //}
+
             // base unit autocomplete textbox
-            else if (dgvUom.Columns[dgvUom.SelectedCells[0].ColumnIndex].Name == colBaseUnit.Name)
+           // else 
+            if (dgvUom.Columns[dgvUom.SelectedCells[0].ColumnIndex].Name == colBaseUnit.Name)
             {
                 TextBox autoText = e.Control as TextBox;
                 if (autoText != null)
@@ -230,22 +240,7 @@ namespace IMS.Forms.Inventory.UOM
             }
         }
 
-        private void UnitsColumn_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // allowed numeric and one dot  ex. 10.23
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)
-                 && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
 
-            // only allow one decimal point
-            if (e.KeyChar == '.'
-                && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-        }
 
         #endregion
 
@@ -438,6 +433,25 @@ namespace IMS.Forms.Inventory.UOM
 
     }
 }
+
+//private void UnitsColumn_KeyPress(object sender, KeyPressEventArgs e)
+//{
+//    // allowed numeric and one dot  ex. 10.23
+//    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)
+//         && e.KeyChar != '.')
+//    {
+//        e.Handled = true;
+//    }
+
+//    // only allow one decimal point
+//    if (e.KeyChar == '.'
+//        && (sender as TextBox).Text.IndexOf('.') > -1)
+//    {
+//        e.Handled = true;
+//    }
+//}
+
+
 
 //private bool IsModelValid(UomModel data)
 //{

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Service.DbEventArgs;
 using ViewModel.Core.Common;
 using Service.Utility;
+using ViewModel.Enums.Inventory;
 
 namespace Service.Core.Inventory
 {
@@ -638,6 +639,56 @@ namespace Service.Core.Inventory
             }
 
         }
+
+        public List<IdNamePair> GetAdjustmentCodeListForCombo()
+        {
+            return _context.AdjustmentCode
+                .Where(x => x.Use)
+                .Select(x => new IdNamePair()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToList();
+        }
+
+        public List<IdNamePair> GetPositiveAdjustmentCodeListForCombo()
+        {
+            var positive = AdjustmentType.Positive.ToString();
+            return _context.AdjustmentCode
+               .Where(x => x.Use && x.Type == positive)
+               .Select(x => new IdNamePair()
+               {
+                   Id = x.Id,
+                   Name = x.Name
+               })
+               .ToList();
+        }
+
+        public List<IdNamePair> GetNegativeAdjustmentCodeListForCombo()
+        {
+            var negative = AdjustmentType.Negative.ToString();
+            return _context.AdjustmentCode
+               .Where(x => x.Use && x.Type== negative)
+               .Select(x => new IdNamePair()
+               {
+                   Id = x.Id,
+                   Name = x.Name
+               })
+               .ToList();
+        }
+
+        public void SaveDirectReceive(List<InventoryUnitModel> list)
+        {
+            var entityList = InventoryUnitMapper.MapToEntity(list);
+            _context.InventoryUnit.AddRange(entityList);
+            _context.SaveChanges();
+           // var list = InventoryUnitMapper.MapToModel(updatedEntryList);
+            var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
+            _listener.TriggerInventoryUnitUpdateEvent(null, args);
+        }
+
+
 
         #endregion
 

@@ -80,7 +80,7 @@ namespace Service.Core.Business
             BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
             entity = WarehouseMapper.MapToEntity(model, entity);
 
-            if (entity == null)
+            if (entity.Id ==0)
             {
                 entity.CreatedAt = DateTime.Now;
                 entity.UpdatedAt = DateTime.Now;
@@ -168,7 +168,8 @@ namespace Service.Core.Business
         private IQueryable<Warehouse> GetWarehouseEntityList()
         {
             return _context.Warehouse
-                  .Where(x => x.DeletedAt == null);
+                  .Where(x => x.DeletedAt == null)
+                  .OrderBy(x=>x.Name);
         }
 
         public List<WarehouseModel> GetWarehouseList()

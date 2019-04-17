@@ -25,9 +25,9 @@ using IMS.Forms.Inventory.Transfers;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
-using IMS.Forms.Inventory.Purchases.Receives;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units;
+using IMS.Forms.Inventory.Units.Actions;
 
 namespace IMS.Forms.Inventory
 {
@@ -187,7 +187,7 @@ namespace IMS.Forms.Inventory
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var directReceiveForm = Program.container.GetInstance<ReceiveForm>();
+                var directReceiveForm = Program.container.GetInstance<InventoryReceiveForm>();
                 directReceiveForm.ShowDialog();
             }
         }

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Enums.Inventory
 {
+    public enum AdjustmentType
+    {
+        Positive, Negative
+    }
+
     public enum Adjustments
     {
         PO_Receive, Damage, Cancelled, Disassembled, 

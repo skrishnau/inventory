@@ -41,7 +41,6 @@ using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Purchases;
 using IMS.Forms.Inventory.Purchases.Order;
-using IMS.Forms.Inventory.Purchases.Receives;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units.Actions;
 
@@ -160,8 +159,6 @@ namespace IMS
             container.Register<SaleUC>(Lifestyle.Scoped);
             container.Register<SettingsForm>(Lifestyle.Scoped);
 
-            // adjustments
-            container.Register<ReceiveForm>(Lifestyle.Scoped);
            // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
 
             // transfers
@@ -175,6 +172,7 @@ namespace IMS
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
 
             container.Register<InventoryMoveForm>(Lifestyle.Scoped);
+            container.Register<InventoryReceiveForm>(Lifestyle.Scoped);
 
 
 

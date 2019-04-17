@@ -41,6 +41,8 @@
             this.colInStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPackageId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUomId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -124,6 +126,8 @@
             this.colInStock,
             this.colOnOrder,
             this.colQuantity,
+            this.colPackageId,
+            this.colUomId,
             this.colRate,
             this.colTotal,
             this.colIsHold});
@@ -174,6 +178,20 @@
             this.colQuantity.DataPropertyName = "Quantity";
             this.colQuantity.HeaderText = "Quantity";
             this.colQuantity.Name = "colQuantity";
+            // 
+            // colPackageId
+            // 
+            this.colPackageId.DataPropertyName = "PackageId";
+            this.colPackageId.HeaderText = "Package";
+            this.colPackageId.Name = "colPackageId";
+            this.colPackageId.Visible = false;
+            // 
+            // colUomId
+            // 
+            this.colUomId.DataPropertyName = "UomId";
+            this.colUomId.HeaderText = "UOM";
+            this.colUomId.Name = "colUomId";
+            this.colUomId.Visible = false;
             // 
             // colRate
             // 
@@ -231,6 +249,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colInStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOnOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPackageId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUomId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;

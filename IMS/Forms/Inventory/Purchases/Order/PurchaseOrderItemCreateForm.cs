@@ -86,7 +86,7 @@ namespace IMS.Forms.Inventory.Purchases.Order
                 row.Cells[this.colInStock.Index].Value = item.InStock;
                 row.Cells[this.colOnOrder.Index].Value = item.OnOrder;
                 row.Cells[this.colProduct.Index].Value = item.Product;
-                row.Cells[this.colQuantity.Index].Value = item.Quantity;
+                row.Cells[this.colQuantity.Index].Value = item.UnitQuantity;
                 row.Cells[this.colRate.Index].Value = item.Rate;
                 row.Cells[this.colSKU.Index].Value = item.SKU;
                 row.Cells[this.colTotal.Index].Value = item.TotalAmount;
@@ -130,6 +130,8 @@ namespace IMS.Forms.Inventory.Purchases.Order
                             row.Cells[this.colInStock.Index].Value = product.InStockQuantity;
                             row.Cells[this.colOnOrder.Index].Value = product.OnOrderQuantity;
                             row.Cells[this.colRate.Index].Value = product.SupplyPrice;
+                            row.Cells[this.colPackageId.Index].Value = product.PackageId;
+                            row.Cells[this.colUomId.Index].Value = product.BaseUomId;
                             UpdateTotalColumn(e);
                         }
                     }
@@ -228,11 +230,13 @@ namespace IMS.Forms.Inventory.Purchases.Order
                         isValid = false;
                     }
                     var isHold = row.Cells[colIsHold.Index].Value;
+                    var packageId = row.Cells[colPackageId.Index].Value;
+                    var uomId = row.Cells[colUomId.Index].Value;
                     items.Add(new PurchaseOrderItemModel
                     {
                         Id = 0,
                         PurchaseOrderId = _purchaseOrderId,
-                        Quantity = quantity,
+                        UnitQuantity = quantity,
                         TotalAmount = rate * quantity,
                         ProductId = variant.Id,
                         Rate = rate, //variant.LatestUnitSellPrice,
@@ -243,9 +247,13 @@ namespace IMS.Forms.Inventory.Purchases.Order
                         LotNumber = _purchaseOrder.LotNumber,
                         ProductionDate = null,
                         SupplierId = _purchaseOrder.SupplierId,
-                        ReferenceNumber = _purchaseOrder.OrderNumber,
+                        Reference = _purchaseOrder.OrderNumber,
+                        PackageId = int.Parse(packageId.ToString()),
+                        UomId = int.Parse(uomId.ToString()),
+                        //PackageQuantity = 
                         
                     });
+                    
                 }
             }
             if (!isValid)

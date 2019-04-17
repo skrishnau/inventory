@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
+using ViewModel.Core.Purchases;
 
 namespace Service.Core.Inventory
 {
@@ -24,20 +25,13 @@ namespace Service.Core.Inventory
         List<IdNamePair> GetProductIdNameList();
         ProductModel GetProductBySKU(string sku);
         void AddUpdateProduct(ProductModel product);
+        List<IdNamePair> GetAdjustmentCodeListForCombo();
+        List<IdNamePair> GetPositiveAdjustmentCodeListForCombo();
+        List<IdNamePair> GetNegativeAdjustmentCodeListForCombo();
         void DeleteProduct(int id);
 
         List<InventoryUnitModel> GetInventoryUnitList();
 
-        //List<AttributeModel> GetAttributeList();
-        // List<OptionModel> GetDistinctAttributes();
-        // List<OptionModel> GetOptionList();
-        // void DeleteAttribute(AttributeModel attributeModel);
-        // List<AttributeModel> GetOptionList(int productId);
-
-        //VariantModel GetVariantById(string sku);
-        //List<VariantModel> GetVariantList();
-        //VariantModel GetVariantBySKU(string sku);
-        //void SaveVariant(VariantModel variantModel);
 
         List<UomModel> GetUomList();
         List<UomModel> GetUomListUsableOnly();
@@ -62,9 +56,20 @@ namespace Service.Core.Inventory
         /// <param name="model"></param>
         void SplitInventoryUnit(List<decimal> quantityList, InventoryUnitModel model);
 
-
-        //        bool AddOrUpdateAttribute(AttributeModel attributeModel);
-
+        void SaveDirectReceive(List<InventoryUnitModel> list);
     }
 }
 
+
+//        bool AddOrUpdateAttribute(AttributeModel attributeModel);
+
+//List<AttributeModel> GetAttributeList();
+// List<OptionModel> GetDistinctAttributes();
+// List<OptionModel> GetOptionList();
+// void DeleteAttribute(AttributeModel attributeModel);
+// List<AttributeModel> GetOptionList(int productId);
+
+//VariantModel GetVariantById(string sku);
+//List<VariantModel> GetVariantList();
+//VariantModel GetVariantBySKU(string sku);
+//void SaveVariant(VariantModel variantModel);
