@@ -38,7 +38,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void PopulateWarehouseCombo()
         {
-            var warehouses = _businessService.GetWarehouseListForCombo();
+            var warehouses = _inventoryService.GetWarehouseListForCombo();
             warehouses.Insert(0, new ViewModel.Core.Common.IdNamePair(0, "--- Select ---"));
             cbWarehouse.DataSource = warehouses;
             cbWarehouse.ValueMember = "Id";

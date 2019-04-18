@@ -14,19 +14,23 @@ using Service.Core.Business;
 using ViewModel.Core.Business;
 using Service.Listeners;
 using Service.DbEventArgs;
+using Service.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Warehouses
 {
     public partial class WarehouseListUC : UserControl
     {
         private readonly IBusinessService _businessService;
+        private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
         private SubHeadingTemplate _header;
         private WarehouseModel _selectedWarehouseModel;
 
-        public WarehouseListUC(IBusinessService businessService, IDatabaseChangeListener listener)
+        public WarehouseListUC(IBusinessService businessService, IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
             this._businessService = businessService;
+            this._inventoryService = inventoryService;
+
             _listener = listener;
 
             InitializeComponent();
@@ -51,7 +55,7 @@ namespace IMS.Forms.Inventory.Warehouses
         private void PopulateWarehouseData()
         {
             dgvWarehouse.AutoGenerateColumns = false;
-            var warehouses = _businessService.GetWarehouseList();
+            var warehouses = _inventoryService.GetWarehouseList();
             dgvWarehouse.DataSource = warehouses;
         }
 
@@ -151,7 +155,7 @@ namespace IMS.Forms.Inventory.Warehouses
                 var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
                 if (dialogResult.Equals(DialogResult.Yes))
                 {
-                    _businessService.DeleteWarehouse(_selectedWarehouseModel.Id);
+                    _inventoryService.DeleteWarehouse(_selectedWarehouseModel.Id);
                 }
             }
         }

@@ -23,8 +23,7 @@ namespace IMS.Forms.Inventory.Units.Actions
         private readonly IBusinessService _businessService;
         private readonly IPurchaseService _purchaseService;
 
-        private GridViewColumnDecimalValidator _decimalValidator;
-        private bool _isCellDirty;
+        //private bool _isCellDirty;
 
         // ---- Purchase Order ---- //
         private int _purchaseOrderId;
@@ -38,7 +37,7 @@ namespace IMS.Forms.Inventory.Units.Actions
             _purchaseService = purchaseService;
 
             InitializeComponent();
-
+            InitializeGridView();
 
 
             this.Load += InventoryReceiveForm_Load;
@@ -48,32 +47,14 @@ namespace IMS.Forms.Inventory.Units.Actions
         private void InventoryReceiveForm_Load(object sender, EventArgs e)
         {
             PopulateAdjustmentCodeCombo();
-            InitializeGridView();
         }
 
         #region Initialization Functions
 
         private void InitializeGridView()
         {
-            // --- warehouse datasource --- //
-            var column = dgvReceiveList.Columns[this.colWarehouse.Index] as DataGridViewComboBoxColumn;
-            if (column != null)
-            {
-                column.DataSource = _businessService.GetWarehouseListForCombo();
-                column.ValueMember = "Id";
-                column.DisplayMember = "Name";
-            }
-
-            dgvReceiveList.CurrentCellDirtyStateChanged += DgvReceiveList_CurrentCellDirtyStateChanged;
-            dgvReceiveList.CellValidating += DgvReceiveList_CellValidating;
-            dgvReceiveList.DataError += DgvReceiveList_DataError;
-
-            _decimalValidator = new GridViewColumnDecimalValidator(dgvReceiveList);
-            _decimalValidator.AddColumn(colQuantity, ColumnDataType.Decimal);
-            _decimalValidator.AddColumn(colLotNumber, ColumnDataType.Integer);
-            _decimalValidator.Validate();
+            dgvReceiveList.InitializeGridViewControls(_inventoryService);
         }
-
 
         #endregion
 
@@ -92,67 +73,6 @@ namespace IMS.Forms.Inventory.Units.Actions
         #endregion
 
 
-
-        #region Event Handlers of Grid View
-
-        private void DgvReceiveList_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            PopupMessage.ShowErrorMessage(e.Exception.Message);
-            this.Focus();
-        }
-
-        private void DgvReceiveList_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            _isCellDirty = true;
-        }
-
-        private void DgvReceiveList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (_isCellDirty)
-            {
-                _isCellDirty = false;
-                // ignore the last row
-                if (e.RowIndex < dgvReceiveList.RowCount - 1)
-                {
-                    var row = dgvReceiveList.Rows[e.RowIndex];
-                    if (e.ColumnIndex == colSKU.Index)
-                    {
-                        // check if the sku is valid
-                        var product = _inventoryService.GetProductBySKU(e.FormattedValue.ToString());
-                        if (product == null)
-                        {
-                            row.Cells[e.ColumnIndex].ErrorText = "Invalid SKU";
-                        }
-                        else
-                        {
-                            row.Cells[e.ColumnIndex].ErrorText = string.Empty;
-                            // populate
-                            row.Cells[this.colProduct.Index].Value = product.Name;
-                            row.Cells[this.colPackage.Index].Value = product.Package;
-                            row.Cells[this.colProduct.Index].Value = product.Name;
-                            row.Cells[this.colSupplyPrice.Index].Value = product.SupplyPrice;
-                            row.Cells[this.colPackageId.Index].Value = product.PackageId;
-                            row.Cells[this.colUomId.Index].Value = product.BaseUomId;
-                            //row.Cells[this.colInStock.Index].Value = product.InStockQuantity;
-                            //row.Cells[this.colOnOrder.Index].Value = product.OnOrderQuantity;
-                            //row.Cells[this.colRate.Index].Value = product.SupplyPrice;
-                            // UpdateTotalColumn(e);
-                        }
-                    }
-                    // handle rate and quantity change to update Total
-                    //else if (e.ColumnIndex == colQuantity.Index || e.ColumnIndex == colRate.Index)
-                    //{
-                    //    UpdateTotalColumn(e);
-                    //}
-                }
-            }
-        }
-
-        #endregion
-
-
-
-
         public void SetData(int purchaseOrderId)
         {
             var model = _purchaseService.GetPurchaseOrder(purchaseOrderId);
@@ -165,6 +85,7 @@ namespace IMS.Forms.Inventory.Units.Actions
             _purchaseOrderModel = model;
             if (model != null)
             {
+                dgvReceiveList.DesignForPurchaseOrderReceive();
                 // populate
                 this.Text = "Receive Against PO " + model.OrderNumber;
                 cbAdjustmentCode.Text = "PO Receive";
@@ -175,6 +96,10 @@ namespace IMS.Forms.Inventory.Units.Actions
                 {
                     column.ReadOnly = true;
                 }
+            }
+            else
+            {
+                dgvReceiveList.DesignForDirectReceive();
             }
         }
 
@@ -187,8 +112,8 @@ namespace IMS.Forms.Inventory.Units.Actions
         {
             if (_purchaseOrderId == 0)
             {
-                var list = GetItems();
-                
+                var list = dgvReceiveList.GetItems();
+
                 _inventoryService.SaveDirectReceive(list);
 
             }
@@ -215,88 +140,93 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         }
 
-        private List<InventoryUnitModel> GetItems()
-        {
-            var isValid = true;
-            var items = new List<InventoryUnitModel>();
-
-            // extra row is added automatically; so get upto second last row only
-            for (int r = 0; r < dgvReceiveList.Rows.Count - 1; r++)
-            {
-                DataGridViewRow row = dgvReceiveList.Rows[r];
-                var sku = row.Cells[colSKU.Name].Value as string;
-                var variant = _inventoryService.GetProductBySKU(sku);
-                if (variant == null)
-                {
-                    row.ErrorText = "SKU not found!";
-                    isValid = false;
-                }
-                else
-                {
-                    decimal quantity = 0;
-                    var qtyVal = row.Cells[colQuantity.Name].Value;
-                    decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
-                    if (quantity <= 0)
-                    {
-                        row.ErrorText = "Quantity can't be zero or less";
-                        isValid = false;
-                    }
-                    decimal rate = 0;
-                    var rateVal = row.Cells[colSupplyPrice.Name].Value;
-                    decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out rate);
-                    if (rate <= 0)
-                    {
-                        row.ErrorText = "Rate can't be zero or less";
-                        isValid = false;
-                    }
-                    var isHold = row.Cells[colIsHold.Index].Value;
-                    var packageId = row.Cells[colPackageId.Index].Value;
-                    var uomId = row.Cells[colUomId.Index].Value;
-                    var warehouseId = row.Cells[colWarehouse.Index].Value;
-                    if(warehouseId == null)
-                    {
-                        isValid = false;
-                    }
-                    var lotNumber = row.Cells[colLotNumber.Index].Value;
-                    if(lotNumber == null)
-                    {
-                        isValid = false;
-                    }
-                    var reference = row.Cells[colReference.Index].Value;
-                    if (reference == null)
-                        isValid = false;
-                    if (isValid)
-                    {
-                        items.Add(new InventoryUnitModel
-                        {
-                            Id = 0,
-                            //PurchaseOrderId = _purchaseOrderId,
-                            UnitQuantity = quantity,
-                            TotalSupplyAmount = rate * quantity,
-                            ProductId = variant.Id,
-                            SupplyPrice = rate, //variant.LatestUnitSellPrice,
-                            IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
-                            WarehouseId = int.Parse(warehouseId.ToString()),//_purchaseOrder.WarehouseId,
-                            ReceiveAdjustment = cbAdjustmentCode.SelectedText,//"PO Receive", //_purchaseOrder.Status
-                            ExpirationDate = null,
-                            LotNumber = int.Parse(lotNumber.ToString()),//_purchaseOrder.LotNumber,
-                            ProductionDate = null,
-                            SupplierId = null,//_purchaseOrder.SupplierId,
-                            ReceiveReceipt = reference.ToString(),//_purchaseOrder.OrderNumber,
-                            PackageId = int.Parse(packageId.ToString()),
-                            UomId = int.Parse(uomId.ToString()),
-                            ReceiveDate = dtReceiveDate.Value.ToShortDateString(),
-                            //PackageQuantity = 
-                        });
-                    }
-                }
-            }
-            if (!isValid)
-            {
-                PopupMessage.ShowPopupMessage("Invalid Items!", "The items you provided aar not valid. Verify again!.", PopupMessageType.ERROR);
-                return null;
-            }
-            return items;
-        }
+        
     }
 }
+
+
+
+
+//private List<InventoryUnitModel> GetItems()
+//{
+//    var isValid = true;
+//    var items = new List<InventoryUnitModel>();
+
+//    // extra row is added automatically; so get upto second last row only
+//    for (int r = 0; r < dgvReceiveList.Rows.Count - 1; r++)
+//    {
+//        DataGridViewRow row = dgvReceiveList.Rows[r];
+//        var sku = row.Cells[dgvReceiveList.colSKU.Name].Value as string;
+//        var variant = _inventoryService.GetProductBySKU(sku);
+//        if (variant == null)
+//        {
+//            row.ErrorText = "SKU not found!";
+//            isValid = false;
+//        }
+//        else
+//        {
+//            decimal quantity = 0;
+//            var qtyVal = row.Cells[dgvReceiveList.colUnitQuantity.Name].Value;
+//            decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
+//            if (quantity <= 0)
+//            {
+//                row.ErrorText = "Quantity can't be zero or less";
+//                isValid = false;
+//            }
+//            decimal rate = 0;
+//            var rateVal = row.Cells[dgvReceiveList.colSupplyPrice.Name].Value;
+//            decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out rate);
+//            if (rate <= 0)
+//            {
+//                row.ErrorText = "Rate can't be zero or less";
+//                isValid = false;
+//            }
+//            var isHold = row.Cells[dgvReceiveList.colIsHold.Index].Value;
+//            var packageId = row.Cells[dgvReceiveList.colPackageId.Index].Value;
+//            var uomId = row.Cells[dgvReceiveList.colUomId.Index].Value;
+//            var warehouseId = row.Cells[dgvReceiveList.colWarehouse.Index].Value;
+//            if(warehouseId == null)
+//            {
+//                isValid = false;
+//            }
+//            var lotNumber = row.Cells[dgvReceiveList.colLotNumber.Index].Value;
+//            if(lotNumber == null)
+//            {
+//                isValid = false;
+//            }
+//            var reference = row.Cells[dgvReceiveList.colReceiveReference.Index].Value;
+//            if (reference == null)
+//                isValid = false;
+//            if (isValid)
+//            {
+//                items.Add(new InventoryUnitModel
+//                {
+//                    Id = 0,
+//                    //PurchaseOrderId = _purchaseOrderId,
+//                    UnitQuantity = quantity,
+//                    TotalSupplyAmount = rate * quantity,
+//                    ProductId = variant.Id,
+//                    SupplyPrice = rate, //variant.LatestUnitSellPrice,
+//                    IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
+//                    WarehouseId = int.Parse(warehouseId.ToString()),//_purchaseOrder.WarehouseId,
+//                    ReceiveAdjustment = cbAdjustmentCode.SelectedText,//"PO Receive", //_purchaseOrder.Status
+//                    ExpirationDate = null,
+//                    LotNumber = int.Parse(lotNumber.ToString()),//_purchaseOrder.LotNumber,
+//                    ProductionDate = null,
+//                    SupplierId = null,//_purchaseOrder.SupplierId,
+//                    ReceiveReceipt = reference.ToString(),//_purchaseOrder.OrderNumber,
+//                    PackageId = int.Parse(packageId.ToString()),
+//                    UomId = int.Parse(uomId.ToString()),
+//                    ReceiveDate = dtReceiveDate.Value.ToShortDateString(),
+//                    //PackageQuantity = 
+//                });
+//            }
+//        }
+//    }
+//    if (!isValid)
+//    {
+//        PopupMessage.ShowPopupMessage("Invalid Items!", "The items you provided aar not valid. Verify again!.", PopupMessageType.ERROR);
+//        return null;
+//    }
+//    return items;
+//}

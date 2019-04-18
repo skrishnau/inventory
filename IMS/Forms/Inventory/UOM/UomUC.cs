@@ -13,6 +13,7 @@ using ViewModel.Core.Inventory;
 using Service.Core.Inventory;
 using ViewModel.Core.Common;
 using IMS.Forms.Common.GridView;
+using Service.Listeners;
 
 namespace IMS.Forms.Inventory.UOM
 {
@@ -20,20 +21,19 @@ namespace IMS.Forms.Inventory.UOM
     {
 
         private readonly IInventoryService _inventoryService;
+        private readonly IDatabaseChangeListener _listener;
 
         SubHeadingTemplate _header;
         private bool _isCurrentRowDirty;
         
-        public UomUC(IInventoryService inventoryService)
+        public UomUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
             _inventoryService = inventoryService;
+            _listener = listener;
 
             InitializeComponent();
 
-           
-
             this.Load += UomUC_Load;
-
         }
         GridViewColumnDecimalValidator _decimalValidator;
 
@@ -47,6 +47,13 @@ namespace IMS.Forms.Inventory.UOM
             _decimalValidator = new GridViewColumnDecimalValidator(dgvUom);
             _decimalValidator.AddColumn(colQuantity, ColumnDataType.Decimal);
             _decimalValidator.Validate();
+
+            _listener.UomUpdated += _listener_UomUpdated;
+        }
+
+        private void _listener_UomUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UomModel> e)
+        {
+            PopulateUomData();
         }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Business;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Purchases;
@@ -11,6 +12,38 @@ namespace Service.Core.Inventory
 {
     public interface IInventoryService
     {
+        #region Warehouse
+
+        WarehouseModel GetWarehouse(int warehouseId);
+        List<WarehouseModel> GetWarehouseList();
+        void AddOrUpdateWarehouse(WarehouseModel model);
+        void DeleteWarehouse(int id);
+        List<IdNamePair> GetWarehouseListForCombo();
+
+        #endregion
+
+        #region Package
+
+        List<IdNamePair> GetPackageListForCombo();
+        List<PackageModel> GetPackageList();
+        string SavePackage(PackageModel package);
+
+        #endregion
+
+        #region UOM
+
+        List<UomModel> GetUomList();
+        List<IdNamePair> GetUomListForCombo();
+
+        #endregion
+
+        #region Supplier
+
+        List<IdNamePair> GetSupplierListForCombo();
+
+
+        #endregion
+
         List<BrandModel> GetBrandList();
         void AddUpdateBrand(BrandModel brand);
 
@@ -31,24 +64,21 @@ namespace Service.Core.Inventory
         void DeleteProduct(int id);
 
         List<InventoryUnitModel> GetInventoryUnitList();
+        
 
 
-        List<UomModel> GetUomList();
-        List<UomModel> GetUomListUsableOnly();
         List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId);
         void SaveUom(UomModel data);
 
-        List<PackageModel> GetPackageList();
         void MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
-        List<PackageModel> GetPackageListUsableOnly();
-        string SavePackage(PackageModel package);
-
+        
         List<AdjustmentCodeModel> GetAdjustmentCodeList();
         List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly();
         string SaveAdjustmentCode(AdjustmentCodeModel model);
 
         // ===== Inventory Units ====== //
         void MergeInventoryUnits(List<InventoryUnitModel> list);
+
         /// <summary>
         /// 
         /// </summary>

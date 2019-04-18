@@ -13,16 +13,20 @@ using Service.Core.Business;
 using ViewModel.Core.Business;
 using IMS.Forms.Business.Delete;
 using IMS.Forms.Common;
+using Service.Core.Inventory;
 
 namespace IMS.Forms.Business
 {
     public partial class BusinessUC : UserControl
     {
         private readonly IBusinessService businessService;
+        private readonly IInventoryService _inventoryService;
 
-        public BusinessUC(IBusinessService businessService)
+        public BusinessUC(IBusinessService businessService, IInventoryService inventoryService)
         {
             this.businessService = businessService;
+            _inventoryService = inventoryService;
+
             InitializeComponent();
             this.Load += BusinessUC_Load;
 
@@ -70,7 +74,7 @@ namespace IMS.Forms.Business
         private void PopulateWarehouseData()
         {
             gvWarehouse.AutoGenerateColumns = false;
-            var warehouses = businessService.GetWarehouseList();
+            var warehouses = _inventoryService.GetWarehouseList();
             gvWarehouse.DataSource = warehouses;
         }
 

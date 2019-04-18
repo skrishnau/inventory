@@ -41,9 +41,13 @@ namespace ViewModel.Core.Inventory
         public string ProductionDate { get; set; }
         public string ExpirationDate { get; set; }
 
+        public decimal InStockQuantity { get; set; }
+        public decimal OnHoldQuantity { get; set; }
+        public decimal OnOrderQuantity { get; set; }
+        public decimal OnComittedQuantity { get; set; }
+
         // include Shipped-To status also
         public bool IsHold { get; set; }
-
         public string Remark { get; set; }
         public string Notes { get; set; }
 

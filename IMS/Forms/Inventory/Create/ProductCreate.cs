@@ -451,7 +451,7 @@ namespace IMS.Forms.Inventory.Create
 
         private void PopulateWarehouse()
         {
-            var warehouses = _businessService.GetWarehouseList();
+            var warehouses = _inventoryService.GetWarehouseList();
             cbWarehouse.DataSource = warehouses;
             cbWarehouse.ValueMember = "Id";
             cbWarehouse.DisplayMember = "Name";

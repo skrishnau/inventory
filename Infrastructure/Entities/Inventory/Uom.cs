@@ -16,6 +16,6 @@ namespace Infrastructure.Entities.Inventory
         public bool Use { get; set; }
 
         // table Objects //
-        public Uom BaseUom { get; set; }
+        public virtual Uom BaseUom { get; set; }
     }
 }

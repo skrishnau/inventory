@@ -123,6 +123,16 @@
     <Compile Include="Forms\Common\GridView\DataGridViewCustom.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.Data.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.Designer.cs" />
+    <Compile Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.EventHandlers.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Common\PopupMessage.cs" />
     <Compile Include="Forms\Common\ComboWithLabelUC.cs">
       <SubType>UserControl</SubType>
@@ -157,6 +167,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.Designer.cs">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryIssueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryIssueForm.Designer.cs">
+      <DependentUpon>InventoryIssueForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventoryReceiveForm.cs">
       <SubType>Form</SubType>
@@ -223,9 +239,6 @@
     </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventorySplitForm.Designer.cs">
       <DependentUpon>InventorySplitForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Units\InventoryUnitDataGridView.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
       <SubType>UserControl</SubType>
@@ -542,6 +555,9 @@
     <EmbeddedResource Include="Forms\Common\Display\SubHeadingTemplate.resx">
       <DependentUpon>SubHeadingTemplate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.resx">
+      <DependentUpon>InventoryUnitDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Generals\Branches\BranchListUC.resx">
       <DependentUpon>BranchListUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -553,6 +569,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.resx">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryIssueForm.resx">
+      <DependentUpon>InventoryIssueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryReceiveForm.resx">
       <DependentUpon>InventoryReceiveForm.cs</DependentUpon>

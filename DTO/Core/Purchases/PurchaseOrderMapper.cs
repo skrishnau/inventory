@@ -45,7 +45,7 @@ namespace DTO.Core.Purchases
         {
             var model = new PurchaseOrderModel();
             if (entity == null)
-                return model;
+                return null;
 
             model.Id = entity.Id;
             model.LotNumber = entity.LotNo;

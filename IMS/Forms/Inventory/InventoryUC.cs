@@ -188,6 +188,7 @@ namespace IMS.Forms.Inventory
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var directReceiveForm = Program.container.GetInstance<InventoryReceiveForm>();
+                directReceiveForm.SetData(0);
                 directReceiveForm.ShowDialog();
             }
         }

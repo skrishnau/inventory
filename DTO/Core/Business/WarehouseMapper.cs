@@ -12,17 +12,17 @@ namespace DTO.Core.Business
 {
     public static class WarehouseMapper
     {
-        public static Warehouse MapToEntity(WarehouseModel model, Warehouse entity)
+        public static Warehouse MapToEntity(this WarehouseModel model, Warehouse entity)
         {
             return Mappings.Mapper.Map(model, entity);
         }
 
-        public static List<WarehouseModel> MapToModel(IQueryable<Warehouse> query)
+        public static List<WarehouseModel> MapToModel(this IQueryable<Warehouse> query)
         {
             return Mappings.Mapper.Map<IQueryable<Warehouse>, List<WarehouseModel>>(query);
         }
 
-        public static WarehouseModel MapToModel(Warehouse entity)
+        public static WarehouseModel MapToModel(this Warehouse entity)
         {
             return Mappings.Mapper.Map<WarehouseModel>(entity);
         }

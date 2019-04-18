@@ -8,19 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Service.Core.Business;
+using Service.Core.Inventory;
 using ViewModel.Core.Business;
 
 namespace IMS.Forms.Business.Create
 {
     public partial class WarehouseCreate : Form
     {
-        private readonly IBusinessService _businessService;
+        private readonly IInventoryService _inventoryService;
 
         private int _warehouseId;
 
-        public WarehouseCreate(IBusinessService businessService)
+        public WarehouseCreate(IInventoryService inventoryService)
         {
-            this._businessService = businessService;
+            _inventoryService = inventoryService;
             InitializeComponent();
 
             InitializeValidationEvents();
@@ -62,7 +63,7 @@ namespace IMS.Forms.Business.Create
 
         public void SetDataForEdit(int warehouseId)
         {
-            WarehouseModel warehouse = _businessService.GetWarehouse(warehouseId);
+            WarehouseModel warehouse = _inventoryService.GetWarehouse(warehouseId);
             if (warehouse != null)
             {
                 this.Text = "Warehouse Edit (" + warehouse.Name + ")";
@@ -93,7 +94,7 @@ namespace IMS.Forms.Business.Create
                     Staging = chkStaging.Checked,
                     Use = chkUse.Checked,
                 };
-                _businessService.AddOrUpdateWarehouse(warehouseModel);
+                _inventoryService.AddOrUpdateWarehouse(warehouseModel);
                 this.Close();
             }
         }

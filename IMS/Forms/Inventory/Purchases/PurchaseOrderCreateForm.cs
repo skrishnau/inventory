@@ -82,7 +82,7 @@ namespace IMS.Forms.Purchases
 
         private void PopulateWarehouseCombo()
         {
-            var warehouses = _businessService.GetWarehouseList();
+            var warehouses = _inventoryService.GetWarehouseList();
             cbWarehouse.DataSource = warehouses;
             cbWarehouse.DisplayMember = "Name";
             cbWarehouse.ValueMember = "Id";

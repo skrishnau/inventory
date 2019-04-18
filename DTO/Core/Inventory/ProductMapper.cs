@@ -73,9 +73,6 @@ namespace DTO.Core.Inventory
             return entity;
         }
 
-
-
-
         public static string GetDateShortString(DateTime date)
         {
             return date.ToShortDateString();

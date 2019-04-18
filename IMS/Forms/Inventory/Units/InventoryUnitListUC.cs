@@ -27,8 +27,8 @@ namespace IMS.Forms.Inventory.Units
         private readonly IBusinessService _businessService;
 
         private SubHeadingTemplate _header;
-        private int checkCount;
-        private bool _bulkActionsEnabled;
+       // private int checkCount;
+       // private bool _bulkActionsEnabled;
 
         public InventoryUnitListUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
@@ -39,6 +39,8 @@ namespace IMS.Forms.Inventory.Units
             _businessService = businessService;
 
             InitializeComponent();
+
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService);
 
             this.Load += InventoryUnitListUC_Load;
         }
@@ -87,8 +89,9 @@ namespace IMS.Forms.Inventory.Units
 
         private void InitializeGridView()
         {
-            dgvInventoryUnit.SelectionChanged += DgvInventoryUnit_SelectionChanged;
-            dgvInventoryUnit.CellContentClick += DgvInventoryUnit_CellContentClick;
+            //dgvInventoryUnit.SelectionChanged += DgvInventoryUnit_SelectionChanged;
+            //dgvInventoryUnit.CellContentClick += DgvInventoryUnit_CellContentClick;
+            dgvInventoryUnit.DesignForInventoryUnitListing();
         }
 
         #endregion
@@ -99,9 +102,8 @@ namespace IMS.Forms.Inventory.Units
 
         private void PopulateInventoryUnits()
         {
-            checkCount = 0;
+            dgvInventoryUnit.ResetCheckCount();
             var inventoryUnits = _inventoryService.GetInventoryUnitList();
-            dgvInventoryUnit.AutoGenerateColumns = false;
             dgvInventoryUnit.DataSource = inventoryUnits;
         }
 
@@ -112,7 +114,7 @@ namespace IMS.Forms.Inventory.Units
             foreach (DataGridViewRow row in dgvInventoryUnit.Rows)
             {
                 // get the cell
-                var check = row.Cells[colCheck.Index].Value;
+                var check = row.Cells[dgvInventoryUnit.colCheck.Index].Value;
                 var checkBool = check == null ? false : bool.Parse(check.ToString());
                 if (checkBool)
                 {
@@ -127,25 +129,6 @@ namespace IMS.Forms.Inventory.Units
 
         #region GridView Event Handlers
 
-        private void DgvInventoryUnit_SelectionChanged(object sender, EventArgs e)
-        {
-            if (_bulkActionsEnabled)
-            {
-                dgvInventoryUnit.ClearSelection();
-            }
-        }
-
-        private void DgvInventoryUnit_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == colCheck.Index)
-            {
-                dgvInventoryUnit.CommitEdit(DataGridViewDataErrorContexts.Commit);
-                var value = dgvInventoryUnit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
-                var check = value == null ? false : bool.Parse(value.ToString());// dgvInventoryUnit.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                checkCount += check ? 1 : -1;
-            }
-        }
 
         #endregion
 
@@ -208,7 +191,8 @@ namespace IMS.Forms.Inventory.Units
 
         private void BtnIssue_Click(object sender, EventArgs e)
         {
-
+            var form = new InventoryIssueForm();
+            form.ShowDialog();
         }
 
         private void BtnDisassemble_Click(object sender, EventArgs e)
@@ -219,13 +203,13 @@ namespace IMS.Forms.Inventory.Units
         private void chkBulkActions_CheckedChanged(object sender, EventArgs e)
         {
             var check = chkBulkActions.Checked;
-            _bulkActionsEnabled = check; // set in variable
+
             gbSingleRowActions.Enabled = !check;
             gbInformation.Enabled = !check;
             pnlBulkActions.Enabled = check;
 
-            dgvInventoryUnit.Columns[colCheck.Index].Visible = check;
-            dgvInventoryUnit.ClearSelection();
+            dgvInventoryUnit.ShowCheckColumn(check);
+
 
             lblInformationMessage.Visible = check;
             lblSingleRowActionMessage.Visible = check;

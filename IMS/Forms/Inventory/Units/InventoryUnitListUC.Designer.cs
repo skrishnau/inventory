@@ -29,23 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dgvInventoryUnit = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLotNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWarehouseId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReceiveDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReceiveReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplyPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colRemark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExpirationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,7 +54,7 @@
             this.btnIssue = new System.Windows.Forms.Button();
             this.lblBulkActionsMessage = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).BeginInit();
+            this.dgvInventoryUnit = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.gbInformation.SuspendLayout();
@@ -80,161 +63,8 @@
             this.flowLayoutPanel2.SuspendLayout();
             this.gbBulkActions.SuspendLayout();
             this.pnlBulkActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvInventoryUnit
-            // 
-            this.dgvInventoryUnit.AllowUserToAddRows = false;
-            this.dgvInventoryUnit.AllowUserToDeleteRows = false;
-            this.dgvInventoryUnit.AllowUserToOrderColumns = true;
-            this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInventoryUnit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colId,
-            this.colCheck,
-            this.colProductId,
-            this.colProduct,
-            this.colSKU,
-            this.colInStockQuantity,
-            this.colLotNumber,
-            this.colWarehouseId,
-            this.colWarehouse,
-            this.colReceiveDate,
-            this.colReceiveReference,
-            this.colSupplyPrice,
-            this.colIsHold,
-            this.colRemark,
-            this.colExpirationDate,
-            this.colProductionDate});
-            this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 121);
-            this.dgvInventoryUnit.MultiSelect = false;
-            this.dgvInventoryUnit.Name = "dgvInventoryUnit";
-            this.dgvInventoryUnit.RowHeadersVisible = false;
-            this.dgvInventoryUnit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInventoryUnit.Size = new System.Drawing.Size(910, 209);
-            this.dgvInventoryUnit.TabIndex = 3;
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "Id";
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.Visible = false;
-            // 
-            // colCheck
-            // 
-            this.colCheck.HeaderText = "";
-            this.colCheck.Name = "colCheck";
-            this.colCheck.Visible = false;
-            this.colCheck.Width = 30;
-            // 
-            // colProductId
-            // 
-            this.colProductId.DataPropertyName = "ProductId";
-            this.colProductId.HeaderText = "ProductId";
-            this.colProductId.Name = "colProductId";
-            this.colProductId.Visible = false;
-            // 
-            // colProduct
-            // 
-            this.colProduct.DataPropertyName = "Product";
-            this.colProduct.HeaderText = "Product";
-            this.colProduct.Name = "colProduct";
-            this.colProduct.ReadOnly = true;
-            this.colProduct.Width = 150;
-            // 
-            // colSKU
-            // 
-            this.colSKU.DataPropertyName = "SKU";
-            this.colSKU.HeaderText = "SKU";
-            this.colSKU.Name = "colSKU";
-            this.colSKU.ReadOnly = true;
-            // 
-            // colInStockQuantity
-            // 
-            this.colInStockQuantity.DataPropertyName = "UnitQuantity";
-            this.colInStockQuantity.HeaderText = "Units";
-            this.colInStockQuantity.Name = "colInStockQuantity";
-            this.colInStockQuantity.ReadOnly = true;
-            // 
-            // colLotNumber
-            // 
-            this.colLotNumber.DataPropertyName = "LotNumber";
-            this.colLotNumber.HeaderText = "Lot #";
-            this.colLotNumber.Name = "colLotNumber";
-            this.colLotNumber.ReadOnly = true;
-            this.colLotNumber.Width = 90;
-            // 
-            // colWarehouseId
-            // 
-            this.colWarehouseId.DataPropertyName = "WarehouseId";
-            this.colWarehouseId.HeaderText = "WarehouseId";
-            this.colWarehouseId.Name = "colWarehouseId";
-            this.colWarehouseId.Visible = false;
-            // 
-            // colWarehouse
-            // 
-            this.colWarehouse.DataPropertyName = "Warehouse";
-            this.colWarehouse.HeaderText = "Warehouse";
-            this.colWarehouse.Name = "colWarehouse";
-            this.colWarehouse.ReadOnly = true;
-            this.colWarehouse.Width = 130;
-            // 
-            // colReceiveDate
-            // 
-            this.colReceiveDate.DataPropertyName = "ReceiveDate";
-            this.colReceiveDate.HeaderText = "Rcv Date";
-            this.colReceiveDate.Name = "colReceiveDate";
-            this.colReceiveDate.ReadOnly = true;
-            this.colReceiveDate.Width = 90;
-            // 
-            // colReceiveReference
-            // 
-            this.colReceiveReference.DataPropertyName = "ReceiveReference";
-            this.colReceiveReference.HeaderText = "Rcv Ref";
-            this.colReceiveReference.Name = "colReceiveReference";
-            this.colReceiveReference.ReadOnly = true;
-            // 
-            // colSupplyPrice
-            // 
-            this.colSupplyPrice.DataPropertyName = "SupplyPrice";
-            this.colSupplyPrice.HeaderText = "Unit Cost";
-            this.colSupplyPrice.Name = "colSupplyPrice";
-            this.colSupplyPrice.ReadOnly = true;
-            // 
-            // colIsHold
-            // 
-            this.colIsHold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colIsHold.DataPropertyName = "IsHold";
-            this.colIsHold.HeaderText = "Hold";
-            this.colIsHold.Name = "colIsHold";
-            this.colIsHold.ReadOnly = true;
-            this.colIsHold.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsHold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsHold.Width = 54;
-            // 
-            // colRemark
-            // 
-            this.colRemark.DataPropertyName = "Remark";
-            this.colRemark.HeaderText = "Remark";
-            this.colRemark.Name = "colRemark";
-            this.colRemark.ReadOnly = true;
-            // 
-            // colExpirationDate
-            // 
-            this.colExpirationDate.DataPropertyName = "ExpirationDate";
-            this.colExpirationDate.HeaderText = "Exp Date";
-            this.colExpirationDate.Name = "colExpirationDate";
-            this.colExpirationDate.ReadOnly = true;
-            this.colExpirationDate.Width = 95;
-            // 
-            // colProductionDate
-            // 
-            this.colProductionDate.DataPropertyName = "ProductionDate";
-            this.colProductionDate.HeaderText = "Prod Date";
-            this.colProductionDate.Name = "colProductionDate";
-            this.colProductionDate.ReadOnly = true;
-            this.colProductionDate.Width = 95;
             // 
             // tableLayoutPanel1
             // 
@@ -253,7 +83,7 @@
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(910, 46);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(801, 46);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // cbProduct
@@ -293,7 +123,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.flowLayoutPanel1.Controls.Add(this.gbInformation);
             this.flowLayoutPanel1.Controls.Add(this.gbSingleRowActions);
             this.flowLayoutPanel1.Controls.Add(this.gbBulkActions);
@@ -301,7 +131,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 46);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(910, 75);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 75);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // gbInformation
@@ -524,6 +354,15 @@
             this.lblBulkActionsMessage.TabIndex = 8;
             this.lblBulkActionsMessage.Text = "Check \"Enable\" button above";
             // 
+            // dgvInventoryUnit
+            // 
+            this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 121);
+            this.dgvInventoryUnit.Name = "dgvInventoryUnit";
+            this.dgvInventoryUnit.Size = new System.Drawing.Size(801, 288);
+            this.dgvInventoryUnit.TabIndex = 6;
+            // 
             // InventoryUnitListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -532,8 +371,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "InventoryUnitListUC";
-            this.Size = new System.Drawing.Size(910, 330);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).EndInit();
+            this.Size = new System.Drawing.Size(801, 409);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -544,14 +382,13 @@
             this.gbBulkActions.ResumeLayout(false);
             this.gbBulkActions.PerformLayout();
             this.pnlBulkActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvInventoryUnit;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox cbProduct;
         private System.Windows.Forms.Label label1;
@@ -573,25 +410,10 @@
         private System.Windows.Forms.GroupBox gbSingleRowActions;
         private System.Windows.Forms.GroupBox gbBulkActions;
         private System.Windows.Forms.CheckBox chkBulkActions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLotNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouseId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveReference;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplyPrice;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRemark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExpirationDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductionDate;
         private System.Windows.Forms.Label lblBulkActionsMessage;
         private System.Windows.Forms.Label lblInformationMessage;
         private System.Windows.Forms.Label lblSingleRowActionMessage;
         private System.Windows.Forms.ToolTip toolTip1;
+        private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvInventoryUnit;
     }
 }

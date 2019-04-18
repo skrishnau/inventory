@@ -74,29 +74,6 @@ namespace Service.Core.Business
             //throw new NotImplementedException();
         }
 
-        public void AddOrUpdateWarehouse(WarehouseModel model)
-        {
-            var entity = _context.Warehouse.FirstOrDefault(x => x.Id == model.Id);
-            BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
-            entity = WarehouseMapper.MapToEntity(model, entity);
-
-            if (entity.Id ==0)
-            {
-                entity.CreatedAt = DateTime.Now;
-                entity.UpdatedAt = DateTime.Now;
-                _context.Warehouse.Add(entity);
-                args.Mode = Utility.UpdateMode.ADD;
-            }
-            else
-            {
-                entity.UpdatedAt = DateTime.Now;
-                args.Mode = Utility.UpdateMode.EDIT;
-            }
-            _context.SaveChanges();
-            args.Model = WarehouseMapper.MapToModel(entity);
-            _listener.TriggerWarehouseUpdateEvent(null, args);
-        }
-
         public void DeleteBranch(int branchId)
         {
             var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branchId);
@@ -107,34 +84,6 @@ namespace Service.Core.Business
                 var args = new BranchEventArgs(BranchMapper.MapToBranchModel(dbEntity), Utility.UpdateMode.DELETE);
                 _listener.TriggerBranchUpdateEvent(null, args);
             }
-        }
-
-        public void DeleteWarehouse(int id)
-        {
-            var warehouse = _context.Warehouse.Find(id);
-            if (warehouse != null)
-            {
-                warehouse.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-                var args = new BaseEventArgs<WarehouseModel>(WarehouseMapper.MapToModel(warehouse), Utility.UpdateMode.DELETE);
-                _listener.TriggerWarehouseUpdateEvent(null, args);
-            }
-        }
-
-        public List<BranchModel> GetBranchList()
-        {
-            var branches = _context.Branch
-                   .Where(x => x.DeletedAt == null)
-                   .Select(x => new BranchModel()
-                   {
-                       Name = x.Name,
-                       Id = x.Id,
-                       CreatedAt = x.CreatedAt,
-                       UpdatedAt = x.UpdatedAt
-                   })
-                   .ToList();
-
-            return branches;
         }
 
         public List<CounterModel> GetCounterList()
@@ -155,56 +104,22 @@ namespace Service.Core.Business
             return counters;
         }
 
-        public WarehouseModel GetWarehouse(int warehouseId)
+        public List<BranchModel> GetBranchList()
         {
-            var warehouse = _context.Warehouse.Find(warehouseId);
-            if (warehouse != null)
-            {
-                return WarehouseMapper.MapToModel(warehouse);
-            }
-            return null;
-        }
-
-        private IQueryable<Warehouse> GetWarehouseEntityList()
-        {
-            return _context.Warehouse
-                  .Where(x => x.DeletedAt == null)
-                  .OrderBy(x=>x.Name);
-        }
-
-        public List<WarehouseModel> GetWarehouseList()
-        {
-            //var warehouses = 
-            var warehouses = WarehouseMapper.MapToModel(GetWarehouseEntityList())
-                   .ToList();
-
-            return warehouses;
-
-        }
-
-        /// <summary>
-        /// Returns list of "Use" able Warehouses only
-        /// </summary>
-        /// <returns>List of IdNamePair </returns>
-        public List<IdNamePair> GetWarehouseListForCombo()
-        {
-            var warehouses = GetWarehouseEntityList()
-                .Where(x => x.Use)
-                   .Select(x => new IdNamePair()
+            var branches = _context.Branch
+                   .Where(x => x.DeletedAt == null)
+                   .Select(x => new BranchModel()
                    {
-                       Id = x.Id,
                        Name = x.Name,
+                       Id = x.Id,
+                       CreatedAt = x.CreatedAt,
+                       UpdatedAt = x.UpdatedAt
                    })
                    .ToList();
 
-            return warehouses;
-
+            return branches;
         }
 
-        public List<WarehouseModel> GetWarehouseListUsableOnly()
-        {
-            return GetWarehouseList();//.Where(x=>x.Use)
-
-        }
+       
     }
 }

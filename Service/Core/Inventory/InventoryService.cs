@@ -13,11 +13,115 @@ using Service.DbEventArgs;
 using ViewModel.Core.Common;
 using Service.Utility;
 using ViewModel.Enums.Inventory;
+using ViewModel.Core.Business;
+using Infrastructure.Entities.Business;
+using DTO.Core.Business;
 
 namespace Service.Core.Inventory
 {
     public class InventoryService : IInventoryService
     {
+
+        #region Warehouse
+
+        public void AddOrUpdateWarehouse(WarehouseModel model)
+        {
+            var entity = _context.Warehouse.FirstOrDefault(x => x.Id == model.Id);
+            BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
+            entity = model.MapToEntity(entity);
+
+            if (entity.Id == 0)
+            {
+                entity.CreatedAt = DateTime.Now;
+                entity.UpdatedAt = DateTime.Now;
+                _context.Warehouse.Add(entity);
+                args.Mode = Utility.UpdateMode.ADD;
+            }
+            else
+            {
+                entity.UpdatedAt = DateTime.Now;
+                args.Mode = Utility.UpdateMode.EDIT;
+            }
+            _context.SaveChanges();
+            args.Model = entity.MapToModel();// WarehouseMapper.MapToModel(entity);
+            _listener.TriggerWarehouseUpdateEvent(null, args);
+        }
+
+        public void DeleteWarehouse(int id)
+        {
+            var warehouse = _context.Warehouse.Find(id);
+            if (warehouse != null)
+            {
+                warehouse.DeletedAt = DateTime.Now;
+                _context.SaveChanges();
+                var args = new BaseEventArgs<WarehouseModel>(warehouse.MapToModel(), Utility.UpdateMode.DELETE);
+                _listener.TriggerWarehouseUpdateEvent(null, args);
+            }
+        }
+
+        public WarehouseModel GetWarehouse(int warehouseId)
+        {
+            var warehouse = _context.Warehouse.Find(warehouseId);
+            if (warehouse != null)
+            {
+                return warehouse.MapToModel();// WarehouseMapper.MapToModel(warehouse);
+            }
+            return null;
+        }
+
+        private IQueryable<Warehouse> GetWarehouseEntityList()
+        {
+            return _context.Warehouse
+                  .Where(x => x.DeletedAt == null)
+                  .OrderBy(x => x.Name);
+        }
+
+        public List<WarehouseModel> GetWarehouseList()
+        {
+            //var warehouses = 
+            var warehouses = GetWarehouseEntityList().MapToModel() //WarehouseMapper.MapToModel()
+                   .ToList();
+
+            return warehouses;
+
+        }
+
+        /// <summary>
+        /// Returns list of "Use" able Warehouses only
+        /// </summary>
+        /// <returns>List of IdNamePair </returns>
+        public List<IdNamePair> GetWarehouseListForCombo()
+        {
+            var warehouses = GetWarehouseEntityList()
+                .Where(x => x.Use)
+                   .Select(x => new IdNamePair()
+                   {
+                       Id = x.Id,
+                       Name = x.Name,
+                   })
+                   .ToList();
+
+            return warehouses;
+
+        }
+
+        #endregion
+
+
+        #region Package
+
+        public List<IdNamePair> GetPackageListForCombo()
+        {
+            return _context.Package
+                .Where(x => x.Use)
+                .Select(x => new IdNamePair()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList();
+        }
+
+        #endregion
 
         private readonly DatabaseContext _context;
         private readonly IDatabaseChangeListener _listener;
@@ -367,7 +471,7 @@ namespace Service.Core.Inventory
         public void SaveUom(UomModel model)
         {
             var entity = _context.Uom.Find(model.Id);
-            entity = UomMapper.MapToEntity(model, entity);
+            entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
             var args = BaseEventArgs<UomModel>.Instance;
             // add
             if (model.Name == model.BaseUom)
@@ -397,14 +501,14 @@ namespace Service.Core.Inventory
             }
 
             _context.SaveChanges();
-            args.Model = UomMapper.MapToUomModel(entity);
+            args.Model = entity.MapToUomModel(); //UomMapper.MapToUomModel(entity);
             _listener.TriggerUomUpdateEvent(null, args);
         }
 
         public List<UomModel> GetUomList()
         {
             var uoms = _context.Uom.AsQueryable();
-            return UomMapper.MapToUomModel(uoms);
+            return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
         }
 
         public string SavePackage(PackageModel package)
@@ -445,7 +549,7 @@ namespace Service.Core.Inventory
         public List<AdjustmentCodeModel> GetAdjustmentCodeList()
         {
             var query = _context.AdjustmentCode.AsQueryable();
-            return AdjustmentCodeMapper.MapToModel(query);
+            return query.MapToModel();// AdjustmentCodeMapper.MapToModel(query);
         }
 
         public string SaveAdjustmentCode(AdjustmentCodeModel model)
@@ -460,7 +564,7 @@ namespace Service.Core.Inventory
 
             // get the package
             var entity = _context.AdjustmentCode.FirstOrDefault(x => x.Id == model.Id);
-            entity = AdjustmentCodeMapper.MapToEntity(model, entity);
+            entity = model.MapToEntity(entity);//AdjustmentCodeMapper.MapToEntity
             if (model.Id == 0)
             {
                 // add
@@ -472,19 +576,19 @@ namespace Service.Core.Inventory
                 args.Mode = Utility.UpdateMode.EDIT;
             }
             _context.SaveChanges();
-            args.Model = AdjustmentCodeMapper.MapToModel(entity);
+            args.Model = entity.MapToModel();//AdjustmentCodeMapper.MapToModel(entity)
             _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
             return msg;
         }
 
-        public List<UomModel> GetUomListUsableOnly()
+        public List<IdNamePair> GetUomListForCombo()
         {
-            return GetUomList().Where(x => x.Use).ToList();
-        }
-
-        public List<PackageModel> GetPackageListUsableOnly()
-        {
-            return GetPackageList().Where(x => x.Use).ToList();
+            return GetUomList().Where(x => x.Use)
+                .Select(x=> new IdNamePair()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).ToList();
         }
 
         public List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly()
@@ -686,6 +790,17 @@ namespace Service.Core.Inventory
            // var list = InventoryUnitMapper.MapToModel(updatedEntryList);
             var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
             _listener.TriggerInventoryUnitUpdateEvent(null, args);
+        }
+
+        public List<IdNamePair> GetSupplierListForCombo()
+        {
+            return _context.Supplier
+                //.Where(x=>x.Use)
+                .Select(x => new IdNamePair()
+                {
+                    Id  = x.Id,
+                    Name = x.BasicInfo.Name,
+                }).ToList();
         }
 
 

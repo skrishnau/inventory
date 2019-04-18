@@ -19,15 +19,5 @@ namespace Service.Core.Business
         List<BranchModel> GetBranchList();
         void DeleteBranch(int branchId);
 
-
-        WarehouseModel GetWarehouse(int warehouseId);
-        List<WarehouseModel> GetWarehouseList();
-        List<IdNamePair> GetWarehouseListForCombo();
-        List<WarehouseModel> GetWarehouseListUsableOnly();
-        void AddOrUpdateWarehouse(WarehouseModel model);
-        void DeleteWarehouse(int id);
-
-
-
     }
 }
