@@ -172,7 +172,7 @@ namespace IMS
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
 
             container.Register<InventoryMoveForm>(Lifestyle.Scoped);
-            container.Register<InventoryReceiveForm>(Lifestyle.Scoped);
+            container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
 
 
 

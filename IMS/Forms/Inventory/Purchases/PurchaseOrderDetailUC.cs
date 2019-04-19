@@ -16,6 +16,7 @@ using IMS.Forms.Purchases;
 using Service.Listeners;
 using IMS.Forms.Inventory.Purchases.Order;
 using IMS.Forms.Inventory.Units.Actions;
+using Service.Enums;
 
 namespace IMS.Forms.Inventory.Purchases
 {
@@ -230,8 +231,8 @@ namespace IMS.Forms.Inventory.Purchases
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var invReceiveForm = Program.container.GetInstance<InventoryReceiveForm>();
-                invReceiveForm.SetData(_purchaseOrderId);
+                var invReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                invReceiveForm.SetData(AdjustmentTypeEnum.POReceive, _purchaseOrderId);
                 invReceiveForm.ShowDialog();
             }
         }

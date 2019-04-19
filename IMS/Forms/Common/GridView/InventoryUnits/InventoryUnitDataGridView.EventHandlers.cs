@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace IMS.Forms.Common.GridView.InventoryUnits
@@ -12,17 +9,25 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
     //
     public partial class InventoryUnitDataGridView
     {
-        private bool _isCellDirty;
-        private int _checkCount;
-        private bool _isUnSelectable;
 
         private void InitializeEvents()
         {
+            // 
+            // this DataGridView
+            //
             this.DataError += InventoryUnitDataGridView_DataError;
             this.CurrentCellDirtyStateChanged += InventoryUnitDataGridView_CurrentCellDirtyStateChanged;
             this.CellValidating += InventoryUnitDataGridView_CellValidating;
             this.SelectionChanged += InventoryUnit_SelectionChanged;
             this.CellContentClick += InventoryUnit_CellContentClick;
+            this.CellEnter += InventoryUnitDataGridView_CellEnter;
+            this.CellLeave += InventoryUnitDataGridView_CellLeave;
+            this.ColumnWidthChanged += InventoryUnitDataGridView_ColumnWidthChanged;
+            this.Scroll += InventoryUnitDataGridView_Scroll;
+            //
+            // Datetime Picker
+            //
+            _dtPicker.TextChanged += _dtPicker_TextChanged;
         }
 
         //
@@ -64,23 +69,23 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         {
                             row.Cells[e.ColumnIndex].ErrorText = string.Empty;
                             // populate
-                            row.Cells[this.colProduct.Index].Value = product.Name;
-                            row.Cells[this.colPackageId.Index].Value = product.Package;
+                            row.Cells[this.colProductId.Index].Value = product.Name;
                             row.Cells[this.colProduct.Index].Value = product.Name;
                             row.Cells[this.colSupplyPrice.Index].Value = product.SupplyPrice;
                             row.Cells[this.colPackageId.Index].Value = product.PackageId;
                             row.Cells[this.colUomId.Index].Value = product.BaseUomId;
-                            //row.Cells[this.colInStock.Index].Value = product.InStockQuantity;
-                            //row.Cells[this.colOnOrder.Index].Value = product.OnOrderQuantity;
+                            row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
+                            row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
                             //row.Cells[this.colRate.Index].Value = product.SupplyPrice;
-                            // UpdateTotalColumn(e);
+                            UpdateTotalColumn(e);
                         }
                     }
                     // handle rate and quantity change to update Total
-                    //else if (e.ColumnIndex == colQuantity.Index || e.ColumnIndex == colRate.Index)
-                    //{
-                    //    UpdateTotalColumn(e);
-                    //}
+                    // don't do 'else' here cause supplyPrice and unitQuantity columns are already handeled above
+                    if (e.ColumnIndex == colUnitQuantity.Index || e.ColumnIndex == colSupplyPrice.Index)
+                    {
+                        UpdateTotalColumn(e);
+                    }
                 }
             }
         }
@@ -108,30 +113,101 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 this.ClearSelection();
             }
         }
-
-
-
-        #region Variables Expose
-
-        public void SetSelectable(bool isSelectable)
+        //
+        // Cell Enter
+        //
+        private void InventoryUnitDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            _isUnSelectable = !isSelectable;
-            if (!isSelectable)
-                this.ClearSelection();
+            this.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = string.Empty;
+            if (e.ColumnIndex == colProductionDate.Index
+                || e.ColumnIndex == colExpirationDate.Index)
+            {
+                _rectangle = this.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+
+                _dtPicker.Size = new Size(17, _rectangle.Height);
+                _dtPicker.Location = new Point(_rectangle.X + _rectangle.Width - 17, _rectangle.Y);
+                _dtPicker.Visible = true;
+                // set
+                _dtPicker.TextChanged -= _dtPicker_TextChanged;
+                var value = this.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                _dtPicker.Text = value == null ? "" : value.ToString();
+                _dtPicker.TextChanged += _dtPicker_TextChanged;
+            }
+        }
+        //
+        // Cell Leave
+        //
+        private void InventoryUnitDataGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colProductionDate.Index
+               || e.ColumnIndex == colExpirationDate.Index)
+            {
+                _dtPicker.Visible = false;
+            }
+        }
+        //
+        // Scroll
+        //
+        private void InventoryUnitDataGridView_Scroll(object sender, ScrollEventArgs e)
+        {
+            _dtPicker.Visible = false;
+        }
+        //
+        // Column Width Changed
+        //
+        private void InventoryUnitDataGridView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            _dtPicker.Visible = false;
         }
 
-        public void ResetCheckCount()
+        //
+        // DateTimePicker Text Changed
+        // 
+        private void _dtPicker_TextChanged(object sender, EventArgs e)
         {
-            _checkCount = 0;
+            this.CurrentCell.Value = _dtPicker.Text;
+            this.BeginEdit(true);
         }
 
-        public void ShowCheckColumn(bool show)
-        {
-            colCheck.Visible = show;
-            // when check box is shown, don't allow row selection
-            SetSelectable(!show);
-        }
 
-        #endregion
+
+        private void UpdateTotalColumn(DataGridViewCellValidatingEventArgs e)
+        {
+            var row = this.Rows[e.RowIndex];
+            object qtyVal = row.Cells[colUnitQuantity.Name].Value;
+            object rateVal = row.Cells[colSupplyPrice.Name].Value;
+            decimal quantity = 0, rate = 0;
+
+            if (e.ColumnIndex == colUnitQuantity.Index)
+            {
+                qtyVal = e.FormattedValue; // row.Cells[colQuantity.Name].Value;
+            }
+            else if (e.ColumnIndex == colSupplyPrice.Index)
+            {
+                rateVal = e.FormattedValue;
+            }
+            decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
+            decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out rate);
+            row.Cells[colTotalSupplyAmount.Index].Value = quantity * rate;
+        }
     }
 }
+
+
+
+
+/*
+    if (e.ColumnIndex == colLotNumber.Index)
+    {
+        GetLotNumber(row, e.FormattedValue);
+    }
+    //else if (e.ColumnIndex == colPackageId.Index)
+    //{
+    //    GetPackageId(row, e.FormattedValue);
+    //}
+    else if (e.ColumnIndex == colUnitQuantity.Index)
+    {
+        GetUnitQuantity(row, e.FormattedValue);
+    }
+    else 
+ */

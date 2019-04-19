@@ -1,6 +1,6 @@
 ﻿namespace IMS.Forms.Inventory.Units.Actions
 {
-    partial class InventoryReceiveForm
+    partial class InventoryAdjustmentForm
     {
         /// <summary>
         /// Required designer variable.

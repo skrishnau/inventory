@@ -37,6 +37,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private void InitializeComboBoxData()
         {
             //
+            // Product
+            //
+            //PopulateProduct();
+            //
             // Warehouse
             //
             PopulateWarehouse();
@@ -52,8 +56,21 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // UOM
             //
             PopulateUom();
+            
         }
-
+        // 
+        // Product
+        //
+        private void PopulateProduct()
+        {
+            var column = this.Columns[this.colProductId.Index] as DataGridViewComboBoxColumn;
+            if (column != null)
+            {
+                column.DataSource = _inventoryService.GetProductListForCombo();
+                column.ValueMember = "Id";
+                column.DisplayMember = "Name";
+            }
+        }
         //
         // Warehouse Population
         //

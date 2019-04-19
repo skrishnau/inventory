@@ -44,41 +44,51 @@ namespace Service.Core.Inventory
 
         #endregion
 
-        List<BrandModel> GetBrandList();
-        void AddUpdateBrand(BrandModel brand);
+
+        #region Product
+
+        List<IdNamePair> GetProductListForCombo();
+        List<ProductModel> GetProductListForGridView();
+        ProductModel GetProduct(int productId);
+        ProductModel GetProductForEdit(int productId);
+        ProductModel GetProductBySKU(string sku);
+        void AddUpdateProduct(ProductModel product);
+        void DeleteProduct(int id);
+
+        #endregion
+
+        List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId);
+
+
+        #region Category
+
+
 
         List<CategoryModel> GetCategoryList(int? parentCategoryId);
         CategoryModel GetCategory(string v);
         void AddUpdateCategory(CategoryModel category);
         void DeleteCategory(CategoryModel categoryModel);
 
-        List<ProductModel> GetProductListForGridView();
-        ProductModel GetProduct(int productId);
-        ProductModel GetProductForEdit(int productId);
-        List<IdNamePair> GetProductIdNameList();
-        ProductModel GetProductBySKU(string sku);
-        void AddUpdateProduct(ProductModel product);
+        #endregion
+
+        List<BrandModel> GetBrandList();
+        void AddUpdateBrand(BrandModel brand);
+
         List<IdNamePair> GetAdjustmentCodeListForCombo();
         List<IdNamePair> GetPositiveAdjustmentCodeListForCombo();
         List<IdNamePair> GetNegativeAdjustmentCodeListForCombo();
-        void DeleteProduct(int id);
 
         List<InventoryUnitModel> GetInventoryUnitList();
-        
 
 
-        List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId);
+
         void SaveUom(UomModel data);
 
+        #region Inventory Actions
+
         void MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
-        
-        List<AdjustmentCodeModel> GetAdjustmentCodeList();
-        List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly();
-        string SaveAdjustmentCode(AdjustmentCodeModel model);
 
-        // ===== Inventory Units ====== //
         void MergeInventoryUnits(List<InventoryUnitModel> list);
-
         /// <summary>
         /// 
         /// </summary>
@@ -86,7 +96,22 @@ namespace Service.Core.Inventory
         /// <param name="model"></param>
         void SplitInventoryUnit(List<decimal> quantityList, InventoryUnitModel model);
 
-        void SaveDirectReceive(List<InventoryUnitModel> list);
+        string SaveDirectReceive(List<InventoryUnitModel> list);
+        string SaveDirectIssue(List<InventoryUnitModel> list);
+
+        #endregion
+
+        #region Adjustment Codes
+
+        List<AdjustmentCodeModel> GetAdjustmentCodeList();
+        List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly();
+        string SaveAdjustmentCode(AdjustmentCodeModel model);
+
+
+        #endregion
+
+
+
     }
 }
 

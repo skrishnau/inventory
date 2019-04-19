@@ -1,6 +1,7 @@
 ﻿using Service.Core.Inventory;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 {
     public partial class InventoryUnitDataGridView
     {
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -424,32 +426,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.HeaderText = "Reference";
             colIsHold.Visible = true;
 
-            foreach (DataGridViewColumn column in this.Columns)
-            {
-                column.ReadOnly = true;
-            }
+            MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
         }
-
-        //public void DesignForInventoryUnitListing()
-        //{
-        //    //this.ClearSelection();
-
-
-        //    //this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-        //    //colProduct.Visible = true;
-        //    //colSKU.Visible = true;
-        //    //colUnitQuantity.Visible = true;
-        //    //colLotNumber.Visible = true;
-        //    //colWarehouseId.Visible = true;
-        //    //colReceiveReference.Visible = true;
-        //    //colSupplyPrice.Visible = true;
-        //    //colRemark.Visible = true;
-        //    //colIsHold.Visible = true;
-        //    //colExpirationDate.Visible = true;
-        //}
-
         //
         // PO Receive designs
         //
@@ -473,18 +452,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         public void DesignForDirectReceive()
         {
-            //foreach
-            //this.Columns[colProduct.Index].Visible = true;
-
-            //((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            //this.SuspendLayout();
-            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.AllowUserToAddRows = true;
             this.AllowUserToDeleteRows = true;
             colProduct.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackageId.Visible = true;
+            colPackageId.ReadOnly = true;
             colWarehouseId.Visible = true;
             colLotNumber.Visible = true;
             colProductionDate.Visible = true;
@@ -492,8 +468,43 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
             colIsHold.Visible = true;
-            //((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            //this.ResumeLayout(false);
+            colRemark.Visible = true;
+        }
+        //
+        // Direct Issue designs
+        //
+        public void DesignForDirectIssue()
+        {
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            //this.AllowUserToAddRows = true;
+            //this.AllowUserToDeleteRows = true;
+            colProduct.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colPackageQuantity.Visible = true;
+            //colPackageId.Visible = true;
+            //colPackageId.ReadOnly = true;
+            colWarehouseId.Visible = true;
+            colLotNumber.Visible = true;
+            colProductionDate.Visible = true;
+            colExpirationDate.Visible = true;
+            colReceiveReference.Visible = true;
+            colReceiveReference.HeaderText = "Reference";
+            colReceiveDate.Visible = true;
+            colRemark.Visible = true;
+
+            MakeAllColumnsReadOnly();
+            colUnitQuantity.ReadOnly = false;
+            colPackageQuantity.ReadOnly = false;
+        }
+
+        private void MakeAllColumnsReadOnly()
+        {
+            foreach (DataGridViewColumn column in this.Columns)
+            {
+                column.ReadOnly = true;
+            }
         }
 
         #endregion
@@ -543,8 +554,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         #endregion
 
+        //
+        // Tooltip
+        //
         public System.Windows.Forms.ToolTip toolTip1;
-
+        //
+        // DateTime Picker for Cells
+        //
+        DateTimePicker _dtPicker = new DateTimePicker();
+        Rectangle _rectangle;
 
 
 

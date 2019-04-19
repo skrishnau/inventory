@@ -454,9 +454,9 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
-            this.groupBox5.Location = new System.Drawing.Point(259, 6);
+            this.groupBox5.Location = new System.Drawing.Point(257, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(180, 107);
+            this.groupBox5.Size = new System.Drawing.Size(182, 107);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Pricing";
@@ -464,8 +464,8 @@
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.8046F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.1954F));
             this.tableLayoutPanel7.Controls.Add(this.numSupplyPrice, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.label9, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.label21, 0, 1);
@@ -480,13 +480,13 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(174, 88);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(176, 88);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // numSupplyPrice
             // 
             this.numSupplyPrice.DecimalPlaces = 1;
-            this.numSupplyPrice.Location = new System.Drawing.Point(90, 3);
+            this.numSupplyPrice.Location = new System.Drawing.Point(74, 3);
             this.numSupplyPrice.Name = "numSupplyPrice";
             this.numSupplyPrice.Size = new System.Drawing.Size(81, 20);
             this.numSupplyPrice.TabIndex = 6;
@@ -496,7 +496,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 13);
+            this.label9.Size = new System.Drawing.Size(42, 26);
             this.label9.TabIndex = 0;
             this.label9.Text = "Supply Price";
             // 
@@ -521,7 +521,7 @@
             // numMarkupPercent
             // 
             this.numMarkupPercent.DecimalPlaces = 1;
-            this.numMarkupPercent.Location = new System.Drawing.Point(90, 32);
+            this.numMarkupPercent.Location = new System.Drawing.Point(74, 32);
             this.numMarkupPercent.Name = "numMarkupPercent";
             this.numMarkupPercent.Size = new System.Drawing.Size(81, 20);
             this.numMarkupPercent.TabIndex = 7;
@@ -529,7 +529,7 @@
             // numRetailPrice
             // 
             this.numRetailPrice.DecimalPlaces = 1;
-            this.numRetailPrice.Location = new System.Drawing.Point(90, 61);
+            this.numRetailPrice.Location = new System.Drawing.Point(74, 61);
             this.numRetailPrice.Name = "numRetailPrice";
             this.numRetailPrice.Size = new System.Drawing.Size(81, 20);
             this.numRetailPrice.TabIndex = 8;
@@ -539,7 +539,7 @@
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Location = new System.Drawing.Point(442, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(220, 107);
+            this.groupBox4.Size = new System.Drawing.Size(238, 107);
             this.groupBox4.TabIndex = 10;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Order";
@@ -547,8 +547,8 @@
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.07477F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.92523F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.58621F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.41379F));
             this.tableLayoutPanel6.Controls.Add(this.numMonthlyDemand, 1, 2);
             this.tableLayoutPanel6.Controls.Add(this.numEOQ, 1, 1);
             this.tableLayoutPanel6.Controls.Add(this.label31, 0, 2);
@@ -562,13 +562,13 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.68182F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.77273F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.68182F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(214, 88);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(232, 88);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // numMonthlyDemand
             // 
             this.numMonthlyDemand.DecimalPlaces = 1;
-            this.numMonthlyDemand.Location = new System.Drawing.Point(123, 63);
+            this.numMonthlyDemand.Location = new System.Drawing.Point(125, 63);
             this.numMonthlyDemand.Name = "numMonthlyDemand";
             this.numMonthlyDemand.Size = new System.Drawing.Size(88, 20);
             this.numMonthlyDemand.TabIndex = 5;
@@ -576,7 +576,7 @@
             // numEOQ
             // 
             this.numEOQ.DecimalPlaces = 1;
-            this.numEOQ.Location = new System.Drawing.Point(123, 29);
+            this.numEOQ.Location = new System.Drawing.Point(125, 29);
             this.numEOQ.Name = "numEOQ";
             this.numEOQ.Size = new System.Drawing.Size(88, 20);
             this.numEOQ.TabIndex = 4;
@@ -604,13 +604,13 @@
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(3, 26);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(112, 26);
+            this.label30.Size = new System.Drawing.Size(115, 26);
             this.label30.TabIndex = 1;
             this.label30.Text = "EOQ (Economic Order Quantity)";
             // 
             // numLeadDays
             // 
-            this.numLeadDays.Location = new System.Drawing.Point(123, 3);
+            this.numLeadDays.Location = new System.Drawing.Point(125, 3);
             this.numLeadDays.Name = "numLeadDays";
             this.numLeadDays.Size = new System.Drawing.Size(88, 20);
             this.numLeadDays.TabIndex = 3;
@@ -620,7 +620,7 @@
             this.groupBox3.Controls.Add(this.tableLayoutPanel5);
             this.groupBox3.Location = new System.Drawing.Point(8, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(245, 107);
+            this.groupBox3.Size = new System.Drawing.Size(249, 107);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Replenishment";
@@ -628,8 +628,8 @@
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.16667F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.83333F));
             this.tableLayoutPanel5.Controls.Add(this.label28, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.numReorderQuantity, 1, 2);
             this.tableLayoutPanel5.Controls.Add(this.label27, 0, 1);
@@ -643,7 +643,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(239, 88);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(243, 88);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // label28
@@ -658,7 +658,7 @@
             // numReorderQuantity
             // 
             this.numReorderQuantity.DecimalPlaces = 1;
-            this.numReorderQuantity.Location = new System.Drawing.Point(122, 61);
+            this.numReorderQuantity.Location = new System.Drawing.Point(110, 61);
             this.numReorderQuantity.Name = "numReorderQuantity";
             this.numReorderQuantity.Size = new System.Drawing.Size(114, 20);
             this.numReorderQuantity.TabIndex = 6;
@@ -675,7 +675,7 @@
             // numReorderPoint
             // 
             this.numReorderPoint.DecimalPlaces = 1;
-            this.numReorderPoint.Location = new System.Drawing.Point(122, 32);
+            this.numReorderPoint.Location = new System.Drawing.Point(110, 32);
             this.numReorderPoint.Name = "numReorderPoint";
             this.numReorderPoint.Size = new System.Drawing.Size(114, 20);
             this.numReorderPoint.TabIndex = 5;
@@ -693,7 +693,7 @@
             // cbWarehouse
             // 
             this.cbWarehouse.FormattingEnabled = true;
-            this.cbWarehouse.Location = new System.Drawing.Point(122, 3);
+            this.cbWarehouse.Location = new System.Drawing.Point(110, 3);
             this.cbWarehouse.Name = "cbWarehouse";
             this.cbWarehouse.Size = new System.Drawing.Size(114, 21);
             this.cbWarehouse.TabIndex = 3;

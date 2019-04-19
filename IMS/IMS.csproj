@@ -140,6 +140,7 @@
     <Compile Include="Forms\Common\ComboWithLabelUC.Designer.cs">
       <DependentUpon>ComboWithLabelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Validations\GreaterThanZeroFieldValidator.cs" />
     <Compile Include="Forms\Common\Validations\RequiredFieldValidator.cs" />
     <Compile Include="Forms\Common\VerticalSplitter.cs">
       <SubType>Component</SubType>
@@ -168,17 +169,11 @@
     <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.Designer.cs">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Units\Actions\InventoryIssueForm.cs">
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Units\Actions\InventoryIssueForm.Designer.cs">
-      <DependentUpon>InventoryIssueForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Units\Actions\InventoryReceiveForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Units\Actions\InventoryReceiveForm.Designer.cs">
-      <DependentUpon>InventoryReceiveForm.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.Designer.cs">
+      <DependentUpon>InventoryAdjustmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Packages\PackageUC.cs">
       <SubType>UserControl</SubType>
@@ -570,11 +565,8 @@
     <EmbeddedResource Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.resx">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryIssueForm.resx">
-      <DependentUpon>InventoryIssueForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryReceiveForm.resx">
-      <DependentUpon>InventoryReceiveForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.resx">
+      <DependentUpon>InventoryAdjustmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Packages\PackageUC.resx">
       <DependentUpon>PackageUC.cs</DependentUpon>

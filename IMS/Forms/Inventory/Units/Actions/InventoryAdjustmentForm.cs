@@ -3,6 +3,7 @@ using IMS.Forms.Common.GridView;
 using Service.Core.Business;
 using Service.Core.Inventory;
 using Service.Core.Purchases.PurchaseOrders;
+using Service.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,12 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Purchases;
 
 namespace IMS.Forms.Inventory.Units.Actions
 {
-    public partial class InventoryReceiveForm : Form
+    public partial class InventoryAdjustmentForm : Form
     {
         private readonly IInventoryService _inventoryService;
         private readonly IBusinessService _businessService;
@@ -29,16 +31,18 @@ namespace IMS.Forms.Inventory.Units.Actions
         private int _purchaseOrderId;
         private PurchaseOrderModel _purchaseOrderModel;
 
+        private AdjustmentTypeEnum _adjustmentType;
+        private List<InventoryUnitModel> _selectedInventoryUnits;
 
-        public InventoryReceiveForm(IInventoryService inventoryService, IBusinessService businessService, IPurchaseService purchaseService)
+        public InventoryAdjustmentForm(IInventoryService inventoryService, IBusinessService businessService, IPurchaseService purchaseService)
         {
             _inventoryService = inventoryService;
             _businessService = businessService;
             _purchaseService = purchaseService;
 
             InitializeComponent();
-            InitializeGridView();
 
+            dgvReceiveList.InitializeGridViewControls(_inventoryService);
 
             this.Load += InventoryReceiveForm_Load;
         }
@@ -49,22 +53,28 @@ namespace IMS.Forms.Inventory.Units.Actions
             PopulateAdjustmentCodeCombo();
         }
 
-        #region Initialization Functions
-
-        private void InitializeGridView()
-        {
-            dgvReceiveList.InitializeGridViewControls(_inventoryService);
-        }
-
-        #endregion
-
-
 
         #region Populating Functions
 
         private void PopulateAdjustmentCodeCombo()
         {
-            var adjustmentList = _inventoryService.GetPositiveAdjustmentCodeListForCombo();
+            List<IdNamePair> adjustmentList;
+            switch (_adjustmentType)
+            {
+                case AdjustmentTypeEnum.DirectIssue:
+                    adjustmentList = _inventoryService.GetNegativeAdjustmentCodeListForCombo();
+                    break;
+                case AdjustmentTypeEnum.DirectReceive:
+                    adjustmentList = _inventoryService.GetPositiveAdjustmentCodeListForCombo();
+                    break;
+                case AdjustmentTypeEnum.POReceive:
+                    adjustmentList = _inventoryService.GetPositiveAdjustmentCodeListForCombo();
+                    cbAdjustmentCode.Enabled = false;
+                    break;
+                default:
+                    adjustmentList = new List<IdNamePair>();
+                    break;
+            }
             cbAdjustmentCode.DataSource = adjustmentList;
             cbAdjustmentCode.ValueMember = "Id";
             cbAdjustmentCode.DisplayMember = "Name";
@@ -73,19 +83,42 @@ namespace IMS.Forms.Inventory.Units.Actions
         #endregion
 
 
-        public void SetData(int purchaseOrderId)
+        public void SetData(AdjustmentTypeEnum adjType, int purchaseOrderId = 0, List<InventoryUnitModel> selectedInventoryUnits = null)
         {
-            var model = _purchaseService.GetPurchaseOrder(purchaseOrderId);
-            SetData(model);
+            _adjustmentType = adjType;
+            switch (adjType)
+            {
+                case AdjustmentTypeEnum.DirectIssue:
+                    _selectedInventoryUnits = selectedInventoryUnits;
+                    this.Text = "Direct Issue";
+                    btnSave.Text = "Issue";
+                    dgvReceiveList.DesignForDirectIssue();
+                    if (selectedInventoryUnits != null)
+                    {
+                        dgvReceiveList.DataSource = selectedInventoryUnits;
+                    }
+                    break;
+                case AdjustmentTypeEnum.DirectReceive:
+                    dgvReceiveList.DesignForDirectReceive();
+                    break;
+                case AdjustmentTypeEnum.POReceive:
+                    _purchaseOrderId = purchaseOrderId;
+                    dgvReceiveList.DesignForPurchaseOrderReceive();
+                    if (purchaseOrderId > 0)
+                    {
+                        var model = _purchaseService.GetPurchaseOrder(purchaseOrderId);
+                        SetDataForPurchaseOrder(model);
+                    }
+                    break;
+            }
         }
 
-        public void SetData(PurchaseOrderModel model)
+        // private cause we need to handle 3 cases and shouldn't expose for PurchaseOrder only
+        private void SetDataForPurchaseOrder(PurchaseOrderModel model)
         {
-            _purchaseOrderId = model == null ? 0 : model.Id;
             _purchaseOrderModel = model;
             if (model != null)
             {
-                dgvReceiveList.DesignForPurchaseOrderReceive();
                 // populate
                 this.Text = "Receive Against PO " + model.OrderNumber;
                 cbAdjustmentCode.Text = "PO Receive";
@@ -97,10 +130,6 @@ namespace IMS.Forms.Inventory.Units.Actions
                     column.ReadOnly = true;
                 }
             }
-            else
-            {
-                dgvReceiveList.DesignForDirectReceive();
-            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -110,37 +139,67 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void Save()
         {
-            if (_purchaseOrderId == 0)
+            List<InventoryUnitModel> list;
+            var msg = string.Empty;
+            var actionForMsg = string.Empty;
+            switch (_adjustmentType)
             {
-                var list = dgvReceiveList.GetItems();
-
-                _inventoryService.SaveDirectReceive(list);
-
+                case AdjustmentTypeEnum.DirectIssue:
+                    actionForMsg = "Issued";
+                    
+                    list = dgvReceiveList.GetItems();
+                    
+                    if (list != null)
+                    {
+                        if (list.Count == 0)
+                        {
+                            PopupMessage.ShowErrorMessage("At least one item expected to receive");
+                            this.Focus();
+                        }
+                        else
+                        {
+                            msg = _inventoryService.SaveDirectIssue(list);
+                        }
+                    }
+                    break;
+                case AdjustmentTypeEnum.DirectReceive:
+                    actionForMsg = "Received";
+                    list = dgvReceiveList.GetItems();
+                    if (list != null)
+                    {
+                        if (list.Count == 0)
+                        {
+                            PopupMessage.ShowErrorMessage("At least one item expected to receive");
+                            this.Focus();
+                        }
+                        else
+                        {
+                            msg = _inventoryService.SaveDirectReceive(list);
+                        }
+                    }
+                    break;
+                case AdjustmentTypeEnum.POReceive:
+                    // PO Receive
+                    actionForMsg = "Received";
+                    var dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNo);
+                    if (dialogResult.Equals(DialogResult.Yes))
+                    {
+                        msg = _purchaseService.SetReceived(_purchaseOrderId);
+                        
+                    }
+                    break;
+            }
+            if (string.IsNullOrEmpty(msg))
+            {
+                PopupMessage.ShowSuccessMessage("Successfully "+actionForMsg+"!");
+                this.Close();
             }
             else
             {
-                // PO Receive
-                var dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNo);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    var msg = _purchaseService.SetReceived(_purchaseOrderId);
-                    if (string.IsNullOrEmpty(msg))
-                    {
-                        PopupMessage.ShowSuccessMessage("Successfully Received!");
-                        this.Close();
-                    }
-                    else
-                    {
-                        PopupMessage.ShowErrorMessage(msg);
-                        this.Focus();
-                    }
-                }
+                PopupMessage.ShowErrorMessage(msg);
+                this.Focus();
             }
-
-
         }
-
-        
     }
 }
 

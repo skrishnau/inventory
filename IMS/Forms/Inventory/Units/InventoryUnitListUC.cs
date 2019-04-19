@@ -16,6 +16,7 @@ using IMS.Forms.Common;
 using SimpleInjector.Lifestyles;
 using IMS.Forms.Inventory.Units.Actions;
 using IMS.Forms.Common.Dialogs;
+using Service.Enums;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -191,8 +192,12 @@ namespace IMS.Forms.Inventory.Units
 
         private void BtnIssue_Click(object sender, EventArgs e)
         {
-            var form = new InventoryIssueForm();
-            form.ShowDialog();
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                directReceiveForm.SetData(AdjustmentTypeEnum.DirectIssue, 0, GetSelectedRows());
+                directReceiveForm.ShowDialog();
+            }
         }
 
         private void BtnDisassemble_Click(object sender, EventArgs e)

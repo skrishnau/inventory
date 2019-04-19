@@ -28,6 +28,7 @@ using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Units.Actions;
+using Service.Enums;
 
 namespace IMS.Forms.Inventory
 {
@@ -187,8 +188,8 @@ namespace IMS.Forms.Inventory
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var directReceiveForm = Program.container.GetInstance<InventoryReceiveForm>();
-                directReceiveForm.SetData(0);
+                var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                directReceiveForm.SetData(AdjustmentTypeEnum.DirectReceive);
                 directReceiveForm.ShowDialog();
             }
         }

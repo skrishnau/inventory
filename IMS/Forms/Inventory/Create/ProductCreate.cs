@@ -32,6 +32,7 @@ namespace IMS.Forms.Inventory.Create
         private readonly ISupplierService _supplierService;
 
         private RequiredFieldValidator _requiredValidator;
+        private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
         // variables
         private int _productId;
         // track the start index of dynamic attributes
@@ -79,12 +80,16 @@ namespace IMS.Forms.Inventory.Create
             //cbUom.Validating += RequiredField_Validating;
             //cbWarehouse.Validating += RequiredField_Validating;
 
-            var controls = new Control[]
+            var requiredControls = new Control[]
             {
                 cbCategory, tbLabelCode, tbProductName, tbSKU, cbPackage, cbSupplier, cbUom, cbWarehouse
             };
-            _requiredValidator = new RequiredFieldValidator(errorProvider1, controls);
-
+            _requiredValidator = new RequiredFieldValidator(errorProvider1, requiredControls);
+            var greaterControls = new Control[]
+            {
+                numSupplyPrice
+            };
+            _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider1, greaterControls);
 
             //btnAddOption.Click += BtnAddOption_Click;
             dgvVariants.EditingControlShowing += DgvVariants_EditingControlShowing;
@@ -104,6 +109,7 @@ namespace IMS.Forms.Inventory.Create
         private void SaveProduct()
         {
             var allValid = _requiredValidator.IsValid();
+            allValid = allValid && _greaterThanZeroFieldValidator.IsValid();
             if (!allValid)
             {
                 PopupMessage.ShowMissingInputsMessage();

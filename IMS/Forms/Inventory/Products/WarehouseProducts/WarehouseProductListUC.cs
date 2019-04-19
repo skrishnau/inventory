@@ -85,7 +85,7 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
 
         private void PopulateProducts()
         {
-            var products = _inventoryService.GetProductIdNameList();
+            var products = _inventoryService.GetProductListForCombo();
             var allProduct = new IdNamePair { Id=0, Name=" ---- All ---- " };
             products.Insert(0, allProduct);
             cbProduct.DataSource = products;

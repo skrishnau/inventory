@@ -79,7 +79,8 @@ namespace Service.Core.Inventory
         public List<WarehouseModel> GetWarehouseList()
         {
             //var warehouses = 
-            var warehouses = GetWarehouseEntityList().MapToModel() //WarehouseMapper.MapToModel()
+            var warehouses =
+                GetWarehouseEntityList().MapToModel() //WarehouseMapper.MapToModel()
                    .ToList();
 
             return warehouses;
@@ -119,6 +120,23 @@ namespace Service.Core.Inventory
                     Id = x.Id,
                     Name = x.Name
                 }).ToList();
+        }
+
+        #endregion
+
+        #region Product
+
+        public List<IdNamePair> GetProductListForCombo()
+        {
+            var products = GetProductEntityList()
+                .Where(x => x.Use)
+                .Select(x => new IdNamePair()
+                {
+                    Id = x.Id,
+                    Name = x.Name + " (" + x.SKU + ")",
+                })
+                .ToList();
+            return products;
         }
 
         #endregion
@@ -361,17 +379,7 @@ namespace Service.Core.Inventory
                 .Where(x => x.DeletedAt == null);
         }
 
-        public List<IdNamePair> GetProductIdNameList()
-        {
-            var products = GetProductEntityList()
-                .Select(x => new IdNamePair()
-                {
-                    Id = x.Id,
-                    Name = x.Name + " (" + x.SKU + ")",
-                })
-                .ToList();
-            return products;
-        }
+
 
         public List<ProductModel> GetProductListForGridView()
         {
@@ -584,7 +592,7 @@ namespace Service.Core.Inventory
         public List<IdNamePair> GetUomListForCombo()
         {
             return GetUomList().Where(x => x.Use)
-                .Select(x=> new IdNamePair()
+                .Select(x => new IdNamePair()
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -695,6 +703,35 @@ namespace Service.Core.Inventory
             _listener.TriggerInventoryUnitUpdateEvent(null, args);
         }
 
+        public string SaveDirectIssue(List<InventoryUnitModel> list)
+        {
+            var msg = string.Empty;
+            foreach (var model in list)
+            {
+                var entity = _context.InventoryUnit
+                    .Include(x => x.Product)
+                    .FirstOrDefault(x => x.Id == model.Id);
+                if (entity != null)
+                {
+                    if (model.UnitQuantity < entity.UnitQuantity)
+                    {
+                        // don't remove; just decrement
+                        entity.UnitQuantity = entity.UnitQuantity - model.UnitQuantity;
+                        entity.PackageQuantity = GetPackageQuantity(entity.UnitQuantity, entity.Product.UnitsInPackage);
+                    }
+                    else
+                    {
+                        // case is : model.UnitQuantity >= entity.UnitQuantity
+                        // remove the InventoryUnit
+                        _context.InventoryUnit.Remove(entity);
+                    }
+                }
+            }
+            _context.SaveChanges();
+            var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.DELETE);
+            _listener.TriggerInventoryUnitUpdateEvent(null, args);
+            return msg;
+        }
 
         public void SplitInventoryUnit(List<decimal> quantitySplitList, InventoryUnitModel model)
         {
@@ -773,7 +810,7 @@ namespace Service.Core.Inventory
         {
             var negative = AdjustmentType.Negative.ToString();
             return _context.AdjustmentCode
-               .Where(x => x.Use && x.Type== negative)
+               .Where(x => x.Use && x.Type == negative)
                .Select(x => new IdNamePair()
                {
                    Id = x.Id,
@@ -782,14 +819,16 @@ namespace Service.Core.Inventory
                .ToList();
         }
 
-        public void SaveDirectReceive(List<InventoryUnitModel> list)
+        public string SaveDirectReceive(List<InventoryUnitModel> list)
         {
+            var msg = string.Empty;
             var entityList = InventoryUnitMapper.MapToEntity(list);
             _context.InventoryUnit.AddRange(entityList);
             _context.SaveChanges();
-           // var list = InventoryUnitMapper.MapToModel(updatedEntryList);
+            // var list = InventoryUnitMapper.MapToModel(updatedEntryList);
             var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
             _listener.TriggerInventoryUnitUpdateEvent(null, args);
+            return msg;
         }
 
         public List<IdNamePair> GetSupplierListForCombo()
@@ -798,15 +837,22 @@ namespace Service.Core.Inventory
                 //.Where(x=>x.Use)
                 .Select(x => new IdNamePair()
                 {
-                    Id  = x.Id,
+                    Id = x.Id,
                     Name = x.BasicInfo.Name,
                 }).ToList();
         }
 
 
 
+
         #endregion
 
+
+        private decimal GetPackageQuantity(decimal unitQuantity, decimal unitsInPackage)
+        {
+            unitsInPackage = unitsInPackage == 0 ? 1 : unitsInPackage;
+            return Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
+        }
 
     }
 }
