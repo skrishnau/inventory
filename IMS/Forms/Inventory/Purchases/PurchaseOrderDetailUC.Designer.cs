@@ -67,6 +67,8 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblNoItemsMessage = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.pnlButtonsHeader.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -74,17 +76,19 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.lblName);
+            this.panel1.Controls.Add(this.btnBackToList);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 13);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(742, 43);
+            this.panel1.Padding = new System.Windows.Forms.Padding(5);
+            this.panel1.Size = new System.Drawing.Size(742, 31);
             this.panel1.TabIndex = 0;
             // 
             // lblStatus
@@ -92,7 +96,7 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(51, 10);
+            this.lblStatus.Location = new System.Drawing.Point(56, 5);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(51, 20);
             this.lblStatus.TabIndex = 1;
@@ -103,7 +107,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(0, 10);
+            this.lblName.Location = new System.Drawing.Point(5, 5);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(51, 20);
             this.lblName.TabIndex = 0;
@@ -111,11 +115,11 @@
             // 
             // pnlButtonsHeader
             // 
-            this.pnlButtonsHeader.BackColor = System.Drawing.Color.LightGray;
+            this.pnlButtonsHeader.BackColor = System.Drawing.Color.Lavender;
             this.pnlButtonsHeader.Controls.Add(this.flowLayoutPanel2);
             this.pnlButtonsHeader.Controls.Add(this.flowLayoutPanel1);
             this.pnlButtonsHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlButtonsHeader.Location = new System.Drawing.Point(0, 56);
+            this.pnlButtonsHeader.Location = new System.Drawing.Point(0, 31);
             this.pnlButtonsHeader.Name = "pnlButtonsHeader";
             this.pnlButtonsHeader.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.pnlButtonsHeader.Size = new System.Drawing.Size(742, 38);
@@ -351,19 +355,21 @@
             // 
             // btnBackToList
             // 
-            this.btnBackToList.AutoSize = true;
-            this.btnBackToList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnBackToList.Location = new System.Drawing.Point(0, 0);
+            this.btnBackToList.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnBackToList.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnBackToList.Location = new System.Drawing.Point(669, 5);
             this.btnBackToList.Name = "btnBackToList";
-            this.btnBackToList.Size = new System.Drawing.Size(68, 13);
+            this.btnBackToList.Size = new System.Drawing.Size(68, 21);
             this.btnBackToList.TabIndex = 2;
             this.btnBackToList.TabStop = true;
             this.btnBackToList.Text = "Back to list...";
+            this.btnBackToList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgvItems
             // 
             this.dgvItems.AllowUserToAddRows = false;
             this.dgvItems.AllowUserToDeleteRows = false;
+            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
@@ -376,12 +382,12 @@
             this.colTotal,
             this.colIsHold});
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(10, 102);
+            this.dgvItems.Location = new System.Drawing.Point(0, 190);
             this.dgvItems.Margin = new System.Windows.Forms.Padding(2);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
             this.dgvItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItems.Size = new System.Drawing.Size(722, 235);
+            this.dgvItems.Size = new System.Drawing.Size(742, 251);
             this.dgvItems.TabIndex = 10;
             // 
             // colId
@@ -456,46 +462,69 @@
             // 
             // splitter1
             // 
+            this.splitter1.BackColor = System.Drawing.Color.SlateGray;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(10, 81);
+            this.splitter1.Location = new System.Drawing.Point(0, 152);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(722, 8);
+            this.splitter1.Size = new System.Drawing.Size(742, 8);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dgvItems);
-            this.panel2.Controls.Add(this.lblNoItemsMessage);
-            this.panel2.Controls.Add(this.splitter1);
             this.panel2.Controls.Add(this.tableLayoutPanel1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 94);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 69);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(10);
-            this.panel2.Size = new System.Drawing.Size(742, 347);
+            this.panel2.Size = new System.Drawing.Size(742, 83);
             this.panel2.TabIndex = 11;
             // 
             // lblNoItemsMessage
             // 
             this.lblNoItemsMessage.AutoSize = true;
             this.lblNoItemsMessage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNoItemsMessage.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblNoItemsMessage.Location = new System.Drawing.Point(10, 89);
+            this.lblNoItemsMessage.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblNoItemsMessage.Location = new System.Drawing.Point(56, 0);
             this.lblNoItemsMessage.Name = "lblNoItemsMessage";
-            this.lblNoItemsMessage.Size = new System.Drawing.Size(283, 13);
+            this.lblNoItemsMessage.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.lblNoItemsMessage.Size = new System.Drawing.Size(283, 23);
             this.lblNoItemsMessage.TabIndex = 11;
             this.lblNoItemsMessage.Text = "There aren\'t any items. Please add items to send the order.";
             this.lblNoItemsMessage.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.label4.Size = new System.Drawing.Size(56, 30);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Items";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblNoItemsMessage);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 160);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(742, 30);
+            this.panel3.TabIndex = 13;
             // 
             // PurchaseOrderDetailUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dgvItems);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlButtonsHeader);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnBackToList);
             this.Name = "PurchaseOrderDetailUC";
             this.Size = new System.Drawing.Size(742, 441);
             this.panel1.ResumeLayout(false);
@@ -507,9 +536,9 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -554,5 +583,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel3;
     }
 }

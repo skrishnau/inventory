@@ -135,6 +135,7 @@ namespace IMS.Forms.Inventory.Purchases
             btnSendOrder.Enabled = true;
             btnSendOrder.Visible = true;
             lblStatus.Text = "( Open )";
+            pnlButtonsHeader.Visible = true;
         }
 
         private void DesignForCancelled()
@@ -150,6 +151,7 @@ namespace IMS.Forms.Inventory.Purchases
             btnSendOrder.Enabled = false;
             btnSendOrder.Visible = false;
             lblStatus.Text = "( Cancelled )";
+            pnlButtonsHeader.Visible = false;
         }
 
         private void DesignForSent()
@@ -165,6 +167,7 @@ namespace IMS.Forms.Inventory.Purchases
             btnSendOrder.Enabled = false;
             btnSendOrder.Visible = false;
             lblStatus.Text = "( Sent )";
+            pnlButtonsHeader.Visible = true;
         }
 
         private void DesignForReceived()
@@ -180,6 +183,7 @@ namespace IMS.Forms.Inventory.Purchases
             btnSendOrder.Enabled = false;
             btnSendOrder.Visible = false;
             lblStatus.Text = "( Received )";
+            pnlButtonsHeader.Visible = false;
         }
 
         #endregion
