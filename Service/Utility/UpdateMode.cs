@@ -8,6 +8,6 @@ namespace Service.Utility
 {
     public enum UpdateMode
     {
-        ADD, EDIT, DELETE
+        ADD, EDIT, DELETE, NONE
     }
 }

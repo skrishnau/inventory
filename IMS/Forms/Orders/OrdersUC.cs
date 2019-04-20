@@ -57,7 +57,7 @@ namespace IMS.Forms.Orders
 
         private void BtnPurchaseOrderList_Click(object sender, EventArgs e)
         {
-            var purchaseListUC = Program.container.GetInstance<PurchaseListUC>();
+            var purchaseListUC = Program.container.GetInstance<PurchaseOrderUC>();
             _bodyTemplate.pnlBody.Controls.Clear();
             purchaseListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(purchaseListUC);

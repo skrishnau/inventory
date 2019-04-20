@@ -134,9 +134,7 @@ namespace IMS
             container.Register<BranchCreate>(Lifestyle.Scoped);
 
             // --- inventory related --- //
-            container.Register<PurchaseListUC>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderCreateForm>(Lifestyle.Scoped);
+           
             container.Register<WarehouseProductListUC>(Lifestyle.Scoped);
 
             container.Register<WarehouseListUC>(Lifestyle.Scoped);
@@ -166,8 +164,7 @@ namespace IMS
             container.Register<InventoryTransfersListUC>(Lifestyle.Scoped);
             container.Register<TransferForm>(Lifestyle.Scoped);
 
-            container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
-
+            
             container.Register<InventoryDisassembleForm>(Lifestyle.Scoped);
             container.Register<InventoryMergeForm>(Lifestyle.Scoped);
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
@@ -175,7 +172,14 @@ namespace IMS
             container.Register<InventoryMoveForm>(Lifestyle.Scoped);
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
             container.Register<InventorySettingsUC>(Lifestyle.Scoped);
-
+            //
+            // Purchases
+            //
+            container.Register<PurchaseOrderUC>(Lifestyle.Scoped); // main
+            container.Register<PurchaseOrderListUC>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderCreateForm>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
 
 
             // Optionally verify the container.

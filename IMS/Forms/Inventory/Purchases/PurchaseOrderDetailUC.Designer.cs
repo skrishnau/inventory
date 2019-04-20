@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
+            this.btnBackToList = new System.Windows.Forms.LinkLabel();
             this.pnlButtonsHeader = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancelOrder = new System.Windows.Forms.Button();
@@ -53,7 +54,6 @@
             this.lblSupplierInvoice = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblExpectedDate = new System.Windows.Forms.Label();
-            this.btnBackToList = new System.Windows.Forms.LinkLabel();
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,6 +112,18 @@
             this.lblName.Size = new System.Drawing.Size(51, 20);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "label1";
+            // 
+            // btnBackToList
+            // 
+            this.btnBackToList.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnBackToList.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnBackToList.Location = new System.Drawing.Point(669, 5);
+            this.btnBackToList.Name = "btnBackToList";
+            this.btnBackToList.Size = new System.Drawing.Size(68, 21);
+            this.btnBackToList.TabIndex = 2;
+            this.btnBackToList.TabStop = true;
+            this.btnBackToList.Text = "Back to list...";
+            this.btnBackToList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlButtonsHeader
             // 
@@ -352,18 +364,6 @@
             this.lblExpectedDate.Size = new System.Drawing.Size(35, 13);
             this.lblExpectedDate.TabIndex = 22;
             this.lblExpectedDate.Text = "label7";
-            // 
-            // btnBackToList
-            // 
-            this.btnBackToList.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnBackToList.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnBackToList.Location = new System.Drawing.Point(669, 5);
-            this.btnBackToList.Name = "btnBackToList";
-            this.btnBackToList.Size = new System.Drawing.Size(68, 21);
-            this.btnBackToList.TabIndex = 2;
-            this.btnBackToList.TabStop = true;
-            this.btnBackToList.Text = "Back to list...";
-            this.btnBackToList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgvItems
             // 

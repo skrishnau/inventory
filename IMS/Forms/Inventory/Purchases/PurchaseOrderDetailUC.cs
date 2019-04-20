@@ -43,6 +43,8 @@ namespace IMS.Forms.Inventory.Purchases
 
         private void PurchaseOrderDetailUC_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
+
             InitializeListener();
         }
 

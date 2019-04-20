@@ -120,7 +120,7 @@ namespace IMS
         private void btnPurchases_Click(object sender, EventArgs e)
         {
             SetButtonSelection(sender);
-            var purchaseListUC = Program.container.GetInstance<PurchaseListUC>();
+            var purchaseListUC = Program.container.GetInstance<PurchaseOrderUC>();
             pnlBody.Controls.Clear();
             purchaseListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(purchaseListUC);

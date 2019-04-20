@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlEventArgs\PurchaseOrderEventArgs.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,11 +173,23 @@
     <Compile Include="Forms\Generals\GeneralUC.Designer.cs">
       <DependentUpon>GeneralUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductUC.Designer.cs">
+      <DependentUpon>ProductUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.Designer.cs">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderListUC.Designer.cs">
+      <DependentUpon>PurchaseOrderListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Settings\InventorySettingsUC.cs">
       <SubType>UserControl</SubType>
@@ -422,11 +435,11 @@
     <Compile Include="Forms\Inventory\Purchases\Order\PurchaseOrderAddItemForm.Designer.cs">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Purchases\PurchaseListUC.cs">
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Purchases\PurchaseListUC.Designer.cs">
-      <DependentUpon>PurchaseListUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Purchases\PurchaseOrderUC.Designer.cs">
+      <DependentUpon>PurchaseOrderUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Purchases\PurchaseOrderCreateForm.cs">
       <SubType>Form</SubType>
@@ -580,8 +593,14 @@
     <EmbeddedResource Include="Forms\Generals\GeneralUC.resx">
       <DependentUpon>GeneralUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\ProductUC.resx">
+      <DependentUpon>ProductUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.resx">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderListUC.resx">
+      <DependentUpon>PurchaseOrderListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsUC.resx">
       <DependentUpon>InventorySettingsUC.cs</DependentUpon>
@@ -697,8 +716,8 @@
     <EmbeddedResource Include="Forms\Inventory\Purchases\Order\PurchaseOrderAddItemForm.resx">
       <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseListUC.resx">
-      <DependentUpon>PurchaseListUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderUC.resx">
+      <DependentUpon>PurchaseOrderUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderCreateForm.resx">
       <DependentUpon>PurchaseOrderCreateForm.cs</DependentUpon>

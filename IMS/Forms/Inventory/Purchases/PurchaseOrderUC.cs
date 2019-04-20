@@ -13,24 +13,28 @@ using IMS.Forms.Common.Display;
 using SimpleInjector.Lifestyles;
 using Service.Listeners;
 using IMS.Forms.Inventory.Purchases;
+using Service.DbEventArgs;
 
 namespace IMS.Forms.Purchases
 {
-    public partial class PurchaseListUC : UserControl
+    public partial class PurchaseOrderUC : UserControl
     {
         private readonly IPurchaseService _purchaseService;
         private readonly IDatabaseChangeListener _listener;
         private readonly PurchaseOrderDetailUC _purchaseOrderDetailUC;
+        private readonly PurchaseOrderListUC _purchaseOrderListUC;
 
         private List<int> _recentPurchaseOrderModelIds = new List<int>();
 
-        public PurchaseListUC(IPurchaseService purchaseService, IDatabaseChangeListener listener,
-            PurchaseOrderDetailUC purchaseOrderDetailUC)
+        public PurchaseOrderUC(IPurchaseService purchaseService, IDatabaseChangeListener listener,
+            PurchaseOrderDetailUC purchaseOrderDetailUC,
+            PurchaseOrderListUC purchaseOrderListUC)
         {
 
             _purchaseService = purchaseService;
             _listener = listener;
             _purchaseOrderDetailUC = purchaseOrderDetailUC;
+            _purchaseOrderListUC = purchaseOrderListUC;
 
             InitializeComponent();
 
@@ -40,10 +44,11 @@ namespace IMS.Forms.Purchases
         private void PurchaseListUC_Load(object sender, EventArgs e)
         {
             InitializeHeader();
-            InitializeGridView();
-            PopulatePurchases();
+            // InitializeGridView();
+            // PopulatePurchases();
             InitializeEvents();
             InitializeLinkLabels();
+            ShowData();
         }
 
 
@@ -64,18 +69,24 @@ namespace IMS.Forms.Purchases
             _header.lblHeading.Text = "Purchase Orders";
         }
 
-        private void InitializeGridView()
-        {
-            dgvPurchases.AutoGenerateColumns = false;
-        }
 
         private void InitializeEvents()
         {
-            _listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
-            dgvPurchases.CellMouseDoubleClick += DgvPurchases_CellMouseDoubleClick;
+            //_listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
+            // dgvPurchases.CellMouseDoubleClick += DgvPurchases_CellMouseDoubleClick;
             _purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
             lnkPurchaseOrderList.Click += Link_Click;
-            btnNew.Click += BtnNewOrder_Click;
+            _purchaseOrderListUC.RowSelected += _purchaseOrderListUC_RowSelected;
+            // btnNew.Click += BtnNewOrder_Click;
+        }
+
+        private void _purchaseOrderListUC_RowSelected(object sender, BaseEventArgs<PurchaseOrderModel> e)
+        {
+            if (e.Model != null)
+            {
+                AddLink(e.Model);
+                ShowData(e.Model.Id);
+            }
         }
 
         private void InitializeLinkLabels()
@@ -94,20 +105,21 @@ namespace IMS.Forms.Purchases
         /// <param name="purchaseOrderId">Don't assign this if list to display</param>
         private void ShowData(int purchaseOrderId = 0)
         {
+            pnlDataBody.Controls.Clear();
             if (purchaseOrderId == 0)
             {
-                this.Controls.Remove(_purchaseOrderDetailUC);
-                this.Controls.Add(pnlDataBody);
-                pnlDataBody.BringToFront();
+                pnlDataBody.Controls.Add(_purchaseOrderListUC);
+                //this.Controls.Remove(_purchaseOrderDetailUC);
+                //this.Controls.Add(pnlDataBody);
+                //pnlDataBody.BringToFront();
                 lblPurchaseOrderHeaderText.Text = "Purchase Orders";
             }
             else
             {
-                _purchaseOrderDetailUC.Dock = DockStyle.Fill;
                 _purchaseOrderDetailUC.SetData(purchaseOrderId);
-                this.Controls.Remove(pnlDataBody);
-                this.Controls.Add(_purchaseOrderDetailUC);
-                _purchaseOrderDetailUC.BringToFront();
+                pnlDataBody.Controls.Add(_purchaseOrderDetailUC);
+                //this.Controls.Remove(pnlDataBody);
+                // _purchaseOrderDetailUC.BringToFront();
                 lblPurchaseOrderHeaderText.Text = "Purchase Order Detail";
             }
             SetLinkVisited(purchaseOrderId);
@@ -144,15 +156,7 @@ namespace IMS.Forms.Purchases
             //}
         }
 
-        private void ShowAddEditDialog(bool isEditMode)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var orderForm = Program.container.GetInstance<PurchaseOrderCreateForm>();
-                orderForm.SetDataForEdit(isEditMode ? null : (PurchaseOrderModel)null);
-                orderForm.ShowDialog();
-            }
-        }
+
 
         private void SetLinkVisited(int purchaseOrderId)
         {
@@ -182,11 +186,7 @@ namespace IMS.Forms.Purchases
 
         #region Populating Functions
 
-        private void PopulatePurchases()
-        {
-            var purchases = _purchaseService.GetAllPurchaseOrders();
-            dgvPurchases.DataSource = purchases;
-        }
+
 
         #endregion
 
@@ -194,25 +194,9 @@ namespace IMS.Forms.Purchases
 
         #region Events
 
-        private void _listener_PurchaseOrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PurchaseOrderModel> e)
-        {
-            PopulatePurchases();
-        }
 
-        private void BtnNewOrder_Click(object sender, EventArgs e)
-        {
-            ShowAddEditDialog(false);
-        }
 
-        private void DgvPurchases_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            var model = dgvPurchases.Rows[e.RowIndex].DataBoundItem as PurchaseOrderModel;
-            if (model != null)
-            {
-                AddLink(model);
-                ShowData(model.Id);
-            }
-        }
+
 
         private void BtnBackToList_Click(object sender, EventArgs e)
         {
