@@ -102,7 +102,7 @@ namespace IMS.Forms.Inventory
             saleUc.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(saleUc);
             // set selection
-            _menubar.ClearSelection(sender);
+            _menubar.SetSelection(sender);
         }
 
         private void BtnPurchaseOrder_Click(object sender, EventArgs e)
@@ -112,26 +112,20 @@ namespace IMS.Forms.Inventory
             purchaseListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(purchaseListUC);
             // set selection
-            _menubar.ClearSelection(sender);
+            _menubar.SetSelection(sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
         {
-            var inventoryUnitList = Program.container.GetInstance<InventoryUnitListUC>();
+            var inventoryUnitList = Program.container.GetInstance<InventoryUnitUC>();
             _bodyTemplate.pnlBody.Controls.Clear();
-            inventoryUnitList.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(inventoryUnitList);
-            _menubar.ClearSelection(sender);
+            _menubar.SetSelection(sender);
         }
 
         private void BtnLocateInventory_Click(object sender, EventArgs e)
         {
-            var warehouseProductListUC = Program.container.GetInstance<WarehouseProductListUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            warehouseProductListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(warehouseProductListUC);
-
-            _menubar.ClearSelection(sender);
+            
 
         }
 
@@ -144,7 +138,7 @@ namespace IMS.Forms.Inventory
             //productListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(productListUC);
 
-            _menubar.ClearSelection(sender);
+            _menubar.SetSelection(sender);
         }
 
 
@@ -188,7 +182,7 @@ namespace IMS.Forms.Inventory
             supplierListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(supplierListUC);
             // set selection
-            _menubar.ClearSelection(sender);
+            _menubar.SetSelection(sender);
         }
 
         #endregion
@@ -221,7 +215,7 @@ namespace IMS.Forms.Inventory
             warehouseListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(warehouseListUC);
             // set selection
-            _menubar.ClearSelection(sender);
+            _menubar.SetSelection(sender);
         }
 
         #endregion
@@ -237,7 +231,7 @@ namespace IMS.Forms.Inventory
             settingsUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(settingsUC);
             // set selection
-            _menubar.ClearSelection(sender);
+            _menubar.SetSelection(sender);
         }
         
 

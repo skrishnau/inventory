@@ -40,7 +40,7 @@ namespace IMS.Forms.Inventory.Units
             _businessService = businessService;
 
             InitializeComponent();
-
+            this.Dock = DockStyle.Fill; ;
             dgvInventoryUnit.InitializeGridViewControls(_inventoryService);
 
             this.Load += InventoryUnitListUC_Load;

@@ -18,18 +18,30 @@ namespace IMS.Forms.Inventory
             this.Dock = DockStyle.Fill;
         }
 
-        public void ClearSelection(object sender)
+        public void SetSelection(object sender)
         {
-            btnProductList.FlatStyle = FlatStyle.Standard;
-            //btnCategoryList.FlatStyle = FlatStyle.Standard;
-            btnSupplierList.FlatStyle = FlatStyle.Standard;
-            btnWarehouseList.FlatStyle = FlatStyle.Standard;
-            btnLocateInventory.FlatStyle = FlatStyle.Standard;
+            ClearSelectionInside(this.Controls);
 
-            if(sender.GetType() == typeof(Button))
+            if (sender.GetType() == typeof(Button))
             {
                 var btn = sender as Button;
                 btn.FlatStyle = FlatStyle.Flat;
+            }
+        }
+
+        private void ClearSelectionInside(ControlCollection collection)
+        {
+            foreach (var control in collection)
+            {
+                var controlType = control.GetType();
+                if (controlType == typeof(Button))
+                {
+                    (control as Button).FlatStyle = FlatStyle.Standard;
+                }
+                else if (controlType == typeof(GroupBox))
+                {
+                    ClearSelectionInside((control as GroupBox).Controls);
+                }
             }
         }
     }

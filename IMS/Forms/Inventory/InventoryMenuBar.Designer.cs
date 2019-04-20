@@ -34,14 +34,11 @@
             this.gbActions = new System.Windows.Forms.GroupBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.gbLists = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.splitter6 = new System.Windows.Forms.Splitter();
-            this.btnTraffic = new System.Windows.Forms.Button();
-            this.btnInventoryFlow = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
@@ -58,7 +55,6 @@
             this.btnDirectReceive = new System.Windows.Forms.Button();
             this.gbActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.gbLists.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -100,18 +96,6 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tools";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnTraffic);
-            this.groupBox2.Controls.Add(this.btnInventoryFlow);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox2.Location = new System.Drawing.Point(908, 2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(131, 80);
-            this.groupBox2.TabIndex = 26;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Analytics";
             // 
             // splitter3
             // 
@@ -166,32 +150,6 @@
             this.splitter6.Size = new System.Drawing.Size(10, 80);
             this.splitter6.TabIndex = 34;
             this.splitter6.TabStop = false;
-            // 
-            // btnTraffic
-            // 
-            this.btnTraffic.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTraffic.Image = global::IMS.Properties.Resources.icons8_Traffic_Light_24px;
-            this.btnTraffic.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTraffic.Location = new System.Drawing.Point(70, 16);
-            this.btnTraffic.Name = "btnTraffic";
-            this.btnTraffic.Size = new System.Drawing.Size(59, 61);
-            this.btnTraffic.TabIndex = 3;
-            this.btnTraffic.Text = "Traffic";
-            this.btnTraffic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnTraffic.UseVisualStyleBackColor = true;
-            // 
-            // btnInventoryFlow
-            // 
-            this.btnInventoryFlow.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnInventoryFlow.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
-            this.btnInventoryFlow.Location = new System.Drawing.Point(3, 16);
-            this.btnInventoryFlow.Name = "btnInventoryFlow";
-            this.btnInventoryFlow.Size = new System.Drawing.Size(67, 61);
-            this.btnInventoryFlow.TabIndex = 1;
-            this.btnInventoryFlow.Text = "Inventory Flow";
-            this.btnInventoryFlow.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnInventoryFlow.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnInventoryFlow.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -285,7 +243,7 @@
             // btnSellOrder
             // 
             this.btnSellOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSellOrder.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
+            this.btnSellOrder.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
             this.btnSellOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSellOrder.Location = new System.Drawing.Point(126, 16);
             this.btnSellOrder.Name = "btnSellOrder";
@@ -298,7 +256,7 @@
             // btnMoveOrder
             // 
             this.btnMoveOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMoveOrder.Image = global::IMS.Properties.Resources.icons8_Move_Shit_Around_24px_1;
+            this.btnMoveOrder.Image = global::IMS.Properties.Resources.icons8_Move_Stock_24px;
             this.btnMoveOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMoveOrder.Location = new System.Drawing.Point(67, 16);
             this.btnMoveOrder.Name = "btnMoveOrder";
@@ -311,7 +269,7 @@
             // btnPurchaseOrder
             // 
             this.btnPurchaseOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPurchaseOrder.Image = global::IMS.Properties.Resources.icons8_Buying_24px;
+            this.btnPurchaseOrder.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
             this.btnPurchaseOrder.Location = new System.Drawing.Point(3, 16);
             this.btnPurchaseOrder.Name = "btnPurchaseOrder";
             this.btnPurchaseOrder.Size = new System.Drawing.Size(64, 61);
@@ -377,7 +335,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.splitter4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.splitter3);
@@ -391,7 +348,6 @@
             this.Size = new System.Drawing.Size(1054, 84);
             this.gbActions.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.gbLists.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -404,8 +360,6 @@
         protected internal System.Windows.Forms.Button btnDirectReceive;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        protected internal System.Windows.Forms.Button btnTraffic;
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Splitter splitter4;
         protected internal System.Windows.Forms.Button btnSupplierList;
@@ -421,7 +375,6 @@
         protected internal System.Windows.Forms.Button btnMoveOrder;
         private System.Windows.Forms.Splitter splitter6;
         protected internal System.Windows.Forms.Button btnPurchaseOrder;
-        protected internal System.Windows.Forms.Button btnInventoryFlow;
         protected internal System.Windows.Forms.Button btnDirectIssue;
         protected internal System.Windows.Forms.Button btnReports;
         protected internal System.Windows.Forms.Button button1;

@@ -30,6 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lnkProductCategory = new System.Windows.Forms.LinkLabel();
+            this.lnkPackages = new System.Windows.Forms.LinkLabel();
+            this.lnkUom = new System.Windows.Forms.LinkLabel();
+            this.lnkAdjustmentCodes = new System.Windows.Forms.LinkLabel();
+            this.lnkPermissions = new System.Windows.Forms.LinkLabel();
+            this.lnkUsers = new System.Windows.Forms.LinkLabel();
+            this.lnkReferences = new System.Windows.Forms.LinkLabel();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -37,85 +44,9 @@
             this.pnlBody = new System.Windows.Forms.Panel();
             this.subHeading = new IMS.Forms.Common.Display.SubHeaderTemplate();
             this.heading = new IMS.Forms.Common.Display.HeaderTemplate();
-            this.lnkProductCategory = new System.Windows.Forms.LinkLabel();
-            this.lnkPackages = new System.Windows.Forms.LinkLabel();
-            this.lnkUom = new System.Windows.Forms.LinkLabel();
-            this.lnkAdjustmentCodes = new System.Windows.Forms.LinkLabel();
-            this.lnkRoles = new System.Windows.Forms.LinkLabel();
-            this.lnkUsers = new System.Windows.Forms.LinkLabel();
-            this.lnkReferences = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.pnlLinks.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlFooter
-            // 
-            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(180, 417);
-            this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(616, 25);
-            this.pnlFooter.TabIndex = 9;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.splitter1.Location = new System.Drawing.Point(175, 27);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(5, 415);
-            this.splitter1.TabIndex = 10;
-            this.splitter1.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.pnlLinks);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 27);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(175, 415);
-            this.panel1.TabIndex = 8;
-            // 
-            // pnlLinks
-            // 
-            this.pnlLinks.Controls.Add(this.lnkReferences);
-            this.pnlLinks.Controls.Add(this.lnkProductCategory);
-            this.pnlLinks.Controls.Add(this.lnkPackages);
-            this.pnlLinks.Controls.Add(this.lnkUom);
-            this.pnlLinks.Controls.Add(this.lnkAdjustmentCodes);
-            this.pnlLinks.Controls.Add(this.lnkRoles);
-            this.pnlLinks.Controls.Add(this.lnkUsers);
-            this.pnlLinks.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLinks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.pnlLinks.Location = new System.Drawing.Point(5, 5);
-            this.pnlLinks.Name = "pnlLinks";
-            this.pnlLinks.Size = new System.Drawing.Size(165, 263);
-            this.pnlLinks.TabIndex = 2;
-            this.pnlLinks.WrapContents = false;
-            // 
-            // pnlBody
-            // 
-            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(180, 69);
-            this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(616, 348);
-            this.pnlBody.TabIndex = 11;
-            // 
-            // subHeading
-            // 
-            this.subHeading.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subHeading.Location = new System.Drawing.Point(180, 27);
-            this.subHeading.Name = "subHeading";
-            this.subHeading.Size = new System.Drawing.Size(616, 42);
-            this.subHeading.TabIndex = 6;
-            // 
-            // heading
-            // 
-            this.heading.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.heading.Dock = System.Windows.Forms.DockStyle.Top;
-            this.heading.Location = new System.Drawing.Point(0, 0);
-            this.heading.Name = "heading";
-            this.heading.Size = new System.Drawing.Size(796, 27);
-            this.heading.TabIndex = 6;
             // 
             // lnkProductCategory
             // 
@@ -191,23 +122,23 @@
             this.toolTip1.SetToolTip(this.lnkAdjustmentCodes, "Go to Purchase Order List");
             this.lnkAdjustmentCodes.VisitedLinkColor = System.Drawing.Color.Black;
             // 
-            // lnkRoles
+            // lnkPermissions
             // 
-            this.lnkRoles.AutoSize = true;
-            this.lnkRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkRoles.Image = global::IMS.Properties.Resources.icons8_Access_16px;
-            this.lnkRoles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lnkRoles.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkRoles.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkRoles.Location = new System.Drawing.Point(5, 140);
-            this.lnkRoles.Margin = new System.Windows.Forms.Padding(5);
-            this.lnkRoles.Name = "lnkRoles";
-            this.lnkRoles.Size = new System.Drawing.Size(73, 17);
-            this.lnkRoles.TabIndex = 7;
-            this.lnkRoles.TabStop = true;
-            this.lnkRoles.Text = "     • Roles";
-            this.toolTip1.SetToolTip(this.lnkRoles, "Go to Purchase Order List");
-            this.lnkRoles.VisitedLinkColor = System.Drawing.Color.Black;
+            this.lnkPermissions.AutoSize = true;
+            this.lnkPermissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkPermissions.Image = global::IMS.Properties.Resources.icons8_Access_16px;
+            this.lnkPermissions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkPermissions.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkPermissions.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lnkPermissions.Location = new System.Drawing.Point(5, 167);
+            this.lnkPermissions.Margin = new System.Windows.Forms.Padding(5);
+            this.lnkPermissions.Name = "lnkPermissions";
+            this.lnkPermissions.Size = new System.Drawing.Size(113, 17);
+            this.lnkPermissions.TabIndex = 7;
+            this.lnkPermissions.TabStop = true;
+            this.lnkPermissions.Text = "     • Permissions";
+            this.toolTip1.SetToolTip(this.lnkPermissions, "Go to Purchase Order List");
+            this.lnkPermissions.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // lnkUsers
             // 
@@ -217,7 +148,7 @@
             this.lnkUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkUsers.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkUsers.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkUsers.Location = new System.Drawing.Point(5, 167);
+            this.lnkUsers.Location = new System.Drawing.Point(5, 140);
             this.lnkUsers.Margin = new System.Windows.Forms.Padding(5);
             this.lnkUsers.Name = "lnkUsers";
             this.lnkUsers.Size = new System.Drawing.Size(74, 17);
@@ -244,6 +175,75 @@
             this.lnkReferences.Text = "     • References";
             this.toolTip1.SetToolTip(this.lnkReferences, "Go to Purchase Order List");
             this.lnkReferences.VisitedLinkColor = System.Drawing.Color.Black;
+            // 
+            // pnlFooter
+            // 
+            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlFooter.Location = new System.Drawing.Point(180, 417);
+            this.pnlFooter.Name = "pnlFooter";
+            this.pnlFooter.Size = new System.Drawing.Size(616, 25);
+            this.pnlFooter.TabIndex = 9;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.splitter1.Location = new System.Drawing.Point(175, 27);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(5, 415);
+            this.splitter1.TabIndex = 10;
+            this.splitter1.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pnlLinks);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(5);
+            this.panel1.Size = new System.Drawing.Size(175, 415);
+            this.panel1.TabIndex = 8;
+            // 
+            // pnlLinks
+            // 
+            this.pnlLinks.Controls.Add(this.lnkReferences);
+            this.pnlLinks.Controls.Add(this.lnkProductCategory);
+            this.pnlLinks.Controls.Add(this.lnkPackages);
+            this.pnlLinks.Controls.Add(this.lnkUom);
+            this.pnlLinks.Controls.Add(this.lnkAdjustmentCodes);
+            this.pnlLinks.Controls.Add(this.lnkUsers);
+            this.pnlLinks.Controls.Add(this.lnkPermissions);
+            this.pnlLinks.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlLinks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlLinks.Location = new System.Drawing.Point(5, 5);
+            this.pnlLinks.Name = "pnlLinks";
+            this.pnlLinks.Size = new System.Drawing.Size(165, 263);
+            this.pnlLinks.TabIndex = 2;
+            this.pnlLinks.WrapContents = false;
+            // 
+            // pnlBody
+            // 
+            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBody.Location = new System.Drawing.Point(180, 69);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(616, 348);
+            this.pnlBody.TabIndex = 11;
+            // 
+            // subHeading
+            // 
+            this.subHeading.Dock = System.Windows.Forms.DockStyle.Top;
+            this.subHeading.Location = new System.Drawing.Point(180, 27);
+            this.subHeading.Name = "subHeading";
+            this.subHeading.Size = new System.Drawing.Size(616, 42);
+            this.subHeading.TabIndex = 6;
+            // 
+            // heading
+            // 
+            this.heading.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.heading.Dock = System.Windows.Forms.DockStyle.Top;
+            this.heading.Location = new System.Drawing.Point(0, 0);
+            this.heading.Name = "heading";
+            this.heading.Size = new System.Drawing.Size(796, 27);
+            this.heading.TabIndex = 6;
             // 
             // InventorySettingsUC
             // 
@@ -278,7 +278,7 @@
         private System.Windows.Forms.LinkLabel lnkPackages;
         private Common.Display.HeaderTemplate heading;
         private Common.Display.SubHeaderTemplate subHeading;
-        private System.Windows.Forms.LinkLabel lnkRoles;
+        private System.Windows.Forms.LinkLabel lnkPermissions;
         private System.Windows.Forms.LinkLabel lnkUsers;
         private System.Windows.Forms.LinkLabel lnkReferences;
     }

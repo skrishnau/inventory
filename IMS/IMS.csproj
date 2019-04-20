@@ -161,6 +161,18 @@
     <Compile Include="Forms\Common\VerticalSplitter.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitSideBarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitSideBarUC.Designer.cs">
+      <DependentUpon>InventoryUnitSideBarUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitUC.Designer.cs">
+      <DependentUpon>InventoryUnitUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\POS\Branches\BranchListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -629,6 +641,12 @@
     <EmbeddedResource Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.resx">
       <DependentUpon>InventoryUnitDataGridView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitSideBarUC.resx">
+      <DependentUpon>InventoryUnitSideBarUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitUC.resx">
+      <DependentUpon>InventoryUnitUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\Branches\BranchListUC.resx">
       <DependentUpon>BranchListUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -866,12 +884,8 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ControlEventArgs\" />
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
-    <Folder Include="Forms\Inventory\InventorySettings\" />
-    <Folder Include="Forms\Inventory\NewFolder1\" />
-    <Folder Include="Forms\Inventory\NewFolder2\" />
     <Folder Include="Forms\Inventory\Purchases\Receives\" />
     <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Shared\" />
@@ -1277,6 +1291,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Receipt_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Traffic_Light_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Inventory_Flow_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Maintenance_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Move_Stock_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Move_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Move_Stock_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Sell_Stock_24px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
