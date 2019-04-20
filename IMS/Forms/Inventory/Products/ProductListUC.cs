@@ -14,11 +14,14 @@ using IMS.Forms.Inventory.Variants;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Common.Display;
 using Service.Listeners;
+using Service.DbEventArgs;
 
 namespace IMS.Forms.Inventory.Products
 {
     public partial class ProductListUC : UserControl
     {
+        public event EventHandler<BaseEventArgs<ProductModel>> RowSelected;
+
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
@@ -34,11 +37,13 @@ namespace IMS.Forms.Inventory.Products
             // use Header template to display header.
             InitializeHeader();
 
+
             this.Load += ProductListUC_Load;
         }
 
         private void ProductListUC_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
             PopulateProductData();
             InitializeEvents();
             InitializeListeners();
@@ -57,6 +62,17 @@ namespace IMS.Forms.Inventory.Products
         private void InitializeEvents()
         {
             dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
+            dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
+        }
+
+        private void DgvProductList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var model = dgvProductList.Rows[e.RowIndex].DataBoundItem as ProductModel;
+            if (model != null)
+            {
+                var args = new BaseEventArgs<ProductModel>(model, Service.Utility.UpdateMode.NONE);
+                RowSelected?.Invoke(sender, args);
+            }
         }
 
         private void DgvProductList_SelectionChanged(object sender, EventArgs e)

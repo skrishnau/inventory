@@ -143,6 +143,7 @@
     <Compile Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.EventHandlers.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Common\Links\LinkManager.cs" />
     <Compile Include="Forms\Common\PopupMessage.cs" />
     <Compile Include="Forms\Common\ComboWithLabelUC.cs">
       <SubType>UserControl</SubType>
@@ -172,6 +173,12 @@
     </Compile>
     <Compile Include="Forms\Generals\GeneralUC.Designer.cs">
       <DependentUpon>GeneralUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductDetailUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductDetailUC.Designer.cs">
+      <DependentUpon>ProductDetailUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Products\ProductUC.cs">
       <SubType>UserControl</SubType>
@@ -592,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Generals\GeneralUC.resx">
       <DependentUpon>GeneralUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\ProductDetailUC.resx">
+      <DependentUpon>ProductDetailUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\ProductUC.resx">
       <DependentUpon>ProductUC.cs</DependentUpon>

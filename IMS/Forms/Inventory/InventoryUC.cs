@@ -115,9 +115,9 @@ namespace IMS.Forms.Inventory
 
         private void BtnProductList_Click(object sender, EventArgs e)
         {
-            var productListUC = Program.container.GetInstance<ProductListUC>();
+            var productListUC = Program.container.GetInstance<ProductUC>();
             _bodyTemplate.pnlBody.Controls.Clear();
-            productListUC.Dock = DockStyle.Fill;
+            //productListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(productListUC);
 
             _menubar.ClearSelection(sender);

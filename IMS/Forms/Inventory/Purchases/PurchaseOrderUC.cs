@@ -14,6 +14,7 @@ using SimpleInjector.Lifestyles;
 using Service.Listeners;
 using IMS.Forms.Inventory.Purchases;
 using Service.DbEventArgs;
+using IMS.Forms.Common.Links;
 
 namespace IMS.Forms.Purchases
 {
@@ -23,6 +24,8 @@ namespace IMS.Forms.Purchases
         private readonly IDatabaseChangeListener _listener;
         private readonly PurchaseOrderDetailUC _purchaseOrderDetailUC;
         private readonly PurchaseOrderListUC _purchaseOrderListUC;
+
+        private LinkManager _linkManager;
 
         private List<int> _recentPurchaseOrderModelIds = new List<int>();
 
@@ -43,12 +46,14 @@ namespace IMS.Forms.Purchases
 
         private void PurchaseListUC_Load(object sender, EventArgs e)
         {
+            _linkManager = new LinkManager(pnlOrderLinkLint, toolTip1);
             InitializeHeader();
             // InitializeGridView();
             // PopulatePurchases();
             InitializeEvents();
             InitializeLinkLabels();
             ShowData();
+
         }
 
 
@@ -75,16 +80,22 @@ namespace IMS.Forms.Purchases
             //_listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
             // dgvPurchases.CellMouseDoubleClick += DgvPurchases_CellMouseDoubleClick;
             _purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
-            lnkPurchaseOrderList.Click += Link_Click;
+            lnkPurchaseOrderList.Click += _linkManager.Link_Click;
+            _linkManager.LinkClicked += _linkManager_LinkClicked;
             _purchaseOrderListUC.RowSelected += _purchaseOrderListUC_RowSelected;
             // btnNew.Click += BtnNewOrder_Click;
+        }
+
+        private void _linkManager_LinkClicked(object sender, IdEventArgs e)
+        {
+            ShowData(e.Id);
         }
 
         private void _purchaseOrderListUC_RowSelected(object sender, BaseEventArgs<PurchaseOrderModel> e)
         {
             if (e.Model != null)
             {
-                AddLink(e.Model);
+                _linkManager.AddLink(e.Model.Id, e.Model.OrderNumber, e.Model.Name);
                 ShowData(e.Model.Id);
             }
         }
@@ -125,36 +136,7 @@ namespace IMS.Forms.Purchases
             SetLinkVisited(purchaseOrderId);
         }
 
-        private void AddLink(PurchaseOrderModel model)
-        {
-            LinkLabel link = null;
-            var index = _recentPurchaseOrderModelIds.IndexOf(model.Id);
-            if (index >= 0)
-            {
-                // exists
-                link = pnlOrderLinkLint.Controls[index] as LinkLabel;
-
-            }
-            else
-            {
-                // doesn't exist
-                link = new LinkLabel();
-                link.AutoEllipsis = true;
-                link.Text = "● " + model.OrderNumber;
-                pnlOrderLinkLint.Controls.Add(link);
-                link.Tag = model.Id;
-                _recentPurchaseOrderModelIds.Add(model.Id);
-                link.Click += Link_Click;
-                link.LinkBehavior = LinkBehavior.HoverUnderline;
-                link.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-                link.VisitedLinkColor = Color.Black;// System.Drawing.SystemColors.ControlText;
-                toolTip1.SetToolTip(link, model.Name);
-            }
-            //if (link != null)
-            //{
-            //    link.BringToFront();
-            //}
-        }
+       
 
 
 
@@ -203,16 +185,7 @@ namespace IMS.Forms.Purchases
             ShowData();
         }
 
-        private void Link_Click(object sender, EventArgs e)
-        {
-            var linkLabel = sender as LinkLabel;
-            if (linkLabel != null)
-            {
-                // link's Tag has purchase Order Id 
-                var id = int.Parse(linkLabel.Tag == null ? "0" : linkLabel.Tag.ToString());
-                ShowData(id);
-            }
-        }
+       
 
         #endregion
 

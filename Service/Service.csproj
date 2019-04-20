@@ -85,6 +85,7 @@
     <Compile Include="Core\Users\IUserService.cs" />
     <Compile Include="Core\Users\UserService.cs" />
     <Compile Include="DbEventArgs\BaseEventArgs.cs" />
+    <Compile Include="DbEventArgs\IdEventArgs.cs" />
     <Compile Include="Enums\AdjustmentTypeEnum.cs" />
     <Compile Include="Listeners\Business\BranchListener.cs" />
     <Compile Include="Listeners\DatabaseChangeListener.cs" />

@@ -125,8 +125,7 @@ namespace IMS
             container.Register<UserManagementMenuBar>(Lifestyle.Scoped);
 
             // --- General Related --- //
-            container.Register<ProductListUC>(Lifestyle.Scoped);
-            container.Register<ProductCreate>(Lifestyle.Scoped);
+           
             container.Register<CategoryListUC>(Lifestyle.Scoped);
             container.Register<CategoryCreate>(Lifestyle.Scoped);
             container.Register<AttributeListUC>(Lifestyle.Scoped);
@@ -134,8 +133,7 @@ namespace IMS
             container.Register<BranchCreate>(Lifestyle.Scoped);
 
             // --- inventory related --- //
-           
-            container.Register<WarehouseProductListUC>(Lifestyle.Scoped);
+            
 
             container.Register<WarehouseListUC>(Lifestyle.Scoped);
             container.Register<UomUC>(Lifestyle.Scoped);
@@ -164,7 +162,8 @@ namespace IMS
             container.Register<InventoryTransfersListUC>(Lifestyle.Scoped);
             container.Register<TransferForm>(Lifestyle.Scoped);
 
-            
+            container.Register<WarehouseProductListUC>(Lifestyle.Scoped);
+
             container.Register<InventoryDisassembleForm>(Lifestyle.Scoped);
             container.Register<InventoryMergeForm>(Lifestyle.Scoped);
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
@@ -180,7 +179,13 @@ namespace IMS
             container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
             container.Register<PurchaseOrderCreateForm>(Lifestyle.Scoped);
             container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
-
+            //
+            // Products
+            //
+            container.Register<ProductUC>(Lifestyle.Scoped);
+            container.Register<ProductListUC>(Lifestyle.Scoped);
+            container.Register<ProductDetailUC>(Lifestyle.Scoped);
+            container.Register<ProductCreate>(Lifestyle.Scoped);
 
             // Optionally verify the container.
             container.Verify();
