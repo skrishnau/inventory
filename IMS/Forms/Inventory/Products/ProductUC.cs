@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
+using IMS.Forms.Common.Links;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -15,8 +16,9 @@ namespace IMS.Forms.Inventory.Products
     {
         private readonly ProductListUC _productListUC;
         private readonly ProductDetailUC _productDetailUC;
+        
 
-        private List<int> _visitedProductIds = new List<int>();
+        private LinkManager _linkManager;
 
         public ProductUC(ProductListUC productListUC, ProductDetailUC productDetailUC)
         {
@@ -26,51 +28,35 @@ namespace IMS.Forms.Inventory.Products
             InitializeComponent();
 
             this.Load += ProductUC_Load;
-            subHeading.Text = "";
         }
 
         private void ProductUC_Load(object sender, EventArgs e)
         {
+            headerTemplate1.Text = "Products";
+            _linkManager = new LinkManager(pnlLinkList, toolTip1);
+            subHeading.Text = "";
             this.Dock = DockStyle.Fill;
             ShowUI();
             _productListUC.RowSelected += _productListUC_RowSelected;
+            lnkList.LinkClicked += _linkManager.Link_Click;
+            _linkManager.LinkClicked += _linkManager_LinkClicked;
+        }
+
+        private void _linkManager_LinkClicked(object sender, Service.DbEventArgs.IdEventArgs e)
+        {
+            ShowUI(e.Id);
         }
 
         private void _productListUC_RowSelected(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Inventory.ProductModel> e)
         {
             if (e.Model != null)
             {
-                AddLink(e.Model);
+                _linkManager.AddLink(e.Model.Id, e.Model.SKU, e.Model.Name);
                 ShowUI(e.Model.Id);
             }
         }
 
-        private void AddLink(ProductModel model)
-        {
-            //LinkLabel link = null;
-            //var index = _visitedProductIds.IndexOf(model.Id);
-            //if (index >= 0)
-            //{
-            //    // exists
-            //    link = pnlLinkList.Controls[index] as LinkLabel;
-            //}
-            //else
-            //{
-            //    // doesn't exist
-            //    link = new LinkLabel();
-            //    link.AutoEllipsis = true;
-            //    link.Text = "● " + model.SKU;
-            //    pnlLinkList.Controls.Add(link);
-            //    link.Tag = model.Id;
-            //    _visitedProductIds.Add(model.Id);
-            //    link.Click += Link_Click;
-            //    link.LinkBehavior = LinkBehavior.HoverUnderline;
-            //    link.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            //    link.VisitedLinkColor = Color.Black;// System.Drawing.SystemColors.ControlText;
-            //    toolTip1.SetToolTip(link, model.Name);
-            //}
-           
-        }
+       
 
         private void ShowUI(int productId = 0)
         {
@@ -85,6 +71,8 @@ namespace IMS.Forms.Inventory.Products
             {
                 subHeading.Text = "Product Detail";
                 // show the product detail
+                _productDetailUC.SetData(productId);
+                pnlBody.Controls.Add(_productDetailUC);
             }
         }
     }

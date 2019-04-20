@@ -59,7 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlEventArgs\PurchaseOrderEventArgs.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -813,6 +812,7 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ControlEventArgs\" />
     <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\InventorySettings\" />

@@ -26,7 +26,7 @@ namespace IMS.Forms.Inventory.Products
         private readonly IDatabaseChangeListener _listener;
 
         private ProductModel _selectedProduct;
-        private HeaderTemplate _header;
+        // private HeaderTemplate _header;
 
         public ProductListUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
@@ -35,7 +35,7 @@ namespace IMS.Forms.Inventory.Products
 
             InitializeComponent();
             // use Header template to display header.
-            InitializeHeader();
+            // InitializeHeader();
 
 
             this.Load += ProductListUC_Load;
@@ -49,20 +49,31 @@ namespace IMS.Forms.Inventory.Products
             InitializeListeners();
         }
 
-        private void InitializeListeners()
-        {
-            _listener.ProductUpdated += _listener_ProductUpdated;
-        }
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
-        {
-            PopulateProductData();
-        }
+        #region Initialize Functions
 
         private void InitializeEvents()
         {
             dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
             dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
+            btnNew.Click += BtnNew_Click;
+            btnEdit.Click += BtnEdit_Click;
+            btnDelete.Click += BtnDelete_Click;
+        }
+
+        private void InitializeListeners()
+        {
+            _listener.ProductUpdated += _listener_ProductUpdated;
+        }
+
+        #endregion
+
+
+        #region Event Handlers
+
+        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        {
+            PopulateProductData();
         }
 
         private void DgvProductList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -78,73 +89,19 @@ namespace IMS.Forms.Inventory.Products
         private void DgvProductList_SelectionChanged(object sender, EventArgs e)
         {
             // populate detail 
-            PopulateProductDetail();
-
-        }
-
-        private void PopulateProductDetail()
-        {
-            // show product detail view
+            //PopulateProductDetail();
             if (dgvProductList.SelectedRows.Count > 0)
             {
                 // show edit and delete buttons
-                _header.btnEdit.Visible = true;
-                _header.btnDelete.Visible = true;
+                btnEdit.Visible = true;
+                btnDelete.Visible = true;
 
-                var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
+                //var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
+                //var model = _inventoryService.GetProductForEdit(data.Id);
+            }
 
-                var model = _inventoryService.GetProductForEdit(data.Id);
-                if (model != null)
-                {
-                    pnlProductDetail.Visible = true;
-                    _selectedProduct = data;
-                    lblProductName.Text = data.Name;
-                    lblCategory.Text = data.Category;
-                    // brand
-                    lblBrands.Text = "";
-                    foreach (var brand in model.Brands)
-                    {
-                        lblBrands.Text += brand.Name + ", ";
-                    }
-                    // attributes
-                    lblAttributes.Text = "";
-                    foreach (var att in model.ProductAttributes)
-                    {
-                        lblAttributes.Text += att.Attribute + ", ";
-                    }
-                    dgvSKUListing.AutoGenerateColumns = false;
-                   // dgvSKUListing.DataSource = model.Variants;
-                }
-                else
-                {
-                    pnlProductDetail.Visible = false;
-                    // show edit and delete buttons
-                    _header.btnEdit.Visible = false;
-                    _header.btnDelete.Visible = false;
-                }
-            }
-            else
-            {
-                pnlProductDetail.Visible = false;
-                // show edit and delete buttons
-                _header.btnEdit.Visible = false;
-                _header.btnDelete.Visible = false;
-            }
         }
 
-        private void InitializeHeader()
-        {
-            _header = HeaderTemplate.Instance;
-            _header.btnNew.Visible = true;
-            _header.btnNew.Click += BtnNew_Click;
-            _header.btnEdit.Click += BtnEdit_Click;
-            _header.btnDelete.Click += BtnDelete_Click;
-            this.Controls.Add(_header);
-            _header.SendToBack();
-            // header text
-            _header.lblHeading.Text = "Products";
-        }
-        
         private void BtnNew_Click(object sender, EventArgs e)
         {
             ShowProductAddEditDialog(0);
@@ -158,6 +115,7 @@ namespace IMS.Forms.Inventory.Products
                 ShowProductAddEditDialog(_selectedProduct.Id);
             }
         }
+
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (_selectedProduct != null)
@@ -170,6 +128,15 @@ namespace IMS.Forms.Inventory.Products
                 }
             }
         }
+
+
+        #endregion
+
+
+
+        #region Populate Functions
+
+
 
         private void ShowProductAddEditDialog(int productId)
         {
@@ -187,7 +154,11 @@ namespace IMS.Forms.Inventory.Products
             var products = _inventoryService.GetProductListForGridView();
             dgvProductList.DataSource = products;
         }
-       
+
+        #endregion
+
+
+
     }
 }
 
@@ -213,4 +184,17 @@ namespace IMS.Forms.Inventory.Products
 //    var skus = _inventoryService.GetVariantList();
 //    dgvSKUListing.AutoGenerateColumns = false;
 //    dgvSKUListing.DataSource = skus;
+//}
+
+//private void InitializeHeader()
+//{
+//    _header = HeaderTemplate.Instance;
+//    _header.btnNew.Visible = true;
+//    _header.btnNew.Click += BtnNew_Click;
+//    _header.btnEdit.Click += BtnEdit_Click;
+//    _header.btnDelete.Click += BtnDelete_Click;
+//    this.Controls.Add(_header);
+//    _header.SendToBack();
+//    // header text
+//    _header.lblHeading.Text = "Products";
 //}
