@@ -110,6 +110,12 @@
     <Compile Include="Forms\Common\Display\LabelSubHeader.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Common\Display\SubBodyTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\SubBodyTemplate.Designer.cs">
+      <DependentUpon>SubBodyTemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Common\Display\SubHeaderTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -286,6 +292,18 @@
     </Compile>
     <Compile Include="Forms\Inventory\Warehouses\WarehouseListUC.Designer.cs">
       <DependentUpon>WarehouseListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Warehouses\WarehouseSideBarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Warehouses\WarehouseSideBarUC.Designer.cs">
+      <DependentUpon>WarehouseSideBarUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Warehouses\WarehouseUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Warehouses\WarehouseUC.Designer.cs">
+      <DependentUpon>WarehouseUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Orders\OrdersMenuBar.cs">
       <SubType>UserControl</SubType>
@@ -581,6 +599,9 @@
     <EmbeddedResource Include="Forms\Common\Display\BodyTemplate.resx">
       <DependentUpon>BodyTemplate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Display\SubBodyTemplate.resx">
+      <DependentUpon>SubBodyTemplate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\Display\SubHeaderTemplate.resx">
       <DependentUpon>SubHeaderTemplate.cs</DependentUpon>
     </EmbeddedResource>
@@ -652,6 +673,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseListUC.resx">
       <DependentUpon>WarehouseListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseSideBarUC.resx">
+      <DependentUpon>WarehouseSideBarUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseUC.resx">
+      <DependentUpon>WarehouseUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Orders\OrdersMenuBar.resx">
       <DependentUpon>OrdersMenuBar.cs</DependentUpon>
@@ -1142,6 +1169,60 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Sell_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Menu_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_List_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Waterfall_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Floods_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Buying_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Move_Shit_Around_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Move_Shit_Around_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Data_Setting_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Gears_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Warehouse_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Depot_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Warehouse_24px_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Sell_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Buy_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Return_Purchase_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Pricing_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Lease_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Invoice_24px_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

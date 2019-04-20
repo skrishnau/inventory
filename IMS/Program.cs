@@ -135,7 +135,6 @@ namespace IMS
             // --- inventory related --- //
             
 
-            container.Register<WarehouseListUC>(Lifestyle.Scoped);
             container.Register<UomUC>(Lifestyle.Scoped);
             container.Register<PackageUC>(Lifestyle.Scoped);
             container.Register<AdjustmentCodeUC>(Lifestyle.Scoped);
@@ -186,6 +185,13 @@ namespace IMS
             container.Register<ProductListUC>(Lifestyle.Scoped);
             container.Register<ProductDetailUC>(Lifestyle.Scoped);
             container.Register<ProductCreate>(Lifestyle.Scoped);
+            //
+            // Warehouse
+            //
+            container.Register<WarehouseUC>(Lifestyle.Scoped);
+            container.Register<WarehouseListUC>(Lifestyle.Scoped);
+            container.Register<WarehouseSideBarUC>(Lifestyle.Scoped);
+
 
             // Optionally verify the container.
             container.Verify();

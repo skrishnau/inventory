@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory.Warehouses
         private readonly IBusinessService _businessService;
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
-        private HeaderTemplate _header;
+       // private HeaderTemplate _header;
         private WarehouseModel _selectedWarehouseModel;
 
         public WarehouseListUC(IBusinessService businessService, IInventoryService inventoryService, IDatabaseChangeListener listener)
@@ -34,6 +34,8 @@ namespace IMS.Forms.Inventory.Warehouses
             _listener = listener;
 
             InitializeComponent();
+
+            this.Dock = DockStyle.Fill;
             this.Load += WarehouseListUC_Load;
 
            
@@ -41,7 +43,7 @@ namespace IMS.Forms.Inventory.Warehouses
 
         private void WarehouseListUC_Load(object sender, EventArgs e)
         {
-            InitializeHeader();
+            //InitializeHeader();
 
             InitializeControlEvents();
 
@@ -62,8 +64,8 @@ namespace IMS.Forms.Inventory.Warehouses
         private void ShowHideEditDeleteButtons()
         {
             var visible = _selectedWarehouseModel != null;
-            _header.btnEdit.Visible = visible;
-            _header.btnDelete.Visible = visible;
+            btnEdit.Visible = visible;
+            btnDelete.Visible = visible;
         }
 
         private void ShowAddEditDialog(bool isEditMode)
@@ -84,24 +86,27 @@ namespace IMS.Forms.Inventory.Warehouses
 
         #region Initialization Functions
 
-        private void InitializeHeader()
-        {
-            _header = HeaderTemplate.Instance;
-            _header.btnNew.Visible = true;
-            _header.btnNew.Click += BtnNew_Click;
-            _header.btnEdit.Click += BtnEdit_Click;
-            _header.btnDelete.Click += BtnDelete_Click;
-            // add
-            this.Controls.Add(_header);
-            _header.SendToBack();
-            // heading
-            _header.lblHeading.Text = "Warehouses";
+        //private void InitializeHeader()
+        //{
+        //    _header = HeaderTemplate.Instance;
+        //    _header.btnNew.Visible = true;
+        //    _header.btnNew.Click += BtnNew_Click;
+        //    _header.btnEdit.Click += BtnEdit_Click;
+        //    _header.btnDelete.Click += BtnDelete_Click;
+        //    // add
+        //    this.Controls.Add(_header);
+        //    _header.SendToBack();
+        //    // heading
+        //    _header.lblHeading.Text = "Warehouses";
 
-        }
+        //}
 
         private void InitializeControlEvents()
         {
             dgvWarehouse.SelectionChanged += DgvWarehouse_SelectionChanged;
+            btnNew.Click += BtnNew_Click;
+            btnEdit.Click += BtnEdit_Click;
+            btnDelete.Click += BtnDelete_Click;
         }
 
         private void InitializeListeners()

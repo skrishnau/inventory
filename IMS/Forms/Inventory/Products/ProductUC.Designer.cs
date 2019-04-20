@@ -51,7 +51,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(175, 430);
+            this.panel1.Size = new System.Drawing.Size(175, 470);
             this.panel1.TabIndex = 8;
             // 
             // flowLayoutPanel2
@@ -115,13 +115,13 @@
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(180, 69);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(466, 363);
+            this.pnlBody.Size = new System.Drawing.Size(466, 403);
             this.pnlBody.TabIndex = 11;
             // 
             // pnlFooter
             // 
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(180, 432);
+            this.pnlFooter.Location = new System.Drawing.Point(180, 472);
             this.pnlFooter.Name = "pnlFooter";
             this.pnlFooter.Size = new System.Drawing.Size(466, 25);
             this.pnlFooter.TabIndex = 9;
@@ -132,7 +132,7 @@
             this.splitter1.Enabled = false;
             this.splitter1.Location = new System.Drawing.Point(175, 27);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(5, 430);
+            this.splitter1.Size = new System.Drawing.Size(5, 470);
             this.splitter1.TabIndex = 10;
             this.splitter1.TabStop = false;
             // 
@@ -164,7 +164,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.headerTemplate1);
             this.Name = "ProductUC";
-            this.Size = new System.Drawing.Size(646, 457);
+            this.Size = new System.Drawing.Size(646, 497);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();

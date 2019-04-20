@@ -30,6 +30,7 @@ using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Units.Actions;
 using Service.Enums;
 using IMS.Forms.Inventory.Settings;
+using IMS.Forms.Sales;
 
 namespace IMS.Forms.Inventory
 {
@@ -77,7 +78,7 @@ namespace IMS.Forms.Inventory
             _menubar.btnDirectReceive.Click += BtnDirectReceive_Click;
 
             // transfers
-            _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
+           // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
             _menubar.btnTransfer.Click += BtnTransfer_Click;
             // supplier
             _menubar.btnSupplierList.Click += BtnSupplierList_Click;
@@ -89,6 +90,29 @@ namespace IMS.Forms.Inventory
 
             _menubar.btnLocateInventory.Click += BtnLocateInventory_Click;
             _menubar.btnInventoryUnits.Click += BtnInventoryUnits_Click;
+
+            _menubar.btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
+            _menubar.btnSellOrder.Click += BtnSellOrder_Click;
+        }
+
+        private void BtnSellOrder_Click(object sender, EventArgs e)
+        {
+            _bodyTemplate.pnlBody.Controls.Clear();
+            var saleUc = Program.container.GetInstance<SaleUC>();
+            saleUc.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(saleUc);
+            // set selection
+            _menubar.ClearSelection(sender);
+        }
+
+        private void BtnPurchaseOrder_Click(object sender, EventArgs e)
+        {
+            var purchaseListUC = Program.container.GetInstance<PurchaseOrderUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            purchaseListUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(purchaseListUC);
+            // set selection
+            _menubar.ClearSelection(sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
@@ -139,17 +163,17 @@ namespace IMS.Forms.Inventory
             }
         }
 
-        private void BtnInventoryTransfers_Click(object sender, EventArgs e)
-        {
-            // show the list
-            _bodyTemplate.pnlBody.Controls.Clear();
-            var transferListUC = Program.container.GetInstance<InventoryTransfersListUC>();
-            transferListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(transferListUC);
-            // set selection
-            _menubar.ClearSelection(sender);
+        //private void BtnInventoryTransfers_Click(object sender, EventArgs e)
+        //{
+        //    // show the list
+        //    _bodyTemplate.pnlBody.Controls.Clear();
+        //    var transferListUC = Program.container.GetInstance<InventoryTransfersListUC>();
+        //    transferListUC.Dock = DockStyle.Fill;
+        //    _bodyTemplate.pnlBody.Controls.Add(transferListUC);
+        //    // set selection
+        //    _menubar.ClearSelection(sender);
 
-        }
+        //}
 
         #endregion
 
@@ -192,7 +216,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnWarehouseList_Click(object sender, EventArgs e)
         {
-            var warehouseListUC = Program.container.GetInstance<WarehouseListUC>();
+            var warehouseListUC = Program.container.GetInstance<WarehouseUC>();
             _bodyTemplate.pnlBody.Controls.Clear();
             warehouseListUC.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(warehouseListUC);
