@@ -31,7 +31,7 @@ namespace IMS.Forms.POS.Customers
 
         private void InitializeHeader()
         {
-            var _header = SubHeadingTemplate.Instance;
+            var _header = HeaderTemplate.Instance;
             _header.lblHeading.Text = "Customers";
             _header.btnNew.Visible = true;
             _header.btnNew.Click += btnAddCustomer_Click;

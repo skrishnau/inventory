@@ -27,7 +27,7 @@ namespace IMS.Forms.Inventory.Units
         private readonly IInventoryService _inventoryService;
         private readonly IBusinessService _businessService;
 
-        private SubHeadingTemplate _header;
+        private HeaderTemplate _header;
        // private int checkCount;
        // private bool _bulkActionsEnabled;
 
@@ -72,7 +72,7 @@ namespace IMS.Forms.Inventory.Units
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             this.Controls.Add(_header);
             _header.SendToBack();
             // header text

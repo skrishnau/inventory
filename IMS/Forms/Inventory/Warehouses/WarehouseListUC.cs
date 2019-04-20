@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory.Warehouses
         private readonly IBusinessService _businessService;
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
-        private SubHeadingTemplate _header;
+        private HeaderTemplate _header;
         private WarehouseModel _selectedWarehouseModel;
 
         public WarehouseListUC(IBusinessService businessService, IInventoryService inventoryService, IDatabaseChangeListener listener)
@@ -86,7 +86,7 @@ namespace IMS.Forms.Inventory.Warehouses
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnNew_Click;
             _header.btnEdit.Click += BtnEdit_Click;

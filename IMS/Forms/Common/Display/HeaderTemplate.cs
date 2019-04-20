@@ -10,19 +10,22 @@ using System.Windows.Forms;
 
 namespace IMS.Forms.Common.Display
 {
-    public partial class SubHeadingTemplate : UserControl
+    public partial class HeaderTemplate : UserControl
     {
-        public SubHeadingTemplate()
+
+        public HeaderTemplate()
         {
             InitializeComponent();
         }
 
+       public override string Text { get { return lblHeading.Text; } set { lblHeading.Text = value; } }
+
         // get instance from this property only
-        public static SubHeadingTemplate Instance
+        public static HeaderTemplate Instance
         {
             get
             {
-                return new SubHeadingTemplate()
+                return new HeaderTemplate()
                 {
                     Dock = DockStyle.Top,
                 };

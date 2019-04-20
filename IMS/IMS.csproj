@@ -107,17 +107,20 @@
     <Compile Include="Forms\Common\Display\BodyTemplate.Designer.cs">
       <DependentUpon>BodyTemplate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Common\Display\HeaderEditControls.cs">
+    <Compile Include="Forms\Common\Display\LabelSubHeader.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\SubHeaderTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Common\Display\HeaderEditControls.Designer.cs">
-      <DependentUpon>HeaderEditControls.cs</DependentUpon>
+    <Compile Include="Forms\Common\Display\SubHeaderTemplate.Designer.cs">
+      <DependentUpon>SubHeaderTemplate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Common\Display\SubHeadingTemplate.cs">
+    <Compile Include="Forms\Common\Display\HeaderTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Common\Display\SubHeadingTemplate.Designer.cs">
-      <DependentUpon>SubHeadingTemplate.cs</DependentUpon>
+    <Compile Include="Forms\Common\Display\HeaderTemplate.Designer.cs">
+      <DependentUpon>HeaderTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Business\Delete\BranchDeleteConfirmationForm.cs">
       <SubType>Form</SubType>
@@ -174,6 +177,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.Designer.cs">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\InventorySettingsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\InventorySettingsUC.Designer.cs">
+      <DependentUpon>InventorySettingsUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.cs">
       <SubType>Form</SubType>
@@ -553,11 +562,11 @@
     <EmbeddedResource Include="Forms\Common\Display\BodyTemplate.resx">
       <DependentUpon>BodyTemplate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Common\Display\HeaderEditControls.resx">
-      <DependentUpon>HeaderEditControls.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Common\Display\SubHeaderTemplate.resx">
+      <DependentUpon>SubHeaderTemplate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Common\Display\SubHeadingTemplate.resx">
-      <DependentUpon>SubHeadingTemplate.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Common\Display\HeaderTemplate.resx">
+      <DependentUpon>HeaderTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.resx">
       <DependentUpon>InventoryUnitDataGridView.cs</DependentUpon>
@@ -573,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.resx">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsUC.resx">
+      <DependentUpon>InventorySettingsUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.resx">
       <DependentUpon>InventoryAdjustmentForm.cs</DependentUpon>
@@ -776,6 +788,7 @@
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\InventorySettings\" />
     <Folder Include="Forms\Inventory\NewFolder1\" />
+    <Folder Include="Forms\Inventory\NewFolder2\" />
     <Folder Include="Forms\Inventory\Purchases\Receives\" />
     <Folder Include="Forms\Purchases\Direct\" />
     <Folder Include="Forms\Shared\" />

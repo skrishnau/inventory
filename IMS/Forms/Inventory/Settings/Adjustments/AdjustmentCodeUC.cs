@@ -135,7 +135,7 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
 
         private void InitializeHeader()
         {
-            var _header = SubHeadingTemplate.Instance;
+            var _header = HeaderTemplate.Instance;
             _header.lblHeading.Text = "Adjustment Codes";
             this.Controls.Add(_header);
             _header.SendToBack();

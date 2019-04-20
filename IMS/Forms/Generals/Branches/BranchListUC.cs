@@ -14,7 +14,7 @@ namespace IMS.Forms.Generals.Branches
     {
         private readonly IBusinessService _businessService;
         private readonly IDatabaseChangeListener _listener;
-        SubHeadingTemplate _header;
+        HeaderTemplate _header;
 
         private BranchModel _SelectedBranchModel;
 
@@ -75,7 +75,7 @@ namespace IMS.Forms.Generals.Branches
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnNew_Click;
             //_header.btnEdit.Visible = true;

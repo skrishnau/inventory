@@ -36,10 +36,6 @@
             this.btnDirectReceive = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnUom = new System.Windows.Forms.LinkLabel();
-            this.btnPackage = new System.Windows.Forms.LinkLabel();
-            this.btnAdjustmentCodes = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnTraffic = new System.Windows.Forms.Button();
             this.btnInventoryFlow = new System.Windows.Forms.Button();
@@ -47,8 +43,9 @@
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.gbProduct = new System.Windows.Forms.GroupBox();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnInventoryUnits = new System.Windows.Forms.Button();
-            this.btnCategoryList = new System.Windows.Forms.Button();
             this.btnProductList = new System.Windows.Forms.Button();
             this.gbWarehouse = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
@@ -61,10 +58,9 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.btnSupplierList = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.splitter2 = new System.Windows.Forms.Splitter();
             this.gbActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbProduct.SuspendLayout();
             this.gbWarehouse.SuspendLayout();
@@ -135,74 +131,15 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox1.Controls.Add(this.btnSettings);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Location = new System.Drawing.Point(1130, 2);
+            this.groupBox1.Location = new System.Drawing.Point(1049, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(128, 80);
+            this.groupBox1.Size = new System.Drawing.Size(76, 80);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.btnUom, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.btnPackage, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAdjustmentCodes, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 18);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(118, 57);
-            this.tableLayoutPanel2.TabIndex = 33;
-            // 
-            // btnUom
-            // 
-            this.btnUom.AutoSize = true;
-            this.btnUom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUom.Image = global::IMS.Properties.Resources.icons8_Scales_16px;
-            this.btnUom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUom.Location = new System.Drawing.Point(3, 38);
-            this.btnUom.Name = "btnUom";
-            this.btnUom.Size = new System.Drawing.Size(112, 19);
-            this.btnUom.TabIndex = 0;
-            this.btnUom.TabStop = true;
-            this.btnUom.Text = "Units of Measure";
-            this.btnUom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnPackage
-            // 
-            this.btnPackage.AutoSize = true;
-            this.btnPackage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPackage.Image = global::IMS.Properties.Resources.icons8_Packaging_16px;
-            this.btnPackage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPackage.Location = new System.Drawing.Point(3, 0);
-            this.btnPackage.Name = "btnPackage";
-            this.btnPackage.Size = new System.Drawing.Size(112, 19);
-            this.btnPackage.TabIndex = 1;
-            this.btnPackage.TabStop = true;
-            this.btnPackage.Text = "Packaging Types";
-            this.btnPackage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnAdjustmentCodes
-            // 
-            this.btnAdjustmentCodes.AutoSize = true;
-            this.btnAdjustmentCodes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdjustmentCodes.Image = global::IMS.Properties.Resources.icons8_Adjust_16px;
-            this.btnAdjustmentCodes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAdjustmentCodes.Location = new System.Drawing.Point(3, 19);
-            this.btnAdjustmentCodes.Name = "btnAdjustmentCodes";
-            this.btnAdjustmentCodes.Size = new System.Drawing.Size(112, 19);
-            this.btnAdjustmentCodes.TabIndex = 2;
-            this.btnAdjustmentCodes.TabStop = true;
-            this.btnAdjustmentCodes.Text = "Adjustment Codes";
-            this.btnAdjustmentCodes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBox2
             // 
@@ -245,7 +182,7 @@
             // splitter3
             // 
             this.splitter3.Enabled = false;
-            this.splitter3.Location = new System.Drawing.Point(1120, 2);
+            this.splitter3.Location = new System.Drawing.Point(1039, 2);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(10, 80);
             this.splitter3.TabIndex = 27;
@@ -263,7 +200,7 @@
             // splitter1
             // 
             this.splitter1.Enabled = false;
-            this.splitter1.Location = new System.Drawing.Point(631, 2);
+            this.splitter1.Location = new System.Drawing.Point(550, 2);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(10, 80);
             this.splitter1.TabIndex = 30;
@@ -273,41 +210,53 @@
             // 
             this.gbProduct.Controls.Add(this.button1);
             this.gbProduct.Controls.Add(this.btnInventoryUnits);
-            this.gbProduct.Controls.Add(this.btnCategoryList);
             this.gbProduct.Controls.Add(this.btnProductList);
             this.gbProduct.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbProduct.Location = new System.Drawing.Point(345, 2);
             this.gbProduct.Name = "gbProduct";
-            this.gbProduct.Size = new System.Drawing.Size(286, 80);
+            this.gbProduct.Size = new System.Drawing.Size(205, 80);
             this.gbProduct.TabIndex = 29;
             this.gbProduct.TabStop = false;
             this.gbProduct.Text = "Product";
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSettings.Image = global::IMS.Properties.Resources.icons8_Home_Automation_24px;
+            this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSettings.Location = new System.Drawing.Point(5, 18);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(65, 57);
+            this.btnSettings.TabIndex = 20;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button1.Image = global::IMS.Properties.Resources.icons8_Data_Transfer_24px;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.Location = new System.Drawing.Point(134, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(65, 61);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Move Order";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // btnInventoryUnits
             // 
             this.btnInventoryUnits.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnInventoryUnits.Image = global::IMS.Properties.Resources.icons8_Beer_Keg_24px;
             this.btnInventoryUnits.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnInventoryUnits.Location = new System.Drawing.Point(134, 16);
+            this.btnInventoryUnits.Location = new System.Drawing.Point(69, 16);
             this.btnInventoryUnits.Name = "btnInventoryUnits";
             this.btnInventoryUnits.Size = new System.Drawing.Size(65, 61);
             this.btnInventoryUnits.TabIndex = 18;
             this.btnInventoryUnits.Text = "Inventory Units";
             this.btnInventoryUnits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnInventoryUnits.UseVisualStyleBackColor = true;
-            // 
-            // btnCategoryList
-            // 
-            this.btnCategoryList.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCategoryList.Image = global::IMS.Properties.Resources.icons8_Categorize_16px;
-            this.btnCategoryList.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCategoryList.Location = new System.Drawing.Point(69, 16);
-            this.btnCategoryList.Name = "btnCategoryList";
-            this.btnCategoryList.Size = new System.Drawing.Size(65, 61);
-            this.btnCategoryList.TabIndex = 17;
-            this.btnCategoryList.Text = "Categories";
-            this.btnCategoryList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCategoryList.UseVisualStyleBackColor = true;
             // 
             // btnProductList
             // 
@@ -329,7 +278,7 @@
             this.gbWarehouse.Controls.Add(this.btnInventoryTransfers);
             this.gbWarehouse.Controls.Add(this.btnWarehouseList);
             this.gbWarehouse.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbWarehouse.Location = new System.Drawing.Point(641, 2);
+            this.gbWarehouse.Location = new System.Drawing.Point(560, 2);
             this.gbWarehouse.Name = "gbWarehouse";
             this.gbWarehouse.Size = new System.Drawing.Size(228, 80);
             this.gbWarehouse.TabIndex = 9;
@@ -390,7 +339,7 @@
             // splitter7
             // 
             this.splitter7.Enabled = false;
-            this.splitter7.Location = new System.Drawing.Point(869, 2);
+            this.splitter7.Location = new System.Drawing.Point(788, 2);
             this.splitter7.Name = "splitter7";
             this.splitter7.Size = new System.Drawing.Size(10, 80);
             this.splitter7.TabIndex = 31;
@@ -403,7 +352,7 @@
             this.gbSupplier.Controls.Add(this.button9);
             this.gbSupplier.Controls.Add(this.btnSupplierList);
             this.gbSupplier.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbSupplier.Location = new System.Drawing.Point(879, 2);
+            this.gbSupplier.Location = new System.Drawing.Point(798, 2);
             this.gbSupplier.Name = "gbSupplier";
             this.gbSupplier.Size = new System.Drawing.Size(241, 80);
             this.gbSupplier.TabIndex = 7;
@@ -461,23 +410,20 @@
             this.btnSupplierList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSupplierList.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // splitter2
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Image = global::IMS.Properties.Resources.icons8_Data_Transfer_24px;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.Location = new System.Drawing.Point(199, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(65, 61);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Move Order";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.splitter2.Enabled = false;
+            this.splitter2.Location = new System.Drawing.Point(1125, 2);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(10, 80);
+            this.splitter2.TabIndex = 32;
+            this.splitter2.TabStop = false;
             // 
             // InventoryMenuBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.splitter2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.splitter3);
             this.Controls.Add(this.gbSupplier);
@@ -491,11 +437,9 @@
             this.Controls.Add(this.gbActions);
             this.Name = "InventoryMenuBar";
             this.Padding = new System.Windows.Forms.Padding(2);
-            this.Size = new System.Drawing.Size(1165, 84);
+            this.Size = new System.Drawing.Size(1272, 84);
             this.gbActions.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.gbProduct.ResumeLayout(false);
             this.gbWarehouse.ResumeLayout(false);
@@ -525,18 +469,15 @@
         protected internal System.Windows.Forms.Button btnTransfer;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox gbProduct;
-        protected internal System.Windows.Forms.Button btnCategoryList;
         protected internal System.Windows.Forms.Button btnProductList;
         private System.Windows.Forms.GroupBox gbWarehouse;
         protected internal System.Windows.Forms.Button btnInventoryTransfers;
         private System.Windows.Forms.Splitter splitter7;
         private System.Windows.Forms.GroupBox gbSupplier;
-        protected internal System.Windows.Forms.LinkLabel btnUom;
-        protected internal System.Windows.Forms.LinkLabel btnPackage;
-        protected internal System.Windows.Forms.LinkLabel btnAdjustmentCodes;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         protected internal System.Windows.Forms.Button btnLocateInventory;
         protected internal System.Windows.Forms.Button btnInventoryUnits;
         protected internal System.Windows.Forms.Button button1;
+        protected internal System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Splitter splitter2;
     }
 }

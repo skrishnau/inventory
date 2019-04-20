@@ -43,6 +43,7 @@ using IMS.Forms.Inventory.Purchases;
 using IMS.Forms.Inventory.Purchases.Order;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units.Actions;
+using IMS.Forms.Inventory.Settings;
 
 namespace IMS
 {
@@ -173,6 +174,7 @@ namespace IMS
 
             container.Register<InventoryMoveForm>(Lifestyle.Scoped);
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
+            container.Register<InventorySettingsUC>(Lifestyle.Scoped);
 
 
 

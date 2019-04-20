@@ -22,7 +22,7 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
         private readonly IInventoryService _inventoryService;
         private readonly IBusinessService _businessService;
 
-        private SubHeadingTemplate _header;
+        private HeaderTemplate _header;
 
         public WarehouseProductListUC(IDatabaseChangeListener listener, 
             IInventoryService inventoryService,
@@ -53,7 +53,7 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             this.Controls.Add(_header);
             _header.SendToBack();
             // header text

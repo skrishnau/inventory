@@ -14,7 +14,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private readonly IDatabaseChangeListener _listener;
 
         SupplierModel _selectedSupplierModel;
-        SubHeadingTemplate _header;
+        HeaderTemplate _header;
 
         public SupplierUC(ISupplierService supplierService, IDatabaseChangeListener listener)
         {
@@ -41,7 +41,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnNew_Click;
             _header.btnEdit.Click += BtnEdit_Click;

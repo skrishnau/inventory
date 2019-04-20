@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory.UOM
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
-        SubHeadingTemplate _header;
+        HeaderTemplate _header;
         private bool _isCurrentRowDirty;
         
         public UomUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
@@ -61,7 +61,7 @@ namespace IMS.Forms.Inventory.UOM
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             //_header.btnNew.Visible = true;
             //_header.btnNew.Click += BtnNew_Click;
             // add

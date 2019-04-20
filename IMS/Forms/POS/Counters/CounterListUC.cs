@@ -39,7 +39,7 @@ namespace IMS.Forms.POS.Counters
 
         private void InitializeHeader()
         {
-            var _header = SubHeadingTemplate.Instance;
+            var _header = HeaderTemplate.Instance;
             _header.lblHeading.Text = "Counters";
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnNew_Click;

@@ -29,6 +29,7 @@ using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Units.Actions;
 using Service.Enums;
+using IMS.Forms.Inventory.Settings;
 
 namespace IMS.Forms.Inventory
 {
@@ -67,8 +68,6 @@ namespace IMS.Forms.Inventory
         {
             // product
             _menubar.btnProductList.Click += BtnProductList_Click;
-            _menubar.btnCategoryList.Click += BtnCategoryList_Click;
-            // _menubar.btnNewProduct.Click += BtnNewProduct_Click;
 
             // order
             //_menubar.btnOrderList.Click += BtnOrderList_Click;
@@ -85,9 +84,8 @@ namespace IMS.Forms.Inventory
             // warehouse
             _menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
             // settings
-            _menubar.btnUom.Click += BtnUom_Click;
-            _menubar.btnPackage.Click += BtnPackage_Click;
-            _menubar.btnAdjustmentCodes.Click += BtnAdjustmentCodes_Click;
+            _menubar.btnSettings.Click += BtnSettings_Click;
+           
 
             _menubar.btnLocateInventory.Click += BtnLocateInventory_Click;
             _menubar.btnInventoryUnits.Click += BtnInventoryUnits_Click;
@@ -125,15 +123,7 @@ namespace IMS.Forms.Inventory
             _menubar.ClearSelection(sender);
         }
 
-        private void BtnCategoryList_Click(object sender, EventArgs e)
-        {
-            var categoryListUC = Program.container.GetInstance<CategoryListUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            categoryListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(categoryListUC);
 
-            _menubar.ClearSelection(sender);
-        }
 
         #endregion
 
@@ -215,35 +205,17 @@ namespace IMS.Forms.Inventory
 
         #region Settings
 
-        private void BtnUom_Click(object sender, EventArgs e)
-        {
-            var uomUC = Program.container.GetInstance<UomUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            uomUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(uomUC);
-            // set selection
-            _menubar.ClearSelection(sender);
-        }
 
-        private void BtnPackage_Click(object sender, EventArgs e)
+        private void BtnSettings_Click(object sender, EventArgs e)
         {
-            var packageUC = Program.container.GetInstance<PackageUC>();
+            var settingsUC = Program.container.GetInstance<InventorySettingsUC>();
             _bodyTemplate.pnlBody.Controls.Clear();
-            packageUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(packageUC);
+            settingsUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(settingsUC);
             // set selection
             _menubar.ClearSelection(sender);
         }
-
-        private void BtnAdjustmentCodes_Click(object sender, EventArgs e)
-        {
-            var packageUC = Program.container.GetInstance<AdjustmentCodeUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            packageUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(packageUC);
-            // set selection
-            _menubar.ClearSelection(sender);
-        }
+        
 
 
         #endregion
@@ -270,4 +242,45 @@ namespace IMS.Forms.Inventory
 //        wareHouseCreate.ShowDialog();
 //        //PopulateWarehouseData();
 //    }
+//}
+
+
+//private void BtnUom_Click(object sender, EventArgs e)
+//{
+//    var uomUC = Program.container.GetInstance<UomUC>();
+//    _bodyTemplate.pnlBody.Controls.Clear();
+//    uomUC.Dock = DockStyle.Fill;
+//    _bodyTemplate.pnlBody.Controls.Add(uomUC);
+//    // set selection
+//    _menubar.ClearSelection(sender);
+//}
+
+//private void BtnPackage_Click(object sender, EventArgs e)
+//{
+//    var packageUC = Program.container.GetInstance<PackageUC>();
+//    _bodyTemplate.pnlBody.Controls.Clear();
+//    packageUC.Dock = DockStyle.Fill;
+//    _bodyTemplate.pnlBody.Controls.Add(packageUC);
+//    // set selection
+//    _menubar.ClearSelection(sender);
+//}
+
+//private void BtnAdjustmentCodes_Click(object sender, EventArgs e)
+//{
+//    var packageUC = Program.container.GetInstance<AdjustmentCodeUC>();
+//    _bodyTemplate.pnlBody.Controls.Clear();
+//    packageUC.Dock = DockStyle.Fill;
+//    _bodyTemplate.pnlBody.Controls.Add(packageUC);
+//    // set selection
+//    _menubar.ClearSelection(sender);
+//}
+
+//private void BtnCategoryList_Click(object sender, EventArgs e)
+//{
+//    var categoryListUC = Program.container.GetInstance<CategoryListUC>();
+//    _bodyTemplate.pnlBody.Controls.Clear();
+//    categoryListUC.Dock = DockStyle.Fill;
+//    _bodyTemplate.pnlBody.Controls.Add(categoryListUC);
+
+//    _menubar.ClearSelection(sender);
 //}

@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory.Products
         private readonly IDatabaseChangeListener _listener;
 
         private ProductModel _selectedProduct;
-        private SubHeadingTemplate _header;
+        private HeaderTemplate _header;
 
         public ProductListUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
@@ -118,7 +118,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnNew_Click;
             _header.btnEdit.Click += BtnEdit_Click;

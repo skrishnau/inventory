@@ -19,7 +19,7 @@ namespace IMS.Forms.Inventory.Attributes
     {
         private readonly IInventoryService inventoryService;
 
-        private SubHeadingTemplate _header;
+        private HeaderTemplate _header;
         public AttributeListUC(IInventoryService inventoryService)
         {
             this.inventoryService = inventoryService;
@@ -36,7 +36,7 @@ namespace IMS.Forms.Inventory.Attributes
 
         private void InitializeHeader()
         {
-            _header = SubHeadingTemplate.Instance;
+            _header = HeaderTemplate.Instance;
             _header.btnNew.Visible = true;
             _header.btnNew.Click += BtnAdd_Click;
             _header.btnEdit.Visible = true;

@@ -10,11 +10,15 @@ using System.Windows.Forms;
 
 namespace IMS.Forms.Common.Display
 {
-    public partial class HeaderEditControls : UserControl
+    public partial class SubHeaderTemplate : UserControl
     {
-        public HeaderEditControls()
+        public SubHeaderTemplate()
         {
             InitializeComponent();
+            this.Dock = DockStyle.Top;
         }
+
+        public override string Text { get { return lblText.Text; } set { lblText.Text = value; } }
+
     }
 }
