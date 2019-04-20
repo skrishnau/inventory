@@ -41,10 +41,14 @@
             this.btnNewCounter = new System.Windows.Forms.Button();
             this.btnCounterList = new System.Windows.Forms.Button();
             this.splitter3 = new System.Windows.Forms.Splitter();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.btnBranchList = new System.Windows.Forms.Button();
+            this.gbBranch = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.gbCustomer.SuspendLayout();
             this.gbCounter.SuspendLayout();
+            this.gbBranch.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -201,10 +205,43 @@
             this.splitter3.TabIndex = 28;
             this.splitter3.TabStop = false;
             // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(541, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(8, 83);
+            this.splitter1.TabIndex = 31;
+            this.splitter1.TabStop = false;
+            // 
+            // btnBranchList
+            // 
+            this.btnBranchList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBranchList.Image = global::IMS.Properties.Resources.icons8_Cactus_24px;
+            this.btnBranchList.Location = new System.Drawing.Point(3, 16);
+            this.btnBranchList.Name = "btnBranchList";
+            this.btnBranchList.Size = new System.Drawing.Size(71, 64);
+            this.btnBranchList.TabIndex = 0;
+            this.btnBranchList.Text = "Branches";
+            this.btnBranchList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnBranchList.UseVisualStyleBackColor = true;
+            // 
+            // gbBranch
+            // 
+            this.gbBranch.Controls.Add(this.btnBranchList);
+            this.gbBranch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbBranch.Location = new System.Drawing.Point(465, 0);
+            this.gbBranch.Name = "gbBranch";
+            this.gbBranch.Size = new System.Drawing.Size(76, 83);
+            this.gbBranch.TabIndex = 30;
+            this.gbBranch.TabStop = false;
+            this.gbBranch.Text = "Branch";
+            // 
             // PosMenuBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.gbBranch);
             this.Controls.Add(this.splitter3);
             this.Controls.Add(this.gbCounter);
             this.Controls.Add(this.splitter2);
@@ -217,6 +254,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.gbCustomer.ResumeLayout(false);
             this.gbCounter.ResumeLayout(false);
+            this.gbBranch.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -235,5 +273,8 @@
         protected internal System.Windows.Forms.Button btnNewCounter;
         protected internal System.Windows.Forms.Button btnCounterList;
         private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.Splitter splitter1;
+        protected internal System.Windows.Forms.Button btnBranchList;
+        private System.Windows.Forms.GroupBox gbBranch;
     }
 }

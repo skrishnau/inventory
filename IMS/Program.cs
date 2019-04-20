@@ -29,7 +29,7 @@ using IMS.Forms.POS.Customers;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.POS.Counters;
 using IMS.Forms.Generals;
-using IMS.Forms.Generals.Branches;
+using IMS.Forms.POS.Branches;
 using IMS.Forms.Business.Create;
 using IMS.Forms.UserManagement;
 using IMS.Forms.UserManagement.Users;
@@ -147,7 +147,6 @@ namespace IMS
             container.Register<UserListUC>(Lifestyle.Scoped);
 
             container.Register<BrandCreate>(Lifestyle.Scoped);
-            container.Register<SupplierUC>(Lifestyle.Scoped);
             container.Register<CustomerListUC>(Lifestyle.Scoped);
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);
@@ -191,6 +190,14 @@ namespace IMS
             container.Register<WarehouseUC>(Lifestyle.Scoped);
             container.Register<WarehouseListUC>(Lifestyle.Scoped);
             container.Register<WarehouseSideBarUC>(Lifestyle.Scoped);
+            //
+            // Suppliers
+            //
+            container.Register<SupplierUC>(Lifestyle.Scoped);
+            container.Register<SupplierListUC>(Lifestyle.Scoped);
+            container.Register<SupplierDetailUC>(Lifestyle.Scoped);
+            container.Register<SupplierCreate>(Lifestyle.Scoped);
+            container.Register<SupplierSideBarUC>(Lifestyle.Scoped);
 
 
             // Optionally verify the container.

@@ -8,21 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IMS.Forms.Generals
+namespace IMS.Forms.Inventory.Suppliers
 {
-    public partial class GeneralMenuBar : UserControl
+    public partial class SupplierDetailUC : UserControl
     {
-        public GeneralMenuBar()
+        public SupplierDetailUC()
         {
             InitializeComponent();
+
             this.Dock = DockStyle.Fill;
         }
 
-        public void ClearSelection()
+        internal void SetData(int supplierId)
         {
-          
-           // btnAttributeList.FlatStyle = FlatStyle.Standard;
-            //btnBranchList.FlatStyle = FlatStyle.Standard;
+            
         }
     }
 }

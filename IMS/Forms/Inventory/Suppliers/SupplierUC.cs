@@ -10,128 +10,72 @@ namespace IMS.Forms.Inventory.Suppliers
 {
     public partial class SupplierUC : UserControl
     {
-        private readonly ISupplierService _supplierService;
-        private readonly IDatabaseChangeListener _listener;
+        private SubBodyTemplate _bodyTemplate;
 
-        SupplierModel _selectedSupplierModel;
-        HeaderTemplate _header;
+        private readonly SupplierListUC _supplierListUC;
+        private readonly SupplierSideBarUC _sidebarUC;
+        private readonly SupplierDetailUC _supplierDetailUC;
 
-        public SupplierUC(ISupplierService supplierService, IDatabaseChangeListener listener)
+
+        public SupplierUC(SupplierListUC supplierListUC, SupplierSideBarUC supplierSideBarUC, SupplierDetailUC supplierDetailUC)
         {
-            this._supplierService = supplierService;
-            _listener = listener;
+            _supplierListUC = supplierListUC;
+            _sidebarUC = supplierSideBarUC;
+            _supplierDetailUC = supplierDetailUC;
 
             InitializeComponent();
 
             this.Load += SupplierUC_Load;
-
-           
         }
 
         private void SupplierUC_Load(object sender, EventArgs e)
         {
-            InitializeHeader();
-            Populate();
+            InitializeSubBody();
 
             InitializeEvents();
+
+            ShowUI(_sidebarUC.lnkList, 0);
+
         }
 
-
-        #region Initialization Functions
-
-        private void InitializeHeader()
-        {
-            _header = HeaderTemplate.Instance;
-            _header.btnNew.Visible = true;
-            _header.btnNew.Click += BtnNew_Click;
-            _header.btnEdit.Click += BtnEdit_Click;
-            _header.btnDelete.Click += BtnDelete_Click;
-            this.Controls.Add(_header);
-            _header.SendToBack();
-
-            _header.lblHeading.Text = "Suppliers";
-        }
-        
         private void InitializeEvents()
         {
-            _listener.SupplierUpdated += _listener_SupplierUpdated;
-            dgvSuppliers.SelectionChanged += DgvSuppliers_SelectionChanged;
+            _supplierListUC.RowSelected += _supplierListUC_RowSelected;
         }
 
-        #endregion
-
-
-
-        #region EventHandlers
-
-        private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Suppliers.SupplierModel> e)
+        private void _supplierListUC_RowSelected(object sender, Service.DbEventArgs.BaseEventArgs<SupplierModel> e)
         {
-            Populate();
-        }
-
-        private void DgvSuppliers_SelectionChanged(object sender, EventArgs e)
-        {
-            _selectedSupplierModel = dgvSuppliers.SelectedRows.Count > 0 ? dgvSuppliers.SelectedRows[0].DataBoundItem as SupplierModel : null;
-            ShowEditDeleteButtons();
-        }
-
-        private void BtnNew_Click(object sender, EventArgs e)
-        {
-            ShowAddEditDialog(false);
-        }
-
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            ShowAddEditDialog(true);
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (_selectedSupplierModel != null)
+            if (e.Model != null)
             {
-                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    _supplierService.DeleteSupplier(_selectedSupplierModel.Id);
-                }
+                ShowUI(sender, e.Model.Id);
             }
         }
 
-        #endregion
-
-
-
-        #region Population Functions
-
-        private void Populate()
+        private void InitializeSubBody()
         {
-            dgvSuppliers.AutoGenerateColumns = false;
-            var supplier = _supplierService.GetSupplierList();
-            dgvSuppliers.DataSource = supplier;
+            _bodyTemplate = new SubBodyTemplate();
+            _bodyTemplate.HeadingText = "Suppliers";
+            _bodyTemplate.SubHeadingText = "";
+            this.Controls.Add(_bodyTemplate);
+
+            _bodyTemplate.pnlSideBar.Controls.Add(_sidebarUC);
+            //_sidebarUC.lnkFlow
         }
 
-        private void ShowAddEditDialog(bool isEditMode)
+        private void ShowUI(object sender, int supplierId)
         {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            _bodyTemplate.pnlBody.Controls.Clear();
+            if (supplierId == 0)
             {
-                var supplierCreate = Program.container.GetInstance<SupplierCreate>();// (supplier);
-                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0);
-                supplierCreate.ShowDialog();
+                _bodyTemplate.pnlBody.Controls.Add(_supplierListUC);
+                _bodyTemplate.SubHeadingText = "Supplier List";
             }
+            else
+            {
+                _supplierDetailUC.SetData(supplierId);
+                _bodyTemplate.pnlBody.Controls.Add(_supplierDetailUC);
+            }
+            _sidebarUC.SetVisited(sender);
         }
-
-        private void ShowEditDeleteButtons()
-        {
-            var visible = _selectedSupplierModel != null;
-            _header.btnEdit.Visible = visible;
-            _header.btnDelete.Visible = visible;
-        }
-
-
-        #endregion
-
-
-
-
     }
 }

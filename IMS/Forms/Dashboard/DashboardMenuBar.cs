@@ -30,13 +30,6 @@ namespace IMS.Forms.Dashboard
             }
         }
 
-        private void btnDirectSale_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var directSaleForm = Program.container.GetInstance<DirectSaleForm>();
-                directSaleForm.ShowDialog();
-            }
-        }
+        
     }
 }

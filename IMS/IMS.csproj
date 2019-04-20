@@ -161,10 +161,10 @@
     <Compile Include="Forms\Common\VerticalSplitter.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Generals\Branches\BranchListUC.cs">
+    <Compile Include="Forms\POS\Branches\BranchListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Generals\Branches\BranchListUC.Designer.cs">
+    <Compile Include="Forms\POS\Branches\BranchListUC.Designer.cs">
       <DependentUpon>BranchListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Generals\GeneralMenuBar.cs">
@@ -208,6 +208,24 @@
     </Compile>
     <Compile Include="Forms\Inventory\Settings\InventorySettingsUC.Designer.cs">
       <DependentUpon>InventorySettingsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Suppliers\SupplierDetailUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Suppliers\SupplierDetailUC.Designer.cs">
+      <DependentUpon>SupplierDetailUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Suppliers\SupplierListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Suppliers\SupplierListUC.Designer.cs">
+      <DependentUpon>SupplierListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Suppliers\SupplierSideBarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Suppliers\SupplierSideBarUC.Designer.cs">
+      <DependentUpon>SupplierSideBarUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.cs">
       <SubType>Form</SubType>
@@ -611,7 +629,7 @@
     <EmbeddedResource Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.resx">
       <DependentUpon>InventoryUnitDataGridView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Generals\Branches\BranchListUC.resx">
+    <EmbeddedResource Include="Forms\POS\Branches\BranchListUC.resx">
       <DependentUpon>BranchListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Generals\GeneralMenuBar.resx">
@@ -634,6 +652,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsUC.resx">
       <DependentUpon>InventorySettingsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierDetailUC.resx">
+      <DependentUpon>SupplierDetailUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierListUC.resx">
+      <DependentUpon>SupplierListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierSideBarUC.resx">
+      <DependentUpon>SupplierSideBarUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.resx">
       <DependentUpon>InventoryAdjustmentForm.cs</DependentUpon>
@@ -1223,6 +1250,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Invoice_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Hashtag_Activity_Grid_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Combo_Chart_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Order_History_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Supplier_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Supplier_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Access_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_User_Account_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Information_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Receipt_16px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

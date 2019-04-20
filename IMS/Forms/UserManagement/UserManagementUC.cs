@@ -48,8 +48,8 @@ namespace IMS.Forms.UserManagement
         private void InitializeMenubarButtonEvents()
         {
             // user
-            _menubar.btnUserList.Click += BtnUserList_Click;
-            _menubar.btnNewUser.Click += BtnNewUser_Click;
+            //_menubar.btnUserList.Click += BtnUserList_Click;
+            //_menubar.btnNewUser.Click += BtnNewUser_Click;
             // roles
             _menubar.btnRoleList.Click += BtnRoles_Click;
             _menubar.btnNewRole.Click += BtnNewRole_Click;
@@ -57,26 +57,9 @@ namespace IMS.Forms.UserManagement
 
         #region Users
 
-        private void BtnUserList_Click(object sender, EventArgs e)
-        {
-            _bodyTemplate.pnlBody.Controls.Clear();
-            var userListUC = Program.container.GetInstance<UserListUC>();
-            userListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(userListUC);
-            // set selection
-            _menubar.ClearSelection();
-            _menubar.btnUserList.FlatStyle = FlatStyle.Flat;
-        }
+       
 
-        private void BtnNewUser_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var userCreate = Program.container.GetInstance<UserCreate>();
-                userCreate.ShowDialog();
-               // Populate();
-            }
-        }
+       
 
         #endregion
 

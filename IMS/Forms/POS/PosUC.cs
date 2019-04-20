@@ -6,6 +6,7 @@ using SimpleInjector.Lifestyles;
 using IMS.Forms.POS.Customers;
 using IMS.Forms.POS.Counters;
 using IMS.Forms.Business.Create;
+using IMS.Forms.POS.Branches;
 
 namespace IMS.Forms.POS
 {
@@ -49,13 +50,25 @@ namespace IMS.Forms.POS
             // counter
             _menubar.btnCounterList.Click += BtnCounterList_Click;
             _menubar.btnNewCounter.Click += BtnNewCounter_Click;
+            _menubar.btnBranchList.Click += BtnBranchList_Click;
         }
 
-      
+
+        private void BtnBranchList_Click(object sender, EventArgs e)
+        {
+            var branchListUC = Program.container.GetInstance<BranchListUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            branchListUC.Dock = DockStyle.Fill;
+            _bodyTemplate.pnlBody.Controls.Add(branchListUC);
+
+            _menubar.ClearSelection();
+            _menubar.btnBranchList.FlatStyle = FlatStyle.Flat;
+        }
 
 
 
-       
+
+
 
 
         private void BtnDirectSell_Click(object sender, EventArgs e)

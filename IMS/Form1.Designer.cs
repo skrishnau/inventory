@@ -141,6 +141,7 @@
             this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnHelp, "Settings");
             this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Visible = false;
             // 
             // btnSetting
             // 
@@ -156,6 +157,7 @@
             this.btnSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnSetting, "Settings");
             this.btnSetting.UseVisualStyleBackColor = true;
+            this.btnSetting.Visible = false;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
             // 
             // btnReport
@@ -172,6 +174,7 @@
             this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnReport, "User");
             this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Visible = false;
             // 
             // btnUserManagement
             // 
@@ -187,6 +190,7 @@
             this.btnUserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnUserManagement, "User Management");
             this.btnUserManagement.UseVisualStyleBackColor = true;
+            this.btnUserManagement.Visible = false;
             // 
             // btnKitting
             // 
@@ -203,6 +207,7 @@
             this.btnKitting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnKitting, "Point of Sale");
             this.btnKitting.UseVisualStyleBackColor = true;
+            this.btnKitting.Visible = false;
             // 
             // btnPOS
             // 
@@ -219,6 +224,7 @@
             this.btnPOS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnPOS, "Point of Sale");
             this.btnPOS.UseVisualStyleBackColor = true;
+            this.btnPOS.Visible = false;
             this.btnPOS.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // btnOrders
@@ -236,6 +242,7 @@
             this.btnOrders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnOrders, "Inventory");
             this.btnOrders.UseVisualStyleBackColor = true;
+            this.btnOrders.Visible = false;
             // 
             // btnInventory
             // 
@@ -267,6 +274,7 @@
             this.btnGeneral.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnGeneral, "Settings");
             this.btnGeneral.UseVisualStyleBackColor = true;
+            this.btnGeneral.Visible = false;
             // 
             // btnDashboard
             // 

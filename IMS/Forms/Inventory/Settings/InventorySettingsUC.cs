@@ -11,6 +11,8 @@ using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Categories;
+using IMS.Forms.UserManagement.Users;
+using IMS.Forms.Settings;
 
 namespace IMS.Forms.Inventory.Settings
 {
@@ -32,6 +34,24 @@ namespace IMS.Forms.Inventory.Settings
             lnkPackages.LinkClicked += LnkPackages_LinkClicked;
             lnkProductCategory.LinkClicked += LnkProductCategory_LinkClicked;
             lnkUom.LinkClicked += LnkUom_LinkClicked;
+            lnkUsers.LinkClicked += LnkUsers_LinkClicked;
+            lnkReferences.LinkClicked += LnkReferences_LinkClicked;
+        }
+
+        private void LnkReferences_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var settingsForm = Program.container.GetInstance<SettingsForm>();
+            settingsForm.ShowDialog();
+        }
+
+        private void LnkUsers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var userListUC = Program.container.GetInstance<UserListUC>();
+            pnlBody.Controls.Clear();
+            pnlBody.Controls.Add(userListUC);
+            // set selection
+            SetSelection(sender);
+            subHeading.Text = "Users";
         }
 
         private void LnkUom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -78,7 +98,7 @@ namespace IMS.Forms.Inventory.Settings
         private void SetSelection(object sender)
         {
             // clear first
-            foreach(LinkLabel linkLabel in pnlLinks.Controls)
+            foreach (LinkLabel linkLabel in pnlLinks.Controls)
             {
                 linkLabel.LinkVisited = false;
             }

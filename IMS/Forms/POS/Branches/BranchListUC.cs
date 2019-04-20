@@ -8,7 +8,7 @@ using Service.Listeners;
 using Service.Listeners.Business;
 using ViewModel.Core.Business;
 
-namespace IMS.Forms.Generals.Branches
+namespace IMS.Forms.POS.Branches
 {
     public partial class BranchListUC : UserControl
     {

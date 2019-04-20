@@ -1,4 +1,4 @@
-﻿namespace IMS.Forms.Generals.Branches
+﻿namespace IMS.Forms.POS.Branches
 {
     partial class BranchListUC
     {

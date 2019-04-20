@@ -1,20 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using IMS.Forms.Common.Display;
-using IMS.Forms.Inventory.Categories;
-using IMS.Forms.Inventory.Products;
-using IMS.Forms.Inventory.Attributes;
-using IMS.Forms.Inventory.Create;
-using SimpleInjector.Lifestyles;
-using IMS.Forms.Generals.Branches;
-using IMS.Forms.Business.Create;
 
 namespace IMS.Forms.Generals
 {
@@ -48,22 +33,21 @@ namespace IMS.Forms.Generals
 
         private void InitializeMenuBarButtonEvents()
         {
-           
+
 
             //_menubar.btnNewCategory.Click += BtnNewCategory_Click;
             //_menubar.btnAttributeList.Click += BtnAttributeList_Click;
             //_menubar.btnNewAttribute.Click += BtnNewAttribute_Click;
             // branch
-            _menubar.btnBranchList.Click += BtnBranchList_Click;
-           // _menubar.btnNewBranch.Click += BtnNewBranch_Click;
+            // _menubar.btnNewBranch.Click += BtnNewBranch_Click;
 
         }
 
-        
+
 
         #region Product
 
-      
+
 
         //private void BtnAttributeList_Click(object sender, EventArgs e)
         //{
@@ -111,16 +95,7 @@ namespace IMS.Forms.Generals
 
         #region Branches
 
-        private void BtnBranchList_Click(object sender, EventArgs e)
-        {
-            var branchListUC = Program.container.GetInstance<BranchListUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            branchListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(branchListUC);
 
-            _menubar.ClearSelection();
-            _menubar.btnBranchList.FlatStyle = FlatStyle.Flat;
-        }
 
         //private void BtnNewBranch_Click(object sender, EventArgs e)
         //{

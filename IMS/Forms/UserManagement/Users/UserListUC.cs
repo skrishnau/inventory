@@ -23,7 +23,7 @@ namespace IMS.Forms.UserManagement.Users
             this._userService = userService;
 
             InitializeComponent();
-
+            this.Dock = DockStyle.Fill;
             InitializeHeader();
         }
 
