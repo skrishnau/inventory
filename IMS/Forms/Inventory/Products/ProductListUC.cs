@@ -43,6 +43,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void ProductListUC_Load(object sender, EventArgs e)
         {
+           // this.heading.Text = "Product List";
             this.Dock = DockStyle.Fill;
             PopulateProductData();
             InitializeEvents();
@@ -142,7 +143,7 @@ namespace IMS.Forms.Inventory.Products
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var productCreate = Program.container.GetInstance<ProductCreate>();
+                var productCreate = Program.container.GetInstance<ProductCreateForm>();
                 productCreate.SetDataForEdit(productId);
                 productCreate.ShowDialog();
             }

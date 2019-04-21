@@ -182,8 +182,9 @@ namespace IMS
             //
             container.Register<ProductUC>(Lifestyle.Scoped);
             container.Register<ProductListUC>(Lifestyle.Scoped);
+            container.Register<ProductSidebarUC>(Lifestyle.Scoped);
             container.Register<ProductDetailUC>(Lifestyle.Scoped);
-            container.Register<ProductCreate>(Lifestyle.Scoped);
+            container.Register<ProductCreateForm>(Lifestyle.Scoped);
             //
             // Warehouse
             //

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Common.Links;
+using IMS.Forms.Common.Display;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -16,64 +17,81 @@ namespace IMS.Forms.Inventory.Products
     {
         private readonly ProductListUC _productListUC;
         private readonly ProductDetailUC _productDetailUC;
-        
 
+        private SubBodyTemplate _body;
         private LinkManager _linkManager;
+        private readonly ProductSidebarUC _sidebar;
 
-        public ProductUC(ProductListUC productListUC, ProductDetailUC productDetailUC)
+        public ProductUC(ProductListUC productListUC, ProductDetailUC productDetailUC, ProductSidebarUC sidebar)
         {
             _productListUC = productListUC;
             _productDetailUC = productDetailUC;
+            _sidebar = sidebar;
 
             InitializeComponent();
+
+            this.Dock = DockStyle.Fill;
 
             this.Load += ProductUC_Load;
         }
 
         private void ProductUC_Load(object sender, EventArgs e)
         {
-            headerTemplate1.Text = "Products";
-            _linkManager = new LinkManager(pnlLinkList, toolTip1);
-            subHeading.Text = "";
-            this.Dock = DockStyle.Fill;
-            ShowUI();
-            _productListUC.RowSelected += _productListUC_RowSelected;
-            lnkList.LinkClicked += _linkManager.Link_Click;
-            _linkManager.LinkClicked += _linkManager_LinkClicked;
+            InitializeBody();
+            
         }
 
+        private void InitializeBody()
+        {
+            _body = new SubBodyTemplate();
+            _linkManager = new LinkManager(_sidebar.pnlLinkList, _body.toolTip1);
+            _body.HeadingText = "Products";
+            _body.SubHeadingText = "";
+            _body.pnlSideBar.Controls.Add(_sidebar);
+            // product detail links
+            _linkManager.LinkClicked += _linkManager_LinkClicked;
+            // show list button click
+            _sidebar.lnkList.LinkClicked += _linkManager.Link_Click;
+            this.Controls.Add(_body);
+            // data row
+            _productListUC.RowSelected += _productListUC_RowSelected;
+            // show first UI
+            ShowProductAndDetailUI(_sidebar.lnkList, 0);
+        }
+
+        // show detail on clicking link
         private void _linkManager_LinkClicked(object sender, Service.DbEventArgs.IdEventArgs e)
         {
-            ShowUI(e.Id);
+            ShowProductAndDetailUI(sender, e.Id);
         }
 
+        // show detail on clicking link
         private void _productListUC_RowSelected(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Inventory.ProductModel> e)
         {
             if (e.Model != null)
             {
-                _linkManager.AddLink(e.Model.Id, e.Model.SKU, e.Model.Name);
-                ShowUI(e.Model.Id);
+                var link = _linkManager.AddAndGetLink(e.Model.Id, e.Model.SKU, e.Model.Name);
+                ShowProductAndDetailUI(link, e.Model.Id);
             }
         }
 
-       
-
-        private void ShowUI(int productId = 0)
+        private void ShowProductAndDetailUI(object sender, int productId)
         {
-            pnlBody.Controls.Clear();
+            _body.pnlBody.Controls.Clear();
             if (productId == 0)
             {
-                subHeading.Text = "Product List";
+                _body.SubHeadingText = "Product List";
                 // show the list
-                pnlBody.Controls.Add(_productListUC);
+                _body.pnlBody.Controls.Add(_productListUC);
             }
             else
             {
-                subHeading.Text = "Product Detail";
+                _body.SubHeadingText = "Product Detail";
                 // show the product detail
                 _productDetailUC.SetData(productId);
-                pnlBody.Controls.Add(_productDetailUC);
+                _body.pnlBody.Controls.Add(_productDetailUC);
             }
+            _sidebar.SetVisited(sender);
         }
     }
 }

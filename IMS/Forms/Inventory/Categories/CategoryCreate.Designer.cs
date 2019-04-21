@@ -1,4 +1,4 @@
-﻿namespace IMS.Forms.Inventory.Create
+﻿namespace IMS.Forms.Inventory.Categories
 {
     partial class CategoryCreate
     {

@@ -24,7 +24,7 @@ namespace IMS.Forms.Common.Links
             _toolTip = toolTip;
         }
 
-        public void AddLink(int modelId, string displayText, string toolTipText)//PurchaseOrderModel model)
+        public LinkLabel AddAndGetLink(int modelId, string displayText, string toolTipText)//PurchaseOrderModel model)
         {
             LinkLabel link = null;
             var index = _visitedLinkIds.IndexOf(modelId);
@@ -48,10 +48,8 @@ namespace IMS.Forms.Common.Links
                 _panel.Controls.Add(link);
                 link.Click += Link_Click;
             }
-            //if (link != null)
-            //{
-            //    link.BringToFront();
-            //}
+            link.LinkVisited = true;
+            return link;
         }
 
 

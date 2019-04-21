@@ -14,12 +14,14 @@ using System.Linq;
 using Service.Core.Business;
 using Service.Core.Suppliers;
 using IMS.Forms.Common.Validations;
+using IMS.Forms.Inventory.Create;
+using IMS.Forms.Inventory.Categories;
 
-namespace IMS.Forms.Inventory.Create
+namespace IMS.Forms.Inventory.Products
 {
     // design link : https://support.vendhq.com/hc/en-us/articles/201379180-What-are-Product-Variants-and-How-Do-I-Set-Them-Up-
 
-    public partial class ProductCreate : Form
+    public partial class ProductCreateForm : Form
     {
         public static readonly string REQUIRED = "Required";
 
@@ -38,7 +40,7 @@ namespace IMS.Forms.Inventory.Create
         // track the start index of dynamic attributes
         private List<ProductAttributeModel> _productAttributes = new List<ProductAttributeModel>();
 
-        public ProductCreate(IInventoryService inventoryService, IDatabaseChangeListener listener, IBusinessService businessService, ISupplierService supplierService)
+        public ProductCreateForm(IInventoryService inventoryService, IDatabaseChangeListener listener, IBusinessService businessService, ISupplierService supplierService)
         {
             _inventoryService = inventoryService;
             _businessService = businessService;

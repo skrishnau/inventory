@@ -161,6 +161,12 @@
     <Compile Include="Forms\Common\VerticalSplitter.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductSidebarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\ProductSidebarUC.Designer.cs">
+      <DependentUpon>ProductSidebarUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitSideBarUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -425,10 +431,10 @@
     <Compile Include="Forms\Inventory\Create\BrandCreate.Designer.cs">
       <DependentUpon>BrandCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Create\CategoryCreate.cs">
+    <Compile Include="Forms\Inventory\Categories\CategoryCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Create\CategoryCreate.Designer.cs">
+    <Compile Include="Forms\Inventory\Categories\CategoryCreate.Designer.cs">
       <DependentUpon>CategoryCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Create\ProductAttributeCreate.cs">
@@ -449,11 +455,11 @@
     <Compile Include="Forms\Inventory\Categories\CategoryEditControlPanel.Designer.cs">
       <DependentUpon>CategoryEditControlPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Create\ProductCreate.cs">
+    <Compile Include="Forms\Inventory\Products\ProductCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Create\ProductCreate.Designer.cs">
-      <DependentUpon>ProductCreate.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Products\ProductCreateForm.Designer.cs">
+      <DependentUpon>ProductCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Categories\CategoryListUC.cs">
       <SubType>UserControl</SubType>
@@ -641,6 +647,9 @@
     <EmbeddedResource Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.resx">
       <DependentUpon>InventoryUnitDataGridView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\ProductSidebarUC.resx">
+      <DependentUpon>ProductSidebarUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitSideBarUC.resx">
       <DependentUpon>InventoryUnitSideBarUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -773,7 +782,7 @@
     <EmbeddedResource Include="Forms\Inventory\Create\BrandCreate.resx">
       <DependentUpon>BrandCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Create\CategoryCreate.resx">
+    <EmbeddedResource Include="Forms\Inventory\Categories\CategoryCreate.resx">
       <DependentUpon>CategoryCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\InventoryMenuBar.resx">
@@ -782,8 +791,8 @@
     <EmbeddedResource Include="Forms\Inventory\Categories\CategoryEditControlPanel.resx">
       <DependentUpon>CategoryEditControlPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Create\ProductCreate.resx">
-      <DependentUpon>ProductCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Products\ProductCreateForm.resx">
+      <DependentUpon>ProductCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\ProductListUC.resx">
       <DependentUpon>ProductListUC.cs</DependentUpon>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
 
-namespace IMS.Forms.Inventory.Create
+namespace IMS.Forms.Inventory.Categories
 {
     public partial class CategoryCreate : Form
     {

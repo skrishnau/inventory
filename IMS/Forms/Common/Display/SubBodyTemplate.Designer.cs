@@ -34,8 +34,8 @@
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.subHeading = new IMS.Forms.Common.Display.SubHeaderTemplate();
             this.heading = new IMS.Forms.Common.Display.HeaderTemplate();
+            this.subHeading = new IMS.Forms.Common.Display.SubHeaderTemplate();
             this.SuspendLayout();
             // 
             // pnlBody
@@ -73,14 +73,6 @@
             this.splitter1.TabIndex = 16;
             this.splitter1.TabStop = false;
             // 
-            // subHeading
-            // 
-            this.subHeading.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subHeading.Location = new System.Drawing.Point(180, 27);
-            this.subHeading.Name = "subHeading";
-            this.subHeading.Size = new System.Drawing.Size(459, 42);
-            this.subHeading.TabIndex = 12;
-            // 
             // heading
             // 
             this.heading.BackColor = System.Drawing.Color.DarkSlateGray;
@@ -89,6 +81,14 @@
             this.heading.Name = "heading";
             this.heading.Size = new System.Drawing.Size(639, 27);
             this.heading.TabIndex = 13;
+            // 
+            // subHeading
+            // 
+            this.subHeading.Dock = System.Windows.Forms.DockStyle.Top;
+            this.subHeading.Location = new System.Drawing.Point(180, 27);
+            this.subHeading.Name = "subHeading";
+            this.subHeading.Size = new System.Drawing.Size(459, 42);
+            this.subHeading.TabIndex = 12;
             // 
             // SubBodyTemplate
             // 
@@ -112,7 +112,7 @@
         protected internal System.Windows.Forms.Panel pnlFooter;
         protected internal System.Windows.Forms.Panel pnlSideBar;
         protected internal System.Windows.Forms.ToolTip toolTip1;
-        private SubHeaderTemplate subHeading;
         private HeaderTemplate heading;
+        private SubHeaderTemplate subHeading;
     }
 }

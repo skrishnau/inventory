@@ -95,7 +95,7 @@ namespace IMS.Forms.Purchases
         {
             if (e.Model != null)
             {
-                _linkManager.AddLink(e.Model.Id, e.Model.OrderNumber, e.Model.Name);
+                _linkManager.AddAndGetLink(e.Model.Id, e.Model.OrderNumber, e.Model.Name);
                 ShowData(e.Model.Id);
             }
         }
