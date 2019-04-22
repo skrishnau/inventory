@@ -38,14 +38,19 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBaseUom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnHoldQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReorderPoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBaseUom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRetailPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).BeginInit();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -53,6 +58,8 @@
             // 
             // dgvProductList
             // 
+            this.dgvProductList.AllowUserToAddRows = false;
+            this.dgvProductList.AllowUserToDeleteRows = false;
             this.dgvProductList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -67,10 +74,16 @@
             this.colId,
             this.dataGridViewTextBoxColumn2,
             this.colSKU,
+            this.colType,
             this.colCategory,
-            this.colBaseUom,
             this.colInStockQuantity,
-            this.colOnHoldQuantity});
+            this.colOnHoldQuantity,
+            this.colReorderPoint,
+            this.colBaseUom,
+            this.colPackage,
+            this.colRetailPrice,
+            this.colBrand,
+            this.colUse});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -82,6 +95,7 @@
             this.dgvProductList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductList.Location = new System.Drawing.Point(0, 35);
             this.dgvProductList.Name = "dgvProductList";
+            this.dgvProductList.ReadOnly = true;
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductList.Size = new System.Drawing.Size(579, 476);
             this.dgvProductList.TabIndex = 7;
@@ -110,7 +124,6 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnNew);
             this.flowLayoutPanel1.Controls.Add(this.btnEdit);
-            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -140,23 +153,12 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Visible = false;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Image = global::IMS.Properties.Resources.icons8_Remove_16px;
-            this.btnDelete.Location = new System.Drawing.Point(165, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 22);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Visible = false;
-            // 
             // colId
             // 
             this.colId.DataPropertyName = "Id";
             this.colId.HeaderText = "Id";
             this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
             this.colId.Visible = false;
             // 
             // dataGridViewTextBoxColumn2
@@ -174,7 +176,17 @@
             this.colSKU.DataPropertyName = "SKU";
             this.colSKU.HeaderText = "SKU";
             this.colSKU.Name = "colSKU";
-            this.colSKU.Width = 120;
+            this.colSKU.ReadOnly = true;
+            this.colSKU.Width = 110;
+            // 
+            // colType
+            // 
+            this.colType.DataPropertyName = "Type";
+            this.colType.HeaderText = "Type";
+            this.colType.Name = "colType";
+            this.colType.ReadOnly = true;
+            this.colType.Visible = false;
+            this.colType.Width = 80;
             // 
             // colCategory
             // 
@@ -185,22 +197,70 @@
             this.colCategory.ReadOnly = true;
             this.colCategory.Width = 74;
             // 
-            // colBaseUom
-            // 
-            this.colBaseUom.HeaderText = "Base UOM";
-            this.colBaseUom.Name = "colBaseUom";
-            // 
             // colInStockQuantity
             // 
             this.colInStockQuantity.DataPropertyName = "InStockQuantity";
             this.colInStockQuantity.HeaderText = "In Stock";
             this.colInStockQuantity.Name = "colInStockQuantity";
+            this.colInStockQuantity.ReadOnly = true;
+            this.colInStockQuantity.Width = 70;
             // 
             // colOnHoldQuantity
             // 
             this.colOnHoldQuantity.DataPropertyName = "OnHoldQuantity";
             this.colOnHoldQuantity.HeaderText = "On Hold";
             this.colOnHoldQuantity.Name = "colOnHoldQuantity";
+            this.colOnHoldQuantity.ReadOnly = true;
+            this.colOnHoldQuantity.Width = 70;
+            // 
+            // colReorderPoint
+            // 
+            this.colReorderPoint.DataPropertyName = "ReorderPoint";
+            this.colReorderPoint.HeaderText = "Reorder At";
+            this.colReorderPoint.Name = "colReorderPoint";
+            this.colReorderPoint.ReadOnly = true;
+            this.colReorderPoint.Width = 70;
+            // 
+            // colBaseUom
+            // 
+            this.colBaseUom.DataPropertyName = "BaseUom";
+            this.colBaseUom.HeaderText = "UOM";
+            this.colBaseUom.Name = "colBaseUom";
+            this.colBaseUom.ReadOnly = true;
+            this.colBaseUom.ToolTipText = "Units of Measure";
+            this.colBaseUom.Width = 70;
+            // 
+            // colPackage
+            // 
+            this.colPackage.DataPropertyName = "Package";
+            this.colPackage.HeaderText = "Pkg Type";
+            this.colPackage.Name = "colPackage";
+            this.colPackage.ReadOnly = true;
+            this.colPackage.Width = 70;
+            // 
+            // colRetailPrice
+            // 
+            this.colRetailPrice.DataPropertyName = "RetailPrice";
+            this.colRetailPrice.HeaderText = "Retail Price";
+            this.colRetailPrice.Name = "colRetailPrice";
+            this.colRetailPrice.ReadOnly = true;
+            this.colRetailPrice.Width = 70;
+            // 
+            // colBrand
+            // 
+            this.colBrand.DataPropertyName = "Brand";
+            this.colBrand.HeaderText = "Brand";
+            this.colBrand.Name = "colBrand";
+            this.colBrand.ReadOnly = true;
+            this.colBrand.Width = 80;
+            // 
+            // colUse
+            // 
+            this.colUse.DataPropertyName = "Use";
+            this.colUse.HeaderText = "Use";
+            this.colUse.Name = "colUse";
+            this.colUse.ReadOnly = true;
+            this.colUse.Width = 40;
             // 
             // ProductListUC
             // 
@@ -225,13 +285,18 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         protected internal System.Windows.Forms.Button btnNew;
         protected internal System.Windows.Forms.Button btnEdit;
-        protected internal System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBaseUom;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOnHoldQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReorderPoint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBaseUom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPackage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRetailPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBrand;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
     }
 }

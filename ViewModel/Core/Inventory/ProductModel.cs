@@ -89,14 +89,14 @@ namespace ViewModel.Core.Inventory
         // used for dynamic attributes adding and for adding SKU directly in Product Create
         public virtual List<ProductAttributeModel> ProductAttributes { get; set; }
        // public List<ProductVariantModel> Variants { get; set; }
-        public virtual List<BrandModel> Brands { get; set; }
+      //  public virtual List<BrandModel> Brands { get; set; }
 
 
 
         public ProductModel()
         {
            // Category = new CategoryModel();
-            Brands = new List<BrandModel>();
+           // Brands = new List<BrandModel>();
             ProductAttributes = new List<ProductAttributeModel>();
             //Variants = new List<ProductVariantModel>();
         }

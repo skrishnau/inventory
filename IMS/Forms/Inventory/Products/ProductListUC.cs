@@ -59,7 +59,7 @@ namespace IMS.Forms.Inventory.Products
             dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
-            btnDelete.Click += BtnDelete_Click;
+           // btnDelete.Click += BtnDelete_Click;
         }
 
         private void InitializeListeners()
@@ -95,9 +95,9 @@ namespace IMS.Forms.Inventory.Products
             {
                 // show edit and delete buttons
                 btnEdit.Visible = true;
-                btnDelete.Visible = true;
-
-                //var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
+               // btnDelete.Visible = true;
+                var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
+                _selectedProduct = data;
                 //var model = _inventoryService.GetProductForEdit(data.Id);
             }
 

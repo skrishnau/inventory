@@ -72,8 +72,8 @@ namespace Service.Core.Inventory
 
         #endregion
 
-        List<BrandModel> GetBrandList();
-        void AddUpdateBrand(BrandModel brand);
+        //List<BrandModel> GetBrandList();
+        //void AddUpdateBrand(BrandModel brand);
 
         #region Adjustment Codes
 

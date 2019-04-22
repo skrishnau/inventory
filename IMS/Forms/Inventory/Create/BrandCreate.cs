@@ -12,6 +12,7 @@ using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Create
 {
+    [Obsolete("Brand is not used any more.", true)]
     public partial class BrandCreate : Form
     {
         private readonly IInventoryService inventoryService;
@@ -45,17 +46,17 @@ namespace IMS.Forms.Inventory.Create
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (tbBrandName.Text == "")
-            {
-                tbBrandName.BackColor = Color.LightPink;
-                return;
-            }
-            var brandModel = new BrandModel
-            {
-                Name = tbBrandName.Text
-            };
-            inventoryService.AddUpdateBrand(brandModel);
-            this.Close();
+            //if (tbBrandName.Text == "")
+            //{
+            //    tbBrandName.BackColor = Color.LightPink;
+            //    return;
+            //}
+            //var brandModel = new BrandModel
+            //{
+            //    Name = tbBrandName.Text
+            //};
+            //inventoryService.AddUpdateBrand(brandModel);
+            //this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

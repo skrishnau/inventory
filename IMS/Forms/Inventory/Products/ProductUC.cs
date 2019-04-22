@@ -54,7 +54,7 @@ namespace IMS.Forms.Inventory.Products
             _sidebar.lnkList.LinkClicked += _linkManager.Link_Click;
             this.Controls.Add(_body);
             // data row
-            _productListUC.RowSelected += _productListUC_RowSelected;
+           // _productListUC.RowSelected += _productListUC_RowSelected;
             // show first UI
             ShowProductAndDetailUI(_sidebar.lnkList, 0);
         }
@@ -64,7 +64,7 @@ namespace IMS.Forms.Inventory.Products
         {
             ShowProductAndDetailUI(sender, e.Id);
         }
-
+        /*
         // show detail on clicking link
         private void _productListUC_RowSelected(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Inventory.ProductModel> e)
         {
@@ -73,10 +73,11 @@ namespace IMS.Forms.Inventory.Products
                 var link = _linkManager.AddAndGetLink(e.Model.Id, e.Model.SKU, e.Model.Name);
                 ShowProductAndDetailUI(link, e.Model.Id);
             }
-        }
+        }*/
 
         private void ShowProductAndDetailUI(object sender, int productId)
         {
+
             _body.pnlBody.Controls.Clear();
             if (productId == 0)
             {
@@ -92,6 +93,7 @@ namespace IMS.Forms.Inventory.Products
                 _body.pnlBody.Controls.Add(_productDetailUC);
             }
             _sidebar.SetVisited(sender);
+
         }
     }
 }

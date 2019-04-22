@@ -149,7 +149,6 @@ namespace IMS
             // --- User Related --- //
             container.Register<UserListUC>(Lifestyle.Scoped);
 
-            container.Register<BrandCreate>(Lifestyle.Scoped);
             container.Register<CustomerListUC>(Lifestyle.Scoped);
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);

@@ -7,6 +7,7 @@ using Infrastructure.Entities.Inventory;
 
 namespace ViewModel.Core.Inventory
 {
+    [Obsolete("Brand table is not used anymore.", true)]
     public class BrandModel
     {
         public int Id { get; set; }

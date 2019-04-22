@@ -37,6 +37,7 @@ namespace IMS.Forms.Inventory.Products
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
         // variables
         private int _productId;
+        private ProductModel _product;
         // track the start index of dynamic attributes
         private List<ProductAttributeModel> _productAttributes = new List<ProductAttributeModel>();
 
@@ -65,6 +66,8 @@ namespace IMS.Forms.Inventory.Products
             PopulateSupplier();
             PopulateUom();
             PopulatePackage();
+
+            PopulateDataForEdit(_product);
 
         }
 
@@ -125,7 +128,7 @@ namespace IMS.Forms.Inventory.Products
             var product = new ProductModel()
             {
                 Id = _productId,
-                Brands = GetBrands(),
+               // Brands = GetBrands(),
                 CategoryId = category.Id,
                 ReorderPoint = numReorderPoint.Value,
                 ReorderAlert = true,
@@ -136,7 +139,7 @@ namespace IMS.Forms.Inventory.Products
                 AttributesJSON = "",
                 Barcode = tbBarcode.Text,
                 BaseUomId = int.Parse(cbUom.SelectedValue.ToString()),
-                Brand = tbBrands.Text,
+                Brand = tbBrand.Text,
                 Description = tbDescription.Text,
                 EOQ = numEOQ.Value,
                 HasVariants = rbProductWithVariants.Checked,
@@ -151,7 +154,7 @@ namespace IMS.Forms.Inventory.Products
 
                 ParentProductId = null,
                 IsVariant = false,
-                Use = true,
+                Use = chkUse.Checked,
 
                 //MarkupPercent = 
                 MonthlyDemand = numMonthlyDemand.Value,
@@ -164,7 +167,7 @@ namespace IMS.Forms.Inventory.Products
                 UnitGrossWeight = numUnitGrossWeight.Value,
                 UnitsInPackage = numUnitsInPackage.Value,
                 WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString()),
-
+                
             };
             product.ProductAttributes = _productAttributes;
             _inventoryService.AddUpdateProduct(product);
@@ -172,89 +175,6 @@ namespace IMS.Forms.Inventory.Products
             this.Close();
 
         }
-
-        //private List<ProductVariantModel> GetVariants()
-        //{
-        //    var variants = new List<ProductVariantModel>();
-        //    for (int r = 0; r < dgvVariants.RowCount - 1; r++)
-        //    {
-        //        DataGridViewRow row = dgvVariants.Rows[r];
-        //        var variant = new ProductVariantModel();
-        //        variant.Id = int.Parse(row.Cells[colVariantId.Name].Value == null ? "0" : row.Cells[colVariantId.Name].Value.ToString());
-        //        variant.SKU = row.Cells[colSKU.Name].Value.ToString();
-        //        variant.Alert = bool.Parse(row.Cells[colAlert.Name].Value == null ? "False" : row.Cells[colAlert.Name].Value.ToString());
-        //        variant.AlertThreshold = int.Parse(row.Cells[colAlertThreshold.Name].Value == null ? "0" : row.Cells[colAlertThreshold.Name].Value.ToString());
-        //        foreach (var attribute in _productAttributes)
-        //        {
-        //            // add to the dictionary
-        //            variant.Attributes.Add(new NameValuePair(attribute.Attribute, row.Cells[COL_NAME_PREFIX + attribute.Attribute].Value.ToString()));
-        //        }
-        //        variants.Add(variant);
-        //    }
-
-        //    return variants;
-        //}
-
-        private List<BrandModel> GetBrands()
-        {
-            var list = new List<BrandModel>();
-
-            // new approach via textbox, comma separated
-            var brandText = tbBrands.Text;
-            var split = brandText.Split(new char[] { '\n', ';', ',' });
-            foreach (var sp in split)
-            {
-
-                if (!string.IsNullOrEmpty(sp))
-                {
-                    // ignore the repeated
-                    var name = sp.Trim();
-                    if (!list.Any(x => x.Name == name))
-                    {
-                        var brandModel = new BrandModel()
-                        {
-                            //Id = inputUc.Id,
-                            CreatedAt = DateTime.Now,//inputUc.Id == 0 ? DateTime.Now : inputUc.CreatedAt,
-                            UpdatedAt = DateTime.Now,
-                            Name = sp.Trim(), //inputUc.InputText,
-                            ProductId = _productId,
-                        };
-                        list.Add(brandModel);
-                    }
-                }
-            }
-            return list;
-        }
-
-        //private bool IsModelValid()
-        //{
-        //    // return Validate();
-
-        //    //var nameValid = ValidateControl(tbProductName);
-        //    //var skuValid = ValidateControl(tbSKU);
-        //    //var categoryValid = ValidateControl(cbCategory);
-        //    //var labelValid = ValidateControl(tbLabelCode);
-        //    //var packageValid = ValidateControl(cbPackage);
-        //    //var supplierValid = ValidateControl(cbSupplier);
-        //    //var uomValid = ValidateControl(cbUom);
-        //    //var warehouseValid = ValidateControl(cbWarehouse);
-
-        //    //var allValid = nameValid &&
-        //    //    categoryValid &&
-        //    //    labelValid &&
-        //    //    packageValid &&
-        //    //    supplierValid &&
-        //    //    uomValid &&
-        //    //    warehouseValid;
-
-        //    var allValid = _requiredValidator.IsValid();
-        //    if (!allValid)
-        //    {
-        //        PopupMessage.ShowMissingInputsMessage();
-        //        this.Focus(); // return the focus to the current form
-        //    }
-        //    return allValid;
-        //}
 
         #endregion
 
@@ -357,29 +277,61 @@ namespace IMS.Forms.Inventory.Products
         {
             _productId = productId;
             // get the product
-            var product = _inventoryService.GetProductForEdit(productId);
-            if (product != null)
+            _product = _inventoryService.GetProductForEdit(productId);
+
+            // SetDataForEdit(_product);
+        }
+
+        public void PopulateDataForEdit(ProductModel product)
+        {
+            if (_product != null)
             {
                 this.Text = "Edit Product (" + product.Name + ")";
-                tbProductName.Text = product.Name;
-                numReorderPoint.Value = product.ReorderPoint;
-                cbCategory.Text = product.Category;
-                //.Checked = product.ReorderAlert;
 
+                tbBarcode.Text = product.Barcode;
+                tbBrand.Text = product.Brand;
+                tbDescription.Text = product.Description;
+                tbLabelCode.Text = product.Label;
+                tbManufacturer.Text = product.Manufacturer;
+                tbProductName.Text = product.Name;
+                tbSKU.Text = product.SKU;
+
+                numEOQ.Value = product.EOQ;
+                numLeadDays.Value = product.LeadDays;
+                numMarkupPercent.Value = product.MarkupPercent;
+                numMonthlyDemand.Value = product.MonthlyDemand;
+                numReorderPoint.Value = product.ReorderPoint;
+                numReorderQuantity.Value = product.ReorderQuantity;
+                numRetailPrice.Value = product.RetailPrice;
+                numSupplyPrice.Value = product.SupplyPrice;
+                numUnitGrossWeight.Value = product.UnitGrossWeight;
+                numUnitNetWeight.Value = product.UnitNetWeight;
+                numUnitsInPackage.Value = product.UnitsInPackage;
+
+                cbCategory.Text = product.Category;
+                cbPackage.Text = product.Package == null ? "" : product.Package;
+                cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
+                cbWarehouse.Text = product.Warehouse == null ? "" : product.Warehouse;
+                //cbSupplier.SelectedValue = product.
+
+                chkIsBuild.Checked = product.IsBuild;
+                chkIsBuy.Checked = product.IsBuy;
+                chkIsNotMovable.Checked = product.IsNotMovable;
+                chkIsSell.Checked = product.IsSell;
+                chkUse.Checked = product.Use;
                 // variants
                 foreach (var prodAttr in product.ProductAttributes)
                 {
                     AddAttributeColumn(prodAttr.Id, prodAttr.Attribute);
                 }
 
-                foreach (var brand in product.Brands)
-                {
-                    tbBrands.Text += brand.Name + ", ";
-                }
+                //foreach (var brand in product.Brands)
+                //{
+                //    tbBrands.Text += brand.Name + ", ";
+                //}
 
                 // PopulateVariants(product.Variants);
             }
-
         }
 
         private void PopulateCategoryCombo()
@@ -748,3 +700,90 @@ private void SaveProduct()
 //}
 
 #endregion
+
+
+/*
+private List<BrandModel> GetBrands()
+{
+    var list = new List<BrandModel>();
+
+    // new approach via textbox, comma separated
+    var brandText = tbBrand.Text;
+    var split = brandText.Split(new char[] { '\n', ';', ',' });
+    foreach (var sp in split)
+    {
+
+        if (!string.IsNullOrEmpty(sp))
+        {
+            // ignore the repeated
+            var name = sp.Trim();
+            if (!list.Any(x => x.Name == name))
+            {
+                var brandModel = new BrandModel()
+                {
+                    //Id = inputUc.Id,
+                    CreatedAt = DateTime.Now,//inputUc.Id == 0 ? DateTime.Now : inputUc.CreatedAt,
+                    UpdatedAt = DateTime.Now,
+                    Name = sp.Trim(), //inputUc.InputText,
+                    ProductId = _productId,
+                };
+                list.Add(brandModel);
+            }
+        }
+    }
+    return list;
+}
+*/
+
+
+//private List<ProductVariantModel> GetVariants()
+//{
+//    var variants = new List<ProductVariantModel>();
+//    for (int r = 0; r < dgvVariants.RowCount - 1; r++)
+//    {
+//        DataGridViewRow row = dgvVariants.Rows[r];
+//        var variant = new ProductVariantModel();
+//        variant.Id = int.Parse(row.Cells[colVariantId.Name].Value == null ? "0" : row.Cells[colVariantId.Name].Value.ToString());
+//        variant.SKU = row.Cells[colSKU.Name].Value.ToString();
+//        variant.Alert = bool.Parse(row.Cells[colAlert.Name].Value == null ? "False" : row.Cells[colAlert.Name].Value.ToString());
+//        variant.AlertThreshold = int.Parse(row.Cells[colAlertThreshold.Name].Value == null ? "0" : row.Cells[colAlertThreshold.Name].Value.ToString());
+//        foreach (var attribute in _productAttributes)
+//        {
+//            // add to the dictionary
+//            variant.Attributes.Add(new NameValuePair(attribute.Attribute, row.Cells[COL_NAME_PREFIX + attribute.Attribute].Value.ToString()));
+//        }
+//        variants.Add(variant);
+//    }
+
+//    return variants;
+//}
+//private bool IsModelValid()
+//{
+//    // return Validate();
+
+//    //var nameValid = ValidateControl(tbProductName);
+//    //var skuValid = ValidateControl(tbSKU);
+//    //var categoryValid = ValidateControl(cbCategory);
+//    //var labelValid = ValidateControl(tbLabelCode);
+//    //var packageValid = ValidateControl(cbPackage);
+//    //var supplierValid = ValidateControl(cbSupplier);
+//    //var uomValid = ValidateControl(cbUom);
+//    //var warehouseValid = ValidateControl(cbWarehouse);
+
+//    //var allValid = nameValid &&
+//    //    categoryValid &&
+//    //    labelValid &&
+//    //    packageValid &&
+//    //    supplierValid &&
+//    //    uomValid &&
+//    //    warehouseValid;
+
+//    var allValid = _requiredValidator.IsValid();
+//    if (!allValid)
+//    {
+//        PopupMessage.ShowMissingInputsMessage();
+//        this.Focus(); // return the focus to the current form
+//    }
+//    return allValid;
+//}
+

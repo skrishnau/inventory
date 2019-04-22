@@ -100,6 +100,10 @@
     <Compile Include="Migrations\201904221540075_MovementUpdates.Designer.cs">
       <DependentUpon>201904221540075_MovementUpdates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904222059478_brandRemoved.cs" />
+    <Compile Include="Migrations\201904222059478_brandRemoved.Designer.cs">
+      <DependentUpon>201904222059478_brandRemoved.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904221540075_MovementUpdates.resx">
       <DependentUpon>201904221540075_MovementUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904222059478_brandRemoved.resx">
+      <DependentUpon>201904222059478_brandRemoved.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

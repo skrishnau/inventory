@@ -78,21 +78,6 @@ namespace DTO.Core.Inventory
             return date.ToShortDateString();
         }
 
-        public static string GetBrandListCommaSeparatedString(List<Brand> brands)
-        {
-            var builder = new StringBuilder();
-            for (var b = 0; b < brands.Count; b++)
-            {
-
-                builder.Append(brands[b].Name);
-                if (b < brands.Count - 2)
-                    builder.Append(", ");
-                if (b == brands.Count - 2)
-                    builder.Append(" , ");// &
-
-            }
-            return builder.ToString();
-        }
 
 
         public static ProductModel MapToProductModel(Product entity)
@@ -124,7 +109,6 @@ namespace DTO.Core.Inventory
             model.AttributesJSON = entity.AttributesJSON;
             model.Barcode = entity.Barcode;
             model.Brand = entity.Brand;
-            model.Brands = BrandMapper.MapToBrandModel(entity.Brands.Where(x => x.DeletedAt == null).ToList());
             model.Description = entity.Description;
             model.Label = entity.Label;
             model.Manufacturer = entity.Manufacturer;
@@ -247,3 +231,20 @@ namespace DTO.Core.Inventory
 //        //VariantCount = x.Variants == null ? 0 : x.Variants.Count
 //    };
 //}
+
+
+/* public static string GetBrandListCommaSeparatedString(List<Brand> brands)
+  {
+      var builder = new StringBuilder();
+      for (var b = 0; b < brands.Count; b++)
+      {
+
+          builder.Append(brands[b].Name);
+          if (b < brands.Count - 2)
+              builder.Append(", ");
+          if (b == brands.Count - 2)
+              builder.Append(" , ");// &
+
+      }
+      return builder.ToString();
+  }*/

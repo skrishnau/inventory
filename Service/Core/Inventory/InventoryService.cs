@@ -150,23 +150,6 @@ namespace Service.Core.Inventory
             _listener = listener;
         }
 
-        public void AddUpdateBrand(BrandModel brand)
-        {
-            var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brand.Id);
-            if (dbEntity == null)
-            {
-                var brandEntity = brand.ToEntity();
-                brandEntity.CreatedAt = DateTime.Now;
-                brandEntity.UpdatedAt = DateTime.Now;
-                _context.Brand.Add(brandEntity);
-            }
-            else
-            {
-                dbEntity.Name = brand.Name;
-                dbEntity.UpdatedAt = DateTime.Now; // brand.UpdatedAt;
-            }
-            _context.SaveChanges();
-        }
 
         public void AddUpdateCategory(CategoryModel category)
         {
@@ -208,7 +191,7 @@ namespace Service.Core.Inventory
                 entity.UpdatedAt = DateTime.Now;
                 entity.ProductAttributes = new List<ProductAttribute>();
                 //entity.Variants = new List<Variant>();
-                entity.Brands = new List<Brand>();
+               // entity.Brands = new List<Brand>();
                 _context.Product.Add(entity);
                 eventArgs.Mode = Utility.UpdateMode.ADD;
             }
@@ -218,7 +201,7 @@ namespace Service.Core.Inventory
                 entity.UpdatedAt = DateTime.Now;
                 eventArgs.Mode = Utility.UpdateMode.EDIT;
             }
-            AssignBrandForSave(entity, model, now);
+          //  AssignBrandForSave(entity, model, now);
             AssignProductAttributesForSave(entity, model, now);
             //  AssignVariantsForSave(entity, model, now);
 
@@ -298,6 +281,25 @@ namespace Service.Core.Inventory
             }
         }
 
+        /*
+        public void AddUpdateBrand(BrandModel brand)
+        {
+            var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brand.Id);
+            if (dbEntity == null)
+            {
+                var brandEntity = brand.ToEntity();
+                brandEntity.CreatedAt = DateTime.Now;
+                brandEntity.UpdatedAt = DateTime.Now;
+                _context.Brand.Add(brandEntity);
+            }
+            else
+            {
+                dbEntity.Name = brand.Name;
+                dbEntity.UpdatedAt = DateTime.Now; // brand.UpdatedAt;
+            }
+            _context.SaveChanges();
+        }
+
         private void AssignBrandForSave(Product productEntity, ProductModel product, DateTime now)
         {
             //dbEntity.Brands
@@ -351,6 +353,17 @@ namespace Service.Core.Inventory
             return brands;
         }
 
+        public void DeleteBrand(BrandModel brandModel)
+        {
+            var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brandModel.Id);
+            if (dbEntity != null)
+            {
+                dbEntity.DeletedAt = DateTime.Now;
+                _context.SaveChanges();
+            }
+        }
+        */
+
         public List<CategoryModel> GetCategoryList(int? parentCateogryId)
         {
             var cats = _context.Category
@@ -386,7 +399,7 @@ namespace Service.Core.Inventory
             var products = _context.Product
                 .Include(x => x.ProductAttributes)
                 //.Include(x => x.ProductAttributes.Select(y => y.Option))
-                .Include(x => x.Brands)
+                // .Include(x => x.Brands)
                 .Where(x => x.DeletedAt == null);
             var list = new List<ProductModel>();
             foreach (var x in products)
@@ -406,15 +419,6 @@ namespace Service.Core.Inventory
             }
         }
 
-        public void DeleteBrand(BrandModel brandModel)
-        {
-            var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brandModel.Id);
-            if (dbEntity != null)
-            {
-                dbEntity.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-            }
-        }
 
         public void DeleteProduct(ProductModel produtModel)
         {
@@ -454,6 +458,11 @@ namespace Service.Core.Inventory
         {
             var product = _context.Product
                 //.Include(x => x.Variants)
+                .Include(x=>x.BaseUom)
+                .Include(x=>x.Category)
+                .Include(x=>x.Package)
+                .Include(x=>x.ParentProduct)
+                .Include(x=>x.Warehouse)
                 .FirstOrDefault(x => x.Id == productId);
             if (product == null)
                 return null;

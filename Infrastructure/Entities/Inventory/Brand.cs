@@ -9,6 +9,7 @@ namespace Infrastructure.Entities.Inventory
     /// <summary>
     /// Brands; e.g. Xiaomi, Samsung, Nike; They have many products
     /// </summary>
+   [Obsolete("Brand table is not used anymore", true)]
    public class Brand
     {
         public int Id { get; set; }

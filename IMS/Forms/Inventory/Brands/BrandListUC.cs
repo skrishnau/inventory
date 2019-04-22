@@ -13,6 +13,7 @@ using IMS.Forms.Inventory.Create;
 
 namespace IMS.Forms.Inventory.Brands
 {
+    [Obsolete("Brand is not used anymore", true)]
     public partial class BrandListUC : UserControl
     {
         private readonly IInventoryService inventoryService;
@@ -25,7 +26,7 @@ namespace IMS.Forms.Inventory.Brands
 
             btnAddBrand.Click += BtnAddBrand_Click;
 
-            PopulateBrandData();
+          //  PopulateBrandData();
 
         }
 
@@ -41,18 +42,20 @@ namespace IMS.Forms.Inventory.Brands
                 var brandCreate = Program.container.GetInstance<BrandCreate>();
                 brandCreate.ShowInTaskbar = false;
                 brandCreate.ShowDialog();
-                PopulateBrandData();
+               // PopulateBrandData();
             }
         }
+        //private void PopulateBrandData()
+        //{
+        //    dgvBrandList.AutoGenerateColumns = false;
+        //    var brands = inventoryService.GetBrandList();
+        //    dgvBrandList.DataSource = brands;
+        //}
 
-        private void PopulateBrandData()
-        {
-            dgvBrandList.AutoGenerateColumns = false;
-            var brands = inventoryService.GetBrandList();
-            dgvBrandList.DataSource = brands;
-        }
     }
 
 
-    
+
 }
+
+

@@ -79,7 +79,7 @@ namespace Infrastructure.Entities.Inventory
         public DateTime? DeletedAt { get; set; }
 
         // ------ table objects ------ //
-        public virtual ICollection<Brand> Brands { get; set; }
+      //  public virtual ICollection<Brand> Brands { get; set; }
         public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
       //  public virtual ICollection<Variant> Variants { get; set; }
 
@@ -87,7 +87,7 @@ namespace Infrastructure.Entities.Inventory
         public Product()
         {
             ProductAttributes = new List<ProductAttribute>();
-            Brands = new List<Brand>();
+           // Brands = new List<Brand>();
            // Variants = new List<Variant>();
         }
 

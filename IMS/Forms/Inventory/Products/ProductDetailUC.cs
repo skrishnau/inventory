@@ -50,18 +50,18 @@ namespace IMS.Forms.Inventory.Products
                 lblName.Text = model.Name;
                 lblCategory.Text = model.Category;
                 // brand
-                lblBrands.Text = "";
-                foreach (var brand in model.Brands)
-                {
-                    lblBrands.Text += brand.Name + ", ";
-                }
+                lblBrand.Text = "";
+                //foreach (var brand in model.Brands)
+                //{
+                //    lblBrands.Text += brand.Name + ", ";
+                //}
                 // attributes
-                lblAttributes.Text = "";
-                foreach (var att in model.ProductAttributes)
-                {
-                    lblAttributes.Text += att.Attribute + ", ";
-                }
-                dgvSKUListing.AutoGenerateColumns = false;
+                //lblAttributes.Text = "";
+                //foreach (var att in model.ProductAttributes)
+                //{
+                //    lblAttributes.Text += att.Attribute + ", ";
+                //}
+                //dgvSKUListing.AutoGenerateColumns = false;
                 // dgvSKUListing.DataSource = model.Variants;
             }
             //else

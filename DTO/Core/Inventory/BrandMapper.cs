@@ -8,6 +8,7 @@ using ViewModel.Core.Inventory;
 
 namespace DTO.Core.Inventory
 {
+    [Obsolete("Extra table for Brand is not to be done now", true)]
     public static class BrandMapper
     {
         public static List<BrandModel> MapToBrandModel(ICollection<Brand> brands)
