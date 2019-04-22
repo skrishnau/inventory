@@ -76,7 +76,7 @@ namespace Infrastructure.Entities.Inventory
         // ============ Time Stamps ============ //
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+       // public DateTime? DeletedAt { get; set; }
 
         // ------ table objects ------ //
       //  public virtual ICollection<Brand> Brands { get; set; }

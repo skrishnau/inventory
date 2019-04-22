@@ -11,15 +11,15 @@ using Service.Core.Business;
 using Service.Core.Inventory;
 using ViewModel.Core.Business;
 
-namespace IMS.Forms.Business.Create
+namespace IMS.Forms.Inventory.Warehouses
 {
-    public partial class WarehouseCreate : Form
+    public partial class WarehouseCreateForm : Form
     {
         private readonly IInventoryService _inventoryService;
 
         private int _warehouseId;
 
-        public WarehouseCreate(IInventoryService inventoryService)
+        public WarehouseCreateForm(IInventoryService inventoryService)
         {
             _inventoryService = inventoryService;
             InitializeComponent();
@@ -72,6 +72,7 @@ namespace IMS.Forms.Business.Create
                 chkHold.Checked = warehouse.Hold;
                 chkMixedProduct.Checked = warehouse.MixedProduct;
                 chkStaging.Checked = warehouse.Staging;
+                chkUse.Checked = warehouse.Use;
             }
         }
 

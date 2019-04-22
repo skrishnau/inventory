@@ -19,7 +19,7 @@ namespace Infrastructure.Entities.Business
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+       // public DateTime? DeletedAt { get; set; }
 
        // public virtual ICollection<Warehouse> Warehouses { get; set; }
         public virtual ICollection<Counter> Counters { get; set; }

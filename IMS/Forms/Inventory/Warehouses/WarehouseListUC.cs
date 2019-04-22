@@ -65,14 +65,14 @@ namespace IMS.Forms.Inventory.Warehouses
         {
             var visible = _selectedWarehouseModel != null;
             btnEdit.Visible = visible;
-            btnDelete.Visible = visible;
+           // btnDelete.Visible = visible;
         }
 
         private void ShowAddEditDialog(bool isEditMode)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var wareHouseCreate = Program.container.GetInstance<WarehouseCreate>();
+                var wareHouseCreate = Program.container.GetInstance<WarehouseCreateForm>();
                 wareHouseCreate.SetDataForEdit(isEditMode ? _selectedWarehouseModel == null ? 0 : _selectedWarehouseModel.Id : 0);
                 wareHouseCreate.ShowDialog();
             }
@@ -106,7 +106,7 @@ namespace IMS.Forms.Inventory.Warehouses
             dgvWarehouse.SelectionChanged += DgvWarehouse_SelectionChanged;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
-            btnDelete.Click += BtnDelete_Click;
+           // btnDelete.Click += BtnDelete_Click;
         }
 
         private void InitializeListeners()
@@ -153,17 +153,17 @@ namespace IMS.Forms.Inventory.Warehouses
             }
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (_selectedWarehouseModel != null)
-            {
-                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    _inventoryService.DeleteWarehouse(_selectedWarehouseModel.Id);
-                }
-            }
-        }
+        //private void BtnDelete_Click(object sender, EventArgs e)
+        //{
+        //    if (_selectedWarehouseModel != null)
+        //    {
+        //        var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
+        //        if (dialogResult.Equals(DialogResult.Yes))
+        //        {
+        //            _inventoryService.DeleteWarehouse(_selectedWarehouseModel.Id);
+        //        }
+        //    }
+        //}
 
         #endregion
 

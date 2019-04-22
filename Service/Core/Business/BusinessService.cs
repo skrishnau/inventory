@@ -74,22 +74,22 @@ namespace Service.Core.Business
             //throw new NotImplementedException();
         }
 
-        public void DeleteBranch(int branchId)
-        {
-            var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branchId);
-            if (dbEntity != null)
-            {
-                dbEntity.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-                var args = new BranchEventArgs(BranchMapper.MapToBranchModel(dbEntity), Utility.UpdateMode.DELETE);
-                _listener.TriggerBranchUpdateEvent(null, args);
-            }
-        }
+        //public void DeleteBranch(int branchId)
+        //{
+        //    var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branchId);
+        //    if (dbEntity != null)
+        //    {
+        //        dbEntity.DeletedAt = DateTime.Now;
+        //        _context.SaveChanges();
+        //        var args = new BranchEventArgs(BranchMapper.MapToBranchModel(dbEntity), Utility.UpdateMode.DELETE);
+        //        _listener.TriggerBranchUpdateEvent(null, args);
+        //    }
+        //}
 
         public List<CounterModel> GetCounterList()
         {
             var counters = _context.Counter
-                   .Where(x => x.DeletedAt == null)
+                   //.Where(x => x.DeletedAt == null)
                    .Select(x => new CounterModel()
                    {
                        Name = x.Name,
@@ -107,7 +107,7 @@ namespace Service.Core.Business
         public List<BranchModel> GetBranchList()
         {
             var branches = _context.Branch
-                   .Where(x => x.DeletedAt == null)
+                   //.Where(x => x.DeletedAt == null)
                    .Select(x => new BranchModel()
                    {
                        Name = x.Name,

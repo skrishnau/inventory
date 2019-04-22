@@ -24,7 +24,7 @@ namespace Infrastructure.Entities.Business
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+       // public DateTime? DeletedAt { get; set; }
 
         // ====== Table objects ====== //
         public virtual Branch Branch { get; set; }

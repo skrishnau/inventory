@@ -19,20 +19,20 @@ namespace ViewModel.Core.Inventory
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+       // public DateTime? DeletedAt { get; set; }
 
-        public  Brand ToEntity()
-        {
-            return new Brand
-            {
-                ProductId = ProductId,
-                CreatedAt = CreatedAt,
-                DeletedAt = DeletedAt,
-                Id = Id,
-                Name = Name,
-                UpdatedAt = UpdatedAt
-            };
-        }
+        //public  Brand ToEntity()
+        //{
+        //    return new Brand
+        //    {
+        //        ProductId = ProductId,
+        //        CreatedAt = CreatedAt,
+        //        DeletedAt = DeletedAt,
+        //        Id = Id,
+        //        Name = Name,
+        //        UpdatedAt = UpdatedAt
+        //    };
+        //}
     }
 
   

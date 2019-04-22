@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DTO.AutoMapperBase;
 using Infrastructure.Entities.Business;
+using Infrastructure.Entities.Inventory;
 using ViewModel.Core.Business;
 
-namespace DTO.Core.Business
+namespace DTO.Core.Inventory
 {
     public static class WarehouseMapper
     {

@@ -1,6 +1,6 @@
-﻿namespace IMS.Forms.Business.Create
+﻿namespace IMS.Forms.Inventory.Warehouses
 {
-    partial class WarehouseCreate
+    partial class WarehouseCreateForm
     {
         /// <summary>
         /// Required designer variable.

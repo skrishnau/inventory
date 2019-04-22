@@ -17,7 +17,7 @@ namespace Service.Core.Inventory
         WarehouseModel GetWarehouse(int warehouseId);
         List<WarehouseModel> GetWarehouseList();
         void AddOrUpdateWarehouse(WarehouseModel model);
-        void DeleteWarehouse(int id);
+       // void DeleteWarehouse(int id);
         List<IdNamePair> GetWarehouseListForCombo();
 
         #endregion
@@ -54,7 +54,7 @@ namespace Service.Core.Inventory
         ProductModel GetProductForEdit(int productId);
         ProductModel GetProductBySKU(string sku);
         void AddUpdateProduct(ProductModel product);
-        void DeleteProduct(int id);
+       // void DeleteProduct(int id);
 
         #endregion
 

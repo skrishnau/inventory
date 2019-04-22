@@ -20,7 +20,7 @@ namespace DTO.Core.Inventory
                 {
                     Name = brand.Name,
                     CreatedAt = brand.CreatedAt,
-                    DeletedAt = brand.DeletedAt,
+                  //  DeletedAt = brand.DeletedAt,
                     ProductId = brand.ProductId,
                     UpdatedAt = brand.UpdatedAt,
                     Id = brand.Id

@@ -17,7 +17,7 @@ namespace Service.Core.Business
 
         int AddOrUpdateBranch(BranchModel branch);
         List<BranchModel> GetBranchList();
-        void DeleteBranch(int branchId);
+       // void DeleteBranch(int branchId);
 
     }
 }

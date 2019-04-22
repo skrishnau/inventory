@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities.Business;
+using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;

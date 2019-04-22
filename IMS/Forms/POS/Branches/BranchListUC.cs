@@ -116,14 +116,14 @@ namespace IMS.Forms.POS.Branches
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (_SelectedBranchModel != null)
-            {
-                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    _businessService.DeleteBranch(_SelectedBranchModel.Id);
-                }
-            }
+            //if (_SelectedBranchModel != null)
+            //{
+            //    var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        _businessService.DeleteBranch(_SelectedBranchModel.Id);
+            //    }
+            //}
         }
 
         private void PopulateBranchData()

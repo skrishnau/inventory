@@ -53,7 +53,7 @@
     <Compile Include="AutoMapperBase\Mappings.cs" />
     <Compile Include="Core\Business\BranchMapper.cs" />
     <Compile Include="Core\Business\CounterMapper.cs" />
-    <Compile Include="Core\Business\WarehouseMapper.cs" />
+    <Compile Include="Core\Inventory\WarehouseMapper.cs" />
     <Compile Include="Core\Inventory\BrandMapper.cs" />
     <Compile Include="Core\Inventory\CategoryMapper.cs" />
     <Compile Include="Core\Inventory\AdjustmentCodeMapper.cs" />

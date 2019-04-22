@@ -68,7 +68,7 @@
     <Compile Include="Entities\Purchases\PurchaseOrderItem.cs" />
     <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
-    <Compile Include="Entities\Business\Warehouse.cs" />
+    <Compile Include="Entities\Inventory\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
     <Compile Include="Entities\Common\SystemAction.cs" />
     <Compile Include="Entities\Inventory\Brand.cs" />
@@ -104,6 +104,10 @@
     <Compile Include="Migrations\201904222059478_brandRemoved.Designer.cs">
       <DependentUpon>201904222059478_brandRemoved.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904222254510_DeletedAtRemoved.cs" />
+    <Compile Include="Migrations\201904222254510_DeletedAtRemoved.Designer.cs">
+      <DependentUpon>201904222254510_DeletedAtRemoved.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -132,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904222059478_brandRemoved.resx">
       <DependentUpon>201904222059478_brandRemoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904222254510_DeletedAtRemoved.resx">
+      <DependentUpon>201904222254510_DeletedAtRemoved.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Entities.Business
+namespace Infrastructure.Entities.Inventory
 {
     /// <summary>
     /// Generally warehouse is used as hub between import and supply 
@@ -31,7 +31,7 @@ namespace Infrastructure.Entities.Business
         // time stamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+       // public DateTime? DeletedAt { get; set; }
 
         // ============== Table Objects ==============//
         //  public virtual Branch Branch { get; set; }

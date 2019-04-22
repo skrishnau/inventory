@@ -26,9 +26,9 @@ namespace IMS.Forms.Business.Delete
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            businessService.DeleteBranch(model.Id);
-            MessageBox.Show("Branch Deleted!!!");
-            this.Close();
+            //businessService.DeleteBranch(model.Id);
+            //MessageBox.Show("Branch Deleted!!!");
+            //this.Close();
 
         }
 

@@ -47,17 +47,17 @@ namespace Service.Core.Inventory
             _listener.TriggerWarehouseUpdateEvent(null, args);
         }
 
-        public void DeleteWarehouse(int id)
-        {
-            var warehouse = _context.Warehouse.Find(id);
-            if (warehouse != null)
-            {
-                warehouse.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-                var args = new BaseEventArgs<WarehouseModel>(warehouse.MapToModel(), Utility.UpdateMode.DELETE);
-                _listener.TriggerWarehouseUpdateEvent(null, args);
-            }
-        }
+        //public void DeleteWarehouse(int id)
+        //{
+        //    var warehouse = _context.Warehouse.Find(id);
+        //    if (warehouse != null)
+        //    {
+        //        warehouse.DeletedAt = DateTime.Now;
+        //        _context.SaveChanges();
+        //        var args = new BaseEventArgs<WarehouseModel>(warehouse.MapToModel(), Utility.UpdateMode.DELETE);
+        //        _listener.TriggerWarehouseUpdateEvent(null, args);
+        //    }
+        //}
 
         public WarehouseModel GetWarehouse(int warehouseId)
         {
@@ -69,22 +69,13 @@ namespace Service.Core.Inventory
             return null;
         }
 
-        private IQueryable<Warehouse> GetWarehouseEntityList()
-        {
-            return _context.Warehouse
-                  .Where(x => x.DeletedAt == null)
-                  .OrderBy(x => x.Name);
-        }
 
         public List<WarehouseModel> GetWarehouseList()
         {
             //var warehouses = 
-            var warehouses =
-                GetWarehouseEntityList().MapToModel() //WarehouseMapper.MapToModel()
-                   .ToList();
-
-            return warehouses;
-
+            return  _context.Warehouse
+                .OrderBy(x => x.Name)
+                .MapToModel();
         }
 
         /// <summary>
@@ -93,7 +84,7 @@ namespace Service.Core.Inventory
         /// <returns>List of IdNamePair </returns>
         public List<IdNamePair> GetWarehouseListForCombo()
         {
-            var warehouses = GetWarehouseEntityList()
+            return _context.Warehouse
                 .Where(x => x.Use)
                    .Select(x => new IdNamePair()
                    {
@@ -101,9 +92,6 @@ namespace Service.Core.Inventory
                        Name = x.Name,
                    })
                    .ToList();
-
-            return warehouses;
-
         }
 
         #endregion
@@ -191,7 +179,7 @@ namespace Service.Core.Inventory
                 entity.UpdatedAt = DateTime.Now;
                 entity.ProductAttributes = new List<ProductAttribute>();
                 //entity.Variants = new List<Variant>();
-               // entity.Brands = new List<Brand>();
+                // entity.Brands = new List<Brand>();
                 _context.Product.Add(entity);
                 eventArgs.Mode = Utility.UpdateMode.ADD;
             }
@@ -201,7 +189,7 @@ namespace Service.Core.Inventory
                 entity.UpdatedAt = DateTime.Now;
                 eventArgs.Mode = Utility.UpdateMode.EDIT;
             }
-          //  AssignBrandForSave(entity, model, now);
+            //  AssignBrandForSave(entity, model, now);
             AssignProductAttributesForSave(entity, model, now);
             //  AssignVariantsForSave(entity, model, now);
 
@@ -388,8 +376,8 @@ namespace Service.Core.Inventory
 
         private IQueryable<Product> GetProductEntityList()
         {
-            return _context.Product
-                .Where(x => x.DeletedAt == null);
+            return _context.Product.AsQueryable();
+            //.Where(x => x.DeletedAt == null);
         }
 
 
@@ -398,9 +386,10 @@ namespace Service.Core.Inventory
         {
             var products = _context.Product
                 .Include(x => x.ProductAttributes)
-                //.Include(x => x.ProductAttributes.Select(y => y.Option))
-                // .Include(x => x.Brands)
-                .Where(x => x.DeletedAt == null);
+               //.Include(x => x.ProductAttributes.Select(y => y.Option))
+               // .Include(x => x.Brands)
+               // .Where(x => x.Use == null)
+               ;
             var list = new List<ProductModel>();
             foreach (var x in products)
             {
@@ -412,17 +401,6 @@ namespace Service.Core.Inventory
         public void DeleteCategory(CategoryModel categoryModel)
         {
             var dbEntity = _context.Category.FirstOrDefault(x => x.Id == categoryModel.Id);
-            if (dbEntity != null)
-            {
-                dbEntity.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-            }
-        }
-
-
-        public void DeleteProduct(ProductModel produtModel)
-        {
-            var dbEntity = _context.Product.FirstOrDefault(x => x.Id == produtModel.Id);
             if (dbEntity != null)
             {
                 dbEntity.DeletedAt = DateTime.Now;
@@ -458,11 +436,11 @@ namespace Service.Core.Inventory
         {
             var product = _context.Product
                 //.Include(x => x.Variants)
-                .Include(x=>x.BaseUom)
-                .Include(x=>x.Category)
-                .Include(x=>x.Package)
-                .Include(x=>x.ParentProduct)
-                .Include(x=>x.Warehouse)
+                .Include(x => x.BaseUom)
+                .Include(x => x.Category)
+                .Include(x => x.Package)
+                .Include(x => x.ParentProduct)
+                .Include(x => x.Warehouse)
                 .FirstOrDefault(x => x.Id == productId);
             if (product == null)
                 return null;
@@ -470,17 +448,27 @@ namespace Service.Core.Inventory
         }
 
 
-        public void DeleteProduct(int id)
-        {
-            var product = _context.Product.Find(id);
-            if (product != null)
-            {
-                product.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-                var args = new ProductEventArgs(ProductMapper.MapToProductModel(product));
-                _listener.TriggerProductUpdateEvent(null, args);
-            }
-        }
+        //public void DeleteProduct(int id)
+        //{
+        //    var product = _context.Product.Find(id);
+        //    if (product != null)
+        //    {
+        //        product.DeletedAt = DateTime.Now;
+        //        _context.SaveChanges();
+        //        var args = new ProductEventArgs(ProductMapper.MapToProductModel(product));
+        //        _listener.TriggerProductUpdateEvent(null, args);
+        //    }
+        //}
+
+        //public void DeleteProduct(ProductModel produtModel)
+        //{
+        //    var dbEntity = _context.Product.FirstOrDefault(x => x.Id == produtModel.Id);
+        //    if (dbEntity != null)
+        //    {
+        //        dbEntity.DeletedAt = DateTime.Now;
+        //        _context.SaveChanges();
+        //    }
+        //}
 
 
         #region Settings
@@ -670,7 +658,7 @@ namespace Service.Core.Inventory
                })
                .ToList();
         }
-        
+
         public List<IdNamePair> GetSupplierListForCombo()
         {
             return _context.Supplier
@@ -687,7 +675,7 @@ namespace Service.Core.Inventory
 
 
 
-        
+
     }
 }
 

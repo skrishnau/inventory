@@ -14,6 +14,7 @@ using ViewModel.Core.Business;
 using IMS.Forms.Business.Delete;
 using IMS.Forms.Common;
 using Service.Core.Inventory;
+using IMS.Forms.Inventory.Warehouses;
 
 namespace IMS.Forms.Business
 {
@@ -30,7 +31,7 @@ namespace IMS.Forms.Business
             InitializeComponent();
             this.Load += BusinessUC_Load;
 
-           
+
         }
 
         private void BusinessUC_Load(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace IMS.Forms.Business
                 PopulateWarehouseData();
 
             }
-                
+
         }
 
         private void PopulateBranchData()
@@ -96,7 +97,7 @@ namespace IMS.Forms.Business
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var wareHouseCreate = Program.container.GetInstance<WarehouseCreate>();
+                var wareHouseCreate = Program.container.GetInstance<WarehouseCreateForm>();
                 wareHouseCreate.ShowInTaskbar = false;
                 wareHouseCreate.ShowDialog();
                 PopulateWarehouseData();
@@ -117,30 +118,30 @@ namespace IMS.Forms.Business
             }
         }
 
-        private void btnDeleteBranch_Click(object sender, EventArgs e)
-        {
-            var  branch = (BranchModel)gvBranch.SelectedRows[0].DataBoundItem;
-            /*using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var branchDelete = Program.container.GetInstance<BranchDeleteConfirmationForm>();
-                branchDelete.ShowInTaskbar = false;
-                branchDelete.SetData(branch);
-                branchDelete.ShowDialog();
-                PopulateBranchData();
-            } */
-            //var branchDelete = new BranchDeleteConfirmationForm(businessService, branch);
+        //private void btnDeleteBranch_Click(object sender, EventArgs e)
+        //{
+        //    var  branch = (BranchModel)gvBranch.SelectedRows[0].DataBoundItem;
+        //    /*using (AsyncScopedLifestyle.BeginScope(Program.container))
+        //    {
+        //        var branchDelete = Program.container.GetInstance<BranchDeleteConfirmationForm>();
+        //        branchDelete.ShowInTaskbar = false;
+        //        branchDelete.SetData(branch);
+        //        branchDelete.ShowDialog();
+        //        PopulateBranchData();
+        //    } */
+        //    //var branchDelete = new BranchDeleteConfirmationForm(businessService, branch);
 
-            var result = MessageBox.Show(this, "Are you sure to delete branch " + branch.Name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
-            if (result.Equals(DialogResult.Yes))
-            {
-                //branchDelete.ShowInTaskbar = false;
-                //branchDelete.SetData(branch);
-                //branchDelete.ShowDialog();
-                businessService.DeleteBranch(branch.Id);
-                //MessageBox.Show("Branch Deleted!!!");
-                PopupMessage.ShowPopupMessage("Delete Success", "Branch is successfully deleted!", PopupMessageType.SUCCESS);
-                PopulateBranchData();
-            }
-        }
+        //    var result = MessageBox.Show(this, "Are you sure to delete branch " + branch.Name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+        //    if (result.Equals(DialogResult.Yes))
+        //    {
+        //        //branchDelete.ShowInTaskbar = false;
+        //        //branchDelete.SetData(branch);
+        //        //branchDelete.ShowDialog();
+        //       // businessService.DeleteBranch(branch.Id);
+        //        //MessageBox.Show("Branch Deleted!!!");
+        //        PopupMessage.ShowPopupMessage("Delete Success", "Branch is successfully deleted!", PopupMessageType.SUCCESS);
+        //        PopulateBranchData();
+        //    }
+        //}
     }
 }

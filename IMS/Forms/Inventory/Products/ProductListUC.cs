@@ -117,18 +117,18 @@ namespace IMS.Forms.Inventory.Products
             }
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (_selectedProduct != null)
-            {
-                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    // delete
-                    _inventoryService.DeleteProduct(_selectedProduct.Id);
-                }
-            }
-        }
+        //private void BtnDelete_Click(object sender, EventArgs e)
+        //{
+        //    if (_selectedProduct != null)
+        //    {
+        //        var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
+        //        if (dialogResult.Equals(DialogResult.Yes))
+        //        {
+        //            // delete
+        //            _inventoryService.DeleteProduct(_selectedProduct.Id);
+        //        }
+        //    }
+        //}
 
 
         #endregion

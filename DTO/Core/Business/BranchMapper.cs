@@ -15,7 +15,7 @@ namespace DTO.Core.Business
             var branchEntity  = new Branch
             {
                 CreatedAt = branch.CreatedAt,
-                DeletedAt = branch.DeletedAt,
+               // DeletedAt = branch.DeletedAt,
                 Id = branch.Id,
                 Name = branch.Name,
                 UpdatedAt = branch.UpdatedAt
@@ -30,7 +30,7 @@ namespace DTO.Core.Business
             var branchModel = new BranchModel
             {
                 CreatedAt = branch.CreatedAt,
-                DeletedAt = branch.DeletedAt,
+               // DeletedAt = branch.DeletedAt,
                 Id = branch.Id,
                 Name = branch.Name,
                 UpdatedAt = branch.UpdatedAt

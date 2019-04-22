@@ -344,7 +344,7 @@
             this.btnDeleteBranch.TabIndex = 4;
             this.btnDeleteBranch.Text = "Delete";
             this.btnDeleteBranch.UseVisualStyleBackColor = true;
-            this.btnDeleteBranch.Click += new System.EventHandler(this.btnDeleteBranch_Click);
+           // this.btnDeleteBranch.Click += new System.EventHandler(this.btnDeleteBranch_Click);
             // 
             // BusinessUC
             // 
