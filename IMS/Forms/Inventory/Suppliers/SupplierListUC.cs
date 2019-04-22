@@ -69,7 +69,7 @@ namespace IMS.Forms.Inventory.Suppliers
             dgvSuppliers.SelectionChanged += DgvSuppliers_SelectionChanged;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
-            btnDelete.Click += BtnDelete_Click;
+           // btnDelete.Click += BtnDelete_Click;
             dgvSuppliers.CellMouseDoubleClick += DgvSuppliers_CellMouseDoubleClick;
         }
 
@@ -110,17 +110,17 @@ namespace IMS.Forms.Inventory.Suppliers
             ShowAddEditDialog(true);
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            if (_selectedSupplierModel != null)
-            {
-                var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
-                if (dialogResult.Equals(DialogResult.Yes))
-                {
-                    _supplierService.DeleteSupplier(_selectedSupplierModel.Id);
-                }
-            }
-        }
+        //private void BtnDelete_Click(object sender, EventArgs e)
+        //{
+        //    if (_selectedSupplierModel != null)
+        //    {
+        //        var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
+        //        if (dialogResult.Equals(DialogResult.Yes))
+        //        {
+        //            _supplierService.DeleteSupplier(_selectedSupplierModel.Id);
+        //        }
+        //    }
+        //}
 
         #endregion
 
@@ -149,7 +149,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             var visible = _selectedSupplierModel != null;
             btnEdit.Visible = visible;
-            btnDelete.Visible = visible;
+          //  btnDelete.Visible = visible;
         }
 
 

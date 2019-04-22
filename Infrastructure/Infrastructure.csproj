@@ -108,6 +108,10 @@
     <Compile Include="Migrations\201904222254510_DeletedAtRemoved.Designer.cs">
       <DependentUpon>201904222254510_DeletedAtRemoved.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904222309347_SupplierUseColumn.cs" />
+    <Compile Include="Migrations\201904222309347_SupplierUseColumn.Designer.cs">
+      <DependentUpon>201904222309347_SupplierUseColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -139,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904222254510_DeletedAtRemoved.resx">
       <DependentUpon>201904222254510_DeletedAtRemoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904222309347_SupplierUseColumn.resx">
+      <DependentUpon>201904222309347_SupplierUseColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

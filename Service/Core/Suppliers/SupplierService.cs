@@ -9,6 +9,7 @@ using Infrastructure.Context;
 using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Suppliers;
+using ViewModel.Core.Common;
 
 namespace Service.Core.Suppliers
 {
@@ -49,17 +50,17 @@ namespace Service.Core.Suppliers
             _listener.TriggerSupplierUpdateEvent(null, eventArgs);
         }
 
-        public void DeleteSupplier(int supplierId)
-        {
-            var entity = _context.Supplier.Find(supplierId);
-            if(entity != null)
-            {
-                entity.BasicInfo.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-                var args = new BaseEventArgs<SupplierModel>(SupplierMapper.MapToSupplierModel(entity), Utility.UpdateMode.DELETE);
-                _listener.TriggerSupplierUpdateEvent(null, args);
-            }
-        }
+        //public void DeleteSupplier(int supplierId)
+        //{
+        //    var entity = _context.Supplier.Find(supplierId);
+        //    if(entity != null)
+        //    {
+        //        entity.BasicInfo.DeletedAt = DateTime.Now;
+        //        _context.SaveChanges();
+        //        var args = new BaseEventArgs<SupplierModel>(SupplierMapper.MapToSupplierModel(entity), Utility.UpdateMode.DELETE);
+        //        _listener.TriggerSupplierUpdateEvent(null, args);
+        //    }
+        //}
 
         public SupplierModel GetSupplier(int supplierId)
         {
@@ -73,8 +74,22 @@ namespace Service.Core.Suppliers
         {
             var query = _context.Supplier
                 .Include(x => x.BasicInfo)
-                .Where(x => x.BasicInfo.DeletedAt == null);
+                .Where(x =>  x.BasicInfo.DeletedAt == null)
+                .OrderBy(x=>x.BasicInfo.Name);
             return SupplierMapper.MapToSupplierModel(query);
+        }
+
+        public List<IdNamePair> GetSupplierListForCombo()
+        {
+            return _context.Supplier
+                .Include(x => x.BasicInfo)
+                .Where(x => x.Use && x.BasicInfo.DeletedAt == null)
+                .OrderBy(x=>x.BasicInfo.Name)
+                .Select(x=> new IdNamePair()
+                {
+                    Name = x.BasicInfo.Name,
+                    Id = x.Id
+                }).ToList();
         }
 
     }

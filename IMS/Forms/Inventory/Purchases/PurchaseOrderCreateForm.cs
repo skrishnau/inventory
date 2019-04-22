@@ -74,7 +74,7 @@ namespace IMS.Forms.Purchases
 
         private void PopulateSupplierCombo()
         {
-            var suppliers = _supplierService.GetSupplierList();
+            var suppliers = _supplierService.GetSupplierListForCombo();
             cbSupplier.DataSource = suppliers;
             cbSupplier.DisplayMember = "Name";
             cbSupplier.ValueMember = "Id";

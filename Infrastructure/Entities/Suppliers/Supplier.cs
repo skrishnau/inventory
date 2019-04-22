@@ -17,6 +17,8 @@ namespace Infrastructure.Entities.Suppliers
         public string SalesPerson { get; set; }
         public string MyCustomerAccount { get; set; }
 
+        public bool Use { get; set; }
+
         // ==== table objects ==== //
         public virtual BasicInfo BasicInfo { get; set; }
 

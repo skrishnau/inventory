@@ -34,7 +34,7 @@ namespace DTO.Core.Inventory
             //entity.BasicInfo.CreatedAt = model.CreatedAt;
             //entity.BasicInfo.UpdatedAt = model.UpdatedAt;
             entity.BasicInfo.Website = model.Website;
-
+            entity.Use = model.Use;
             return entity;
         }
 
@@ -66,7 +66,8 @@ namespace DTO.Core.Inventory
                 RegisteredAt = supplier.BasicInfo.DOB,
                 SalesPerson = supplier.SalesPerson,
                 UpdatedAt = supplier.BasicInfo.UpdatedAt,
-                Website = supplier.BasicInfo.Website
+                Website = supplier.BasicInfo.Website,
+                Use = supplier.Use
             };
         }
 

@@ -38,19 +38,6 @@ namespace IMS.Forms.Inventory.Suppliers
 
         }
 
-        private void InitializeEvents()
-        {
-            _supplierListUC.RowSelected += _supplierListUC_RowSelected;
-        }
-
-        private void _supplierListUC_RowSelected(object sender, Service.DbEventArgs.BaseEventArgs<SupplierModel> e)
-        {
-            if (e.Model != null)
-            {
-                ShowUI(sender, e.Model.Id);
-            }
-        }
-
         private void InitializeSubBody()
         {
             _bodyTemplate = new SubBodyTemplate();
@@ -59,7 +46,25 @@ namespace IMS.Forms.Inventory.Suppliers
             this.Controls.Add(_bodyTemplate);
 
             _bodyTemplate.pnlSideBar.Controls.Add(_sidebarUC);
-            //_sidebarUC.lnkFlow
+        }
+
+        private void InitializeEvents()
+        {
+            _sidebarUC.lnkList.LinkClicked += LnkList_LinkClicked;
+            //_supplierListUC.RowSelected += _supplierListUC_RowSelected;
+        }
+
+        //private void _supplierListUC_RowSelected(object sender, Service.DbEventArgs.BaseEventArgs<SupplierModel> e)
+        //{
+        //    if (e.Model != null)
+        //    {
+        //        ShowUI(sender, e.Model.Id);
+        //    }
+        //}
+
+        private void LnkList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ShowUI(sender, 0);
         }
 
         private void ShowUI(object sender, int supplierId)

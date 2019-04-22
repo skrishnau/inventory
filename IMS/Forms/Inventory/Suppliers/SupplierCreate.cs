@@ -55,6 +55,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 tbMyAccountNo.Text = model.MyCustomerAccount;
                 tbSalesperson.Text = model.SalesPerson;
                 tbWebsite.Text = model.Website;
+                chkUse.Checked = model.Use;
                 _supplierId = model.Id;
             }
         }
@@ -75,6 +76,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 //RegisteredAt = cbtbRegisteredDate.Value,
                 SalesPerson = tbSalesperson.Text,
                 Website = tbWebsite.Text,
+                Use = chkUse.Checked,
             };
             _supplierService.AddOrUpdateSupplier(model);
             this.Close();

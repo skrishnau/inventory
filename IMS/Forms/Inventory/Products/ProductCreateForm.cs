@@ -435,7 +435,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void PopulateSupplier()
         {
-            var suppliers = _supplierService.GetSupplierList();
+            var suppliers = _supplierService.GetSupplierListForCombo();
             cbSupplier.DataSource = suppliers;
             cbSupplier.ValueMember = "Id";
             cbSupplier.DisplayMember = "Name";

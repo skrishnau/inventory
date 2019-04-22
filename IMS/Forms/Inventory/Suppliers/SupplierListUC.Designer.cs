@@ -30,15 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierListUC));
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
-            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOpenOrders = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWebsite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -46,12 +51,20 @@
             // 
             // dgvSuppliers
             // 
+            this.dgvSuppliers.AllowUserToAddRows = false;
+            this.dgvSuppliers.AllowUserToDeleteRows = false;
             this.dgvSuppliers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSuppliers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colId,
             this.SupplierName,
+            this.colOpenOrders,
             this.Phone,
             this.Address,
-            this.Email});
+            this.Email,
+            this.colFax,
+            this.colWebsite,
+            this.colSalesPerson,
+            this.colUse});
             this.dgvSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSuppliers.Location = new System.Drawing.Point(0, 35);
             this.dgvSuppliers.Margin = new System.Windows.Forms.Padding(2);
@@ -61,36 +74,6 @@
             this.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSuppliers.Size = new System.Drawing.Size(660, 474);
             this.dgvSuppliers.TabIndex = 11;
-            // 
-            // SupplierName
-            // 
-            this.SupplierName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SupplierName.DataPropertyName = "Name";
-            this.SupplierName.HeaderText = "Name";
-            this.SupplierName.Name = "SupplierName";
-            this.SupplierName.ReadOnly = true;
-            // 
-            // Phone
-            // 
-            this.Phone.DataPropertyName = "Phone";
-            this.Phone.HeaderText = "Phone";
-            this.Phone.Name = "Phone";
-            this.Phone.ReadOnly = true;
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            this.Email.Width = 243;
             // 
             // panel1
             // 
@@ -107,11 +90,10 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnNew);
             this.flowLayoutPanel1.Controls.Add(this.btnEdit);
-            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(339, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(167, 27);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnNew
@@ -137,17 +119,83 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Visible = false;
             // 
-            // btnDelete
+            // colId
             // 
-            this.btnDelete.Image = global::IMS.Properties.Resources.icons8_Remove_16px;
-            this.btnDelete.Location = new System.Drawing.Point(165, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 22);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Visible = false;
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // SupplierName
+            // 
+            this.SupplierName.DataPropertyName = "Name";
+            this.SupplierName.HeaderText = "Name";
+            this.SupplierName.Name = "SupplierName";
+            this.SupplierName.ReadOnly = true;
+            this.SupplierName.Width = 140;
+            // 
+            // colOpenOrders
+            // 
+            this.colOpenOrders.DataPropertyName = "OpenOrders";
+            this.colOpenOrders.HeaderText = "On Order";
+            this.colOpenOrders.Name = "colOpenOrders";
+            this.colOpenOrders.ReadOnly = true;
+            this.colOpenOrders.Width = 90;
+            // 
+            // Phone
+            // 
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.HeaderText = "Phone";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            this.Address.Width = 150;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            this.Email.Width = 150;
+            // 
+            // colFax
+            // 
+            this.colFax.DataPropertyName = "Fax";
+            this.colFax.HeaderText = "Fax";
+            this.colFax.Name = "colFax";
+            this.colFax.ReadOnly = true;
+            this.colFax.Width = 90;
+            // 
+            // colWebsite
+            // 
+            this.colWebsite.DataPropertyName = "Website";
+            this.colWebsite.HeaderText = "Website";
+            this.colWebsite.Name = "colWebsite";
+            this.colWebsite.ReadOnly = true;
+            // 
+            // colSalesPerson
+            // 
+            this.colSalesPerson.DataPropertyName = "SalesPerson";
+            this.colSalesPerson.HeaderText = "SalesPerson";
+            this.colSalesPerson.Name = "colSalesPerson";
+            this.colSalesPerson.ReadOnly = true;
+            this.colSalesPerson.Width = 80;
+            // 
+            // colUse
+            // 
+            this.colUse.DataPropertyName = "Use";
+            this.colUse.HeaderText = "Use";
+            this.colUse.Name = "colUse";
+            this.colUse.ReadOnly = true;
+            this.colUse.Width = 40;
             // 
             // SupplierListUC
             // 
@@ -167,14 +215,19 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvSuppliers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SupplierName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         protected internal System.Windows.Forms.Button btnNew;
         protected internal System.Windows.Forms.Button btnEdit;
-        protected internal System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SupplierName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOpenOrders;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWebsite;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
     }
 }

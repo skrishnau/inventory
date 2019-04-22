@@ -29,7 +29,7 @@ namespace ViewModel.Core.Suppliers
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-       
+        public bool Use { get; set; }
 
     }
 }
