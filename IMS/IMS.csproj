@@ -167,6 +167,12 @@
     <Compile Include="Forms\Inventory\Products\ProductSidebarUC.Designer.cs">
       <DependentUpon>ProductSidebarUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Units\Details\InventoryMovementUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\Details\InventoryMovementUC.Designer.cs">
+      <DependentUpon>InventoryMovementUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitSideBarUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -649,6 +655,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\ProductSidebarUC.resx">
       <DependentUpon>ProductSidebarUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\Details\InventoryMovementUC.resx">
+      <DependentUpon>InventoryMovementUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitSideBarUC.resx">
       <DependentUpon>InventoryUnitSideBarUC.cs</DependentUpon>

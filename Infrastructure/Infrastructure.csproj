@@ -92,6 +92,14 @@
     <Compile Include="Migrations\201904171201204_InitMigration.Designer.cs">
       <DependentUpon>201904171201204_InitMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904220937550_Movement.cs" />
+    <Compile Include="Migrations\201904220937550_Movement.Designer.cs">
+      <DependentUpon>201904220937550_Movement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904221540075_MovementUpdates.cs" />
+    <Compile Include="Migrations\201904221540075_MovementUpdates.Designer.cs">
+      <DependentUpon>201904221540075_MovementUpdates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -111,6 +119,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904171201204_InitMigration.resx">
       <DependentUpon>201904171201204_InitMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904220937550_Movement.resx">
+      <DependentUpon>201904220937550_Movement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904221540075_MovementUpdates.resx">
+      <DependentUpon>201904221540075_MovementUpdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

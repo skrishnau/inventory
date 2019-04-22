@@ -1,5 +1,6 @@
 ﻿using Service.Core.Business;
 using Service.Core.Inventory;
+using Service.Core.Inventory.Units;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,13 +19,15 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private readonly IBusinessService _businessService;
         private readonly IInventoryService _inventoryService;
+        private readonly IInventoryUnitService _inventoryUnitService;
 
         private List<InventoryUnitModel> _dataList;
 
-        public InventoryMoveForm(IBusinessService businessService, IInventoryService inventoryService)
+        public InventoryMoveForm(IBusinessService businessService, IInventoryService inventoryService, IInventoryUnitService inventoryUnitService)
         {
             _businessService = businessService;
             _inventoryService = inventoryService;
+            _inventoryUnitService = inventoryUnitService;
 
             InitializeComponent();
 
@@ -45,7 +48,7 @@ namespace IMS.Forms.Inventory.Units.Actions
             cbWarehouse.DisplayMember = "Name";
         }
 
-        internal void SetData(List<InventoryUnitModel> list)
+        public void SetData(List<InventoryUnitModel> list)
         {
             _dataList = list;
         }
@@ -53,7 +56,7 @@ namespace IMS.Forms.Inventory.Units.Actions
         private void btnSave_Click(object sender, EventArgs e)
         {
             var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
-            _inventoryService.MoveInventoryUnits(warehouseId, _dataList);
+            _inventoryUnitService.MoveInventoryUnits(warehouseId, _dataList);
             this.Close();
         }
     }

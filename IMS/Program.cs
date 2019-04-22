@@ -44,6 +44,8 @@ using IMS.Forms.Inventory.Purchases.Order;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units.Actions;
 using IMS.Forms.Inventory.Settings;
+using IMS.Forms.Inventory.Units.Details;
+using Service.Core.Inventory.Units;
 
 namespace IMS
 {
@@ -88,6 +90,7 @@ namespace IMS
             container.Register<IDatabaseChangeListener, DatabaseChangeListener>(Lifestyle.Singleton);
 
             container.Register<IInventoryService, InventoryService>(Lifestyle.Singleton);
+            container.Register<IInventoryUnitService, InventoryUnitService>(Lifestyle.Singleton);
             container.Register<ILDapService, ActiveDirectory>(Lifestyle.Singleton);
 
             container.Register<ISupplierService, SupplierService>(Lifestyle.Singleton);
@@ -165,6 +168,7 @@ namespace IMS
             container.Register<InventoryDisassembleForm>(Lifestyle.Scoped);
             container.Register<InventoryMergeForm>(Lifestyle.Scoped);
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
+            container.Register<InventoryMovementUC>(Lifestyle.Scoped);
 
             container.Register<InventoryMoveForm>(Lifestyle.Scoped);
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
@@ -199,10 +203,10 @@ namespace IMS
             container.Register<SupplierDetailUC>(Lifestyle.Scoped);
             container.Register<SupplierCreate>(Lifestyle.Scoped);
             container.Register<SupplierSideBarUC>(Lifestyle.Scoped);
-
-
+            
             // Optionally verify the container.
             container.Verify();
+
         }
     }
 }

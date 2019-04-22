@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Inventory\Units\IInventoryUnitService.cs" />
+    <Compile Include="Core\Inventory\Units\InventoryUnitService.cs" />
     <Compile Include="Core\Settings\AppSettingService.cs" />
     <Compile Include="Core\Settings\IAppSettingService.cs" />
     <Compile Include="Core\Bills\Formats\BillFormatService.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="DbEventArgs\BaseEventArgs.cs" />
     <Compile Include="DbEventArgs\IdEventArgs.cs" />
     <Compile Include="Enums\AdjustmentTypeEnum.cs" />
+    <Compile Include="Enums\InventoryActionEnum.cs" />
     <Compile Include="Listeners\Business\BranchListener.cs" />
     <Compile Include="Listeners\DatabaseChangeListener.cs" />
     <Compile Include="Listeners\IDatabaseChangeListener.cs" />

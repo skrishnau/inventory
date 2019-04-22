@@ -1,4 +1,5 @@
 ﻿using Service.Core.Inventory;
+using Service.Core.Inventory.Units;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +16,13 @@ namespace IMS.Forms.Inventory.Units.Actions
     public partial class InventoryMergeForm : Form
     {
 
-        private readonly IInventoryService _inventoryService;
+        private readonly IInventoryUnitService _inventoryUnitService;
 
         private List<InventoryUnitModel> _dataList;
 
-        public InventoryMergeForm(IInventoryService inventoryService)
+        public InventoryMergeForm(IInventoryUnitService inventoryUnitService)
         {
-            _inventoryService = inventoryService;
+            _inventoryUnitService = inventoryUnitService;
 
             InitializeComponent();
         }
@@ -76,7 +77,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void Save()
         {
-            _inventoryService.MergeInventoryUnits(_dataList);
+            _inventoryUnitService.MergeInventoryUnits(_dataList);
             this.Close();
         }
 

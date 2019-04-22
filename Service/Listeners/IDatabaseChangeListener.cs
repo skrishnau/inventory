@@ -46,5 +46,6 @@ namespace Service.Listeners
         // Inventory Unit Updates
         event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
         void TriggerInventoryUnitUpdateEvent(object p, BaseEventArgs<List<InventoryUnitModel>> eventArgs);
+        
     }
 }

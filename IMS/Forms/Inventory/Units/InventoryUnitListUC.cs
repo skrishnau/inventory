@@ -17,6 +17,7 @@ using SimpleInjector.Lifestyles;
 using IMS.Forms.Inventory.Units.Actions;
 using IMS.Forms.Common.Dialogs;
 using Service.Enums;
+using Service.Core.Inventory.Units;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -25,6 +26,7 @@ namespace IMS.Forms.Inventory.Units
 
         private readonly IDatabaseChangeListener _listener;
         private readonly IInventoryService _inventoryService;
+        private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
 
         private HeaderTemplate _header;
@@ -33,10 +35,12 @@ namespace IMS.Forms.Inventory.Units
 
         public InventoryUnitListUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
+            IInventoryUnitService inventoryUnitService,
             IBusinessService businessService)
         {
             _listener = listener;
             _inventoryService = inventoryService;
+            _inventoryUnitService = inventoryUnitService;
             _businessService = businessService;
 
             InitializeComponent();
@@ -104,7 +108,7 @@ namespace IMS.Forms.Inventory.Units
         private void PopulateInventoryUnits()
         {
             dgvInventoryUnit.ResetCheckCount();
-            var inventoryUnits = _inventoryService.GetInventoryUnitList();
+            var inventoryUnits = _inventoryUnitService.GetInventoryUnitList();
             dgvInventoryUnit.DataSource = inventoryUnits;
         }
 

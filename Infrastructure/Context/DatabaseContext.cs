@@ -76,6 +76,8 @@ namespace Infrastructure.Context
 
         public virtual DbSet<AppSetting> AppSetting { get; set; }
 
+        public virtual DbSet<Movement> Movement { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

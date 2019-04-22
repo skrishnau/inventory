@@ -2,6 +2,7 @@
 using IMS.Forms.Common.GridView;
 using Service.Core.Business;
 using Service.Core.Inventory;
+using Service.Core.Inventory.Units;
 using Service.Core.Purchases.PurchaseOrders;
 using Service.Enums;
 using System;
@@ -22,6 +23,7 @@ namespace IMS.Forms.Inventory.Units.Actions
     public partial class InventoryAdjustmentForm : Form
     {
         private readonly IInventoryService _inventoryService;
+        private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
         private readonly IPurchaseService _purchaseService;
 
@@ -34,11 +36,15 @@ namespace IMS.Forms.Inventory.Units.Actions
         private AdjustmentTypeEnum _adjustmentType;
         private List<InventoryUnitModel> _selectedInventoryUnits;
 
-        public InventoryAdjustmentForm(IInventoryService inventoryService, IBusinessService businessService, IPurchaseService purchaseService)
+        public InventoryAdjustmentForm(IInventoryService inventoryService, 
+            IBusinessService businessService, 
+            IPurchaseService purchaseService,
+            IInventoryUnitService inventoryUnitService)
         {
             _inventoryService = inventoryService;
             _businessService = businessService;
             _purchaseService = purchaseService;
+            _inventoryUnitService = inventoryUnitService;
 
             InitializeComponent();
 
@@ -158,7 +164,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                         else
                         {
-                            msg = _inventoryService.SaveDirectIssue(list);
+                            msg = _inventoryUnitService.SaveDirectIssue(list);
                         }
                     }
                     break;
@@ -174,7 +180,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                         else
                         {
-                            msg = _inventoryService.SaveDirectReceive(list);
+                            msg = _inventoryUnitService.SaveDirectReceive(list);
                         }
                     }
                     break;

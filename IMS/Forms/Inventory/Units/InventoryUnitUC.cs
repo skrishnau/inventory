@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Common.Display;
 using IMS.Forms.Inventory.Products.WarehouseProducts;
+using IMS.Forms.Inventory.Units.Details;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -47,6 +48,17 @@ namespace IMS.Forms.Inventory.Units
         {
             _sidebar.lnkSummary.LinkClicked += LnkSummary_LinkClicked;
             _sidebar.lnkManage.LinkClicked += LnkManage_LinkClicked;
+            _sidebar.lnkMovement.LinkClicked += LnkMovement_LinkClicked;
+        }
+
+        private void LnkMovement_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var warehouseProductListUC = Program.container.GetInstance<InventoryMovementUC>();
+            _body.pnlBody.Controls.Clear();
+            warehouseProductListUC.Dock = DockStyle.Fill;
+            _body.pnlBody.Controls.Add(warehouseProductListUC);
+            _sidebar.SetVisited(sender);
+            _body.SubHeadingText = "Inentory Movements";
         }
 
         private void LnkSummary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -56,6 +68,7 @@ namespace IMS.Forms.Inventory.Units
             warehouseProductListUC.Dock = DockStyle.Fill;
             _body.pnlBody.Controls.Add(warehouseProductListUC);
             _sidebar.SetVisited(sender);
+            _body.SubHeadingText = "Inentory Units Summary";
         }
 
         private void LnkManage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -65,6 +78,7 @@ namespace IMS.Forms.Inventory.Units
             inventoryUnitList.Dock = DockStyle.Fill;
             _body.pnlBody.Controls.Add(inventoryUnitList);
             _sidebar.SetVisited(sender);
+            _body.SubHeadingText = "Manage Inventory";
         }
 
 

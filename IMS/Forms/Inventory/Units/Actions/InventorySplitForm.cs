@@ -1,5 +1,6 @@
 ﻿using IMS.Forms.Common;
 using Service.Core.Inventory;
+using Service.Core.Inventory.Units;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,16 +17,16 @@ namespace IMS.Forms.Inventory.Units.Actions
     public partial class InventorySplitForm : Form
     {
 
-        private readonly IInventoryService _inventoryService;
+        private readonly IInventoryUnitService _inventoryUnitService;
 
         private InventoryUnitModel _data;
 
         // list to hold the parsed quantities
         List<decimal> _qtyList = new List<decimal>();
 
-        public InventorySplitForm(IInventoryService inventoryService)
+        public InventorySplitForm(IInventoryUnitService inventoryUnitService)
         {
-            _inventoryService = inventoryService;
+            _inventoryUnitService = inventoryUnitService;
 
             InitializeComponent();
         }
@@ -51,7 +52,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                 return;
             }
 
-            _inventoryService.SplitInventoryUnit(_qtyList, _data);
+            _inventoryUnitService.SplitInventoryUnit(_qtyList, _data);
             PopupMessage.ShowSuccessMessage("Split Success");
             this.Focus();
             this.Close();

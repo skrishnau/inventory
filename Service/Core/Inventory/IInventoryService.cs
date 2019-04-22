@@ -32,6 +32,7 @@ namespace Service.Core.Inventory
 
         #region UOM
 
+        void SaveUom(UomModel data);
         List<UomModel> GetUomList();
         List<IdNamePair> GetUomListForCombo();
 
@@ -74,41 +75,28 @@ namespace Service.Core.Inventory
         List<BrandModel> GetBrandList();
         void AddUpdateBrand(BrandModel brand);
 
-        List<IdNamePair> GetAdjustmentCodeListForCombo();
-        List<IdNamePair> GetPositiveAdjustmentCodeListForCombo();
-        List<IdNamePair> GetNegativeAdjustmentCodeListForCombo();
-
-        List<InventoryUnitModel> GetInventoryUnitList();
-
-
-
-        void SaveUom(UomModel data);
-
-        #region Inventory Actions
-
-        void MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
-
-        void MergeInventoryUnits(List<InventoryUnitModel> list);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="splitRule">Format: For "5" splitRule is "2+2+1"</param>
-        /// <param name="model"></param>
-        void SplitInventoryUnit(List<decimal> quantityList, InventoryUnitModel model);
-
-        string SaveDirectReceive(List<InventoryUnitModel> list);
-        string SaveDirectIssue(List<InventoryUnitModel> list);
-
-        #endregion
-
         #region Adjustment Codes
 
         List<AdjustmentCodeModel> GetAdjustmentCodeList();
         List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly();
+        List<IdNamePair> GetAdjustmentCodeListForCombo();
+        List<IdNamePair> GetPositiveAdjustmentCodeListForCombo();
+        List<IdNamePair> GetNegativeAdjustmentCodeListForCombo();
         string SaveAdjustmentCode(AdjustmentCodeModel model);
 
-
         #endregion
+
+        
+
+
+
+
+
+
+
+     
+
+       
 
 
 
