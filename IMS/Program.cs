@@ -18,7 +18,6 @@ using Service.Core.Users;
 using Service.Core.Purchases.PurchaseOrders;
 using IMS.Forms.Sales;
 using Service.Core.Sales;
-using IMS.Forms.Settings;
 using Service.Core.Settings;
 using IMS.Forms.Dashboard;
 using IMS.Forms.Inventory.Attributes;
@@ -46,6 +45,9 @@ using IMS.Forms.Inventory.Units.Actions;
 using IMS.Forms.Inventory.Settings;
 using IMS.Forms.Inventory.Units.Details;
 using Service.Core.Inventory.Units;
+using IMS.Forms.Inventory.Settings.Companies;
+using IMS.Forms.Inventory.Settings.Appearance;
+using IMS.Forms.Inventory.Settings.References;
 
 namespace IMS
 {
@@ -154,7 +156,6 @@ namespace IMS
             container.Register<UserCreate>(Lifestyle.Scoped);
             container.Register<NewItemAddForm>(Lifestyle.Scoped);
             container.Register<SaleUC>(Lifestyle.Scoped);
-            container.Register<SettingsForm>(Lifestyle.Scoped);
 
            // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
 
@@ -171,7 +172,7 @@ namespace IMS
 
             container.Register<InventoryMoveForm>(Lifestyle.Scoped);
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
-            container.Register<InventorySettingsUC>(Lifestyle.Scoped);
+            
             //
             // Purchases
             //
@@ -202,7 +203,15 @@ namespace IMS
             container.Register<SupplierDetailUC>(Lifestyle.Scoped);
             container.Register<SupplierCreate>(Lifestyle.Scoped);
             container.Register<SupplierSideBarUC>(Lifestyle.Scoped);
-            
+            // 
+            // Settings
+            // 
+            container.Register<InventorySettingsUC>(Lifestyle.Scoped);
+            container.Register<InventorySettingsSidebarUC>(Lifestyle.Scoped);
+            container.Register<CompanySettingsUC>(Lifestyle.Scoped);
+            container.Register<AppearanceSettingsUC>(Lifestyle.Scoped);
+            container.Register<ReferenceSettingsUC>(Lifestyle.Scoped);
+
             // Optionally verify the container.
             container.Verify();
 

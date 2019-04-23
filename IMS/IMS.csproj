@@ -83,6 +83,30 @@
     <Compile Include="Forms\Business\Create\CounterCreate.Designer.cs">
       <DependentUpon>CounterCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Settings\Appearance\AppearanceSettingsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\Appearance\AppearanceSettingsUC.Designer.cs">
+      <DependentUpon>AppearanceSettingsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.Designer.cs">
+      <DependentUpon>CompanySettingsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.Designer.cs">
+      <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.Designer.cs">
+      <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Warehouses\WarehouseCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -543,12 +567,6 @@
     <Compile Include="Forms\POS\Sales\SaleUC.Designer.cs">
       <DependentUpon>SaleUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Suppliers\SupplierCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -625,6 +643,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Business\Create\CounterCreate.resx">
       <DependentUpon>CounterCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\Appearance\AppearanceSettingsUC.resx">
+      <DependentUpon>AppearanceSettingsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.resx">
+      <DependentUpon>CompanySettingsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.resx">
+      <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.resx">
+      <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseCreateForm.resx">
       <DependentUpon>WarehouseCreateForm.cs</DependentUpon>
@@ -837,9 +867,6 @@
       <DependentUpon>SaleUC.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings\SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierCreate.resx">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -906,6 +933,7 @@
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Purchases\Receives\" />
     <Folder Include="Forms\Purchases\Direct\" />
+    <Folder Include="Forms\Settings\" />
     <Folder Include="Forms\Shared\" />
     <Folder Include="Master\" />
   </ItemGroup>

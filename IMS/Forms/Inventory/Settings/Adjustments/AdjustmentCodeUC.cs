@@ -26,15 +26,16 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
 
             InitializeComponent();
 
-            InitializeHeader();
-
-            InitializeEvents();
-
+            this.Dock = DockStyle.Fill;
+            
             this.Load += AdjustmentUC_Load;
         }
 
         private void AdjustmentUC_Load(object sender, EventArgs e)
         {
+            InitializeHeader();
+            InitializeEvents();
+
             PopulateAdjustmentData();
         }
 

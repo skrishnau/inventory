@@ -25,15 +25,15 @@ namespace IMS.Forms.Inventory.Categories
             this._inventoryService = inventoryService;
 
             InitializeComponent();
-            InitializeHeader();
-
-            InitializeEvents();
-
+            
+            this.Dock = DockStyle.Fill;
             this.Load += CategoryListUC_Load;
         }
 
         private void CategoryListUC_Load(object sender, EventArgs e)
         {
+            InitializeHeader();
+            InitializeEvents();
             PopulateCategoryData();
         }
 

@@ -32,7 +32,7 @@ namespace IMS.Forms.Inventory.UOM
             _listener = listener;
 
             InitializeComponent();
-
+            this.Dock = DockStyle.Fill;
             this.Load += UomUC_Load;
         }
         GridViewColumnDecimalValidator _decimalValidator;

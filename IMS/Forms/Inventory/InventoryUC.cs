@@ -226,12 +226,15 @@ namespace IMS.Forms.Inventory
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            var settingsUC = Program.container.GetInstance<InventorySettingsUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            settingsUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(settingsUC);
-            // set selection
-            _menubar.SetSelection(sender);
+           // using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var settingsUC = Program.container.GetInstance<InventorySettingsUC>();
+                _bodyTemplate.pnlBody.Controls.Clear();
+                settingsUC.Dock = DockStyle.Fill;
+                _bodyTemplate.pnlBody.Controls.Add(settingsUC);
+                // set selection
+                _menubar.SetSelection(sender);
+            }
         }
         
 

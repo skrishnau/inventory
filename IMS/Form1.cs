@@ -4,7 +4,6 @@ using System;
 using System.Windows.Forms;
 using IMS.Forms.Business;
 using IMS.Forms.Users;
-using IMS.Forms.Settings;
 using IMS.Forms.Dashboard;
 using IMS.Forms.Inventory.Suppliers;
 using IMS.Forms.POS;
@@ -138,9 +137,9 @@ namespace IMS
 
         private void btnSetting_Click(object sender, EventArgs e)
         {
-            SetButtonSelection(sender);
-            var settingsForm = Program.container.GetInstance<SettingsForm>();
-            settingsForm.ShowDialog();
+            //SetButtonSelection(sender);
+            //var settingsForm = Program.container.GetInstance<SettingsForm>();
+            //settingsForm.ShowDialog();
 
         }
 
