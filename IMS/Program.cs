@@ -160,7 +160,6 @@ namespace IMS
 
             // transfers
             container.Register<InventoryTransfersListUC>(Lifestyle.Scoped);
-            container.Register<TransferForm>(Lifestyle.Scoped);
 
             container.Register<WarehouseProductListUC>(Lifestyle.Scoped);
 
@@ -169,7 +168,6 @@ namespace IMS
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
             container.Register<InventoryMovementUC>(Lifestyle.Scoped);
 
-            container.Register<InventoryMoveForm>(Lifestyle.Scoped);
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
             
             //

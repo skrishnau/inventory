@@ -498,6 +498,34 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colUnitQuantity.ReadOnly = false;
             colPackageQuantity.ReadOnly = false;
         }
+        //
+        // Direct Move designs
+        //
+        public void DesignForDirectMove()
+        {
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            //this.AllowUserToAddRows = true;
+            //this.AllowUserToDeleteRows = true;
+            colProduct.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colPackageQuantity.Visible = true;
+            //colPackageId.Visible = true;
+            //colPackageId.ReadOnly = true;
+            colWarehouseId.Visible = true;
+            colLotNumber.Visible = true;
+            colProductionDate.Visible = true;
+            colExpirationDate.Visible = true;
+            colReceiveReference.Visible = true;
+            colReceiveReference.HeaderText = "Reference";
+            colReceiveDate.Visible = true;
+            colRemark.Visible = true;
+
+            MakeAllColumnsReadOnly();
+            //colUnitQuantity.ReadOnly = false;
+            //colPackageQuantity.ReadOnly = false;
+        }
 
         private void MakeAllColumnsReadOnly()
         {

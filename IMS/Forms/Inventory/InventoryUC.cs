@@ -78,7 +78,7 @@ namespace IMS.Forms.Inventory
 
             // transfers
            // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
-            _menubar.btnTransfer.Click += BtnTransfer_Click;
+          //  _menubar.btnTransfer.Click += BtnTransfer_Click;
             // supplier
             _menubar.btnSupplierList.Click += BtnSupplierList_Click;
             // warehouse
@@ -93,6 +93,7 @@ namespace IMS.Forms.Inventory
             _menubar.btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
             _menubar.btnSellOrder.Click += BtnSellOrder_Click;
         }
+
 
         private void BtnSellOrder_Click(object sender, EventArgs e)
         {
@@ -146,15 +147,16 @@ namespace IMS.Forms.Inventory
 
         #region Transfers
 
-        private void BtnTransfer_Click(object sender, EventArgs e)
-        {
-            // show transfer dialog
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var transferForm = Program.container.GetInstance<TransferForm>();
-                transferForm.ShowDialog();
-            }
-        }
+        //private void BtnTransfer_Click(object sender, EventArgs e)
+        //{
+        //    // show transfer dialog
+        //    using (AsyncScopedLifestyle.BeginScope(Program.container))
+        //    {
+        //        var transferForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+        //        transferForm.SetData(AdjustmentTypeEnum.DirectMove, 0);
+        //        transferForm.ShowDialog();
+        //    }
+        //}
 
         //private void BtnInventoryTransfers_Click(object sender, EventArgs e)
         //{

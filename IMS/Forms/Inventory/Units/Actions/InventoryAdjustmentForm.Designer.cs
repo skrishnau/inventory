@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlAdjustmentCode = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtReceiveDate = new System.Windows.Forms.DateTimePicker();
             this.cbAdjustmentCode = new System.Windows.Forms.ComboBox();
+            this.dtReceiveDate = new System.Windows.Forms.DateTimePicker();
+            this.pnlWarehouse = new System.Windows.Forms.TableLayoutPanel();
+            this.cbWarehouse = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvInventoryUnit = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbWarehouse = new System.Windows.Forms.ComboBox();
-            this.pnlWarehouse = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlAdjustmentCode = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
+            this.pnlAdjustmentCode.SuspendLayout();
+            this.pnlWarehouse.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).BeginInit();
-            this.pnlWarehouse.SuspendLayout();
-            this.pnlAdjustmentCode.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -56,7 +56,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
             this.tableLayoutPanel1.Controls.Add(this.pnlAdjustmentCode, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dtReceiveDate, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlWarehouse, 1, 0);
@@ -69,6 +69,20 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(973, 34);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // pnlAdjustmentCode
+            // 
+            this.pnlAdjustmentCode.ColumnCount = 2;
+            this.pnlAdjustmentCode.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
+            this.pnlAdjustmentCode.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
+            this.pnlAdjustmentCode.Controls.Add(this.label1, 0, 0);
+            this.pnlAdjustmentCode.Controls.Add(this.cbAdjustmentCode, 1, 0);
+            this.pnlAdjustmentCode.Location = new System.Drawing.Point(3, 3);
+            this.pnlAdjustmentCode.Name = "pnlAdjustmentCode";
+            this.pnlAdjustmentCode.RowCount = 1;
+            this.pnlAdjustmentCode.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlAdjustmentCode.Size = new System.Drawing.Size(270, 28);
+            this.pnlAdjustmentCode.TabIndex = 5;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -78,6 +92,55 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Ajustment Code";
             // 
+            // cbAdjustmentCode
+            // 
+            this.cbAdjustmentCode.FormattingEnabled = true;
+            this.cbAdjustmentCode.Location = new System.Drawing.Point(80, 3);
+            this.cbAdjustmentCode.Name = "cbAdjustmentCode";
+            this.cbAdjustmentCode.Size = new System.Drawing.Size(162, 21);
+            this.cbAdjustmentCode.TabIndex = 8;
+            // 
+            // dtReceiveDate
+            // 
+            this.dtReceiveDate.Enabled = false;
+            this.dtReceiveDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtReceiveDate.Location = new System.Drawing.Point(824, 3);
+            this.dtReceiveDate.Name = "dtReceiveDate";
+            this.dtReceiveDate.Size = new System.Drawing.Size(129, 20);
+            this.dtReceiveDate.TabIndex = 5;
+            // 
+            // pnlWarehouse
+            // 
+            this.pnlWarehouse.ColumnCount = 2;
+            this.pnlWarehouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.pnlWarehouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
+            this.pnlWarehouse.Controls.Add(this.cbWarehouse, 1, 0);
+            this.pnlWarehouse.Controls.Add(this.label2, 0, 0);
+            this.pnlWarehouse.Location = new System.Drawing.Point(352, 3);
+            this.pnlWarehouse.Name = "pnlWarehouse";
+            this.pnlWarehouse.RowCount = 1;
+            this.pnlWarehouse.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlWarehouse.Size = new System.Drawing.Size(257, 28);
+            this.pnlWarehouse.TabIndex = 5;
+            this.pnlWarehouse.Visible = false;
+            // 
+            // cbWarehouse
+            // 
+            this.cbWarehouse.FormattingEnabled = true;
+            this.cbWarehouse.Location = new System.Drawing.Point(103, 3);
+            this.cbWarehouse.Name = "cbWarehouse";
+            this.cbWarehouse.Size = new System.Drawing.Size(146, 21);
+            this.cbWarehouse.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 26);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Move to Warehouse";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -86,22 +149,6 @@
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Date";
-            // 
-            // dtReceiveDate
-            // 
-            this.dtReceiveDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtReceiveDate.Location = new System.Drawing.Point(824, 3);
-            this.dtReceiveDate.Name = "dtReceiveDate";
-            this.dtReceiveDate.Size = new System.Drawing.Size(129, 20);
-            this.dtReceiveDate.TabIndex = 5;
-            // 
-            // cbAdjustmentCode
-            // 
-            this.cbAdjustmentCode.FormattingEnabled = true;
-            this.cbAdjustmentCode.Location = new System.Drawing.Point(80, 3);
-            this.cbAdjustmentCode.Name = "cbAdjustmentCode";
-            this.cbAdjustmentCode.Size = new System.Drawing.Size(162, 21);
-            this.cbAdjustmentCode.TabIndex = 8;
             // 
             // panel1
             // 
@@ -144,52 +191,6 @@
             this.dgvInventoryUnit.Size = new System.Drawing.Size(973, 369);
             this.dgvInventoryUnit.TabIndex = 4;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 26);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Move to Warehouse";
-            // 
-            // cbWarehouse
-            // 
-            this.cbWarehouse.FormattingEnabled = true;
-            this.cbWarehouse.Location = new System.Drawing.Point(103, 3);
-            this.cbWarehouse.Name = "cbWarehouse";
-            this.cbWarehouse.Size = new System.Drawing.Size(146, 21);
-            this.cbWarehouse.TabIndex = 1;
-            // 
-            // pnlWarehouse
-            // 
-            this.pnlWarehouse.ColumnCount = 2;
-            this.pnlWarehouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.pnlWarehouse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
-            this.pnlWarehouse.Controls.Add(this.cbWarehouse, 1, 0);
-            this.pnlWarehouse.Controls.Add(this.label2, 0, 0);
-            this.pnlWarehouse.Location = new System.Drawing.Point(352, 3);
-            this.pnlWarehouse.Name = "pnlWarehouse";
-            this.pnlWarehouse.RowCount = 1;
-            this.pnlWarehouse.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlWarehouse.Size = new System.Drawing.Size(257, 28);
-            this.pnlWarehouse.TabIndex = 5;
-            this.pnlWarehouse.Visible = false;
-            // 
-            // pnlAdjustmentCode
-            // 
-            this.pnlAdjustmentCode.ColumnCount = 2;
-            this.pnlAdjustmentCode.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.pnlAdjustmentCode.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.pnlAdjustmentCode.Controls.Add(this.label1, 0, 0);
-            this.pnlAdjustmentCode.Controls.Add(this.cbAdjustmentCode, 1, 0);
-            this.pnlAdjustmentCode.Location = new System.Drawing.Point(3, 3);
-            this.pnlAdjustmentCode.Name = "pnlAdjustmentCode";
-            this.pnlAdjustmentCode.RowCount = 1;
-            this.pnlAdjustmentCode.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlAdjustmentCode.Size = new System.Drawing.Size(270, 28);
-            this.pnlAdjustmentCode.TabIndex = 5;
-            // 
             // InventoryAdjustmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,12 +210,12 @@
             this.Text = "Direct Receive";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).EndInit();
-            this.pnlWarehouse.ResumeLayout(false);
-            this.pnlWarehouse.PerformLayout();
             this.pnlAdjustmentCode.ResumeLayout(false);
             this.pnlAdjustmentCode.PerformLayout();
+            this.pnlWarehouse.ResumeLayout(false);
+            this.pnlWarehouse.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -123,7 +123,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     _selectedInventoryUnits = selectedInventoryUnits;
                     this.Text = "Direct Transfer";
                     btnSave.Text = "Transfer";
-                    dgvInventoryUnit.DesignForDirectIssue();
+                    dgvInventoryUnit.DesignForDirectMove();
                     if (selectedInventoryUnits != null)
                     {
                         dgvInventoryUnit.DataSource = selectedInventoryUnits;

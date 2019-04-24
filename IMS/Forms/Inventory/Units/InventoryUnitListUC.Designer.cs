@@ -144,6 +144,7 @@
             this.gbInformation.TabIndex = 6;
             this.gbInformation.TabStop = false;
             this.gbInformation.Text = "Information";
+            this.gbInformation.Visible = false;
             // 
             // flowLayoutPanel4
             // 
@@ -354,7 +355,7 @@
             this.lblBulkActionsMessage.Name = "lblBulkActionsMessage";
             this.lblBulkActionsMessage.Size = new System.Drawing.Size(247, 13);
             this.lblBulkActionsMessage.TabIndex = 8;
-            this.lblBulkActionsMessage.Text = "Check \"Enable\" button above";
+            this.lblBulkActionsMessage.Text = "Check rows to do bulk action";
             // 
             // dgvInventoryUnit
             // 

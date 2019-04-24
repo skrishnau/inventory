@@ -32,27 +32,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryMenuBar));
             this.splitter5 = new System.Windows.Forms.Splitter();
             this.gbActions = new System.Windows.Forms.GroupBox();
+            this.btnLocateInventory = new System.Windows.Forms.Button();
+            this.btnDirectReceive = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.splitter3 = new System.Windows.Forms.Splitter();
-            this.splitter4 = new System.Windows.Forms.Splitter();
-            this.gbLists = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.splitter6 = new System.Windows.Forms.Splitter();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.gbLists = new System.Windows.Forms.GroupBox();
             this.btnSupplierList = new System.Windows.Forms.Button();
             this.btnWarehouseList = new System.Windows.Forms.Button();
             this.btnProductList = new System.Windows.Forms.Button();
             this.btnInventoryUnits = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnSellOrder = new System.Windows.Forms.Button();
-            this.btnMoveOrder = new System.Windows.Forms.Button();
             this.btnPurchaseOrder = new System.Windows.Forms.Button();
-            this.btnLocateInventory = new System.Windows.Forms.Button();
+            this.splitter6 = new System.Windows.Forms.Splitter();
+            this.btnMoveOrder = new System.Windows.Forms.Button();
             this.btnDirectIssue = new System.Windows.Forms.Button();
             this.btnTransfer = new System.Windows.Forms.Button();
-            this.btnDirectReceive = new System.Windows.Forms.Button();
             this.gbActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbLists.SuspendLayout();
@@ -62,7 +62,7 @@
             // splitter5
             // 
             this.splitter5.Enabled = false;
-            this.splitter5.Location = new System.Drawing.Point(257, 2);
+            this.splitter5.Location = new System.Drawing.Point(138, 2);
             this.splitter5.Name = "splitter5";
             this.splitter5.Size = new System.Drawing.Size(10, 80);
             this.splitter5.TabIndex = 18;
@@ -70,18 +70,44 @@
             // 
             // gbActions
             // 
-            this.gbActions.Controls.Add(this.btnLocateInventory);
             this.gbActions.Controls.Add(this.btnDirectIssue);
             this.gbActions.Controls.Add(this.btnTransfer);
+            this.gbActions.Controls.Add(this.btnLocateInventory);
             this.gbActions.Controls.Add(this.btnDirectReceive);
             this.gbActions.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbActions.Location = new System.Drawing.Point(2, 2);
             this.gbActions.Name = "gbActions";
             this.gbActions.Padding = new System.Windows.Forms.Padding(5);
-            this.gbActions.Size = new System.Drawing.Size(255, 80);
+            this.gbActions.Size = new System.Drawing.Size(136, 80);
             this.gbActions.TabIndex = 22;
             this.gbActions.TabStop = false;
             this.gbActions.Text = "Quick Actions";
+            // 
+            // btnLocateInventory
+            // 
+            this.btnLocateInventory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLocateInventory.Image = global::IMS.Properties.Resources.icons8_Wine_Tour_24px;
+            this.btnLocateInventory.Location = new System.Drawing.Point(69, 18);
+            this.btnLocateInventory.Name = "btnLocateInventory";
+            this.btnLocateInventory.Size = new System.Drawing.Size(61, 57);
+            this.btnLocateInventory.TabIndex = 6;
+            this.btnLocateInventory.Text = "Locate Inventory";
+            this.btnLocateInventory.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLocateInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnLocateInventory.UseVisualStyleBackColor = true;
+            // 
+            // btnDirectReceive
+            // 
+            this.btnDirectReceive.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDirectReceive.Image = global::IMS.Properties.Resources.icons8_Lease_24px;
+            this.btnDirectReceive.Location = new System.Drawing.Point(5, 18);
+            this.btnDirectReceive.Name = "btnDirectReceive";
+            this.btnDirectReceive.Size = new System.Drawing.Size(64, 57);
+            this.btnDirectReceive.TabIndex = 3;
+            this.btnDirectReceive.Text = "Direct Receive";
+            this.btnDirectReceive.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDirectReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDirectReceive.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -89,67 +115,13 @@
             this.groupBox1.Controls.Add(this.btnSettings);
             this.groupBox1.Controls.Add(this.btnReports);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Location = new System.Drawing.Point(728, 2);
+            this.groupBox1.Location = new System.Drawing.Point(552, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(170, 80);
+            this.groupBox1.Size = new System.Drawing.Size(125, 80);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tools";
-            // 
-            // splitter3
-            // 
-            this.splitter3.Enabled = false;
-            this.splitter3.Location = new System.Drawing.Point(718, 2);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(10, 80);
-            this.splitter3.TabIndex = 27;
-            this.splitter3.TabStop = false;
-            // 
-            // splitter4
-            // 
-            this.splitter4.Enabled = false;
-            this.splitter4.Location = new System.Drawing.Point(898, 2);
-            this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(10, 80);
-            this.splitter4.TabIndex = 28;
-            this.splitter4.TabStop = false;
-            // 
-            // gbLists
-            // 
-            this.gbLists.Controls.Add(this.btnSupplierList);
-            this.gbLists.Controls.Add(this.btnWarehouseList);
-            this.gbLists.Controls.Add(this.btnProductList);
-            this.gbLists.Controls.Add(this.btnInventoryUnits);
-            this.gbLists.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gbLists.Location = new System.Drawing.Point(465, 2);
-            this.gbLists.Name = "gbLists";
-            this.gbLists.Size = new System.Drawing.Size(253, 80);
-            this.gbLists.TabIndex = 29;
-            this.gbLists.TabStop = false;
-            this.gbLists.Text = "Lists";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btnSellOrder);
-            this.groupBox3.Controls.Add(this.btnMoveOrder);
-            this.groupBox3.Controls.Add(this.btnPurchaseOrder);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox3.Location = new System.Drawing.Point(267, 2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(188, 80);
-            this.groupBox3.TabIndex = 33;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Orders";
-            // 
-            // splitter6
-            // 
-            this.splitter6.Enabled = false;
-            this.splitter6.Location = new System.Drawing.Point(455, 2);
-            this.splitter6.Name = "splitter6";
-            this.splitter6.Size = new System.Drawing.Size(10, 80);
-            this.splitter6.TabIndex = 34;
-            this.splitter6.TabStop = false;
             // 
             // button1
             // 
@@ -163,6 +135,7 @@
             this.button1.Text = "Help";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             // 
             // btnSettings
             // 
@@ -189,6 +162,38 @@
             this.btnReports.Text = "Reports";
             this.btnReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnReports.UseVisualStyleBackColor = true;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Enabled = false;
+            this.splitter3.Location = new System.Drawing.Point(542, 2);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(10, 80);
+            this.splitter3.TabIndex = 27;
+            this.splitter3.TabStop = false;
+            // 
+            // splitter4
+            // 
+            this.splitter4.Enabled = false;
+            this.splitter4.Location = new System.Drawing.Point(677, 2);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(10, 80);
+            this.splitter4.TabIndex = 28;
+            this.splitter4.TabStop = false;
+            // 
+            // gbLists
+            // 
+            this.gbLists.Controls.Add(this.btnSupplierList);
+            this.gbLists.Controls.Add(this.btnWarehouseList);
+            this.gbLists.Controls.Add(this.btnProductList);
+            this.gbLists.Controls.Add(this.btnInventoryUnits);
+            this.gbLists.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbLists.Location = new System.Drawing.Point(289, 2);
+            this.gbLists.Name = "gbLists";
+            this.gbLists.Size = new System.Drawing.Size(253, 80);
+            this.gbLists.TabIndex = 29;
+            this.gbLists.TabStop = false;
+            this.gbLists.Text = "Lists";
             // 
             // btnSupplierList
             // 
@@ -240,31 +245,31 @@
             this.btnInventoryUnits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnInventoryUnits.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnMoveOrder);
+            this.groupBox3.Controls.Add(this.btnSellOrder);
+            this.groupBox3.Controls.Add(this.btnPurchaseOrder);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox3.Location = new System.Drawing.Point(148, 2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(131, 80);
+            this.groupBox3.TabIndex = 33;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Orders";
+            // 
             // btnSellOrder
             // 
             this.btnSellOrder.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSellOrder.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
             this.btnSellOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSellOrder.Location = new System.Drawing.Point(126, 16);
+            this.btnSellOrder.Location = new System.Drawing.Point(67, 16);
             this.btnSellOrder.Name = "btnSellOrder";
             this.btnSellOrder.Size = new System.Drawing.Size(59, 61);
             this.btnSellOrder.TabIndex = 4;
             this.btnSellOrder.Text = "Sell Order";
             this.btnSellOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSellOrder.UseVisualStyleBackColor = true;
-            // 
-            // btnMoveOrder
-            // 
-            this.btnMoveOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMoveOrder.Image = global::IMS.Properties.Resources.icons8_Move_Stock_24px;
-            this.btnMoveOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnMoveOrder.Location = new System.Drawing.Point(67, 16);
-            this.btnMoveOrder.Name = "btnMoveOrder";
-            this.btnMoveOrder.Size = new System.Drawing.Size(59, 61);
-            this.btnMoveOrder.TabIndex = 3;
-            this.btnMoveOrder.Text = "Move Order";
-            this.btnMoveOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnMoveOrder.UseVisualStyleBackColor = true;
             // 
             // btnPurchaseOrder
             // 
@@ -279,24 +284,34 @@
             this.btnPurchaseOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPurchaseOrder.UseVisualStyleBackColor = true;
             // 
-            // btnLocateInventory
+            // splitter6
             // 
-            this.btnLocateInventory.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnLocateInventory.Image = global::IMS.Properties.Resources.icons8_Wine_Tour_24px;
-            this.btnLocateInventory.Location = new System.Drawing.Point(189, 18);
-            this.btnLocateInventory.Name = "btnLocateInventory";
-            this.btnLocateInventory.Size = new System.Drawing.Size(61, 57);
-            this.btnLocateInventory.TabIndex = 6;
-            this.btnLocateInventory.Text = "Locate Inventory";
-            this.btnLocateInventory.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLocateInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnLocateInventory.UseVisualStyleBackColor = true;
+            this.splitter6.Enabled = false;
+            this.splitter6.Location = new System.Drawing.Point(279, 2);
+            this.splitter6.Name = "splitter6";
+            this.splitter6.Size = new System.Drawing.Size(10, 80);
+            this.splitter6.TabIndex = 34;
+            this.splitter6.TabStop = false;
+            // 
+            // btnMoveOrder
+            // 
+            this.btnMoveOrder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMoveOrder.Image = global::IMS.Properties.Resources.icons8_Move_Stock_24px;
+            this.btnMoveOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnMoveOrder.Location = new System.Drawing.Point(126, 16);
+            this.btnMoveOrder.Name = "btnMoveOrder";
+            this.btnMoveOrder.Size = new System.Drawing.Size(59, 61);
+            this.btnMoveOrder.TabIndex = 3;
+            this.btnMoveOrder.Text = "Move Order";
+            this.btnMoveOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnMoveOrder.UseVisualStyleBackColor = true;
+            this.btnMoveOrder.Visible = false;
             // 
             // btnDirectIssue
             // 
             this.btnDirectIssue.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnDirectIssue.Image = global::IMS.Properties.Resources.icons8_Sell_24px;
-            this.btnDirectIssue.Location = new System.Drawing.Point(129, 18);
+            this.btnDirectIssue.Location = new System.Drawing.Point(190, 18);
             this.btnDirectIssue.Name = "btnDirectIssue";
             this.btnDirectIssue.Size = new System.Drawing.Size(60, 57);
             this.btnDirectIssue.TabIndex = 7;
@@ -304,12 +319,13 @@
             this.btnDirectIssue.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnDirectIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDirectIssue.UseVisualStyleBackColor = true;
+            this.btnDirectIssue.Visible = false;
             // 
             // btnTransfer
             // 
             this.btnTransfer.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnTransfer.Image = global::IMS.Properties.Resources.icons8_Data_Transfer_24px;
-            this.btnTransfer.Location = new System.Drawing.Point(69, 18);
+            this.btnTransfer.Location = new System.Drawing.Point(130, 18);
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.Size = new System.Drawing.Size(60, 57);
             this.btnTransfer.TabIndex = 4;
@@ -317,19 +333,7 @@
             this.btnTransfer.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnTransfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnTransfer.UseVisualStyleBackColor = true;
-            // 
-            // btnDirectReceive
-            // 
-            this.btnDirectReceive.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnDirectReceive.Image = global::IMS.Properties.Resources.icons8_Lease_24px;
-            this.btnDirectReceive.Location = new System.Drawing.Point(5, 18);
-            this.btnDirectReceive.Name = "btnDirectReceive";
-            this.btnDirectReceive.Size = new System.Drawing.Size(64, 57);
-            this.btnDirectReceive.TabIndex = 3;
-            this.btnDirectReceive.Text = "Direct Receive";
-            this.btnDirectReceive.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDirectReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDirectReceive.UseVisualStyleBackColor = true;
+            this.btnTransfer.Visible = false;
             // 
             // InventoryMenuBar
             // 
@@ -364,7 +368,6 @@
         private System.Windows.Forms.Splitter splitter4;
         protected internal System.Windows.Forms.Button btnSupplierList;
         protected internal System.Windows.Forms.Button btnWarehouseList;
-        protected internal System.Windows.Forms.Button btnTransfer;
         private System.Windows.Forms.GroupBox gbLists;
         protected internal System.Windows.Forms.Button btnProductList;
         protected internal System.Windows.Forms.Button btnLocateInventory;
@@ -372,11 +375,12 @@
         protected internal System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.GroupBox groupBox3;
         protected internal System.Windows.Forms.Button btnSellOrder;
-        protected internal System.Windows.Forms.Button btnMoveOrder;
         private System.Windows.Forms.Splitter splitter6;
         protected internal System.Windows.Forms.Button btnPurchaseOrder;
-        protected internal System.Windows.Forms.Button btnDirectIssue;
         protected internal System.Windows.Forms.Button btnReports;
         protected internal System.Windows.Forms.Button button1;
+        protected internal System.Windows.Forms.Button btnDirectIssue;
+        protected internal System.Windows.Forms.Button btnTransfer;
+        protected internal System.Windows.Forms.Button btnMoveOrder;
     }
 }

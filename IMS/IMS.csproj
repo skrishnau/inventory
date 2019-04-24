@@ -311,12 +311,6 @@
     <Compile Include="Forms\Inventory\Transfers\InventoryTransfersListUC.Designer.cs">
       <DependentUpon>InventoryTransfersListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Transfers\TransferForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Transfers\TransferForm.Designer.cs">
-      <DependentUpon>TransferForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventoryDisassembleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,12 +322,6 @@
     </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventoryMergeForm.Designer.cs">
       <DependentUpon>InventoryMergeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Units\Actions\InventoryMoveForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Units\Actions\InventoryMoveForm.Designer.cs">
-      <DependentUpon>InventoryMoveForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventorySplitForm.cs">
       <SubType>Form</SubType>
@@ -746,14 +734,8 @@
     <EmbeddedResource Include="Forms\Inventory\Transfers\InventoryTransfersListUC.resx">
       <DependentUpon>InventoryTransfersListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Transfers\TransferForm.resx">
-      <DependentUpon>TransferForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryMergeForm.resx">
       <DependentUpon>InventoryMergeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryMoveForm.resx">
-      <DependentUpon>InventoryMoveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventorySplitForm.resx">
       <DependentUpon>InventorySplitForm.cs</DependentUpon>
