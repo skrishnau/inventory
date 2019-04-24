@@ -40,7 +40,6 @@ using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Purchases;
 using IMS.Forms.Inventory.Purchases.Order;
-using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units.Actions;
 using IMS.Forms.Inventory.Settings;
 using IMS.Forms.Inventory.Units.Details;

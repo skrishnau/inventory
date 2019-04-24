@@ -1,4 +1,4 @@
-﻿namespace IMS.Forms.Inventory.Products.WarehouseProducts
+﻿namespace IMS.Forms.Inventory.Units.Details
 {
     partial class WarehouseProductListUC
     {

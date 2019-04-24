@@ -8,11 +8,11 @@ using ViewModel.Core.Inventory;
 
 namespace DTO.Core.Inventory
 {
-    public class InventoryUnitMapper
+    public static class InventoryUnitMapper
     {
         
 
-        public static List<InventoryUnitModel> MapToModel(IQueryable<InventoryUnit> query)
+        public static List<InventoryUnitModel> MapToModel(this IQueryable<InventoryUnit> query)
         {
             var list = new List<InventoryUnitModel>();
             foreach (var entity in query)
@@ -21,7 +21,7 @@ namespace DTO.Core.Inventory
             }
             return list;
         }
-        public static List<InventoryUnitModel> MapToModel(List<InventoryUnit> query)
+        public static List<InventoryUnitModel> MapToModel(this List<InventoryUnit> query)
         {
             var list = new List<InventoryUnitModel>();
             foreach (var entity in query)
@@ -31,7 +31,7 @@ namespace DTO.Core.Inventory
             return list;
         }
 
-        public static InventoryUnitModel MapToModel(InventoryUnit entity)
+        public static InventoryUnitModel MapToModel(this InventoryUnit entity)
         {
             return new InventoryUnitModel()
             {
@@ -68,7 +68,7 @@ namespace DTO.Core.Inventory
             };
         }
 
-        public static InventoryUnit CloneEntity(InventoryUnit entity)
+        public static InventoryUnit CloneEntity(this InventoryUnit entity)
         {
             return new InventoryUnit()
             {
@@ -106,7 +106,7 @@ namespace DTO.Core.Inventory
             };
         }
 
-        public static List<InventoryUnit> MapToEntity(List<InventoryUnitModel> modelList)
+        public static List<InventoryUnit> MapToEntity(this List<InventoryUnitModel> modelList)
         {
             var entityList = new List<InventoryUnit>();
             foreach(var model in modelList)
@@ -116,7 +116,7 @@ namespace DTO.Core.Inventory
             return entityList;
         }
 
-        public static InventoryUnit MapToEntity(InventoryUnitModel model)
+        public static InventoryUnit MapToEntity(this InventoryUnitModel model)
         {
             return new InventoryUnit()
             {

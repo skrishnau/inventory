@@ -97,6 +97,8 @@ namespace IMS.Forms.Inventory.Units
             //dgvInventoryUnit.SelectionChanged += DgvInventoryUnit_SelectionChanged;
             //dgvInventoryUnit.CellContentClick += DgvInventoryUnit_CellContentClick;
             dgvInventoryUnit.DesignForInventoryUnitListing();
+            dgvInventoryUnit.ShowCheckColumn(true); // 1. first show
+            dgvInventoryUnit.SetSelectable(true); // 2. Second set selectable
         }
 
         #endregion

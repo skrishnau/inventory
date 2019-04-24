@@ -88,29 +88,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201904171201204_InitMigration.cs" />
-    <Compile Include="Migrations\201904171201204_InitMigration.Designer.cs">
-      <DependentUpon>201904171201204_InitMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904220937550_Movement.cs" />
-    <Compile Include="Migrations\201904220937550_Movement.Designer.cs">
-      <DependentUpon>201904220937550_Movement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904221540075_MovementUpdates.cs" />
-    <Compile Include="Migrations\201904221540075_MovementUpdates.Designer.cs">
-      <DependentUpon>201904221540075_MovementUpdates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904222059478_brandRemoved.cs" />
-    <Compile Include="Migrations\201904222059478_brandRemoved.Designer.cs">
-      <DependentUpon>201904222059478_brandRemoved.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904222254510_DeletedAtRemoved.cs" />
-    <Compile Include="Migrations\201904222254510_DeletedAtRemoved.Designer.cs">
-      <DependentUpon>201904222254510_DeletedAtRemoved.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904222309347_SupplierUseColumn.cs" />
-    <Compile Include="Migrations\201904222309347_SupplierUseColumn.Designer.cs">
-      <DependentUpon>201904222309347_SupplierUseColumn.cs</DependentUpon>
+    <Compile Include="Migrations\201904241153479_InitialMigration.cs" />
+    <Compile Include="Migrations\201904241153479_InitialMigration.Designer.cs">
+      <DependentUpon>201904241153479_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -129,23 +109,8 @@
     <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904171201204_InitMigration.resx">
-      <DependentUpon>201904171201204_InitMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904220937550_Movement.resx">
-      <DependentUpon>201904220937550_Movement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904221540075_MovementUpdates.resx">
-      <DependentUpon>201904221540075_MovementUpdates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904222059478_brandRemoved.resx">
-      <DependentUpon>201904222059478_brandRemoved.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904222254510_DeletedAtRemoved.resx">
-      <DependentUpon>201904222254510_DeletedAtRemoved.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904222309347_SupplierUseColumn.resx">
-      <DependentUpon>201904222309347_SupplierUseColumn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904241153479_InitialMigration.resx">
+      <DependentUpon>201904241153479_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

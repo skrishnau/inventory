@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Common.Display;
-using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units.Details;
 
 namespace IMS.Forms.Inventory.Units

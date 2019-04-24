@@ -283,6 +283,9 @@
             // chkBulkActions
             // 
             this.chkBulkActions.AutoSize = true;
+            this.chkBulkActions.Checked = true;
+            this.chkBulkActions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBulkActions.Enabled = false;
             this.chkBulkActions.Location = new System.Drawing.Point(188, -2);
             this.chkBulkActions.Name = "chkBulkActions";
             this.chkBulkActions.Size = new System.Drawing.Size(59, 17);
@@ -298,7 +301,6 @@
             this.pnlBulkActions.Controls.Add(this.btnMove);
             this.pnlBulkActions.Controls.Add(this.btnIssue);
             this.pnlBulkActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBulkActions.Enabled = false;
             this.pnlBulkActions.Location = new System.Drawing.Point(3, 16);
             this.pnlBulkActions.Name = "pnlBulkActions";
             this.pnlBulkActions.Size = new System.Drawing.Size(247, 27);

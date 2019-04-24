@@ -13,6 +13,7 @@ using Service.DbEventArgs;
 using Service.Listeners;
 using Infrastructure.Entities.Purchases;
 using Infrastructure.Entities.Inventory;
+using Service.Core.Inventory.Units;
 
 namespace Service.Core.Purchases.PurchaseOrders
 {
@@ -21,11 +22,15 @@ namespace Service.Core.Purchases.PurchaseOrders
 
         private DatabaseContext _context;
         private readonly IDatabaseChangeListener _listener;
-
-        public PurchaseService(DatabaseContext context, IDatabaseChangeListener listener)
+        private readonly IInventoryUnitService _inventoryUnitService;
+        public PurchaseService(DatabaseContext context,
+            IDatabaseChangeListener listener,
+            IInventoryUnitService inventoryUnitService
+            )
         {
             _context = context;
             _listener = listener;
+            _inventoryUnitService = inventoryUnitService;
         }
 
         public List<PurchaseOrderModel> GetAllPurchaseOrders()
@@ -140,41 +145,6 @@ namespace Service.Core.Purchases.PurchaseOrders
             return "The Purchase Order doesn't exist";
         }
 
-        private void AddReceivedItemsToWarehouse(ICollection<PurchaseOrderItem> items, DateTime now)
-        {
-            foreach (var item in items)
-            {
-                var product = _context.Product.Find(item.ProductId);
-                if (product != null)
-                {
-                    item.IsReceived = true;
-                    AddPOReceiveToInventoryUnit(item, product, now);
-                    var wp = _context.WarehouseProduct.FirstOrDefault(x => x.ProductId == item.ProductId && x.WarehouseId == item.WarehouseId);
-                    if (wp == null)
-                    {
-                        wp = new Infrastructure.Entities.Inventory.WarehouseProduct()
-                        {
-                            ProductId = item.ProductId,
-                            InStockQuantity = item.UnitQuantity,
-                            OnHoldQuantity = item.IsHold ? item.UnitQuantity : 0,
-                            UpdatedAt = DateTime.Now,
-                            WarehouseId = item.WarehouseId,
-                        };
-                        _context.WarehouseProduct.Add(wp);
-                    }
-                    else
-                    {
-                        wp.UpdatedAt = DateTime.Now;
-                        wp.InStockQuantity += item.UnitQuantity;
-                        wp.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
-                    }
-                    // update the product 
-                    product.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
-                    product.InStockQuantity += item.UnitQuantity;
-                }
-            }
-            _context.SaveChanges();
-        }
 
         public string SetCancelled(int purchaseOrderId)
         {
@@ -262,6 +232,21 @@ namespace Service.Core.Purchases.PurchaseOrders
 
         #region Inventory Units
 
+        private void AddReceivedItemsToWarehouse(ICollection<PurchaseOrderItem> items, DateTime now)
+        {
+            foreach (var item in items)
+            {
+                var product = _context.Product.Find(item.ProductId);
+                if (product != null)
+                {
+                    item.IsReceived = true;
+                    AddPOReceiveToInventoryUnit(item, product, now);
+                }
+            }
+            _context.SaveChanges();
+        }
+
+
         public void AddPOReceiveToInventoryUnit(PurchaseOrderItem poItem, Product product, DateTime now)
         {
 
@@ -290,6 +275,7 @@ namespace Service.Core.Purchases.PurchaseOrders
                 UomId = product.BaseUomId,
                 WarehouseId = poItem.WarehouseId,
             };
+            _inventoryUnitService.UpdateWarehouseProduct(invUnit.MapToModel(), null, poItem.WarehouseId, now);
             _context.InventoryUnit.Add(invUnit);
         }
 
@@ -297,3 +283,29 @@ namespace Service.Core.Purchases.PurchaseOrders
 
     }
 }
+
+
+/*
+    var wp = _context.WarehouseProduct.FirstOrDefault(x => x.ProductId == item.ProductId && x.WarehouseId == item.WarehouseId);
+    if (wp == null)
+    {
+        wp = new Infrastructure.Entities.Inventory.WarehouseProduct()
+        {
+            ProductId = item.ProductId,
+            InStockQuantity = item.UnitQuantity,
+            OnHoldQuantity = item.IsHold ? item.UnitQuantity : 0,
+            UpdatedAt = DateTime.Now,
+            WarehouseId = item.WarehouseId,
+        };
+        _context.WarehouseProduct.Add(wp);
+    }
+    else
+    {
+        wp.UpdatedAt = DateTime.Now;
+        wp.InStockQuantity += item.UnitQuantity;
+        wp.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
+    }
+    // update the product 
+    product.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
+    product.InStockQuantity += item.UnitQuantity;
+ */

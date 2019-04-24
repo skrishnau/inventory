@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Core\Inventory\Units\IInventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUnitService.cs" />
+    <Compile Include="Core\Inventory\Units\InventoryUpdate.cs" />
     <Compile Include="Core\Settings\AppSettingService.cs" />
     <Compile Include="Core\Settings\IAppSettingService.cs" />
     <Compile Include="Core\Bills\Formats\BillFormatService.cs" />

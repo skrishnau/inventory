@@ -30,6 +30,8 @@ namespace Service.Core.Inventory.Units
 
         string SaveDirectIssue(List<InventoryUnitModel> list);
 
+        void UpdateWarehouseProduct(InventoryUnitModel iuModel, int? sourceWarehouseId, int? targetWarehouseId, DateTime now);
+
         #endregion
 
     }

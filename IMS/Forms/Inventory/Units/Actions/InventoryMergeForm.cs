@@ -38,33 +38,37 @@ namespace IMS.Forms.Inventory.Units.Actions
         private void PopulateData()
         {
             var displayList = new List<InventoryUnitModel>();
-            foreach (var invUnitGroup in _dataList.GroupBy(x => x.ProductId))
+            foreach (var productWiseGroup in _dataList.GroupBy(x => x.ProductId))
             {
-                //var first = invUnitGroup.First();
-                var last = invUnitGroup.Last();
-                var unitQuantity = invUnitGroup.Sum(x => x.UnitQuantity);
-                var packageQuantity = invUnitGroup.Sum(x => x.PackageQuantity);
-                var model = new InventoryUnitModel()
+                foreach (var warehouseWiseGroup in productWiseGroup.GroupBy(x => x.WarehouseId))
                 {
-                    Product = last.Product,
-                    ProductId = last.ProductId,
-                    SKU = last.SKU,
-                    LotNumber = last.LotNumber,
-                    PackageQuantity = packageQuantity,
-                    UnitQuantity = unitQuantity,
-                    Warehouse = last.Warehouse,
-                    WarehouseId = last.WarehouseId,
-                    IsHold = last.IsHold,
-                    ExpirationDate = last.ExpirationDate,
-                    ProductionDate = last.ProductionDate,
-                    GrossWeight = last.GrossWeight,
-                    Id = 0,
-                    Package = last.Package,
-                    PackageId = last.PackageId,
-                    Uom = last.Uom,
-                    UomId = last.UomId,
-                };
-                displayList.Add(model);
+                    //var first = invUnitGroup.First();
+                    var last = warehouseWiseGroup.Last();
+                    var unitQuantity = warehouseWiseGroup.Sum(x => x.UnitQuantity);
+                    var packageQuantity = warehouseWiseGroup.Sum(x => x.PackageQuantity);
+                    var model = new InventoryUnitModel()
+                    {
+                        Product = last.Product,
+                        ProductId = last.ProductId,
+                        SKU = last.SKU,
+                        LotNumber = last.LotNumber,
+                        PackageQuantity = packageQuantity,
+                        UnitQuantity = unitQuantity,
+                        Warehouse = last.Warehouse,
+                        WarehouseId = last.WarehouseId,
+                        IsHold = last.IsHold,
+                        ExpirationDate = last.ExpirationDate,
+                        ProductionDate = last.ProductionDate,
+                        GrossWeight = last.GrossWeight,
+                        Id = 0,
+                        Package = last.Package,
+                        PackageId = last.PackageId,
+                        Uom = last.Uom,
+                        UomId = last.UomId,
+                    };
+                    displayList.Add(model);
+                }
+               
             }
             dgvInventoryUnit.AutoGenerateColumns = false;
             dgvInventoryUnit.DataSource = displayList;

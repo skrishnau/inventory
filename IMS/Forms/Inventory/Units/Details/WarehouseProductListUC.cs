@@ -14,7 +14,7 @@ using Service.Core.Business;
 using ViewModel.Core.Business;
 using ViewModel.Core.Common;
 
-namespace IMS.Forms.Inventory.Products.WarehouseProducts
+namespace IMS.Forms.Inventory.Units.Details
 {
     public partial class WarehouseProductListUC : UserControl
     {
@@ -24,7 +24,7 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
 
         private HeaderTemplate _header;
 
-        public WarehouseProductListUC(IDatabaseChangeListener listener, 
+        public WarehouseProductListUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
             IBusinessService businessService)
         {
@@ -35,10 +35,16 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
             InitializeComponent();
 
             this.Load += WarehouseProductListUC_Load;
+
         }
+
+
 
         private void WarehouseProductListUC_Load(object sender, EventArgs e)
         {
+            _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
+            _listener.WarehouseUpdated += _listener_WarehouseUpdated;
+            _listener.ProductUpdated += _listener_ProductUpdated;
             InitializeHeader();
             PopulateWarehouses();
             PopulateProducts();
@@ -47,6 +53,21 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
             InitializeComboBoxEvents();
         }
 
+
+
+        private void _listener_InventoryUnitUpdated(object sender, Service.DbEventArgs.BaseEventArgs<List<ViewModel.Core.Inventory.InventoryUnitModel>> e)
+        {
+            PopulateWarehouseProducts();
+        }
+
+        private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<WarehouseModel> e)
+        {
+            PopulateWarehouses();
+        }
+        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        {
+            PopulateProducts();
+        }
 
 
         #region Initialize Functions
@@ -76,7 +97,7 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
         private void PopulateWarehouses()
         {
             var warehouses = _inventoryService.GetWarehouseListForCombo();
-            var allWarehouse = new IdNamePair{Id = 0, Name = " ---- All ---- "};
+            var allWarehouse = new IdNamePair { Id = 0, Name = " ---- All ---- " };
             warehouses.Insert(0, allWarehouse);
             cbWarehouse.DataSource = warehouses;
             cbWarehouse.DisplayMember = "Name";
@@ -86,7 +107,7 @@ namespace IMS.Forms.Inventory.Products.WarehouseProducts
         private void PopulateProducts()
         {
             var products = _inventoryService.GetProductListForCombo();
-            var allProduct = new IdNamePair { Id=0, Name=" ---- All ---- " };
+            var allProduct = new IdNamePair { Id = 0, Name = " ---- All ---- " };
             products.Insert(0, allProduct);
             cbProduct.DataSource = products;
             cbProduct.DisplayMember = "Name";

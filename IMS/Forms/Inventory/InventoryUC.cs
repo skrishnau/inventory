@@ -25,7 +25,6 @@ using IMS.Forms.Inventory.Transfers;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
-using IMS.Forms.Inventory.Products.WarehouseProducts;
 using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Units.Actions;
 using Service.Enums;

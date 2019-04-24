@@ -239,10 +239,10 @@
     <Compile Include="Forms\Inventory\Products\ProductUC.Designer.cs">
       <DependentUpon>ProductUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.cs">
+    <Compile Include="Forms\Inventory\Units\Details\WarehouseProductListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.Designer.cs">
+    <Compile Include="Forms\Inventory\Units\Details\WarehouseProductListUC.Designer.cs">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Purchases\PurchaseOrderListUC.cs">
@@ -710,7 +710,7 @@
     <EmbeddedResource Include="Forms\Inventory\Products\ProductUC.resx">
       <DependentUpon>ProductUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Products\WarehouseProducts\WarehouseProductListUC.resx">
+    <EmbeddedResource Include="Forms\Inventory\Units\Details\WarehouseProductListUC.resx">
       <DependentUpon>WarehouseProductListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Purchases\PurchaseOrderListUC.resx">
