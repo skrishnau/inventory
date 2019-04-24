@@ -15,7 +15,7 @@ namespace Service.Core.Inventory.Units
 
         List<MovementModel> GetMovementList();
 
-        void MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
+        string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
 
         void MergeInventoryUnits(List<InventoryUnitModel> list);
         

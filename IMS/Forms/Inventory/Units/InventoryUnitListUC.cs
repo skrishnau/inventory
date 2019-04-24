@@ -30,8 +30,8 @@ namespace IMS.Forms.Inventory.Units
         private readonly IBusinessService _businessService;
 
         private HeaderTemplate _header;
-       // private int checkCount;
-       // private bool _bulkActionsEnabled;
+        // private int checkCount;
+        // private bool _bulkActionsEnabled;
 
         public InventoryUnitListUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
@@ -190,8 +190,9 @@ namespace IMS.Forms.Inventory.Units
             }
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var moveForm = Program.container.GetInstance<InventoryMoveForm>();
-                moveForm.SetData(list);
+                var moveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                //Program.container.GetInstance<InventoryMoveForm>();
+                moveForm.SetData(AdjustmentTypeEnum.DirectMove, 0, list);
                 moveForm.ShowDialog();
             }
         }

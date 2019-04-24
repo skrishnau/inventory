@@ -8,6 +8,8 @@ namespace Service.Enums
 {
     public enum AdjustmentTypeEnum
     {
-        POReceive, DirectReceive, DirectIssue,
+        POReceive, DirectReceive,
+        SOIssue, DirectIssue,
+        TOMove, DirectMove
     }
 }

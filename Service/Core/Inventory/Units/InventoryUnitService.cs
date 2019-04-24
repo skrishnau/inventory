@@ -163,8 +163,14 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        public void MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> list)
+        public string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> list)
         {
+            var msg = string.Empty;
+            if (!list.Any())
+            {
+                msg = "There aren't any items to move";
+                return msg;
+            }
             DateTime now = DateTime.Now;
             var warehouseEntity = _context.Warehouse.Find(warehouseId);
             if (warehouseEntity != null)
@@ -191,6 +197,7 @@ namespace Service.Core.Inventory.Units
             _context.SaveChanges();
             var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
             _listener.TriggerInventoryUnitUpdateEvent(null, args);
+            return msg;
         }
 
         public string SaveDirectReceive(List<InventoryUnitModel> list)
@@ -199,7 +206,11 @@ namespace Service.Core.Inventory.Units
             var msg = string.Empty;
             var entityList = InventoryUnitMapper.MapToEntity(list);
             _context.InventoryUnit.AddRange(entityList);
-
+            if (!list.Any())
+            {
+                msg = "There aren't any items to receive";
+                return msg;
+            }
             //
             // Movement
             //

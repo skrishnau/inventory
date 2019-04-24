@@ -36,8 +36,8 @@ namespace IMS.Forms.Inventory.Units.Actions
         private AdjustmentTypeEnum _adjustmentType;
         private List<InventoryUnitModel> _selectedInventoryUnits;
 
-        public InventoryAdjustmentForm(IInventoryService inventoryService, 
-            IBusinessService businessService, 
+        public InventoryAdjustmentForm(IInventoryService inventoryService,
+            IBusinessService businessService,
             IPurchaseService purchaseService,
             IInventoryUnitService inventoryUnitService)
         {
@@ -48,7 +48,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
             InitializeComponent();
 
-            dgvReceiveList.InitializeGridViewControls(_inventoryService);
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService);
 
             this.Load += InventoryReceiveForm_Load;
         }
@@ -98,22 +98,35 @@ namespace IMS.Forms.Inventory.Units.Actions
                     _selectedInventoryUnits = selectedInventoryUnits;
                     this.Text = "Direct Issue";
                     btnSave.Text = "Issue";
-                    dgvReceiveList.DesignForDirectIssue();
+                    dgvInventoryUnit.DesignForDirectIssue();
                     if (selectedInventoryUnits != null)
                     {
-                        dgvReceiveList.DataSource = selectedInventoryUnits;
+                        dgvInventoryUnit.DataSource = selectedInventoryUnits;
                     }
                     break;
                 case AdjustmentTypeEnum.DirectReceive:
-                    dgvReceiveList.DesignForDirectReceive();
+                    dgvInventoryUnit.DesignForDirectReceive();
                     break;
                 case AdjustmentTypeEnum.POReceive:
                     _purchaseOrderId = purchaseOrderId;
-                    dgvReceiveList.DesignForPurchaseOrderReceive();
+                    dgvInventoryUnit.DesignForPurchaseOrderReceive();
                     if (purchaseOrderId > 0)
                     {
                         var model = _purchaseService.GetPurchaseOrder(purchaseOrderId);
                         SetDataForPurchaseOrder(model);
+                    }
+                    break;
+                case AdjustmentTypeEnum.DirectMove:
+                    pnlWarehouse.Visible = true;
+                    pnlAdjustmentCode.Visible = false;
+                    PopulateWarehouseCombo();
+                    _selectedInventoryUnits = selectedInventoryUnits;
+                    this.Text = "Direct Transfer";
+                    btnSave.Text = "Transfer";
+                    dgvInventoryUnit.DesignForDirectIssue();
+                    if (selectedInventoryUnits != null)
+                    {
+                        dgvInventoryUnit.DataSource = selectedInventoryUnits;
                     }
                     break;
             }
@@ -128,10 +141,10 @@ namespace IMS.Forms.Inventory.Units.Actions
                 // populate
                 this.Text = "Receive Against PO " + model.OrderNumber;
                 cbAdjustmentCode.Text = "PO Receive";
-                dgvReceiveList.AutoGenerateColumns = false;
-                dgvReceiveList.DataSource = _purchaseService.GetInventoryUnitsOfPurchaseOrdeItems(model.PurchaseOrderItems);
+                dgvInventoryUnit.AutoGenerateColumns = false;
+                dgvInventoryUnit.DataSource = _purchaseService.GetInventoryUnitsOfPurchaseOrdeItems(model.PurchaseOrderItems);
 
-                foreach (DataGridViewColumn column in dgvReceiveList.Columns)
+                foreach (DataGridViewColumn column in dgvInventoryUnit.Columns)
                 {
                     column.ReadOnly = true;
                 }
@@ -148,35 +161,39 @@ namespace IMS.Forms.Inventory.Units.Actions
             List<InventoryUnitModel> list;
             var msg = string.Empty;
             var actionForMsg = string.Empty;
+            DialogResult dialogResult = DialogResult.None;
+            
             switch (_adjustmentType)
             {
                 case AdjustmentTypeEnum.DirectIssue:
                     actionForMsg = "Issued";
-                    
-                    list = dgvReceiveList.GetItems();
-                    
+
+                    list = dgvInventoryUnit.GetItems();
+
                     if (list != null)
                     {
                         if (list.Count == 0)
                         {
-                            PopupMessage.ShowErrorMessage("At least one item expected to receive");
-                            this.Focus();
+                            msg = "At least one item expected to issue";
                         }
                         else
                         {
-                            msg = _inventoryUnitService.SaveDirectIssue(list);
+                            dialogResult = MessageBox.Show(this, "Are you sure to issue the selected items?", "Issue?", MessageBoxButtons.YesNoCancel);
+                            if (dialogResult.Equals(DialogResult.Yes))
+                            {
+                                msg = _inventoryUnitService.SaveDirectIssue(list);
+                            }
                         }
                     }
                     break;
                 case AdjustmentTypeEnum.DirectReceive:
                     actionForMsg = "Received";
-                    list = dgvReceiveList.GetItems();
+                    list = dgvInventoryUnit.GetItems();
                     if (list != null)
                     {
                         if (list.Count == 0)
                         {
-                            PopupMessage.ShowErrorMessage("At least one item expected to receive");
-                            this.Focus();
+                            msg = "At least one item expected to receive";
                         }
                         else
                         {
@@ -187,17 +204,42 @@ namespace IMS.Forms.Inventory.Units.Actions
                 case AdjustmentTypeEnum.POReceive:
                     // PO Receive
                     actionForMsg = "Received";
-                    var dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNo);
+                    dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNoCancel);
                     if (dialogResult.Equals(DialogResult.Yes))
                     {
                         msg = _purchaseService.SetReceived(_purchaseOrderId);
-                        
+
                     }
                     break;
+                case AdjustmentTypeEnum.DirectMove:
+                    actionForMsg = "Transferred";
+                    var wIdVal = cbWarehouse.SelectedValue == null ? "" : cbWarehouse.SelectedValue.ToString();
+                    var warehouseId = string.IsNullOrEmpty(wIdVal) ? 0 : int.Parse(wIdVal);
+                    var warehouse = cbWarehouse.Text;
+
+                    if (warehouseId == 0)
+                    {
+                        msg = "Please Select Warehouse first!";
+                    }
+                    else
+                    {
+                        list = dgvInventoryUnit.GetItems();
+                        dialogResult = MessageBox.Show(this, "Are you sure to transfer selected items to the '"+warehouse+"' warehouse?", "Transfer?", MessageBoxButtons.YesNoCancel);
+                        if (dialogResult.Equals(DialogResult.Yes))
+                        {
+                            msg = _inventoryUnitService.MoveInventoryUnits(warehouseId, list);
+                        }
+                    }
+
+                    break;
+            }
+            if(dialogResult == DialogResult.Cancel || dialogResult == DialogResult.No)
+            {
+                return;
             }
             if (string.IsNullOrEmpty(msg))
             {
-                PopupMessage.ShowSuccessMessage("Successfully "+actionForMsg+"!");
+                PopupMessage.ShowSuccessMessage("Successfully " + actionForMsg + "!");
                 this.Close();
             }
             else
@@ -205,6 +247,15 @@ namespace IMS.Forms.Inventory.Units.Actions
                 PopupMessage.ShowErrorMessage(msg);
                 this.Focus();
             }
+        }
+
+        private void PopulateWarehouseCombo()
+        {
+            var warehouses = _inventoryService.GetWarehouseListForCombo();
+            warehouses.Insert(0, new IdNamePair(0, "--- Select ---"));
+            cbWarehouse.DataSource = warehouses;
+            cbWarehouse.ValueMember = "Id";
+            cbWarehouse.DisplayMember = "Name";
         }
     }
 }
