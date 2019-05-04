@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Service.Listeners;
 using Service.Core.Inventory;
@@ -15,9 +9,8 @@ using ViewModel.Core.Inventory;
 using IMS.Forms.Common;
 using SimpleInjector.Lifestyles;
 using IMS.Forms.Inventory.Units.Actions;
-using IMS.Forms.Common.Dialogs;
-using Service.Enums;
 using Service.Core.Inventory.Units;
+using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -192,7 +185,7 @@ namespace IMS.Forms.Inventory.Units
             {
                 var moveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
                 //Program.container.GetInstance<InventoryMoveForm>();
-                moveForm.SetData(AdjustmentTypeEnum.DirectMove, 0, list);
+                moveForm.SetData(MovementTypeEnum.DirectMove, 0, list);
                 moveForm.ShowDialog();
             }
         }
@@ -202,7 +195,7 @@ namespace IMS.Forms.Inventory.Units
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
-                directReceiveForm.SetData(AdjustmentTypeEnum.DirectIssue, 0, GetSelectedRows());
+                directReceiveForm.SetData(MovementTypeEnum.DirectIssue, 0, GetSelectedRows());
                 directReceiveForm.ShowDialog();
             }
         }

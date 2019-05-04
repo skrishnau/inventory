@@ -1,5 +1,4 @@
-﻿using IMS.Forms.Inventory.Create;
-using IMS.Forms.Inventory;
+﻿using IMS.Forms.Inventory;
 using Infrastructure.Context;
 using Service.Core.Inventory;
 using SimpleInjector;
@@ -7,17 +6,13 @@ using SimpleInjector.Lifestyles;
 using System;
 using System.Windows.Forms;
 using IMS.Forms.Inventory.Categories;
-using IMS.Forms.Purchases;
-using Service.Core.LDAP;
 using Service.Core.Suppliers;
 using Service.Core.Customers;
 using IMS.Forms.Business;
 using Service.Core.Business;
 using IMS.Forms.Users.Create;
 using Service.Core.Users;
-using Service.Core.Purchases.PurchaseOrders;
 using IMS.Forms.Sales;
-using Service.Core.Sales;
 using Service.Core.Settings;
 using IMS.Forms.Dashboard;
 using IMS.Forms.Inventory.Attributes;
@@ -47,6 +42,9 @@ using Service.Core.Inventory.Units;
 using IMS.Forms.Inventory.Settings.Companies;
 using IMS.Forms.Inventory.Settings.Appearance;
 using IMS.Forms.Inventory.Settings.References;
+using IMS.Forms.Inventory.Sales;
+using Service.Core.Orders;
+using IMS.Forms.Inventory.Orders;
 
 namespace IMS
 {
@@ -86,22 +84,22 @@ namespace IMS
             // e.g.
             // container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Singleton);
             // container.Register<IUserContext, WinFormsUserContext>();
-            container.Register<DatabaseContext>(Lifestyle.Singleton);
+           // container.Register<DatabaseContext>(Lifestyle.Singleton);
             // change listener
             container.Register<IDatabaseChangeListener, DatabaseChangeListener>(Lifestyle.Singleton);
 
             container.Register<IInventoryService, InventoryService>(Lifestyle.Singleton);
             container.Register<IInventoryUnitService, InventoryUnitService>(Lifestyle.Singleton);
-            container.Register<ILDapService, ActiveDirectory>(Lifestyle.Singleton);
 
             container.Register<ISupplierService, SupplierService>(Lifestyle.Singleton);
             container.Register<ICustomerService, CustomerService>(Lifestyle.Singleton);
 
             container.Register<IBusinessService, BusinessService>(Lifestyle.Singleton);
             container.Register<IUserService, UserService>(Lifestyle.Singleton);
-            container.Register<IPurchaseService, PurchaseService>(Lifestyle.Singleton);
+            container.Register<IOrderService, OrderService>(Lifestyle.Singleton);
 
             container.Register<ISaleService, SaleService>(Lifestyle.Singleton);
+            //container.Register<ISaleOrderService, SaleOrderService>(Lifestyle.Singleton);
 
             container.Register<IAppSettingService, AppSettingService>(Lifestyle.Singleton);
 
@@ -145,7 +143,6 @@ namespace IMS
 
             // --- POS related --- //
             container.Register<CounterListUC>(Lifestyle.Scoped);
-            container.Register<DirectSaleForm>(Lifestyle.Scoped);
 
             // --- User Related --- //
             container.Register<UserListUC>(Lifestyle.Scoped);
@@ -154,8 +151,8 @@ namespace IMS
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);
             container.Register<NewItemAddForm>(Lifestyle.Scoped);
-            container.Register<SaleUC>(Lifestyle.Scoped);
 
+         
            // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
 
             // transfers
@@ -170,14 +167,7 @@ namespace IMS
 
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
             
-            //
-            // Purchases
-            //
-            container.Register<PurchaseOrderUC>(Lifestyle.Scoped); // main
-            container.Register<PurchaseOrderListUC>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderCreateForm>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
+            
             //
             // Products
             //
@@ -208,6 +198,22 @@ namespace IMS
             container.Register<CompanySettingsUC>(Lifestyle.Scoped);
             container.Register<AppearanceSettingsUC>(Lifestyle.Scoped);
             container.Register<ReferenceSettingsUC>(Lifestyle.Scoped);
+            //
+            // Sales
+            //
+            container.Register<SaleOrderListUC>(Lifestyle.Scoped);
+            container.Register<SaleOrderDetailUC>(Lifestyle.Scoped);
+            container.Register<SaleOrderCreateForm>(Lifestyle.Scoped);
+            container.Register<DirectSaleForm>(Lifestyle.Scoped);
+            //
+            // Orders
+            //
+            container.Register<OrderUC>(Lifestyle.Scoped);
+            container.Register<OrderListUC>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
+            container.Register<OrderCreateForm>(Lifestyle.Scoped);
+            container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
+
 
             // Optionally verify the container.
             container.Verify();

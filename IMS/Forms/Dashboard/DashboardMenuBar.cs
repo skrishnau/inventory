@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SimpleInjector.Lifestyles;
 using IMS.Forms.Purchases;
 using IMS.Forms.Sales;
+using IMS.Forms.Inventory.Orders;
 
 namespace IMS.Forms.Dashboard
 {
@@ -25,7 +26,7 @@ namespace IMS.Forms.Dashboard
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var purchaseOrderForm = Program.container.GetInstance<PurchaseOrderCreateForm>();//new PurchaseOrderForm();
+                var purchaseOrderForm = Program.container.GetInstance<OrderCreateForm>();//new PurchaseOrderForm();
                 purchaseOrderForm.ShowDialog();
             }
         }

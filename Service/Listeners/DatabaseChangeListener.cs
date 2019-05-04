@@ -4,8 +4,9 @@ using Service.Listeners.Inventory;
 using System;
 using System.Collections.Generic;
 using ViewModel.Core.Business;
+using ViewModel.Core.Customers;
 using ViewModel.Core.Inventory;
-using ViewModel.Core.Purchases;
+using ViewModel.Core.Orders;
 using ViewModel.Core.Suppliers;
 
 namespace Service.Listeners
@@ -21,8 +22,9 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
         public event EventHandler<BaseEventArgs<PackageModel>> PackageUpdated;
         public event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
-        public event EventHandler<BaseEventArgs<PurchaseOrderModel>> PurchaseOrderUpdated;
+        public event EventHandler<BaseEventArgs<OrderModel>> PurchaseOrderUpdated;
         public event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
+        public event EventHandler<BaseEventArgs<CustomerModel>> CustomerUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -70,7 +72,7 @@ namespace Service.Listeners
             AdjustmentCodeUpdated?.Invoke(sender, eventArgs);
         }
 
-        public void TriggerPurchaseOrderUpdateEvent(object p, BaseEventArgs<PurchaseOrderModel> eventArgs)
+        public void TriggerPurchaseOrderUpdateEvent(object p, BaseEventArgs<OrderModel> eventArgs)
         {
             PurchaseOrderUpdated?.Invoke(p, eventArgs);
         }
@@ -78,6 +80,11 @@ namespace Service.Listeners
         public void TriggerInventoryUnitUpdateEvent(object p, BaseEventArgs<List<InventoryUnitModel>> eventArgs)
         {
             InventoryUnitUpdated?.Invoke(p, eventArgs);
+        }
+
+        public void TriggerCustomerUpdateEvent(object p, BaseEventArgs<CustomerModel> eventArgs)
+        {
+            CustomerUpdated?.Invoke(p, eventArgs);
         }
     }
 }

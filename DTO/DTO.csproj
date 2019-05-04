@@ -66,9 +66,8 @@
     <Compile Include="Core\Settings\AppSettingMapper.cs" />
     <Compile Include="Core\Inventory\ProductMapper.cs" />
     <Compile Include="Core\Inventory\VariantMapper.cs" />
-    <Compile Include="Core\Purchases\PurchaseOrderItemMapper.cs" />
-    <Compile Include="Core\Purchases\PurchaseMapper.cs" />
-    <Compile Include="Core\Purchases\PurchaseOrderMapper.cs" />
+    <Compile Include="Core\Inventory\OrderItemMapper.cs" />
+    <Compile Include="Core\Inventory\OrderMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +84,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Core\POS\" />
+    <Folder Include="Core\Purchases\" />
     <Folder Include="Core\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

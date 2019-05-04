@@ -65,7 +65,7 @@
     <Compile Include="Entities\Inventory\Variant.cs" />
     <Compile Include="Entities\Inventory\VariantAttribute.cs" />
     <Compile Include="Entities\Inventory\WarehouseProduct.cs" />
-    <Compile Include="Entities\Purchases\PurchaseOrderItem.cs" />
+    <Compile Include="Entities\Orders\OrderItem.cs" />
     <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Inventory\Warehouse.cs" />
@@ -80,17 +80,18 @@
     <Compile Include="Entities\Common\Lead.cs" />
     <Compile Include="Entities\Customers\Customer.cs" />
     <Compile Include="Entities\Customers\CustomerReport.cs" />
-    <Compile Include="Entities\Purchases\PurchaseOrder.cs" />
-    <Compile Include="Entities\Purchases\Receipt.cs" />
-    <Compile Include="Entities\Sales\Sale.cs" />
-    <Compile Include="Entities\Sales\SaleItem.cs" />
-    <Compile Include="Entities\Sales\SaleOrder.cs" />
+    <Compile Include="Entities\Orders\Order.cs" />
+    <Compile Include="Entities\Orders\Receipt.cs" />
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201904241153479_InitialMigration.cs" />
-    <Compile Include="Migrations\201904241153479_InitialMigration.Designer.cs">
-      <DependentUpon>201904241153479_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201905031155311_InitMigration.cs" />
+    <Compile Include="Migrations\201905031155311_InitMigration.Designer.cs">
+      <DependentUpon>201905031155311_InitMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905031824479_ColumnChanged.cs" />
+    <Compile Include="Migrations\201905031824479_ColumnChanged.Designer.cs">
+      <DependentUpon>201905031824479_ColumnChanged.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,8 +110,11 @@
     <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904241153479_InitialMigration.resx">
-      <DependentUpon>201904241153479_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905031155311_InitMigration.resx">
+      <DependentUpon>201905031155311_InitMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031824479_ColumnChanged.resx">
+      <DependentUpon>201905031824479_ColumnChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

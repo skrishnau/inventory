@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModel.Core.Sales;
+using ViewModel.Core.Orders;
 
-namespace Service.Core.Sales
+namespace Service.Core.Orders
 {
     public interface ISaleService
     {
-        void AddOrUpdateSale(SaleModel saleModel);
+        void AddOrUpdateOrder(OrderModel saleModel);
 
-        void AddOrUpdateSaleItem(SaleItemModel saleItemModel);
+        void AddOrUpdateOrderItem(OrderItemModel saleItemModel);
 
-        List<SaleModel> GetSaleList();
+        List<OrderModel> GetOrderList();
 
-        List<SaleItemModel> GetSaleItemList(int saleId);
+        List<OrderItemModel> GetOrderItemList(int saleId);
 
     }
 }

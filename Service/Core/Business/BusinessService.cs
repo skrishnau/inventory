@@ -16,17 +16,20 @@ namespace Service.Core.Business
 {
     public class BusinessService : IBusinessService
     {
-        private readonly DatabaseContext _context;
+       // private readonly DatabaseContext _context;
         private readonly IDatabaseChangeListener _listener;
 
-        public BusinessService(DatabaseContext context, IDatabaseChangeListener listener)
+        public BusinessService( IDatabaseChangeListener listener)// DatabaseContext context,
         {
-            _context = context;
+            //_context = context;
             _listener = listener;
         }
 
         public int AddOrUpdateBranch(BranchModel branch)
         {
+            using (var _context = new DatabaseContext())
+            {
+
             var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branch.Id);
             BranchEventArgs args = BranchEventArgs.Instance;
             if (dbEntity == null)
@@ -51,10 +54,14 @@ namespace Service.Core.Business
             args.BranchModel = BranchMapper.MapToBranchModel(dbEntity);
             _listener.TriggerBranchUpdateEvent(this, args);
             return dbEntity.Id;
+            }
         }
 
         public void AddOrUpdateCounter(CounterModel counter)
         {
+            using (var _context = new DatabaseContext())
+            {
+
             var dbEntity = _context.Counter.FirstOrDefault(x => x.Id == counter.Id);
             if (dbEntity == null)
             {
@@ -71,6 +78,7 @@ namespace Service.Core.Business
                 dbEntity.UpdatedAt = DateTime.Now;
             }
             _context.SaveChanges();
+            }
             //throw new NotImplementedException();
         }
 
@@ -88,6 +96,9 @@ namespace Service.Core.Business
 
         public List<CounterModel> GetCounterList()
         {
+            using (var _context = new DatabaseContext())
+            {
+
             var counters = _context.Counter
                    //.Where(x => x.DeletedAt == null)
                    .Select(x => new CounterModel()
@@ -102,10 +113,14 @@ namespace Service.Core.Business
                    .ToList();
 
             return counters;
+            }
         }
 
         public List<BranchModel> GetBranchList()
         {
+            using (var _context = new DatabaseContext())
+            {
+
             var branches = _context.Branch
                    //.Where(x => x.DeletedAt == null)
                    .Select(x => new BranchModel()
@@ -118,6 +133,7 @@ namespace Service.Core.Business
                    .ToList();
 
             return branches;
+            }
         }
 
        

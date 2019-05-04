@@ -4,8 +4,7 @@ namespace Infrastructure.Context
     using Infrastructure.Entities.Suppliers;
     using Infrastructure.Entities.Common;
     using Infrastructure.Entities.Customers;
-    using Infrastructure.Entities.Purchases;
-    using Infrastructure.Entities.Sales;
+    using Infrastructure.Entities.Orders;
     using Infrastructure.Entities.Users;
     using System;
     using System.Data.Entity;
@@ -67,12 +66,12 @@ namespace Infrastructure.Context
 
 
         // ===================== TRANSACTION MODULE ==================== //
-        public virtual DbSet<Sale> Sales { get; set; }
-        public virtual DbSet<SaleOrder> SaleOrder { get; set; }
-        public virtual DbSet<SaleItem> SaleItems { get; set; }
+        //public virtual DbSet<Sale> Sales { get; set; }
+        //public virtual DbSet<SaleOrder> SaleOrder { get; set; }
+        //public virtual DbSet<SaleItem> SaleItems { get; set; }
 
-        public virtual DbSet<PurchaseOrder> PurchaseOrder { get; set; }
-        public virtual DbSet<PurchaseOrderItem> PurchaseOrderItem { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderItem> OrderItem { get; set; }
 
         public virtual DbSet<AppSetting> AppSetting { get; set; }
 

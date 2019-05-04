@@ -32,9 +32,9 @@
             this.lnkSummary = new System.Windows.Forms.LinkLabel();
             this.pnlLinkList = new System.Windows.Forms.FlowLayoutPanel();
             this.lnkManage = new System.Windows.Forms.LinkLabel();
+            this.lnkMovement = new System.Windows.Forms.LinkLabel();
             this.lnkInventoryFlow = new System.Windows.Forms.LinkLabel();
             this.lnkTraffic = new System.Windows.Forms.LinkLabel();
-            this.lnkMovement = new System.Windows.Forms.LinkLabel();
             this.pnlBody.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@
             this.pnlBody.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlBody.Location = new System.Drawing.Point(0, 0);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(185, 454);
+            this.pnlBody.Size = new System.Drawing.Size(185, 272);
             this.pnlBody.TabIndex = 5;
             this.pnlBody.WrapContents = false;
             // 
@@ -101,6 +101,23 @@
             this.lnkManage.Text = "     • Manage Inventory";
             this.lnkManage.VisitedLinkColor = System.Drawing.Color.Black;
             // 
+            // lnkMovement
+            // 
+            this.lnkMovement.AutoSize = true;
+            this.lnkMovement.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkMovement.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_16px;
+            this.lnkMovement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkMovement.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkMovement.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lnkMovement.Location = new System.Drawing.Point(5, 59);
+            this.lnkMovement.Margin = new System.Windows.Forms.Padding(5);
+            this.lnkMovement.Name = "lnkMovement";
+            this.lnkMovement.Size = new System.Drawing.Size(102, 17);
+            this.lnkMovement.TabIndex = 6;
+            this.lnkMovement.TabStop = true;
+            this.lnkMovement.Text = "     • Movement";
+            this.lnkMovement.VisitedLinkColor = System.Drawing.Color.Black;
+            // 
             // lnkInventoryFlow
             // 
             this.lnkInventoryFlow.AutoSize = true;
@@ -135,30 +152,13 @@
             this.lnkTraffic.Text = "     • Traffic";
             this.lnkTraffic.VisitedLinkColor = System.Drawing.Color.Black;
             // 
-            // lnkMovement
-            // 
-            this.lnkMovement.AutoSize = true;
-            this.lnkMovement.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkMovement.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_16px;
-            this.lnkMovement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lnkMovement.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkMovement.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkMovement.Location = new System.Drawing.Point(5, 59);
-            this.lnkMovement.Margin = new System.Windows.Forms.Padding(5);
-            this.lnkMovement.Name = "lnkMovement";
-            this.lnkMovement.Size = new System.Drawing.Size(102, 17);
-            this.lnkMovement.TabIndex = 6;
-            this.lnkMovement.TabStop = true;
-            this.lnkMovement.Text = "     • Movement";
-            this.lnkMovement.VisitedLinkColor = System.Drawing.Color.Black;
-            // 
             // InventoryUnitSideBarUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlBody);
             this.Name = "InventoryUnitSideBarUC";
-            this.Size = new System.Drawing.Size(185, 454);
+            this.Size = new System.Drawing.Size(185, 272);
             this.pnlBody.ResumeLayout(false);
             this.pnlBody.PerformLayout();
             this.ResumeLayout(false);

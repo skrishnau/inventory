@@ -1,35 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using IMS.Forms.Inventory.Create;
-using Service.Core.Inventory;
 using SimpleInjector.Lifestyles;
-using ViewModel.Core.Inventory;
-using IMS.Forms.Inventory.Categories;
-using System.Threading;
-using IMS.Forms.Inventory.Variants;
 using IMS.Forms.Common.Display;
-using IMS.Forms.Purchases;
 using IMS.Forms.Inventory.Products;
 using IMS.Forms.Inventory.Suppliers;
-using IMS.Forms.Inventory.Attributes;
 using IMS.Forms.Inventory.Warehouses;
-using IMS.Forms.Business.Create;
-using IMS.Forms.Inventory.Transfers;
-using IMS.Forms.Inventory.UOM;
-using IMS.Forms.Inventory.Packages;
-using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Units.Actions;
-using Service.Enums;
 using IMS.Forms.Inventory.Settings;
-using IMS.Forms.Sales;
+using IMS.Forms.Inventory.Sales;
+using IMS.Forms.Inventory.Orders;
+using ViewModel.Enums;
+using Service.Core.Orders;
+using Service.Listeners;
+using IMS.Forms.Inventory.Purchases;
 
 namespace IMS.Forms.Inventory
 {
@@ -39,9 +23,14 @@ namespace IMS.Forms.Inventory
         private BodyTemplate _bodyTemplate;
         private InventoryMenuBar _menubar;
 
+        private readonly IOrderService _orderService;
+        private readonly IDatabaseChangeListener _listener;
+
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar)
+        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IDatabaseChangeListener listener)
         {
+            _orderService = orderService;
+            _listener = listener;
             _menubar = menubar;
 
             InitializeComponent();
@@ -77,15 +66,15 @@ namespace IMS.Forms.Inventory
             _menubar.btnDirectReceive.Click += BtnDirectReceive_Click;
 
             // transfers
-           // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
-          //  _menubar.btnTransfer.Click += BtnTransfer_Click;
+            // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
+            //  _menubar.btnTransfer.Click += BtnTransfer_Click;
             // supplier
             _menubar.btnSupplierList.Click += BtnSupplierList_Click;
             // warehouse
             _menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
             // settings
             _menubar.btnSettings.Click += BtnSettings_Click;
-           
+
 
             _menubar.btnLocateInventory.Click += BtnLocateInventory_Click;
             _menubar.btnInventoryUnits.Click += BtnInventoryUnits_Click;
@@ -94,23 +83,44 @@ namespace IMS.Forms.Inventory
             _menubar.btnSellOrder.Click += BtnSellOrder_Click;
         }
 
+        //private OrderUC purchaseOrderUC;
+        //private OrderUC saleOrderUC;
 
         private void BtnSellOrder_Click(object sender, EventArgs e)
         {
+            //var orderType = OrderTypeEnum.Sale;
+            //if (saleOrderUC == null)
+            //{
+
+            //    var purchaseOrderDetailUC = Program.container.GetInstance<PurchaseOrderDetailUC>();
+            //    saleOrderUC = new OrderUC(_orderService,
+            //        _listener,
+            //        purchaseOrderDetailUC
+            //        );
+            //}
+
+            var saleOrderUC = Program.container.GetInstance<OrderUC>();
             _bodyTemplate.pnlBody.Controls.Clear();
-            var saleUc = Program.container.GetInstance<SaleUC>();
-            saleUc.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(saleUc);
+            _bodyTemplate.pnlBody.Controls.Add(saleOrderUC);
             // set selection
             _menubar.SetSelection(sender);
         }
 
         private void BtnPurchaseOrder_Click(object sender, EventArgs e)
         {
-            var purchaseListUC = Program.container.GetInstance<PurchaseOrderUC>();
+            //var orderType = OrderTypeEnum.Purchase;
+            //if (purchaseOrderUC == null)
+            //{
+            //    var purchaseOrderDetailUC = Program.container.GetInstance<PurchaseOrderDetailUC>();
+            //    purchaseOrderUC = new OrderUC(_orderService,
+            //        _listener,
+            //        purchaseOrderDetailUC//, orderType
+            //        );
+            //}
+
+            var purchaseOrderUC = Program.container.GetInstance<OrderUC>();
             _bodyTemplate.pnlBody.Controls.Clear();
-            purchaseListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(purchaseListUC);
+            _bodyTemplate.pnlBody.Controls.Add(purchaseOrderUC);
             // set selection
             _menubar.SetSelection(sender);
         }
@@ -125,7 +135,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnLocateInventory_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -192,13 +202,13 @@ namespace IMS.Forms.Inventory
 
 
         #region Adjustments
-        
+
         private void BtnDirectReceive_Click(object sender, EventArgs e)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
-                directReceiveForm.SetData(AdjustmentTypeEnum.DirectReceive);
+                directReceiveForm.SetData(MovementTypeEnum.DirectReceive);
                 directReceiveForm.ShowDialog();
             }
         }
@@ -227,7 +237,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-           // using (AsyncScopedLifestyle.BeginScope(Program.container))
+            // using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var settingsUC = Program.container.GetInstance<InventorySettingsUC>();
                 _bodyTemplate.pnlBody.Controls.Clear();
@@ -237,7 +247,7 @@ namespace IMS.Forms.Inventory
                 _menubar.SetSelection(sender);
             }
         }
-        
+
 
 
         #endregion

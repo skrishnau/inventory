@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Common.Display;
-using IMS.Forms.Purchases;
 using SimpleInjector.Lifestyles;
-using IMS.Forms.Sales;
+using IMS.Forms.Inventory.Sales;
+using IMS.Forms.Inventory.Orders;
+using ViewModel.Enums;
 
 namespace IMS.Forms.Orders
 {
@@ -57,20 +51,21 @@ namespace IMS.Forms.Orders
 
         private void BtnPurchaseOrderList_Click(object sender, EventArgs e)
         {
-            var purchaseListUC = Program.container.GetInstance<PurchaseOrderUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
-            purchaseListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(purchaseListUC);
-            // set selection
-            _menubar.ClearSelection();
-            _menubar.btnPurchaseOrderList.FlatStyle = FlatStyle.Flat;
+            //var purchaseListUC = Program.container.GetInstance<OrderUC>();
+            //purchaseListUC.SetData(OrderTypeEnum.Purchase);
+            //_bodyTemplate.pnlBody.Controls.Clear();
+            //purchaseListUC.Dock = DockStyle.Fill;
+            //_bodyTemplate.pnlBody.Controls.Add(purchaseListUC);
+            //// set selection
+            //_menubar.ClearSelection();
+            //_menubar.btnPurchaseOrderList.FlatStyle = FlatStyle.Flat;
         }
 
         private void BtnNewPurchaseOrder_Click(object sender, EventArgs e)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var orderCreate = Program.container.GetInstance<PurchaseOrderCreateForm>();
+                var orderCreate = Program.container.GetInstance<OrderCreateForm>();
                 orderCreate.ShowInTaskbar = false;
                 orderCreate.ShowDialog();
             }
@@ -83,7 +78,7 @@ namespace IMS.Forms.Orders
         private void BtnSalesOrderList_Click(object sender, EventArgs e)
         {
             _bodyTemplate.pnlBody.Controls.Clear();
-            var saleUc = Program.container.GetInstance<SaleUC>();
+            var saleUc = Program.container.GetInstance<SaleOrderListUC>();
             saleUc.Dock = DockStyle.Fill;
             _bodyTemplate.pnlBody.Controls.Add(saleUc);
             // set selection

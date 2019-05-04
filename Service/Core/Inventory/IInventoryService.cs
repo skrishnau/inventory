@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ViewModel.Core.Business;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
-using ViewModel.Core.Purchases;
+using ViewModel.Core.Orders;
 
 namespace Service.Core.Inventory
 {

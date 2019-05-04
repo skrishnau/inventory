@@ -1,12 +1,6 @@
-﻿using Infrastructure.Context;
-using Infrastructure.Entities.Inventory;
-using Service.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ViewModel.Core.Inventory;
+using ViewModel.Enums;
 
 namespace Service.Core.Inventory.Units
 {

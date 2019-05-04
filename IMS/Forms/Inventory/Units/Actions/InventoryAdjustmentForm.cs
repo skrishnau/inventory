@@ -1,22 +1,15 @@
 ﻿using IMS.Forms.Common;
-using IMS.Forms.Common.GridView;
 using Service.Core.Business;
 using Service.Core.Inventory;
 using Service.Core.Inventory.Units;
-using Service.Core.Purchases.PurchaseOrders;
-using Service.Enums;
+using Service.Core.Orders;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
-using ViewModel.Core.Purchases;
+using ViewModel.Core.Orders;
+using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Units.Actions
 {
@@ -25,25 +18,24 @@ namespace IMS.Forms.Inventory.Units.Actions
         private readonly IInventoryService _inventoryService;
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
-        private readonly IPurchaseService _purchaseService;
+        private readonly IOrderService _orderService;
 
         //private bool _isCellDirty;
 
         // ---- Purchase Order ---- //
         private int _purchaseOrderId;
-        private PurchaseOrderModel _purchaseOrderModel;
-
-        private AdjustmentTypeEnum _adjustmentType;
+        private OrderModel _purchaseOrderModel;
+        private MovementTypeEnum _adjustmentType;
         private List<InventoryUnitModel> _selectedInventoryUnits;
 
         public InventoryAdjustmentForm(IInventoryService inventoryService,
             IBusinessService businessService,
-            IPurchaseService purchaseService,
+            IOrderService purchaseService,
             IInventoryUnitService inventoryUnitService)
         {
             _inventoryService = inventoryService;
             _businessService = businessService;
-            _purchaseService = purchaseService;
+            _orderService = purchaseService;
             _inventoryUnitService = inventoryUnitService;
 
             InitializeComponent();
@@ -67,13 +59,13 @@ namespace IMS.Forms.Inventory.Units.Actions
             List<IdNamePair> adjustmentList;
             switch (_adjustmentType)
             {
-                case AdjustmentTypeEnum.DirectIssue:
+                case MovementTypeEnum.DirectIssue:
                     adjustmentList = _inventoryService.GetNegativeAdjustmentCodeListForCombo();
                     break;
-                case AdjustmentTypeEnum.DirectReceive:
+                case MovementTypeEnum.DirectReceive:
                     adjustmentList = _inventoryService.GetPositiveAdjustmentCodeListForCombo();
                     break;
-                case AdjustmentTypeEnum.POReceive:
+                case MovementTypeEnum.POReceive:
                     adjustmentList = _inventoryService.GetPositiveAdjustmentCodeListForCombo();
                     cbAdjustmentCode.Enabled = false;
                     break;
@@ -89,12 +81,12 @@ namespace IMS.Forms.Inventory.Units.Actions
         #endregion
 
 
-        public void SetData(AdjustmentTypeEnum adjType, int purchaseOrderId = 0, List<InventoryUnitModel> selectedInventoryUnits = null)
+        public void SetData(MovementTypeEnum adjType, int purchaseOrderId = 0, List<InventoryUnitModel> selectedInventoryUnits = null)
         {
             _adjustmentType = adjType;
             switch (adjType)
             {
-                case AdjustmentTypeEnum.DirectIssue:
+                case MovementTypeEnum.DirectIssue:
                     _selectedInventoryUnits = selectedInventoryUnits;
                     this.Text = "Direct Issue";
                     btnSave.Text = "Issue";
@@ -104,19 +96,19 @@ namespace IMS.Forms.Inventory.Units.Actions
                         dgvInventoryUnit.DataSource = selectedInventoryUnits;
                     }
                     break;
-                case AdjustmentTypeEnum.DirectReceive:
+                case MovementTypeEnum.DirectReceive:
                     dgvInventoryUnit.DesignForDirectReceive();
                     break;
-                case AdjustmentTypeEnum.POReceive:
+                case MovementTypeEnum.POReceive:
                     _purchaseOrderId = purchaseOrderId;
                     dgvInventoryUnit.DesignForPurchaseOrderReceive();
                     if (purchaseOrderId > 0)
                     {
-                        var model = _purchaseService.GetPurchaseOrder(purchaseOrderId);
+                        var model = _orderService.GetOrder(OrderTypeEnum.Purchase, purchaseOrderId);
                         SetDataForPurchaseOrder(model);
                     }
                     break;
-                case AdjustmentTypeEnum.DirectMove:
+                case MovementTypeEnum.DirectMove:
                     pnlWarehouse.Visible = true;
                     pnlAdjustmentCode.Visible = false;
                     PopulateWarehouseCombo();
@@ -133,16 +125,16 @@ namespace IMS.Forms.Inventory.Units.Actions
         }
 
         // private cause we need to handle 3 cases and shouldn't expose for PurchaseOrder only
-        private void SetDataForPurchaseOrder(PurchaseOrderModel model)
+        private void SetDataForPurchaseOrder(OrderModel model)
         {
             _purchaseOrderModel = model;
             if (model != null)
             {
                 // populate
-                this.Text = "Receive Against PO " + model.OrderNumber;
+                this.Text = "Receive Against PO " + model.ReferenceNumber;
                 cbAdjustmentCode.Text = "PO Receive";
                 dgvInventoryUnit.AutoGenerateColumns = false;
-                dgvInventoryUnit.DataSource = _purchaseService.GetInventoryUnitsOfPurchaseOrdeItems(model.PurchaseOrderItems);
+                dgvInventoryUnit.DataSource = _orderService.GetInventoryUnitsOfPurchaseOrdeItems(model.OrderItems);
 
                 foreach (DataGridViewColumn column in dgvInventoryUnit.Columns)
                 {
@@ -165,7 +157,7 @@ namespace IMS.Forms.Inventory.Units.Actions
             
             switch (_adjustmentType)
             {
-                case AdjustmentTypeEnum.DirectIssue:
+                case MovementTypeEnum.DirectIssue:
                     actionForMsg = "Issued";
 
                     list = dgvInventoryUnit.GetItems();
@@ -186,7 +178,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                     }
                     break;
-                case AdjustmentTypeEnum.DirectReceive:
+                case MovementTypeEnum.DirectReceive:
                     actionForMsg = "Received";
                     list = dgvInventoryUnit.GetItems();
                     if (list != null)
@@ -201,17 +193,17 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                     }
                     break;
-                case AdjustmentTypeEnum.POReceive:
+                case MovementTypeEnum.POReceive:
                     // PO Receive
                     actionForMsg = "Received";
                     dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNoCancel);
                     if (dialogResult.Equals(DialogResult.Yes))
                     {
-                        msg = _purchaseService.SetReceived(_purchaseOrderId);
+                        msg = _orderService.SetReceived(_purchaseOrderId);
 
                     }
                     break;
-                case AdjustmentTypeEnum.DirectMove:
+                case MovementTypeEnum.DirectMove:
                     actionForMsg = "Transferred";
                     var wIdVal = cbWarehouse.SelectedValue == null ? "" : cbWarehouse.SelectedValue.ToString();
                     var warehouseId = string.IsNullOrEmpty(wIdVal) ? 0 : int.Parse(wIdVal);

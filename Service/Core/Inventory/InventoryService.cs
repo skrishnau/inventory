@@ -22,29 +22,42 @@ namespace Service.Core.Inventory
     public class InventoryService : IInventoryService
     {
 
+        // private readonly DatabaseContext _context;
+        private readonly IDatabaseChangeListener _listener;
+
+        public InventoryService(IDatabaseChangeListener listener)//DatabaseContext context,
+        {
+            //_context = context;
+            _listener = listener;
+        }
+
         #region Warehouse
 
         public void AddOrUpdateWarehouse(WarehouseModel model)
         {
-            var entity = _context.Warehouse.FirstOrDefault(x => x.Id == model.Id);
-            BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
-            entity = model.MapToEntity(entity);
+            using (var _context = new DatabaseContext())
+            {
+                var entity = _context.Warehouse.FirstOrDefault(x => x.Id == model.Id);
+                BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
+                entity = model.MapToEntity(entity);
 
-            if (entity.Id == 0)
-            {
-                entity.CreatedAt = DateTime.Now;
-                entity.UpdatedAt = DateTime.Now;
-                _context.Warehouse.Add(entity);
-                args.Mode = Utility.UpdateMode.ADD;
+                if (entity.Id == 0)
+                {
+                    entity.CreatedAt = DateTime.Now;
+                    entity.UpdatedAt = DateTime.Now;
+                    _context.Warehouse.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    entity.UpdatedAt = DateTime.Now;
+                    args.Mode = Utility.UpdateMode.EDIT;
+                }
+                _context.SaveChanges();
+                args.Model = entity.MapToModel();// WarehouseMapper.MapToModel(entity);
+                _listener.TriggerWarehouseUpdateEvent(null, args);
             }
-            else
-            {
-                entity.UpdatedAt = DateTime.Now;
-                args.Mode = Utility.UpdateMode.EDIT;
-            }
-            _context.SaveChanges();
-            args.Model = entity.MapToModel();// WarehouseMapper.MapToModel(entity);
-            _listener.TriggerWarehouseUpdateEvent(null, args);
+
         }
 
         //public void DeleteWarehouse(int id)
@@ -61,21 +74,29 @@ namespace Service.Core.Inventory
 
         public WarehouseModel GetWarehouse(int warehouseId)
         {
-            var warehouse = _context.Warehouse.Find(warehouseId);
-            if (warehouse != null)
+            using (var _context = new DatabaseContext())
             {
-                return warehouse.MapToModel();// WarehouseMapper.MapToModel(warehouse);
+                var warehouse = _context.Warehouse.Find(warehouseId);
+                if (warehouse != null)
+                {
+                    return warehouse.MapToModel();// WarehouseMapper.MapToModel(warehouse);
+                }
+                return null;
             }
-            return null;
+
         }
 
 
         public List<WarehouseModel> GetWarehouseList()
         {
-            //var warehouses = 
-            return  _context.Warehouse
-                .OrderBy(x => x.Name)
-                .MapToModel();
+            using (var _context = new DatabaseContext())
+            {
+                //var warehouses = 
+                return _context.Warehouse
+                    .OrderBy(x => x.Name)
+                    .MapToModel();
+            }
+
         }
 
         /// <summary>
@@ -84,14 +105,18 @@ namespace Service.Core.Inventory
         /// <returns>List of IdNamePair </returns>
         public List<IdNamePair> GetWarehouseListForCombo()
         {
-            return _context.Warehouse
-                .Where(x => x.Use)
-                   .Select(x => new IdNamePair()
-                   {
-                       Id = x.Id,
-                       Name = x.Name,
-                   })
-                   .ToList();
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Warehouse
+                              .Where(x => x.Use)
+                                 .Select(x => new IdNamePair()
+                                 {
+                                     Id = x.Id,
+                                     Name = x.Name,
+                                 })
+                                 .ToList();
+            }
+
         }
 
         #endregion
@@ -101,13 +126,17 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetPackageListForCombo()
         {
-            return _context.Package
-                .Where(x => x.Use)
-                .Select(x => new IdNamePair()
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                }).ToList();
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Package
+                                .Where(x => x.Use)
+                                .Select(x => new IdNamePair()
+                                {
+                                    Id = x.Id,
+                                    Name = x.Name
+                                }).ToList();
+            }
+
         }
 
         #endregion
@@ -129,74 +158,75 @@ namespace Service.Core.Inventory
 
         #endregion
 
-        private readonly DatabaseContext _context;
-        private readonly IDatabaseChangeListener _listener;
 
-        public InventoryService(DatabaseContext context, IDatabaseChangeListener listener)
-        {
-            _context = context;
-            _listener = listener;
-        }
 
 
         public void AddUpdateCategory(CategoryModel category)
         {
-            var dbEntity = _context.Category.FirstOrDefault(x => x.Id == category.Id);
-            var catEventArgs = CategoryEventArgs.Instance;
-            if (dbEntity == null)
+            using (var _context = new DatabaseContext())
             {
-                dbEntity = category.ToEntity();
-                _context.Category.Add(dbEntity);
-                catEventArgs.Mode = Utility.UpdateMode.ADD;
+                var dbEntity = _context.Category.FirstOrDefault(x => x.Id == category.Id);
+                var catEventArgs = CategoryEventArgs.Instance;
+                if (dbEntity == null)
+                {
+                    dbEntity = category.ToEntity();
+                    _context.Category.Add(dbEntity);
+                    catEventArgs.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    dbEntity.Name = category.Name;
+                    dbEntity.UpdatedAt = DateTime.Now; // category.UpdatedAt;
+                    catEventArgs.Mode = Utility.UpdateMode.EDIT;
+                }
+                _context.SaveChanges();
+                catEventArgs.Category = CategoryMapper.MapToCategoryModel(dbEntity);
+                _listener.TriggerCategoryUpdateEvent(null, catEventArgs);
+
             }
-            else
-            {
-                dbEntity.Name = category.Name;
-                dbEntity.UpdatedAt = DateTime.Now; // category.UpdatedAt;
-                catEventArgs.Mode = Utility.UpdateMode.EDIT;
-            }
-            _context.SaveChanges();
-            catEventArgs.Category = CategoryMapper.MapToCategoryModel(dbEntity);
-            _listener.TriggerCategoryUpdateEvent(null, catEventArgs);
 
         }
 
         public void AddUpdateProduct(ProductModel model)
         {
-            var now = DateTime.Now;
-
-            var entity = _context.Product
-                .Include(x => x.ProductAttributes)
-                .FirstOrDefault(x => x.Id == model.Id);
-
-            ProductEventArgs eventArgs = ProductEventArgs.Instance; ;
-            entity = ProductMapper.MapToEntity(model, entity);
-
-            if (entity.Id == 0)
+            using (var _context = new DatabaseContext())
             {
-                // add
-                entity.CreatedAt = DateTime.Now;
-                entity.UpdatedAt = DateTime.Now;
-                entity.ProductAttributes = new List<ProductAttribute>();
-                //entity.Variants = new List<Variant>();
-                // entity.Brands = new List<Brand>();
-                _context.Product.Add(entity);
-                eventArgs.Mode = Utility.UpdateMode.ADD;
-            }
-            else
-            {
-                // udpate
-                entity.UpdatedAt = DateTime.Now;
-                eventArgs.Mode = Utility.UpdateMode.EDIT;
-            }
-            //  AssignBrandForSave(entity, model, now);
-            AssignProductAttributesForSave(entity, model, now);
-            //  AssignVariantsForSave(entity, model, now);
+                var now = DateTime.Now;
 
-            _context.SaveChanges();
+                var entity = _context.Product
+                    .Include(x => x.ProductAttributes)
+                    .FirstOrDefault(x => x.Id == model.Id);
 
-            eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
-            _listener.TriggerProductUpdateEvent(null, eventArgs);
+                ProductEventArgs eventArgs = ProductEventArgs.Instance; ;
+                entity = ProductMapper.MapToEntity(model, entity);
+
+                if (entity.Id == 0)
+                {
+                    // add
+                    entity.CreatedAt = DateTime.Now;
+                    entity.UpdatedAt = DateTime.Now;
+                    entity.ProductAttributes = new List<ProductAttribute>();
+                    //entity.Variants = new List<Variant>();
+                    // entity.Brands = new List<Brand>();
+                    _context.Product.Add(entity);
+                    eventArgs.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    // udpate
+                    entity.UpdatedAt = DateTime.Now;
+                    eventArgs.Mode = Utility.UpdateMode.EDIT;
+                }
+                //  AssignBrandForSave(entity, model, now);
+                AssignProductAttributesForSave(entity, model, now);
+                //  AssignVariantsForSave(entity, model, now);
+
+                _context.SaveChanges();
+
+                eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
+                _listener.TriggerProductUpdateEvent(null, eventArgs);
+            }
+
         }
 
         //private void AssignVariantsForSave(Product productEntity, ProductModelForSave product, DateTime now)
@@ -354,97 +384,125 @@ namespace Service.Core.Inventory
 
         public List<CategoryModel> GetCategoryList(int? parentCateogryId)
         {
-            var cats = _context.Category
-                .Where(x => x.DeletedAt == null && x.ParentCategoryId == parentCateogryId)
-                .Select(x => new CategoryModel()
-                {
-                    Name = x.Name,
-                    ParentCategoryId = x.ParentCategoryId,
-                    Id = x.Id,
-                    CreatedAt = x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt,
-                    ParentCategory = (x.ParentCategory == null ? "" : x.ParentCategory.Name)
-
-                }).ToList();
-
-            foreach (var cat in cats)
+            using (var _context = new DatabaseContext())
             {
-                cat.SuCategories = GetCategoryList(cat.Id);  // TODO:: use property "SubCategories" of the entity instead of recursive call
+                var cats = _context.Category
+                                .Where(x => x.DeletedAt == null && x.ParentCategoryId == parentCateogryId)
+                                .Select(x => new CategoryModel()
+                                {
+                                    Name = x.Name,
+                                    ParentCategoryId = x.ParentCategoryId,
+                                    Id = x.Id,
+                                    CreatedAt = x.CreatedAt,
+                                    UpdatedAt = x.UpdatedAt,
+                                    ParentCategory = (x.ParentCategory == null ? "" : x.ParentCategory.Name)
+
+                                }).ToList();
+
+                foreach (var cat in cats)
+                {
+                    cat.SuCategories = GetCategoryList(cat.Id);  // TODO:: use property "SubCategories" of the entity instead of recursive call
+                }
+                return cats;
             }
-            return cats;
+
         }
 
         private IQueryable<Product> GetProductEntityList()
         {
-            return _context.Product.AsQueryable();
-            //.Where(x => x.DeletedAt == null);
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Product.AsQueryable();
+                //.Where(x => x.DeletedAt == null);
+            }
+
         }
 
 
 
         public List<ProductModel> GetProductListForGridView()
         {
-            var products = _context.Product
-                .Include(x => x.ProductAttributes)
-               //.Include(x => x.ProductAttributes.Select(y => y.Option))
-               // .Include(x => x.Brands)
-               // .Where(x => x.Use == null)
-               ;
-            var list = new List<ProductModel>();
-            foreach (var x in products)
+            using (var _context = new DatabaseContext())
             {
-                list.Add(ProductMapper.MapToProductModel(x));
+                var products = _context.Product
+                                .Include(x => x.ProductAttributes)
+                               //.Include(x => x.ProductAttributes.Select(y => y.Option))
+                               // .Include(x => x.Brands)
+                               // .Where(x => x.Use == null)
+                               ;
+                var list = new List<ProductModel>();
+                foreach (var x in products)
+                {
+                    list.Add(ProductMapper.MapToProductModel(x));
+                }
+                return list;
             }
-            return list;
+
         }
 
         public void DeleteCategory(CategoryModel categoryModel)
         {
-            var dbEntity = _context.Category.FirstOrDefault(x => x.Id == categoryModel.Id);
-            if (dbEntity != null)
+            using (var _context = new DatabaseContext())
             {
-                dbEntity.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
+                var dbEntity = _context.Category.FirstOrDefault(x => x.Id == categoryModel.Id);
+                if (dbEntity != null)
+                {
+                    dbEntity.DeletedAt = DateTime.Now;
+                    _context.SaveChanges();
+                }
             }
+
         }
 
         public CategoryModel GetCategory(string name)
         {
-            name = name.Trim();
-            var cat = _context.Category.FirstOrDefault(x => x.DeletedAt == null && x.Name == name);
-
-            return new CategoryModel
+            using (var _context = new DatabaseContext())
             {
-                Name = cat.Name,
-                ParentCategoryId = cat.ParentCategoryId,
-                UpdatedAt = cat.UpdatedAt,
-                CreatedAt = cat.CreatedAt,
-                DeletedAt = cat.DeletedAt,
-                Id = cat.Id
-            };
+                name = name.Trim();
+                var cat = _context.Category.FirstOrDefault(x => x.DeletedAt == null && x.Name == name);
+
+                return new CategoryModel
+                {
+                    Name = cat.Name,
+                    ParentCategoryId = cat.ParentCategoryId,
+                    UpdatedAt = cat.UpdatedAt,
+                    CreatedAt = cat.CreatedAt,
+                    DeletedAt = cat.DeletedAt,
+                    Id = cat.Id
+                };
+            }
+
         }
 
         public ProductModel GetProduct(int productId)
         {
-            var product = _context.Product.Find(productId);
-            if (product == null)
-                return null;
-            return ProductMapper.MapToProductModel(product);
+            using (var _context = new DatabaseContext())
+            {
+                var product = _context.Product.Find(productId);
+                if (product == null)
+                    return null;
+                return ProductMapper.MapToProductModel(product);
+            }
+
         }
 
         public ProductModel GetProductForEdit(int productId)
         {
-            var product = _context.Product
-                //.Include(x => x.Variants)
-                .Include(x => x.BaseUom)
-                .Include(x => x.Category)
-                .Include(x => x.Package)
-                .Include(x => x.ParentProduct)
-                .Include(x => x.Warehouse)
-                .FirstOrDefault(x => x.Id == productId);
-            if (product == null)
-                return null;
-            return ProductMapper.MapToProductModel(product);
+            using (var _context = new DatabaseContext())
+            {
+                var product = _context.Product
+                               //.Include(x => x.Variants)
+                               .Include(x => x.BaseUom)
+                               .Include(x => x.Category)
+                               .Include(x => x.Package)
+                               .Include(x => x.ParentProduct)
+                               .Include(x => x.Warehouse)
+                               .FirstOrDefault(x => x.Id == productId);
+                if (product == null)
+                    return null;
+                return ProductMapper.MapToProductModel(product);
+            }
+
         }
 
 
@@ -475,115 +533,138 @@ namespace Service.Core.Inventory
 
         public void SaveUom(UomModel model)
         {
-            var entity = _context.Uom.Find(model.Id);
-            entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
-            var args = BaseEventArgs<UomModel>.Instance;
-            // add
-            if (model.Name == model.BaseUom)
+            using (var _context = new DatabaseContext())
             {
-                // root uom
-                entity.BaseUomId = null;// entity;
-            }
-            else
-            {
-                // find the unit 
-                var baseUomEntity = _context.Uom.FirstOrDefault(x => x.Name == model.BaseUom);
-                if (baseUomEntity != null)
+                var entity = _context.Uom.Find(model.Id);
+                entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
+                var args = BaseEventArgs<UomModel>.Instance;
+                // add
+                if (model.Name == model.BaseUom)
                 {
-                    entity.BaseUomId = baseUomEntity.Id;
-                    entity.BaseUom = null;
+                    // root uom
+                    entity.BaseUomId = null;// entity;
                 }
+                else
+                {
+                    // find the unit 
+                    var baseUomEntity = _context.Uom.FirstOrDefault(x => x.Name == model.BaseUom);
+                    if (baseUomEntity != null)
+                    {
+                        entity.BaseUomId = baseUomEntity.Id;
+                        entity.BaseUom = null;
+                    }
+                }
+
+                if (model.Id == 0)
+                {
+                    _context.Uom.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    args.Mode = Utility.UpdateMode.EDIT;
+                }
+
+                _context.SaveChanges();
+                args.Model = entity.MapToUomModel(); //UomMapper.MapToUomModel(entity);
+                _listener.TriggerUomUpdateEvent(null, args);
             }
 
-            if (model.Id == 0)
-            {
-                _context.Uom.Add(entity);
-                args.Mode = Utility.UpdateMode.ADD;
-            }
-            else
-            {
-                args.Mode = Utility.UpdateMode.EDIT;
-            }
-
-            _context.SaveChanges();
-            args.Model = entity.MapToUomModel(); //UomMapper.MapToUomModel(entity);
-            _listener.TriggerUomUpdateEvent(null, args);
         }
 
         public List<UomModel> GetUomList()
         {
-            var uoms = _context.Uom.AsQueryable();
-            return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
+            using (var _context = new DatabaseContext())
+            {
+                var uoms = _context.Uom.AsQueryable();
+                return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
+            }
+
         }
 
         public string SavePackage(PackageModel package)
         {
-            var msg = "";
-            var args = BaseEventArgs<PackageModel>.Instance;
-            var duplicate = _context.Package.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
-            if (duplicate != null)
+            using (var _context = new DatabaseContext())
             {
-                return "Same 'Package' Name already exists";
-            }
 
-            // get the package
-            var entity = _context.Package.FirstOrDefault(x => x.Id == package.Id);
-            entity = PackageMapper.MapToEntity(package, entity);
-            if (package.Id == 0)
-            {
-                // add
-                _context.Package.Add(entity);
-                args.Mode = Utility.UpdateMode.ADD;
+                var msg = "";
+                var args = BaseEventArgs<PackageModel>.Instance;
+                var duplicate = _context.Package.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
+                if (duplicate != null)
+                {
+                    return "Same 'Package' Name already exists";
+                }
+
+                // get the package
+                var entity = _context.Package.FirstOrDefault(x => x.Id == package.Id);
+                entity = PackageMapper.MapToEntity(package, entity);
+                if (package.Id == 0)
+                {
+                    // add
+                    _context.Package.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    args.Mode = Utility.UpdateMode.EDIT;
+                }
+                _context.SaveChanges();
+                args.Model = PackageMapper.MapToModel(entity);
+                _listener.TriggerPackageUpdateEvent(null, args);
+                return msg;
             }
-            else
-            {
-                args.Mode = Utility.UpdateMode.EDIT;
-            }
-            _context.SaveChanges();
-            args.Model = PackageMapper.MapToModel(entity);
-            _listener.TriggerPackageUpdateEvent(null, args);
-            return msg;
         }
 
         public List<PackageModel> GetPackageList()
         {
-            var query = _context.Package.AsQueryable();
-            return PackageMapper.MapToModel(query);
+            using (var _context = new DatabaseContext())
+            {
+                var query = _context.Package.AsQueryable();
+                return PackageMapper.MapToModel(query);
+            }
         }
 
         public List<AdjustmentCodeModel> GetAdjustmentCodeList()
         {
-            var query = _context.AdjustmentCode.AsQueryable();
-            return query.MapToModel();// AdjustmentCodeMapper.MapToModel(query);
+            using (var _context = new DatabaseContext())
+            {
+                var query = _context.AdjustmentCode.AsQueryable();
+                return query.MapToModel();// AdjustmentCodeMapper.MapToModel(query);
+
+            }
         }
 
         public string SaveAdjustmentCode(AdjustmentCodeModel model)
         {
-            var msg = "";
-            var args = BaseEventArgs<AdjustmentCodeModel>.Instance;
-            var duplicate = _context.AdjustmentCode.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
-            if (duplicate != null)
+            using (var _context = new DatabaseContext())
             {
-                return "Same 'Adjustment Code' already exists";
+                var msg = "";
+                var args = BaseEventArgs<AdjustmentCodeModel>.Instance;
+                var duplicate = _context.AdjustmentCode.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
+                if (duplicate != null)
+                {
+                    return "Same 'Adjustment Code' already exists";
+                }
+
+                // get the package
+                var entity = _context.AdjustmentCode.FirstOrDefault(x => x.Id == model.Id);
+                entity = model.MapToEntity(entity);//AdjustmentCodeMapper.MapToEntity
+                if (model.Id == 0)
+                {
+                    // add
+                    _context.AdjustmentCode.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    args.Mode = Utility.UpdateMode.EDIT;
+                }
+                _context.SaveChanges();
+                args.Model = entity.MapToModel();//AdjustmentCodeMapper.MapToModel(entity)
+                _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
+                return msg;
             }
 
-            // get the package
-            var entity = _context.AdjustmentCode.FirstOrDefault(x => x.Id == model.Id);
-            entity = model.MapToEntity(entity);//AdjustmentCodeMapper.MapToEntity
-            if (model.Id == 0)
-            {
-                // add
-                _context.AdjustmentCode.Add(entity);
-                args.Mode = Utility.UpdateMode.ADD;
-            }
-            else
-            {
-                args.Mode = Utility.UpdateMode.EDIT;
-            }
-            _context.SaveChanges();
-            args.Model = entity.MapToModel();//AdjustmentCodeMapper.MapToModel(entity)
-            _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
-            return msg;
         }
 
         public List<IdNamePair> GetUomListForCombo()
@@ -603,71 +684,93 @@ namespace Service.Core.Inventory
 
         public ProductModel GetProductBySKU(string sku)
         {
-            var entity = _context.Product.FirstOrDefault(x => x.SKU == sku);
-            return entity == null ? null : ProductMapper.MapToProductModel(entity);
+            using (var _context = new DatabaseContext())
+            {
+                var entity = _context.Product.FirstOrDefault(x => x.SKU == sku);
+                return entity == null ? null : ProductMapper.MapToProductModel(entity);
+            }
         }
 
         public List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId)
         {
+            using (var _context = new DatabaseContext())
+            {
+                var wpList = _context.WarehouseProduct
+                                .Include(x => x.Product)
+                                .Include(x => x.Warehouse)
+                                .Where(x => x.InStockQuantity > 0
+                                    && (warehouseId == 0 || x.WarehouseId == warehouseId)
+                                    && (productId == 0 || x.ProductId == productId))
+                                .OrderBy(x => x.Warehouse.Name)
+                                .ThenBy(x => x.Product.Name);
+                return WarehouseProductMapper.MapToModel(wpList);
+            }
 
-            var wpList = _context.WarehouseProduct
-                .Include(x => x.Product)
-                .Include(x => x.Warehouse)
-                .Where(x => x.InStockQuantity > 0
-                    && (warehouseId == 0 || x.WarehouseId == warehouseId)
-                    && (productId == 0 || x.ProductId == productId))
-                .OrderBy(x => x.Warehouse.Name)
-                .ThenBy(x => x.Product.Name);
-            return WarehouseProductMapper.MapToModel(wpList);
         }
 
         public List<IdNamePair> GetAdjustmentCodeListForCombo()
         {
-            return _context.AdjustmentCode
-                .Where(x => x.Use)
-                .Select(x => new IdNamePair()
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
-                .ToList();
+            using (var _context = new DatabaseContext())
+            {
+                return _context.AdjustmentCode
+                                .Where(x => x.Use)
+                                .Select(x => new IdNamePair()
+                                {
+                                    Id = x.Id,
+                                    Name = x.Name
+                                })
+                                .ToList();
+            }
+
         }
 
         public List<IdNamePair> GetPositiveAdjustmentCodeListForCombo()
         {
-            var positive = AdjustmentType.Positive.ToString();
-            return _context.AdjustmentCode
-               .Where(x => x.Use && x.Type == positive)
-               .Select(x => new IdNamePair()
-               {
-                   Id = x.Id,
-                   Name = x.Name
-               })
-               .ToList();
+            using (var _context = new DatabaseContext())
+            {
+                var positive = AdjustmentType.Positive.ToString();
+                return _context.AdjustmentCode
+                   .Where(x => x.Use && x.Type == positive)
+                   .Select(x => new IdNamePair()
+                   {
+                       Id = x.Id,
+                       Name = x.Name
+                   })
+                   .ToList();
+            }
+
         }
 
         public List<IdNamePair> GetNegativeAdjustmentCodeListForCombo()
         {
-            var negative = AdjustmentType.Negative.ToString();
-            return _context.AdjustmentCode
-               .Where(x => x.Use && x.Type == negative)
-               .Select(x => new IdNamePair()
-               {
-                   Id = x.Id,
-                   Name = x.Name
-               })
-               .ToList();
+            using (var _context = new DatabaseContext())
+            {
+                var negative = AdjustmentType.Negative.ToString();
+                return _context.AdjustmentCode
+                   .Where(x => x.Use && x.Type == negative)
+                   .Select(x => new IdNamePair()
+                   {
+                       Id = x.Id,
+                       Name = x.Name
+                   })
+                   .ToList();
+            }
+
         }
 
         public List<IdNamePair> GetSupplierListForCombo()
         {
-            return _context.Supplier
-                //.Where(x=>x.Use)
-                .Select(x => new IdNamePair()
-                {
-                    Id = x.Id,
-                    Name = x.BasicInfo.Name,
-                }).ToList();
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Supplier
+                                //.Where(x=>x.Use)
+                                .Select(x => new IdNamePair()
+                                {
+                                    Id = x.Id,
+                                    Name = x.BasicInfo.Name,
+                                }).ToList();
+            }
+
         }
 
 

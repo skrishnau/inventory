@@ -1,16 +1,13 @@
 ﻿using IMS.Forms.Inventory;
-using IMS.Forms.Purchases;
 using System;
 using System.Windows.Forms;
-using IMS.Forms.Business;
-using IMS.Forms.Users;
 using IMS.Forms.Dashboard;
-using IMS.Forms.Inventory.Suppliers;
 using IMS.Forms.POS;
-using IMS.Forms.POS.Customers;
 using IMS.Forms.Generals;
 using IMS.Forms.UserManagement;
 using IMS.Forms.Orders;
+using IMS.Forms.Inventory.Orders;
+using ViewModel.Enums;
 
 namespace IMS
 {
@@ -116,24 +113,25 @@ namespace IMS
             pnlBody.Controls.Add(userUC);
         }
 
-        private void btnPurchases_Click(object sender, EventArgs e)
-        {
-            SetButtonSelection(sender);
-            var purchaseListUC = Program.container.GetInstance<PurchaseOrderUC>();
-            pnlBody.Controls.Clear();
-            purchaseListUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(purchaseListUC);
-        }
+        //private void btnPurchases_Click(object sender, EventArgs e)
+        //{
+        //    SetButtonSelection(sender);
+        //    var purchaseListUC = Program.container.GetInstance<OrderUC>();
+        //    purchaseListUC.SetData(OrderTypeEnum.Purchase);
+        //    pnlBody.Controls.Clear();
+        //    purchaseListUC.Dock = DockStyle.Fill;
+        //    pnlBody.Controls.Add(purchaseListUC);
+        //}
 
-        private void btnSales_Click(object sender, EventArgs e)
-        {
-            //var saleUC = Program.container.GetInstance<SaleUC>();
-            SetButtonSelection(sender);
-            var posUC = Program.container.GetInstance<PosUC>();
-            pnlBody.Controls.Clear();
-            posUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(posUC);
-        }
+        //private void btnSales_Click(object sender, EventArgs e)
+        //{
+        //    //var saleUC = Program.container.GetInstance<SaleUC>();
+        //    SetButtonSelection(sender);
+        //    var posUC = Program.container.GetInstance<PosUC>();
+        //    pnlBody.Controls.Clear();
+        //    posUC.Dock = DockStyle.Fill;
+        //    pnlBody.Controls.Add(posUC);
+        //}
 
         private void btnSetting_Click(object sender, EventArgs e)
         {

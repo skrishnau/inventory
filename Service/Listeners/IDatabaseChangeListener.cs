@@ -4,8 +4,9 @@ using Service.Listeners.Inventory;
 using System;
 using System.Collections.Generic;
 using ViewModel.Core.Business;
+using ViewModel.Core.Customers;
 using ViewModel.Core.Inventory;
-using ViewModel.Core.Purchases;
+using ViewModel.Core.Orders;
 using ViewModel.Core.Suppliers;
 
 namespace Service.Listeners
@@ -41,11 +42,13 @@ namespace Service.Listeners
         event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
         void TriggerAdjustmentCodeUpdateEvent(object sender, BaseEventArgs<AdjustmentCodeModel> eventArgs);
         // purchase Order
-        event EventHandler<BaseEventArgs<PurchaseOrderModel>> PurchaseOrderUpdated;
-        void TriggerPurchaseOrderUpdateEvent(object p, BaseEventArgs<PurchaseOrderModel> eventArgs);
+        event EventHandler<BaseEventArgs<OrderModel>> PurchaseOrderUpdated;
+        void TriggerPurchaseOrderUpdateEvent(object p, BaseEventArgs<OrderModel> eventArgs);
         // Inventory Unit Updates
         event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
         void TriggerInventoryUnitUpdateEvent(object p, BaseEventArgs<List<InventoryUnitModel>> eventArgs);
-        
+        // Customer
+        event EventHandler<BaseEventArgs<CustomerModel>> CustomerUpdated;
+        void TriggerCustomerUpdateEvent(object p, BaseEventArgs<CustomerModel> eventArgs);
     }
 }

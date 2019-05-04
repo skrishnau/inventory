@@ -88,6 +88,7 @@ namespace IMS.Forms.Inventory.UOM
 
         private void PopulateUomData()
         {
+            dgvUom.Rows.Clear();
             var uoms = _inventoryService.GetUomList();
             foreach (var uom in uoms)
             {

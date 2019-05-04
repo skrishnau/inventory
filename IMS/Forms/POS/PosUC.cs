@@ -98,7 +98,7 @@ namespace IMS.Forms.POS
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var customerCreate = Program.container.GetInstance<CustomerCreate>();
+                var customerCreate = Program.container.GetInstance<CustomerCreateForm>();
                 customerCreate.ShowDialog();
                 //Populate();
             }

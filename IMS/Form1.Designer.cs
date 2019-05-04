@@ -225,7 +225,7 @@
             this.toolTip1.SetToolTip(this.btnPOS, "Point of Sale");
             this.btnPOS.UseVisualStyleBackColor = true;
             this.btnPOS.Visible = false;
-            this.btnPOS.Click += new System.EventHandler(this.btnSales_Click);
+            //this.btnPOS.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // btnOrders
             // 
