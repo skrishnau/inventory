@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ViewModel.Core.Common;
+using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Common.GridView.InventoryUnits
 {
@@ -16,6 +18,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // this DataGridView
             //
             this.DataError += InventoryUnitDataGridView_DataError;
+            this.EditingControlShowing += InventoryUnitDataGridView_EditingControlShowing;
             this.CurrentCellDirtyStateChanged += InventoryUnitDataGridView_CurrentCellDirtyStateChanged;
             this.CellValidating += InventoryUnitDataGridView_CellValidating;
             this.SelectionChanged += InventoryUnit_SelectionChanged;
@@ -69,26 +72,38 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         {
                             row.Cells[e.ColumnIndex].ErrorText = string.Empty;
                             // populate
-                            row.Cells[this.colProductId.Index].Value = product.Name;
-                            row.Cells[this.colProduct.Index].Value = product.Name;
-                            row.Cells[this.colSupplyPrice.Index].Value = product.SupplyPrice;
-                            row.Cells[this.colPackageId.Index].Value = product.PackageId;
-                            row.Cells[this.colUomId.Index].Value = product.BaseUomId;
-                            row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
-                            row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
-                            //row.Cells[this.colRate.Index].Value = product.SupplyPrice;
-                            UpdateTotalColumn(e);
+                            UpdateProductInfo(row, product, e.RowIndex, e.ColumnIndex, e.FormattedValue);
+
                         }
                     }
                     // handle rate and quantity change to update Total
                     // don't do 'else' here cause supplyPrice and unitQuantity columns are already handeled above
                     if (e.ColumnIndex == colUnitQuantity.Index || e.ColumnIndex == colSupplyPrice.Index)
                     {
-                        UpdateTotalColumn(e);
+                        UpdateTotalColumn(e.RowIndex, e.ColumnIndex, e.FormattedValue);
                     }
                 }
             }
         }
+
+        //
+        // Update Product detail after product selection/change
+        //
+        private void UpdateProductInfo(DataGridViewRow row, ProductModel product,
+            int currentRowIndex, int currentColumnIndex, object formattedValue)
+        {
+            row.Cells[this.colProductId.Index].Value = product.Id;
+            // row.Cells[this.colProduct.Index].Value = product.Name;
+            row.Cells[this.colSKU.Index].Value = product.SKU;
+            row.Cells[this.colSupplyPrice.Index].Value = product.SupplyPrice;
+            row.Cells[this.colPackageId.Index].Value = product.PackageId;
+            row.Cells[this.colUomId.Index].Value = product.BaseUomId;
+            row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
+            row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
+            //row.Cells[this.colRate.Index].Value = product.SupplyPrice;
+            UpdateTotalColumn(currentRowIndex, currentColumnIndex, formattedValue);
+        }
+
         //
         // Cell Content Click
         //
@@ -146,6 +161,41 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
         }
         //
+        // Editing Control Showing
+        private void InventoryUnitDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (this.CurrentCell.ColumnIndex == this.colProductId.Index && e.Control is ComboBox)
+            {
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.SelectedIndexChanged -= ProductColumnComboSelectionChanged;
+                comboBox.SelectedIndexChanged += ProductColumnComboSelectionChanged;
+            }
+        }
+
+        private void ProductColumnComboSelectionChanged(object sender, EventArgs e)
+        {
+            // var currentcell = this.CurrentCellAddress;
+            //var sendingCB = sender as DataGridViewComboBoxEditingControl;
+            //DataGridViewTextBoxCell cel = (DataGridViewTextBoxCell)this.Rows[currentcell.Y].Cells[0];
+            //cel.Value = sendingCB.EditingControlFormattedValue.ToString();
+
+            var combo = sender as ComboBox;
+            if (combo != null)
+            {
+                var selectedItem = combo.SelectedItem as IdNamePair;
+                if (selectedItem != null)
+                {
+                    var row = this.CurrentRow;
+                    var productId = int.Parse(selectedItem.Id.ToString());
+                    var productModel = _inventoryService.GetProductById(productId);
+
+                    UpdateProductInfo(row, productModel, this.CurrentRow.Index, this.colProductId.Index, productId);
+                }
+
+            }
+
+        }
+        //
         // Scroll
         //
         private void InventoryUnitDataGridView_Scroll(object sender, ScrollEventArgs e)
@@ -171,20 +221,21 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
 
 
-        private void UpdateTotalColumn(DataGridViewCellValidatingEventArgs e)
+        private void UpdateTotalColumn(int currentRowIndex, int currentColumnIndex, object formattedValue)
+        //(DataGridViewCellValidatingEventArgs e)
         {
-            var row = this.Rows[e.RowIndex];
+            var row = this.Rows[currentRowIndex];
             object qtyVal = row.Cells[colUnitQuantity.Name].Value;
             object rateVal = row.Cells[colSupplyPrice.Name].Value;
             decimal quantity = 0, rate = 0;
 
-            if (e.ColumnIndex == colUnitQuantity.Index)
+            if (currentColumnIndex == colUnitQuantity.Index)
             {
-                qtyVal = e.FormattedValue; // row.Cells[colQuantity.Name].Value;
+                qtyVal = formattedValue; // row.Cells[colQuantity.Name].Value;
             }
-            else if (e.ColumnIndex == colSupplyPrice.Index)
+            else if (currentColumnIndex == colSupplyPrice.Index)
             {
-                rateVal = e.FormattedValue;
+                rateVal = formattedValue;
             }
             decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
             decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out rate);

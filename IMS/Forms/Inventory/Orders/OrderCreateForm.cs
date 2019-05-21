@@ -55,27 +55,7 @@ namespace IMS.Forms.Inventory.Orders
         {
             var po = _orderService.GetOrder(_orderType, _orderId);
             SetDataForEdit(po);
-            // initial data
-            tbName.Text = "Order - " + DateTime.Now.ToString("ddd, dd MMM yyyy");
-            numLotNumber.Value = _orderService.GetNextLotNumber();
-
-            switch (_orderType)
-            {
-                case OrderTypeEnum.Purchase:
-                    lblClient.Text = "Supplier";
-                    lblClientInfo.Text = "Supplier Invoice";
-                    this.Text = "Create Purchase Order";
-                    break;
-                case OrderTypeEnum.Sale:
-                    lblClient.Text = "Customer";
-                    lblPhone.Visible = true;
-                    tbPhone.Visible = true;
-                    lblExpectedDate.Text = "Delivery Date *";
-                    lblClientInfo.Text = "Address/Phone";
-                    this.Text = "Create Sale Order";
-                    break;
-            }
-
+            
             PopulateClientCombo();
             PopulateWarehouseCombo();
 
@@ -89,11 +69,20 @@ namespace IMS.Forms.Inventory.Orders
 
         private void InitializeValidation()
         {
-            var controls = new Control[]
+            List<Control> controls = new List<Control>()
             {
-                tbName, tbOrderNumber, cbClient, cbWarehouse
+                 tbName, tbOrderNumber, cbClient,
             };
-            _requiredFieldValidator = new RequiredFieldValidator(errorProvider, controls);
+            switch (_orderType)
+            {
+                case OrderTypeEnum.Purchase:
+                    controls.Add(cbWarehouse);
+                    break;
+                case OrderTypeEnum.Sale:
+
+                    break;
+            }
+            _requiredFieldValidator = new RequiredFieldValidator(errorProvider, controls.ToArray());
 
         }
 
@@ -144,7 +133,12 @@ namespace IMS.Forms.Inventory.Orders
 
         private void PopulateWarehouseCombo()
         {
-            var warehouses = _inventoryService.GetWarehouseList();
+            var warehouses = _inventoryService.GetWarehouseListForCombo();
+            warehouses.Insert(0, new IdNamePair
+            {
+                Id = 0,
+                Name = "----- Select -----"
+            });
             cbWarehouse.DataSource = warehouses;
             cbWarehouse.DisplayMember = "Name";
             cbWarehouse.ValueMember = "Id";
@@ -165,8 +159,6 @@ namespace IMS.Forms.Inventory.Orders
                 // change button
                 btnSave.Text = "Save";
                 btnSave.Width = btnCancel.Width;
-                this.Text = "Edit Purchase Order";
-
                 _orderId = model.Id;
                 tbName.Text = model.Name;
                 tbNotes.Text = model.Note;
@@ -177,6 +169,39 @@ namespace IMS.Forms.Inventory.Orders
                 dtExpectedDate.Value = model.ExpectedDate;
                 numLotNumber.Value = model.LotNumber;
             }
+            else
+            {
+                // initial data
+                var initials =
+                    _orderType == OrderTypeEnum.Purchase ? "PO - "
+                    : _orderType == OrderTypeEnum.Sale ? "SO - "
+                    : _orderType == OrderTypeEnum.Move ? "MO - "
+                    : "";
+                tbName.Text = initials + DateTime.Now.ToString("ddd, dd MMM yyyy");
+                numLotNumber.Value = _orderService.GetNextLotNumber();
+            }
+
+            switch (_orderType)
+            {
+                case OrderTypeEnum.Purchase:
+                    lblClient.Text = "Supplier";
+                    lblClientInfo.Text = "Supplier Invoice";
+                    this.Text = (model == null ? "Create" : "Edit" )+" Purchase Order";
+                    break;
+                case OrderTypeEnum.Sale:
+                    cbWarehouse.Visible = false;
+                    lblWarehouse.Visible = false;
+                    lblClient.Text = "Customer";
+                    lblPhone.Visible = true;
+                    tbPhone.Visible = true;
+                    lblExpectedDate.Text = "Delivery Date *";
+                    lblClientInfo.Text = "Address/Phone";
+                    this.Text = (model == null ? "Create" : "Edit") + " Sale Order";
+                    break;
+            }
+
+           
+
         }
 
         #endregion

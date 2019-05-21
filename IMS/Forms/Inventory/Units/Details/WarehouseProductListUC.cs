@@ -22,7 +22,7 @@ namespace IMS.Forms.Inventory.Units.Details
         private readonly IInventoryService _inventoryService;
         private readonly IBusinessService _businessService;
 
-        private HeaderTemplate _header;
+      //  private HeaderTemplate _header;
 
         public WarehouseProductListUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
@@ -45,7 +45,7 @@ namespace IMS.Forms.Inventory.Units.Details
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
             _listener.WarehouseUpdated += _listener_WarehouseUpdated;
             _listener.ProductUpdated += _listener_ProductUpdated;
-            InitializeHeader();
+           // InitializeHeader();
             PopulateWarehouses();
             PopulateProducts();
             PopulateWarehouseProducts();
@@ -72,14 +72,14 @@ namespace IMS.Forms.Inventory.Units.Details
 
         #region Initialize Functions
 
-        private void InitializeHeader()
-        {
-            _header = HeaderTemplate.Instance;
-            this.Controls.Add(_header);
-            _header.SendToBack();
-            // header text
-            _header.lblHeading.Text = "Locate Inventory";
-        }
+        //private void InitializeHeader()
+        //{
+        //    _header = HeaderTemplate.Instance;
+        //    this.Controls.Add(_header);
+        //    _header.SendToBack();
+        //    // header text
+        //    _header.lblHeading.Text = "Locate Inventory";
+        //}
 
         private void InitializeComboBoxEvents()
         {

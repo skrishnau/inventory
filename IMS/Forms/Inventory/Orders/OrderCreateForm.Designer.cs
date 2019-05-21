@@ -38,7 +38,7 @@
             this.tbName = new System.Windows.Forms.TextBox();
             this.lblClient = new System.Windows.Forms.Label();
             this.cbClient = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblWarehouse = new System.Windows.Forms.Label();
             this.lblClientInfo = new System.Windows.Forms.Label();
             this.tbClientInfo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -73,7 +73,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tbName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblClient, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbClient, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblWarehouse, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblClientInfo, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbClientInfo, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 1);
@@ -166,16 +166,16 @@
             this.cbClient.Size = new System.Drawing.Size(146, 21);
             this.cbClient.TabIndex = 8;
             // 
-            // label3
+            // lblWarehouse
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(2, 84);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Warehouse *";
+            this.lblWarehouse.AutoSize = true;
+            this.lblWarehouse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWarehouse.Location = new System.Drawing.Point(2, 84);
+            this.lblWarehouse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWarehouse.Name = "lblWarehouse";
+            this.lblWarehouse.Size = new System.Drawing.Size(69, 13);
+            this.lblWarehouse.TabIndex = 2;
+            this.lblWarehouse.Text = "Warehouse *";
             // 
             // lblClientInfo
             // 
@@ -332,7 +332,7 @@
         private System.Windows.Forms.Label lblClient;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblExpectedDate;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblWarehouse;
         private System.Windows.Forms.NumericUpDown numLotNumber;
         private System.Windows.Forms.DateTimePicker dtExpectedDate;
         private System.Windows.Forms.ComboBox cbClient;

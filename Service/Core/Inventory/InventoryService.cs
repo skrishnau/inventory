@@ -16,6 +16,7 @@ using ViewModel.Enums.Inventory;
 using ViewModel.Core.Business;
 using Infrastructure.Entities.Business;
 using DTO.Core.Business;
+using ViewModel.Enums;
 
 namespace Service.Core.Inventory
 {
@@ -145,7 +146,10 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetProductListForCombo()
         {
-            var products = GetProductEntityList()
+            using (var _context = new DatabaseContext())
+            {
+                
+                var products = _context.Product.AsQueryable()// GetProductEntityList()
                 .Where(x => x.Use)
                 .Select(x => new IdNamePair()
                 {
@@ -153,7 +157,10 @@ namespace Service.Core.Inventory
                     Name = x.Name + " (" + x.SKU + ")",
                 })
                 .ToList();
-            return products;
+                return products;
+                //.Where(x => x.DeletedAt == null);
+            }
+            
         }
 
         #endregion
@@ -628,10 +635,100 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.AdjustmentCode.AsQueryable();
+                var query = _context.AdjustmentCode.AsEnumerable();
+                if (!query.Any())
+                {
+                    // add system defined adj codes
+                    SeedAdjustmentCodes(_context);
+                }
                 return query.MapToModel();// AdjustmentCodeMapper.MapToModel(query);
 
             }
+        }
+
+        private void SeedAdjustmentCodes(DatabaseContext _context)
+        {
+            //
+            // Positive
+            //
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand = false,
+                IsSystem = true,
+                Name = "Assembled",
+                Type = AdjustmentTypeEnum.Positive.ToString(),
+                Use = true,
+            });
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand = false,
+                IsSystem = true,
+                Name = "Imported",
+                Type = AdjustmentTypeEnum.Positive.ToString(),
+                Use = true,
+            });
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand=false,
+                IsSystem = true,
+                Name = "PO receive",
+                Type = AdjustmentTypeEnum.Positive.ToString(),
+                Use = true,
+            });
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand=false,
+                IsSystem = true,
+                Name = "Direct Receive",
+                Type = AdjustmentTypeEnum.Positive.ToString(),
+                Use = true,
+            });
+
+            //
+            // Negative
+            //
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand = false,
+                IsSystem = true,
+                Name = "Damaged/Broken",
+                Type = AdjustmentTypeEnum.Negative.ToString(),
+                Use = true,
+            });
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand = false,
+                IsSystem = true,
+                Name = "Direct Issue",
+                Type = AdjustmentTypeEnum.Negative.ToString(),
+                Use = true,
+            });
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand = false,
+                IsSystem = true,
+                Name = "Disassembled",
+                Type = AdjustmentTypeEnum.Negative.ToString(),
+                Use = true,
+            });
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand = false,
+                IsSystem = true,
+                Name = "Used in Repairs",
+                Type = AdjustmentTypeEnum.Negative.ToString(),
+                Use = true,
+            });
+            _context.AdjustmentCode.Add(new AdjustmentCode()
+            {
+                AffectsDemand = false,
+                IsSystem = true,
+                Name = "SO issue",
+                Type = AdjustmentTypeEnum.Negative.ToString(),
+                Use = true,
+            });
+
+            _context.SaveChanges();
         }
 
         public string SaveAdjustmentCode(AdjustmentCodeModel model)
@@ -687,6 +784,15 @@ namespace Service.Core.Inventory
             using (var _context = new DatabaseContext())
             {
                 var entity = _context.Product.FirstOrDefault(x => x.SKU == sku);
+                return entity == null ? null : ProductMapper.MapToProductModel(entity);
+            }
+        }
+
+        public ProductModel GetProductById(int id)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var entity = _context.Product.Find(id);
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }

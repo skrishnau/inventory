@@ -17,7 +17,7 @@ namespace DTO.Core.Inventory
             return Mappings.Mapper.Map(model, entity);
         }
 
-        public static List<AdjustmentCodeModel> MapToModel(this IQueryable<AdjustmentCode> query)
+        public static List<AdjustmentCodeModel> MapToModel(this IEnumerable<AdjustmentCode> query)
         {
             return Mappings.Mapper.Map<List<AdjustmentCodeModel>>(query);
         }

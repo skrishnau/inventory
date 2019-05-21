@@ -15,7 +15,7 @@ namespace IMS.Forms.Inventory.Orders
     {
        // private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
-        private readonly PurchaseOrderDetailUC _purchaseOrderDetailUC;
+        private readonly OrderDetailUC _orderDetailUC;
         private readonly OrderListUC _orderListUC;
         private OrderSidebarUC _sidebar;
 
@@ -24,15 +24,14 @@ namespace IMS.Forms.Inventory.Orders
         private List<int> _recentPurchaseOrderModelIds = new List<int>();
         private OrderTypeEnum _orderType;
 
-        public OrderUC(IDatabaseChangeListener listener, //IOrderService orderService, 
-            PurchaseOrderDetailUC purchaseOrderDetailUC// , OrderTypeEnum orderType
-            , OrderListUC orderListUC)
+        public OrderUC(IOrderService orderService,IDatabaseChangeListener listener, // 
+             OrderTypeEnum orderType)
         {
-            _orderType = OrderTypeEnum.Sale;// orderType;
-           // _orderService = orderService;
+            _orderType = orderType;
+            //_orderService = orderService;
             _listener = listener;
-            _purchaseOrderDetailUC = purchaseOrderDetailUC;
-            _orderListUC = orderListUC;//new OrderListUC(orderService, listener, _orderType);
+            _orderDetailUC = new OrderDetailUC(orderService, listener);// orderDetailUC;
+            _orderListUC = new OrderListUC(orderService, listener, orderType);
 
             InitializeComponent();
             this.Dock = DockStyle.Fill;
@@ -83,7 +82,7 @@ namespace IMS.Forms.Inventory.Orders
         {
             //_listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
             // dgvPurchases.CellMouseDoubleClick += DgvPurchases_CellMouseDoubleClick;
-            _purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
+            _orderDetailUC.btnBackToList.Click += BtnBackToList_Click;
             _sidebar.lnkList.Click += _linkManager.Link_Click;
             _linkManager.LinkClicked += _linkManager_LinkClicked;
             _orderListUC.RowSelected += _purchaseOrderListUC_RowSelected;
@@ -137,8 +136,17 @@ namespace IMS.Forms.Inventory.Orders
             }
             else
             {
-                _purchaseOrderDetailUC.SetData(_orderType, orderId);
-                _body.pnlBody.Controls.Add(_purchaseOrderDetailUC);
+                switch (_orderType)
+                {
+                    case OrderTypeEnum.Purchase:
+                        _orderDetailUC.SetData(_orderType, orderId);
+                        _body.pnlBody.Controls.Add(_orderDetailUC);
+                        break;
+                    case OrderTypeEnum.Sale:
+                        _orderDetailUC.SetData(_orderType, orderId);
+                        _body.pnlBody.Controls.Add(_orderDetailUC);
+                        break;
+                }
             }
             _sidebar.SetVisited(orderId);
         }

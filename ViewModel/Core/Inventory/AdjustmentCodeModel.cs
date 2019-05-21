@@ -13,5 +13,7 @@ namespace ViewModel.Core.Inventory
         public string Type { get; set; }
         public bool AffectsDemand { get; set; }
         public bool Use { get; set; }
+
+        public bool IsSystem { get; set; }
     }
 }

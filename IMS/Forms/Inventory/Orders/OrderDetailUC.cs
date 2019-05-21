@@ -14,10 +14,10 @@ using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Purchases
 {
-    public partial class PurchaseOrderDetailUC : UserControl
+    public partial class OrderDetailUC : UserControl
     {
         private readonly IOrderService _orderService;
-        private readonly IInventoryService _inventoryService;
+       // private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
         //private PurchaseOrderModel _purchaseOrderModel;
@@ -25,10 +25,10 @@ namespace IMS.Forms.Inventory.Purchases
         private OrderModel _purchaseOrderModel;
         private OrderTypeEnum _orderType;
 
-        public PurchaseOrderDetailUC(IOrderService purchaseService, IInventoryService inventoryService, IDatabaseChangeListener listener)
+        public OrderDetailUC(IOrderService orderService, IDatabaseChangeListener listener)
         {
-            _orderService = purchaseService;
-            _inventoryService = inventoryService;
+            _orderService = orderService;
+            //_inventoryService = inventoryService;
             _listener = listener;
 
             InitializeComponent();
@@ -39,11 +39,11 @@ namespace IMS.Forms.Inventory.Purchases
 
         private void PurchaseOrderDetailUC_Load(object sender, EventArgs e)
         {
-            var model = _orderService.GetOrder(_orderType, _purchaseOrderId);
-            SetData(model);
-
+            PopulateData();
+            UpdateViewForOrderType();
             InitializeListener();
         }
+
 
 
 
@@ -64,7 +64,7 @@ namespace IMS.Forms.Inventory.Purchases
         {
             if (e.Model.Id == _purchaseOrderId)
             {
-                SetData(e.Model);
+                PopulateData(e.Model);
             }
         }
 
@@ -74,14 +74,34 @@ namespace IMS.Forms.Inventory.Purchases
 
         #region Populating Functions
 
+
+        private void UpdateViewForOrderType()
+        {
+            switch (_orderType)
+            {
+                case OrderTypeEnum.Purchase:
+
+                    break;
+                case OrderTypeEnum.Sale:
+                    btnReceive.Text = "Issue";
+                    btnSendOrder.Text = "Confirm";
+                    break;
+            }
+        }
+
         public void SetData(OrderTypeEnum orderType, int purchaseOrderId)
         {
             _orderType = orderType;
             _purchaseOrderId = purchaseOrderId;
+
+            PopulateData();
         }
 
-        private void SetData(OrderModel model)
+        private void PopulateData(OrderModel model = null)
         {
+            if (model == null)
+                model = _orderService.GetOrder(_orderType, _purchaseOrderId);
+
             _purchaseOrderId = model == null ? 0 : model.Id;
             _purchaseOrderModel = model;
             if (model != null)
@@ -195,7 +215,7 @@ namespace IMS.Forms.Inventory.Purchases
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var po = Program.container.GetInstance<OrderCreateForm>();
-                po.SetDataForEdit(OrderTypeEnum.Purchase, _purchaseOrderId);
+                po.SetDataForEdit(_orderType, _purchaseOrderId);
                 po.ShowDialog();
             }
         }

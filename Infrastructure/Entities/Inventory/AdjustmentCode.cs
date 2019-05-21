@@ -13,5 +13,8 @@ namespace Infrastructure.Entities.Inventory
         public string Type { get; set; }
         public bool AffectsDemand { get; set; }
         public bool Use { get; set; }
+        // System defined adjustment codes are non-editable
+        public bool IsSystem { get; set; }
+
     }
 }

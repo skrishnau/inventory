@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewModel.Core.Common;
 
 namespace IMS.Forms.Common.Validations
 {
@@ -122,10 +123,20 @@ namespace IMS.Forms.Common.Validations
         private bool ValidateComboBoxRequired(ComboBox comboBox)
         {
             //if(string.IsNullOrEmpty(comboBox.SelectedText))
-            if (comboBox.SelectedItem == null)
+            var item = comboBox.SelectedItem;
+            if (item == null)
             {
                 _errorProvider.SetError(comboBox, REQUIRED);
                 return false;
+            }
+            else
+            {
+                var idName = item as IdNamePair;
+                if (idName != null && idName.Id == 0)
+                {
+                    _errorProvider.SetError(comboBox, REQUIRED);
+                    return false;
+                }
             }
             _errorProvider.SetError(comboBox, string.Empty);
             return true;

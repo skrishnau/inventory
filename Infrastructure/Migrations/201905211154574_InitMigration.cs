@@ -16,6 +16,7 @@ namespace Infrastructure.Migrations
                         Type = c.String(),
                         AffectsDemand = c.Boolean(nullable: false),
                         Use = c.Boolean(nullable: false),
+                        IsSystem = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -305,7 +306,7 @@ namespace Infrastructure.Migrations
                         Name = c.String(),
                         ReferenceNumber = c.String(),
                         ParentOrderId = c.Int(),
-                        LotNo = c.Int(nullable: false),
+                        LotNumber = c.Int(nullable: false),
                         TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Note = c.String(),
                         ExpectedDate = c.DateTime(nullable: false),

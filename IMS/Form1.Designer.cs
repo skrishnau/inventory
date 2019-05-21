@@ -43,6 +43,7 @@
             this.btnKitting = new System.Windows.Forms.Button();
             this.btnPOS = new System.Windows.Forms.Button();
             this.btnOrders = new System.Windows.Forms.Button();
+            this.btnProduction = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
             this.btnGeneral = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
@@ -88,6 +89,7 @@
             this.pnlSidebarBody.Controls.Add(this.btnKitting);
             this.pnlSidebarBody.Controls.Add(this.btnPOS);
             this.pnlSidebarBody.Controls.Add(this.btnOrders);
+            this.pnlSidebarBody.Controls.Add(this.btnProduction);
             this.pnlSidebarBody.Controls.Add(this.btnInventory);
             this.pnlSidebarBody.Controls.Add(this.btnGeneral);
             this.pnlSidebarBody.Controls.Add(this.btnDashboard);
@@ -132,7 +134,7 @@
             this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnHelp.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnHelp.Image = global::IMS.Properties.Resources.icons8_Information_24px;
-            this.btnHelp.Location = new System.Drawing.Point(0, 450);
+            this.btnHelp.Location = new System.Drawing.Point(0, 500);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(64, 50);
             this.btnHelp.TabIndex = 8;
@@ -148,7 +150,7 @@
             this.btnSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnSetting.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSetting.Image = global::IMS.Properties.Resources.icons8_Gear_24px;
-            this.btnSetting.Location = new System.Drawing.Point(0, 400);
+            this.btnSetting.Location = new System.Drawing.Point(0, 450);
             this.btnSetting.Name = "btnSetting";
             this.btnSetting.Size = new System.Drawing.Size(64, 50);
             this.btnSetting.TabIndex = 7;
@@ -165,7 +167,7 @@
             this.btnReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReport.Image = global::IMS.Properties.Resources.icons8_Pie_Chart_24px;
-            this.btnReport.Location = new System.Drawing.Point(0, 350);
+            this.btnReport.Location = new System.Drawing.Point(0, 400);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(64, 50);
             this.btnReport.TabIndex = 9;
@@ -181,7 +183,7 @@
             this.btnUserManagement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnUserManagement.Image = global::IMS.Properties.Resources.icons8_User_Account_24px;
-            this.btnUserManagement.Location = new System.Drawing.Point(0, 300);
+            this.btnUserManagement.Location = new System.Drawing.Point(0, 350);
             this.btnUserManagement.Name = "btnUserManagement";
             this.btnUserManagement.Size = new System.Drawing.Size(64, 50);
             this.btnUserManagement.TabIndex = 5;
@@ -197,7 +199,7 @@
             this.btnKitting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnKitting.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnKitting.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
-            this.btnKitting.Location = new System.Drawing.Point(0, 250);
+            this.btnKitting.Location = new System.Drawing.Point(0, 300);
             this.btnKitting.Margin = new System.Windows.Forms.Padding(4);
             this.btnKitting.Name = "btnKitting";
             this.btnKitting.Size = new System.Drawing.Size(64, 50);
@@ -214,7 +216,7 @@
             this.btnPOS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnPOS.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnPOS.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
-            this.btnPOS.Location = new System.Drawing.Point(0, 200);
+            this.btnPOS.Location = new System.Drawing.Point(0, 250);
             this.btnPOS.Margin = new System.Windows.Forms.Padding(4);
             this.btnPOS.Name = "btnPOS";
             this.btnPOS.Size = new System.Drawing.Size(64, 50);
@@ -225,7 +227,6 @@
             this.toolTip1.SetToolTip(this.btnPOS, "Point of Sale");
             this.btnPOS.UseVisualStyleBackColor = true;
             this.btnPOS.Visible = false;
-            //this.btnPOS.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // btnOrders
             // 
@@ -233,7 +234,7 @@
             this.btnOrders.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnOrders.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnOrders.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
-            this.btnOrders.Location = new System.Drawing.Point(0, 150);
+            this.btnOrders.Location = new System.Drawing.Point(0, 200);
             this.btnOrders.Name = "btnOrders";
             this.btnOrders.Size = new System.Drawing.Size(64, 50);
             this.btnOrders.TabIndex = 12;
@@ -243,6 +244,22 @@
             this.toolTip1.SetToolTip(this.btnOrders, "Inventory");
             this.btnOrders.UseVisualStyleBackColor = true;
             this.btnOrders.Visible = false;
+            // 
+            // btnProduction
+            // 
+            this.btnProduction.AutoSize = true;
+            this.btnProduction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnProduction.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnProduction.Image = global::IMS.Properties.Resources.icons8_Manufacturing_24px;
+            this.btnProduction.Location = new System.Drawing.Point(0, 150);
+            this.btnProduction.Name = "btnProduction";
+            this.btnProduction.Size = new System.Drawing.Size(64, 50);
+            this.btnProduction.TabIndex = 13;
+            this.btnProduction.Text = "Production";
+            this.btnProduction.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnProduction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnProduction, "Inventory");
+            this.btnProduction.UseVisualStyleBackColor = true;
             // 
             // btnInventory
             // 
@@ -369,6 +386,7 @@
         private System.Windows.Forms.Button btnScrollUp;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Button btnProduction;
     }
 }
 

@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory.UOM
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
-        HeaderTemplate _header;
+       // HeaderTemplate _header;
         private bool _isCurrentRowDirty;
         
         public UomUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
@@ -39,7 +39,7 @@ namespace IMS.Forms.Inventory.UOM
 
         private void UomUC_Load(object sender, EventArgs e)
         {
-            InitializeHeader();
+           // InitializeHeader();
             InitializeEvents();
             PopulateUomData();
 
@@ -59,18 +59,18 @@ namespace IMS.Forms.Inventory.UOM
 
         #region Initialization Functions
 
-        private void InitializeHeader()
-        {
-            _header = HeaderTemplate.Instance;
-            //_header.btnNew.Visible = true;
-            //_header.btnNew.Click += BtnNew_Click;
-            // add
-            this.Controls.Add(_header);
-            _header.SendToBack();
-            // heading
-            _header.lblHeading.Text = "UOM (Unit of Measure)";
+        //private void InitializeHeader()
+        //{
+        //    _header = HeaderTemplate.Instance;
+        //    //_header.btnNew.Visible = true;
+        //    //_header.btnNew.Click += BtnNew_Click;
+        //    // add
+        //    this.Controls.Add(_header);
+        //    _header.SendToBack();
+        //    // heading
+        //    _header.lblHeading.Text = "UOM (Unit of Measure)";
 
-        }
+        //}
 
         private void InitializeEvents()
         {

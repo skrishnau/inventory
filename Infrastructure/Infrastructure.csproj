@@ -85,13 +85,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201905031155311_InitMigration.cs" />
-    <Compile Include="Migrations\201905031155311_InitMigration.Designer.cs">
-      <DependentUpon>201905031155311_InitMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905031824479_ColumnChanged.cs" />
-    <Compile Include="Migrations\201905031824479_ColumnChanged.Designer.cs">
-      <DependentUpon>201905031824479_ColumnChanged.cs</DependentUpon>
+    <Compile Include="Migrations\201905211154574_InitMigration.cs" />
+    <Compile Include="Migrations\201905211154574_InitMigration.Designer.cs">
+      <DependentUpon>201905211154574_InitMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,11 +106,8 @@
     <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905031155311_InitMigration.resx">
-      <DependentUpon>201905031155311_InitMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905031824479_ColumnChanged.resx">
-      <DependentUpon>201905031824479_ColumnChanged.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905211154574_InitMigration.resx">
+      <DependentUpon>201905211154574_InitMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

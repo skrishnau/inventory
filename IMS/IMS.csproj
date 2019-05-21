@@ -317,11 +317,11 @@
     <Compile Include="Forms\Inventory\Orders\Order\PurchaseOrderItemCreateForm.Designer.cs">
       <DependentUpon>PurchaseOrderItemCreateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Orders\PurchaseOrderDetailUC.cs">
+    <Compile Include="Forms\Inventory\Orders\OrderDetailUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Orders\PurchaseOrderDetailUC.Designer.cs">
-      <DependentUpon>PurchaseOrderDetailUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Orders\OrderDetailUC.Designer.cs">
+      <DependentUpon>OrderDetailUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Settings\Adjustments\AdjustmentCodeUC.cs">
       <SubType>UserControl</SubType>
@@ -603,6 +603,18 @@
     <Compile Include="Forms\Inventory\Suppliers\SupplierUC.Designer.cs">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Production\ProductionMenuBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Production\ProductionMenuBar.Designer.cs">
+      <DependentUpon>ProductionMenuBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Production\ProductionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Production\ProductionUC.Designer.cs">
+      <DependentUpon>ProductionUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserManagement\Create\BasicInfoCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -761,8 +773,8 @@
     <EmbeddedResource Include="Forms\Inventory\Orders\Order\PurchaseOrderItemCreateForm.resx">
       <DependentUpon>PurchaseOrderItemCreateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Orders\PurchaseOrderDetailUC.resx">
-      <DependentUpon>PurchaseOrderDetailUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Orders\OrderDetailUC.resx">
+      <DependentUpon>OrderDetailUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\Adjustments\AdjustmentCodeUC.resx">
       <DependentUpon>AdjustmentCodeUC.cs</DependentUpon>
@@ -899,6 +911,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierUC.resx">
       <DependentUpon>SupplierUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Production\ProductionMenuBar.resx">
+      <DependentUpon>ProductionMenuBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Production\ProductionUC.resx">
+      <DependentUpon>ProductionUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserManagement\Create\BasicInfoCreate.resx">
       <DependentUpon>BasicInfoCreate.cs</DependentUpon>
@@ -1376,6 +1394,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Sell_Stock_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Manufacturing_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Lease_16px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

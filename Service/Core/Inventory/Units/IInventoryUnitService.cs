@@ -11,7 +11,7 @@ namespace Service.Core.Inventory.Units
     {
         #region Inventory
 
-        List<InventoryUnitModel> GetInventoryUnitList();
+        List<InventoryUnitModel> GetInventoryUnitList(int warehouseId, int productId);
 
         List<MovementModel> GetMovementList();
 

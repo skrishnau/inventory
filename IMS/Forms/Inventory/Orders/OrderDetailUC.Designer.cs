@@ -1,6 +1,6 @@
 ﻿namespace IMS.Forms.Inventory.Purchases
 {
-    partial class PurchaseOrderDetailUC
+    partial class OrderDetailUC
     {
         /// <summary> 
         /// Required designer variable.

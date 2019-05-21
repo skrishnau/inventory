@@ -12,7 +12,7 @@ namespace DTO.Core.Inventory
     {
         
 
-        public static List<InventoryUnitModel> MapToModel(this IQueryable<InventoryUnit> query)
+        public static List<InventoryUnitModel> MapToModel(this IEnumerable<InventoryUnit> query)
         {
             var list = new List<InventoryUnitModel>();
             foreach (var entity in query)

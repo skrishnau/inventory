@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Inventory;
+using IMS.Forms.Production;
 using System;
 using System.Windows.Forms;
 using IMS.Forms.Dashboard;
@@ -30,12 +31,22 @@ namespace IMS
         private void InitializeEvents()
         {
             btnInventory.Click += BtnInventory_Click;
+            btnProduction.Click += BtnProduction_Click;
             btnGeneral.Click += BtnGeneral_Click;
             btnUserManagement.Click += btnUserManagement_Click;
             btnOrders.Click += BtnOrders_Click;
             //btnSupplier.Click += btnSupplier_Click;
             //btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
             //btnDirectSale.Click += BtnDirectSale_Click;
+        }
+
+        private void BtnProduction_Click(object sender, EventArgs e)
+        {
+            SetButtonSelection(sender);
+            pnlBody.Controls.Clear();
+            var productionListUC = Program.container.GetInstance<ProductionUC>();//new InventoryUC();
+            productionListUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(productionListUC);
         }
 
         private void BtnOrders_Click(object sender, EventArgs e)

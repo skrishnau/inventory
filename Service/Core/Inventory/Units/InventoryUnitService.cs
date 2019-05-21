@@ -24,7 +24,7 @@ namespace Service.Core.Inventory.Units
             _listener = listener;
         }
 
-        public List<InventoryUnitModel> GetInventoryUnitList()
+        public List<InventoryUnitModel> GetInventoryUnitList(int warehouseId, int productId)
         {
             using (var _context = new DatabaseContext())
             {
@@ -35,6 +35,11 @@ namespace Service.Core.Inventory.Units
                     .Include(x => x.Supplier)
                     .Include(x => x.Uom)
                     .Include(x => x.Warehouse)
+                    .Where(x => (warehouseId == 0 || x.WarehouseId == warehouseId) 
+                            && (productId == 0 || x.ProductId == productId))
+                    .OrderBy(x => x.ReceiveDate)
+                    //.ThenBy(x => x.Warehouse.Name)
+                    //.ThenBy(x => x.Product.Name)
                     .AsQueryable();
                 return InventoryUnitMapper.MapToModel(query);
             }
@@ -331,66 +336,70 @@ namespace Service.Core.Inventory.Units
         {
             using (var _context = new DatabaseContext())
             {
-
-                // subtract from source warehouse (fromWarehouse)
-                if (sourceWarehouseId != null)
+                var product = _context.Product.Find(iuModel.ProductId);
+                if (product != null)
                 {
-                    var fromWp = _context.WarehouseProduct
-                        .Include(x => x.Warehouse)
-                        .Include(x => x.Product)
-                        .FirstOrDefault(x => x.ProductId == iuModel.ProductId
-                                && x.WarehouseId == sourceWarehouseId);
-                    if (fromWp != null)
+                    // subtract from source warehouse (fromWarehouse)
+                    if (sourceWarehouseId != null)
                     {
-                        // update FromWarehouse
-                        fromWp.InStockQuantity -= iuModel.UnitQuantity;
-                        fromWp.OnHoldQuantity -= iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
-                        fromWp.UpdatedAt = now;
-                        fromWp.Product.InStockQuantity -= iuModel.UnitQuantity;
-                        fromWp.Product.OnHoldQuantity -= iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
-                    }
-                }
-                if (targetWarehouseId != null)
-                {
-                    // var toId = target == null ? 0 : target.Id;
-                    var toWp = _context.WarehouseProduct
-                        .Include(x => x.Warehouse)
-                        .Include(x => x.Product)
-                        .FirstOrDefault(x => x.ProductId == iuModel.ProductId
-                                && x.WarehouseId == targetWarehouseId);
-                    // add to the target warehouse (toWarehouse)
-                    if (toWp == null)
-                    {
-                        using (var txn = _context.Database.BeginTransaction())
+                        var fromWp = _context.WarehouseProduct
+                            .Include(x => x.Warehouse)
+                            .Include(x => x.Product)
+                            .FirstOrDefault(x => x.ProductId == iuModel.ProductId
+                                    && x.WarehouseId == sourceWarehouseId);
+                        if (fromWp != null)
                         {
-                            // add
-                            toWp = new WarehouseProduct()
+                            // update FromWarehouse
+                            fromWp.InStockQuantity -= iuModel.UnitQuantity;
+                            fromWp.OnHoldQuantity -= iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
+                            fromWp.UpdatedAt = now;
+                            fromWp.Product.InStockQuantity -= iuModel.UnitQuantity;
+                            fromWp.Product.OnHoldQuantity -= iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
+                        }
+                    }
+                    if (targetWarehouseId != null)
+                    {
+
+                        // var toId = target == null ? 0 : target.Id;
+                        var toWp = _context.WarehouseProduct
+                            .Include(x => x.Warehouse)
+                            .Include(x => x.Product)
+                            .FirstOrDefault(x => x.ProductId == iuModel.ProductId
+                                    && x.WarehouseId == targetWarehouseId);
+                        // add to the target warehouse (toWarehouse)
+                        if (toWp == null)
+                        {
+                            using (var txn = _context.Database.BeginTransaction())
                             {
-                                WarehouseId = targetWarehouseId ?? 0,
-                                ProductId = iuModel.ProductId,
-                            };
+                                // add
+                                toWp = new WarehouseProduct()
+                                {
+                                    WarehouseId = targetWarehouseId ?? 0,
+                                    ProductId = iuModel.ProductId,
+                                };
+                                // update
+                                toWp.InStockQuantity += iuModel.UnitQuantity;
+                                toWp.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
+                                toWp.UpdatedAt = now;
+                                _context.WarehouseProduct.Add(toWp);
+                                // need to do _context.SaveChanges(); Reason: in case of multiple add; the context won't still have the
+                                // added warehouseProduct. and searching in context in next loop won't give the previously added 
+                                // warehouseProduct. Hence multiple rows for same (product,warehouse) is created.  so first save it.
+                                _context.SaveChanges();
+                                txn.Commit();
+                            }
+
+                        }
+                        else
+                        {
                             // update
                             toWp.InStockQuantity += iuModel.UnitQuantity;
                             toWp.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
                             toWp.UpdatedAt = now;
-                            _context.WarehouseProduct.Add(toWp);
-                            // need to do _context.SaveChanges(); Reason: in case of multiple add; the context won't still have the
-                            // added warehouseProduct. and searching in context in next loop won't give the previously added 
-                            // warehouseProduct. Hence multiple rows for same (product,warehouse) is created.  so first save it.
-                            _context.SaveChanges();
-                            txn.Commit();
                         }
-
+                        product.InStockQuantity += iuModel.UnitQuantity;
+                        product.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
                     }
-                    else
-                    {
-                        // update
-                        toWp.InStockQuantity += iuModel.UnitQuantity;
-                        toWp.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
-                        toWp.UpdatedAt = now;
-                    }
-                    toWp.Product.InStockQuantity += iuModel.UnitQuantity;
-                    toWp.Product.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
                 }
             }
         }

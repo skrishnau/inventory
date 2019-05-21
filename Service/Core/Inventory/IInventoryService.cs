@@ -53,6 +53,7 @@ namespace Service.Core.Inventory
         ProductModel GetProduct(int productId);
         ProductModel GetProductForEdit(int productId);
         ProductModel GetProductBySKU(string sku);
+        ProductModel GetProductById(int id);
         void AddUpdateProduct(ProductModel product);
        // void DeleteProduct(int id);
 

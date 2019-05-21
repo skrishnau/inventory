@@ -15,19 +15,19 @@ using Service.Core.Orders;
 using Service.Listeners;
 using IMS.Forms.Inventory.Purchases;
 
-namespace IMS.Forms.Inventory
+namespace IMS.Forms.Production
 {
-    public partial class InventoryUC : UserControl
+    public partial class ProductionUC : UserControl
     {
-        private static readonly string MODULE_NAME = "Inventory";
+        private static readonly string MODULE_NAME = "Production";
         private BodyTemplate _bodyTemplate;
-        private InventoryMenuBar _menubar;
+        private ProductionMenuBar _menubar;
 
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
 
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IDatabaseChangeListener listener)
+        public ProductionUC(ProductionMenuBar menubar, IOrderService orderService, IDatabaseChangeListener listener)
         {
             _orderService = orderService;
             _listener = listener;

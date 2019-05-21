@@ -33,7 +33,7 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
 
         private void AdjustmentUC_Load(object sender, EventArgs e)
         {
-            InitializeHeader();
+           // InitializeHeader();
             InitializeEvents();
 
             PopulateAdjustmentData();
@@ -56,7 +56,7 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
             row.Cells[colType.Index].Value = adj.Type;
             row.Cells[colAffectsDemand.Index].Value = adj.AffectsDemand;
             row.Cells[colUse.Index].Value = adj.Use;
-
+            row.ReadOnly = adj.IsSystem;
             dgvAdj.Rows.Add(row);
         }
 
@@ -134,12 +134,12 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
             };
         }
 
-        private void InitializeHeader()
-        {
-            var _header = HeaderTemplate.Instance;
-            _header.lblHeading.Text = "Adjustment Codes";
-            this.Controls.Add(_header);
-            _header.SendToBack();
-        }
+        //private void InitializeHeader()
+        //{
+        //    var _header = HeaderTemplate.Instance;
+        //    _header.lblHeading.Text = "Adjustment Codes";
+        //    this.Controls.Add(_header);
+        //    _header.SendToBack();
+        //}
     }
 }

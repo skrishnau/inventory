@@ -84,7 +84,7 @@ namespace IMS
             // e.g.
             // container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Singleton);
             // container.Register<IUserContext, WinFormsUserContext>();
-           // container.Register<DatabaseContext>(Lifestyle.Singleton);
+            // container.Register<DatabaseContext>(Lifestyle.Singleton);
             // change listener
             container.Register<IDatabaseChangeListener, DatabaseChangeListener>(Lifestyle.Singleton);
 
@@ -127,7 +127,7 @@ namespace IMS
             container.Register<UserManagementMenuBar>(Lifestyle.Scoped);
 
             // --- General Related --- //
-           
+
             container.Register<CategoryListUC>(Lifestyle.Scoped);
             container.Register<CategoryCreate>(Lifestyle.Scoped);
             container.Register<AttributeListUC>(Lifestyle.Scoped);
@@ -135,7 +135,7 @@ namespace IMS
             container.Register<BranchCreate>(Lifestyle.Scoped);
 
             // --- inventory related --- //
-            
+
 
             container.Register<UomUC>(Lifestyle.Scoped);
             container.Register<PackageUC>(Lifestyle.Scoped);
@@ -152,8 +152,8 @@ namespace IMS
             container.Register<UserCreate>(Lifestyle.Scoped);
             container.Register<NewItemAddForm>(Lifestyle.Scoped);
 
-         
-           // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
+
+            // container.Register<BranchDeleteConfirmationForm>(Lifestyle.Scoped);
 
             // transfers
             container.Register<InventoryTransfersListUC>(Lifestyle.Scoped);
@@ -166,8 +166,8 @@ namespace IMS
             container.Register<InventoryMovementUC>(Lifestyle.Scoped);
 
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
-            
-            
+
+
             //
             // Products
             //
@@ -208,9 +208,9 @@ namespace IMS
             //
             // Orders
             //
-            container.Register<OrderUC>(Lifestyle.Scoped);
-            container.Register<OrderListUC>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderDetailUC>(Lifestyle.Scoped);
+            // container.Register<OrderUC>(Lifestyle.Scoped);
+            // container.Register<OrderListUC>(Lifestyle.Scoped);
+            // container.Register<OrderDetailUC>(Lifestyle.Scoped);
             container.Register<OrderCreateForm>(Lifestyle.Scoped);
             container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
 

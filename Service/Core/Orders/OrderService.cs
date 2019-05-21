@@ -43,7 +43,7 @@ namespace Service.Core.Orders
                     .Include(x => x.OrderItems)
                     .Where(x => x.OrderType == type);
                 // return new List<PurchaseOrderModelForGridView>();
-                return OrderMapper.MapToOrderModel(purchases);
+                return purchases.MapToModel();// OrderMapper.MapToOrderModel(purchases);
             }
         }
 
@@ -54,14 +54,12 @@ namespace Service.Core.Orders
                 int lotNo = _context.Order.Any() ? _context.Order.Max(x => x.LotNumber) : 1;
                 return ++lotNo;
             }
-
         }
 
         public List<OrderItemModel> GetPurchaseOrderItems(int purchaseOrderId)
         {
             using (var _context = new DatabaseContext())
             {
-
                 var query = _context.OrderItem
                     .Include(x => x.Product)
                     .Where(x => x.PurchaseOrderId == purchaseOrderId);
@@ -77,7 +75,7 @@ namespace Service.Core.Orders
                 var now = DateTime.Now;
                 var args = BaseEventArgs<OrderModel>.Instance;
                 var entity = _context.Order.Find(purchaseOrderModel.Id);
-                entity = OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
+                entity = purchaseOrderModel.MapToEntity(entity);// OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
 
                 if (entity.Id == 0)
                 {
@@ -92,7 +90,7 @@ namespace Service.Core.Orders
                     args.Mode = Utility.UpdateMode.EDIT;
                 }
                 _context.SaveChanges();
-                args.Model = OrderMapper.MapToOrderModel(entity);
+                args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
                 _listener.TriggerPurchaseOrderUpdateEvent(null, args);
             }
         }
@@ -113,7 +111,7 @@ namespace Service.Core.Orders
                      .Include(x => x.OrderItems.Select(y => y.Product))
                      .Include(x => x.OrderItems.Select(y => y.Warehouse))
                      .FirstOrDefault(x => x.Id == orderId && x.OrderType == type);
-                return OrderMapper.MapToOrderModel(entity);
+                return entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
             }
         }
 
@@ -139,7 +137,7 @@ namespace Service.Core.Orders
                     entity.IsVerified = true;
                     entity.VerifiedDate = DateTime.Now;
                     _context.SaveChanges();
-                    var args = new BaseEventArgs<OrderModel>(OrderMapper.MapToOrderModel(entity), Utility.UpdateMode.EDIT);
+                    var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
                     _listener.TriggerPurchaseOrderUpdateEvent(null, args);
                     return string.Empty;
                 }
@@ -168,7 +166,7 @@ namespace Service.Core.Orders
                     AddReceivedItemsToWarehouse(entity.OrderItems, now);
 
                     _context.SaveChanges();
-                    var args = new BaseEventArgs<OrderModel>(OrderMapper.MapToOrderModel(entity), Utility.UpdateMode.EDIT);
+                    var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
                     _listener.TriggerPurchaseOrderUpdateEvent(null, args);
                     _listener.TriggerInventoryUnitUpdateEvent(null, null);
                     return string.Empty;
@@ -193,7 +191,7 @@ namespace Service.Core.Orders
                     entity.IsCancelled = true;
                     entity.CancelledDate = DateTime.Now;
                     _context.SaveChanges();
-                    var args = new BaseEventArgs<OrderModel>(OrderMapper.MapToOrderModel(entity), Utility.UpdateMode.EDIT);
+                    var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
                     _listener.TriggerPurchaseOrderUpdateEvent(null, args);
                     return string.Empty;
                 }
@@ -262,7 +260,7 @@ namespace Service.Core.Orders
                     // need not handle update cause entity is already assigned above (entity = Pur...; line)
                 }
                 _context.SaveChanges();
-                var model = OrderMapper.MapToOrderModel(poEntity);
+                var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);
                 var eventArgs = new BaseEventArgs<OrderModel>(model, Utility.UpdateMode.EDIT);
                 _listener.TriggerPurchaseOrderUpdateEvent(null, eventArgs);
                 return string.Empty;

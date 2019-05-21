@@ -19,9 +19,9 @@ namespace IMS.Forms.Inventory.Purchases
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
 
-        public OrderListUC(IOrderService purchaseService, IDatabaseChangeListener listener)
+        public OrderListUC(IOrderService purchaseService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
         {
-            _orderType = OrderTypeEnum.Sale;//orderType; //, OrderTypeEnum orderType
+            _orderType = orderType; //OrderTypeEnum.Sale;//
             _orderService = purchaseService;
             _listener = listener;
 

@@ -39,7 +39,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //
             // Product
             //
-            //PopulateProduct();
+            PopulateProduct();
             //
             // Warehouse
             //

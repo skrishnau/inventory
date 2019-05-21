@@ -43,6 +43,7 @@
             this.lblInformationMessage = new System.Windows.Forms.Label();
             this.gbSingleRowActions = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnReceive = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
             this.btnDisassemble = new System.Windows.Forms.Button();
             this.lblSingleRowActionMessage = new System.Windows.Forms.Label();
@@ -131,7 +132,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 46);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 75);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 140);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // gbInformation
@@ -214,25 +215,39 @@
             this.gbSingleRowActions.Controls.Add(this.lblSingleRowActionMessage);
             this.gbSingleRowActions.Location = new System.Drawing.Point(313, 8);
             this.gbSingleRowActions.Name = "gbSingleRowActions";
-            this.gbSingleRowActions.Size = new System.Drawing.Size(190, 59);
+            this.gbSingleRowActions.Size = new System.Drawing.Size(274, 59);
             this.gbSingleRowActions.TabIndex = 6;
             this.gbSingleRowActions.TabStop = false;
             this.gbSingleRowActions.Text = "Single Row Actions";
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.Controls.Add(this.btnReceive);
             this.flowLayoutPanel2.Controls.Add(this.btnSplit);
             this.flowLayoutPanel2.Controls.Add(this.btnDisassemble);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(184, 29);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(268, 29);
             this.flowLayoutPanel2.TabIndex = 11;
+            // 
+            // btnReceive
+            // 
+            this.btnReceive.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnReceive.Location = new System.Drawing.Point(3, 3);
+            this.btnReceive.Name = "btnReceive";
+            this.btnReceive.Size = new System.Drawing.Size(75, 23);
+            this.btnReceive.TabIndex = 6;
+            this.btnReceive.Text = "Receive";
+            this.btnReceive.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.btnReceive, "Split the selcted Inventory Unit (row)");
+            this.btnReceive.UseVisualStyleBackColor = true;
             // 
             // btnSplit
             // 
             this.btnSplit.Image = global::IMS.Properties.Resources.icons8_Divider_16px;
-            this.btnSplit.Location = new System.Drawing.Point(3, 3);
+            this.btnSplit.Location = new System.Drawing.Point(84, 3);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(75, 23);
             this.btnSplit.TabIndex = 5;
@@ -247,7 +262,7 @@
             this.btnDisassemble.Enabled = false;
             this.btnDisassemble.Image = global::IMS.Properties.Resources.icons8_Split_Files_16px;
             this.btnDisassemble.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDisassemble.Location = new System.Drawing.Point(84, 3);
+            this.btnDisassemble.Location = new System.Drawing.Point(165, 3);
             this.btnDisassemble.Name = "btnDisassemble";
             this.btnDisassemble.Size = new System.Drawing.Size(95, 23);
             this.btnDisassemble.TabIndex = 4;
@@ -264,7 +279,7 @@
             this.lblSingleRowActionMessage.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblSingleRowActionMessage.Location = new System.Drawing.Point(3, 45);
             this.lblSingleRowActionMessage.Name = "lblSingleRowActionMessage";
-            this.lblSingleRowActionMessage.Size = new System.Drawing.Size(184, 11);
+            this.lblSingleRowActionMessage.Size = new System.Drawing.Size(268, 11);
             this.lblSingleRowActionMessage.TabIndex = 12;
             this.lblSingleRowActionMessage.Text = "Disable Bulk Actions to enable this";
             this.lblSingleRowActionMessage.Visible = false;
@@ -274,7 +289,7 @@
             this.gbBulkActions.Controls.Add(this.chkBulkActions);
             this.gbBulkActions.Controls.Add(this.pnlBulkActions);
             this.gbBulkActions.Controls.Add(this.lblBulkActionsMessage);
-            this.gbBulkActions.Location = new System.Drawing.Point(509, 8);
+            this.gbBulkActions.Location = new System.Drawing.Point(8, 73);
             this.gbBulkActions.Name = "gbBulkActions";
             this.gbBulkActions.Size = new System.Drawing.Size(253, 59);
             this.gbBulkActions.TabIndex = 6;
@@ -361,9 +376,9 @@
             // 
             this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 121);
+            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 186);
             this.dgvInventoryUnit.Name = "dgvInventoryUnit";
-            this.dgvInventoryUnit.Size = new System.Drawing.Size(801, 288);
+            this.dgvInventoryUnit.Size = new System.Drawing.Size(801, 223);
             this.dgvInventoryUnit.TabIndex = 6;
             // 
             // InventoryUnitListUC
@@ -418,5 +433,6 @@
         private System.Windows.Forms.Label lblSingleRowActionMessage;
         private System.Windows.Forms.ToolTip toolTip1;
         private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvInventoryUnit;
+        private System.Windows.Forms.Button btnReceive;
     }
 }

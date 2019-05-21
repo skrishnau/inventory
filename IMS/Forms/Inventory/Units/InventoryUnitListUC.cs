@@ -11,6 +11,8 @@ using SimpleInjector.Lifestyles;
 using IMS.Forms.Inventory.Units.Actions;
 using Service.Core.Inventory.Units;
 using ViewModel.Enums;
+using ViewModel.Core.Common;
+using ViewModel.Core.Business;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -22,7 +24,7 @@ namespace IMS.Forms.Inventory.Units
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
 
-        private HeaderTemplate _header;
+        // private HeaderTemplate _header;
         // private int checkCount;
         // private bool _bulkActionsEnabled;
 
@@ -45,7 +47,13 @@ namespace IMS.Forms.Inventory.Units
 
         private void InventoryUnitListUC_Load(object sender, EventArgs e)
         {
-            InitializeHeader();
+            // InitializeHeader();  
+            _listener.WarehouseUpdated += _listener_WarehouseUpdated;
+            _listener.ProductUpdated += _listener_ProductUpdated;
+            // InitializeHeader();
+            PopulateWarehouses();
+            PopulateProducts();
+
             InitializeEvents();
             InitializeGridView();
             PopulateInventoryUnits();
@@ -53,7 +61,15 @@ namespace IMS.Forms.Inventory.Units
             InitializeListeners();
         }
 
+        private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<WarehouseModel> e)
+        {
+            PopulateWarehouses();
+        }
 
+        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        {
+            PopulateProducts();
+        }
 
         #region Intialization Funcitons
 
@@ -67,22 +83,36 @@ namespace IMS.Forms.Inventory.Units
             PopulateInventoryUnits();
         }
 
-        private void InitializeHeader()
-        {
-            _header = HeaderTemplate.Instance;
-            this.Controls.Add(_header);
-            _header.SendToBack();
-            // header text
-            _header.lblHeading.Text = "Inventory Units";
-        }
+        //private void InitializeHeader()
+        //{
+        //    _header = HeaderTemplate.Instance;
+        //    this.Controls.Add(_header);
+        //    _header.SendToBack();
+        //    // header text
+        //    _header.lblHeading.Text = "Inventory Units";
+        //}
 
         private void InitializeEvents()
         {
+            cbWarehouse.SelectedValueChanged += CbWarehouse_SelectedValueChanged;
+            cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
+
             btnMerge.Click += BtnMerge_Click;
             btnSplit.Click += BtnSplit_Click;
             btnMove.Click += BtnMove_Click;
             btnIssue.Click += BtnIssue_Click;
             btnDisassemble.Click += BtnDisassemble_Click;
+            btnReceive.Click += BtnReceive_Click;
+        }
+
+        private void BtnReceive_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                directReceiveForm.SetData(MovementTypeEnum.DirectReceive);
+                directReceiveForm.ShowDialog();
+            }
         }
 
         private void InitializeGridView()
@@ -100,10 +130,32 @@ namespace IMS.Forms.Inventory.Units
 
         #region Populate and Get Data
 
+        private void PopulateWarehouses()
+        {
+            var warehouses = _inventoryService.GetWarehouseListForCombo();
+            var allWarehouse = new IdNamePair { Id = 0, Name = " ---- All ---- " };
+            warehouses.Insert(0, allWarehouse);
+            cbWarehouse.DataSource = warehouses;
+            cbWarehouse.DisplayMember = "Name";
+            cbWarehouse.ValueMember = "Id";
+        }
+
+        private void PopulateProducts()
+        {
+            var products = _inventoryService.GetProductListForCombo();
+            var allProduct = new IdNamePair { Id = 0, Name = " ---- All ---- " };
+            products.Insert(0, allProduct);
+            cbProduct.DataSource = products;
+            cbProduct.DisplayMember = "Name";
+            cbProduct.ValueMember = "Id";
+        }
+
         private void PopulateInventoryUnits()
         {
             dgvInventoryUnit.ResetCheckCount();
-            var inventoryUnits = _inventoryUnitService.GetInventoryUnitList();
+            var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
+            var productId = int.Parse(cbProduct.SelectedValue.ToString());
+            var inventoryUnits = _inventoryUnitService.GetInventoryUnitList(warehouseId, productId);
             dgvInventoryUnit.DataSource = inventoryUnits;
         }
 
@@ -127,8 +179,18 @@ namespace IMS.Forms.Inventory.Units
         #endregion
 
 
-        #region GridView Event Handlers
+        #region Events (filter controls)
 
+
+        private void CbProduct_SelectedValueChanged(object sender, EventArgs e)
+        {
+            PopulateInventoryUnits();
+        }
+
+        private void CbWarehouse_SelectedValueChanged(object sender, EventArgs e)
+        {
+            PopulateInventoryUnits();
+        }
 
         #endregion
 

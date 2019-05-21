@@ -38,8 +38,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            //this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouseId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             // this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,7 +102,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colId,
             this.colCheck,
             this.colProductId,
-            this.colProduct,
+           // this.colProduct,
             this.colSKU,
             this.colInStockQuantity,
             this.colOnHoldQuantity,
@@ -161,14 +161,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colProductId.HeaderText = "ProductId";
             this.colProductId.Name = "colProductId";
             this.colProductId.Visible = false;
+            this.colProductId.Width = 150;
             // 
             // colProduct
             // 
-            this.colProduct.DataPropertyName = "Product";
-            this.colProduct.HeaderText = "Product";
-            this.colProduct.Name = "colProduct";
-            this.colProduct.Visible = false;
-            this.colProduct.Width = 150;
+            //this.colProduct.DataPropertyName = "Product";
+            //this.colProduct.HeaderText = "Product";
+            //this.colProduct.Name = "colProduct";
+            //this.colProduct.Visible = false;
+            //this.colProduct.Width = 150;
             // 
             // colSKU
             // 
@@ -414,7 +415,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public void DesignForInventoryUnitListing()
         {
             this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            colProduct.Visible = true;
+            colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackageId.Visible = true;
@@ -428,6 +429,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
+
+            HideUnusedDefaults();
+
         }
         //
         // PO Receive designs
@@ -435,7 +439,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public void DesignForPurchaseOrderReceive()
         {
             this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            colProduct.Visible = true;
+            colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackageId.Visible = true;
@@ -446,6 +450,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
             colIsHold.Visible = true;
+
+            HideUnusedDefaults();
         }
         //
         // Direct Receive designs
@@ -453,10 +459,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public void DesignForDirectReceive()
         {
             this.RowHeadersVisible = true;
-            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.AllowUserToAddRows = true;
             this.AllowUserToDeleteRows = true;
-            colProduct.Visible = true;
+            colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackageId.Visible = true;
@@ -469,6 +475,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.HeaderText = "Reference";
             colIsHold.Visible = true;
             colRemark.Visible = true;
+
+            HideUnusedDefaults();
         }
         //
         // Direct Issue designs
@@ -479,7 +487,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.SelectionMode = DataGridViewSelectionMode.CellSelect;
             //this.AllowUserToAddRows = true;
             //this.AllowUserToDeleteRows = true;
-            colProduct.Visible = true;
+            colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackageQuantity.Visible = true;
@@ -497,6 +505,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             MakeAllColumnsReadOnly();
             colUnitQuantity.ReadOnly = false;
             colPackageQuantity.ReadOnly = false;
+
+            HideUnusedDefaults();
         }
         //
         // Direct Move designs
@@ -507,7 +517,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.SelectionMode = DataGridViewSelectionMode.CellSelect;
             //this.AllowUserToAddRows = true;
             //this.AllowUserToDeleteRows = true;
-            colProduct.Visible = true;
+            colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackageQuantity.Visible = true;
@@ -525,6 +535,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             MakeAllColumnsReadOnly();
             //colUnitQuantity.ReadOnly = false;
             //colPackageQuantity.ReadOnly = false;
+            HideUnusedDefaults();
         }
 
         private void MakeAllColumnsReadOnly()
@@ -535,6 +546,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
         }
 
+        private void HideUnusedDefaults()
+        {
+            this.colSKU.Visible = false;
+        }
+
         #endregion
 
 
@@ -542,8 +558,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         public System.Windows.Forms.DataGridViewTextBoxColumn colId;
         public System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
-        public System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
-        public System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
+        public System.Windows.Forms.DataGridViewComboBoxColumn colProductId;
+       // public System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         public System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
 
 

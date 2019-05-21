@@ -14,17 +14,17 @@ namespace DTO.Core.Inventory
     public static class OrderMapper
     {
 
-        public static Order MapToOrderEntityForAdd(OrderModel model, Order entity)
+        public static Order MapToEntity(this OrderModel model, Order entity)
         {
             return Mappings.Mapper.Map(model, entity);
         }
 
-        public static List<OrderModel> MapToOrderModel(IQueryable<Order> query)
+        public static List<OrderModel> MapToModel(this IQueryable<Order> query)
         {
             return Mappings.Mapper.Map<List<OrderModel>>(query);
         }
 
-        public static OrderModel MapToOrderModel(Order entity)
+        public static OrderModel MapToModel(this Order entity)
         {
             return Mappings.Mapper.Map<OrderModel>(entity);
         }

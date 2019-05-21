@@ -103,6 +103,7 @@
     <Compile Include="Core\Settings\CompanyInfoSettingModel.cs" />
     <Compile Include="Core\Suppliers\SupplierModel.cs" />
     <Compile Include="Core\Users\BasicInfoModel.cs" />
+    <Compile Include="Enums\AdjustmentEnum.cs" />
     <Compile Include="Enums\InventoryActionEnum.cs" />
     <Compile Include="Enums\Inventory\Adjustments.cs" />
     <Compile Include="Enums\MovementTypeEnum.cs" />
