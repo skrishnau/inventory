@@ -156,6 +156,7 @@
             this.lblClient.Size = new System.Drawing.Size(52, 13);
             this.lblClient.TabIndex = 0;
             this.lblClient.Text = "Supplier *";
+            this.lblClient.DoubleClick += new System.EventHandler(this.lblClient_Click);
             // 
             // cbClient
             // 
@@ -176,6 +177,7 @@
             this.lblWarehouse.Size = new System.Drawing.Size(69, 13);
             this.lblWarehouse.TabIndex = 2;
             this.lblWarehouse.Text = "Warehouse *";
+            this.lblWarehouse.DoubleClick += new System.EventHandler(this.lblWarehouse_DoubleClick);
             // 
             // lblClientInfo
             // 
@@ -294,7 +296,7 @@
             this.tbNotes.Margin = new System.Windows.Forms.Padding(2);
             this.tbNotes.Multiline = true;
             this.tbNotes.Name = "tbNotes";
-            this.tbNotes.Size = new System.Drawing.Size(256, 50);
+            this.tbNotes.Size = new System.Drawing.Size(564, 50);
             this.tbNotes.TabIndex = 3;
             // 
             // OrderCreateForm

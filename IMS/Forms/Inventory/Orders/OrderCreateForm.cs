@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
+using IMS.Forms.Inventory.Suppliers;
+using IMS.Forms.Inventory.Warehouses;
+using IMS.Forms.POS.Customers;
 using IMS.Forms.Purchases.Order;
 using Service.Core.Business;
 using Service.Core.Customers;
@@ -10,6 +13,7 @@ using Service.Core.Inventory;
 using Service.Core.Orders;
 using Service.Core.Suppliers;
 using Service.Listeners;
+using SimpleInjector.Lifestyles;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
 using ViewModel.Enums;
@@ -36,7 +40,7 @@ namespace IMS.Forms.Inventory.Orders
             ICustomerService customerService,
             IBusinessService businessService,
             IInventoryService inventoryService,
-            IOrderService purchaseService, 
+            IOrderService purchaseService,
             IDatabaseChangeListener listener) /* It's a only way I know :D */
         {
             _listener = listener;
@@ -55,7 +59,7 @@ namespace IMS.Forms.Inventory.Orders
         {
             var po = _orderService.GetOrder(_orderType, _orderId);
             SetDataForEdit(po);
-            
+
             PopulateClientCombo();
             PopulateWarehouseCombo();
 
@@ -63,9 +67,9 @@ namespace IMS.Forms.Inventory.Orders
 
             _listener.CustomerUpdated += _listener_CustomerUpdated;
             _listener.SupplierUpdated += _listener_SupplierUpdated;
+            _listener.WarehouseUpdated += _listener_WarehouseUpdated;
 
         }
-
 
         private void InitializeValidation()
         {
@@ -85,10 +89,14 @@ namespace IMS.Forms.Inventory.Orders
             _requiredFieldValidator = new RequiredFieldValidator(errorProvider, controls.ToArray());
 
         }
+       
+
+
+        #region Listener Events
 
         private void _listener_CustomerUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Customers.CustomerModel> e)
         {
-            if(_orderType == OrderTypeEnum.Sale)
+            if (_orderType == OrderTypeEnum.Sale)
             {
                 PopulateClientCombo();
                 cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
@@ -104,6 +112,16 @@ namespace IMS.Forms.Inventory.Orders
             }
         }
 
+        private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Business.WarehouseModel> e)
+        {
+            PopulateWarehouseCombo();
+            cbWarehouse.SelectedValue = e.Model == null ? 0 : e.Model.Id;
+        }
+
+        #endregion
+
+
+
         #region Populate Functions
 
         private void PopulateClientCombo()
@@ -112,7 +130,7 @@ namespace IMS.Forms.Inventory.Orders
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
-                   list = _supplierService.GetSupplierListForCombo();
+                    list = _supplierService.GetSupplierListForCombo();
                     break;
                 case OrderTypeEnum.Sale:
                     list = _customerService.GetCustomerListForCombo();
@@ -148,7 +166,7 @@ namespace IMS.Forms.Inventory.Orders
         {
             _orderType = orderType;
             _orderId = purchaseOrderId;
-            
+
         }
 
         private void SetDataForEdit(OrderModel model)
@@ -186,7 +204,7 @@ namespace IMS.Forms.Inventory.Orders
                 case OrderTypeEnum.Purchase:
                     lblClient.Text = "Supplier";
                     lblClientInfo.Text = "Supplier Invoice";
-                    this.Text = (model == null ? "Create" : "Edit" )+" Purchase Order";
+                    this.Text = (model == null ? "Create" : "Edit") + " Purchase Order";
                     break;
                 case OrderTypeEnum.Sale:
                     cbWarehouse.Visible = false;
@@ -200,12 +218,15 @@ namespace IMS.Forms.Inventory.Orders
                     break;
             }
 
-           
+
 
         }
 
         #endregion
+        
 
+
+        #region Button and Label Events
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -217,6 +238,35 @@ namespace IMS.Forms.Inventory.Orders
         {
             Save();
         }
+
+        private void lblClient_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                switch (_orderType)
+                {
+                    case OrderTypeEnum.Purchase:
+                        var supplierCreate = Program.container.GetInstance<SupplierCreate>();
+                        supplierCreate.ShowDialog();
+                        break;
+                    case OrderTypeEnum.Sale:
+                        var customerCreate = Program.container.GetInstance<CustomerCreateForm>();
+                        customerCreate.ShowDialog();
+                        break;
+                }
+            }
+        }
+
+        private void lblWarehouse_DoubleClick(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var warehouseCreate = Program.container.GetInstance<WarehouseCreateForm>();
+                warehouseCreate.ShowDialog();
+            }
+        }
+
+        #endregion
 
         private void Save()
         {
@@ -258,10 +308,5 @@ namespace IMS.Forms.Inventory.Orders
             this.Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-    }
+       }
 }
