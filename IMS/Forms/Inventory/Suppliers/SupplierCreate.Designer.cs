@@ -45,13 +45,13 @@
             this.tbNotes = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbMyAccountNo = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.chkUse = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tbWebsite = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.chkUse = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -103,7 +103,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.9906F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.83072F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.721F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel1.Controls.Add(this.tbSalesperson, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblName, 0, 0);
@@ -140,7 +140,7 @@
             // 
             // tbSalesperson
             // 
-            this.tbSalesperson.Location = new System.Drawing.Point(434, 3);
+            this.tbSalesperson.Location = new System.Drawing.Point(433, 3);
             this.tbSalesperson.Name = "tbSalesperson";
             this.tbSalesperson.Size = new System.Drawing.Size(185, 20);
             this.tbSalesperson.TabIndex = 55;
@@ -148,7 +148,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(335, 0);
+            this.label3.Location = new System.Drawing.Point(334, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
@@ -204,7 +204,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(335, 27);
+            this.label2.Location = new System.Drawing.Point(334, 27);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
@@ -213,7 +213,7 @@
             // 
             // tbNotes
             // 
-            this.tbNotes.Location = new System.Drawing.Point(434, 30);
+            this.tbNotes.Location = new System.Drawing.Point(433, 30);
             this.tbNotes.Multiline = true;
             this.tbNotes.Name = "tbNotes";
             this.tbNotes.Size = new System.Drawing.Size(185, 59);
@@ -222,7 +222,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(335, 94);
+            this.label7.Location = new System.Drawing.Point(334, 94);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 13);
@@ -231,15 +231,35 @@
             // 
             // tbMyAccountNo
             // 
-            this.tbMyAccountNo.Location = new System.Drawing.Point(434, 97);
+            this.tbMyAccountNo.Location = new System.Drawing.Point(433, 97);
             this.tbMyAccountNo.Name = "tbMyAccountNo";
             this.tbMyAccountNo.Size = new System.Drawing.Size(185, 20);
             this.tbMyAccountNo.TabIndex = 75;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 178);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(26, 13);
+            this.label9.TabIndex = 76;
+            this.label9.Text = "Use";
+            // 
+            // chkUse
+            // 
+            this.chkUse.AutoSize = true;
+            this.chkUse.Checked = true;
+            this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUse.Location = new System.Drawing.Point(105, 181);
+            this.chkUse.Name = "chkUse";
+            this.chkUse.Size = new System.Drawing.Size(15, 14);
+            this.chkUse.TabIndex = 36;
+            this.chkUse.UseVisualStyleBackColor = true;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(335, 122);
+            this.label8.Location = new System.Drawing.Point(334, 122);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(46, 13);
@@ -248,7 +268,7 @@
             // 
             // tbWebsite
             // 
-            this.tbWebsite.Location = new System.Drawing.Point(434, 125);
+            this.tbWebsite.Location = new System.Drawing.Point(433, 125);
             this.tbWebsite.Name = "tbWebsite";
             this.tbWebsite.Size = new System.Drawing.Size(185, 20);
             this.tbWebsite.TabIndex = 80;
@@ -284,24 +304,6 @@
             this.btnCancel.TabIndex = 101;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 178);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(26, 13);
-            this.label9.TabIndex = 76;
-            this.label9.Text = "Use";
-            // 
-            // chkUse
-            // 
-            this.chkUse.AutoSize = true;
-            this.chkUse.Location = new System.Drawing.Point(105, 181);
-            this.chkUse.Name = "chkUse";
-            this.chkUse.Size = new System.Drawing.Size(15, 14);
-            this.chkUse.TabIndex = 36;
-            this.chkUse.UseVisualStyleBackColor = true;
             // 
             // SupplierCreate
             // 
