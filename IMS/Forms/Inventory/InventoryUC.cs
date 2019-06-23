@@ -14,6 +14,8 @@ using ViewModel.Enums;
 using Service.Core.Orders;
 using Service.Listeners;
 using IMS.Forms.Inventory.Purchases;
+using IMS.Forms.POS;
+using IMS.Forms.Inventory.Dashboard;
 
 namespace IMS.Forms.Inventory
 {
@@ -39,6 +41,12 @@ namespace IMS.Forms.Inventory
 
             InitializeMenubarButtonEvents();
 
+            ShowDashboard();
+        }
+
+        private void ShowDashboard()
+        {
+            BtnHome_Click(_menubar.btnHome, EventArgs.Empty);
         }
 
         private void InitializeRootTemplate()
@@ -55,6 +63,7 @@ namespace IMS.Forms.Inventory
 
         private void InitializeMenubarButtonEvents()
         {
+            _menubar.btnHome.Click += BtnHome_Click;
             // product
             _menubar.btnProductList.Click += BtnProductList_Click;
 
@@ -81,10 +90,21 @@ namespace IMS.Forms.Inventory
 
             _menubar.btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
             _menubar.btnSellOrder.Click += BtnSellOrder_Click;
+            _menubar.btnPOS.Click += BtnPOS_Click;
         }
+
+      
 
         private OrderUC purchaseOrderUC;
         private OrderUC saleOrderUC;
+
+        private void BtnHome_Click(object sender, EventArgs e)
+        {
+            var dashboard = Program.container.GetInstance<DashboardUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            _bodyTemplate.pnlBody.Controls.Add(dashboard);
+            _menubar.SetSelection(sender);
+        }
 
         private void BtnSellOrder_Click(object sender, EventArgs e)
         {
@@ -138,6 +158,15 @@ namespace IMS.Forms.Inventory
         {
 
 
+        }
+
+
+        private void BtnPOS_Click(object sender, EventArgs e)
+        {
+            var posUC = Program.container.GetInstance<PosUC>();
+            _bodyTemplate.pnlBody.Controls.Clear();
+            _bodyTemplate.pnlBody.Controls.Add(posUC);
+            _menubar.SetSelection(sender);
         }
 
         #region Products

@@ -11,11 +11,11 @@ using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Categories;
-using IMS.Forms.UserManagement.Users;
 using IMS.Forms.Common.Display;
 using IMS.Forms.Inventory.Settings.Companies;
 using IMS.Forms.Inventory.Settings.References;
 using IMS.Forms.Inventory.Settings.Appearance;
+using IMS.Forms.Inventory.Users;
 
 namespace IMS.Forms.Inventory.Settings
 {

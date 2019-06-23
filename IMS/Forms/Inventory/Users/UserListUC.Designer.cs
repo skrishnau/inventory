@@ -1,4 +1,4 @@
-﻿namespace IMS.Forms.UserManagement.Users
+﻿namespace IMS.Forms.Inventory.Users
 {
     partial class UserListUC
     {

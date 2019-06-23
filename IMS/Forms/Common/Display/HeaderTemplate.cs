@@ -16,6 +16,7 @@ namespace IMS.Forms.Common.Display
         public HeaderTemplate()
         {
             InitializeComponent();
+            this.Dock = DockStyle.Top;
         }
 
        public override string Text { get { return lblHeading.Text; } set { lblHeading.Text = value; } }
@@ -25,10 +26,7 @@ namespace IMS.Forms.Common.Display
         {
             get
             {
-                return new HeaderTemplate()
-                {
-                    Dock = DockStyle.Top,
-                };
+                return new HeaderTemplate();
             }
         }
     }

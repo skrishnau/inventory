@@ -91,31 +91,6 @@
             this.numReorderPoint = new System.Windows.Forms.NumericUpDown();
             this.label28 = new System.Windows.Forms.Label();
             this.numReorderQuantity = new System.Windows.Forms.NumericUpDown();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.chkIsBuy = new System.Windows.Forms.CheckBox();
-            this.chkIsBuild = new System.Windows.Forms.CheckBox();
-            this.chkIsSell = new System.Windows.Forms.CheckBox();
-            this.cbWarehouse = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.chkIsNotMovable = new System.Windows.Forms.CheckBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.gbPackage = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cbUom = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbPackage = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.numUnitsInPackage = new System.Windows.Forms.NumericUpDown();
-            this.numUnitNetWeight = new System.Windows.Forms.NumericUpDown();
-            this.numUnitGrossWeight = new System.Windows.Forms.NumericUpDown();
             this.tabDescription = new System.Windows.Forms.TabPage();
             this.pnlVariants = new System.Windows.Forms.Panel();
             this.dgvVariants = new System.Windows.Forms.DataGridView();
@@ -128,6 +103,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.gbPackage = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.numUnitGrossWeight = new System.Windows.Forms.NumericUpDown();
+            this.numUnitNetWeight = new System.Windows.Forms.NumericUpDown();
+            this.numUnitsInPackage = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbPackage = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbUom = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.chkIsNotMovable = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.cbWarehouse = new System.Windows.Forms.ComboBox();
+            this.chkIsSell = new System.Windows.Forms.CheckBox();
+            this.chkIsBuild = new System.Windows.Forms.CheckBox();
+            this.chkIsBuy = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.tblBasicDetails.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -153,18 +153,18 @@
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReorderQuantity)).BeginInit();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.gbPackage.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numUnitsInPackage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUnitNetWeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUnitGrossWeight)).BeginInit();
             this.tabDescription.SuspendLayout();
             this.pnlVariants.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVariants)).BeginInit();
             this.panel8.SuspendLayout();
+            this.gbPackage.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitGrossWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitNetWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitsInPackage)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tblBasicDetails
@@ -836,278 +836,6 @@
             this.numReorderQuantity.Size = new System.Drawing.Size(87, 20);
             this.numReorderQuantity.TabIndex = 2;
             // 
-            // tableLayoutPanel9
-            // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Controls.Add(this.groupBox1, 0, 0);
-            this.tableLayoutPanel9.Controls.Add(this.gbPackage, 1, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(700, 147);
-            this.tableLayoutPanel9.TabIndex = 36;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(344, 141);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Inventory";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.label15, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.chkIsBuy, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.chkIsBuild, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.chkIsSell, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.cbWarehouse, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label16, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.chkIsNotMovable, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label20, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label17, 0, 3);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 5;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(338, 122);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 13);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Is a buy";
-            // 
-            // chkIsBuy
-            // 
-            this.chkIsBuy.AutoSize = true;
-            this.chkIsBuy.Checked = true;
-            this.chkIsBuy.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIsBuy.Location = new System.Drawing.Point(172, 3);
-            this.chkIsBuy.Name = "chkIsBuy";
-            this.chkIsBuy.Size = new System.Drawing.Size(15, 14);
-            this.chkIsBuy.TabIndex = 7;
-            this.chkIsBuy.UseVisualStyleBackColor = true;
-            // 
-            // chkIsBuild
-            // 
-            this.chkIsBuild.AutoSize = true;
-            this.chkIsBuild.Location = new System.Drawing.Point(172, 27);
-            this.chkIsBuild.Name = "chkIsBuild";
-            this.chkIsBuild.Size = new System.Drawing.Size(15, 14);
-            this.chkIsBuild.TabIndex = 8;
-            this.chkIsBuild.UseVisualStyleBackColor = true;
-            // 
-            // chkIsSell
-            // 
-            this.chkIsSell.AutoSize = true;
-            this.chkIsSell.Checked = true;
-            this.chkIsSell.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIsSell.Location = new System.Drawing.Point(172, 51);
-            this.chkIsSell.Name = "chkIsSell";
-            this.chkIsSell.Size = new System.Drawing.Size(15, 14);
-            this.chkIsSell.TabIndex = 9;
-            this.chkIsSell.UseVisualStyleBackColor = true;
-            // 
-            // cbWarehouse
-            // 
-            this.cbWarehouse.FormattingEnabled = true;
-            this.cbWarehouse.Location = new System.Drawing.Point(172, 99);
-            this.cbWarehouse.Name = "cbWarehouse";
-            this.cbWarehouse.Size = new System.Drawing.Size(140, 21);
-            this.cbWarehouse.TabIndex = 12;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(3, 96);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(99, 13);
-            this.label16.TabIndex = 4;
-            this.label16.Text = "Default Warehouse";
-            // 
-            // chkIsNotMovable
-            // 
-            this.chkIsNotMovable.AutoSize = true;
-            this.chkIsNotMovable.Location = new System.Drawing.Point(172, 75);
-            this.chkIsNotMovable.Name = "chkIsNotMovable";
-            this.chkIsNotMovable.Size = new System.Drawing.Size(15, 14);
-            this.chkIsNotMovable.TabIndex = 10;
-            this.chkIsNotMovable.UseVisualStyleBackColor = true;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(3, 24);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(49, 13);
-            this.label20.TabIndex = 6;
-            this.label20.Text = "Is a build";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 48);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(42, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Is a sell";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 72);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(91, 13);
-            this.label17.TabIndex = 5;
-            this.label17.Text = "Cannot be moved";
-            // 
-            // gbPackage
-            // 
-            this.gbPackage.Controls.Add(this.tableLayoutPanel3);
-            this.gbPackage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbPackage.Location = new System.Drawing.Point(353, 3);
-            this.gbPackage.Name = "gbPackage";
-            this.gbPackage.Size = new System.Drawing.Size(344, 141);
-            this.gbPackage.TabIndex = 10;
-            this.gbPackage.TabStop = false;
-            this.gbPackage.Text = "Package";
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.label10, 0, 4);
-            this.tableLayoutPanel3.Controls.Add(this.cbUom, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.cbPackage, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.numUnitsInPackage, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.numUnitNetWeight, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.numUnitGrossWeight, 1, 4);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 5;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(338, 122);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 96);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(93, 13);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Unit Gross Weight";
-            // 
-            // cbUom
-            // 
-            this.cbUom.FormattingEnabled = true;
-            this.cbUom.Location = new System.Drawing.Point(172, 27);
-            this.cbUom.Name = "cbUom";
-            this.cbUom.Size = new System.Drawing.Size(121, 21);
-            this.cbUom.TabIndex = 14;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Base Unit of Measure";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Package Type";
-            // 
-            // cbPackage
-            // 
-            this.cbPackage.FormattingEnabled = true;
-            this.cbPackage.Location = new System.Drawing.Point(172, 3);
-            this.cbPackage.Name = "cbPackage";
-            this.cbPackage.Size = new System.Drawing.Size(121, 21);
-            this.cbPackage.TabIndex = 13;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Units in Package";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 72);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(83, 13);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Unit Net Weight";
-            // 
-            // numUnitsInPackage
-            // 
-            this.numUnitsInPackage.DecimalPlaces = 1;
-            this.numUnitsInPackage.Location = new System.Drawing.Point(172, 51);
-            this.numUnitsInPackage.Name = "numUnitsInPackage";
-            this.numUnitsInPackage.Size = new System.Drawing.Size(120, 20);
-            this.numUnitsInPackage.TabIndex = 15;
-            // 
-            // numUnitNetWeight
-            // 
-            this.numUnitNetWeight.DecimalPlaces = 1;
-            this.numUnitNetWeight.Location = new System.Drawing.Point(172, 75);
-            this.numUnitNetWeight.Name = "numUnitNetWeight";
-            this.numUnitNetWeight.Size = new System.Drawing.Size(120, 20);
-            this.numUnitNetWeight.TabIndex = 16;
-            // 
-            // numUnitGrossWeight
-            // 
-            this.numUnitGrossWeight.DecimalPlaces = 1;
-            this.numUnitGrossWeight.Location = new System.Drawing.Point(172, 99);
-            this.numUnitGrossWeight.Name = "numUnitGrossWeight";
-            this.numUnitGrossWeight.Size = new System.Drawing.Size(120, 20);
-            this.numUnitGrossWeight.TabIndex = 17;
-            // 
             // tabDescription
             // 
             this.tabDescription.Controls.Add(this.pnlVariants);
@@ -1220,6 +948,278 @@
             this.label14.Text = "Desccription";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // gbPackage
+            // 
+            this.gbPackage.Controls.Add(this.tableLayoutPanel3);
+            this.gbPackage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbPackage.Location = new System.Drawing.Point(353, 3);
+            this.gbPackage.Name = "gbPackage";
+            this.gbPackage.Size = new System.Drawing.Size(344, 141);
+            this.gbPackage.TabIndex = 10;
+            this.gbPackage.TabStop = false;
+            this.gbPackage.Text = "Package";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.label10, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.cbUom, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cbPackage, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.numUnitsInPackage, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.numUnitNetWeight, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.numUnitGrossWeight, 1, 4);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 5;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(338, 122);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // numUnitGrossWeight
+            // 
+            this.numUnitGrossWeight.DecimalPlaces = 1;
+            this.numUnitGrossWeight.Location = new System.Drawing.Point(172, 99);
+            this.numUnitGrossWeight.Name = "numUnitGrossWeight";
+            this.numUnitGrossWeight.Size = new System.Drawing.Size(120, 20);
+            this.numUnitGrossWeight.TabIndex = 17;
+            // 
+            // numUnitNetWeight
+            // 
+            this.numUnitNetWeight.DecimalPlaces = 1;
+            this.numUnitNetWeight.Location = new System.Drawing.Point(172, 75);
+            this.numUnitNetWeight.Name = "numUnitNetWeight";
+            this.numUnitNetWeight.Size = new System.Drawing.Size(120, 20);
+            this.numUnitNetWeight.TabIndex = 16;
+            // 
+            // numUnitsInPackage
+            // 
+            this.numUnitsInPackage.DecimalPlaces = 1;
+            this.numUnitsInPackage.Location = new System.Drawing.Point(172, 51);
+            this.numUnitsInPackage.Name = "numUnitsInPackage";
+            this.numUnitsInPackage.Size = new System.Drawing.Size(120, 20);
+            this.numUnitsInPackage.TabIndex = 15;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 72);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(83, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Unit Net Weight";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Units in Package";
+            // 
+            // cbPackage
+            // 
+            this.cbPackage.FormattingEnabled = true;
+            this.cbPackage.Location = new System.Drawing.Point(172, 3);
+            this.cbPackage.Name = "cbPackage";
+            this.cbPackage.Size = new System.Drawing.Size(121, 21);
+            this.cbPackage.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Package Type";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(3, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(109, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Base Unit of Measure";
+            // 
+            // cbUom
+            // 
+            this.cbUom.FormattingEnabled = true;
+            this.cbUom.Location = new System.Drawing.Point(172, 27);
+            this.cbUom.Name = "cbUom";
+            this.cbUom.Size = new System.Drawing.Size(121, 21);
+            this.cbUom.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 96);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(93, 13);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Unit Gross Weight";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(344, 141);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Inventory";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.label15, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.chkIsBuy, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.chkIsBuild, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.chkIsSell, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.cbWarehouse, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label16, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.chkIsNotMovable, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label20, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label17, 0, 3);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(338, 122);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 72);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(91, 13);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "Cannot be moved";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 48);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(42, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Is a sell";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(3, 24);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(49, 13);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "Is a build";
+            // 
+            // chkIsNotMovable
+            // 
+            this.chkIsNotMovable.AutoSize = true;
+            this.chkIsNotMovable.Location = new System.Drawing.Point(172, 75);
+            this.chkIsNotMovable.Name = "chkIsNotMovable";
+            this.chkIsNotMovable.Size = new System.Drawing.Size(15, 14);
+            this.chkIsNotMovable.TabIndex = 10;
+            this.chkIsNotMovable.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(3, 96);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(99, 13);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "Default Warehouse";
+            // 
+            // cbWarehouse
+            // 
+            this.cbWarehouse.FormattingEnabled = true;
+            this.cbWarehouse.Location = new System.Drawing.Point(172, 99);
+            this.cbWarehouse.Name = "cbWarehouse";
+            this.cbWarehouse.Size = new System.Drawing.Size(140, 21);
+            this.cbWarehouse.TabIndex = 12;
+            // 
+            // chkIsSell
+            // 
+            this.chkIsSell.AutoSize = true;
+            this.chkIsSell.Checked = true;
+            this.chkIsSell.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIsSell.Location = new System.Drawing.Point(172, 51);
+            this.chkIsSell.Name = "chkIsSell";
+            this.chkIsSell.Size = new System.Drawing.Size(15, 14);
+            this.chkIsSell.TabIndex = 9;
+            this.chkIsSell.UseVisualStyleBackColor = true;
+            // 
+            // chkIsBuild
+            // 
+            this.chkIsBuild.AutoSize = true;
+            this.chkIsBuild.Location = new System.Drawing.Point(172, 27);
+            this.chkIsBuild.Name = "chkIsBuild";
+            this.chkIsBuild.Size = new System.Drawing.Size(15, 14);
+            this.chkIsBuild.TabIndex = 8;
+            this.chkIsBuild.UseVisualStyleBackColor = true;
+            // 
+            // chkIsBuy
+            // 
+            this.chkIsBuy.AutoSize = true;
+            this.chkIsBuy.Checked = true;
+            this.chkIsBuy.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIsBuy.Location = new System.Drawing.Point(172, 3);
+            this.chkIsBuy.Name = "chkIsBuy";
+            this.chkIsBuy.Size = new System.Drawing.Size(15, 14);
+            this.chkIsBuy.TabIndex = 7;
+            this.chkIsBuy.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Is a buy";
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.gbPackage, 1, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(700, 147);
+            this.tableLayoutPanel9.TabIndex = 36;
+            // 
             // ProductCreateForm
             // 
             this.AcceptButton = this.btnSave;
@@ -1267,21 +1267,21 @@
             this.tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReorderQuantity)).EndInit();
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.gbPackage.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numUnitsInPackage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUnitNetWeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUnitGrossWeight)).EndInit();
             this.tabDescription.ResumeLayout(false);
             this.tabDescription.PerformLayout();
             this.pnlVariants.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVariants)).EndInit();
             this.panel8.ResumeLayout(false);
+            this.gbPackage.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitGrossWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitNetWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitsInPackage)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1345,32 +1345,7 @@
         private System.Windows.Forms.NumericUpDown numReorderQuantity;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.NumericUpDown numReorderPoint;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox cbWarehouse;
-        private System.Windows.Forms.GroupBox gbPackage;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox cbUom;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbPackage;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numUnitsInPackage;
-        private System.Windows.Forms.NumericUpDown numUnitNetWeight;
-        private System.Windows.Forms.NumericUpDown numUnitGrossWeight;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.CheckBox chkIsBuy;
-        private System.Windows.Forms.CheckBox chkIsBuild;
-        private System.Windows.Forms.CheckBox chkIsSell;
-        private System.Windows.Forms.CheckBox chkIsNotMovable;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.GroupBox gbBasicDetails;
         private System.Windows.Forms.Label label14;
@@ -1386,5 +1361,30 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button btnAddAttribute;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox chkIsBuy;
+        private System.Windows.Forms.CheckBox chkIsBuild;
+        private System.Windows.Forms.CheckBox chkIsSell;
+        private System.Windows.Forms.ComboBox cbWarehouse;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox chkIsNotMovable;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.GroupBox gbPackage;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbUom;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbPackage;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown numUnitsInPackage;
+        private System.Windows.Forms.NumericUpDown numUnitNetWeight;
+        private System.Windows.Forms.NumericUpDown numUnitGrossWeight;
     }
 }

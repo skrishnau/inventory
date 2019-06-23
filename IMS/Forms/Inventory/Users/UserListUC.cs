@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Common.Display;
 using SimpleInjector.Lifestyles;
-using IMS.Forms.Users.Create;
 using Service.Core.Users;
 
-namespace IMS.Forms.UserManagement.Users
+namespace IMS.Forms.Inventory.Users
 {
     public partial class UserListUC : UserControl
     {

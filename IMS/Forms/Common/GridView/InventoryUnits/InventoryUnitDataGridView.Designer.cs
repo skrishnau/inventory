@@ -158,7 +158,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // colProductId
             // 
             this.colProductId.DataPropertyName = "ProductId";
-            this.colProductId.HeaderText = "ProductId";
+            this.colProductId.HeaderText = "Product";
             this.colProductId.Name = "colProductId";
             this.colProductId.Visible = false;
             this.colProductId.Width = 150;

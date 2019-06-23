@@ -150,7 +150,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void Save()
         {
-            List<InventoryUnitModel> list;
+            List<InventoryUnitModel> list = null;
             var msg = string.Empty;
             var actionForMsg = string.Empty;
             DialogResult dialogResult = DialogResult.None;
@@ -229,6 +229,8 @@ namespace IMS.Forms.Inventory.Units.Actions
             {
                 return;
             }
+            if (list == null)
+                return;
             if (string.IsNullOrEmpty(msg))
             {
                 PopupMessage.ShowSuccessMessage("Successfully " + actionForMsg + "!");

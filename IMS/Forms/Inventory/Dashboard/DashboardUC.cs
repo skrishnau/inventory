@@ -8,21 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IMS.Forms.Generals
+namespace IMS.Forms.Inventory.Dashboard
 {
-    public partial class GeneralMenuBar : UserControl
+    public partial class DashboardUC : UserControl
     {
-        public GeneralMenuBar()
+        public DashboardUC()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            InitializeBody();
         }
 
-        public void ClearSelection()
+        private void InitializeBody()
         {
-          
-           // btnAttributeList.FlatStyle = FlatStyle.Standard;
-            //btnBranchList.FlatStyle = FlatStyle.Standard;
+            this.headerTemplate1.Text = "Dashboard";
         }
     }
 }

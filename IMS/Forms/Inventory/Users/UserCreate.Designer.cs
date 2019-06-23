@@ -1,4 +1,4 @@
-﻿namespace IMS.Forms.Users.Create
+﻿namespace IMS.Forms.Inventory.Users
 {
     partial class UserCreate
     {

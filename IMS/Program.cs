@@ -10,11 +10,9 @@ using Service.Core.Suppliers;
 using Service.Core.Customers;
 using IMS.Forms.Business;
 using Service.Core.Business;
-using IMS.Forms.Users.Create;
 using Service.Core.Users;
 using IMS.Forms.Sales;
 using Service.Core.Settings;
-using IMS.Forms.Dashboard;
 using IMS.Forms.Inventory.Attributes;
 using IMS.Forms.Inventory.Products;
 using IMS.Forms.Inventory.Suppliers;
@@ -22,12 +20,8 @@ using IMS.Forms.POS;
 using IMS.Forms.POS.Customers;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.POS.Counters;
-using IMS.Forms.Generals;
 using IMS.Forms.POS.Branches;
 using IMS.Forms.Business.Create;
-using IMS.Forms.UserManagement;
-using IMS.Forms.UserManagement.Users;
-using IMS.Forms.Orders;
 using IMS.Forms.Inventory.Transfers;
 using Service.Listeners;
 using IMS.Forms.Inventory.UOM;
@@ -45,6 +39,8 @@ using IMS.Forms.Inventory.Settings.References;
 using IMS.Forms.Inventory.Sales;
 using Service.Core.Orders;
 using IMS.Forms.Inventory.Orders;
+using IMS.Forms.Inventory.Users;
+using IMS.Forms.Inventory.Dashboard;
 
 namespace IMS
 {
@@ -108,24 +104,14 @@ namespace IMS
             container.Register<Form1>(Lifestyle.Scoped);
 
             // ======================= Modules registration ====================== //
-            container.Register<GeneralUC>(Lifestyle.Scoped);
-            container.Register<GeneralMenuBar>(Lifestyle.Scoped);
-
             container.Register<DashboardUC>(Lifestyle.Scoped);
-            container.Register<DashboardMenuBar>(Lifestyle.Scoped);
 
             container.Register<InventoryUC>(Lifestyle.Scoped);
             container.Register<InventoryMenuBar>(Lifestyle.Scoped);
 
-            container.Register<OrdersUC>(Lifestyle.Scoped);
-            container.Register<OrdersMenuBar>(Lifestyle.Scoped);
-
             container.Register<PosUC>(Lifestyle.Scoped);
             container.Register<PosMenuBar>(Lifestyle.Scoped);
-
-            container.Register<UserManagementUC>(Lifestyle.Scoped);
-            container.Register<UserManagementMenuBar>(Lifestyle.Scoped);
-
+            
             // --- General Related --- //
 
             container.Register<CategoryListUC>(Lifestyle.Scoped);

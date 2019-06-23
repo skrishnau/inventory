@@ -35,7 +35,7 @@ namespace Service.Core.Inventory.Units
                     .Include(x => x.Supplier)
                     .Include(x => x.Uom)
                     .Include(x => x.Warehouse)
-                    .Where(x => (warehouseId == 0 || x.WarehouseId == warehouseId) 
+                    .Where(x => (warehouseId == 0 || x.WarehouseId == warehouseId)
                             && (productId == 0 || x.ProductId == productId))
                     .OrderBy(x => x.ReceiveDate)
                     //.ThenBy(x => x.Warehouse.Name)
@@ -100,7 +100,7 @@ namespace Service.Core.Inventory.Units
                                 splitString = splitString.Trim();
                                 splitString = splitString.TrimEnd(new char[] { '+' });
                                 var description = "Merged " + splitString + " of '" + product.Name + "' into " + editingRecord.UnitQuantity + " qty.";
-                                SaveMovement(description, "-------------", "Merge", editingRecord.UnitQuantity, now);
+                                AddMovement(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now);
 
                             }
 
@@ -142,7 +142,7 @@ namespace Service.Core.Inventory.Units
                             splitString = splitString.Trim();
                             splitString = splitString.TrimEnd(new char[] { '+' });
                             var description = "Splitted " + entity.UnitQuantity + " qty. of '" + entity.Product.Name + "' into " + splitString + ".";
-                            SaveMovement(description, "----------------", "Split", entity.UnitQuantity, now);
+                            AddMovement(_context, description, "----------------", "Split", entity.UnitQuantity, now);
 
                             for (var q = 0; q < quantitySplitList.Count; q++)
                             {
@@ -207,7 +207,7 @@ namespace Service.Core.Inventory.Units
                             //
                             var description = "Moved " + dbEntity.UnitQuantity + " qty. of '" + dbEntity.Product.Name + "' from " + dbEntity.Warehouse.Name + " to " + warehouseEntity.Name + ".";
                             UpdateWarehouseProduct(iuModel, dbEntity.Warehouse.Id, warehouseEntity.Id, now);
-                            SaveMovement(description, "--------------", "Move", dbEntity.UnitQuantity, now);
+                            AddMovement(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now);
                         }
                     }
                 }
@@ -242,7 +242,7 @@ namespace Service.Core.Inventory.Units
                     var description = "Received " + unit.UnitQuantity + " quantities of " +
                         product.Name + " into " + warehouse.Name + " warehouse.";
                     //var quantity = list.Sum(x => x.UnitQuantity);
-                    SaveMovement(description, "----------------", "Direct Receive", unit.UnitQuantity, now);
+                    AddMovement(_context, description, "----------------", "Direct Receive", unit.UnitQuantity, now);
                     UpdateWarehouseProduct(unit, null, unit.WarehouseId, now);
                 }
 
@@ -294,7 +294,7 @@ namespace Service.Core.Inventory.Units
                         // Movement
                         //
                         var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                        SaveMovement(description, "----------------", "Direct Issue", dbEntity.UnitQuantity, now);
+                        AddMovement(_context, description, "----------------", "Direct Issue", dbEntity.UnitQuantity, now);
                         UpdateWarehouseProduct(model, dbEntity.WarehouseId, null, now);
                     }
                 }
@@ -405,21 +405,17 @@ namespace Service.Core.Inventory.Units
         }
 
 
-        public void SaveMovement(string description, string reference, string adjustmentCode, decimal quantity, DateTime now)
+        public void AddMovement(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now)
         {
-            using (var _context = new DatabaseContext())
+            var movement = new Movement()
             {
-
-                var movement = new Movement()
-                {
-                    AdjustmentCode = adjustmentCode,
-                    Date = now,
-                    Description = description,
-                    Quantity = quantity,
-                    Reference = reference,
-                };
-                _context.Movement.Add(movement);
-            }
+                AdjustmentCode = adjustmentCode,
+                Date = now,
+                Description = description,
+                Quantity = quantity,
+                Reference = reference,
+            };
+            _context.Movement.Add(movement);
         }
 
 

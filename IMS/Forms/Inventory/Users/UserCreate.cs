@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Service.Core.Users;
 using ViewModel.Core.Users;
 
-namespace IMS.Forms.Users.Create
+namespace IMS.Forms.Inventory.Users
 {
     public partial class UserCreate : Form
     {

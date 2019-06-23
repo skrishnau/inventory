@@ -19,6 +19,7 @@ namespace IMS.Forms.POS
         public PosUC(PosMenuBar menubar)
         {
             _menubar = menubar;
+            this.Dock = DockStyle.Fill;
 
             InitializeComponent();
 
