@@ -41,7 +41,7 @@
             // 
             this.lblHeading.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblHeading.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeading.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblHeading.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblHeading.Location = new System.Drawing.Point(0, 0);
             this.lblHeading.Name = "lblHeading";
             this.lblHeading.Size = new System.Drawing.Size(253, 27);
@@ -97,14 +97,14 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(275, 27);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // SubHeadingTemplate
+            // HeaderTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.Controls.Add(this.lblHeading);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Name = "SubHeadingTemplate";
+            this.Name = "HeaderTemplate";
             this.Size = new System.Drawing.Size(528, 27);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

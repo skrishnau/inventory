@@ -155,12 +155,6 @@
     <Compile Include="Forms\Common\Dialogs\MessageBoxWithInput.Designer.cs">
       <DependentUpon>MessageBoxWithInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Common\Display\BodyTemplate.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Common\Display\BodyTemplate.Designer.cs">
-      <DependentUpon>BodyTemplate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Common\Display\LabelSubHeader.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -652,9 +646,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\Dialogs\MessageBoxWithInput.resx">
       <DependentUpon>MessageBoxWithInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Common\Display\BodyTemplate.resx">
-      <DependentUpon>BodyTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\Display\SubBodyTemplate.resx">
       <DependentUpon>SubBodyTemplate.cs</DependentUpon>

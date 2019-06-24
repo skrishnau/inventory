@@ -13,7 +13,7 @@ namespace IMS.Forms.POS
     public partial class PosUC : UserControl
     {
         public static readonly string MODULE_NAME = "POS";
-        private BodyTemplate _bodyTemplate;
+        //private BodyTemplate _bodyTemplate;
         private PosMenuBar _menubar;
 
         public PosUC(PosMenuBar menubar)
@@ -23,22 +23,22 @@ namespace IMS.Forms.POS
 
             InitializeComponent();
 
-            InitializeRootTemplate();
+           // InitializeRootTemplate();
 
             InitializeMenuBarButtonEvents();
         }
 
-        private void InitializeRootTemplate()
-        {
-            // body
-            _bodyTemplate = new BodyTemplate();
-            _bodyTemplate.Dock = DockStyle.Fill;
-            this.Controls.Add(_bodyTemplate);
-            // heading
-            _bodyTemplate.lblHeading.Text = MODULE_NAME;
-            // menubar template
-            _bodyTemplate.pnlMenuBar.Controls.Add(_menubar);
-        }
+        //private void InitializeRootTemplate()
+        //{
+        //    // body
+        //    _bodyTemplate = new BodyTemplate();
+        //    Dock = DockStyle.Fill;
+        //    this.Controls.Add(_bodyTemplate);
+        //    // heading
+        //    lblHeading.Text = MODULE_NAME;
+        //    // menubar template
+        //    pnlMenuBar.Controls.Add(_menubar);
+        //}
 
         private void InitializeMenuBarButtonEvents()
         {
@@ -58,9 +58,9 @@ namespace IMS.Forms.POS
         private void BtnBranchList_Click(object sender, EventArgs e)
         {
             var branchListUC = Program.container.GetInstance<BranchListUC>();
-            _bodyTemplate.pnlBody.Controls.Clear();
+            pnlBody.Controls.Clear();
             branchListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(branchListUC);
+            pnlBody.Controls.Add(branchListUC);
 
             _menubar.ClearSelection();
             _menubar.btnBranchList.FlatStyle = FlatStyle.Flat;
@@ -86,10 +86,10 @@ namespace IMS.Forms.POS
 
         private void BtnCustomerList_Click(object sender, EventArgs e)
         {
-            _bodyTemplate.pnlBody.Controls.Clear();
+            pnlBody.Controls.Clear();
             var customerUC = Program.container.GetInstance<CustomerListUC>();
             customerUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(customerUC);
+            pnlBody.Controls.Add(customerUC);
             // set selection
             _menubar.ClearSelection();
             _menubar.btnCustomerList.FlatStyle = FlatStyle.Flat;
@@ -112,10 +112,10 @@ namespace IMS.Forms.POS
 
         private void BtnCounterList_Click(object sender, EventArgs e)
         {
-            _bodyTemplate.pnlBody.Controls.Clear();
+            pnlBody.Controls.Clear();
             var counterListUC = Program.container.GetInstance<CounterListUC>();
             counterListUC.Dock = DockStyle.Fill;
-            _bodyTemplate.pnlBody.Controls.Add(counterListUC);
+            pnlBody.Controls.Add(counterListUC);
             // set selection
             _menubar.ClearSelection();
             _menubar.btnCounterList.FlatStyle = FlatStyle.Flat;

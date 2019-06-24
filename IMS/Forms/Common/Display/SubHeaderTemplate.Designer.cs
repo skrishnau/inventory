@@ -33,10 +33,9 @@
             // 
             // lblText
             // 
-            this.lblText.BackColor = System.Drawing.Color.SlateGray;
+            this.lblText.BackColor = System.Drawing.Color.LightGray;
             this.lblText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblText.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblText.Location = new System.Drawing.Point(0, 0);
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(563, 42);

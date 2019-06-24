@@ -24,7 +24,6 @@ namespace IMS
         {
             pnlBody.Controls.Clear();
             var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
-            productListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(productListUC);
         }
 

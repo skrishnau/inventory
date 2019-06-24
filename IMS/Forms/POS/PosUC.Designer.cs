@@ -28,18 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.pnlBody = new System.Windows.Forms.Panel();
             this.SuspendLayout();
+            // 
+            // pnlBody
+            // 
+            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBody.Location = new System.Drawing.Point(0, 0);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(654, 423);
+            this.pnlBody.TabIndex = 0;
             // 
             // PosUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlBody);
             this.Name = "PosUC";
-            this.Size = new System.Drawing.Size(355, 255);
+            this.Size = new System.Drawing.Size(654, 423);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel pnlBody;
     }
 }

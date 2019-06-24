@@ -29,7 +29,7 @@ namespace IMS.Forms.Inventory.Settings
             _sidebar = sidebar;
 
             InitializeComponent();
-
+            this.Dock = DockStyle.Fill;
             this.Load += InventorySettingsUC_Load;
 
         }

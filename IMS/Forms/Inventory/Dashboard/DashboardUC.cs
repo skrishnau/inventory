@@ -21,7 +21,7 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void InitializeBody()
         {
-            this.headerTemplate1.Text = "Dashboard";
+           // this.headerTemplate1.Text = "Dashboard";
         }
     }
 }

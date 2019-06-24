@@ -24,7 +24,7 @@ namespace IMS.Forms.Inventory.Suppliers
             _supplierDetailUC = supplierDetailUC;
 
             InitializeComponent();
-
+            this.Dock = DockStyle.Fill;
             this.Load += SupplierUC_Load;
         }
 
