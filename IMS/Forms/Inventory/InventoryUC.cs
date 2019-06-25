@@ -292,7 +292,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(dashboard);
             AddTabPage("Dashboard", dashboard);
-            _menubar.SetSelection(sender);
+            //_menubar.SetSelection(sender);
         }
 
         private void BtnSellOrder_Click(object sender, EventArgs e)
@@ -315,7 +315,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Add(saleOrderUC);
             AddTabPage("Sale Orders", saleOrderUC);
             // set selection
-            _menubar.SetSelection(sender);
+           // _menubar.SetSelection(sender);
         }
 
         private void BtnPurchaseOrder_Click(object sender, EventArgs e)
@@ -334,7 +334,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(purchaseOrderUC);
             // set selection
-            _menubar.SetSelection(sender);
+            //_menubar.SetSelection(sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
@@ -343,7 +343,7 @@ namespace IMS.Forms.Inventory
             AddTabPage("Inventory Units", inventoryUnitList);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(inventoryUnitList);
-            _menubar.SetSelection(sender);
+           // _menubar.SetSelection(sender);
         }
 
 
@@ -353,7 +353,7 @@ namespace IMS.Forms.Inventory
             AddTabPage("POS", posUC);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(posUC);
-            _menubar.SetSelection(sender);
+           // _menubar.SetSelection(sender);
         }
 
         #region Products
@@ -365,7 +365,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(productListUC);
 
-            _menubar.SetSelection(sender);
+           // _menubar.SetSelection(sender);
         }
 
 
@@ -410,7 +410,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(supplierListUC);
             // set selection
-            _menubar.SetSelection(sender);
+           // _menubar.SetSelection(sender);
         }
 
         #endregion
@@ -443,7 +443,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(warehouseListUC);
             // set selection
-            _menubar.SetSelection(sender);
+           // _menubar.SetSelection(sender);
         }
 
         #endregion
@@ -461,7 +461,7 @@ namespace IMS.Forms.Inventory
                 //pnlBody.Controls.Clear();
                 //pnlBody.Controls.Add(settingsUC);
                 // set selection
-                _menubar.SetSelection(sender);
+               // _menubar.SetSelection(sender);
             }
         }
 

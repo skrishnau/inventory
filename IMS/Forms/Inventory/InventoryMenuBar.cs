@@ -18,6 +18,7 @@ namespace IMS.Forms.Inventory
             this.Dock = DockStyle.Fill;
         }
 
+        /*
         public void SetSelection(object sender)
         {
             ClearSelectionInside(this.Controls);
@@ -44,6 +45,7 @@ namespace IMS.Forms.Inventory
                 }
             }
         }
+        */
     }
 
 }

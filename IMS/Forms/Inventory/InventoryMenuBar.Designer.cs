@@ -70,73 +70,80 @@
             // btnPOS
             // 
             this.btnPOS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPOS.FlatAppearance.BorderSize = 0;
+            this.btnPOS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPOS.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
             this.btnPOS.Location = new System.Drawing.Point(338, 2);
             this.btnPOS.Name = "btnPOS";
             this.btnPOS.Size = new System.Drawing.Size(60, 57);
             this.btnPOS.TabIndex = 8;
             this.btnPOS.Text = "POS";
-            this.btnPOS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPOS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPOS.UseVisualStyleBackColor = true;
             // 
             // btnDirectIssue
             // 
             this.btnDirectIssue.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDirectIssue.FlatAppearance.BorderSize = 0;
+            this.btnDirectIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDirectIssue.Image = global::IMS.Properties.Resources.icons8_Sell_24px;
             this.btnDirectIssue.Location = new System.Drawing.Point(275, 2);
             this.btnDirectIssue.Name = "btnDirectIssue";
             this.btnDirectIssue.Size = new System.Drawing.Size(63, 57);
             this.btnDirectIssue.TabIndex = 7;
             this.btnDirectIssue.Text = "Direct Issue";
-            this.btnDirectIssue.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnDirectIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDirectIssue.UseVisualStyleBackColor = true;
             this.btnDirectIssue.Visible = false;
             // 
             // btnTransfer
             // 
+            this.btnTransfer.BackColor = System.Drawing.Color.Transparent;
             this.btnTransfer.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnTransfer.FlatAppearance.BorderSize = 0;
+            this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransfer.Image = global::IMS.Properties.Resources.icons8_Data_Transfer_24px;
             this.btnTransfer.Location = new System.Drawing.Point(215, 2);
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.Size = new System.Drawing.Size(60, 57);
             this.btnTransfer.TabIndex = 4;
             this.btnTransfer.Text = "Transfer";
-            this.btnTransfer.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnTransfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnTransfer.UseVisualStyleBackColor = true;
-            this.btnTransfer.Visible = false;
+            this.btnTransfer.UseVisualStyleBackColor = false;
             // 
             // btnLocateInventory
             // 
             this.btnLocateInventory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLocateInventory.FlatAppearance.BorderSize = 0;
+            this.btnLocateInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLocateInventory.Image = global::IMS.Properties.Resources.icons8_Wine_Tour_24px;
             this.btnLocateInventory.Location = new System.Drawing.Point(154, 2);
             this.btnLocateInventory.Name = "btnLocateInventory";
             this.btnLocateInventory.Size = new System.Drawing.Size(61, 57);
             this.btnLocateInventory.TabIndex = 6;
             this.btnLocateInventory.Text = "Locate Inventory";
-            this.btnLocateInventory.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnLocateInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnLocateInventory.UseVisualStyleBackColor = true;
             // 
             // btnDirectReceive
             // 
             this.btnDirectReceive.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDirectReceive.FlatAppearance.BorderSize = 0;
+            this.btnDirectReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDirectReceive.Image = global::IMS.Properties.Resources.icons8_Lease_24px;
             this.btnDirectReceive.Location = new System.Drawing.Point(90, 2);
             this.btnDirectReceive.Name = "btnDirectReceive";
             this.btnDirectReceive.Size = new System.Drawing.Size(64, 57);
             this.btnDirectReceive.TabIndex = 3;
             this.btnDirectReceive.Text = "Direct Receive";
-            this.btnDirectReceive.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnDirectReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDirectReceive.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::IMS.Properties.Resources.icons8_Information_16px;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.Location = new System.Drawing.Point(975, 2);
@@ -151,6 +158,8 @@
             // btnSettings
             // 
             this.btnSettings.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Image = global::IMS.Properties.Resources.icons8_Gears_24px;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSettings.Location = new System.Drawing.Point(919, 2);
@@ -164,6 +173,8 @@
             // btnReports
             // 
             this.btnReports.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnReports.FlatAppearance.BorderSize = 0;
+            this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReports.Image = global::IMS.Properties.Resources.icons8_Pie_Chart_24px;
             this.btnReports.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnReports.Location = new System.Drawing.Point(860, 2);
@@ -177,32 +188,36 @@
             // btnSupplierList
             // 
             this.btnSupplierList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSupplierList.FlatAppearance.BorderSize = 0;
+            this.btnSupplierList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSupplierList.Image = ((System.Drawing.Image)(resources.GetObject("btnSupplierList.Image")));
             this.btnSupplierList.Location = new System.Drawing.Point(790, 2);
             this.btnSupplierList.Name = "btnSupplierList";
             this.btnSupplierList.Size = new System.Drawing.Size(59, 57);
             this.btnSupplierList.TabIndex = 0;
             this.btnSupplierList.Text = "Suppliers";
-            this.btnSupplierList.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSupplierList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSupplierList.UseVisualStyleBackColor = true;
             // 
             // btnWarehouseList
             // 
             this.btnWarehouseList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnWarehouseList.FlatAppearance.BorderSize = 0;
+            this.btnWarehouseList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWarehouseList.Image = global::IMS.Properties.Resources.icons8_Depot_24px;
             this.btnWarehouseList.Location = new System.Drawing.Point(727, 2);
             this.btnWarehouseList.Name = "btnWarehouseList";
             this.btnWarehouseList.Size = new System.Drawing.Size(63, 57);
             this.btnWarehouseList.TabIndex = 8;
             this.btnWarehouseList.Text = "Ware houses";
-            this.btnWarehouseList.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnWarehouseList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnWarehouseList.UseVisualStyleBackColor = true;
             // 
             // btnProductList
             // 
             this.btnProductList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnProductList.FlatAppearance.BorderSize = 0;
+            this.btnProductList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductList.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnProductList.Image = global::IMS.Properties.Resources.icons8_Product_24px;
             this.btnProductList.Location = new System.Drawing.Point(667, 2);
@@ -210,13 +225,14 @@
             this.btnProductList.Size = new System.Drawing.Size(60, 57);
             this.btnProductList.TabIndex = 15;
             this.btnProductList.Text = "Products";
-            this.btnProductList.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnProductList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnProductList.UseVisualStyleBackColor = true;
             // 
             // btnInventoryUnits
             // 
             this.btnInventoryUnits.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnInventoryUnits.FlatAppearance.BorderSize = 0;
+            this.btnInventoryUnits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInventoryUnits.Image = global::IMS.Properties.Resources.icons8_Beer_Keg_24px;
             this.btnInventoryUnits.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnInventoryUnits.Location = new System.Drawing.Point(602, 2);
@@ -230,6 +246,8 @@
             // btnMoveOrder
             // 
             this.btnMoveOrder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMoveOrder.FlatAppearance.BorderSize = 0;
+            this.btnMoveOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMoveOrder.Image = global::IMS.Properties.Resources.icons8_Move_Stock_24px;
             this.btnMoveOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMoveOrder.Location = new System.Drawing.Point(532, 2);
@@ -244,6 +262,8 @@
             // btnSellOrder
             // 
             this.btnSellOrder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSellOrder.FlatAppearance.BorderSize = 0;
+            this.btnSellOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSellOrder.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
             this.btnSellOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSellOrder.Location = new System.Drawing.Point(473, 2);
@@ -257,20 +277,23 @@
             // btnPurchaseOrder
             // 
             this.btnPurchaseOrder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPurchaseOrder.FlatAppearance.BorderSize = 0;
+            this.btnPurchaseOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPurchaseOrder.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
             this.btnPurchaseOrder.Location = new System.Drawing.Point(409, 2);
             this.btnPurchaseOrder.Name = "btnPurchaseOrder";
             this.btnPurchaseOrder.Size = new System.Drawing.Size(64, 57);
             this.btnPurchaseOrder.TabIndex = 1;
             this.btnPurchaseOrder.Text = "Purchase Order";
-            this.btnPurchaseOrder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPurchaseOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPurchaseOrder.UseVisualStyleBackColor = true;
             // 
             // btnHome
             // 
             this.btnHome.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnHome.Image = global::IMS.Properties.Resources.icons8_Speed_24px;
+            this.btnHome.FlatAppearance.BorderSize = 0;
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
             this.btnHome.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnHome.Location = new System.Drawing.Point(13, 2);
             this.btnHome.Name = "btnHome";
@@ -292,7 +315,7 @@
             // 
             // splitter1
             // 
-            this.splitter1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Location = new System.Drawing.Point(5, 4);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(2, 49);
@@ -311,7 +334,7 @@
             // 
             // splitter2
             // 
-            this.splitter2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter2.Location = new System.Drawing.Point(5, 4);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(2, 49);
@@ -330,7 +353,7 @@
             // 
             // splitter3
             // 
-            this.splitter3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter3.Location = new System.Drawing.Point(5, 4);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(2, 49);
@@ -349,7 +372,7 @@
             // 
             // splitter7
             // 
-            this.splitter7.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitter7.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter7.Location = new System.Drawing.Point(5, 4);
             this.splitter7.Name = "splitter7";
             this.splitter7.Size = new System.Drawing.Size(2, 49);
@@ -368,7 +391,7 @@
             // 
             // splitter4
             // 
-            this.splitter4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter4.Location = new System.Drawing.Point(5, 4);
             this.splitter4.Name = "splitter4";
             this.splitter4.Size = new System.Drawing.Size(2, 49);
@@ -387,7 +410,7 @@
             // 
             // splitter5
             // 
-            this.splitter5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter5.Location = new System.Drawing.Point(5, 4);
             this.splitter5.Name = "splitter5";
             this.splitter5.Size = new System.Drawing.Size(2, 49);
