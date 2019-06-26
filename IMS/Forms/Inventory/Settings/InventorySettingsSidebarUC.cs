@@ -20,16 +20,20 @@ namespace IMS.Forms.Inventory.Settings
 
         public void SetVisited(object sender)
         {
+            var regularFont = new Font(lnkGeneral.Font, FontStyle.Regular);
+            var boldFont = new Font(lnkGeneral.Font, FontStyle.Bold);
             // clear first
             foreach (LinkLabel linkLabel in pnlLinks.Controls)
             {
                 linkLabel.LinkVisited = false;
+                linkLabel.Font = regularFont;
             }
             // set second
             var link = sender as LinkLabel;
             if (link != null)
             {
                 link.LinkVisited = true;
+                link.Font = boldFont;
             }
         }
     }

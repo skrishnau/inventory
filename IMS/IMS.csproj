@@ -83,6 +83,21 @@
     <Compile Include="Forms\Business\Create\CounterCreate.Designer.cs">
       <DependentUpon>CounterCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Buttons\MenuButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\ListHeaderTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\ListHeaderTemplate.Designer.cs">
+      <DependentUpon>ListHeaderTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Common\Display\ListBodyTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\ListBodyTemplate.Designer.cs">
+      <DependentUpon>ListBodyTemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Dashboard\DashboardUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,17 +122,11 @@
     <Compile Include="Forms\Inventory\Sales\SaleOrderUC.Designer.cs">
       <DependentUpon>SaleOrderUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Orders\OrderSidebarUC.cs">
+    <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Orders\OrderSidebarUC.Designer.cs">
-      <DependentUpon>OrderSidebarUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Settings\Appearance\AppearanceSettingsUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Settings\Appearance\AppearanceSettingsUC.Designer.cs">
-      <DependentUpon>AppearanceSettingsUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.Designer.cs">
+      <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.cs">
       <SubType>UserControl</SubType>
@@ -158,11 +167,11 @@
     <Compile Include="Forms\Common\Display\LabelSubHeader.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Common\Display\SubBodyTemplate.cs">
+    <Compile Include="Forms\Common\Display\SettingsBodyTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Common\Display\SubBodyTemplate.Designer.cs">
-      <DependentUpon>SubBodyTemplate.cs</DependentUpon>
+    <Compile Include="Forms\Common\Display\SettingsBodyTemplate.Designer.cs">
+      <DependentUpon>SettingsBodyTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Common\Display\SubHeaderTemplate.cs">
       <SubType>UserControl</SubType>
@@ -209,23 +218,17 @@
     <Compile Include="Forms\Common\VerticalSplitter.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Products\ProductSidebarUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Products\ProductSidebarUC.Designer.cs">
-      <DependentUpon>ProductSidebarUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Units\Details\InventoryMovementUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\Units\Details\InventoryMovementUC.Designer.cs">
       <DependentUpon>InventoryMovementUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Units\InventoryUnitSideBarUC.cs">
+    <Compile Include="Forms\Inventory\Units\InventoryUnitsMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Units\InventoryUnitSideBarUC.Designer.cs">
-      <DependentUpon>InventoryUnitSideBarUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitsMenu.Designer.cs">
+      <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitUC.cs">
       <SubType>UserControl</SubType>
@@ -608,6 +611,12 @@
     <EmbeddedResource Include="Forms\Business\Create\CounterCreate.resx">
       <DependentUpon>CounterCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Display\ListHeaderTemplate.resx">
+      <DependentUpon>ListHeaderTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Display\ListBodyTemplate.resx">
+      <DependentUpon>ListBodyTemplate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Dashboard\DashboardUC.resx">
       <DependentUpon>DashboardUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -620,11 +629,8 @@
     <EmbeddedResource Include="Forms\Inventory\Sales\SaleOrderUC.resx">
       <DependentUpon>SaleOrderUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Orders\OrderSidebarUC.resx">
-      <DependentUpon>OrderSidebarUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Settings\Appearance\AppearanceSettingsUC.resx">
-      <DependentUpon>AppearanceSettingsUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Settings\General\GeneralSettingsUC.resx">
+      <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.resx">
       <DependentUpon>CompanySettingsUC.cs</DependentUpon>
@@ -647,8 +653,8 @@
     <EmbeddedResource Include="Forms\Common\Dialogs\MessageBoxWithInput.resx">
       <DependentUpon>MessageBoxWithInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Common\Display\SubBodyTemplate.resx">
-      <DependentUpon>SubBodyTemplate.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Common\Display\SettingsBodyTemplate.resx">
+      <DependentUpon>SettingsBodyTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\Display\SubHeaderTemplate.resx">
       <DependentUpon>SubHeaderTemplate.cs</DependentUpon>
@@ -659,14 +665,11 @@
     <EmbeddedResource Include="Forms\Common\GridView\InventoryUnits\InventoryUnitDataGridView.resx">
       <DependentUpon>InventoryUnitDataGridView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Products\ProductSidebarUC.resx">
-      <DependentUpon>ProductSidebarUC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\Details\InventoryMovementUC.resx">
       <DependentUpon>InventoryMovementUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitSideBarUC.resx">
-      <DependentUpon>InventoryUnitSideBarUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitsMenu.resx">
+      <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitUC.resx">
       <DependentUpon>InventoryUnitUC.cs</DependentUpon>

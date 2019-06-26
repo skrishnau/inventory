@@ -10,7 +10,7 @@ namespace IMS.Forms.Inventory.Suppliers
 {
     public partial class SupplierUC : UserControl
     {
-        private SubBodyTemplate _bodyTemplate;
+        private SettingsBodyTemplate _bodyTemplate;
 
         private readonly SupplierListUC _supplierListUC;
         private readonly SupplierSideBarUC _sidebarUC;
@@ -40,7 +40,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void InitializeSubBody()
         {
-            _bodyTemplate = new SubBodyTemplate();
+            _bodyTemplate = new SettingsBodyTemplate();
             _bodyTemplate.HeadingText = "Suppliers";
             _bodyTemplate.SubHeadingText = "";
             this.Controls.Add(_bodyTemplate);

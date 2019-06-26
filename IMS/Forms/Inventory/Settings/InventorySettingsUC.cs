@@ -14,14 +14,14 @@ using IMS.Forms.Inventory.Categories;
 using IMS.Forms.Common.Display;
 using IMS.Forms.Inventory.Settings.Companies;
 using IMS.Forms.Inventory.Settings.References;
-using IMS.Forms.Inventory.Settings.Appearance;
+using IMS.Forms.Inventory.Settings.General;
 using IMS.Forms.Inventory.Users;
 
 namespace IMS.Forms.Inventory.Settings
 {
     public partial class InventorySettingsUC : UserControl
     {
-        private SubBodyTemplate _body;
+        private SettingsBodyTemplate _body;
 
         private readonly InventorySettingsSidebarUC _sidebar;
         public InventorySettingsUC(InventorySettingsSidebarUC sidebar)
@@ -36,26 +36,28 @@ namespace IMS.Forms.Inventory.Settings
 
         private void InventorySettingsUC_Load(object sender, EventArgs e)
         {
+            
             InitializeBody();
 
             InitializeEvents();
 
+            SelectGeneralLink();
         }
 
         private void InitializeBody()
         {
-            _body = new SubBodyTemplate
+            _body = new SettingsBodyTemplate
             {
                 HeadingText = "Settings",
                 SubHeadingText = ""
             };
             this.Controls.Add(_body);
             _body.pnlSideBar.Controls.Add(_sidebar);
-
         }
 
         private void InitializeEvents()
         {
+            _sidebar.lnkGeneral.LinkClicked += LnkGeneral_LinkClicked;
             _sidebar.lnkAdjustmentCodes.LinkClicked += LnkAdjustmentCodes_LinkClicked;
             _sidebar.lnkPackages.LinkClicked += LnkPackages_LinkClicked;
             _sidebar.lnkProductCategory.LinkClicked += LnkProductCategory_LinkClicked;
@@ -63,17 +65,22 @@ namespace IMS.Forms.Inventory.Settings
             _sidebar.lnkUsers.LinkClicked += LnkUsers_LinkClicked;
             _sidebar.lnkReferences.LinkClicked += LnkReferences_LinkClicked;
             _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
-            _sidebar.lnkAppearance.LinkClicked += LnkAppearance_LinkClicked;
         }
 
-        private void LnkAppearance_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+
+        private void SelectGeneralLink()
         {
-            var uc = Program.container.GetInstance<AppearanceSettingsUC>();
+            LnkGeneral_LinkClicked(_sidebar.lnkGeneral, null);
+        }
+
+        private void LnkGeneral_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var uc = Program.container.GetInstance<GeneralSettingsUC>();
             _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(uc);
             // set selection
             _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "Appearance";
+            _body.SubHeadingText = "General";
         }
 
         private void LnkProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

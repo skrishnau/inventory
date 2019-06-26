@@ -29,272 +29,83 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.chkBulkActions = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbProduct = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbWarehouse = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.gbInformation = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnProductDetail = new System.Windows.Forms.Button();
-            this.btnUnitDetail = new System.Windows.Forms.Button();
-            this.btnLabels = new System.Windows.Forms.Button();
-            this.lblInformationMessage = new System.Windows.Forms.Label();
-            this.gbSingleRowActions = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnReceive = new System.Windows.Forms.Button();
-            this.btnSplit = new System.Windows.Forms.Button();
-            this.btnDisassemble = new System.Windows.Forms.Button();
-            this.lblSingleRowActionMessage = new System.Windows.Forms.Label();
-            this.gbBulkActions = new System.Windows.Forms.GroupBox();
-            this.chkBulkActions = new System.Windows.Forms.CheckBox();
-            this.pnlBulkActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnMerge = new System.Windows.Forms.Button();
-            this.btnMove = new System.Windows.Forms.Button();
-            this.btnIssue = new System.Windows.Forms.Button();
-            this.lblBulkActionsMessage = new System.Windows.Forms.Label();
+            this.cbWarehouse = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlInfo = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.dgvInventoryUnit = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.btnProductDetail = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnUnitDetail = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnLabels = new IMS.Forms.Common.Buttons.MenuButton();
+            this.pnlSingleRowActions = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnReceive = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnSplit = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnDisassemble = new IMS.Forms.Common.Buttons.MenuButton();
+            this.pnlBulkActions = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnMerge = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnMove = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnIssue = new IMS.Forms.Common.Buttons.MenuButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.pnlHeader = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
-            this.gbInformation.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.gbSingleRowActions.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.gbBulkActions.SuspendLayout();
-            this.pnlBulkActions.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.pnlInfo.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).BeginInit();
+            this.pnlSingleRowActions.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.pnlBulkActions.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 555F));
-            this.tableLayoutPanel1.Controls.Add(this.cbProduct, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cbWarehouse, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(801, 46);
-            this.tableLayoutPanel1.TabIndex = 4;
-            // 
-            // cbProduct
-            // 
-            this.cbProduct.FormattingEnabled = true;
-            this.cbProduct.Location = new System.Drawing.Point(348, 13);
-            this.cbProduct.Name = "cbProduct";
-            this.cbProduct.Size = new System.Drawing.Size(167, 21);
-            this.cbProduct.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Warehouse";
-            // 
-            // cbWarehouse
-            // 
-            this.cbWarehouse.FormattingEnabled = true;
-            this.cbWarehouse.Location = new System.Drawing.Point(86, 13);
-            this.cbWarehouse.Name = "cbWarehouse";
-            this.cbWarehouse.Size = new System.Drawing.Size(167, 21);
-            this.cbWarehouse.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(286, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Product";
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.flowLayoutPanel1.Controls.Add(this.gbInformation);
-            this.flowLayoutPanel1.Controls.Add(this.gbSingleRowActions);
-            this.flowLayoutPanel1.Controls.Add(this.gbBulkActions);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 46);
+            this.flowLayoutPanel1.Controls.Add(this.panel7);
+            this.flowLayoutPanel1.Controls.Add(this.pnlInfo);
+            this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Controls.Add(this.pnlSingleRowActions);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
+            this.flowLayoutPanel1.Controls.Add(this.pnlBulkActions);
+            this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 140);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(579, 91);
             this.flowLayoutPanel1.TabIndex = 5;
-            // 
-            // gbInformation
-            // 
-            this.gbInformation.Controls.Add(this.flowLayoutPanel4);
-            this.gbInformation.Controls.Add(this.lblInformationMessage);
-            this.gbInformation.Location = new System.Drawing.Point(8, 8);
-            this.gbInformation.Name = "gbInformation";
-            this.gbInformation.Size = new System.Drawing.Size(299, 59);
-            this.gbInformation.TabIndex = 6;
-            this.gbInformation.TabStop = false;
-            this.gbInformation.Text = "Information";
-            this.gbInformation.Visible = false;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.btnProductDetail);
-            this.flowLayoutPanel4.Controls.Add(this.btnUnitDetail);
-            this.flowLayoutPanel4.Controls.Add(this.btnLabels);
-            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(293, 29);
-            this.flowLayoutPanel4.TabIndex = 13;
-            // 
-            // btnProductDetail
-            // 
-            this.btnProductDetail.Image = global::IMS.Properties.Resources.icons8_Product_16px_1;
-            this.btnProductDetail.Location = new System.Drawing.Point(3, 3);
-            this.btnProductDetail.Name = "btnProductDetail";
-            this.btnProductDetail.Size = new System.Drawing.Size(110, 23);
-            this.btnProductDetail.TabIndex = 0;
-            this.btnProductDetail.Text = "Product Detail";
-            this.btnProductDetail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnProductDetail.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnProductDetail, "View Product detail of the selected Inventory Unit (row)");
-            this.btnProductDetail.UseVisualStyleBackColor = true;
-            // 
-            // btnUnitDetail
-            // 
-            this.btnUnitDetail.Image = global::IMS.Properties.Resources.icons8_Unity_16px_1;
-            this.btnUnitDetail.Location = new System.Drawing.Point(119, 3);
-            this.btnUnitDetail.Name = "btnUnitDetail";
-            this.btnUnitDetail.Size = new System.Drawing.Size(87, 23);
-            this.btnUnitDetail.TabIndex = 1;
-            this.btnUnitDetail.Text = "Unit Detail";
-            this.btnUnitDetail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUnitDetail.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnUnitDetail, "View Unit Detail of the selected Inventory Unit (row)");
-            this.btnUnitDetail.UseVisualStyleBackColor = true;
-            // 
-            // btnLabels
-            // 
-            this.btnLabels.Image = global::IMS.Properties.Resources.icons8_Postcard_With_Barcode_16px;
-            this.btnLabels.Location = new System.Drawing.Point(212, 3);
-            this.btnLabels.Name = "btnLabels";
-            this.btnLabels.Size = new System.Drawing.Size(75, 23);
-            this.btnLabels.TabIndex = 8;
-            this.btnLabels.Text = "Labels";
-            this.btnLabels.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLabels.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnLabels, "View Labels of the selected Inventory Unit (row)");
-            this.btnLabels.UseVisualStyleBackColor = true;
-            // 
-            // lblInformationMessage
-            // 
-            this.lblInformationMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblInformationMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInformationMessage.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblInformationMessage.Location = new System.Drawing.Point(3, 45);
-            this.lblInformationMessage.Name = "lblInformationMessage";
-            this.lblInformationMessage.Size = new System.Drawing.Size(293, 11);
-            this.lblInformationMessage.TabIndex = 14;
-            this.lblInformationMessage.Text = "Disable Bulk Actions to enable this";
-            this.lblInformationMessage.Visible = false;
-            // 
-            // gbSingleRowActions
-            // 
-            this.gbSingleRowActions.Controls.Add(this.flowLayoutPanel2);
-            this.gbSingleRowActions.Controls.Add(this.lblSingleRowActionMessage);
-            this.gbSingleRowActions.Location = new System.Drawing.Point(313, 8);
-            this.gbSingleRowActions.Name = "gbSingleRowActions";
-            this.gbSingleRowActions.Size = new System.Drawing.Size(274, 59);
-            this.gbSingleRowActions.TabIndex = 6;
-            this.gbSingleRowActions.TabStop = false;
-            this.gbSingleRowActions.Text = "Single Row Actions";
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.btnReceive);
-            this.flowLayoutPanel2.Controls.Add(this.btnSplit);
-            this.flowLayoutPanel2.Controls.Add(this.btnDisassemble);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(268, 29);
-            this.flowLayoutPanel2.TabIndex = 11;
-            // 
-            // btnReceive
-            // 
-            this.btnReceive.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnReceive.Location = new System.Drawing.Point(3, 3);
-            this.btnReceive.Name = "btnReceive";
-            this.btnReceive.Size = new System.Drawing.Size(75, 23);
-            this.btnReceive.TabIndex = 6;
-            this.btnReceive.Text = "Receive";
-            this.btnReceive.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnReceive, "Split the selcted Inventory Unit (row)");
-            this.btnReceive.UseVisualStyleBackColor = true;
-            // 
-            // btnSplit
-            // 
-            this.btnSplit.Image = global::IMS.Properties.Resources.icons8_Divider_16px;
-            this.btnSplit.Location = new System.Drawing.Point(84, 3);
-            this.btnSplit.Name = "btnSplit";
-            this.btnSplit.Size = new System.Drawing.Size(75, 23);
-            this.btnSplit.TabIndex = 5;
-            this.btnSplit.Text = "Split";
-            this.btnSplit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSplit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnSplit, "Split the selcted Inventory Unit (row)");
-            this.btnSplit.UseVisualStyleBackColor = true;
-            // 
-            // btnDisassemble
-            // 
-            this.btnDisassemble.Enabled = false;
-            this.btnDisassemble.Image = global::IMS.Properties.Resources.icons8_Split_Files_16px;
-            this.btnDisassemble.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDisassemble.Location = new System.Drawing.Point(165, 3);
-            this.btnDisassemble.Name = "btnDisassemble";
-            this.btnDisassemble.Size = new System.Drawing.Size(95, 23);
-            this.btnDisassemble.TabIndex = 4;
-            this.btnDisassemble.Text = "Disassemble";
-            this.btnDisassemble.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDisassemble.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnDisassemble, "Disassemble the selected Inventory Unit (row)");
-            this.btnDisassemble.UseVisualStyleBackColor = true;
-            // 
-            // lblSingleRowActionMessage
-            // 
-            this.lblSingleRowActionMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblSingleRowActionMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSingleRowActionMessage.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblSingleRowActionMessage.Location = new System.Drawing.Point(3, 45);
-            this.lblSingleRowActionMessage.Name = "lblSingleRowActionMessage";
-            this.lblSingleRowActionMessage.Size = new System.Drawing.Size(268, 11);
-            this.lblSingleRowActionMessage.TabIndex = 12;
-            this.lblSingleRowActionMessage.Text = "Disable Bulk Actions to enable this";
-            this.lblSingleRowActionMessage.Visible = false;
-            // 
-            // gbBulkActions
-            // 
-            this.gbBulkActions.Controls.Add(this.chkBulkActions);
-            this.gbBulkActions.Controls.Add(this.pnlBulkActions);
-            this.gbBulkActions.Controls.Add(this.lblBulkActionsMessage);
-            this.gbBulkActions.Location = new System.Drawing.Point(8, 73);
-            this.gbBulkActions.Name = "gbBulkActions";
-            this.gbBulkActions.Size = new System.Drawing.Size(253, 59);
-            this.gbBulkActions.TabIndex = 6;
-            this.gbBulkActions.TabStop = false;
-            this.gbBulkActions.Text = "Bulk Actions";
             // 
             // chkBulkActions
             // 
@@ -302,7 +113,7 @@
             this.chkBulkActions.Checked = true;
             this.chkBulkActions.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBulkActions.Enabled = false;
-            this.chkBulkActions.Location = new System.Drawing.Point(188, -2);
+            this.chkBulkActions.Location = new System.Drawing.Point(141, 60);
             this.chkBulkActions.Name = "chkBulkActions";
             this.chkBulkActions.Size = new System.Drawing.Size(59, 17);
             this.chkBulkActions.TabIndex = 13;
@@ -311,128 +122,492 @@
             this.chkBulkActions.UseVisualStyleBackColor = true;
             this.chkBulkActions.CheckedChanged += new System.EventHandler(this.chkBulkActions_CheckedChanged);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tableLayoutPanel1.Controls.Add(this.cbWarehouse, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cbProduct, 2, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 12);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(326, 69);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // cbProduct
+            // 
+            this.cbProduct.FormattingEnabled = true;
+            this.cbProduct.Location = new System.Drawing.Point(146, 36);
+            this.cbProduct.Name = "cbProduct";
+            this.cbProduct.Size = new System.Drawing.Size(167, 21);
+            this.cbProduct.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(77, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Product";
+            // 
+            // cbWarehouse
+            // 
+            this.cbWarehouse.FormattingEnabled = true;
+            this.cbWarehouse.Location = new System.Drawing.Point(146, 4);
+            this.cbWarehouse.Name = "cbWarehouse";
+            this.cbWarehouse.Size = new System.Drawing.Size(167, 21);
+            this.cbWarehouse.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(77, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Warehouse";
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(4, 1);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 23);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Filter";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlInfo
+            // 
+            this.pnlInfo.Controls.Add(this.panel1);
+            this.pnlInfo.Controls.Add(this.label3);
+            this.pnlInfo.Location = new System.Drawing.Point(25, 8);
+            this.pnlInfo.Name = "pnlInfo";
+            this.pnlInfo.Size = new System.Drawing.Size(200, 75);
+            this.pnlInfo.TabIndex = 7;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.flowLayoutPanel3);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 60);
+            this.panel1.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label3.Location = new System.Drawing.Point(0, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(200, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Information";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.btnProductDetail);
+            this.flowLayoutPanel3.Controls.Add(this.btnUnitDetail);
+            this.flowLayoutPanel3.Controls.Add(this.btnLabels);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(200, 60);
+            this.flowLayoutPanel3.TabIndex = 10;
+            // 
+            // dgvInventoryUnit
+            // 
+            this.dgvInventoryUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 91);
+            this.dgvInventoryUnit.Name = "dgvInventoryUnit";
+            this.dgvInventoryUnit.Size = new System.Drawing.Size(913, 318);
+            this.dgvInventoryUnit.TabIndex = 6;
+            // 
+            // btnProductDetail
+            // 
+            this.btnProductDetail.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnProductDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProductDetail.Image = global::IMS.Properties.Resources.icons8_Product_16px_1;
+            this.btnProductDetail.Location = new System.Drawing.Point(3, 3);
+            this.btnProductDetail.Name = "btnProductDetail";
+            this.btnProductDetail.Size = new System.Drawing.Size(60, 55);
+            this.btnProductDetail.TabIndex = 0;
+            this.btnProductDetail.Text = "Product Detail";
+            this.btnProductDetail.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnProductDetail.UseVisualStyleBackColor = true;
+            // 
+            // btnUnitDetail
+            // 
+            this.btnUnitDetail.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnUnitDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnitDetail.Image = global::IMS.Properties.Resources.icons8_Unity_16px_1;
+            this.btnUnitDetail.Location = new System.Drawing.Point(69, 3);
+            this.btnUnitDetail.Name = "btnUnitDetail";
+            this.btnUnitDetail.Size = new System.Drawing.Size(60, 55);
+            this.btnUnitDetail.TabIndex = 1;
+            this.btnUnitDetail.Text = "Unit Detail";
+            this.btnUnitDetail.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUnitDetail.UseVisualStyleBackColor = true;
+            // 
+            // btnLabels
+            // 
+            this.btnLabels.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnLabels.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLabels.Image = global::IMS.Properties.Resources.icons8_Postcard_With_Barcode_16px;
+            this.btnLabels.Location = new System.Drawing.Point(135, 3);
+            this.btnLabels.Name = "btnLabels";
+            this.btnLabels.Size = new System.Drawing.Size(60, 55);
+            this.btnLabels.TabIndex = 2;
+            this.btnLabels.Text = "Labels";
+            this.btnLabels.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnLabels.UseVisualStyleBackColor = true;
+            // 
+            // pnlSingleRowActions
+            // 
+            this.pnlSingleRowActions.Controls.Add(this.panel3);
+            this.pnlSingleRowActions.Controls.Add(this.label5);
+            this.pnlSingleRowActions.Location = new System.Drawing.Point(248, 8);
+            this.pnlSingleRowActions.Name = "pnlSingleRowActions";
+            this.pnlSingleRowActions.Size = new System.Drawing.Size(200, 75);
+            this.pnlSingleRowActions.TabIndex = 8;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.flowLayoutPanel4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 60);
+            this.panel3.TabIndex = 14;
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.btnReceive);
+            this.flowLayoutPanel4.Controls.Add(this.btnSplit);
+            this.flowLayoutPanel4.Controls.Add(this.btnDisassemble);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(200, 60);
+            this.flowLayoutPanel4.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.Location = new System.Drawing.Point(0, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(200, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Single Row Actions";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnReceive
+            // 
+            this.btnReceive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReceive.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnReceive.Location = new System.Drawing.Point(3, 3);
+            this.btnReceive.Name = "btnReceive";
+            this.btnReceive.Size = new System.Drawing.Size(60, 55);
+            this.btnReceive.TabIndex = 0;
+            this.btnReceive.Text = "Receive";
+            this.btnReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnReceive.UseVisualStyleBackColor = true;
+            // 
+            // btnSplit
+            // 
+            this.btnSplit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSplit.Image = global::IMS.Properties.Resources.icons8_Divider_16px;
+            this.btnSplit.Location = new System.Drawing.Point(69, 3);
+            this.btnSplit.Name = "btnSplit";
+            this.btnSplit.Size = new System.Drawing.Size(60, 55);
+            this.btnSplit.TabIndex = 1;
+            this.btnSplit.Text = "Split";
+            this.btnSplit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSplit.UseVisualStyleBackColor = true;
+            // 
+            // btnDisassemble
+            // 
+            this.btnDisassemble.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDisassemble.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDisassemble.Image = global::IMS.Properties.Resources.icons8_Split_Files_16px;
+            this.btnDisassemble.Location = new System.Drawing.Point(135, 3);
+            this.btnDisassemble.Name = "btnDisassemble";
+            this.btnDisassemble.Size = new System.Drawing.Size(60, 55);
+            this.btnDisassemble.TabIndex = 2;
+            this.btnDisassemble.Text = "Disassemble";
+            this.btnDisassemble.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDisassemble.UseVisualStyleBackColor = true;
+            // 
             // pnlBulkActions
             // 
-            this.pnlBulkActions.Controls.Add(this.btnMerge);
-            this.pnlBulkActions.Controls.Add(this.btnMove);
-            this.pnlBulkActions.Controls.Add(this.btnIssue);
-            this.pnlBulkActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBulkActions.Location = new System.Drawing.Point(3, 16);
+            this.pnlBulkActions.Controls.Add(this.chkBulkActions);
+            this.pnlBulkActions.Controls.Add(this.panel4);
+            this.pnlBulkActions.Controls.Add(this.label6);
+            this.pnlBulkActions.Location = new System.Drawing.Point(8, 89);
             this.pnlBulkActions.Name = "pnlBulkActions";
-            this.pnlBulkActions.Size = new System.Drawing.Size(247, 27);
-            this.pnlBulkActions.TabIndex = 12;
+            this.pnlBulkActions.Size = new System.Drawing.Size(200, 75);
+            this.pnlBulkActions.TabIndex = 9;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.flowLayoutPanel2);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 60);
+            this.panel4.TabIndex = 14;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.btnMerge);
+            this.flowLayoutPanel2.Controls.Add(this.btnMove);
+            this.flowLayoutPanel2.Controls.Add(this.btnIssue);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 60);
+            this.flowLayoutPanel2.TabIndex = 10;
             // 
             // btnMerge
             // 
+            this.btnMerge.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnMerge.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMerge.Image = global::IMS.Properties.Resources.icons8_Merge_Horizontal_16px;
             this.btnMerge.Location = new System.Drawing.Point(3, 3);
             this.btnMerge.Name = "btnMerge";
-            this.btnMerge.Size = new System.Drawing.Size(75, 23);
-            this.btnMerge.TabIndex = 2;
+            this.btnMerge.Size = new System.Drawing.Size(60, 55);
+            this.btnMerge.TabIndex = 0;
             this.btnMerge.Text = "Merge";
-            this.btnMerge.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMerge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnMerge, "Merge the checked Inventory Units (rows) into one");
+            this.btnMerge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnMerge.UseVisualStyleBackColor = true;
             // 
             // btnMove
             // 
+            this.btnMove.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMove.Image = global::IMS.Properties.Resources.icons8_Move_16px;
-            this.btnMove.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMove.Location = new System.Drawing.Point(84, 3);
+            this.btnMove.Location = new System.Drawing.Point(69, 3);
             this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(75, 23);
-            this.btnMove.TabIndex = 6;
+            this.btnMove.Size = new System.Drawing.Size(60, 55);
+            this.btnMove.TabIndex = 1;
             this.btnMove.Text = "Move";
-            this.btnMove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnMove, "Move the checked Inventory Units (rows) to different warehouse");
+            this.btnMove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnMove.UseVisualStyleBackColor = true;
             // 
             // btnIssue
             // 
+            this.btnIssue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIssue.Image = global::IMS.Properties.Resources.icons8_Sell_16px;
-            this.btnIssue.Location = new System.Drawing.Point(165, 3);
+            this.btnIssue.Location = new System.Drawing.Point(135, 3);
             this.btnIssue.Name = "btnIssue";
-            this.btnIssue.Size = new System.Drawing.Size(75, 23);
-            this.btnIssue.TabIndex = 7;
+            this.btnIssue.Size = new System.Drawing.Size(60, 55);
+            this.btnIssue.TabIndex = 2;
             this.btnIssue.Text = "Issue";
-            this.btnIssue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.btnIssue, "Issue the checked Inventory Units (rows)");
+            this.btnIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnIssue.UseVisualStyleBackColor = true;
             // 
-            // lblBulkActionsMessage
+            // label6
             // 
-            this.lblBulkActionsMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblBulkActionsMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBulkActionsMessage.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblBulkActionsMessage.Location = new System.Drawing.Point(3, 43);
-            this.lblBulkActionsMessage.Name = "lblBulkActionsMessage";
-            this.lblBulkActionsMessage.Size = new System.Drawing.Size(247, 13);
-            this.lblBulkActionsMessage.TabIndex = 8;
-            this.lblBulkActionsMessage.Text = "Check rows to do bulk action";
+            this.label6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label6.Location = new System.Drawing.Point(0, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(200, 15);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Bulk Actions";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dgvInventoryUnit
+            // panel2
             // 
-            this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 186);
-            this.dgvInventoryUnit.Name = "dgvInventoryUnit";
-            this.dgvInventoryUnit.Size = new System.Drawing.Size(801, 223);
-            this.dgvInventoryUnit.TabIndex = 6;
+            this.panel2.Controls.Add(this.splitter1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(454, 8);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel2.Size = new System.Drawing.Size(11, 75);
+            this.panel2.TabIndex = 41;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter1.Location = new System.Drawing.Point(5, 4);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(2, 67);
+            this.splitter1.TabIndex = 0;
+            this.splitter1.TabStop = false;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.splitter2);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(214, 89);
+            this.panel5.Name = "panel5";
+            this.panel5.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel5.Size = new System.Drawing.Size(11, 75);
+            this.panel5.TabIndex = 42;
+            // 
+            // splitter2
+            // 
+            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter2.Location = new System.Drawing.Point(5, 4);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(2, 67);
+            this.splitter2.TabIndex = 0;
+            this.splitter2.TabStop = false;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.splitter3);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(231, 8);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel6.Size = new System.Drawing.Size(11, 75);
+            this.panel6.TabIndex = 43;
+            // 
+            // splitter3
+            // 
+            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter3.Location = new System.Drawing.Point(5, 4);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(2, 67);
+            this.splitter3.TabIndex = 0;
+            this.splitter3.TabStop = false;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.splitter4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(8, 8);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel7.Size = new System.Drawing.Size(11, 75);
+            this.panel7.TabIndex = 44;
+            // 
+            // splitter4
+            // 
+            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter4.Location = new System.Drawing.Point(5, 4);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(2, 67);
+            this.splitter4.TabIndex = 0;
+            this.splitter4.TabStop = false;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.tableLayoutPanel1);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel8.Location = new System.Drawing.Point(579, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(334, 91);
+            this.panel8.TabIndex = 7;
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.AutoSize = true;
+            this.pnlHeader.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlHeader.Controls.Add(this.flowLayoutPanel1);
+            this.pnlHeader.Controls.Add(this.panel8);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(913, 91);
+            this.pnlHeader.TabIndex = 8;
             // 
             // InventoryUnitListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvInventoryUnit);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.pnlHeader);
             this.Name = "InventoryUnitListUC";
-            this.Size = new System.Drawing.Size(801, 409);
+            this.Size = new System.Drawing.Size(913, 409);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.gbInformation.ResumeLayout(false);
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.gbSingleRowActions.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.gbBulkActions.ResumeLayout(false);
-            this.gbBulkActions.PerformLayout();
-            this.pnlBulkActions.ResumeLayout(false);
+            this.pnlInfo.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).EndInit();
+            this.pnlSingleRowActions.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.pnlBulkActions.ResumeLayout(false);
+            this.pnlBulkActions.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ComboBox cbProduct;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbWarehouse;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnProductDetail;
-        private System.Windows.Forms.Button btnUnitDetail;
-        private System.Windows.Forms.Button btnMerge;
-        private System.Windows.Forms.Button btnDisassemble;
-        private System.Windows.Forms.Button btnMove;
-        private System.Windows.Forms.Button btnIssue;
-        private System.Windows.Forms.Button btnLabels;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.FlowLayoutPanel pnlBulkActions;
-        private System.Windows.Forms.Button btnSplit;
-        private System.Windows.Forms.GroupBox gbInformation;
-        private System.Windows.Forms.GroupBox gbSingleRowActions;
-        private System.Windows.Forms.GroupBox gbBulkActions;
         private System.Windows.Forms.CheckBox chkBulkActions;
-        private System.Windows.Forms.Label lblBulkActionsMessage;
-        private System.Windows.Forms.Label lblInformationMessage;
-        private System.Windows.Forms.Label lblSingleRowActionMessage;
         private System.Windows.Forms.ToolTip toolTip1;
         private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvInventoryUnit;
-        private System.Windows.Forms.Button btnReceive;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ComboBox cbProduct;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbWarehouse;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pnlInfo;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private Common.Buttons.MenuButton btnProductDetail;
+        private Common.Buttons.MenuButton btnUnitDetail;
+        private Common.Buttons.MenuButton btnLabels;
+        private System.Windows.Forms.Panel pnlSingleRowActions;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private Common.Buttons.MenuButton btnReceive;
+        private Common.Buttons.MenuButton btnSplit;
+        private Common.Buttons.MenuButton btnDisassemble;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel pnlBulkActions;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private Common.Buttons.MenuButton btnMerge;
+        private Common.Buttons.MenuButton btnMove;
+        private Common.Buttons.MenuButton btnIssue;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Splitter splitter4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel pnlHeader;
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace IMS.Forms.Inventory.Settings.Appearance
+﻿namespace IMS.Forms.Inventory.Settings.General
 {
-    partial class AppearanceSettingsUC
+    partial class GeneralSettingsUC
     {
         /// <summary> 
         /// Required designer variable.

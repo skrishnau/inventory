@@ -271,36 +271,35 @@ namespace IMS.Forms.Inventory.Units
         {
             var check = chkBulkActions.Checked;
 
-            gbSingleRowActions.Enabled = !check;
-            gbInformation.Enabled = !check;
+           // gbSingleRowActions.Enabled = !check;
+            //gbInformation.Enabled = !check;
             pnlBulkActions.Enabled = check;
 
             dgvInventoryUnit.ShowCheckColumn(check);
 
 
-            lblInformationMessage.Visible = check;
-            lblSingleRowActionMessage.Visible = check;
+           // lblInformationMessage.Visible = check;
+            //lblSingleRowActionMessage.Visible = check;
 
             if (check)
             {
                 chkBulkActions.Text = "Disable";
-                lblBulkActionsMessage.Text = "Check rows to perform bulk action";
+               // lblBulkActionsMessage.Text = "Check rows to perform bulk action";
                 // PopupMessage.ShowInfoMessage("Check rows to perform bulk action");
             }
             else
             {
                 chkBulkActions.Text = "Enable";
-                lblBulkActionsMessage.Text = "Check \"Enable\" button above";
+                //lblBulkActionsMessage.Text = "Check \"Enable\" button above";
             }
         }
 
+
+
+
+
+
+
         #endregion
-
-
-
-
-
-
-
     }
 }

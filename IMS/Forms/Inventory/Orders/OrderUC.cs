@@ -17,9 +17,9 @@ namespace IMS.Forms.Inventory.Orders
         private readonly IDatabaseChangeListener _listener;
         private readonly OrderDetailUC _orderDetailUC;
         private readonly OrderListUC _orderListUC;
-        private OrderSidebarUC _sidebar;
+       // private OrderSidebarUC _sidebar;
 
-        private LinkManager _linkManager;
+      //  private LinkManager _linkManager;
 
         private List<int> _recentPurchaseOrderModelIds = new List<int>();
         private OrderTypeEnum _orderType;
@@ -43,17 +43,17 @@ namespace IMS.Forms.Inventory.Orders
         {
             InitializeBody();
 
-            _linkManager = new LinkManager(_sidebar.pnlLinkList, _body.toolTip1);
+           // _linkManager = new LinkManager(_sidebar.pnlLinkList, _body.toolTip1);
 
             InitializeEvents();
-            InitializeLinkLabels();
+           // InitializeLinkLabels();
             ShowData();
 
         }
 
         private void InitializeBody()
         {
-            _sidebar = new OrderSidebarUC();
+           // _sidebar = new OrderSidebarUC();
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
@@ -66,9 +66,9 @@ namespace IMS.Forms.Inventory.Orders
                     break;
             }
 
-            _body.SubHeadingText = "";
+            //_body.SubHeadingText = "";
 
-            _body.pnlSideBar.Controls.Add(_sidebar);
+            //_body.pnlSideBar.Controls.Add(_sidebar);
 
         }
 
@@ -83,8 +83,8 @@ namespace IMS.Forms.Inventory.Orders
             //_listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
             // dgvPurchases.CellMouseDoubleClick += DgvPurchases_CellMouseDoubleClick;
             _orderDetailUC.btnBackToList.Click += BtnBackToList_Click;
-            _sidebar.lnkList.Click += _linkManager.Link_Click;
-            _linkManager.LinkClicked += _linkManager_LinkClicked;
+            //_sidebar.lnkList.Click += _linkManager.Link_Click;
+            //_linkManager.LinkClicked += _linkManager_LinkClicked;
             _orderListUC.RowSelected += _purchaseOrderListUC_RowSelected;
             // btnNew.Click += BtnNewOrder_Click;
         }
@@ -98,15 +98,15 @@ namespace IMS.Forms.Inventory.Orders
         {
             if (e.Model != null)
             {
-                _linkManager.AddAndGetLink(e.Model.Id, e.Model.ReferenceNumber, e.Model.Name);
+               // _linkManager.AddAndGetLink(e.Model.Id, e.Model.ReferenceNumber, e.Model.Name);
                 ShowData(e.Model.Id);
             }
         }
 
-        private void InitializeLinkLabels()
-        {
-            _sidebar.lnkList.LinkVisited = true;
-        }
+        //private void InitializeLinkLabels()
+        //{
+        //    _sidebar.lnkList.LinkVisited = true;
+        //}
         #endregion
 
 
@@ -120,16 +120,16 @@ namespace IMS.Forms.Inventory.Orders
         private void ShowData(int orderId = 0)
         {
             _body.pnlBody.Controls.Clear();
-            switch (_orderType)
-            {
-                case OrderTypeEnum.Purchase:
-                    _body.SubHeadingText = orderId == 0 ? "Purchase Orders" : "Purchase Order Detail";
+            //switch (_orderType)
+            //{
+            //    case OrderTypeEnum.Purchase:
+            //        _body.SubHeadingText = orderId == 0 ? "Purchase Orders" : "Purchase Order Detail";
+            //        break;
+            //    case OrderTypeEnum.Sale:
+            //        _body.SubHeadingText = orderId == 0 ? "Sale Orders" : "Sale Order Detail";
+            //        break;
+            //}
 
-                    break;
-                case OrderTypeEnum.Sale:
-                    _body.SubHeadingText = orderId == 0 ? "Sale Orders" : "Sale Order Detail";
-                    break;
-            }
             if (orderId == 0)
             {
                 _body.pnlBody.Controls.Add(_orderListUC);
@@ -148,7 +148,7 @@ namespace IMS.Forms.Inventory.Orders
                         break;
                 }
             }
-            _sidebar.SetVisited(orderId);
+           // _sidebar.SetVisited(orderId);
         }
 
 

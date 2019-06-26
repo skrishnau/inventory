@@ -10,13 +10,13 @@ using System.Windows.Forms;
 using Service.Core.Settings;
 using ViewModel.Core.Settings;
 
-namespace IMS.Forms.Inventory.Settings.Appearance
+namespace IMS.Forms.Inventory.Settings.General
 {
-    public partial class AppearanceSettingsUC : UserControl
+    public partial class GeneralSettingsUC : UserControl
     {
         private readonly IAppSettingService appSettingService;
 
-        public AppearanceSettingsUC(IAppSettingService appSettingService)
+        public GeneralSettingsUC(IAppSettingService appSettingService)
         {
             this.appSettingService = appSettingService;
             InitializeComponent();

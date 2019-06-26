@@ -28,18 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this._body = new IMS.Forms.Common.Display.ListBodyTemplate();
             this.SuspendLayout();
+            // 
+            // _body
+            // 
+            this._body.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._body.HeadingText = "Heading";
+            this._body.HeadingVisible = true;
+            this._body.Location = new System.Drawing.Point(0, 0);
+            this._body.Name = "_body";
+            this._body.Size = new System.Drawing.Size(767, 466);
+            this._body.TabIndex = 0;
             // 
             // InventoryUnitUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this._body);
             this.Name = "InventoryUnitUC";
-            this.Size = new System.Drawing.Size(228, 180);
+            this.Size = new System.Drawing.Size(767, 466);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private Common.Display.ListBodyTemplate _body;
     }
 }

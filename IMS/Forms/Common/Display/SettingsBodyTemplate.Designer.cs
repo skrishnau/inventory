@@ -1,6 +1,6 @@
 ﻿namespace IMS.Forms.Common.Display
 {
-    partial class SubBodyTemplate
+    partial class SettingsBodyTemplate
     {
         /// <summary> 
         /// Required designer variable.

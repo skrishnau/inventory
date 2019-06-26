@@ -38,10 +38,11 @@
             this.lblText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblText.Location = new System.Drawing.Point(0, 0);
             this.lblText.Name = "lblText";
+            this.lblText.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.lblText.Size = new System.Drawing.Size(563, 42);
             this.lblText.TabIndex = 8;
             this.lblText.Text = "Heading";
-            this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SubHeaderTemplate
             // 

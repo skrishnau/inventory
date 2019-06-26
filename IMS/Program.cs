@@ -34,7 +34,7 @@ using IMS.Forms.Inventory.Settings;
 using IMS.Forms.Inventory.Units.Details;
 using Service.Core.Inventory.Units;
 using IMS.Forms.Inventory.Settings.Companies;
-using IMS.Forms.Inventory.Settings.Appearance;
+using IMS.Forms.Inventory.Settings.General;
 using IMS.Forms.Inventory.Settings.References;
 using IMS.Forms.Inventory.Sales;
 using Service.Core.Orders;
@@ -159,7 +159,7 @@ namespace IMS
             //
             container.Register<ProductUC>(Lifestyle.Scoped);
             container.Register<ProductListUC>(Lifestyle.Scoped);
-            container.Register<ProductSidebarUC>(Lifestyle.Scoped);
+           // container.Register<ProductSidebarUC>(Lifestyle.Scoped);
             container.Register<ProductDetailUC>(Lifestyle.Scoped);
             container.Register<ProductCreateForm>(Lifestyle.Scoped);
             //
@@ -182,7 +182,7 @@ namespace IMS
             container.Register<InventorySettingsUC>(Lifestyle.Scoped);
             container.Register<InventorySettingsSidebarUC>(Lifestyle.Scoped);
             container.Register<CompanySettingsUC>(Lifestyle.Scoped);
-            container.Register<AppearanceSettingsUC>(Lifestyle.Scoped);
+            container.Register<GeneralSettingsUC>(Lifestyle.Scoped);
             container.Register<ReferenceSettingsUC>(Lifestyle.Scoped);
             //
             // Sales

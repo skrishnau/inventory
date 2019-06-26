@@ -14,11 +14,11 @@ namespace IMS.Forms.Inventory.Units
 {
     public partial class InventoryUnitUC : UserControl
     {
-        private SubBodyTemplate _body;
-        private readonly InventoryUnitSideBarUC _sidebar;
+       // private SettingsBodyTemplate _body;
+        private readonly InventoryUnitsMenu _sidebar;
         private readonly InventoryUnitListUC _inventoryUnitListUC;
 
-        public InventoryUnitUC(InventoryUnitListUC inventoryUnitListUC , InventoryUnitSideBarUC sidebar)
+        public InventoryUnitUC(InventoryUnitListUC inventoryUnitListUC , InventoryUnitsMenu sidebar)
         {
             _sidebar = sidebar;
             _inventoryUnitListUC = inventoryUnitListUC;
@@ -27,20 +27,40 @@ namespace IMS.Forms.Inventory.Units
 
             this.Dock = DockStyle.Fill;
 
+            this.Load += InventoryUnitUC_Load;
+
+            
+
+        }
+
+        private void InventoryUnitUC_Load(object sender, EventArgs e)
+        {
             InitializeBody();
 
             InitializeEvents();
+
+            ShowInventoryUnitList();
+
+        }
+
+        private void ShowInventoryUnitList()
+        {
+            LnkManage_LinkClicked(_sidebar.lnkManage, null);
         }
 
         private void InitializeBody()
         {
-            _body = new SubBodyTemplate
-            {
-                HeadingText = "Inventory Units",
-                SubHeadingText = ""
-            };
-            _body.pnlSideBar.Controls.Add(_sidebar);
-            this.Controls.Add(_body);
+            _body.HeadingText = "Inventory Units";
+            //_body = new SettingsBodyTemplate
+            //{
+            //    HeadingText = "Inventory Units",
+            //    SubHeadingText = ""
+            //};
+            _sidebar.Dock = DockStyle.Right;
+            _body.headingControl.Controls.Add(_sidebar);
+            _sidebar.BringToFront();
+            //_body.pnlSideBar.Controls.Add(_sidebar);
+           // this.Controls.Add(_body);
         }
 
         private void InitializeEvents()
@@ -57,7 +77,7 @@ namespace IMS.Forms.Inventory.Units
             warehouseProductListUC.Dock = DockStyle.Fill;
             _body.pnlBody.Controls.Add(warehouseProductListUC);
             _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "Inentory Movements";
+           // _body.SubHeadingText = "Inentory Movements";
         }
 
         private void LnkSummary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -67,7 +87,7 @@ namespace IMS.Forms.Inventory.Units
             warehouseProductListUC.Dock = DockStyle.Fill;
             _body.pnlBody.Controls.Add(warehouseProductListUC);
             _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "Inentory Units Summary";
+           // _body.SubHeadingText = "Inentory Units Summary";
         }
 
         private void LnkManage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -77,7 +97,7 @@ namespace IMS.Forms.Inventory.Units
             inventoryUnitList.Dock = DockStyle.Fill;
             _body.pnlBody.Controls.Add(inventoryUnitList);
             _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "Manage Inventory";
+          //  _body.SubHeadingText = "Manage Inventory";
         }
 
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderListUC));
             this.dgvPurchases = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,10 +38,14 @@
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvPurchases
@@ -57,12 +62,12 @@
             this.colTotalAmount,
             this.colStatus});
             this.dgvPurchases.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPurchases.Location = new System.Drawing.Point(0, 26);
+            this.dgvPurchases.Location = new System.Drawing.Point(0, 56);
             this.dgvPurchases.MultiSelect = false;
             this.dgvPurchases.Name = "dgvPurchases";
             this.dgvPurchases.ReadOnly = true;
             this.dgvPurchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPurchases.Size = new System.Drawing.Size(608, 439);
+            this.dgvPurchases.Size = new System.Drawing.Size(608, 409);
             this.dgvPurchases.TabIndex = 6;
             // 
             // colId
@@ -128,37 +133,76 @@
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
             // 
-            // panel3
+            // panel1
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Controls.Add(this.btnNew);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel3.Size = new System.Drawing.Size(608, 26);
-            this.panel3.TabIndex = 7;
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(608, 53);
+            this.panel1.TabIndex = 11;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnNew);
+            this.flowLayoutPanel1.Controls.Add(this.btnEdit);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 4);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(339, 45);
+            this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnNew
             // 
+            this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnNew.Location = new System.Drawing.Point(4, 3);
+            this.btnNew.Location = new System.Drawing.Point(3, 3);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(21, 19);
-            this.btnNew.TabIndex = 1;
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnNew.Size = new System.Drawing.Size(42, 40);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "New";
+            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNew.UseVisualStyleBackColor = true;
             // 
-            // PurchaseOrderListUC
+            // btnEdit
+            // 
+            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(51, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(48, 40);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Visible = false;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter1.Location = new System.Drawing.Point(0, 53);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(608, 3);
+            this.splitter1.TabIndex = 12;
+            this.splitter1.TabStop = false;
+            // 
+            // OrderListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvPurchases);
-            this.Controls.Add(this.panel3);
-            this.Name = "PurchaseOrderListUC";
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.panel1);
+            this.Name = "OrderListUC";
             this.Size = new System.Drawing.Size(608, 465);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -174,7 +218,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         protected internal System.Windows.Forms.Button btnNew;
+        protected internal System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }

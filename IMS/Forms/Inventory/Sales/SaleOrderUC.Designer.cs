@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this._body = new IMS.Forms.Common.Display.SubBodyTemplate();
+            this._body = new IMS.Forms.Common.Display.SettingsBodyTemplate();
             this.SuspendLayout();
             // 
             // _body
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private Common.Display.SubBodyTemplate _body;
+        private Common.Display.SettingsBodyTemplate _body;
     }
 }

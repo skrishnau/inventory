@@ -8,16 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IMS.Forms.Inventory.Orders
+namespace IMS.Forms.Inventory.Units
 {
-    public partial class OrderSidebarUC : UserControl
+    public partial class InventoryUnitsMenu : UserControl
     {
-        public OrderSidebarUC()
+        public InventoryUnitsMenu()
         {
             InitializeComponent();
-
             this.Dock = DockStyle.Fill;
-
         }
 
         public void SetVisited(object sender)

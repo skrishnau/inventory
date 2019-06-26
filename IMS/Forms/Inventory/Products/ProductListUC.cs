@@ -37,7 +37,7 @@ namespace IMS.Forms.Inventory.Products
             // use Header template to display header.
             // InitializeHeader();
 
-
+            this.dgvProductList.AutoGenerateColumns = false;
             this.Load += ProductListUC_Load;
         }
 

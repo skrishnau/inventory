@@ -16,7 +16,7 @@ namespace IMS.Forms.Inventory.Warehouses
     public partial class WarehouseUC : UserControl
     {
 
-        private SubBodyTemplate _subBodyTemplate;
+        private SettingsBodyTemplate _subBodyTemplate;
 
         private readonly WarehouseListUC _warehouseListUC;
         private readonly WarehouseSideBarUC _warehouseSideBarUC;
@@ -65,7 +65,7 @@ namespace IMS.Forms.Inventory.Warehouses
 
         private void InitializeSubBody()
         {
-            _subBodyTemplate = new SubBodyTemplate();
+            _subBodyTemplate = new SettingsBodyTemplate();
             this.Controls.Add(_subBodyTemplate);
             _subBodyTemplate.HeadingText = "Warehouses";
             _subBodyTemplate.SubHeadingText = "";
