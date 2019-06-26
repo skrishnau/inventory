@@ -128,12 +128,6 @@
     <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.Designer.cs">
       <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.Designer.cs">
-      <DependentUpon>CompanySettingsUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -631,9 +625,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\General\GeneralSettingsUC.resx">
       <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Settings\Companies\CompanySettingsUC.resx">
-      <DependentUpon>CompanySettingsUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.resx">
       <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>
@@ -1331,6 +1322,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Forward_Arrow_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Depot_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Supplier_16px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Calculator_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Math_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Help_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Help_24px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Administrative_Tools_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Deviation_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Odometer_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Speed_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Speed_24px_4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

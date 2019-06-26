@@ -22,9 +22,9 @@ namespace IMS
 
         private void DisplayInventory()
         {
-            pnlBody.Controls.Clear();
+            this.Controls.Clear();
             var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
-            pnlBody.Controls.Add(productListUC);
+            this.Controls.Add(productListUC);
         }
 
         //private void InitializeEvents()

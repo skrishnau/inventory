@@ -29,13 +29,20 @@
         private void InitializeComponent()
         {
             this.pnlLinks = new System.Windows.Forms.FlowLayoutPanel();
+            this.splitter5 = new System.Windows.Forms.Splitter();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.splitter6 = new System.Windows.Forms.Splitter();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.splitter4 = new System.Windows.Forms.Splitter();
             this.lnkGeneral = new System.Windows.Forms.LinkLabel();
-            this.lnkProfile = new System.Windows.Forms.LinkLabel();
             this.lnkReferences = new System.Windows.Forms.LinkLabel();
             this.lnkProductCategory = new System.Windows.Forms.LinkLabel();
             this.lnkPackages = new System.Windows.Forms.LinkLabel();
             this.lnkUom = new System.Windows.Forms.LinkLabel();
             this.lnkAdjustmentCodes = new System.Windows.Forms.LinkLabel();
+            this.lnkSuppliers = new System.Windows.Forms.LinkLabel();
+            this.lnkWarehouses = new System.Windows.Forms.LinkLabel();
             this.lnkUsers = new System.Windows.Forms.LinkLabel();
             this.lnkPermissions = new System.Windows.Forms.LinkLabel();
             this.pnlLinks.SuspendLayout();
@@ -43,32 +50,99 @@
             // 
             // pnlLinks
             // 
+            this.pnlLinks.Controls.Add(this.splitter5);
             this.pnlLinks.Controls.Add(this.lnkGeneral);
-            this.pnlLinks.Controls.Add(this.lnkProfile);
+            this.pnlLinks.Controls.Add(this.splitter1);
             this.pnlLinks.Controls.Add(this.lnkReferences);
+            this.pnlLinks.Controls.Add(this.splitter2);
             this.pnlLinks.Controls.Add(this.lnkProductCategory);
             this.pnlLinks.Controls.Add(this.lnkPackages);
             this.pnlLinks.Controls.Add(this.lnkUom);
             this.pnlLinks.Controls.Add(this.lnkAdjustmentCodes);
+            this.pnlLinks.Controls.Add(this.splitter6);
+            this.pnlLinks.Controls.Add(this.lnkSuppliers);
+            this.pnlLinks.Controls.Add(this.lnkWarehouses);
+            this.pnlLinks.Controls.Add(this.splitter3);
             this.pnlLinks.Controls.Add(this.lnkUsers);
             this.pnlLinks.Controls.Add(this.lnkPermissions);
+            this.pnlLinks.Controls.Add(this.splitter4);
             this.pnlLinks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLinks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlLinks.Location = new System.Drawing.Point(0, 0);
             this.pnlLinks.Name = "pnlLinks";
-            this.pnlLinks.Size = new System.Drawing.Size(189, 484);
+            this.pnlLinks.Size = new System.Drawing.Size(196, 484);
             this.pnlLinks.TabIndex = 3;
             this.pnlLinks.WrapContents = false;
+            // 
+            // splitter5
+            // 
+            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter5.Location = new System.Drawing.Point(3, 3);
+            this.splitter5.Name = "splitter5";
+            this.splitter5.Size = new System.Drawing.Size(150, 3);
+            this.splitter5.TabIndex = 16;
+            this.splitter5.TabStop = false;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter1.Location = new System.Drawing.Point(3, 39);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(150, 3);
+            this.splitter1.TabIndex = 12;
+            this.splitter1.TabStop = false;
+            // 
+            // splitter2
+            // 
+            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter2.Location = new System.Drawing.Point(3, 75);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(150, 3);
+            this.splitter2.TabIndex = 13;
+            this.splitter2.TabStop = false;
+            // 
+            // splitter6
+            // 
+            this.splitter6.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter6.Location = new System.Drawing.Point(3, 192);
+            this.splitter6.Name = "splitter6";
+            this.splitter6.Size = new System.Drawing.Size(150, 3);
+            this.splitter6.TabIndex = 19;
+            this.splitter6.TabStop = false;
+            // 
+            // splitter3
+            // 
+            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter3.Location = new System.Drawing.Point(3, 255);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(150, 3);
+            this.splitter3.TabIndex = 14;
+            this.splitter3.TabStop = false;
+            // 
+            // splitter4
+            // 
+            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter4.Location = new System.Drawing.Point(3, 318);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(150, 3);
+            this.splitter4.TabIndex = 15;
+            this.splitter4.TabStop = false;
             // 
             // lnkGeneral
             // 
             this.lnkGeneral.AutoSize = true;
             this.lnkGeneral.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkGeneral.Image = global::IMS.Properties.Resources.icons8_Receipt_16px;
+            this.lnkGeneral.Image = global::IMS.Properties.Resources.icons8_Deviation_16px;
             this.lnkGeneral.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkGeneral.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkGeneral.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkGeneral.Location = new System.Drawing.Point(5, 5);
+            this.lnkGeneral.Location = new System.Drawing.Point(5, 14);
             this.lnkGeneral.Margin = new System.Windows.Forms.Padding(5);
             this.lnkGeneral.Name = "lnkGeneral";
             this.lnkGeneral.Size = new System.Drawing.Size(83, 17);
@@ -76,23 +150,6 @@
             this.lnkGeneral.TabStop = true;
             this.lnkGeneral.Text = "      General";
             this.lnkGeneral.VisitedLinkColor = System.Drawing.Color.Black;
-            // 
-            // lnkProfile
-            // 
-            this.lnkProfile.AutoSize = true;
-            this.lnkProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkProfile.Image = global::IMS.Properties.Resources.icons8_Receipt_16px;
-            this.lnkProfile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lnkProfile.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkProfile.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkProfile.Location = new System.Drawing.Point(5, 32);
-            this.lnkProfile.Margin = new System.Windows.Forms.Padding(5);
-            this.lnkProfile.Name = "lnkProfile";
-            this.lnkProfile.Size = new System.Drawing.Size(72, 17);
-            this.lnkProfile.TabIndex = 9;
-            this.lnkProfile.TabStop = true;
-            this.lnkProfile.Text = "      Profile";
-            this.lnkProfile.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // lnkReferences
             // 
@@ -102,7 +159,7 @@
             this.lnkReferences.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkReferences.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkReferences.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkReferences.Location = new System.Drawing.Point(5, 59);
+            this.lnkReferences.Location = new System.Drawing.Point(5, 50);
             this.lnkReferences.Margin = new System.Windows.Forms.Padding(5);
             this.lnkReferences.Name = "lnkReferences";
             this.lnkReferences.Size = new System.Drawing.Size(105, 17);
@@ -181,6 +238,42 @@
             this.lnkAdjustmentCodes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkAdjustmentCodes.VisitedLinkColor = System.Drawing.Color.Black;
             // 
+            // lnkSuppliers
+            // 
+            this.lnkSuppliers.AutoSize = true;
+            this.lnkSuppliers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkSuppliers.Image = global::IMS.Properties.Resources.icons8_Supplier_16px;
+            this.lnkSuppliers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkSuppliers.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkSuppliers.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lnkSuppliers.Location = new System.Drawing.Point(5, 203);
+            this.lnkSuppliers.Margin = new System.Windows.Forms.Padding(5);
+            this.lnkSuppliers.Name = "lnkSuppliers";
+            this.lnkSuppliers.Size = new System.Drawing.Size(91, 17);
+            this.lnkSuppliers.TabIndex = 18;
+            this.lnkSuppliers.TabStop = true;
+            this.lnkSuppliers.Text = "      Suppliers";
+            this.lnkSuppliers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkSuppliers.VisitedLinkColor = System.Drawing.Color.Black;
+            // 
+            // lnkWarehouses
+            // 
+            this.lnkWarehouses.AutoSize = true;
+            this.lnkWarehouses.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkWarehouses.Image = global::IMS.Properties.Resources.icons8_Depot_16px;
+            this.lnkWarehouses.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkWarehouses.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkWarehouses.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lnkWarehouses.Location = new System.Drawing.Point(5, 230);
+            this.lnkWarehouses.Margin = new System.Windows.Forms.Padding(5);
+            this.lnkWarehouses.Name = "lnkWarehouses";
+            this.lnkWarehouses.Size = new System.Drawing.Size(112, 17);
+            this.lnkWarehouses.TabIndex = 17;
+            this.lnkWarehouses.TabStop = true;
+            this.lnkWarehouses.Text = "      Warehouses";
+            this.lnkWarehouses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkWarehouses.VisitedLinkColor = System.Drawing.Color.Black;
+            // 
             // lnkUsers
             // 
             this.lnkUsers.AutoSize = true;
@@ -189,7 +282,7 @@
             this.lnkUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkUsers.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkUsers.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkUsers.Location = new System.Drawing.Point(5, 194);
+            this.lnkUsers.Location = new System.Drawing.Point(5, 266);
             this.lnkUsers.Margin = new System.Windows.Forms.Padding(5);
             this.lnkUsers.Name = "lnkUsers";
             this.lnkUsers.Size = new System.Drawing.Size(69, 17);
@@ -206,7 +299,7 @@
             this.lnkPermissions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkPermissions.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkPermissions.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkPermissions.Location = new System.Drawing.Point(5, 221);
+            this.lnkPermissions.Location = new System.Drawing.Point(5, 293);
             this.lnkPermissions.Margin = new System.Windows.Forms.Padding(5);
             this.lnkPermissions.Name = "lnkPermissions";
             this.lnkPermissions.Size = new System.Drawing.Size(108, 17);
@@ -221,7 +314,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlLinks);
             this.Name = "InventorySettingsSidebarUC";
-            this.Size = new System.Drawing.Size(189, 484);
+            this.Size = new System.Drawing.Size(196, 484);
             this.pnlLinks.ResumeLayout(false);
             this.pnlLinks.PerformLayout();
             this.ResumeLayout(false);
@@ -238,7 +331,14 @@
         protected internal System.Windows.Forms.LinkLabel lnkAdjustmentCodes;
         protected internal System.Windows.Forms.LinkLabel lnkUsers;
         protected internal System.Windows.Forms.LinkLabel lnkPermissions;
-        protected internal System.Windows.Forms.LinkLabel lnkProfile;
         protected internal System.Windows.Forms.LinkLabel lnkGeneral;
+        private System.Windows.Forms.Splitter splitter5;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Splitter splitter6;
+        protected internal System.Windows.Forms.LinkLabel lnkSuppliers;
+        protected internal System.Windows.Forms.LinkLabel lnkWarehouses;
+        private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.Splitter splitter4;
     }
 }

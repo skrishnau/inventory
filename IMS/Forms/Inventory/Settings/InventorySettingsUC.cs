@@ -12,10 +12,11 @@ using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
 using IMS.Forms.Inventory.Categories;
 using IMS.Forms.Common.Display;
-using IMS.Forms.Inventory.Settings.Companies;
 using IMS.Forms.Inventory.Settings.References;
 using IMS.Forms.Inventory.Settings.General;
 using IMS.Forms.Inventory.Users;
+using IMS.Forms.Inventory.Warehouses;
+using IMS.Forms.Inventory.Suppliers;
 
 namespace IMS.Forms.Inventory.Settings
 {
@@ -64,9 +65,11 @@ namespace IMS.Forms.Inventory.Settings
             _sidebar.lnkUom.LinkClicked += LnkUom_LinkClicked;
             _sidebar.lnkUsers.LinkClicked += LnkUsers_LinkClicked;
             _sidebar.lnkReferences.LinkClicked += LnkReferences_LinkClicked;
-            _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
-        }
+           // _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
 
+            _sidebar.lnkWarehouses.LinkClicked += LnkWarehouses_LinkClicked;
+            _sidebar.lnkSuppliers.LinkClicked += LnkSuppliers_LinkClicked;
+        }
 
         private void SelectGeneralLink()
         {
@@ -83,15 +86,15 @@ namespace IMS.Forms.Inventory.Settings
             _body.SubHeadingText = "General";
         }
 
-        private void LnkProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var userListUC = Program.container.GetInstance<CompanySettingsUC>();
-            _body.pnlBody.Controls.Clear();
-            _body.pnlBody.Controls.Add(userListUC);
-            // set selection
-            _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "Profile";
-        }
+        //private void LnkProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        //{
+        //    var userListUC = Program.container.GetInstance<CompanySettingsUC>();
+        //    _body.pnlBody.Controls.Clear();
+        //    _body.pnlBody.Controls.Add(userListUC);
+        //    // set selection
+        //    _sidebar.SetVisited(sender);
+        //    _body.SubHeadingText = "Profile";
+        //}
 
         private void LnkReferences_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -150,6 +153,25 @@ namespace IMS.Forms.Inventory.Settings
             _body.SubHeadingText = "Adjustment Codes";
         }
 
+
+
+        private void LnkWarehouses_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var uc = Program.container.GetInstance<WarehouseUC>();
+            _body.pnlBody.Controls.Clear();
+            _body.pnlBody.Controls.Add(uc);
+            _sidebar.SetVisited(sender);
+            _body.SubHeadingText = "Warehouses";
+        }
+
+        private void LnkSuppliers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var uc = Program.container.GetInstance<SupplierUC>();
+            _body.pnlBody.Controls.Clear();
+            _body.pnlBody.Controls.Add(uc);
+            _sidebar.SetVisited(sender);
+            _body.SubHeadingText = "Suppliers";
+        }
 
         #region Event Handlers
 

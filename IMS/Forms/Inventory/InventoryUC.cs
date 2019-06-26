@@ -243,9 +243,9 @@ namespace IMS.Forms.Inventory
             // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
             //  _menubar.btnTransfer.Click += BtnTransfer_Click;
             // supplier
-            _menubar.btnSupplierList.Click += BtnSupplierList_Click;
-            // warehouse
-            _menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
+            //_menubar.btnSupplierList.Click += BtnSupplierList_Click;
+            //// warehouse
+            //_menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
             // settings
             _menubar.btnSettings.Click += BtnSettings_Click;
 
@@ -403,15 +403,15 @@ namespace IMS.Forms.Inventory
 
         #region Supplier
 
-        private void BtnSupplierList_Click(object sender, EventArgs e)
-        {
-            var supplierListUC = Program.container.GetInstance<SupplierUC>();
-            AddTabPage("Suppliers", supplierListUC);
-            //pnlBody.Controls.Clear();
-            //pnlBody.Controls.Add(supplierListUC);
-            // set selection
-           // _menubar.SetSelection(sender);
-        }
+        //private void BtnSupplierList_Click(object sender, EventArgs e)
+        //{
+        //    var supplierListUC = Program.container.GetInstance<SupplierUC>();
+        //    AddTabPage("Suppliers", supplierListUC);
+        //    //pnlBody.Controls.Clear();
+        //    //pnlBody.Controls.Add(supplierListUC);
+        //    // set selection
+        //   // _menubar.SetSelection(sender);
+        //}
 
         #endregion
 
@@ -436,15 +436,15 @@ namespace IMS.Forms.Inventory
 
         #region Warehouse
 
-        private void BtnWarehouseList_Click(object sender, EventArgs e)
-        {
-            var warehouseListUC = Program.container.GetInstance<WarehouseUC>();
-            AddTabPage("Warehouses", warehouseListUC);
-            //pnlBody.Controls.Clear();
-            //pnlBody.Controls.Add(warehouseListUC);
-            // set selection
-           // _menubar.SetSelection(sender);
-        }
+        //private void BtnWarehouseList_Click(object sender, EventArgs e)
+        //{
+        //    var warehouseListUC = Program.container.GetInstance<WarehouseUC>();
+        //    AddTabPage("Warehouses", warehouseListUC);
+        //    //pnlBody.Controls.Clear();
+        //    //pnlBody.Controls.Add(warehouseListUC);
+        //    // set selection
+        //   // _menubar.SetSelection(sender);
+        //}
 
         #endregion
 

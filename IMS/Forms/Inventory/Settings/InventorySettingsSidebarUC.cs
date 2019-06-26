@@ -23,10 +23,14 @@ namespace IMS.Forms.Inventory.Settings
             var regularFont = new Font(lnkGeneral.Font, FontStyle.Regular);
             var boldFont = new Font(lnkGeneral.Font, FontStyle.Bold);
             // clear first
-            foreach (LinkLabel linkLabel in pnlLinks.Controls)
+            foreach (Control control in pnlLinks.Controls)
             {
-                linkLabel.LinkVisited = false;
-                linkLabel.Font = regularFont;
+                var linkLabel = control as LinkLabel;
+                if (linkLabel != null)
+                {
+                    linkLabel.LinkVisited = false;
+                    linkLabel.Font = regularFont;
+                }
             }
             // set second
             var link = sender as LinkLabel;
