@@ -57,11 +57,11 @@ namespace IMS.Forms.Inventory.Orders
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
-                    _body.HeadingText = "Purchase Orders";
+                    _body.HeadingText = "Purchases";
                    // _sidebar.lnkList.Text = "     • Purchase Order List";
                     break;
                 case OrderTypeEnum.Sale:
-                    _body.HeadingText = "Sale Orders";
+                    _body.HeadingText = "Sales";
                     //_sidebar.lnkList.Text = "     • Sale Order List";
                     break;
             }

@@ -1326,5 +1326,11 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_16px_3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Edit_Property_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Forward_Arrow_16px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

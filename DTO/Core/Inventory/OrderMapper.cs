@@ -19,7 +19,7 @@ namespace DTO.Core.Inventory
             return Mappings.Mapper.Map(model, entity);
         }
 
-        public static List<OrderModel> MapToModel(this IQueryable<Order> query)
+        public static List<OrderModel> MapToModel(this IEnumerable<Order> query)
         {
             return Mappings.Mapper.Map<List<OrderModel>>(query);
         }
@@ -34,6 +34,7 @@ namespace DTO.Core.Inventory
     {
         public OrderProfile()
         {
+            // from entity to model
             CreateMap<Order, OrderModel>()
                 .ForMember(x => x.Customer,
                             opt => opt.MapFrom(src => src.Customer == null ? "" : src.Customer.BasicInfo.Name))
@@ -51,13 +52,15 @@ namespace DTO.Core.Inventory
                                         : OrderStatusEnum.Open.ToString()
                             ))
                ;
+
+            // from model to entity
             CreateMap<OrderModel, Order>()
                 .ForMember(x => x.Warehouse, src => src.Ignore())
                 .ForMember(x => x.Supplier, src => src.Ignore())
                 .ForMember(x => x.ParentOrder, src => src.Ignore())
                 .ForMember(x => x.OrderItems, src => src.Ignore())
                 .ForMember(x => x.Customer, src => src.Ignore())
-
+                .ForMember(x=>x.CreatedAt, src=>src.Ignore())
                 ;
         }
     }

@@ -80,9 +80,12 @@ namespace IMS.Forms.Inventory.Purchases
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
-
+                    tblSupplier.Visible = true;
+                    tblCustomer.Visible = false;
                     break;
                 case OrderTypeEnum.Sale:
+                    tblSupplier.Visible = false;
+                    tblCustomer.Visible = true;
                     btnReceive.Text = "Issue";
                     btnSendOrder.Text = "Confirm";
                     break;
@@ -108,14 +111,22 @@ namespace IMS.Forms.Inventory.Purchases
             {
 
                 // populate
+                lblName.Text = model.Name;
                 lblExpectedDate.Text = model.ExpectedDate.ToShortDateString();
                 lblLotNumber.Text = model.LotNumber.ToString();
-                lblName.Text = model.Name;
+                lblOrderNumber.Text = model.Name;
                 // lblOrderDate.Text = po.OrderDate.HasValue? po.OrderDate.Value.ToShortDateString(): " - ";
                 lblOrderNumber.Text = model.ReferenceNumber;
+                lblOrderNumber1.Text = model.ReferenceNumber;
                 lblSupplier.Text = model.Supplier;
+                lblCustomer.Text = model.Customer;
+
                 lblSupplierInvoice.Text = model.SupplierInvoice;
                 lblWarehouse.Text = model.Warehouse;
+
+                lblAddress.Text = model.Address;
+                lblPhone.Text = model.Phone;
+
                 lblNoItemsMessage.Visible = !model.OrderItems.Any();
 
                 dgvItems.AutoGenerateColumns = false;

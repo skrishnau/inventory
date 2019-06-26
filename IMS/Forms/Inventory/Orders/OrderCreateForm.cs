@@ -58,10 +58,12 @@ namespace IMS.Forms.Inventory.Orders
         private void PurchaseOrderForm_Load(object sender, EventArgs e)
         {
             var po = _orderService.GetOrder(_orderType, _orderId);
-            SetDataForEdit(po);
 
             PopulateClientCombo();
             PopulateWarehouseCombo();
+
+            SetDataForEdit(po);
+
 
             InitializeValidation();
 
@@ -89,7 +91,7 @@ namespace IMS.Forms.Inventory.Orders
             _requiredFieldValidator = new RequiredFieldValidator(errorProvider, controls.ToArray());
 
         }
-       
+
 
 
         #region Listener Events
@@ -181,21 +183,33 @@ namespace IMS.Forms.Inventory.Orders
                 tbName.Text = model.Name;
                 tbNotes.Text = model.Note;
                 tbOrderNumber.Text = model.ReferenceNumber;
-                tbClientInfo.Text = model.SupplierInvoice;
-                cbClient.SelectedValue = model.SupplierId;
                 cbWarehouse.SelectedValue = model.WarehouseId;
                 dtExpectedDate.Value = model.ExpectedDate;
                 numLotNumber.Value = model.LotNumber;
+
+                switch (_orderType)
+                {
+                    case OrderTypeEnum.Purchase:
+                        cbClient.SelectedValue = model.SupplierId;
+                        tbClientInfo.Text = model.SupplierInvoice;
+                        break;
+                    case OrderTypeEnum.Sale:
+                        cbClient.SelectedValue = model.CustomerId;
+                        tbClientInfo.Text = model.Address;
+                        tbPhone.Text = model.Phone;
+                        break;
+                }
             }
             else
             {
                 // initial data
                 var initials =
-                    _orderType == OrderTypeEnum.Purchase ? "PO - "
-                    : _orderType == OrderTypeEnum.Sale ? "SO - "
-                    : _orderType == OrderTypeEnum.Move ? "MO - "
+                    _orderType == OrderTypeEnum.Purchase ? "PO-"
+                    : _orderType == OrderTypeEnum.Sale ? "SO-"
+                    : _orderType == OrderTypeEnum.Move ? "MO-"
                     : "";
-                tbName.Text = initials + DateTime.Now.ToString("ddd, dd MMM yyyy");
+                // tbName.Text = initials + DateTime.Now.ToString("ddd, dd MMM yyyy");
+                tbName.Text = initials + DateTime.Now.Ticks.ToString();
                 numLotNumber.Value = _orderService.GetNextLotNumber();
             }
 
@@ -213,7 +227,7 @@ namespace IMS.Forms.Inventory.Orders
                     lblPhone.Visible = true;
                     tbPhone.Visible = true;
                     lblExpectedDate.Text = "Delivery Date *";
-                    lblClientInfo.Text = "Address/Phone";
+                    lblClientInfo.Text = "Address";
                     this.Text = (model == null ? "Create" : "Edit") + " Sale Order";
                     break;
             }
@@ -223,7 +237,7 @@ namespace IMS.Forms.Inventory.Orders
         }
 
         #endregion
-        
+
 
 
         #region Button and Label Events
@@ -285,6 +299,7 @@ namespace IMS.Forms.Inventory.Orders
                 Note = tbNotes.Text,
                 ReferenceNumber = tbOrderNumber.Text,
                 ExpectedDate = dtExpectedDate.Value,
+                Phone = tbPhone.Text,
                 // don't add other properties which are set individually, e.g. receivedAt, etc.
             };
 
@@ -308,5 +323,5 @@ namespace IMS.Forms.Inventory.Orders
             this.Close();
         }
 
-       }
+    }
 }

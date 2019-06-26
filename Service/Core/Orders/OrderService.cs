@@ -41,7 +41,8 @@ namespace Service.Core.Orders
                 var purchases = _context.Order
                     .Include(x => x.Supplier.BasicInfo)
                     .Include(x => x.OrderItems)
-                    .Where(x => x.OrderType == type);
+                    .Where(x => x.OrderType == type)
+                    .AsEnumerable();
                 // return new List<PurchaseOrderModelForGridView>();
                 return purchases.MapToModel();// OrderMapper.MapToOrderModel(purchases);
             }

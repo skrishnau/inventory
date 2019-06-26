@@ -313,7 +313,7 @@ namespace IMS.Forms.Inventory
             // var saleOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(saleOrderUC);
-            AddTabPage("Sale Orders", saleOrderUC);
+            AddTabPage("Sales", saleOrderUC);
             // set selection
            // _menubar.SetSelection(sender);
         }
@@ -330,7 +330,7 @@ namespace IMS.Forms.Inventory
             }
 
             //var purchaseOrderUC = Program.container.GetInstance<OrderUC>();
-            AddTabPage("Purchase Orders", purchaseOrderUC);
+            AddTabPage("Purchases", purchaseOrderUC);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(purchaseOrderUC);
             // set selection

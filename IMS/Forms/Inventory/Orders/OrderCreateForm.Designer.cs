@@ -34,18 +34,18 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numLotNumber = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbName = new System.Windows.Forms.TextBox();
             this.lblClient = new System.Windows.Forms.Label();
             this.cbClient = new System.Windows.Forms.ComboBox();
             this.lblWarehouse = new System.Windows.Forms.Label();
             this.lblClientInfo = new System.Windows.Forms.Label();
             this.tbClientInfo = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbOrderNumber = new System.Windows.Forms.TextBox();
             this.cbWarehouse = new System.Windows.Forms.ComboBox();
             this.lblExpectedDate = new System.Windows.Forms.Label();
             this.dtExpectedDate = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.tbOrderNumber = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -69,18 +69,18 @@
             this.tableLayoutPanel1.Controls.Add(this.lblPhone, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.numLotNumber, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblClient, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbClient, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblWarehouse, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblClientInfo, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbClientInfo, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbOrderNumber, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbWarehouse, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblExpectedDate, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.dtExpectedDate, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbName, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbOrderNumber, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -128,24 +128,6 @@
             this.numLotNumber.Name = "numLotNumber";
             this.numLotNumber.Size = new System.Drawing.Size(141, 20);
             this.numLotNumber.TabIndex = 6;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 0);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Name/Reference *";
-            // 
-            // tbName
-            // 
-            this.tbName.Location = new System.Drawing.Point(115, 2);
-            this.tbName.Margin = new System.Windows.Forms.Padding(2);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(141, 20);
-            this.tbName.TabIndex = 12;
             // 
             // lblClient
             // 
@@ -196,24 +178,6 @@
             this.tbClientInfo.Size = new System.Drawing.Size(146, 20);
             this.tbClientInfo.TabIndex = 14;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(2, 28);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Order No. *";
-            // 
-            // tbOrderNumber
-            // 
-            this.tbOrderNumber.Location = new System.Drawing.Point(115, 30);
-            this.tbOrderNumber.Margin = new System.Windows.Forms.Padding(2);
-            this.tbOrderNumber.Name = "tbOrderNumber";
-            this.tbOrderNumber.Size = new System.Drawing.Size(141, 20);
-            this.tbOrderNumber.TabIndex = 16;
-            // 
             // cbWarehouse
             // 
             this.cbWarehouse.FormattingEnabled = true;
@@ -242,6 +206,42 @@
             this.dtExpectedDate.Name = "dtExpectedDate";
             this.dtExpectedDate.Size = new System.Drawing.Size(146, 20);
             this.dtExpectedDate.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(2, 28);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(97, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Name/Reference *";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(2, 0);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Order No. *";
+            // 
+            // tbName
+            // 
+            this.tbName.Location = new System.Drawing.Point(115, 30);
+            this.tbName.Margin = new System.Windows.Forms.Padding(2);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(141, 20);
+            this.tbName.TabIndex = 12;
+            // 
+            // tbOrderNumber
+            // 
+            this.tbOrderNumber.Location = new System.Drawing.Point(115, 2);
+            this.tbOrderNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.tbOrderNumber.Name = "tbOrderNumber";
+            this.tbOrderNumber.Size = new System.Drawing.Size(141, 20);
+            this.tbOrderNumber.TabIndex = 16;
             // 
             // panel3
             // 

@@ -42,6 +42,20 @@ namespace IMS.Forms.Inventory.Purchases
         private void InitializeGridView()
         {
             dgvPurchases.AutoGenerateColumns = false;
+            switch (_orderType)
+            {
+                case OrderTypeEnum.Purchase:
+                    this.colSupplier.Visible = true; 
+                    this.colCustomer.Visible = false;
+                    this.colWarehouse.Visible = true;
+                    break;
+                case OrderTypeEnum.Sale:
+                    this.colSupplier.Visible = false;
+                    this.colCustomer.Visible = true;
+                    this.colWarehouse.Visible = false;
+                    break;
+            }
+
         }
 
         private void InitializeEvents()
@@ -57,14 +71,6 @@ namespace IMS.Forms.Inventory.Purchases
         {
             List<OrderModel> orders = new List<OrderModel>();
             orders = _orderService.GetAllOrders(_orderType);
-            //switch (_orderType)
-            //{
-            //    case OrderTypeEnum.Purchase:
-            //        break;
-            //    case OrderTypeEnum.Sale:
-            //        break;
-            //}
-
             dgvPurchases.DataSource = orders;
         }
 
