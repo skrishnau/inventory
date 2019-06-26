@@ -401,6 +401,7 @@ namespace Service.Core.Inventory.Units
                         product.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
                     }
                 }
+                _context.SaveChanges();
             }
         }
 

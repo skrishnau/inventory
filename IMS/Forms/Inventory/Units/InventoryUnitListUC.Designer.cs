@@ -30,62 +30,62 @@
         {
             this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.chkBulkActions = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbProduct = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbWarehouse = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.splitter4 = new System.Windows.Forms.Splitter();
             this.pnlInfo = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dgvInventoryUnit = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.btnProductDetail = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnUnitDetail = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnLabels = new IMS.Forms.Common.Buttons.MenuButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlSingleRowActions = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnReceive = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnSplit = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnDisassemble = new IMS.Forms.Common.Buttons.MenuButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlBulkActions = new System.Windows.Forms.Panel();
+            this.chkBulkActions = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnMerge = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnMove = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnIssue = new IMS.Forms.Common.Buttons.MenuButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel5 = new System.Windows.Forms.Panel();
             this.splitter2 = new System.Windows.Forms.Splitter();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.splitter3 = new System.Windows.Forms.Splitter();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbWarehouse = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbProduct = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dgvInventoryUnit = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.panel8 = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.pnlInfo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).BeginInit();
+            this.panel6.SuspendLayout();
             this.pnlSingleRowActions.SuspendLayout();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.pnlBulkActions.SuspendLayout();
             this.panel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).BeginInit();
             this.panel8.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -107,85 +107,24 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(579, 91);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
-            // chkBulkActions
+            // panel7
             // 
-            this.chkBulkActions.AutoSize = true;
-            this.chkBulkActions.Checked = true;
-            this.chkBulkActions.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBulkActions.Enabled = false;
-            this.chkBulkActions.Location = new System.Drawing.Point(141, 60);
-            this.chkBulkActions.Name = "chkBulkActions";
-            this.chkBulkActions.Size = new System.Drawing.Size(59, 17);
-            this.chkBulkActions.TabIndex = 13;
-            this.chkBulkActions.Text = "Enable";
-            this.toolTip1.SetToolTip(this.chkBulkActions, "Enable/Disable the Bulk Action Mode");
-            this.chkBulkActions.UseVisualStyleBackColor = true;
-            this.chkBulkActions.CheckedChanged += new System.EventHandler(this.chkBulkActions_CheckedChanged);
+            this.panel7.Controls.Add(this.splitter4);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(8, 8);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel7.Size = new System.Drawing.Size(11, 75);
+            this.panel7.TabIndex = 44;
             // 
-            // tableLayoutPanel1
+            // splitter4
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
-            this.tableLayoutPanel1.Controls.Add(this.cbWarehouse, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.cbProduct, 2, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 12);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(326, 69);
-            this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // cbProduct
-            // 
-            this.cbProduct.FormattingEnabled = true;
-            this.cbProduct.Location = new System.Drawing.Point(146, 36);
-            this.cbProduct.Name = "cbProduct";
-            this.cbProduct.Size = new System.Drawing.Size(167, 21);
-            this.cbProduct.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Product";
-            // 
-            // cbWarehouse
-            // 
-            this.cbWarehouse.FormattingEnabled = true;
-            this.cbWarehouse.Location = new System.Drawing.Point(146, 4);
-            this.cbWarehouse.Name = "cbWarehouse";
-            this.cbWarehouse.Size = new System.Drawing.Size(167, 21);
-            this.cbWarehouse.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(77, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Warehouse";
-            // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(4, 1);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 23);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Filter";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter4.Location = new System.Drawing.Point(5, 4);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(2, 67);
+            this.splitter4.TabIndex = 0;
+            this.splitter4.TabStop = false;
             // 
             // pnlInfo
             // 
@@ -205,17 +144,6 @@
             this.panel1.Size = new System.Drawing.Size(200, 60);
             this.panel1.TabIndex = 14;
             // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label3.Location = new System.Drawing.Point(0, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(200, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Information";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.Controls.Add(this.btnProductDetail);
@@ -226,16 +154,6 @@
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(200, 60);
             this.flowLayoutPanel3.TabIndex = 10;
-            // 
-            // dgvInventoryUnit
-            // 
-            this.dgvInventoryUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 91);
-            this.dgvInventoryUnit.Name = "dgvInventoryUnit";
-            this.dgvInventoryUnit.Size = new System.Drawing.Size(913, 318);
-            this.dgvInventoryUnit.TabIndex = 6;
             // 
             // btnProductDetail
             // 
@@ -276,6 +194,36 @@
             this.btnLabels.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnLabels.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label3.Location = new System.Drawing.Point(0, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(200, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Information";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.splitter3);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(231, 8);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel6.Size = new System.Drawing.Size(11, 75);
+            this.panel6.TabIndex = 43;
+            // 
+            // splitter3
+            // 
+            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter3.Location = new System.Drawing.Point(5, 4);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(2, 67);
+            this.splitter3.TabIndex = 0;
+            this.splitter3.TabStop = false;
+            // 
             // pnlSingleRowActions
             // 
             this.pnlSingleRowActions.Controls.Add(this.panel3);
@@ -304,17 +252,6 @@
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(200, 60);
             this.flowLayoutPanel4.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label5.Location = new System.Drawing.Point(0, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(200, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Single Row Actions";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnReceive
             // 
@@ -355,6 +292,36 @@
             this.btnDisassemble.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDisassemble.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.Location = new System.Drawing.Point(0, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(200, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Single Row Actions";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.splitter1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(454, 8);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel2.Size = new System.Drawing.Size(11, 75);
+            this.panel2.TabIndex = 41;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter1.Location = new System.Drawing.Point(5, 4);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(2, 67);
+            this.splitter1.TabIndex = 0;
+            this.splitter1.TabStop = false;
+            // 
             // pnlBulkActions
             // 
             this.pnlBulkActions.Controls.Add(this.chkBulkActions);
@@ -364,6 +331,21 @@
             this.pnlBulkActions.Name = "pnlBulkActions";
             this.pnlBulkActions.Size = new System.Drawing.Size(200, 75);
             this.pnlBulkActions.TabIndex = 9;
+            // 
+            // chkBulkActions
+            // 
+            this.chkBulkActions.AutoSize = true;
+            this.chkBulkActions.Checked = true;
+            this.chkBulkActions.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBulkActions.Enabled = false;
+            this.chkBulkActions.Location = new System.Drawing.Point(141, 60);
+            this.chkBulkActions.Name = "chkBulkActions";
+            this.chkBulkActions.Size = new System.Drawing.Size(59, 17);
+            this.chkBulkActions.TabIndex = 13;
+            this.chkBulkActions.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkBulkActions, "Enable/Disable the Bulk Action Mode");
+            this.chkBulkActions.UseVisualStyleBackColor = true;
+            this.chkBulkActions.CheckedChanged += new System.EventHandler(this.chkBulkActions_CheckedChanged);
             // 
             // panel4
             // 
@@ -435,25 +417,6 @@
             this.label6.Text = "Bulk Actions";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.splitter1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(454, 8);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel2.Size = new System.Drawing.Size(11, 75);
-            this.panel2.TabIndex = 41;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter1.Location = new System.Drawing.Point(5, 4);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(2, 67);
-            this.splitter1.TabIndex = 0;
-            this.splitter1.TabStop = false;
-            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.splitter2);
@@ -473,43 +436,80 @@
             this.splitter2.TabIndex = 0;
             this.splitter2.TabStop = false;
             // 
-            // panel6
+            // tableLayoutPanel1
             // 
-            this.panel6.Controls.Add(this.splitter3);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(231, 8);
-            this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel6.Size = new System.Drawing.Size(11, 75);
-            this.panel6.TabIndex = 43;
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tableLayoutPanel1.Controls.Add(this.cbWarehouse, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cbProduct, 2, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 12);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(326, 69);
+            this.tableLayoutPanel1.TabIndex = 7;
             // 
-            // splitter3
+            // cbWarehouse
             // 
-            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter3.Location = new System.Drawing.Point(5, 4);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(2, 67);
-            this.splitter3.TabIndex = 0;
-            this.splitter3.TabStop = false;
+            this.cbWarehouse.FormattingEnabled = true;
+            this.cbWarehouse.Location = new System.Drawing.Point(146, 4);
+            this.cbWarehouse.Name = "cbWarehouse";
+            this.cbWarehouse.Size = new System.Drawing.Size(167, 21);
+            this.cbWarehouse.TabIndex = 1;
             // 
-            // panel7
+            // label1
             // 
-            this.panel7.Controls.Add(this.splitter4);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(8, 8);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel7.Size = new System.Drawing.Size(11, 75);
-            this.panel7.TabIndex = 44;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(77, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Warehouse";
             // 
-            // splitter4
+            // label4
             // 
-            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter4.Location = new System.Drawing.Point(5, 4);
-            this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(2, 67);
-            this.splitter4.TabIndex = 0;
-            this.splitter4.TabStop = false;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(4, 1);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 23);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Filter";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(77, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Product";
+            // 
+            // cbProduct
+            // 
+            this.cbProduct.FormattingEnabled = true;
+            this.cbProduct.Location = new System.Drawing.Point(146, 36);
+            this.cbProduct.Name = "cbProduct";
+            this.cbProduct.Size = new System.Drawing.Size(167, 21);
+            this.cbProduct.TabIndex = 3;
+            // 
+            // dgvInventoryUnit
+            // 
+            this.dgvInventoryUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 91);
+            this.dgvInventoryUnit.Name = "dgvInventoryUnit";
+            this.dgvInventoryUnit.Size = new System.Drawing.Size(913, 318);
+            this.dgvInventoryUnit.TabIndex = 6;
             // 
             // panel8
             // 
@@ -524,7 +524,7 @@
             // 
             this.pnlHeader.AutoSize = true;
             this.pnlHeader.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlHeader.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlHeader.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pnlHeader.Controls.Add(this.flowLayoutPanel1);
             this.pnlHeader.Controls.Add(this.panel8);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -542,23 +542,23 @@
             this.Name = "InventoryUnitListUC";
             this.Size = new System.Drawing.Size(913, 409);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.panel7.ResumeLayout(false);
             this.pnlInfo.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).EndInit();
+            this.panel6.ResumeLayout(false);
             this.pnlSingleRowActions.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.pnlBulkActions.ResumeLayout(false);
             this.pnlBulkActions.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).EndInit();
             this.panel8.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();

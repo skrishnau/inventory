@@ -48,6 +48,8 @@ namespace IMS.Forms.Inventory.Products
             PopulateProductData();
             InitializeEvents();
             InitializeListeners();
+
+
         }
 
 
@@ -57,15 +59,33 @@ namespace IMS.Forms.Inventory.Products
         {
             dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
             dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
+           // dgvProductList.CellFormatting += DgvProductList_CellFormatting;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
            // btnDelete.Click += BtnDelete_Click;
         }
 
+        //private void DgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        //{
+        //    if(e.ColumnIndex == this.colSKU.Index)
+        //    {
+        //        var reorderAt = dgvProductList.Rows[e.RowIndex].Cells[this.colReorderPoint.Index].Value;
+        //        var inStock = dgvProductList.Rows[e.RowIndex].Cells[this.colInStockQuantity.Index].Value;
+
+        //        e.CellStyle.ForeColor = Color.Red;
+        //        e.CellStyle.SelectionForeColor = Color.DarkRed;
+        //        //e.CellStyle.BackColor = Color.Green;
+        //        //e.CellStyle.SelectionBackColor = Color.LightBlue;
+        //    }
+        //}
+
         private void InitializeListeners()
         {
             _listener.ProductUpdated += _listener_ProductUpdated;
+            _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
         }
+
+        
 
         #endregion
 
@@ -73,6 +93,11 @@ namespace IMS.Forms.Inventory.Products
         #region Event Handlers
 
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        {
+            PopulateProductData();
+        }
+
+        private void _listener_InventoryUnitUpdated(object sender, BaseEventArgs<List<InventoryUnitModel>> e)
         {
             PopulateProductData();
         }
@@ -102,7 +127,7 @@ namespace IMS.Forms.Inventory.Products
             }
 
         }
-
+        
         private void BtnNew_Click(object sender, EventArgs e)
         {
             ShowProductAddEditDialog(0);
@@ -154,6 +179,11 @@ namespace IMS.Forms.Inventory.Products
             dgvProductList.AutoGenerateColumns = false;
             var products = _inventoryService.GetProductListForGridView();
             dgvProductList.DataSource = products;
+            //dgvProductList.ClearSelection();
+            //foreach (DataGridViewRow row in dgvProductList.Rows)
+            //{
+            //    row.Cells[this.colSKU.Index].Style.ForeColor = Color.Red;
+            //}
         }
 
         #endregion
