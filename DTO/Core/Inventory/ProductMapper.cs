@@ -138,6 +138,8 @@ namespace DTO.Core.Inventory
             // collections
             model.ProductAttributes = MapToProductAttributeModel(entity.ProductAttributes);
             // model.Variants = MapToProductVariant(entity.Variants);
+
+            model.IsLessThanMinimumStock = entity.InStockQuantity <= entity.ReorderPoint;
             return model;
         }
 

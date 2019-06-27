@@ -148,7 +148,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                
+
                 var products = _context.Product.AsQueryable()// GetProductEntityList()
                 .Where(x => x.Use)
                 .Select(x => new IdNamePair()
@@ -160,7 +160,7 @@ namespace Service.Core.Inventory
                 return products;
                 //.Where(x => x.DeletedAt == null);
             }
-            
+
         }
 
         #endregion
@@ -444,7 +444,25 @@ namespace Service.Core.Inventory
                 }
                 return list;
             }
+        }
 
+        public List<IdNamePair> GetUnderStockProducts()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var products = _context.Product
+                               .Include(x => x.ProductAttributes)
+                               .Where(x => x.Use)
+                               .Where(x => x.InStockQuantity <= x.ReorderPoint)
+                               .OrderByDescending(x => x.ReorderPoint - x.InStockQuantity)
+                               .Select(x => new IdNamePair
+                               {
+                                   Id = x.Id,
+                                   Name = x.SKU + "  (" + x.Name + ")   -   " + ((int)x.InStockQuantity) + " qty.",
+                               })
+                               .ToList();
+                return products;
+            }
         }
 
         public void DeleteCategory(CategoryModel categoryModel)
@@ -669,7 +687,7 @@ namespace Service.Core.Inventory
             });
             _context.AdjustmentCode.Add(new AdjustmentCode()
             {
-                AffectsDemand=false,
+                AffectsDemand = false,
                 IsSystem = true,
                 Name = "PO receive",
                 Type = AdjustmentTypeEnum.Positive.ToString(),
@@ -677,7 +695,7 @@ namespace Service.Core.Inventory
             });
             _context.AdjustmentCode.Add(new AdjustmentCode()
             {
-                AffectsDemand=false,
+                AffectsDemand = false,
                 IsSystem = true,
                 Name = "Direct Receive",
                 Type = AdjustmentTypeEnum.Positive.ToString(),

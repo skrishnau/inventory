@@ -31,9 +31,9 @@ namespace ViewModel.Core.Inventory
         public bool IsVariant { get; set; }
         // parent product Id for variants
         public int? ParentProductId { get; set; }
-        public  string ParentProduct { get; set; }
+        public string ParentProduct { get; set; }
         public int CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
-        public  string Category { get; set; }
+        public string Category { get; set; }
 
         // ============== Package ============== //
         public int PackageId { get; set; }
@@ -63,7 +63,7 @@ namespace ViewModel.Core.Inventory
         public decimal MonthlyDemand { get; set; }
 
         // ==== current informations (calculated at runtime) ==== //
-       // public decimal AvailableQuantity { get; set; }
+        // public decimal AvailableQuantity { get; set; }
         public decimal InStockQuantity { get; set; }
         public decimal OnHoldQuantity { get; set; }
         public decimal CommittedQuantity { get; set; }
@@ -88,15 +88,16 @@ namespace ViewModel.Core.Inventory
 
         // used for dynamic attributes adding and for adding SKU directly in Product Create
         public virtual List<ProductAttributeModel> ProductAttributes { get; set; }
-       // public List<ProductVariantModel> Variants { get; set; }
-      //  public virtual List<BrandModel> Brands { get; set; }
+        // public List<ProductVariantModel> Variants { get; set; }
+        //  public virtual List<BrandModel> Brands { get; set; }
 
 
+        public bool IsLessThanMinimumStock { get; set; }
 
         public ProductModel()
         {
-           // Category = new CategoryModel();
-           // Brands = new List<BrandModel>();
+            // Category = new CategoryModel();
+            // Brands = new List<BrandModel>();
             ProductAttributes = new List<ProductAttributeModel>();
             //Variants = new List<ProductVariantModel>();
         }

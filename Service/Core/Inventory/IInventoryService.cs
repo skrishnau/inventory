@@ -54,6 +54,7 @@ namespace Service.Core.Inventory
         ProductModel GetProductForEdit(int productId);
         ProductModel GetProductBySKU(string sku);
         ProductModel GetProductById(int id);
+        List<IdNamePair> GetUnderStockProducts();
         void AddUpdateProduct(ProductModel product);
        // void DeleteProduct(int id);
 

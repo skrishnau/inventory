@@ -28,6 +28,8 @@ namespace IMS.Forms.Inventory.Products
         private ProductModel _selectedProduct;
         // private HeaderTemplate _header;
 
+        private List<ProductModel> _productList;
+
         public ProductListUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
             this._inventoryService = inventoryService;
@@ -43,7 +45,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void ProductListUC_Load(object sender, EventArgs e)
         {
-           // this.heading.Text = "Product List";
+            // this.heading.Text = "Product List";
             this.Dock = DockStyle.Fill;
             PopulateProductData();
             InitializeEvents();
@@ -59,25 +61,29 @@ namespace IMS.Forms.Inventory.Products
         {
             dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
             dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
-           // dgvProductList.CellFormatting += DgvProductList_CellFormatting;
+            dgvProductList.CellFormatting += DgvProductList_CellFormatting;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
-           // btnDelete.Click += BtnDelete_Click;
+            // btnDelete.Click += BtnDelete_Click;
         }
 
-        //private void DgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        //{
-        //    if(e.ColumnIndex == this.colSKU.Index)
-        //    {
-        //        var reorderAt = dgvProductList.Rows[e.RowIndex].Cells[this.colReorderPoint.Index].Value;
-        //        var inStock = dgvProductList.Rows[e.RowIndex].Cells[this.colInStockQuantity.Index].Value;
-
-        //        e.CellStyle.ForeColor = Color.Red;
-        //        e.CellStyle.SelectionForeColor = Color.DarkRed;
-        //        //e.CellStyle.BackColor = Color.Green;
-        //        //e.CellStyle.SelectionBackColor = Color.LightBlue;
-        //    }
-        //}
+        private void DgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+           // if (e.ColumnIndex == this.colSKU.Index || e.ColumnIndex == this.colName.Index)
+            {
+                try
+                {
+                    if (_productList[e.RowIndex].IsLessThanMinimumStock)
+                    {
+                        e.CellStyle.ForeColor = Color.Red;
+                        e.CellStyle.SelectionForeColor = Color.Red;
+                        // e.CellStyle.BackColor = Color.LightBlue;
+                        e.CellStyle.SelectionBackColor = SystemColors.GradientInactiveCaption; //Color.LightBlue;
+                    }
+                }
+                catch (Exception ex) { }
+            }
+        }
 
         private void InitializeListeners()
         {
@@ -85,7 +91,7 @@ namespace IMS.Forms.Inventory.Products
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
         }
 
-        
+
 
         #endregion
 
@@ -120,14 +126,14 @@ namespace IMS.Forms.Inventory.Products
             {
                 // show edit and delete buttons
                 btnEdit.Visible = true;
-               // btnDelete.Visible = true;
+                // btnDelete.Visible = true;
                 var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
                 _selectedProduct = data;
                 //var model = _inventoryService.GetProductForEdit(data.Id);
             }
 
         }
-        
+
         private void BtnNew_Click(object sender, EventArgs e)
         {
             ShowProductAddEditDialog(0);
@@ -177,8 +183,8 @@ namespace IMS.Forms.Inventory.Products
         private void PopulateProductData()
         {
             dgvProductList.AutoGenerateColumns = false;
-            var products = _inventoryService.GetProductListForGridView();
-            dgvProductList.DataSource = products;
+            _productList = _inventoryService.GetProductListForGridView();
+            dgvProductList.DataSource = _productList;
             //dgvProductList.ClearSelection();
             //foreach (DataGridViewRow row in dgvProductList.Rows)
             //{
