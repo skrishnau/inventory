@@ -149,7 +149,7 @@ namespace Service.Core.Inventory
             using (var _context = new DatabaseContext())
             {
 
-                var products = _context.Product.AsQueryable()// GetProductEntityList()
+                var products = _context.Product//.AsQueryable()// GetProductEntityList()
                 .Where(x => x.Use)
                 .Select(x => new IdNamePair()
                 {

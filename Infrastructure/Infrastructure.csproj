@@ -103,6 +103,7 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Entities\Accounts\" />
     <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>
