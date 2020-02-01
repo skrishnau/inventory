@@ -63,6 +63,7 @@
     <Compile Include="Core\Inventory\SupplierMapper.cs" />
     <Compile Include="Core\Inventory\UomMapper.cs" />
     <Compile Include="Core\Inventory\WarehouseProductMapper.cs" />
+    <Compile Include="Core\POS\Store.cs" />
     <Compile Include="Core\Settings\AppSettingMapper.cs" />
     <Compile Include="Core\Inventory\ProductMapper.cs" />
     <Compile Include="Core\Inventory\VariantMapper.cs" />
@@ -84,7 +85,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\POS\" />
     <Folder Include="Core\Purchases\" />
     <Folder Include="Core\Users\" />
   </ItemGroup>

@@ -40,6 +40,8 @@ using Service.Core.Orders;
 using IMS.Forms.Inventory.Orders;
 using IMS.Forms.Inventory.Users;
 using IMS.Forms.Inventory.Dashboard;
+using IMS.Forms.Inventory.InventoryDetail;
+using IMS.Forms.Inventory.Units;
 
 namespace IMS
 {
@@ -107,6 +109,7 @@ namespace IMS
 
             container.Register<InventoryUC>(Lifestyle.Scoped);
             container.Register<InventoryMenuBar>(Lifestyle.Scoped);
+            //container.Register<InventoryUnitListUC>(Lifestyle.Scoped);
 
             container.Register<PosUC>(Lifestyle.Scoped);
             container.Register<PosMenuBar>(Lifestyle.Scoped);
@@ -151,6 +154,8 @@ namespace IMS
             container.Register<InventoryMovementUC>(Lifestyle.Scoped);
 
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
+
+            container.Register<InventoryDetailUC>(Lifestyle.Scoped);
 
 
             //

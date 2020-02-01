@@ -19,6 +19,7 @@ using IMS.Forms.Inventory.Dashboard;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using IMS.Forms.Inventory.InventoryDetail;
 
 namespace IMS.Forms.Inventory
 {
@@ -341,6 +342,11 @@ namespace IMS.Forms.Inventory
         {
             var inventoryUnitList = Program.container.GetInstance<InventoryUnitUC>();
             AddTabPage("Inventory Units", inventoryUnitList);
+
+            //var inventoryDetailUC = Program.container.GetInstance<InventoryDetailUC>();
+            //AddTabPage("Inventory", inventoryDetailUC);
+
+
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(inventoryUnitList);
            // _menubar.SetSelection(sender);

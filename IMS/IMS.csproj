@@ -104,6 +104,12 @@
     <Compile Include="Forms\Inventory\Dashboard\DashboardUC.Designer.cs">
       <DependentUpon>DashboardUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.Designer.cs">
+      <DependentUpon>InventoryDetailUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Sales\SaleOrderCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.Designer.cs">
       <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.Designer.cs">
+      <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Warehouses\WarehouseCreateForm.cs">
       <SubType>Form</SubType>
@@ -338,11 +350,11 @@
     <Compile Include="Forms\Inventory\Units\Actions\InventorySplitForm.Designer.cs">
       <DependentUpon>InventorySplitForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
+    <Compile Include="Forms\Inventory\Units\InventoryManageUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.Designer.cs">
-      <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Units\InventoryManageUC.Designer.cs">
+      <DependentUpon>InventoryManageUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\UOM\UomUC.cs">
       <SubType>UserControl</SubType>
@@ -614,6 +626,9 @@
     <EmbeddedResource Include="Forms\Inventory\Dashboard\DashboardUC.resx">
       <DependentUpon>DashboardUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.resx">
+      <DependentUpon>InventoryDetailUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Sales\SaleOrderCreateForm.resx">
       <DependentUpon>SaleOrderCreateForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -631,6 +646,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.resx">
       <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
+      <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseCreateForm.resx">
       <DependentUpon>WarehouseCreateForm.cs</DependentUpon>
@@ -716,8 +734,8 @@
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventorySplitForm.resx">
       <DependentUpon>InventorySplitForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
-      <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Units\InventoryManageUC.resx">
+      <DependentUpon>InventoryManageUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\UOM\UomUC.resx">
       <DependentUpon>UomUC.cs</DependentUpon>

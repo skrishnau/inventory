@@ -51,9 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
+    <Compile Include="Entities\Accounts\FiscalYear.cs" />
+    <Compile Include="Entities\Accounts\Transaction.cs" />
     <Compile Include="Entities\AppSettings\AppSetting.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
+    <Compile Include="Entities\Business\Company.cs" />
     <Compile Include="Entities\Business\Counter.cs" />
     <Compile Include="Entities\Inventory\AdjustmentCode.cs" />
     <Compile Include="Entities\Inventory\InventoryUnit.cs" />
@@ -103,7 +106,6 @@
     <Content Include="Entities\zForNextVersion\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\Accounts\" />
     <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>

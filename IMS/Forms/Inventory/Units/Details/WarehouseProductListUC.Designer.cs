@@ -85,6 +85,7 @@
             // 
             // dgvWarehouseProduct
             // 
+            this.dgvWarehouseProduct.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvWarehouseProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWarehouseProduct.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,

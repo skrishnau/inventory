@@ -25,17 +25,23 @@ namespace IMS.Forms.Inventory.Units
                 var linkLabel = lnk as LinkLabel;
                 if (linkLabel != null)
                 {
+                    // clear selection
                     linkLabel.LinkVisited = false;
+                    lnk.BackColor = Color.Gainsboro;
                 }
             }
             foreach (LinkLabel lnk in pnlLinkList.Controls)
             {
+                // clear selection
                 lnk.LinkVisited = false;
+                lnk.BackColor = Color.Gainsboro;
             }
             var link = sender as LinkLabel;
             if (link != null)
             {
+                // set selection
                 link.LinkVisited = true;
+                link.BackColor = System.Drawing.SystemColors.Control;
             }
         }
     }

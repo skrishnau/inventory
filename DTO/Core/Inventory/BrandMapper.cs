@@ -1,4 +1,6 @@
-﻿using Infrastructure.Entities.Inventory;
+﻿using AutoMapper;
+using DTO.AutoMapperBase;
+using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +13,20 @@ namespace DTO.Core.Inventory
     [Obsolete("Extra table for Brand is not to be done now", true)]
     public static class BrandMapper
     {
-        public static List<BrandModel> MapToBrandModel(ICollection<Brand> brands)
+        public static List<BrandModel> MapToBrandModel(this ICollection<Brand> brands)
         {
-            var list = new List<BrandModel>();
-            foreach(var brand in brands)
-            {
-                list.Add(new BrandModel()
-                {
-                    Name = brand.Name,
-                    CreatedAt = brand.CreatedAt,
-                  //  DeletedAt = brand.DeletedAt,
-                    ProductId = brand.ProductId,
-                    UpdatedAt = brand.UpdatedAt,
-                    Id = brand.Id
-                });
-            }
-            return list;
+            return Mappings.Mapper.Map<List<BrandModel>>(brands);
         }
+    }
+
+    public class BrandProfile : Profile
+    {
+        public BrandProfile()
+        {
+            CreateMap<Brand, BrandModel>();
+            CreateMap<BrandModel, Brand>();
+
+        }
+
     }
 }
