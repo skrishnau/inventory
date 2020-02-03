@@ -239,6 +239,7 @@ namespace IMS.Forms.Inventory
 
             // adjustments
             _menubar.btnDirectReceive.Click += BtnDirectReceive_Click;
+            _menubar.btnDirectIssue.Click += BtnDirectIssue_Click;
 
             // transfers
             // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
@@ -432,6 +433,16 @@ namespace IMS.Forms.Inventory
             {
                 var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
                 directReceiveForm.SetData(MovementTypeEnum.DirectReceive);
+                directReceiveForm.ShowDialog();
+            }
+        }
+
+        private void BtnDirectIssue_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                directReceiveForm.SetData(MovementTypeEnum.DirectIssueAny);
                 directReceiveForm.ShowDialog();
             }
         }

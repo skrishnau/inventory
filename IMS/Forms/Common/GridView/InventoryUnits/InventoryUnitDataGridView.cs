@@ -24,6 +24,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private bool isValid = true;
 
         private IInventoryService _inventoryService;
+        private List<DataGridViewColumn> IgnoreColumnsForErrorList = new List<DataGridViewColumn>();
+
+        private List<string> InvalidColumns = new List<string>();
 
         public InventoryUnitDataGridView()
         {
@@ -88,11 +91,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         #region Get Cell Values
 
-        public List<InventoryUnitModel> GetItems()
+        public List<InventoryUnitModel> GetItems(List<DataGridViewColumn> ignoreColumnsForError = null)
         {
+            
+            this.IgnoreColumnsForErrorList = ignoreColumnsForError??new List<DataGridViewColumn>();
             isValid = true;
             var items = new List<InventoryUnitModel>();
-
+            // clear the invalid column list initially
+            InvalidColumns.Clear();
+            var extraMsg = new StringBuilder();
             // extra row is added automatically; so get upto second last row only
             for (int r = 0; r < this.Rows.Count; r++)
             {
@@ -122,7 +129,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         ProductId = productId,
                         SupplyPrice = supplyPrice,
                         WarehouseId = warehouseId,
-                        ReceiveAdjustment = adjCode,
+                        ReceiveAdjustmentCode = adjCode,
                         LotNumber = lotNumber,
                         ExpirationDate = null,
                         ProductionDate = null,
@@ -133,11 +140,20 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
                     });
                 }
+                else
+                {
+                    extraMsg.Append("Row: ").Append(r+1).Append("; Columns: ");
+                    InvalidColumns.ForEach(x => {
+                        extraMsg.Append(x+ ", ");
+                    });
+                    extraMsg.Append("\n");
+                }
 
             }
             if (!isValid)
             {
-                PopupMessage.ShowPopupMessage("Invalid Items!", "The items you provided aar not valid. Verify again!.", PopupMessageType.ERROR);
+                PopupMessage.ShowPopupMessage("Invalid Items!", "The items you provided are not valid. Verify again!." + extraMsg, 
+                    PopupMessageType.ERROR);
                 return null;
             }
             return items;
@@ -161,8 +177,14 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var product = _inventoryService.GetProductBySKU(sku);
                 productId = product == null ? 0 : product.Id;
             }
+            if (IgnoreColumnsForErrorList.Contains(colProductId))
+            {
+                return productId;
+            }
+            // else set error and set invalid flag
             if (productId == 0)
             {
+                InvalidColumns.Add("Product");
                 cell.ErrorText = "Invalid Product";
                 isValid = false;
             }
@@ -179,8 +201,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var cell = row.Cells[this.colUnitQuantity.Index];
             var value = formattedValue == null ? cell.Value : formattedValue;
             decimal.TryParse(value == null ? "0" : value.ToString(), out unitQuantity);
+            if (IgnoreColumnsForErrorList.Contains(colUnitQuantity))
+            {
+                return unitQuantity;
+            }
             if (unitQuantity <= 0)
             {
+                InvalidColumns.Add("Quantity");
                 cell.ErrorText = "Quantity can't be zero or less";
                 isValid = false;
             }
@@ -196,8 +223,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             decimal rate = 0;
             var cell = row.Cells[this.colSupplyPrice.Index];
             decimal.TryParse(cell.Value == null ? "0" : cell.Value.ToString(), out rate);
+            if (IgnoreColumnsForErrorList.Contains(colSupplyPrice))
+            {
+                return rate;
+            }
             if (rate <= 0)
             {
+                InvalidColumns.Add("Supply Price");
                 cell.ErrorText = GREATER_THAN_ZERO;//"Rate can't be zero or less";
                 isValid = false;
             }
@@ -212,8 +244,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         {
             var cell = row.Cells[colWarehouseId.Index];
             var warehouseId = cell.Value == null ? 0 : int.Parse(cell.Value.ToString());
+            if (IgnoreColumnsForErrorList.Contains(colWarehouseId))
+            {
+                return warehouseId;
+            }
             if (warehouseId == 0)
             {
+                InvalidColumns.Add("Warehouse");
                 isValid = false;
                 cell.ErrorText = REQUIRED;
             }
@@ -229,8 +266,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var cell = row.Cells[colLotNumber.Index];
             var value = formattedValue == null ? cell.Value : formattedValue;
             var lotNumber = value == null ? 0 : int.Parse(value.ToString());
+            if (IgnoreColumnsForErrorList.Contains(colLotNumber))
+            {
+                return lotNumber;
+            }
             if (lotNumber == 0)
             {
+                InvalidColumns.Add("Lot No.");
                 isValid = false;
                 cell.ErrorText = "Should be greater than zero";// GREATER_THAN_ZERO;
             }
@@ -266,8 +308,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var cell = row.Cells[colPackageId.Index];
             var valueValue = cell.Value;// formattedValue == null ? cell.Value : formattedValue;
             var value = valueValue == null ? 0 : int.Parse(valueValue.ToString());
+            if (IgnoreColumnsForErrorList.Contains(colPackageId))
+            {
+                return value;
+            }
             if (value == 0)
             {
+                InvalidColumns.Add("Package");
                 isValid = false;
                 cell.ErrorText = REQUIRED;
             }
@@ -282,8 +329,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         {
             var cell = row.Cells[colUomId.Index];
             var value = cell.Value == null ? 0 : int.Parse(cell.Value.ToString());
+            if (IgnoreColumnsForErrorList.Contains(colUomId))
+            {
+                return value;
+            }
             if (value == 0)
             {
+                InvalidColumns.Add("UoM");
                 isValid = false;
                 cell.ErrorText = REQUIRED;
             }

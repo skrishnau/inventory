@@ -50,6 +50,7 @@
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label30 = new System.Windows.Forms.Label();
+            this.numReorderPoint = new System.Windows.Forms.NumericUpDown();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -88,7 +89,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label27 = new System.Windows.Forms.Label();
-            this.numReorderPoint = new System.Windows.Forms.NumericUpDown();
             this.label28 = new System.Windows.Forms.Label();
             this.numReorderQuantity = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
@@ -128,7 +128,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnAddCategory = new System.Windows.Forms.Button();
             this.tblBasicDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -151,7 +154,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numRetailPrice)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReorderQuantity)).BeginInit();
             this.tableLayoutPanel9.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -165,6 +167,7 @@
             this.pnlVariants.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVariants)).BeginInit();
             this.panel8.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tblBasicDetails
@@ -174,6 +177,7 @@
             this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.88406F));
             this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.21739F));
             this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.21739F));
+            this.tblBasicDetails.Controls.Add(this.panel2, 1, 2);
             this.tblBasicDetails.Controls.Add(this.label33, 0, 4);
             this.tblBasicDetails.Controls.Add(this.tbBrand, 3, 2);
             this.tblBasicDetails.Controls.Add(this.label19, 2, 1);
@@ -191,23 +195,22 @@
             this.tblBasicDetails.Controls.Add(this.tbLabelCode, 1, 3);
             this.tblBasicDetails.Controls.Add(this.chkUse, 1, 4);
             this.tblBasicDetails.Controls.Add(this.label4, 2, 2);
-            this.tblBasicDetails.Controls.Add(this.cbCategory, 1, 2);
             this.tblBasicDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblBasicDetails.Location = new System.Drawing.Point(10, 16);
             this.tblBasicDetails.Name = "tblBasicDetails";
             this.tblBasicDetails.RowCount = 5;
             this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblBasicDetails.Size = new System.Drawing.Size(680, 135);
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.82759F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.31034F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.55556F));
+            this.tblBasicDetails.Size = new System.Drawing.Size(680, 145);
             this.tblBasicDetails.TabIndex = 28;
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(3, 108);
+            this.label33.Location = new System.Drawing.Point(3, 122);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(35, 13);
             this.label33.TabIndex = 48;
@@ -216,7 +219,7 @@
             // 
             // tbBrand
             // 
-            this.tbBrand.Location = new System.Drawing.Point(442, 57);
+            this.tbBrand.Location = new System.Drawing.Point(442, 61);
             this.tbBrand.Multiline = true;
             this.tbBrand.Name = "tbBrand";
             this.tbBrand.Size = new System.Drawing.Size(146, 19);
@@ -225,7 +228,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(339, 27);
+            this.label19.Location = new System.Drawing.Point(339, 29);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(70, 13);
             this.label19.TabIndex = 45;
@@ -234,7 +237,7 @@
             // tbSKU
             // 
             this.tbSKU.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSKU.Location = new System.Drawing.Point(122, 29);
+            this.tbSKU.Location = new System.Drawing.Point(122, 31);
             this.tbSKU.Margin = new System.Windows.Forms.Padding(2);
             this.tbSKU.Name = "tbSKU";
             this.tbSKU.Size = new System.Drawing.Size(157, 21);
@@ -273,7 +276,7 @@
             // 
             this.lblCategory.AutoSize = true;
             this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(2, 54);
+            this.lblCategory.Location = new System.Drawing.Point(2, 58);
             this.lblCategory.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(56, 13);
@@ -284,7 +287,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 27);
+            this.label12.Location = new System.Drawing.Point(3, 29);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(103, 13);
             this.label12.TabIndex = 41;
@@ -293,7 +296,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(3, 81);
+            this.label18.Location = new System.Drawing.Point(3, 94);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(61, 13);
             this.label18.TabIndex = 43;
@@ -310,7 +313,7 @@
             // 
             // tbManufacturer
             // 
-            this.tbManufacturer.Location = new System.Drawing.Point(442, 30);
+            this.tbManufacturer.Location = new System.Drawing.Point(442, 32);
             this.tbManufacturer.Name = "tbManufacturer";
             this.tbManufacturer.Size = new System.Drawing.Size(146, 20);
             this.tbManufacturer.TabIndex = 30;
@@ -318,7 +321,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(339, 81);
+            this.label26.Location = new System.Drawing.Point(339, 94);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(48, 13);
             this.label26.TabIndex = 47;
@@ -326,14 +329,14 @@
             // 
             // tbBarcode
             // 
-            this.tbBarcode.Location = new System.Drawing.Point(442, 84);
+            this.tbBarcode.Location = new System.Drawing.Point(442, 97);
             this.tbBarcode.Name = "tbBarcode";
             this.tbBarcode.Size = new System.Drawing.Size(146, 20);
             this.tbBarcode.TabIndex = 40;
             // 
             // tbLabelCode
             // 
-            this.tbLabelCode.Location = new System.Drawing.Point(123, 84);
+            this.tbLabelCode.Location = new System.Drawing.Point(123, 97);
             this.tbLabelCode.Name = "tbLabelCode";
             this.tbLabelCode.Size = new System.Drawing.Size(156, 20);
             this.tbLabelCode.TabIndex = 20;
@@ -343,7 +346,7 @@
             this.chkUse.AutoSize = true;
             this.chkUse.Checked = true;
             this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUse.Location = new System.Drawing.Point(123, 111);
+            this.chkUse.Location = new System.Drawing.Point(123, 125);
             this.chkUse.Name = "chkUse";
             this.chkUse.Size = new System.Drawing.Size(15, 14);
             this.chkUse.TabIndex = 49;
@@ -354,7 +357,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(338, 54);
+            this.label4.Location = new System.Drawing.Point(338, 58);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 15);
@@ -363,8 +366,9 @@
             // 
             // cbCategory
             // 
+            this.cbCategory.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(123, 57);
+            this.cbCategory.Location = new System.Drawing.Point(6, 4);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(156, 21);
             this.cbCategory.TabIndex = 50;
@@ -378,6 +382,25 @@
             this.label30.TabIndex = 1;
             this.label30.Text = "EOQ";
             this.toolTip1.SetToolTip(this.label30, "Economic Order Quantity");
+            // 
+            // numReorderPoint
+            // 
+            this.numReorderPoint.DecimalPlaces = 1;
+            this.numReorderPoint.Location = new System.Drawing.Point(113, 3);
+            this.numReorderPoint.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numReorderPoint.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numReorderPoint.Name = "numReorderPoint";
+            this.numReorderPoint.Size = new System.Drawing.Size(87, 20);
+            this.numReorderPoint.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.numReorderPoint, "Put -1 to ignore Reorder level");
             // 
             // btnCancel
             // 
@@ -406,7 +429,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 289);
+            this.panel1.Location = new System.Drawing.Point(5, 298);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(714, 37);
             this.panel1.TabIndex = 100;
@@ -424,7 +447,7 @@
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(714, 284);
+            this.tabControl1.Size = new System.Drawing.Size(714, 293);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 33;
             // 
@@ -437,7 +460,7 @@
             this.tabDetails.Location = new System.Drawing.Point(4, 22);
             this.tabDetails.Name = "tabDetails";
             this.tabDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetails.Size = new System.Drawing.Size(706, 258);
+            this.tabDetails.Size = new System.Drawing.Size(706, 267);
             this.tabDetails.TabIndex = 0;
             this.tabDetails.Text = "Details";
             this.tabDetails.UseVisualStyleBackColor = true;
@@ -446,7 +469,7 @@
             // 
             this.panel6.Controls.Add(this.gbProductType);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(3, 167);
+            this.panel6.Location = new System.Drawing.Point(3, 177);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(700, 80);
             this.panel6.TabIndex = 38;
@@ -569,7 +592,7 @@
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(3, 157);
+            this.splitter1.Location = new System.Drawing.Point(3, 167);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(700, 10);
             this.splitter1.TabIndex = 39;
@@ -582,7 +605,7 @@
             this.gbBasicDetails.Location = new System.Drawing.Point(3, 3);
             this.gbBasicDetails.Name = "gbBasicDetails";
             this.gbBasicDetails.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.gbBasicDetails.Size = new System.Drawing.Size(700, 154);
+            this.gbBasicDetails.Size = new System.Drawing.Size(700, 164);
             this.gbBasicDetails.TabIndex = 1;
             this.gbBasicDetails.TabStop = false;
             this.gbBasicDetails.Text = "Basic Details";
@@ -810,25 +833,6 @@
             this.label27.Size = new System.Drawing.Size(72, 13);
             this.label27.TabIndex = 0;
             this.label27.Text = "Reorder Point";
-            // 
-            // numReorderPoint
-            // 
-            this.numReorderPoint.DecimalPlaces = 1;
-            this.numReorderPoint.Location = new System.Drawing.Point(113, 3);
-            this.numReorderPoint.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numReorderPoint.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numReorderPoint.Name = "numReorderPoint";
-            this.numReorderPoint.Size = new System.Drawing.Size(87, 20);
-            this.numReorderPoint.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.numReorderPoint, "Put -1 to ignore Reorder level");
             // 
             // label28
             // 
@@ -1231,13 +1235,32 @@
             this.label14.Text = "Desccription";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnAddCategory);
+            this.panel2.Controls.Add(this.cbCategory);
+            this.panel2.Location = new System.Drawing.Point(123, 61);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(196, 30);
+            this.panel2.TabIndex = 103;
+            // 
+            // btnAddCategory
+            // 
+            this.btnAddCategory.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
+            this.btnAddCategory.Location = new System.Drawing.Point(167, 4);
+            this.btnAddCategory.Name = "btnAddCategory";
+            this.btnAddCategory.Size = new System.Drawing.Size(20, 21);
+            this.btnAddCategory.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.btnAddCategory, "New Category");
+            this.btnAddCategory.UseVisualStyleBackColor = true;
+            // 
             // ProductCreateForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(724, 331);
+            this.ClientSize = new System.Drawing.Size(724, 340);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -1249,6 +1272,7 @@
             this.Text = "Create Product";
             this.tblBasicDetails.ResumeLayout(false);
             this.tblBasicDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.tabControl1.ResumeLayout(false);
@@ -1276,7 +1300,6 @@
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReorderQuantity)).EndInit();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -1293,6 +1316,7 @@
             this.pnlVariants.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVariants)).EndInit();
             this.panel8.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1397,5 +1421,7 @@
         private System.Windows.Forms.NumericUpDown numUnitsInPackage;
         private System.Windows.Forms.NumericUpDown numUnitNetWeight;
         private System.Windows.Forms.NumericUpDown numUnitGrossWeight;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnAddCategory;
     }
 }

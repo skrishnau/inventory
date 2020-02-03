@@ -9,7 +9,16 @@ namespace ViewModel.Enums
     public enum MovementTypeEnum
     {
         POReceive, DirectReceive,
-        SOIssue, DirectIssue,
+
+        SOIssue,
+        /// <summary>
+        /// Direct Issue all units in an Inventory Unit. Only the selected inventory unit is issued. 
+        /// </summary>
+        DirectIssueInventoryUnit,
+        /// <summary>
+        /// Direct Issue which allows user to select any product
+        /// </summary>
+        DirectIssueAny,
         TOMove, DirectMove
     }
 }

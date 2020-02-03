@@ -17,9 +17,9 @@ namespace ViewModel.Core.Inventory
         public string Warehouse { get; set; }
 
         public int LotNumber { get; set; }
-        public string ReceiveReceipt { get; set; }
-        public string ReceiveAdjustment { get; set; } // adjustment code
-        public string ReceiveDate { get; set; }
+        public string ReceiveReceipt { get; set; } // RecieveReciept 
+        public string ReceiveAdjustmentCode { get; set; } // adjustment code
+        public string ReceiveDate { get; set; } // ReceiveDate 
         public string IssueReceipt { get; set; }
         public string IssueAdjustment { get; set; }// adjustment code
         public string IssueDate { get; set; }

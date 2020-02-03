@@ -179,6 +179,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //DataGridViewTextBoxCell cel = (DataGridViewTextBoxCell)this.Rows[currentcell.Y].Cells[0];
             //cel.Value = sendingCB.EditingControlFormattedValue.ToString();
 
+            if (this.CurrentCell.ColumnIndex != colProductId.Index)
+                return;
+
             var combo = sender as ComboBox;
             if (combo != null)
             {

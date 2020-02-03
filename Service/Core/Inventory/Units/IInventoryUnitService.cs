@@ -26,11 +26,13 @@ namespace Service.Core.Inventory.Units
         /// <param name="model"></param>
         void SplitInventoryUnit(List<decimal> quantityList, InventoryUnitModel model);
 
-        string SaveDirectReceive(List<InventoryUnitModel> list);
+        string SaveDirectReceive(List<InventoryUnitModel> list, string adjustmentCode);
 
-        string SaveDirectIssue(List<InventoryUnitModel> list);
+        string SaveDirectIssueInventoryUnit(List<InventoryUnitModel> list, string adjustmentCode);
 
-        void UpdateWarehouseProduct(InventoryUnitModel iuModel, int? sourceWarehouseId, int? targetWarehouseId, DateTime now);
+        string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode);
+
+        void UpdateWarehouseProduct(InventoryUnitModel iuModel, decimal unitQuantity, int? sourceWarehouseId, int? targetWarehouseId, DateTime now);
 
         #endregion
 

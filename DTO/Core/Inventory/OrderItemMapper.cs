@@ -53,7 +53,7 @@ namespace DTO.Core.Inventory
                 Package = model.Package,
                 PackageId = model.PackageId,
                 PackageQuantity = model.PackageQuantity,
-                ReceiveAdjustment = model.Adjustment,
+                ReceiveAdjustmentCode = model.Adjustment,
                 ReceiveDate = null,
                 ReceiveReceipt = model.Reference,
                 Remark = null,

@@ -254,10 +254,17 @@ namespace IMS.Forms.Inventory.Units
 
         private void BtnIssue_Click(object sender, EventArgs e)
         {
+            var list = GetSelectedRows();
+            if (list.Count == 0)
+            {
+                PopupMessage.ShowInfoMessage("Please check at least one record to perform \"Issue\"!");
+                this.Focus();
+                return;
+            }
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
-                directReceiveForm.SetData(MovementTypeEnum.DirectIssue, 0, GetSelectedRows());
+                directReceiveForm.SetData(MovementTypeEnum.DirectIssueInventoryUnit, 0, list);
                 directReceiveForm.ShowDialog();
             }
         }

@@ -59,7 +59,8 @@ namespace IMS.Forms.Inventory.Units.Actions
             List<IdNamePair> adjustmentList;
             switch (_adjustmentType)
             {
-                case MovementTypeEnum.DirectIssue:
+                case MovementTypeEnum.DirectIssueInventoryUnit:
+                case MovementTypeEnum.DirectIssueAny:
                     adjustmentList = _inventoryService.GetNegativeAdjustmentCodeListForCombo();
                     break;
                 case MovementTypeEnum.DirectReceive:
@@ -86,15 +87,20 @@ namespace IMS.Forms.Inventory.Units.Actions
             _adjustmentType = adjType;
             switch (adjType)
             {
-                case MovementTypeEnum.DirectIssue:
+                case MovementTypeEnum.DirectIssueInventoryUnit:
                     _selectedInventoryUnits = selectedInventoryUnits;
                     this.Text = "Direct Issue";
                     btnSave.Text = "Issue";
-                    dgvInventoryUnit.DesignForDirectIssue();
+                    dgvInventoryUnit.DesignForDirectIssueInventoryUnit();
                     if (selectedInventoryUnits != null)
                     {
                         dgvInventoryUnit.DataSource = selectedInventoryUnits;
                     }
+                    break;
+                case MovementTypeEnum.DirectIssueAny:
+                    this.Text = "Direct Issue";
+                    btnSave.Text = "Issue";
+                    dgvInventoryUnit.DesignForDirectIssueAny();
                     break;
                 case MovementTypeEnum.DirectReceive:
                     dgvInventoryUnit.DesignForDirectReceive();
@@ -154,10 +160,11 @@ namespace IMS.Forms.Inventory.Units.Actions
             var msg = string.Empty;
             var actionForMsg = string.Empty;
             DialogResult dialogResult = DialogResult.None;
-            
+            var adjustmentCode = ((IdNamePair)cbAdjustmentCode.SelectedItem).Name;
+
             switch (_adjustmentType)
             {
-                case MovementTypeEnum.DirectIssue:
+                case MovementTypeEnum.DirectIssueInventoryUnit:
                     actionForMsg = "Issued";
 
                     list = dgvInventoryUnit.GetItems();
@@ -173,7 +180,31 @@ namespace IMS.Forms.Inventory.Units.Actions
                             dialogResult = MessageBox.Show(this, "Are you sure to issue the selected items?", "Issue?", MessageBoxButtons.YesNoCancel);
                             if (dialogResult.Equals(DialogResult.Yes))
                             {
-                                msg = _inventoryUnitService.SaveDirectIssue(list);
+                                msg = _inventoryUnitService.SaveDirectIssueInventoryUnit(list, adjustmentCode);
+                            }
+                        }
+                    }
+                    break;
+                case MovementTypeEnum.DirectIssueAny:
+                    actionForMsg = "Issued";
+                    var ignoreList = new List<DataGridViewColumn>
+                    {
+                        dgvInventoryUnit.colLotNumber
+                    };
+                    list = dgvInventoryUnit.GetItems(ignoreList);
+
+                    if (list != null)
+                    {
+                        if (list.Count == 0)
+                        {
+                            msg = "At least one item expected to issue";
+                        }
+                        else
+                        {
+                            dialogResult = MessageBox.Show(this, "Are you sure to issue the selected items?", "Issue?", MessageBoxButtons.YesNoCancel);
+                            if (dialogResult.Equals(DialogResult.Yes))
+                            {
+                                msg = _inventoryUnitService.SaveDirectIssueAny(list, adjustmentCode);
                             }
                         }
                     }
@@ -189,7 +220,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                         else
                         {
-                            msg = _inventoryUnitService.SaveDirectReceive(list);
+                            msg = _inventoryUnitService.SaveDirectReceive(list, adjustmentCode);
                         }
                     }
                     break;
@@ -216,7 +247,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     else
                     {
                         list = dgvInventoryUnit.GetItems();
-                        dialogResult = MessageBox.Show(this, "Are you sure to transfer selected items to the '"+warehouse+"' warehouse?", "Transfer?", MessageBoxButtons.YesNoCancel);
+                        dialogResult = MessageBox.Show(this, "Are you sure to transfer selected items to the '" + warehouse + "' warehouse?", "Transfer?", MessageBoxButtons.YesNoCancel);
                         if (dialogResult.Equals(DialogResult.Yes))
                         {
                             msg = _inventoryUnitService.MoveInventoryUnits(warehouseId, list);
@@ -225,7 +256,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
                     break;
             }
-            if(dialogResult == DialogResult.Cancel || dialogResult == DialogResult.No)
+            if (dialogResult == DialogResult.Cancel || dialogResult == DialogResult.No)
             {
                 return;
             }

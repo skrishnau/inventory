@@ -320,7 +320,7 @@ namespace Service.Core.Orders
                     UomId = product.BaseUomId,
                     WarehouseId = poItem.WarehouseId,
                 };
-                _inventoryUnitService.UpdateWarehouseProduct(invUnit.MapToModel(), null, poItem.WarehouseId, now);
+                _inventoryUnitService.UpdateWarehouseProduct(invUnit.MapToModel(), invUnit.UnitQuantity, null, poItem.WarehouseId, now);
                 _context.InventoryUnit.Add(invUnit);
             }
         }

@@ -69,6 +69,9 @@ namespace IMS.Forms.Inventory.Categories
                     this.Text = "Edit Category";
                     tbParentCategory.Text = string.IsNullOrEmpty(categoryModel.ParentCategory) ? "None" : categoryModel.ParentCategory;
                     break;
+                default:
+                    this.Text = "Add Category";
+                    break;
             }
         }
 

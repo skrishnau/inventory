@@ -44,6 +44,7 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colViewDetail = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPurchases)).BeginInit();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -62,7 +63,8 @@
             this.colSupplier,
             this.colCustomer,
             this.colTotalAmount,
-            this.colStatus});
+            this.colStatus,
+            this.colViewDetail});
             this.dgvPurchases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPurchases.Location = new System.Drawing.Point(0, 56);
             this.dgvPurchases.MultiSelect = false;
@@ -201,6 +203,17 @@
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
             // 
+            // colViewDetail
+            // 
+            this.colViewDetail.HeaderText = "";
+            this.colViewDetail.Image = global::IMS.Properties.Resources.icons8_List_16px;
+            this.colViewDetail.MinimumWidth = 24;
+            this.colViewDetail.Name = "colViewDetail";
+            this.colViewDetail.ReadOnly = true;
+            this.colViewDetail.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colViewDetail.ToolTipText = "View Detail";
+            this.colViewDetail.Width = 32;
+            // 
             // OrderListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,5 +247,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.DataGridViewImageColumn colViewDetail;
     }
 }

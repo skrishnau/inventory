@@ -99,6 +99,18 @@ namespace IMS.Forms.Inventory.Products
             //btnAddOption.Click += BtnAddOption_Click;
             dgvVariants.EditingControlShowing += DgvVariants_EditingControlShowing;
 
+            btnAddCategory.Click += BtnAddCategory_Click;
+        }
+        
+        private void BtnAddCategory_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var categoryCreate = Program.container.GetInstance<CategoryCreate>();
+                categoryCreate.ShowInTaskbar = false;
+                categoryCreate.ShowDialog();
+                //PopulateCategoryData();
+            }
         }
 
         private void InitializeDatabaseChangeListeners()

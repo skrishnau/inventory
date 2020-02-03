@@ -479,9 +479,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             HideUnusedDefaults();
         }
         //
-        // Direct Issue designs
+        // Direct Issue of whole Inventory-Unit designs
         //
-        public void DesignForDirectIssue()
+        public void DesignForDirectIssueInventoryUnit()
         {
             this.RowHeadersVisible = true;
             this.SelectionMode = DataGridViewSelectionMode.CellSelect;
@@ -490,9 +490,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
-            colPackageQuantity.Visible = true;
-            //colPackageId.Visible = true;
-            //colPackageId.ReadOnly = true;
+            // colPackageQuantity.Visible = true;
+            colPackageId.Visible = true;
+            colPackageId.ReadOnly = true;
             colWarehouseId.Visible = true;
             colLotNumber.Visible = true;
             colProductionDate.Visible = true;
@@ -501,13 +501,45 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.HeaderText = "Reference";
             colReceiveDate.Visible = true;
             colRemark.Visible = true;
+            colIsHold.Visible = true;
+            colIsHold.ReadOnly = true;
 
             MakeAllColumnsReadOnly();
             colUnitQuantity.ReadOnly = false;
             colPackageQuantity.ReadOnly = false;
 
             HideUnusedDefaults();
+
+            
         }
+
+        //
+        // Direct Issue of any product designs
+        //
+        public void DesignForDirectIssueAny()
+        {
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.AllowUserToAddRows = true;
+            this.AllowUserToDeleteRows = true;
+            colProductId.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colPackageId.Visible = true;
+            colPackageId.ReadOnly = true;
+            colWarehouseId.Visible = true;
+           // colLotNumber.Visible = true;
+           // colProductionDate.Visible = true;
+           // colExpirationDate.Visible = true;
+           // colReceiveReference.Visible = true;
+           // colReceiveReference.HeaderText = "Reference";
+           // colIsHold.Visible = true;
+            colRemark.Visible = true;
+
+            HideUnusedDefaults();
+            
+        }
+
         //
         // Direct Move designs
         //
@@ -531,6 +563,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.HeaderText = "Reference";
             colReceiveDate.Visible = true;
             colRemark.Visible = true;
+            colIsHold.Visible = true;
+            colIsHold.ReadOnly = true;
 
             MakeAllColumnsReadOnly();
             //colUnitQuantity.ReadOnly = false;

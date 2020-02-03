@@ -62,6 +62,7 @@ namespace IMS.Forms.Inventory.Purchases
         {
             _listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
             dgvPurchases.CellMouseDoubleClick += DgvPurchases_CellMouseDoubleClick;
+            dgvPurchases.CellClick += DgvPurchases_CellClick;
             //_purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
             //lnkPurchaseOrderList.Click += Link_Click;
             btnNew.Click += BtnNewOrder_Click;
@@ -81,9 +82,23 @@ namespace IMS.Forms.Inventory.Purchases
             PopulateOrders();
         }
 
+        private void DgvPurchases_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colViewDetail.Index)
+            {
+                var model = dgvPurchases.Rows[e.RowIndex].DataBoundItem as OrderModel;
+                ShowDetail(sender, model);
+            }
+        }
+
         private void DgvPurchases_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var model = dgvPurchases.Rows[e.RowIndex].DataBoundItem as OrderModel;
+            ShowDetail(sender, model);
+        }
+
+        private void ShowDetail(object sender, OrderModel model)
+        {
             if (model != null)
             {
                 var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
