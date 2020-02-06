@@ -60,7 +60,7 @@ namespace DTO.Core.Inventory
             };
         }
 
-        public static OrderItem MapToEntity(OrderItemModel model, OrderItem entity)
+        public static OrderItem MapToEntity(this OrderItemModel model, OrderItem entity)
         {
             if (entity == null)
                 entity = new OrderItem();
@@ -83,7 +83,7 @@ namespace DTO.Core.Inventory
             entity.TotalAmount = model.TotalAmount;
             entity.UnitQuantity = model.UnitQuantity;
             entity.UomId = model.UomId;
-            entity.WarehouseId = model.WarehouseId??0;
+            entity.WarehouseId = model.WarehouseId;
             return entity;
         }
 
@@ -105,7 +105,7 @@ namespace DTO.Core.Inventory
                     ProductId = model.ProductId,
                     PurchaseOrderId = model.PurchaseOrderId,
                     WarehouseId = model.WarehouseId,
-                    Warehouse = model.Warehouse.Name,
+                    Warehouse = model.Warehouse?.Name,
                     InStock = model.Product.InStockQuantity,
                     OnOrder = model.Product.OnOrderQuantity,
                     UomId = model.UomId,
@@ -121,6 +121,88 @@ namespace DTO.Core.Inventory
                     PackageQuantity = model.PackageQuantity,
                     ProductionDate = model.ProductionDate,
                     Reference = model.Reference,
+                    Uom = model.Uom == null ? "" : model.Uom.Name,
+                    
+                });
+            }
+            return list;
+        }
+
+        public static List<OrderItemModel> MapToOrderItemModel(this ICollection<OrderItem> query)
+        {
+            var list = new List<OrderItemModel>();
+            foreach (var model in query)
+            {
+                list.Add(new OrderItemModel()
+                {
+                    Id = model.Id,
+                    UnitQuantity = model.UnitQuantity,
+                    Rate = model.Rate,
+                    TotalAmount = model.TotalAmount,
+                    Product = model.Product.Name,
+                    SKU = model.Product.SKU,
+                    IsHold = model.IsHold,
+                    IsReceived = model.IsReceived,
+                    ProductId = model.ProductId,
+                    PurchaseOrderId = model.PurchaseOrderId,
+                    WarehouseId = model.WarehouseId,
+                    Warehouse = model.Warehouse?.Name,
+                    InStock = model.Product.InStockQuantity,
+                    OnOrder = model.Product.OnOrderQuantity,
+                    UomId = model.UomId,
+                    SupplierId = model.SupplierId,
+                    Supplier = model.Supplier == null ? "" : model.Supplier.BasicInfo.Name,
+                    Adjustment = model.Adjustment,
+                    ExpirationDate = model.ExpirationDate,
+                    GrossWeight = model.GrossWeight,
+                    LotNumber = model.LotNumber,
+                    NetWeight = model.NetWeight,
+                    Package = model.Package == null ? "" : model.Package.Name,
+                    PackageId = model.PackageId,
+                    PackageQuantity = model.PackageQuantity,
+                    ProductionDate = model.ProductionDate,
+                    Reference = model.Reference,
+                    Uom = model.Uom == null ? "" : model.Uom.Name,
+
+                });
+            }
+            return list;
+        }
+
+        public static List<InventoryUnitModel> MapToInventoryUnitModel(this ICollection<OrderItem> query)
+        {
+            var list = new List<InventoryUnitModel>();
+            foreach (var model in query)
+            {
+                list.Add(new InventoryUnitModel()
+                {
+                    Id = model.Id,
+                    UnitQuantity = model.UnitQuantity,
+                    //Rate = model.Rate,
+                    //TotalAmount = model.TotalAmount,
+                    Product = model.Product.Name,
+                    SKU = model.Product.SKU,
+                    IsHold = model.IsHold,
+                   // IsReceived = model.IsReceived,
+                    ProductId = model.ProductId,
+                   // PurchaseOrderId = model.PurchaseOrderId,
+                    WarehouseId = model.WarehouseId??0,
+                    Warehouse = model.Warehouse?.Name,
+                  //  InStock = model.Product.InStockQuantity,
+                   // OnOrder = model.Product.OnOrderQuantity,
+                    UomId = model.UomId,
+                    SupplierId = model.SupplierId,
+                    Supplier = model.Supplier == null ? "" : model.Supplier.BasicInfo.Name,
+                   // Adjustment = model.Adjustment,
+                  //  ExpirationDate = model.ExpirationDate,
+                    GrossWeight = model.GrossWeight,
+                    LotNumber = model.LotNumber,
+                    NetWeight = model.NetWeight,
+                    Package = model.Package == null ? "" : model.Package.Name,
+                    PackageId = model.PackageId,
+                    PackageQuantity = model.PackageQuantity,
+                  //  ProductionDate = model.ProductionDate,
+                   // Reference = model.Reference,
                     Uom = model.Uom == null ? "" : model.Uom.Name,
                     
                 });

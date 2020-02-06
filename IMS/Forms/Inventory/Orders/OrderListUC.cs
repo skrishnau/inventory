@@ -19,18 +19,18 @@ namespace IMS.Forms.Inventory.Purchases
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
 
-        public OrderListUC(IOrderService purchaseService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
+        public OrderListUC(IOrderService orderService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
         {
             _orderType = orderType; //OrderTypeEnum.Sale;//
-            _orderService = purchaseService;
+            _orderService = orderService;
             _listener = listener;
 
             InitializeComponent();
-            this.Load += PurchaseOrderListUC_Load;
+            this.Load += OrderListUC_Load;
 
         }
 
-        private void PurchaseOrderListUC_Load(object sender, EventArgs e)
+        private void OrderListUC_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Fill;
             InitializeGridView();
@@ -48,11 +48,20 @@ namespace IMS.Forms.Inventory.Purchases
                     this.colSupplier.Visible = true; 
                     this.colCustomer.Visible = false;
                     this.colWarehouse.Visible = true;
+                    this.colToWarehouse.Visible = false;
                     break;
                 case OrderTypeEnum.Sale:
                     this.colSupplier.Visible = false;
                     this.colCustomer.Visible = true;
                     this.colWarehouse.Visible = false;
+                    this.colToWarehouse.Visible = false;
+                    break;
+                case OrderTypeEnum.Move:
+                    this.colSupplier.Visible = false;
+                    this.colCustomer.Visible = false;
+                    this.colWarehouse.Visible = true;
+                    this.colWarehouse.HeaderText = "From Warehouse";
+                    this.colToWarehouse.Visible = true;
                     break;
             }
 

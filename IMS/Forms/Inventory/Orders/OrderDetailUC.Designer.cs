@@ -46,16 +46,18 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblOrderNumber1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblExpectedDate = new System.Windows.Forms.Label();
+            this.lblWarehouse = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblToWarehouse = new System.Windows.Forms.Label();
+            this.lblWarehouseLabel = new System.Windows.Forms.Label();
             this.lblLotNumber = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblExpectedDate = new System.Windows.Forms.Label();
+            this.lblToWarehouseLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblWarehouse = new System.Windows.Forms.Label();
             this.lblSupplier = new System.Windows.Forms.Label();
             this.lblSupplierInvoice = new System.Windows.Forms.Label();
             this.dgvItems = new System.Windows.Forms.DataGridView();
@@ -130,13 +132,19 @@
             // 
             // btnBackToList
             // 
+            this.btnBackToList.BackColor = System.Drawing.Color.DimGray;
             this.btnBackToList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBackToList.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.btnBackToList.FlatAppearance.BorderSize = 2;
+            this.btnBackToList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBackToList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackToList.ForeColor = System.Drawing.Color.White;
             this.btnBackToList.Location = new System.Drawing.Point(5, 5);
             this.btnBackToList.Name = "btnBackToList";
             this.btnBackToList.Size = new System.Drawing.Size(28, 21);
             this.btnBackToList.TabIndex = 4;
             this.btnBackToList.Text = "<--";
-            this.btnBackToList.UseVisualStyleBackColor = true;
+            this.btnBackToList.UseVisualStyleBackColor = false;
             // 
             // pnlButtonsHeader
             // 
@@ -266,12 +274,16 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.Controls.Add(this.lblOrderNumber1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblExpectedDate, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblWarehouse, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblToWarehouse, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblWarehouseLabel, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblLotNumber, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblExpectedDate, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblToWarehouseLabel, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -302,24 +314,14 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Name/Ref.";
             // 
-            // label5
+            // lblWarehouse
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(267, 0);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Expected Date";
-            // 
-            // lblExpectedDate
-            // 
-            this.lblExpectedDate.AutoSize = true;
-            this.lblExpectedDate.Location = new System.Drawing.Point(363, 0);
-            this.lblExpectedDate.Name = "lblExpectedDate";
-            this.lblExpectedDate.Size = new System.Drawing.Size(35, 13);
-            this.lblExpectedDate.TabIndex = 22;
-            this.lblExpectedDate.Text = "label7";
+            this.lblWarehouse.AutoSize = true;
+            this.lblWarehouse.Location = new System.Drawing.Point(363, 0);
+            this.lblWarehouse.Name = "lblWarehouse";
+            this.lblWarehouse.Size = new System.Drawing.Size(35, 13);
+            this.lblWarehouse.TabIndex = 18;
+            this.lblWarehouse.Text = "label7";
             // 
             // label2
             // 
@@ -330,6 +332,26 @@
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Lot #";
+            // 
+            // lblToWarehouse
+            // 
+            this.lblToWarehouse.AutoSize = true;
+            this.lblToWarehouse.Location = new System.Drawing.Point(362, 21);
+            this.lblToWarehouse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblToWarehouse.Name = "lblToWarehouse";
+            this.lblToWarehouse.Size = new System.Drawing.Size(62, 13);
+            this.lblToWarehouse.TabIndex = 14;
+            this.lblToWarehouse.Text = "Warehouse";
+            // 
+            // lblWarehouseLabel
+            // 
+            this.lblWarehouseLabel.AutoSize = true;
+            this.lblWarehouseLabel.Location = new System.Drawing.Point(267, 0);
+            this.lblWarehouseLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWarehouseLabel.Name = "lblWarehouseLabel";
+            this.lblWarehouseLabel.Size = new System.Drawing.Size(62, 13);
+            this.lblWarehouseLabel.TabIndex = 2;
+            this.lblWarehouseLabel.Text = "Warehouse";
             // 
             // lblLotNumber
             // 
@@ -359,6 +381,35 @@
             this.label8.TabIndex = 15;
             this.label8.Text = "Order No.";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(267, 42);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Expected Date";
+            // 
+            // lblExpectedDate
+            // 
+            this.lblExpectedDate.AutoSize = true;
+            this.lblExpectedDate.Location = new System.Drawing.Point(363, 42);
+            this.lblExpectedDate.Name = "lblExpectedDate";
+            this.lblExpectedDate.Size = new System.Drawing.Size(35, 13);
+            this.lblExpectedDate.TabIndex = 22;
+            this.lblExpectedDate.Text = "label7";
+            // 
+            // lblToWarehouseLabel
+            // 
+            this.lblToWarehouseLabel.AutoSize = true;
+            this.lblToWarehouseLabel.Location = new System.Drawing.Point(267, 21);
+            this.lblToWarehouseLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblToWarehouseLabel.Name = "lblToWarehouseLabel";
+            this.lblToWarehouseLabel.Size = new System.Drawing.Size(78, 13);
+            this.lblToWarehouseLabel.TabIndex = 14;
+            this.lblToWarehouseLabel.Text = "To Warehouse";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -376,25 +427,6 @@
             this.label6.Size = new System.Drawing.Size(83, 13);
             this.label6.TabIndex = 13;
             this.label6.Text = "Supplier Invoice";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 42);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Warehouse";
-            // 
-            // lblWarehouse
-            // 
-            this.lblWarehouse.AutoSize = true;
-            this.lblWarehouse.Location = new System.Drawing.Point(128, 42);
-            this.lblWarehouse.Name = "lblWarehouse";
-            this.lblWarehouse.Size = new System.Drawing.Size(35, 13);
-            this.lblWarehouse.TabIndex = 18;
-            this.lblWarehouse.Text = "label7";
             // 
             // lblSupplier
             // 
@@ -479,7 +511,7 @@
             // 
             // colQuantity
             // 
-            this.colQuantity.DataPropertyName = "Quantity";
+            this.colQuantity.DataPropertyName = "UnitQuantity";
             this.colQuantity.HeaderText = "Quantity";
             this.colQuantity.Name = "colQuantity";
             this.colQuantity.ReadOnly = true;
@@ -605,8 +637,6 @@
             this.tblSupplier.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblSupplier.Controls.Add(this.label1, 0, 0);
             this.tblSupplier.Controls.Add(this.lblSupplier, 1, 0);
-            this.tblSupplier.Controls.Add(this.lblWarehouse, 1, 2);
-            this.tblSupplier.Controls.Add(this.label3, 0, 2);
             this.tblSupplier.Controls.Add(this.lblSupplierInvoice, 1, 1);
             this.tblSupplier.Controls.Add(this.label6, 0, 1);
             this.tblSupplier.Dock = System.Windows.Forms.DockStyle.Left;
@@ -695,7 +725,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblWarehouseLabel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
@@ -707,15 +737,6 @@
         private System.Windows.Forms.DataGridView dgvItems;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblNoItemsMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInStock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOnOrder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblOrderNumber;
@@ -738,5 +759,16 @@
         private Common.Buttons.MenuButton btnPartialReceive;
         private System.Windows.Forms.ToolTip toolTip1;
         protected internal System.Windows.Forms.Button btnBackToList;
+        private System.Windows.Forms.Label lblToWarehouse;
+        private System.Windows.Forms.Label lblToWarehouseLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOnOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
     }
 }

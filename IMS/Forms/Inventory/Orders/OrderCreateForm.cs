@@ -35,6 +35,8 @@ namespace IMS.Forms.Inventory.Orders
         private int _orderId;
         private OrderTypeEnum _orderType;
 
+        private Label warehouseClickLabel;
+
         public OrderCreateForm(
             ISupplierService supplierService,
             ICustomerService customerService,
@@ -71,21 +73,29 @@ namespace IMS.Forms.Inventory.Orders
             _listener.SupplierUpdated += _listener_SupplierUpdated;
             _listener.WarehouseUpdated += _listener_WarehouseUpdated;
 
-        }
+            lblWarehouse.DoubleClick += lblWarehouse_DoubleClick;
+            lblToWarehouse.DoubleClick += lblWarehouse_DoubleClick;
 
+        }
+        
         private void InitializeValidation()
         {
             List<Control> controls = new List<Control>()
             {
-                 tbName, tbOrderNumber, cbClient,
+                 tbName, tbOrderNumber,
             };
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
                     controls.Add(cbWarehouse);
+                    controls.Add(cbClient);
                     break;
                 case OrderTypeEnum.Sale:
-
+                    controls.Add(cbClient);
+                    break;
+                case OrderTypeEnum.Move:
+                    controls.Add(cbWarehouse);
+                    controls.Add(cbToWarehouse);
                     break;
             }
             _requiredFieldValidator = new RequiredFieldValidator(errorProvider, controls.ToArray());
@@ -117,7 +127,17 @@ namespace IMS.Forms.Inventory.Orders
         private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Business.WarehouseModel> e)
         {
             PopulateWarehouseCombo();
-            cbWarehouse.SelectedValue = e.Model == null ? 0 : e.Model.Id;
+            if(warehouseClickLabel != null)
+            {
+                if(warehouseClickLabel.Name == lblWarehouse.Name)
+                {
+                    cbWarehouse.SelectedValue = e.Model == null ? 0 : e.Model.Id;
+                }
+                else if(warehouseClickLabel.Name == lblToWarehouse.Name)
+                {
+                    cbToWarehouse.SelectedValue = e.Model == null ? 0 : e.Model.Id;
+                }
+            }
         }
 
         #endregion
@@ -162,6 +182,10 @@ namespace IMS.Forms.Inventory.Orders
             cbWarehouse.DataSource = warehouses;
             cbWarehouse.DisplayMember = "Name";
             cbWarehouse.ValueMember = "Id";
+            // To Warehouse
+            cbToWarehouse.DataSource = warehouses.ToArray();
+            cbToWarehouse.DisplayMember = "Name";
+            cbToWarehouse.ValueMember = "Id";
         }
 
         public void SetDataForEdit(OrderTypeEnum orderType, int purchaseOrderId)
@@ -183,7 +207,7 @@ namespace IMS.Forms.Inventory.Orders
                 tbName.Text = model.Name;
                 tbNotes.Text = model.Note;
                 tbOrderNumber.Text = model.ReferenceNumber;
-                cbWarehouse.SelectedValue = model.WarehouseId;
+                cbWarehouse.SelectedValue = model.WarehouseId??0;
                 dtExpectedDate.Value = model.ExpectedDate;
                 numLotNumber.Value = model.LotNumber;
 
@@ -219,16 +243,32 @@ namespace IMS.Forms.Inventory.Orders
                     lblClient.Text = "Supplier";
                     lblClientInfo.Text = "Supplier Invoice";
                     this.Text = (model == null ? "Create" : "Edit") + " Purchase Order";
+                    tblToWarehouse.Visible = false;
                     break;
                 case OrderTypeEnum.Sale:
-                    cbWarehouse.Visible = false;
-                    lblWarehouse.Visible = false;
+                    //cbWarehouse.Visible = false;
+                    //lblWarehouse.Visible = false;
+                    //lblWarehouse.Text = "From Warehouse";
                     lblClient.Text = "Customer";
                     lblPhone.Visible = true;
                     tbPhone.Visible = true;
                     lblExpectedDate.Text = "Delivery Date *";
                     lblClientInfo.Text = "Address";
                     this.Text = (model == null ? "Create" : "Edit") + " Sale Order";
+                    tblToWarehouse.Visible = false;
+                    break;
+                case OrderTypeEnum.Move:
+                    cbWarehouse.Visible = true;
+                    lblWarehouse.Visible = true;
+                    lblClient.Visible = false;
+                    cbClient.Visible = false;
+                    lblPhone.Visible = false;
+                    tbPhone.Visible = false;
+                    lblExpectedDate.Text = "Transfer Date *";
+                    lblClientInfo.Visible = false;
+                    tbClientInfo.Visible = false;
+                    this.Text = (model == null ? "Create" : "Edit") + " Transfer Order";
+                    tblToWarehouse.Visible = true;
                     break;
             }
 
@@ -273,11 +313,13 @@ namespace IMS.Forms.Inventory.Orders
 
         private void lblWarehouse_DoubleClick(object sender, EventArgs e)
         {
+            warehouseClickLabel = (Label)sender;
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var warehouseCreate = Program.container.GetInstance<WarehouseCreateForm>();
                 warehouseCreate.ShowDialog();
             }
+            warehouseClickLabel = null;
         }
 
         #endregion
@@ -303,22 +345,29 @@ namespace IMS.Forms.Inventory.Orders
                 // don't add other properties which are set individually, e.g. receivedAt, etc.
             };
 
+            var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
                     model.SupplierId = int.Parse(cbClient.SelectedValue.ToString());
-                    model.WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
+                    model.WarehouseId = warehouseId;
                     model.SupplierInvoice = tbClientInfo.Text;
+                    model.ToWarehouseId = null;
                     break;
                 case OrderTypeEnum.Sale:
                     model.CustomerId = int.Parse(cbClient.SelectedValue.ToString());
+                    model.WarehouseId = warehouseId == 0 ? (int?)null : warehouseId; 
                     model.SupplierId = null;
-                    model.WarehouseId = null;
                     model.Address = tbClientInfo.Text;
+                    model.ToWarehouseId = null;
+                    break;
+                case OrderTypeEnum.Move:
+                    model.WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
+                    model.ToWarehouseId = int.Parse(cbToWarehouse.SelectedValue.ToString());
                     break;
             }
 
-            _orderService.SavePurchaseOrder(model);
+            _orderService.SaveOrder(model);
             // redirect to PO detail page
             this.Close();
         }

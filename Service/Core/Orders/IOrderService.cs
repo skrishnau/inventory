@@ -13,7 +13,7 @@ namespace Service.Core.Orders
     {
         int GetNextLotNumber();
 
-        void SavePurchaseOrder(OrderModel purchaseOrderModel);
+        void SaveOrder(OrderModel purchaseOrderModel);
 
         List<OrderModel> GetAllOrders(OrderTypeEnum orderType);
 
@@ -21,12 +21,13 @@ namespace Service.Core.Orders
         List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<OrderItemModel> models);
 
         OrderModel GetOrder(OrderTypeEnum orderType, int orderId);
-
+        OrderModel GetOrderForDetailView(int orderId);//OrderTypeEnum orderType, 
 
         string SavePurchaseOrderItems(int purchaseOrderId, List<OrderItemModel> items);
 
-        string SetSent(int purchaseOrderId);
+        string SetSent(int orderId);
         string SetReceived(int purchaseOrderId);
+        string SetIssued(int orderId);
         string SetCancelled(int purchaseOrderId);
     }
 }

@@ -45,7 +45,8 @@ namespace ViewModel.Core.Orders
         public string Phone { get; set; }
         #endregion
         #region Move Order
-
+        public int? ToWarehouseId { get; set; }
+        public string ToWarehouse { get; set; }
         #endregion
 
         public virtual ICollection<OrderItemModel> OrderItems { get; set; }

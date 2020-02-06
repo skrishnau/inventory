@@ -92,6 +92,14 @@
     <Compile Include="Migrations\201905211154574_InitMigration.Designer.cs">
       <DependentUpon>201905211154574_InitMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002051151495_ToWarehouseColumnAddedInOrderTable.cs" />
+    <Compile Include="Migrations\202002051151495_ToWarehouseColumnAddedInOrderTable.Designer.cs">
+      <DependentUpon>202002051151495_ToWarehouseColumnAddedInOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs" />
+    <Compile Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.Designer.cs">
+      <DependentUpon>202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -111,6 +119,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905211154574_InitMigration.resx">
       <DependentUpon>201905211154574_InitMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002051151495_ToWarehouseColumnAddedInOrderTable.resx">
+      <DependentUpon>202002051151495_ToWarehouseColumnAddedInOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.resx">
+      <DependentUpon>202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

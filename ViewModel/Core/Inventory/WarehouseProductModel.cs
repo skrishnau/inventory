@@ -16,6 +16,7 @@ namespace ViewModel.Core.Inventory
         public string SKU { get; set; }
 
         public decimal InStockQuantity { get; set; }
+        public decimal OnOrderQuantity { get; set; }
         public decimal OnHoldQuantity { get; set; }
 
         public string UpdatedAt { get; set; }

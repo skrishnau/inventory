@@ -89,7 +89,8 @@ namespace Infrastructure.Entities.Orders
 
         #region Move Order
 
-
+        public int? ToWarehouseId { get; set; }
+        public virtual Warehouse ToWarehouse { get; set; }
 
         #endregion
 

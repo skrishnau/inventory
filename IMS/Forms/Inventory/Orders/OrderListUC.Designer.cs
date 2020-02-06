@@ -40,6 +40,7 @@
             this.colOrderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colToWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +61,7 @@
             this.colOrderName,
             this.colLotNo,
             this.colWarehouse,
+            this.colToWarehouse,
             this.colSupplier,
             this.colCustomer,
             this.colTotalAmount,
@@ -171,6 +173,14 @@
             this.colWarehouse.ReadOnly = true;
             this.colWarehouse.Width = 150;
             // 
+            // colToWarehouse
+            // 
+            this.colToWarehouse.DataPropertyName = "ToWarehouse";
+            this.colToWarehouse.HeaderText = "To Warehouse";
+            this.colToWarehouse.Name = "colToWarehouse";
+            this.colToWarehouse.ReadOnly = true;
+            this.colToWarehouse.Width = 150;
+            // 
             // colSupplier
             // 
             this.colSupplier.DataPropertyName = "Supplier";
@@ -243,6 +253,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLotNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colToWarehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;

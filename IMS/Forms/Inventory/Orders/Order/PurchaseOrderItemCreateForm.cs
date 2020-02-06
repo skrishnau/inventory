@@ -3,6 +3,7 @@ using Service.Core.Inventory;
 using Service.Core.Orders;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using ViewModel.Core.Orders;
 using ViewModel.Enums;
@@ -74,6 +75,13 @@ namespace IMS.Forms.Inventory.Purchases.Order
                 // logic to show buttons
                 var enableSave = !(model.IsCancelled || model.IsVerified || model.IsExecuted);
                 pnlItemsSaveFooter.Enabled = enableSave;
+
+                switch (_orderType)
+                {
+                    case OrderTypeEnum.Move:
+                        colRate.ReadOnly = true;
+                        break;
+                }
             }
         }
 
@@ -127,12 +135,30 @@ namespace IMS.Forms.Inventory.Purchases.Order
                             row.Cells[e.ColumnIndex].ErrorText = string.Empty;
                             // populate
                             row.Cells[this.colProduct.Index].Value = product.Name;
-                            row.Cells[this.colInStock.Index].Value = product.InStockQuantity;
-                            row.Cells[this.colOnOrder.Index].Value = product.OnOrderQuantity;
                             row.Cells[this.colRate.Index].Value = product.SupplyPrice;
                             row.Cells[this.colPackageId.Index].Value = product.PackageId;
                             row.Cells[this.colUomId.Index].Value = product.BaseUomId;
                             UpdateTotalColumn(e);
+                            if (_orderType == OrderTypeEnum.Move)
+                            {
+                                var warehouseProduct = _inventoryService.GetWarehouseProductList(_purchaseOrder.ToWarehouseId ?? 0, product.Id);
+                                if (warehouseProduct.Any())
+                                {
+                                    row.Cells[this.colInStock.Index].Value = warehouseProduct[0].InStockQuantity;
+                                    row.Cells[this.colOnOrder.Index].Value = warehouseProduct[0].OnOrderQuantity;
+                                }
+                                else
+                                {
+                                    row.Cells[this.colInStock.Index].Value = 0M;
+                                    row.Cells[this.colOnOrder.Index].Value = 0M;
+                                }
+                            }
+                            else
+                            {
+                                row.Cells[this.colInStock.Index].Value = product.InStockQuantity;
+                                row.Cells[this.colOnOrder.Index].Value = product.OnOrderQuantity;
+                            }
+                           
                         }
                     }
                     // handle rate and quantity change to update Total
@@ -204,6 +230,10 @@ namespace IMS.Forms.Inventory.Purchases.Order
             for (int r = 0; r < dgvItems.Rows.Count - 1; r++)
             {
                 DataGridViewRow row = dgvItems.Rows[r];
+                row.Cells[colQuantity.Name].ErrorText = string.Empty;
+                row.Cells[colRate.Name].ErrorText = string.Empty;
+                row.ErrorText = string.Empty;
+
                 var sku = row.Cells[colSKU.Name].Value as string;
                 var variant = _inventoryService.GetProductBySKU(sku);
                 if (variant == null)
@@ -213,13 +243,26 @@ namespace IMS.Forms.Inventory.Purchases.Order
                 }
                 else
                 {
+                    
+
+                    decimal inStock = decimal.Parse(row.Cells[colInStock.Name].Value.ToString());
                     decimal quantity = 0;
                     var qtyVal = row.Cells[colQuantity.Name].Value;
                     decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
                     if (quantity <= 0)
                     {
                         row.ErrorText = "Quantity can't be zero or less";
+                        row.Cells[colQuantity.Name].ErrorText = "Quantity can't be zero or less";
                         isValid = false;
+                    }
+                    if(_orderType == OrderTypeEnum.Move || _orderType == OrderTypeEnum.Sale)
+                    {
+                        if(quantity > inStock)
+                        {
+                            row.ErrorText = "Quantity can't be greater than " + inStock.ToString();
+                            row.Cells[colQuantity.Name].ErrorText = "Quantity can't be zero or less";
+                            isValid = false;
+                        }
                     }
                     decimal rate = 0;
                     var rateVal = row.Cells[colRate.Name].Value;
@@ -227,6 +270,7 @@ namespace IMS.Forms.Inventory.Purchases.Order
                     if (rate <= 0)
                     {
                         row.ErrorText = "Rate can't be zero or less";
+                        row.Cells[colRate.Name].ErrorText = "Rate can't be zero or less";
                         isValid = false;
                     }
                     var isHold = row.Cells[colIsHold.Index].Value;

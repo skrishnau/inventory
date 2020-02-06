@@ -8,6 +8,7 @@ using Service.DbEventArgs;
 using IMS.Forms.Common.Links;
 using Service.Core.Orders;
 using ViewModel.Enums;
+using Service.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Orders
 {
@@ -24,13 +25,13 @@ namespace IMS.Forms.Inventory.Orders
         private List<int> _recentPurchaseOrderModelIds = new List<int>();
         private OrderTypeEnum _orderType;
 
-        public OrderUC(IOrderService orderService,IDatabaseChangeListener listener, // 
+        public OrderUC(IOrderService orderService, IInventoryService inventoryService, IDatabaseChangeListener listener, // 
              OrderTypeEnum orderType)
         {
             _orderType = orderType;
             //_orderService = orderService;
             _listener = listener;
-            _orderDetailUC = new OrderDetailUC(orderService, listener);// orderDetailUC;
+            _orderDetailUC = new OrderDetailUC(orderService, listener, inventoryService);// orderDetailUC;
             _orderListUC = new OrderListUC(orderService, listener, orderType);
 
             InitializeComponent();
@@ -64,6 +65,10 @@ namespace IMS.Forms.Inventory.Orders
                     _body.HeadingText = "Sale Orders";
                     //_sidebar.lnkList.Text = "     • Sale Order List";
                     break;
+                case OrderTypeEnum.Move:
+                    _body.HeadingText = "Transfer Orders";
+                    //_sidebar.lnkList.Text = "     • Sale Order List";
+                    break;
             }
 
             //_body.SubHeadingText = "";
@@ -85,7 +90,7 @@ namespace IMS.Forms.Inventory.Orders
             _orderDetailUC.btnBackToList.Click += BtnBackToList_Click;
             //_sidebar.lnkList.Click += _linkManager.Link_Click;
             //_linkManager.LinkClicked += _linkManager_LinkClicked;
-            _orderListUC.RowSelected += _purchaseOrderListUC_RowSelected;
+            _orderListUC.RowSelected += _orderListUC_RowSelected;
             // btnNew.Click += BtnNewOrder_Click;
         }
 
@@ -94,7 +99,7 @@ namespace IMS.Forms.Inventory.Orders
             ShowData(e.Id);
         }
 
-        private void _purchaseOrderListUC_RowSelected(object sender, BaseEventArgs<OrderModel> e)
+        private void _orderListUC_RowSelected(object sender, BaseEventArgs<OrderModel> e)
         {
             if (e.Model != null)
             {
@@ -136,6 +141,9 @@ namespace IMS.Forms.Inventory.Orders
             }
             else
             {
+                _orderDetailUC.SetData(_orderType, orderId);
+                _body.pnlBody.Controls.Add(_orderDetailUC);
+               /* 
                 switch (_orderType)
                 {
                     case OrderTypeEnum.Purchase:
@@ -146,7 +154,12 @@ namespace IMS.Forms.Inventory.Orders
                         _orderDetailUC.SetData(_orderType, orderId);
                         _body.pnlBody.Controls.Add(_orderDetailUC);
                         break;
+                    case OrderTypeEnum.Move:
+                        _orderDetailUC.SetData(_orderType, orderId);
+                        _body.pnlBody.Controls.Add(_orderDetailUC);
+                        break;
                 }
+                */
             }
            // _sidebar.SetVisited(orderId);
         }

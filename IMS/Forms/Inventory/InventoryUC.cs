@@ -20,6 +20,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using IMS.Forms.Inventory.InventoryDetail;
+using Service.Core.Inventory;
 
 namespace IMS.Forms.Inventory
 {
@@ -30,16 +31,19 @@ namespace IMS.Forms.Inventory
         //  private InventoryMenuBar _menubar;
 
         private readonly IOrderService _orderService;
+        private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
 
         private OrderUC purchaseOrderUC;
         private OrderUC saleOrderUC;
+        private OrderUC transferOrderUC;
 
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IDatabaseChangeListener listener)
+        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IDatabaseChangeListener listener, IInventoryService inventoryService)
         {
             _orderService = orderService;
+            _inventoryService = inventoryService;
             _listener = listener;
             _menubar = menubar;
 
@@ -257,6 +261,7 @@ namespace IMS.Forms.Inventory
 
             _menubar.btnPurchaseOrder.Click += BtnPurchaseOrder_Click;
             _menubar.btnSellOrder.Click += BtnSellOrder_Click;
+            _menubar.btnTransferOrder.Click += BtnTransferOrder_Click;
             _menubar.btnPOS.Click += BtnPOS_Click;
         }
 
@@ -297,6 +302,25 @@ namespace IMS.Forms.Inventory
             //_menubar.SetSelection(sender);
         }
 
+        private void BtnPurchaseOrder_Click(object sender, EventArgs e)
+        {
+            var orderType = OrderTypeEnum.Purchase;
+            if (purchaseOrderUC == null)
+            {
+                // var purchaseOrderDetailUC = Program.container.GetInstance<OrderDetailUC>();
+                purchaseOrderUC = new OrderUC(_orderService, _inventoryService,
+                    _listener, orderType
+                    );
+            }
+
+            //var purchaseOrderUC = Program.container.GetInstance<OrderUC>();
+            AddTabPage("Purchases", purchaseOrderUC);
+            //pnlBody.Controls.Clear();
+            //pnlBody.Controls.Add(purchaseOrderUC);
+            // set selection
+            //_menubar.SetSelection(sender);
+        }
+
         private void BtnSellOrder_Click(object sender, EventArgs e)
         {
             var orderType = OrderTypeEnum.Sale;
@@ -306,7 +330,7 @@ namespace IMS.Forms.Inventory
                 // var orderDetailUC = new OrderDetailUC(_orderService,
                 //   _listener);
                 //Program.container.GetInstance<OrderDetailUC>();
-                saleOrderUC = new OrderUC(_orderService,
+                saleOrderUC = new OrderUC(_orderService, _inventoryService,
                     _listener,
                     orderType
                     );
@@ -320,23 +344,27 @@ namespace IMS.Forms.Inventory
            // _menubar.SetSelection(sender);
         }
 
-        private void BtnPurchaseOrder_Click(object sender, EventArgs e)
+        private void BtnTransferOrder_Click(object sender, EventArgs e)
         {
-            var orderType = OrderTypeEnum.Purchase;
-            if (purchaseOrderUC == null)
+            var orderType = OrderTypeEnum.Move;
+            if (transferOrderUC == null)
             {
-                // var purchaseOrderDetailUC = Program.container.GetInstance<OrderDetailUC>();
-                purchaseOrderUC = new OrderUC(_orderService,
-                    _listener, orderType
+
+                // var orderDetailUC = new OrderDetailUC(_orderService,
+                //   _listener);
+                //Program.container.GetInstance<OrderDetailUC>();
+                transferOrderUC = new OrderUC(_orderService, _inventoryService,
+                    _listener,
+                    orderType
                     );
             }
 
-            //var purchaseOrderUC = Program.container.GetInstance<OrderUC>();
-            AddTabPage("Purchases", purchaseOrderUC);
+            // var transferOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
-            //pnlBody.Controls.Add(purchaseOrderUC);
+            //pnlBody.Controls.Add(transferOrderUC);
+            AddTabPage("Transfers", transferOrderUC);
             // set selection
-            //_menubar.SetSelection(sender);
+            // _menubar.SetSelection(sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)

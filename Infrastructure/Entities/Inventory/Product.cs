@@ -83,6 +83,7 @@ namespace Infrastructure.Entities.Inventory
         public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
       //  public virtual ICollection<Variant> Variants { get; set; }
 
+            public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
 
         public Product()
         {

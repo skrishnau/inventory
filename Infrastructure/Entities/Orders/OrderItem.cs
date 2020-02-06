@@ -17,7 +17,10 @@ namespace Infrastructure.Entities.Orders
         public virtual Order PurchaseOrder { get; set; }
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
-        public int WarehouseId { get; set; }
+        /// <summary>
+        /// in case of sales, warehouse is not given(available) at first but we need to save the record, hence it's nullable
+        /// </summary>
+        public int? WarehouseId { get; set; }
         public virtual Warehouse Warehouse { get; set; }
 
         public decimal UnitQuantity { get; set; }

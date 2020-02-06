@@ -24,9 +24,20 @@ namespace DTO.Core.Inventory
             return Mappings.Mapper.Map<List<OrderModel>>(query);
         }
 
-        public static OrderModel MapToModel(this Order entity)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="withOrderDetails">Also map order items</param>
+        /// <returns></returns>
+        public static OrderModel MapToModel(this Order entity, bool withOrderDetails = false)
         {
-            return Mappings.Mapper.Map<OrderModel>(entity);
+            var model = Mappings.Mapper.Map<OrderModel>(entity);
+            if (withOrderDetails)
+            {
+                model.OrderItems = entity.OrderItems.MapToOrderItemModel();
+            }
+            return model;
         }
     }
 
@@ -40,15 +51,17 @@ namespace DTO.Core.Inventory
                             opt => opt.MapFrom(src => src.Customer == null ? "" : src.Customer.BasicInfo.Name))
                 .ForMember(x => x.Warehouse,
                             opt => opt.MapFrom(src => src.Warehouse == null ? "" : src.Warehouse.Name))
+                .ForMember(x => x.ToWarehouse,
+                            opt => opt.MapFrom(src => src.ToWarehouse == null ? "" : src.ToWarehouse.Name))
                .ForMember(x => x.ParentOrder, opt => opt.Ignore())
                .ForMember(x => x.Supplier,
                             opt => opt.MapFrom(src => src.Supplier == null ? "" : src.Supplier.BasicInfo.Name))
                .ForMember(x => x.OrderItems, opt => opt.Ignore())
                .ForMember(x => x.Status,
-                            opt => opt.MapFrom(src => 
-                                        src.IsCancelled ? OrderStatusEnum.Cancelled.ToString() 
-                                        : src.IsExecuted ? OrderStatusEnum.Received.ToString() 
-                                        : src.IsVerified ? OrderStatusEnum.Sent.ToString() 
+                            opt => opt.MapFrom(src =>
+                                        src.IsCancelled ? OrderStatusEnum.Cancelled.ToString()
+                                        : src.IsExecuted ? OrderStatusEnum.Received.ToString()
+                                        : src.IsVerified ? OrderStatusEnum.Sent.ToString()
                                         : OrderStatusEnum.Open.ToString()
                             ))
                ;
@@ -56,11 +69,12 @@ namespace DTO.Core.Inventory
             // from model to entity
             CreateMap<OrderModel, Order>()
                 .ForMember(x => x.Warehouse, src => src.Ignore())
+                .ForMember(x => x.ToWarehouse, src => src.Ignore())
                 .ForMember(x => x.Supplier, src => src.Ignore())
                 .ForMember(x => x.ParentOrder, src => src.Ignore())
                 .ForMember(x => x.OrderItems, src => src.Ignore())
                 .ForMember(x => x.Customer, src => src.Ignore())
-                .ForMember(x=>x.CreatedAt, src=>src.Ignore())
+                .ForMember(x => x.CreatedAt, src => src.Ignore())
                 ;
         }
     }

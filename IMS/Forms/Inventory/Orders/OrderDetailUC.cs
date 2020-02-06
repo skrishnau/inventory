@@ -17,18 +17,18 @@ namespace IMS.Forms.Inventory.Purchases
     public partial class OrderDetailUC : UserControl
     {
         private readonly IOrderService _orderService;
-       // private readonly IInventoryService _inventoryService;
+        private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
         //private PurchaseOrderModel _purchaseOrderModel;
-        private int _purchaseOrderId;
-        private OrderModel _purchaseOrderModel;
+        private int _orderId;
+        private OrderModel _orderModel;
         private OrderTypeEnum _orderType;
 
-        public OrderDetailUC(IOrderService orderService, IDatabaseChangeListener listener)
+        public OrderDetailUC(IOrderService orderService, IDatabaseChangeListener listener, IInventoryService inventoryService)
         {
             _orderService = orderService;
-            //_inventoryService = inventoryService;
+            _inventoryService = inventoryService;
             _listener = listener;
 
             InitializeComponent();
@@ -62,7 +62,7 @@ namespace IMS.Forms.Inventory.Purchases
 
         private void _listener_PurchaseOrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
         {
-            if (e.Model.Id == _purchaseOrderId)
+            if (e.Model.Id == _orderId)
             {
                 PopulateData(e.Model);
             }
@@ -87,15 +87,15 @@ namespace IMS.Forms.Inventory.Purchases
                     tblSupplier.Visible = false;
                     tblCustomer.Visible = true;
                     btnReceive.Text = "Issue";
-                    btnSendOrder.Text = "Confirm";
+                    btnSendOrder.Text = "Confirm Package";
                     break;
             }
         }
 
-        public void SetData(OrderTypeEnum orderType, int purchaseOrderId)
+        public void SetData(OrderTypeEnum orderType, int orderId)
         {
             _orderType = orderType;
-            _purchaseOrderId = purchaseOrderId;
+            _orderId = orderId;
 
             PopulateData();
         }
@@ -103,13 +103,19 @@ namespace IMS.Forms.Inventory.Purchases
         private void PopulateData(OrderModel model = null)
         {
             if (model == null)
-                model = _orderService.GetOrder(_orderType, _purchaseOrderId);
-
-            _purchaseOrderId = model == null ? 0 : model.Id;
-            _purchaseOrderModel = model;
+                model = _orderService.GetOrderForDetailView( _orderId); //_orderType,
+            else
+            {
+                if(model.OrderItems == null || !model.OrderItems.Any())
+                {
+                    model.OrderItems = _orderService.GetPurchaseOrderItems(model.Id);
+                }
+            }
+            _orderId = model == null ? 0 : model.Id;
+            _orderModel = model;
             if (model != null)
             {
-
+                
                 // populate
                 lblName.Text = model.Name;
                 lblExpectedDate.Text = model.ExpectedDate.ToShortDateString();
@@ -124,6 +130,11 @@ namespace IMS.Forms.Inventory.Purchases
                 lblSupplierInvoice.Text = model.SupplierInvoice;
                 lblWarehouse.Text = model.Warehouse;
 
+                lblWarehouseLabel.Text = model.ToWarehouse;
+                lblToWarehouse.Text = model.ToWarehouse;
+                lblToWarehouseLabel.Visible = !string.IsNullOrEmpty(model.ToWarehouse);
+                lblWarehouseLabel.Text = string.IsNullOrEmpty(model.ToWarehouse)? "Warehouse": "From Warehouse";
+                
                 lblAddress.Text = model.Address;
                 lblPhone.Text = model.Phone;
 
@@ -148,6 +159,14 @@ namespace IMS.Forms.Inventory.Purchases
                 else
                 {
                     DesignForOpen();
+                }
+
+                switch (_orderType)
+                {
+                    case OrderTypeEnum.Move:
+                        colInStock.Visible = false;
+                        colOnOrder.Visible = false;
+                        break;
                 }
             }
         }
@@ -196,7 +215,7 @@ namespace IMS.Forms.Inventory.Purchases
             btnReceive.Visible = true;
             btnSendOrder.Enabled = false;
             btnSendOrder.Visible = false;
-            lblStatus.Text = "( Sent )";
+            lblStatus.Text = _orderType == OrderTypeEnum.Sale? "( Packaged )" : "( Sent )";
             pnlButtonsHeader.Visible = true;
         }
 
@@ -212,7 +231,10 @@ namespace IMS.Forms.Inventory.Purchases
             btnReceive.Visible = false;
             btnSendOrder.Enabled = false;
             btnSendOrder.Visible = false;
-            lblStatus.Text = "( Received )";
+            var executedText = _orderType == OrderTypeEnum.Purchase ? "( Received )"
+                : _orderType == OrderTypeEnum.Sale ? "( Issued )"
+                : "( Moved )";
+            lblStatus.Text = executedText;
             pnlButtonsHeader.Visible = false;
         }
 
@@ -226,7 +248,7 @@ namespace IMS.Forms.Inventory.Purchases
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var po = Program.container.GetInstance<OrderCreateForm>();
-                po.SetDataForEdit(_orderType, _purchaseOrderId);
+                po.SetDataForEdit(_orderType, _orderId);
                 po.ShowDialog();
             }
         }
@@ -236,25 +258,64 @@ namespace IMS.Forms.Inventory.Purchases
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var itemCreateForm = Program.container.GetInstance<PurchaseOrderItemCreateForm>();
-                itemCreateForm.SetData(_orderType, _purchaseOrderModel.Id);
+                itemCreateForm.SetData(_orderType, _orderModel.Id);
                 itemCreateForm.ShowDialog();
             }
         }
 
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
-            if (!_purchaseOrderModel.OrderItems.Any())
+            if (!_orderModel.OrderItems.Any())
             {
                 MessageBox.Show("There aren't any items. Please add items to the order.", "No items!");
                 return;
             }
-            var dialogResult = MessageBox.Show(this, "Are you sure to send it to the Supplier? " +
-                "You won't be able to edit the order after it's sent.", "Send?", MessageBoxButtons.YesNo);
+            var question = "";
+            var buttonText = "Send?";
+            var successMsg = "Successfully Sent!";
+            switch (_orderType)
+            {
+                case OrderTypeEnum.Purchase:
+                    question = "Are you sure to send the order to the Supplier? " + "You won't be able to edit the order after it's sent.";
+                    break;
+                case OrderTypeEnum.Sale:
+                    if(_orderModel.WarehouseId == null)
+                    {
+                        MessageBox.Show(this, "You haven't entered warehouse from which the sales request is fulfilled. Edit the order and try again.");
+                        return;
+                    }
+                    var isValid = true;
+                    // check if the items are available in the given warehouse
+                    for(var i=0; i< _orderModel.OrderItems.Count; i++)
+                    {
+                        var item = _orderModel.OrderItems.ElementAt(i);
+                        var wp = _inventoryService.GetWarehouseProductList(_orderModel.WarehouseId??0, item.ProductId).FirstOrDefault();
+                        var inStock = (wp?.InStockQuantity)??0;
+                        if(item.UnitQuantity > inStock)
+                        {
+                            dgvItems.Rows[i].ErrorText = "Greater than in-stock quantity";//.Cells[colQuantity.Name].ErrorText = ""
+                            isValid = false;
+                        }
+                    }
+                    if (!isValid)
+                    {
+                        MessageBox.Show(this, "Some items are greater than in-stock quantity. Please verify!");
+                        return;
+                    }
+                    question = "Are you sure to package the items? " + "You won't be able to edit the order once it's packaged.";
+                    buttonText = "Package?";
+                    successMsg = "Successfully Packaged!";
+                    break;
+                case OrderTypeEnum.Move:
+                    question = "Are you sure to send the order to the warehouse? " + "You won't be able to edit the order once it's sent.";
+                    break;
+            }
+            var dialogResult = MessageBox.Show(this, question, buttonText, MessageBoxButtons.YesNo);
             if (dialogResult.Equals(DialogResult.Yes))
             {
-                var msg = _orderService.SetSent(_purchaseOrderId);
+                var msg = _orderService.SetSent(_orderId);
                 if (string.IsNullOrEmpty(msg))
-                    PopupMessage.ShowSuccessMessage("Successfully Sent!");
+                    PopupMessage.ShowSuccessMessage(successMsg);
                 else
                     PopupMessage.ShowErrorMessage(msg);
                 this.Focus();
@@ -265,9 +326,14 @@ namespace IMS.Forms.Inventory.Purchases
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var invReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
-                invReceiveForm.SetData(MovementTypeEnum.POReceive, _purchaseOrderId);
-                invReceiveForm.ShowDialog();
+                var invAdjForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                var movementType = _orderType == OrderTypeEnum.Purchase
+                    ? MovementTypeEnum.POReceive
+                    : _orderType == OrderTypeEnum.Sale
+                    ? MovementTypeEnum.SOIssue
+                    : MovementTypeEnum.TOMove;
+                invAdjForm.SetData(movementType, _orderId);
+                invAdjForm.ShowDialog();
             }
         }
 
@@ -276,7 +342,7 @@ namespace IMS.Forms.Inventory.Purchases
             var dialogResult = MessageBox.Show(this, "Are you sure to cancel the order?", "Cancel?", MessageBoxButtons.YesNo);
             if (dialogResult.Equals(DialogResult.Yes))
             {
-                var msg = _orderService.SetCancelled(_purchaseOrderId);
+                var msg = _orderService.SetCancelled(_orderId);
                 if (string.IsNullOrEmpty(msg))
                     PopupMessage.ShowSuccessMessage("Successfully Cancelled!");
                 else

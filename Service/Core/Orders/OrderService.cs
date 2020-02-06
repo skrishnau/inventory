@@ -41,6 +41,8 @@ namespace Service.Core.Orders
                 var purchases = _context.Order
                     .Include(x => x.Supplier.BasicInfo)
                     .Include(x => x.OrderItems)
+                    //.Include(x=>x.Warehouse)
+                    //.Include(x=>x.ToWarehouse)
                     .Where(x => x.OrderType == type)
                     .AsEnumerable();
                 // return new List<PurchaseOrderModelForGridView>();
@@ -68,15 +70,15 @@ namespace Service.Core.Orders
             }
         }
 
-        public void SavePurchaseOrder(OrderModel purchaseOrderModel)
+        public void SaveOrder(OrderModel orderModel)
         {
             using (var _context = new DatabaseContext())
             {
 
                 var now = DateTime.Now;
                 var args = BaseEventArgs<OrderModel>.Instance;
-                var entity = _context.Order.Find(purchaseOrderModel.Id);
-                entity = purchaseOrderModel.MapToEntity(entity);// OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
+                var entity = _context.Order.Find(orderModel.Id);
+                entity = orderModel.MapToEntity(entity);// OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
 
                 if (entity.Id == 0)
                 {
@@ -89,6 +91,12 @@ namespace Service.Core.Orders
                 {
                     entity.UpdatedAt = now;
                     args.Mode = Utility.UpdateMode.EDIT;
+
+                    // update the order items' warehouse
+                    foreach (var item in _context.OrderItem.Where(x=>x.PurchaseOrderId == entity.Id))
+                    {
+                        item.WarehouseId = entity.WarehouseId;
+                    }
                 }
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
@@ -105,6 +113,7 @@ namespace Service.Core.Orders
                 var type = orderType.ToString();
                 var entity = _context.Order
                      .Include(x => x.Warehouse)
+                     .Include(x=> x.ToWarehouse)
                      .Include(x => x.Supplier)
                      .Include(x => x.ParentOrder)
                      .Include(x => x.OrderItems)
@@ -116,25 +125,69 @@ namespace Service.Core.Orders
             }
         }
 
+        public OrderModel GetOrderForDetailView( int orderId) //OrderTypeEnum orderType,
+        {
+            using (var _context = new DatabaseContext())
+            {
+
+                // don't use enum directly
+               // var type = orderType.ToString();
+                var entity = _context.Order
+                     .Include(x => x.Warehouse)
+                     .Include(x => x.ToWarehouse)
+                     .Include(x => x.Supplier)
+                     .Include(x => x.ParentOrder)
+                     .Include(x => x.OrderItems)
+                     .Include(x => x.Customer)
+                     .Include(x => x.OrderItems.Select(y => y.Product))
+                     .Include(x => x.OrderItems.Select(y => y.Warehouse))
+                     .FirstOrDefault(x => x.Id == orderId ); //&& x.OrderType == type
+                return entity.MapToModel(true);// OrderMapper.MapToOrderModel(entity);
+            }
+        }
+
         public List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<OrderItemModel> models)
         {
             return OrderItemMapper.MapToInventoryUnitModel(models);
         }
 
-        public string SetSent(int purchaseOrderId)
+        public string SetSent(int orderId)
         {
             using (var _context = new DatabaseContext())
             {
 
-                var entity = _context.Order.Find(purchaseOrderId);
+                var entity = _context.Order.Find(orderId);
                 if (entity != null)
                 {
+                    var orderType = Enum.Parse(typeof(OrderTypeEnum), entity.OrderType);
+                    var verifiedAction = "";
+                    var verifiyAction = "";
+                    var executedAction = "";
+                    switch (orderType)
+                    {
+                        case OrderTypeEnum.Purchase:
+                            verifiedAction = "sent";
+                            verifiyAction = "send";
+                            executedAction = "received";
+                            break;
+                        case OrderTypeEnum.Sale:
+                            verifiedAction = "packaged";
+                            verifiyAction = "package";
+                            executedAction = "issued";
+                            break;
+                        case OrderTypeEnum.Move:
+                            verifiedAction = "sent";
+                            verifiyAction = "send";
+                            executedAction = "moved";
+                            break;
+                    }
+                    
                     if (entity.IsVerified)
-                        return "The Order is already sent";
+                        return "The Order is already " + verifiedAction;
                     else if (entity.IsExecuted)
-                        return "This order has already been received. No need to send!";
+                        return "This order has already been "+executedAction+". No need to send!";
                     else if (entity.IsCancelled)
-                        return "This order is aleady cancelled. You can't send a cancelled order";
+                        return "This order is aleady cancelled. You can't "+verifiyAction+" a cancelled order";
                     entity.IsVerified = true;
                     entity.VerifiedDate = DateTime.Now;
                     _context.SaveChanges();
@@ -142,17 +195,17 @@ namespace Service.Core.Orders
                     _listener.TriggerPurchaseOrderUpdateEvent(null, args);
                     return string.Empty;
                 }
-                return "The Purchase Order doesn't exist";
+                return "The Order doesn't exist";
             }
         }
 
-        public string SetReceived(int purchaseOrderId)
+        public string SetReceived(int orderId)
         {
             using (var _context = new DatabaseContext())
             {
 
                 var now = DateTime.Now;
-                var entity = _context.Order.Find(purchaseOrderId);
+                var entity = _context.Order.Find(orderId);
                 if (entity != null)
                 {
                     if (!entity.IsVerified)
@@ -176,13 +229,46 @@ namespace Service.Core.Orders
             }
         }
 
-
-        public string SetCancelled(int purchaseOrderId)
+        public string SetIssued(int orderId)
         {
             using (var _context = new DatabaseContext())
             {
 
-                var entity = _context.Order.Find(purchaseOrderId);
+                var now = DateTime.Now;
+                var entity = _context.Order.Find(orderId);
+                if (entity != null)
+                {
+                    if (!entity.IsVerified)
+                        return "This order hasn't been packaged yet. First package the order, then only you can issue against it.";
+                    if (entity.IsCancelled)
+                        return "You can't issue a cancelled order. This order is cancelled.";
+                    if (entity.IsExecuted)
+                        return "Already issued!";
+                    
+
+                    var msg = SubtractIssuedItemsFromWarehouse(entity.OrderItems, now);
+                    if (!string.IsNullOrEmpty(msg))
+                        return msg;
+
+                    entity.IsExecuted = true;
+                    entity.ExecutedDate = now;
+
+                    _context.SaveChanges();
+                    var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
+                    _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                    _listener.TriggerInventoryUnitUpdateEvent(null, null);
+                    return string.Empty;
+                }
+                return "The Order doesn't exist";
+            }
+        }
+
+        public string SetCancelled(int orderId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+
+                var entity = _context.Order.Find(orderId);
                 if (entity != null)
                 {
                     if (entity.IsExecuted)
@@ -196,7 +282,7 @@ namespace Service.Core.Orders
                     _listener.TriggerPurchaseOrderUpdateEvent(null, args);
                     return string.Empty;
                 }
-                return "The Purchase Order doesn't exist";
+                return "The Order doesn't exist";
             }
         }
 
@@ -252,13 +338,13 @@ namespace Service.Core.Orders
                 foreach (var item in items)
                 {
                     var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
-                    entity = OrderItemMapper.MapToEntity(item, entity);
+                    entity = item.MapToEntity(entity);//OrderItemMapper.MapToEntity(item, entity);
                     if (entity.Id == 0)
                     {
                         // add
                         _context.OrderItem.Add(entity);
                     }
-                    // need not handle update cause entity is already assigned above (entity = Pur...; line)
+                    // No need to handle update cause entity is already assigned above { ....MapToEntity(..)}
                 }
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);
@@ -318,11 +404,34 @@ namespace Service.Core.Orders
                     SupplyPrice = poItem.Rate,
                     UnitQuantity = poItem.UnitQuantity,
                     UomId = product.BaseUomId,
-                    WarehouseId = poItem.WarehouseId,
+                    WarehouseId = poItem.WarehouseId??0,
                 };
                 _inventoryUnitService.UpdateWarehouseProduct(invUnit.MapToModel(), invUnit.UnitQuantity, null, poItem.WarehouseId, now);
                 _context.InventoryUnit.Add(invUnit);
             }
+        }
+
+        private string SubtractIssuedItemsFromWarehouse(ICollection<OrderItem> items, DateTime now)
+        {
+            var msg = _inventoryUnitService.SaveDirectIssueAny(items.MapToInventoryUnitModel(), "Issue");
+            if (!string.IsNullOrEmpty(msg))
+                return msg;
+            // save was successful
+            using (var _context = new DatabaseContext())
+            {
+
+                foreach (var item in items)
+                {
+                    var product = _context.Product.Find(item.ProductId);
+                    if (product != null)
+                    {
+                        item.IsReceived = true;
+                        //AddPOReceiveToInventoryUnit(item, product, now);
+                    }
+                }
+                _context.SaveChanges();
+            }
+            return string.Empty;
         }
 
         #endregion
