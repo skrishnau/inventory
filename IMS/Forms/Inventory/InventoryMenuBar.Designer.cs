@@ -43,7 +43,7 @@
             this.btnSellOrder = new System.Windows.Forms.Button();
             this.btnPurchaseOrder = new System.Windows.Forms.Button();
             this.btnLocateInventory = new System.Windows.Forms.Button();
-            this.btnTransfer = new System.Windows.Forms.Button();
+            this.btnDirectMove = new System.Windows.Forms.Button();
             this.btnDirectIssue = new System.Windows.Forms.Button();
             this.btnDirectReceive = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
@@ -69,7 +69,9 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button1.Enabled = false;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
@@ -81,7 +83,7 @@
             this.button1.Text = "Help";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.button1, "Help and Support");
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // btnSettings
             // 
@@ -101,7 +103,9 @@
             // 
             // btnReports
             // 
+            this.btnReports.BackColor = System.Drawing.Color.Transparent;
             this.btnReports.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnReports.Enabled = false;
             this.btnReports.FlatAppearance.BorderSize = 0;
             this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReports.Image = global::IMS.Properties.Resources.icons8_Pie_Chart_24px;
@@ -113,11 +117,13 @@
             this.btnReports.Text = "Reports";
             this.btnReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnReports, "Reports");
-            this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.UseVisualStyleBackColor = false;
             // 
             // btnAccounts
             // 
+            this.btnAccounts.BackColor = System.Drawing.Color.Transparent;
             this.btnAccounts.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAccounts.Enabled = false;
             this.btnAccounts.FlatAppearance.BorderSize = 0;
             this.btnAccounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAccounts.Image = global::IMS.Properties.Resources.icons8_Calculator_24px;
@@ -129,11 +135,13 @@
             this.btnAccounts.Text = "Accounts";
             this.btnAccounts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnAccounts, "Accounts");
-            this.btnAccounts.UseVisualStyleBackColor = true;
+            this.btnAccounts.UseVisualStyleBackColor = false;
             // 
             // btnManufacturings
             // 
+            this.btnManufacturings.BackColor = System.Drawing.Color.Transparent;
             this.btnManufacturings.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnManufacturings.Enabled = false;
             this.btnManufacturings.FlatAppearance.BorderSize = 0;
             this.btnManufacturings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnManufacturings.Image = global::IMS.Properties.Resources.icons8_Manufacturing_24px;
@@ -145,7 +153,7 @@
             this.btnManufacturings.Text = "MRP II";
             this.btnManufacturings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnManufacturings, "Manufacturing Resource Planning");
-            this.btnManufacturings.UseVisualStyleBackColor = true;
+            this.btnManufacturings.UseVisualStyleBackColor = false;
             // 
             // btnInventoryUnits
             // 
@@ -182,7 +190,9 @@
             // 
             // btnPOS
             // 
+            this.btnPOS.BackColor = System.Drawing.Color.Transparent;
             this.btnPOS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPOS.Enabled = false;
             this.btnPOS.FlatAppearance.BorderSize = 0;
             this.btnPOS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPOS.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
@@ -194,7 +204,7 @@
             this.btnPOS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPOS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnPOS, "Point Of Sale");
-            this.btnPOS.UseVisualStyleBackColor = true;
+            this.btnPOS.UseVisualStyleBackColor = false;
             // 
             // btnTransferOrder
             // 
@@ -246,7 +256,9 @@
             // 
             // btnLocateInventory
             // 
+            this.btnLocateInventory.BackColor = System.Drawing.Color.Transparent;
             this.btnLocateInventory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLocateInventory.Enabled = false;
             this.btnLocateInventory.FlatAppearance.BorderSize = 0;
             this.btnLocateInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLocateInventory.Image = global::IMS.Properties.Resources.icons8_Wine_Tour_24px;
@@ -258,24 +270,25 @@
             this.btnLocateInventory.Text = "Locate";
             this.btnLocateInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnLocateInventory, "Locate Inventory");
-            this.btnLocateInventory.UseVisualStyleBackColor = true;
+            this.btnLocateInventory.UseVisualStyleBackColor = false;
             // 
-            // btnTransfer
+            // btnDirectMove
             // 
-            this.btnTransfer.BackColor = System.Drawing.Color.Transparent;
-            this.btnTransfer.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTransfer.FlatAppearance.BorderSize = 0;
-            this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransfer.Image = global::IMS.Properties.Resources.icons8_Data_Transfer_24px;
-            this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTransfer.Location = new System.Drawing.Point(216, 2);
-            this.btnTransfer.Name = "btnTransfer";
-            this.btnTransfer.Size = new System.Drawing.Size(60, 57);
-            this.btnTransfer.TabIndex = 4;
-            this.btnTransfer.Text = "Move";
-            this.btnTransfer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnTransfer, "Direct Move");
-            this.btnTransfer.UseVisualStyleBackColor = false;
+            this.btnDirectMove.BackColor = System.Drawing.Color.Transparent;
+            this.btnDirectMove.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDirectMove.Enabled = false;
+            this.btnDirectMove.FlatAppearance.BorderSize = 0;
+            this.btnDirectMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDirectMove.Image = global::IMS.Properties.Resources.icons8_Data_Transfer_24px;
+            this.btnDirectMove.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDirectMove.Location = new System.Drawing.Point(216, 2);
+            this.btnDirectMove.Name = "btnDirectMove";
+            this.btnDirectMove.Size = new System.Drawing.Size(60, 57);
+            this.btnDirectMove.TabIndex = 4;
+            this.btnDirectMove.Text = "Move";
+            this.btnDirectMove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnDirectMove, "Direct Move");
+            this.btnDirectMove.UseVisualStyleBackColor = false;
             // 
             // btnDirectIssue
             // 
@@ -459,7 +472,7 @@
             this.Controls.Add(this.btnPurchaseOrder);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnLocateInventory);
-            this.Controls.Add(this.btnTransfer);
+            this.Controls.Add(this.btnDirectMove);
             this.Controls.Add(this.btnDirectIssue);
             this.Controls.Add(this.btnDirectReceive);
             this.Controls.Add(this.panel1);
@@ -490,7 +503,7 @@
         protected internal System.Windows.Forms.Button btnReports;
         protected internal System.Windows.Forms.Button button1;
         protected internal System.Windows.Forms.Button btnDirectIssue;
-        protected internal System.Windows.Forms.Button btnTransfer;
+        protected internal System.Windows.Forms.Button btnDirectMove;
         protected internal System.Windows.Forms.Button btnTransferOrder;
         protected internal System.Windows.Forms.Button btnPOS;
         protected internal System.Windows.Forms.Button btnHome;

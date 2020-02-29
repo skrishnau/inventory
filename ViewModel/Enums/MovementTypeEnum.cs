@@ -19,6 +19,9 @@ namespace ViewModel.Enums
         /// Direct Issue which allows user to select any product
         /// </summary>
         DirectIssueAny,
-        TOMove, DirectMove
+
+        TOMove,
+        DirectMoveInventoryUnit,
+        DirectMoveAny
     }
 }

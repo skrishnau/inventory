@@ -132,18 +132,31 @@ namespace IMS.Forms.Inventory.Units.Actions
                         SetDataForOrder(model);
                     }
                     break;
-                case MovementTypeEnum.DirectMove:
+                case MovementTypeEnum.DirectMoveInventoryUnit:
                     pnlWarehouse.Visible = true;
                     pnlAdjustmentCode.Visible = false;
                     PopulateWarehouseCombo();
                     _selectedInventoryUnits = selectedInventoryUnits;
-                    this.Text = "Direct Transfer";
-                    btnSave.Text = "Transfer";
-                    dgvInventoryUnit.DesignForDirectMove();
+                    this.Text = "Direct Move";
+                    btnSave.Text = "Move";
+                    dgvInventoryUnit.DesignForDirectMoveInventoryUnit();
                     if (selectedInventoryUnits != null)
                     {
                         dgvInventoryUnit.DataSource = selectedInventoryUnits;
                     }
+                    break;
+                case MovementTypeEnum.DirectMoveAny:
+                    pnlWarehouse.Visible = true;
+                    pnlAdjustmentCode.Visible = true;
+                    PopulateWarehouseCombo();
+                   // _selectedInventoryUnits = selectedInventoryUnits;
+                    this.Text = "Direct Move";
+                    btnSave.Text = "Move";
+                    dgvInventoryUnit.DesignForDirectMoveAny();
+                    //if (selectedInventoryUnits != null)
+                    //{
+                    //    dgvInventoryUnit.DataSource = selectedInventoryUnits;
+                    //}
                     break;
             }
         }
@@ -283,7 +296,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                             this.Close();
                     }
                     break;
-                case MovementTypeEnum.DirectMove:
+                case MovementTypeEnum.DirectMoveInventoryUnit:
                     actionForMsg = "Transferred";
                     var wIdVal = cbWarehouse.SelectedValue == null ? "" : cbWarehouse.SelectedValue.ToString();
                     var warehouseId = string.IsNullOrEmpty(wIdVal) ? 0 : int.Parse(wIdVal);

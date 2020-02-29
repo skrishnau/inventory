@@ -27,7 +27,7 @@ namespace IMS.Forms.Inventory.Settings.General
 
         private void GeneralSettingsUC_Load(object sender, EventArgs e)
         {
-            btnSaveAppearance.Click += BtnSaveAppearance_Click;
+           // btnSaveAppearance.Click += BtnSaveAppearance_Click;
 
             PopulateCompanyInfoSetting();
             btnSaveProfile.Click += BtnSave_Click;
@@ -35,7 +35,7 @@ namespace IMS.Forms.Inventory.Settings.General
 
 
 
-        private void BtnSaveAppearance_Click(object sender, EventArgs e)
+     /*   private void BtnSaveAppearance_Click(object sender, EventArgs e)
         {
             if (cbThemes.Text == "")
             {
@@ -53,6 +53,7 @@ namespace IMS.Forms.Inventory.Settings.General
             if (_appSettingService.SaveAppSetting(appsettingModel))
                 MessageBox.Show("Themes setting updated!!!");
         }
+        */
 
 
         #region Profile

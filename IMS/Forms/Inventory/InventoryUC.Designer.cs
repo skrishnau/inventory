@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tabControl = new System.Windows.Forms.TabControl();
-            this._menubar = new IMS.Forms.Inventory.InventoryMenuBar();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -42,6 +41,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this._menubar = new IMS.Forms.Inventory.InventoryMenuBar();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,15 +55,6 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(996, 371);
             this.tabControl.TabIndex = 0;
-            // 
-            // _menubar
-            // 
-            this._menubar.Dock = System.Windows.Forms.DockStyle.Top;
-            this._menubar.Location = new System.Drawing.Point(0, 24);
-            this._menubar.Name = "_menubar";
-            this._menubar.Padding = new System.Windows.Forms.Padding(2);
-            this._menubar.Size = new System.Drawing.Size(1001, 61);
-            this._menubar.TabIndex = 0;
             // 
             // splitter1
             // 
@@ -160,6 +151,15 @@
             this.statusStrip1.Size = new System.Drawing.Size(1001, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // _menubar
+            // 
+            this._menubar.Dock = System.Windows.Forms.DockStyle.Top;
+            this._menubar.Location = new System.Drawing.Point(0, 24);
+            this._menubar.Name = "_menubar";
+            this._menubar.Padding = new System.Windows.Forms.Padding(2);
+            this._menubar.Size = new System.Drawing.Size(1001, 61);
+            this._menubar.TabIndex = 0;
             // 
             // InventoryUC
             // 

@@ -244,6 +244,7 @@ namespace IMS.Forms.Inventory
             // adjustments
             _menubar.btnDirectReceive.Click += BtnDirectReceive_Click;
             _menubar.btnDirectIssue.Click += BtnDirectIssue_Click;
+           // _menubar.btnDirectMove.Click += BtnDirectMove_Click;
 
             // transfers
             // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
@@ -264,8 +265,6 @@ namespace IMS.Forms.Inventory
             _menubar.btnTransferOrder.Click += BtnTransferOrder_Click;
             _menubar.btnPOS.Click += BtnPOS_Click;
         }
-
-
 
         private void AddTabPage(String text, UserControl uc)
         {
@@ -475,6 +474,15 @@ namespace IMS.Forms.Inventory
             }
         }
 
+        private void BtnDirectMove_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                directReceiveForm.SetData(MovementTypeEnum.DirectMoveAny);
+                directReceiveForm.ShowDialog();
+            }
+        }
 
         #endregion
 

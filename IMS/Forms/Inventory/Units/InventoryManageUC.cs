@@ -247,7 +247,7 @@ namespace IMS.Forms.Inventory.Units
             {
                 var moveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
                 //Program.container.GetInstance<InventoryMoveForm>();
-                moveForm.SetData(MovementTypeEnum.DirectMove, 0, list);
+                moveForm.SetData(MovementTypeEnum.DirectMoveInventoryUnit, 0, list);
                 moveForm.ShowDialog();
             }
         }

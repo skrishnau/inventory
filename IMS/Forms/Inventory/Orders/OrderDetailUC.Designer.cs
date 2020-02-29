@@ -106,7 +106,6 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(1044, 31);
             this.panel1.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.panel1, "Back to list");
             // 
             // lblStatus
             // 
@@ -144,6 +143,7 @@
             this.btnBackToList.Size = new System.Drawing.Size(28, 21);
             this.btnBackToList.TabIndex = 4;
             this.btnBackToList.Text = "<--";
+            this.toolTip1.SetToolTip(this.btnBackToList, "Back to list");
             this.btnBackToList.UseVisualStyleBackColor = false;
             // 
             // pnlButtonsHeader

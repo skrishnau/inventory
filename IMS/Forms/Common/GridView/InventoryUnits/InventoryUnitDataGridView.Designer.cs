@@ -543,7 +543,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         // Direct Move designs
         //
-        public void DesignForDirectMove()
+        public void DesignForDirectMoveInventoryUnit()
         {
             this.RowHeadersVisible = true;
             this.SelectionMode = DataGridViewSelectionMode.CellSelect;
@@ -570,6 +570,38 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colUnitQuantity.ReadOnly = false;
             //colPackageQuantity.ReadOnly = false;
             HideUnusedDefaults();
+        }
+        //
+        // Direct Move designs
+        //
+        public void DesignForDirectMoveAny()
+        {
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.AllowUserToAddRows = true;
+            this.AllowUserToDeleteRows = true;
+            colProductId.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colPackageQuantity.Visible = true;
+            //colPackageId.Visible = true;
+            //colPackageId.ReadOnly = true;
+            colWarehouseId.Visible = true;
+            colLotNumber.Visible = true;
+            colProductionDate.Visible = true;
+            colExpirationDate.Visible = true;
+            colReceiveReference.Visible = true;
+            colReceiveReference.HeaderText = "Reference";
+            colReceiveDate.Visible = true;
+            colRemark.Visible = true;
+            colIsHold.Visible = true;
+            colIsHold.ReadOnly = true;
+
+           // MakeAllColumnsReadOnly();
+            //colUnitQuantity.ReadOnly = false;
+            //colPackageQuantity.ReadOnly = false;
+            HideUnusedDefaults();
+           
         }
 
         private void MakeAllColumnsReadOnly()
