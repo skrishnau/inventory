@@ -30,12 +30,16 @@ namespace DTO.Core.Inventory
         /// <param name="entity"></param>
         /// <param name="withOrderDetails">Also map order items</param>
         /// <returns></returns>
-        public static OrderModel MapToModel(this Order entity, bool withOrderDetails = false)
+        public static OrderModel MapToModel(this Order entity, bool withOrderDetails = false, bool withPayments = false)
         {
             var model = Mappings.Mapper.Map<OrderModel>(entity);
             if (withOrderDetails)
             {
                 model.OrderItems = entity.OrderItems.MapToOrderItemModel();
+            }
+            if (withPayments)
+            {
+                model.Payments = entity.Payments.MapToModel();
             }
             return model;
         }

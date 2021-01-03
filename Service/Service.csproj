@@ -54,6 +54,8 @@
     <Compile Include="Core\Inventory\Units\IInventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUpdate.cs" />
+    <Compile Include="Core\Payment\IPaymentService.cs" />
+    <Compile Include="Core\Payment\PaymentService.cs" />
     <Compile Include="Core\Settings\AppSettingService.cs" />
     <Compile Include="Core\Settings\IAppSettingService.cs" />
     <Compile Include="Core\Bills\Formats\BillFormatService.cs" />
@@ -103,7 +105,6 @@
     <Compile Include="Core\Users\Roles\IRoleService.cs" />
     <Compile Include="Core\Users\Roles\RoleService.cs" />
     <Compile Include="Utility\UpdateMode.cs" />
-    <Compile Include="Utility\DateUtilityService.cs" />
     <Compile Include="Utility\ProductOptionTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>

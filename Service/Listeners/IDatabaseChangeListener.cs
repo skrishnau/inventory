@@ -41,9 +41,12 @@ namespace Service.Listeners
         // adj code
         event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
         void TriggerAdjustmentCodeUpdateEvent(object sender, BaseEventArgs<AdjustmentCodeModel> eventArgs);
-        // purchase Order
-        event EventHandler<BaseEventArgs<OrderModel>> PurchaseOrderUpdated;
-        void TriggerPurchaseOrderUpdateEvent(object p, BaseEventArgs<OrderModel> eventArgs);
+        // Order
+        event EventHandler<BaseEventArgs<OrderModel>> OrderUpdated;
+        void TriggerOrderUpdateEvent(object sender, BaseEventArgs<OrderModel> eventArgs);
+        // Payment
+        event EventHandler<BaseEventArgs<PaymentModel>> PaymentUpdated;
+        void TriggerPaymentUpdateEvent(object sender, BaseEventArgs<PaymentModel> eventArgs);
         // Inventory Unit Updates
         event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
         void TriggerInventoryUnitUpdateEvent(object p, BaseEventArgs<List<InventoryUnitModel>> eventArgs);

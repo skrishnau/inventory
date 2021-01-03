@@ -223,9 +223,6 @@
   <data name="icons8_Combo_Chart_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Combo_Chart_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_Create_Order_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8_Create_Order_16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icons8_Data_Transfer_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Data_Transfer_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

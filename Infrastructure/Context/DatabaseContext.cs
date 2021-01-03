@@ -81,6 +81,7 @@ namespace Infrastructure.Context
 
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }
+        public virtual DbSet<Payment> Payment { get; set; }
 
         public virtual DbSet<AppSetting> AppSetting { get; set; }
 

@@ -40,6 +40,7 @@
             this.btnSendOrder = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnPartialReceive = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnReceive = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnEditDetails = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnEditItems = new IMS.Forms.Common.Buttons.MenuButton();
@@ -71,6 +72,13 @@
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblPaymentDueDate = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
+            this.lblRemainingAmount = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.tblCustomer = new System.Windows.Forms.TableLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
             this.lblCustomer = new System.Windows.Forms.Label();
@@ -79,8 +87,6 @@
             this.lblAddress = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.tblSupplier = new System.Windows.Forms.TableLayoutPanel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblPaymentMethod = new System.Windows.Forms.Label();
             this.lblNoItemsMessage = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -92,6 +98,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.tblCustomer.SuspendLayout();
             this.tblSupplier.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -106,7 +113,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(1044, 31);
+            this.panel1.Size = new System.Drawing.Size(1195, 31);
             this.panel1.TabIndex = 0;
             // 
             // lblStatus
@@ -157,7 +164,7 @@
             this.pnlButtonsHeader.Location = new System.Drawing.Point(0, 31);
             this.pnlButtonsHeader.Name = "pnlButtonsHeader";
             this.pnlButtonsHeader.Padding = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            this.pnlButtonsHeader.Size = new System.Drawing.Size(1044, 67);
+            this.pnlButtonsHeader.Size = new System.Drawing.Size(1195, 67);
             this.pnlButtonsHeader.TabIndex = 1;
             // 
             // flowLayoutPanel2
@@ -166,11 +173,12 @@
             this.flowLayoutPanel2.Controls.Add(this.btnSendOrder);
             this.flowLayoutPanel2.Controls.Add(this.btnPartialReceive);
             this.flowLayoutPanel2.Controls.Add(this.btnReceive);
+            this.flowLayoutPanel2.Controls.Add(this.btnPayment);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(243, 2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(796, 63);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(947, 63);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // btnCancelOrder
@@ -178,7 +186,7 @@
             this.btnCancelOrder.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnCancelOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelOrder.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnCancelOrder.Location = new System.Drawing.Point(733, 3);
+            this.btnCancelOrder.Location = new System.Drawing.Point(884, 3);
             this.btnCancelOrder.Name = "btnCancelOrder";
             this.btnCancelOrder.Size = new System.Drawing.Size(60, 55);
             this.btnCancelOrder.TabIndex = 12;
@@ -192,7 +200,7 @@
             this.btnSendOrder.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnSendOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSendOrder.Image = global::IMS.Properties.Resources.icons8_Forward_Arrow_16px;
-            this.btnSendOrder.Location = new System.Drawing.Point(667, 3);
+            this.btnSendOrder.Location = new System.Drawing.Point(818, 3);
             this.btnSendOrder.Name = "btnSendOrder";
             this.btnSendOrder.Size = new System.Drawing.Size(60, 55);
             this.btnSendOrder.TabIndex = 11;
@@ -206,7 +214,7 @@
             this.btnPartialReceive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnPartialReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPartialReceive.Image = ((System.Drawing.Image)(resources.GetObject("btnPartialReceive.Image")));
-            this.btnPartialReceive.Location = new System.Drawing.Point(601, 3);
+            this.btnPartialReceive.Location = new System.Drawing.Point(752, 3);
             this.btnPartialReceive.Name = "btnPartialReceive";
             this.btnPartialReceive.Size = new System.Drawing.Size(60, 55);
             this.btnPartialReceive.TabIndex = 13;
@@ -220,7 +228,7 @@
             this.btnReceive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceive.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnReceive.Location = new System.Drawing.Point(535, 3);
+            this.btnReceive.Location = new System.Drawing.Point(686, 3);
             this.btnReceive.Name = "btnReceive";
             this.btnReceive.Size = new System.Drawing.Size(60, 55);
             this.btnReceive.TabIndex = 10;
@@ -228,6 +236,20 @@
             this.btnReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnReceive.UseVisualStyleBackColor = true;
             this.btnReceive.Click += new System.EventHandler(this.btnReceive_Click);
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.Location = new System.Drawing.Point(620, 3);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(60, 55);
+            this.btnPayment.TabIndex = 14;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayment.UseVisualStyleBackColor = true;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -271,9 +293,9 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 290F));
             this.tableLayoutPanel1.Controls.Add(this.lblOrderNumber1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblWarehouse, 3, 0);
@@ -293,7 +315,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(523, 63);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(443, 63);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblOrderNumber1
@@ -321,7 +343,7 @@
             // 
             this.lblWarehouse.AutoSize = true;
             this.lblWarehouse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWarehouse.Location = new System.Drawing.Point(363, 0);
+            this.lblWarehouse.Location = new System.Drawing.Point(323, 0);
             this.lblWarehouse.Name = "lblWarehouse";
             this.lblWarehouse.Size = new System.Drawing.Size(41, 13);
             this.lblWarehouse.TabIndex = 18;
@@ -341,7 +363,7 @@
             // 
             this.lblToWarehouse.AutoSize = true;
             this.lblToWarehouse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblToWarehouse.Location = new System.Drawing.Point(362, 21);
+            this.lblToWarehouse.Location = new System.Drawing.Point(322, 21);
             this.lblToWarehouse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToWarehouse.Name = "lblToWarehouse";
             this.lblToWarehouse.Size = new System.Drawing.Size(71, 13);
@@ -351,7 +373,7 @@
             // lblWarehouseLabel
             // 
             this.lblWarehouseLabel.AutoSize = true;
-            this.lblWarehouseLabel.Location = new System.Drawing.Point(267, 0);
+            this.lblWarehouseLabel.Location = new System.Drawing.Point(229, 0);
             this.lblWarehouseLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehouseLabel.Name = "lblWarehouseLabel";
             this.lblWarehouseLabel.Size = new System.Drawing.Size(62, 13);
@@ -391,7 +413,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(267, 42);
+            this.label5.Location = new System.Drawing.Point(229, 42);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 13);
@@ -402,7 +424,7 @@
             // 
             this.lblExpectedDate.AutoSize = true;
             this.lblExpectedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpectedDate.Location = new System.Drawing.Point(363, 42);
+            this.lblExpectedDate.Location = new System.Drawing.Point(323, 42);
             this.lblExpectedDate.Name = "lblExpectedDate";
             this.lblExpectedDate.Size = new System.Drawing.Size(41, 13);
             this.lblExpectedDate.TabIndex = 22;
@@ -411,7 +433,7 @@
             // lblToWarehouseLabel
             // 
             this.lblToWarehouseLabel.AutoSize = true;
-            this.lblToWarehouseLabel.Location = new System.Drawing.Point(267, 21);
+            this.lblToWarehouseLabel.Location = new System.Drawing.Point(229, 21);
             this.lblToWarehouseLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToWarehouseLabel.Name = "lblToWarehouseLabel";
             this.lblToWarehouseLabel.Size = new System.Drawing.Size(78, 13);
@@ -440,7 +462,7 @@
             // 
             this.lblSupplier.AutoSize = true;
             this.lblSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSupplier.Location = new System.Drawing.Point(128, 0);
+            this.lblSupplier.Location = new System.Drawing.Point(95, 0);
             this.lblSupplier.Name = "lblSupplier";
             this.lblSupplier.Size = new System.Drawing.Size(41, 13);
             this.lblSupplier.TabIndex = 19;
@@ -450,7 +472,7 @@
             // 
             this.lblSupplierInvoice.AutoSize = true;
             this.lblSupplierInvoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSupplierInvoice.Location = new System.Drawing.Point(128, 21);
+            this.lblSupplierInvoice.Location = new System.Drawing.Point(95, 21);
             this.lblSupplierInvoice.Name = "lblSupplierInvoice";
             this.lblSupplierInvoice.Size = new System.Drawing.Size(41, 13);
             this.lblSupplierInvoice.TabIndex = 20;
@@ -478,7 +500,7 @@
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
             this.dgvItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItems.Size = new System.Drawing.Size(1044, 230);
+            this.dgvItems.Size = new System.Drawing.Size(1195, 230);
             this.dgvItems.TabIndex = 10;
             // 
             // colId
@@ -554,6 +576,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.tableLayoutPanel2);
             this.panel2.Controls.Add(this.tblCustomer);
             this.panel2.Controls.Add(this.tblSupplier);
             this.panel2.Controls.Add(this.tableLayoutPanel1);
@@ -561,14 +584,90 @@
             this.panel2.Location = new System.Drawing.Point(0, 98);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(10);
-            this.panel2.Size = new System.Drawing.Size(1044, 83);
+            this.panel2.Size = new System.Drawing.Size(1195, 83);
             this.panel2.TabIndex = 11;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.lblPaymentDueDate, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblTotalAmount, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblRemainingAmount, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label17, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(834, 10);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(250, 63);
+            this.tableLayoutPanel2.TabIndex = 16;
+            // 
+            // lblPaymentDueDate
+            // 
+            this.lblPaymentDueDate.AutoSize = true;
+            this.lblPaymentDueDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaymentDueDate.Location = new System.Drawing.Point(128, 42);
+            this.lblPaymentDueDate.Name = "lblPaymentDueDate";
+            this.lblPaymentDueDate.Size = new System.Drawing.Size(113, 13);
+            this.lblPaymentDueDate.TabIndex = 21;
+            this.lblPaymentDueDate.Text = "Payment Due Date";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 42);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(97, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Payment Due Date";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Total Amount";
+            // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.AutoSize = true;
+            this.lblTotalAmount.Location = new System.Drawing.Point(128, 0);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(35, 13);
+            this.lblTotalAmount.TabIndex = 19;
+            this.lblTotalAmount.Text = "label7";
+            // 
+            // lblRemainingAmount
+            // 
+            this.lblRemainingAmount.AutoSize = true;
+            this.lblRemainingAmount.Location = new System.Drawing.Point(128, 21);
+            this.lblRemainingAmount.Name = "lblRemainingAmount";
+            this.lblRemainingAmount.Size = new System.Drawing.Size(35, 13);
+            this.lblRemainingAmount.TabIndex = 20;
+            this.lblRemainingAmount.Text = "label7";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 21);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(96, 13);
+            this.label17.TabIndex = 13;
+            this.label17.Text = "Remaining Amount";
             // 
             // tblCustomer
             // 
             this.tblCustomer.ColumnCount = 2;
-            this.tblCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.65432F));
+            this.tblCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.34568F));
             this.tblCustomer.Controls.Add(this.label9, 0, 0);
             this.tblCustomer.Controls.Add(this.lblCustomer, 1, 0);
             this.tblCustomer.Controls.Add(this.lblPhone, 1, 2);
@@ -576,13 +675,13 @@
             this.tblCustomer.Controls.Add(this.lblAddress, 1, 1);
             this.tblCustomer.Controls.Add(this.label14, 0, 1);
             this.tblCustomer.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tblCustomer.Location = new System.Drawing.Point(783, 10);
+            this.tblCustomer.Location = new System.Drawing.Point(658, 10);
             this.tblCustomer.Name = "tblCustomer";
             this.tblCustomer.RowCount = 3;
             this.tblCustomer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tblCustomer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tblCustomer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tblCustomer.Size = new System.Drawing.Size(250, 63);
+            this.tblCustomer.Size = new System.Drawing.Size(176, 63);
             this.tblCustomer.TabIndex = 15;
             // 
             // label9
@@ -597,7 +696,7 @@
             // lblCustomer
             // 
             this.lblCustomer.AutoSize = true;
-            this.lblCustomer.Location = new System.Drawing.Point(128, 0);
+            this.lblCustomer.Location = new System.Drawing.Point(69, 0);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(35, 13);
             this.lblCustomer.TabIndex = 19;
@@ -606,7 +705,7 @@
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(128, 42);
+            this.lblPhone.Location = new System.Drawing.Point(69, 42);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(35, 13);
             this.lblPhone.TabIndex = 18;
@@ -625,7 +724,7 @@
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(128, 21);
+            this.lblAddress.Location = new System.Drawing.Point(69, 21);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(35, 13);
             this.lblAddress.TabIndex = 20;
@@ -643,42 +742,21 @@
             // tblSupplier
             // 
             this.tblSupplier.ColumnCount = 2;
-            this.tblSupplier.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblSupplier.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblSupplier.Controls.Add(this.label10, 0, 2);
-            this.tblSupplier.Controls.Add(this.lblPaymentMethod, 0, 2);
+            this.tblSupplier.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.36585F));
+            this.tblSupplier.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.63415F));
             this.tblSupplier.Controls.Add(this.label1, 0, 0);
             this.tblSupplier.Controls.Add(this.lblSupplier, 1, 0);
             this.tblSupplier.Controls.Add(this.lblSupplierInvoice, 1, 1);
             this.tblSupplier.Controls.Add(this.label6, 0, 1);
             this.tblSupplier.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tblSupplier.Location = new System.Drawing.Point(533, 10);
+            this.tblSupplier.Location = new System.Drawing.Point(453, 10);
             this.tblSupplier.Name = "tblSupplier";
             this.tblSupplier.RowCount = 3;
             this.tblSupplier.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tblSupplier.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tblSupplier.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tblSupplier.Size = new System.Drawing.Size(250, 63);
+            this.tblSupplier.Size = new System.Drawing.Size(205, 63);
             this.tblSupplier.TabIndex = 14;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 42);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Payment Method";
-            // 
-            // lblPaymentMethod
-            // 
-            this.lblPaymentMethod.AutoSize = true;
-            this.lblPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPaymentMethod.Location = new System.Drawing.Point(128, 42);
-            this.lblPaymentMethod.Name = "lblPaymentMethod";
-            this.lblPaymentMethod.Size = new System.Drawing.Size(101, 13);
-            this.lblPaymentMethod.TabIndex = 21;
-            this.lblPaymentMethod.Text = "Payment Method";
             // 
             // lblNoItemsMessage
             // 
@@ -713,7 +791,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 181);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1044, 30);
+            this.panel3.Size = new System.Drawing.Size(1195, 30);
             this.panel3.TabIndex = 13;
             // 
             // OrderDetailUC
@@ -726,7 +804,7 @@
             this.Controls.Add(this.pnlButtonsHeader);
             this.Controls.Add(this.panel1);
             this.Name = "OrderDetailUC";
-            this.Size = new System.Drawing.Size(1044, 441);
+            this.Size = new System.Drawing.Size(1195, 441);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlButtonsHeader.ResumeLayout(false);
@@ -736,6 +814,8 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.tblCustomer.ResumeLayout(false);
             this.tblCustomer.PerformLayout();
             this.tblSupplier.ResumeLayout(false);
@@ -802,6 +882,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label lblPaymentMethod;
+        private System.Windows.Forms.Label lblPaymentDueDate;
+        private Common.Buttons.MenuButton btnPayment;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTotalAmount;
+        private System.Windows.Forms.Label lblRemainingAmount;
+        private System.Windows.Forms.Label label17;
     }
 }

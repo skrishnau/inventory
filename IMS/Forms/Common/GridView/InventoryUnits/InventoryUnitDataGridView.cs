@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Common.GridView.InventoryUnits
 {
@@ -16,6 +17,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
     public partial class InventoryUnitDataGridView : DataGridViewCustom
     {
         private string REQUIRED = "Required";
+        private string INVALID = "Invalid";
         private string GREATER_THAN_ZERO = "Greater than zero";
 
         //private List<ViewModel.Core.Inventory.InventoryUnitModel> _dataList;
@@ -102,7 +104,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         public List<InventoryUnitModel> GetItems(List<DataGridViewColumn> ignoreColumnsForError = null)
         {
-            
+            var isValidAll = true; // store for all items (global indicator)
             this.IgnoreColumnsForErrorList = ignoreColumnsForError??new List<DataGridViewColumn>();
             isValid = true;
             var items = new List<InventoryUnitModel>();
@@ -126,6 +128,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var packageId = GetPackageId(row);
                 var uomId = GetUomId(row);
                 var isHold = row.Cells[colIsHold.Index].Value;
+                var expirationDate = GetDateCellValue(row, colExpirationDate);
+                var productionDate = GetDateCellValue(row, colProductionDate);
 
                 if (isValid)
                 {
@@ -140,13 +144,14 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         WarehouseId = warehouseId,
                         ReceiveAdjustmentCode = adjCode,
                         LotNumber = lotNumber,
-                        ExpirationDate = null,
-                        ProductionDate = null,
+                        ExpirationDate = expirationDate,
+                        ProductionDate = productionDate,
                         SupplierId = null,
                         ReceiveReceipt = reference,
                         PackageId = packageId,
                         UomId = uomId,
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
+                        
                     });
                 }
                 else
@@ -353,6 +358,34 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 cell.ErrorText = string.Empty;
             }
             return value;
+        }
+
+        private string GetDateCellValue(DataGridViewRow row, DataGridViewColumn column)
+        {
+            var value = row.Cells[column.Index].Value;
+            if (value == null)
+                return "";
+            var valueString = value.ToString();
+            var cell = row.Cells[column.Index];
+            if (string.IsNullOrEmpty(valueString) || string.IsNullOrWhiteSpace(valueString))
+                return "";
+            DateTime date;
+            if (IgnoreColumnsForErrorList.Contains(colUomId))
+            {
+                return valueString;
+            }
+            if (DateTime.TryParse(valueString, out date))
+            {
+                cell.ErrorText = string.Empty;
+                return valueString;
+            }
+            else
+            {
+                InvalidColumns.Add(column.HeaderText);
+                isValid = false;
+                cell.ErrorText = INVALID;
+                return "";
+            }
         }
 
         #endregion

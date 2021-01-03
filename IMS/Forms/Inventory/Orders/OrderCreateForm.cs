@@ -63,7 +63,6 @@ namespace IMS.Forms.Inventory.Orders
 
             PopulateClientCombo();
             PopulateWarehouseCombo();
-            PopulatePaymentMethodCombo();
 
             SetDataForEdit(po);
 
@@ -189,15 +188,6 @@ namespace IMS.Forms.Inventory.Orders
             cbToWarehouse.ValueMember = "Id";
         }
 
-        private void PopulatePaymentMethodCombo()
-        {
-            var paymentMethods = Enum.GetValues(typeof(PaymentMethodEnum)).Cast<PaymentMethodEnum>();
-            var dataList = paymentMethods.Select(x => new NameValuePair(x.ToString(), x.ToString())).ToList();
-            cbPaymentMethod.DataSource = dataList;
-            cbPaymentMethod.DisplayMember = "Name";
-            cbPaymentMethod.ValueMember = "Value";
-        }
-
         public void SetDataForEdit(OrderTypeEnum orderType, int purchaseOrderId)
         {
             _orderType = orderType;
@@ -254,6 +244,8 @@ namespace IMS.Forms.Inventory.Orders
                     lblClientInfo.Text = "Supplier Invoice";
                     this.Text = (model == null ? "Create" : "Edit") + " Purchase Order";
                     tblToWarehouse.Visible = false;
+                    if (model.PaymentDueDate.HasValue)
+                        dtPaymentDueDate.Value = model.PaymentDueDate.Value;
                     break;
                 case OrderTypeEnum.Sale:
                     //cbWarehouse.Visible = false;
@@ -266,6 +258,8 @@ namespace IMS.Forms.Inventory.Orders
                     lblClientInfo.Text = "Address";
                     this.Text = (model == null ? "Create" : "Edit") + " Sale Order";
                     tblToWarehouse.Visible = false;
+                    if(model.PaymentDueDate.HasValue)
+                        dtPaymentDueDate.Value = model.PaymentDueDate.Value;
                     break;
                 case OrderTypeEnum.Move:
                     cbWarehouse.Visible = true;
@@ -280,7 +274,6 @@ namespace IMS.Forms.Inventory.Orders
                     this.Text = (model == null ? "Create" : "Edit") + " Transfer Order";
                     tblToWarehouse.Visible = true;
                     lblPaymentMethod.Visible = false;
-                    cbPaymentMethod.Visible = false;
                     break;
             }
 
@@ -359,7 +352,7 @@ namespace IMS.Forms.Inventory.Orders
                     model.WarehouseId = warehouseId;
                     model.SupplierInvoice = tbClientInfo.Text;
                     model.ToWarehouseId = null;
-                    model.PaymentMethod = cbPaymentMethod.SelectedValue?.ToString();
+                    //model.PaymentDueDate = cbPaymentMethod.SelectedValue?.ToString();
                     break;
                 case OrderTypeEnum.Sale:
                     model.CustomerId = int.Parse(cbClient.SelectedValue.ToString());
@@ -367,12 +360,12 @@ namespace IMS.Forms.Inventory.Orders
                     model.SupplierId = null;
                     model.Address = tbClientInfo.Text;
                     model.ToWarehouseId = null;
-                    model.PaymentMethod = cbPaymentMethod.SelectedValue?.ToString();
+                    //model.PaymentMethod = cbPaymentMethod.SelectedValue?.ToString();
                     break;
                 case OrderTypeEnum.Move:
                     model.WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
                     model.ToWarehouseId = int.Parse(cbToWarehouse.SelectedValue.ToString());
-                    model.PaymentMethod = null;
+                    //model.PaymentMethod = null;
                     break;
             }
 

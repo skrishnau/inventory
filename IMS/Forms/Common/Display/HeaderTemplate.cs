@@ -29,5 +29,6 @@ namespace IMS.Forms.Common.Display
                 return new HeaderTemplate();
             }
         }
+        public string Text1 { set { lblHeading.Text = value; } }
     }
 }

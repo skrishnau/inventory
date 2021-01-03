@@ -1,5 +1,4 @@
-﻿using DTO.Common;
-using Infrastructure.Entities.Orders;
+﻿using Infrastructure.Entities.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
+using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
 {

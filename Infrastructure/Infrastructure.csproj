@@ -84,7 +84,7 @@
     <Compile Include="Entities\Customers\Customer.cs" />
     <Compile Include="Entities\Customers\CustomerReport.cs" />
     <Compile Include="Entities\Orders\Order.cs" />
-    <Compile Include="Entities\Orders\Receipt.cs" />
+    <Compile Include="Entities\Orders\Payment.cs" />
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
@@ -111,6 +111,14 @@
     <Compile Include="Migrations\202101021549006_updatedcolumnnames.cs" />
     <Compile Include="Migrations\202101021549006_updatedcolumnnames.Designer.cs">
       <DependentUpon>202101021549006_updatedcolumnnames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101030929033_PaymentTableAdded.cs" />
+    <Compile Include="Migrations\202101030929033_PaymentTableAdded.Designer.cs">
+      <DependentUpon>202101030929033_PaymentTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101031841552_PaymentTableAdded1.cs" />
+    <Compile Include="Migrations\202101031841552_PaymentTableAdded1.Designer.cs">
+      <DependentUpon>202101031841552_PaymentTableAdded1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,6 +154,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101021549006_updatedcolumnnames.resx">
       <DependentUpon>202101021549006_updatedcolumnnames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101030929033_PaymentTableAdded.resx">
+      <DependentUpon>202101030929033_PaymentTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101031841552_PaymentTableAdded1.resx">
+      <DependentUpon>202101031841552_PaymentTableAdded1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,11 +6,13 @@ using Service.Core.Inventory;
 using IMS.Forms.Common;
 using SimpleInjector.Lifestyles;
 using Service.Listeners;
-using IMS.Forms.Inventory.Purchases.Order;
 using IMS.Forms.Inventory.Units.Actions;
 using Service.Core.Orders;
 using IMS.Forms.Inventory.Orders;
 using ViewModel.Enums;
+using Service.Utility;
+using ViewModel.Utility;
+using IMS.Forms.Inventory.Payment;
 
 namespace IMS.Forms.Inventory.Purchases
 {
@@ -51,7 +53,7 @@ namespace IMS.Forms.Inventory.Purchases
 
         private void InitializeListener()
         {
-            _listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
+            _listener.OrderUpdated += _listener_PurchaseOrderUpdated;
         }
 
         #endregion
@@ -137,9 +139,12 @@ namespace IMS.Forms.Inventory.Purchases
                 
                 lblAddress.Text = model.Address;
                 lblPhone.Text = model.Phone;
-                lblPaymentMethod.Text = model.PaymentMethod??"-";
-
                 lblNoItemsMessage.Visible = !model.OrderItems.Any();
+
+                lblPaymentDueDate.Text = DateHelper.ToFormattedDateString(model.PaymentDueDate);
+                lblTotalAmount.Text = model.TotalAmount.ToString();
+                lblRemainingAmount.Text = model.RemainingAmount == 0 ? "All Paid" : model.RemainingAmount.ToString();
+                btnPayment.Visible = model.RemainingAmount > 0;
 
                 dgvItems.AutoGenerateColumns = false;
                 dgvItems.DataSource = model.OrderItems;
@@ -243,6 +248,16 @@ namespace IMS.Forms.Inventory.Purchases
 
 
         #region Actions Event Handlers
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var po = Program.container.GetInstance<PaymentCreateForm>();
+                po.SetData(_orderModel);
+                po.ShowDialog();
+            }
+        }
 
         private void btnEditDetails_Click(object sender, EventArgs e)
         {
@@ -360,7 +375,11 @@ namespace IMS.Forms.Inventory.Purchases
             }
         }
 
+
         #endregion
+
+
+       
 
 
     }

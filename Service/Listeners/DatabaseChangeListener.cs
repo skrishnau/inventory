@@ -22,7 +22,8 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
         public event EventHandler<BaseEventArgs<PackageModel>> PackageUpdated;
         public event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
-        public event EventHandler<BaseEventArgs<OrderModel>> PurchaseOrderUpdated;
+        public event EventHandler<BaseEventArgs<OrderModel>> OrderUpdated;
+        public event EventHandler<BaseEventArgs<PaymentModel>> PaymentUpdated;
         public event EventHandler<BaseEventArgs<OrderModel>> OrderItemUpdated;
         public event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
         public event EventHandler<BaseEventArgs<CustomerModel>> CustomerUpdated;
@@ -73,9 +74,14 @@ namespace Service.Listeners
             AdjustmentCodeUpdated?.Invoke(sender, eventArgs);
         }
 
-        public void TriggerPurchaseOrderUpdateEvent(object p, BaseEventArgs<OrderModel> eventArgs)
+        public void TriggerOrderUpdateEvent(object p, BaseEventArgs<OrderModel> eventArgs)
         {
-            PurchaseOrderUpdated?.Invoke(p, eventArgs);
+            OrderUpdated?.Invoke(p, eventArgs);
+        }
+
+        public void TriggerPaymentUpdateEvent(object p, BaseEventArgs<PaymentModel> eventArgs)
+        {
+            PaymentUpdated?.Invoke(p, eventArgs);
         }
 
         public void TriggerOrderItemUpdateEvent(object p, BaseEventArgs<OrderModel> eventArgs)

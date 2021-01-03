@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Orders;
 
-namespace ViewModel.Utility
+namespace Service.Core.Payment
 {
-    /// <summary>
-    /// Toast Message
-    /// </summary>
-    public class MessageModel
+    public interface IPaymentService
     {
+        void Save(PaymentModel model);
     }
 }

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTO.Common
+namespace ViewModel.Utility
 {
-    public static class DateHelper
+    public class DateHelper
     {
-
         public static string ToFormattedDateString(DateTime? date)
         {
             return date.HasValue ? date.Value.ToString("yyyy/MM/dd") : "";
@@ -22,10 +21,17 @@ namespace DTO.Common
         public static DateTime? ConvertToDateTime(string str)
         {
             DateTime date;
-            if(DateTime.TryParse(str, out date))
+            if (DateTime.TryParse(str, out date))
                 return date;
             return null;
         }
 
+        public static bool IsValidIgnoreWhiteSpaceAndNull(string dt)
+        {
+            if (string.IsNullOrEmpty(dt))
+                return true;
+            DateTime date;
+            return DateTime.TryParse(dt, out date);
+        }
     }
 }

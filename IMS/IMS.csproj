@@ -110,6 +110,12 @@
     <Compile Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.Designer.cs">
       <DependentUpon>InventoryDetailUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Payment\PaymentCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Payment\PaymentCreateForm.Designer.cs">
+      <DependentUpon>PaymentCreateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -289,12 +295,6 @@
     </Compile>
     <Compile Include="Forms\Inventory\Packages\PackageUC.Designer.cs">
       <DependentUpon>PackageUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Orders\Order\PurchaseOrderItemCreateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Orders\Order\PurchaseOrderItemCreateForm.Designer.cs">
-      <DependentUpon>PurchaseOrderItemCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Orders\OrderDetailUC.cs">
       <SubType>UserControl</SubType>
@@ -593,6 +593,9 @@
     <EmbeddedResource Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.resx">
       <DependentUpon>InventoryDetailUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Payment\PaymentCreateForm.resx">
+      <DependentUpon>PaymentCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\General\GeneralSettingsUC.resx">
       <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -670,9 +673,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Packages\PackageUC.resx">
       <DependentUpon>PackageUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Orders\Order\PurchaseOrderItemCreateForm.resx">
-      <DependentUpon>PurchaseOrderItemCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Orders\OrderDetailUC.resx">
       <DependentUpon>OrderDetailUC.cs</DependentUpon>

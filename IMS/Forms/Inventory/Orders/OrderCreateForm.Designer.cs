@@ -32,7 +32,6 @@
             this.tblBase = new System.Windows.Forms.TableLayoutPanel();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
-            this.cbPaymentMethod = new System.Windows.Forms.ComboBox();
             this.lblPaymentMethod = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numLotNumber = new System.Windows.Forms.NumericUpDown();
@@ -57,6 +56,7 @@
             this.tblToWarehouse = new System.Windows.Forms.TableLayoutPanel();
             this.lblToWarehouse = new System.Windows.Forms.Label();
             this.cbToWarehouse = new System.Windows.Forms.ComboBox();
+            this.dtPaymentDueDate = new System.Windows.Forms.DateTimePicker();
             this.tblBase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLotNumber)).BeginInit();
             this.panel3.SuspendLayout();
@@ -73,7 +73,6 @@
             this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.83902F));
             this.tblBase.Controls.Add(this.tbPhone, 3, 2);
             this.tblBase.Controls.Add(this.lblPhone, 2, 2);
-            this.tblBase.Controls.Add(this.cbPaymentMethod, 1, 4);
             this.tblBase.Controls.Add(this.lblPaymentMethod, 0, 4);
             this.tblBase.Controls.Add(this.label2, 0, 2);
             this.tblBase.Controls.Add(this.numLotNumber, 1, 2);
@@ -89,6 +88,7 @@
             this.tblBase.Controls.Add(this.label8, 0, 0);
             this.tblBase.Controls.Add(this.tbName, 1, 1);
             this.tblBase.Controls.Add(this.tbOrderNumber, 1, 0);
+            this.tblBase.Controls.Add(this.dtPaymentDueDate, 1, 4);
             this.tblBase.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblBase.Location = new System.Drawing.Point(8, 8);
             this.tblBase.Name = "tblBase";
@@ -120,22 +120,14 @@
             this.lblPhone.Text = "Phone";
             this.lblPhone.Visible = false;
             // 
-            // cbPaymentMethod
-            // 
-            this.cbPaymentMethod.FormattingEnabled = true;
-            this.cbPaymentMethod.Location = new System.Drawing.Point(116, 115);
-            this.cbPaymentMethod.Name = "cbPaymentMethod";
-            this.cbPaymentMethod.Size = new System.Drawing.Size(140, 21);
-            this.cbPaymentMethod.TabIndex = 11;
-            // 
             // lblPaymentMethod
             // 
             this.lblPaymentMethod.AutoSize = true;
             this.lblPaymentMethod.Location = new System.Drawing.Point(3, 112);
             this.lblPaymentMethod.Name = "lblPaymentMethod";
-            this.lblPaymentMethod.Size = new System.Drawing.Size(87, 13);
+            this.lblPaymentMethod.Size = new System.Drawing.Size(97, 13);
             this.lblPaymentMethod.TabIndex = 10;
-            this.lblPaymentMethod.Text = "Payment Method";
+            this.lblPaymentMethod.Text = "Payment Due Date";
             // 
             // label2
             // 
@@ -225,6 +217,7 @@
             // dtExpectedDate
             // 
             this.dtExpectedDate.Checked = false;
+            this.dtExpectedDate.CustomFormat = "yyyy/MM/dd";
             this.dtExpectedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtExpectedDate.Location = new System.Drawing.Point(398, 86);
             this.dtExpectedDate.Margin = new System.Windows.Forms.Padding(2);
@@ -365,6 +358,15 @@
             this.cbToWarehouse.Size = new System.Drawing.Size(141, 21);
             this.cbToWarehouse.TabIndex = 9;
             // 
+            // dtPaymentDueDate
+            // 
+            this.dtPaymentDueDate.CustomFormat = "yyyy/MM/dd";
+            this.dtPaymentDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtPaymentDueDate.Location = new System.Drawing.Point(116, 115);
+            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
+            this.dtPaymentDueDate.Size = new System.Drawing.Size(140, 20);
+            this.dtPaymentDueDate.TabIndex = 17;
+            // 
             // OrderCreateForm
             // 
             this.AcceptButton = this.btnSave;
@@ -426,6 +428,6 @@
         private System.Windows.Forms.Label lblToWarehouse;
         private System.Windows.Forms.ComboBox cbToWarehouse;
         private System.Windows.Forms.Label lblPaymentMethod;
-        private System.Windows.Forms.ComboBox cbPaymentMethod;
+        private System.Windows.Forms.DateTimePicker dtPaymentDueDate;
     }
 }

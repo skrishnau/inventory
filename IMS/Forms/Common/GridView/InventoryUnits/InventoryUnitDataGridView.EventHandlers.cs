@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Common.GridView.InventoryUnits
 {
@@ -155,7 +156,14 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 // set
                 _dtPicker.TextChanged -= _dtPicker_TextChanged;
                 var value = this.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                _dtPicker.Text = value == null ? "" : value.ToString();
+                if (value != null)
+                {
+                    DateTime dt;
+                    if (DateTime.TryParse(value.ToString(), out dt))
+                    {
+                        _dtPicker.Text = value == null ? "" : value.ToString();
+                    }
+                }
                 _dtPicker.TextChanged += _dtPicker_TextChanged;
             }
         }
@@ -228,7 +236,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         // 
         private void _dtPicker_TextChanged(object sender, EventArgs e)
         {
-            this.CurrentCell.Value = _dtPicker.Text;
+            this.CurrentCell.Value = DateHelper.ToFormattedDateString(_dtPicker.Value);
             this.BeginEdit(true);
         }
 

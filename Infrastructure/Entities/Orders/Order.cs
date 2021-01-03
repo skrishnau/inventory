@@ -10,6 +10,11 @@ namespace Infrastructure.Entities.Orders
 {
     public class Order
     {
+        public Order()
+        {
+            OrderItems = new List<OrderItem>();
+        }
+
         public int Id { get; set; }
         // Either of Purchase, Sale, Move
         public string OrderType { get; set; }
@@ -57,7 +62,13 @@ namespace Infrastructure.Entities.Orders
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        public string PaymentMethod { get; set; }
+        public decimal DiscountPercent { get; set; }
+        public decimal DiscountAmount { get; set; }
+
+        public decimal PaidAmount { get; set; }
+        public DateTime? PaymentDueDate { get; set; }
+        public DateTime? PaymentCompleteDate { get; set; }
+
         #endregion
 
 
@@ -97,10 +108,8 @@ namespace Infrastructure.Entities.Orders
 
 
         public virtual ICollection<OrderItem> OrderItems { get; set; }
-        public Order()
-        {
-            OrderItems = new List<OrderItem>();
-        }
+        public virtual ICollection<Payment> Payments { get; set; }
+
 
     }
 }

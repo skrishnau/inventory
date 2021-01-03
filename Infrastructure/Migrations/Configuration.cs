@@ -9,7 +9,11 @@ namespace Infrastructure.Migrations
     {
         public Configuration()
         {
+#if DEBUG
             AutomaticMigrationsEnabled = false;
+#else
+            AutomaticMigrationsEnabled = true;
+#endif
         }
 
         protected override void Seed(Infrastructure.Context.DatabaseContext context)

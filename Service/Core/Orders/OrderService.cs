@@ -100,7 +100,7 @@ namespace Service.Core.Orders
                 }
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
-                _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                _listener.TriggerOrderUpdateEvent(null, args);
             }
         }
 
@@ -192,7 +192,7 @@ namespace Service.Core.Orders
                     entity.VerifiedDate = DateTime.Now;
                     _context.SaveChanges();
                     var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
-                    _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                    _listener.TriggerOrderUpdateEvent(null, args);
                     return string.Empty;
                 }
                 return "The Order doesn't exist";
@@ -221,7 +221,7 @@ namespace Service.Core.Orders
 
                     _context.SaveChanges();
                     var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
-                    _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                    _listener.TriggerOrderUpdateEvent(null, args);
                     _listener.TriggerInventoryUnitUpdateEvent(null, null);
                     return string.Empty;
                 }
@@ -255,7 +255,7 @@ namespace Service.Core.Orders
 
                     _context.SaveChanges();
                     var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
-                    _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                    _listener.TriggerOrderUpdateEvent(null, args);
                     _listener.TriggerInventoryUnitUpdateEvent(null, null);
                     return string.Empty;
                 }
@@ -279,7 +279,7 @@ namespace Service.Core.Orders
                     entity.CancelledDate = DateTime.Now;
                     _context.SaveChanges();
                     var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
-                    _listener.TriggerPurchaseOrderUpdateEvent(null, args);
+                    _listener.TriggerOrderUpdateEvent(null, args);
                     return string.Empty;
                 }
                 return "The Order doesn't exist";
@@ -346,10 +346,13 @@ namespace Service.Core.Orders
                     }
                     // No need to handle update cause entity is already assigned above { ....MapToEntity(..)}
                 }
+
+                poEntity.TotalAmount = items.Sum(x => x.Total);
+
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);
                 var eventArgs = new BaseEventArgs<OrderModel>(model, Utility.UpdateMode.EDIT);
-                _listener.TriggerPurchaseOrderUpdateEvent(null, eventArgs);
+                _listener.TriggerOrderUpdateEvent(null, eventArgs);
                 return string.Empty;
             }
         }

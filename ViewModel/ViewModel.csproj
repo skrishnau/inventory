@@ -70,6 +70,7 @@
     <Compile Include="Core\Inventory\PackageModel.cs" />
     <Compile Include="Core\Inventory\UomModel.cs" />
     <Compile Include="Core\Inventory\WarehouseProductModel.cs" />
+    <Compile Include="Core\Orders\PaymentModel.cs" />
     <Compile Include="Core\Settings\AppSettingModel.cs" />
     <Compile Include="Core\Bills\BillFormatModel.cs" />
     <Compile Include="Core\Bills\BillGenerationModel.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Orders\OrderModel.cs" />
     <Compile Include="Core\Users\UserModel.cs" />
-    <Compile Include="Utility\MessageModel.cs" />
+    <Compile Include="Utility\DateHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

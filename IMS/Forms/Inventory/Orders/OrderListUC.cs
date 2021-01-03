@@ -69,7 +69,7 @@ namespace IMS.Forms.Inventory.Purchases
 
         private void InitializeEvents()
         {
-            _listener.PurchaseOrderUpdated += _listener_PurchaseOrderUpdated;
+            _listener.OrderUpdated += _listener_PurchaseOrderUpdated;
             dgvPurchases.CellMouseDoubleClick += DgvPurchases_CellMouseDoubleClick;
             dgvPurchases.CellClick += DgvPurchases_CellClick;
             //_purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
