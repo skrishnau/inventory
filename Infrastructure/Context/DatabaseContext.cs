@@ -13,6 +13,8 @@ namespace Infrastructure.Context
     using System.Data.Entity.ModelConfiguration.Conventions;
     using Infrastructure.Entities.Business;
     using Infrastructure.Entities.AppSettings;
+    using System.Data.SqlClient;
+    using System.Data.Entity.Core.EntityClient;
 
     public class DatabaseContext : DbContext
     {
@@ -26,6 +28,13 @@ namespace Infrastructure.Context
             : base("name=DatabaseContext")
         {
         }
+
+        public DatabaseContext(string connectionString)
+            :base (connectionString)
+        {
+
+        }
+
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
@@ -93,6 +102,29 @@ namespace Infrastructure.Context
         }
 
 
+        public static DatabaseContext ConnectToSqlServer(string host, string catalog, string user, string pass, bool winAuth)
+        {
+            SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder
+            {
+                DataSource = host,
+                InitialCatalog = catalog,
+                PersistSecurityInfo = true,
+                IntegratedSecurity = winAuth,
+                MultipleActiveResultSets = true,
+                UserID = user,
+                Password = pass,
+            };
+
+            // assumes a connectionString name in .config of MyDbEntities
+            var entityConnectionStringBuilder = new EntityConnectionStringBuilder
+            {
+                Provider = "System.Data.SqlClient",
+                ProviderConnectionString = sqlBuilder.ConnectionString,
+                Metadata = "res://*/DbModel.csdl|res://*/DbModel.ssdl|res://*/DbModel.msl",
+            };
+
+            return new DatabaseContext(entityConnectionStringBuilder.ConnectionString);
+        }
 
     }
 

@@ -43,6 +43,14 @@ namespace IMS.Forms.Common.GridView
                     break;
             }
         }
+        public bool HasColumn(DataGridViewColumn column)
+        {
+            if (_validatingDecimalColumns.Contains(column))
+                return true;
+            if (_validatingIntegerColumns.Contains(column))
+                return true;
+            return false;
+        }
 
         public void Validate()
         {

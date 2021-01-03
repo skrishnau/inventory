@@ -65,8 +65,8 @@ namespace Service.Core.Orders
             {
                 var query = _context.OrderItem
                     .Include(x => x.Product)
-                    .Where(x => x.PurchaseOrderId == purchaseOrderId);
-                return OrderItemMapper.MapToPurhaseOrderItemModel(query);
+                    .Where(x => x.OrderId == purchaseOrderId);
+                return OrderItemMapper.MapToOrderItemModel(query);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Service.Core.Orders
                     args.Mode = Utility.UpdateMode.EDIT;
 
                     // update the order items' warehouse
-                    foreach (var item in _context.OrderItem.Where(x=>x.PurchaseOrderId == entity.Id))
+                    foreach (var item in _context.OrderItem.Where(x=>x.OrderId == entity.Id))
                     {
                         item.WarehouseId = entity.WarehouseId;
                     }
@@ -318,12 +318,12 @@ namespace Service.Core.Orders
                         else
                         {
                             item.ProductId = productEntity.Id;
-                            item.TotalAmount = item.Rate * item.UnitQuantity;
+                            item.Total = item.Rate * item.UnitQuantity;
                         }
                     }
                 }
 
-                var dbItems = _context.OrderItem.Where(x => x.PurchaseOrderId == purchaseOrderId).ToList();
+                var dbItems = _context.OrderItem.Where(x => x.OrderId == purchaseOrderId).ToList();
                 // first remove those that are not in the model list
                 for (var i = 0; i < dbItems.Count(); i++)
                 {
@@ -352,6 +352,12 @@ namespace Service.Core.Orders
                 _listener.TriggerPurchaseOrderUpdateEvent(null, eventArgs);
                 return string.Empty;
             }
+        }
+
+
+        public string SavePurchaseOrderItems(int orderId, List<InventoryUnitModel> items)
+        {
+            return SavePurchaseOrderItems(orderId, InventoryUnitMapper.MapToOrderItemModel(items, orderId));
         }
 
 
@@ -401,7 +407,7 @@ namespace Service.Core.Orders
                     ReceiveAdjustment = poItem.Adjustment,
                     Remark = null,
                     SupplierId = poItem.SupplierId,
-                    SupplyPrice = poItem.Rate,
+                    Rate = poItem.Rate,
                     UnitQuantity = poItem.UnitQuantity,
                     UomId = product.BaseUomId,
                     WarehouseId = poItem.WarehouseId??0,
@@ -433,6 +439,7 @@ namespace Service.Core.Orders
             }
             return string.Empty;
         }
+
 
         #endregion
 

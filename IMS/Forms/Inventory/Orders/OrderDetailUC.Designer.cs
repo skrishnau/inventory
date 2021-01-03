@@ -79,6 +79,8 @@
             this.lblAddress = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.tblSupplier = new System.Windows.Forms.TableLayoutPanel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblPaymentMethod = new System.Windows.Forms.Label();
             this.lblNoItemsMessage = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -255,7 +257,7 @@
             // 
             this.btnEditItems.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEditItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditItems.Image = global::IMS.Properties.Resources.icons8_Edit_Property_16px;
+            this.btnEditItems.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
             this.btnEditItems.Location = new System.Drawing.Point(69, 3);
             this.btnEditItems.Name = "btnEditItems";
             this.btnEditItems.Size = new System.Drawing.Size(60, 55);
@@ -297,10 +299,11 @@
             // lblOrderNumber1
             // 
             this.lblOrderNumber1.AutoSize = true;
+            this.lblOrderNumber1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOrderNumber1.Location = new System.Drawing.Point(83, 0);
             this.lblOrderNumber1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderNumber1.Name = "lblOrderNumber1";
-            this.lblOrderNumber1.Size = new System.Drawing.Size(35, 13);
+            this.lblOrderNumber1.Size = new System.Drawing.Size(41, 13);
             this.lblOrderNumber1.TabIndex = 16;
             this.lblOrderNumber1.Text = "label7";
             // 
@@ -317,9 +320,10 @@
             // lblWarehouse
             // 
             this.lblWarehouse.AutoSize = true;
+            this.lblWarehouse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWarehouse.Location = new System.Drawing.Point(363, 0);
             this.lblWarehouse.Name = "lblWarehouse";
-            this.lblWarehouse.Size = new System.Drawing.Size(35, 13);
+            this.lblWarehouse.Size = new System.Drawing.Size(41, 13);
             this.lblWarehouse.TabIndex = 18;
             this.lblWarehouse.Text = "label7";
             // 
@@ -336,10 +340,11 @@
             // lblToWarehouse
             // 
             this.lblToWarehouse.AutoSize = true;
+            this.lblToWarehouse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblToWarehouse.Location = new System.Drawing.Point(362, 21);
             this.lblToWarehouse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblToWarehouse.Name = "lblToWarehouse";
-            this.lblToWarehouse.Size = new System.Drawing.Size(62, 13);
+            this.lblToWarehouse.Size = new System.Drawing.Size(71, 13);
             this.lblToWarehouse.TabIndex = 14;
             this.lblToWarehouse.Text = "Warehouse";
             // 
@@ -356,18 +361,20 @@
             // lblLotNumber
             // 
             this.lblLotNumber.AutoSize = true;
+            this.lblLotNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLotNumber.Location = new System.Drawing.Point(84, 42);
             this.lblLotNumber.Name = "lblLotNumber";
-            this.lblLotNumber.Size = new System.Drawing.Size(35, 13);
+            this.lblLotNumber.Size = new System.Drawing.Size(41, 13);
             this.lblLotNumber.TabIndex = 17;
             this.lblLotNumber.Text = "label7";
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Location = new System.Drawing.Point(84, 21);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.Size = new System.Drawing.Size(41, 13);
             this.lblName.TabIndex = 18;
             this.lblName.Text = "label7";
             // 
@@ -394,9 +401,10 @@
             // lblExpectedDate
             // 
             this.lblExpectedDate.AutoSize = true;
+            this.lblExpectedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExpectedDate.Location = new System.Drawing.Point(363, 42);
             this.lblExpectedDate.Name = "lblExpectedDate";
-            this.lblExpectedDate.Size = new System.Drawing.Size(35, 13);
+            this.lblExpectedDate.Size = new System.Drawing.Size(41, 13);
             this.lblExpectedDate.TabIndex = 22;
             this.lblExpectedDate.Text = "label7";
             // 
@@ -431,18 +439,20 @@
             // lblSupplier
             // 
             this.lblSupplier.AutoSize = true;
+            this.lblSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSupplier.Location = new System.Drawing.Point(128, 0);
             this.lblSupplier.Name = "lblSupplier";
-            this.lblSupplier.Size = new System.Drawing.Size(35, 13);
+            this.lblSupplier.Size = new System.Drawing.Size(41, 13);
             this.lblSupplier.TabIndex = 19;
             this.lblSupplier.Text = "label7";
             // 
             // lblSupplierInvoice
             // 
             this.lblSupplierInvoice.AutoSize = true;
+            this.lblSupplierInvoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSupplierInvoice.Location = new System.Drawing.Point(128, 21);
             this.lblSupplierInvoice.Name = "lblSupplierInvoice";
-            this.lblSupplierInvoice.Size = new System.Drawing.Size(35, 13);
+            this.lblSupplierInvoice.Size = new System.Drawing.Size(41, 13);
             this.lblSupplierInvoice.TabIndex = 20;
             this.lblSupplierInvoice.Text = "label7";
             // 
@@ -635,6 +645,8 @@
             this.tblSupplier.ColumnCount = 2;
             this.tblSupplier.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblSupplier.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblSupplier.Controls.Add(this.label10, 0, 2);
+            this.tblSupplier.Controls.Add(this.lblPaymentMethod, 0, 2);
             this.tblSupplier.Controls.Add(this.label1, 0, 0);
             this.tblSupplier.Controls.Add(this.lblSupplier, 1, 0);
             this.tblSupplier.Controls.Add(this.lblSupplierInvoice, 1, 1);
@@ -648,6 +660,25 @@
             this.tblSupplier.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tblSupplier.Size = new System.Drawing.Size(250, 63);
             this.tblSupplier.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 42);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Payment Method";
+            // 
+            // lblPaymentMethod
+            // 
+            this.lblPaymentMethod.AutoSize = true;
+            this.lblPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPaymentMethod.Location = new System.Drawing.Point(128, 42);
+            this.lblPaymentMethod.Name = "lblPaymentMethod";
+            this.lblPaymentMethod.Size = new System.Drawing.Size(101, 13);
+            this.lblPaymentMethod.TabIndex = 21;
+            this.lblPaymentMethod.Text = "Payment Method";
             // 
             // lblNoItemsMessage
             // 
@@ -770,5 +801,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblPaymentMethod;
     }
 }

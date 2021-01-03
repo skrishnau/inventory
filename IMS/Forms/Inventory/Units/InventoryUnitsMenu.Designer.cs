@@ -57,7 +57,7 @@
             // 
             this.lnkSummary.AutoSize = true;
             this.lnkSummary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkSummary.Image = global::IMS.Properties.Resources.icons8_List_16px;
+            this.lnkSummary.Image = global::IMS.Properties.Resources.icons8_View_More_24px;
             this.lnkSummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkSummary.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkSummary.LinkColor = System.Drawing.SystemColors.ControlDarkDark;

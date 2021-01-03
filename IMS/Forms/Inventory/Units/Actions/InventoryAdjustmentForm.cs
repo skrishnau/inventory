@@ -5,6 +5,7 @@ using Service.Core.Inventory.Units;
 using Service.Core.Orders;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
@@ -23,8 +24,8 @@ namespace IMS.Forms.Inventory.Units.Actions
         //private bool _isCellDirty;
 
         // ---- Purchase Order ---- //
-        private int _purchaseOrderId;
-        private OrderModel _purchaseOrderModel;
+        private int _orderId;
+        private OrderModel _orderModel;
         private MovementTypeEnum _adjustmentType;
         private List<InventoryUnitModel> _selectedInventoryUnits;
 
@@ -73,10 +74,12 @@ namespace IMS.Forms.Inventory.Units.Actions
                     cbAdjustmentCode.DisplayMember = "Name";
                     break;
                 case MovementTypeEnum.SOIssue:
+                case MovementTypeEnum.SOIssueEditItems:
                     adjustmentList = _inventoryService.GetNegativeAdjustmentCodeListForCombo();
                     cbAdjustmentCode.Enabled = false;
                     break;
                 case MovementTypeEnum.POReceive:
+                case MovementTypeEnum.POReceiveEditItems:
                     adjustmentList = _inventoryService.GetPositiveAdjustmentCodeListForCombo();
                     cbAdjustmentCode.Enabled = false;
                     break;
@@ -84,16 +87,17 @@ namespace IMS.Forms.Inventory.Units.Actions
                     adjustmentList = new List<IdNamePair>();
                     break;
             }
-            
+
         }
 
         #endregion
 
 
-        public void SetData(MovementTypeEnum adjType, int orderId = 0, List<InventoryUnitModel> selectedInventoryUnits = null)
+        public void SetData(MovementTypeEnum movementType, int orderId = 0, List<InventoryUnitModel> selectedInventoryUnits = null)
         {
-            _adjustmentType = adjType;
-            switch (adjType)
+            _adjustmentType = movementType;
+            dgvInventoryUnit.MovementType = movementType;
+            switch (movementType)
             {
                 case MovementTypeEnum.DirectIssueInventoryUnit:
                     _selectedInventoryUnits = selectedInventoryUnits;
@@ -111,26 +115,46 @@ namespace IMS.Forms.Inventory.Units.Actions
                     dgvInventoryUnit.DesignForDirectIssueAny();
                     break;
                 case MovementTypeEnum.SOIssue:
-                    _purchaseOrderId = orderId;
-                    dgvInventoryUnit.DesignForPurchaseOrderReceive();
+                    _orderId = orderId;
+                    dgvInventoryUnit.DesignForOrder(false);
                     if (orderId > 0)
                     {
                         var model = _orderService.GetOrderForDetailView(orderId); //OrderTypeEnum.Purchase, 
-                        SetDataForOrder(model);
+                        SetDataForOrder(model, false);
                     }
                     btnSave.Text = "Issue";
+                    break;
+                case MovementTypeEnum.SOIssueEditItems:
+                    _orderId = orderId;
+                    dgvInventoryUnit.DesignForOrder(true);
+                    if (orderId > 0)
+                    {
+                        var model = _orderService.GetOrderForDetailView(orderId); //OrderTypeEnum.Purchase, 
+                        SetDataForOrder(model, true);
+                    }
+                    btnSave.Text = "Save Items";
                     break;
                 case MovementTypeEnum.DirectReceive:
                     dgvInventoryUnit.DesignForDirectReceive();
                     break;
                 case MovementTypeEnum.POReceive:
-                    _purchaseOrderId = orderId;
-                    dgvInventoryUnit.DesignForPurchaseOrderReceive();
+                    _orderId = orderId;
+                    dgvInventoryUnit.DesignForOrder(false);
                     if (orderId > 0)
                     {
                         var model = _orderService.GetOrderForDetailView(orderId); //OrderTypeEnum.Purchase, 
-                        SetDataForOrder(model);
+                        SetDataForOrder(model, false);
                     }
+                    break;
+                case MovementTypeEnum.POReceiveEditItems:
+                    _orderId = orderId;
+                    dgvInventoryUnit.DesignForOrder(true);
+                    if (orderId > 0)
+                    {
+                        var model = _orderService.GetOrderForDetailView(orderId); //OrderTypeEnum.Purchase, 
+                        SetDataForOrder(model, true);
+                    }
+                    btnSave.Text = "Save Items";
                     break;
                 case MovementTypeEnum.DirectMoveInventoryUnit:
                     pnlWarehouse.Visible = true;
@@ -149,7 +173,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     pnlWarehouse.Visible = true;
                     pnlAdjustmentCode.Visible = true;
                     PopulateWarehouseCombo();
-                   // _selectedInventoryUnits = selectedInventoryUnits;
+                    // _selectedInventoryUnits = selectedInventoryUnits;
                     this.Text = "Direct Move";
                     btnSave.Text = "Move";
                     dgvInventoryUnit.DesignForDirectMoveAny();
@@ -162,37 +186,60 @@ namespace IMS.Forms.Inventory.Units.Actions
         }
 
         // private cause we need to handle 3 cases and shouldn't expose for PurchaseOrder only
-        private void SetDataForOrder(OrderModel model)
+        private void SetDataForOrder(OrderModel model, bool forEditView)
         {
-           
-            _purchaseOrderModel = model;
+            _orderModel = model;
             if (model != null)
             {
                 var orderType = Enum.Parse(typeof(OrderTypeEnum), model.OrderType);
                 switch (orderType)
                 {
                     case OrderTypeEnum.Purchase:
-                        this.Text = "Receive Against PO " + model.ReferenceNumber;
-                        cbAdjustmentCode.SelectedText = "PO Receive";
+                        if (forEditView)
+                        {
+                            this.Text = "Edit Items for PO " + model.ReferenceNumber;
+                        }
+                        else
+                        {
+                            this.Text = "Receive Against PO " + model.ReferenceNumber;
+                            cbAdjustmentCode.SelectedText = "PO Receive";
+                        }
                         break;
                     case OrderTypeEnum.Sale:
-                        this.Text = "Issue Against SO " + model.ReferenceNumber;
-                        cbAdjustmentCode.Text = "SO Issue";
+                        if (forEditView)
+                        {
+                            this.Text = "Edit Items for SO " + model.ReferenceNumber;
+                        }
+                        else
+                        {
+                            this.Text = "Issue Against SO " + model.ReferenceNumber;
+                            cbAdjustmentCode.Text = "SO Issue";
+                        }
                         break;
                     case OrderTypeEnum.Move:
                         this.Text = "Move Against TO " + model.ReferenceNumber;
                         cbAdjustmentCode.Text = "TO Move";
                         break;
                 }
-                // populate
-                dgvInventoryUnit.SetSelectable(false);
-                dgvInventoryUnit.AutoGenerateColumns = false;
-                dgvInventoryUnit.DataSource = _orderService.GetInventoryUnitsOfPurchaseOrdeItems(model.OrderItems);
-
-                foreach (DataGridViewColumn column in dgvInventoryUnit.Columns)
+                if (!forEditView)
                 {
-                    column.ReadOnly = true;
+                    dgvInventoryUnit.SetSelectable(false);
+
+                    foreach (DataGridViewColumn column in dgvInventoryUnit.Columns)
+                    {
+                        column.ReadOnly = true;
+                    }
                 }
+                dgvInventoryUnit.AutoGenerateColumns = false;
+                // populate
+                //BindingSource src = new BindingSource();
+                // src.DataSource = _orderService.GetInventoryUnitsOfPurchaseOrdeItems(model.OrderItems);
+                //dgvInventoryUnit.DataSource = src;
+
+                var list = _orderService.GetInventoryUnitsOfPurchaseOrdeItems(model.OrderItems);
+                //var data = new BindingList<InventoryUnitModel>(list);
+                //dgvInventoryUnit.DataSource = data;
+                dgvInventoryUnit.AddRows(list);
             }
         }
 
@@ -281,8 +328,22 @@ namespace IMS.Forms.Inventory.Units.Actions
                     dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNoCancel);
                     if (dialogResult.Equals(DialogResult.Yes))
                     {
-                        msg = _orderService.SetReceived(_purchaseOrderId);
+                        msg = _orderService.SetReceived(_orderId);
                         this.Close();
+                    }
+                    break;
+                case MovementTypeEnum.POReceiveEditItems:
+                    // PO Receive
+                    actionForMsg = "Saved";
+                    var poItems = dgvInventoryUnit.GetItems();
+                    if (poItems != null)
+                    {
+                        dialogResult = MessageBox.Show(this, "Are you sure to save items for this purchase order?", "Save?", MessageBoxButtons.YesNoCancel);
+                        if (dialogResult.Equals(DialogResult.Yes))
+                        {
+                            msg = _orderService.SavePurchaseOrderItems(_orderId, poItems);
+                            DoActionAfterSave(msg);
+                        }
                     }
                     break;
                 case MovementTypeEnum.SOIssue:
@@ -291,9 +352,24 @@ namespace IMS.Forms.Inventory.Units.Actions
                     dialogResult = MessageBox.Show(this, "Are you sure to issue items against this sales order?", "Issue?", MessageBoxButtons.YesNoCancel);
                     if (dialogResult.Equals(DialogResult.Yes))
                     {
-                        msg = _orderService.SetIssued(_purchaseOrderId);
-                        if(string.IsNullOrEmpty(msg))
+                        msg = _orderService.SetIssued(_orderId);
+                        if (string.IsNullOrEmpty(msg))
                             this.Close();
+                    }
+                    break;
+                case MovementTypeEnum.SOIssueEditItems:
+                    // PO Receive
+                    actionForMsg = "Saved";
+                    var soItems = dgvInventoryUnit.GetItems();
+                    if (soItems != null)
+                    {
+                        dialogResult = MessageBox.Show(this, "Are you sure to save items for this sale order?", "Save?", MessageBoxButtons.YesNoCancel);
+                        if (dialogResult.Equals(DialogResult.Yes))
+                        {
+
+                            msg = _orderService.SavePurchaseOrderItems(_orderId, soItems);
+                            DoActionAfterSave(msg);
+                        }
                     }
                     break;
                 case MovementTypeEnum.DirectMoveInventoryUnit:
@@ -333,6 +409,20 @@ namespace IMS.Forms.Inventory.Units.Actions
             {
                 PopupMessage.ShowErrorMessage(msg);
                 this.Focus();
+            }
+        }
+
+        private void DoActionAfterSave(string msg)
+        {
+            if (!string.IsNullOrEmpty(msg))
+            {
+                PopupMessage.ShowErrorMessage(msg);
+                this.Focus();
+            }
+            else
+            {
+                PopupMessage.ShowSaveSuccessMessage();
+                this.Close();
             }
         }
 

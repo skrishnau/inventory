@@ -216,7 +216,7 @@
             // colViewDetail
             // 
             this.colViewDetail.HeaderText = "";
-            this.colViewDetail.Image = global::IMS.Properties.Resources.icons8_List_16px;
+            this.colViewDetail.Image = global::IMS.Properties.Resources.icons8_Deviation_16px;
             this.colViewDetail.MinimumWidth = 24;
             this.colViewDetail.Name = "colViewDetail";
             this.colViewDetail.ReadOnly = true;

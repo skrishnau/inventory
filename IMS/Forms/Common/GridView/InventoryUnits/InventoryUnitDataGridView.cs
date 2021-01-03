@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
+using ViewModel.Enums;
 
 namespace IMS.Forms.Common.GridView.InventoryUnits
 {
@@ -17,14 +18,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private string REQUIRED = "Required";
         private string GREATER_THAN_ZERO = "Greater than zero";
 
+        //private List<ViewModel.Core.Inventory.InventoryUnitModel> _dataList;
         private bool _isCellDirty;
         private int _checkCount;
         private bool _isUnSelectable;
-
+        private bool _isEditable = true; // by default editable
         private bool isValid = true;
+        private MovementTypeEnum _movementType;
 
         private IInventoryService _inventoryService;
         private List<DataGridViewColumn> IgnoreColumnsForErrorList = new List<DataGridViewColumn>();
+
+        public MovementTypeEnum MovementType { get { return _movementType; } internal set { _movementType = value; } }
 
         private List<string> InvalidColumns = new List<string>();
 
@@ -63,7 +68,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
 
 
-        #region Variables Expose
+        #region Setters & Variables Expose
 
         public void SetSelectable(bool isSelectable)
         {
@@ -84,6 +89,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             SetSelectable(!show);
         }
 
+        //public void SetData(List<ViewModel.Core.Inventory.InventoryUnitModel> modelList)
+        //{
+        //    this._dataList = modelList;
+        //}
         #endregion
 
 
@@ -109,7 +118,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var id = GetId(row);
                 var productId = GetProductId(row);
                 var unitQuantity = GetUnitQuantity(row, null);
-                var supplyPrice = GetSupplyPrice(row);
+                var rate = GetRate(row);
                 var warehouseId = GetWarehouseId(row);
                 var lotNumber = GetLotNumber(row, null);
                 var reference = GetReference(row);
@@ -125,9 +134,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         Id = id,
                         //PurchaseOrderId = _purchaseOrderId,
                         UnitQuantity = unitQuantity,
-                        TotalSupplyAmount = supplyPrice * unitQuantity,
+                        Total = rate * unitQuantity,
                         ProductId = productId,
-                        SupplyPrice = supplyPrice,
+                        Rate = rate,
                         WarehouseId = warehouseId,
                         ReceiveAdjustmentCode = adjCode,
                         LotNumber = lotNumber,
@@ -218,18 +227,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             return unitQuantity;
         }
 
-        private decimal GetSupplyPrice(DataGridViewRow row)
+        private decimal GetRate(DataGridViewRow row)
         {
             decimal rate = 0;
-            var cell = row.Cells[this.colSupplyPrice.Index];
+            var cell = row.Cells[this.colRate.Index];
             decimal.TryParse(cell.Value == null ? "0" : cell.Value.ToString(), out rate);
-            if (IgnoreColumnsForErrorList.Contains(colSupplyPrice))
+            if (IgnoreColumnsForErrorList.Contains(colRate))
             {
                 return rate;
             }
             if (rate <= 0)
             {
-                InvalidColumns.Add("Supply Price");
+                InvalidColumns.Add("Rate");
                 cell.ErrorText = GREATER_THAN_ZERO;//"Rate can't be zero or less";
                 isValid = false;
             }
@@ -266,7 +275,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var cell = row.Cells[colLotNumber.Index];
             var value = formattedValue == null ? cell.Value : formattedValue;
             var lotNumber = value == null ? 0 : int.Parse(value.ToString());
-            if (IgnoreColumnsForErrorList.Contains(colLotNumber))
+            if (IgnoreColumnsForErrorList.Contains(colLotNumber) || !_decimalValidator.HasColumn(colLotNumber))
             {
                 return lotNumber;
             }

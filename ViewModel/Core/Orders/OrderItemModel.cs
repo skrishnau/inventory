@@ -9,18 +9,20 @@ namespace ViewModel.Core.Orders
    public class OrderItemModel
     {
         public int Id { get; set; }
-        public int PurchaseOrderId { get; set; }
+        public int OrderId { get; set; }
         public int ProductId { get; set; }
         public string Product { get; set; }
         public string SKU { get; set; }
 
-        public decimal InStock { get; set; }
-        public decimal OnOrder { get; set; }
-
+        public decimal InStockQuantity { get; set; }
+        public decimal OnHoldQuantity { get; set; }
+        public decimal OnOrderQuantity { get; set; }
+        public decimal OnComittedQuantity { get; set; }
+        
         public decimal UnitQuantity { get; set; }
         public decimal PackageQuantity { get; set; }
         public decimal Rate { get; set; }
-        public decimal TotalAmount { get; set; }
+        public decimal Total { get; set; }
 
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
@@ -33,8 +35,8 @@ namespace ViewModel.Core.Orders
         public int? WarehouseId { get; set; }
         public string Warehouse { get; set; }
 
-        public DateTime? ExpirationDate { get; set; }
-        public DateTime? ProductionDate { get; set; }
+        public string ExpirationDate { get; set; }
+        public string ProductionDate { get; set; }
 
         public int LotNumber { get; set; }
         public string Reference { get; set; }

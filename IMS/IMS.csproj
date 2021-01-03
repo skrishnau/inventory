@@ -110,24 +110,6 @@
     <Compile Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.Designer.cs">
       <DependentUpon>InventoryDetailUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderCreateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderCreateForm.Designer.cs">
-      <DependentUpon>SaleOrderCreateForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderDetailUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderDetailUC.Designer.cs">
-      <DependentUpon>SaleOrderDetailUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderUC.Designer.cs">
-      <DependentUpon>SaleOrderUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -510,12 +492,6 @@
     <Compile Include="Forms\Inventory\Variants\VariantEditForm.Designer.cs">
       <DependentUpon>VariantEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Orders\Order\PurchaseOrderAddItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Orders\Order\PurchaseOrderAddItemForm.Designer.cs">
-      <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Orders\OrderUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -551,12 +527,6 @@
     </Compile>
     <Compile Include="Forms\POS\Sales\NewItemAddForm.Designer.cs">
       <DependentUpon>NewItemAddForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderListUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Sales\SaleOrderListUC.Designer.cs">
-      <DependentUpon>SaleOrderListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Suppliers\SupplierCreate.cs">
       <SubType>Form</SubType>
@@ -602,12 +572,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sales\DirectSale\Create\SaleItemCreate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\DirectSale\Create\SaleItemCreate.Designer.cs">
-      <DependentUpon>SaleItemCreate.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
       <DependentUpon>BusinessUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -628,15 +592,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.resx">
       <DependentUpon>InventoryDetailUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Sales\SaleOrderCreateForm.resx">
-      <DependentUpon>SaleOrderCreateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Sales\SaleOrderDetailUC.resx">
-      <DependentUpon>SaleOrderDetailUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Sales\SaleOrderUC.resx">
-      <DependentUpon>SaleOrderUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\General\GeneralSettingsUC.resx">
       <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
@@ -809,9 +764,6 @@
     <EmbeddedResource Include="Forms\Inventory\Variants\VariantEditForm.resx">
       <DependentUpon>VariantEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Orders\Order\PurchaseOrderAddItemForm.resx">
-      <DependentUpon>PurchaseOrderAddItemForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Orders\OrderUC.resx">
       <DependentUpon>OrderUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -829,10 +781,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\Sales\NewItemAddForm.resx">
       <DependentUpon>NewItemAddForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Sales\SaleOrderListUC.resx">
-      <DependentUpon>SaleOrderListUC.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierCreate.resx">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
@@ -863,9 +811,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\DirectSale\Create\SaleItemCreate.resx">
-      <DependentUpon>SaleItemCreate.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -887,10 +832,8 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dependency\" />
     <Folder Include="Forms\Bills\" />
-    <Folder Include="Forms\Inventory\Orders\Receives\" />
-    <Folder Include="Master\" />
+    <Folder Include="License\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
@@ -949,22 +892,13 @@
     <None Include="Resources\icons8_Info_52px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8_Error_52px.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icons8_Ok_52px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Goal_50px.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_More_50px.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Add_50px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Edit_Property_50px.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Buy_48px.png" />
@@ -1099,9 +1033,6 @@
     <None Include="Resources\icons8_Hashtag_Activity_Grid_24px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8_Handshake_16px.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icons8_Combo_Chart_24px.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1222,7 +1153,7 @@
     <None Include="Resources\icons8_Waterfall_16px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8_Floods_16px.png" />
+    <None Include="Resources\icons8_Building_16px.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Buying_24px.png" />
@@ -1334,9 +1265,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Delete_16px_3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8_Edit_Property_16px.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Forward_Arrow_16px.png" />

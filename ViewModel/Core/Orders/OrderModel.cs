@@ -29,6 +29,7 @@ namespace ViewModel.Core.Orders
         public DateTime? ExecutedDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public string PaymentMethod { get; set; }
         #endregion
         #region Purchase Order
         public int? WarehouseId { get; set; }

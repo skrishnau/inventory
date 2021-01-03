@@ -26,8 +26,8 @@ namespace ViewModel.Core.Inventory
 
         public decimal UnitQuantity { get; set; }
         public decimal PackageQuantity { get; set; }
-        public decimal SupplyPrice { get; set; }
-        public decimal TotalSupplyAmount { get; set; }
+        public decimal Rate { get; set; }
+        public decimal Total { get; set; }
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
         

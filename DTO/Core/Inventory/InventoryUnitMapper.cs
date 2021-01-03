@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Entities.Inventory;
 using ViewModel.Core.Inventory;
+using ViewModel.Core.Orders;
 
 namespace DTO.Core.Inventory
 {
     public static class InventoryUnitMapper
     {
-        
+
 
         public static List<InventoryUnitModel> MapToModel(this IEnumerable<InventoryUnit> query)
         {
@@ -58,7 +59,7 @@ namespace DTO.Core.Inventory
                 SKU = entity.Product == null ? "" : entity.Product.SKU,
                 Supplier = entity.Supplier == null ? "" : entity.Supplier.BasicInfo.Name,
                 SupplierId = entity.SupplierId,
-                SupplyPrice = entity.SupplyPrice,
+                Rate = entity.Rate,
                 UnitQuantity = entity.UnitQuantity,
                 Uom = entity.Uom == null ? "" : entity.Uom.Name,
                 UomId = entity.UomId,
@@ -72,7 +73,7 @@ namespace DTO.Core.Inventory
         {
             return new InventoryUnit()
             {
-                
+
                 ExpirationDate = entity.ExpirationDate,//.HasValue ? entity.ExpirationDate.Value.ToShortDateString() : "",
                 GrossWeight = entity.GrossWeight,
                 Id = entity.Id,
@@ -96,7 +97,7 @@ namespace DTO.Core.Inventory
                 // SKU = entity.Product == null ? "" : entity.Product.SKU,
                 // Supplier = entity.Supplier, == null ? "" : entity.Supplier.BasicInfo.Name,
                 SupplierId = entity.SupplierId,
-                SupplyPrice = entity.SupplyPrice,
+                Rate = entity.Rate,
                 UnitQuantity = entity.UnitQuantity,
                 //Uom = entity.Uom == null ? "" : entity.Uom.Name,
                 UomId = entity.UomId,
@@ -109,7 +110,7 @@ namespace DTO.Core.Inventory
         public static List<InventoryUnit> MapToEntity(this List<InventoryUnitModel> modelList)
         {
             var entityList = new List<InventoryUnit>();
-            foreach(var model in modelList)
+            foreach (var model in modelList)
             {
                 entityList.Add(MapToEntity(model));
             }
@@ -118,9 +119,13 @@ namespace DTO.Core.Inventory
 
         public static InventoryUnit MapToEntity(this InventoryUnitModel model)
         {
+            DateTime productionDate; DateTime expireDate;
+            var prodDateParsed = DateTime.TryParse(model.ProductionDate, out productionDate);
+            var expireDateParsed = DateTime.TryParse(model.ExpirationDate, out expireDate);
+
             return new InventoryUnit()
             {
-                ExpirationDate = null, //model.ExpirationDate,
+                ExpirationDate = expireDateParsed ? (DateTime?)expireDate : null, //model.ExpirationDate,
                 GrossWeight = model.GrossWeight,
                 Id = model.Id,
                 IsHold = model.IsHold,
@@ -134,21 +139,69 @@ namespace DTO.Core.Inventory
                 PackageId = model.PackageId,
                 PackageQuantity = model.PackageQuantity,
                 //Product = model.Product,
-                ProductId= model.ProductId,
-                ProductionDate = null, //model.ProductionDate,
+                ProductId = model.ProductId,
+                ProductionDate = prodDateParsed ? (DateTime?)productionDate : null, //model.ProductionDate,
                 ReceiveAdjustment = model.ReceiveAdjustmentCode,
                 ReceiveDate = null,//model.ReceiveDate,
                 ReceiveReceipt = model.ReceiveReceipt,
                 Remark = model.Remark,
                 //Supplier= model.Supplier,
                 SupplierId = model.SupplierId,
-                SupplyPrice = model.SupplyPrice,
-                TotalSupplyAmount = model.TotalSupplyAmount,
+                Rate = model.Rate,
+                Total = model.Total,
                 UnitQuantity = model.UnitQuantity,
                 //Uom = model.Uom,
                 UomId = model.UomId,
                 //Warehouse = model.Warehouse,
                 WarehouseId = model.WarehouseId,
+
+            };
+        }
+        public static List<OrderItemModel> MapToOrderItemModel(List<InventoryUnitModel> model, int orderId)
+        {
+            var list = new List<OrderItemModel>();
+            if (model == null)
+                return list;
+            foreach (var m in model)
+            {
+                list.Add(MapToOrderItemModel(m, orderId));
+            }
+            return list;
+        }
+
+        public static OrderItemModel MapToOrderItemModel(InventoryUnitModel model, int orderId)
+        {
+            return new OrderItemModel()
+            {
+                Id = 0,
+                ProductId = model.ProductId,
+                Product = model.Product,
+                SKU = model.SKU,
+                ExpirationDate = model.ExpirationDate,//.HasValue ? model.ExpirationDate.Value.ToShortDateString() : "",
+                ProductionDate = model.ProductionDate,//.HasValue ? model.ProductionDate.Value.ToShortDateString() : "",
+                LotNumber = model.LotNumber,
+                //IssueReceipt = null,
+                //IssueAdjustment = null,//model.Adjustment,
+                NetWeight = model.NetWeight,
+                GrossWeight = model.GrossWeight,
+                UnitQuantity = model.UnitQuantity,
+                Rate = model.Rate,
+                Total = model.Total,
+                IsHold = model.IsHold,
+                SupplierId = model.SupplierId,
+                Supplier = model.Supplier,
+                WarehouseId = model.WarehouseId,
+                Warehouse = model.Warehouse,
+                Uom = model.Uom,
+                UomId = model.UomId,
+                Package = model.Package,
+                PackageId = model.PackageId,
+                PackageQuantity = model.PackageQuantity,
+                //ReceiveAdjustmentCode = model.Adjustment,
+                //ReceiveDate = null,
+                //ReceiveReceipt = model.Reference,
+                //Remark = null,
+                OrderId = orderId,
                 
             };
         }

@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperBase\Mappings.cs" />
+    <Compile Include="Common\DateHelper.cs" />
     <Compile Include="Core\Business\BranchMapper.cs" />
     <Compile Include="Core\Business\CounterMapper.cs" />
     <Compile Include="Core\Inventory\WarehouseMapper.cs" />

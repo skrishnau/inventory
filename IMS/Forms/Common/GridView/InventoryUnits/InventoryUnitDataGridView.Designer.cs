@@ -42,7 +42,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouseId = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            // this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             this.colLotNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceiveReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,8 +53,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             this.colUnitQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPackageQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplyPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalSupplyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNetWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGrossWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
@@ -98,6 +98,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.AutoGenerateColumns = false;
             this.ColumnHeadersVisible = true;
             this.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
             this.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colCheck,
@@ -114,12 +115,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colPackageId,
            // this.colPackage,
             this.colPackageQuantity,
-            this.colSupplyPrice,
-            this.colTotalSupplyAmount,
+            this.colRate,
+            this.colTotal,
             this.colNetWeight,
             this.colGrossWeight,
             this.colWarehouseId,
-           // this.colWarehouse,
+            this.colWarehouse,
             this.colLotNumber,
             this.colProductionDate,
             this.colExpirationDate,
@@ -189,12 +190,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //// 
             //// colWarehouse
             //// 
-            //this.colWarehouse.DataPropertyName = "Warehouse";
-            //this.colWarehouse.HeaderText = "Warehouse";
-            //this.colWarehouse.Name = "colWarehouse";
-            //this.colWarehouse.ReadOnly = true;
-            //this.colWarehouse.Visible = false;
-            //this.colWarehouse.Width = 130;
+            this.colWarehouse.DataPropertyName = "Warehouse";
+            this.colWarehouse.HeaderText = "Warehouse";
+            this.colWarehouse.Name = "colWarehouse";
+            this.colWarehouse.ReadOnly = true;
+            this.colWarehouse.Visible = false;
+            this.colWarehouse.Width = 90;
             // 
             // colLotNumber
             // 
@@ -235,7 +236,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colUnitQuantity.HeaderText = "Units";
             this.colUnitQuantity.Name = "colUnitQuantity";
             this.colUnitQuantity.Visible = false;
-            this.colUnitQuantity.Width = 70;
+            this.colUnitQuantity.Width = 70; // 
             // 
             // colPackageQuantity
             // 
@@ -263,19 +264,19 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // 
             // colSupplyPrice
             // 
-            this.colSupplyPrice.DataPropertyName = "SupplyPrice";
-            this.colSupplyPrice.HeaderText = "Unit Cost";
-            this.colSupplyPrice.Name = "colSupplyPrice";
-            this.colSupplyPrice.Visible = false;
-            this.colSupplyPrice.Width = 70;
+            this.colRate.DataPropertyName = "Rate";
+            this.colRate.HeaderText = "Rate";
+            this.colRate.Name = "colRate";
+            this.colRate.Visible = false;
+            this.colRate.Width = 70;
             // 
             // colTotalSupplyAmount
             // 
-            this.colTotalSupplyAmount.DataPropertyName = "TotalSupplyAmount";
-            this.colTotalSupplyAmount.HeaderText = "Amount";
-            this.colTotalSupplyAmount.Name = "colTotalSupplyAmount";
-            this.colTotalSupplyAmount.Visible = false;
-            this.colTotalSupplyAmount.Width = 70;
+            this.colTotal.DataPropertyName = "Total";
+            this.colTotal.HeaderText = "Total";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.Visible = false;
+            this.colTotal.Width = 70;
             // 
             // colNetWeight
             // 
@@ -347,7 +348,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colInStockQuantity.HeaderText = "In Stock";
             this.colInStockQuantity.Name = "colInStockQuantity";
             this.colInStockQuantity.Visible = false;
-            this.colInStockQuantity.Width = 40;
+            this.colInStockQuantity.Width = 70;
+            this.colInStockQuantity.ReadOnly = true;
             // 
             // colOnHoldQuantity
             // 
@@ -355,7 +357,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colOnHoldQuantity.HeaderText = "On Hold";
             this.colOnHoldQuantity.Name = "colOnHoldQuantity";
             this.colOnHoldQuantity.Visible = false;
-            this.colOnHoldQuantity.Width = 40;
+            this.colOnHoldQuantity.Width = 70;
+            this.colOnHoldQuantity.ReadOnly = true;
             // 
             // colOnOrderQuantity
             // 
@@ -363,7 +366,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colOnOrderQuantity.HeaderText = "On Order";
             this.colOnOrderQuantity.Name = "colOnOrderQuantity";
             this.colOnOrderQuantity.Visible = false;
-            this.colOnOrderQuantity.Width = 40;
+            this.colOnOrderQuantity.Width = 70;
+            this.colOnOrderQuantity.ReadOnly = true;
             // 
             // colOnComittedQuantity
             // 
@@ -371,7 +375,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colOnComittedQuantity.HeaderText = "On Comitted";
             this.colOnComittedQuantity.Name = "colOnComittedQuantity";
             this.colOnComittedQuantity.Visible = false;
-            this.colOnComittedQuantity.Width = 40;
+            this.colOnComittedQuantity.Width = 70;
+            this.colOnComittedQuantity.ReadOnly = true;
             // 
             // colIsHold
             // 
@@ -418,8 +423,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
-            colPackageId.Visible = true;
-            colWarehouseId.Visible = true;
+            //colPackageId.Visible = true;
+            //colWarehouseId.Visible = true;
+            colWarehouse.Visible = true;
             colLotNumber.Visible = true;
             colProductionDate.Visible = true;
             colExpirationDate.Visible = true;
@@ -436,20 +442,37 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         // PO Receive designs
         //
-        public void DesignForPurchaseOrderReceive()
+        public void DesignForOrder(bool forEditMode)
         {
-            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            _isEditable = forEditMode;
+            if (forEditMode)
+            {
+                this.RowHeadersVisible = true;
+                this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                this.AllowUserToAddRows = true;
+                this.AllowUserToDeleteRows = true;
+            }
+            else
+            {
+                this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            }
             colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
-            colPackageId.Visible = true;
-            colWarehouseId.Visible = true;
-            colLotNumber.Visible = true;
+            //colPackageId.Visible = true;
+            //colWarehouseId.Visible = true;
+            colWarehouse.Visible = true;
+            //colLotNumber.Visible = true;
             colProductionDate.Visible = true;
             colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
             colIsHold.Visible = true;
+            colRate.Visible = true;
+            colTotal.Visible = true;
+
+            colInStockQuantity.Visible = true;
+            colOnHoldQuantity.Visible = true;
 
             HideUnusedDefaults();
         }
@@ -465,9 +488,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
-            colPackageId.Visible = true;
-            colPackageId.ReadOnly = true;
-            colWarehouseId.Visible = true;
+            //colPackageId.Visible = true;
+            //colPackageId.ReadOnly = true;
+            //colWarehouseId.Visible = true;
+            colWarehouse.Visible = true;
             colLotNumber.Visible = true;
             colProductionDate.Visible = true;
             colExpirationDate.Visible = true;
@@ -475,6 +499,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.HeaderText = "Reference";
             colIsHold.Visible = true;
             colRemark.Visible = true;
+            colInStockQuantity.Visible = true;
+            colOnHoldQuantity.Visible = true;
 
             HideUnusedDefaults();
         }
@@ -491,9 +517,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             // colPackageQuantity.Visible = true;
-            colPackageId.Visible = true;
-            colPackageId.ReadOnly = true;
-            colWarehouseId.Visible = true;
+            //colPackageId.Visible = true;
+            //colPackageId.ReadOnly = true;
+            //colWarehouseId.Visible = true;
+            colWarehouse.Visible = true;
             colLotNumber.Visible = true;
             colProductionDate.Visible = true;
             colExpirationDate.Visible = true;
@@ -525,15 +552,19 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
-            colPackageId.Visible = true;
-            colPackageId.ReadOnly = true;
-            colWarehouseId.Visible = true;
-           // colLotNumber.Visible = true;
-           // colProductionDate.Visible = true;
-           // colExpirationDate.Visible = true;
-           // colReceiveReference.Visible = true;
-           // colReceiveReference.HeaderText = "Reference";
-           // colIsHold.Visible = true;
+            //colPackageId.Visible = true;
+            //colPackageId.ReadOnly = true;
+            //colWarehouseId.Visible = true;
+            colWarehouse.Visible = true;
+
+            colInStockQuantity.Visible = true;
+            colOnHoldQuantity.Visible = true;
+            // colLotNumber.Visible = true;
+            // colProductionDate.Visible = true;
+            // colExpirationDate.Visible = true;
+            // colReceiveReference.Visible = true;
+            // colReceiveReference.HeaderText = "Reference";
+            // colIsHold.Visible = true;
             colRemark.Visible = true;
 
             HideUnusedDefaults();
@@ -555,7 +586,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colPackageQuantity.Visible = true;
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
-            colWarehouseId.Visible = true;
+            //colWarehouseId.Visible = true;
+            colWarehouse.Visible = true;
             colLotNumber.Visible = true;
             colProductionDate.Visible = true;
             colExpirationDate.Visible = true;
@@ -586,7 +618,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colPackageQuantity.Visible = true;
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
-            colWarehouseId.Visible = true;
+            //colWarehouseId.Visible = true;
+            colWarehouse.Visible = true;
             colLotNumber.Visible = true;
             colProductionDate.Visible = true;
             colExpirationDate.Visible = true;
@@ -617,6 +650,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colSKU.Visible = false;
         }
 
+
         #endregion
 
 
@@ -635,8 +669,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         public System.Windows.Forms.DataGridViewTextBoxColumn colUnitQuantity;
         public System.Windows.Forms.DataGridViewTextBoxColumn colPackageQuantity;
-        public System.Windows.Forms.DataGridViewTextBoxColumn colSupplyPrice;
-        public System.Windows.Forms.DataGridViewTextBoxColumn colTotalSupplyAmount;
+        public System.Windows.Forms.DataGridViewTextBoxColumn colRate;
+        public System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         public System.Windows.Forms.DataGridViewTextBoxColumn colNetWeight;
         public System.Windows.Forms.DataGridViewTextBoxColumn colGrossWeight;
 
@@ -656,7 +690,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewTextBoxColumn colOnComittedQuantity;
         public System.Windows.Forms.DataGridViewTextBoxColumn colLotNumber;
         public System.Windows.Forms.DataGridViewComboBoxColumn colWarehouseId;
-        //public System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
+        /// <summary>
+        /// Text Only Display 
+        /// </summary>
+        public System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
 
         public System.Windows.Forms.DataGridViewTextBoxColumn colRemark;
         public System.Windows.Forms.DataGridViewTextBoxColumn colNotes;

@@ -13,8 +13,8 @@ namespace Infrastructure.Entities.Orders
     {
         public int Id { get; set; }
         // to which purchase transaction does this item belongs 
-        public int PurchaseOrderId { get; set; }
-        public virtual Order PurchaseOrder { get; set; }
+        public int OrderId { get; set; }
+        public virtual Order Order { get; set; }
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
         /// <summary>
@@ -28,7 +28,7 @@ namespace Infrastructure.Entities.Orders
         // implement discount in rate in version 2
         public decimal Rate { get; set; }
         // totalAmount = quantity * rate 
-        public decimal TotalAmount { get; set; }
+        public decimal Total { get; set; }
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
 

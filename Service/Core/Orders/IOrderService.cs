@@ -24,6 +24,7 @@ namespace Service.Core.Orders
         OrderModel GetOrderForDetailView(int orderId);//OrderTypeEnum orderType, 
 
         string SavePurchaseOrderItems(int purchaseOrderId, List<OrderItemModel> items);
+        string SavePurchaseOrderItems(int purchaseOrderId, List<InventoryUnitModel> items);
 
         string SetSent(int orderId);
         string SetReceived(int purchaseOrderId);

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
 using IMS.Forms.Inventory.Suppliers;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.POS.Customers;
-using IMS.Forms.Purchases.Order;
 using Service.Core.Business;
 using Service.Core.Customers;
 using Service.Core.Inventory;
@@ -63,6 +63,7 @@ namespace IMS.Forms.Inventory.Orders
 
             PopulateClientCombo();
             PopulateWarehouseCombo();
+            PopulatePaymentMethodCombo();
 
             SetDataForEdit(po);
 
@@ -188,6 +189,15 @@ namespace IMS.Forms.Inventory.Orders
             cbToWarehouse.ValueMember = "Id";
         }
 
+        private void PopulatePaymentMethodCombo()
+        {
+            var paymentMethods = Enum.GetValues(typeof(PaymentMethodEnum)).Cast<PaymentMethodEnum>();
+            var dataList = paymentMethods.Select(x => new NameValuePair(x.ToString(), x.ToString())).ToList();
+            cbPaymentMethod.DataSource = dataList;
+            cbPaymentMethod.DisplayMember = "Name";
+            cbPaymentMethod.ValueMember = "Value";
+        }
+
         public void SetDataForEdit(OrderTypeEnum orderType, int purchaseOrderId)
         {
             _orderType = orderType;
@@ -269,6 +279,8 @@ namespace IMS.Forms.Inventory.Orders
                     tbClientInfo.Visible = false;
                     this.Text = (model == null ? "Create" : "Edit") + " Transfer Order";
                     tblToWarehouse.Visible = true;
+                    lblPaymentMethod.Visible = false;
+                    cbPaymentMethod.Visible = false;
                     break;
             }
 
@@ -281,12 +293,6 @@ namespace IMS.Forms.Inventory.Orders
 
 
         #region Button and Label Events
-
-        private void btnAddItem_Click(object sender, EventArgs e)
-        {
-            var addItemForm = new PurchaseOrderAddItemForm();
-            addItemForm.ShowDialog();
-        }
 
         private void btnSavePurchaseOrder_Click(object sender, EventArgs e)
         {
@@ -353,6 +359,7 @@ namespace IMS.Forms.Inventory.Orders
                     model.WarehouseId = warehouseId;
                     model.SupplierInvoice = tbClientInfo.Text;
                     model.ToWarehouseId = null;
+                    model.PaymentMethod = cbPaymentMethod.SelectedValue?.ToString();
                     break;
                 case OrderTypeEnum.Sale:
                     model.CustomerId = int.Parse(cbClient.SelectedValue.ToString());
@@ -360,10 +367,12 @@ namespace IMS.Forms.Inventory.Orders
                     model.SupplierId = null;
                     model.Address = tbClientInfo.Text;
                     model.ToWarehouseId = null;
+                    model.PaymentMethod = cbPaymentMethod.SelectedValue?.ToString();
                     break;
                 case OrderTypeEnum.Move:
                     model.WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
                     model.ToWarehouseId = int.Parse(cbToWarehouse.SelectedValue.ToString());
+                    model.PaymentMethod = null;
                     break;
             }
 

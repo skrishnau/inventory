@@ -8,7 +8,6 @@ using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Units.Actions;
 using IMS.Forms.Inventory.Settings;
-using IMS.Forms.Inventory.Sales;
 using IMS.Forms.Inventory.Orders;
 using ViewModel.Enums;
 using Service.Core.Orders;
@@ -38,6 +37,8 @@ namespace IMS.Forms.Inventory
         private OrderUC purchaseOrderUC;
         private OrderUC saleOrderUC;
         private OrderUC transferOrderUC;
+
+        private Dictionary<string, Button> menuButtonsDictionary = new Dictionary<string, Button>();
 
         // dependency injection
         public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IDatabaseChangeListener listener, IInventoryService inventoryService)
@@ -71,10 +72,23 @@ namespace IMS.Forms.Inventory
             this.tabControl.MouseDown += tabControl_MouseDown;
             // this.tabControl.Selecting += tabControl_Selecting;
             // this.tabControl.HandleCreated += tabControl_HandleCreated;
+            this.tabControl.SelectedIndexChanged += TabControl_TabIndexChanged;
         }
 
 
+
         #region Tab Control Init
+
+
+        private void TabControl_TabIndexChanged(object sender, EventArgs e)
+        {
+            foreach(var buttonText in menuButtonsDictionary.Keys)
+            {
+                menuButtonsDictionary[buttonText].BackColor = Color.Transparent;
+            }
+            menuButtonsDictionary[tabControl.SelectedTab.Text].BackColor = Color.Gainsboro;
+
+        }
 
         //
         // Handle Click on Close button 
@@ -210,6 +224,7 @@ namespace IMS.Forms.Inventory
             SendMessage(this.tabControl.Handle, TCM_SETMINTABWIDTH, IntPtr.Zero, (IntPtr)16);
         }
 
+
         #endregion
 
 
@@ -266,7 +281,7 @@ namespace IMS.Forms.Inventory
             _menubar.btnPOS.Click += BtnPOS_Click;
         }
 
-        private void AddTabPage(String text, UserControl uc)
+        private void AddTabPage(String text, UserControl uc, Object sender)
         {
             text += "      ";
             TabPage toSelect = null;
@@ -287,9 +302,19 @@ namespace IMS.Forms.Inventory
                 tabControl.TabPages.Add(tabPage);
 
                 toSelect = tabPage;
+
+                AddToButtonsDictionary(text, (Button) sender);
             }
 
             tabControl.SelectedTab = toSelect;
+        }
+
+        private void AddToButtonsDictionary(string text, Button button)
+        {
+            if (!menuButtonsDictionary.ContainsKey(text))
+            {
+                menuButtonsDictionary.Add(text, button);
+            }
         }
 
         private void BtnHome_Click(object sender, EventArgs e)
@@ -297,7 +322,7 @@ namespace IMS.Forms.Inventory
             var dashboard = Program.container.GetInstance<DashboardUC>();
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(dashboard);
-            AddTabPage("Dashboard", dashboard);
+            AddTabPage("Dashboard", dashboard, sender);
             //_menubar.SetSelection(sender);
         }
 
@@ -313,7 +338,7 @@ namespace IMS.Forms.Inventory
             }
 
             //var purchaseOrderUC = Program.container.GetInstance<OrderUC>();
-            AddTabPage("Purchases", purchaseOrderUC);
+            AddTabPage("Purchases", purchaseOrderUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(purchaseOrderUC);
             // set selection
@@ -338,7 +363,7 @@ namespace IMS.Forms.Inventory
             // var saleOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(saleOrderUC);
-            AddTabPage("Sales", saleOrderUC);
+            AddTabPage("Sales", saleOrderUC, sender);
             // set selection
            // _menubar.SetSelection(sender);
         }
@@ -361,7 +386,7 @@ namespace IMS.Forms.Inventory
             // var transferOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(transferOrderUC);
-            AddTabPage("Transfers", transferOrderUC);
+            AddTabPage("Transfers", transferOrderUC, sender);
             // set selection
             // _menubar.SetSelection(sender);
         }
@@ -369,7 +394,7 @@ namespace IMS.Forms.Inventory
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
         {
             var inventoryUnitList = Program.container.GetInstance<InventoryUnitUC>();
-            AddTabPage("Inventory Units", inventoryUnitList);
+            AddTabPage("Inventory Units", inventoryUnitList, sender);
 
             //var inventoryDetailUC = Program.container.GetInstance<InventoryDetailUC>();
             //AddTabPage("Inventory", inventoryDetailUC);
@@ -384,7 +409,7 @@ namespace IMS.Forms.Inventory
         private void BtnPOS_Click(object sender, EventArgs e)
         {
             var posUC = Program.container.GetInstance<PosUC>();
-            AddTabPage("POS", posUC);
+            AddTabPage("POS", posUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(posUC);
            // _menubar.SetSelection(sender);
@@ -395,7 +420,7 @@ namespace IMS.Forms.Inventory
         private void BtnProductList_Click(object sender, EventArgs e)
         {
             var productListUC = Program.container.GetInstance<ProductUC>();
-            AddTabPage("Products", productListUC);
+            AddTabPage("Products", productListUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(productListUC);
 
@@ -510,7 +535,7 @@ namespace IMS.Forms.Inventory
             // using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var settingsUC = Program.container.GetInstance<InventorySettingsUC>();
-                AddTabPage("Settings", settingsUC);
+                AddTabPage("Settings", settingsUC, sender);
                 //pnlBody.Controls.Clear();
                 //pnlBody.Controls.Add(settingsUC);
                 // set selection

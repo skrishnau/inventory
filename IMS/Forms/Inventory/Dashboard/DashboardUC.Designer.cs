@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.pnlTopUnderstockProducts = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblTopUnderstockProducts = new System.Windows.Forms.Label();
             this.lbUnderStockProducts = new System.Windows.Forms.ListBox();
+            this.lblTopUnderstockProducts = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,15 +51,17 @@
             this.pnlTopUnderstockProducts.Size = new System.Drawing.Size(204, 159);
             this.pnlTopUnderstockProducts.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // lbUnderStockProducts
             // 
-            this.flowLayoutPanel1.Controls.Add(this.pnlTopUnderstockProducts);
-            this.flowLayoutPanel1.Controls.Add(this.panel1);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(696, 383);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.lbUnderStockProducts.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbUnderStockProducts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbUnderStockProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUnderStockProducts.FormattingEnabled = true;
+            this.lbUnderStockProducts.ItemHeight = 15;
+            this.lbUnderStockProducts.Location = new System.Drawing.Point(5, 28);
+            this.lbUnderStockProducts.Name = "lbUnderStockProducts";
+            this.lbUnderStockProducts.Size = new System.Drawing.Size(194, 126);
+            this.lbUnderStockProducts.TabIndex = 1;
             // 
             // lblTopUnderstockProducts
             // 
@@ -73,17 +75,16 @@
             this.lblTopUnderstockProducts.Text = "Top Understock Products";
             this.lblTopUnderstockProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lbUnderStockProducts
+            // flowLayoutPanel1
             // 
-            this.lbUnderStockProducts.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbUnderStockProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbUnderStockProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUnderStockProducts.FormattingEnabled = true;
-            this.lbUnderStockProducts.ItemHeight = 15;
-            this.lbUnderStockProducts.Location = new System.Drawing.Point(5, 28);
-            this.lbUnderStockProducts.Name = "lbUnderStockProducts";
-            this.lbUnderStockProducts.Size = new System.Drawing.Size(194, 126);
-            this.lbUnderStockProducts.TabIndex = 1;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutPanel1.Controls.Add(this.pnlTopUnderstockProducts);
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(696, 383);
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // panel1
             // 
@@ -98,6 +99,7 @@
             // 
             // listBox1
             // 
+            this.listBox1.BackColor = System.Drawing.Color.LightCoral;
             this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

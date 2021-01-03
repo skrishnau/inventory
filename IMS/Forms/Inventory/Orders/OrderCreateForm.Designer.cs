@@ -32,6 +32,8 @@
             this.tblBase = new System.Windows.Forms.TableLayoutPanel();
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.lblPhone = new System.Windows.Forms.Label();
+            this.cbPaymentMethod = new System.Windows.Forms.ComboBox();
+            this.lblPaymentMethod = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numLotNumber = new System.Windows.Forms.NumericUpDown();
             this.lblClient = new System.Windows.Forms.Label();
@@ -65,12 +67,14 @@
             // tblBase
             // 
             this.tblBase.ColumnCount = 4;
-            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.66527F));
-            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.35888F));
-            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.94425F));
-            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.75314F));
+            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.72018F));
+            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.44645F));
+            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.99436F));
+            this.tblBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.83902F));
             this.tblBase.Controls.Add(this.tbPhone, 3, 2);
             this.tblBase.Controls.Add(this.lblPhone, 2, 2);
+            this.tblBase.Controls.Add(this.cbPaymentMethod, 1, 4);
+            this.tblBase.Controls.Add(this.lblPaymentMethod, 0, 4);
             this.tblBase.Controls.Add(this.label2, 0, 2);
             this.tblBase.Controls.Add(this.numLotNumber, 1, 2);
             this.tblBase.Controls.Add(this.lblClient, 2, 0);
@@ -88,12 +92,13 @@
             this.tblBase.Dock = System.Windows.Forms.DockStyle.Top;
             this.tblBase.Location = new System.Drawing.Point(8, 8);
             this.tblBase.Name = "tblBase";
-            this.tblBase.RowCount = 4;
-            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tblBase.Size = new System.Drawing.Size(574, 113);
+            this.tblBase.RowCount = 5;
+            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBase.Size = new System.Drawing.Size(574, 143);
             this.tblBase.TabIndex = 0;
             // 
             // tbPhone
@@ -114,6 +119,23 @@
             this.lblPhone.TabIndex = 14;
             this.lblPhone.Text = "Phone";
             this.lblPhone.Visible = false;
+            // 
+            // cbPaymentMethod
+            // 
+            this.cbPaymentMethod.FormattingEnabled = true;
+            this.cbPaymentMethod.Location = new System.Drawing.Point(116, 115);
+            this.cbPaymentMethod.Name = "cbPaymentMethod";
+            this.cbPaymentMethod.Size = new System.Drawing.Size(140, 21);
+            this.cbPaymentMethod.TabIndex = 11;
+            // 
+            // lblPaymentMethod
+            // 
+            this.lblPaymentMethod.AutoSize = true;
+            this.lblPaymentMethod.Location = new System.Drawing.Point(3, 112);
+            this.lblPaymentMethod.Name = "lblPaymentMethod";
+            this.lblPaymentMethod.Size = new System.Drawing.Size(87, 13);
+            this.lblPaymentMethod.TabIndex = 10;
+            this.lblPaymentMethod.Text = "Payment Method";
             // 
             // label2
             // 
@@ -251,7 +273,7 @@
             this.panel3.Controls.Add(this.btnCancel);
             this.panel3.Controls.Add(this.btnSave);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(8, 216);
+            this.panel3.Location = new System.Drawing.Point(8, 257);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(574, 40);
             this.panel3.TabIndex = 1;
@@ -286,7 +308,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Location = new System.Drawing.Point(8, 148);
+            this.label4.Location = new System.Drawing.Point(8, 178);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.label4.Size = new System.Drawing.Size(30, 23);
@@ -296,11 +318,11 @@
             // tbNotes
             // 
             this.tbNotes.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tbNotes.Location = new System.Drawing.Point(8, 171);
+            this.tbNotes.Location = new System.Drawing.Point(8, 201);
             this.tbNotes.Margin = new System.Windows.Forms.Padding(2);
             this.tbNotes.Multiline = true;
             this.tbNotes.Name = "tbNotes";
-            this.tbNotes.Size = new System.Drawing.Size(564, 45);
+            this.tbNotes.Size = new System.Drawing.Size(564, 56);
             this.tbNotes.TabIndex = 3;
             // 
             // tblToWarehouse
@@ -313,7 +335,7 @@
             this.tblToWarehouse.Controls.Add(this.lblToWarehouse, 0, 0);
             this.tblToWarehouse.Controls.Add(this.cbToWarehouse, 1, 0);
             this.tblToWarehouse.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tblToWarehouse.Location = new System.Drawing.Point(8, 121);
+            this.tblToWarehouse.Location = new System.Drawing.Point(8, 151);
             this.tblToWarehouse.Name = "tblToWarehouse";
             this.tblToWarehouse.RowCount = 1;
             this.tblToWarehouse.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -349,7 +371,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(590, 264);
+            this.ClientSize = new System.Drawing.Size(590, 305);
             this.Controls.Add(this.tbNotes);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tblToWarehouse);
@@ -403,5 +425,7 @@
         private System.Windows.Forms.TableLayoutPanel tblToWarehouse;
         private System.Windows.Forms.Label lblToWarehouse;
         private System.Windows.Forms.ComboBox cbToWarehouse;
+        private System.Windows.Forms.Label lblPaymentMethod;
+        private System.Windows.Forms.ComboBox cbPaymentMethod;
     }
 }

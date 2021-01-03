@@ -32,6 +32,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //
             _dtPicker.TextChanged += _dtPicker_TextChanged;
         }
+        
 
         //
         // Data Error
@@ -78,7 +79,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     }
                     // handle rate and quantity change to update Total
                     // don't do 'else' here cause supplyPrice and unitQuantity columns are already handeled above
-                    if (e.ColumnIndex == colUnitQuantity.Index || e.ColumnIndex == colSupplyPrice.Index)
+                    if (e.ColumnIndex == colUnitQuantity.Index || e.ColumnIndex == colRate.Index)
                     {
                         UpdateTotalColumn(e.RowIndex, e.ColumnIndex, e.FormattedValue);
                     }
@@ -95,12 +96,21 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             row.Cells[this.colProductId.Index].Value = product.Id;
             // row.Cells[this.colProduct.Index].Value = product.Name;
             row.Cells[this.colSKU.Index].Value = product.SKU;
-            row.Cells[this.colSupplyPrice.Index].Value = product.SupplyPrice;
+            switch (_movementType)
+            {
+                case ViewModel.Enums.MovementTypeEnum.SOIssueEditItems:
+                    row.Cells[this.colRate.Index].Value = product.RetailPrice;
+                    break;
+                case ViewModel.Enums.MovementTypeEnum.POReceiveEditItems:
+                    row.Cells[this.colRate.Index].Value = product.SupplyPrice;
+                    break;
+            }
             row.Cells[this.colPackageId.Index].Value = product.PackageId;
             row.Cells[this.colUomId.Index].Value = product.BaseUomId;
             row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
             row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
-            //row.Cells[this.colRate.Index].Value = product.SupplyPrice;
+            row.Cells[this.colWarehouseId.Index].Value = product.WarehouseId;
+            row.Cells[this.colWarehouse.Index].Value = product.Warehouse;
             UpdateTotalColumn(currentRowIndex, currentColumnIndex, formattedValue);
         }
 
@@ -134,8 +144,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private void InventoryUnitDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             this.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = string.Empty;
-            if (e.ColumnIndex == colProductionDate.Index
-                || e.ColumnIndex == colExpirationDate.Index)
+            if (_isEditable && (e.ColumnIndex == colProductionDate.Index
+                || e.ColumnIndex == colExpirationDate.Index))
             {
                 _rectangle = this.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
 
@@ -229,20 +239,20 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         {
             var row = this.Rows[currentRowIndex];
             object qtyVal = row.Cells[colUnitQuantity.Name].Value;
-            object rateVal = row.Cells[colSupplyPrice.Name].Value;
+            object rateVal = row.Cells[colRate.Name].Value;
             decimal quantity = 0, rate = 0;
 
             if (currentColumnIndex == colUnitQuantity.Index)
             {
                 qtyVal = formattedValue; // row.Cells[colQuantity.Name].Value;
             }
-            else if (currentColumnIndex == colSupplyPrice.Index)
+            else if (currentColumnIndex == colRate.Index)
             {
                 rateVal = formattedValue;
             }
             decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
             decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out rate);
-            row.Cells[colTotalSupplyAmount.Index].Value = quantity * rate;
+            row.Cells[colTotal.Index].Value = quantity * rate;
         }
     }
 }

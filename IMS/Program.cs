@@ -35,7 +35,7 @@ using IMS.Forms.Inventory.Units.Details;
 using Service.Core.Inventory.Units;
 using IMS.Forms.Inventory.Settings.General;
 using IMS.Forms.Inventory.Settings.References;
-using IMS.Forms.Inventory.Sales;
+//using IMS.Forms.Inventory.Sales;
 using Service.Core.Orders;
 using IMS.Forms.Inventory.Orders;
 using IMS.Forms.Inventory.Users;
@@ -191,10 +191,10 @@ namespace IMS
             //
             // Sales
             //
-            container.Register<SaleOrderListUC>(Lifestyle.Scoped);
-            container.Register<SaleOrderDetailUC>(Lifestyle.Scoped);
-            container.Register<SaleOrderCreateForm>(Lifestyle.Scoped);
-            container.Register<DirectSaleForm>(Lifestyle.Scoped);
+            //container.Register<SaleOrderListUC>(Lifestyle.Scoped);
+            //container.Register<SaleOrderDetailUC>(Lifestyle.Scoped);
+            //container.Register<SaleOrderCreateForm>(Lifestyle.Scoped);
+            //container.Register<DirectSaleForm>(Lifestyle.Scoped);
             //
             // Orders
             //
@@ -202,7 +202,7 @@ namespace IMS
             // container.Register<OrderListUC>(Lifestyle.Scoped);
             // container.Register<OrderDetailUC>(Lifestyle.Scoped);
             container.Register<OrderCreateForm>(Lifestyle.Scoped);
-            container.Register<PurchaseOrderItemCreateForm>(Lifestyle.Scoped);
+            
 
 
             // Optionally verify the container.

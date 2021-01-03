@@ -57,6 +57,7 @@ namespace Infrastructure.Entities.Orders
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
+        public string PaymentMethod { get; set; }
         #endregion
 
 

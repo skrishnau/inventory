@@ -84,6 +84,7 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.button1, "Help and Support");
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
             // 
             // btnSettings
             // 
@@ -154,6 +155,7 @@
             this.btnManufacturings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnManufacturings, "Manufacturing Resource Planning");
             this.btnManufacturings.UseVisualStyleBackColor = false;
+            this.btnManufacturings.Visible = false;
             // 
             // btnInventoryUnits
             // 
@@ -196,7 +198,7 @@
             this.btnPOS.FlatAppearance.BorderSize = 0;
             this.btnPOS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPOS.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
-            this.btnPOS.Location = new System.Drawing.Point(536, 2);
+            this.btnPOS.Location = new System.Drawing.Point(89, 2);
             this.btnPOS.Name = "btnPOS";
             this.btnPOS.Size = new System.Drawing.Size(60, 57);
             this.btnPOS.TabIndex = 8;
@@ -205,6 +207,7 @@
             this.btnPOS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnPOS, "Point Of Sale");
             this.btnPOS.UseVisualStyleBackColor = false;
+            this.btnPOS.Visible = false;
             // 
             // btnTransferOrder
             // 
@@ -213,7 +216,7 @@
             this.btnTransferOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTransferOrder.Image = global::IMS.Properties.Resources.icons8_Move_Stock_24px;
             this.btnTransferOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTransferOrder.Location = new System.Drawing.Point(477, 2);
+            this.btnTransferOrder.Location = new System.Drawing.Point(278, 2);
             this.btnTransferOrder.Name = "btnTransferOrder";
             this.btnTransferOrder.Size = new System.Drawing.Size(59, 57);
             this.btnTransferOrder.TabIndex = 3;
@@ -221,6 +224,7 @@
             this.btnTransferOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnTransferOrder, "Transfers");
             this.btnTransferOrder.UseVisualStyleBackColor = true;
+            this.btnTransferOrder.Visible = false;
             // 
             // btnSellOrder
             // 
@@ -229,7 +233,7 @@
             this.btnSellOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSellOrder.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
             this.btnSellOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSellOrder.Location = new System.Drawing.Point(418, 2);
+            this.btnSellOrder.Location = new System.Drawing.Point(149, 2);
             this.btnSellOrder.Name = "btnSellOrder";
             this.btnSellOrder.Size = new System.Drawing.Size(59, 57);
             this.btnSellOrder.TabIndex = 4;
@@ -245,7 +249,7 @@
             this.btnPurchaseOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPurchaseOrder.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
             this.btnPurchaseOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPurchaseOrder.Location = new System.Drawing.Point(348, 2);
+            this.btnPurchaseOrder.Location = new System.Drawing.Point(208, 2);
             this.btnPurchaseOrder.Name = "btnPurchaseOrder";
             this.btnPurchaseOrder.Size = new System.Drawing.Size(70, 57);
             this.btnPurchaseOrder.TabIndex = 1;
@@ -263,7 +267,7 @@
             this.btnLocateInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLocateInventory.Image = global::IMS.Properties.Resources.icons8_Wine_Tour_24px;
             this.btnLocateInventory.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLocateInventory.Location = new System.Drawing.Point(276, 2);
+            this.btnLocateInventory.Location = new System.Drawing.Point(535, 2);
             this.btnLocateInventory.Name = "btnLocateInventory";
             this.btnLocateInventory.Size = new System.Drawing.Size(61, 57);
             this.btnLocateInventory.TabIndex = 6;
@@ -271,6 +275,7 @@
             this.btnLocateInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnLocateInventory, "Locate Inventory");
             this.btnLocateInventory.UseVisualStyleBackColor = false;
+            this.btnLocateInventory.Visible = false;
             // 
             // btnDirectMove
             // 
@@ -281,7 +286,7 @@
             this.btnDirectMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDirectMove.Image = global::IMS.Properties.Resources.icons8_Data_Transfer_24px;
             this.btnDirectMove.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDirectMove.Location = new System.Drawing.Point(216, 2);
+            this.btnDirectMove.Location = new System.Drawing.Point(475, 2);
             this.btnDirectMove.Name = "btnDirectMove";
             this.btnDirectMove.Size = new System.Drawing.Size(60, 57);
             this.btnDirectMove.TabIndex = 4;
@@ -289,6 +294,7 @@
             this.btnDirectMove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnDirectMove, "Direct Move");
             this.btnDirectMove.UseVisualStyleBackColor = false;
+            this.btnDirectMove.Visible = false;
             // 
             // btnDirectIssue
             // 
@@ -297,7 +303,7 @@
             this.btnDirectIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDirectIssue.Image = global::IMS.Properties.Resources.icons8_Sell_24px;
             this.btnDirectIssue.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDirectIssue.Location = new System.Drawing.Point(153, 2);
+            this.btnDirectIssue.Location = new System.Drawing.Point(412, 2);
             this.btnDirectIssue.Name = "btnDirectIssue";
             this.btnDirectIssue.Size = new System.Drawing.Size(63, 57);
             this.btnDirectIssue.TabIndex = 7;
@@ -313,7 +319,7 @@
             this.btnDirectReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDirectReceive.Image = global::IMS.Properties.Resources.icons8_Lease_24px;
             this.btnDirectReceive.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnDirectReceive.Location = new System.Drawing.Point(89, 2);
+            this.btnDirectReceive.Location = new System.Drawing.Point(348, 2);
             this.btnDirectReceive.Name = "btnDirectReceive";
             this.btnDirectReceive.Size = new System.Drawing.Size(64, 57);
             this.btnDirectReceive.TabIndex = 3;
@@ -466,15 +472,15 @@
             this.Controls.Add(this.btnInventoryUnits);
             this.Controls.Add(this.btnProductList);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.btnPOS);
-            this.Controls.Add(this.btnTransferOrder);
-            this.Controls.Add(this.btnSellOrder);
-            this.Controls.Add(this.btnPurchaseOrder);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnLocateInventory);
             this.Controls.Add(this.btnDirectMove);
             this.Controls.Add(this.btnDirectIssue);
             this.Controls.Add(this.btnDirectReceive);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btnTransferOrder);
+            this.Controls.Add(this.btnPurchaseOrder);
+            this.Controls.Add(this.btnSellOrder);
+            this.Controls.Add(this.btnPOS);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.panel5);

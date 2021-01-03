@@ -1,4 +1,5 @@
-﻿using Infrastructure.Entities.Orders;
+﻿using DTO.Common;
+using Infrastructure.Entities.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,16 +32,16 @@ namespace DTO.Core.Inventory
                 ProductId = model.ProductId,
                 Product = model.Product,
                 SKU = model.SKU,
-                ExpirationDate = model.ExpirationDate.HasValue ? model.ExpirationDate.Value.ToShortDateString() : "",
-                ProductionDate = model.ProductionDate.HasValue ? model.ProductionDate.Value.ToShortDateString() : "",
+                ExpirationDate = model.ExpirationDate,//.HasValue ? model.ExpirationDate.Value.ToShortDateString() : "",
+                ProductionDate = model.ProductionDate,//.HasValue ? model.ProductionDate.Value.ToShortDateString() : "",
                 LotNumber = model.LotNumber,
                 IssueReceipt = null,
                 IssueAdjustment = null,//model.Adjustment,
                 NetWeight = model.NetWeight,
                 GrossWeight = model.GrossWeight,
                 UnitQuantity = model.UnitQuantity,
-                SupplyPrice = model.Rate,
-                TotalSupplyAmount = model.TotalAmount,
+                Rate = model.Rate,
+                Total = model.Total,
                 IsHold = model.IsHold,
                 SupplierId = model.SupplierId,
                 Supplier = model.Supplier,
@@ -57,6 +58,11 @@ namespace DTO.Core.Inventory
                 ReceiveDate = null,
                 ReceiveReceipt = model.Reference,
                 Remark = null,
+                InStockQuantity = model.InStockQuantity,
+                OnOrderQuantity = model.OnOrderQuantity,
+                OnComittedQuantity = model.OnComittedQuantity,
+                OnHoldQuantity = model.OnHoldQuantity,
+                
             };
         }
 
@@ -64,9 +70,12 @@ namespace DTO.Core.Inventory
         {
             if (entity == null)
                 entity = new OrderItem();
+            //DateTime productionDate; DateTime expireDate;
+            //var prodDateParsed = DateTime.TryParse(model.ProductionDate, out productionDate);
+            //var expireDateParsed = DateTime.TryParse(model.ExpirationDate, out expireDate);
 
             entity.Adjustment = model.Adjustment;
-            entity.ExpirationDate = model.ExpirationDate;
+            entity.ExpirationDate = DateHelper.ConvertToDateTime(model.ExpirationDate);//model.ExpirationDate;
             entity.GrossWeight = model.GrossWeight;
             entity.IsHold = model.IsHold;
             entity.IsReceived = model.IsReceived;
@@ -75,55 +84,24 @@ namespace DTO.Core.Inventory
             entity.PackageId = model.PackageId;
             entity.PackageQuantity = model.PackageQuantity;
             entity.ProductId = model.ProductId;
-            entity.ProductionDate = model.ProductionDate;
-            entity.PurchaseOrderId = model.PurchaseOrderId;
+            entity.ProductionDate = DateHelper.ConvertToDateTime(model.ProductionDate);// model.ProductionDate;
+            entity.OrderId = model.OrderId;
             entity.Rate = model.Rate;
             entity.Reference = model.Reference;
             entity.SupplierId = model.SupplierId;
-            entity.TotalAmount = model.TotalAmount;
+            entity.Total = model.Total;
             entity.UnitQuantity = model.UnitQuantity;
             entity.UomId = model.UomId;
             entity.WarehouseId = model.WarehouseId;
             return entity;
         }
 
-        public static List<OrderItemModel> MapToPurhaseOrderItemModel(IQueryable<OrderItem> query)
+        public static List<OrderItemModel> MapToOrderItemModel(IQueryable<OrderItem> query)
         {
             var list = new List<OrderItemModel>();
             foreach (var model in query)
             {
-                list.Add(new OrderItemModel()
-                {
-                    Id = model.Id,
-                    UnitQuantity = model.UnitQuantity,
-                    Rate = model.Rate,
-                    TotalAmount = model.TotalAmount,
-                    Product = model.Product.Name,
-                    SKU = model.Product.SKU,
-                    IsHold = model.IsHold,
-                    IsReceived = model.IsReceived,
-                    ProductId = model.ProductId,
-                    PurchaseOrderId = model.PurchaseOrderId,
-                    WarehouseId = model.WarehouseId,
-                    Warehouse = model.Warehouse?.Name,
-                    InStock = model.Product.InStockQuantity,
-                    OnOrder = model.Product.OnOrderQuantity,
-                    UomId = model.UomId,
-                    SupplierId = model.SupplierId,
-                    Supplier = model.Supplier == null ? "" : model.Supplier.BasicInfo.Name,
-                    Adjustment = model.Adjustment,
-                    ExpirationDate = model.ExpirationDate,
-                    GrossWeight = model.GrossWeight,
-                    LotNumber = model.LotNumber,
-                    NetWeight = model.NetWeight,
-                    Package = model.Package == null ? "" : model.Package.Name,
-                    PackageId = model.PackageId,
-                    PackageQuantity = model.PackageQuantity,
-                    ProductionDate = model.ProductionDate,
-                    Reference = model.Reference,
-                    Uom = model.Uom == null ? "" : model.Uom.Name,
-                    
-                });
+                list.Add(MapToOrderItemModel(model));
             }
             return list;
         }
@@ -133,40 +111,44 @@ namespace DTO.Core.Inventory
             var list = new List<OrderItemModel>();
             foreach (var model in query)
             {
-                list.Add(new OrderItemModel()
-                {
-                    Id = model.Id,
-                    UnitQuantity = model.UnitQuantity,
-                    Rate = model.Rate,
-                    TotalAmount = model.TotalAmount,
-                    Product = model.Product.Name,
-                    SKU = model.Product.SKU,
-                    IsHold = model.IsHold,
-                    IsReceived = model.IsReceived,
-                    ProductId = model.ProductId,
-                    PurchaseOrderId = model.PurchaseOrderId,
-                    WarehouseId = model.WarehouseId,
-                    Warehouse = model.Warehouse?.Name,
-                    InStock = model.Product.InStockQuantity,
-                    OnOrder = model.Product.OnOrderQuantity,
-                    UomId = model.UomId,
-                    SupplierId = model.SupplierId,
-                    Supplier = model.Supplier == null ? "" : model.Supplier.BasicInfo.Name,
-                    Adjustment = model.Adjustment,
-                    ExpirationDate = model.ExpirationDate,
-                    GrossWeight = model.GrossWeight,
-                    LotNumber = model.LotNumber,
-                    NetWeight = model.NetWeight,
-                    Package = model.Package == null ? "" : model.Package.Name,
-                    PackageId = model.PackageId,
-                    PackageQuantity = model.PackageQuantity,
-                    ProductionDate = model.ProductionDate,
-                    Reference = model.Reference,
-                    Uom = model.Uom == null ? "" : model.Uom.Name,
-
-                });
+                list.Add(MapToOrderItemModel(model));
             }
             return list;
+        }
+        public static OrderItemModel MapToOrderItemModel(OrderItem model)
+        {
+            return new OrderItemModel()
+            {
+                Id = model.Id,
+                UnitQuantity = model.UnitQuantity,
+                Rate = model.Rate,
+                Total = model.Total,
+                Product = model.Product.Name,
+                SKU = model.Product.SKU,
+                IsHold = model.IsHold,
+                IsReceived = model.IsReceived,
+                ProductId = model.ProductId,
+                OrderId = model.OrderId,
+                WarehouseId = model.WarehouseId,
+                Warehouse = model.Warehouse?.Name,
+                InStockQuantity = model.Product.InStockQuantity,
+                OnOrderQuantity = model.Product.OnOrderQuantity,
+                OnHoldQuantity = model.Product.OnHoldQuantity,
+                UomId = model.UomId,
+                SupplierId = model.SupplierId,
+                Supplier = model.Supplier == null ? "" : model.Supplier.BasicInfo.Name,
+                Adjustment = model.Adjustment,
+                ExpirationDate = DateHelper.ToFormattedDateString(model.ExpirationDate),
+                GrossWeight = model.GrossWeight,
+                LotNumber = model.LotNumber,
+                NetWeight = model.NetWeight,
+                Package = model.Package == null ? "" : model.Package.Name,
+                PackageId = model.PackageId,
+                PackageQuantity = model.PackageQuantity,
+                ProductionDate = DateHelper.ToFormattedDateString(model.ProductionDate),
+                Reference = model.Reference,
+                Uom = model.Uom == null ? "" : model.Uom.Name,
+            };
         }
 
         public static List<InventoryUnitModel> MapToInventoryUnitModel(this ICollection<OrderItem> query)

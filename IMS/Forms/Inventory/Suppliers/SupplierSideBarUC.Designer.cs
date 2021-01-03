@@ -69,7 +69,7 @@
             // 
             this.lnkList.AutoSize = true;
             this.lnkList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkList.Image = global::IMS.Properties.Resources.icons8_List_16px;
+            this.lnkList.Image = global::IMS.Properties.Resources.icons8_View_More_24px;
             this.lnkList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkList.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkList.LinkColor = System.Drawing.SystemColors.ControlDarkDark;

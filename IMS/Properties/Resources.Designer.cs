@@ -443,16 +443,6 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_Edit_Property_16px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Edit_Property_16px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons8_Edit_Row_16px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Edit_Row_16px", resourceCulture);
@@ -483,16 +473,6 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_Floods_16px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Floods_16px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons8_Flow_Chart_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Flow_Chart_24px", resourceCulture);
@@ -516,16 +496,6 @@ namespace IMS.Properties {
         internal static System.Drawing.Bitmap icons8_Gear_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Gear_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Handshake_16px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Handshake_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -603,16 +573,6 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_Ingredients_24px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Ingredients_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons8_Inventory_Flow_16px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Inventory_Flow_16px", resourceCulture);
@@ -656,16 +616,6 @@ namespace IMS.Properties {
         internal static System.Drawing.Bitmap icons8_Lease_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Lease_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_List_16px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_List_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -746,26 +696,6 @@ namespace IMS.Properties {
         internal static System.Drawing.Bitmap icons8_Move_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Move_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Move_Shit_Around_24px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Move_Shit_Around_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Move_Shit_Around_24px_1 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Move_Shit_Around_24px_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1096,16 +1026,6 @@ namespace IMS.Properties {
         internal static System.Drawing.Bitmap icons8_Trolley_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Trolley_24px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Trolley_24px_1 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Trolley_24px_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

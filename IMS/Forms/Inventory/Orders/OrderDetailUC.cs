@@ -137,6 +137,7 @@ namespace IMS.Forms.Inventory.Purchases
                 
                 lblAddress.Text = model.Address;
                 lblPhone.Text = model.Phone;
+                lblPaymentMethod.Text = model.PaymentMethod??"-";
 
                 lblNoItemsMessage.Visible = !model.OrderItems.Any();
 
@@ -257,9 +258,17 @@ namespace IMS.Forms.Inventory.Purchases
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var itemCreateForm = Program.container.GetInstance<PurchaseOrderItemCreateForm>();
-                itemCreateForm.SetData(_orderType, _orderModel.Id);
-                itemCreateForm.ShowDialog();
+                //var itemCreateForm = Program.container.GetInstance<PurchaseOrderItemCreateForm>();
+                //itemCreateForm.SetData(_orderType, _orderModel.Id);
+                //itemCreateForm.ShowDialog();
+                var invAdjForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                var movementType = _orderType == OrderTypeEnum.Purchase
+                    ? MovementTypeEnum.POReceiveEditItems
+                    : _orderType == OrderTypeEnum.Sale
+                    ? MovementTypeEnum.SOIssueEditItems
+                    : MovementTypeEnum.TOMove;
+                invAdjForm.SetData(movementType, _orderId);
+                invAdjForm.ShowDialog();
             }
         }
 

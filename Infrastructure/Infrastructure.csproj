@@ -100,6 +100,18 @@
     <Compile Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.Designer.cs">
       <DependentUpon>202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101010519461_PaymentMethodAdded.cs" />
+    <Compile Include="Migrations\202101010519461_PaymentMethodAdded.Designer.cs">
+      <DependentUpon>202101010519461_PaymentMethodAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.cs" />
+    <Compile Include="Migrations\202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.Designer.cs">
+      <DependentUpon>202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101021549006_updatedcolumnnames.cs" />
+    <Compile Include="Migrations\202101021549006_updatedcolumnnames.Designer.cs">
+      <DependentUpon>202101021549006_updatedcolumnnames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +137,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.resx">
       <DependentUpon>202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101010519461_PaymentMethodAdded.resx">
+      <DependentUpon>202101010519461_PaymentMethodAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.resx">
+      <DependentUpon>202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101021549006_updatedcolumnnames.resx">
+      <DependentUpon>202101021549006_updatedcolumnnames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
