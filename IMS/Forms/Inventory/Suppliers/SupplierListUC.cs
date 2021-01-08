@@ -36,7 +36,6 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void SupplierUC_Load(object sender, EventArgs e)
         {
-            btnNew.Visible = false;
             // InitializeHeader();
             Populate();
 
@@ -76,17 +75,17 @@ namespace IMS.Forms.Inventory.Suppliers
             if (rbCustomer.Checked)
             {
                 _userType = UserTypeEnum.Customer;
-                btnNew.Visible = true;
+               // btnNew.Visible = true;
             }
             else if (rbSupplier.Checked)
             {
                 _userType = UserTypeEnum.Supplier;
-                btnNew.Visible = true;
+                //btnNew.Visible = true;
             }
             else
             {
                 _userType = UserTypeEnum.Client;
-                btnNew.Visible = false;
+                //btnNew.Visible = false;
             }
             Populate();
         }

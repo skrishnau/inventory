@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using IMS.Forms.Common;
+using IMS.Forms.Common.Validations;
 using Service.Core.Users;
 using Service.Listeners;
+using ViewModel.Core.Common;
 using ViewModel.Core.Users;
 using ViewModel.Enums;
 
@@ -15,6 +19,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private UserTypeEnum _userType;
 
         private int _supplierId;
+        private int _userId;
 
         public SupplierCreate(IUserService supplierService, IDatabaseChangeListener listener)
         {
@@ -32,6 +37,26 @@ namespace IMS.Forms.Inventory.Suppliers
             this.Text = _userType + " Create";
             InitializeEvents();
             this.ActiveControl = tbName;
+            PopulateUserType();
+
+            var supplier = _supplierService.GetSupplier(_userId);
+            SetDataForEdit(supplier);
+        }
+
+        private void PopulateUserType()
+        {
+            var list = new List<NameValuePair>();
+            var customer = UserTypeEnum.Customer.ToString();
+            var supplier = UserTypeEnum.Supplier.ToString();
+            list.Add(new NameValuePair ("", "--- Select ---"));
+            list.Add(new NameValuePair (customer, customer));
+            list.Add(new NameValuePair (supplier, supplier));
+
+            cbUserType.DataSource = list;
+            cbUserType.ValueMember = "Value";
+            cbUserType.DisplayMember = "name";
+            if(_userType != UserTypeEnum.All && _userType != UserTypeEnum.Client)
+                cbUserType.SelectedValue = _userType.ToString();
         }
 
         private void InitializeEvents()
@@ -39,21 +64,20 @@ namespace IMS.Forms.Inventory.Suppliers
             btnSave.Click += btnSave_Click;
         }
 
-        public void SetDataForEdit(int supplierId, UserTypeEnum userType)
+        public void SetDataForEdit(int userId, UserTypeEnum userType)
         {
             _userType = userType;
-
-            var supplier = _supplierService.GetSupplier(supplierId);
-            SetDataForEdit(supplier);
+            _userId = userId;
         }
 
         
         public void SetDataForEdit(UserModel model)
         {
-
             if (model != null)
             {
-                this.Text = _userType + " Edit (" + model.Name + ")";
+                cbUserType.Enabled = false;
+                cbUserType.SelectedValue = model.UserType;
+                this.Text = model.UserType + " Edit (" + model.Name + ")";
                 tbAddress.Text = model.Address;
                 tbEmail.Text = model.Email;
                 tbFax.Text = model.Fax;
@@ -69,6 +93,12 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            var msg = ValidateControls();
+            if(!string.IsNullOrEmpty(msg))
+            {
+                PopupMessage.ShowInfoMessage(msg);
+                return;
+            }
             var model = new UserModel
             {
                 Address = tbAddress.Text,
@@ -83,10 +113,26 @@ namespace IMS.Forms.Inventory.Suppliers
                // SalesPerson = tbSalesperson.Text,
                 Website = tbWebsite.Text,
                 Use = chkUse.Checked,
-                UserType = _userType.ToString(),
+                UserType = cbUserType.SelectedValue.ToString(),
             };
             _supplierService.AddOrUpdateSupplier(model);
             this.Close();
+        }
+
+        private string ValidateControls()
+        {
+            var msg = string.Empty;
+            if (string.IsNullOrEmpty(tbName.Text.Trim()))
+            {
+                errorProvider1.SetError(tbName, RequiredFieldValidator.REQUIRED);
+                msg += "Name is required.\n";
+            }
+            if(string.IsNullOrEmpty(cbUserType.SelectedValue?.ToString()))
+            {
+                errorProvider1.SetError(cbUserType, RequiredFieldValidator.REQUIRED);
+                msg += "User type is required.\n";
+            }
+            return msg;
         }
 
         internal void SetType(OrderTypeEnum orderType)
