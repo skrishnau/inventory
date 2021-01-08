@@ -88,6 +88,7 @@ namespace IMS.Forms.Inventory.UOM
 
         private void PopulateUomData()
         {
+            // TODO: here is error after saving first row in UOM
             // should use thread safe way ???
             dgvUom.Rows.Clear();
             var uoms = _inventoryService.GetUomList();

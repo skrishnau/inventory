@@ -50,6 +50,7 @@
             this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnSaleTransactionList = new System.Windows.Forms.Button();
             this.btnPurchaseTransaction = new System.Windows.Forms.Button();
+            this.btnClients = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -76,7 +77,6 @@
             this.pnlMisc = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCustomer = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -418,6 +418,22 @@
             this.toolTip1.SetToolTip(this.btnPurchaseTransaction, "Purchases");
             this.btnPurchaseTransaction.UseVisualStyleBackColor = true;
             // 
+            // btnClients
+            // 
+            this.btnClients.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnClients.FlatAppearance.BorderSize = 0;
+            this.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClients.Image = global::IMS.Properties.Resources.icons8_Supplier_24px;
+            this.btnClients.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnClients.Location = new System.Drawing.Point(0, 15);
+            this.btnClients.Name = "btnClients";
+            this.btnClients.Size = new System.Drawing.Size(64, 53);
+            this.btnClients.TabIndex = 48;
+            this.btnClients.Text = "Clients";
+            this.btnClients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnClients, "Settings");
+            this.btnClients.UseVisualStyleBackColor = true;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitter1);
@@ -669,7 +685,7 @@
             this.pnlMisc.Controls.Add(this.btnSettings);
             this.pnlMisc.Controls.Add(this.btnReports);
             this.pnlMisc.Controls.Add(this.btnAccounts);
-            this.pnlMisc.Controls.Add(this.btnCustomer);
+            this.pnlMisc.Controls.Add(this.btnClients);
             this.pnlMisc.Controls.Add(this.label6);
             this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMisc.Location = new System.Drawing.Point(1035, 2);
@@ -696,22 +712,6 @@
             this.label1.Size = new System.Drawing.Size(65, 15);
             this.label1.TabIndex = 38;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnCustomer
-            // 
-            this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCustomer.FlatAppearance.BorderSize = 0;
-            this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCustomer.Image = global::IMS.Properties.Resources.icons8_Supplier_24px;
-            this.btnCustomer.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCustomer.Location = new System.Drawing.Point(0, 15);
-            this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(64, 53);
-            this.btnCustomer.TabIndex = 48;
-            this.btnCustomer.Text = "Customer";
-            this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnCustomer, "Settings");
-            this.btnCustomer.UseVisualStyleBackColor = true;
             // 
             // InventoryMenuBar
             // 
@@ -799,6 +799,6 @@
         private System.Windows.Forms.Label label1;
         protected internal System.Windows.Forms.Button btnSaleTransactionList;
         protected internal System.Windows.Forms.Button btnPurchaseTransaction;
-        protected internal System.Windows.Forms.Button btnCustomer;
+        protected internal System.Windows.Forms.Button btnClients;
     }
 }

@@ -29,10 +29,12 @@ namespace DTO.Core.Inventory
             // don't assign the dates
             entity.Website = model.Website;
             entity.Use = model.Use;
+            entity.UserType = model.UserType;
+                
             return entity;
         }
 
-        public static List<UserModel> MapToSupplierModel(IQueryable<User> suppliers)
+        public static List<UserModel> MapToUserModel(IQueryable<User> suppliers)
         {
             var list = new List<UserModel>();
             foreach (var supplier in suppliers)
@@ -42,24 +44,32 @@ namespace DTO.Core.Inventory
             return list;
         }
 
-        public static UserModel MapToSupplierModel(User supplier)
+        public static UserModel MapToSupplierModel(User x)
         {
             return new UserModel()
             {
-                Address = supplier.Address,
-                CreatedAt = supplier.CreatedAt,
-                Email = supplier.Email,
-                Fax = supplier.Fax,
-                Id = supplier.Id,
-                IsCompany = supplier.IsCompany,
-                Name = supplier.Name,
-                Notes = supplier.Notes,
-                Phone = supplier.Phone,
-                DOB = supplier.DOB,
-                SalesPerson = supplier.SalesPerson,
-                UpdatedAt = supplier.UpdatedAt,
-                Website = supplier.Website,
-                Use = supplier.Use
+                Address = x.Address,
+                CreatedAt = x.CreatedAt,
+                Email = x.Email,
+                Fax = x.Fax,
+                Id = x.Id,
+                IsCompany = x.IsCompany,
+                Name = x.Name,
+                Notes = x.Notes,
+                Phone = x.Phone,
+                DOB = x.DOB,
+                SalesPerson = x.SalesPerson,
+                UpdatedAt = x.UpdatedAt,
+                Website = x.Website,
+                Use = x.Use,
+
+                CanLogin = x.CanLogin,
+                Password = x.Password,
+                Username = x.Username,
+                UserType = x.UserType,
+                
+                IsMarried = x.IsMarried,
+                Gender = x.Gender,
             };
         }
 

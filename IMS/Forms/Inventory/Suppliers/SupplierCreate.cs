@@ -12,7 +12,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private readonly IUserService _supplierService;
         private readonly IDatabaseChangeListener _listener;
 
-        private UserType _userType;
+        private UserTypeEnum _userType;
 
         private int _supplierId;
 
@@ -21,8 +21,16 @@ namespace IMS.Forms.Inventory.Suppliers
             this._supplierService = supplierService;
             _listener = listener;
             InitializeComponent();
-            InitializeEvents();
 
+           
+
+            this.Load += SupplierCreate_Load;
+        }
+
+        private void SupplierCreate_Load(object sender, EventArgs e)
+        {
+            this.Text = _userType + " Create";
+            InitializeEvents();
             this.ActiveControl = tbName;
         }
 
@@ -31,8 +39,10 @@ namespace IMS.Forms.Inventory.Suppliers
             btnSave.Click += btnSave_Click;
         }
 
-        public void SetDataForEdit(int supplierId)
+        public void SetDataForEdit(int supplierId, UserTypeEnum userType)
         {
+            _userType = userType;
+
             var supplier = _supplierService.GetSupplier(supplierId);
             SetDataForEdit(supplier);
         }
@@ -50,7 +60,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 tbName.Text = model.Name;
                 tbNotes.Text = model.Notes;
                 tbPhone.Text = model.Phone;
-                tbSalesperson.Text = model.SalesPerson;
+                //tbSalesperson.Text = model.SalesPerson;
                 tbWebsite.Text = model.Website;
                 chkUse.Checked = model.Use;
                 _supplierId = model.Id;
@@ -70,7 +80,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 Id = _supplierId,
                 Notes = tbNotes.Text,
                 //RegisteredAt = cbtbRegisteredDate.Value,
-                SalesPerson = tbSalesperson.Text,
+               // SalesPerson = tbSalesperson.Text,
                 Website = tbWebsite.Text,
                 Use = chkUse.Checked,
                 UserType = _userType.ToString(),
@@ -84,13 +94,13 @@ namespace IMS.Forms.Inventory.Suppliers
             switch (orderType)
             {
                 case OrderTypeEnum.Sale:
-                    _userType = UserType.Customer;
+                    _userType = UserTypeEnum.Customer;
                     break;
                 case OrderTypeEnum.Purchase:
-                    _userType = UserType.Supplier;
+                    _userType = UserTypeEnum.Supplier;
                     break;
                 case OrderTypeEnum.All:
-                    _userType = UserType.All;
+                    _userType = UserTypeEnum.All;
                     break;
             }
         }

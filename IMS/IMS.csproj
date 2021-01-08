@@ -284,12 +284,6 @@
     <Compile Include="Forms\Inventory\Settings\InventorySettingsUC.Designer.cs">
       <DependentUpon>InventorySettingsUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierDetailUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierDetailUC.Designer.cs">
-      <DependentUpon>SupplierDetailUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Suppliers\SupplierListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -534,12 +528,6 @@
     <Compile Include="Forms\Inventory\Suppliers\SupplierCreate.Designer.cs">
       <DependentUpon>SupplierCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\UC\AddSupplierUC.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\UC\AddSupplierUC.Designer.cs">
-      <DependentUpon>AddSupplierUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\InventoryUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -551,18 +539,6 @@
     </Compile>
     <Compile Include="Forms\Inventory\Suppliers\SupplierUC.Designer.cs">
       <DependentUpon>SupplierUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Users\UserCreate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Users\UserCreate.Designer.cs">
-      <DependentUpon>UserCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Users\UserListUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Users\UserListUC.Designer.cs">
-      <DependentUpon>UserListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -661,9 +637,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsUC.resx">
       <DependentUpon>InventorySettingsUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierDetailUC.resx">
-      <DependentUpon>SupplierDetailUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierListUC.resx">
       <DependentUpon>SupplierListUC.cs</DependentUpon>
@@ -782,20 +755,11 @@
     <EmbeddedResource Include="Forms\Inventory\Categories\CategoryListUC.resx">
       <DependentUpon>CategoryListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Suppliers\UC\AddSupplierUC.resx">
-      <DependentUpon>AddSupplierUC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierUC.resx">
       <DependentUpon>SupplierUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Users\UserCreate.resx">
-      <DependentUpon>UserCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Users\UserListUC.resx">
-      <DependentUpon>UserListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

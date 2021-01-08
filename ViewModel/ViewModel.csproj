@@ -101,7 +101,7 @@
     <Compile Include="Core\Settings\BillSettingsModel.cs" />
     <Compile Include="Core\Settings\CompanyInfoSettingModel.cs" />
     <Compile Include="Enums\AdjustmentEnum.cs" />
-    <Compile Include="Enums\UserType.cs" />
+    <Compile Include="Enums\UserTypeEnum.cs" />
     <Compile Include="Enums\InventoryActionEnum.cs" />
     <Compile Include="Enums\Inventory\Adjustments.cs" />
     <Compile Include="Enums\MovementTypeEnum.cs" />

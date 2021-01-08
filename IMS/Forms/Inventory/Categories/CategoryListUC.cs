@@ -39,13 +39,13 @@ namespace IMS.Forms.Inventory.Categories
 
         private void InitializeHeader()
         {
-            var _header = HeaderTemplate.Instance;
-            _header.btnNew.Visible = true;
-            _header.btnNew.Click += BtnAddCategory_Click;
-            this.Controls.Add(_header);
-            _header.SendToBack();
-            // header text
-            _header.lblHeading.Text = "Categories";
+            //var _header = HeaderTemplate.Instance;
+            //_header.btnNew.Visible = true;
+            btnNew.Click += BtnAddCategory_Click;
+            //this.Controls.Add(_header);
+            //_header.SendToBack();
+            //// header text
+            //_header.lblHeading.Text = "Categories";
 
         }
 

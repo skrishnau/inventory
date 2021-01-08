@@ -72,7 +72,8 @@
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tbCompanyName, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 6);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 8;
@@ -84,12 +85,12 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(302, 231);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(266, 272);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // tbWebsite
             // 
-            this.tbWebsite.Location = new System.Drawing.Point(113, 198);
+            this.tbWebsite.Location = new System.Drawing.Point(100, 240);
             this.tbWebsite.Margin = new System.Windows.Forms.Padding(2);
             this.tbWebsite.Name = "tbWebsite";
             this.tbWebsite.Size = new System.Drawing.Size(127, 20);
@@ -97,7 +98,7 @@
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(113, 170);
+            this.tbEmail.Location = new System.Drawing.Point(100, 206);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(2);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(127, 20);
@@ -105,7 +106,7 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(113, 142);
+            this.tbPhone.Location = new System.Drawing.Point(100, 172);
             this.tbPhone.Margin = new System.Windows.Forms.Padding(2);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(127, 20);
@@ -113,7 +114,7 @@
             // 
             // tbPAN
             // 
-            this.tbPAN.Location = new System.Drawing.Point(113, 114);
+            this.tbPAN.Location = new System.Drawing.Point(100, 138);
             this.tbPAN.Margin = new System.Windows.Forms.Padding(2);
             this.tbPAN.Name = "tbPAN";
             this.tbPAN.Size = new System.Drawing.Size(127, 20);
@@ -121,7 +122,7 @@
             // 
             // tbVAT
             // 
-            this.tbVAT.Location = new System.Drawing.Point(113, 86);
+            this.tbVAT.Location = new System.Drawing.Point(100, 104);
             this.tbVAT.Margin = new System.Windows.Forms.Padding(2);
             this.tbVAT.Name = "tbVAT";
             this.tbVAT.Size = new System.Drawing.Size(127, 20);
@@ -129,7 +130,7 @@
             // 
             // tbOwner
             // 
-            this.tbOwner.Location = new System.Drawing.Point(113, 58);
+            this.tbOwner.Location = new System.Drawing.Point(100, 70);
             this.tbOwner.Margin = new System.Windows.Forms.Padding(2);
             this.tbOwner.Name = "tbOwner";
             this.tbOwner.Size = new System.Drawing.Size(127, 20);
@@ -137,7 +138,7 @@
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(113, 30);
+            this.tbAddress.Location = new System.Drawing.Point(100, 36);
             this.tbAddress.Margin = new System.Windows.Forms.Padding(2);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(127, 20);
@@ -146,7 +147,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2, 196);
+            this.label13.Location = new System.Drawing.Point(2, 238);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(46, 13);
@@ -156,7 +157,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 168);
+            this.label12.Location = new System.Drawing.Point(2, 204);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 13);
@@ -166,7 +167,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(2, 140);
+            this.label11.Location = new System.Drawing.Point(2, 170);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(38, 13);
@@ -176,7 +177,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(2, 112);
+            this.label10.Location = new System.Drawing.Point(2, 136);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 13);
@@ -186,7 +187,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 84);
+            this.label9.Location = new System.Drawing.Point(2, 102);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
@@ -196,7 +197,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(2, 56);
+            this.label8.Location = new System.Drawing.Point(2, 68);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(76, 13);
@@ -206,7 +207,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 28);
+            this.label7.Location = new System.Drawing.Point(2, 34);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(45, 13);
@@ -225,7 +226,7 @@
             // 
             // tbCompanyName
             // 
-            this.tbCompanyName.Location = new System.Drawing.Point(113, 2);
+            this.tbCompanyName.Location = new System.Drawing.Point(100, 2);
             this.tbCompanyName.Margin = new System.Windows.Forms.Padding(2);
             this.tbCompanyName.Name = "tbCompanyName";
             this.tbCompanyName.Size = new System.Drawing.Size(127, 20);
@@ -234,15 +235,16 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.btnSaveProfile);
-            this.panel3.Location = new System.Drawing.Point(3, 245);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 272);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(302, 29);
+            this.panel3.Size = new System.Drawing.Size(266, 29);
             this.panel3.TabIndex = 4;
             // 
             // btnSaveProfile
             // 
             this.btnSaveProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveProfile.Location = new System.Drawing.Point(165, 3);
+            this.btnSaveProfile.Location = new System.Drawing.Point(177, 3);
             this.btnSaveProfile.Name = "btnSaveProfile";
             this.btnSaveProfile.Size = new System.Drawing.Size(75, 23);
             this.btnSaveProfile.TabIndex = 3;
@@ -256,7 +258,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.panel3);
             this.Name = "GeneralSettingsUC";
-            this.Size = new System.Drawing.Size(312, 283);
+            this.Size = new System.Drawing.Size(266, 301);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel3.ResumeLayout(false);

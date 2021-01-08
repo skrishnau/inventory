@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Common;
 using ViewModel.Core.Users;
+using ViewModel.Enums;
 
 namespace Service.Core.Users
 {
@@ -12,15 +13,14 @@ namespace Service.Core.Users
     {
         void AddOrUpdateUser(UserModel userModel);
 
-        List<UserModel> GetUserList();
-        
+        List<UserModel> GetUserList(UserTypeEnum userType);
+
         void DeleteUser(UserModel user);
 
         void AddOrUpdateSupplier(UserModel supplierModel);
 
         UserModel GetSupplier(int supplierId);
 
-        List<UserModel> GetSupplierList();
 
         List<IdNamePair> GetSupplierListForCombo();
     }

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
@@ -14,7 +7,6 @@ using IMS.Forms.Inventory.Categories;
 using IMS.Forms.Common.Display;
 using IMS.Forms.Inventory.Settings.References;
 using IMS.Forms.Inventory.Settings.General;
-using IMS.Forms.Inventory.Users;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.Inventory.Suppliers;
 
@@ -52,6 +44,7 @@ namespace IMS.Forms.Inventory.Settings
                 HeadingText = "Settings",
                 SubHeadingText = ""
             };
+            _body.pnlBody.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Controls.Add(_body);
             _body.pnlSideBar.Controls.Add(_sidebar);
         }
@@ -108,7 +101,7 @@ namespace IMS.Forms.Inventory.Settings
 
         private void LnkUsers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var userListUC = Program.container.GetInstance<UserListUC>();
+            var userListUC = Program.container.GetInstance<SupplierListUC>();
             _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(userListUC);
             // set selection

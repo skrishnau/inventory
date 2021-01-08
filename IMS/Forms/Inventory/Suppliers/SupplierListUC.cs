@@ -5,6 +5,7 @@ using SimpleInjector.Lifestyles;
 using Service.DbEventArgs;
 using ViewModel.Core.Users;
 using Service.Core.Users;
+using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
@@ -16,6 +17,8 @@ namespace IMS.Forms.Inventory.Suppliers
         private readonly IDatabaseChangeListener _listener;
 
         UserModel _selectedSupplierModel;
+
+        UserTypeEnum _userType = UserTypeEnum.Client;
         //HeaderTemplate _header;
 
         public SupplierListUC(IUserService supplierService, IDatabaseChangeListener listener)
@@ -33,7 +36,8 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void SupplierUC_Load(object sender, EventArgs e)
         {
-           // InitializeHeader();
+            btnNew.Visible = false;
+            // InitializeHeader();
             Populate();
 
             InitializeEvents();
@@ -61,8 +65,30 @@ namespace IMS.Forms.Inventory.Suppliers
             dgvSuppliers.SelectionChanged += DgvSuppliers_SelectionChanged;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
-           // btnDelete.Click += BtnDelete_Click;
             dgvSuppliers.CellMouseDoubleClick += DgvSuppliers_CellMouseDoubleClick;
+            rbAll.CheckedChanged += UserType_CheckedChanged;
+            rbCustomer.CheckedChanged += UserType_CheckedChanged;
+            rbSupplier.CheckedChanged += UserType_CheckedChanged;
+        }
+
+        private void UserType_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbCustomer.Checked)
+            {
+                _userType = UserTypeEnum.Customer;
+                btnNew.Visible = true;
+            }
+            else if (rbSupplier.Checked)
+            {
+                _userType = UserTypeEnum.Supplier;
+                btnNew.Visible = true;
+            }
+            else
+            {
+                _userType = UserTypeEnum.Client;
+                btnNew.Visible = false;
+            }
+            Populate();
         }
 
         private void DgvSuppliers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -123,7 +149,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private void Populate()
         {
             dgvSuppliers.AutoGenerateColumns = false;
-            var supplier = _supplierService.GetSupplierList();
+            var supplier = _supplierService.GetUserList(_userType);
             dgvSuppliers.DataSource = supplier;
         }
 
@@ -132,7 +158,7 @@ namespace IMS.Forms.Inventory.Suppliers
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var supplierCreate = Program.container.GetInstance<SupplierCreate>();// (supplier);
-                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0);
+                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, _userType);
                 supplierCreate.ShowDialog();
             }
         }
@@ -141,7 +167,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             var visible = _selectedSupplierModel != null;
             btnEdit.Visible = visible;
-          //  btnDelete.Visible = visible;
+            //  btnDelete.Visible = visible;
         }
 
 

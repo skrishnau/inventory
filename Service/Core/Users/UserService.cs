@@ -9,6 +9,7 @@ using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Common;
 using ViewModel.Core.Users;
+using ViewModel.Enums;
 
 namespace Service.Core.Users
 {
@@ -20,9 +21,7 @@ namespace Service.Core.Users
         public UserService(IDatabaseChangeListener listener)//DatabaseContext context
         {
             _listener = listener;
-            // _context = context;
         }
-        
 
         public void AddOrUpdateUser(UserModel userModel)
         {
@@ -36,7 +35,6 @@ namespace Service.Core.Users
                     userEntitiy.CreatedAt = DateTime.Now;
                     userEntitiy.UpdatedAt = DateTime.Now;
                     _context.User.Add(userEntitiy);
-
                 }
                 else
                 {
@@ -54,10 +52,7 @@ namespace Service.Core.Users
                     dbEntity.Name = userModel.Name;
                     dbEntity.Phone = userModel.Phone;
                     dbEntity.Website = userModel.Website;
-
-                    // dbEntityId = userModelId;
                     dbEntity.CanLogin = userModel.CanLogin;
-                    //dbEntity.Id = userModel.Id;
                 }
                 _context.SaveChanges();
             }
@@ -84,36 +79,26 @@ namespace Service.Core.Users
                 }
             }
         }
-        
 
-        public List<UserModel> GetUserList()
+        public List<UserModel> GetUserList(UserTypeEnum userType)
         {
             using (var _context = new DatabaseContext())
             {
 
-                var user = _context.User
-                    .Where(x => x.DeletedAt == null)
-                    .Select(x => new UserModel()
-                    {
-                        CanLogin = x.CanLogin,
-                        Password = x.Password,
-                        Username = x.Username,
-                        UserType = x.UserType,
-                        Id = x.Id,
-                        Name = x.Name,
-                        Email = x.Email,
-                        DOB = x.DOB,
-                        IsCompany = x.IsCompany,
-                        IsMarried = x.IsMarried,
-                        Phone = x.Phone,
-                        Website = x.Website,
-                        Gender = x.Gender,
-                        Address = x.Address,
-
-
-                    })
-                    .ToList();
-                return user;
+                var query = _context.User
+                    .Where(x => x.DeletedAt == null);
+                var customer = UserTypeEnum.Customer.ToString();
+                var supplier = UserTypeEnum.Supplier.ToString();
+                if (userType == UserTypeEnum.Client) // client means both Customer and Supplier
+                {
+                    query = query.Where(x => x.UserType == customer || x.UserType == supplier);
+                }
+                else if (userType != UserTypeEnum.All)
+                {
+                    var userTypeStr = userType.ToString();
+                    query = query.Where(x => x.UserType == userTypeStr);
+                }
+                return UserMapper.MapToUserModel(query.OrderBy(x => x.Name));
             }
         }
 
@@ -177,17 +162,6 @@ namespace Service.Core.Users
             }
         }
 
-        public List<UserModel> GetSupplierList()
-        {
-            using (var _context = new DatabaseContext())
-            {
-
-                var query = _context.User
-                    .Where(x => x.DeletedAt == null)
-                    .OrderBy(x => x.Name);
-                return UserMapper.MapToSupplierModel(query);
-            }
-        }
 
         public List<IdNamePair> GetSupplierListForCombo()
         {

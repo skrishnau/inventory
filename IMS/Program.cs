@@ -32,7 +32,6 @@ using IMS.Forms.Inventory.Settings.References;
 //using IMS.Forms.Inventory.Sales;
 using Service.Core.Orders;
 using IMS.Forms.Inventory.Orders;
-using IMS.Forms.Inventory.Users;
 using IMS.Forms.Inventory.Dashboard;
 using IMS.Forms.Inventory.InventoryDetail;
 
@@ -123,10 +122,8 @@ namespace IMS
             container.Register<CounterListUC>(Lifestyle.Scoped);
 
             // --- User Related --- //
-            container.Register<UserListUC>(Lifestyle.Scoped);
 
             container.Register<BusinessUC>(Lifestyle.Scoped);
-            container.Register<UserCreate>(Lifestyle.Scoped);
             container.Register<NewItemAddForm>(Lifestyle.Scoped);
 
 
@@ -164,11 +161,10 @@ namespace IMS
             //
             // Suppliers
             //
-            container.Register<SupplierUC>(Lifestyle.Scoped);
-            container.Register<SupplierListUC>(Lifestyle.Scoped);
-            container.Register<SupplierDetailUC>(Lifestyle.Scoped);
+           // container.Register<SupplierUC>(Lifestyle.Scoped);
+           container.Register<SupplierListUC>(Lifestyle.Scoped);
             container.Register<SupplierCreate>(Lifestyle.Scoped);
-            container.Register<SupplierSideBarUC>(Lifestyle.Scoped);
+           // container.Register<SupplierSideBarUC>(Lifestyle.Scoped);
             // 
             // Settings
             // 

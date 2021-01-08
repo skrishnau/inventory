@@ -54,6 +54,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblReferenceNo = new System.Windows.Forms.Label();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
+            this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -68,7 +69,7 @@
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 53);
+            this.splitter1.Location = new System.Drawing.Point(0, 88);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(769, 3);
             this.splitter1.TabIndex = 15;
@@ -95,7 +96,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(646, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(119, 45);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(119, 48);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.Visible = false;
             // 
@@ -119,10 +120,10 @@
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 32);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(769, 53);
+            this.panel1.Size = new System.Drawing.Size(769, 56);
             this.panel1.TabIndex = 14;
             // 
             // panel3
@@ -134,7 +135,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(306, 45);
+            this.panel3.Size = new System.Drawing.Size(306, 48);
             this.panel3.TabIndex = 4;
             // 
             // rbPurchase
@@ -197,7 +198,7 @@
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(356, 461);
+            this.dgvOrders.Size = new System.Drawing.Size(356, 426);
             this.dgvOrders.TabIndex = 13;
             // 
             // colOrderNumber
@@ -271,9 +272,9 @@
             this.panel2.Controls.Add(this.splitter2);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 56);
+            this.panel2.Location = new System.Drawing.Point(0, 91);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(769, 461);
+            this.panel2.Size = new System.Drawing.Size(769, 426);
             this.panel2.TabIndex = 16;
             // 
             // splitter2
@@ -281,7 +282,7 @@
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Location = new System.Drawing.Point(356, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 461);
+            this.splitter2.Size = new System.Drawing.Size(5, 426);
             this.splitter2.TabIndex = 15;
             this.splitter2.TabStop = false;
             // 
@@ -292,7 +293,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(361, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(408, 461);
+            this.panel4.Size = new System.Drawing.Size(408, 426);
             this.panel4.TabIndex = 16;
             // 
             // panel5
@@ -310,9 +311,9 @@
             this.lblReferenceNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReferenceNo.Location = new System.Drawing.Point(6, 15);
             this.lblReferenceNo.Name = "lblReferenceNo";
-            this.lblReferenceNo.Size = new System.Drawing.Size(38, 15);
+            this.lblReferenceNo.Size = new System.Drawing.Size(12, 15);
             this.lblReferenceNo.TabIndex = 0;
-            this.lblReferenceNo.Text = "label2";
+            this.lblReferenceNo.Text = "-";
             // 
             // dgvItems
             // 
@@ -321,8 +322,19 @@
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 45);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(408, 416);
+            this.dgvItems.Size = new System.Drawing.Size(408, 381);
             this.dgvItems.TabIndex = 14;
+            // 
+            // listHeaderTemplate1
+            // 
+            this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.listHeaderTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listHeaderTemplate1.HeadingText = "Transactions";
+            this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
+            this.listHeaderTemplate1.Name = "listHeaderTemplate1";
+            this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.listHeaderTemplate1.Size = new System.Drawing.Size(769, 32);
+            this.listHeaderTemplate1.TabIndex = 17;
             // 
             // TransactionListUC
             // 
@@ -331,6 +343,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.listHeaderTemplate1);
             this.Name = "TransactionListUC";
             this.Size = new System.Drawing.Size(769, 517);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -374,5 +387,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblReferenceNo;
+        private Common.Display.ListHeaderTemplate listHeaderTemplate1;
     }
 }

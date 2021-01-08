@@ -8,16 +8,14 @@ namespace IMS.Forms.Inventory.Suppliers
     {
         private SettingsBodyTemplate _bodyTemplate;
 
-        private readonly SupplierListUC _supplierListUC;
+       // private readonly SupplierListUC _supplierListUC;
         private readonly SupplierSideBarUC _sidebarUC;
-        private readonly SupplierDetailUC _supplierDetailUC;
 
 
-        public SupplierUC(SupplierListUC supplierListUC, SupplierSideBarUC supplierSideBarUC, SupplierDetailUC supplierDetailUC)
+        public SupplierUC(SupplierSideBarUC supplierSideBarUC)//SupplierListUC supplierListUC, 
         {
-            _supplierListUC = supplierListUC;
+            //_supplierListUC = supplierListUC;
             _sidebarUC = supplierSideBarUC;
-            _supplierDetailUC = supplierDetailUC;
 
             InitializeComponent();
             this.Dock = DockStyle.Fill;
@@ -65,18 +63,18 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void ShowUI(object sender, int supplierId)
         {
-            _bodyTemplate.pnlBody.Controls.Clear();
-            if (supplierId == 0)
-            {
-                _bodyTemplate.pnlBody.Controls.Add(_supplierListUC);
-                _bodyTemplate.SubHeadingText = "Supplier List";
-            }
-            else
-            {
-                _supplierDetailUC.SetData(supplierId);
-                _bodyTemplate.pnlBody.Controls.Add(_supplierDetailUC);
-            }
-            _sidebarUC.SetVisited(sender);
+            //_bodyTemplate.pnlBody.Controls.Clear();
+            //if (supplierId == 0)
+            //{
+            //    _bodyTemplate.pnlBody.Controls.Add(_supplierListUC);
+            //    _bodyTemplate.SubHeadingText = "Supplier List";
+            //}
+            //else
+            //{
+            //    //_supplierDetailUC.SetData(supplierId);
+            //    //_bodyTemplate.pnlBody.Controls.Add(_supplierDetailUC);
+            //}
+            //_sidebarUC.SetVisited(sender);
         }
     }
 }

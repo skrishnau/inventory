@@ -285,7 +285,7 @@ namespace IMS.Forms.Inventory
             _menubar.btnPurchaseTransaction.Click += BtnPurchaseTransaction_Click;
             _menubar.btnSaleTransactionList.Click += BtnTransactionList_Click;
 
-            _menubar.btnCustomer.Click += BtnCustomer_Click;
+            _menubar.btnClients.Click += BtnClients_Click;
         }
 
 
@@ -400,7 +400,7 @@ namespace IMS.Forms.Inventory
             // _menubar.SetSelection(sender);
         }
 
-        private void BtnCustomer_Click(object sender, EventArgs e)
+        private void BtnClients_Click(object sender, EventArgs e)
         {
             var uc = Program.container.GetInstance<SupplierListUC>();
             AddTabPage("Clients", uc, sender);
@@ -523,7 +523,7 @@ namespace IMS.Forms.Inventory
                     orderType
                     );
             }
-            AddTabPage("Transaction List", _transactionListUC, sender);
+            AddTabPage("Transactions", _transactionListUC, sender);
         }
 
         #endregion

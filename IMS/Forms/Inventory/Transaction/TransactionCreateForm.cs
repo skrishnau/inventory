@@ -321,7 +321,6 @@ namespace IMS.Forms.Inventory.Transaction
                 var supplierCreate = Program.container.GetInstance<SupplierCreate>();
                 supplierCreate.SetType(_orderType);
                 supplierCreate.ShowDialog();
-                
             }
         }
 
