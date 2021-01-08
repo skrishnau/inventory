@@ -22,6 +22,26 @@ namespace Infrastructure.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+            var mainWarehouseName = "Main Warehouse";
+            if (!context.Warehouse.Any(x => x.Name == mainWarehouseName))
+            {
+                var warehouse = new Entities.Inventory.Warehouse
+                {
+                    CreatedAt = DateTime.Now,
+                    Hold = true,
+                    MixedProduct = true,
+                    Name = mainWarehouseName,
+                    Staging = true,
+                    UpdatedAt = DateTime.Now,
+                    Use = true,
+                };
+                context.Warehouse.Add(warehouse);
+
+            }
+
+
+
+            context.SaveChanges();
 
         }
     }

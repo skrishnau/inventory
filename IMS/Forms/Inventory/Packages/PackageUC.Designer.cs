@@ -38,6 +38,7 @@
             // dgvPackage
             // 
             this.dgvPackage.AllowUserToDeleteRows = false;
+            this.dgvPackage.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvPackage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPackage.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,

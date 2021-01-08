@@ -41,6 +41,7 @@
             // dgvUom
             // 
             this.dgvUom.AllowUserToDeleteRows = false;
+            this.dgvUom.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvUom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUom.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,

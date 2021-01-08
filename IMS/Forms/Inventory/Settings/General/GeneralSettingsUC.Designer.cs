@@ -34,14 +34,12 @@
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.tbPAN = new System.Windows.Forms.TextBox();
             this.tbVAT = new System.Windows.Forms.TextBox();
-            this.tbOwner = new System.Windows.Forms.TextBox();
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbCompanyName = new System.Windows.Forms.TextBox();
@@ -56,19 +54,17 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.07165F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.92835F));
-            this.tableLayoutPanel2.Controls.Add(this.tbWebsite, 1, 7);
-            this.tableLayoutPanel2.Controls.Add(this.tbEmail, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.tbPhone, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.tbPAN, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.tbVAT, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tbOwner, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tbWebsite, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.tbEmail, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.tbPhone, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.tbPAN, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.tbVAT, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.tbAddress, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label8, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tbCompanyName, 1, 0);
@@ -76,7 +72,7 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 8;
+            this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -84,13 +80,12 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(266, 272);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(266, 213);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // tbWebsite
             // 
-            this.tbWebsite.Location = new System.Drawing.Point(100, 240);
+            this.tbWebsite.Location = new System.Drawing.Point(100, 182);
             this.tbWebsite.Margin = new System.Windows.Forms.Padding(2);
             this.tbWebsite.Name = "tbWebsite";
             this.tbWebsite.Size = new System.Drawing.Size(127, 20);
@@ -98,7 +93,7 @@
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(100, 206);
+            this.tbEmail.Location = new System.Drawing.Point(100, 152);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(2);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(127, 20);
@@ -106,7 +101,7 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(100, 172);
+            this.tbPhone.Location = new System.Drawing.Point(100, 122);
             this.tbPhone.Margin = new System.Windows.Forms.Padding(2);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(127, 20);
@@ -114,7 +109,7 @@
             // 
             // tbPAN
             // 
-            this.tbPAN.Location = new System.Drawing.Point(100, 138);
+            this.tbPAN.Location = new System.Drawing.Point(100, 92);
             this.tbPAN.Margin = new System.Windows.Forms.Padding(2);
             this.tbPAN.Name = "tbPAN";
             this.tbPAN.Size = new System.Drawing.Size(127, 20);
@@ -122,23 +117,15 @@
             // 
             // tbVAT
             // 
-            this.tbVAT.Location = new System.Drawing.Point(100, 104);
+            this.tbVAT.Location = new System.Drawing.Point(100, 62);
             this.tbVAT.Margin = new System.Windows.Forms.Padding(2);
             this.tbVAT.Name = "tbVAT";
             this.tbVAT.Size = new System.Drawing.Size(127, 20);
             this.tbVAT.TabIndex = 17;
             // 
-            // tbOwner
-            // 
-            this.tbOwner.Location = new System.Drawing.Point(100, 70);
-            this.tbOwner.Margin = new System.Windows.Forms.Padding(2);
-            this.tbOwner.Name = "tbOwner";
-            this.tbOwner.Size = new System.Drawing.Size(127, 20);
-            this.tbOwner.TabIndex = 16;
-            // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(100, 36);
+            this.tbAddress.Location = new System.Drawing.Point(100, 32);
             this.tbAddress.Margin = new System.Windows.Forms.Padding(2);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(127, 20);
@@ -147,7 +134,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2, 238);
+            this.label13.Location = new System.Drawing.Point(2, 180);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(46, 13);
@@ -157,7 +144,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 204);
+            this.label12.Location = new System.Drawing.Point(2, 150);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 13);
@@ -167,7 +154,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(2, 170);
+            this.label11.Location = new System.Drawing.Point(2, 120);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(38, 13);
@@ -177,7 +164,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(2, 136);
+            this.label10.Location = new System.Drawing.Point(2, 90);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 13);
@@ -187,27 +174,17 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 102);
+            this.label9.Location = new System.Drawing.Point(2, 60);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 6;
             this.label9.Text = "VAT No";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(2, 68);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Owner\'s Name";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 34);
+            this.label7.Location = new System.Drawing.Point(2, 30);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(45, 13);
@@ -220,9 +197,9 @@
             this.label6.Location = new System.Drawing.Point(2, 0);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 13);
+            this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Company Name";
+            this.label6.Text = "Name";
             // 
             // tbCompanyName
             // 
@@ -236,15 +213,15 @@
             // 
             this.panel3.Controls.Add(this.btnSaveProfile);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 272);
+            this.panel3.Location = new System.Drawing.Point(0, 213);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(266, 29);
+            this.panel3.Size = new System.Drawing.Size(266, 46);
             this.panel3.TabIndex = 4;
             // 
             // btnSaveProfile
             // 
             this.btnSaveProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveProfile.Location = new System.Drawing.Point(177, 3);
+            this.btnSaveProfile.Location = new System.Drawing.Point(177, 12);
             this.btnSaveProfile.Name = "btnSaveProfile";
             this.btnSaveProfile.Size = new System.Drawing.Size(75, 23);
             this.btnSaveProfile.TabIndex = 3;
@@ -258,7 +235,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.panel3);
             this.Name = "GeneralSettingsUC";
-            this.Size = new System.Drawing.Size(266, 301);
+            this.Size = new System.Drawing.Size(266, 259);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -273,14 +250,12 @@
         private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.TextBox tbPAN;
         private System.Windows.Forms.TextBox tbVAT;
-        private System.Windows.Forms.TextBox tbOwner;
         private System.Windows.Forms.TextBox tbAddress;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbCompanyName;

@@ -76,7 +76,7 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             // set selection
             _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "General";
+            _body.SubHeadingText = "My Company";
         }
 
         //private void LnkProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

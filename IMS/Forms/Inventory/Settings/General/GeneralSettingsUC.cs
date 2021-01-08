@@ -63,7 +63,7 @@ namespace IMS.Forms.Inventory.Settings.General
             var companysetting = _appSettingService.GetCompanyInfoSetting();
             tbAddress.Text = companysetting.Address;
             tbCompanyName.Text = companysetting.CompanyName;
-            tbOwner.Text = companysetting.OwnerName;
+            //tbOwner.Text = companysetting.OwnerName;
             tbVAT.Text = companysetting.VATNo;
             tbPAN.Text = companysetting.PANNo;
             tbPhone.Text = companysetting.Phone;
@@ -78,7 +78,7 @@ namespace IMS.Forms.Inventory.Settings.General
                 Address = tbAddress.Text,
                 CompanyName = tbCompanyName.Text,
                 Email = tbEmail.Text,
-                OwnerName = tbOwner.Text,
+                //OwnerName = tbOwner.Text,
                 PANNo = tbPAN.Text,
                 Phone = tbPhone.Text,
                 VATNo = tbVAT.Text,

@@ -40,6 +40,7 @@
             // dgvAdj
             // 
             this.dgvAdj.AllowUserToDeleteRows = false;
+            this.dgvAdj.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvAdj.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAdj.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
@@ -83,12 +84,12 @@
             this.colUse.HeaderText = "Use";
             this.colUse.Name = "colUse";
             // 
-            // AdjustmentUC
+            // AdjustmentCodeUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvAdj);
-            this.Name = "AdjustmentUC";
+            this.Name = "AdjustmentCodeUC";
             this.Size = new System.Drawing.Size(509, 359);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAdj)).EndInit();
             this.ResumeLayout(false);
