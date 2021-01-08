@@ -6,16 +6,12 @@ using Service.Listeners.Inventory;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
-using ViewModel.Core.Common;
-using System.Linq;
 using Service.Core.Business;
-using Service.Core.Suppliers;
 using IMS.Forms.Common.Validations;
-using IMS.Forms.Inventory.Create;
 using IMS.Forms.Inventory.Categories;
+using Service.Core.Users;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -31,7 +27,7 @@ namespace IMS.Forms.Inventory.Products
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
-        private readonly ISupplierService _supplierService;
+        private readonly IUserService _supplierService;
 
         private RequiredFieldValidator _requiredValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
@@ -41,7 +37,7 @@ namespace IMS.Forms.Inventory.Products
         // track the start index of dynamic attributes
         private List<ProductAttributeModel> _productAttributes = new List<ProductAttributeModel>();
 
-        public ProductCreateForm(IInventoryService inventoryService, IDatabaseChangeListener listener, IBusinessService businessService, ISupplierService supplierService)
+        public ProductCreateForm(IInventoryService inventoryService, IDatabaseChangeListener listener, IBusinessService businessService, IUserService supplierService)
         {
             _inventoryService = inventoryService;
             _businessService = businessService;

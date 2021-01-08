@@ -8,6 +8,9 @@ namespace ViewModel.Enums
 {
     public enum OrderTypeEnum
     {
-        Purchase, Sale, Move
+        Purchase =1,
+        Sale=2,
+        Move=3,
+        All=4,
     }
 }

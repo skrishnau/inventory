@@ -486,6 +486,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             else
             {
                 this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                MakeAllColumnsReadOnly();
+
             }
         }
 

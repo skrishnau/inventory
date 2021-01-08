@@ -12,6 +12,9 @@ using Infrastructure.Entities.Orders;
 using Infrastructure.Entities.Inventory;
 using Service.Core.Inventory.Units;
 using ViewModel.Enums;
+using Service.Core.Settings;
+using Infrastructure.Entities.Users;
+using Service.Core.Users;
 
 namespace Service.Core.Orders
 {
@@ -21,32 +24,35 @@ namespace Service.Core.Orders
         //   private DatabaseContext _context;
         private readonly IDatabaseChangeListener _listener;
         private readonly IInventoryUnitService _inventoryUnitService;
+        private readonly IUserService _customerService;
+        private readonly IAppSettingService _appSettingService;
 
         public OrderService(
             IDatabaseChangeListener listener,
-            IInventoryUnitService inventoryUnitService
+            IInventoryUnitService inventoryUnitService,
+            IUserService customerService,
+            IAppSettingService appSettingSerivce 
             )//DatabaseContext context,
         {
             //_context = context;
             _listener = listener;
             _inventoryUnitService = inventoryUnitService;
+            _customerService = customerService;
+            _appSettingService = appSettingSerivce;
         }
 
         public List<OrderModel> GetAllOrders(OrderTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
-
                 var type = orderType.ToString();
                 var purchases = _context.Order
-                    .Include(x => x.Supplier.BasicInfo)
-                    .Include(x => x.OrderItems)
-                    //.Include(x=>x.Warehouse)
-                    //.Include(x=>x.ToWarehouse)
-                    .Where(x => x.OrderType == type)
-                    .AsEnumerable();
-                // return new List<PurchaseOrderModelForGridView>();
-                return purchases.MapToModel();// OrderMapper.MapToOrderModel(purchases);
+                    .Include(x => x.User)
+                    .Include(x => x.OrderItems);
+                if (orderType != OrderTypeEnum.All)
+                    purchases = purchases.Where(x => x.OrderType == type);
+                return purchases
+                    .AsEnumerable().MapToModel();// OrderMapper.MapToOrderModel(purchases);
             }
         }
 
@@ -77,8 +83,15 @@ namespace Service.Core.Orders
 
                 var now = DateTime.Now;
                 var args = BaseEventArgs<OrderModel>.Instance;
+
+                CheckAndAssignCustomer(_context, ref orderModel);
+
+
+
                 var entity = _context.Order.Find(orderModel.Id);
                 entity = orderModel.MapToEntity(entity);// OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
+               
+
                 SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
 
                 if (checkout)
@@ -99,22 +112,49 @@ namespace Service.Core.Orders
                     args.Mode = Utility.UpdateMode.EDIT;
 
                     // update the order items' warehouse
-                    foreach (var item in _context.OrderItem.Where(x=>x.OrderId == entity.Id))
+                    foreach (var item in _context.OrderItem.Where(x => x.OrderId == entity.Id))
                     {
                         item.WarehouseId = entity.WarehouseId;
                     }
                 }
+                _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
                 _listener.TriggerOrderUpdateEvent(null, args);
             }
         }
 
+        private void CheckAndAssignCustomer(DatabaseContext _context, ref OrderModel orderModel)
+        {
+            if ((orderModel.UserId ?? 0) == 0 && !string.IsNullOrEmpty(orderModel.User))
+            {
+                //_customerService.AddOrUpdateCustomer()
+                var customer = new User
+                {
+                    CreatedAt = DateTime.Now,
+                    Phone = orderModel.Phone,
+                    Address = orderModel.Address,
+                    Name = orderModel.User,
+                    UpdatedAt = DateTime.Now,
+                    DeletedAt = null,
+                    DOB = null,
+                    DeliveryAddress = orderModel.Address,
+                };
+                _context.User.Add(customer);
+                _context.SaveChanges();
+                orderModel.UserId = customer.Id;
+            }
+            else
+            {
+                orderModel.UserId = null;
+            }
+        }
+
         private void MakeCheckout(Order entity)
         {
-            entity.IsExecuted = true;
+            entity.IsCompleted = true;
             entity.IsVerified = true;
-            entity.ExecutedDate = DateTime.Now;
+            entity.CompletedDate = DateTime.Now;
             entity.VerifiedDate = DateTime.Now;
         }
 
@@ -127,11 +167,11 @@ namespace Service.Core.Orders
                 var type = orderType.ToString();
                 var entity = _context.Order
                      .Include(x => x.Warehouse)
-                     .Include(x=> x.ToWarehouse)
-                     .Include(x => x.Supplier)
+                     .Include(x => x.ToWarehouse)
+                     .Include(x => x.User)
                      .Include(x => x.ParentOrder)
                      .Include(x => x.OrderItems)
-                     .Include(x => x.Customer)
+                     .Include(x => x.User)
                      .Include(x => x.OrderItems.Select(y => y.Product))
                      .Include(x => x.OrderItems.Select(y => y.Warehouse))
                      .FirstOrDefault(x => x.Id == orderId && x.OrderType == type);
@@ -139,23 +179,23 @@ namespace Service.Core.Orders
             }
         }
 
-        public OrderModel GetOrderForDetailView( int orderId) //OrderTypeEnum orderType,
+        public OrderModel GetOrderForDetailView(int orderId) //OrderTypeEnum orderType,
         {
             using (var _context = new DatabaseContext())
             {
 
                 // don't use enum directly
-               // var type = orderType.ToString();
+                // var type = orderType.ToString();
                 var entity = _context.Order
                      .Include(x => x.Warehouse)
                      .Include(x => x.ToWarehouse)
-                     .Include(x => x.Supplier)
+                     .Include(x => x.User)
                      .Include(x => x.ParentOrder)
                      .Include(x => x.OrderItems)
-                     .Include(x => x.Customer)
+                     .Include(x => x.User)
                      .Include(x => x.OrderItems.Select(y => y.Product))
                      .Include(x => x.OrderItems.Select(y => y.Warehouse))
-                     .FirstOrDefault(x => x.Id == orderId ); //&& x.OrderType == type
+                     .FirstOrDefault(x => x.Id == orderId); //&& x.OrderType == type
                 return entity.MapToModel(true);// OrderMapper.MapToOrderModel(entity);
             }
         }
@@ -195,13 +235,13 @@ namespace Service.Core.Orders
                             executedAction = "moved";
                             break;
                     }
-                    
+
                     if (entity.IsVerified)
                         return "The Order is already " + verifiedAction;
-                    else if (entity.IsExecuted)
-                        return "This order has already been "+executedAction+". No need to send!";
+                    else if (entity.IsCompleted)
+                        return "This order has already been " + executedAction + ". No need to send!";
                     else if (entity.IsCancelled)
-                        return "This order is aleady cancelled. You can't "+verifiyAction+" a cancelled order";
+                        return "This order is aleady cancelled. You can't " + verifiyAction + " a cancelled order";
                     entity.IsVerified = true;
                     entity.VerifiedDate = DateTime.Now;
                     _context.SaveChanges();
@@ -226,10 +266,10 @@ namespace Service.Core.Orders
                         return "This order hasn't been sent yet. First send the order, then only you can receive against it.";
                     if (entity.IsCancelled)
                         return "You can't receive a cancelled order. This order is cancelled.";
-                    if (entity.IsExecuted)
+                    if (entity.IsCompleted)
                         return "Already received!";
-                    entity.IsExecuted = true;
-                    entity.ExecutedDate = now;
+                    entity.IsCompleted = true;
+                    entity.CompletedDate = now;
 
                     AddReceivedItemsToWarehouse(entity.OrderItems, now);
 
@@ -256,16 +296,16 @@ namespace Service.Core.Orders
                         return "This order hasn't been packaged yet. First package the order, then only you can issue against it.";
                     if (entity.IsCancelled)
                         return "You can't issue a cancelled order. This order is cancelled.";
-                    if (entity.IsExecuted)
+                    if (entity.IsCompleted)
                         return "Already issued!";
-                    
+
 
                     var msg = SubtractIssuedItemsFromWarehouse(entity.OrderItems, now);
                     if (!string.IsNullOrEmpty(msg))
                         return msg;
 
-                    entity.IsExecuted = true;
-                    entity.ExecutedDate = now;
+                    entity.IsCompleted = true;
+                    entity.CompletedDate = now;
 
                     _context.SaveChanges();
                     var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
@@ -285,7 +325,7 @@ namespace Service.Core.Orders
                 var entity = _context.Order.Find(orderId);
                 if (entity != null)
                 {
-                    if (entity.IsExecuted)
+                    if (entity.IsCompleted)
                         return "You have already received against this order. You can't cancel it now.";
                     if (entity.IsCancelled)
                         return "Already cancelled!";
@@ -431,7 +471,7 @@ namespace Service.Core.Orders
                     Rate = poItem.Rate,
                     UnitQuantity = poItem.UnitQuantity,
                     UomId = product.BaseUomId,
-                    WarehouseId = poItem.WarehouseId??0,
+                    WarehouseId = poItem.WarehouseId ?? 0,
                 };
                 _inventoryUnitService.UpdateWarehouseProduct(invUnit.MapToModel(), invUnit.UnitQuantity, null, poItem.WarehouseId, now);
                 _context.InventoryUnit.Add(invUnit);

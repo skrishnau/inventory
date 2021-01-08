@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Entities.Business;
 using Infrastructure.Entities.Inventory;
+using Infrastructure.Entities.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace Infrastructure.Entities.Orders
         public int Id { get; set; }
         // Either of Purchase, Sale, Move
         public string OrderType { get; set; }
+
+        public int? UserId { get; set; }
+        public virtual User User { get; set; }
 
         #region Common
 
@@ -40,7 +44,7 @@ namespace Infrastructure.Entities.Orders
         // Purchase Order : Expected Date
         // Sale Order : Delivery Date
         // Move Order : Move  Date
-        public DateTime ExpectedDate { get; set; }
+        public DateTime DeliveryDate { get; set; }
         // no. of maximum delay days 
         public int? DueDays { get; set; }
         // Verified means different as per order type:
@@ -56,8 +60,8 @@ namespace Infrastructure.Entities.Orders
         // Purchase Order : Received Date
         // Sale Order : Delivered Date
         // Move Order : Transfered Date
-        public bool IsExecuted { get; set; }
-        public DateTime? ExecutedDate { get; set; }
+        public bool IsCompleted { get; set; }
+        public DateTime? CompletedDate { get; set; }
         // timestamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
@@ -65,6 +69,7 @@ namespace Infrastructure.Entities.Orders
         public decimal DiscountPercent { get; set; }
         public decimal DiscountAmount { get; set; }
 
+        public string PaymentType { get; set; }
         public decimal PaidAmount { get; set; }
         public DateTime? PaymentDueDate { get; set; }
         public DateTime? PaymentCompleteDate { get; set; }
@@ -79,9 +84,7 @@ namespace Infrastructure.Entities.Orders
         public virtual Warehouse Warehouse { get; set; }
         // supplier's invoice
         public string SupplierInvoice { get; set; }
-        // supplier for purchase order only
-        public int? SupplierId { get; set; }
-        public virtual Suppliers.Supplier Supplier { get; set; }
+        
 
         #endregion
 
@@ -90,8 +93,6 @@ namespace Infrastructure.Entities.Orders
         #region Sale Order
 
         public string VatNumber { get; set; }
-        public int? CustomerId { get; set; }
-        public virtual Customers.Customer Customer { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
 

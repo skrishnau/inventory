@@ -1,10 +1,5 @@
-﻿using Infrastructure.Entities.Inventory;
-using Infrastructure.Entities.Suppliers;
+﻿using Infrastructure.Entities.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Inventory
 {
@@ -29,6 +24,6 @@ namespace Infrastructure.Entities.Inventory
 
         public virtual Product Product { get; set; }
 
-        public virtual Supplier Supplier { get; set; }
+        public virtual User Supplier { get; set; }
     }
 }

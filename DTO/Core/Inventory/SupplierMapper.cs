@@ -1,46 +1,40 @@
-﻿using Infrastructure.Entities.Suppliers;
-using System;
+﻿using Infrastructure.Entities.Users;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ViewModel.Core.Suppliers;
+using ViewModel.Core.Users;
 
 namespace DTO.Core.Inventory
 {
-    public static class SupplierMapper
+    public static class UserMapper
     {
-        public static Supplier MapToEntity(SupplierModel model, Supplier entity)
+        public static User MapToEntity(UserModel model, User entity)
         {
             if (entity == null)
-                entity = new Supplier() { BasicInfo = new Infrastructure.Entities.Users.BasicInfo() };
+                entity = new User() {};
 
             // supplier
            // entity.Id = model.Id;
             //entity.BasicInfoId = model.BasicInfoId;
-            entity.MyCustomerAccount = model.MyCustomerAccount;
             entity.SalesPerson = model.SalesPerson;
             // basci Info
-            entity.BasicInfo.Address = model.Address;
-            entity.BasicInfo.DOB = model.RegisteredAt;
-            entity.BasicInfo.Email = model.Email;
-            entity.BasicInfo.Fax = model.Fax;
+            entity.Address = model.Address;
+            entity.DOB = model.DOB;
+            entity.Email = model.Email;
+            entity.Fax = model.Fax;
            // entity.BasicInfo.Id = model.BasicInfoId;
-            entity.BasicInfo.IsCompany = model.IsCompany;
-            entity.BasicInfo.Name = model.Name;
-            entity.BasicInfo.Notes = model.Notes;
-            entity.BasicInfo.Phone = model.Phone;
+            entity.IsCompany = model.IsCompany;
+            entity.Name = model.Name;
+            entity.Notes = model.Notes;
+            entity.Phone = model.Phone;
             // don't assign the dates
-            //entity.BasicInfo.CreatedAt = model.CreatedAt;
-            //entity.BasicInfo.UpdatedAt = model.UpdatedAt;
-            entity.BasicInfo.Website = model.Website;
+            entity.Website = model.Website;
             entity.Use = model.Use;
             return entity;
         }
 
-        public static List<SupplierModel> MapToSupplierModel(IQueryable<Supplier> suppliers)
+        public static List<UserModel> MapToSupplierModel(IQueryable<User> suppliers)
         {
-            var list = new List<SupplierModel>();
+            var list = new List<UserModel>();
             foreach (var supplier in suppliers)
             {
                 list.Add(MapToSupplierModel(supplier));
@@ -48,25 +42,23 @@ namespace DTO.Core.Inventory
             return list;
         }
 
-        public static SupplierModel MapToSupplierModel(Supplier supplier)
+        public static UserModel MapToSupplierModel(User supplier)
         {
-            return new SupplierModel()
+            return new UserModel()
             {
-                Address = supplier.BasicInfo.Address,
-                BasicInfoId = supplier.BasicInfoId,
-                CreatedAt = supplier.BasicInfo.CreatedAt,
-                Email = supplier.BasicInfo.Email,
-                Fax = supplier.BasicInfo.Fax,
+                Address = supplier.Address,
+                CreatedAt = supplier.CreatedAt,
+                Email = supplier.Email,
+                Fax = supplier.Fax,
                 Id = supplier.Id,
-                IsCompany = supplier.BasicInfo.IsCompany,
-                MyCustomerAccount = supplier.MyCustomerAccount,
-                Name = supplier.BasicInfo.Name,
-                Notes = supplier.BasicInfo.Notes,
-                Phone = supplier.BasicInfo.Phone,
-                RegisteredAt = supplier.BasicInfo.DOB,
+                IsCompany = supplier.IsCompany,
+                Name = supplier.Name,
+                Notes = supplier.Notes,
+                Phone = supplier.Phone,
+                DOB = supplier.DOB,
                 SalesPerson = supplier.SalesPerson,
-                UpdatedAt = supplier.BasicInfo.UpdatedAt,
-                Website = supplier.BasicInfo.Website,
+                UpdatedAt = supplier.UpdatedAt,
+                Website = supplier.Website,
                 Use = supplier.Use
             };
         }

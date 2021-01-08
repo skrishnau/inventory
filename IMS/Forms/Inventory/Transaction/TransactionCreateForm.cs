@@ -2,34 +2,26 @@
 using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
 using IMS.Forms.Inventory.Suppliers;
-using IMS.Forms.POS.Customers;
 using Service.Core.Business;
-using Service.Core.Customers;
 using Service.Core.Inventory;
 using Service.Core.Orders;
 using Service.Core.Settings;
-using Service.Core.Suppliers;
+using Service.Core.Users;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
+using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Transaction
 {
     public partial class TransactionCreateForm : Form
     {
-        private readonly ISupplierService _supplierService;
-        private readonly ICustomerService _customerService;
+        private readonly IUserService _supplierService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
         private readonly IOrderService _orderService;
@@ -43,8 +35,7 @@ namespace IMS.Forms.Inventory.Transaction
         private OrderTypeEnum _orderType;
 
 
-        public TransactionCreateForm(ISupplierService supplierService,
-            ICustomerService customerService,
+        public TransactionCreateForm(IUserService supplierService,
             IBusinessService businessService,
             IInventoryService inventoryService,
             IOrderService purchaseService,
@@ -54,7 +45,6 @@ namespace IMS.Forms.Inventory.Transaction
             _listener = listener;
             this._businessService = businessService;
             this._supplierService = supplierService;
-            this._customerService = customerService;
             this._orderService = purchaseService;
             this._inventoryService = inventoryService;
             this._appSettingService = appSettingService;
@@ -91,7 +81,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         #region Functions
 
-        public void SetData(OrderTypeEnum orderType, int orderId)
+        public void SetDataForEdit(OrderTypeEnum orderType, int orderId)
         {
             _orderType = orderType;
             _orderId = orderId;
@@ -114,11 +104,10 @@ namespace IMS.Forms.Inventory.Transaction
             saveFooterUC1.btnCheckout.Click += BtnCheckout_Click;
             rbCredit.CheckedChanged += RbCredit_CheckedChanged;
 
-            _listener.CustomerUpdated += _listener_CustomerUpdated;
-            _listener.SupplierUpdated += _listener_SupplierUpdated;
+            _listener.UserUpdated += _listener_CustomerUpdated;
             lblClient.DoubleClick += LblClient_DoubleClick;
 
-            dgvItems.AmountChnanged += DgvItems_AmountChnanged;
+            dgvItems.AmountChanged += DgvItems_AmountChnanged;
         }
 
         private void InitializeValidation()
@@ -155,10 +144,8 @@ namespace IMS.Forms.Inventory.Transaction
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
-                    list = _supplierService.GetSupplierListForCombo();
-                    break;
                 case OrderTypeEnum.Sale:
-                    list = _customerService.GetCustomerListForCombo();
+                    list = _supplierService.GetSupplierListForCombo();
                     break;
             }
             if (list != null)
@@ -182,16 +169,14 @@ namespace IMS.Forms.Inventory.Transaction
                 // change button
                 _orderId = model.Id;
                 txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
-                dtExpectedDate.Value = model.ExpectedDate;
+                dtExpectedDate.Value = model.DeliveryDate;
                 txtAddress.Text = model.Address;
                 txtPhone.Text = model.Phone;
                 switch (_orderType)
                 {
                     case OrderTypeEnum.Purchase:
-                        cbClient.SelectedValue = model.SupplierId;
-                        break;
                     case OrderTypeEnum.Sale:
-                        cbClient.SelectedValue = model.CustomerId;
+                        cbClient.SelectedValue = model.UserId;
                         break;
                 }
             }
@@ -275,7 +260,7 @@ namespace IMS.Forms.Inventory.Transaction
                     Id = _orderId,
                     OrderType = _orderType.ToString(),
                     Name = (string.IsNullOrEmpty(cbClient.Text) ? "" : $"{cbClient.Text}, ") + txtReceiptNo.Text,
-                    ExpectedDate = dtExpectedDate.Value,
+                    DeliveryDate = dtExpectedDate.Value,
                     PaidAmount = txtPaidAmount.Value,
                     CreatedAt = DateTime.Now,
                     OrderItems = InventoryUnitMapper.MapToOrderItemModel(items, _orderId),
@@ -283,21 +268,11 @@ namespace IMS.Forms.Inventory.Transaction
                     Phone = txtPhone.Text,
                     Address = txtAddress.Text,
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.Value : (DateTime?)null,
+                    PaymentType = rbCredit.Checked ? PaymentType.Credit.ToString() : PaymentType.Cash.ToString(),
                 };
-                if (_orderType == OrderTypeEnum.Sale)
-                {
-                    orderModel.Customer = client;
-                    orderModel.CustomerId = clientId;
-                    orderModel.SupplierId = null;
-                    orderModel.Supplier = null;
-                }
-                else if (_orderType == OrderTypeEnum.Purchase)
-                {
-                    orderModel.Supplier = client;
-                    orderModel.SupplierId = clientId;
-                    orderModel.Customer = null;
-                    orderModel.CustomerId = null;
-                }
+                orderModel.User = client;
+                orderModel.UserId = clientId;
+                
                 return orderModel;
             }
             return null;
@@ -310,28 +285,18 @@ namespace IMS.Forms.Inventory.Transaction
 
         #region Event Handlers
 
-        private void _listener_CustomerUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Customers.CustomerModel> e)
+        private void _listener_CustomerUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
-            if (_orderType == OrderTypeEnum.Sale)
-            {
-                PopulateClientCombo();
-                cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
-            }
+            PopulateClientCombo();
+            cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
         }
-
-        private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Suppliers.SupplierModel> e)
-        {
-            if (_orderType == OrderTypeEnum.Purchase)
-            {
-                PopulateClientCombo();
-                cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
-            }
-        }
+        
 
         private void RbCredit_CheckedChanged(object sender, EventArgs e)
         {
             pnlPaymentDueDate.Visible = rbCredit.Checked;
             txtPaidAmount.Value = txtTotal.Value;
+            txtPaidAmount.Enabled = rbCredit.Checked;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -353,17 +318,10 @@ namespace IMS.Forms.Inventory.Transaction
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                switch (_orderType)
-                {
-                    case OrderTypeEnum.Purchase:
-                        var supplierCreate = Program.container.GetInstance<SupplierCreate>();
-                        supplierCreate.ShowDialog();
-                        break;
-                    case OrderTypeEnum.Sale:
-                        var customerCreate = Program.container.GetInstance<CustomerCreateForm>();
-                        customerCreate.ShowDialog();
-                        break;
-                }
+                var supplierCreate = Program.container.GetInstance<SupplierCreate>();
+                supplierCreate.SetType(_orderType);
+                supplierCreate.ShowDialog();
+                
             }
         }
 

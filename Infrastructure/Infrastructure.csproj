@@ -69,7 +69,6 @@
     <Compile Include="Entities\Inventory\VariantAttribute.cs" />
     <Compile Include="Entities\Inventory\WarehouseProduct.cs" />
     <Compile Include="Entities\Orders\OrderItem.cs" />
-    <Compile Include="Entities\Users\BasicInfo.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Inventory\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
@@ -77,48 +76,16 @@
     <Compile Include="Entities\Inventory\Brand.cs" />
     <Compile Include="Entities\Inventory\Product.cs" />
     <Compile Include="Entities\Inventory\Category.cs" />
-    <Compile Include="Entities\Suppliers\Supplier.cs" />
     <Compile Include="Entities\Inventory\ProductSupplier.cs" />
-    <Compile Include="Entities\Suppliers\SupplierReport.cs" />
     <Compile Include="Entities\Common\Lead.cs" />
-    <Compile Include="Entities\Customers\Customer.cs" />
-    <Compile Include="Entities\Customers\CustomerReport.cs" />
     <Compile Include="Entities\Orders\Order.cs" />
     <Compile Include="Entities\Orders\Payment.cs" />
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\201905211154574_InitMigration.cs" />
-    <Compile Include="Migrations\201905211154574_InitMigration.Designer.cs">
-      <DependentUpon>201905211154574_InitMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002051151495_ToWarehouseColumnAddedInOrderTable.cs" />
-    <Compile Include="Migrations\202002051151495_ToWarehouseColumnAddedInOrderTable.Designer.cs">
-      <DependentUpon>202002051151495_ToWarehouseColumnAddedInOrderTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs" />
-    <Compile Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.Designer.cs">
-      <DependentUpon>202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101010519461_PaymentMethodAdded.cs" />
-    <Compile Include="Migrations\202101010519461_PaymentMethodAdded.Designer.cs">
-      <DependentUpon>202101010519461_PaymentMethodAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.cs" />
-    <Compile Include="Migrations\202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.Designer.cs">
-      <DependentUpon>202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101021549006_updatedcolumnnames.cs" />
-    <Compile Include="Migrations\202101021549006_updatedcolumnnames.Designer.cs">
-      <DependentUpon>202101021549006_updatedcolumnnames.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101030929033_PaymentTableAdded.cs" />
-    <Compile Include="Migrations\202101030929033_PaymentTableAdded.Designer.cs">
-      <DependentUpon>202101030929033_PaymentTableAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101031841552_PaymentTableAdded1.cs" />
-    <Compile Include="Migrations\202101031841552_PaymentTableAdded1.Designer.cs">
-      <DependentUpon>202101031841552_PaymentTableAdded1.cs</DependentUpon>
+    <Compile Include="Migrations\202101081808372_Init_Migration.cs" />
+    <Compile Include="Migrations\202101081808372_Init_Migration.Designer.cs">
+      <DependentUpon>202101081808372_Init_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,29 +104,8 @@
     <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905211154574_InitMigration.resx">
-      <DependentUpon>201905211154574_InitMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002051151495_ToWarehouseColumnAddedInOrderTable.resx">
-      <DependentUpon>202002051151495_ToWarehouseColumnAddedInOrderTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.resx">
-      <DependentUpon>202002051927247_WarehouseId_is_now_nullable_in_OrderItem_table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101010519461_PaymentMethodAdded.resx">
-      <DependentUpon>202101010519461_PaymentMethodAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.resx">
-      <DependentUpon>202101011705439_RenamedSupplyPriceToRateAndSupplyAmountToTotal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101021549006_updatedcolumnnames.resx">
-      <DependentUpon>202101021549006_updatedcolumnnames.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101030929033_PaymentTableAdded.resx">
-      <DependentUpon>202101030929033_PaymentTableAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101031841552_PaymentTableAdded1.resx">
-      <DependentUpon>202101031841552_PaymentTableAdded1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101081808372_Init_Migration.resx">
+      <DependentUpon>202101081808372_Init_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

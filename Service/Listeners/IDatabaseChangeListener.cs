@@ -4,10 +4,9 @@ using Service.Listeners.Inventory;
 using System;
 using System.Collections.Generic;
 using ViewModel.Core.Business;
-using ViewModel.Core.Customers;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
-using ViewModel.Core.Suppliers;
+using ViewModel.Core.Users;
 
 namespace Service.Listeners
 {
@@ -28,10 +27,6 @@ namespace Service.Listeners
         // Warehouse
         event EventHandler<BaseEventArgs<WarehouseModel>> WarehouseUpdated;
         void TriggerWarehouseUpdateEvent(object sender, BaseEventArgs<WarehouseModel> eventArgs);
-        // supplier
-        event EventHandler<BaseEventArgs<SupplierModel>> SupplierUpdated;
-        void TriggerSupplierUpdateEvent(object sender, BaseEventArgs<SupplierModel> eventArgs);
-
         // UOM
         event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
         void TriggerUomUpdateEvent(object sender, BaseEventArgs<UomModel> eventArgs);
@@ -51,7 +46,7 @@ namespace Service.Listeners
         event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
         void TriggerInventoryUnitUpdateEvent(object p, BaseEventArgs<List<InventoryUnitModel>> eventArgs);
         // Customer
-        event EventHandler<BaseEventArgs<CustomerModel>> CustomerUpdated;
-        void TriggerCustomerUpdateEvent(object p, BaseEventArgs<CustomerModel> eventArgs);
+        event EventHandler<BaseEventArgs<UserModel>> UserUpdated;
+        void TriggerUserUpdateEvent(object p, BaseEventArgs<UserModel> eventArgs);
     }
 }

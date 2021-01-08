@@ -146,6 +146,12 @@
     <Compile Include="Forms\Inventory\Transaction\TransactionCreateForm.Designer.cs">
       <DependentUpon>TransactionCreateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionListUC.Designer.cs">
+      <DependentUpon>TransactionListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -380,24 +386,6 @@
     <Compile Include="Forms\POS\Counters\CounterListUC.Designer.cs">
       <DependentUpon>CounterListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\POS\Customers\CustomerCreateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\POS\Customers\CustomerCreateForm.Designer.cs">
-      <DependentUpon>CustomerCreateForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\POS\Customers\UC\AddCustomerUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\POS\Customers\UC\AddCustomerUC.Designer.cs">
-      <DependentUpon>AddCustomerUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\POS\Customers\CustomerListUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\POS\Customers\CustomerListUC.Designer.cs">
-      <DependentUpon>CustomerListUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Common\TextBoxWithDeleteUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -564,12 +552,6 @@
     <Compile Include="Forms\Inventory\Suppliers\SupplierUC.Designer.cs">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Users\BasicInfoCreate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Users\BasicInfoCreate.Designer.cs">
-      <DependentUpon>BasicInfoCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\Users\UserCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -622,6 +604,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionCreateForm.resx">
       <DependentUpon>TransactionCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionListUC.resx">
+      <DependentUpon>TransactionListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
       <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
@@ -725,17 +710,8 @@
     <EmbeddedResource Include="Forms\POS\Counters\CounterListUC.resx">
       <DependentUpon>CounterListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\POS\Customers\CustomerCreateForm.resx">
-      <DependentUpon>CustomerCreateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\POS\Customers\UC\AddCustomerUC.resx">
-      <DependentUpon>AddCustomerUC.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\POS\Customers\CustomerListUC.resx">
-      <DependentUpon>CustomerListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\TextBoxWithDeleteUC.resx">
       <DependentUpon>TextBoxWithDeleteUC.cs</DependentUpon>
@@ -814,9 +790,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierUC.resx">
       <DependentUpon>SupplierUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Users\BasicInfoCreate.resx">
-      <DependentUpon>BasicInfoCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Users\UserCreate.resx">
       <DependentUpon>UserCreate.cs</DependentUpon>

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using IMS.Forms.Common.Display;
 using IMS.Forms.Sales;
 using SimpleInjector.Lifestyles;
-using IMS.Forms.POS.Customers;
 using IMS.Forms.POS.Counters;
 using IMS.Forms.Business.Create;
 using IMS.Forms.POS.Branches;
@@ -86,23 +84,23 @@ namespace IMS.Forms.POS
 
         private void BtnCustomerList_Click(object sender, EventArgs e)
         {
-            pnlBody.Controls.Clear();
-            var customerUC = Program.container.GetInstance<CustomerListUC>();
-            customerUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(customerUC);
-            // set selection
-            _menubar.ClearSelection();
-            _menubar.btnCustomerList.FlatStyle = FlatStyle.Flat;
+            //pnlBody.Controls.Clear();
+            //var customerUC = Program.container.GetInstance<CustomerListUC>();
+            //customerUC.Dock = DockStyle.Fill;
+            //pnlBody.Controls.Add(customerUC);
+            //// set selection
+            //_menubar.ClearSelection();
+            //_menubar.btnCustomerList.FlatStyle = FlatStyle.Flat;
         }
 
         private void BtnNewCustomer_Click(object sender, EventArgs e)
         {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var customerCreate = Program.container.GetInstance<CustomerCreateForm>();
-                customerCreate.ShowDialog();
-                //Populate();
-            }
+            //using (AsyncScopedLifestyle.BeginScope(Program.container))
+            //{
+            //    var customerCreate = Program.container.GetInstance<CustomerCreateForm>();
+            //    customerCreate.ShowDialog();
+            //    //Populate();
+            //}
         }
 
         #endregion

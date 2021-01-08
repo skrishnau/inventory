@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Service.Core.Suppliers;
-using SimpleInjector.Lifestyles;
 using IMS.Forms.Common.Display;
-using Service.Listeners;
-using ViewModel.Core.Suppliers;
 
 namespace IMS.Forms.Inventory.Suppliers
 {

@@ -51,33 +51,32 @@ namespace DTO.Core.Inventory
         {
             // from entity to model
             CreateMap<Order, OrderModel>()
-                .ForMember(x => x.Customer,
-                            opt => opt.MapFrom(src => src.Customer == null ? "" : src.Customer.BasicInfo.Name))
+                .ForMember(x => x.User,
+                            opt => opt.MapFrom(src => src.User == null ? "" : src.User.Name))
                 .ForMember(x => x.Warehouse,
                             opt => opt.MapFrom(src => src.Warehouse == null ? "" : src.Warehouse.Name))
                 .ForMember(x => x.ToWarehouse,
                             opt => opt.MapFrom(src => src.ToWarehouse == null ? "" : src.ToWarehouse.Name))
                .ForMember(x => x.ParentOrder, opt => opt.Ignore())
-               .ForMember(x => x.Supplier,
-                            opt => opt.MapFrom(src => src.Supplier == null ? "" : src.Supplier.BasicInfo.Name))
                .ForMember(x => x.OrderItems, opt => opt.Ignore())
                .ForMember(x => x.Status,
                             opt => opt.MapFrom(src =>
                                         src.IsCancelled ? OrderStatusEnum.Cancelled.ToString()
-                                        : src.IsExecuted ? OrderStatusEnum.Received.ToString()
-                                        : src.IsVerified ? OrderStatusEnum.Sent.ToString()
+                                        : src.IsCompleted ? OrderStatusEnum.Completed.ToString()
+                                        : src.IsVerified ? OrderStatusEnum.Pending.ToString()
                                         : OrderStatusEnum.Open.ToString()
                             ))
+               .ForMember(x => x.NoOfProducts,
+                            opt => opt.MapFrom(src => src.OrderItems.Select(x=>x.ProductId).Distinct().Count()))
                ;
 
             // from model to entity
             CreateMap<OrderModel, Order>()
                 .ForMember(x => x.Warehouse, src => src.Ignore())
                 .ForMember(x => x.ToWarehouse, src => src.Ignore())
-                .ForMember(x => x.Supplier, src => src.Ignore())
+                .ForMember(x => x.User, src => src.Ignore())
                 .ForMember(x => x.ParentOrder, src => src.Ignore())
                 .ForMember(x => x.OrderItems, src => src.Ignore())
-                .ForMember(x => x.Customer, src => src.Ignore())
                 .ForMember(x => x.CreatedAt, src => src.Ignore())
                 ;
         }

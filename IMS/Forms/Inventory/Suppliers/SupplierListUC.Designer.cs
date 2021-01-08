@@ -36,13 +36,8 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOpenOrders = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWebsite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -57,13 +52,8 @@
             this.dgvSuppliers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.SupplierName,
-            this.colOpenOrders,
-            this.Phone,
             this.Address,
-            this.Email,
-            this.colFax,
-            this.colWebsite,
-            this.colSalesPerson,
+            this.Phone,
             this.colUse});
             this.dgvSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSuppliers.Location = new System.Drawing.Point(0, 35);
@@ -135,21 +125,6 @@
             this.SupplierName.ReadOnly = true;
             this.SupplierName.Width = 140;
             // 
-            // colOpenOrders
-            // 
-            this.colOpenOrders.DataPropertyName = "OpenOrders";
-            this.colOpenOrders.HeaderText = "On Order";
-            this.colOpenOrders.Name = "colOpenOrders";
-            this.colOpenOrders.ReadOnly = true;
-            this.colOpenOrders.Width = 90;
-            // 
-            // Phone
-            // 
-            this.Phone.DataPropertyName = "Phone";
-            this.Phone.HeaderText = "Phone";
-            this.Phone.Name = "Phone";
-            this.Phone.ReadOnly = true;
-            // 
             // Address
             // 
             this.Address.DataPropertyName = "Address";
@@ -158,36 +133,12 @@
             this.Address.ReadOnly = true;
             this.Address.Width = 150;
             // 
-            // Email
+            // Phone
             // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            this.Email.Width = 150;
-            // 
-            // colFax
-            // 
-            this.colFax.DataPropertyName = "Fax";
-            this.colFax.HeaderText = "Fax";
-            this.colFax.Name = "colFax";
-            this.colFax.ReadOnly = true;
-            this.colFax.Width = 90;
-            // 
-            // colWebsite
-            // 
-            this.colWebsite.DataPropertyName = "Website";
-            this.colWebsite.HeaderText = "Website";
-            this.colWebsite.Name = "colWebsite";
-            this.colWebsite.ReadOnly = true;
-            // 
-            // colSalesPerson
-            // 
-            this.colSalesPerson.DataPropertyName = "SalesPerson";
-            this.colSalesPerson.HeaderText = "SalesPerson";
-            this.colSalesPerson.Name = "colSalesPerson";
-            this.colSalesPerson.ReadOnly = true;
-            this.colSalesPerson.Width = 80;
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.HeaderText = "Phone";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
             // 
             // colUse
             // 
@@ -221,13 +172,8 @@
         protected internal System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SupplierName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOpenOrders;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWebsite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
     }
 }

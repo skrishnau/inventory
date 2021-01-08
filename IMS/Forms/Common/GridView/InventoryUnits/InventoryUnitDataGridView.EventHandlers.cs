@@ -15,7 +15,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
     public partial class InventoryUnitDataGridView
     {
         public delegate void AmountChange(decimal totals);
-        public event AmountChange AmountChnanged;
+        public event AmountChange AmountChanged;
 
         private void InitializeEvents()
         {
@@ -290,7 +290,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             row.Cells[colTotal.Index].Value = quantity * rate;
 
             //GetItems();
-            AmountChnanged(GetTotalSumAmount());
+            if (AmountChanged != null)
+                AmountChanged(GetTotalSumAmount());
         }
     }
 }

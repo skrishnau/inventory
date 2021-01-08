@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Core.Clients.Details
+namespace ViewModel.Enums
 {
-    public interface IClientDetailService
+    public enum UserType
     {
+        Customer = 1,
+        Supplier = 2,
+        User = 3,
+        All = 4
     }
 }

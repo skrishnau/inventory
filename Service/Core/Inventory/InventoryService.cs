@@ -886,12 +886,12 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Supplier
+                return _context.User
                                 //.Where(x=>x.Use)
                                 .Select(x => new IdNamePair()
                                 {
                                     Id = x.Id,
-                                    Name = x.BasicInfo.Name,
+                                    Name = x.Name,
                                 }).ToList();
             }
 

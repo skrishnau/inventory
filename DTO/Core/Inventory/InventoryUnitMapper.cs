@@ -57,7 +57,7 @@ namespace DTO.Core.Inventory
                 ReceiveReceipt = entity.ReceiveReceipt,
                 Remark = entity.Remark,
                 SKU = entity.Product == null ? "" : entity.Product.SKU,
-                Supplier = entity.Supplier == null ? "" : entity.Supplier.BasicInfo.Name,
+                Supplier = entity.Supplier == null ? "" : entity.Supplier.Name,
                 SupplierId = entity.SupplierId,
                 Rate = entity.Rate,
                 UnitQuantity = entity.UnitQuantity,

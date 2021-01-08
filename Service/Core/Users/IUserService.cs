@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Common;
 using ViewModel.Core.Users;
 
 namespace Service.Core.Users
@@ -12,10 +13,15 @@ namespace Service.Core.Users
         void AddOrUpdateUser(UserModel userModel);
 
         List<UserModel> GetUserList();
-
-        void AddOrUpdateBasicInfo(BasicInfoModel basicInfoModel);
-
-        List<BasicInfoModel> GetBasicInfoList();
+        
         void DeleteUser(UserModel user);
+
+        void AddOrUpdateSupplier(UserModel supplierModel);
+
+        UserModel GetSupplier(int supplierId);
+
+        List<UserModel> GetSupplierList();
+
+        List<IdNamePair> GetSupplierListForCombo();
     }
 }

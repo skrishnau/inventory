@@ -1,11 +1,6 @@
-﻿using Infrastructure.Entities.Business;
-using Infrastructure.Entities.Inventory;
-using Infrastructure.Entities.Suppliers;
+﻿using Infrastructure.Entities.Inventory;
+using Infrastructure.Entities.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Orders
 {
@@ -47,7 +42,7 @@ namespace Infrastructure.Entities.Orders
         public int PackageId { get; set; }
         public virtual Package Package { get; set; }
         public int? SupplierId { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public virtual User Supplier { get; set; }
 
         public DateTime? ProductionDate { get; set; }
         public DateTime? ExpirationDate { get; set; }

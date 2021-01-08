@@ -30,6 +30,7 @@ namespace Service.Core.Settings
         bool SaveBillSetting(List<BillSettingsModel> modelList);
         string GetReceiptNumber(OrderTypeEnum orderType);
         string GetReceiptNumber(BillSettingsModel setting, long currentIndex);
-        bool SaveCurrentIndex(BillSettingsModel model, OrderTypeEnum orderType);
+        bool SaveCurrentIndex(long index, OrderTypeEnum orderType);
+        bool IncrementBillIndex(OrderTypeEnum orderType);
     }
 }

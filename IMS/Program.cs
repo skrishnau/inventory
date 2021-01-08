@@ -1,13 +1,10 @@
 ﻿using IMS.Forms.Inventory;
-using Infrastructure.Context;
 using Service.Core.Inventory;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Windows.Forms;
 using IMS.Forms.Inventory.Categories;
-using Service.Core.Suppliers;
-using Service.Core.Customers;
 using IMS.Forms.Business;
 using Service.Core.Business;
 using Service.Core.Users;
@@ -17,7 +14,6 @@ using IMS.Forms.Inventory.Attributes;
 using IMS.Forms.Inventory.Products;
 using IMS.Forms.Inventory.Suppliers;
 using IMS.Forms.POS;
-using IMS.Forms.POS.Customers;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.POS.Counters;
 using IMS.Forms.POS.Branches;
@@ -27,7 +23,6 @@ using Service.Listeners;
 using IMS.Forms.Inventory.UOM;
 using IMS.Forms.Inventory.Packages;
 using IMS.Forms.Inventory.Settings.Adjustments;
-using IMS.Forms.Inventory.Purchases;
 using IMS.Forms.Inventory.Units.Actions;
 using IMS.Forms.Inventory.Settings;
 using IMS.Forms.Inventory.Units.Details;
@@ -40,7 +35,6 @@ using IMS.Forms.Inventory.Orders;
 using IMS.Forms.Inventory.Users;
 using IMS.Forms.Inventory.Dashboard;
 using IMS.Forms.Inventory.InventoryDetail;
-using IMS.Forms.Inventory.Units;
 
 namespace IMS
 {
@@ -87,9 +81,6 @@ namespace IMS
             container.Register<IInventoryService, InventoryService>(Lifestyle.Singleton);
             container.Register<IInventoryUnitService, InventoryUnitService>(Lifestyle.Singleton);
 
-            container.Register<ISupplierService, SupplierService>(Lifestyle.Singleton);
-            container.Register<ICustomerService, CustomerService>(Lifestyle.Singleton);
-
             container.Register<IBusinessService, BusinessService>(Lifestyle.Singleton);
             container.Register<IUserService, UserService>(Lifestyle.Singleton);
             container.Register<IOrderService, OrderService>(Lifestyle.Singleton);
@@ -134,7 +125,6 @@ namespace IMS
             // --- User Related --- //
             container.Register<UserListUC>(Lifestyle.Scoped);
 
-            container.Register<CustomerListUC>(Lifestyle.Scoped);
             container.Register<BusinessUC>(Lifestyle.Scoped);
             container.Register<UserCreate>(Lifestyle.Scoped);
             container.Register<NewItemAddForm>(Lifestyle.Scoped);

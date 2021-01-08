@@ -48,6 +48,7 @@
             this.btnDirectReceive = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnSaleTransaction = new System.Windows.Forms.Button();
+            this.btnSaleTransactionList = new System.Windows.Forms.Button();
             this.btnPurchaseTransaction = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -75,6 +76,7 @@
             this.pnlMisc = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnCustomer = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -99,7 +101,7 @@
             this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
             this.btnHelp.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHelp.Location = new System.Drawing.Point(188, 15);
+            this.btnHelp.Location = new System.Drawing.Point(252, 15);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(43, 53);
             this.btnHelp.TabIndex = 22;
@@ -116,7 +118,7 @@
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Image = global::IMS.Properties.Resources.icons8_Administrative_Tools_24px;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSettings.Location = new System.Drawing.Point(124, 15);
+            this.btnSettings.Location = new System.Drawing.Point(188, 15);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(64, 53);
             this.btnSettings.TabIndex = 20;
@@ -134,7 +136,7 @@
             this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReports.Image = global::IMS.Properties.Resources.icons8_Pie_Chart_24px;
             this.btnReports.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnReports.Location = new System.Drawing.Point(65, 15);
+            this.btnReports.Location = new System.Drawing.Point(129, 15);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(59, 53);
             this.btnReports.TabIndex = 21;
@@ -152,7 +154,7 @@
             this.btnAccounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAccounts.Image = global::IMS.Properties.Resources.icons8_Calculator_24px;
             this.btnAccounts.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAccounts.Location = new System.Drawing.Point(0, 15);
+            this.btnAccounts.Location = new System.Drawing.Point(64, 15);
             this.btnAccounts.Name = "btnAccounts";
             this.btnAccounts.Size = new System.Drawing.Size(65, 53);
             this.btnAccounts.TabIndex = 47;
@@ -195,6 +197,7 @@
             this.btnInventoryUnits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnInventoryUnits, "Inventory Units");
             this.btnInventoryUnits.UseVisualStyleBackColor = true;
+            this.btnInventoryUnits.Visible = false;
             // 
             // btnProductList
             // 
@@ -378,10 +381,26 @@
             this.btnSaleTransaction.Name = "btnSaleTransaction";
             this.btnSaleTransaction.Size = new System.Drawing.Size(59, 53);
             this.btnSaleTransaction.TabIndex = 48;
-            this.btnSaleTransaction.Text = "Sales";
+            this.btnSaleTransaction.Text = "Sale";
             this.btnSaleTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnSaleTransaction, "Sales");
             this.btnSaleTransaction.UseVisualStyleBackColor = true;
+            // 
+            // btnSaleTransactionList
+            // 
+            this.btnSaleTransactionList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSaleTransactionList.FlatAppearance.BorderSize = 0;
+            this.btnSaleTransactionList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaleTransactionList.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
+            this.btnSaleTransactionList.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSaleTransactionList.Location = new System.Drawing.Point(189, 15);
+            this.btnSaleTransactionList.Name = "btnSaleTransactionList";
+            this.btnSaleTransactionList.Size = new System.Drawing.Size(82, 53);
+            this.btnSaleTransactionList.TabIndex = 5;
+            this.btnSaleTransactionList.Text = "Transactions";
+            this.btnSaleTransactionList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnSaleTransactionList, "Sale Orders");
+            this.btnSaleTransactionList.UseVisualStyleBackColor = true;
             // 
             // btnPurchaseTransaction
             // 
@@ -394,7 +413,7 @@
             this.btnPurchaseTransaction.Name = "btnPurchaseTransaction";
             this.btnPurchaseTransaction.Size = new System.Drawing.Size(70, 53);
             this.btnPurchaseTransaction.TabIndex = 50;
-            this.btnPurchaseTransaction.Text = "Purchases";
+            this.btnPurchaseTransaction.Text = "Purchase";
             this.btnPurchaseTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnPurchaseTransaction, "Purchases");
             this.btnPurchaseTransaction.UseVisualStyleBackColor = true;
@@ -422,7 +441,7 @@
             // 
             this.panel2.Controls.Add(this.splitter2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(482, 2);
+            this.panel2.Location = new System.Drawing.Point(564, 2);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel2.Size = new System.Drawing.Size(11, 68);
@@ -441,7 +460,7 @@
             // 
             this.panel3.Controls.Add(this.splitter3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(741, 2);
+            this.panel3.Location = new System.Drawing.Point(823, 2);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel3.Size = new System.Drawing.Size(11, 68);
@@ -460,7 +479,7 @@
             // 
             this.panel4.Controls.Add(this.splitter7);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(942, 2);
+            this.panel4.Location = new System.Drawing.Point(1024, 2);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel4.Size = new System.Drawing.Size(11, 68);
@@ -498,7 +517,7 @@
             // 
             this.panel6.Controls.Add(this.splitter5);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(1184, 2);
+            this.panel6.Location = new System.Drawing.Point(1330, 2);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel6.Size = new System.Drawing.Size(11, 68);
@@ -517,11 +536,12 @@
             // 
             this.panel7.Controls.Add(this.splitter6);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(278, 2);
+            this.panel7.Location = new System.Drawing.Point(360, 2);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel7.Size = new System.Drawing.Size(11, 68);
             this.panel7.TabIndex = 49;
+            this.panel7.Visible = false;
             // 
             // splitter6
             // 
@@ -538,7 +558,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 15);
+            this.label2.Size = new System.Drawing.Size(271, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Transactions";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -582,7 +602,7 @@
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(231, 15);
+            this.label6.Size = new System.Drawing.Size(295, 15);
             this.label6.TabIndex = 5;
             this.label6.Text = "Misc";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -590,6 +610,7 @@
             // pnlTransactions
             // 
             this.pnlTransactions.AutoSize = true;
+            this.pnlTransactions.Controls.Add(this.btnSaleTransactionList);
             this.pnlTransactions.Controls.Add(this.btnPurchaseTransaction);
             this.pnlTransactions.Controls.Add(this.btnSaleTransaction);
             this.pnlTransactions.Controls.Add(this.btnPOS);
@@ -597,7 +618,7 @@
             this.pnlTransactions.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlTransactions.Location = new System.Drawing.Point(89, 2);
             this.pnlTransactions.Name = "pnlTransactions";
-            this.pnlTransactions.Size = new System.Drawing.Size(189, 68);
+            this.pnlTransactions.Size = new System.Drawing.Size(271, 68);
             this.pnlTransactions.TabIndex = 52;
             // 
             // pnlOrders
@@ -608,10 +629,11 @@
             this.pnlOrders.Controls.Add(this.btnSellOrder);
             this.pnlOrders.Controls.Add(this.label3);
             this.pnlOrders.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlOrders.Location = new System.Drawing.Point(289, 2);
+            this.pnlOrders.Location = new System.Drawing.Point(371, 2);
             this.pnlOrders.Name = "pnlOrders";
             this.pnlOrders.Size = new System.Drawing.Size(193, 68);
             this.pnlOrders.TabIndex = 53;
+            this.pnlOrders.Visible = false;
             // 
             // pnlAdjustments
             // 
@@ -622,7 +644,7 @@
             this.pnlAdjustments.Controls.Add(this.btnDirectReceive);
             this.pnlAdjustments.Controls.Add(this.label4);
             this.pnlAdjustments.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAdjustments.Location = new System.Drawing.Point(493, 2);
+            this.pnlAdjustments.Location = new System.Drawing.Point(575, 2);
             this.pnlAdjustments.Name = "pnlAdjustments";
             this.pnlAdjustments.Size = new System.Drawing.Size(248, 68);
             this.pnlAdjustments.TabIndex = 54;
@@ -635,7 +657,7 @@
             this.pnlInventory.Controls.Add(this.btnProductList);
             this.pnlInventory.Controls.Add(this.label5);
             this.pnlInventory.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlInventory.Location = new System.Drawing.Point(752, 2);
+            this.pnlInventory.Location = new System.Drawing.Point(834, 2);
             this.pnlInventory.Name = "pnlInventory";
             this.pnlInventory.Size = new System.Drawing.Size(190, 68);
             this.pnlInventory.TabIndex = 55;
@@ -647,11 +669,12 @@
             this.pnlMisc.Controls.Add(this.btnSettings);
             this.pnlMisc.Controls.Add(this.btnReports);
             this.pnlMisc.Controls.Add(this.btnAccounts);
+            this.pnlMisc.Controls.Add(this.btnCustomer);
             this.pnlMisc.Controls.Add(this.label6);
             this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMisc.Location = new System.Drawing.Point(953, 2);
+            this.pnlMisc.Location = new System.Drawing.Point(1035, 2);
             this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(231, 68);
+            this.pnlMisc.Size = new System.Drawing.Size(295, 68);
             this.pnlMisc.TabIndex = 56;
             // 
             // pnlHome
@@ -674,6 +697,22 @@
             this.label1.TabIndex = 38;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnCustomer
+            // 
+            this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCustomer.FlatAppearance.BorderSize = 0;
+            this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomer.Image = global::IMS.Properties.Resources.icons8_Supplier_24px;
+            this.btnCustomer.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCustomer.Location = new System.Drawing.Point(0, 15);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Size = new System.Drawing.Size(64, 53);
+            this.btnCustomer.TabIndex = 48;
+            this.btnCustomer.Text = "Customer";
+            this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnCustomer, "Settings");
+            this.btnCustomer.UseVisualStyleBackColor = true;
+            // 
             // InventoryMenuBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -694,7 +733,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "InventoryMenuBar";
             this.Padding = new System.Windows.Forms.Padding(2);
-            this.Size = new System.Drawing.Size(1256, 72);
+            this.Size = new System.Drawing.Size(1474, 72);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -746,7 +785,6 @@
         protected internal System.Windows.Forms.Button btnSaleTransaction;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Splitter splitter6;
-        protected internal System.Windows.Forms.Button btnPurchaseTransaction;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -759,5 +797,8 @@
         private System.Windows.Forms.Panel pnlMisc;
         private System.Windows.Forms.Panel pnlHome;
         private System.Windows.Forms.Label label1;
+        protected internal System.Windows.Forms.Button btnSaleTransactionList;
+        protected internal System.Windows.Forms.Button btnPurchaseTransaction;
+        protected internal System.Windows.Forms.Button btnCustomer;
     }
 }

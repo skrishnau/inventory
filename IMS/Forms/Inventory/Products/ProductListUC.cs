@@ -110,11 +110,14 @@ namespace IMS.Forms.Inventory.Products
 
         private void DgvProductList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var model = dgvProductList.Rows[e.RowIndex].DataBoundItem as ProductModel;
-            if (model != null)
+            if (e.RowIndex >= 0)
             {
-                var args = new BaseEventArgs<ProductModel>(model, Service.Utility.UpdateMode.NONE);
-                RowSelected?.Invoke(sender, args);
+                var model = dgvProductList.Rows[e.RowIndex].DataBoundItem as ProductModel;
+                if (model != null)
+                {
+                    var args = new BaseEventArgs<ProductModel>(model, Service.Utility.UpdateMode.NONE);
+                    RowSelected?.Invoke(sender, args);
+                }
             }
         }
 

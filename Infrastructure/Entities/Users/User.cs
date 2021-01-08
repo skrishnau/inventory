@@ -13,13 +13,24 @@ namespace Infrastructure.Entities.Users
     public class User
     {
         public int Id { get; set; }
-        // username
+
+        // user specific
         public string Username { get; set; }
         // hashed password
         public string Password { get; set; }
 
-        public int BasicInfoId { get; set; }
-       
+        public bool IsCompany { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public bool Use { get; set; }
+
+        // supplier specific informations
+        public string SalesPerson { get; set; }
+        // customer specific
+        public string DeliveryAddress { get; set; }
+
+
         // UserType is one of (Supplier, Customer or User(own)); will be used in future versions when we implement Web
         // This concept is needed if we allow Suppliers and Customers access into our system, for
         //       sale orders and purchase orders (orders require their's involvement)
@@ -33,9 +44,21 @@ namespace Infrastructure.Entities.Users
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
-        // ============= Table objects ===============//
-        //public virtual Role Role { get; set; }
+        // 
+        // extra
+        //
+        public string Fax { get; set; }
+        // email address of the user to which the system sends mails to mail subscribers
+        public string Email { get; set; }
+        public string Website { get; set; }
+        // Gender will be empty in case of companies
+        public string Gender { get; set; }
+        // null if user doesn't want to provide or if its company
+        public string IsMarried { get; set; }
+        // Registration Date in case of company; or birth date in case of person
+        public DateTime? DOB { get; set; }
+        public string Notes { get; set; }
+        
 
-        public virtual BasicInfo BasicInfo { get; set; }
     }
 }

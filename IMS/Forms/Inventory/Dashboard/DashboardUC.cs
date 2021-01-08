@@ -57,7 +57,7 @@ namespace IMS.Forms.Inventory.Dashboard
         {
             var products = _inventoryService.GetUnderStockProducts();
             lbUnderStockProducts.DataSource = products;
-            lblTopUnderstockProducts.Text = "Top Understock Products - " + products.Count;
+            lblTopUnderstockProducts.Text = "Understock Products - " + products.Count;
             lbUnderStockProducts.DisplayMember = "Name";
             lbUnderStockProducts.ValueMember = "Id";
             lbUnderStockProducts.ClearSelected();

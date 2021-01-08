@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Service.Core.Suppliers;
+using Service.Core.Users;
 using Service.Listeners;
-using ViewModel.Core.Suppliers;
+using ViewModel.Core.Users;
+using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
     public partial class SupplierCreate : Form
     {
-        private readonly ISupplierService _supplierService;
+        private readonly IUserService _supplierService;
         private readonly IDatabaseChangeListener _listener;
+
+        private UserType _userType;
 
         private int _supplierId;
 
-        public SupplierCreate(ISupplierService supplierService, IDatabaseChangeListener listener)
+        public SupplierCreate(IUserService supplierService, IDatabaseChangeListener listener)
         {
             this._supplierService = supplierService;
             _listener = listener;
@@ -41,18 +37,19 @@ namespace IMS.Forms.Inventory.Suppliers
             SetDataForEdit(supplier);
         }
 
-        public void SetDataForEdit(SupplierModel model)
+        
+        public void SetDataForEdit(UserModel model)
         {
+
             if (model != null)
             {
-                this.Text = "Supplier Edit (" + model.Name + ")";
+                this.Text = _userType + " Edit (" + model.Name + ")";
                 tbAddress.Text = model.Address;
                 tbEmail.Text = model.Email;
                 tbFax.Text = model.Fax;
                 tbName.Text = model.Name;
                 tbNotes.Text = model.Notes;
                 tbPhone.Text = model.Phone;
-                tbMyAccountNo.Text = model.MyCustomerAccount;
                 tbSalesperson.Text = model.SalesPerson;
                 tbWebsite.Text = model.Website;
                 chkUse.Checked = model.Use;
@@ -62,7 +59,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var model = new SupplierModel
+            var model = new UserModel
             {
                 Address = tbAddress.Text,
                 Name = tbName.Text,
@@ -71,16 +68,31 @@ namespace IMS.Forms.Inventory.Suppliers
                 Fax = tbFax.Text,
                 IsCompany = true,
                 Id = _supplierId,
-                MyCustomerAccount = tbMyAccountNo.Text,
                 Notes = tbNotes.Text,
                 //RegisteredAt = cbtbRegisteredDate.Value,
                 SalesPerson = tbSalesperson.Text,
                 Website = tbWebsite.Text,
                 Use = chkUse.Checked,
+                UserType = _userType.ToString(),
             };
             _supplierService.AddOrUpdateSupplier(model);
             this.Close();
         }
 
+        internal void SetType(OrderTypeEnum orderType)
+        {
+            switch (orderType)
+            {
+                case OrderTypeEnum.Sale:
+                    _userType = UserType.Customer;
+                    break;
+                case OrderTypeEnum.Purchase:
+                    _userType = UserType.Supplier;
+                    break;
+                case OrderTypeEnum.All:
+                    _userType = UserType.All;
+                    break;
+            }
+        }
     }
 }

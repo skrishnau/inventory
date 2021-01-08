@@ -33,6 +33,7 @@ namespace IMS.Forms.Inventory
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
 
+        private Transaction.TransactionListUC _transactionListUC;
 
         private OrderUC purchaseOrderUC;
         private OrderUC saleOrderUC;
@@ -281,6 +282,10 @@ namespace IMS.Forms.Inventory
             _menubar.btnPOS.Click += BtnPOS_Click;
 
             _menubar.btnSaleTransaction.Click += BtnSaleTransaction_Click;
+            _menubar.btnPurchaseTransaction.Click += BtnPurchaseTransaction_Click;
+            _menubar.btnSaleTransactionList.Click += BtnTransactionList_Click;
+
+            _menubar.btnCustomer.Click += BtnCustomer_Click;
         }
 
 
@@ -348,6 +353,7 @@ namespace IMS.Forms.Inventory
             //_menubar.SetSelection(sender);
         }
 
+
         private void BtnSellOrder_Click(object sender, EventArgs e)
         {
             var orderType = OrderTypeEnum.Sale;
@@ -392,6 +398,12 @@ namespace IMS.Forms.Inventory
             AddTabPage("Transfers", transferOrderUC, sender);
             // set selection
             // _menubar.SetSelection(sender);
+        }
+
+        private void BtnCustomer_Click(object sender, EventArgs e)
+        {
+            var uc = Program.container.GetInstance<SupplierListUC>();
+            AddTabPage("Clients", uc, sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
@@ -485,9 +497,33 @@ namespace IMS.Forms.Inventory
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
-                form.SetData(OrderTypeEnum.Sale, 0);
+                form.SetDataForEdit(OrderTypeEnum.Sale, 0);
                 form.ShowDialog();
             }
+        }
+
+        private void BtnPurchaseTransaction_Click(object sender, EventArgs e)
+        {
+            //using (AsyncScopedLifestyle.BeginScope(Program.container))
+            //{
+            //    var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+            //    form.SetDataForEdit(OrderTypeEnum.Purchase, 0);
+            //    form.ShowDialog();
+            //}
+        }
+
+        private void BtnTransactionList_Click(object sender, EventArgs e)
+        {
+            var orderType = OrderTypeEnum.All;
+            if (_transactionListUC == null)
+            {
+                _transactionListUC = new Transaction.TransactionListUC(_orderService, 
+                    _inventoryService,
+                    _listener,
+                    orderType
+                    );
+            }
+            AddTabPage("Transaction List", _transactionListUC, sender);
         }
 
         #endregion

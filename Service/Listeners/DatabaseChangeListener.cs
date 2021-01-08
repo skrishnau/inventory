@@ -4,10 +4,9 @@ using Service.Listeners.Inventory;
 using System;
 using System.Collections.Generic;
 using ViewModel.Core.Business;
-using ViewModel.Core.Customers;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
-using ViewModel.Core.Suppliers;
+using ViewModel.Core.Users;
 
 namespace Service.Listeners
 {
@@ -18,7 +17,6 @@ namespace Service.Listeners
         public event EventHandler<CategoryEventArgs> CategoryUpdated;
         public event EventHandler<ProductEventArgs> ProductUpdated;
         public event EventHandler<BaseEventArgs<WarehouseModel>> WarehouseUpdated;
-        public event EventHandler<BaseEventArgs<SupplierModel>> SupplierUpdated;
         public event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
         public event EventHandler<BaseEventArgs<PackageModel>> PackageUpdated;
         public event EventHandler<BaseEventArgs<AdjustmentCodeModel>> AdjustmentCodeUpdated;
@@ -26,7 +24,7 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<PaymentModel>> PaymentUpdated;
         public event EventHandler<BaseEventArgs<OrderModel>> OrderItemUpdated;
         public event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
-        public event EventHandler<BaseEventArgs<CustomerModel>> CustomerUpdated;
+        public event EventHandler<BaseEventArgs<UserModel>> UserUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -49,9 +47,9 @@ namespace Service.Listeners
             ProductUpdated?.Invoke(sender, eventArgs);
         }
 
-        public void TriggerSupplierUpdateEvent(object sender, BaseEventArgs<SupplierModel> eventArgs)
+        public void TriggerSupplierUpdateEvent(object sender, BaseEventArgs<UserModel> eventArgs)
         {
-            SupplierUpdated?.Invoke(sender, eventArgs);
+            UserUpdated?.Invoke(sender, eventArgs);
         }
 
         public void TriggerUomUpdateEvent(object sender, BaseEventArgs<UomModel> eventArgs)
@@ -94,9 +92,9 @@ namespace Service.Listeners
             InventoryUnitUpdated?.Invoke(p, eventArgs);
         }
 
-        public void TriggerCustomerUpdateEvent(object p, BaseEventArgs<CustomerModel> eventArgs)
+        public void TriggerUserUpdateEvent(object p, BaseEventArgs<UserModel> eventArgs)
         {
-            CustomerUpdated?.Invoke(p, eventArgs);
+            UserUpdated?.Invoke(p, eventArgs);
         }
     }
 }

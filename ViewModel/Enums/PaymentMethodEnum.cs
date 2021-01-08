@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Enums
 {
+
     public enum PaymentMethodEnum
     {
         Cash = 0,
         Cheque = 1,
         CreditCard = 2
+    }
+
+    public enum PaymentType
+    {
+        Cash,
+        Credit
     }
 }

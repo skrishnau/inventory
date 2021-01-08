@@ -7,13 +7,13 @@ namespace Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ToWarehouseColumnAddedInOrderTable : IMigrationMetadata
+    public sealed partial class Init_Migration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ToWarehouseColumnAddedInOrderTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init_Migration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202002051151495_ToWarehouseColumnAddedInOrderTable"; }
+            get { return "202101081808372_Init_Migration"; }
         }
         
         string IMigrationMetadata.Source

@@ -52,7 +52,7 @@
             this.gvUserList.Name = "gvUserList";
             this.gvUserList.RowTemplate.Height = 24;
             this.gvUserList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvUserList.Size = new System.Drawing.Size(421, 297);
+            this.gvUserList.Size = new System.Drawing.Size(635, 297);
             this.gvUserList.TabIndex = 13;
             // 
             // dataGridViewTextBoxColumn1
@@ -92,7 +92,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gvUserList);
             this.Name = "UserListUC";
-            this.Size = new System.Drawing.Size(421, 297);
+            this.Size = new System.Drawing.Size(635, 297);
             ((System.ComponentModel.ISupportInitialize)(this.gvUserList)).EndInit();
             this.ResumeLayout(false);
 

@@ -34,13 +34,15 @@
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.btnCheckout = new System.Windows.Forms.Button();
             this.pnlCheckout = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlCheckout.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCancel.Location = new System.Drawing.Point(503, 4);
+            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCancel.Location = new System.Drawing.Point(85, 0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 9;
@@ -50,8 +52,8 @@
             // btnSave
             // 
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(418, 4);
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSave.Location = new System.Drawing.Point(0, 0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 27);
             this.btnSave.TabIndex = 8;
@@ -60,8 +62,7 @@
             // 
             // splitter1
             // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(493, 4);
+            this.splitter1.Location = new System.Drawing.Point(160, 0);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(10, 27);
             this.splitter1.TabIndex = 10;
@@ -69,7 +70,6 @@
             // 
             // splitter2
             // 
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Location = new System.Drawing.Point(75, 0);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(10, 27);
@@ -90,29 +90,40 @@
             // pnlCheckout
             // 
             this.pnlCheckout.AutoSize = true;
+            this.pnlCheckout.BackColor = System.Drawing.SystemColors.Highlight;
             this.pnlCheckout.Controls.Add(this.btnCheckout);
-            this.pnlCheckout.Controls.Add(this.splitter2);
             this.pnlCheckout.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlCheckout.Location = new System.Drawing.Point(333, 4);
+            this.pnlCheckout.Location = new System.Drawing.Point(503, 4);
             this.pnlCheckout.Name = "pnlCheckout";
-            this.pnlCheckout.Size = new System.Drawing.Size(85, 27);
+            this.pnlCheckout.Size = new System.Drawing.Size(75, 27);
             this.pnlCheckout.TabIndex = 13;
             this.pnlCheckout.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.splitter1);
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Controls.Add(this.splitter2);
+            this.panel1.Controls.Add(this.btnSave);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(20, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 27);
+            this.panel1.TabIndex = 14;
             // 
             // SaveFooterUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlCheckout);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.btnCancel);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SaveFooterUC";
-            this.Padding = new System.Windows.Forms.Padding(0, 4, 20, 4);
+            this.Padding = new System.Windows.Forms.Padding(20, 4, 20, 4);
             this.Size = new System.Drawing.Size(598, 35);
             this.pnlCheckout.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,5 +136,6 @@
         private System.Windows.Forms.Splitter splitter2;
         protected internal System.Windows.Forms.Button btnCheckout;
         protected internal System.Windows.Forms.Panel pnlCheckout;
+        private System.Windows.Forms.Panel panel1;
     }
 }

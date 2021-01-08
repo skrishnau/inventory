@@ -1,9 +1,7 @@
 namespace Infrastructure.Context
 {
     using Infrastructure.Entities.Bills;
-    using Infrastructure.Entities.Suppliers;
     using Infrastructure.Entities.Common;
-    using Infrastructure.Entities.Customers;
     using Infrastructure.Entities.Orders;
     using Infrastructure.Entities.Users;
     using System;
@@ -53,9 +51,6 @@ namespace Infrastructure.Context
 
         // =================== HRM MODULE ======================//
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Supplier> Supplier { get; set; }
-        public virtual DbSet<BasicInfo> BasicInfo { get; set; }
         //  public virtual DbSet<Lead> Lead { get; set; }
 
 

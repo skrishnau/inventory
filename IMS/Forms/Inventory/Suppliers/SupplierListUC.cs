@@ -1,32 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Service.Core.Suppliers;
 using Service.Listeners;
-using ViewModel.Core.Suppliers;
-using IMS.Forms.Common.Display;
 using SimpleInjector.Lifestyles;
 using Service.DbEventArgs;
+using ViewModel.Core.Users;
+using Service.Core.Users;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
     public partial class SupplierListUC : UserControl
     {
-        public event EventHandler<BaseEventArgs<SupplierModel>> RowSelected;
+        public event EventHandler<BaseEventArgs<UserModel>> RowSelected;
 
-        private readonly ISupplierService _supplierService;
+        private readonly IUserService _supplierService;
         private readonly IDatabaseChangeListener _listener;
 
-        SupplierModel _selectedSupplierModel;
+        UserModel _selectedSupplierModel;
         //HeaderTemplate _header;
 
-        public SupplierListUC(ISupplierService supplierService, IDatabaseChangeListener listener)
+        public SupplierListUC(IUserService supplierService, IDatabaseChangeListener listener)
         {
             this._supplierService = supplierService;
             _listener = listener;
@@ -65,7 +57,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void InitializeEvents()
         {
-            _listener.SupplierUpdated += _listener_SupplierUpdated;
+            _listener.UserUpdated += _listener_SupplierUpdated;
             dgvSuppliers.SelectionChanged += DgvSuppliers_SelectionChanged;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
@@ -75,10 +67,10 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void DgvSuppliers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            var rowData = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as SupplierModel;
+            var rowData = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
             if (rowData != null)
             {
-                var args = new BaseEventArgs<SupplierModel>(rowData, Service.Utility.UpdateMode.NONE);
+                var args = new BaseEventArgs<UserModel>(rowData, Service.Utility.UpdateMode.NONE);
                 RowSelected?.Invoke(sender, args);
             }
         }
@@ -89,14 +81,14 @@ namespace IMS.Forms.Inventory.Suppliers
 
         #region EventHandlers
 
-        private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Suppliers.SupplierModel> e)
+        private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
             Populate();
         }
 
         private void DgvSuppliers_SelectionChanged(object sender, EventArgs e)
         {
-            _selectedSupplierModel = dgvSuppliers.SelectedRows.Count > 0 ? dgvSuppliers.SelectedRows[0].DataBoundItem as SupplierModel : null;
+            _selectedSupplierModel = dgvSuppliers.SelectedRows.Count > 0 ? dgvSuppliers.SelectedRows[0].DataBoundItem as UserModel : null;
             ShowEditDeleteButtons();
         }
 

@@ -120,14 +120,14 @@ namespace IMS.Forms.Inventory.Purchases
                 
                 // populate
                 lblName.Text = model.Name;
-                lblExpectedDate.Text = model.ExpectedDate.ToShortDateString();
+                lblExpectedDate.Text = model.DeliveryDate.ToShortDateString();
                 lblLotNumber.Text = model.LotNumber.ToString();
                 lblOrderNumber.Text = model.Name;
                 // lblOrderDate.Text = po.OrderDate.HasValue? po.OrderDate.Value.ToShortDateString(): " - ";
                 lblOrderNumber.Text = model.ReferenceNumber;
                 lblOrderNumber1.Text = model.ReferenceNumber;
-                lblSupplier.Text = model.Supplier;
-                lblCustomer.Text = model.Customer;
+                lblSupplier.Text = model.User;
+                lblCustomer.Text = model.User;
 
                 lblSupplierInvoice.Text = model.SupplierInvoice;
                 lblWarehouse.Text = model.Warehouse;
@@ -154,7 +154,7 @@ namespace IMS.Forms.Inventory.Purchases
                 {
                     DesignForCancelled();
                 }
-                else if (model.IsExecuted)
+                else if (model.IsCompleted)
                 {
                     DesignForReceived();
                 }

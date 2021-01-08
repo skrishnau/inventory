@@ -204,7 +204,13 @@ namespace Service.Core.Settings
             }
         }
 
-        public bool SaveCurrentIndex(BillSettingsModel model, OrderTypeEnum orderType)
+        public bool IncrementBillIndex(OrderTypeEnum orderType)
+        {
+            var sett = GetBillSettings(orderType);
+            return SaveCurrentIndex(sett.CurrentIndex, orderType);
+        }
+
+        public bool SaveCurrentIndex(long currentIndex, OrderTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
@@ -220,7 +226,7 @@ namespace Service.Core.Settings
                         DisplayName = currentIndexKey,
                         Group = "Bill",
                         UpdatedAt = DateTime.Now,
-                        Value = model.CurrentIndex.ToString(),
+                        Value = currentIndex.ToString(),//model.CurrentIndex.ToString(),
 
                     };
                     _context.AppSetting.Add(currentIndexSetting);
@@ -228,7 +234,7 @@ namespace Service.Core.Settings
                 else
                 {
                     currentIndexEntity.UpdatedAt = DateTime.Now;
-                    currentIndexEntity.Value = model.CurrentIndex.ToString();
+                    currentIndexEntity.Value = currentIndex.ToString();// model.CurrentIndex.ToString();
                 }
                 _context.SaveChanges();
                 return true;

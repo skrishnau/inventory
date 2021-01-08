@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
 using IMS.Forms.Inventory.Suppliers;
 using IMS.Forms.Inventory.Warehouses;
-using IMS.Forms.POS.Customers;
 using Service.Core.Business;
-using Service.Core.Customers;
 using Service.Core.Inventory;
 using Service.Core.Orders;
-using Service.Core.Suppliers;
+using Service.Core.Users;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
+using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Orders
 {
     public partial class OrderCreateForm : Form
     {
-        private readonly ISupplierService _supplierService;
-        private readonly ICustomerService _customerService;
+        private readonly IUserService _userService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
         private readonly IOrderService _orderService;
@@ -38,8 +35,7 @@ namespace IMS.Forms.Inventory.Orders
         private Label warehouseClickLabel;
 
         public OrderCreateForm(
-            ISupplierService supplierService,
-            ICustomerService customerService,
+            IUserService supplierService,
             IBusinessService businessService,
             IInventoryService inventoryService,
             IOrderService purchaseService,
@@ -47,8 +43,7 @@ namespace IMS.Forms.Inventory.Orders
         {
             _listener = listener;
             this._businessService = businessService;
-            this._supplierService = supplierService;
-            this._customerService = customerService;
+            this._userService = supplierService;
             this._orderService = purchaseService;
             this._inventoryService = inventoryService;
 
@@ -69,8 +64,7 @@ namespace IMS.Forms.Inventory.Orders
 
             InitializeValidation();
 
-            _listener.CustomerUpdated += _listener_CustomerUpdated;
-            _listener.SupplierUpdated += _listener_SupplierUpdated;
+            _listener.UserUpdated += _listener_UserUpdated;
             _listener.WarehouseUpdated += _listener_WarehouseUpdated;
 
             lblWarehouse.DoubleClick += lblWarehouse_DoubleClick;
@@ -106,22 +100,11 @@ namespace IMS.Forms.Inventory.Orders
 
         #region Listener Events
 
-        private void _listener_CustomerUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Customers.CustomerModel> e)
-        {
-            if (_orderType == OrderTypeEnum.Sale)
-            {
-                PopulateClientCombo();
-                cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
-            }
-        }
 
-        private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Suppliers.SupplierModel> e)
+        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
-            if (_orderType == OrderTypeEnum.Purchase)
-            {
-                PopulateClientCombo();
-                cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
-            }
+            PopulateClientCombo();
+            cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
         }
 
         private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Business.WarehouseModel> e)
@@ -152,10 +135,8 @@ namespace IMS.Forms.Inventory.Orders
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
-                    list = _supplierService.GetSupplierListForCombo();
-                    break;
                 case OrderTypeEnum.Sale:
-                    list = _customerService.GetCustomerListForCombo();
+                    list = _userService.GetSupplierListForCombo();
                     break;
             }
             if (list != null)
@@ -208,17 +189,16 @@ namespace IMS.Forms.Inventory.Orders
                 tbNotes.Text = model.Note;
                 tbOrderNumber.Text = model.ReferenceNumber;
                 cbWarehouse.SelectedValue = model.WarehouseId ?? 0;
-                dtExpectedDate.Value = model.ExpectedDate;
+                dtExpectedDate.Value = model.DeliveryDate;
                 numLotNumber.Value = model.LotNumber;
+                cbClient.SelectedValue = model.UserId;
 
                 switch (_orderType)
                 {
                     case OrderTypeEnum.Purchase:
-                        cbClient.SelectedValue = model.SupplierId;
                         tbClientInfo.Text = model.SupplierInvoice;
                         break;
                     case OrderTypeEnum.Sale:
-                        cbClient.SelectedValue = model.CustomerId;
                         tbClientInfo.Text = model.Address;
                         tbPhone.Text = model.Phone;
                         break;
@@ -299,12 +279,9 @@ namespace IMS.Forms.Inventory.Orders
                 switch (_orderType)
                 {
                     case OrderTypeEnum.Purchase:
+                    case OrderTypeEnum.Sale:
                         var supplierCreate = Program.container.GetInstance<SupplierCreate>();
                         supplierCreate.ShowDialog();
-                        break;
-                    case OrderTypeEnum.Sale:
-                        var customerCreate = Program.container.GetInstance<CustomerCreateForm>();
-                        customerCreate.ShowDialog();
                         break;
                 }
             }
@@ -339,25 +316,23 @@ namespace IMS.Forms.Inventory.Orders
                 Name = tbName.Text,
                 Note = tbNotes.Text,
                 ReferenceNumber = tbOrderNumber.Text,
-                ExpectedDate = dtExpectedDate.Value,
+                DeliveryDate = dtExpectedDate.Value,
                 Phone = tbPhone.Text,
                 // don't add other properties which are set individually, e.g. receivedAt, etc.
             };
 
             var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
+            model.UserId = int.Parse(cbClient.SelectedValue.ToString());
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
-                    model.SupplierId = int.Parse(cbClient.SelectedValue.ToString());
                     model.WarehouseId = warehouseId;
                     model.SupplierInvoice = tbClientInfo.Text;
                     model.ToWarehouseId = null;
                     //model.PaymentDueDate = cbPaymentMethod.SelectedValue?.ToString();
                     break;
                 case OrderTypeEnum.Sale:
-                    model.CustomerId = int.Parse(cbClient.SelectedValue.ToString());
                     model.WarehouseId = warehouseId == 0 ? (int?)null : warehouseId;
-                    model.SupplierId = null;
                     model.Address = tbClientInfo.Text;
                     model.ToWarehouseId = null;
                     //model.PaymentMethod = cbPaymentMethod.SelectedValue?.ToString();

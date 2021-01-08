@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTO.Core.Inventory;
 using Infrastructure.Context;
+using Service.DbEventArgs;
+using Service.Listeners;
+using ViewModel.Core.Common;
 using ViewModel.Core.Users;
 
 namespace Service.Core.Users
@@ -11,42 +15,14 @@ namespace Service.Core.Users
     public class UserService : IUserService
     {
         // private readonly DatabaseContext _context;
+        private readonly IDatabaseChangeListener _listener;
 
-        public UserService()//DatabaseContext context
+        public UserService(IDatabaseChangeListener listener)//DatabaseContext context
         {
+            _listener = listener;
             // _context = context;
         }
-
-        public void AddOrUpdateBasicInfo(BasicInfoModel basicInfoModel)
-        {
-            using (var _context = new DatabaseContext())
-            {
-
-                var dbEntity = _context.BasicInfo.FirstOrDefault(x => x.Id == basicInfoModel.Id);
-                if (dbEntity == null)
-                {
-                    var userEntitiy = basicInfoModel.ToEntity();
-                    userEntitiy.CreatedAt = DateTime.Now;
-                    userEntitiy.UpdatedAt = DateTime.Now;
-                    _context.BasicInfo.Add(userEntitiy);
-
-                }
-                else
-                {
-                    dbEntity.UpdatedAt = DateTime.Now;
-                    dbEntity.Address = basicInfoModel.Address;
-                    dbEntity.DOB = basicInfoModel.DOB;
-                    dbEntity.Email = basicInfoModel.Email;
-                    dbEntity.Gender = basicInfoModel.Gender;
-                    dbEntity.IsCompany = basicInfoModel.IsCompany;
-                    dbEntity.IsMarried = basicInfoModel.IsMarried;
-                    dbEntity.Name = basicInfoModel.Name;
-                    dbEntity.Phone = basicInfoModel.Phone;
-
-                }
-                _context.SaveChanges();
-            }
-        }
+        
 
         public void AddOrUpdateUser(UserModel userModel)
         {
@@ -68,18 +44,18 @@ namespace Service.Core.Users
                     dbEntity.Password = userModel.Password;
                     dbEntity.Username = userModel.Username;
                     dbEntity.UserType = userModel.UserType;
-                    dbEntity.BasicInfo.Address = userModel.Address;
-                    dbEntity.BasicInfo.UpdatedAt = DateTime.Now;
-                    dbEntity.BasicInfo.DOB = userModel.DOB;
-                    dbEntity.BasicInfo.Email = userModel.Email;
-                    dbEntity.BasicInfo.Gender = userModel.Gender;
-                    dbEntity.BasicInfo.IsCompany = userModel.IsCompany;
-                    dbEntity.BasicInfo.IsMarried = userModel.IsMarried;
-                    dbEntity.BasicInfo.Name = userModel.Name;
-                    dbEntity.BasicInfo.Phone = userModel.Phone;
-                    dbEntity.BasicInfo.Website = userModel.Website;
+                    dbEntity.Address = userModel.Address;
+                    dbEntity.UpdatedAt = DateTime.Now;
+                    dbEntity.DOB = userModel.DOB;
+                    dbEntity.Email = userModel.Email;
+                    dbEntity.Gender = userModel.Gender;
+                    dbEntity.IsCompany = userModel.IsCompany;
+                    dbEntity.IsMarried = userModel.IsMarried;
+                    dbEntity.Name = userModel.Name;
+                    dbEntity.Phone = userModel.Phone;
+                    dbEntity.Website = userModel.Website;
 
-                    // dbEntity.BasicInfoId = userModel.BasicInfoId;
+                    // dbEntityId = userModelId;
                     dbEntity.CanLogin = userModel.CanLogin;
                     //dbEntity.Id = userModel.Id;
                 }
@@ -95,11 +71,11 @@ namespace Service.Core.Users
                 var dbEntity = _context.User.FirstOrDefault(x => x.Id == user.Id);
                 if (dbEntity != null)
                 {
-                    //var basicInfoId = dbEntity.BasicInfo.Id;
+                    //var basicInfoId = dbEntity.Id;
                     dbEntity.DeletedAt = DateTime.Now;
-                    //dbEntity.BasicInfo.DeletedAt = DateTime.Now;
+                    //dbEntity.DeletedAt = DateTime.Now;
                     dbEntity.CanLogin = false;
-                    //var basicInfoEntity = _context.BasicInfo.FirstOrDefault(y => y.Id == basicInfoId);
+                    //var basicInfoEntity = _context.FirstOrDefault(y => y.Id == basicInfoId);
                     //if(basicInfoEntity != null)
                     //{
                     //    basicInfoEntity.DeletedAt = DateTime.Now;
@@ -108,32 +84,7 @@ namespace Service.Core.Users
                 }
             }
         }
-
-        public List<BasicInfoModel> GetBasicInfoList()
-        {
-            using (var _context = new DatabaseContext())
-            {
-
-                var basicInfo = _context.BasicInfo
-                   .Where(x => x.DeletedAt == null)
-                   .Select(x => new BasicInfoModel()
-                   {
-                       Id = x.Id,
-                       Address = x.Address,
-                       Phone = x.Phone,
-                       Name = x.Name,
-                       IsMarried = x.IsMarried,
-                       DOB = x.DOB,
-                       Email = x.Email,
-                       Gender = x.Gender,
-                       IsCompany = x.IsCompany,
-                       Website = x.Website,
-
-                   })
-                   .ToList();
-                return basicInfo;
-            }
-        }
+        
 
         public List<UserModel> GetUserList()
         {
@@ -144,21 +95,20 @@ namespace Service.Core.Users
                     .Where(x => x.DeletedAt == null)
                     .Select(x => new UserModel()
                     {
-                        BasicInfoId = x.BasicInfoId,
                         CanLogin = x.CanLogin,
                         Password = x.Password,
                         Username = x.Username,
                         UserType = x.UserType,
                         Id = x.Id,
-                        Name = x.BasicInfo.Name,
-                        Email = x.BasicInfo.Email,
-                        DOB = x.BasicInfo.DOB,
-                        IsCompany = x.BasicInfo.IsCompany,
-                        IsMarried = x.BasicInfo.IsMarried,
-                        Phone = x.BasicInfo.Phone,
-                        Website = x.BasicInfo.Website,
-                        Gender = x.BasicInfo.Gender,
-                        Address = x.BasicInfo.Address,
+                        Name = x.Name,
+                        Email = x.Email,
+                        DOB = x.DOB,
+                        IsCompany = x.IsCompany,
+                        IsMarried = x.IsMarried,
+                        Phone = x.Phone,
+                        Website = x.Website,
+                        Gender = x.Gender,
+                        Address = x.Address,
 
 
                     })
@@ -173,7 +123,87 @@ namespace Service.Core.Users
          }
          */
 
+        public void AddOrUpdateSupplier(UserModel supplierModel)
+        {
+            using (var _context = new DatabaseContext())
+            {
 
+                var now = DateTime.Now;
+                var dbEntity = _context.User
+                    .FirstOrDefault(x => x.Id == supplierModel.Id);
+                BaseEventArgs<UserModel> eventArgs = BaseEventArgs<UserModel>.Instance;
+                dbEntity = UserMapper.MapToEntity(supplierModel, dbEntity);
+                if (dbEntity.Id == 0)
+                {
+                    // add
+                    dbEntity.CreatedAt = now;
+                    dbEntity.UpdatedAt = now;
+                    _context.User.Add(dbEntity);
+                    eventArgs.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    dbEntity.UpdatedAt = now;
+                    // update; not needed to assign cause Mapper has already assigned; just set the mode of eventArgs
+                    eventArgs.Mode = Utility.UpdateMode.EDIT;
+                }
+                _context.SaveChanges();
+                eventArgs.Model = UserMapper.MapToSupplierModel(dbEntity);
+                _listener.TriggerUserUpdateEvent(null, eventArgs);
+            }
+        }
+
+        //public void DeleteSupplier(int supplierId)
+        //{
+        //    var entity = _context.Supplier.Find(supplierId);
+        //    if(entity != null)
+        //    {
+        //        entity.DeletedAt = DateTime.Now;
+        //        _context.SaveChanges();
+        //        var args = new BaseEventArgs<SupplierModel>(SupplierMapper.MapToSupplierModel(entity), Utility.UpdateMode.DELETE);
+        //        _listener.TriggerSupplierUpdateEvent(null, args);
+        //    }
+        //}
+
+        public UserModel GetSupplier(int supplierId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+
+                var supplier = _context.User.Find(supplierId);
+                if (supplier == null)
+                    return null;
+                return UserMapper.MapToSupplierModel(supplier);
+            }
+        }
+
+        public List<UserModel> GetSupplierList()
+        {
+            using (var _context = new DatabaseContext())
+            {
+
+                var query = _context.User
+                    .Where(x => x.DeletedAt == null)
+                    .OrderBy(x => x.Name);
+                return UserMapper.MapToSupplierModel(query);
+            }
+        }
+
+        public List<IdNamePair> GetSupplierListForCombo()
+        {
+            using (var _context = new DatabaseContext())
+            {
+
+                return _context.User
+                    .Where(x => x.Use && x.DeletedAt == null)
+                    .OrderBy(x => x.Name)
+                    .Select(x => new IdNamePair()
+                    {
+                        Name = x.Name,
+                        Id = x.Id
+                    }).ToList();
+            }
+        }
     }
 
 }
