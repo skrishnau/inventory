@@ -8,6 +8,10 @@ namespace ViewModel.Enums.Settings
 {
    public enum BillSettingsEnum
     {
-        BILL_SUFFIX, BILL_PREFIX, BILL_END_NUMBER, BILL_START_NUMBER
+        BILL_SUFFIX, 
+        BILL_PREFIX,
+        BILL_BODY,
+        BillCurrentIndex,
+        //BILL_END_NUMBER, BILL_START_NUMBER
     }
 }

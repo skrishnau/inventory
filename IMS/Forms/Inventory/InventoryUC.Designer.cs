@@ -48,19 +48,19 @@
             // tabControl
             // 
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(5, 66);
+            this.tabControl.Location = new System.Drawing.Point(5, 71);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(0, 0);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(996, 395);
+            this.tabControl.Size = new System.Drawing.Size(996, 390);
             this.tabControl.TabIndex = 0;
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 61);
+            this.splitter1.Location = new System.Drawing.Point(0, 66);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(1001, 5);
             this.splitter1.TabIndex = 1;
@@ -69,9 +69,9 @@
             // splitter2
             // 
             this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter2.Location = new System.Drawing.Point(0, 66);
+            this.splitter2.Location = new System.Drawing.Point(0, 71);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 395);
+            this.splitter2.Size = new System.Drawing.Size(5, 390);
             this.splitter2.TabIndex = 2;
             this.splitter2.TabStop = false;
             // 
@@ -156,10 +156,11 @@
             // _menubar
             // 
             this._menubar.Dock = System.Windows.Forms.DockStyle.Top;
+            this._menubar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._menubar.Location = new System.Drawing.Point(0, 0);
             this._menubar.Name = "_menubar";
             this._menubar.Padding = new System.Windows.Forms.Padding(2);
-            this._menubar.Size = new System.Drawing.Size(1001, 61);
+            this._menubar.Size = new System.Drawing.Size(1001, 66);
             this._menubar.TabIndex = 0;
             // 
             // InventoryUC

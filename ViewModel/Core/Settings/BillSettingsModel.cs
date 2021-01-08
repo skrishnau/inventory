@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Enums;
 
 namespace ViewModel.Core.Settings
 {
     public class BillSettingsModel
     {
-        public int StartNumber { get; set; }
-        public int EndNumber { get; set; }
 
+        public string Body { get; set; }
         public string Prefix { get; set; }
         public string Suffix { get; set; }
 
+        public long CurrentIndex { get; set; }
+        public string ReceiptNo { get; set; }
+        public OrderTypeEnum OrderType { get; set; }
 
         public static BillSettingsModel GetNewInstance()
         {
             return new BillSettingsModel()
             {
-                EndNumber = 0,
                 Prefix = "",
-                StartNumber = 0, 
                 Suffix = "",
+                Body = "",
             };
         }
 

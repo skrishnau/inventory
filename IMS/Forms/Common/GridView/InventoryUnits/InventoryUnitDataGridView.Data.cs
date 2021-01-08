@@ -68,7 +68,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var column = this.Columns[this.colProductId.Index] as DataGridViewComboBoxColumn;
             if (column != null)
             {
-                column.DataSource = _inventoryService.GetProductListForCombo();
+                column.AutoComplete = true;
+                //var datasource = _productList;//
+                //foreach(var n in datasource.Select(x => x.Name).ToList())
+                //    column.Items.Add(n);
+                column.DataSource = _productList;
                 column.ValueMember = "Id";
                 column.DisplayMember = "Name";
             }

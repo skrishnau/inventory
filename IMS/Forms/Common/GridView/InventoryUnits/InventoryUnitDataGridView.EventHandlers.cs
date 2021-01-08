@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
@@ -12,6 +14,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
     //
     public partial class InventoryUnitDataGridView
     {
+        public delegate void AmountChange(decimal totals);
+        public event AmountChange AmountChnanged;
 
         private void InitializeEvents()
         {
@@ -33,7 +37,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //
             _dtPicker.TextChanged += _dtPicker_TextChanged;
         }
-        
+
 
         //
         // Data Error
@@ -55,13 +59,30 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         private void InventoryUnitDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (_isCellDirty)
+
+            // ignore the last row
+            if (e.RowIndex <= this.RowCount - 1)
             {
-                _isCellDirty = false;
-                // ignore the last row
-                if (e.RowIndex < this.RowCount - 1)
+                var row = this.Rows[e.RowIndex];
+                // below commented code adds product to the list in UI . YOu need to change datasource to AddItems
+                //if (e.ColumnIndex == this.colProductId.Index)
+                //{
+                //    DataGridView dataGridView = sender as DataGridView;
+                //    if (dataGridView == null) return;
+                //    if (!dataGridView.CurrentCell.IsInEditMode) return;
+                //    if (dataGridView.CurrentCell.GetType() != typeof(DataGridViewComboBoxCell)) return;
+                //    DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                //    if (cell.Items.Contains(e.FormattedValue)) return;
+                //    cell.Items.Add(e.FormattedValue);
+                //    cell.Value = e.FormattedValue;
+                //    if (((DataGridViewComboBoxColumn)dataGridView.Columns[colProductId.Index]).Items.Contains(e.FormattedValue)) return;
+                //    ((DataGridViewComboBoxColumn)dataGridView.Columns[colProductId.Index]).Items.Add(e.FormattedValue);
+                //}
+                if (_isCellDirty)
                 {
-                    var row = this.Rows[e.RowIndex];
+                    _isCellDirty = false;
+
+
                     if (e.ColumnIndex == this.colSKU.Index)
                     {
                         // check if the sku is valid
@@ -185,6 +206,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             if (this.CurrentCell.ColumnIndex == this.colProductId.Index && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
+                comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+                //var list = (ViewModel.Core.Common.IdNamePair)comboBox.DataSource;
+                comboBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.Name).ToArray());
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
                 comboBox.SelectedIndexChanged -= ProductColumnComboSelectionChanged;
                 comboBox.SelectedIndexChanged += ProductColumnComboSelectionChanged;
             }
@@ -261,6 +288,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
             decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out rate);
             row.Cells[colTotal.Index].Value = quantity * rate;
+
+            //GetItems();
+            AmountChnanged(GetTotalSumAmount());
         }
     }
 }

@@ -7,12 +7,11 @@ using DTO.Core.Settings;
 using Infrastructure.Context;
 using Infrastructure.Entities.AppSettings;
 using ViewModel.Core.Settings;
+using ViewModel.Enums;
 using ViewModel.Enums.Settings;
 
 namespace Service.Core.Settings
 {
-
-
     public class AppSettingService : IAppSettingService
     {
         // private readonly DatabaseContext _context;
@@ -73,40 +72,43 @@ namespace Service.Core.Settings
 
 
         // get bill settings
-        public BillSettingsModel GetBillSettings()
+        public BillSettingsModel GetBillSettings(OrderTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
                 //return BillSettingsModel.GetNewInstance();
                 var model = new BillSettingsModel();
 
-                var prefixKey = BillSettingsEnum.BILL_PREFIX.ToString();
+                var prefixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_PREFIX.ToString();
                 var prefixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == prefixKey);
                 if (prefixEntity != null)
                 {
                     model.Prefix = prefixEntity.Value;
                 }
                 // suffix
-                var suffixKey = BillSettingsEnum.BILL_SUFFIX.ToString();
+                var suffixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_SUFFIX.ToString();
                 var suffixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == suffixKey);
                 if (suffixEntity != null)
                 {
                     model.Suffix = suffixEntity.Value;
                 }
-                // start
-                var startKey = BillSettingsEnum.BILL_START_NUMBER.ToString();
-                var startEntity = _context.AppSetting.FirstOrDefault(x => x.Name == startKey);
-                if (startEntity != null)
+                // Body
+                var bodyKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
+                var bodyEntity = _context.AppSetting.FirstOrDefault(x => x.Name == bodyKey);
+                if (bodyEntity != null)
                 {
-                    model.StartNumber = int.Parse(startEntity.Value);
+                    model.Body = bodyEntity.Value;
                 }
-                // end
-                var endKey = BillSettingsEnum.BILL_END_NUMBER.ToString();
-                var endEntity = _context.AppSetting.FirstOrDefault(x => x.Name == endKey);
-                if (endEntity != null)
+                // CurrentIndex
+                var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
+                var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
+                if (currentIndexEntity != null)
                 {
-                    model.EndNumber = int.Parse(endEntity.Value);
+                    long currentIndex;
+                    if (long.TryParse(bodyEntity.Value, out currentIndex))
+                        model.CurrentIndex = currentIndex;
                 }
+                model.ReceiptNo = GetReceiptNumber(model, model.CurrentIndex + 1);
 
                 return model;
 
@@ -119,99 +121,114 @@ namespace Service.Core.Settings
             // throw new NotImplementedException();
         }
 
-        public bool SaveBillSetting(BillSettingsModel model)
+        public bool SaveBillSetting(List<BillSettingsModel> modelList)
         {
             using (var _context = new DatabaseContext())
             {
-
-                // property : StartNum, EndNum, Prefix, Suffix
-                var prefixKey = BillSettingsEnum.BILL_PREFIX.ToString();
-                var prefixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == prefixKey);
-                if (prefixEntity == null)
+                foreach (var model in modelList)
                 {
-                    var prefix = new AppSetting()
+                    var orderType = model.OrderType;
+
+                    // property : StartNum, EndNum, Prefix, Suffix
+                    var prefixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_PREFIX.ToString();
+                    var prefixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == prefixKey);
+                    if (prefixEntity == null)
                     {
-                        Name = prefixKey,
+                        var prefix = new AppSetting()
+                        {
+                            Name = prefixKey,
+                            CreatedAt = DateTime.Now,
+                            DisplayName = prefixKey,
+                            Group = "Bill",
+                            UpdatedAt = DateTime.Now,
+                            Value = model.Prefix
+                        };
+                        _context.AppSetting.Add(prefix);
+                    }
+                    else
+                    {
+                        prefixEntity.UpdatedAt = DateTime.Now;
+                        prefixEntity.Value = model.Prefix;
+                    }
+
+                    // for suffix
+                    var suffixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_SUFFIX.ToString();
+                    var suffixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == suffixKey);
+                    if (suffixEntity == null)
+                    {
+                        var suffix = new AppSetting()
+                        {
+                            Name = suffixKey,
+                            CreatedAt = DateTime.Now,
+                            DisplayName = suffixKey,
+                            Group = "Bill",
+                            UpdatedAt = DateTime.Now,
+                            Value = model.Suffix,
+                        };
+                        _context.AppSetting.Add(suffix);
+                    }
+                    else
+                    {
+                        suffixEntity.UpdatedAt = DateTime.Now;
+                        suffixEntity.Value = model.Suffix;
+
+                    }
+
+                    //for Body
+                    var startKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
+                    var startEntity = _context.AppSetting.FirstOrDefault(x => x.Name == startKey);
+                    if (startEntity == null)
+                    {
+                        var start = new AppSetting()
+                        {
+                            Name = startKey,
+                            CreatedAt = DateTime.Now,
+                            DisplayName = startKey,
+                            Group = "Bill",
+                            UpdatedAt = DateTime.Now,
+                            Value = model.Body,
+
+                        };
+                        _context.AppSetting.Add(start);
+                    }
+                    else
+                    {
+                        startEntity.UpdatedAt = DateTime.Now;
+                        startEntity.Value = model.Body;
+                    }
+
+
+                }
+                _context.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool SaveCurrentIndex(BillSettingsModel model, OrderTypeEnum orderType)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                //for CurrentIndex
+                var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
+                var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
+                if (currentIndexEntity == null)
+                {
+                    var currentIndexSetting = new AppSetting()
+                    {
+                        Name = currentIndexKey,
                         CreatedAt = DateTime.Now,
-                        DisplayName = prefixKey,
+                        DisplayName = currentIndexKey,
                         Group = "Bill",
                         UpdatedAt = DateTime.Now,
-                        Value = model.Prefix
+                        Value = model.CurrentIndex.ToString(),
+
                     };
-                    _context.AppSetting.Add(prefix);
+                    _context.AppSetting.Add(currentIndexSetting);
                 }
                 else
                 {
-                    prefixEntity.UpdatedAt = DateTime.Now;
-                    prefixEntity.Value = model.Prefix;
-                }
-
-                // for suffix
-                var suffixKey = BillSettingsEnum.BILL_SUFFIX.ToString();
-                var suffixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == suffixKey);
-                if (suffixEntity == null)
-                {
-                    var suffix = new AppSetting()
-                    {
-                        Name = suffixKey,
-                        CreatedAt = DateTime.Now,
-                        DisplayName = suffixKey,
-                        Group = "Bill",
-                        UpdatedAt = DateTime.Now,
-                        Value = model.Suffix,
-                    };
-                    _context.AppSetting.Add(suffix);
-                }
-                else
-                {
-                    suffixEntity.UpdatedAt = DateTime.Now;
-                    suffixEntity.Value = model.Suffix;
-
-                }
-
-                //for startNum
-                var startKey = BillSettingsEnum.BILL_START_NUMBER.ToString();
-                var startEntity = _context.AppSetting.FirstOrDefault(x => x.Name == startKey);
-                if (startEntity == null)
-                {
-                    var start = new AppSetting()
-                    {
-                        Name = startKey,
-                        CreatedAt = DateTime.Now,
-                        DisplayName = startKey,
-                        Group = "Bill",
-                        UpdatedAt = DateTime.Now,
-                        Value = model.StartNumber.ToString()
-
-                    };
-                    _context.AppSetting.Add(start);
-                }
-                else
-                {
-                    startEntity.UpdatedAt = DateTime.Now;
-                    startEntity.Value = model.StartNumber.ToString();
-                }
-
-                //for endNum
-                var endKey = BillSettingsEnum.BILL_END_NUMBER.ToString();
-                var endEntity = _context.AppSetting.FirstOrDefault(x => x.Name == endKey);
-                if (endEntity == null)
-                {
-                    var end = new AppSetting()
-                    {
-                        Value = model.EndNumber.ToString(),
-                        CreatedAt = DateTime.Now,
-                        DisplayName = endKey,
-                        Group = "Bill",
-                        Name = endKey,
-                        UpdatedAt = DateTime.Now
-                    };
-                    _context.AppSetting.Add(end);
-                }
-                else
-                {
-                    endEntity.Value = model.EndNumber.ToString();
-                    endEntity.UpdatedAt = DateTime.Now;
+                    currentIndexEntity.UpdatedAt = DateTime.Now;
+                    currentIndexEntity.Value = model.CurrentIndex.ToString();
                 }
                 _context.SaveChanges();
                 return true;
@@ -437,10 +454,29 @@ namespace Service.Core.Settings
                 dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Website");
                 if (dbEntity != null)
                     model.Website = dbEntity.Value;
-
-
                 return model;
             }
+        }
+
+        public string GetReceiptNumber(BillSettingsModel setting, long currentIndex)
+        {
+            long number;
+            var body = "";
+            if (long.TryParse(setting.Body, out number))
+            {
+                number += currentIndex;
+                var leadingZeros = setting.Body.Length - number.ToString().Length;
+                for (var i = 0; i < leadingZeros; i++)
+                    body += "0";
+                body += number;
+            }
+            return setting.Prefix + body + setting.Suffix;
+        }
+
+        public string GetReceiptNumber(OrderTypeEnum orderType)
+        {
+            var billSettings = GetBillSettings(orderType);
+            return billSettings.ReceiptNo;
         }
     }
 }

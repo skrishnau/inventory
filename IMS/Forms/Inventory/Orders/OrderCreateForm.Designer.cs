@@ -47,6 +47,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.tbOrderNumber = new System.Windows.Forms.TextBox();
+            this.dtPaymentDueDate = new System.Windows.Forms.DateTimePicker();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.tblToWarehouse = new System.Windows.Forms.TableLayoutPanel();
             this.lblToWarehouse = new System.Windows.Forms.Label();
             this.cbToWarehouse = new System.Windows.Forms.ComboBox();
-            this.dtPaymentDueDate = new System.Windows.Forms.DateTimePicker();
             this.tblBase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLotNumber)).BeginInit();
             this.panel3.SuspendLayout();
@@ -261,6 +261,15 @@
             this.tbOrderNumber.Size = new System.Drawing.Size(141, 20);
             this.tbOrderNumber.TabIndex = 16;
             // 
+            // dtPaymentDueDate
+            // 
+            this.dtPaymentDueDate.CustomFormat = "yyyy/MM/dd";
+            this.dtPaymentDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtPaymentDueDate.Location = new System.Drawing.Point(116, 115);
+            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
+            this.dtPaymentDueDate.Size = new System.Drawing.Size(140, 20);
+            this.dtPaymentDueDate.TabIndex = 17;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btnCancel);
@@ -357,15 +366,6 @@
             this.cbToWarehouse.Name = "cbToWarehouse";
             this.cbToWarehouse.Size = new System.Drawing.Size(141, 21);
             this.cbToWarehouse.TabIndex = 9;
-            // 
-            // dtPaymentDueDate
-            // 
-            this.dtPaymentDueDate.CustomFormat = "yyyy/MM/dd";
-            this.dtPaymentDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtPaymentDueDate.Location = new System.Drawing.Point(116, 115);
-            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
-            this.dtPaymentDueDate.Size = new System.Drawing.Size(140, 20);
-            this.dtPaymentDueDate.TabIndex = 17;
             // 
             // OrderCreateForm
             // 

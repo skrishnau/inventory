@@ -70,7 +70,7 @@ namespace Service.Core.Orders
             }
         }
 
-        public void SaveOrder(OrderModel orderModel)
+        public void SaveOrder(OrderModel orderModel, bool checkout)
         {
             using (var _context = new DatabaseContext())
             {
@@ -79,6 +79,12 @@ namespace Service.Core.Orders
                 var args = BaseEventArgs<OrderModel>.Instance;
                 var entity = _context.Order.Find(orderModel.Id);
                 entity = orderModel.MapToEntity(entity);// OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
+                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
+
+                if (checkout)
+                {
+                    MakeCheckout(entity);
+                }
 
                 if (entity.Id == 0)
                 {
@@ -102,6 +108,14 @@ namespace Service.Core.Orders
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
                 _listener.TriggerOrderUpdateEvent(null, args);
             }
+        }
+
+        private void MakeCheckout(Order entity)
+        {
+            entity.IsExecuted = true;
+            entity.IsVerified = true;
+            entity.ExecutedDate = DateTime.Now;
+            entity.VerifiedDate = DateTime.Now;
         }
 
         public OrderModel GetOrder(OrderTypeEnum orderType, int orderId)
@@ -290,64 +304,8 @@ namespace Service.Core.Orders
         {
             using (var _context = new DatabaseContext())
             {
-
                 var poEntity = _context.Order.Find(purchaseOrderId);
-                if (poEntity == null)
-                {
-                    return "The Purchase Order doesn't exist.";
-                }
-
-                // validate & assign productId in the items; check if the sku exists
-                foreach (var item in items)
-                {
-                    if (item.UnitQuantity <= 0)
-                    {
-                        return "Some of the items have zero quantity. Quantity must be greater than zero";
-                    }
-                    if (item.Rate <= 0)
-                    {
-                        return "Some of the items have zero rate. Rates must be greater than zero";
-                    }
-                    if (item.ProductId == 0)
-                    {
-                        var productEntity = _context.Product.FirstOrDefault(x => x.SKU == item.SKU);
-                        if (productEntity == null)
-                        {
-                            return "Some of the items you provided are invalid!";
-                        }
-                        else
-                        {
-                            item.ProductId = productEntity.Id;
-                            item.Total = item.Rate * item.UnitQuantity;
-                        }
-                    }
-                }
-
-                var dbItems = _context.OrderItem.Where(x => x.OrderId == purchaseOrderId).ToList();
-                // first remove those that are not in the model list
-                for (var i = 0; i < dbItems.Count(); i++)
-                {
-                    var entity = dbItems.ElementAt(i);
-                    var stillExists = items.FirstOrDefault(x => x.Id == entity.Id);
-                    if (stillExists == null)
-                    {
-                        _context.OrderItem.Remove(entity);
-                    }
-                }
-                // second add/update
-                foreach (var item in items)
-                {
-                    var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
-                    entity = item.MapToEntity(entity);//OrderItemMapper.MapToEntity(item, entity);
-                    if (entity.Id == 0)
-                    {
-                        // add
-                        _context.OrderItem.Add(entity);
-                    }
-                    // No need to handle update cause entity is already assigned above { ....MapToEntity(..)}
-                }
-
-                poEntity.TotalAmount = items.Sum(x => x.Total);
+                SaveOrderItemsWithoutCommit(_context, poEntity, items);
 
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);
@@ -357,6 +315,66 @@ namespace Service.Core.Orders
             }
         }
 
+        private string SaveOrderItemsWithoutCommit(DatabaseContext _context, Order poEntity, List<OrderItemModel> items)
+        {
+            if (poEntity == null)
+            {
+                return "The Purchase Order doesn't exist.";
+            }
+
+            // validate & assign productId in the items; check if the sku exists
+            foreach (var item in items)
+            {
+                if (item.UnitQuantity <= 0)
+                {
+                    return "Some of the items have zero quantity. Quantity must be greater than zero";
+                }
+                if (item.Rate <= 0)
+                {
+                    return "Some of the items have zero rate. Rates must be greater than zero";
+                }
+                if (item.ProductId == 0)
+                {
+                    var productEntity = _context.Product.FirstOrDefault(x => x.SKU == item.SKU);
+                    if (productEntity == null)
+                    {
+                        return "Some of the items you provided are invalid!";
+                    }
+                    else
+                    {
+                        item.ProductId = productEntity.Id;
+                        item.Total = item.Rate * item.UnitQuantity;
+                    }
+                }
+            }
+
+            var dbItems = poEntity.OrderItems.Where(x => x.OrderId == poEntity.Id).ToList();
+            // first remove those that are not in the model list
+            for (var i = 0; i < dbItems.Count(); i++)
+            {
+                var entity = dbItems.ElementAt(i);
+                var stillExists = items.FirstOrDefault(x => x.Id == entity.Id);
+                if (stillExists == null)
+                {
+                    poEntity.OrderItems.Remove(entity);
+                }
+            }
+            // second add/update
+            foreach (var item in items)
+            {
+                var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
+                entity = item.MapToEntity(entity);//OrderItemMapper.MapToEntity(item, entity);
+                if (entity.Id == 0)
+                {
+                    // add
+                    poEntity.OrderItems.Add(entity);
+                }
+                // No need to handle update cause entity is already assigned above { ....MapToEntity(..)}
+            }
+
+            poEntity.TotalAmount = items.Sum(x => x.Total);
+            return string.Empty;
+        }
 
         public string SavePurchaseOrderItems(int orderId, List<InventoryUnitModel> items)
         {

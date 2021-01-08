@@ -77,7 +77,7 @@ namespace IMS.Forms.Inventory.Orders
             lblToWarehouse.DoubleClick += lblWarehouse_DoubleClick;
 
         }
-        
+
         private void InitializeValidation()
         {
             List<Control> controls = new List<Control>()
@@ -127,13 +127,13 @@ namespace IMS.Forms.Inventory.Orders
         private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Business.WarehouseModel> e)
         {
             PopulateWarehouseCombo();
-            if(warehouseClickLabel != null)
+            if (warehouseClickLabel != null)
             {
-                if(warehouseClickLabel.Name == lblWarehouse.Name)
+                if (warehouseClickLabel.Name == lblWarehouse.Name)
                 {
                     cbWarehouse.SelectedValue = e.Model == null ? 0 : e.Model.Id;
                 }
-                else if(warehouseClickLabel.Name == lblToWarehouse.Name)
+                else if (warehouseClickLabel.Name == lblToWarehouse.Name)
                 {
                     cbToWarehouse.SelectedValue = e.Model == null ? 0 : e.Model.Id;
                 }
@@ -207,7 +207,7 @@ namespace IMS.Forms.Inventory.Orders
                 tbName.Text = model.Name;
                 tbNotes.Text = model.Note;
                 tbOrderNumber.Text = model.ReferenceNumber;
-                cbWarehouse.SelectedValue = model.WarehouseId??0;
+                cbWarehouse.SelectedValue = model.WarehouseId ?? 0;
                 dtExpectedDate.Value = model.ExpectedDate;
                 numLotNumber.Value = model.LotNumber;
 
@@ -244,7 +244,7 @@ namespace IMS.Forms.Inventory.Orders
                     lblClientInfo.Text = "Supplier Invoice";
                     this.Text = (model == null ? "Create" : "Edit") + " Purchase Order";
                     tblToWarehouse.Visible = false;
-                    if (model.PaymentDueDate.HasValue)
+                    if (model?.PaymentDueDate.HasValue ?? false)
                         dtPaymentDueDate.Value = model.PaymentDueDate.Value;
                     break;
                 case OrderTypeEnum.Sale:
@@ -258,7 +258,7 @@ namespace IMS.Forms.Inventory.Orders
                     lblClientInfo.Text = "Address";
                     this.Text = (model == null ? "Create" : "Edit") + " Sale Order";
                     tblToWarehouse.Visible = false;
-                    if(model.PaymentDueDate.HasValue)
+                    if (model?.PaymentDueDate.HasValue ?? false)
                         dtPaymentDueDate.Value = model.PaymentDueDate.Value;
                     break;
                 case OrderTypeEnum.Move:
@@ -356,7 +356,7 @@ namespace IMS.Forms.Inventory.Orders
                     break;
                 case OrderTypeEnum.Sale:
                     model.CustomerId = int.Parse(cbClient.SelectedValue.ToString());
-                    model.WarehouseId = warehouseId == 0 ? (int?)null : warehouseId; 
+                    model.WarehouseId = warehouseId == 0 ? (int?)null : warehouseId;
                     model.SupplierId = null;
                     model.Address = tbClientInfo.Text;
                     model.ToWarehouseId = null;
@@ -369,7 +369,7 @@ namespace IMS.Forms.Inventory.Orders
                     break;
             }
 
-            _orderService.SaveOrder(model);
+            _orderService.SaveOrder(model, false);
             // redirect to PO detail page
             this.Close();
         }

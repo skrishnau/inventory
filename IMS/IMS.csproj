@@ -98,6 +98,12 @@
     <Compile Include="Forms\Common\Display\ListBodyTemplate.Designer.cs">
       <DependentUpon>ListBodyTemplate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Display\SaveFooterUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Display\SaveFooterUC.Designer.cs">
+      <DependentUpon>SaveFooterUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Dashboard\DashboardUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +139,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.Designer.cs">
       <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionCreateForm.Designer.cs">
+      <DependentUpon>TransactionCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
       <SubType>UserControl</SubType>
@@ -587,6 +599,9 @@
     <EmbeddedResource Include="Forms\Common\Display\ListBodyTemplate.resx">
       <DependentUpon>ListBodyTemplate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Display\SaveFooterUC.resx">
+      <DependentUpon>SaveFooterUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Dashboard\DashboardUC.resx">
       <DependentUpon>DashboardUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -604,6 +619,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.resx">
       <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionCreateForm.resx">
+      <DependentUpon>TransactionCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
       <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
@@ -836,6 +854,10 @@
     <Folder Include="License\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{88AB3CF7-BD72-49F4-89C4-BAC874042636}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{7b41b468-a95f-4036-9563-d86460e3f341}</Project>
       <Name>Infrastructure</Name>

@@ -163,6 +163,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colProductId.Name = "colProductId";
             this.colProductId.Visible = false;
             this.colProductId.Width = 150;
+            //var comboBoxCell = new DataGridViewComboBoxCell();
+            //comboBoxCell.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+            //this.colProductId.CellTemplate = comboBoxCell;
             // 
             // colProduct
             // 
@@ -277,6 +280,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colTotal.Name = "colTotal";
             this.colTotal.Visible = false;
             this.colTotal.Width = 70;
+            this.colTotal.ReadOnly = true;
             // 
             // colNetWeight
             // 
@@ -444,18 +448,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         public void DesignForOrder(bool forEditMode)
         {
-            _isEditable = forEditMode;
-            if (forEditMode)
-            {
-                this.RowHeadersVisible = true;
-                this.SelectionMode = DataGridViewSelectionMode.CellSelect;
-                this.AllowUserToAddRows = true;
-                this.AllowUserToDeleteRows = true;
-            }
-            else
-            {
-                this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            }
+            SetEditMode(forEditMode);
+
             colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
@@ -476,6 +470,39 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             HideUnusedDefaults();
         }
+
+        private void SetEditMode(bool forEditMode)
+        {
+            _isEditable = forEditMode;
+            if (forEditMode)
+            {
+                this.RowHeadersVisible = true;
+                this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                this.AllowUserToAddRows = true;
+                this.AllowUserToDeleteRows = true;
+                this.AllowUserToResizeRows = false;
+                this.AllowUserToOrderColumns = false;
+            }
+            else
+            {
+                this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            }
+        }
+
+        internal void DesignForTransaction(bool forEditMode)
+        {
+
+            SetEditMode(forEditMode);
+
+            colProductId.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colRate.Visible = true;
+            colTotal.Visible = true;
+            colPackageId.Visible = true;
+            HideUnusedDefaults();
+        }
+
         //
         // Direct Receive designs
         //

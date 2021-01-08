@@ -279,7 +279,10 @@ namespace IMS.Forms.Inventory
             _menubar.btnSellOrder.Click += BtnSellOrder_Click;
             _menubar.btnTransferOrder.Click += BtnTransferOrder_Click;
             _menubar.btnPOS.Click += BtnPOS_Click;
+
+            _menubar.btnSaleTransaction.Click += BtnSaleTransaction_Click;
         }
+
 
         private void AddTabPage(String text, UserControl uc, Object sender)
         {
@@ -474,7 +477,20 @@ namespace IMS.Forms.Inventory
 
         #endregion
 
+        #region Transactions
 
+
+        private void BtnSaleTransaction_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+                form.SetData(OrderTypeEnum.Sale, 0);
+                form.ShowDialog();
+            }
+        }
+
+        #endregion
 
 
         #region Adjustments

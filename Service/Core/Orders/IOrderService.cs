@@ -13,7 +13,12 @@ namespace Service.Core.Orders
     {
         int GetNextLotNumber();
 
-        void SaveOrder(OrderModel purchaseOrderModel);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="purchaseOrderModel"></param>
+        /// <param name="checkout">The order is processed and receipt generated at the same time</param>
+        void SaveOrder(OrderModel purchaseOrderModel, bool checkout); 
 
         List<OrderModel> GetAllOrders(OrderTypeEnum orderType);
 

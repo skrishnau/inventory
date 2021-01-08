@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Settings;
+using ViewModel.Enums;
 
 namespace Service.Core.Settings
 {
@@ -19,20 +20,16 @@ namespace Service.Core.Settings
         /// </summary>
         /// <param name="model"></param>
         bool SaveAppSetting(AppSettingModel model);
-
-        /// <summary>
-        /// Settings related to Bills
-        /// </summary>
-        BillSettingsModel GetBillSettings();
-
-        CompanyInfoSettingModel GetCompanyInfoSetting();
-
         void AddOrUpdateAppSetting();
-
-        bool SaveBillSetting(BillSettingsModel model);
-
+        
+        CompanyInfoSettingModel GetCompanyInfoSetting();
         bool SaveCompanyInfoSetting(CompanyInfoSettingModel model);
 
-        
+
+        BillSettingsModel GetBillSettings(OrderTypeEnum orderType);
+        bool SaveBillSetting(List<BillSettingsModel> modelList);
+        string GetReceiptNumber(OrderTypeEnum orderType);
+        string GetReceiptNumber(BillSettingsModel setting, long currentIndex);
+        bool SaveCurrentIndex(BillSettingsModel model, OrderTypeEnum orderType);
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Enums;
 using ViewModel.Utility;
@@ -23,6 +24,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //private List<ViewModel.Core.Inventory.InventoryUnitModel> _dataList;
         private bool _isCellDirty;
         private int _checkCount;
+
+
         private bool _isUnSelectable;
         private bool _isEditable = true; // by default editable
         private bool isValid = true;
@@ -35,6 +38,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         private List<string> InvalidColumns = new List<string>();
 
+        private List<IdNamePair> _productList;
+
         public InventoryUnitDataGridView()
         {
             // Initialize columns
@@ -43,6 +48,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.Controls.Add(_dtPicker);
             _dtPicker.Visible = false;
             _dtPicker.Format = DateTimePickerFormat.Custom;
+
+            this.AutoGenerateColumns = false;
+
+
         }
 
 
@@ -50,6 +59,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public void InitializeGridViewControls(IInventoryService inventoryService)
         {
             _inventoryService = inventoryService;
+            _productList = _inventoryService.GetProductListForCombo();
+
             //
             // Columns
             //
@@ -105,7 +116,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public List<InventoryUnitModel> GetItems(List<DataGridViewColumn> ignoreColumnsForError = null)
         {
             var isValidAll = true; // store for all items (global indicator)
-            this.IgnoreColumnsForErrorList = ignoreColumnsForError??new List<DataGridViewColumn>();
+            this.IgnoreColumnsForErrorList = ignoreColumnsForError ?? new List<DataGridViewColumn>();
             isValid = true;
             var items = new List<InventoryUnitModel>();
             // clear the invalid column list initially
@@ -151,14 +162,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         PackageId = packageId,
                         UomId = uomId,
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
-                        
+
                     });
                 }
                 else
                 {
-                    extraMsg.Append("Row: ").Append(r+1).Append("; Columns: ");
-                    InvalidColumns.ForEach(x => {
-                        extraMsg.Append(x+ ", ");
+                    extraMsg.Append("Row: ").Append(r + 1).Append("; Columns: ");
+                    InvalidColumns.ForEach(x =>
+                    {
+                        extraMsg.Append(x + ", ");
                     });
                     extraMsg.Append("\n");
                 }
@@ -166,11 +178,36 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             if (!isValid)
             {
-                PopupMessage.ShowPopupMessage("Invalid Items!", "The items you provided are not valid. Verify again!." + extraMsg, 
+                PopupMessage.ShowPopupMessage("Invalid Items!", "The items you provided are not valid. Verify again!." + extraMsg,
                     PopupMessageType.ERROR);
                 return null;
             }
             return items;
+        }
+        
+        /// <summary>
+        /// Returns sum of all the rows of total column
+        /// </summary>
+        /// <returns></returns>
+        public decimal GetTotalSumAmount()
+        {
+            decimal total = 0M;
+            for (int r = 0; r < this.Rows.Count; r++)
+            {
+                DataGridViewRow row = this.Rows[r];
+                if (row.IsNewRow)
+                    continue;
+                total += GetTotal(row);// (GetRate(row) * GetUnitQuantity(row, null));
+            }
+            return total;
+        }
+
+        private decimal GetTotal(DataGridViewRow row)
+        {
+            decimal total = 0;
+            var cell = row.Cells[this.colTotal.Index];
+            decimal.TryParse(cell.Value == null ? "0" : cell.Value.ToString(), out total);
+            return total;
         }
 
         // Gets
