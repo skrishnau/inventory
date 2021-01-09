@@ -63,7 +63,7 @@ namespace Service.Core.Users
                     eventArgs.Mode = Utility.UpdateMode.EDIT;
                 }
                 _context.SaveChanges();
-                eventArgs.Model = UserMapper.MapToSupplierModel(dbEntity);
+                eventArgs.Model = UserMapper.MapToUserModel(dbEntity);
                 _listener.TriggerUserUpdateEvent(null, eventArgs);
             }
         }
@@ -75,7 +75,7 @@ namespace Service.Core.Users
                 var supplier = _context.User.Find(userId);
                 if (supplier == null)
                     return null;
-                return UserMapper.MapToSupplierModel(supplier);
+                return UserMapper.MapToUserModel(supplier);
             }
         }
 

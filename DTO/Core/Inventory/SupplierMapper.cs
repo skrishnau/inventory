@@ -39,12 +39,12 @@ namespace DTO.Core.Inventory
             var list = new List<UserModel>();
             foreach (var supplier in suppliers)
             {
-                list.Add(MapToSupplierModel(supplier));
+                list.Add(MapToUserModel(supplier));
             }
             return list;
         }
 
-        public static UserModel MapToSupplierModel(User x)
+        public static UserModel MapToUserModel(User x)
         {
             return new UserModel()
             {

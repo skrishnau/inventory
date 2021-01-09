@@ -61,6 +61,8 @@ namespace Service.Core.Inventory
         #endregion
 
         List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId);
+        List<TransactionSummaryModel> GetTransactionSummary(DateTime start, DateTime end);
+        List<TransactionSummaryModel> GetInventorySummary();
 
 
         #region Category

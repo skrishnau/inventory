@@ -51,8 +51,9 @@ namespace DTO.Core.Inventory
         {
             // from entity to model
             CreateMap<Order, OrderModel>()
-                .ForMember(x => x.User,
-                            opt => opt.MapFrom(src => src.User == null ? "" : src.User.Name))
+                .ForMember(x => x.User, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Name))
+                .ForMember(x => x.Address, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Address))
+               .ForMember(x => x.Phone, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Phone))
                 .ForMember(x => x.Warehouse,
                             opt => opt.MapFrom(src => src.Warehouse == null ? "" : src.Warehouse.Name))
                 .ForMember(x => x.ToWarehouse,

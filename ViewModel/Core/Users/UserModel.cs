@@ -41,6 +41,10 @@ namespace ViewModel.Core.Users
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
+        public decimal TotalAmount { get; set; }
+        public decimal PaidAmount { get; set; }
+        public decimal DueAmount { get { return TotalAmount - PaidAmount; } }
+
         // 
         // extra
         //

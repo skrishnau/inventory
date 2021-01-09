@@ -260,12 +260,16 @@ namespace IMS.Forms.Inventory.Units.Actions
             else
                 adjustmentCode = ((IdNamePair)cbAdjustmentCode.SelectedItem).Name;
 
+            List<DataGridViewColumn> ignoreList;
             switch (_adjustmentType)
             {
                 case MovementTypeEnum.DirectIssueInventoryUnit:
                     actionForMsg = "Issued";
-
-                    list = dgvInventoryUnit.GetItems();
+                    ignoreList = new List<DataGridViewColumn>
+                    {
+                       dgvInventoryUnit.colRate
+                    };
+                    list = dgvInventoryUnit.GetItems(ignoreList);
 
                     if (list != null)
                     {
@@ -285,9 +289,9 @@ namespace IMS.Forms.Inventory.Units.Actions
                     break;
                 case MovementTypeEnum.DirectIssueAny:
                     actionForMsg = "Issued";
-                    var ignoreList = new List<DataGridViewColumn>
+                     ignoreList = new List<DataGridViewColumn>
                     {
-                        dgvInventoryUnit.colLotNumber
+                        dgvInventoryUnit.colLotNumber, dgvInventoryUnit.colRate
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
 
@@ -309,7 +313,11 @@ namespace IMS.Forms.Inventory.Units.Actions
                     break;
                 case MovementTypeEnum.DirectReceive:
                     actionForMsg = "Received";
-                    list = dgvInventoryUnit.GetItems();
+                    ignoreList = new List<DataGridViewColumn>
+                    {
+                        dgvInventoryUnit.colRate
+                    };
+                    list = dgvInventoryUnit.GetItems(ignoreList);
                     if (list != null)
                     {
                         if (list.Count == 0)
@@ -334,8 +342,12 @@ namespace IMS.Forms.Inventory.Units.Actions
                     break;
                 case MovementTypeEnum.POReceiveEditItems:
                     // PO Receive
+                    ignoreList = new List<DataGridViewColumn>
+                    {
+                        dgvInventoryUnit.colLotNumber
+                    };
                     actionForMsg = "Saved";
-                    var poItems = dgvInventoryUnit.GetItems();
+                    var poItems = dgvInventoryUnit.GetItems(ignoreList);
                     if (poItems != null)
                     {
                         dialogResult = MessageBox.Show(this, "Are you sure to save items for this purchase order?", "Save?", MessageBoxButtons.YesNoCancel);
@@ -360,7 +372,11 @@ namespace IMS.Forms.Inventory.Units.Actions
                 case MovementTypeEnum.SOIssueEditItems:
                     // PO Receive
                     actionForMsg = "Saved";
-                    var soItems = dgvInventoryUnit.GetItems();
+                    ignoreList = new List<DataGridViewColumn>
+                    {
+                        dgvInventoryUnit.colLotNumber
+                    };
+                    var soItems = dgvInventoryUnit.GetItems(ignoreList);
                     if (soItems != null)
                     {
                         dialogResult = MessageBox.Show(this, "Are you sure to save items for this sale order?", "Save?", MessageBoxButtons.YesNoCancel);
@@ -384,6 +400,10 @@ namespace IMS.Forms.Inventory.Units.Actions
                     }
                     else
                     {
+                        ignoreList = new List<DataGridViewColumn>
+                        {
+                            dgvInventoryUnit.colRate
+                        };
                         list = dgvInventoryUnit.GetItems();
                         dialogResult = MessageBox.Show(this, "Are you sure to transfer selected items to the '" + warehouse + "' warehouse?", "Transfer?", MessageBoxButtons.YesNoCancel);
                         if (dialogResult.Equals(DialogResult.Yes))

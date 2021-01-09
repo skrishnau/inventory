@@ -130,7 +130,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     continue;
                 var id = GetId(row);
                 var productId = GetProductId(row);
-                var unitQuantity = GetUnitQuantity(row, null);
+                var checkWithInStockQuantity = _movementType == MovementTypeEnum.DirectIssueAny
+                    || _movementType == MovementTypeEnum.DirectIssueInventoryUnit
+                    || _movementType == MovementTypeEnum.SOIssue
+                    || _movementType == MovementTypeEnum.SOIssueEditItems;
+
+                var unitQuantity = GetUnitQuantity(row, null, checkWithInStockQuantity);
                 var rate = GetRate(row);
                 var warehouseId = GetWarehouseId(row);
                 var lotNumber = GetLotNumber(row, null);
@@ -184,7 +189,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             return items;
         }
-        
+
         /// <summary>
         /// Returns sum of all the rows of total column
         /// </summary>
@@ -246,7 +251,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             return productId;
         }
 
-        private decimal GetUnitQuantity(DataGridViewRow row, object formattedValue)
+        private decimal GetUnitQuantity(DataGridViewRow row, object formattedValue, bool checkWithInStockQuanity)
         {
             decimal unitQuantity = 0;
             var cell = row.Cells[this.colUnitQuantity.Index];
@@ -261,6 +266,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 InvalidColumns.Add("Quantity");
                 cell.ErrorText = "Quantity can't be zero or less";
                 isValid = false;
+            }
+            else if (checkWithInStockQuanity)
+            {
+                decimal inStockQuantity = 0;
+                var inStockcell = row.Cells[this.colInStockQuantity.Index];
+                decimal.TryParse(inStockcell.Value == null ? "0" : inStockcell.Value.ToString(), out inStockQuantity);
+                if (unitQuantity > inStockQuantity)
+                {
+                    InvalidColumns.Add("Quantity");
+                    cell.ErrorText = "Quantity can't be greater than stock quantity. Stock Quanitity is '" + inStockQuantity.ToString("0") + "'";
+                    isValid = false;
+                }
             }
             else
             {

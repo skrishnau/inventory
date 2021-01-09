@@ -30,23 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tblBasicDetails = new System.Windows.Forms.TableLayoutPanel();
-            this.label33 = new System.Windows.Forms.Label();
-            this.tbBrand = new System.Windows.Forms.TextBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.tbSKU = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbProductName = new System.Windows.Forms.MaskedTextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.lblCategory = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.tbManufacturer = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbBrand = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.tbBarcode = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
             this.chkUse = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnAddCategory = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label30 = new System.Windows.Forms.Label();
             this.numReorderPoint = new System.Windows.Forms.NumericUpDown();
@@ -128,7 +126,6 @@
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.tblBasicDetails.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -197,49 +194,22 @@
             this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblBasicDetails.Size = new System.Drawing.Size(483, 139);
+            this.tblBasicDetails.Size = new System.Drawing.Size(521, 139);
             this.tblBasicDetails.TabIndex = 28;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(3, 102);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(35, 13);
-            this.label33.TabIndex = 48;
-            this.label33.Text = "Use ?";
-            this.toolTip1.SetToolTip(this.label33, "Either to Include in product selection in other sections.");
-            // 
-            // tbBrand
-            // 
-            this.tbBrand.Location = new System.Drawing.Point(344, 37);
-            this.tbBrand.Multiline = true;
-            this.tbBrand.Name = "tbBrand";
-            this.tbBrand.Size = new System.Drawing.Size(136, 19);
-            this.tbBrand.TabIndex = 35;
             // 
             // cbCategory
             // 
             this.cbCategory.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(97, 71);
+            this.cbCategory.Location = new System.Drawing.Point(104, 71);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(149, 21);
             this.cbCategory.TabIndex = 50;
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(252, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(70, 13);
-            this.label19.TabIndex = 45;
-            this.label19.Text = "Manufacturer";
-            // 
             // tbSKU
             // 
             this.tbSKU.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSKU.Location = new System.Drawing.Point(96, 36);
+            this.tbSKU.Location = new System.Drawing.Point(103, 36);
             this.tbSKU.Margin = new System.Windows.Forms.Padding(2);
             this.tbSKU.Name = "tbSKU";
             this.tbSKU.Size = new System.Drawing.Size(151, 21);
@@ -258,22 +228,11 @@
             // tbProductName
             // 
             this.tbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbProductName.Location = new System.Drawing.Point(96, 2);
+            this.tbProductName.Location = new System.Drawing.Point(103, 2);
             this.tbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.tbProductName.Name = "tbProductName";
             this.tbProductName.Size = new System.Drawing.Size(151, 21);
             this.tbProductName.TabIndex = 5;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(252, 102);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(45, 13);
-            this.label11.TabIndex = 39;
-            this.label11.Text = "Supplier";
-            this.label11.Visible = false;
             // 
             // lblCategory
             // 
@@ -296,17 +255,45 @@
             this.label12.TabIndex = 41;
             this.label12.Text = "Product Code (SKU)";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(272, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(70, 13);
+            this.label19.TabIndex = 45;
+            this.label19.Text = "Manufacturer";
+            // 
             // tbManufacturer
             // 
-            this.tbManufacturer.Location = new System.Drawing.Point(344, 3);
+            this.tbManufacturer.Location = new System.Drawing.Point(372, 3);
             this.tbManufacturer.Name = "tbManufacturer";
             this.tbManufacturer.Size = new System.Drawing.Size(136, 20);
             this.tbManufacturer.TabIndex = 30;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(271, 34);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 15);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Brand / Model";
+            // 
+            // tbBrand
+            // 
+            this.tbBrand.Location = new System.Drawing.Point(372, 37);
+            this.tbBrand.Multiline = true;
+            this.tbBrand.Name = "tbBrand";
+            this.tbBrand.Size = new System.Drawing.Size(136, 19);
+            this.tbBrand.TabIndex = 35;
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(252, 68);
+            this.label26.Location = new System.Drawing.Point(272, 68);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(48, 13);
             this.label26.TabIndex = 47;
@@ -314,51 +301,43 @@
             // 
             // tbBarcode
             // 
-            this.tbBarcode.Location = new System.Drawing.Point(344, 71);
+            this.tbBarcode.Location = new System.Drawing.Point(372, 71);
             this.tbBarcode.Name = "tbBarcode";
             this.tbBarcode.Size = new System.Drawing.Size(136, 20);
             this.tbBarcode.TabIndex = 40;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(3, 102);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(35, 13);
+            this.label33.TabIndex = 48;
+            this.label33.Text = "Use ?";
+            this.toolTip1.SetToolTip(this.label33, "Either to Include in product selection in other sections.");
             // 
             // chkUse
             // 
             this.chkUse.AutoSize = true;
             this.chkUse.Checked = true;
             this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUse.Location = new System.Drawing.Point(97, 105);
+            this.chkUse.Location = new System.Drawing.Point(104, 105);
             this.chkUse.Name = "chkUse";
             this.chkUse.Size = new System.Drawing.Size(15, 14);
             this.chkUse.TabIndex = 49;
             this.toolTip1.SetToolTip(this.chkUse, "Either to Include in product selection in other sections.");
             this.chkUse.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // label11
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(251, 34);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 15);
-            this.label4.TabIndex = 34;
-            this.label4.Text = "Brand / Model";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnAddCategory);
-            this.panel2.Location = new System.Drawing.Point(167, 267);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(153, 28);
-            this.panel2.TabIndex = 103;
-            // 
-            // btnAddCategory
-            // 
-            this.btnAddCategory.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnAddCategory.Location = new System.Drawing.Point(167, 4);
-            this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(20, 21);
-            this.btnAddCategory.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.btnAddCategory, "New Category");
-            this.btnAddCategory.UseVisualStyleBackColor = true;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(272, 102);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(45, 13);
+            this.label11.TabIndex = 39;
+            this.label11.Text = "Supplier";
+            this.label11.Visible = false;
             // 
             // label30
             // 
@@ -373,7 +352,7 @@
             // numReorderPoint
             // 
             this.numReorderPoint.DecimalPlaces = 1;
-            this.numReorderPoint.Location = new System.Drawing.Point(121, 3);
+            this.numReorderPoint.Location = new System.Drawing.Point(127, 3);
             this.numReorderPoint.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -393,7 +372,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(691, 6);
+            this.btnCancel.Location = new System.Drawing.Point(702, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 102;
@@ -403,7 +382,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(597, 6);
+            this.btnSave.Location = new System.Drawing.Point(610, 6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 101;
@@ -416,9 +395,9 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 314);
+            this.panel1.Location = new System.Drawing.Point(5, 317);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 37);
+            this.panel1.Size = new System.Drawing.Size(799, 37);
             this.panel1.TabIndex = 100;
             // 
             // errorProvider1
@@ -434,21 +413,20 @@
             this.tabControl1.Location = new System.Drawing.Point(5, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(778, 309);
+            this.tabControl1.Size = new System.Drawing.Size(799, 312);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 33;
             // 
             // tabDetails
             // 
             this.tabDetails.AutoScroll = true;
-            this.tabDetails.Controls.Add(this.panel2);
             this.tabDetails.Controls.Add(this.tableLayoutPanel8);
             this.tabDetails.Controls.Add(this.panel6);
             this.tabDetails.Controls.Add(this.splitter1);
             this.tabDetails.Location = new System.Drawing.Point(4, 22);
             this.tabDetails.Name = "tabDetails";
             this.tabDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetails.Size = new System.Drawing.Size(770, 283);
+            this.tabDetails.Size = new System.Drawing.Size(791, 286);
             this.tabDetails.TabIndex = 0;
             this.tabDetails.Text = "Details";
             this.tabDetails.UseVisualStyleBackColor = true;
@@ -467,16 +445,16 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(747, 100);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(785, 100);
             this.tableLayoutPanel8.TabIndex = 40;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel6);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(501, 3);
+            this.groupBox4.Location = new System.Drawing.Point(525, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(243, 94);
+            this.groupBox4.Size = new System.Drawing.Size(257, 94);
             this.groupBox4.TabIndex = 25;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Order";
@@ -499,13 +477,13 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(237, 75);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(251, 75);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // numMonthlyDemand
             // 
             this.numMonthlyDemand.DecimalPlaces = 1;
-            this.numMonthlyDemand.Location = new System.Drawing.Point(121, 53);
+            this.numMonthlyDemand.Location = new System.Drawing.Point(128, 53);
             this.numMonthlyDemand.Name = "numMonthlyDemand";
             this.numMonthlyDemand.Size = new System.Drawing.Size(88, 20);
             this.numMonthlyDemand.TabIndex = 3;
@@ -513,7 +491,7 @@
             // numEOQ
             // 
             this.numEOQ.DecimalPlaces = 1;
-            this.numEOQ.Location = new System.Drawing.Point(121, 28);
+            this.numEOQ.Location = new System.Drawing.Point(128, 28);
             this.numEOQ.Name = "numEOQ";
             this.numEOQ.Size = new System.Drawing.Size(88, 20);
             this.numEOQ.TabIndex = 2;
@@ -538,7 +516,7 @@
             // 
             // numLeadDays
             // 
-            this.numLeadDays.Location = new System.Drawing.Point(121, 3);
+            this.numLeadDays.Location = new System.Drawing.Point(128, 3);
             this.numLeadDays.Name = "numLeadDays";
             this.numLeadDays.Size = new System.Drawing.Size(88, 20);
             this.numLeadDays.TabIndex = 1;
@@ -547,9 +525,9 @@
             // 
             this.groupBox5.Controls.Add(this.tableLayoutPanel7);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Location = new System.Drawing.Point(252, 3);
+            this.groupBox5.Location = new System.Drawing.Point(264, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(243, 94);
+            this.groupBox5.Size = new System.Drawing.Size(255, 94);
             this.groupBox5.TabIndex = 20;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Pricing";
@@ -572,13 +550,13 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(237, 75);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(249, 75);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // numSupplyPrice
             // 
             this.numSupplyPrice.DecimalPlaces = 1;
-            this.numSupplyPrice.Location = new System.Drawing.Point(121, 3);
+            this.numSupplyPrice.Location = new System.Drawing.Point(127, 3);
             this.numSupplyPrice.Name = "numSupplyPrice";
             this.numSupplyPrice.Size = new System.Drawing.Size(86, 20);
             this.numSupplyPrice.TabIndex = 1;
@@ -613,7 +591,7 @@
             // numMarkupPercent
             // 
             this.numMarkupPercent.DecimalPlaces = 1;
-            this.numMarkupPercent.Location = new System.Drawing.Point(121, 28);
+            this.numMarkupPercent.Location = new System.Drawing.Point(127, 28);
             this.numMarkupPercent.Name = "numMarkupPercent";
             this.numMarkupPercent.Size = new System.Drawing.Size(86, 20);
             this.numMarkupPercent.TabIndex = 2;
@@ -621,7 +599,7 @@
             // numRetailPrice
             // 
             this.numRetailPrice.DecimalPlaces = 1;
-            this.numRetailPrice.Location = new System.Drawing.Point(121, 53);
+            this.numRetailPrice.Location = new System.Drawing.Point(127, 53);
             this.numRetailPrice.Name = "numRetailPrice";
             this.numRetailPrice.Size = new System.Drawing.Size(86, 20);
             this.numRetailPrice.TabIndex = 3;
@@ -632,7 +610,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(243, 94);
+            this.groupBox3.Size = new System.Drawing.Size(255, 94);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Replenishment";
@@ -653,7 +631,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(237, 75);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(249, 75);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // label27
@@ -677,7 +655,7 @@
             // numReorderQuantity
             // 
             this.numReorderQuantity.DecimalPlaces = 1;
-            this.numReorderQuantity.Location = new System.Drawing.Point(121, 28);
+            this.numReorderQuantity.Location = new System.Drawing.Point(127, 28);
             this.numReorderQuantity.Name = "numReorderQuantity";
             this.numReorderQuantity.Size = new System.Drawing.Size(87, 20);
             this.numReorderQuantity.TabIndex = 2;
@@ -689,7 +667,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 13);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(747, 161);
+            this.panel6.Size = new System.Drawing.Size(785, 161);
             this.panel6.TabIndex = 38;
             // 
             // gbBasicDetails
@@ -699,7 +677,7 @@
             this.gbBasicDetails.Location = new System.Drawing.Point(0, 0);
             this.gbBasicDetails.Name = "gbBasicDetails";
             this.gbBasicDetails.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.gbBasicDetails.Size = new System.Drawing.Size(503, 158);
+            this.gbBasicDetails.Size = new System.Drawing.Size(541, 158);
             this.gbBasicDetails.TabIndex = 1;
             this.gbBasicDetails.TabStop = false;
             this.gbBasicDetails.Text = "Basic Details";
@@ -708,8 +686,9 @@
             // 
             this.gbPackage.Controls.Add(this.tableLayoutPanel3);
             this.gbPackage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbPackage.Location = new System.Drawing.Point(503, 0);
+            this.gbPackage.Location = new System.Drawing.Point(541, 0);
             this.gbPackage.Name = "gbPackage";
+            this.gbPackage.Padding = new System.Windows.Forms.Padding(3, 3, 2, 3);
             this.gbPackage.Size = new System.Drawing.Size(244, 161);
             this.gbPackage.TabIndex = 11;
             this.gbPackage.TabStop = false;
@@ -733,13 +712,14 @@
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.tableLayoutPanel3.RowCount = 5;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(238, 142);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(239, 142);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // label10
@@ -754,9 +734,9 @@
             // cbUom
             // 
             this.cbUom.FormattingEnabled = true;
-            this.cbUom.Location = new System.Drawing.Point(122, 31);
+            this.cbUom.Location = new System.Drawing.Point(117, 31);
             this.cbUom.Name = "cbUom";
-            this.cbUom.Size = new System.Drawing.Size(113, 21);
+            this.cbUom.Size = new System.Drawing.Size(109, 21);
             this.cbUom.TabIndex = 14;
             // 
             // label6
@@ -765,7 +745,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(3, 28);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 13);
+            this.label6.Size = new System.Drawing.Size(68, 26);
             this.label6.TabIndex = 2;
             this.label6.Text = "Base Unit of Measure";
             // 
@@ -782,9 +762,9 @@
             // cbPackage
             // 
             this.cbPackage.FormattingEnabled = true;
-            this.cbPackage.Location = new System.Drawing.Point(122, 3);
+            this.cbPackage.Location = new System.Drawing.Point(117, 3);
             this.cbPackage.Name = "cbPackage";
-            this.cbPackage.Size = new System.Drawing.Size(113, 21);
+            this.cbPackage.Size = new System.Drawing.Size(109, 21);
             this.cbPackage.TabIndex = 13;
             // 
             // label7
@@ -808,25 +788,25 @@
             // numUnitsInPackage
             // 
             this.numUnitsInPackage.DecimalPlaces = 1;
-            this.numUnitsInPackage.Location = new System.Drawing.Point(122, 59);
+            this.numUnitsInPackage.Location = new System.Drawing.Point(117, 59);
             this.numUnitsInPackage.Name = "numUnitsInPackage";
-            this.numUnitsInPackage.Size = new System.Drawing.Size(113, 20);
+            this.numUnitsInPackage.Size = new System.Drawing.Size(109, 20);
             this.numUnitsInPackage.TabIndex = 15;
             // 
             // numUnitNetWeight
             // 
             this.numUnitNetWeight.DecimalPlaces = 1;
-            this.numUnitNetWeight.Location = new System.Drawing.Point(122, 87);
+            this.numUnitNetWeight.Location = new System.Drawing.Point(117, 87);
             this.numUnitNetWeight.Name = "numUnitNetWeight";
-            this.numUnitNetWeight.Size = new System.Drawing.Size(113, 20);
+            this.numUnitNetWeight.Size = new System.Drawing.Size(109, 20);
             this.numUnitNetWeight.TabIndex = 16;
             // 
             // numUnitGrossWeight
             // 
             this.numUnitGrossWeight.DecimalPlaces = 1;
-            this.numUnitGrossWeight.Location = new System.Drawing.Point(122, 115);
+            this.numUnitGrossWeight.Location = new System.Drawing.Point(117, 115);
             this.numUnitGrossWeight.Name = "numUnitGrossWeight";
-            this.numUnitGrossWeight.Size = new System.Drawing.Size(113, 20);
+            this.numUnitGrossWeight.Size = new System.Drawing.Size(109, 20);
             this.numUnitGrossWeight.TabIndex = 17;
             // 
             // splitter1
@@ -834,7 +814,7 @@
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(3, 3);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(747, 10);
+            this.splitter1.Size = new System.Drawing.Size(785, 10);
             this.splitter1.TabIndex = 39;
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
@@ -1230,7 +1210,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(788, 356);
+            this.ClientSize = new System.Drawing.Size(809, 359);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -1242,7 +1222,6 @@
             this.Text = "Create Product";
             this.tblBasicDetails.ResumeLayout(false);
             this.tblBasicDetails.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numReorderPoint)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -1344,8 +1323,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnAddCategory;
         private System.Windows.Forms.GroupBox gbPackage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label10;

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
+using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Payment
@@ -19,6 +20,7 @@ namespace IMS.Forms.Inventory.Payment
     public partial class PaymentCreateForm : Form
     {
         private OrderModel _orderModel;
+        private UserModel _userModel;
         private readonly PaymentService _paymentService;
         private RequiredFieldValidator _requiredFieldValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
@@ -37,13 +39,25 @@ namespace IMS.Forms.Inventory.Payment
             PopulatePaymentMethodCombo();
         }
 
-        public void SetData(OrderModel model)
+        public void SetData(OrderModel orderModel, UserModel userModel)
         {
-            this.headerTemplate1.Text = model.Name;
-            lblRemainingAmount.Text = model.RemainingAmount.ToString();
-            lblTotalAmount.Text = model.TotalAmount.ToString();
-            txtAmount.Value = model.RemainingAmount;
-            _orderModel = model;
+            if(orderModel != null)
+            {
+                this.headerTemplate1.Text = orderModel.Name;
+                lblRemainingAmount.Text = orderModel.RemainingAmount.ToString();
+                lblTotalAmount.Text = orderModel.TotalAmount.ToString();
+                txtAmount.Value = 0;//orderModel.RemainingAmount;
+                _orderModel = orderModel;
+            }
+            else if(userModel == null)
+            {
+                this.headerTemplate1.Text = userModel.Name;
+                lblRemainingAmount.Text = userModel.DueAmount.ToString();
+                lblTotalAmount.Text = userModel.TotalAmount.ToString();
+                txtAmount.Value = 0;// userModel.DueAmount;
+                _userModel = userModel;
+            }
+            
         }
 
 
@@ -86,6 +100,10 @@ namespace IMS.Forms.Inventory.Payment
             if (chkAllPaid.Checked)
             {
                 txtAmount.Value = _orderModel.RemainingAmount;
+            }
+            else
+            {
+                txtAmount.Value = 0;
             }
         }
 
@@ -134,7 +152,8 @@ namespace IMS.Forms.Inventory.Payment
                 Date = DateTime.Now,
                 PaidBy = txtBy.Text.ToString(),
                 PaymentMethod = cbPaymentMethod.SelectedValue.ToString(),
-                OrderId = _orderModel.Id,
+                OrderId = _orderModel?.Id,
+                UserId = _userModel?.Id,
             };
             return model;
         }

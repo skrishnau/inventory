@@ -1,6 +1,7 @@
 ﻿using DTO.Core.Inventory;
 using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
+using IMS.Forms.Inventory.Payment;
 using IMS.Forms.Inventory.Suppliers;
 using Service.Core.Business;
 using Service.Core.Inventory;
@@ -39,7 +40,7 @@ namespace IMS.Forms.Inventory.Transaction
             IBusinessService businessService,
             IInventoryService inventoryService,
             IOrderService purchaseService,
-            IDatabaseChangeListener listener, 
+            IDatabaseChangeListener listener,
             IAppSettingService appSettingService)
         {
             _listener = listener;
@@ -74,11 +75,6 @@ namespace IMS.Forms.Inventory.Transaction
             PopulateReceiptNumber();
         }
 
-        
-
-
-
-
         #region Functions
 
         public void SetDataForEdit(OrderTypeEnum orderType, int orderId)
@@ -89,6 +85,10 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void InitializeDataGridView()
         {
+            if (_orderType == OrderTypeEnum.Sale)
+                dgvItems.MovementType = MovementTypeEnum.SOIssueEditItems;
+            else if (_orderType == OrderTypeEnum.Purchase)
+                dgvItems.MovementType = MovementTypeEnum.POReceiveEditItems;
             dgvItems.DesignForTransaction(true);
         }
 
@@ -108,7 +108,10 @@ namespace IMS.Forms.Inventory.Transaction
             lblClient.DoubleClick += LblClient_DoubleClick;
 
             dgvItems.AmountChanged += DgvItems_AmountChnanged;
+            btnPayment.Click += btnPayment_Click;
         }
+
+        
 
         private void InitializeValidation()
         {
@@ -141,7 +144,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void PopulateClientCombo()
         {
             List<IdNamePair> list = null;
-             var userType = UserTypeEnum.Client;
+            var userType = UserTypeEnum.Client;
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
@@ -171,6 +174,7 @@ namespace IMS.Forms.Inventory.Transaction
             _orderModel = model;
             if (model != null)
             {
+                btnPayment.Visible = model.RemainingAmount > 0;
                 // change button
                 _orderId = model.Id;
                 txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
@@ -221,7 +225,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void PopulateReceiptNumber()
         {
-            if(_orderModel == null)
+            if (_orderModel == null)
             {
                 txtReceiptNo.Text = _appSettingService.GetReceiptNumber(_orderType);
             }
@@ -244,15 +248,23 @@ namespace IMS.Forms.Inventory.Transaction
             var model = GetData();
             if (model == null)
                 return;
-            _orderService.SaveOrder(model, checkout);
-            this.Close();
+            msg = _orderService.SaveOrder(model, checkout);
+            if (string.IsNullOrEmpty(msg))
+            {
+                PopupMessage.ShowSaveSuccessMessage();
+                this.Close();
+            }
+            else
+            {
+                PopupMessage.ShowErrorMessage("Couln't save! Please contact admin.");
+            }
         }
 
         private OrderModel GetData()
         {
             var client = "";
             var clientId = 0;
-            int.TryParse(cbClient.SelectedValue?.ToString()??"", out clientId);
+            int.TryParse(cbClient.SelectedValue?.ToString() ?? "", out clientId);
             if (clientId == 0)
             {
                 client = cbClient.Text;
@@ -277,7 +289,7 @@ namespace IMS.Forms.Inventory.Transaction
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;
-                
+
                 return orderModel;
             }
             return null;
@@ -295,13 +307,14 @@ namespace IMS.Forms.Inventory.Transaction
             PopulateClientCombo();
             cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
         }
-        
+
 
         private void RbCredit_CheckedChanged(object sender, EventArgs e)
         {
             pnlPaymentDueDate.Visible = rbCredit.Checked;
-            txtPaidAmount.Value = txtTotal.Value;
+            txtPaidAmount.Value = rbCredit.Checked ? 0 : txtTotal.Value;
             txtPaidAmount.Enabled = rbCredit.Checked;
+
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -329,11 +342,29 @@ namespace IMS.Forms.Inventory.Transaction
             }
         }
 
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var po = Program.container.GetInstance<PaymentCreateForm>();
+                po.SetData(_orderModel, null);
+                po.ShowDialog();
+            }
+        }
+
         private void DgvItems_AmountChnanged(decimal totals)
         {
-            txtTotal.Value = totals;
-            if (rbCash.Checked)
-                txtPaidAmount.Value = totals;
+            try
+            {
+                txtTotal.Value = totals;
+                if (rbCash.Checked)
+                    txtPaidAmount.Value = totals;
+            }
+            catch (Exception ex)
+            {
+                txtTotal.Value = 0;
+                PopupMessage.ShowInfoMessage(ex.Message);
+            }
         }
         #endregion
     }

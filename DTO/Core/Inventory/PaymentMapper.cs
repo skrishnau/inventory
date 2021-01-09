@@ -41,8 +41,13 @@ namespace DTO.Core.Inventory
     {
         public PaymentProfile()
         {
-            CreateMap<Payment, PaymentModel>();
-            CreateMap<PaymentModel, Payment>();
+            CreateMap<Payment, PaymentModel>()
+                .ForMember(s=> s.User, opt=>opt.MapFrom(src=>src.User == null ? "" : src.User.Name))
+                .ForMember(s=> s.Order, opt=>opt.MapFrom(src=>src.Order == null ? "" : src.Order.Name))
+                ;
+            CreateMap<PaymentModel, Payment>()
+                .ForMember(s => s.User, opt => opt.Ignore())
+                .ForMember(s => s.Order, opt => opt.Ignore());
         }
     }
 }

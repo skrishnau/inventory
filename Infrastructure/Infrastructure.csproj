@@ -91,6 +91,10 @@
     <Compile Include="Migrations\202101090712531_ProductTableLabelRemoved.Designer.cs">
       <DependentUpon>202101090712531_ProductTableLabelRemoved.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101091252006_PaidAmountAddedInUserTable.cs" />
+    <Compile Include="Migrations\202101091252006_PaidAmountAddedInUserTable.Designer.cs">
+      <DependentUpon>202101091252006_PaidAmountAddedInUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -113,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101090712531_ProductTableLabelRemoved.resx">
       <DependentUpon>202101090712531_ProductTableLabelRemoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101091252006_PaidAmountAddedInUserTable.resx">
+      <DependentUpon>202101091252006_PaidAmountAddedInUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

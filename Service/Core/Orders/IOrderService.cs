@@ -18,7 +18,7 @@ namespace Service.Core.Orders
         /// </summary>
         /// <param name="purchaseOrderModel"></param>
         /// <param name="checkout">The order is processed and receipt generated at the same time</param>
-        void SaveOrder(OrderModel purchaseOrderModel, bool checkout); 
+        string SaveOrder(OrderModel purchaseOrderModel, bool checkout); 
 
         List<OrderModel> GetAllOrders(OrderTypeEnum orderType);
 
@@ -35,5 +35,6 @@ namespace Service.Core.Orders
         string SetReceived(int purchaseOrderId);
         string SetIssued(int orderId);
         string SetCancelled(int purchaseOrderId);
+        List<OrderModel> GetDuePayments();
     }
 }

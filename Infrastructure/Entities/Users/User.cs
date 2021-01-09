@@ -58,7 +58,9 @@ namespace Infrastructure.Entities.Users
         // Registration Date in case of company; or birth date in case of person
         public DateTime? DOB { get; set; }
         public string Notes { get; set; }
-        
 
+        // payments
+        public decimal TotalAmount { get; set; }
+        public decimal PaidAmount { get; set; }
     }
 }

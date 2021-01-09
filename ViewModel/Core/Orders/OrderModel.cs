@@ -40,6 +40,23 @@ namespace ViewModel.Core.Orders
         public DateTime? PaymentDueDate { get; set; }
         public DateTime? PaymentCompleteDate { get; set; }
 
+        public int PaymentDueDays
+        {
+            get
+            {
+                if(PaymentDueDate.HasValue)
+                    return (PaymentDueDate.Value.Date - DateTime.Now.Date.AddDays(1)).Days;
+                return 0;
+            }
+        }
+        public decimal PaymentDueAmount
+        {
+            get
+            {
+                return TotalAmount - PaidAmount;
+            }
+        }
+
         public int NoOfProducts { get; set; }
 
         public decimal RemainingAmount

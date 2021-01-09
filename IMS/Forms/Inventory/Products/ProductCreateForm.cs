@@ -54,7 +54,7 @@ namespace IMS.Forms.Inventory.Products
         private void ProductCreate_Load(object sender, EventArgs e)
         {
             numSupplyPrice.Maximum = Int32.MaxValue;
-            numRetailPrice.Minimum = Int32.MaxValue;
+            numRetailPrice.Maximum = Int32.MaxValue;
             // active control
             this.ActiveControl = tbProductName;
             // call all the populating functions
@@ -96,18 +96,7 @@ namespace IMS.Forms.Inventory.Products
             //btnAddOption.Click += BtnAddOption_Click;
             dgvVariants.EditingControlShowing += DgvVariants_EditingControlShowing;
 
-            btnAddCategory.Click += BtnAddCategory_Click;
-        }
-        
-        private void BtnAddCategory_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var categoryCreate = Program.container.GetInstance<CategoryCreate>();
-                categoryCreate.ShowInTaskbar = false;
-                categoryCreate.ShowDialog();
-                //PopulateCategoryData();
-            }
+           // btnAddCategory.Click += BtnAddCategory_Click;
         }
 
         private void InitializeDatabaseChangeListeners()
@@ -202,6 +191,7 @@ namespace IMS.Forms.Inventory.Products
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var categoryCreate = Program.container.GetInstance<CategoryCreate>();
+                categoryCreate.ShowInTaskbar = false;
                 categoryCreate.ShowDialog();
             }
         }
@@ -515,15 +505,6 @@ namespace IMS.Forms.Inventory.Products
 //    return list;
 //}
 
-
-
-//private void BtnAddCategory_Click(object sender, EventArgs e)
-//{
-
-//    var categoryCreate = Program.container.GetInstance<CategoryCreate>();
-//    categoryCreate.StartPosition = FormStartPosition.CenterParent;
-//    categoryCreate.ShowDialog();
-//}
 
 //private void btnAddBrand_Click(object sender, EventArgs e)
 //{

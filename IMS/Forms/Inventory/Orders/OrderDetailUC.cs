@@ -254,7 +254,7 @@ namespace IMS.Forms.Inventory.Purchases
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var po = Program.container.GetInstance<PaymentCreateForm>();
-                po.SetData(_orderModel);
+                po.SetData(_orderModel, null);
                 po.ShowDialog();
             }
         }

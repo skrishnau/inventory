@@ -14,6 +14,7 @@ using Service.DbEventArgs;
 using ViewModel.Core.Orders;
 using SimpleInjector.Lifestyles;
 using Service.Core.Inventory;
+using IMS.Forms.Inventory.Payment;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -74,6 +75,7 @@ namespace IMS.Forms.Inventory.Transaction
             rbAll.CheckedChanged += Type_CheckedChanged;
             rbPurchase.CheckedChanged += Type_CheckedChanged;
             rbSale.CheckedChanged += Type_CheckedChanged;
+            btnPayment.Click += btnPayment_Click;
         }
 
         private void Type_CheckedChanged(object sender, EventArgs e)
@@ -98,7 +100,7 @@ namespace IMS.Forms.Inventory.Transaction
             List<OrderModel> _orderList = new List<OrderModel>();
             _orderList = _orderService.GetAllOrders(_orderType);
             dgvOrders.DataSource = _orderList;
-            if(dgvOrders.SelectedRows.Count > 0)
+            if (dgvOrders.SelectedRows.Count > 0)
             {
                 var model = dgvOrders.Rows[dgvOrders.SelectedRows[0].Index].DataBoundItem as OrderModel;
                 ShowDetail(this, model);
@@ -125,10 +127,17 @@ namespace IMS.Forms.Inventory.Transaction
         {
             if (model != null)
             {
+                btnPayment.Visible = model.RemainingAmount > 0;
+                btnPayment.Tag = model;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);
                 dgvItems.DataSource = _orderService.GetPurchaseOrderItems(model.Id);
                 lblReferenceNo.Text = model.ReferenceNumber;
+            }
+            else
+            {
+                btnPayment.Tag = null;
+                btnPayment.Visible = false;
             }
         }
 
@@ -138,6 +147,20 @@ namespace IMS.Forms.Inventory.Transaction
         }
 
         #endregion
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var orderModel = btnPayment.Tag as OrderModel;
+                if (orderModel != null)
+                {
+                    var po = Program.container.GetInstance<PaymentCreateForm>();
+                    po.SetData(orderModel, null);
+                    po.ShowDialog();
+                }
+            }
+        }
 
 
         private void ShowAddEditDialog(bool isEditMode)

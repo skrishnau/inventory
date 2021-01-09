@@ -31,7 +31,7 @@ namespace Service.Core.Orders
             IDatabaseChangeListener listener,
             IInventoryUnitService inventoryUnitService,
             IUserService customerService,
-            IAppSettingService appSettingSerivce 
+            IAppSettingService appSettingSerivce
             )//DatabaseContext context,
         {
             //_context = context;
@@ -76,7 +76,7 @@ namespace Service.Core.Orders
             }
         }
 
-        public void SaveOrder(OrderModel orderModel, bool checkout)
+        public string SaveOrder(OrderModel orderModel, bool checkout)
         {
             using (var _context = new DatabaseContext())
             {
@@ -84,20 +84,52 @@ namespace Service.Core.Orders
                 var now = DateTime.Now;
                 var args = BaseEventArgs<OrderModel>.Instance;
 
-                CheckAndAssignCustomer(_context, ref orderModel);
-
-
-
                 var entity = _context.Order.Find(orderModel.Id);
+                var user = CheckAndAssignCustomer(ref orderModel, checkout);
                 entity = orderModel.MapToEntity(entity);// OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
-               
+                if (user != null) // means new user was created assign to entity
+                    entity.User = user;
+
+                // amount in user table
+                if(entity.UserId > 0 && checkout)
+                {
+                    user = _context.User.Find(orderModel.UserId);
+                    if (user != null)
+                    {
+                        // new order
+                        if (orderModel.Id <= 0)
+                        {
+                            user.TotalAmount += orderModel.TotalAmount;
+                            user.PaidAmount += orderModel.PaidAmount;
+                        }
+                        else
+                        {
+                            user.TotalAmount = user.TotalAmount - (entity?.TotalAmount ?? 0) + orderModel.TotalAmount;
+                            user.PaidAmount = user.PaidAmount - (entity?.PaidAmount??0) + orderModel.PaidAmount;
+                        }
+                        
+                    }
+                }
 
                 SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
 
                 if (checkout)
                 {
-                    MakeCheckout(entity);
+                    // makechecout
+                    entity.IsCompleted = true;
+                    entity.IsVerified = true;
+                    entity.CompletedDate = DateTime.Now;
+                    entity.VerifiedDate = DateTime.Now;
+                    var msg = "";
+                    if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
+                        msg = SubtractIssuedItemsFromWarehouse(entity.OrderItems, DateTime.Now);
+                    else if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
+                        AddReceivedItemsToWarehouse(entity.OrderItems, DateTime.Now);
+
+                    if (!string.IsNullOrEmpty(msg))
+                        return msg;
                 }
+
 
                 if (entity.Id == 0)
                 {
@@ -117,46 +149,44 @@ namespace Service.Core.Orders
                         item.WarehouseId = entity.WarehouseId;
                     }
                 }
+
+
                 _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
                 _listener.TriggerOrderUpdateEvent(null, args);
+                return string.Empty;
             }
         }
 
-        private void CheckAndAssignCustomer(DatabaseContext _context, ref OrderModel orderModel)
+        private User CheckAndAssignCustomer(ref OrderModel orderModel, bool checkout)
         {
-            if ((orderModel.UserId ?? 0) == 0 && !string.IsNullOrEmpty(orderModel.User))
+            if (orderModel.UserId > 0)
             {
-                //_customerService.AddOrUpdateCustomer()
-                var customer = new User
-                {
-                    CreatedAt = DateTime.Now,
-                    Phone = orderModel.Phone,
-                    Address = orderModel.Address,
-                    Name = orderModel.User,
-                    UpdatedAt = DateTime.Now,
-                    DeletedAt = null,
-                    DOB = null,
-                    DeliveryAddress = orderModel.Address,
-                };
-                _context.User.Add(customer);
-                _context.SaveChanges();
-                orderModel.UserId = customer.Id;
+                return null;
             }
-            else
+            if (string.IsNullOrEmpty(orderModel.User))
             {
                 orderModel.UserId = null;
+                return null;
             }
+            // below code executes if userId is null but manual input of user-name is present 
+            return new User
+            {
+                CreatedAt = DateTime.Now,
+                Phone = orderModel.Phone,
+                Address = orderModel.Address,
+                Name = orderModel.User,
+                UpdatedAt = DateTime.Now,
+                DeletedAt = null,
+                DOB = null,
+                DeliveryAddress = orderModel.Address,
+                PaidAmount = checkout ? orderModel.PaidAmount : 0,
+                TotalAmount = checkout ? orderModel.TotalAmount : 0,
+                UserType = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? UserTypeEnum.Customer.ToString() : UserTypeEnum.Supplier.ToString(),
+            };
         }
 
-        private void MakeCheckout(Order entity)
-        {
-            entity.IsCompleted = true;
-            entity.IsVerified = true;
-            entity.CompletedDate = DateTime.Now;
-            entity.VerifiedDate = DateTime.Now;
-        }
 
         public OrderModel GetOrder(OrderTypeEnum orderType, int orderId)
         {
@@ -499,6 +529,15 @@ namespace Service.Core.Orders
                 _context.SaveChanges();
             }
             return string.Empty;
+        }
+
+        public List<OrderModel> GetDuePayments()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var orders = _context.Order.ToList();
+                return OrderMapper.MapToModel(orders.Where(x => x.PaidAmount < x.TotalAmount));
+            }
         }
 
 

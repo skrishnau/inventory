@@ -58,6 +58,7 @@
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).BeginInit();
@@ -362,11 +363,28 @@
             this.saveFooterUC1.Size = new System.Drawing.Size(518, 35);
             this.saveFooterUC1.TabIndex = 9;
             // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.Color.MintCream;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPayment.Location = new System.Drawing.Point(433, 4);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(78, 22);
+            this.btnPayment.TabIndex = 15;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Visible = false;
+            // 
             // TransactionCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 506);
+            this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
@@ -427,5 +445,6 @@
         private Common.Display.SaveFooterUC saveFooterUC1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private Common.Buttons.MenuButton btnPayment;
     }
 }

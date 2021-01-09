@@ -9,17 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Service.Core.Inventory;
 using Service.Listeners;
+using ViewModel.Enums;
+using ViewModel.Core.Orders;
+using Service.Core.Orders;
+using SimpleInjector.Lifestyles;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
     public partial class DashboardUC : UserControl
     {
         private readonly IInventoryService _inventoryService;
+        private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
 
-        public DashboardUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
+        public DashboardUC(IInventoryService inventoryService, IOrderService orderService, IDatabaseChangeListener listener)
         {
             _inventoryService = inventoryService;
+            _orderService = orderService;
+
             _listener = listener;
 
             InitializeComponent();
@@ -32,9 +39,73 @@ namespace IMS.Forms.Inventory.Dashboard
         {
             _listener.ProductUpdated += _listener_ProductUpdated;
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
-
+            _listener.UserUpdated += _listener_UserUpdated;
+            _listener.OrderUpdated += _listener_OrderUpdated;
 
             PopulateUnderstockProducts();
+            PopulateDueReceivables();
+            PopulateTransactionSummary();
+            PopulateInventorySummary();
+            InitializeEvents();
+        }
+
+        private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
+        {
+            PopulateDueReceivables();
+        }
+
+        // uncomment to give colors to cells 
+        //private void DgvDueReceivables_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        //{
+        //    //try
+        //    //{
+        //    //    var order = dgvDueReceivables.Rows[e.RowIndex].DataBoundItem as OrderModel;
+        //    //    if(order != null)
+        //    //    {
+        //    //        if(order.Pay)
+        //    //    }
+        //    //    if (_productList[e.RowIndex].IsLessThanMinimumStock)
+        //    //    {
+        //    //        e.CellStyle.ForeColor = Color.Red;
+        //    //        e.CellStyle.SelectionForeColor = Color.Red;
+        //    //        // e.CellStyle.BackColor = Color.LightBlue;
+        //    //        e.CellStyle.SelectionBackColor = SystemColors.GradientInactiveCaption; //Color.LightBlue;
+        //    //    }
+        //    //}
+        //    //catch (Exception ex) { }
+        //}
+
+        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
+        {
+            PopulateInventorySummary();
+        }
+
+        private void InitializeEvents()
+        {
+            dtEnd.ValueChanged += Date_ValueChanged;
+            dtStart.ValueChanged += Date_ValueChanged;
+          //  dgvDueReceivables.CellDoubleClick += DgvDueReceivables_CellDoubleClick;
+        }
+
+        private void DgvDueReceivables_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                if (e.RowIndex >= 0) {
+                    var orderModel = dgvDueReceivables.Rows[e.RowIndex].DataBoundItem as OrderModel;
+                    if (orderModel != null)
+                    {
+                        var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+                        form.SetDataForEdit(OrderTypeEnum.Sale, orderModel.Id);
+                        form.ShowDialog();
+                    }
+                }
+            }
+        }
+
+        private void Date_ValueChanged(object sender, EventArgs e)
+        {
+            PopulateTransactionSummary();
         }
 
         #region Listeners
@@ -42,16 +113,56 @@ namespace IMS.Forms.Inventory.Dashboard
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
             PopulateUnderstockProducts();
+            PopulateInventorySummary();
 
         }
 
         private void _listener_InventoryUnitUpdated(object sender, Service.DbEventArgs.BaseEventArgs<List<ViewModel.Core.Inventory.InventoryUnitModel>> e)
         {
             PopulateUnderstockProducts();
+            PopulateInventorySummary();
         }
 
         #endregion
 
+        private void PopulateTransactionSummary()
+        {
+            var start = dtStart.Value.Date;
+            var end = dtEnd.Value.Date;
+            end = end.AddDays(1);
+            var summary = _inventoryService.GetTransactionSummary(start, end);
+            foreach (var sum in summary)
+            {
+                if (sum.Key == TransactionSummaryKeys.Purchase.ToString())
+                {
+                    lblPurchase.Text = sum.Value.ToString("0");
+                }
+                else if (sum.Key == TransactionSummaryKeys.Sale.ToString())
+                {
+                    lblSale.Text = sum.Value.ToString("0");
+                }
+            }
+        }
+
+        void PopulateInventorySummary()
+        {
+            var summary = _inventoryService.GetInventorySummary();
+            foreach (var sum in summary)
+            {
+                if (sum.Key == TransactionSummaryKeys.Product.ToString())
+                {
+                    lblProducts.Text = sum.Value.ToString("0");
+                }
+                else if (sum.Key == TransactionSummaryKeys.Customer.ToString())
+                {
+                    lblCustomers.Text = sum.Value.ToString("0");
+                }
+                else if (sum.Key == TransactionSummaryKeys.InventoryQuantity.ToString())
+                {
+                    lblInventoryQuantity.Text = sum.Value.ToString("0");
+                }
+            }
+        }
 
         private void PopulateUnderstockProducts()
         {
@@ -64,5 +175,17 @@ namespace IMS.Forms.Inventory.Dashboard
             lbUnderStockProducts.SelectionMode = SelectionMode.None;
         }
 
+        private void PopulateDueReceivables()
+        {
+            var sale = OrderTypeEnum.Sale.ToString();
+            var orders = _orderService.GetDuePayments();
+            orders = orders.Where(x => x.OrderType == sale).OrderBy(x=>x.PaymentDueDays).ToList();
+            dgvDueReceivables.AutoGenerateColumns = false;
+            dgvDueReceivables.DataSource = orders;
+            dgvDueReceivables.AllowUserToAddRows = false;
+            dgvDueReceivables.AllowUserToDeleteRows = false;
+            dgvDueReceivables.RowHeadersVisible = false;
+
+        }
     }
 }

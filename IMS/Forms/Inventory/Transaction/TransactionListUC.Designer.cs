@@ -51,18 +51,19 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblReferenceNo = new System.Windows.Forms.Label();
-            this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitter1
@@ -296,13 +297,24 @@
             this.panel4.Size = new System.Drawing.Size(408, 426);
             this.panel4.TabIndex = 16;
             // 
+            // dgvItems
+            // 
+            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(0, 49);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.Size = new System.Drawing.Size(408, 377);
+            this.dgvItems.TabIndex = 14;
+            // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnPayment);
             this.panel5.Controls.Add(this.lblReferenceNo);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(408, 45);
+            this.panel5.Size = new System.Drawing.Size(408, 49);
             this.panel5.TabIndex = 15;
             // 
             // lblReferenceNo
@@ -315,16 +327,6 @@
             this.lblReferenceNo.TabIndex = 0;
             this.lblReferenceNo.Text = "-";
             // 
-            // dgvItems
-            // 
-            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 45);
-            this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(408, 381);
-            this.dgvItems.TabIndex = 14;
-            // 
             // listHeaderTemplate1
             // 
             this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -335,6 +337,21 @@
             this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.listHeaderTemplate1.Size = new System.Drawing.Size(769, 32);
             this.listHeaderTemplate1.TabIndex = 17;
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.Location = new System.Drawing.Point(305, 6);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(96, 33);
+            this.btnPayment.TabIndex = 15;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Visible = false;
             // 
             // TransactionListUC
             // 
@@ -353,9 +370,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -388,5 +405,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblReferenceNo;
         private Common.Display.ListHeaderTemplate listHeaderTemplate1;
+        private Common.Buttons.MenuButton btnPayment;
     }
 }

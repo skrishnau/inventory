@@ -17,6 +17,7 @@ using ViewModel.Core.Business;
 using Infrastructure.Entities.Business;
 using DTO.Core.Business;
 using ViewModel.Enums;
+using ViewModel.Core.Orders;
 
 namespace Service.Core.Inventory
 {
@@ -894,9 +895,42 @@ namespace Service.Core.Inventory
                                     Name = x.Name,
                                 }).ToList();
             }
-
         }
 
+        public List<TransactionSummaryModel> GetTransactionSummary(DateTime start, DateTime end)
+        {
+            var list = new List<TransactionSummaryModel>();
+            using (var _context = new DatabaseContext())
+            {
+                var totalOrders = _context.Order.Where(x => x.IsCompleted && x.CompletedDate >= start && x.CompletedDate <= end)
+                    .GroupBy(x=>x.OrderType)
+                    .Select(x => new TransactionSummaryModel
+                    {
+                        Key = x.Key,
+                        Value = x.Count()
+                    })
+                    .ToList();
+                list.AddRange(totalOrders);
+            }
+            return list;
+        }
+
+
+        public List<TransactionSummaryModel> GetInventorySummary()
+        {
+            var list = new List<TransactionSummaryModel>();
+            using (var _context = new DatabaseContext())
+            {
+                var totalProducts = _context.Product.Count();
+                list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Product.ToString(), Value = totalProducts });
+                var totalInventoryQty = _context.Product.Select(x => (decimal?)x.InStockQuantity).Sum()??0;
+                list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.InventoryQuantity.ToString(), Value = totalInventoryQty });
+                var customer = UserTypeEnum.Customer.ToString();
+                var totalCustomers = _context.User.Where(x => x.UserType == customer);
+                list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Customer.ToString(), Value = totalProducts });
+            }
+            return list;
+        }
 
         #endregion
 

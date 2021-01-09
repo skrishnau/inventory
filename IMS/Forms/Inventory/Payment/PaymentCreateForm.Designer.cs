@@ -68,7 +68,6 @@
             // txtAmount
             // 
             this.txtAmount.DecimalPlaces = 1;
-            this.txtAmount.Enabled = false;
             this.txtAmount.Location = new System.Drawing.Point(107, 32);
             this.txtAmount.Maximum = new decimal(new int[] {
             200,
@@ -141,8 +140,6 @@
             // chkAllPaid
             // 
             this.chkAllPaid.AutoSize = true;
-            this.chkAllPaid.Checked = true;
-            this.chkAllPaid.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAllPaid.Location = new System.Drawing.Point(3, 3);
             this.chkAllPaid.Name = "chkAllPaid";
             this.chkAllPaid.Size = new System.Drawing.Size(61, 17);
@@ -201,11 +198,11 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(299, 11);
+            this.btnSave.Location = new System.Drawing.Point(360, 11);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(144, 23);
+            this.btnSave.Size = new System.Drawing.Size(83, 23);
             this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Save and Add Items";
+            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // headerTemplate1
