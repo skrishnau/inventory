@@ -39,7 +39,7 @@ namespace IMS.Forms.Inventory.Suppliers
             this.ActiveControl = tbName;
             PopulateUserType();
 
-            var supplier = _supplierService.GetSupplier(_userId);
+            var supplier = _supplierService.GetUser(_userId);
             SetDataForEdit(supplier);
         }
 
@@ -115,7 +115,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 Use = chkUse.Checked,
                 UserType = cbUserType.SelectedValue.ToString(),
             };
-            _supplierService.AddOrUpdateSupplier(model);
+            _supplierService.AddOrUpdateUser(model);
             this.Close();
         }
 

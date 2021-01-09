@@ -27,6 +27,7 @@ namespace DTO.Core.Inventory
             entity.ParentProductId = model.ParentProductId;
             entity.SKU = model.SKU;
             entity.Use = model.Use;
+            //entity
             // replenishments
             entity.ReorderPoint = model.ReorderPoint;
             entity.ReorderQuantity = model.ReorderQuantity;
@@ -42,7 +43,7 @@ namespace DTO.Core.Inventory
             entity.Brand = model.Brand;
             //entity.Brands = model.Brands;
             entity.Description = model.Description;
-            entity.Label = model.Label;
+            //entity.Label = model.Label;
             entity.Manufacturer = model.Manufacturer;
             //package
             entity.PackageId = model.PackageId;
@@ -110,7 +111,7 @@ namespace DTO.Core.Inventory
             model.Barcode = entity.Barcode;
             model.Brand = entity.Brand;
             model.Description = entity.Description;
-            model.Label = entity.Label;
+            //model.Label = entity.Label;
             model.Manufacturer = entity.Manufacturer;
             //package
             model.PackageId = entity.PackageId;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DTO.Core.Inventory;
 using Infrastructure.Context;
+using Infrastructure.Entities.Users;
 using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Common;
@@ -15,47 +16,11 @@ namespace Service.Core.Users
 {
     public class UserService : IUserService
     {
-        // private readonly DatabaseContext _context;
         private readonly IDatabaseChangeListener _listener;
 
-        public UserService(IDatabaseChangeListener listener)//DatabaseContext context
+        public UserService(IDatabaseChangeListener listener)
         {
             _listener = listener;
-        }
-
-        public void AddOrUpdateUser(UserModel userModel)
-        {
-            using (var _context = new DatabaseContext())
-            {
-
-                var dbEntity = _context.User.FirstOrDefault(x => x.Id == userModel.Id);
-                if (dbEntity == null)
-                {
-                    var userEntitiy = userModel.ToEntity();
-                    userEntitiy.CreatedAt = DateTime.Now;
-                    userEntitiy.UpdatedAt = DateTime.Now;
-                    _context.User.Add(userEntitiy);
-                }
-                else
-                {
-                    dbEntity.UpdatedAt = DateTime.Now;
-                    dbEntity.Password = userModel.Password;
-                    dbEntity.Username = userModel.Username;
-                    dbEntity.UserType = userModel.UserType;
-                    dbEntity.Address = userModel.Address;
-                    dbEntity.UpdatedAt = DateTime.Now;
-                    dbEntity.DOB = userModel.DOB;
-                    dbEntity.Email = userModel.Email;
-                    dbEntity.Gender = userModel.Gender;
-                    dbEntity.IsCompany = userModel.IsCompany;
-                    dbEntity.IsMarried = userModel.IsMarried;
-                    dbEntity.Name = userModel.Name;
-                    dbEntity.Phone = userModel.Phone;
-                    dbEntity.Website = userModel.Website;
-                    dbEntity.CanLogin = userModel.CanLogin;
-                }
-                _context.SaveChanges();
-            }
         }
 
         public void DeleteUser(UserModel user)
@@ -66,49 +31,14 @@ namespace Service.Core.Users
                 var dbEntity = _context.User.FirstOrDefault(x => x.Id == user.Id);
                 if (dbEntity != null)
                 {
-                    //var basicInfoId = dbEntity.Id;
                     dbEntity.DeletedAt = DateTime.Now;
-                    //dbEntity.DeletedAt = DateTime.Now;
                     dbEntity.CanLogin = false;
-                    //var basicInfoEntity = _context.FirstOrDefault(y => y.Id == basicInfoId);
-                    //if(basicInfoEntity != null)
-                    //{
-                    //    basicInfoEntity.DeletedAt = DateTime.Now;
-                    //}
                     _context.SaveChanges();
                 }
             }
         }
 
-        public List<UserModel> GetUserList(UserTypeEnum userType)
-        {
-            using (var _context = new DatabaseContext())
-            {
-
-                var query = _context.User
-                    .Where(x => x.DeletedAt == null);
-                var customer = UserTypeEnum.Customer.ToString();
-                var supplier = UserTypeEnum.Supplier.ToString();
-                if (userType == UserTypeEnum.Client) // client means both Customer and Supplier
-                {
-                    query = query.Where(x => x.UserType == customer || x.UserType == supplier);
-                }
-                else if (userType != UserTypeEnum.All)
-                {
-                    var userTypeStr = userType.ToString();
-                    query = query.Where(x => x.UserType == userTypeStr);
-                }
-                return UserMapper.MapToUserModel(query.OrderBy(x => x.Name));
-            }
-        }
-
-        /* public List<BasicInfoModel> GetBasicInfoList()
-         {
-             return null;
-         }
-         */
-
-        public void AddOrUpdateSupplier(UserModel supplierModel)
+        public void AddOrUpdateUser(UserModel supplierModel)
         {
             using (var _context = new DatabaseContext())
             {
@@ -138,38 +68,35 @@ namespace Service.Core.Users
             }
         }
 
-        //public void DeleteSupplier(int supplierId)
-        //{
-        //    var entity = _context.Supplier.Find(supplierId);
-        //    if(entity != null)
-        //    {
-        //        entity.DeletedAt = DateTime.Now;
-        //        _context.SaveChanges();
-        //        var args = new BaseEventArgs<SupplierModel>(SupplierMapper.MapToSupplierModel(entity), Utility.UpdateMode.DELETE);
-        //        _listener.TriggerSupplierUpdateEvent(null, args);
-        //    }
-        //}
-
-        public UserModel GetSupplier(int supplierId)
+        public UserModel GetUser(int userId)
         {
             using (var _context = new DatabaseContext())
             {
-
-                var supplier = _context.User.Find(supplierId);
+                var supplier = _context.User.Find(userId);
                 if (supplier == null)
                     return null;
                 return UserMapper.MapToSupplierModel(supplier);
             }
         }
 
-
-        public List<IdNamePair> GetSupplierListForCombo()
+        public List<UserModel> GetUserList(UserTypeEnum userType)
         {
             using (var _context = new DatabaseContext())
             {
+                var query = GetUserQueryable(_context, userType);
+                return UserMapper.MapToUserModel(query.OrderBy(x => x.Name));
+            }
+        }
 
-                return _context.User
-                    .Where(x => x.Use && x.DeletedAt == null)
+        // includeUserList : includes the given users even if Use property is false
+        public List<IdNamePair> GetUserListForCombo(UserTypeEnum userType, int[] includeUserList)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = GetUserQueryable(_context, userType);
+
+                return query
+                    .Where(x => x.Use || (!x.Use && includeUserList != null && includeUserList.Contains(x.Id)))
                     .OrderBy(x => x.Name)
                     .Select(x => new IdNamePair()
                     {
@@ -177,6 +104,24 @@ namespace Service.Core.Users
                         Id = x.Id
                     }).ToList();
             }
+        }
+
+        private IQueryable<User> GetUserQueryable(DatabaseContext _context, UserTypeEnum userType)
+        {
+            var query = _context.User
+                    .Where(x => x.DeletedAt == null);
+            var customer = UserTypeEnum.Customer.ToString();
+            var supplier = UserTypeEnum.Supplier.ToString();
+            if (userType == UserTypeEnum.Client) // client means both Customer and Supplier
+            {
+                query = query.Where(x => x.UserType == customer || x.UserType == supplier);
+            }
+            else if (userType != UserTypeEnum.All)
+            {
+                var userTypeStr = userType.ToString();
+                query = query.Where(x => x.UserType == userTypeStr);
+            }
+            return query;
         }
     }
 

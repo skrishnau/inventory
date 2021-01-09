@@ -67,7 +67,7 @@ namespace Infrastructure.Entities.Inventory
         public decimal RetailPrice { get; set; }
 
         // ============= Extra Information ============= //
-        public string Label { get; set; }
+        //public string Label { get; set; }
         public string Manufacturer { get; set; }
         public string Brand { get; set; }
         public string Description { get; set; }

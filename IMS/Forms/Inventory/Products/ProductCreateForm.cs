@@ -48,18 +48,19 @@ namespace IMS.Forms.Inventory.Products
             InitializeEvents();
             InitializeDatabaseChangeListeners();
 
-
             this.Load += ProductCreate_Load;
         }
 
         private void ProductCreate_Load(object sender, EventArgs e)
         {
+            numSupplyPrice.Maximum = Int32.MaxValue;
+            numRetailPrice.Minimum = Int32.MaxValue;
             // active control
             this.ActiveControl = tbProductName;
             // call all the populating functions
             PopulateCategoryCombo();
             PopulateWarehouse();
-            PopulateSupplier();
+            //PopulateSupplier();
             PopulateUom();
             PopulatePackage();
 
@@ -83,12 +84,12 @@ namespace IMS.Forms.Inventory.Products
 
             var requiredControls = new Control[]
             {
-                cbCategory, tbLabelCode, tbProductName, tbSKU, cbPackage, cbSupplier, cbUom, cbWarehouse
+                cbCategory, tbProductName, tbSKU, cbPackage, cbUom, cbWarehouse
             };
             _requiredValidator = new RequiredFieldValidator(errorProvider1, requiredControls);
             var greaterControls = new Control[]
             {
-                numSupplyPrice
+                numSupplyPrice, numRetailPrice
             };
             _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider1, greaterControls);
 
@@ -121,8 +122,10 @@ namespace IMS.Forms.Inventory.Products
 
         private void SaveProduct()
         {
-            var allValid = _requiredValidator.IsValid();
-            allValid = allValid && _greaterThanZeroFieldValidator.IsValid();
+            var allValid = true;
+            var requiredValid = _requiredValidator.IsValid();
+            var greaterThanZeroValid = _greaterThanZeroFieldValidator.IsValid();
+            allValid = requiredValid && greaterThanZeroValid;
             if (!allValid)
             {
                 PopupMessage.ShowMissingInputsMessage();
@@ -155,7 +158,7 @@ namespace IMS.Forms.Inventory.Products
                 IsBuy = chkIsBuy.Checked,
                 IsNotMovable = chkIsNotMovable.Checked,
                 IsSell = chkIsSell.Checked,
-                Label = tbLabelCode.Text,
+                //Label = tbLabelCode.Text,
                 LeadDays = (int)numLeadDays.Value,
                 Manufacturer = tbManufacturer.Text,
                 PackageId = int.Parse(cbPackage.SelectedValue.ToString()),
@@ -299,7 +302,7 @@ namespace IMS.Forms.Inventory.Products
                 tbBarcode.Text = product.Barcode;
                 tbBrand.Text = product.Brand;
                 tbDescription.Text = product.Description;
-                tbLabelCode.Text = product.Label;
+                //tbLabelCode.Text = product.Label;
                 tbManufacturer.Text = product.Manufacturer;
                 tbProductName.Text = product.Name;
                 tbSKU.Text = product.SKU;
@@ -441,13 +444,18 @@ namespace IMS.Forms.Inventory.Products
             cbUom.DisplayMember = "Name";
         }
 
-        private void PopulateSupplier()
-        {
-            var suppliers = _supplierService.GetSupplierListForCombo();
-            cbSupplier.DataSource = suppliers;
-            cbSupplier.ValueMember = "Id";
-            cbSupplier.DisplayMember = "Name";
-        }
+        //private void PopulateSupplier()
+        //{
+        //    var includeSupplierList = new int[1];
+        //    if (this._product != null)
+        //    {
+        //        includeSupplierList[0] = _product.UserId
+        //    }
+        //    var suppliers = _supplierService.GetUserListForCombo(ViewModel.Enums.UserTypeEnum.Supplier, null);
+        //    cbSupplier.DataSource = suppliers;
+        //    cbSupplier.ValueMember = "Id";
+        //    cbSupplier.DisplayMember = "Name";
+        //}
 
 
         #endregion

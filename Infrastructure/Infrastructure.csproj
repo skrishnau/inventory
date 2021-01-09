@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202101081808372_Init_Migration.Designer.cs">
       <DependentUpon>202101081808372_Init_Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101090712531_ProductTableLabelRemoved.cs" />
+    <Compile Include="Migrations\202101090712531_ProductTableLabelRemoved.Designer.cs">
+      <DependentUpon>202101090712531_ProductTableLabelRemoved.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -106,6 +110,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101081808372_Init_Migration.resx">
       <DependentUpon>202101081808372_Init_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101090712531_ProductTableLabelRemoved.resx">
+      <DependentUpon>202101090712531_ProductTableLabelRemoved.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,15 +13,16 @@ namespace Service.Core.Users
     {
         void AddOrUpdateUser(UserModel userModel);
 
-        List<UserModel> GetUserList(UserTypeEnum userType);
-
+        UserModel GetUser(int supplierId);
         void DeleteUser(UserModel user);
-
-        void AddOrUpdateSupplier(UserModel supplierModel);
-
-        UserModel GetSupplier(int supplierId);
-
-
-        List<IdNamePair> GetSupplierListForCombo();
+        List<UserModel> GetUserList(UserTypeEnum userType);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userType"></param>
+        /// <param name="includeUserList">Includes the given users even if Use property is false</param>
+        /// <returns></returns>
+        List<IdNamePair> GetUserListForCombo(UserTypeEnum userType, int[] includeUserList);
     }
 }

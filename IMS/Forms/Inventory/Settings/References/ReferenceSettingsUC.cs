@@ -99,26 +99,30 @@ namespace IMS.Forms.Inventory.Settings.References
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            var purchaseBillSetting = new BillSettingsModel()
+            var dialogResult = MessageBox.Show(this, "This will reset the current counter to zero. Are you sure to save?", "Save", MessageBoxButtons.YesNo);
+            if(dialogResult == DialogResult.Yes)
             {
-                Body = tbPurchaseBody.Text,
-                Prefix = tbPurchasePrefix.Text,
-                Suffix = tbPurchaseSuffix.Text,
-                OrderType = ViewModel.Enums.OrderTypeEnum.Purchase,
-            };
-            var saleBillSetting = new BillSettingsModel()
-            {
-                Body = tbSaleBody.Text,
-                Prefix = tbSalePrefix.Text,
-                Suffix = tbSaleSuffix.Text,
-                OrderType = ViewModel.Enums.OrderTypeEnum.Sale,
-            };
-            var list = new List<BillSettingsModel> { purchaseBillSetting, saleBillSetting };
-            if (_appSettingService.SaveBillSetting(list))
-                PopupMessage.ShowSaveSuccessMessage();
-            else
-                PopupMessage.ShowErrorMessage("Couldn't save");
-            this.Focus();
+                var purchaseBillSetting = new BillSettingsModel()
+                {
+                    Body = tbPurchaseBody.Text,
+                    Prefix = tbPurchasePrefix.Text,
+                    Suffix = tbPurchaseSuffix.Text,
+                    OrderType = ViewModel.Enums.OrderTypeEnum.Purchase,
+                };
+                var saleBillSetting = new BillSettingsModel()
+                {
+                    Body = tbSaleBody.Text,
+                    Prefix = tbSalePrefix.Text,
+                    Suffix = tbSaleSuffix.Text,
+                    OrderType = ViewModel.Enums.OrderTypeEnum.Sale,
+                };
+                var list = new List<BillSettingsModel> { purchaseBillSetting, saleBillSetting };
+                if (_appSettingService.SaveBillSetting(list))
+                    PopupMessage.ShowSaveSuccessMessage();
+                else
+                    PopupMessage.ShowErrorMessage("Couldn't save");
+                this.Focus();
+            }
         }
     }
 }

@@ -34,6 +34,8 @@ namespace ViewModel.Core.Inventory
         public string ParentProduct { get; set; }
         public int CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
         public string Category { get; set; }
+        public int UserId { get; set; }
+        public string User { get; set; }
 
         // ============== Package ============== //
         public int PackageId { get; set; }
@@ -69,12 +71,13 @@ namespace ViewModel.Core.Inventory
         public decimal CommittedQuantity { get; set; }
         public decimal OnOrderQuantity { get; set; }
         // ------------ Price -------------- //
+        
         public decimal SupplyPrice { get; set; }
         public decimal MarkupPercent { get; set; } // percent to keep for ourselves
         public decimal RetailPrice { get; set; }
 
         // ============= Extra Information ============= //
-        public string Label { get; set; }
+        //public string Label { get; set; }
         public string Manufacturer { get; set; }
         public string Brand { get; set; }
         public string Description { get; set; }

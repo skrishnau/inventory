@@ -175,15 +175,15 @@ namespace Service.Core.Settings
                     }
 
                     //for Body
-                    var startKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
-                    var startEntity = _context.AppSetting.FirstOrDefault(x => x.Name == startKey);
+                    var bodyKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
+                    var startEntity = _context.AppSetting.FirstOrDefault(x => x.Name == bodyKey);
                     if (startEntity == null)
                     {
                         var start = new AppSetting()
                         {
-                            Name = startKey,
+                            Name = bodyKey,
                             CreatedAt = DateTime.Now,
-                            DisplayName = startKey,
+                            DisplayName = bodyKey,
                             Group = "Bill",
                             UpdatedAt = DateTime.Now,
                             Value = model.Body,
@@ -197,6 +197,27 @@ namespace Service.Core.Settings
                         startEntity.Value = model.Body;
                     }
 
+                    // counter
+                    var counterKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
+                    var counterEntity = _context.AppSetting.FirstOrDefault(x => x.Name == counterKey);
+                    if (counterEntity == null)
+                    {
+                        var start = new AppSetting()
+                        {
+                            Name = counterKey,
+                            CreatedAt = DateTime.Now,
+                            DisplayName = counterKey,
+                            Group = "Bill",
+                            UpdatedAt = DateTime.Now,
+                            Value = "0",
+                        };
+                        _context.AppSetting.Add(start);
+                    }
+                    else
+                    {
+                        counterEntity.UpdatedAt = DateTime.Now;
+                        counterEntity.Value = "0";
+                    }
 
                 }
                 _context.SaveChanges();
