@@ -105,7 +105,7 @@ namespace Service.Core.Settings
                 if (currentIndexEntity != null)
                 {
                     long currentIndex;
-                    if (long.TryParse(bodyEntity.Value, out currentIndex))
+                    if (long.TryParse(currentIndexEntity.Value, out currentIndex))
                         model.CurrentIndex = currentIndex;
                 }
                 model.ReceiptNo = GetReceiptNumber(model, model.CurrentIndex + 1);
@@ -228,7 +228,7 @@ namespace Service.Core.Settings
         public bool IncrementBillIndex(OrderTypeEnum orderType)
         {
             var sett = GetBillSettings(orderType);
-            return SaveCurrentIndex(sett.CurrentIndex, orderType);
+            return SaveCurrentIndex(sett.CurrentIndex + 1, orderType);
         }
 
         public bool SaveCurrentIndex(long currentIndex, OrderTypeEnum orderType)

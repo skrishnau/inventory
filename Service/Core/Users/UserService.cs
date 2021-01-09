@@ -91,12 +91,14 @@ namespace Service.Core.Users
         // includeUserList : includes the given users even if Use property is false
         public List<IdNamePair> GetUserListForCombo(UserTypeEnum userType, int[] includeUserList)
         {
+            if (includeUserList == null)
+                includeUserList = new int[0];
             using (var _context = new DatabaseContext())
             {
                 var query = GetUserQueryable(_context, userType);
 
                 return query
-                    .Where(x => x.Use || (!x.Use && includeUserList != null && includeUserList.Contains(x.Id)))
+                    .Where(x => x.Use || (!x.Use && includeUserList.Contains(x.Id)))
                     .OrderBy(x => x.Name)
                     .Select(x => new IdNamePair()
                     {
