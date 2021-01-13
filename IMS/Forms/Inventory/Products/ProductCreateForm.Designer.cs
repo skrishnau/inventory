@@ -826,7 +826,7 @@
             this.tabProperties.Location = new System.Drawing.Point(4, 22);
             this.tabProperties.Name = "tabProperties";
             this.tabProperties.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProperties.Size = new System.Drawing.Size(770, 283);
+            this.tabProperties.Size = new System.Drawing.Size(791, 286);
             this.tabProperties.TabIndex = 7;
             this.tabProperties.Text = "Properties";
             this.tabProperties.UseVisualStyleBackColor = true;
@@ -836,10 +836,10 @@
             this.gbProductType.Controls.Add(this.tableLayoutPanel4);
             this.gbProductType.Controls.Add(this.label25);
             this.gbProductType.Dock = System.Windows.Forms.DockStyle.Right;
-            this.gbProductType.Location = new System.Drawing.Point(405, 150);
+            this.gbProductType.Location = new System.Drawing.Point(426, 150);
             this.gbProductType.Name = "gbProductType";
             this.gbProductType.Padding = new System.Windows.Forms.Padding(10, 10, 10, 3);
-            this.gbProductType.Size = new System.Drawing.Size(362, 130);
+            this.gbProductType.Size = new System.Drawing.Size(362, 133);
             this.gbProductType.TabIndex = 37;
             this.gbProductType.TabStop = false;
             this.gbProductType.Text = "Product Type";
@@ -864,16 +864,16 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.63218F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.36781F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(342, 91);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(342, 94);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // label24
             // 
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label24.Enabled = false;
-            this.label24.Location = new System.Drawing.Point(230, 33);
+            this.label24.Location = new System.Drawing.Point(230, 34);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(108, 57);
+            this.label24.Size = new System.Drawing.Size(108, 59);
             this.label24.TabIndex = 7;
             this.label24.Text = "A composite contains one or more standard Products. It has one SKU but adjusts in" +
     "ventory level for each standard product";
@@ -881,9 +881,9 @@
             // label22
             // 
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(4, 33);
+            this.label22.Location = new System.Drawing.Point(4, 34);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(106, 57);
+            this.label22.Size = new System.Drawing.Size(106, 59);
             this.label22.TabIndex = 5;
             this.label22.Text = "This product has one SKU with its own inventory";
             // 
@@ -903,9 +903,9 @@
             // 
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Enabled = false;
-            this.label23.Location = new System.Drawing.Point(117, 33);
+            this.label23.Location = new System.Drawing.Point(117, 34);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(106, 57);
+            this.label23.Size = new System.Drawing.Size(106, 59);
             this.label23.TabIndex = 6;
             this.label23.Text = "This product has different attributes, like, size, color. Each variant has uinque" +
     " SKU and inventory level";
@@ -940,7 +940,7 @@
             this.label25.AutoSize = true;
             this.label25.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label25.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label25.Location = new System.Drawing.Point(10, 101);
+            this.label25.Location = new System.Drawing.Point(10, 104);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(365, 13);
             this.label25.TabIndex = 8;
@@ -957,7 +957,7 @@
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(764, 147);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(785, 147);
             this.tableLayoutPanel9.TabIndex = 36;
             // 
             // groupBox1
@@ -966,7 +966,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(376, 141);
+            this.groupBox1.Size = new System.Drawing.Size(386, 141);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inventory";
@@ -995,7 +995,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(370, 122);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(380, 122);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label15
@@ -1012,7 +1012,7 @@
             this.chkIsBuy.AutoSize = true;
             this.chkIsBuy.Checked = true;
             this.chkIsBuy.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIsBuy.Location = new System.Drawing.Point(188, 3);
+            this.chkIsBuy.Location = new System.Drawing.Point(193, 3);
             this.chkIsBuy.Name = "chkIsBuy";
             this.chkIsBuy.Size = new System.Drawing.Size(15, 14);
             this.chkIsBuy.TabIndex = 7;
@@ -1021,7 +1021,7 @@
             // chkIsBuild
             // 
             this.chkIsBuild.AutoSize = true;
-            this.chkIsBuild.Location = new System.Drawing.Point(188, 27);
+            this.chkIsBuild.Location = new System.Drawing.Point(193, 27);
             this.chkIsBuild.Name = "chkIsBuild";
             this.chkIsBuild.Size = new System.Drawing.Size(15, 14);
             this.chkIsBuild.TabIndex = 8;
@@ -1032,7 +1032,7 @@
             this.chkIsSell.AutoSize = true;
             this.chkIsSell.Checked = true;
             this.chkIsSell.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIsSell.Location = new System.Drawing.Point(188, 51);
+            this.chkIsSell.Location = new System.Drawing.Point(193, 51);
             this.chkIsSell.Name = "chkIsSell";
             this.chkIsSell.Size = new System.Drawing.Size(15, 14);
             this.chkIsSell.TabIndex = 9;
@@ -1041,7 +1041,7 @@
             // cbWarehouse
             // 
             this.cbWarehouse.FormattingEnabled = true;
-            this.cbWarehouse.Location = new System.Drawing.Point(188, 99);
+            this.cbWarehouse.Location = new System.Drawing.Point(193, 99);
             this.cbWarehouse.Name = "cbWarehouse";
             this.cbWarehouse.Size = new System.Drawing.Size(140, 21);
             this.cbWarehouse.TabIndex = 12;
@@ -1059,7 +1059,7 @@
             // chkIsNotMovable
             // 
             this.chkIsNotMovable.AutoSize = true;
-            this.chkIsNotMovable.Location = new System.Drawing.Point(188, 75);
+            this.chkIsNotMovable.Location = new System.Drawing.Point(193, 75);
             this.chkIsNotMovable.Name = "chkIsNotMovable";
             this.chkIsNotMovable.Size = new System.Drawing.Size(15, 14);
             this.chkIsNotMovable.TabIndex = 10;
@@ -1100,7 +1100,7 @@
             this.tabDescription.Location = new System.Drawing.Point(4, 22);
             this.tabDescription.Name = "tabDescription";
             this.tabDescription.Padding = new System.Windows.Forms.Padding(10);
-            this.tabDescription.Size = new System.Drawing.Size(770, 283);
+            this.tabDescription.Size = new System.Drawing.Size(791, 286);
             this.tabDescription.TabIndex = 6;
             this.tabDescription.Text = "Description";
             this.tabDescription.UseVisualStyleBackColor = true;
@@ -1112,7 +1112,7 @@
             this.pnlVariants.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVariants.Location = new System.Drawing.Point(10, 173);
             this.pnlVariants.Name = "pnlVariants";
-            this.pnlVariants.Size = new System.Drawing.Size(750, 100);
+            this.pnlVariants.Size = new System.Drawing.Size(771, 103);
             this.pnlVariants.TabIndex = 2;
             this.pnlVariants.Visible = false;
             // 
@@ -1127,7 +1127,7 @@
             this.dgvVariants.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVariants.Location = new System.Drawing.Point(0, 31);
             this.dgvVariants.Name = "dgvVariants";
-            this.dgvVariants.Size = new System.Drawing.Size(750, 69);
+            this.dgvVariants.Size = new System.Drawing.Size(771, 72);
             this.dgvVariants.TabIndex = 2;
             // 
             // colVariantId
@@ -1161,13 +1161,13 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(750, 31);
+            this.panel8.Size = new System.Drawing.Size(771, 31);
             this.panel8.TabIndex = 1;
             // 
             // btnAddAttribute
             // 
             this.btnAddAttribute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddAttribute.Location = new System.Drawing.Point(621, 4);
+            this.btnAddAttribute.Location = new System.Drawing.Point(642, 4);
             this.btnAddAttribute.Name = "btnAddAttribute";
             this.btnAddAttribute.Size = new System.Drawing.Size(114, 23);
             this.btnAddAttribute.TabIndex = 1;
@@ -1191,7 +1191,7 @@
             this.tbDescription.Location = new System.Drawing.Point(10, 31);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(750, 142);
+            this.tbDescription.Size = new System.Drawing.Size(771, 142);
             this.tbDescription.TabIndex = 0;
             // 
             // label14
@@ -1199,7 +1199,7 @@
             this.label14.Dock = System.Windows.Forms.DockStyle.Top;
             this.label14.Location = new System.Drawing.Point(10, 10);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(750, 21);
+            this.label14.Size = new System.Drawing.Size(771, 21);
             this.label14.TabIndex = 1;
             this.label14.Text = "Desccription";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

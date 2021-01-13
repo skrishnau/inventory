@@ -39,7 +39,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colProductId = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            //this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouseId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,7 +103,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colId,
             this.colCheck,
             this.colProductId,
-           // this.colProduct,
+            this.colProduct,
             this.colSKU,
             this.colInStockQuantity,
             this.colOnHoldQuantity,
@@ -169,11 +169,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // 
             // colProduct
             // 
-            //this.colProduct.DataPropertyName = "Product";
-            //this.colProduct.HeaderText = "Product";
-            //this.colProduct.Name = "colProduct";
-            //this.colProduct.Visible = false;
-            //this.colProduct.Width = 150;
+            this.colProduct.DataPropertyName = "Product";
+            this.colProduct.HeaderText = "Product";
+            this.colProduct.Name = "colProduct";
+            this.colProduct.Visible = false;
+            this.colProduct.Width = 150;
             // 
             // colSKU
             // 
@@ -496,12 +496,17 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             SetEditMode(forEditMode);
 
-            colProductId.Visible = true;
+            //colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colRate.Visible = true;
             colTotal.Visible = true;
             colPackageId.Visible = true;
+            colProduct.Visible = true;
+            //IgnoreColumnsForErrorList = new List<DataGridViewColumn>
+            //{
+            //    colRate, colInStockQuantity, colOnHoldQuantity, colLotNumber,
+            //};
             HideUnusedDefaults();
         }
 
@@ -688,7 +693,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewTextBoxColumn colId;
         public System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
         public System.Windows.Forms.DataGridViewComboBoxColumn colProductId;
-       // public System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
+        public System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         public System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
 
 

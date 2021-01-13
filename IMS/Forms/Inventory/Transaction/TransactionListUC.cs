@@ -15,6 +15,7 @@ using ViewModel.Core.Orders;
 using SimpleInjector.Lifestyles;
 using Service.Core.Inventory;
 using IMS.Forms.Inventory.Payment;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -26,11 +27,13 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
 
-        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
+        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
         {
             _orderService = orderService;
             _inventoryService = inventoryService;
+            _productService = productService;
             _orderType = orderType; //OrderTypeEnum.Sale;//
             _listener = listener;
 
@@ -40,7 +43,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void OrderListUC_Load(object sender, EventArgs e)
         {
-            dgvItems.InitializeGridViewControls(_inventoryService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService);
             dgvItems.DesignForTransaction(false);
 
             this.Dock = DockStyle.Fill;

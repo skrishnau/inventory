@@ -88,11 +88,11 @@ namespace DTO.Core.Inventory
             entity.OrderId = model.OrderId;
             entity.Rate = model.Rate;
             entity.Reference = model.Reference;
-            entity.SupplierId = model.SupplierId;
+            entity.SupplierId = model.SupplierId == 0 ? null : model.SupplierId;
             entity.Total = model.Total;
             entity.UnitQuantity = model.UnitQuantity;
-            entity.UomId = model.UomId;
-            entity.WarehouseId = model.WarehouseId;
+            entity.UomId = model.UomId == 0 ? null : model.UomId;
+            entity.WarehouseId = model.WarehouseId == 0 ? null : model.WarehouseId;
             return entity;
         }
 

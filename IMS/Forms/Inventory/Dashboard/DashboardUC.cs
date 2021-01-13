@@ -14,19 +14,22 @@ using ViewModel.Core.Orders;
 using Service.Core.Orders;
 using SimpleInjector.Lifestyles;
 using Service.Core.Settings;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
     public partial class DashboardUC : UserControl
     {
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IAppSettingService _appSettingService;
 
-        public DashboardUC(IInventoryService inventoryService, IOrderService orderService, IAppSettingService appSettingService, IDatabaseChangeListener listener)
+        public DashboardUC(IInventoryService inventoryService, IProductService productService, IOrderService orderService, IAppSettingService appSettingService, IDatabaseChangeListener listener)
         {
             _inventoryService = inventoryService;
+            _productService = productService;
             _orderService = orderService;
             _appSettingService = appSettingService;
 
@@ -185,7 +188,7 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void PopulateUnderstockProducts()
         {
-            var products = _inventoryService.GetUnderStockProducts();
+            var products = _productService.GetUnderStockProducts();
             lbUnderStockProducts.DataSource = products;
             lblTopUnderstockProducts.Text = "Understock Products - " + products.Count;
             lbUnderStockProducts.DisplayMember = "Name";

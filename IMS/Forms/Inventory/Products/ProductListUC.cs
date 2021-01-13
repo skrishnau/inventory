@@ -15,6 +15,7 @@ using ViewModel.Core.Inventory;
 using IMS.Forms.Common.Display;
 using Service.Listeners;
 using Service.DbEventArgs;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -22,7 +23,7 @@ namespace IMS.Forms.Inventory.Products
     {
         public event EventHandler<BaseEventArgs<ProductModel>> RowSelected;
 
-        private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IDatabaseChangeListener _listener;
 
         private ProductModel _selectedProduct;
@@ -30,9 +31,9 @@ namespace IMS.Forms.Inventory.Products
 
         private List<ProductModel> _productList;
 
-        public ProductListUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
+        public ProductListUC(IProductService inventoryService, IDatabaseChangeListener listener)
         {
-            this._inventoryService = inventoryService;
+            this._productService = inventoryService;
             this._listener = listener;
 
             InitializeComponent();
@@ -186,7 +187,7 @@ namespace IMS.Forms.Inventory.Products
         private void PopulateProductData()
         {
             dgvProductList.AutoGenerateColumns = false;
-            _productList = _inventoryService.GetProductListForGridView();
+            _productList = _productService.GetProductListForGridView();
             dgvProductList.DataSource = _productList;
             //dgvProductList.ClearSelection();
             //foreach (DataGridViewRow row in dgvProductList.Rows)

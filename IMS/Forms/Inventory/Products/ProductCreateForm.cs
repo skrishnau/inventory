@@ -12,6 +12,7 @@ using Service.Core.Business;
 using IMS.Forms.Common.Validations;
 using IMS.Forms.Inventory.Categories;
 using Service.Core.Users;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -24,6 +25,7 @@ namespace IMS.Forms.Inventory.Products
         public readonly static string COL_NAME_PREFIX = "col";
 
         // references
+        private readonly IProductService _productService;
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
@@ -37,22 +39,25 @@ namespace IMS.Forms.Inventory.Products
         // track the start index of dynamic attributes
         private List<ProductAttributeModel> _productAttributes = new List<ProductAttributeModel>();
 
-        public ProductCreateForm(IInventoryService inventoryService, IDatabaseChangeListener listener, IBusinessService businessService, IUserService supplierService)
+        public ProductCreateForm(IProductService productService, IInventoryService inventoryService, IDatabaseChangeListener listener, IBusinessService businessService, IUserService supplierService)
         {
+            _productService = productService;
             _inventoryService = inventoryService;
             _businessService = businessService;
             _supplierService = supplierService;
             _listener = listener;
 
             InitializeComponent();
-            InitializeEvents();
-            InitializeDatabaseChangeListeners();
+
 
             this.Load += ProductCreate_Load;
         }
 
         private void ProductCreate_Load(object sender, EventArgs e)
         {
+            InitializeEvents();
+            InitializeDatabaseChangeListeners();
+
             numSupplyPrice.Maximum = Int32.MaxValue;
             numRetailPrice.Maximum = Int32.MaxValue;
             // active control
@@ -84,7 +89,7 @@ namespace IMS.Forms.Inventory.Products
 
             var requiredControls = new Control[]
             {
-                cbCategory, tbProductName, tbSKU, cbPackage, cbUom, cbWarehouse
+                cbCategory, tbProductName, tbSKU, cbPackage, //cbUom, //cbWarehouse
             };
             _requiredValidator = new RequiredFieldValidator(errorProvider1, requiredControls);
             var greaterControls = new Control[]
@@ -123,12 +128,16 @@ namespace IMS.Forms.Inventory.Products
             }
 
             // since category combo displays text only and doesn't hold id, hence get the category from db
-            var category = _inventoryService.GetCategory(cbCategory.SelectedItem.ToString());
+            var category = _productService.GetCategory(cbCategory.SelectedItem.ToString());
+            var uomId = 0;
+            var warehouseId = 0;
+            int.TryParse(cbUom.SelectedValue as string, out uomId);
+            int.TryParse(cbWarehouse.SelectedValue as string, out warehouseId);
             //var variants = GetVariants();
             var product = new ProductModel()
             {
                 Id = _productId,
-               // Brands = GetBrands(),
+                // Brands = GetBrands(),
                 CategoryId = category.Id,
                 ReorderPoint = numReorderPoint.Value,
                 ReorderAlert = true,
@@ -138,7 +147,7 @@ namespace IMS.Forms.Inventory.Products
                 // Variants = variants,
                 AttributesJSON = "",
                 Barcode = tbBarcode.Text,
-                BaseUomId = int.Parse(cbUom.SelectedValue.ToString()),
+                BaseUomId = uomId == 0 ? null : (int?)uomId,
                 Brand = tbBrand.Text,
                 Description = tbDescription.Text,
                 EOQ = numEOQ.Value,
@@ -166,11 +175,11 @@ namespace IMS.Forms.Inventory.Products
                 SupplyPrice = numSupplyPrice.Value,
                 UnitGrossWeight = numUnitGrossWeight.Value,
                 UnitsInPackage = numUnitsInPackage.Value,
-                WarehouseId = int.Parse(cbWarehouse.SelectedValue.ToString()),
+                WarehouseId = warehouseId == 0 ? null : (int?)warehouseId,
                 
             };
             product.ProductAttributes = _productAttributes;
-            _inventoryService.AddUpdateProduct(product);
+            _productService.AddUpdateProduct(product);
             PopupMessage.ShowSaveSuccessMessage();
             this.Close();
 
@@ -278,7 +287,7 @@ namespace IMS.Forms.Inventory.Products
         {
             _productId = productId;
             // get the product
-            _product = _inventoryService.GetProductForEdit(productId);
+            _product = _productService.GetProductForEdit(productId);
 
             // SetDataForEdit(_product);
         }
@@ -340,7 +349,7 @@ namespace IMS.Forms.Inventory.Products
             cbCategory.Items.Clear();
             cbCategory.FlatStyle = FlatStyle.Popup;
             cbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            var categories = _inventoryService.GetCategoryList(null);
+            var categories = _productService.GetCategoryList(null);
             //cbCategory.ValueMember = "Id";
             //cbCategory.DisplayMember = "Name";
             AddCategoryToCombo(null, null, null);
@@ -352,7 +361,7 @@ namespace IMS.Forms.Inventory.Products
         {
             if (category != null)
                 cbCategory.Items.Add(spaces + category.Name);
-            var subCategories = _inventoryService.GetCategoryList(categoryId);
+            var subCategories = _productService.GetCategoryList(categoryId);
             foreach (var sub in subCategories)
             {
                 AddCategoryToCombo(sub.Id, sub, spaces == null ? "" : spaces + "   ");

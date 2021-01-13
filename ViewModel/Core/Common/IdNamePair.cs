@@ -19,8 +19,17 @@ namespace ViewModel.Core.Common
             Name = name;
         }
 
+        public IdNamePair(int id, string name, string extraValue)
+        {
+            Id = id;
+            Name = name;
+            ExtraValue = extraValue;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
+        // extra value if needed
+        public string ExtraValue { get; set; }
 
         public static IdNamePair Instance { get { return new IdNamePair(); } }
     }

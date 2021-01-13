@@ -13,6 +13,7 @@ using IMS.Forms.Common.Display;
 using Service.Core.Business;
 using ViewModel.Core.Business;
 using ViewModel.Core.Common;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Units.Details
 {
@@ -20,16 +21,19 @@ namespace IMS.Forms.Inventory.Units.Details
     {
         private readonly IDatabaseChangeListener _listener;
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IBusinessService _businessService;
 
       //  private HeaderTemplate _header;
 
         public WarehouseProductListUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
+            IProductService productService,
             IBusinessService businessService)
         {
             _listener = listener;
             _inventoryService = inventoryService;
+            _productService = productService;
             _businessService = businessService;
 
             InitializeComponent();
@@ -106,7 +110,7 @@ namespace IMS.Forms.Inventory.Units.Details
 
         private void PopulateProducts()
         {
-            var products = _inventoryService.GetProductListForCombo();
+            var products = _productService.GetProductListForCombo();
             var allProduct = new IdNamePair { Id = 0, Name = " ---- All ---- " };
             products.Insert(0, allProduct);
             cbProduct.DataSource = products;

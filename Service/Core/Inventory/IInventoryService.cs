@@ -48,14 +48,6 @@ namespace Service.Core.Inventory
 
         #region Product
 
-        List<IdNamePair> GetProductListForCombo();
-        List<ProductModel> GetProductListForGridView();
-        ProductModel GetProduct(int productId);
-        ProductModel GetProductForEdit(int productId);
-        ProductModel GetProductBySKU(string sku);
-        ProductModel GetProductById(int id);
-        List<IdNamePair> GetUnderStockProducts();
-        void AddUpdateProduct(ProductModel product);
        // void DeleteProduct(int id);
 
         #endregion
@@ -68,11 +60,6 @@ namespace Service.Core.Inventory
         #region Category
 
 
-
-        List<CategoryModel> GetCategoryList(int? parentCategoryId);
-        CategoryModel GetCategory(string v);
-        void AddUpdateCategory(CategoryModel category);
-        void DeleteCategory(CategoryModel categoryModel);
 
         #endregion
 

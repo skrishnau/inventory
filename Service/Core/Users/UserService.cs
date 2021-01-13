@@ -79,11 +79,13 @@ namespace Service.Core.Users
             }
         }
 
-        public List<UserModel> GetUserList(UserTypeEnum userType)
+        public List<UserModel> GetUserList(UserTypeEnum userType, string searchName = "")
         {
             using (var _context = new DatabaseContext())
             {
                 var query = GetUserQueryable(_context, userType);
+                if (!string.IsNullOrEmpty(searchName))
+                    query = query.Where(x => x.Name.Contains(searchName));
                 return UserMapper.MapToUserModel(query.OrderBy(x => x.Name));
             }
         }

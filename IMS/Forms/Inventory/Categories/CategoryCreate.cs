@@ -1,4 +1,5 @@
 ﻿using Service.Core.Inventory;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,16 +15,16 @@ namespace IMS.Forms.Inventory.Categories
 {
     public partial class CategoryCreate : Form
     {
-        private readonly IInventoryService _productService;
+        private readonly IProductService _productService;
         private CategoryModel _categoryModel;
         private int? _parentCategoryId;
         private CategoryUpdateType _categoryUpdateType;
 
         // inject in constructor
-        public CategoryCreate(IInventoryService productService)
+        public CategoryCreate(IProductService inventoryService)
         {
             _categoryUpdateType = CategoryUpdateType.ADD_CATEGORY;
-            this._productService = productService;
+            this._productService = inventoryService;
 
             InitializeComponent();
 

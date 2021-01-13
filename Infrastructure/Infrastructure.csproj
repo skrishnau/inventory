@@ -103,6 +103,14 @@
     <Compile Include="Migrations\202101111752174_TransactionAndUserTableUpdated.Designer.cs">
       <DependentUpon>202101111752174_TransactionAndUserTableUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101130819002_ForeignKeysMadeNullableInProduct.cs" />
+    <Compile Include="Migrations\202101130819002_ForeignKeysMadeNullableInProduct.Designer.cs">
+      <DependentUpon>202101130819002_ForeignKeysMadeNullableInProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.cs" />
+    <Compile Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.Designer.cs">
+      <DependentUpon>202101130826068_ForeignKeysMadeNullableInProduct1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +142,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101111752174_TransactionAndUserTableUpdated.resx">
       <DependentUpon>202101111752174_TransactionAndUserTableUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101130819002_ForeignKeysMadeNullableInProduct.resx">
+      <DependentUpon>202101130819002_ForeignKeysMadeNullableInProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.resx">
+      <DependentUpon>202101130826068_ForeignKeysMadeNullableInProduct1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

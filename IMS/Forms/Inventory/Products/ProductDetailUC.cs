@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
 using Service.Core.Inventory;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Products
 {
     public partial class ProductDetailUC : UserControl
     {
-        private readonly IInventoryService _inventoryService;
+        private readonly IProductService _inventoryService;
 
-        public ProductDetailUC(IInventoryService inventoryService)
+        public ProductDetailUC(IProductService inventoryService)
         {
             _inventoryService = inventoryService;
 

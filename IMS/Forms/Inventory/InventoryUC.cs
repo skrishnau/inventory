@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using IMS.Forms.Inventory.InventoryDetail;
 using Service.Core.Inventory;
 using IMS.Forms.Inventory.Reports;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory
 {
@@ -32,6 +33,7 @@ namespace IMS.Forms.Inventory
 
         private readonly IOrderService _orderService;
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IDatabaseChangeListener _listener;
 
         private Transaction.TransactionListUC _transactionListUC;
@@ -43,9 +45,10 @@ namespace IMS.Forms.Inventory
         private Dictionary<string, Button> menuButtonsDictionary = new Dictionary<string, Button>();
 
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IDatabaseChangeListener listener, IInventoryService inventoryService)
+        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService)
         {
             _orderService = orderService;
+            _productService = productService;
             _inventoryService = inventoryService;
             _listener = listener;
             _menubar = menubar;
@@ -521,6 +524,7 @@ namespace IMS.Forms.Inventory
             {
                 _transactionListUC = new Transaction.TransactionListUC(_orderService, 
                     _inventoryService,
+                    _productService,
                     _listener,
                     orderType
                     );

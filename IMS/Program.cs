@@ -35,6 +35,8 @@ using IMS.Forms.Inventory.Orders;
 using IMS.Forms.Inventory.Dashboard;
 using IMS.Forms.Inventory.InventoryDetail;
 using Service.Core.Reports;
+using Service.Interfaces;
+using Service.Core;
 
 namespace IMS
 {
@@ -79,6 +81,7 @@ namespace IMS
             container.Register<IDatabaseChangeListener, DatabaseChangeListener>(Lifestyle.Singleton);
 
             container.Register<IInventoryService, InventoryService>(Lifestyle.Singleton);
+            container.Register<IProductService, ProductService>(Lifestyle.Singleton);
             container.Register<IInventoryUnitService, InventoryUnitService>(Lifestyle.Singleton);
 
             container.Register<IBusinessService, BusinessService>(Lifestyle.Singleton);

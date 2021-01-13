@@ -26,13 +26,13 @@ namespace Infrastructure.Entities.Inventory
         // parent product Id for variants
         public int? ParentProductId { get; set; }
         public virtual Product ParentProduct { get; set; }
-        public int CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
+        public int? CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
         public virtual Category Category { get; set; }
         public bool IsDiscontinued { get; set; }
         // ============== Package ============== //
-        public int PackageId { get; set; }
+        public int? PackageId { get; set; }
         public virtual Package Package { get; set; }
-        public int BaseUomId { get; set; }
+        public int? BaseUomId { get; set; }
         public virtual Uom BaseUom { get; set; }
         public decimal UnitsInPackage { get; set; }
         public decimal UnitNetWeight { get; set; }
@@ -43,7 +43,7 @@ namespace Infrastructure.Entities.Inventory
         public bool IsSell { get; set; }
         public bool IsBuild { get; set; }
         public bool IsNotMovable { get; set; }
-        public int WarehouseId { get; set; }
+        public int? WarehouseId { get; set; }
         public virtual Warehouse Warehouse { get; set; }
 
         // ========= Replenishments ========== //

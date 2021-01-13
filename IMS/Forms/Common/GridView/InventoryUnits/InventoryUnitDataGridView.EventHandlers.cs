@@ -86,7 +86,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     if (e.ColumnIndex == this.colSKU.Index)
                     {
                         // check if the sku is valid
-                        var product = _inventoryService.GetProductBySKU(e.FormattedValue.ToString());
+                        var product = _productService.GetProductBySKU(e.FormattedValue.ToString());
                         if (product == null)
                         {
                             row.Cells[e.ColumnIndex].ErrorText = "Invalid SKU";
@@ -99,6 +99,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
                         }
                     }
+                    else if (e.ColumnIndex == colProduct.Index)
+                    {
+                        var productModel = _productService.GetProductByNameOrSKU(e.FormattedValue as string);
+                        UpdateProductInfo(this.Rows[e.RowIndex], productModel, e.RowIndex, e.ColumnIndex, null);
+                    }
+
                     // handle rate and quantity change to update Total
                     // don't do 'else' here cause supplyPrice and unitQuantity columns are already handeled above
                     if (e.ColumnIndex == colUnitQuantity.Index || e.ColumnIndex == colRate.Index)
@@ -115,25 +121,28 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private void UpdateProductInfo(DataGridViewRow row, ProductModel product,
             int currentRowIndex, int currentColumnIndex, object formattedValue)
         {
-            row.Cells[this.colProductId.Index].Value = product.Id;
-            // row.Cells[this.colProduct.Index].Value = product.Name;
-            row.Cells[this.colSKU.Index].Value = product.SKU;
-            switch (_movementType)
+            if (product != null)
             {
-                case ViewModel.Enums.MovementTypeEnum.SOIssueEditItems:
-                    row.Cells[this.colRate.Index].Value = product.RetailPrice;
-                    break;
-                case ViewModel.Enums.MovementTypeEnum.POReceiveEditItems:
-                    row.Cells[this.colRate.Index].Value = product.SupplyPrice;
-                    break;
+                row.Cells[this.colProductId.Index].Value = product.Id;
+                row.Cells[this.colProduct.Index].Value = product.Name;
+                row.Cells[this.colSKU.Index].Value = product.SKU;
+                switch (_movementType)
+                {
+                    case ViewModel.Enums.MovementTypeEnum.SOIssueEditItems:
+                        row.Cells[this.colRate.Index].Value = product.RetailPrice;
+                        break;
+                    case ViewModel.Enums.MovementTypeEnum.POReceiveEditItems:
+                        row.Cells[this.colRate.Index].Value = product.SupplyPrice;
+                        break;
+                }
+                row.Cells[this.colPackageId.Index].Value = product.PackageId;
+                row.Cells[this.colUomId.Index].Value = product.BaseUomId;
+                row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
+                row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
+                row.Cells[this.colWarehouseId.Index].Value = product.WarehouseId;
+                row.Cells[this.colWarehouse.Index].Value = product.Warehouse;
+                UpdateTotalColumn(currentRowIndex, currentColumnIndex, formattedValue);
             }
-            row.Cells[this.colPackageId.Index].Value = product.PackageId;
-            row.Cells[this.colUomId.Index].Value = product.BaseUomId;
-            row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
-            row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
-            row.Cells[this.colWarehouseId.Index].Value = product.WarehouseId;
-            row.Cells[this.colWarehouse.Index].Value = product.Warehouse;
-            UpdateTotalColumn(currentRowIndex, currentColumnIndex, formattedValue);
         }
 
         //
@@ -215,6 +224,17 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 comboBox.SelectedIndexChanged -= ProductColumnComboSelectionChanged;
                 comboBox.SelectedIndexChanged += ProductColumnComboSelectionChanged;
             }
+            else if (this.CurrentCell.ColumnIndex == this.colProduct.Index && e.Control is TextBox)
+            {
+                TextBox comboBox = e.Control as TextBox;
+                comboBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.Name).ToArray());
+                //comboBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.ExtraValue).ToArray());
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+                //comboBox.SelectedIndexChanged -= ProductColumnComboSelectionChanged;
+                //comboBox.SelectedIndexChanged += ProductColumnComboSelectionChanged;
+            }
         }
 
         private void ProductColumnComboSelectionChanged(object sender, EventArgs e)
@@ -235,7 +255,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 {
                     var row = this.CurrentRow;
                     var productId = int.Parse(selectedItem.Id.ToString());
-                    var productModel = _inventoryService.GetProductById(productId);
+                    var productModel = _productService.GetProductById(productId);
 
                     UpdateProductInfo(row, productModel, this.CurrentRow.Index, this.colProductId.Index, productId);
                 }

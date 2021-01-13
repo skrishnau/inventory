@@ -8,6 +8,7 @@ using Service.Core.Inventory;
 using Service.Core.Orders;
 using Service.Core.Settings;
 using Service.Core.Users;
+using Service.Interfaces;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using System;
@@ -28,6 +29,7 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IBusinessService _businessService;
         private readonly IOrderService _orderService;
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IAppSettingService _appSettingService;
         private RequiredFieldValidator _requiredFieldValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
@@ -40,6 +42,7 @@ namespace IMS.Forms.Inventory.Transaction
         public TransactionCreateForm(IUserService userService,
             IBusinessService businessService,
             IInventoryService inventoryService,
+            IProductService productService,
             IOrderService purchaseService,
             IDatabaseChangeListener listener,
             IAppSettingService appSettingService)
@@ -49,6 +52,7 @@ namespace IMS.Forms.Inventory.Transaction
             this._userService = userService;
             this._orderService = purchaseService;
             this._inventoryService = inventoryService;
+            this._productService = productService;
             this._appSettingService = appSettingService;
 
             InitializeComponent();
@@ -65,7 +69,7 @@ namespace IMS.Forms.Inventory.Transaction
 
             var order = _orderService.GetOrder(_orderType, _orderId);
 
-            dgvItems.InitializeGridViewControls(_inventoryService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService);
             InitializeValidation();
             InitializeEvents();
             InitializeDataGridView();
@@ -277,6 +281,7 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 PopupMessage.ShowErrorMessage("Couln't save! Please contact admin.");
             }
+            this.Focus();
         }
 
         private OrderModel GetData()
@@ -288,7 +293,8 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 client = cbClient.Text;
             }
-            var items = dgvItems.GetItems();
+            var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId, dgvItems.colUomId };
+            var items = dgvItems.GetItems(ignoreList, false);
             if (items != null)
             {
                 var orderModel = new OrderModel

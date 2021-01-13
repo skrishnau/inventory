@@ -13,7 +13,7 @@ namespace ViewModel.Core.Inventory
         public int ProductId { get; set; }
         public string Product { get; set; }
         public string SKU { get; set; }
-        public int WarehouseId { get; set; }
+        public int? WarehouseId { get; set; }
         public string Warehouse { get; set; }
 
         public int LotNumber { get; set; }
@@ -31,9 +31,9 @@ namespace ViewModel.Core.Inventory
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
         
-        public int UomId { get; set; }
+        public int? UomId { get; set; }
         public string Uom { get; set; }
-        public int PackageId { get; set; }
+        public int? PackageId { get; set; }
         public string Package { get; set; }
         public int? SupplierId { get; set; }
         public string Supplier { get; set; }

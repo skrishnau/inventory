@@ -65,17 +65,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         private void PopulateProduct()
         {
-            var column = this.Columns[this.colProductId.Index] as DataGridViewComboBoxColumn;
-            if (column != null)
+            var productIdColumn = this.Columns[this.colProductId.Index] as DataGridViewComboBoxColumn;
+            if (productIdColumn != null)
             {
-                column.AutoComplete = true;
+                productIdColumn.AutoComplete = true;
                 //var datasource = _productList;//
                 //foreach(var n in datasource.Select(x => x.Name).ToList())
                 //    column.Items.Add(n);
-                column.DataSource = _productList;
-                column.ValueMember = "Id";
-                column.DisplayMember = "Name";
+                productIdColumn.DataSource = _productList;
+                productIdColumn.ValueMember = "Id";
+                productIdColumn.DisplayMember = "Name";
             }
+            
         }
         //
         // Warehouse Population

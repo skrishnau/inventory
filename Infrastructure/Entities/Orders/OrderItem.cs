@@ -37,9 +37,9 @@ namespace Infrastructure.Entities.Orders
         public string Reference { get; set; }
         public string Adjustment { get; set; }
 
-        public int UomId { get; set; }
+        public int? UomId { get; set; }
         public virtual Uom Uom { get; set; }
-        public int PackageId { get; set; }
+        public int? PackageId { get; set; }
         public virtual Package Package { get; set; }
         public int? SupplierId { get; set; }
         public virtual User Supplier { get; set; }

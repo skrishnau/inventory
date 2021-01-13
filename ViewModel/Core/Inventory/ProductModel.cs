@@ -32,15 +32,15 @@ namespace ViewModel.Core.Inventory
         // parent product Id for variants
         public int? ParentProductId { get; set; }
         public string ParentProduct { get; set; }
-        public int CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
+        public int? CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
         public string Category { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public string User { get; set; }
 
         // ============== Package ============== //
-        public int PackageId { get; set; }
+        public int? PackageId { get; set; }
         public string Package { get; set; }
-        public int BaseUomId { get; set; }
+        public int? BaseUomId { get; set; }
         public string BaseUom { get; set; }
         public decimal UnitsInPackage { get; set; }
         public decimal UnitNetWeight { get; set; }
@@ -51,7 +51,7 @@ namespace ViewModel.Core.Inventory
         public bool IsSell { get; set; }
         public bool IsBuild { get; set; }
         public bool IsNotMovable { get; set; }
-        public int WarehouseId { get; set; }
+        public int? WarehouseId { get; set; }
         public string Warehouse { get; set; }
 
         // ========= Replenishments ========== //

@@ -12,17 +12,18 @@ using Service.Core.Inventory;
 using SimpleInjector.Lifestyles;
 using IMS.Forms.Inventory.Create;
 using IMS.Forms.Common.Display;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Categories
 {
     public partial class CategoryListUC : UserControl
     {
-        private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         //private TreeViewCategory treeView;
 
-        public CategoryListUC(IInventoryService inventoryService)
+        public CategoryListUC(IProductService inventoryService)
         {
-            this._inventoryService = inventoryService;
+            this._productService = inventoryService;
 
             InitializeComponent();
             
@@ -82,7 +83,7 @@ namespace IMS.Forms.Inventory.Categories
             if (dialogResult == DialogResult.Yes)
             {
                 // delete
-                _inventoryService.DeleteCategory(categoryModel);
+                _productService.DeleteCategory(categoryModel);
                 PopulateCategoryData();
             }
         }
@@ -107,7 +108,7 @@ namespace IMS.Forms.Inventory.Categories
             // hide the edit control panel if visible
             //treeView.HideUC();
 
-            var categories = _inventoryService.GetCategoryList(null);
+            var categories = _productService.GetCategoryList(null);
 
             treeView.Nodes.Clear();
 

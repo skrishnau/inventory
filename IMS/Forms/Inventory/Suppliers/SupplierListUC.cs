@@ -68,6 +68,12 @@ namespace IMS.Forms.Inventory.Suppliers
             rbAll.CheckedChanged += UserType_CheckedChanged;
             rbCustomer.CheckedChanged += UserType_CheckedChanged;
             rbSupplier.CheckedChanged += UserType_CheckedChanged;
+            btnSearch.Click += BtnSearch_Click;
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            Populate();
         }
 
         private void UserType_CheckedChanged(object sender, EventArgs e)
@@ -148,7 +154,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private void Populate()
         {
             dgvSuppliers.AutoGenerateColumns = false;
-            var supplier = _supplierService.GetUserList(_userType);
+            var supplier = _supplierService.GetUserList(_userType, txtName.Text);
             dgvSuppliers.DataSource = supplier;
         }
 

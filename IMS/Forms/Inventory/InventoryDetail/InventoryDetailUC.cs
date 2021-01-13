@@ -11,6 +11,7 @@ using Service.Core.Inventory;
 using Service.Listeners;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Inventory.Units;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.InventoryDetail
 {
@@ -18,13 +19,15 @@ namespace IMS.Forms.Inventory.InventoryDetail
     {
 
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IDatabaseChangeListener _listener;
 
 
-        public InventoryDetailUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
+        public InventoryDetailUC(IInventoryService inventoryService, IProductService productService, IDatabaseChangeListener listener)
         {
 
             _inventoryService = inventoryService;
+            _productService = productService;
             _listener = listener;
 
             InitializeComponent();
@@ -99,7 +102,7 @@ namespace IMS.Forms.Inventory.InventoryDetail
 
         private void PopulateProductList()
         {
-            var products = _inventoryService.GetProductListForGridView();
+            var products = _productService.GetProductListForGridView();
             dgvProductList.DataSource = products;
         }
 

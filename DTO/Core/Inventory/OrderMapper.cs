@@ -79,6 +79,10 @@ namespace DTO.Core.Inventory
                 .ForMember(x => x.ParentOrder, src => src.Ignore())
                 .ForMember(x => x.OrderItems, src => src.Ignore())
                 .ForMember(x => x.CreatedAt, src => src.Ignore())
+                .ForMember(x => x.UserId, opt => opt.MapFrom(src=> src.UserId == 0 ? null : src.UserId))
+                .ForMember(x => x.WarehouseId, opt => opt.MapFrom(src=> src.WarehouseId == 0 ? null : src.WarehouseId))
+                .ForMember(x => x.ToWarehouseId, opt => opt.MapFrom(src=> src.ToWarehouseId == 0 ? null : src.ToWarehouseId))
+                .ForMember(x => x.ParentOrderId, opt => opt.MapFrom(src=> src.ParentOrderId == 0 ? null : src.ParentOrderId))
                 ;
         }
     }

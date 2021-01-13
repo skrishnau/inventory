@@ -30,7 +30,7 @@ namespace ViewModel.Core.Orders
         public bool IsReceived { get; set; }
         public bool IsHold { get; set; }
 
-        public int PackageId { get; set; }
+        public int? PackageId { get; set; }
         public string Package { get; set; }
         public int? WarehouseId { get; set; }
         public string Warehouse { get; set; }
@@ -42,7 +42,7 @@ namespace ViewModel.Core.Orders
         public string Reference { get; set; }
         public string Adjustment { get; set; }
 
-        public int UomId { get; set; }
+        public int? UomId { get; set; }
         public string Uom { get; set; }
         public int? SupplierId { get; set; }
         public string Supplier { get; set; }

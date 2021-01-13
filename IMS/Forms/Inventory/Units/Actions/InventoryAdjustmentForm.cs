@@ -3,6 +3,7 @@ using Service.Core.Business;
 using Service.Core.Inventory;
 using Service.Core.Inventory.Units;
 using Service.Core.Orders;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace IMS.Forms.Inventory.Units.Actions
     public partial class InventoryAdjustmentForm : Form
     {
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
         private readonly IOrderService _orderService;
@@ -30,18 +32,20 @@ namespace IMS.Forms.Inventory.Units.Actions
         private List<InventoryUnitModel> _selectedInventoryUnits;
 
         public InventoryAdjustmentForm(IInventoryService inventoryService,
+            IProductService productService,
             IBusinessService businessService,
             IOrderService purchaseService,
             IInventoryUnitService inventoryUnitService)
         {
             _inventoryService = inventoryService;
+            _productService = productService;
             _businessService = businessService;
             _orderService = purchaseService;
             _inventoryUnitService = inventoryUnitService;
 
             InitializeComponent();
 
-            dgvInventoryUnit.InitializeGridViewControls(_inventoryService);
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService);
 
             this.Load += InventoryReceiveForm_Load;
         }

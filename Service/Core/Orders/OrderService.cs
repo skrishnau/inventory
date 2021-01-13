@@ -54,7 +54,7 @@ namespace Service.Core.Orders
                     .Include(x => x.OrderItems);
                 if (orderType != OrderTypeEnum.All)
                     purchases = purchases.Where(x => x.OrderType == type);
-                return purchases
+                return purchases.OrderByDescending(x=>x.CompletedDate).ThenByDescending(x=>x.CreatedAt)
                     .AsEnumerable().MapToModel();// OrderMapper.MapToOrderModel(purchases);
             }
         }
@@ -153,6 +153,8 @@ namespace Service.Core.Orders
 
                 SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
 
+                
+
                 if (checkout)
                 {
                     // makechecout
@@ -182,6 +184,7 @@ namespace Service.Core.Orders
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
                 _listener.TriggerOrderUpdateEvent(null, args);
+                _listener.TriggerProductUpdateEvent(null, null);
                 return string.Empty;
             }
         }
@@ -458,12 +461,8 @@ namespace Service.Core.Orders
                 }
                 if (item.ProductId == 0)
                 {
-                    var productEntity = _context.Product.FirstOrDefault(x => x.SKU == item.SKU);
-                    if (productEntity == null)
-                    {
-                        return "Some of the items you provided are invalid!";
-                    }
-                    else
+                    var productEntity = _context.Product.FirstOrDefault(x => x.Name == item.Product || x.SKU == item.Product);
+                    if (productEntity != null)
                     {
                         item.ProductId = productEntity.Id;
                         item.Total = item.Rate * item.UnitQuantity;
@@ -489,6 +488,27 @@ namespace Service.Core.Orders
                 entity = item.MapToEntity(entity);//OrderItemMapper.MapToEntity(item, entity);
                 if (entity.Id == 0)
                 {
+                    if(entity.ProductId == 0)
+                    {
+                        // create prouct 
+                        var product = new Product
+                        {
+                            Use = true,
+                            Name = item.Product,
+                            SKU = item.Product,
+                            CategoryId = null,
+                            BaseUomId = null,
+                            CreatedAt = DateTime.Now,
+                            PackageId = item.PackageId,
+                            WarehouseId = null,
+                            SupplyPrice = poEntity.OrderType == OrderTypeEnum.Purchase.ToString()? item.Rate: 0,
+                            RetailPrice = poEntity.OrderType == OrderTypeEnum.Sale.ToString()? item.Rate: 0,
+                            UpdatedAt = DateTime.Now,
+                            
+                        };
+                        entity.Product = product;
+                        //return "Some of the items you provided are invalid!";
+                    }
                     // add
                     poEntity.OrderItems.Add(entity);
                 }

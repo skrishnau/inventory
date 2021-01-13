@@ -1,5 +1,6 @@
 ﻿using IMS.Forms.Common;
 using Service.Core.Inventory;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,11 @@ namespace IMS.Forms.Inventory.Variants
 {
     public partial class VariantEditForm : Form
     {
-        private IInventoryService _inventoryService;
+        private IProductService _inventoryService;
         private int _id; // edit mode
         private int _productId;
 
-        public VariantEditForm(IInventoryService inventoryService, int productId)
+        public VariantEditForm(IProductService inventoryService, int productId)
         {
             this._inventoryService = inventoryService;
             this._productId = productId;

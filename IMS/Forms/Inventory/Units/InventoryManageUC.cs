@@ -13,6 +13,7 @@ using Service.Core.Inventory.Units;
 using ViewModel.Enums;
 using ViewModel.Core.Common;
 using ViewModel.Core.Business;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -21,6 +22,7 @@ namespace IMS.Forms.Inventory.Units
 
         private readonly IDatabaseChangeListener _listener;
         private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
 
@@ -30,17 +32,19 @@ namespace IMS.Forms.Inventory.Units
 
         public InventoryManageUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
+            IProductService productService,
             IInventoryUnitService inventoryUnitService,
             IBusinessService businessService)
         {
             _listener = listener;
             _inventoryService = inventoryService;
+            _productService = productService;
             _inventoryUnitService = inventoryUnitService;
             _businessService = businessService;
 
             InitializeComponent();
             this.Dock = DockStyle.Fill; ;
-            dgvInventoryUnit.InitializeGridViewControls(_inventoryService);
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService);
 
             this.Load += InventoryUnitListUC_Load;
         }
@@ -142,7 +146,7 @@ namespace IMS.Forms.Inventory.Units
 
         private void PopulateProducts()
         {
-            var products = _inventoryService.GetProductListForCombo();
+            var products = _productService.GetProductListForCombo();
             var allProduct = new IdNamePair { Id = 0, Name = " ---- All ---- " };
             products.Insert(0, allProduct);
             cbProduct.DataSource = products;
