@@ -185,6 +185,7 @@ namespace Service.Core.Orders
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
                 _listener.TriggerOrderUpdateEvent(null, args);
                 _listener.TriggerProductUpdateEvent(null, null);
+                _listener.TriggerPackageUpdateEvent(null, null);
                 return string.Empty;
             }
         }
@@ -443,6 +444,8 @@ namespace Service.Core.Orders
 
         private string SaveOrderItemsWithoutCommit(DatabaseContext _context, Order poEntity, List<OrderItemModel> items)
         {
+            var newProductList = new List<Product>();
+            var newPackageList = new List<Package>();
             if (poEntity == null)
             {
                 return "The Purchase Order doesn't exist.";
@@ -468,6 +471,14 @@ namespace Service.Core.Orders
                         item.Total = item.Rate * item.UnitQuantity;
                     }
                 }
+                if(item.PackageId == 0)
+                {
+                    var packageEntity = _context.Package.FirstOrDefault(x => x.Name == item.Package);
+                    if(packageEntity != null)
+                    {
+                        item.PackageId = packageEntity.Id;
+                    }
+                }
             }
 
             var dbItems = poEntity.OrderItems.Where(x => x.OrderId == poEntity.Id).ToList();
@@ -488,27 +499,57 @@ namespace Service.Core.Orders
                 entity = item.MapToEntity(entity);//OrderItemMapper.MapToEntity(item, entity);
                 if (entity.Id == 0)
                 {
-                    if(entity.ProductId == 0)
+                    if ((entity.PackageId ?? 0) == 0)
                     {
-                        // create prouct 
-                        var product = new Product
+                        var packageInNewList = newPackageList.FirstOrDefault(x => x.Name.Equals(item.Package, StringComparison.OrdinalIgnoreCase));
+                        if (packageInNewList == null)
                         {
-                            Use = true,
-                            Name = item.Product,
-                            SKU = item.Product,
-                            CategoryId = null,
-                            BaseUomId = null,
-                            CreatedAt = DateTime.Now,
-                            PackageId = item.PackageId,
-                            WarehouseId = null,
-                            SupplyPrice = poEntity.OrderType == OrderTypeEnum.Purchase.ToString()? item.Rate: 0,
-                            RetailPrice = poEntity.OrderType == OrderTypeEnum.Sale.ToString()? item.Rate: 0,
-                            UpdatedAt = DateTime.Now,
-                            
-                        };
-                        entity.Product = product;
-                        //return "Some of the items you provided are invalid!";
+                            var package = new Package
+                            {
+                                Use = true,
+                                Name = item.Package,
+                            };
+                            entity.Package = package;
+                            newPackageList.Add(package);
+                        }
+                        else
+                        {
+                            entity.Package = packageInNewList;
+                        }
                     }
+                    if (entity.ProductId == 0)
+                    {
+                        var productInNewList = newProductList.FirstOrDefault(x => x.Name.Equals(item.Product, StringComparison.OrdinalIgnoreCase));
+                        if(productInNewList == null)
+                        {
+                            // create prouct 
+                            var product = new Product
+                            {
+                                Use = true,
+                                Name = item.Product,
+                                SKU = item.Product,
+                                CategoryId = null,
+                                BaseUomId = null,
+                                CreatedAt = DateTime.Now,
+                                //PackageId = entity.PackageId > 0 ? entity.PackageId: 0//item.PackageId,
+                                WarehouseId = null,
+                                SupplyPrice = poEntity.OrderType == OrderTypeEnum.Purchase.ToString() ? item.Rate : 0,
+                                RetailPrice = poEntity.OrderType == OrderTypeEnum.Sale.ToString() ? item.Rate : 0,
+                                UpdatedAt = DateTime.Now,
+                            };
+                            if (entity.PackageId > 0)
+                                product.PackageId = entity.PackageId;
+                            else
+                                product.Package = entity.Package;
+                            entity.Product = product;
+                            newProductList.Add(product);
+                        }
+                        else
+                        {
+                            entity.Product = productInNewList;
+                        }
+                    }
+                    
                     // add
                     poEntity.OrderItems.Add(entity);
                 }

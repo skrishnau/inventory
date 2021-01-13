@@ -11,27 +11,30 @@ using IMS.Forms.Common.Display;
 using ViewModel.Core.Inventory;
 using Service.Core.Inventory;
 using IMS.Forms.Common;
+using Service.Listeners;
 
 namespace IMS.Forms.Inventory.Packages
 {
     public partial class PackageUC : UserControl
     {
+        private readonly IDatabaseChangeListener _listener;
         private readonly IInventoryService _inventoryService;
         private bool _isRowDirty;
 
-        public PackageUC(IInventoryService inventoryService)
+        public PackageUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
             _inventoryService = inventoryService;
+            _listener = listener;
 
             InitializeComponent();
 
-            this.Dock = DockStyle.Fill;
             
             this.Load += PackageUC_Load;
         }
 
         private void PackageUC_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
             //InitializeHeader();
             InitializeEvents();
             PopulatePackageData();
@@ -59,6 +62,12 @@ namespace IMS.Forms.Inventory.Packages
         {
             dgvPackage.RowValidated += DgvPackage_RowValidated;
             dgvPackage.CurrentCellDirtyStateChanged += DgvPackage_CurrentCellDirtyStateChanged;
+            _listener.PackageUpdated += _listener_PackageUpdated;
+        }
+
+        private void _listener_PackageUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PackageModel> e)
+        {
+            PopulatePackageData();
         }
 
         private void DgvPackage_CurrentCellDirtyStateChanged(object sender, EventArgs e)

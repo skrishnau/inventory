@@ -32,8 +32,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private bool isValid = true;
         private MovementTypeEnum _movementType;
 
-        private  IInventoryService _inventoryService;
-        private  IProductService _productService;
+        private IInventoryService _inventoryService;
+        private IProductService _productService;
         private List<DataGridViewColumn> IgnoreColumnsForErrorList = new List<DataGridViewColumn>();
 
         public MovementTypeEnum MovementType { get { return _movementType; } internal set { _movementType = value; } }
@@ -41,6 +41,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private List<string> InvalidColumns = new List<string>();
 
         private List<IdNamePair> _productList;
+        private List<IdNamePair> _packageList;
 
         public InventoryUnitDataGridView()
         {
@@ -63,7 +64,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             _inventoryService = inventoryService;
             _productService = productService;
             _productList = _productService.GetProductListForCombo();
-
+            _packageList = _inventoryService.GetPackageListForCombo();
             //
             // Columns
             //
@@ -116,7 +117,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         #region Get Cell Values
 
-        public List<InventoryUnitModel> GetItems(List<DataGridViewColumn> ignoreColumnsForError = null, bool checkWithInStockQuantity= true)
+        public List<InventoryUnitModel> GetItems(List<DataGridViewColumn> ignoreColumnsForError = null, bool checkWithInStockQuantity = true)
         {
             var isValidAll = true; // store for all items (global indicator)
             this.IgnoreColumnsForErrorList = ignoreColumnsForError ?? new List<DataGridViewColumn>();
@@ -134,7 +135,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var id = GetId(row);
                 var product = GetProduct(row);
 
-                checkWithInStockQuantity = checkWithInStockQuantity && ( _movementType == MovementTypeEnum.DirectIssueAny
+                checkWithInStockQuantity = checkWithInStockQuantity && (_movementType == MovementTypeEnum.DirectIssueAny
                     || _movementType == MovementTypeEnum.DirectIssueInventoryUnit
                     || _movementType == MovementTypeEnum.SOIssue
                     || _movementType == MovementTypeEnum.SOIssueEditItems);
@@ -145,7 +146,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var lotNumber = GetLotNumber(row, null);
                 var reference = GetReference(row);
                 var adjCode = GetAdjustmentCode(row);
-                var packageId = GetPackageId(row);
+                var package = GetPackage(row);
                 var uomId = GetUomId(row);
                 var isHold = row.Cells[colIsHold.Index].Value;
                 var expirationDate = GetDateCellValue(row, colExpirationDate);
@@ -169,7 +170,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         ProductionDate = productionDate,
                         SupplierId = null,
                         ReceiveReceipt = reference,
-                        PackageId = packageId,
+                        PackageId = package.Id,
+                        Package = package.Name,
                         UomId = uomId,
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
                     });
@@ -233,25 +235,25 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var model = new ProductModel();
             var productIdCell = row.Cells[colProductId.Index];
             var productNameCell = row.Cells[colProduct.Index];
-            var productId = 0;
-            string productNameOrSku = "";
-            int.TryParse(productIdCell.Value == null ? "0" : productIdCell.Value.ToString(), out productId);
-            if (productId == 0)
+            if (colProductId.Visible)
             {
-                /*var sku = row.Cells[this.colSKU.Index].Value as string;
-                var product = _inventoryService.GetProductBySKU(sku);
-                productId = product == null ? 0 : product.Id;*/
-                productNameOrSku = productNameCell.Value as string;
+                var productId = 0;
+                int.TryParse(productIdCell.Value == null ? "0" : productIdCell.Value.ToString(), out productId);
+                model.Id = productId;
             }
-            model.Id = productId;
-            model.Name = productNameOrSku;
+            else
+            {
+                string productNameOrSku = productNameCell.Value as string;
+                model.Name = productNameOrSku;
+            }
+
 
             if (IgnoreColumnsForErrorList.Contains(colProductId))
             {
-                return model; //productId;
+                return model; 
             }
             // else set error and set invalid flag
-            if (productId == 0 && string.IsNullOrEmpty(productNameOrSku))
+            if (model.Id == 0 && string.IsNullOrEmpty(model.Name))
             {
                 InvalidColumns.Add("Product");
                 productIdCell.ErrorText = "Invalid Product";
@@ -264,6 +266,42 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 productNameCell.ErrorText = string.Empty;
             }
             return model;//productId;
+        }
+
+        private PackageModel GetPackage(DataGridViewRow row)
+        {
+            var model = new PackageModel();
+            var idCell = row.Cells[colPackageId.Index];
+            var nameCell = row.Cells[colPackage.Index];
+
+            if (colPackageId.Visible)
+            {
+                var packageId = 0;
+                int.TryParse(idCell.Value == null ? "0" : idCell.Value.ToString(), out packageId);
+                model.Id = packageId;
+            }
+            else
+            {
+                model.Name = nameCell.Value as string;
+            }
+
+            if (IgnoreColumnsForErrorList.Contains(colPackageId))
+            {
+                return model;
+            }
+            if (model.Id == 0 && string.IsNullOrEmpty(model.Name))
+            {
+                InvalidColumns.Add("Package");
+                isValid = false;
+                idCell.ErrorText = REQUIRED;
+                nameCell.ErrorText = REQUIRED;
+            }
+            else
+            {
+                idCell.ErrorText = string.Empty;
+                nameCell.ErrorText = string.Empty;
+            }
+            return model;
         }
 
         private decimal GetUnitQuantity(DataGridViewRow row, object formattedValue, bool checkWithInStockQuanity)
@@ -384,28 +422,6 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         {
             var adjCode = row.Cells[this.colReceiveAdjustment.Index].Value;
             return adjCode == null ? "" : adjCode.ToString();
-        }
-
-        private int GetPackageId(DataGridViewRow row)
-        {
-            var cell = row.Cells[colPackageId.Index];
-            var valueValue = cell.Value;// formattedValue == null ? cell.Value : formattedValue;
-            var value = valueValue == null ? 0 : int.Parse(valueValue.ToString());
-            if (IgnoreColumnsForErrorList.Contains(colPackageId))
-            {
-                return value;
-            }
-            if (value == 0)
-            {
-                InvalidColumns.Add("Package");
-                isValid = false;
-                cell.ErrorText = REQUIRED;
-            }
-            else
-            {
-                cell.ErrorText = string.Empty;
-            }
-            return value;
         }
 
         private int GetUomId(DataGridViewRow row)

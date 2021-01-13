@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ViewModel.Core.Users;
+using ViewModel.Enums;
 
 namespace DTO.Core.Inventory
 {
@@ -40,15 +41,23 @@ namespace DTO.Core.Inventory
             foreach (var user in users)
             {
                 var transactions = user.Transactions.ToList();
-                var total = transactions.Sum(x => x.Debit);
-                var paid = transactions.Sum(x => x.Credit);
-                
+                decimal total = 0, paid = 0;
+                if(user.UserType == UserTypeEnum.Customer.ToString())
+                {
+                    total = transactions.Sum(x => x.Debit);
+                    paid = transactions.Sum(x => x.Credit);
+                }
+                else if(user.UserType == UserTypeEnum.Supplier.ToString())
+                {
+                    total = transactions.Sum(x => x.Credit); // incomming stock amount
+                    paid = transactions.Sum(x => x.Debit); // outgoing paid amount
+                }
                 list.Add(MapToUserModel(user, total, paid));
             }
             return list;
         }
 
-        public static UserModel MapToUserModel(User x, decimal debit=0, decimal credit =0)
+        public static UserModel MapToUserModel(User x, decimal totalAmount=0, decimal paidAmount =0)
         {
             return new UserModel()
             {
@@ -74,8 +83,8 @@ namespace DTO.Core.Inventory
                 
                 IsMarried = x.IsMarried,
                 Gender = x.Gender,
-                TotalAmount = debit,
-                PaidAmount = credit,
+                TotalAmount = totalAmount,
+                PaidAmount = paidAmount,
                 
             };
         }

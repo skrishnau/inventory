@@ -42,7 +42,7 @@
             // btnCancel
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCancel.Location = new System.Drawing.Point(85, 0);
+            this.btnCancel.Location = new System.Drawing.Point(95, 0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 9;
@@ -53,7 +53,7 @@
             // 
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSave.Location = new System.Drawing.Point(0, 0);
+            this.btnSave.Location = new System.Drawing.Point(10, 0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 27);
             this.btnSave.TabIndex = 8;
@@ -62,7 +62,7 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(160, 0);
+            this.splitter1.Location = new System.Drawing.Point(170, 0);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(10, 27);
             this.splitter1.TabIndex = 10;
@@ -70,7 +70,7 @@
             // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(75, 0);
+            this.splitter2.Location = new System.Drawing.Point(85, 0);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(10, 27);
             this.splitter2.TabIndex = 11;
@@ -108,6 +108,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(20, 4);
             this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.panel1.Size = new System.Drawing.Size(200, 27);
             this.panel1.TabIndex = 14;
             // 

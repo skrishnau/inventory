@@ -32,6 +32,9 @@
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.rbSupplier = new System.Windows.Forms.RadioButton();
             this.rbCustomer = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,18 +42,17 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemainAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colEdit = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -67,10 +69,12 @@
             this.SupplierName,
             this.Address,
             this.Phone,
+            this.colUserType,
             this.colTotalAmount,
             this.colPaidAmount,
             this.colRemainAmount,
-            this.colUse});
+            this.colUse,
+            this.colEdit});
             this.dgvSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSuppliers.Location = new System.Drawing.Point(0, 85);
             this.dgvSuppliers.Margin = new System.Windows.Forms.Padding(2);
@@ -107,6 +111,31 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(689, 45);
             this.panel3.TabIndex = 5;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(537, 8);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 8;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(329, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Search Name";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(407, 10);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(124, 20);
+            this.txtName.TabIndex = 6;
             // 
             // rbSupplier
             // 
@@ -187,31 +216,6 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Visible = false;
             // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(407, 10);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(124, 20);
-            this.txtName.TabIndex = 6;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(329, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Search Name";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(537, 8);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 8;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
             // listHeaderTemplate1
             // 
             this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -254,12 +258,20 @@
             this.Phone.Name = "Phone";
             this.Phone.ReadOnly = true;
             // 
+            // colUserType
+            // 
+            this.colUserType.DataPropertyName = "UserType";
+            this.colUserType.HeaderText = "Type";
+            this.colUserType.Name = "colUserType";
+            this.colUserType.ReadOnly = true;
+            // 
             // colTotalAmount
             // 
             this.colTotalAmount.DataPropertyName = "TotalAmount";
             this.colTotalAmount.HeaderText = "Total Txn Amount";
             this.colTotalAmount.Name = "colTotalAmount";
             this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Width = 120;
             // 
             // colPaidAmount
             // 
@@ -282,6 +294,14 @@
             this.colUse.Name = "colUse";
             this.colUse.ReadOnly = true;
             this.colUse.Width = 40;
+            // 
+            // colEdit
+            // 
+            this.colEdit.HeaderText = "";
+            this.colEdit.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
+            this.colEdit.Name = "colEdit";
+            this.colEdit.ReadOnly = true;
+            this.colEdit.Width = 30;
             // 
             // SupplierListUC
             // 
@@ -321,9 +341,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SupplierName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemainAmount;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
+        private System.Windows.Forms.DataGridViewImageColumn colEdit;
     }
 }

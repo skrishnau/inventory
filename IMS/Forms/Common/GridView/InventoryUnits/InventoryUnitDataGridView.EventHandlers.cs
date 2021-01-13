@@ -82,8 +82,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 {
                     _isCellDirty = false;
 
-
-                    if (e.ColumnIndex == this.colSKU.Index)
+                    if (e.ColumnIndex == colProduct.Index)
+                    {
+                        var productModel = _productService.GetProductByNameOrSKU(e.FormattedValue as string);
+                        UpdateProductInfo(this.Rows[e.RowIndex], productModel, e.RowIndex, e.ColumnIndex, null);
+                    }
+                    else if (e.ColumnIndex == this.colSKU.Index)
                     {
                         // check if the sku is valid
                         var product = _productService.GetProductBySKU(e.FormattedValue.ToString());
@@ -99,11 +103,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
                         }
                     }
-                    else if (e.ColumnIndex == colProduct.Index)
-                    {
-                        var productModel = _productService.GetProductByNameOrSKU(e.FormattedValue as string);
-                        UpdateProductInfo(this.Rows[e.RowIndex], productModel, e.RowIndex, e.ColumnIndex, null);
-                    }
+
 
                     // handle rate and quantity change to update Total
                     // don't do 'else' here cause supplyPrice and unitQuantity columns are already handeled above
@@ -136,6 +136,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         break;
                 }
                 row.Cells[this.colPackageId.Index].Value = product.PackageId;
+                row.Cells[this.colPackage.Index].Value = product.Package;
                 row.Cells[this.colUomId.Index].Value = product.BaseUomId;
                 row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
                 row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
@@ -226,14 +227,26 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             else if (this.CurrentCell.ColumnIndex == this.colProduct.Index && e.Control is TextBox)
             {
-                TextBox comboBox = e.Control as TextBox;
-                comboBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.Name).ToArray());
+                TextBox textBox = e.Control as TextBox;
+                textBox.AutoCompleteCustomSource.Clear();
+                textBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.Name).ToArray());
                 //comboBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.ExtraValue).ToArray());
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+            else if (this.CurrentCell.ColumnIndex == this.colPackage.Index && e.Control is TextBox)
+            {
+                TextBox textBox = e.Control as TextBox;
+                textBox.AutoCompleteCustomSource.Clear();
+                textBox.AutoCompleteCustomSource.AddRange(_packageList.Select(x => x.Name).ToArray());
+                textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-                //comboBox.SelectedIndexChanged -= ProductColumnComboSelectionChanged;
-                //comboBox.SelectedIndexChanged += ProductColumnComboSelectionChanged;
+            }
+            else
+            {
+                TextBox textBox = e.Control as TextBox;
+                textBox.AutoCompleteCustomSource.Clear();
             }
         }
 

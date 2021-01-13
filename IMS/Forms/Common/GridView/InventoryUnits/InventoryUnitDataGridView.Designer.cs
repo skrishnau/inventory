@@ -60,8 +60,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             this.colUomId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             // this.colUom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            // this.colPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPackageId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplierId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             // this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
@@ -113,7 +113,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
              this.colUomId,
            // this.colUom,
             this.colPackageId,
-           // this.colPackage,
+            this.colPackage,
             this.colPackageQuantity,
             this.colRate,
             this.colTotal,
@@ -259,11 +259,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //// 
             //// colPackage
             //// 
-            //this.colPackage.DataPropertyName = "Package";
-            //this.colPackage.HeaderText = "Package";
-            //this.colPackage.Name = "colPackage";
-            //this.colPackage.Visible = false;
-            //this.colPackage.Width = 40;
+            this.colPackage.DataPropertyName = "Package";
+            this.colPackage.HeaderText = "Package";
+            this.colPackage.Name = "colPackage";
+            this.colPackage.Visible = false;
+            this.colPackage.Width = 70;
             // 
             // colSupplyPrice
             // 
@@ -279,7 +279,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colTotal.HeaderText = "Total";
             this.colTotal.Name = "colTotal";
             this.colTotal.Visible = false;
-            this.colTotal.Width = 70;
+            this.colTotal.Width = 90;
             this.colTotal.ReadOnly = true;
             // 
             // colNetWeight
@@ -495,18 +495,14 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         {
 
             SetEditMode(forEditMode);
-
             //colProductId.Visible = true;
+            colProduct.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colRate.Visible = true;
             colTotal.Visible = true;
-            colPackageId.Visible = true;
-            colProduct.Visible = true;
-            //IgnoreColumnsForErrorList = new List<DataGridViewColumn>
-            //{
-            //    colRate, colInStockQuantity, colOnHoldQuantity, colLotNumber,
-            //};
+            //colPackageId.Visible = true;
+            colPackage.Visible = true;
             HideUnusedDefaults();
         }
 
@@ -711,7 +707,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewComboBoxColumn colUomId;
         //  public System.Windows.Forms.DataGridViewTextBoxColumn colUom;
         public System.Windows.Forms.DataGridViewComboBoxColumn colPackageId;
-        // public System.Windows.Forms.DataGridViewTextBoxColumn colPackage;
+        public System.Windows.Forms.DataGridViewTextBoxColumn colPackage;
         public System.Windows.Forms.DataGridViewComboBoxColumn colSupplierId;
         // public System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
 

@@ -78,7 +78,25 @@ namespace IMS.Forms.Inventory.Suppliers
             rbSupplier.CheckedChanged += UserType_CheckedChanged;
             btnSearch.Click += BtnSearch_Click;
             dgvSuppliers.ColumnHeaderMouseClick += DgvSuppliers_ColumnHeaderMouseClick;
+            dgvSuppliers.CellClick += DgvSuppliers_CellClick;
         }
+
+        private void DgvSuppliers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                if(e.ColumnIndex == colEdit.Index)
+                {
+                    var data = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
+                    if (data != null)
+                    {
+                        ShowAddEditDialog(true);
+                    }
+
+                }
+            }
+        }
+
         private void DgvSuppliers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.ColumnIndex == _previousIndex)
