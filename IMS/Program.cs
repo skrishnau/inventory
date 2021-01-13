@@ -34,6 +34,7 @@ using Service.Core.Orders;
 using IMS.Forms.Inventory.Orders;
 using IMS.Forms.Inventory.Dashboard;
 using IMS.Forms.Inventory.InventoryDetail;
+using Service.Core.Reports;
 
 namespace IMS
 {
@@ -85,6 +86,7 @@ namespace IMS
             container.Register<IOrderService, OrderService>(Lifestyle.Singleton);
 
             container.Register<ISaleService, SaleService>(Lifestyle.Singleton);
+            container.Register<IReportService, ReportService>(Lifestyle.Singleton);
             //container.Register<ISaleOrderService, SaleOrderService>(Lifestyle.Singleton);
 
             container.Register<IAppSettingService, AppSettingService>(Lifestyle.Singleton);

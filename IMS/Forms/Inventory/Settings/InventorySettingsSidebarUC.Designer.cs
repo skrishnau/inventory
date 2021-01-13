@@ -68,7 +68,7 @@
             this.pnlLinks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlLinks.Location = new System.Drawing.Point(0, 0);
             this.pnlLinks.Name = "pnlLinks";
-            this.pnlLinks.Size = new System.Drawing.Size(196, 484);
+            this.pnlLinks.Size = new System.Drawing.Size(179, 484);
             this.pnlLinks.TabIndex = 3;
             this.pnlLinks.WrapContents = false;
             // 
@@ -307,7 +307,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlLinks);
             this.Name = "InventorySettingsSidebarUC";
-            this.Size = new System.Drawing.Size(196, 484);
+            this.Size = new System.Drawing.Size(179, 484);
             this.pnlLinks.ResumeLayout(false);
             this.pnlLinks.PerformLayout();
             this.ResumeLayout(false);

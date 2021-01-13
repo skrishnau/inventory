@@ -70,6 +70,7 @@
     <Compile Include="Core\Inventory\VariantMapper.cs" />
     <Compile Include="Core\Inventory\OrderItemMapper.cs" />
     <Compile Include="Core\Inventory\OrderMapper.cs" />
+    <Compile Include="Core\TransactionMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

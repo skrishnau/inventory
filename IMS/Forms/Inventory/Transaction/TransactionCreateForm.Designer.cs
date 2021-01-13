@@ -277,7 +277,6 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Enabled = false;
             this.txtAddress.Location = new System.Drawing.Point(267, 3);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(107, 20);
@@ -285,7 +284,6 @@
             // 
             // txtPhone
             // 
-            this.txtPhone.Enabled = false;
             this.txtPhone.Location = new System.Drawing.Point(433, 3);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(82, 20);

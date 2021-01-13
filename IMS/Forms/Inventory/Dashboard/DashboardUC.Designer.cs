@@ -63,6 +63,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.pnlCompany = new System.Windows.Forms.Panel();
+            this.lblCompanyName = new System.Windows.Forms.Label();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.lblPhone = new System.Windows.Forms.Label();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -74,6 +78,7 @@
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDueReceivables)).BeginInit();
+            this.pnlCompany.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopUnderstockProducts
@@ -118,7 +123,7 @@
             this.panel2.Controls.Add(this.dtEnd);
             this.panel2.Controls.Add(this.dtStart);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(0, 67);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(877, 38);
             this.panel2.TabIndex = 2;
@@ -342,7 +347,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel7, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 38);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 105);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel1.RowCount = 1;
@@ -356,7 +361,7 @@
             this.panel1.Controls.Add(this.splitter2);
             this.panel1.Controls.Add(this.pnlTopUnderstockProducts);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 128);
+            this.panel1.Location = new System.Drawing.Point(0, 195);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(877, 219);
             this.panel1.TabIndex = 0;
@@ -462,11 +467,58 @@
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 123);
+            this.splitter1.Location = new System.Drawing.Point(0, 190);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(877, 5);
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
+            // 
+            // pnlCompany
+            // 
+            this.pnlCompany.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(234)))), ((int)(((byte)(217)))));
+            this.pnlCompany.Controls.Add(this.lblCompanyName);
+            this.pnlCompany.Controls.Add(this.lblAddress);
+            this.pnlCompany.Controls.Add(this.lblPhone);
+            this.pnlCompany.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlCompany.Location = new System.Drawing.Point(0, 0);
+            this.pnlCompany.Name = "pnlCompany";
+            this.pnlCompany.Size = new System.Drawing.Size(877, 67);
+            this.pnlCompany.TabIndex = 3;
+            this.pnlCompany.Visible = false;
+            // 
+            // lblCompanyName
+            // 
+            this.lblCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCompanyName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompanyName.Location = new System.Drawing.Point(0, 0);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(877, 27);
+            this.lblCompanyName.TabIndex = 0;
+            this.lblCompanyName.Text = "My Company";
+            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAddress
+            // 
+            this.lblAddress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAddress.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblAddress.Location = new System.Drawing.Point(0, 27);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(877, 20);
+            this.lblAddress.TabIndex = 2;
+            this.lblAddress.Text = "Address";
+            this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblPhone.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblPhone.Location = new System.Drawing.Point(0, 47);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(877, 20);
+            this.lblPhone.TabIndex = 1;
+            this.lblPhone.Text = "Phone";
+            this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DashboardUC
             // 
@@ -476,8 +528,9 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pnlCompany);
             this.Name = "DashboardUC";
-            this.Size = new System.Drawing.Size(877, 383);
+            this.Size = new System.Drawing.Size(877, 475);
             this.pnlTopUnderstockProducts.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -490,6 +543,7 @@
             this.panel1.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDueReceivables)).EndInit();
+            this.pnlCompany.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -531,5 +585,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDays;
+        private System.Windows.Forms.Panel pnlCompany;
+        private System.Windows.Forms.Label lblCompanyName;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.Label lblPhone;
     }
 }

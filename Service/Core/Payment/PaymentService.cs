@@ -1,5 +1,7 @@
 ﻿using DTO.Core.Inventory;
 using Infrastructure.Context;
+using Infrastructure.Entities.Orders;
+using Infrastructure.Entities.Users;
 using Service.DbEventArgs;
 using Service.Listeners;
 using System;
@@ -27,44 +29,44 @@ namespace Service.Core.Payment
                 var entity = model.MapToEntity();
                 _context.Payment.Add(entity);
                 model.Id = entity.Id;
-
+                User user = null;
+                Order order = null;
                 if (model.OrderId > 0)
                 {
-                    var order = _context.Order.Find(model.OrderId);
+                    order = _context.Order.Find(model.OrderId);
                     if (order != null)
                     {
+                        user = order.User;
                         model.UserId = order.UserId;
                         order.PaidAmount += model.Amount;
                         if (order.PaidAmount >= order.TotalAmount)
                         {
                             order.PaymentCompleteDate = DateTime.Now;
                         }
-                        _context.SaveChanges();
-
-                        var orderModel = order.MapToModel();
-                        BaseEventArgs<OrderModel> orderEventArgs = BaseEventArgs<OrderModel>.Instance;
-                        orderEventArgs.Mode = Utility.UpdateMode.EDIT;
-                        orderEventArgs.Model = orderModel;
-                        _listener.TriggerOrderUpdateEvent(null, orderEventArgs);
                     }
                 }
-                if (model.UserId > 0)
+                else if (model.UserId > 0)
                 {
-                    var user = _context.User.Find(model.UserId);
-                    if (user != null)
-                    {
-                        user.PaidAmount += model.Amount;
-                        _context.SaveChanges();
-
-                        var userModel = UserMapper.MapToUserModel(user);
-                        BaseEventArgs<UserModel> userEventArgs = BaseEventArgs<UserModel>.Instance;
-                        userEventArgs.Mode = Utility.UpdateMode.EDIT;
-                        userEventArgs.Model = userModel;
-                        _listener.TriggerUserUpdateEvent(null, userEventArgs);
-                    }
+                    user = _context.User.Find(model.UserId);
                 }
+                _context.SaveChanges();
 
-
+                if (order != null)
+                {
+                    var orderModel = order.MapToModel();
+                    BaseEventArgs<OrderModel> orderEventArgs = BaseEventArgs<OrderModel>.Instance;
+                    orderEventArgs.Mode = Utility.UpdateMode.EDIT;
+                    orderEventArgs.Model = orderModel;
+                    _listener.TriggerOrderUpdateEvent(null, orderEventArgs);
+                }
+                if (user != null)
+                {
+                    var userModel = UserMapper.MapToUserModel(user);
+                    BaseEventArgs<UserModel> userEventArgs = BaseEventArgs<UserModel>.Instance;
+                    userEventArgs.Mode = Utility.UpdateMode.EDIT;
+                    userEventArgs.Model = userModel;
+                    _listener.TriggerUserUpdateEvent(null, userEventArgs);
+                }
                 BaseEventArgs<PaymentModel> eventArgs = BaseEventArgs<PaymentModel>.Instance;
                 eventArgs.Mode = Utility.UpdateMode.ADD;
                 eventArgs.Model = model;

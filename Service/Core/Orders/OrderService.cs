@@ -15,6 +15,7 @@ using ViewModel.Enums;
 using Service.Core.Settings;
 using Infrastructure.Entities.Users;
 using Service.Core.Users;
+using Infrastructure.Entities;
 
 namespace Service.Core.Orders
 {
@@ -40,6 +41,8 @@ namespace Service.Core.Orders
             _customerService = customerService;
             _appSettingService = appSettingSerivce;
         }
+
+        #region Get Functions
 
         public List<OrderModel> GetAllOrders(OrderTypeEnum orderType)
         {
@@ -75,118 +78,6 @@ namespace Service.Core.Orders
                 return OrderItemMapper.MapToOrderItemModel(query);
             }
         }
-
-        public string SaveOrder(OrderModel orderModel, bool checkout)
-        {
-            using (var _context = new DatabaseContext())
-            {
-
-                var now = DateTime.Now;
-                var args = BaseEventArgs<OrderModel>.Instance;
-
-                var entity = _context.Order.Find(orderModel.Id);
-                var user = CheckAndAssignCustomer(ref orderModel, checkout);
-                entity = orderModel.MapToEntity(entity);// OrderMapper.MapToOrderEntityForAdd(purchaseOrderModel, entity);
-                if (user != null) // means new user was created assign to entity
-                    entity.User = user;
-
-                // amount in user table
-                if(entity.UserId > 0 && checkout)
-                {
-                    user = _context.User.Find(orderModel.UserId);
-                    if (user != null)
-                    {
-                        // new order
-                        if (orderModel.Id <= 0)
-                        {
-                            user.TotalAmount += orderModel.TotalAmount;
-                            user.PaidAmount += orderModel.PaidAmount;
-                        }
-                        else
-                        {
-                            user.TotalAmount = user.TotalAmount - (entity?.TotalAmount ?? 0) + orderModel.TotalAmount;
-                            user.PaidAmount = user.PaidAmount - (entity?.PaidAmount??0) + orderModel.PaidAmount;
-                        }
-                        
-                    }
-                }
-
-                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
-
-                if (checkout)
-                {
-                    // makechecout
-                    entity.IsCompleted = true;
-                    entity.IsVerified = true;
-                    entity.CompletedDate = DateTime.Now;
-                    entity.VerifiedDate = DateTime.Now;
-                    var msg = "";
-                    if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
-                        msg = SubtractIssuedItemsFromWarehouse(entity.OrderItems, DateTime.Now);
-                    else if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
-                        AddReceivedItemsToWarehouse(entity.OrderItems, DateTime.Now);
-
-                    if (!string.IsNullOrEmpty(msg))
-                        return msg;
-                }
-
-
-                if (entity.Id == 0)
-                {
-                    entity.CreatedAt = now;
-                    entity.UpdatedAt = now;
-                    _context.Order.Add(entity);
-                    args.Mode = Utility.UpdateMode.ADD;
-                }
-                else
-                {
-                    entity.UpdatedAt = now;
-                    args.Mode = Utility.UpdateMode.EDIT;
-
-                    // update the order items' warehouse
-                    foreach (var item in _context.OrderItem.Where(x => x.OrderId == entity.Id))
-                    {
-                        item.WarehouseId = entity.WarehouseId;
-                    }
-                }
-
-
-                _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
-                _context.SaveChanges();
-                args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
-                _listener.TriggerOrderUpdateEvent(null, args);
-                return string.Empty;
-            }
-        }
-
-        private User CheckAndAssignCustomer(ref OrderModel orderModel, bool checkout)
-        {
-            if (orderModel.UserId > 0)
-            {
-                return null;
-            }
-            if (string.IsNullOrEmpty(orderModel.User))
-            {
-                orderModel.UserId = null;
-                return null;
-            }
-            // below code executes if userId is null but manual input of user-name is present 
-            return new User
-            {
-                CreatedAt = DateTime.Now,
-                Phone = orderModel.Phone,
-                Address = orderModel.Address,
-                Name = orderModel.User,
-                UpdatedAt = DateTime.Now,
-                DeletedAt = null,
-                DOB = null,
-                DeliveryAddress = orderModel.Address,
-                PaidAmount = checkout ? orderModel.PaidAmount : 0,
-                TotalAmount = checkout ? orderModel.TotalAmount : 0,
-                UserType = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? UserTypeEnum.Customer.ToString() : UserTypeEnum.Supplier.ToString(),
-            };
-        }
-
 
         public OrderModel GetOrder(OrderTypeEnum orderType, int orderId)
         {
@@ -233,6 +124,168 @@ namespace Service.Core.Orders
         public List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<OrderItemModel> models)
         {
             return OrderItemMapper.MapToInventoryUnitModel(models);
+        }
+
+        public List<OrderModel> GetDuePayments()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var orders = _context.Order.ToList();
+                return OrderMapper.MapToModel(orders.Where(x => x.PaidAmount < x.TotalAmount));
+            }
+        }
+
+        #endregion
+
+
+        #region Set Functions
+
+        public string SaveOrder(OrderModel orderModel, bool checkout)
+        {
+            var now = DateTime.Now;
+            var args = BaseEventArgs<OrderModel>.Instance;
+            using (var _context = new DatabaseContext())
+            {
+                var entity = _context.Order.Find(orderModel.Id);
+                entity = orderModel.MapToEntity(entity);
+
+                CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
+
+                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
+
+                if (checkout)
+                {
+                    // makechecout
+                    MakeCheckout(_context, ref entity, ref orderModel);
+                    UpdateTransactionWithoutCommit(_context, ref orderModel, ref entity);
+                }
+
+                if (entity.Id == 0)
+                {
+                    entity.CreatedAt = now;
+                    entity.UpdatedAt = now;
+                    _context.Order.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    entity.UpdatedAt = now;
+                    args.Mode = Utility.UpdateMode.EDIT;
+                    // update the order items' warehouse
+                    foreach (var item in _context.OrderItem.Where(x => x.OrderId == entity.Id))
+                    {
+                        item.WarehouseId = entity.WarehouseId;
+                    }
+                }
+
+                _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
+                _context.SaveChanges();
+                args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
+                _listener.TriggerOrderUpdateEvent(null, args);
+                return string.Empty;
+            }
+        }
+
+        private void MakeCheckout(DatabaseContext _context, ref Order entity, ref OrderModel orderModel)
+        {
+            entity.IsCompleted = true;
+            entity.IsVerified = true;
+            entity.CompletedDate = DateTime.Now;
+            entity.VerifiedDate = DateTime.Now;
+            if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
+                SubtractIssuedItemsFromWarehouse(entity.OrderItems);
+            else if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
+                AddReceivedItemsToWarehouse(entity.OrderItems, DateTime.Now);
+
+        }
+
+        private void UpdateTransactionWithoutCommit(DatabaseContext _context, ref OrderModel orderModel, ref Order entity)
+        {
+            var debit = 0M;
+            var credit = 0M;
+            var balance = orderModel.TotalAmount - orderModel.PaidAmount;
+            if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
+            {
+                debit = orderModel.PaidAmount;
+                credit = orderModel.TotalAmount;
+            }
+            else if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
+            {
+                debit = orderModel.TotalAmount;
+                credit = orderModel.PaidAmount;
+            }
+            balance = credit - debit;
+
+            var transaction = new Transaction
+            {
+                Balance = Math.Abs(balance),
+                Credit = credit,//orderModel.PaidAmount,
+                Date = DateTime.Now,
+                Debit = debit, //orderModel.TotalAmount,
+                DrCr = Math.Sign(balance),
+                IsVoid = false,
+                OrderId = orderModel.Id,
+                Particulars = orderModel.Note,
+                UserId = orderModel.UserId,
+                Type = orderModel.OrderType,
+            };
+            _context.Transaction.Add(transaction);
+        }
+        // amount in user table -- tooo much fradulent code.. can't make a robust amount entry in User table. due to changing 
+        // nature of transaction (invoice void, re-save, etc.)
+        //private void AddUpdateUserAmount(DatabaseContext _context, OrderModel orderModel, Order entity)
+        //{
+        //    var user = _context.User.Find(orderModel.UserId);
+        //    if (user != null)
+        //    {
+        //        // new order
+        //        if (orderModel.Id <= 0)
+        //        {
+        //            user.TotalAmount += orderModel.TotalAmount;
+        //            user.PaidAmount += orderModel.PaidAmount;
+        //        }
+        //        else
+        //        {
+        //            user.TotalAmount = user.TotalAmount - (entity?.TotalAmount ?? 0) + orderModel.TotalAmount;
+        //            user.PaidAmount = user.PaidAmount - (entity?.PaidAmount ?? 0) + orderModel.PaidAmount;
+        //        }
+        //    }
+        //}
+
+        private void CheckAndAssignCustomer(DatabaseContext _context, ref OrderModel orderModel, ref Order entity, bool checkout)
+        {
+            if (orderModel.UserId > 0)
+            {
+                var userEntity = _context.User.Find(orderModel.UserId);
+                if (userEntity != null)
+                {
+                    userEntity.Address = orderModel.Address;
+                    userEntity.Phone = orderModel.Phone;
+                }
+                return;
+            }
+            if (string.IsNullOrEmpty(orderModel.User))
+            {
+                orderModel.UserId = null;
+                return;
+            }
+            // below code executes if userId is null but manual input of user-name is present 
+            var user = new User
+            {
+                CreatedAt = DateTime.Now,
+                Phone = orderModel.Phone,
+                Address = orderModel.Address,
+                Name = orderModel.User,
+                UpdatedAt = DateTime.Now,
+                DeletedAt = null,
+                DOB = null,
+                DeliveryAddress = orderModel.Address,
+                Use = true, 
+                //PaidAmount = checkout ? orderModel.PaidAmount : 0,
+                //TotalAmount = checkout ? orderModel.TotalAmount : 0,
+                UserType = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? UserTypeEnum.Customer.ToString() : UserTypeEnum.Supplier.ToString(),
+            };
+            entity.User = user;
         }
 
         public string SetSent(int orderId)
@@ -330,7 +383,7 @@ namespace Service.Core.Orders
                         return "Already issued!";
 
 
-                    var msg = SubtractIssuedItemsFromWarehouse(entity.OrderItems, now);
+                    var msg = SubtractIssuedItemsFromWarehouse(entity.OrderItems);
                     if (!string.IsNullOrEmpty(msg))
                         return msg;
 
@@ -451,9 +504,6 @@ namespace Service.Core.Orders
             return SavePurchaseOrderItems(orderId, InventoryUnitMapper.MapToOrderItemModel(items, orderId));
         }
 
-
-        #region Inventory Units
-
         private void AddReceivedItemsToWarehouse(ICollection<OrderItem> items, DateTime now)
         {
             using (var _context = new DatabaseContext())
@@ -471,7 +521,6 @@ namespace Service.Core.Orders
                 _context.SaveChanges();
             }
         }
-
 
         public void AddPOReceiveToInventoryUnit(OrderItem poItem, Product product, DateTime now)
         {
@@ -508,7 +557,7 @@ namespace Service.Core.Orders
             }
         }
 
-        private string SubtractIssuedItemsFromWarehouse(ICollection<OrderItem> items, DateTime now)
+        private string SubtractIssuedItemsFromWarehouse(ICollection<OrderItem> items)
         {
             var msg = _inventoryUnitService.SaveDirectIssueAny(items.MapToInventoryUnitModel(), "Issue");
             if (!string.IsNullOrEmpty(msg))
@@ -516,7 +565,6 @@ namespace Service.Core.Orders
             // save was successful
             using (var _context = new DatabaseContext())
             {
-
                 foreach (var item in items)
                 {
                     var product = _context.Product.Find(item.ProductId);
@@ -531,43 +579,14 @@ namespace Service.Core.Orders
             return string.Empty;
         }
 
-        public List<OrderModel> GetDuePayments()
+        private void UpdateInventoryItemsWithoutCommit(ICollection<OrderItem> items)
         {
-            using (var _context = new DatabaseContext())
-            {
-                var orders = _context.Order.ToList();
-                return OrderMapper.MapToModel(orders.Where(x => x.PaidAmount < x.TotalAmount));
-            }
+
         }
 
 
         #endregion
 
+
     }
 }
-
-
-/*
-    var wp = _context.WarehouseProduct.FirstOrDefault(x => x.ProductId == item.ProductId && x.WarehouseId == item.WarehouseId);
-    if (wp == null)
-    {
-        wp = new Infrastructure.Entities.Inventory.WarehouseProduct()
-        {
-            ProductId = item.ProductId,
-            InStockQuantity = item.UnitQuantity,
-            OnHoldQuantity = item.IsHold ? item.UnitQuantity : 0,
-            UpdatedAt = DateTime.Now,
-            WarehouseId = item.WarehouseId,
-        };
-        _context.WarehouseProduct.Add(wp);
-    }
-    else
-    {
-        wp.UpdatedAt = DateTime.Now;
-        wp.InStockQuantity += item.UnitQuantity;
-        wp.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
-    }
-    // update the product 
-    product.OnHoldQuantity += item.IsHold ? item.UnitQuantity : 0;
-    product.InStockQuantity += item.UnitQuantity;
- */

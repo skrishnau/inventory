@@ -131,7 +131,6 @@
             // 
             this.btnReports.BackColor = System.Drawing.Color.Transparent;
             this.btnReports.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnReports.Enabled = false;
             this.btnReports.FlatAppearance.BorderSize = 0;
             this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReports.Image = global::IMS.Properties.Resources.icons8_Pie_Chart_24px;

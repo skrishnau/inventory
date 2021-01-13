@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ViewModel.Core.Business;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
+using ViewModel.Core.Settings;
 using ViewModel.Core.Users;
 
 namespace Service.Listeners
@@ -48,5 +49,8 @@ namespace Service.Listeners
         // Customer
         event EventHandler<BaseEventArgs<UserModel>> UserUpdated;
         void TriggerUserUpdateEvent(object p, BaseEventArgs<UserModel> eventArgs);
+        // Company
+        event EventHandler<BaseEventArgs<CompanyInfoSettingModel>> CompanyUpdated;
+        void TriggerCompanyUpdateEvent(object p, BaseEventArgs<CompanyInfoSettingModel> eventArgs);
     }
 }

@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Entities\Accounts\FiscalYear.cs" />
-    <Compile Include="Entities\Accounts\Transaction.cs" />
+    <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\AppSettings\AppSetting.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
     <Compile Include="Entities\Business\Branch.cs" />
@@ -95,6 +95,14 @@
     <Compile Include="Migrations\202101091252006_PaidAmountAddedInUserTable.Designer.cs">
       <DependentUpon>202101091252006_PaidAmountAddedInUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101101714290_TransactionTableAdded.cs" />
+    <Compile Include="Migrations\202101101714290_TransactionTableAdded.Designer.cs">
+      <DependentUpon>202101101714290_TransactionTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101111752174_TransactionAndUserTableUpdated.cs" />
+    <Compile Include="Migrations\202101111752174_TransactionAndUserTableUpdated.Designer.cs">
+      <DependentUpon>202101111752174_TransactionAndUserTableUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -120,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101091252006_PaidAmountAddedInUserTable.resx">
       <DependentUpon>202101091252006_PaidAmountAddedInUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101101714290_TransactionTableAdded.resx">
+      <DependentUpon>202101101714290_TransactionTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101111752174_TransactionAndUserTableUpdated.resx">
+      <DependentUpon>202101111752174_TransactionAndUserTableUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

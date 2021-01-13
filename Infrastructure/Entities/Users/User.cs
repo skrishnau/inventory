@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Infrastructure.Entities.Accounts;
+using Infrastructure.Entities.Orders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,8 +61,11 @@ namespace Infrastructure.Entities.Users
         public DateTime? DOB { get; set; }
         public string Notes { get; set; }
 
-        // payments
-        public decimal TotalAmount { get; set; }
-        public decimal PaidAmount { get; set; }
+        //// payments
+        //public decimal TotalAmount { get; set; }
+        //public decimal PaidAmount { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

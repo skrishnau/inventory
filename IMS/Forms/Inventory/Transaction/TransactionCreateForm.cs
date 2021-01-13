@@ -12,6 +12,7 @@ using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
@@ -22,7 +23,7 @@ namespace IMS.Forms.Inventory.Transaction
 {
     public partial class TransactionCreateForm : Form
     {
-        private readonly IUserService _supplierService;
+        private readonly IUserService _userService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
         private readonly IOrderService _orderService;
@@ -36,7 +37,7 @@ namespace IMS.Forms.Inventory.Transaction
         private OrderTypeEnum _orderType;
 
 
-        public TransactionCreateForm(IUserService supplierService,
+        public TransactionCreateForm(IUserService userService,
             IBusinessService businessService,
             IInventoryService inventoryService,
             IOrderService purchaseService,
@@ -45,7 +46,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             _listener = listener;
             this._businessService = businessService;
-            this._supplierService = supplierService;
+            this._userService = userService;
             this._orderService = purchaseService;
             this._inventoryService = inventoryService;
             this._appSettingService = appSettingService;
@@ -109,9 +110,27 @@ namespace IMS.Forms.Inventory.Transaction
 
             dgvItems.AmountChanged += DgvItems_AmountChnanged;
             btnPayment.Click += btnPayment_Click;
+            cbClient.SelectedValueChanged += CbClient_SelectedValueChanged;
         }
 
-        
+        private void CbClient_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(cbClient.SelectedValue != null)
+            {
+                var selectedValue = cbClient.SelectedValue;
+                var client = _userService.GetUser(int.Parse(cbClient.SelectedValue.ToString()));
+                if (client != null)
+                {
+                    txtAddress.Text = client.Address;
+                    txtPhone.Text = client.Phone;
+                }
+                else
+                {
+                    txtAddress.Text = "";
+                    txtPhone.Text = "";
+                }
+            }
+        }
 
         private void InitializeValidation()
         {
@@ -155,7 +174,7 @@ namespace IMS.Forms.Inventory.Transaction
                     break;
             }
             var includeUserList = new int[] { _orderModel?.UserId ?? 0 };
-            list = _supplierService.GetUserListForCombo(userType, includeUserList);
+            list = _userService.GetUserListForCombo(userType, includeUserList);
             if (list != null)
             {
                 list.Insert(0, new IdNamePair
@@ -163,9 +182,9 @@ namespace IMS.Forms.Inventory.Transaction
                     Id = 0,
                     Name = ""
                 });
-                cbClient.DataSource = list;
                 cbClient.DisplayMember = "Name";
                 cbClient.ValueMember = "Id";
+                cbClient.DataSource = list;
             }
         }
 
@@ -286,6 +305,7 @@ namespace IMS.Forms.Inventory.Transaction
                     Address = txtAddress.Text,
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.Value : (DateTime?)null,
                     PaymentType = rbCredit.Checked ? PaymentType.Credit.ToString() : PaymentType.Cash.ToString(),
+                    TotalAmount = items.Select(x=>x.Total).Sum()
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;

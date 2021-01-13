@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ViewModel.Core.Business;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
+using ViewModel.Core.Settings;
 using ViewModel.Core.Users;
 
 namespace Service.Listeners
@@ -25,6 +26,7 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<OrderModel>> OrderItemUpdated;
         public event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
         public event EventHandler<BaseEventArgs<UserModel>> UserUpdated;
+        public event EventHandler<BaseEventArgs<CompanyInfoSettingModel>> CompanyUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -95,6 +97,11 @@ namespace Service.Listeners
         public void TriggerUserUpdateEvent(object p, BaseEventArgs<UserModel> eventArgs)
         {
             UserUpdated?.Invoke(p, eventArgs);
+        }
+
+        public void TriggerCompanyUpdateEvent(object p, BaseEventArgs<CompanyInfoSettingModel> eventArgs)
+        {
+            CompanyUpdated?.Invoke(p, eventArgs);
         }
     }
 }

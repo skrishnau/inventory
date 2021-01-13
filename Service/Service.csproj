@@ -86,8 +86,8 @@
     <Compile Include="Core\Orders\OrderService.cs" />
     <Compile Include="Core\Reports\Admin\AdminReportService.cs" />
     <Compile Include="Core\Reports\Admin\IAdminReportService.cs" />
-    <Compile Include="Core\Reports\Crashes\CrashReportService.cs" />
-    <Compile Include="Core\Reports\Crashes\ICrashReportService.cs" />
+    <Compile Include="Core\Reports\ReportService.cs" />
+    <Compile Include="Core\Reports\IReportService.cs" />
     <Compile Include="Core\Users\Accounts\AccountService.cs" />
     <Compile Include="Core\Users\Accounts\IAccountService.cs" />
     <Compile Include="Core\Users\Roles\IRoleService.cs" />

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DTO.Core.Settings;
 using Infrastructure.Context;
 using Infrastructure.Entities.AppSettings;
+using Service.DbEventArgs;
+using Service.Listeners;
 using ViewModel.Core.Settings;
 using ViewModel.Enums;
 using ViewModel.Enums.Settings;
@@ -15,10 +17,12 @@ namespace Service.Core.Settings
     public class AppSettingService : IAppSettingService
     {
         // private readonly DatabaseContext _context;
+        private readonly IDatabaseChangeListener _listener;
 
-        public AppSettingService()//DatabaseContext context
+        public AppSettingService(IDatabaseChangeListener listener)//DatabaseContext context
         {
             // _context = context;
+            _listener = listener;
         }
         #region AppSettings Core
 
@@ -437,6 +441,10 @@ namespace Service.Core.Settings
                 }
 
                 _context.SaveChanges();
+                BaseEventArgs<CompanyInfoSettingModel> eventArgs = BaseEventArgs<CompanyInfoSettingModel>.Instance;
+                eventArgs.Model = model;
+                _listener.TriggerCompanyUpdateEvent(null, eventArgs);
+
                 return true;
 
             }

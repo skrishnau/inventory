@@ -122,6 +122,24 @@
     <Compile Include="Forms\Inventory\Payment\PaymentCreateForm.Designer.cs">
       <DependentUpon>PaymentCreateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Reports\All\LedgerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Reports\All\LedgerUC.Designer.cs">
+      <DependentUpon>LedgerUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Reports\ReportSidebarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Reports\ReportSidebarUC.Designer.cs">
+      <DependentUpon>ReportSidebarUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Reports\ReportsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Reports\ReportsUC.Designer.cs">
+      <DependentUpon>ReportsUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -568,6 +586,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Payment\PaymentCreateForm.resx">
       <DependentUpon>PaymentCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Reports\All\LedgerUC.resx">
+      <DependentUpon>LedgerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Reports\ReportSidebarUC.resx">
+      <DependentUpon>ReportSidebarUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Reports\ReportsUC.resx">
+      <DependentUpon>ReportsUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\General\GeneralSettingsUC.resx">
       <DependentUpon>GeneralSettingsUC.cs</DependentUpon>

@@ -13,6 +13,8 @@ namespace Infrastructure.Context
     using Infrastructure.Entities.AppSettings;
     using System.Data.SqlClient;
     using System.Data.Entity.Core.EntityClient;
+    using Infrastructure.Entities.Accounts;
+    using Infrastructure.Entities;
 
     public class DatabaseContext : DbContext
     {
@@ -70,13 +72,11 @@ namespace Infrastructure.Context
 
 
         // ===================== TRANSACTION MODULE ==================== //
-        //public virtual DbSet<Sale> Sales { get; set; }
-        //public virtual DbSet<SaleOrder> SaleOrder { get; set; }
-        //public virtual DbSet<SaleItem> SaleItems { get; set; }
-
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }
+        public virtual DbSet<Transaction> Transaction { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
+
 
         public virtual DbSet<AppSetting> AppSetting { get; set; }
 

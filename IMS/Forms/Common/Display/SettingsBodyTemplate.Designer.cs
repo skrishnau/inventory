@@ -41,27 +41,27 @@
             // pnlBody
             // 
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(185, 69);
+            this.pnlBody.Location = new System.Drawing.Point(185, 77);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(454, 420);
+            this.pnlBody.Size = new System.Drawing.Size(454, 412);
             this.pnlBody.TabIndex = 17;
             // 
             // pnlSideBar
             // 
             this.pnlSideBar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSideBar.Location = new System.Drawing.Point(5, 27);
+            this.pnlSideBar.Location = new System.Drawing.Point(5, 35);
             this.pnlSideBar.Name = "pnlSideBar";
             this.pnlSideBar.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlSideBar.Size = new System.Drawing.Size(175, 462);
+            this.pnlSideBar.Size = new System.Drawing.Size(175, 454);
             this.pnlSideBar.TabIndex = 14;
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Enabled = false;
-            this.splitter1.Location = new System.Drawing.Point(180, 27);
+            this.splitter1.Location = new System.Drawing.Point(180, 35);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(5, 462);
+            this.splitter1.Size = new System.Drawing.Size(5, 454);
             this.splitter1.TabIndex = 16;
             this.splitter1.TabStop = false;
             // 
@@ -77,7 +77,7 @@
             // subHeading
             // 
             this.subHeading.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subHeading.Location = new System.Drawing.Point(185, 27);
+            this.subHeading.Location = new System.Drawing.Point(185, 35);
             this.subHeading.Name = "subHeading";
             this.subHeading.Size = new System.Drawing.Size(454, 42);
             this.subHeading.TabIndex = 12;
@@ -88,10 +88,10 @@
             this.heading.Dock = System.Windows.Forms.DockStyle.Top;
             this.heading.Location = new System.Drawing.Point(5, 0);
             this.heading.Name = "heading";
-            this.heading.Size = new System.Drawing.Size(634, 27);
+            this.heading.Size = new System.Drawing.Size(634, 35);
             this.heading.TabIndex = 13;
             // 
-            // SubBodyTemplate
+            // SettingsBodyTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -101,7 +101,7 @@
             this.Controls.Add(this.pnlSideBar);
             this.Controls.Add(this.heading);
             this.Controls.Add(this.splitter2);
-            this.Name = "SubBodyTemplate";
+            this.Name = "SettingsBodyTemplate";
             this.Size = new System.Drawing.Size(639, 489);
             this.ResumeLayout(false);
 

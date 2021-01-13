@@ -1,4 +1,5 @@
-﻿using Infrastructure.Entities.Business;
+﻿using Infrastructure.Entities.Accounts;
+using Infrastructure.Entities.Business;
 using Infrastructure.Entities.Inventory;
 using Infrastructure.Entities.Users;
 using System;
@@ -110,6 +111,7 @@ namespace Infrastructure.Entities.Orders
 
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
 
 
     }

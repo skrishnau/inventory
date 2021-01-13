@@ -20,6 +20,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using IMS.Forms.Inventory.InventoryDetail;
 using Service.Core.Inventory;
+using IMS.Forms.Inventory.Reports;
 
 namespace IMS.Forms.Inventory
 {
@@ -271,6 +272,7 @@ namespace IMS.Forms.Inventory
             //_menubar.btnWarehouseList.Click += BtnWarehouseList_Click;
             // settings
             _menubar.btnSettings.Click += BtnSettings_Click;
+            _menubar.btnReports.Click += BtnReports_Click;
 
 
             //_menubar.btnLocateInventory.Click += BtnLocateInventory_Click;
@@ -595,6 +597,12 @@ namespace IMS.Forms.Inventory
             }
         }
 
+
+        private void BtnReports_Click(object sender, EventArgs e)
+        {
+            var reportUc = Program.container.GetInstance<ReportsUC>();
+            AddTabPage("Reports", reportUc, sender);
+        }
 
 
         #endregion

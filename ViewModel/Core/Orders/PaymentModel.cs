@@ -25,5 +25,6 @@ namespace ViewModel.Core.Orders
         /// </summary>
         public string ChequeNo { get; set; }
 
+
     }
 }

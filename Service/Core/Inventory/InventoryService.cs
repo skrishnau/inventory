@@ -926,8 +926,8 @@ namespace Service.Core.Inventory
                 var totalInventoryQty = _context.Product.Select(x => (decimal?)x.InStockQuantity).Sum()??0;
                 list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.InventoryQuantity.ToString(), Value = totalInventoryQty });
                 var customer = UserTypeEnum.Customer.ToString();
-                var totalCustomers = _context.User.Where(x => x.UserType == customer);
-                list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Customer.ToString(), Value = totalProducts });
+                var totalCustomers = _context.User.Where(x => x.UserType == customer).Count();
+                list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Customer.ToString(), Value = totalCustomers });
             }
             return list;
         }

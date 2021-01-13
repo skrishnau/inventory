@@ -13,6 +13,7 @@ using ViewModel.Enums;
 using ViewModel.Core.Orders;
 using Service.Core.Orders;
 using SimpleInjector.Lifestyles;
+using Service.Core.Settings;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
@@ -21,11 +22,13 @@ namespace IMS.Forms.Inventory.Dashboard
         private readonly IInventoryService _inventoryService;
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
+        private readonly IAppSettingService _appSettingService;
 
-        public DashboardUC(IInventoryService inventoryService, IOrderService orderService, IDatabaseChangeListener listener)
+        public DashboardUC(IInventoryService inventoryService, IOrderService orderService, IAppSettingService appSettingService, IDatabaseChangeListener listener)
         {
             _inventoryService = inventoryService;
             _orderService = orderService;
+            _appSettingService = appSettingService;
 
             _listener = listener;
 
@@ -41,12 +44,28 @@ namespace IMS.Forms.Inventory.Dashboard
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
             _listener.UserUpdated += _listener_UserUpdated;
             _listener.OrderUpdated += _listener_OrderUpdated;
+            _listener.CompanyUpdated += _listener_CompanyUpdated; ;
 
             PopulateUnderstockProducts();
             PopulateDueReceivables();
             PopulateTransactionSummary();
             PopulateInventorySummary();
             InitializeEvents();
+            PopulateCompany();
+            
+        }
+
+        private void _listener_CompanyUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Settings.CompanyInfoSettingModel> e)
+        {
+            PopulateCompany();
+        }
+
+        private void PopulateCompany()
+        {
+            var company = _appSettingService.GetCompanyInfoSetting();
+            lblAddress.Text = string.IsNullOrEmpty(company.Address) ? "Address" : company.Address;
+            lblCompanyName.Text = string.IsNullOrEmpty(company.CompanyName) ? "My Company" :  company.CompanyName;
+            lblPhone.Text = string.IsNullOrEmpty(company.Phone) ? "Phone" : company.Phone;
         }
 
         private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)

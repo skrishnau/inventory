@@ -100,7 +100,7 @@ namespace Service.Core.Inventory.Units
                                 splitString = splitString.Trim();
                                 splitString = splitString.TrimEnd(new char[] { '+' });
                                 var description = "Merged " + splitString + " of '" + product.Name + "' into " + editingRecord.UnitQuantity + " qty.";
-                                AddMovement(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now);
+                                AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now);
 
                             }
 
@@ -142,7 +142,7 @@ namespace Service.Core.Inventory.Units
                             splitString = splitString.Trim();
                             splitString = splitString.TrimEnd(new char[] { '+' });
                             var description = "Splitted " + entity.UnitQuantity + " qty. of '" + entity.Product.Name + "' into " + splitString + ".";
-                            AddMovement(_context, description, "----------------", "Split", entity.UnitQuantity, now);
+                            AddMovementWithoutCoomit(_context, description, "----------------", "Split", entity.UnitQuantity, now);
 
                             for (var q = 0; q < quantitySplitList.Count; q++)
                             {
@@ -207,7 +207,7 @@ namespace Service.Core.Inventory.Units
                             //
                             var description = "Moved " + dbEntity.UnitQuantity + " qty. of '" + dbEntity.Product.Name + "' from " + dbEntity.Warehouse.Name + " to " + warehouseEntity.Name + ".";
                             UpdateWarehouseProduct(iuModel, iuModel.UnitQuantity, dbEntity.Warehouse.Id, warehouseEntity.Id, now);
-                            AddMovement(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now);
+                            AddMovementWithoutCoomit(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now);
                         }
                     }
                 }
@@ -242,7 +242,7 @@ namespace Service.Core.Inventory.Units
                     var description = "Received " + unit.UnitQuantity + " quantities of " +
                         product.Name + " into " + warehouse.Name + " warehouse.";
                     //var quantity = list.Sum(x => x.UnitQuantity);
-                    AddMovement(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now);//"Direct Receive"
+                    AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now);//"Direct Receive"
                     UpdateWarehouseProduct(unit, unit.UnitQuantity, null, unit.WarehouseId, now);
                 }
 
@@ -294,7 +294,7 @@ namespace Service.Core.Inventory.Units
                         // Movement
                         //
                         var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                        AddMovement(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
+                        AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
                         UpdateWarehouseProduct(model, issuedQuantity, dbEntity.WarehouseId, null, now);
                     }
                 }
@@ -371,7 +371,7 @@ namespace Service.Core.Inventory.Units
                         // Movement
                         //
                         var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                        AddMovement(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
+                        AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
                         UpdateWarehouseProduct(model, issuedQuantity, dbEntity.WarehouseId, null, now);
                     }
                 }
@@ -483,7 +483,7 @@ namespace Service.Core.Inventory.Units
         }
 
 
-        public void AddMovement(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now)
+        public void AddMovementWithoutCoomit(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now)
         {
             var movement = new Movement()
             {
