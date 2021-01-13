@@ -34,17 +34,21 @@ namespace DTO.Core.Inventory
             return entity;
         }
 
-        public static List<UserModel> MapToUserModel(IQueryable<User> suppliers)
+        public static List<UserModel> MapToUserModel(IQueryable<User> users)
         {
             var list = new List<UserModel>();
-            foreach (var supplier in suppliers)
+            foreach (var user in users)
             {
-                list.Add(MapToUserModel(supplier));
+                var transactions = user.Transactions.ToList();
+                var total = transactions.Sum(x => x.Debit);
+                var paid = transactions.Sum(x => x.Credit);
+                
+                list.Add(MapToUserModel(user, total, paid));
             }
             return list;
         }
 
-        public static UserModel MapToUserModel(User x)
+        public static UserModel MapToUserModel(User x, decimal debit=0, decimal credit =0)
         {
             return new UserModel()
             {
@@ -70,6 +74,9 @@ namespace DTO.Core.Inventory
                 
                 IsMarried = x.IsMarried,
                 Gender = x.Gender,
+                TotalAmount = debit,
+                PaidAmount = credit,
+                
             };
         }
 

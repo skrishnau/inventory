@@ -6,6 +6,8 @@ using Service.DbEventArgs;
 using ViewModel.Core.Users;
 using Service.Core.Users;
 using ViewModel.Enums;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
@@ -19,6 +21,10 @@ namespace IMS.Forms.Inventory.Suppliers
         UserModel _selectedSupplierModel;
 
         UserTypeEnum _userType = UserTypeEnum.Client;
+        BindingSource _bindingSource = new BindingSource();
+
+        private int _previousIndex;
+        private bool _sortDirection;
         //HeaderTemplate _header;
 
         public SupplierListUC(IUserService supplierService, IDatabaseChangeListener listener)
@@ -37,9 +43,11 @@ namespace IMS.Forms.Inventory.Suppliers
         private void SupplierUC_Load(object sender, EventArgs e)
         {
             // InitializeHeader();
+            dgvSuppliers.DataSource = _bindingSource;
             Populate();
 
             InitializeEvents();
+            this.dgvSuppliers.AllowUserToOrderColumns = true;
         }
 
 
@@ -69,8 +77,24 @@ namespace IMS.Forms.Inventory.Suppliers
             rbCustomer.CheckedChanged += UserType_CheckedChanged;
             rbSupplier.CheckedChanged += UserType_CheckedChanged;
             btnSearch.Click += BtnSearch_Click;
+            dgvSuppliers.ColumnHeaderMouseClick += DgvSuppliers_ColumnHeaderMouseClick;
         }
+        private void DgvSuppliers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == _previousIndex)
+                _sortDirection ^= true; // toggle direction
 
+            _bindingSource.DataSource = SortData(
+                (List<UserModel>)_bindingSource.DataSource, dgvSuppliers.Columns[e.ColumnIndex].DataPropertyName, _sortDirection);
+
+            _previousIndex = e.ColumnIndex;
+        }
+        public List<UserModel> SortData(List<UserModel> list, string column, bool ascending)
+        {
+            return ascending ?
+                list.OrderBy(_ => _.GetType().GetProperty(column).GetValue(_)).ToList() :
+                list.OrderByDescending(_ => _.GetType().GetProperty(column).GetValue(_)).ToList();
+        }
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             Populate();
@@ -98,11 +122,14 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void DgvSuppliers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            var rowData = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
-            if (rowData != null)
+            if (e.RowIndex >= 0)
             {
-                var args = new BaseEventArgs<UserModel>(rowData, Service.Utility.UpdateMode.NONE);
-                RowSelected?.Invoke(sender, args);
+                var rowData = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
+                if (rowData != null)
+                {
+                    var args = new BaseEventArgs<UserModel>(rowData, Service.Utility.UpdateMode.NONE);
+                    RowSelected?.Invoke(sender, args);
+                }
             }
         }
 
@@ -155,7 +182,8 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             dgvSuppliers.AutoGenerateColumns = false;
             var supplier = _supplierService.GetUserList(_userType, txtName.Text);
-            dgvSuppliers.DataSource = supplier;
+            _bindingSource.DataSource = supplier;
+            _bindingSource.ResetBindings(false);
         }
 
         private void ShowAddEditDialog(bool isEditMode)
