@@ -63,6 +63,8 @@ namespace Infrastructure.Entities.Orders
         // Move Order : Transfered Date
         public bool IsCompleted { get; set; }
         public DateTime? CompletedDate { get; set; }
+        public bool IsReceiptGenerated { get; set; }
+        public DateTime? ReceiptGeneratedDate { get; set; }
         // timestamps
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

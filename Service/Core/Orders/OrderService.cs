@@ -645,9 +645,36 @@ namespace Service.Core.Orders
 
         }
 
+        public List<SalePurchaseAmountModel> GetSalePurchaseAmountForBarDiagram()
+        {
+            var from = DateTime.Now.Date.AddDays(-30);
+            var to = DateTime.Now.Date.AddDays(1);
+            using(var _context = new DatabaseContext())
+            {
+                return _context.Order
+                    .Where(x => x.IsCompleted && x.CompletedDate >= from && x.CompletedDate <= to)
+                    .GroupBy(x=>new {CompletedDate = DbFunctions.TruncateTime(x.CompletedDate), x.OrderType })
+                    .Select(x=> new
+                    {
+                        x.Key.CompletedDate,
+                        x.Key.OrderType,
+                        PurchaseAmount = x.Where(y=> x.Key.OrderType == "Purchase").Sum(y=>(decimal?)y.TotalAmount),
+                        SaleAmount = x.Where(y => x.Key.OrderType == "Sale").Sum(y => (decimal?)y.TotalAmount),
+                    })
+                    .AsEnumerable()
+                    .Select(x => new SalePurchaseAmountModel
+                    {
+                        Date = x.CompletedDate.HasValue ? x.CompletedDate.Value.ToString("M/dd") : "",
+                        PurchaseAmount = x.PurchaseAmount.HasValue ? x.PurchaseAmount.Value : 0,
+                        SaleAmount = x.SaleAmount.HasValue ? x.SaleAmount.Value : 0,
+                    }).ToList();
+            }
+        }
+
 
         #endregion
 
 
     }
 }
+

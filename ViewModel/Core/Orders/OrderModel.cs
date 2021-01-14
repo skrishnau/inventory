@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Enums;
 
 namespace ViewModel.Core.Orders
 {
@@ -28,6 +29,8 @@ namespace ViewModel.Core.Orders
         public DateTime? CancelledDate { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime? CompletedDate { get; set; }
+        public bool IsReceiptGenerated { get; set; }
+        public DateTime? ReceiptGeneratedDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
@@ -39,6 +42,9 @@ namespace ViewModel.Core.Orders
         public decimal PaidAmount { get; set; }
         public DateTime? PaymentDueDate { get; set; }
         public DateTime? PaymentCompleteDate { get; set; }
+
+        public bool IsCash => PaidAmount >= TotalAmount;
+        public bool IsCredit => PaidAmount < TotalAmount;
 
         public int PaymentDueDays
         {

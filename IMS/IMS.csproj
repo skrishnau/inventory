@@ -585,6 +585,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Helpers\OrderModelReportHelper.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
       <DependentUpon>BusinessUC.cs</DependentUpon>
@@ -824,6 +825,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\SalesTransactionReport.rdlc" />
+    <EmbeddedResource Include="Reports\TransactionBarReportUC.rdlc" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -832,6 +834,7 @@
     <None Include="Properties\DataSources\IMS.Forms.Inventory.Transaction.TransactionPrintReceiptUC.datasource" />
     <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderItemModel.datasource" />
     <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderModel.datasource" />
+    <None Include="Properties\DataSources\ViewModel.Core.Orders.SalePurchaseAmountModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

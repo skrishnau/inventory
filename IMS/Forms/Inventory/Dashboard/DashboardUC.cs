@@ -15,6 +15,7 @@ using Service.Core.Orders;
 using SimpleInjector.Lifestyles;
 using Service.Core.Settings;
 using Service.Interfaces;
+using Microsoft.Reporting.WinForms;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
@@ -55,7 +56,18 @@ namespace IMS.Forms.Inventory.Dashboard
             PopulateInventorySummary();
             InitializeEvents();
             PopulateCompany();
+
+            PopulateBarDiagram();
             
+        }
+
+        private void PopulateBarDiagram()
+        {
+            List<SalePurchaseAmountModel> amountSummary = _orderService.GetSalePurchaseAmountForBarDiagram();
+            ReportDataSource reportDataSource = new ReportDataSource("SalePurchaseAmountDataset", amountSummary);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
+
+            this.reportViewer1.RefreshReport();
         }
 
         private void _listener_CompanyUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Settings.CompanyInfoSettingModel> e)
@@ -74,6 +86,8 @@ namespace IMS.Forms.Inventory.Dashboard
         private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
         {
             PopulateDueReceivables();
+            PopulateBarDiagram();
+
         }
 
         // uncomment to give colors to cells 

@@ -39,6 +39,9 @@ namespace IMS.Forms.Inventory.Transaction
         private int _orderId;
         private OrderTypeEnum _orderType;
 
+        // to show Print View at first load
+        private bool _showPrintView;
+
 
         public TransactionCreateForm(IUserService userService,
             IBusinessService businessService,
@@ -68,7 +71,7 @@ namespace IMS.Forms.Inventory.Transaction
             this.txtPaidAmount.Maximum = Int32.MaxValue;
             this.txtPaidAmount.Minimum = 0;
 
-            var order = _orderService.GetOrder(_orderType, _orderId);
+            var order = _orderService.GetOrderForDetailView(_orderId);
 
             dgvItems.InitializeGridViewControls(_inventoryService, _productService);
             InitializeValidation();
@@ -83,10 +86,11 @@ namespace IMS.Forms.Inventory.Transaction
 
         #region Functions
 
-        public void SetDataForEdit(OrderTypeEnum orderType, int orderId)
+        public void SetDataForEdit(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
         {
             _orderType = orderType;
             _orderId = orderId;
+            _showPrintView = showPrintView;
         }
 
         private void InitializeDataGridView()
@@ -201,19 +205,27 @@ namespace IMS.Forms.Inventory.Transaction
             _orderModel = model;
             if (model != null)
             {
-                btnPayment.Visible = model.RemainingAmount > 0;
-                // change button
-                _orderId = model.Id;
-                txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
-                dtExpectedDate.Value = model.DeliveryDate;
-                txtAddress.Text = model.Address;
-                txtPhone.Text = model.Phone;
-                switch (_orderType)
+                if (_showPrintView)
                 {
-                    case OrderTypeEnum.Purchase:
-                    case OrderTypeEnum.Sale:
-                        cbClient.SelectedValue = model.UserId;
-                        break;
+                    ShowPrintView(model);
+                    return;
+                }
+                else
+                {
+                    btnPayment.Visible = model.RemainingAmount > 0;
+                    // change button
+                    _orderId = model.Id;
+                    txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
+                    dtExpectedDate.Value = model.DeliveryDate;
+                    txtAddress.Text = model.Address;
+                    txtPhone.Text = model.Phone;
+                    switch (_orderType)
+                    {
+                        case OrderTypeEnum.Purchase:
+                        case OrderTypeEnum.Sale:
+                            cbClient.SelectedValue = model.UserId;
+                            break;
+                    }
                 }
             }
             else
@@ -376,15 +388,26 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void CheckOutAndPrint()
         {
+            if (_orderModel != null)
+            {
+                _orderModel.ReceiptGeneratedDate = DateTime.Now;
+                _orderModel.IsReceiptGenerated = true;
+            }
             var model = Save(true, false);
+            //var orders = _orderService.GetAllOrders(OrderTypeEnum.Sale);
+            //var model = _orderService.GetOrderForDetailView(orders.FirstOrDefault()?.Id ?? 0);
             if (model != null)
             {
-                this.Controls.Clear();
-                //var orders = _orderService.GetAllOrders(OrderTypeEnum.Sale);
-                //var order = _orderService.GetOrderForDetailView(orders.FirstOrDefault()?.Id ?? 0);
-                var transactionPrintBillUc = new TransactionPrintReceiptUC(model);
-                this.Controls.Add(transactionPrintBillUc);
+                ShowPrintView(model);
             }
+        }
+
+        private void ShowPrintView(OrderModel model)
+        {
+            this.Text = "Print Receipt";
+            this.Controls.Clear();
+            var transactionPrintBillUc = new TransactionPrintReceiptUC(model);
+            this.Controls.Add(transactionPrintBillUc);
         }
         
 

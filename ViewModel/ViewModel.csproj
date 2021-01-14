@@ -71,6 +71,7 @@
     <Compile Include="Core\Inventory\UomModel.cs" />
     <Compile Include="Core\Inventory\WarehouseProductModel.cs" />
     <Compile Include="Core\Orders\PaymentModel.cs" />
+    <Compile Include="Core\Orders\SalePurchaseAmountModel.cs" />
     <Compile Include="Core\Orders\TransactionSummaryModel.cs" />
     <Compile Include="Core\Reports\LedgerModel.cs" />
     <Compile Include="Core\Settings\AppSettingModel.cs" />

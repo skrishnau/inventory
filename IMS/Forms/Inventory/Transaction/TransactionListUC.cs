@@ -50,6 +50,8 @@ namespace IMS.Forms.Inventory.Transaction
             InitializeGridView();
             InitializeEvents();
             PopulateOrders();
+            
+            btnPrint.Image = null;
 
         }
 
@@ -79,7 +81,9 @@ namespace IMS.Forms.Inventory.Transaction
             rbPurchase.CheckedChanged += Type_CheckedChanged;
             rbSale.CheckedChanged += Type_CheckedChanged;
             btnPayment.Click += btnPayment_Click;
+            btnPrint.Click += BtnPrint_Click;
         }
+
 
         private void Type_CheckedChanged(object sender, EventArgs e)
         {
@@ -130,6 +134,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             if (model != null)
             {
+                btnPrint.Visible = true;
                 btnPayment.Visible = model.RemainingAmount > 0;
                 btnPayment.Tag = model;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
@@ -141,6 +146,7 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 btnPayment.Tag = null;
                 btnPayment.Visible = false;
+                btnPrint.Visible = false;
             }
         }
 
@@ -160,6 +166,20 @@ namespace IMS.Forms.Inventory.Transaction
                 {
                     var po = Program.container.GetInstance<PaymentCreateForm>();
                     po.SetData(orderModel, null);
+                    po.ShowDialog();
+                }
+            }
+        }
+
+        private void BtnPrint_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var orderModel = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel : null;//btnPayment.Tag as OrderModel;
+                if (orderModel != null)
+                {
+                    var po = Program.container.GetInstance<TransactionCreateForm>();
+                    po.SetDataForEdit((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType), orderModel.Id, true);
                     po.ShowDialog();
                 }
             }

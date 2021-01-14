@@ -53,9 +53,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.lblReferenceNo = new System.Windows.Forms.Label();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
-            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -309,6 +310,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnPrint);
             this.panel5.Controls.Add(this.btnPayment);
             this.panel5.Controls.Add(this.lblReferenceNo);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
@@ -316,6 +318,35 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(408, 49);
             this.panel5.TabIndex = 15;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Location = new System.Drawing.Point(305, 6);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(96, 33);
+            this.btnPrint.TabIndex = 16;
+            this.btnPrint.Text = "Print Receipt";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Visible = false;
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.Location = new System.Drawing.Point(203, 6);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(96, 33);
+            this.btnPayment.TabIndex = 15;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Visible = false;
             // 
             // lblReferenceNo
             // 
@@ -337,21 +368,6 @@
             this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.listHeaderTemplate1.Size = new System.Drawing.Size(769, 32);
             this.listHeaderTemplate1.TabIndex = 17;
-            // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(305, 6);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(96, 33);
-            this.btnPayment.TabIndex = 15;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Visible = false;
             // 
             // TransactionListUC
             // 
@@ -406,5 +422,6 @@
         private System.Windows.Forms.Label lblReferenceNo;
         private Common.Display.ListHeaderTemplate listHeaderTemplate1;
         private Common.Buttons.MenuButton btnPayment;
+        private Common.Buttons.MenuButton btnPrint;
     }
 }

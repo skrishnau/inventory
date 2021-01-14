@@ -111,6 +111,10 @@
     <Compile Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.Designer.cs">
       <DependentUpon>202101130826068_ForeignKeysMadeNullableInProduct1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101141840004_ReceiptGenDateAddedInOrderTable.cs" />
+    <Compile Include="Migrations\202101141840004_ReceiptGenDateAddedInOrderTable.Designer.cs">
+      <DependentUpon>202101141840004_ReceiptGenDateAddedInOrderTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.resx">
       <DependentUpon>202101130826068_ForeignKeysMadeNullableInProduct1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101141840004_ReceiptGenDateAddedInOrderTable.resx">
+      <DependentUpon>202101141840004_ReceiptGenDateAddedInOrderTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
