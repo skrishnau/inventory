@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionCreateForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtPaidAmount = new System.Windows.Forms.NumericUpDown();
@@ -59,6 +60,8 @@
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).BeginInit();
@@ -377,6 +380,16 @@
             this.saveFooterUC1.Size = new System.Drawing.Size(518, 35);
             this.saveFooterUC1.TabIndex = 9;
             // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
             // TransactionCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -446,5 +459,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private Common.Buttons.MenuButton btnPayment;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }

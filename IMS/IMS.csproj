@@ -39,6 +39,25 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleInjector, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleInjector.4.4.3\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
@@ -169,6 +188,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Transaction\TransactionListUC.Designer.cs">
       <DependentUpon>TransactionListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionPrintReceiptUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionPrintReceiptUC.Designer.cs">
+      <DependentUpon>TransactionPrintReceiptUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.cs">
       <SubType>UserControl</SubType>
@@ -560,6 +585,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
       <DependentUpon>BusinessUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -610,6 +636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionListUC.resx">
       <DependentUpon>TransactionListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionPrintReceiptUC.resx">
+      <DependentUpon>TransactionPrintReceiptUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
       <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
@@ -788,15 +817,21 @@
     <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierUC.resx">
       <DependentUpon>SupplierUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SalesTransactionReport.rdlc" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\IMS.Forms.Inventory.Transaction.TransactionCreateForm.datasource" />
+    <None Include="Properties\DataSources\IMS.Forms.Inventory.Transaction.TransactionPrintReceiptUC.datasource" />
+    <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderItemModel.datasource" />
+    <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1287,6 +1322,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Speed_24px_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

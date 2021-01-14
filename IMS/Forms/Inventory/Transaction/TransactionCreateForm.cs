@@ -13,6 +13,7 @@ using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
@@ -100,12 +101,14 @@ namespace IMS.Forms.Inventory.Transaction
         private void InitializeSaveFooter()
         {
             saveFooterUC1.pnlCheckout.Visible = true;
+            saveFooterUC1.pnlCheckoutAndPrint.Visible = true;
         }
 
         private void InitializeEvents()
         {
             saveFooterUC1.btnSave.Click += BtnSave_Click;
             saveFooterUC1.btnCancel.Click += BtnCancel_Click;
+            saveFooterUC1.btnCheckoutAndPrint.Click += BtnCheckoutAndPrint_Click;
             saveFooterUC1.btnCheckout.Click += BtnCheckout_Click;
             rbCredit.CheckedChanged += RbCredit_CheckedChanged;
 
@@ -116,6 +119,7 @@ namespace IMS.Forms.Inventory.Transaction
             btnPayment.Click += btnPayment_Click;
             cbClient.SelectedValueChanged += CbClient_SelectedValueChanged;
         }
+
 
         private void CbClient_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -253,7 +257,7 @@ namespace IMS.Forms.Inventory.Transaction
                 txtReceiptNo.Text = _appSettingService.GetReceiptNumber(_orderType);
             }
         }
-        private void Save(bool checkout = false)
+        private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
         {
             var msg = string.Empty;
             if (!_requiredFieldValidator.IsValid())
@@ -266,22 +270,26 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 PopupMessage.ShowInfoMessage(msg);
                 this.Focus();
-                return;
+                return null;
             }
             var model = GetData();
             if (model == null)
-                return;
+                return null;
             msg = _orderService.SaveOrder(model, checkout);
             if (string.IsNullOrEmpty(msg))
             {
                 PopupMessage.ShowSaveSuccessMessage();
-                this.Close();
+                if(closeFormAftherSave)
+                    this.Close();
+                return model;
             }
             else
             {
                 PopupMessage.ShowErrorMessage("Couln't save! Please contact admin.");
+
             }
             this.Focus();
+            return null;
         }
 
         private OrderModel GetData()
@@ -348,6 +356,7 @@ namespace IMS.Forms.Inventory.Transaction
             Save();
         }
 
+
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -357,6 +366,27 @@ namespace IMS.Forms.Inventory.Transaction
         {
             Save(true);
         }
+
+        private void BtnCheckoutAndPrint_Click(object sender, EventArgs e)
+        {
+             CheckOutAndPrint();
+            //var printBillTest = new PrintBillTest();
+            //printBillTest.ShowDialog();
+        }
+
+        private void CheckOutAndPrint()
+        {
+            var model = Save(true, false);
+            if (model != null)
+            {
+                this.Controls.Clear();
+                //var orders = _orderService.GetAllOrders(OrderTypeEnum.Sale);
+                //var order = _orderService.GetOrderForDetailView(orders.FirstOrDefault()?.Id ?? 0);
+                var transactionPrintBillUc = new TransactionPrintReceiptUC(model);
+                this.Controls.Add(transactionPrintBillUc);
+            }
+        }
+        
 
         private void LblClient_DoubleClick(object sender, EventArgs e)
         {
@@ -392,6 +422,7 @@ namespace IMS.Forms.Inventory.Transaction
                 PopupMessage.ShowInfoMessage(ex.Message);
             }
         }
+
         #endregion
     }
 }

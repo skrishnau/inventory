@@ -67,6 +67,7 @@
             this.lblCompanyName = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -357,6 +358,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.reportViewer1);
             this.panel1.Controls.Add(this.panel8);
             this.panel1.Controls.Add(this.splitter2);
             this.panel1.Controls.Add(this.pnlTopUnderstockProducts);
@@ -475,11 +477,12 @@
             // 
             // pnlCompany
             // 
-            this.pnlCompany.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(234)))), ((int)(((byte)(217)))));
+            this.pnlCompany.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlCompany.Controls.Add(this.lblCompanyName);
             this.pnlCompany.Controls.Add(this.lblAddress);
             this.pnlCompany.Controls.Add(this.lblPhone);
             this.pnlCompany.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlCompany.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.pnlCompany.Location = new System.Drawing.Point(0, 0);
             this.pnlCompany.Name = "pnlCompany";
             this.pnlCompany.Size = new System.Drawing.Size(877, 67);
@@ -519,6 +522,16 @@
             this.lblPhone.TabIndex = 1;
             this.lblPhone.Text = "Phone";
             this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.reportViewer1.Location = new System.Drawing.Point(481, 0);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Remote;
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.Size = new System.Drawing.Size(396, 219);
+            this.reportViewer1.TabIndex = 3;
             // 
             // DashboardUC
             // 
@@ -589,5 +602,6 @@
         private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblPhone;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

@@ -35,8 +35,12 @@
             this.btnCheckout = new System.Windows.Forms.Button();
             this.pnlCheckout = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlCheckoutAndPrint = new System.Windows.Forms.Panel();
+            this.btnCheckoutAndPrint = new System.Windows.Forms.Button();
+            this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlCheckout.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.pnlCheckoutAndPrint.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -112,11 +116,45 @@
             this.panel1.Size = new System.Drawing.Size(200, 27);
             this.panel1.TabIndex = 14;
             // 
+            // pnlCheckoutAndPrint
+            // 
+            this.pnlCheckoutAndPrint.AutoSize = true;
+            this.pnlCheckoutAndPrint.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.pnlCheckoutAndPrint.Controls.Add(this.btnCheckoutAndPrint);
+            this.pnlCheckoutAndPrint.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlCheckoutAndPrint.Location = new System.Drawing.Point(374, 4);
+            this.pnlCheckoutAndPrint.Name = "pnlCheckoutAndPrint";
+            this.pnlCheckoutAndPrint.Size = new System.Drawing.Size(119, 27);
+            this.pnlCheckoutAndPrint.TabIndex = 15;
+            this.pnlCheckoutAndPrint.Visible = false;
+            // 
+            // btnCheckoutAndPrint
+            // 
+            this.btnCheckoutAndPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnCheckoutAndPrint.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCheckoutAndPrint.Location = new System.Drawing.Point(0, 0);
+            this.btnCheckoutAndPrint.Name = "btnCheckoutAndPrint";
+            this.btnCheckoutAndPrint.Size = new System.Drawing.Size(119, 27);
+            this.btnCheckoutAndPrint.TabIndex = 12;
+            this.btnCheckoutAndPrint.Text = "Checkout & Print";
+            this.btnCheckoutAndPrint.UseVisualStyleBackColor = true;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter3.Location = new System.Drawing.Point(493, 4);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(10, 27);
+            this.splitter3.TabIndex = 16;
+            this.splitter3.TabStop = false;
+            // 
             // SaveFooterUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Controls.Add(this.pnlCheckoutAndPrint);
+            this.Controls.Add(this.splitter3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlCheckout);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -125,6 +163,7 @@
             this.Size = new System.Drawing.Size(598, 35);
             this.pnlCheckout.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.pnlCheckoutAndPrint.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +177,8 @@
         protected internal System.Windows.Forms.Button btnCheckout;
         protected internal System.Windows.Forms.Panel pnlCheckout;
         private System.Windows.Forms.Panel panel1;
+        protected internal System.Windows.Forms.Panel pnlCheckoutAndPrint;
+        protected internal System.Windows.Forms.Button btnCheckoutAndPrint;
+        private System.Windows.Forms.Splitter splitter3;
     }
 }
