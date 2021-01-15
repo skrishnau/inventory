@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Core.Reports
 {
+    public class LedgerMasterModel
+    {
+        public LedgerMasterModel()
+        {
+            LedgerData = new List<LedgerModel>();
+        }
+        public List<LedgerModel> LedgerData { get; set; }
+        public string DebitSum { get; set; }
+        public string CreditSum { get; set; }
+        public string BalanceSum { get; set; }
+        public int DrCr { get; set; }
+        public string DrCrString { get; set; }
+    }
     public class LedgerModel
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public string Particulars { get; set; }
         public string Debit { get; set; }
         public string Credit { get; set; }

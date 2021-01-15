@@ -179,6 +179,7 @@
             this.colDrCr.HeaderText = "Dr/Cr";
             this.colDrCr.Name = "colDrCr";
             this.colDrCr.ReadOnly = true;
+            this.colDrCr.Width = 60;
             // 
             // colBalance
             // 

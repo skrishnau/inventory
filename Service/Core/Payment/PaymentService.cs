@@ -2,6 +2,7 @@
 using Infrastructure.Context;
 using Infrastructure.Entities.Orders;
 using Infrastructure.Entities.Users;
+using Service.Core.Orders;
 using Service.DbEventArgs;
 using Service.Listeners;
 using System;
@@ -49,7 +50,19 @@ namespace Service.Core.Payment
                 {
                     user = _context.User.Find(model.UserId);
                 }
+                var tempOrder = new Order
+                {
+                    TotalAmount = 0,
+                    PaidAmount = model.Amount,
+                    ReferenceNumber = $"Paid by {model.PaidBy}",
+                    UserId = user?.Id, //model.UserId,
+                    Id = order?.Id??0,
+                    OrderType = "Sale",
+                };
+                OrderService.UpdateTransactionWithoutCommit(_context, tempOrder.MapToModel());
                 _context.SaveChanges();
+
+
 
                 if (order != null)
                 {

@@ -18,7 +18,7 @@ namespace IMS.Forms.Inventory.Reports.All
         private readonly IReportService _reportService;
         private readonly IUserService _userService;
 
-        private List<LedgerModel> _ledgerList = new List<LedgerModel>();
+        private LedgerMasterModel _ledgerMaster = new LedgerMasterModel();
 
         BindingSource _bindingSource;
         public LedgerUC(IReportService reportService, IUserService userService)
@@ -55,31 +55,15 @@ namespace IMS.Forms.Inventory.Reports.All
         private void DgvLedger_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dgvLedger.DataBindingComplete -= DgvLedger_DataBindingComplete;
-            foreach (DataGridViewRow row in dgvLedger.Rows)
-            {
-                var data = row.DataBoundItem as LedgerModel;
-                if (data != null)
-                {
-                    //row.Cells[colBalance.Index].ValueType = typeof(string);
-                    //row.Cells[colBalance.Index].Value = data.DrCr < 0 ? $"({data.Balance})" : data.Balance.ToString();
-                }
-            }
-
-            //If you want to do some formating on the footer row
             int rowIndex = dgvLedger.Rows.GetLastRow(DataGridViewElementStates.Visible);
-            if (rowIndex <= 0)
+            if (rowIndex > 0)
             {
-                return;
-            }
-            dgvLedger.Rows[rowIndex].Cells[colParticulars.Index].Value = "Total";
-            dgvLedger.Rows[rowIndex].Cells[colDate.Index].Value = "";
-            //dgvLedger.Rows[rowIndex].Cells[colBalance.Index].Value = _ledgerList.Where(x => !x.IsManualNewRow).Select(x => (x.DrCr * x.Balance)).Sum();
-            //dgvLedger.Rows[rowIndex].Cells[colCredit.Index].Value = _ledgerList.Where(x => !x.IsManualNewRow).Sum(x => x.Credit);
-            //dgvLedger.Rows[rowIndex].Cells[colDebit.Index].Value = _ledgerList.Where(x => !x.IsManualNewRow).Sum(x => x.Debit);
+                dgvLedger.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+                dgvLedger.Rows[rowIndex].DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+                //dgvLedger.Rows[rowIndex].DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Bold);//
 
-            dgvLedger.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightGray;
-            dgvLedger.Rows[rowIndex].DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-            //dgvLedger.Rows[rowIndex].DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Bold);//
+                // make bold if Dr
+            }
             dgvLedger.DataBindingComplete += DgvLedger_DataBindingComplete;
         }
 
@@ -104,10 +88,19 @@ namespace IMS.Forms.Inventory.Reports.All
             var customerIdStr = cbCustomer.SelectedValue?.ToString() ?? "";
             int customerId;
             int.TryParse(customerIdStr, out customerId);
-            _ledgerList = _reportService.GetLedger(customerId, from, to);
-            _ledgerList.Add(new LedgerModel() { IsManualNewRow = true });
-            _ledgerList.Add(new LedgerModel() { IsManualNewRow = true });
-            _bindingSource.DataSource = _ledgerList;
+            _ledgerMaster = _reportService.GetLedger(customerId, from, to);
+
+            _ledgerMaster.LedgerData.Add(new LedgerModel()
+            {
+                IsManualNewRow = true,
+                Balance = _ledgerMaster.BalanceSum,
+                Credit = _ledgerMaster.CreditSum,
+                Debit = _ledgerMaster.DebitSum,
+                DrCr = _ledgerMaster.DrCr,
+                DrCrString = _ledgerMaster.DrCrString,
+                Particulars ="Total"
+            });
+            _bindingSource.DataSource = _ledgerMaster.LedgerData;
             _bindingSource.ResetBindings(false);
             //dgvLedger.DataSource = ledgerList;
             //dgvLedger.DataBindings.

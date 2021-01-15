@@ -9,7 +9,7 @@ namespace Service.Core.Reports
 {
     public interface IReportService
     {
-        List<LedgerModel> GetLedger(int customerId, DateTime from, DateTime to);
+        LedgerMasterModel GetLedger(int customerId, DateTime from, DateTime to);
 
     }
 }

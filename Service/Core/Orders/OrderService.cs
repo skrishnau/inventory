@@ -132,7 +132,7 @@ namespace Service.Core.Orders
             //TODO;;; get the 
             using (var _context = new DatabaseContext())
             {
-                var orders = _context.Order.Where(x=> x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
+                var orders = _context.Order.Where(x => x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
                 //var saleType = OrderTypeEnum.Sale.ToString();
                 ////var invoice = TransactionTypeEnum
                 //var transactions = _context.Transaction
@@ -170,7 +170,7 @@ namespace Service.Core.Orders
                 {
                     // makechecout
                     MakeCheckout(_context, ref entity, ref orderModel);
-                    UpdateTransactionWithoutCommit(_context, ref orderModel, ref entity);
+                    UpdateTransactionWithoutCommit(_context, orderModel);
                 }
 
                 if (entity.Id == 0)
@@ -190,7 +190,7 @@ namespace Service.Core.Orders
                         item.WarehouseId = entity.WarehouseId;
                     }
                 }
-                if(!isEditMode)
+                if (!isEditMode)
                     _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
@@ -200,7 +200,7 @@ namespace Service.Core.Orders
                 _listener.TriggerPackageUpdateEvent(null, null);
                 _listener.TriggerUserUpdateEvent(null, null);
                 var newOrder = _context.Order.Find(entity.Id)?.MapToModel(true);
-                return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true};
+                return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true };
             }
         }
 
@@ -219,7 +219,7 @@ namespace Service.Core.Orders
         }
 
 
-        private void UpdateTransactionWithoutCommit(DatabaseContext _context, ref OrderModel orderModel, ref Order entity)
+        public static void UpdateTransactionWithoutCommit(DatabaseContext _context, OrderModel orderModel)
         {
             var debit = 0M;
             var credit = 0M;
@@ -244,9 +244,9 @@ namespace Service.Core.Orders
                 Debit = debit, //orderModel.TotalAmount,
                 DrCr = Math.Sign(balance),
                 IsVoid = false,
-                OrderId = orderModel.Id,
-                Particulars = orderModel.Note,
-                UserId = orderModel.UserId,
+                OrderId = orderModel.Id > 0 ? (int?)orderModel.Id : null,
+                Particulars = orderModel.ReferenceNumber,
+                UserId = orderModel.UserId > 0 ? (int?)orderModel.UserId : null,
                 Type = orderModel.OrderType,
             };
             _context.Transaction.Add(transaction);
@@ -548,11 +548,11 @@ namespace Service.Core.Orders
                                 CategoryId = null,
                                 BaseUomId = null,
                                 CreatedAt = DateTime.Now,
+                                UpdatedAt = DateTime.Now,
                                 //PackageId = entity.PackageId > 0 ? entity.PackageId: 0//item.PackageId,
                                 WarehouseId = null,
                                 SupplyPrice = order.OrderType == OrderTypeEnum.Purchase.ToString() ? item.Rate : 0,
                                 RetailPrice = order.OrderType == OrderTypeEnum.Sale.ToString() ? item.Rate : 0,
-                                UpdatedAt = DateTime.Now,
                             };
                             if (entity.PackageId > 0)
                                 product.PackageId = entity.PackageId;
@@ -573,7 +573,7 @@ namespace Service.Core.Orders
                 // No need to handle update cause entity is already assigned above { ....MapToEntity(..)}
 
                 // modify product inStock & OnHold quantity
-                if(checkout)
+                if (checkout)
                     UpdateProductForOrderItemSaveWithoutCommit(_context, order, entity);
             }
 
@@ -589,9 +589,16 @@ namespace Service.Core.Orders
             if (product != null)
             {
                 if (order.OrderType == OrderTypeEnum.Sale.ToString())
+                {
+                    product.RetailPrice = entity.Rate;
                     product.InStockQuantity -= entity.UnitQuantity;
+                }
                 else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
-                    product.InStockQuantity -= entity.UnitQuantity;
+                {
+                    product.SupplyPrice = entity.Rate;
+                    product.InStockQuantity += entity.UnitQuantity;
+                }
+                product.UpdatedAt = DateTime.Now;
             }
         }
 

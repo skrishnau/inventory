@@ -16,7 +16,16 @@ namespace ViewModel.Core.Orders
         public string Order { get; set; }
         public string User { get; set; }
 
+        /// <summary>
+        /// Dr amt in case of sales , Cr amt in case of purchase
+        /// </summary>
+        public decimal TotalAmount { get; set; }
+        /// <summary>
+        /// Paid Amount
+        /// Cr amt in case of sales, Dr. amt in case of purchase
+        /// </summary>
         public decimal Amount { get; set; }
+
         public string PaymentMethod { get; set; }
         public DateTime Date { get; set; }
         public string PaidBy { get; set; }

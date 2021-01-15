@@ -34,7 +34,7 @@
             // bodyTemplate
             // 
             this.bodyTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bodyTemplate.HeadingText = "Heading";
+            this.bodyTemplate.HeadingText = "Reports";
             this.bodyTemplate.HeadingVisible = true;
             this.bodyTemplate.Location = new System.Drawing.Point(0, 0);
             this.bodyTemplate.Name = "bodyTemplate";

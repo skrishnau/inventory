@@ -31,6 +31,7 @@ namespace IMS.Forms.Inventory.Reports
 
         private void ReportsUC_Load(object sender, EventArgs e)
         {
+            this.bodyTemplate.SubHeadingText = "";
             var sidebarUc = new ReportSidebarUC();
             this.bodyTemplate.pnlSideBar.Controls.Add(sidebarUc);
 
@@ -40,7 +41,7 @@ namespace IMS.Forms.Inventory.Reports
         private void BtnLedger_Click(object sender, EventArgs e)
         {
             var ledgerUc = new LedgerUC(_reportService, _userService);
-            this.bodyTemplate.HeadingText = "Ledger";
+            this.bodyTemplate.SubHeadingText = "Ledger";
             this.bodyTemplate.pnlBody.Controls.Add(ledgerUc);
         }
     }
