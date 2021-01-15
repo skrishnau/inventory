@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
 using ViewModel.Enums;
@@ -18,7 +19,7 @@ namespace Service.Core.Orders
         /// </summary>
         /// <param name="purchaseOrderModel"></param>
         /// <param name="checkout">The order is processed and receipt generated at the same time</param>
-        string SaveOrder(OrderModel purchaseOrderModel, bool checkout); 
+        ResponseModel<OrderModel> SaveOrder(OrderModel purchaseOrderModel, bool checkout); 
 
         List<OrderModel> GetAllOrders(OrderTypeEnum orderType);
 

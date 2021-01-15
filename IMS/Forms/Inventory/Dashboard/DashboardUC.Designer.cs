@@ -53,7 +53,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.panel8 = new System.Windows.Forms.Panel();
             this.dgvDueReceivables = new System.Windows.Forms.DataGridView();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,11 +62,13 @@
             this.colDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlCompany = new System.Windows.Forms.Panel();
             this.lblCompanyName = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -80,6 +81,7 @@
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDueReceivables)).BeginInit();
             this.pnlCompany.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopUnderstockProducts
@@ -125,7 +127,7 @@
             this.panel2.Controls.Add(this.dtEnd);
             this.panel2.Controls.Add(this.dtStart);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 67);
+            this.panel2.Location = new System.Drawing.Point(0, 49);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1027, 38);
             this.panel2.TabIndex = 2;
@@ -349,7 +351,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel7, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 105);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 87);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel1.RowCount = 1;
@@ -364,21 +366,10 @@
             this.panel1.Controls.Add(this.pnlTopUnderstockProducts);
             this.panel1.Controls.Add(this.reportViewer1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 195);
+            this.panel1.Location = new System.Drawing.Point(0, 177);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1027, 252);
             this.panel1.TabIndex = 0;
-            // 
-            // reportViewer1
-            // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "IMS.Reports.TransactionBarReportUC.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.ShowToolBar = false;
-            this.reportViewer1.Size = new System.Drawing.Size(460, 252);
-            this.reportViewer1.TabIndex = 3;
             // 
             // panel8
             // 
@@ -478,10 +469,21 @@
             this.splitter2.TabIndex = 2;
             this.splitter2.TabStop = false;
             // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "IMS.Reports.TransactionBarReportUC.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.ShowToolBar = false;
+            this.reportViewer1.Size = new System.Drawing.Size(460, 252);
+            this.reportViewer1.TabIndex = 3;
+            // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 190);
+            this.splitter1.Location = new System.Drawing.Point(0, 172);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(1027, 5);
             this.splitter1.TabIndex = 4;
@@ -489,50 +491,63 @@
             // 
             // pnlCompany
             // 
-            this.pnlCompany.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlCompany.BackColor = System.Drawing.Color.Gray;
+            this.pnlCompany.Controls.Add(this.panel9);
             this.pnlCompany.Controls.Add(this.lblCompanyName);
-            this.pnlCompany.Controls.Add(this.lblAddress);
-            this.pnlCompany.Controls.Add(this.lblPhone);
             this.pnlCompany.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlCompany.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.pnlCompany.ForeColor = System.Drawing.Color.White;
             this.pnlCompany.Location = new System.Drawing.Point(0, 0);
             this.pnlCompany.Name = "pnlCompany";
-            this.pnlCompany.Size = new System.Drawing.Size(1027, 67);
+            this.pnlCompany.Padding = new System.Windows.Forms.Padding(4);
+            this.pnlCompany.Size = new System.Drawing.Size(1027, 49);
             this.pnlCompany.TabIndex = 3;
             // 
             // lblCompanyName
             // 
             this.lblCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCompanyName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompanyName.Location = new System.Drawing.Point(0, 0);
+            this.lblCompanyName.Location = new System.Drawing.Point(4, 4);
             this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(1027, 27);
+            this.lblCompanyName.Size = new System.Drawing.Size(1019, 41);
             this.lblCompanyName.TabIndex = 0;
             this.lblCompanyName.Text = "My Company";
             this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblAddress
             // 
-            this.lblAddress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblAddress.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddress.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblAddress.Location = new System.Drawing.Point(0, 27);
+            this.lblAddress.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblAddress.Location = new System.Drawing.Point(0, 0);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(1027, 20);
+            this.lblAddress.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblAddress.Size = new System.Drawing.Size(273, 19);
             this.lblAddress.TabIndex = 2;
             this.lblAddress.Text = "Address";
-            this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblPhone
             // 
-            this.lblPhone.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblPhone.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblPhone.Location = new System.Drawing.Point(0, 47);
+            this.lblPhone.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPhone.ForeColor = System.Drawing.Color.White;
+            this.lblPhone.Location = new System.Drawing.Point(0, 19);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(1027, 20);
+            this.lblPhone.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblPhone.Size = new System.Drawing.Size(273, 20);
             this.lblPhone.TabIndex = 1;
             this.lblPhone.Text = "Phone";
-            this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.lblPhone);
+            this.panel9.Controls.Add(this.lblAddress);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel9.Location = new System.Drawing.Point(750, 4);
+            this.panel9.Name = "panel9";
+            this.panel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panel9.Size = new System.Drawing.Size(273, 41);
+            this.panel9.TabIndex = 2;
             // 
             // DashboardUC
             // 
@@ -558,6 +573,7 @@
             this.panel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDueReceivables)).EndInit();
             this.pnlCompany.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -604,5 +620,6 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblPhone;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.Panel panel9;
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Core\Orders\SalePurchaseAmountModel.cs" />
     <Compile Include="Core\Orders\TransactionSummaryModel.cs" />
     <Compile Include="Core\Reports\LedgerModel.cs" />
+    <Compile Include="Core\ResponseModel.cs" />
     <Compile Include="Core\Settings\AppSettingModel.cs" />
     <Compile Include="Core\Bills\BillFormatModel.cs" />
     <Compile Include="Core\Bills\BillGenerationModel.cs" />

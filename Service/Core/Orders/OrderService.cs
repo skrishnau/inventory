@@ -16,6 +16,7 @@ using Service.Core.Settings;
 using Infrastructure.Entities.Users;
 using Service.Core.Users;
 using Infrastructure.Entities;
+using ViewModel.Core;
 
 namespace Service.Core.Orders
 {
@@ -54,7 +55,7 @@ namespace Service.Core.Orders
                     .Include(x => x.OrderItems);
                 if (orderType != OrderTypeEnum.All)
                     purchases = purchases.Where(x => x.OrderType == type);
-                return purchases.OrderByDescending(x=>x.CompletedDate).ThenByDescending(x=>x.CreatedAt)
+                return purchases.OrderByDescending(x => x.CompletedDate).ThenByDescending(x => x.CreatedAt)
                     .AsEnumerable().MapToModel();// OrderMapper.MapToOrderModel(purchases);
             }
         }
@@ -140,7 +141,7 @@ namespace Service.Core.Orders
 
         #region Set Functions
 
-        public string SaveOrder(OrderModel orderModel, bool checkout)
+        public ResponseModel<OrderModel> SaveOrder(OrderModel orderModel, bool checkout)
         {
             var now = DateTime.Now;
             var args = BaseEventArgs<OrderModel>.Instance;
@@ -153,7 +154,7 @@ namespace Service.Core.Orders
 
                 SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
 
-                
+
 
                 if (checkout)
                 {
@@ -183,10 +184,13 @@ namespace Service.Core.Orders
                 _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
+
                 _listener.TriggerOrderUpdateEvent(null, args);
                 _listener.TriggerProductUpdateEvent(null, null);
                 _listener.TriggerPackageUpdateEvent(null, null);
-                return string.Empty;
+                _listener.TriggerUserUpdateEvent(null, null);
+                var newOrder = _context.Order.Find(entity.Id)?.MapToModel();
+                return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true};
             }
         }
 
@@ -196,12 +200,14 @@ namespace Service.Core.Orders
             entity.IsVerified = true;
             entity.CompletedDate = DateTime.Now;
             entity.VerifiedDate = DateTime.Now;
-            if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
-                SubtractIssuedItemsFromWarehouse(entity.OrderItems);
-            else if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
-                AddReceivedItemsToWarehouse(entity.OrderItems, DateTime.Now);
+            //if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
+            //    SubtractIssuedItemsFromWarehouse(entity.OrderItems);
+            //else if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
+            //    AddReceivedItemsToWarehouse(entity.OrderItems, DateTime.Now);
+
 
         }
+
 
         private void UpdateTransactionWithoutCommit(DatabaseContext _context, ref OrderModel orderModel, ref Order entity)
         {
@@ -284,7 +290,7 @@ namespace Service.Core.Orders
                 DeletedAt = null,
                 DOB = null,
                 DeliveryAddress = orderModel.Address,
-                Use = true, 
+                Use = true,
                 //PaidAmount = checkout ? orderModel.PaidAmount : 0,
                 //TotalAmount = checkout ? orderModel.TotalAmount : 0,
                 UserType = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? UserTypeEnum.Customer.ToString() : UserTypeEnum.Supplier.ToString(),
@@ -442,11 +448,11 @@ namespace Service.Core.Orders
             }
         }
 
-        private string SaveOrderItemsWithoutCommit(DatabaseContext _context, Order poEntity, List<OrderItemModel> items)
+        private string SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items)
         {
             var newProductList = new List<Product>();
             var newPackageList = new List<Package>();
-            if (poEntity == null)
+            if (order == null)
             {
                 return "The Purchase Order doesn't exist.";
             }
@@ -471,17 +477,17 @@ namespace Service.Core.Orders
                         item.Total = item.Rate * item.UnitQuantity;
                     }
                 }
-                if(item.PackageId == 0)
+                if (item.PackageId == 0)
                 {
                     var packageEntity = _context.Package.FirstOrDefault(x => x.Name == item.Package);
-                    if(packageEntity != null)
+                    if (packageEntity != null)
                     {
                         item.PackageId = packageEntity.Id;
                     }
                 }
             }
 
-            var dbItems = poEntity.OrderItems.Where(x => x.OrderId == poEntity.Id).ToList();
+            var dbItems = order.OrderItems.Where(x => x.OrderId == order.Id).ToList();
             // first remove those that are not in the model list
             for (var i = 0; i < dbItems.Count(); i++)
             {
@@ -489,7 +495,7 @@ namespace Service.Core.Orders
                 var stillExists = items.FirstOrDefault(x => x.Id == entity.Id);
                 if (stillExists == null)
                 {
-                    poEntity.OrderItems.Remove(entity);
+                    order.OrderItems.Remove(entity);
                 }
             }
             // second add/update
@@ -520,7 +526,7 @@ namespace Service.Core.Orders
                     if (entity.ProductId == 0)
                     {
                         var productInNewList = newProductList.FirstOrDefault(x => x.Name.Equals(item.Product, StringComparison.OrdinalIgnoreCase));
-                        if(productInNewList == null)
+                        if (productInNewList == null)
                         {
                             // create prouct 
                             var product = new Product
@@ -533,8 +539,8 @@ namespace Service.Core.Orders
                                 CreatedAt = DateTime.Now,
                                 //PackageId = entity.PackageId > 0 ? entity.PackageId: 0//item.PackageId,
                                 WarehouseId = null,
-                                SupplyPrice = poEntity.OrderType == OrderTypeEnum.Purchase.ToString() ? item.Rate : 0,
-                                RetailPrice = poEntity.OrderType == OrderTypeEnum.Sale.ToString() ? item.Rate : 0,
+                                SupplyPrice = order.OrderType == OrderTypeEnum.Purchase.ToString() ? item.Rate : 0,
+                                RetailPrice = order.OrderType == OrderTypeEnum.Sale.ToString() ? item.Rate : 0,
                                 UpdatedAt = DateTime.Now,
                             };
                             if (entity.PackageId > 0)
@@ -549,15 +555,32 @@ namespace Service.Core.Orders
                             entity.Product = productInNewList;
                         }
                     }
-                    
+
                     // add
-                    poEntity.OrderItems.Add(entity);
+                    order.OrderItems.Add(entity);
                 }
                 // No need to handle update cause entity is already assigned above { ....MapToEntity(..)}
+
+                // modify product inStock & OnHold quantity
+                UpdateProductForOrderItemSaveWithoutCommit(_context, order, entity);
             }
 
-            poEntity.TotalAmount = items.Sum(x => x.Total);
+            order.TotalAmount = items.Sum(x => x.Total);
             return string.Empty;
+        }
+
+        private void UpdateProductForOrderItemSaveWithoutCommit(DatabaseContext _context, Order order, OrderItem entity)
+        {
+            var product = entity.Product;
+            if (product == null)
+                product = _context.Product.Find(entity.ProductId);
+            if (product != null)
+            {
+                if (order.OrderType == OrderTypeEnum.Sale.ToString())
+                    product.InStockQuantity -= entity.UnitQuantity;
+                else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
+                    product.InStockQuantity -= entity.UnitQuantity;
+            }
         }
 
         public string SavePurchaseOrderItems(int orderId, List<InventoryUnitModel> items)
@@ -649,16 +672,16 @@ namespace Service.Core.Orders
         {
             var from = DateTime.Now.Date.AddDays(-30);
             var to = DateTime.Now.Date.AddDays(1);
-            using(var _context = new DatabaseContext())
+            using (var _context = new DatabaseContext())
             {
                 return _context.Order
                     .Where(x => x.IsCompleted && x.CompletedDate >= from && x.CompletedDate <= to)
-                    .GroupBy(x=>new {CompletedDate = DbFunctions.TruncateTime(x.CompletedDate), x.OrderType })
-                    .Select(x=> new
+                    .GroupBy(x => new { CompletedDate = DbFunctions.TruncateTime(x.CompletedDate), x.OrderType })
+                    .Select(x => new
                     {
                         x.Key.CompletedDate,
                         x.Key.OrderType,
-                        PurchaseAmount = x.Where(y=> x.Key.OrderType == "Purchase").Sum(y=>(decimal?)y.TotalAmount),
+                        PurchaseAmount = x.Where(y => x.Key.OrderType == "Purchase").Sum(y => (decimal?)y.TotalAmount),
                         SaleAmount = x.Where(y => x.Key.OrderType == "Sale").Sum(y => (decimal?)y.TotalAmount),
                     })
                     .AsEnumerable()

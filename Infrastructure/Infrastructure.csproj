@@ -83,37 +83,9 @@
     <Compile Include="Entities\Users\Permission.cs" />
     <Compile Include="Entities\Users\Role.cs" />
     <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\202101081808372_Init_Migration.cs" />
-    <Compile Include="Migrations\202101081808372_Init_Migration.Designer.cs">
-      <DependentUpon>202101081808372_Init_Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101090712531_ProductTableLabelRemoved.cs" />
-    <Compile Include="Migrations\202101090712531_ProductTableLabelRemoved.Designer.cs">
-      <DependentUpon>202101090712531_ProductTableLabelRemoved.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101091252006_PaidAmountAddedInUserTable.cs" />
-    <Compile Include="Migrations\202101091252006_PaidAmountAddedInUserTable.Designer.cs">
-      <DependentUpon>202101091252006_PaidAmountAddedInUserTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101101714290_TransactionTableAdded.cs" />
-    <Compile Include="Migrations\202101101714290_TransactionTableAdded.Designer.cs">
-      <DependentUpon>202101101714290_TransactionTableAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101111752174_TransactionAndUserTableUpdated.cs" />
-    <Compile Include="Migrations\202101111752174_TransactionAndUserTableUpdated.Designer.cs">
-      <DependentUpon>202101111752174_TransactionAndUserTableUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101130819002_ForeignKeysMadeNullableInProduct.cs" />
-    <Compile Include="Migrations\202101130819002_ForeignKeysMadeNullableInProduct.Designer.cs">
-      <DependentUpon>202101130819002_ForeignKeysMadeNullableInProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.cs" />
-    <Compile Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.Designer.cs">
-      <DependentUpon>202101130826068_ForeignKeysMadeNullableInProduct1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202101141840004_ReceiptGenDateAddedInOrderTable.cs" />
-    <Compile Include="Migrations\202101141840004_ReceiptGenDateAddedInOrderTable.Designer.cs">
-      <DependentUpon>202101141840004_ReceiptGenDateAddedInOrderTable.cs</DependentUpon>
+    <Compile Include="Migrations\202101150442214_InitMigration.cs" />
+    <Compile Include="Migrations\202101150442214_InitMigration.Designer.cs">
+      <DependentUpon>202101150442214_InitMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,29 +104,8 @@
     <Folder Include="Entities\Items\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101081808372_Init_Migration.resx">
-      <DependentUpon>202101081808372_Init_Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101090712531_ProductTableLabelRemoved.resx">
-      <DependentUpon>202101090712531_ProductTableLabelRemoved.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101091252006_PaidAmountAddedInUserTable.resx">
-      <DependentUpon>202101091252006_PaidAmountAddedInUserTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101101714290_TransactionTableAdded.resx">
-      <DependentUpon>202101101714290_TransactionTableAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101111752174_TransactionAndUserTableUpdated.resx">
-      <DependentUpon>202101111752174_TransactionAndUserTableUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101130819002_ForeignKeysMadeNullableInProduct.resx">
-      <DependentUpon>202101130819002_ForeignKeysMadeNullableInProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101130826068_ForeignKeysMadeNullableInProduct1.resx">
-      <DependentUpon>202101130826068_ForeignKeysMadeNullableInProduct1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101141840004_ReceiptGenDateAddedInOrderTable.resx">
-      <DependentUpon>202101141840004_ReceiptGenDateAddedInOrderTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101150442214_InitMigration.resx">
+      <DependentUpon>202101150442214_InitMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

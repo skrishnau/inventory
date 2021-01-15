@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
 using ViewModel.Core.Users;
@@ -122,6 +123,7 @@ namespace IMS.Forms.Inventory.Transaction
             dgvItems.AmountChanged += DgvItems_AmountChnanged;
             btnPayment.Click += btnPayment_Click;
             cbClient.SelectedValueChanged += CbClient_SelectedValueChanged;
+            
         }
 
 
@@ -198,6 +200,9 @@ namespace IMS.Forms.Inventory.Transaction
                 cbClient.ValueMember = "Id";
                 cbClient.DataSource = list;
             }
+            cbClient.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbClient.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            cbClient.AutoCompleteCustomSource.AddRange(list.Select(x => x.Name).ToArray());
         }
 
         private void PopulateModel(OrderModel model)
@@ -271,16 +276,16 @@ namespace IMS.Forms.Inventory.Transaction
         }
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
         {
-            var msg = string.Empty;
+            ResponseModel<OrderModel> msg = new ResponseModel<OrderModel>();
             if (!_requiredFieldValidator.IsValid())
-                msg += "Some required Fields are empty\n";
+                msg.Message += "Some required Fields are empty\n";
             if (!_greaterThanZeroFieldValidator.IsValid())
-                msg += "Some Fields are less than zero\n";
+                msg.Message += "Some Fields are less than zero\n";
             if (txtPaidAmount.Value > txtTotal.Value)
-                msg += "Paid amount cannot be greater than total amount";
-            if (!string.IsNullOrEmpty(msg))
+                msg.Message += "Paid amount cannot be greater than total amount";
+            if (!string.IsNullOrEmpty(msg.Message))
             {
-                PopupMessage.ShowInfoMessage(msg);
+                PopupMessage.ShowInfoMessage(msg.Message);
                 this.Focus();
                 return null;
             }
@@ -288,16 +293,16 @@ namespace IMS.Forms.Inventory.Transaction
             if (model == null)
                 return null;
             msg = _orderService.SaveOrder(model, checkout);
-            if (string.IsNullOrEmpty(msg))
+            if (string.IsNullOrEmpty(msg.Message))
             {
                 PopupMessage.ShowSaveSuccessMessage();
                 if(closeFormAftherSave)
                     this.Close();
-                return model;
+                return msg.Data;
             }
             else
             {
-                PopupMessage.ShowErrorMessage("Couln't save! Please contact admin.");
+                PopupMessage.ShowErrorMessage(msg.Message);//"Couln't save! Please contact admin.");
 
             }
             this.Focus();
@@ -351,7 +356,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void _listener_CustomerUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
             PopulateClientCombo();
-            cbClient.SelectedValue = e.Model == null ? 0 : e.Model.Id;
+            cbClient.SelectedValue = e?.Model == null ? 0 : e.Model.Id;
         }
 
 

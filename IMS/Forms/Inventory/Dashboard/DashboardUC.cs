@@ -65,6 +65,7 @@ namespace IMS.Forms.Inventory.Dashboard
         {
             List<SalePurchaseAmountModel> amountSummary = _orderService.GetSalePurchaseAmountForBarDiagram();
             ReportDataSource reportDataSource = new ReportDataSource("SalePurchaseAmountDataset", amountSummary);
+            this.reportViewer1.LocalReport.DataSources.Clear();
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 
             this.reportViewer1.RefreshReport();
@@ -87,7 +88,7 @@ namespace IMS.Forms.Inventory.Dashboard
         {
             PopulateDueReceivables();
             PopulateBarDiagram();
-
+            PopulateTransactionSummary();
         }
 
         // uncomment to give colors to cells 
