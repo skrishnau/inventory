@@ -390,7 +390,7 @@
             this.btnSaleTransactionList.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaleTransactionList.FlatAppearance.BorderSize = 0;
             this.btnSaleTransactionList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaleTransactionList.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
+            this.btnSaleTransactionList.Image = global::IMS.Properties.Resources.icons8_ledger_24;
             this.btnSaleTransactionList.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSaleTransactionList.Location = new System.Drawing.Point(189, 15);
             this.btnSaleTransactionList.Name = "btnSaleTransactionList";

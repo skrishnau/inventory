@@ -13,12 +13,12 @@ namespace IMS.Forms.Common.Validations
         public static readonly string REQUIRED = "Required";
         private readonly ErrorProvider _errorProvider;
 
-        private readonly Control[] _requiredControls;
+        private readonly List<Control> _requiredControls;
 
         public GreaterThanZeroFieldValidator(ErrorProvider errorProvider, Control[] controls)
         {
             _errorProvider = errorProvider;
-            _requiredControls = controls;
+            _requiredControls = controls.ToList();
 
             // set validating event
             if (controls != null)
@@ -27,6 +27,22 @@ namespace IMS.Forms.Common.Validations
                 {
                     control.Validating += GreaterThanZeroField_Validating;
                 }
+            }
+        }
+
+        public void Remove(Control control)
+        {
+            var cnt = this._requiredControls.Contains(control);
+            if (cnt)
+                _requiredControls.Remove(control);
+        }
+        public void AddIfNotExists(Control control)
+        {
+            var cnt = this._requiredControls.Contains(control);
+            if (!cnt)
+            {
+                _requiredControls.Add(control);
+                control.Validating += GreaterThanZeroField_Validating;
             }
         }
 

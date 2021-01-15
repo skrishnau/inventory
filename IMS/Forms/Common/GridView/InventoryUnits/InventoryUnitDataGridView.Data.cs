@@ -58,8 +58,17 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // UOM
             //
             PopulateUom();
+
+            PopulateEditColumn();
             
         }
+
+        private void PopulateEditColumn()
+        {
+            //this.colDelete.Image = Properties.Resources.icons8_Delete_Red_16px;
+
+        }
+
         // 
         // Product
         //
@@ -152,6 +161,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 DataGridViewRow row = (DataGridViewRow)this.Rows[0].Clone();
                 row.Cells[colId.Index].Value = model.Id;
                 row.Cells[colProductId.Index].Value = model.ProductId;
+                row.Cells[colProduct.Index].Value = model.Product;
                 row.Cells[colSKU.Index].Value = model.SKU;
                 row.Cells[colInStockQuantity.Index].Value = model.InStockQuantity;
                 row.Cells[colOnHoldQuantity.Index].Value = model.OnHoldQuantity;

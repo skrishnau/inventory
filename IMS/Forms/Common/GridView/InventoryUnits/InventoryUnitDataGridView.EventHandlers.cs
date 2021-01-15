@@ -32,11 +32,14 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.CellLeave += InventoryUnitDataGridView_CellLeave;
             this.ColumnWidthChanged += InventoryUnitDataGridView_ColumnWidthChanged;
             this.Scroll += InventoryUnitDataGridView_Scroll;
+            this.CellClick += InventoryUnitDataGridView_CellClick;
             //
             // Datetime Picker
             //
             _dtPicker.TextChanged += _dtPicker_TextChanged;
+
         }
+
 
 
         //
@@ -160,6 +163,16 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 _checkCount += check ? 1 : -1;
             }
         }
+
+        private void InventoryUnitDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == this.colDelete.Index)
+            {
+                if (e.RowIndex >= 0 && e.RowIndex != this.NewRowIndex)
+                    this.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
         //
         // Selection Change
         //

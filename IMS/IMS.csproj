@@ -1327,6 +1327,8 @@
     <None Include="Resources\icons8_Speed_24px_4.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\delete_icon_16px.bmp" />
+    <None Include="Resources\icons8-ledger-24.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

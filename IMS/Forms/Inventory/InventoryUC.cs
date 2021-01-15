@@ -509,12 +509,12 @@ namespace IMS.Forms.Inventory
 
         private void BtnPurchaseTransaction_Click(object sender, EventArgs e)
         {
-            //using (AsyncScopedLifestyle.BeginScope(Program.container))
-            //{
-            //    var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
-            //    form.SetDataForEdit(OrderTypeEnum.Purchase, 0);
-            //    form.ShowDialog();
-            //}
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+                form.SetDataForEdit(OrderTypeEnum.Purchase, 0);
+                form.ShowDialog();
+            }
         }
 
         private void BtnTransactionList_Click(object sender, EventArgs e)

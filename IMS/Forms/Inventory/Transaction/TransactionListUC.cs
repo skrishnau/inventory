@@ -29,6 +29,8 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
 
+        int _selectedIndex = -1;
+
         public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
         {
             _orderService = orderService;
@@ -82,6 +84,8 @@ namespace IMS.Forms.Inventory.Transaction
             rbSale.CheckedChanged += Type_CheckedChanged;
             btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
+            btnEdit.Click += BtnEdit_Click;
+            dgvOrders.DataBindingComplete += DgvOrders_DataBindingComplete;
         }
 
 
@@ -107,11 +111,19 @@ namespace IMS.Forms.Inventory.Transaction
             List<OrderModel> _orderList = new List<OrderModel>();
             _orderList = _orderService.GetAllOrders(_orderType);
             dgvOrders.DataSource = _orderList;
+
+            if (_selectedIndex > -1)
+            {
+                dgvOrders.Rows[_selectedIndex].Selected = true;
+            }
+
             if (dgvOrders.SelectedRows.Count > 0)
             {
                 var model = dgvOrders.Rows[dgvOrders.SelectedRows[0].Index].DataBoundItem as OrderModel;
                 ShowDetail(this, model);
             }
+
+            
         }
 
         #region Event Handlers
@@ -130,12 +142,22 @@ namespace IMS.Forms.Inventory.Transaction
             //  }
         }
 
+        private void DgvOrders_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            var selectedIndex = dgvItems.SelectedRows.Count > 0 ? dgvItems.SelectedRows[0].Index : -1;
+            if (selectedIndex > -1)
+            {
+                dgvOrders.Rows[selectedIndex].Selected = true;
+            }
+        }
+
         private void ShowDetail(object sender, OrderModel model)
         {
             if (model != null)
             {
-                btnPrint.Visible = true;
-                btnPayment.Visible = model.RemainingAmount > 0;
+                btnEdit.Visible = !model.IsCompleted;
+                btnPrint.Visible = model.IsCompleted;
+                btnPayment.Visible =  model.IsCompleted && model.RemainingAmount > 0;
                 btnPayment.Tag = model;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);
@@ -147,12 +169,13 @@ namespace IMS.Forms.Inventory.Transaction
                 btnPayment.Tag = null;
                 btnPayment.Visible = false;
                 btnPrint.Visible = false;
+                btnEdit.Visible = false;
             }
         }
 
         private void BtnNewOrder_Click(object sender, EventArgs e)
         {
-            ShowAddEditDialog(false);
+            ShowAddEditDialog(_orderType, 0);
         }
 
         #endregion
@@ -186,12 +209,20 @@ namespace IMS.Forms.Inventory.Transaction
         }
 
 
-        private void ShowAddEditDialog(bool isEditMode)
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            OrderModel order = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel: null;
+            ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id??0);
+        }
+
+
+        private void ShowAddEditDialog(OrderTypeEnum orderType, int orderId = 0)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
+                _selectedIndex = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].Index : -1;
                 var orderForm = Program.container.GetInstance<TransactionCreateForm>();
-                orderForm.SetDataForEdit(_orderType, 0);// isEditMode ? null : (OrderModel)null);
+                orderForm.SetDataForEdit(orderType, orderId);
                 orderForm.ShowDialog();
             }
         }

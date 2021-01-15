@@ -45,18 +45,20 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.lblCustomer = new System.Windows.Forms.Label();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.lblReferenceNo = new System.Windows.Forms.Label();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.colOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNoOfProducts = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colViewDetail = new System.Windows.Forms.DataGridViewImageColumn();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -65,6 +67,7 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel5.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitter1
@@ -93,7 +96,6 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnNew);
-            this.flowLayoutPanel1.Controls.Add(this.btnEdit);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(646, 4);
@@ -104,16 +106,17 @@
             // 
             // btnEdit
             // 
+            this.btnEdit.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(20, 3);
+            this.btnEdit.Location = new System.Drawing.Point(16, 5);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(48, 40);
+            this.btnEdit.Size = new System.Drawing.Size(79, 31);
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Edit";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Visible = false;
             // 
             // panel1
@@ -188,19 +191,19 @@
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colOrderNumber,
             this.colCreatedDate,
+            this.colOrderType,
             this.colCustomer,
             this.colTotalAmount,
             this.colDeliveryDate,
             this.colNoOfProducts,
-            this.colStatus,
-            this.colViewDetail});
+            this.colStatus});
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrders.Location = new System.Drawing.Point(0, 0);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(356, 426);
+            this.dgvOrders.Size = new System.Drawing.Size(342, 426);
             this.dgvOrders.TabIndex = 13;
             // 
             // panel2
@@ -217,7 +220,7 @@
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(356, 0);
+            this.splitter2.Location = new System.Drawing.Point(342, 0);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(5, 426);
             this.splitter2.TabIndex = 15;
@@ -228,9 +231,9 @@
             this.panel4.Controls.Add(this.dgvItems);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(361, 0);
+            this.panel4.Location = new System.Drawing.Point(347, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(408, 426);
+            this.panel4.Size = new System.Drawing.Size(422, 426);
             this.panel4.TabIndex = 16;
             // 
             // dgvItems
@@ -238,36 +241,44 @@
             this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 49);
+            this.dgvItems.Location = new System.Drawing.Point(0, 43);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(408, 377);
+            this.dgvItems.Size = new System.Drawing.Size(422, 383);
             this.dgvItems.TabIndex = 14;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.btnPrint);
-            this.panel5.Controls.Add(this.btnPayment);
+            this.panel5.Controls.Add(this.lblCustomer);
+            this.panel5.Controls.Add(this.flowLayoutPanel2);
             this.panel5.Controls.Add(this.lblReferenceNo);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(408, 49);
+            this.panel5.Size = new System.Drawing.Size(422, 43);
             this.panel5.TabIndex = 15;
             // 
-            // btnPrint
+            // lblCustomer
             // 
-            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(305, 6);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(96, 33);
-            this.btnPrint.TabIndex = 16;
-            this.btnPrint.Text = "Print Receipt";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = false;
-            this.btnPrint.Visible = false;
+            this.lblCustomer.AutoSize = true;
+            this.lblCustomer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCustomer.Location = new System.Drawing.Point(6, 21);
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Size = new System.Drawing.Size(11, 13);
+            this.lblCustomer.TabIndex = 18;
+            this.lblCustomer.Text = "-";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.btnPayment);
+            this.flowLayoutPanel2.Controls.Add(this.btnPrint);
+            this.flowLayoutPanel2.Controls.Add(this.btnEdit);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(115, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 2, 5, 0);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(307, 43);
+            this.flowLayoutPanel2.TabIndex = 17;
             // 
             // btnPayment
             // 
@@ -275,7 +286,7 @@
             this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(203, 6);
+            this.btnPayment.Location = new System.Drawing.Point(203, 5);
             this.btnPayment.Name = "btnPayment";
             this.btnPayment.Size = new System.Drawing.Size(96, 33);
             this.btnPayment.TabIndex = 15;
@@ -284,11 +295,26 @@
             this.btnPayment.UseVisualStyleBackColor = false;
             this.btnPayment.Visible = false;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.Location = new System.Drawing.Point(101, 5);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(96, 33);
+            this.btnPrint.TabIndex = 16;
+            this.btnPrint.Text = "Print Receipt";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Visible = false;
+            // 
             // lblReferenceNo
             // 
             this.lblReferenceNo.AutoSize = true;
             this.lblReferenceNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReferenceNo.Location = new System.Drawing.Point(6, 15);
+            this.lblReferenceNo.Location = new System.Drawing.Point(6, 6);
             this.lblReferenceNo.Name = "lblReferenceNo";
             this.lblReferenceNo.Size = new System.Drawing.Size(12, 15);
             this.lblReferenceNo.TabIndex = 0;
@@ -319,6 +345,14 @@
             this.colCreatedDate.HeaderText = "Created";
             this.colCreatedDate.Name = "colCreatedDate";
             this.colCreatedDate.ReadOnly = true;
+            // 
+            // colOrderType
+            // 
+            this.colOrderType.DataPropertyName = "OrderType";
+            this.colOrderType.HeaderText = "Type";
+            this.colOrderType.Name = "colOrderType";
+            this.colOrderType.ReadOnly = true;
+            this.colOrderType.Width = 80;
             // 
             // colCustomer
             // 
@@ -358,17 +392,7 @@
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
-            // 
-            // colViewDetail
-            // 
-            this.colViewDetail.HeaderText = "";
-            this.colViewDetail.Image = global::IMS.Properties.Resources.icons8_Deviation_16px;
-            this.colViewDetail.MinimumWidth = 24;
-            this.colViewDetail.Name = "colViewDetail";
-            this.colViewDetail.ReadOnly = true;
-            this.colViewDetail.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colViewDetail.ToolTipText = "View Detail";
-            this.colViewDetail.Width = 32;
+            this.colStatus.Width = 80;
             // 
             // TransactionListUC
             // 
@@ -390,6 +414,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -416,13 +441,15 @@
         private Common.Display.ListHeaderTemplate listHeaderTemplate1;
         private Common.Buttons.MenuButton btnPayment;
         private Common.Buttons.MenuButton btnPrint;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreatedDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNoOfProducts;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.DataGridViewImageColumn colViewDetail;
     }
 }

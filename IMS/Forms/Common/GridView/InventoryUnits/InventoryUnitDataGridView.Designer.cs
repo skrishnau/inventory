@@ -77,6 +77,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colRemark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNotes = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
+            this.colDelete = new System.Windows.Forms.DataGridViewImageColumn();
 
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 
@@ -131,7 +132,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //this.colSupplier,
             this.colIsHold,
             this.colRemark,
-            this.colNotes});
+            this.colNotes,
+            this.colDelete});
             // this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Location = new System.Drawing.Point(100, 100);
             this.MultiSelect = false;
@@ -408,6 +410,17 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colNotes.Visible = false;
             this.colNotes.Width = 50;
 
+            // 
+            // colDelete
+            // 
+            this.colDelete.DataPropertyName = "";
+            this.colDelete.HeaderText = "";
+            this.colDelete.Name = "colDelete";
+            this.colDelete.Visible = false;
+            this.colDelete.Width = 19;
+            this.colDelete.Image = Properties.Resources.icons8_Delete_Red_16px;//global::IMS.Properties.Resources.icons8_Delete_Red_16px;
+            this.colDelete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+
 
             //
             // this
@@ -501,6 +514,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colUnitQuantity.Visible = true;
             colRate.Visible = true;
             colTotal.Visible = true;
+            colDelete.Visible = _isEditable;
             //colPackageId.Visible = true;
             colPackage.Visible = true;
             HideUnusedDefaults();
@@ -728,6 +742,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewTextBoxColumn colRemark;
         public System.Windows.Forms.DataGridViewTextBoxColumn colNotes;
         public System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
+        public System.Windows.Forms.DataGridViewImageColumn colDelete;
 
         #endregion
 

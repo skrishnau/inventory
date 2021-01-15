@@ -55,7 +55,7 @@ namespace Service.Core.Orders
                     .Include(x => x.OrderItems);
                 if (orderType != OrderTypeEnum.All)
                     purchases = purchases.Where(x => x.OrderType == type);
-                return purchases.OrderByDescending(x => x.CompletedDate).ThenByDescending(x => x.CreatedAt)
+                return purchases.OrderByDescending(x => x.CreatedAt)//.ThenByDescending(x => x.CreatedAt)
                     .AsEnumerable().MapToModel();// OrderMapper.MapToOrderModel(purchases);
             }
         }
@@ -129,10 +129,19 @@ namespace Service.Core.Orders
 
         public List<OrderModel> GetDuePayments()
         {
+            //TODO;;; get the 
             using (var _context = new DatabaseContext())
             {
-                var orders = _context.Order.ToList();
-                return OrderMapper.MapToModel(orders.Where(x => x.PaidAmount < x.TotalAmount));
+                var orders = _context.Order.Where(x=> x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
+                //var saleType = OrderTypeEnum.Sale.ToString();
+                ////var invoice = TransactionTypeEnum
+                //var transactions = _context.Transaction
+                //    .Where(x=>x.Type == saleType)
+                //    .GroupBy(x=>x.User)
+                //    .Select(x=> new { x.Key.Name, Balance = x.Sum(y=>y.Balance * y.DrCr) })
+
+
+                return OrderMapper.MapToModel(orders);
             }
         }
 
@@ -143,6 +152,7 @@ namespace Service.Core.Orders
 
         public ResponseModel<OrderModel> SaveOrder(OrderModel orderModel, bool checkout)
         {
+            var isEditMode = orderModel.Id > 0;
             var now = DateTime.Now;
             var args = BaseEventArgs<OrderModel>.Instance;
             using (var _context = new DatabaseContext())
@@ -152,7 +162,7 @@ namespace Service.Core.Orders
 
                 CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
-                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList());
+                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout);
 
 
 
@@ -180,8 +190,8 @@ namespace Service.Core.Orders
                         item.WarehouseId = entity.WarehouseId;
                     }
                 }
-
-                _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
+                if(!isEditMode)
+                    _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
 
@@ -189,7 +199,7 @@ namespace Service.Core.Orders
                 _listener.TriggerProductUpdateEvent(null, null);
                 _listener.TriggerPackageUpdateEvent(null, null);
                 _listener.TriggerUserUpdateEvent(null, null);
-                var newOrder = _context.Order.Find(entity.Id)?.MapToModel();
+                var newOrder = _context.Order.Find(entity.Id)?.MapToModel(true);
                 return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true};
             }
         }
@@ -438,7 +448,7 @@ namespace Service.Core.Orders
             using (var _context = new DatabaseContext())
             {
                 var poEntity = _context.Order.Find(purchaseOrderId);
-                SaveOrderItemsWithoutCommit(_context, poEntity, items);
+                SaveOrderItemsWithoutCommit(_context, poEntity, items, false);
 
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);
@@ -448,7 +458,7 @@ namespace Service.Core.Orders
             }
         }
 
-        private string SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items)
+        private string SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout)
         {
             var newProductList = new List<Product>();
             var newPackageList = new List<Package>();
@@ -474,9 +484,9 @@ namespace Service.Core.Orders
                     if (productEntity != null)
                     {
                         item.ProductId = productEntity.Id;
-                        item.Total = item.Rate * item.UnitQuantity;
                     }
                 }
+                item.Total = item.Rate * item.UnitQuantity;
                 if (item.PackageId == 0)
                 {
                     var packageEntity = _context.Package.FirstOrDefault(x => x.Name == item.Package);
@@ -495,14 +505,15 @@ namespace Service.Core.Orders
                 var stillExists = items.FirstOrDefault(x => x.Id == entity.Id);
                 if (stillExists == null)
                 {
-                    order.OrderItems.Remove(entity);
+                    _context.OrderItem.Remove(entity);
+                    //order.OrderItems.Remove(entity);
                 }
             }
             // second add/update
             foreach (var item in items)
             {
-                var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
-                entity = item.MapToEntity(entity);//OrderItemMapper.MapToEntity(item, entity);
+                //var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
+                var entity = item.MapToEntity(null);//OrderItemMapper.MapToEntity(item, entity);
                 if (entity.Id == 0)
                 {
                     if ((entity.PackageId ?? 0) == 0)
@@ -562,7 +573,8 @@ namespace Service.Core.Orders
                 // No need to handle update cause entity is already assigned above { ....MapToEntity(..)}
 
                 // modify product inStock & OnHold quantity
-                UpdateProductForOrderItemSaveWithoutCommit(_context, order, entity);
+                if(checkout)
+                    UpdateProductForOrderItemSaveWithoutCommit(_context, order, entity);
             }
 
             order.TotalAmount = items.Sum(x => x.Total);

@@ -58,9 +58,7 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
-            this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -253,7 +251,7 @@
             this.tableLayoutPanel1.Controls.Add(this.txtPhone, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 4, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 55);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -308,7 +306,7 @@
             this.panel9.Controls.Add(this.txtReceiptNo);
             this.panel9.Controls.Add(this.label8);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 29);
+            this.panel9.Location = new System.Drawing.Point(0, 4);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(518, 26);
             this.panel9.TabIndex = 6;
@@ -343,41 +341,14 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.Color.MintCream;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPayment.Location = new System.Drawing.Point(433, 4);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(78, 22);
-            this.btnPayment.TabIndex = 15;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Visible = false;
-            // 
             // dgvItems
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 82);
+            this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(518, 341);
+            this.dgvItems.Size = new System.Drawing.Size(518, 366);
             this.dgvItems.TabIndex = 4;
-            // 
-            // listHeaderTemplate1
-            // 
-            this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.listHeaderTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listHeaderTemplate1.HeadingText = "New Sales Transaction";
-            this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
-            this.listHeaderTemplate1.Name = "listHeaderTemplate1";
-            this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.listHeaderTemplate1.Size = new System.Drawing.Size(518, 29);
-            this.listHeaderTemplate1.TabIndex = 8;
             // 
             // saveFooterUC1
             // 
@@ -395,15 +366,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 506);
-            this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel9);
-            this.Controls.Add(this.listHeaderTemplate1);
             this.Controls.Add(this.saveFooterUC1);
             this.MinimizeBox = false;
             this.Name = "TransactionCreateForm";
+            this.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -451,13 +421,11 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.TextBox txtReceiptNo;
         private System.Windows.Forms.Label label8;
-        private Common.Display.ListHeaderTemplate listHeaderTemplate1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ComboBox cbClient;
         private Common.Display.SaveFooterUC saveFooterUC1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private Common.Buttons.MenuButton btnPayment;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }

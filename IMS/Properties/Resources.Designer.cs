@@ -313,16 +313,6 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_Delete_16px_4 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Delete_16px_4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons8_Delete_16px_Dark {
             get {
                 object obj = ResourceManager.GetObject("icons8_Delete_16px_Dark", resourceCulture);
@@ -336,6 +326,16 @@ namespace IMS.Properties {
         internal static System.Drawing.Bitmap icons8_Delete_Bin_16px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Delete_Bin_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Delete_Red_16px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Delete_Red_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -606,6 +606,16 @@ namespace IMS.Properties {
         internal static System.Drawing.Bitmap icons8_Lease_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Lease_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_ledger_24 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_ledger_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

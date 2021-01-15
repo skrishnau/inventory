@@ -72,7 +72,7 @@ namespace IMS.Forms.Inventory.Transaction
             this.txtPaidAmount.Maximum = Int32.MaxValue;
             this.txtPaidAmount.Minimum = 0;
 
-            var order = _orderService.GetOrderForDetailView(_orderId);
+            _orderModel = _orderService.GetOrderForDetailView(_orderId);
 
             dgvItems.InitializeGridViewControls(_inventoryService, _productService);
             InitializeValidation();
@@ -80,9 +80,9 @@ namespace IMS.Forms.Inventory.Transaction
             InitializeDataGridView();
             InitializeSaveFooter();
 
-            PopulateModel(order);
             PopulateClientCombo();
             PopulateReceiptNumber();
+            PopulateModel(_orderModel);
         }
 
         #region Functions
@@ -121,15 +121,22 @@ namespace IMS.Forms.Inventory.Transaction
             lblClient.DoubleClick += LblClient_DoubleClick;
 
             dgvItems.AmountChanged += DgvItems_AmountChnanged;
-            btnPayment.Click += btnPayment_Click;
+            //btnPayment.Click += btnPayment_Click;
             cbClient.SelectedValueChanged += CbClient_SelectedValueChanged;
-            
+            dgvItems.RowsRemoved += DgvItems_RowsRemoved;
         }
 
+        private void DgvItems_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if (e.RowCount > 0)
+            {
+                txtTotal.Value = dgvItems.GetTotalSumAmount();
+            }
+        }
 
         private void CbClient_SelectedValueChanged(object sender, EventArgs e)
         {
-            if(cbClient.SelectedValue != null)
+            if (cbClient.SelectedValue != null)
             {
                 var selectedValue = cbClient.SelectedValue;
                 var client = _userService.GetUser(int.Parse(cbClient.SelectedValue.ToString()));
@@ -162,12 +169,14 @@ namespace IMS.Forms.Inventory.Transaction
             //        requiredControls.Add(cbClient);
             //        break;
             //}
+
             _requiredFieldValidator = new RequiredFieldValidator(errorProvider, requiredControls.ToArray());
 
             // greater than zero field validator
+
             List<Control> controls = new List<Control>()
             {
-                 txtTotal,
+                    txtTotal,
             };
             _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider, controls.ToArray());
 
@@ -217,20 +226,25 @@ namespace IMS.Forms.Inventory.Transaction
                 }
                 else
                 {
-                    btnPayment.Visible = model.RemainingAmount > 0;
+                    //btnPayment.Visible = model.RemainingAmount > 0;
                     // change button
                     _orderId = model.Id;
                     txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
                     dtExpectedDate.Value = model.DeliveryDate;
                     txtAddress.Text = model.Address;
                     txtPhone.Text = model.Phone;
-                    switch (_orderType)
-                    {
-                        case OrderTypeEnum.Purchase:
-                        case OrderTypeEnum.Sale:
-                            cbClient.SelectedValue = model.UserId;
-                            break;
-                    }
+                    txtTotal.Value = model.TotalAmount;
+                    cbClient.Text = model.User;
+                    rbCash.Checked = model.PaidAmount >= model.TotalAmount;
+                    rbCredit.Checked = !rbCash.Checked;
+                    ShowPaymentDueDateLayout(rbCredit.Checked);
+                    txtPaidAmount.Value = model.PaidAmount;
+                    dtExpectedDate.Value = model.DeliveryDate;
+                    dtPaymentDueDate.Value = model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now;
+
+                    dgvItems.AddRows(OrderItemMapper.MapToInventoryUnitModel(model.OrderItems));
+                    if (model?.PaymentDueDate.HasValue ?? false)
+                        dtPaymentDueDate.Value = model.PaymentDueDate.Value;
                 }
             }
             else
@@ -249,15 +263,11 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 case OrderTypeEnum.Purchase:
                     lblClient.Text = "Supplier";
-                    this.Text = (model == null ? "Create" : "Edit") + " Transaction";
-                    if (model?.PaymentDueDate.HasValue ?? false)
-                        dtPaymentDueDate.Value = model.PaymentDueDate.Value;
+                    this.Text = (model == null ? "Create" : "Edit") + " Purchase Transaction";
                     break;
                 case OrderTypeEnum.Sale:
                     lblClient.Text = "Customer";
-                    this.Text = (model == null ? "Create" : "Edit") + " Transaction";
-                    if (model?.PaymentDueDate.HasValue ?? false)
-                        dtPaymentDueDate.Value = model.PaymentDueDate.Value;
+                    this.Text = (model == null ? "Create" : "Edit") + " Sale Transaction";
                     break;
                     //case OrderTypeEnum.Move:
                     //    lblClient.Visible = false;
@@ -277,6 +287,11 @@ namespace IMS.Forms.Inventory.Transaction
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
         {
             ResponseModel<OrderModel> msg = new ResponseModel<OrderModel>();
+
+            if (!checkout)
+                _greaterThanZeroFieldValidator.Remove(txtTotal);
+            else 
+                _greaterThanZeroFieldValidator.AddIfNotExists(txtTotal);
             if (!_requiredFieldValidator.IsValid())
                 msg.Message += "Some required Fields are empty\n";
             if (!_greaterThanZeroFieldValidator.IsValid())
@@ -296,7 +311,7 @@ namespace IMS.Forms.Inventory.Transaction
             if (string.IsNullOrEmpty(msg.Message))
             {
                 PopupMessage.ShowSaveSuccessMessage();
-                if(closeFormAftherSave)
+                if (closeFormAftherSave)
                     this.Close();
                 return msg.Data;
             }
@@ -336,7 +351,7 @@ namespace IMS.Forms.Inventory.Transaction
                     Address = txtAddress.Text,
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.Value : (DateTime?)null,
                     PaymentType = rbCredit.Checked ? PaymentType.Credit.ToString() : PaymentType.Cash.ToString(),
-                    TotalAmount = items.Select(x=>x.Total).Sum()
+                    TotalAmount = items.Select(x => x.Total).Sum()
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;
@@ -362,10 +377,14 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void RbCredit_CheckedChanged(object sender, EventArgs e)
         {
-            pnlPaymentDueDate.Visible = rbCredit.Checked;
-            txtPaidAmount.Value = rbCredit.Checked ? 0 : txtTotal.Value;
-            txtPaidAmount.Enabled = rbCredit.Checked;
+            ShowPaymentDueDateLayout(rbCredit.Checked);
+        }
 
+        private void ShowPaymentDueDateLayout(bool show)
+        {
+            pnlPaymentDueDate.Visible = show;
+            txtPaidAmount.Value = show ? 0 : txtTotal.Value;
+            txtPaidAmount.Enabled = show;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -386,7 +405,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void BtnCheckoutAndPrint_Click(object sender, EventArgs e)
         {
-             CheckOutAndPrint();
+            CheckOutAndPrint();
             //var printBillTest = new PrintBillTest();
             //printBillTest.ShowDialog();
         }
@@ -414,7 +433,7 @@ namespace IMS.Forms.Inventory.Transaction
             var transactionPrintBillUc = new TransactionPrintReceiptUC(model);
             this.Controls.Add(transactionPrintBillUc);
         }
-        
+
 
         private void LblClient_DoubleClick(object sender, EventArgs e)
         {
@@ -426,15 +445,15 @@ namespace IMS.Forms.Inventory.Transaction
             }
         }
 
-        private void btnPayment_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var po = Program.container.GetInstance<PaymentCreateForm>();
-                po.SetData(_orderModel, null);
-                po.ShowDialog();
-            }
-        }
+        //private void btnPayment_Click(object sender, EventArgs e)
+        //{
+        //    using (AsyncScopedLifestyle.BeginScope(Program.container))
+        //    {
+        //        var po = Program.container.GetInstance<PaymentCreateForm>();
+        //        po.SetData(_orderModel, null);
+        //        po.ShowDialog();
+        //    }
+        //}
 
         private void DgvItems_AmountChnanged(decimal totals)
         {
