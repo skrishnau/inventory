@@ -82,6 +82,7 @@ namespace IMS.Forms.Inventory.Payment
         {
             btnSave.Click += BtnSave_Click;
             btnCancel.Click += BtnCancel_Click;
+            btnPrint.Click += BtnPrint_Click;
             chkAllPaid.CheckedChanged += ChkAllPaid_CheckedChanged;
             cbPaymentMethod.SelectedValueChanged += CbPaymentMethod_SelectedValueChanged;
         }
@@ -117,6 +118,12 @@ namespace IMS.Forms.Inventory.Payment
             Save();
         }
 
+
+        private void BtnPrint_Click(object sender, EventArgs e)
+        {
+            //Save();
+            Print();
+        }
         #endregion
 
 
@@ -132,6 +139,14 @@ namespace IMS.Forms.Inventory.Payment
                     this.Close();
                 }
             }
+        }
+
+        private void Print()
+        {
+            this.Text = "Print Receipt";
+            this.Controls.Clear();
+            var transactionPrintBillUc = new PaymentPrintUC();
+            this.Controls.Add(transactionPrintBillUc);
         }
 
         public PaymentModel GetData()

@@ -43,12 +43,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.headerTemplate1 = new IMS.Forms.Common.Display.HeaderTemplate();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.lblTotalAmount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.headerTemplate1 = new IMS.Forms.Common.Display.HeaderTemplate();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -188,7 +189,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(460, 10);
+            this.btnCancel.Location = new System.Drawing.Point(12, 10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -198,24 +199,16 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(360, 11);
+            this.btnSave.Location = new System.Drawing.Point(107, 10);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(83, 23);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
-            // headerTemplate1
-            // 
-            this.headerTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.headerTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerTemplate1.Location = new System.Drawing.Point(0, 0);
-            this.headerTemplate1.Name = "headerTemplate1";
-            this.headerTemplate1.Size = new System.Drawing.Size(545, 27);
-            this.headerTemplate1.TabIndex = 8;
-            // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnPrint);
             this.panel3.Controls.Add(this.btnCancel);
             this.panel3.Controls.Add(this.btnSave);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -223,6 +216,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(545, 40);
             this.panel3.TabIndex = 10;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Location = new System.Drawing.Point(413, 10);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(120, 23);
+            this.btnPrint.TabIndex = 3;
+            this.btnPrint.Text = "Save And Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Visible = false;
             // 
             // lblTotalAmount
             // 
@@ -268,6 +272,15 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // headerTemplate1
+            // 
+            this.headerTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.headerTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerTemplate1.Location = new System.Drawing.Point(0, 0);
+            this.headerTemplate1.Name = "headerTemplate1";
+            this.headerTemplate1.Size = new System.Drawing.Size(545, 27);
+            this.headerTemplate1.TabIndex = 8;
+            // 
             // PaymentCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -277,7 +290,6 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.headerTemplate1);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PaymentCreateForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -315,5 +327,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnPrint;
     }
 }

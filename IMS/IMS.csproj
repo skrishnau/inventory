@@ -141,6 +141,12 @@
     <Compile Include="Forms\Inventory\Payment\PaymentCreateForm.Designer.cs">
       <DependentUpon>PaymentCreateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Payment\PaymentPrintUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Payment\PaymentPrintUC.Designer.cs">
+      <DependentUpon>PaymentPrintUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Reports\All\LedgerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -614,6 +620,9 @@
     <EmbeddedResource Include="Forms\Inventory\Payment\PaymentCreateForm.resx">
       <DependentUpon>PaymentCreateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Payment\PaymentPrintUC.resx">
+      <DependentUpon>PaymentPrintUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Reports\All\LedgerUC.resx">
       <DependentUpon>LedgerUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -826,6 +835,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\SalesTransactionReport.rdlc" />
     <EmbeddedResource Include="Reports\TransactionBarReportUC.rdlc" />
+    <EmbeddedResource Include="Reports\VoucherReport.rdlc" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
