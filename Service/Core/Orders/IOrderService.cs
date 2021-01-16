@@ -19,9 +19,9 @@ namespace Service.Core.Orders
         /// </summary>
         /// <param name="purchaseOrderModel"></param>
         /// <param name="checkout">The order is processed and receipt generated at the same time</param>
-        ResponseModel<OrderModel> SaveOrder(OrderModel purchaseOrderModel, bool checkout); 
-
-        List<OrderModel> GetAllOrders(OrderTypeEnum orderType);
+        ResponseModel<OrderModel> SaveOrder(OrderModel purchaseOrderModel, bool checkout);
+        int GetAllOrdersCount(OrderTypeEnum orderType);
+        OrderListModel GetAllOrders(OrderTypeEnum orderType, int pageSize, int offset);
 
         List<OrderItemModel> GetPurchaseOrderItems(int purchaseId);
         List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<OrderItemModel> models);

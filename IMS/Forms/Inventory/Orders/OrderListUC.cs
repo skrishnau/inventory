@@ -79,9 +79,8 @@ namespace IMS.Forms.Inventory.Purchases
 
         private void PopulateOrders()
         {
-            List<OrderModel> orders = new List<OrderModel>();
-            orders = _orderService.GetAllOrders(_orderType);
-            dgvPurchases.DataSource = orders;
+            var orderListModel = _orderService.GetAllOrders(_orderType, -1, -1);
+            dgvPurchases.DataSource = orderListModel.OrderList;
         }
 
         #region Event Handlers

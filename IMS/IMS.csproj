@@ -123,6 +123,7 @@
     <Compile Include="Forms\Common\Display\SaveFooterUC.Designer.cs">
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Pagination\PaginationHelper.cs" />
     <Compile Include="Forms\Inventory\Dashboard\DashboardUC.cs">
       <SubType>UserControl</SubType>
     </Compile>

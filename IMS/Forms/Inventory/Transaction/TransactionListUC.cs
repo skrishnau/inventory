@@ -16,6 +16,7 @@ using SimpleInjector.Lifestyles;
 using Service.Core.Inventory;
 using IMS.Forms.Inventory.Payment;
 using Service.Interfaces;
+using IMS.Forms.Common.Pagination;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -29,7 +30,9 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
 
-        int _selectedIndex = -1;
+        int _previousSelectedIndex = -1;
+        BindingSource _bindingSource = new BindingSource();
+        private TransactionListPaginationHelper helper;
 
         public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
         {
@@ -55,10 +58,14 @@ namespace IMS.Forms.Inventory.Transaction
             
             btnPrint.Image = null;
 
+           
+
         }
 
         private void InitializeGridView()
         {
+            
+
             dgvOrders.AutoGenerateColumns = false;
             //switch (_orderType)
             //{
@@ -70,6 +77,9 @@ namespace IMS.Forms.Inventory.Transaction
             //        break;
             //}
 
+
+            //dgvOrders.DataSource = _bindingSource;
+            helper = new TransactionListPaginationHelper(_bindingSource, dgvOrders, bindingNavigator1, _orderService, _orderType);
         }
 
         private void InitializeEvents()
@@ -86,8 +96,9 @@ namespace IMS.Forms.Inventory.Transaction
             btnPrint.Click += BtnPrint_Click;
             btnEdit.Click += BtnEdit_Click;
             dgvOrders.DataBindingComplete += DgvOrders_DataBindingComplete;
-        }
 
+        }
+        
 
         private void Type_CheckedChanged(object sender, EventArgs e)
         {
@@ -108,13 +119,17 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void PopulateOrders()
         {
-            List<OrderModel> _orderList = new List<OrderModel>();
-            _orderList = _orderService.GetAllOrders(_orderType);
-            dgvOrders.DataSource = _orderList;
+            //List<OrderModel> _orderList = new List<OrderModel>();
+            //_orderList = _orderService.GetAllOrders(_orderType);
+            //_bindingSource.DataSource = _orderList;
+            //bindingNavigator1.BindingSource = _bindingSource;
 
-            if (_selectedIndex > -1)
+            if (helper != null)
+                helper.Reset(_orderType);
+
+            if (_previousSelectedIndex > -1)
             {
-                dgvOrders.Rows[_selectedIndex].Selected = true;
+                dgvOrders.Rows[_previousSelectedIndex].Selected = true;
             }
 
             if (dgvOrders.SelectedRows.Count > 0)
@@ -147,7 +162,8 @@ namespace IMS.Forms.Inventory.Transaction
             var selectedIndex = dgvItems.SelectedRows.Count > 0 ? dgvItems.SelectedRows[0].Index : -1;
             if (selectedIndex > -1)
             {
-                dgvOrders.Rows[selectedIndex].Selected = true;
+                if(dgvOrders.Rows.Count > selectedIndex)
+                    dgvOrders.Rows[selectedIndex].Selected = true;
             }
         }
 
@@ -218,7 +234,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                _selectedIndex = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].Index : -1;
+                _previousSelectedIndex = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].Index : -1;
                 var orderForm = Program.container.GetInstance<TransactionCreateForm>();
                 orderForm.SetDataForEdit(orderType, orderId);
                 orderForm.ShowDialog();

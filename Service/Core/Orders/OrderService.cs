@@ -45,19 +45,47 @@ namespace Service.Core.Orders
 
         #region Get Functions
 
-        public List<OrderModel> GetAllOrders(OrderTypeEnum orderType)
+        public int GetAllOrdersCount(OrderTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
-                var type = orderType.ToString();
-                var purchases = _context.Order
-                    .Include(x => x.User)
-                    .Include(x => x.OrderItems);
-                if (orderType != OrderTypeEnum.All)
-                    purchases = purchases.Where(x => x.OrderType == type);
-                return purchases.OrderByDescending(x => x.CreatedAt)//.ThenByDescending(x => x.CreatedAt)
-                    .AsEnumerable().MapToModel();// OrderMapper.MapToOrderModel(purchases);
+                var orders = GetAllOrdersQuery(_context, orderType);
+                return orders.Count();
             }
+        }
+
+        // page size: no.of items per page; offset: current page number..
+        public OrderListModel GetAllOrders(OrderTypeEnum orderType, int pageSize, int offset)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var orders = GetAllOrdersQuery(_context, orderType);
+                var totalCount = orders.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    orders = orders.Skip(offset).Take(pageSize);
+                }
+                var list = orders
+                .AsEnumerable()
+                .MapToModel(); 
+                return new OrderListModel
+                {
+                    OrderList = list,
+                    TotalCount = totalCount
+                };
+            }
+        }
+        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType)
+        {
+            var type = orderType.ToString();
+            var orders = _context.Order
+                .Include(x => x.User)
+                .Include(x => x.OrderItems);
+            if (orderType != OrderTypeEnum.All)
+                orders = orders.Where(x => x.OrderType == type);
+            orders = orders.OrderByDescending(x => x.CreatedAt); //.ThenByDescending(x => x.CreatedAt)
+           
+            return orders;
         }
 
         public int GetNextLotNumber()
@@ -309,7 +337,7 @@ namespace Service.Core.Orders
 
                 entity.User = user;
             }
-            if (user!=null && checkout && orderModel.PaidAmount < orderModel.TotalAmount)
+            if (user != null && checkout && orderModel.PaidAmount < orderModel.TotalAmount)
             {
                 // credit ; store payment due date in the customer
                 user.PaymentDueDate = orderModel.PaymentDueDate;
