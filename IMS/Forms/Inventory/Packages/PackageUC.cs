@@ -12,6 +12,7 @@ using ViewModel.Core.Inventory;
 using Service.Core.Inventory;
 using IMS.Forms.Common;
 using Service.Listeners;
+using SimpleInjector.Lifestyles;
 
 namespace IMS.Forms.Inventory.Packages
 {
@@ -28,28 +29,77 @@ namespace IMS.Forms.Inventory.Packages
 
             InitializeComponent();
 
-            
+
             this.Load += PackageUC_Load;
         }
 
         private void PackageUC_Load(object sender, EventArgs e)
         {
+            dgvPackage.AutoGenerateColumns = false;
             this.Dock = DockStyle.Fill;
             //InitializeHeader();
             InitializeEvents();
             PopulatePackageData();
         }
 
-        private void PopulatePackageData()
+        private void InitializeEvents()
         {
-            var packages = _inventoryService.GetPackageList();
-            foreach (var pkg in packages)
+            _listener.PackageUpdated += _listener_PackageUpdated;
+            btnNew.Click += BtnNew_Click;
+            btnEdit.Click += BtnEdit_Click;
+            dgvPackage.SelectionChanged += DgvPackage_SelectionChanged;
+        }
+
+        private void DgvPackage_SelectionChanged(object sender, EventArgs e)
+        {
+            btnEdit.Visible = dgvPackage.SelectedRows.Count > 0;
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            PackageModel package = dgvPackage.SelectedRows.Count > 0 ? dgvPackage.SelectedRows[0].DataBoundItem as PackageModel : null;
+            ShowAddEditDialog(package?.Id ?? 0);
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            ShowAddEditDialog(0);
+        }
+
+        private void ShowAddEditDialog(int packageId)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                AddRow(pkg);
+                var productCreate = Program.container.GetInstance<PackageCreateForm>();
+                productCreate.SetDataForEdit(packageId);
+                productCreate.ShowDialog();
             }
         }
 
-        private void AddRow(PackageModel pkg)
+        private void PopulatePackageData()
+        {
+            var packages = _inventoryService.GetPackageList();
+            dgvPackage.DataSource = packages;
+        }
+
+        private void _listener_PackageUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PackageModel> e)
+        {
+            PopulatePackageData();
+        }
+        
+        //private void InitializeHeader()
+        //{
+        //    //var _header = HeaderTemplate.Instance;
+        //    //_header.lblHeading.Text = "Packaging Types";
+        //    //this.Controls.Add(_header);
+        //    //_header.SendToBack();
+        //}
+    }
+}
+
+/*
+ // code that saves directly from editing DataGridView
+   private void AddRow(PackageModel pkg)
         {
             var row = (DataGridViewRow)dgvPackage.Rows[dgvPackage.RowCount - 1].Clone();
             row.Cells[colId.Index].Value = pkg.Id;
@@ -58,24 +108,28 @@ namespace IMS.Forms.Inventory.Packages
             dgvPackage.Rows.Add(row);
         }
 
-        private void InitializeEvents()
+
+
+  private void PopulatePackageData()
         {
-            dgvPackage.RowValidated += DgvPackage_RowValidated;
+            dgvPackage.Rows.Clear();
+            var packages = _inventoryService.GetPackageList();
+
+            foreach (var pkg in packages)
+            {
+                AddRow(pkg);
+            }
+        }
+    // initializeEvents
+     dgvPackage.RowValidated += DgvPackage_RowValidated;
             dgvPackage.CurrentCellDirtyStateChanged += DgvPackage_CurrentCellDirtyStateChanged;
-            _listener.PackageUpdated += _listener_PackageUpdated;
-        }
 
-        private void _listener_PackageUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PackageModel> e)
-        {
-            PopulatePackageData();
-        }
 
-        private void DgvPackage_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+  private void DgvPackage_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             _isRowDirty = true;
         }
-
-        private void DgvPackage_RowValidated(object sender, DataGridViewCellEventArgs e)
+     private void DgvPackage_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
             // save the row if not empty
             if (_isRowDirty && e.RowIndex < dgvPackage.RowCount - 1)
@@ -88,20 +142,19 @@ namespace IMS.Forms.Inventory.Packages
                 }
                 // save
                 var msg = _inventoryService.SavePackage(package);
-                if (string.IsNullOrEmpty(msg))
+                if (string.IsNullOrEmpty(msg.Message))
                 {
                     // save success
                     PopupMessage.ShowSaveSuccessMessage();
                 }
                 else
                 {
-                    PopupMessage.ShowErrorMessage(msg);
+                    PopupMessage.ShowErrorMessage(msg.Message);
                 }
                 dgvPackage.Focus();
             }
         }
-
-        private PackageModel GetPackageData(int rowIndex)
+  private PackageModel GetPackageData(int rowIndex)
         {
             var row = dgvPackage.Rows[rowIndex];
             var name = row.Cells[colName.Name].Value;
@@ -122,12 +175,4 @@ namespace IMS.Forms.Inventory.Packages
             };
         }
 
-        //private void InitializeHeader()
-        //{
-        //    //var _header = HeaderTemplate.Instance;
-        //    //_header.lblHeading.Text = "Packaging Types";
-        //    //this.Controls.Add(_header);
-        //    //_header.SendToBack();
-        //}
-    }
-}
+ */

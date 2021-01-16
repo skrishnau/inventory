@@ -135,6 +135,12 @@
     <Compile Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.Designer.cs">
       <DependentUpon>InventoryDetailUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Packages\PackageCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Packages\PackageCreateForm.Designer.cs">
+      <DependentUpon>PackageCreateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Payment\PaymentCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -616,6 +622,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\InventoryDetail\InventoryDetailUC.resx">
       <DependentUpon>InventoryDetailUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Packages\PackageCreateForm.resx">
+      <DependentUpon>PackageCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Payment\PaymentCreateForm.resx">
       <DependentUpon>PaymentCreateForm.cs</DependentUpon>

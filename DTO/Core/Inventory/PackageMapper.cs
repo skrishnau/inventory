@@ -25,14 +25,18 @@ namespace DTO.Core.Inventory
             var list = new List<PackageModel>();
             foreach(var entity in query)
             {
-                list.Add(MapToModel(entity));
+                var m = MapToModel(entity);
+                if(m!=null)
+                    list.Add(m);
             }
             return list;
         }
 
 
-        public static PackageModel MapToModel(Package entity)
+        public static PackageModel MapToModel(this Package entity)
         {
+            if (entity == null)
+                return null;
             return new PackageModel()
             {
                 Id = entity.Id,

@@ -15,6 +15,27 @@ namespace ViewModel.Core
         }
         public T Data { get; set; }
         public string Message { get; set; }
-        public bool Success { get; set; }
+        public Boolean Success { get; set; }
+
+        public void ChangeToSuccess()
+        {
+            Success = true;
+            Message = string.Empty;
+        }
+
+        public static ResponseModel<T> GetSuccess()
+        {
+            return new ResponseModel<T> { Success = true, Message = "Success!" };
+        }
+
+        public static ResponseModel<T> GetSaveSuccess()
+        {
+            return new ResponseModel<T> { Success = true, Message = "Save Successful!" };
+        }
+
+        public static ResponseModel<T> GetError()
+        {
+            return new ResponseModel<T> { Success = false, Message = "Save Successful!" };
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core;
 using ViewModel.Core.Business;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
@@ -26,7 +27,8 @@ namespace Service.Core.Inventory
 
         List<IdNamePair> GetPackageListForCombo();
         List<PackageModel> GetPackageList();
-        string SavePackage(PackageModel package);
+        PackageModel GetPackage(int packageId);
+        ResponseModel<PackageModel> SavePackage(PackageModel package);
 
         #endregion
 

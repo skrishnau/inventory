@@ -18,6 +18,7 @@ using Infrastructure.Entities.Business;
 using DTO.Core.Business;
 using ViewModel.Enums;
 using ViewModel.Core.Orders;
+using ViewModel.Core;
 
 namespace Service.Core.Inventory
 {
@@ -372,17 +373,19 @@ namespace Service.Core.Inventory
 
         }
 
-        public string SavePackage(PackageModel package)
+        public ResponseModel<PackageModel> SavePackage(PackageModel package)
         {
             using (var _context = new DatabaseContext())
             {
-
+                var response = new ResponseModel<PackageModel>();
                 var msg = "";
                 var args = BaseEventArgs<PackageModel>.Instance;
                 var duplicate = _context.Package.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
                 if (duplicate != null)
                 {
-                    return "Same 'Package' Name already exists";
+                    response.Message = "Same 'Package' Name already exists";
+                    response.Success = false;
+                    return response;
                 }
 
                 // get the package
@@ -401,7 +404,10 @@ namespace Service.Core.Inventory
                 _context.SaveChanges();
                 args.Model = PackageMapper.MapToModel(entity);
                 _listener.TriggerPackageUpdateEvent(null, args);
-                return msg;
+                response.Data = args.Model;
+                response.Success = true;
+                response.Message = "Save Successful";
+                return response;
             }
         }
 
@@ -411,6 +417,14 @@ namespace Service.Core.Inventory
             {
                 var query = _context.Package.AsQueryable();
                 return PackageMapper.MapToModel(query);
+            }
+        }
+
+        public PackageModel GetPackage(int packageId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Package.Find(packageId).MapToModel();
             }
         }
 
