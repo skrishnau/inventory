@@ -35,6 +35,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void TransactionPrintReceiptUC_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Fill;
+            
 
             var reportParams = GetReportParametersForSaleTransaction(_orderModel);
             this.reportViewer1.LocalReport.SetParameters(reportParams);

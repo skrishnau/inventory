@@ -851,6 +851,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SalesTransactionReport_DoublePrint.rdlc" />
     <EmbeddedResource Include="Reports\SalesTransactionReport.rdlc" />
     <EmbeddedResource Include="Reports\TransactionBarReportUC.rdlc" />
     <EmbeddedResource Include="Reports\VoucherReport.rdlc" />
