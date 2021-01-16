@@ -44,7 +44,7 @@ namespace IMS.Forms.Inventory.Payment
             if(orderModel != null)
             {
                 this.headerTemplate1.Text = orderModel.Name;
-                lblRemainingAmount.Text = orderModel.RemainingAmount.ToString();
+                lblRemainingAmount.Text = orderModel.DueAmount.ToString();
                 lblTotalAmount.Text = orderModel.TotalAmount.ToString();
                 txtAmount.Value = 0;//orderModel.RemainingAmount;
                 _orderModel = orderModel;
@@ -100,7 +100,7 @@ namespace IMS.Forms.Inventory.Payment
             txtAmount.Enabled = !chkAllPaid.Checked;
             if (chkAllPaid.Checked)
             {
-                txtAmount.Value = _orderModel.RemainingAmount;
+                txtAmount.Value = _orderModel.DueAmount;
             }
             else
             {

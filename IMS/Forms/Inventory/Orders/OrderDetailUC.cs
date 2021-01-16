@@ -143,8 +143,8 @@ namespace IMS.Forms.Inventory.Purchases
 
                 lblPaymentDueDate.Text = DateHelper.ToFormattedDateString(model.PaymentDueDate);
                 lblTotalAmount.Text = model.TotalAmount.ToString();
-                lblRemainingAmount.Text = model.RemainingAmount == 0 ? "All Paid" : model.RemainingAmount.ToString();
-                btnPayment.Visible = model.RemainingAmount > 0;
+                lblRemainingAmount.Text = model.DueAmount == 0 ? "All Paid" : model.DueAmount.ToString();
+                btnPayment.Visible = model.DueAmount > 0;
 
                 dgvItems.AutoGenerateColumns = false;
                 dgvItems.DataSource = model.OrderItems;

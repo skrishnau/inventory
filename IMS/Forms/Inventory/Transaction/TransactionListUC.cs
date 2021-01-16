@@ -157,7 +157,7 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 btnEdit.Visible = !model.IsCompleted;
                 btnPrint.Visible = model.IsCompleted;
-                btnPayment.Visible =  model.IsCompleted && model.RemainingAmount > 0;
+                btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
                 btnPayment.Tag = model;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);

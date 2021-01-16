@@ -66,6 +66,12 @@ namespace IMS.Forms.Inventory.Transaction
             reportParam.Add(new ReportParameter("IsCredit", (_orderModel.IsCredit).ToString()));
 
             reportParam.Add(new ReportParameter("Date", _orderModel.CompletedDate.HasValue ? _orderModel.CompletedDate.Value.ToString("yyyy/MM/dd") : ""));
+
+            var dueAmt = _orderModel.DueAmount;
+            reportParam.Add(new ReportParameter("PaidAmount", _orderModel.PaidAmount.ToString("#.00")));
+            reportParam.Add(new ReportParameter("DueAmount", dueAmt == 0 ? " - " : dueAmt.ToString("#.00")));
+
+
             return reportParam.AsEnumerable();
         }
     }

@@ -65,7 +65,7 @@ namespace ViewModel.Core.Orders
 
         public int NoOfProducts { get; set; }
 
-        public decimal RemainingAmount
+        public decimal DueAmount
         {
             get
             {
