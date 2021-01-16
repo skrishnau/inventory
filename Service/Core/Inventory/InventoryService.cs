@@ -146,16 +146,16 @@ namespace Service.Core.Inventory
 
         #region Product
 
-       
+
 
         #endregion
 
 
 
 
-       
 
-       
+
+
 
         //private void AssignVariantsForSave(Product productEntity, ProductModelForSave product, DateTime now)
         //{
@@ -194,7 +194,7 @@ namespace Service.Core.Inventory
         //    }
         //}
 
-       
+
 
         /*
         public void AddUpdateBrand(BrandModel brand)
@@ -279,7 +279,7 @@ namespace Service.Core.Inventory
         }
         */
 
-      
+
 
         private IQueryable<Product> GetProductEntityList()
         {
@@ -293,8 +293,8 @@ namespace Service.Core.Inventory
 
 
 
-       
-       
+
+
 
 
         //public void DeleteProduct(int id)
@@ -322,7 +322,7 @@ namespace Service.Core.Inventory
 
         #region Settings
 
-        public void SaveUom(UomModel model)
+        public ResponseModel<UomModel> SaveUom(UomModel model)
         {
             using (var _context = new DatabaseContext())
             {
@@ -344,6 +344,18 @@ namespace Service.Core.Inventory
                         entity.BaseUomId = baseUomEntity.Id;
                         entity.BaseUom = null;
                     }
+                    else if(model.BaseUom != model.Name)
+                    {
+                        // if the base Uom is not same as the Name then create the base
+                        var baseUom = new Uom
+                        {
+                            BaseUomId = null,
+                            Name = model.BaseUom,
+                            Quantity = 1,
+                            Use = true,
+                        };
+                        entity.BaseUom = baseUom;
+                    }
                 }
 
                 if (model.Id == 0)
@@ -359,6 +371,7 @@ namespace Service.Core.Inventory
                 _context.SaveChanges();
                 args.Model = entity.MapToUomModel(); //UomMapper.MapToUomModel(entity);
                 _listener.TriggerUomUpdateEvent(null, args);
+                return ResponseModel<UomModel>.GetSaveSuccess(args.Model);
             }
 
         }
@@ -369,6 +382,17 @@ namespace Service.Core.Inventory
             {
                 var uoms = _context.Uom.AsQueryable();
                 return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
+            }
+
+        }
+
+
+        public UomModel GetUom(int uomId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var uom = _context.Uom.Find(uomId);
+                return uom.MapToUomModel();//UomMapper.MapToUomModel(uoms);
             }
 
         }
@@ -576,7 +600,7 @@ namespace Service.Core.Inventory
             return GetAdjustmentCodeList().Where(x => x.Use).ToList();
         }
 
-       
+
 
         public List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId)
         {
@@ -665,7 +689,7 @@ namespace Service.Core.Inventory
             using (var _context = new DatabaseContext())
             {
                 var totalOrders = _context.Order.Where(x => x.IsCompleted && x.CompletedDate >= start && x.CompletedDate <= end)
-                    .GroupBy(x=>x.OrderType)
+                    .GroupBy(x => x.OrderType)
                     .Select(x => new TransactionSummaryModel
                     {
                         Key = x.Key,
@@ -685,7 +709,7 @@ namespace Service.Core.Inventory
             {
                 var totalProducts = _context.Product.Count();
                 list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Product.ToString(), Value = totalProducts });
-                var totalInventoryQty = _context.Product.Select(x => (decimal?)x.InStockQuantity).Sum()??0;
+                var totalInventoryQty = _context.Product.Select(x => (decimal?)x.InStockQuantity).Sum() ?? 0;
                 list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.InventoryQuantity.ToString(), Value = totalInventoryQty });
                 var customer = UserTypeEnum.Customer.ToString();
                 var totalCustomers = _context.User.Where(x => x.UserType == customer).Count();

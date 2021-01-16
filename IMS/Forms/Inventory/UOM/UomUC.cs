@@ -14,17 +14,14 @@ using Service.Core.Inventory;
 using ViewModel.Core.Common;
 using IMS.Forms.Common.GridView;
 using Service.Listeners;
+using SimpleInjector.Lifestyles;
 
 namespace IMS.Forms.Inventory.UOM
 {
     public partial class UomUC : UserControl
     {
-
         private readonly IInventoryService _inventoryService;
         private readonly IDatabaseChangeListener _listener;
-
-       // HeaderTemplate _header;
-        private bool _isCurrentRowDirty;
         
         public UomUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
         {
@@ -35,7 +32,6 @@ namespace IMS.Forms.Inventory.UOM
             this.Dock = DockStyle.Fill;
             this.Load += UomUC_Load;
         }
-        GridViewColumnDecimalValidator _decimalValidator;
 
         private void UomUC_Load(object sender, EventArgs e)
         {
@@ -43,12 +39,40 @@ namespace IMS.Forms.Inventory.UOM
             InitializeEvents();
             PopulateUomData();
 
-            // decimal column validations
-            _decimalValidator = new GridViewColumnDecimalValidator(dgvUom);
-            _decimalValidator.AddColumn(colQuantity, ColumnDataType.Decimal);
-            _decimalValidator.Validate();
-
+            dgvUom.SelectionChanged += DgvUom_SelectionChanged;
             _listener.UomUpdated += _listener_UomUpdated;
+        }
+
+        private void DgvUom_SelectionChanged(object sender, EventArgs e)
+        {
+            btnEdit.Visible = dgvUom.SelectedRows.Count > 0;
+        }
+
+        private void InitializeEvents()
+        {
+            btnNew.Click += BtnNew_Click;
+            btnEdit.Click += BtnEdit_Click;
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            UomModel package = dgvUom.SelectedRows.Count > 0 ? dgvUom.SelectedRows[0].DataBoundItem as UomModel : null;
+            ShowAddEditDialog(package?.Id ?? 0);
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            ShowAddEditDialog(0);
+        }
+
+        private void ShowAddEditDialog(int packageId)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var productCreate = Program.container.GetInstance<UomCreateForm>();
+                productCreate.SetDataForEdit(packageId);
+                productCreate.ShowDialog();
+            }
         }
 
         private void _listener_UomUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UomModel> e)
@@ -56,8 +80,24 @@ namespace IMS.Forms.Inventory.UOM
             PopulateUomData();
         }
 
+        private void PopulateUomData()
+        {
+            var uoms = _inventoryService.GetUomList();
+            dgvUom.AutoGenerateColumns = false;
+            dgvUom.DataSource = uoms;
+        }
 
-        #region Initialization Functions
+    }
+}
+
+/*
+ * 
+ * 
+ // earlier code to save uomm directly from editing datagridview
+ 
+        private bool _isCurrentRowDirty;
+      #region Event Handlers
+       #region Initialization Functions
 
         //private void InitializeHeader()
         //{
@@ -82,41 +122,6 @@ namespace IMS.Forms.Inventory.UOM
 
 
         #endregion
-
-
-        #region Populating Functions
-
-        private void PopulateUomData()
-        {
-            // TODO: here is error after saving first row in UOM
-            // should use thread safe way ???
-            //dgvUom.Rows.Clear();
-            var uoms = _inventoryService.GetUomList();
-            foreach (var uom in uoms)
-            {
-                AddRow(uom);
-            }
-            //dgvUom.AutoGenerateColumns = false;
-            //dgvUom.DataSource = uoms;
-
-        }
-
-        private void AddRow(UomModel model)
-        {
-            var row = (DataGridViewRow)dgvUom.Rows[dgvUom.RowCount - 1].Clone();//new DataGridViewRow();
-            row.Cells[colId.Index].Value = model.Id;
-            row.Cells[colUnit.Index].Value = model.Name;
-            row.Cells[colQuantity.Index].Value = model.Quantity;
-            row.Cells[colBaseUnitId.Index].Value = model.BaseUomId;
-            row.Cells[colBaseUnit.Index].Value = model.BaseUom;
-            row.Cells[colUse.Index].Value = model.Use;
-            dgvUom.Rows.Add(row);
-        }
-
-        #endregion
-
-
-        #region Event Handlers
 
 
         private void DgvUom_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -254,8 +259,6 @@ namespace IMS.Forms.Inventory.UOM
 
         #endregion
 
-
-
         #region Get Data
 
         private UomModel GetRowData(int rowIndex)
@@ -320,10 +323,7 @@ namespace IMS.Forms.Inventory.UOM
         #endregion
 
 
-
-        #region  Helper Functions (GET)
-
-        // removes error text
+     // removes error text
         private void RemoveRowError(int rowIndex)
         {
             foreach (DataGridViewCell cell in dgvUom.Rows[rowIndex].Cells)
@@ -438,11 +438,20 @@ namespace IMS.Forms.Inventory.UOM
             return isValid;
         }
 
-        #endregion
 
 
-    }
-}
+        private void AddRow(UomModel model)
+        {
+            var row = (DataGridViewRow)dgvUom.Rows[dgvUom.RowCount - 1].Clone();//new DataGridViewRow();
+            row.Cells[colId.Index].Value = model.Id;
+            row.Cells[colUnit.Index].Value = model.Name;
+            row.Cells[colQuantity.Index].Value = model.Quantity;
+            row.Cells[colBaseUnitId.Index].Value = model.BaseUomId;
+            row.Cells[colBaseUnit.Index].Value = model.BaseUom;
+            row.Cells[colUse.Index].Value = model.Use;
+            dgvUom.Rows.Add(row);
+        }
+ */
 
 //private void UnitsColumn_KeyPress(object sender, KeyPressEventArgs e)
 //{

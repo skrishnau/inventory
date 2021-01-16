@@ -34,8 +34,9 @@ namespace Service.Core.Inventory
 
         #region UOM
 
-        void SaveUom(UomModel data);
+        ResponseModel<UomModel> SaveUom(UomModel data);
         List<UomModel> GetUomList();
+        UomModel GetUom(int uomId);
         List<IdNamePair> GetUomListForCombo();
 
         #endregion

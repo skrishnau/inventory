@@ -28,9 +28,9 @@ namespace ViewModel.Core
             return new ResponseModel<T> { Success = true, Message = "Success!" };
         }
 
-        public static ResponseModel<T> GetSaveSuccess()
+        public static ResponseModel<T> GetSaveSuccess(T data)
         {
-            return new ResponseModel<T> { Success = true, Message = "Save Successful!" };
+            return new ResponseModel<T> { Success = true, Message = "Save Successful!", Data = data };
         }
 
         public static ResponseModel<T> GetError()

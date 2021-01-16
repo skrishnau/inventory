@@ -213,6 +213,12 @@
     <Compile Include="Forms\Inventory\Units\InventoryUnitListUC.Designer.cs">
       <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\UOM\UomCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\UOM\UomCreateForm.Designer.cs">
+      <DependentUpon>UomCreateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Warehouses\WarehouseCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -661,6 +667,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitListUC.resx">
       <DependentUpon>InventoryUnitListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\UOM\UomCreateForm.resx">
+      <DependentUpon>UomCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Warehouses\WarehouseCreateForm.resx">
       <DependentUpon>WarehouseCreateForm.cs</DependentUpon>
