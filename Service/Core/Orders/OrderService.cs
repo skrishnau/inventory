@@ -105,7 +105,6 @@ namespace Service.Core.Orders
         {
             using (var _context = new DatabaseContext())
             {
-
                 // don't use enum directly
                 // var type = orderType.ToString();
                 var entity = _context.Order
@@ -160,17 +159,20 @@ namespace Service.Core.Orders
                 var entity = _context.Order.Find(orderModel.Id);
                 entity = orderModel.MapToEntity(entity);
 
-                CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
+                var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
                 SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout);
-
-
 
                 if (checkout)
                 {
                     // makechecout
                     MakeCheckout(_context, ref entity, ref orderModel);
-                    UpdateTransactionWithoutCommit(_context, orderModel);
+                    var transaction = GetTransactionWithoutCommit(_context, orderModel);
+                    if (user != null)
+                    {
+                        user.Transactions.Add(transaction);
+                    }
+                    entity.Transactions.Add(transaction);
                 }
 
                 if (entity.Id == 0)
@@ -214,12 +216,9 @@ namespace Service.Core.Orders
             //    SubtractIssuedItemsFromWarehouse(entity.OrderItems);
             //else if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
             //    AddReceivedItemsToWarehouse(entity.OrderItems, DateTime.Now);
-
-
         }
 
-
-        public static void UpdateTransactionWithoutCommit(DatabaseContext _context, OrderModel orderModel)
+        public static Transaction GetTransactionWithoutCommit(DatabaseContext _context, OrderModel orderModel)
         {
             var debit = 0M;
             var credit = 0M;
@@ -244,12 +243,13 @@ namespace Service.Core.Orders
                 Debit = debit, //orderModel.TotalAmount,
                 DrCr = Math.Sign(balance),
                 IsVoid = false,
-                OrderId = orderModel.Id > 0 ? (int?)orderModel.Id : null,
+                //OrderId = orderModel.Id > 0 ? (int?)orderModel.Id : null, // don't add orderid
                 Particulars = orderModel.ReferenceNumber,
-                UserId = orderModel.UserId > 0 ? (int?)orderModel.UserId : null,
+                //UserId = orderModel.UserId > 0 ? (int?)orderModel.UserId : null, // don't add userid
                 Type = orderModel.OrderType,
             };
-            _context.Transaction.Add(transaction);
+            //_context.Transaction.Add(transaction);
+            return transaction;
         }
         // amount in user table -- tooo much fradulent code.. can't make a robust amount entry in User table. due to changing 
         // nature of transaction (invoice void, re-save, etc.)
@@ -272,40 +272,49 @@ namespace Service.Core.Orders
         //    }
         //}
 
-        private void CheckAndAssignCustomer(DatabaseContext _context, ref OrderModel orderModel, ref Order entity, bool checkout)
+        private User CheckAndAssignCustomer(DatabaseContext _context, ref OrderModel orderModel, ref Order entity, bool checkout)
         {
+            User user = null;
             if (orderModel.UserId > 0)
             {
-                var userEntity = _context.User.Find(orderModel.UserId);
-                if (userEntity != null)
+                user = _context.User.Find(orderModel.UserId);
+                if (user != null)
                 {
-                    userEntity.Address = orderModel.Address;
-                    userEntity.Phone = orderModel.Phone;
+                    user.Address = orderModel.Address;
+                    user.Phone = orderModel.Phone;
                 }
-                return;
             }
-            if (string.IsNullOrEmpty(orderModel.User))
+            else if (string.IsNullOrEmpty(orderModel.User))
             {
                 orderModel.UserId = null;
-                return;
             }
-            // below code executes if userId is null but manual input of user-name is present 
-            var user = new User
+            else
             {
-                CreatedAt = DateTime.Now,
-                Phone = orderModel.Phone,
-                Address = orderModel.Address,
-                Name = orderModel.User,
-                UpdatedAt = DateTime.Now,
-                DeletedAt = null,
-                DOB = null,
-                DeliveryAddress = orderModel.Address,
-                Use = true,
-                //PaidAmount = checkout ? orderModel.PaidAmount : 0,
-                //TotalAmount = checkout ? orderModel.TotalAmount : 0,
-                UserType = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? UserTypeEnum.Customer.ToString() : UserTypeEnum.Supplier.ToString(),
-            };
-            entity.User = user;
+                // below code executes if userId is null but manual input of user-name is present 
+                user = new User
+                {
+                    CreatedAt = DateTime.Now,
+                    Phone = orderModel.Phone,
+                    Address = orderModel.Address,
+                    Name = orderModel.User,
+                    UpdatedAt = DateTime.Now,
+                    DeletedAt = null,
+                    DOB = null,
+                    DeliveryAddress = orderModel.Address,
+                    Use = true,
+                    //PaidAmount = checkout ? orderModel.PaidAmount : 0,
+                    //TotalAmount = checkout ? orderModel.TotalAmount : 0,
+                    UserType = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? UserTypeEnum.Customer.ToString() : UserTypeEnum.Supplier.ToString(),
+                };
+
+                entity.User = user;
+            }
+            if (user!=null && checkout && orderModel.PaidAmount < orderModel.TotalAmount)
+            {
+                // credit ; store payment due date in the customer
+                user.PaymentDueDate = orderModel.PaymentDueDate;
+            }
+            return user;
         }
 
         public string SetSent(int orderId)

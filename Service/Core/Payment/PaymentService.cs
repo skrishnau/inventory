@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Orders;
 using ViewModel.Core.Users;
+using ViewModel.Enums;
 
 namespace Service.Core.Payment
 {
@@ -32,6 +33,7 @@ namespace Service.Core.Payment
                 model.Id = entity.Id;
                 User user = null;
                 Order order = null;
+
                 if (model.OrderId > 0)
                 {
                     order = _context.Order.Find(model.OrderId);
@@ -54,14 +56,20 @@ namespace Service.Core.Payment
                 {
                     TotalAmount = 0,
                     PaidAmount = model.Amount,
-                    ReferenceNumber = $"Paid by {model.PaidBy}",
+                    ReferenceNumber = $"Paid by {(string.IsNullOrEmpty(model.PaidBy)? user !=null ? user.Name : order?.ReferenceNumber: model.PaidBy)}",
                     UserId = user?.Id, //model.UserId,
                     Id = order?.Id??0,
                     OrderType = "Sale",
                 };
-                OrderService.UpdateTransactionWithoutCommit(_context, tempOrder.MapToModel());
+                var txn = OrderService.GetTransactionWithoutCommit(_context, tempOrder.MapToModel());
+                if (user != null)
+                {
+                    user.Transactions.Add(txn);
+                    user.PaymentDueDate = model.TotalAmount <= model.Amount ? null : user.PaymentDueDate;
+                }
+                if (order != null)
+                    order.Transactions.Add(txn);
                 _context.SaveChanges();
-
 
 
                 if (order != null)
@@ -87,5 +95,7 @@ namespace Service.Core.Payment
 
             }
         }
+
+      
     }
 }

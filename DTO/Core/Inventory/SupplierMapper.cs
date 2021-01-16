@@ -49,8 +49,8 @@ namespace DTO.Core.Inventory
                 }
                 else if(user.UserType == UserTypeEnum.Supplier.ToString())
                 {
-                    total = transactions.Sum(x => x.Credit); // incomming stock amount
-                    paid = transactions.Sum(x => x.Debit); // outgoing paid amount
+                    total = transactions.Sum(x => x.Debit); // incomming stock amount
+                    paid = transactions.Sum(x => x.Credit); // outgoing paid amount
                 }
                 list.Add(MapToUserModel(user, total, paid));
             }

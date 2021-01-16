@@ -287,7 +287,8 @@ namespace IMS.Forms.Inventory.Transaction
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
         {
             ResponseModel<OrderModel> msg = new ResponseModel<OrderModel>();
-
+            var userType = _orderType == OrderTypeEnum.Sale ? UserTypeEnum.Customer : UserTypeEnum.Supplier;
+            var givenByTo = _orderType == OrderTypeEnum.Sale ? "given to" : "taken from";
             if (!checkout)
                 _greaterThanZeroFieldValidator.Remove(txtTotal);
             else 
@@ -298,6 +299,12 @@ namespace IMS.Forms.Inventory.Transaction
                 msg.Message += "Some Fields are less than zero\n";
             if (txtPaidAmount.Value > txtTotal.Value)
                 msg.Message += "Paid amount cannot be greater than total amount";
+            if (rbCredit.Checked && string.IsNullOrEmpty(cbClient.Text))
+            {
+                var creditToAnonumousMsg = $"Credit can't be {givenByTo} anonymous {userType.ToString()}. Please enter {userType.ToString()} name";
+                errorProvider.SetError(cbClient, creditToAnonumousMsg);
+                msg.Message += creditToAnonumousMsg;
+            }
             if (!string.IsNullOrEmpty(msg.Message))
             {
                 PopupMessage.ShowInfoMessage(msg.Message);
@@ -333,8 +340,10 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 client = cbClient.Text;
             }
+            
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId, dgvItems.colUomId };
             var items = dgvItems.GetItems(ignoreList, false);
+
             if (items != null)
             {
                 var orderModel = new OrderModel

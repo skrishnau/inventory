@@ -14,6 +14,11 @@ namespace Infrastructure.Entities.Users
     /// </summary>
     public class User
     {
+        public User()
+        {
+            Orders = new List<Order>();
+            Transactions = new List<Transaction>();
+        }
         public int Id { get; set; }
 
         // user specific
@@ -60,6 +65,11 @@ namespace Infrastructure.Entities.Users
         // Registration Date in case of company; or birth date in case of person
         public DateTime? DOB { get; set; }
         public string Notes { get; set; }
+
+        /// <summary>
+        /// The last stored due date for customer/supplier. it's updated everytime credit is taken
+        /// </summary>
+        public DateTime? PaymentDueDate { get; set; }
 
         //// payments
         //public decimal TotalAmount { get; set; }

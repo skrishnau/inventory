@@ -45,7 +45,7 @@ namespace Service.Core.Reports
                 var drcr = Math.Sign(balance);
                 var master = new LedgerMasterModel
                 {
-                    BalanceSum = drcr < 0 ? $"({Math.Abs(balance)})" : "",
+                    BalanceSum = drcr < 0 ? $"({Math.Abs(balance)})" : balance.ToString(),
                     LedgerData = result,
                     CreditSum = "" + transactions.Sum(x => x.Credit),
                     DebitSum = "" + transactions.Sum(x => x.Debit),

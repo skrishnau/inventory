@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202101150442214_InitMigration.Designer.cs">
       <DependentUpon>202101150442214_InitMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101161108522_PaymentDueDateAddedInUserTable.cs" />
+    <Compile Include="Migrations\202101161108522_PaymentDueDateAddedInUserTable.Designer.cs">
+      <DependentUpon>202101161108522_PaymentDueDateAddedInUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -106,6 +110,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101150442214_InitMigration.resx">
       <DependentUpon>202101150442214_InitMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101161108522_PaymentDueDateAddedInUserTable.resx">
+      <DependentUpon>202101161108522_PaymentDueDateAddedInUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -37,6 +37,7 @@ using IMS.Forms.Inventory.InventoryDetail;
 using Service.Core.Reports;
 using Service.Interfaces;
 using Service.Core;
+using Service.Core.Payment;
 
 namespace IMS
 {
@@ -87,6 +88,7 @@ namespace IMS
             container.Register<IBusinessService, BusinessService>(Lifestyle.Singleton);
             container.Register<IUserService, UserService>(Lifestyle.Singleton);
             container.Register<IOrderService, OrderService>(Lifestyle.Singleton);
+            container.Register<IPaymentService, PaymentService>(Lifestyle.Singleton);
 
             container.Register<ISaleService, SaleService>(Lifestyle.Singleton);
             container.Register<IReportService, ReportService>(Lifestyle.Singleton);

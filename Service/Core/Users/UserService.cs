@@ -127,6 +127,36 @@ namespace Service.Core.Users
             }
             return query;
         }
+
+        public UserModel GetTransactionSumOfUser(int userId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var user = _context.User.Find(userId);
+                if (user != null)
+                {
+                    var query = _context.Transaction.Where(x => !x.IsVoid && x.UserId == userId)
+                    .GroupBy(x => x.UserId);
+                    if (user.UserType == UserTypeEnum.Customer.ToString())
+                    {
+                        return query.Select(x => new UserModel
+                        {
+                            TotalAmount = x.Sum(y => y.Debit),
+                            PaidAmount = x.Sum(y => y.Credit)
+                        }).FirstOrDefault();
+                    }
+                    else
+                    {
+                        return query.Select(x => new UserModel
+                        {
+                            TotalAmount = x.Sum(y => y.Credit),
+                            PaidAmount = x.Sum(y => y.Debit)
+                        }).FirstOrDefault();
+                    }
+                }
+                return null;
+            }
+        }
     }
 
 }

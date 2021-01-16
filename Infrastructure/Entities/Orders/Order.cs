@@ -15,6 +15,8 @@ namespace Infrastructure.Entities.Orders
         public Order()
         {
             OrderItems = new List<OrderItem>();
+            Payments = new List<Payment>();
+            Transactions = new List<Transaction>();
         }
 
         public int Id { get; set; }

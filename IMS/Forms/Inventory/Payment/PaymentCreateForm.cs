@@ -1,6 +1,7 @@
 ﻿using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
 using Service.Core.Payment;
+using Service.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,14 +22,18 @@ namespace IMS.Forms.Inventory.Payment
     {
         private OrderModel _orderModel;
         private UserModel _userModel;
-        private readonly PaymentService _paymentService;
+        private readonly IPaymentService _paymentService;
+        private readonly IUserService _userService;
         private RequiredFieldValidator _requiredFieldValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
+
+        private decimal totalAmount;
         
 
-        public PaymentCreateForm(PaymentService paymentService)
+        public PaymentCreateForm(IPaymentService paymentService, IUserService userService)
         {
             _paymentService = paymentService;
+            _userService = userService;
             InitializeComponent();
 
             txtAmount.Maximum = Int32.MaxValue;
@@ -41,23 +46,31 @@ namespace IMS.Forms.Inventory.Payment
 
         public void SetData(OrderModel orderModel, UserModel userModel)
         {
+            var byFrom = "-";
             if(orderModel != null)
             {
+                 byFrom = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? "By Customer" : "To Supplier";
+                this.Text = $"New {orderModel.OrderType} Payment {byFrom}";
                 this.headerTemplate1.Text = orderModel.Name;
                 lblRemainingAmount.Text = orderModel.DueAmount.ToString();
                 lblTotalAmount.Text = orderModel.TotalAmount.ToString();
                 txtAmount.Value = 0;//orderModel.RemainingAmount;
                 _orderModel = orderModel;
+                totalAmount = orderModel.TotalAmount;
             }
-            else if(userModel == null)
+            else if(userModel != null)
             {
+                byFrom = userModel.UserType== UserTypeEnum.Customer.ToString()? "By Customer" : "To Supplier";
+                this.Text = $"New Payment {byFrom}";
                 this.headerTemplate1.Text = userModel.Name;
-                lblRemainingAmount.Text = userModel.DueAmount.ToString();
-                lblTotalAmount.Text = userModel.TotalAmount.ToString();
+                var transactionSum = _userService.GetTransactionSumOfUser(userModel.Id);
+                lblRemainingAmount.Text = transactionSum?.DueAmount.ToString();//userModel.DueAmount.ToString();
+                lblTotalAmount.Text = transactionSum?.TotalAmount.ToString();//userModel.TotalAmount.ToString();
                 txtAmount.Value = 0;// userModel.DueAmount;
                 _userModel = userModel;
+                totalAmount = transactionSum?.TotalAmount??0;
             }
-            
+            lblByFrom.Text = byFrom;
         }
 
 
@@ -100,7 +113,7 @@ namespace IMS.Forms.Inventory.Payment
             txtAmount.Enabled = !chkAllPaid.Checked;
             if (chkAllPaid.Checked)
             {
-                txtAmount.Value = _orderModel.DueAmount;
+                txtAmount.Value = _userModel!=null ? _userModel.DueAmount: _orderModel != null? _orderModel.DueAmount : 0;
             }
             else
             {
@@ -169,6 +182,7 @@ namespace IMS.Forms.Inventory.Payment
                 PaymentMethod = cbPaymentMethod.SelectedValue.ToString(),
                 OrderId = _orderModel?.Id,
                 UserId = _userModel?.Id,
+                TotalAmount = totalAmount,
             };
             return model;
         }

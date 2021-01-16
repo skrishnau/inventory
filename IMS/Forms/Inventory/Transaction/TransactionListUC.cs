@@ -82,7 +82,7 @@ namespace IMS.Forms.Inventory.Transaction
             rbAll.CheckedChanged += Type_CheckedChanged;
             rbPurchase.CheckedChanged += Type_CheckedChanged;
             rbSale.CheckedChanged += Type_CheckedChanged;
-            btnPayment.Click += btnPayment_Click;
+           // btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
             btnEdit.Click += BtnEdit_Click;
             dgvOrders.DataBindingComplete += DgvOrders_DataBindingComplete;
@@ -156,9 +156,8 @@ namespace IMS.Forms.Inventory.Transaction
             if (model != null)
             {
                 btnEdit.Visible = !model.IsCompleted;
-                btnPrint.Visible = model.IsCompleted;
-                btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
-                btnPayment.Tag = model;
+                btnPrint.Visible = model.OrderType == OrderTypeEnum.Sale.ToString() && model.IsCompleted;
+               // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);
                 dgvItems.DataSource = _orderService.GetPurchaseOrderItems(model.Id);
@@ -166,8 +165,7 @@ namespace IMS.Forms.Inventory.Transaction
             }
             else
             {
-                btnPayment.Tag = null;
-                btnPayment.Visible = false;
+               // btnPayment.Visible = false;
                 btnPrint.Visible = false;
                 btnEdit.Visible = false;
             }
@@ -184,7 +182,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var orderModel = btnPayment.Tag as OrderModel;
+                var orderModel = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel : null;
                 if (orderModel != null)
                 {
                     var po = Program.container.GetInstance<PaymentCreateForm>();
@@ -198,7 +196,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var orderModel = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel : null;//btnPayment.Tag as OrderModel;
+                var orderModel = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel : null;
                 if (orderModel != null)
                 {
                     var po = Program.container.GetInstance<TransactionCreateForm>();

@@ -8,6 +8,7 @@ using Service.Core.Users;
 using ViewModel.Enums;
 using System.Collections.Generic;
 using System.Linq;
+using IMS.Forms.Inventory.Payment;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
@@ -72,6 +73,7 @@ namespace IMS.Forms.Inventory.Suppliers
             dgvSuppliers.SelectionChanged += DgvSuppliers_SelectionChanged;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
+            btnPayment.Click += btnPayment_Click;
             dgvSuppliers.CellMouseDoubleClick += DgvSuppliers_CellMouseDoubleClick;
             rbAll.CheckedChanged += UserType_CheckedChanged;
             rbCustomer.CheckedChanged += UserType_CheckedChanged;
@@ -178,6 +180,21 @@ namespace IMS.Forms.Inventory.Suppliers
             ShowAddEditDialog(true);
         }
 
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                //var orderModel = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel : null;
+                var userModel = dgvSuppliers.SelectedRows.Count > 0 ? dgvSuppliers.SelectedRows[0].DataBoundItem as UserModel : null;
+                if (userModel != null)
+                {
+                    var po = Program.container.GetInstance<PaymentCreateForm>();
+                    po.SetData(null, userModel);
+                    po.ShowDialog();
+                }
+            }
+        }
+
         //private void BtnDelete_Click(object sender, EventArgs e)
         //{
         //    if (_selectedSupplierModel != null)
@@ -218,6 +235,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             var visible = _selectedSupplierModel != null;
             btnEdit.Visible = visible;
+            btnPayment.Visible = visible;
             //  btnDelete.Visible = visible;
         }
 

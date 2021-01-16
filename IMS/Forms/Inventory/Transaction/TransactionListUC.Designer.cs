@@ -47,7 +47,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblCustomer = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.lblReferenceNo = new System.Windows.Forms.Label();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
@@ -56,6 +55,7 @@
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNoOfProducts = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -110,7 +110,7 @@
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(16, 5);
+            this.btnEdit.Location = new System.Drawing.Point(118, 5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(79, 31);
             this.btnEdit.TabIndex = 1;
@@ -194,6 +194,7 @@
             this.colOrderType,
             this.colCustomer,
             this.colTotalAmount,
+            this.colPaidAmount,
             this.colDeliveryDate,
             this.colNoOfProducts,
             this.colStatus});
@@ -269,7 +270,6 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.btnPayment);
             this.flowLayoutPanel2.Controls.Add(this.btnPrint);
             this.flowLayoutPanel2.Controls.Add(this.btnEdit);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -280,28 +280,13 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(307, 43);
             this.flowLayoutPanel2.TabIndex = 17;
             // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(203, 5);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(96, 33);
-            this.btnPayment.TabIndex = 15;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Visible = false;
-            // 
             // btnPrint
             // 
             this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(101, 5);
+            this.btnPrint.Location = new System.Drawing.Point(203, 5);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(96, 33);
             this.btnPrint.TabIndex = 16;
@@ -345,6 +330,7 @@
             this.colCreatedDate.HeaderText = "Created";
             this.colCreatedDate.Name = "colCreatedDate";
             this.colCreatedDate.ReadOnly = true;
+            this.colCreatedDate.Width = 80;
             // 
             // colOrderType
             // 
@@ -371,20 +357,29 @@
             this.colTotalAmount.ReadOnly = true;
             this.colTotalAmount.Width = 95;
             // 
+            // colPaidAmount
+            // 
+            this.colPaidAmount.DataPropertyName = "PaidAmount";
+            this.colPaidAmount.HeaderText = "Paid Amount";
+            this.colPaidAmount.Name = "colPaidAmount";
+            this.colPaidAmount.ReadOnly = true;
+            // 
             // colDeliveryDate
             // 
             this.colDeliveryDate.DataPropertyName = "DeliveryDate";
             this.colDeliveryDate.HeaderText = "Delivery Date";
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
+            this.colDeliveryDate.Width = 80;
             // 
             // colNoOfProducts
             // 
             this.colNoOfProducts.DataPropertyName = "NoOfProducts";
             this.colNoOfProducts.FillWeight = 80F;
-            this.colNoOfProducts.HeaderText = "Product Count";
+            this.colNoOfProducts.HeaderText = "Products";
             this.colNoOfProducts.Name = "colNoOfProducts";
             this.colNoOfProducts.ReadOnly = true;
+            this.colNoOfProducts.Width = 80;
             // 
             // colStatus
             // 
@@ -392,7 +387,7 @@
             this.colStatus.HeaderText = "Status";
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 80;
+            this.colStatus.Width = 70;
             // 
             // TransactionListUC
             // 
@@ -439,7 +434,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblReferenceNo;
         private Common.Display.ListHeaderTemplate listHeaderTemplate1;
-        private Common.Buttons.MenuButton btnPayment;
         private Common.Buttons.MenuButton btnPrint;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label lblCustomer;
@@ -448,6 +442,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNoOfProducts;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;

@@ -60,6 +60,8 @@ namespace ViewModel.Core.Users
         public DateTime? DOB { get; set; }
         public string Notes { get; set; }
 
+        public DateTime? PaymentDueDate { get; set; }
+
         // ============= Table objects ===============//
         //public virtual Role Role { get; set; }
 
