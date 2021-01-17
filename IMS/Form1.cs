@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using IMS.Forms.POS;
 using IMS.Forms.Inventory.Orders;
 using ViewModel.Enums;
+using IMS.Forms.Authorization;
 
 namespace IMS
 {
@@ -16,7 +17,36 @@ namespace IMS
            // InitializeEvents();
             
             // open inventory at first initialization
-            DisplayInventory();
+
+            this.Load += Form1_Load;
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ShowLoginFormOrLogin();
+        }
+
+        private void ShowLoginFormOrLogin()
+        {
+            // ask for password
+            var loginForm = Program.container.GetInstance<LoginForm>();//new InventoryUC();
+            DialogResult result = loginForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                DisplayInventory();
+            }
+            else if(result == DialogResult.Abort)
+            {
+                ShowLoginFormOrLogin();
+            }else
+            {
+                this.Close();
+                try {
+                    this.Dispose();
+                }
+                catch (Exception) { }
+            }
 
         }
 

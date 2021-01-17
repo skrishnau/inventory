@@ -513,5 +513,37 @@ namespace Service.Core.Settings
             var billSettings = GetBillSettings(orderType);
             return billSettings.ReceiptNo;
         }
+
+        public bool SavePassword(string password)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var auth = _context.AppSetting.FirstOrDefault(x => x.Name == "Auth"); //GetAppSetting("Auth");
+                if (auth == null)
+                {
+                    auth = new AppSetting()
+                    {
+                        Name = "Auth",
+                        CreatedAt = DateTime.Now,
+                        DisplayName = "Auth",
+                        Group = "Authorization",
+                        UpdatedAt = DateTime.Now,
+                        Value = password,
+                    };
+                    _context.AppSetting.Add(auth);
+                }
+                else
+                {
+                    auth.Value = password;
+                }
+                _context.SaveChanges();
+                return true;
+            }
+        }
+
+        public string GetPassword()
+        {
+            return GetAppSetting("Auth")?.Value;
+        }
     }
 }

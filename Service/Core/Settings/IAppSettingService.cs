@@ -32,5 +32,8 @@ namespace Service.Core.Settings
         string GetReceiptNumber(BillSettingsModel setting, long currentIndex);
         bool SaveCurrentIndex(long index, OrderTypeEnum orderType);
         bool IncrementBillIndex(OrderTypeEnum orderType);
+
+        string GetPassword();
+        bool SavePassword(string password);
     }
 }
