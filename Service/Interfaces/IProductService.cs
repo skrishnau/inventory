@@ -10,8 +10,12 @@ namespace Service.Interfaces
 {
     public interface IProductService
     {
+        int GetAllProductsCount();
+        ProductListModel GetAllProducts(int pageSize, int offset);
+
+
         List<IdNamePair> GetProductListForCombo();
-        List<ProductModel> GetProductListForGridView();
+
         ProductModel GetProduct(int productId);
         ProductModel GetProductForEdit(int productId);
         ProductModel GetProductBySKU(string sku);

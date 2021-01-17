@@ -15,7 +15,9 @@ namespace Service.Core.Users
 
         UserModel GetUser(int supplierId);
         void DeleteUser(UserModel user);
-        List<UserModel> GetUserList(UserTypeEnum userType, string searchName = "");
+
+        int GetAllUsersCount(UserTypeEnum userType, string searchName = "");
+        UserListModel GetAllUsers(UserTypeEnum userType, int pageSize, int offset, string searchName = "");
         
         /// <summary>
         /// 

@@ -78,15 +78,33 @@ namespace Service.Core.Users
                 return UserMapper.MapToUserModel(supplier);
             }
         }
-
-        public List<UserModel> GetUserList(UserTypeEnum userType, string searchName = "")
+        public int GetAllUsersCount(UserTypeEnum userType, string searchName = "")
         {
             using (var _context = new DatabaseContext())
             {
-                var query = GetUserQueryable(_context, userType);
-                if (!string.IsNullOrEmpty(searchName))
-                    query = query.Where(x => x.Name.Contains(searchName));
-                return UserMapper.MapToUserModel(query.OrderBy(x => x.Name));
+                var query = GetUserQueryable(_context, userType, searchName);
+                return query.Count();
+            }
+        }
+
+        public UserListModel GetAllUsers(UserTypeEnum userType, int pageSize, int offset, string searchName = "")
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = GetUserQueryable(_context, userType, searchName);
+                var totalCount = query.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    query = query.Skip(offset).Take(pageSize);
+                }
+                var list = query.MapToUserModel();// UserMapper.MapToUserModel(query);
+                return new UserListModel
+                {
+                    DataList = list,
+                    TotalCount = totalCount,
+                    Offset = offset,
+                    PageSize = pageSize,
+                };
             }
         }
 
@@ -97,11 +115,10 @@ namespace Service.Core.Users
                 includeUserList = new int[0];
             using (var _context = new DatabaseContext())
             {
-                var query = GetUserQueryable(_context, userType);
+                var query = GetUserQueryable(_context, userType, string.Empty);
 
                 return query
                     .Where(x => x.Use || (!x.Use && includeUserList.Contains(x.Id)))
-                    .OrderBy(x => x.Name)
                     .Select(x => new IdNamePair()
                     {
                         Name = x.Name,
@@ -110,7 +127,7 @@ namespace Service.Core.Users
             }
         }
 
-        private IQueryable<User> GetUserQueryable(DatabaseContext _context, UserTypeEnum userType)
+        private IQueryable<User> GetUserQueryable(DatabaseContext _context, UserTypeEnum userType, string searchName)
         {
             var query = _context.User
                     .Where(x => x.DeletedAt == null);
@@ -125,7 +142,9 @@ namespace Service.Core.Users
                 var userTypeStr = userType.ToString();
                 query = query.Where(x => x.UserType == userTypeStr);
             }
-            return query;
+            if (!string.IsNullOrEmpty(searchName))
+                query = query.Where(x => x.Name.Contains(searchName));
+            return query.OrderBy(x => x.Name);
         }
 
         public UserModel GetTransactionSumOfUser(int userId)

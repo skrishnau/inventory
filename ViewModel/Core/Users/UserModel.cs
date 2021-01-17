@@ -7,6 +7,16 @@ using Infrastructure.Entities.Users;
 
 namespace ViewModel.Core.Users
 {
+
+    public class UserListModel
+    {
+        public List<UserModel> DataList { get; set; }
+
+        public int TotalCount { get; set; }
+        public int PageSize { get; set; }
+        public int Offset { get; set; }
+    }
+
     public class UserModel
     {
         public int Id { get; set; }

@@ -16,6 +16,7 @@ using IMS.Forms.Common.Display;
 using Service.Listeners;
 using Service.DbEventArgs;
 using Service.Interfaces;
+using IMS.Forms.Common.Pagination;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -28,6 +29,10 @@ namespace IMS.Forms.Inventory.Products
 
         private ProductModel _selectedProduct;
         // private HeaderTemplate _header;
+
+        BindingSource _bindingSource = new BindingSource();
+        private ProductListPaginationHelper helper;
+        int _previousSelectedIndex = -1;
 
         private List<ProductModel> _productList;
 
@@ -48,15 +53,25 @@ namespace IMS.Forms.Inventory.Products
         {
             // this.heading.Text = "Product List";
             this.Dock = DockStyle.Fill;
-            PopulateProductData();
+            InitializeGridView();
             InitializeEvents();
             InitializeListeners();
 
+            PopulateProductData();
 
         }
 
 
         #region Initialize Functions
+
+
+        private void InitializeGridView()
+        {
+            dgvProductList.AutoGenerateColumns = false;
+            helper = new ProductListPaginationHelper(_bindingSource, dgvProductList, bindingNavigator1, _productService);
+
+        }
+
 
         private void InitializeEvents()
         {
@@ -96,6 +111,41 @@ namespace IMS.Forms.Inventory.Products
 
         #endregion
 
+        #region Populate Functions
+
+
+        private void PopulateProductData()
+        {
+            //_productList = _productService.GetProductList();
+            //dgvProductList.DataSource = _productList;
+            if (helper != null)
+                helper.Reset();
+
+            // in case new product is added the index will change
+            //if (_previousSelectedIndex > -1 && dgvProductList.Rows.Count)
+            //{
+            //    dgvProductList.Rows[_previousSelectedIndex].Selected = true;
+            //}
+
+            //dgvProductList.ClearSelection();
+            //foreach (DataGridViewRow row in dgvProductList.Rows)
+            //{
+            //    row.Cells[this.colSKU.Index].Style.ForeColor = Color.Red;
+            //}
+        }
+
+        private void ShowProductAddEditDialog(int productId)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var productCreate = Program.container.GetInstance<ProductCreateForm>();
+                productCreate.SetDataForEdit(productId);
+                productCreate.ShowDialog();
+            }
+        }
+
+
+        #endregion
 
         #region Event Handlers
 
@@ -170,33 +220,6 @@ namespace IMS.Forms.Inventory.Products
 
 
 
-        #region Populate Functions
-
-
-
-        private void ShowProductAddEditDialog(int productId)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var productCreate = Program.container.GetInstance<ProductCreateForm>();
-                productCreate.SetDataForEdit(productId);
-                productCreate.ShowDialog();
-            }
-        }
-
-        private void PopulateProductData()
-        {
-            dgvProductList.AutoGenerateColumns = false;
-            _productList = _productService.GetProductListForGridView();
-            dgvProductList.DataSource = _productList;
-            //dgvProductList.ClearSelection();
-            //foreach (DataGridViewRow row in dgvProductList.Rows)
-            //{
-            //    row.Cells[this.colSKU.Index].Style.ForeColor = Color.Red;
-            //}
-        }
-
-        #endregion
 
 
 

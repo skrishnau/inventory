@@ -9,6 +9,7 @@ using ViewModel.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using IMS.Forms.Inventory.Payment;
+using IMS.Forms.Common.Pagination;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
@@ -16,7 +17,7 @@ namespace IMS.Forms.Inventory.Suppliers
     {
         public event EventHandler<BaseEventArgs<UserModel>> RowSelected;
 
-        private readonly IUserService _supplierService;
+        private readonly IUserService _userService;
         private readonly IDatabaseChangeListener _listener;
 
         UserModel _selectedSupplierModel;
@@ -28,44 +29,40 @@ namespace IMS.Forms.Inventory.Suppliers
         private bool _sortDirection;
         //HeaderTemplate _header;
 
-        public SupplierListUC(IUserService supplierService, IDatabaseChangeListener listener)
+        private ClientListPaginationHelper helper;
+
+
+        public SupplierListUC(IUserService userService, IDatabaseChangeListener listener)
         {
-            this._supplierService = supplierService;
+            this._userService = userService;
             _listener = listener;
 
             InitializeComponent();
 
             this.Load += SupplierUC_Load;
-
-            this.Dock = DockStyle.Fill;
-
         }
 
         private void SupplierUC_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
             // InitializeHeader();
-            dgvSuppliers.DataSource = _bindingSource;
-            Populate();
-
+            //dgvSuppliers.DataSource = _bindingSource;
+            InitializeGridView();
             InitializeEvents();
-            this.dgvSuppliers.AllowUserToOrderColumns = true;
+            Populate();
         }
+
 
 
         #region Initialization Functions
 
-        //private void InitializeHeader()
-        //{
-        //    _header = HeaderTemplate.Instance;
-        //    _header.btnNew.Visible = true;
-        //    _header.btnNew.Click += BtnNew_Click;
-        //    _header.btnEdit.Click += BtnEdit_Click;
-        //    _header.btnDelete.Click += BtnDelete_Click;
-        //    this.Controls.Add(_header);
-        //    _header.SendToBack();
 
-        //    _header.lblHeading.Text = "Suppliers";
-        //}
+        private void InitializeGridView()
+        {
+            dgvSuppliers.AutoGenerateColumns = false;
+            dgvSuppliers.AllowUserToOrderColumns = true;
+            helper = new ClientListPaginationHelper(_bindingSource, dgvSuppliers, bindingNavigator1, _userService, _userType, txtName?.Text);
+        }
 
         private void InitializeEvents()
         {
@@ -83,75 +80,38 @@ namespace IMS.Forms.Inventory.Suppliers
             dgvSuppliers.CellClick += DgvSuppliers_CellClick;
         }
 
-        private void DgvSuppliers_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.RowIndex >= 0)
-            {
-                if(e.ColumnIndex == colEdit.Index)
-                {
-                    var data = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
-                    if (data != null)
-                    {
-                        ShowAddEditDialog(true);
-                    }
+        #endregion
 
-                }
+
+
+        #region Population Functions
+
+        private void Populate()
+        {
+            //var supplier = _userService.GetUserList(_userType, txtName.Text);
+            //_bindingSource.DataSource = supplier;
+            //_bindingSource.ResetBindings(false);
+            helper.Reset(_userType, txtName?.Text);
+        }
+
+        private void ShowAddEditDialog(bool isEditMode)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var supplierCreate = Program.container.GetInstance<SupplierCreate>();// (supplier);
+                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, _userType);
+                supplierCreate.ShowDialog();
             }
         }
 
-        private void DgvSuppliers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void ShowEditDeleteButtons()
         {
-            if (e.ColumnIndex == _previousIndex)
-                _sortDirection ^= true; // toggle direction
-
-            _bindingSource.DataSource = SortData(
-                (List<UserModel>)_bindingSource.DataSource, dgvSuppliers.Columns[e.ColumnIndex].DataPropertyName, _sortDirection);
-
-            _previousIndex = e.ColumnIndex;
-        }
-        public List<UserModel> SortData(List<UserModel> list, string column, bool ascending)
-        {
-            return ascending ?
-                list.OrderBy(_ => _.GetType().GetProperty(column).GetValue(_)).ToList() :
-                list.OrderByDescending(_ => _.GetType().GetProperty(column).GetValue(_)).ToList();
-        }
-        private void BtnSearch_Click(object sender, EventArgs e)
-        {
-            Populate();
+            var visible = _selectedSupplierModel != null;
+            btnEdit.Visible = visible;
+            btnPayment.Visible = visible;
+            //  btnDelete.Visible = visible;
         }
 
-        private void UserType_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbCustomer.Checked)
-            {
-                _userType = UserTypeEnum.Customer;
-               // btnNew.Visible = true;
-            }
-            else if (rbSupplier.Checked)
-            {
-                _userType = UserTypeEnum.Supplier;
-                //btnNew.Visible = true;
-            }
-            else
-            {
-                _userType = UserTypeEnum.Client;
-                //btnNew.Visible = false;
-            }
-            Populate();
-        }
-
-        private void DgvSuppliers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                var rowData = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
-                if (rowData != null)
-                {
-                    var args = new BaseEventArgs<UserModel>(rowData, Service.Utility.UpdateMode.NONE);
-                    RowSelected?.Invoke(sender, args);
-                }
-            }
-        }
 
         #endregion
 
@@ -179,6 +139,74 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             ShowAddEditDialog(true);
         }
+        public List<UserModel> SortData(List<UserModel> list, string column, bool ascending)
+        {
+            return ascending ?
+                list.OrderBy(_ => _.GetType().GetProperty(column).GetValue(_)).ToList() :
+                list.OrderByDescending(_ => _.GetType().GetProperty(column).GetValue(_)).ToList();
+        }
+        private void DgvSuppliers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (e.ColumnIndex == colEdit.Index)
+                {
+                    var data = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
+                    if (data != null)
+                    {
+                        ShowAddEditDialog(true);
+                    }
+
+                }
+            }
+        }
+
+        private void DgvSuppliers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == _previousIndex)
+                _sortDirection ^= true; // toggle direction
+
+            dgvSuppliers.DataSource = SortData((List<UserModel>)dgvSuppliers.DataSource, dgvSuppliers.Columns[e.ColumnIndex].DataPropertyName, _sortDirection);
+
+            _previousIndex = e.ColumnIndex;
+        }
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            Populate();
+        }
+
+        private void UserType_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbCustomer.Checked)
+            {
+                _userType = UserTypeEnum.Customer;
+                // btnNew.Visible = true;
+            }
+            else if (rbSupplier.Checked)
+            {
+                _userType = UserTypeEnum.Supplier;
+                //btnNew.Visible = true;
+            }
+            else
+            {
+                _userType = UserTypeEnum.Client;
+                //btnNew.Visible = false;
+            }
+            Populate();
+        }
+
+        private void DgvSuppliers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var rowData = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
+                if (rowData != null)
+                {
+                    var args = new BaseEventArgs<UserModel>(rowData, Service.Utility.UpdateMode.NONE);
+                    RowSelected?.Invoke(sender, args);
+                }
+            }
+        }
 
         private void btnPayment_Click(object sender, EventArgs e)
         {
@@ -195,52 +223,10 @@ namespace IMS.Forms.Inventory.Suppliers
             }
         }
 
-        //private void BtnDelete_Click(object sender, EventArgs e)
-        //{
-        //    if (_selectedSupplierModel != null)
-        //    {
-        //        var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
-        //        if (dialogResult.Equals(DialogResult.Yes))
-        //        {
-        //            _supplierService.DeleteSupplier(_selectedSupplierModel.Id);
-        //        }
-        //    }
-        //}
-
         #endregion
 
 
 
-        #region Population Functions
-
-        private void Populate()
-        {
-            dgvSuppliers.AutoGenerateColumns = false;
-            var supplier = _supplierService.GetUserList(_userType, txtName.Text);
-            _bindingSource.DataSource = supplier;
-            _bindingSource.ResetBindings(false);
-        }
-
-        private void ShowAddEditDialog(bool isEditMode)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var supplierCreate = Program.container.GetInstance<SupplierCreate>();// (supplier);
-                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, _userType);
-                supplierCreate.ShowDialog();
-            }
-        }
-
-        private void ShowEditDeleteButtons()
-        {
-            var visible = _selectedSupplierModel != null;
-            btnEdit.Visible = visible;
-            btnPayment.Visible = visible;
-            //  btnDelete.Visible = visible;
-        }
-
-
-        #endregion
-
+      
     }
 }

@@ -146,24 +146,49 @@ namespace Service.Core
                 //.Where(x => x.DeletedAt == null);
             }
         }
-        public List<ProductModel> GetProductListForGridView()
+
+        public int GetAllProductsCount()
+        {
+            using(var _context = new DatabaseContext())
+            {
+                var query = GetProductListQuery(_context);
+                return query.Count();
+            }
+        }
+
+        public ProductListModel GetAllProducts(int pageSize, int offset)
         {
             using (var _context = new DatabaseContext())
             {
-                var products = _context.Product
+                var products = GetProductListQuery(_context);
+                var totalCount = products.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    products = products.Skip(offset).Take(pageSize);
+                }
+                var list = products.MapToModel();
+                return new ProductListModel
+                {
+                    DataList = list,
+                    Offset = offset,
+                    PageSize = pageSize,
+                    TotalCount = totalCount,
+                };
+            }
+        }
+
+        private IQueryable<Product> GetProductListQuery(DatabaseContext _context)
+        {
+            var products = _context.Product
                                 .Include(x => x.ProductAttributes)
                                //.Include(x => x.ProductAttributes.Select(y => y.Option))
                                // .Include(x => x.Brands)
                                // .Where(x => x.Use == null)
+                               .OrderBy(o=> o.Name)
                                ;
-                var list = new List<ProductModel>();
-                foreach (var x in products)
-                {
-                    list.Add(ProductMapper.MapToProductModel(x));
-                }
-                return list;
-            }
+            return products;
         }
+
         public ProductModel GetProductBySKU(string sku)
         {
             using (var _context = new DatabaseContext())

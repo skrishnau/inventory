@@ -127,7 +127,7 @@ namespace IMS.Forms.Inventory.Transaction
             if (helper != null)
                 helper.Reset(_orderType);
 
-            if (_previousSelectedIndex > -1)
+            if (_previousSelectedIndex > -1 && dgvOrders.Rows.Count > _previousSelectedIndex)
             {
                 dgvOrders.Rows[_previousSelectedIndex].Selected = true;
             }

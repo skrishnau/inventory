@@ -79,9 +79,17 @@ namespace DTO.Core.Inventory
             return date.ToShortDateString();
         }
 
+        public static List<ProductModel> MapToModel(this IQueryable<Product> query)
+        {
+            var list = new List<ProductModel>();
+            foreach(var p in query)
+            {
+                list.Add(p.MapToProductModel());
+            }
+            return list;
+        }
 
-
-        public static ProductModel MapToProductModel(Product entity)
+        public static ProductModel MapToProductModel(this Product entity)
         {
             var model = new ProductModel();
             // basics

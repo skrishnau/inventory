@@ -15,6 +15,14 @@ namespace ViewModel.Core.Inventory
     //    public int Id { get; set; }
     //    public string Name { get; set; }
     //}
+    public class ProductListModel
+    {
+        public List<ProductModel> DataList { get; set; }
+
+        public int TotalCount { get; set; }
+        public int PageSize { get; set; }
+        public int Offset { get; set; }
+    }
 
     public class ProductModel
     {

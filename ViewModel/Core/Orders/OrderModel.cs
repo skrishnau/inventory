@@ -7,6 +7,15 @@ using ViewModel.Enums;
 
 namespace ViewModel.Core.Orders
 {
+    public class OrderListModel
+    {
+        public List<OrderModel> OrderList { get; set; }
+
+        public int TotalCount { get; set; }
+        public int PageSize { get; set; }
+        public int Offset { get; set; }
+    }
+
     public class OrderModel
     {
         public int Id { get; set; }

@@ -35,7 +35,7 @@ namespace DTO.Core.Inventory
             return entity;
         }
 
-        public static List<UserModel> MapToUserModel(IQueryable<User> users)
+        public static List<UserModel> MapToUserModel(this IQueryable<User> users)
         {
             var list = new List<UserModel>();
             foreach (var user in users)
