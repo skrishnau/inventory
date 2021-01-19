@@ -228,7 +228,6 @@
             this.btnPrint.TabIndex = 3;
             this.btnPrint.Text = "Save And Print";
             this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Visible = false;
             // 
             // lblTotalAmount
             // 

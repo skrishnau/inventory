@@ -91,6 +91,10 @@
     <Compile Include="Migrations\202101161108522_PaymentDueDateAddedInUserTable.Designer.cs">
       <DependentUpon>202101161108522_PaymentDueDateAddedInUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101191749238_CompanyColumnAddedInUser.cs" />
+    <Compile Include="Migrations\202101191749238_CompanyColumnAddedInUser.Designer.cs">
+      <DependentUpon>202101191749238_CompanyColumnAddedInUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -113,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101161108522_PaymentDueDateAddedInUserTable.resx">
       <DependentUpon>202101161108522_PaymentDueDateAddedInUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101191749238_CompanyColumnAddedInUser.resx">
+      <DependentUpon>202101191749238_CompanyColumnAddedInUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

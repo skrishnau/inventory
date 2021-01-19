@@ -31,7 +31,7 @@ namespace DTO.Core.Inventory
             entity.Website = model.Website;
             entity.Use = model.Use;
             entity.UserType = model.UserType;
-                
+            entity.Company = model.Company;
             return entity;
         }
 
@@ -85,7 +85,7 @@ namespace DTO.Core.Inventory
                 Gender = x.Gender,
                 TotalAmount = totalAmount,
                 PaidAmount = paidAmount,
-                
+                Company = x.Company,
             };
         }
 

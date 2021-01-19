@@ -127,6 +127,24 @@ namespace Service.Core.Users
             }
         }
 
+        public List<IdNamePair> GetUserListWithCompanyForCombo(UserTypeEnum userType, int[] includeUserList)
+        {
+            if (includeUserList == null)
+                includeUserList = new int[0];
+            using (var _context = new DatabaseContext())
+            {
+                var query = GetUserQueryable(_context, userType, string.Empty);
+
+                return query
+                    .Where(x => x.Use || (!x.Use && includeUserList.Contains(x.Id)))
+                    .Select(x => new IdNamePair()
+                    {
+                        Name = x.Name + (string.IsNullOrEmpty(x.Company) ? "" : " - " + x.Company),
+                        Id = x.Id
+                    }).ToList();
+            }
+        }
+
         private IQueryable<User> GetUserQueryable(DatabaseContext _context, UserTypeEnum userType, string searchName)
         {
             var query = _context.User

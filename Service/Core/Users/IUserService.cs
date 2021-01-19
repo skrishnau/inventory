@@ -26,6 +26,8 @@ namespace Service.Core.Users
         /// <param name="includeUserList">Includes the given users even if Use property is false</param>
         /// <returns></returns>
         List<IdNamePair> GetUserListForCombo(UserTypeEnum userType, int[] includeUserList);
+        List<IdNamePair> GetUserListWithCompanyForCombo(UserTypeEnum userType, int[] includeUserList);
+
         UserModel GetTransactionSumOfUser(int userId);
     }
 }

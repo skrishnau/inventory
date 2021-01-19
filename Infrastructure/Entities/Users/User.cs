@@ -58,6 +58,7 @@ namespace Infrastructure.Entities.Users
         // email address of the user to which the system sends mails to mail subscribers
         public string Email { get; set; }
         public string Website { get; set; }
+        public string Company { get; set; }
         // Gender will be empty in case of companies
         public string Gender { get; set; }
         // null if user doesn't want to provide or if its company

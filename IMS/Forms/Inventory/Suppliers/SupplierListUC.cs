@@ -48,8 +48,18 @@ namespace IMS.Forms.Inventory.Suppliers
             // InitializeHeader();
             //dgvSuppliers.DataSource = _bindingSource;
             InitializeGridView();
+            InitializeSearchTextBox();
             InitializeEvents();
-            Populate();
+            PopulateUserList();
+            
+        }
+
+        private void InitializeSearchTextBox()
+        {
+            var users = _userService.GetUserListWithCompanyForCombo(_userType, new int[0]);
+            txtName.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
+            txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
 
 
@@ -75,10 +85,11 @@ namespace IMS.Forms.Inventory.Suppliers
             rbAll.CheckedChanged += UserType_CheckedChanged;
             rbCustomer.CheckedChanged += UserType_CheckedChanged;
             rbSupplier.CheckedChanged += UserType_CheckedChanged;
-            btnSearch.Click += BtnSearch_Click;
             dgvSuppliers.ColumnHeaderMouseClick += DgvSuppliers_ColumnHeaderMouseClick;
             dgvSuppliers.CellClick += DgvSuppliers_CellClick;
+            txtName.TextChanged += TxtName_TextChanged;
         }
+
 
         #endregion
 
@@ -86,7 +97,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         #region Population Functions
 
-        private void Populate()
+        private void PopulateUserList()
         {
             //var supplier = _userService.GetUserList(_userType, txtName.Text);
             //_bindingSource.DataSource = supplier;
@@ -119,9 +130,15 @@ namespace IMS.Forms.Inventory.Suppliers
 
         #region EventHandlers
 
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            PopulateUserList();
+        }
+
         private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
-            Populate();
+            PopulateUserList();
         }
 
         private void DgvSuppliers_SelectionChanged(object sender, EventArgs e)
@@ -170,10 +187,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
             _previousIndex = e.ColumnIndex;
         }
-        private void BtnSearch_Click(object sender, EventArgs e)
-        {
-            Populate();
-        }
+       
 
         private void UserType_CheckedChanged(object sender, EventArgs e)
         {
@@ -192,7 +206,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 _userType = UserTypeEnum.Client;
                 //btnNew.Visible = false;
             }
-            Populate();
+            PopulateUserList();
         }
 
         private void DgvSuppliers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

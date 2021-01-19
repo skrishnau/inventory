@@ -31,19 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierListUC));
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemainAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.rbSupplier = new System.Windows.Forms.RadioButton();
@@ -53,18 +42,29 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
-            this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemainAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colEdit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
+            this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -81,6 +81,7 @@
             this.dgvSuppliers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.SupplierName,
+            this.colCompany,
             this.Address,
             this.Phone,
             this.colUserType,
@@ -100,82 +101,6 @@
             this.dgvSuppliers.Size = new System.Drawing.Size(1044, 424);
             this.dgvSuppliers.TabIndex = 11;
             // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "Id";
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            // 
-            // SupplierName
-            // 
-            this.SupplierName.DataPropertyName = "Name";
-            this.SupplierName.HeaderText = "Name";
-            this.SupplierName.Name = "SupplierName";
-            this.SupplierName.ReadOnly = true;
-            this.SupplierName.Width = 140;
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            this.Address.Width = 150;
-            // 
-            // Phone
-            // 
-            this.Phone.DataPropertyName = "Phone";
-            this.Phone.HeaderText = "Phone";
-            this.Phone.Name = "Phone";
-            this.Phone.ReadOnly = true;
-            // 
-            // colUserType
-            // 
-            this.colUserType.DataPropertyName = "UserType";
-            this.colUserType.HeaderText = "Type";
-            this.colUserType.Name = "colUserType";
-            this.colUserType.ReadOnly = true;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.DataPropertyName = "TotalAmount";
-            this.colTotalAmount.HeaderText = "Total Txn Amount";
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Width = 120;
-            // 
-            // colPaidAmount
-            // 
-            this.colPaidAmount.DataPropertyName = "PaidAmount";
-            this.colPaidAmount.HeaderText = "Paid Amount";
-            this.colPaidAmount.Name = "colPaidAmount";
-            this.colPaidAmount.ReadOnly = true;
-            // 
-            // colRemainAmount
-            // 
-            this.colRemainAmount.DataPropertyName = "DueAmount";
-            this.colRemainAmount.HeaderText = "Due Amount";
-            this.colRemainAmount.Name = "colRemainAmount";
-            this.colRemainAmount.ReadOnly = true;
-            // 
-            // colUse
-            // 
-            this.colUse.DataPropertyName = "Use";
-            this.colUse.HeaderText = "Use";
-            this.colUse.Name = "colUse";
-            this.colUse.ReadOnly = true;
-            this.colUse.Width = 40;
-            // 
-            // colEdit
-            // 
-            this.colEdit.HeaderText = "";
-            this.colEdit.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
-            this.colEdit.Name = "colEdit";
-            this.colEdit.ReadOnly = true;
-            this.colEdit.Width = 30;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -190,7 +115,6 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnSearch);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.txtName);
             this.panel3.Controls.Add(this.rbSupplier);
@@ -200,17 +124,8 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(650, 45);
+            this.panel3.Size = new System.Drawing.Size(553, 45);
             this.panel3.TabIndex = 5;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(537, 8);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 8;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -223,7 +138,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(407, 10);
+            this.txtName.Location = new System.Drawing.Point(407, 12);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(124, 20);
             this.txtName.TabIndex = 6;
@@ -308,32 +223,6 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Visible = false;
             // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(140, 3);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(78, 40);
-            this.btnPayment.TabIndex = 16;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Visible = false;
-            // 
-            // listHeaderTemplate1
-            // 
-            this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.listHeaderTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listHeaderTemplate1.HeadingText = "Clients";
-            this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
-            this.listHeaderTemplate1.Name = "listHeaderTemplate1";
-            this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.listHeaderTemplate1.Size = new System.Drawing.Size(1044, 32);
-            this.listHeaderTemplate1.TabIndex = 14;
-            // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = null;
@@ -360,6 +249,13 @@
             this.bindingNavigator1.Size = new System.Drawing.Size(1044, 25);
             this.bindingNavigator1.TabIndex = 15;
             this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -393,16 +289,9 @@
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "Current position";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
             // bindingNavigatorSeparator1
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
@@ -425,8 +314,118 @@
             // 
             // bindingNavigatorSeparator2
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // SupplierName
+            // 
+            this.SupplierName.DataPropertyName = "Name";
+            this.SupplierName.HeaderText = "Name";
+            this.SupplierName.Name = "SupplierName";
+            this.SupplierName.ReadOnly = true;
+            this.SupplierName.Width = 140;
+            // 
+            // colCompany
+            // 
+            this.colCompany.DataPropertyName = "Company";
+            this.colCompany.HeaderText = "Company";
+            this.colCompany.Name = "colCompany";
+            this.colCompany.ReadOnly = true;
+            this.colCompany.Width = 110;
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            this.Address.Width = 150;
+            // 
+            // Phone
+            // 
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.HeaderText = "Phone";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
+            // 
+            // colUserType
+            // 
+            this.colUserType.DataPropertyName = "UserType";
+            this.colUserType.HeaderText = "Type";
+            this.colUserType.Name = "colUserType";
+            this.colUserType.ReadOnly = true;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.DataPropertyName = "TotalAmount";
+            this.colTotalAmount.HeaderText = "Total Txn Amount";
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Width = 120;
+            // 
+            // colPaidAmount
+            // 
+            this.colPaidAmount.DataPropertyName = "PaidAmount";
+            this.colPaidAmount.HeaderText = "Paid Amount";
+            this.colPaidAmount.Name = "colPaidAmount";
+            this.colPaidAmount.ReadOnly = true;
+            // 
+            // colRemainAmount
+            // 
+            this.colRemainAmount.DataPropertyName = "DueAmount";
+            this.colRemainAmount.HeaderText = "Due Amount";
+            this.colRemainAmount.Name = "colRemainAmount";
+            this.colRemainAmount.ReadOnly = true;
+            // 
+            // colUse
+            // 
+            this.colUse.DataPropertyName = "Use";
+            this.colUse.HeaderText = "Use";
+            this.colUse.Name = "colUse";
+            this.colUse.ReadOnly = true;
+            this.colUse.Width = 40;
+            // 
+            // colEdit
+            // 
+            this.colEdit.HeaderText = "";
+            this.colEdit.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
+            this.colEdit.Name = "colEdit";
+            this.colEdit.ReadOnly = true;
+            this.colEdit.Width = 30;
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.Location = new System.Drawing.Point(140, 3);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(78, 40);
+            this.btnPayment.TabIndex = 16;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Visible = false;
+            // 
+            // listHeaderTemplate1
+            // 
+            this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.listHeaderTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listHeaderTemplate1.HeadingText = "Clients";
+            this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
+            this.listHeaderTemplate1.Name = "listHeaderTemplate1";
+            this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.listHeaderTemplate1.Size = new System.Drawing.Size(1044, 32);
+            this.listHeaderTemplate1.TabIndex = 14;
             // 
             // SupplierListUC
             // 
@@ -466,17 +465,6 @@
         private Common.Display.ListHeaderTemplate listHeaderTemplate1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SupplierName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUserType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRemainAmount;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
-        private System.Windows.Forms.DataGridViewImageColumn colEdit;
         private Common.Buttons.MenuButton btnPayment;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
@@ -488,5 +476,16 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SupplierName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCompany;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRemainAmount;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
+        private System.Windows.Forms.DataGridViewImageColumn colEdit;
     }
 }

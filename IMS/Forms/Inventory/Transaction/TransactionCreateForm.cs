@@ -125,6 +125,7 @@ namespace IMS.Forms.Inventory.Transaction
             cbClient.SelectedValueChanged += CbClient_SelectedValueChanged;
             dgvItems.RowsRemoved += DgvItems_RowsRemoved;
         }
+        
 
         private void DgvItems_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
@@ -197,7 +198,7 @@ namespace IMS.Forms.Inventory.Transaction
                     break;
             }
             var includeUserList = new int[] { _orderModel?.UserId ?? 0 };
-            list = _userService.GetUserListForCombo(userType, includeUserList);
+            list = _userService.GetUserListWithCompanyForCombo(userType, includeUserList);
             if (list != null)
             {
                 list.Insert(0, new IdNamePair

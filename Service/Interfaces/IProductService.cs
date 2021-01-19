@@ -10,8 +10,8 @@ namespace Service.Interfaces
 {
     public interface IProductService
     {
-        int GetAllProductsCount();
-        ProductListModel GetAllProducts(int pageSize, int offset);
+        int GetAllProductsCount(int categoryId, string searchText);
+        Task<ProductListModel> GetAllProducts(int categoryId, string searchText, int pageSize, int offset);
 
 
         List<IdNamePair> GetProductListForCombo();
@@ -26,6 +26,7 @@ namespace Service.Interfaces
 
 
         // category
+        List<IdNamePair> GetAllCategoriesForCombo();
         List<CategoryModel> GetCategoryList(int? parentCategoryId);
         CategoryModel GetCategory(string v);
         void AddUpdateCategory(CategoryModel category);

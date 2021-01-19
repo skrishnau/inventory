@@ -17,6 +17,7 @@ using Service.Listeners;
 using Service.DbEventArgs;
 using Service.Interfaces;
 using IMS.Forms.Common.Pagination;
+using ViewModel.Core.Common;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -56,9 +57,17 @@ namespace IMS.Forms.Inventory.Products
             InitializeGridView();
             InitializeEvents();
             InitializeListeners();
-
+            PopulateCategoryCombo();
             PopulateProductData();
+        }
 
+        private void PopulateCategoryCombo()
+        {
+            var cats = _productService.GetAllCategoriesForCombo();
+            cats.Insert(0, new IdNamePair(0, ""));
+            cbCategory.DisplayMember = "Name";
+            cbCategory.ValueMember = "Id";
+            cbCategory.DataSource = cats;
         }
 
 
@@ -81,25 +90,11 @@ namespace IMS.Forms.Inventory.Products
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
             // btnDelete.Click += BtnDelete_Click;
+            cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
+            txtName.TextChanged += TxtName_TextChanged;
         }
 
-        private void DgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-           // if (e.ColumnIndex == this.colSKU.Index || e.ColumnIndex == this.colName.Index)
-            {
-                try
-                {
-                    if (_productList[e.RowIndex].IsLessThanMinimumStock)
-                    {
-                        e.CellStyle.ForeColor = Color.Red;
-                        e.CellStyle.SelectionForeColor = Color.Red;
-                        // e.CellStyle.BackColor = Color.LightBlue;
-                        e.CellStyle.SelectionBackColor = SystemColors.GradientInactiveCaption; //Color.LightBlue;
-                    }
-                }
-                catch (Exception ex) { }
-            }
-        }
+       
 
         private void InitializeListeners()
         {
@@ -118,8 +113,12 @@ namespace IMS.Forms.Inventory.Products
         {
             //_productList = _productService.GetProductList();
             //dgvProductList.DataSource = _productList;
+
+            var category = cbCategory.SelectedItem as IdNamePair;
+
+
             if (helper != null)
-                helper.Reset();
+                helper.Reset(category?.Id ?? 0, txtName.Text);
 
             // in case new product is added the index will change
             //if (_previousSelectedIndex > -1 && dgvProductList.Rows.Count)
@@ -149,6 +148,16 @@ namespace IMS.Forms.Inventory.Products
 
         #region Event Handlers
 
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            PopulateProductData();
+        }
+
+        private void CbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateProductData();
+        }
+
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
             PopulateProductData();
@@ -159,6 +168,23 @@ namespace IMS.Forms.Inventory.Products
             PopulateProductData();
         }
 
+        private void DgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // if (e.ColumnIndex == this.colSKU.Index || e.ColumnIndex == this.colName.Index)
+            {
+                try
+                {
+                    if (_productList[e.RowIndex].IsLessThanMinimumStock)
+                    {
+                        e.CellStyle.ForeColor = Color.Red;
+                        e.CellStyle.SelectionForeColor = Color.Red;
+                        // e.CellStyle.BackColor = Color.LightBlue;
+                        e.CellStyle.SelectionBackColor = SystemColors.GradientInactiveCaption; //Color.LightBlue;
+                    }
+                }
+                catch (Exception ex) { }
+            }
+        }
         private void DgvProductList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

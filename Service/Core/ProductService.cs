@@ -19,6 +19,7 @@ using DTO.Core.Business;
 using ViewModel.Enums;
 using ViewModel.Core.Orders;
 using Service.Interfaces;
+using System.Threading.Tasks;
 
 namespace Service.Core
 {
@@ -132,7 +133,6 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-
                 var products = _context.Product//.AsQueryable()// GetProductEntityList()
                 .Where(x => x.Use)
                 .Select(x => new IdNamePair()
@@ -147,29 +147,30 @@ namespace Service.Core
             }
         }
 
-        public int GetAllProductsCount()
+        public int GetAllProductsCount(int categoryId, string searchText)
         {
-            using(var _context = new DatabaseContext())
+            using (var _context = new DatabaseContext())
             {
-                var query = GetProductListQuery(_context);
+                var query = GetProductListQuery(_context, categoryId, searchText);
                 return query.Count();
             }
         }
 
-        public ProductListModel GetAllProducts(int pageSize, int offset)
+        public async Task<ProductListModel> GetAllProducts(int categoryId, string searchText, int pageSize, int offset)
         {
             using (var _context = new DatabaseContext())
             {
-                var products = GetProductListQuery(_context);
+                var products = GetProductListQuery(_context, categoryId, searchText);
                 var totalCount = products.Count();
                 if (pageSize > 0 && offset >= 0)
                 {
                     products = products.Skip(offset).Take(pageSize);
                 }
-                var list = products.MapToModel();
+                var list = await products.ToListAsync();
+
                 return new ProductListModel
                 {
-                    DataList = list,
+                    DataList = list.MapToModel(),
                     Offset = offset,
                     PageSize = pageSize,
                     TotalCount = totalCount,
@@ -177,16 +178,19 @@ namespace Service.Core
             }
         }
 
-        private IQueryable<Product> GetProductListQuery(DatabaseContext _context)
+        private IQueryable<Product> GetProductListQuery(DatabaseContext _context, int categoryId, string searchText)
         {
             var products = _context.Product
                                 .Include(x => x.ProductAttributes)
                                //.Include(x => x.ProductAttributes.Select(y => y.Option))
                                // .Include(x => x.Brands)
                                // .Where(x => x.Use == null)
-                               .OrderBy(o=> o.Name)
                                ;
-            return products;
+            if (!string.IsNullOrEmpty(searchText))
+                products = products.Where(x => x.Name.Contains(searchText));
+            if (categoryId > 0)
+                products = products.Where(x => x.CategoryId == categoryId);
+            return products.OrderBy(o => o.Name);
         }
 
         public ProductModel GetProductBySKU(string sku)
@@ -252,6 +256,20 @@ namespace Service.Core
                 return cats;
             }
 
+        }
+
+        public List<IdNamePair> GetAllCategoriesForCombo()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = _context.Category;
+
+                return query.Select(x => new IdNamePair
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList();
+            }
         }
         public List<IdNamePair> GetUnderStockProducts()
         {

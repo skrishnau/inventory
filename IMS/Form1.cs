@@ -29,6 +29,8 @@ namespace IMS
 
         private void ShowLoginFormOrLogin()
         {
+            DisplayInventory();
+            /*
             // ask for password
             var loginForm = Program.container.GetInstance<LoginForm>();//new InventoryUC();
             DialogResult result = loginForm.ShowDialog();
@@ -47,7 +49,7 @@ namespace IMS
                 }
                 catch (Exception) { }
             }
-
+            */
         }
 
         private void DisplayInventory()

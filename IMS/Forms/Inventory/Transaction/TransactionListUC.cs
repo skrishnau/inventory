@@ -34,6 +34,7 @@ namespace IMS.Forms.Inventory.Transaction
         BindingSource _bindingSource = new BindingSource();
         private TransactionListPaginationHelper helper;
 
+
         public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
         {
             _orderService = orderService;
@@ -95,10 +96,11 @@ namespace IMS.Forms.Inventory.Transaction
            // btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
             btnEdit.Click += BtnEdit_Click;
+            btnCancel.Click += BtnCancel_Click;
             dgvOrders.DataBindingComplete += DgvOrders_DataBindingComplete;
-
+            txtName.TextChanged += TxtName_TextChanged;
         }
-        
+
 
         private void Type_CheckedChanged(object sender, EventArgs e)
         {
@@ -125,7 +127,7 @@ namespace IMS.Forms.Inventory.Transaction
             //bindingNavigator1.BindingSource = _bindingSource;
 
             if (helper != null)
-                helper.Reset(_orderType);
+                helper.Reset(_orderType, txtName.Text);
 
             if (_previousSelectedIndex > -1 && dgvOrders.Rows.Count > _previousSelectedIndex)
             {
@@ -142,6 +144,13 @@ namespace IMS.Forms.Inventory.Transaction
         }
 
         #region Event Handlers
+
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            _previousSelectedIndex = -1;
+            PopulateOrders();
+        }
 
         private void _listener_PurchaseOrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
         {
@@ -171,8 +180,9 @@ namespace IMS.Forms.Inventory.Transaction
         {
             if (model != null)
             {
-                btnEdit.Visible = !model.IsCompleted;
+                btnEdit.Visible = !model.IsCompleted && !model.IsCancelled;
                 btnPrint.Visible = model.OrderType == OrderTypeEnum.Sale.ToString() && model.IsCompleted;
+                btnCancel.Visible = !model.IsCompleted && !model.IsCancelled;
                // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);
@@ -184,6 +194,7 @@ namespace IMS.Forms.Inventory.Transaction
                // btnPayment.Visible = false;
                 btnPrint.Visible = false;
                 btnEdit.Visible = false;
+                btnCancel.Visible = false;
             }
         }
 
@@ -222,11 +233,42 @@ namespace IMS.Forms.Inventory.Transaction
             }
         }
 
+        private OrderModel GetRowDataAndStoreSelectedIndex()
+        {
+            OrderModel order = null;
+            if (dgvOrders.SelectedRows.Count > 0)
+            {
+                order = dgvOrders.SelectedRows[0].DataBoundItem as OrderModel;
+                _previousSelectedIndex = dgvOrders.SelectedRows[0].Index;
+            }
+            else
+            {
+                _previousSelectedIndex = -1;
+            }
+
+            return order;
+        }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            OrderModel order = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel: null;
-            ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id??0);
+            var order = GetRowDataAndStoreSelectedIndex();
+            if (order != null)
+            {
+                ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id ?? 0);
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            var order = GetRowDataAndStoreSelectedIndex();
+            if (order != null)
+            {
+                var dialog = MessageBox.Show(this, "Are you sure to cancel the order?", "Cancel?", MessageBoxButtons.YesNo);
+                if (dialog == DialogResult.Yes)
+                {
+                    _orderService.SetCancelled(order.Id);
+                }
+            }
         }
 
 

@@ -102,7 +102,7 @@ namespace IMS.Forms.Inventory.InventoryDetail
 
         private void PopulateProductList()
         {
-            var products = _productService.GetAllProducts(-1, -1);
+            var products = _productService.GetAllProducts(0, string.Empty, -1, -1);
             dgvProductList.DataSource = products;
         }
 

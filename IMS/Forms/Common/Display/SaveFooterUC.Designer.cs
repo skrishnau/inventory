@@ -46,7 +46,7 @@
             // btnCancel
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCancel.Location = new System.Drawing.Point(95, 0);
+            this.btnCancel.Location = new System.Drawing.Point(99, 0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 9;
@@ -59,14 +59,14 @@
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSave.Location = new System.Drawing.Point(10, 0);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 27);
+            this.btnSave.Size = new System.Drawing.Size(79, 27);
             this.btnSave.TabIndex = 8;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "Save Order";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(170, 0);
+            this.splitter1.Location = new System.Drawing.Point(174, 0);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(10, 27);
             this.splitter1.TabIndex = 10;
@@ -74,7 +74,7 @@
             // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(85, 0);
+            this.splitter2.Location = new System.Drawing.Point(89, 0);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(10, 27);
             this.splitter2.TabIndex = 11;

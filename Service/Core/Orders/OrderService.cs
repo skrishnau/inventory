@@ -45,21 +45,21 @@ namespace Service.Core.Orders
 
         #region Get Functions
 
-        public int GetAllOrdersCount(OrderTypeEnum orderType)
+        public int GetAllOrdersCount(OrderTypeEnum orderType, string userSearchText)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType);
+                var orders = GetAllOrdersQuery(_context, orderType, userSearchText);
                 return orders.Count();
             }
         }
 
         // page size: no.of items per page; offset: current page number..
-        public OrderListModel GetAllOrders(OrderTypeEnum orderType, int pageSize, int offset)
+        public OrderListModel GetAllOrders(OrderTypeEnum orderType, string userSearchText, int pageSize, int offset)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType);
+                var orders = GetAllOrdersQuery(_context, orderType, userSearchText);
                 var totalCount = orders.Count();
                 if (pageSize > 0 && offset >= 0)
                 {
@@ -75,7 +75,7 @@ namespace Service.Core.Orders
                 };
             }
         }
-        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType)
+        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, string userSearchText)
         {
             var type = orderType.ToString();
             var orders = _context.Order
@@ -84,7 +84,8 @@ namespace Service.Core.Orders
             if (orderType != OrderTypeEnum.All)
                 orders = orders.Where(x => x.OrderType == type);
             orders = orders.OrderByDescending(x => x.CreatedAt); //.ThenByDescending(x => x.CreatedAt)
-           
+            if (!string.IsNullOrEmpty(userSearchText))
+                orders = orders.Where(x => x.User.Name.Contains(userSearchText) || x.User.Company.Contains(userSearchText));
             return orders;
         }
 

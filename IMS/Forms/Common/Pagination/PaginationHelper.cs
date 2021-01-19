@@ -109,6 +109,9 @@ namespace IMS.Forms.Common.Pagination
         BindingNavigator bindingNavigator1;
         private readonly IProductService _productService;
 
+        private int _categoryId;
+        private string _searchText;
+
         public ProductListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IProductService productService)
         {
             this.bindingSource1 = bindingSource;
@@ -118,18 +121,18 @@ namespace IMS.Forms.Common.Pagination
 
             bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
-            var totalRecords = _productService.GetAllProductsCount();
+            var totalRecords = _productService.GetAllProductsCount(_categoryId, _searchText);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
 
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        private async void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            int offset = (int)bindingSource1.Current;
+            int offset = ((int?)bindingSource1.Current)??0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
-            var records = _productService.GetAllProducts(pageSize, offset);
+            var records = await _productService.GetAllProducts(_categoryId, _searchText, pageSize, offset);
             dataGridView1.DataSource = records.DataList;
             this.totalRecords = records.TotalCount;
         }
@@ -167,9 +170,11 @@ namespace IMS.Forms.Common.Pagination
             }
         }
 
-        public void Reset()
+        public void Reset(int categoryId, string searchText)
         {
-            var totalRecords = _productService.GetAllProductsCount();
+            _categoryId = categoryId;
+            _searchText = searchText;
+            var totalRecords = _productService.GetAllProductsCount(_categoryId, _searchText);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
     }
@@ -187,6 +192,7 @@ namespace IMS.Forms.Common.Pagination
         BindingNavigator bindingNavigator1;
         private readonly IOrderService _orderService;
         private OrderTypeEnum _orderType;
+        private string _searchText;
 
         public TransactionListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IOrderService orderService, OrderTypeEnum orderType )
         {
@@ -198,18 +204,18 @@ namespace IMS.Forms.Common.Pagination
 
             bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
-            var totalRecords = _orderService.GetAllOrdersCount(_orderType);
+            var totalRecords = _orderService.GetAllOrdersCount(_orderType, _searchText);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            int offset = (int)bindingSource1.Current;
+            int offset = ((int?)bindingSource1.Current)??0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
-            var records = _orderService.GetAllOrders(_orderType, pageSize, offset);
+            var records = _orderService.GetAllOrders(_orderType, _searchText, pageSize, offset);
             dataGridView1.DataSource = records.OrderList;
             this.totalRecords = records.TotalCount;
         }
@@ -246,10 +252,11 @@ namespace IMS.Forms.Common.Pagination
             }
         }
 
-        public void Reset(OrderTypeEnum orderType)
+        public void Reset(OrderTypeEnum orderType, string serachText)
         {
             _orderType = orderType;
-            var totalRecords = _orderService.GetAllOrdersCount(_orderType);
+            _searchText = serachText;
+            var totalRecords = _orderService.GetAllOrdersCount(_orderType, _searchText);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
     }

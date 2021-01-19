@@ -80,12 +80,13 @@ namespace IMS.Forms.Inventory.Suppliers
                 this.Text = model.UserType + " Edit (" + model.Name + ")";
                 tbAddress.Text = model.Address;
                 tbEmail.Text = model.Email;
-                tbFax.Text = model.Fax;
+                tbCompany.Text = model.Fax;
                 tbName.Text = model.Name;
                 tbNotes.Text = model.Notes;
                 tbPhone.Text = model.Phone;
                 //tbSalesperson.Text = model.SalesPerson;
-                tbWebsite.Text = model.Website;
+               // tbWebsite.Text = model.Website;
+                tbCompany.Text = model.Company;
                 chkUse.Checked = model.Use;
                 _supplierId = model.Id;
             }
@@ -105,13 +106,14 @@ namespace IMS.Forms.Inventory.Suppliers
                 Name = tbName.Text,
                 Email = tbEmail.Text,
                 Phone = tbPhone.Text,
-                Fax = tbFax.Text,
+                Fax = tbCompany.Text,
                 IsCompany = true,
                 Id = _supplierId,
                 Notes = tbNotes.Text,
                 //RegisteredAt = cbtbRegisteredDate.Value,
                // SalesPerson = tbSalesperson.Text,
-                Website = tbWebsite.Text,
+                //Website = tbWebsite.Text,
+                Company = tbCompany.Text,
                 Use = chkUse.Checked,
                 UserType = cbUserType.SelectedValue.ToString(),
             };
@@ -130,7 +132,7 @@ namespace IMS.Forms.Inventory.Suppliers
             if(string.IsNullOrEmpty(cbUserType.SelectedValue?.ToString()))
             {
                 errorProvider1.SetError(cbUserType, RequiredFieldValidator.REQUIRED);
-                msg += "User type is required.\n";
+                msg += "Type is required.\n";
             }
             return msg;
         }

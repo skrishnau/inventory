@@ -15,6 +15,7 @@
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
                       <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -22,7 +23,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Height>0.19097in</Height>
+            <Top>0.05in</Top>
+            <Left>0.0875in</Left>
+            <Height>0.25278in</Height>
             <Width>1in</Width>
             <Style>
               <Border>
@@ -36,12 +39,15 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Left>0.00285in</Left>
-        <Height>0.73264in</Height>
-        <Width>2.47569in</Width>
+        <Top>0.04708in</Top>
+        <Left>0.05139in</Left>
+        <Height>0.75764in</Height>
+        <Width>3.49715in</Width>
         <Style>
           <Border>
-            <Style>Double</Style>
+            <Color>LightGrey</Color>
+            <Style>Solid</Style>
+            <Width>2pt</Width>
           </Border>
         </Style>
       </Rectangle>
@@ -57,7 +63,8 @@
                     <Value>NO.</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -65,10 +72,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.30556in</Top>
+            <Top>0.33056in</Top>
             <Left>0.02778in</Left>
-            <Height>0.19098in</Height>
-            <Width>1.46875in</Width>
+            <Height>0.17708in</Height>
+            <Width>2.3671in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -89,7 +96,8 @@
                     <Value>DATE</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -100,7 +108,7 @@
             <Top>0.52431in</Top>
             <Left>0.01389in</Left>
             <Height>0.20833in</Height>
-            <Width>1.46875in</Width>
+            <Width>2.38099in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -122,7 +130,9 @@
                     <Value>RECEIPT</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -134,13 +144,16 @@
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.02778in</Top>
             <Left>0.02778in</Left>
-            <Height>0.23611in</Height>
-            <Width>1.46875in</Width>
+            <Height>0.25in</Height>
+            <Width>2.3671in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
-                <Style>Solid</Style>
+                <Color>LightGrey</Color>
+                <Style>None</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>Gray</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -149,13 +162,15 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Left>2.5341in</Left>
-        <Height>0.76042in</Height>
-        <Width>1.57544in</Width>
+        <Top>0.02208in</Top>
+        <Left>3.61616in</Left>
+        <Height>0.78264in</Height>
+        <Width>2.40877in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Color>LightGrey</Color>
+            <Style>Solid</Style>
           </Border>
         </Style>
       </Rectangle>
@@ -168,8 +183,7 @@
               <TextRun>
                 <Value>RECEIVED with thanks from M/s</Value>
                 <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -177,48 +191,13 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.76042in</Top>
-        <Left>0.00285in</Left>
-        <Height>0.20833in</Height>
-        <Width>4.10669in</Width>
+        <Top>0.87417in</Top>
+        <Left>0.0375in</Left>
+        <Height>0.19791in</Height>
+        <Width>2.21937in</Width>
         <ZIndex>2</ZIndex>
         <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox6">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.99652in</Top>
-        <Left>0.00285in</Left>
-        <Height>0.15309in</Height>
-        <Width>4.10669in</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
+          <Border />
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -234,8 +213,7 @@
               <TextRun>
                 <Value>the sum of Rupees</Value>
                 <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -243,275 +221,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.17739in</Top>
-        <Left>0.00285in</Left>
+        <Top>1.12917in</Top>
+        <Left>0.0375in</Left>
         <Height>0.20833in</Height>
-        <Width>4.10669in</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox9">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Bank</Value>
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.53881in</Top>
-        <Left>0.00285in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.35416in</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox10">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Cheque No.</Value>
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.53881in</Top>
-        <Left>0.93215in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.69097in</Width>
-        <ZIndex>6</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox11">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.53881in</Top>
-        <Left>1.62312in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.65467in</Width>
-        <ZIndex>7</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox12">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.53881in</Top>
-        <Left>0.35701in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.57514in</Width>
-        <ZIndex>8</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox13">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.53881in</Top>
-        <Left>2.69446in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.48233in</Width>
-        <ZIndex>9</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox14">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Dated</Value>
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.53881in</Top>
-        <Left>2.29168in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.40278in</Width>
-        <ZIndex>10</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox15">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Drawn on</Value>
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.53881in</Top>
-        <Left>3.17678in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.5868in</Width>
-        <ZIndex>11</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox16">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.5527in</Top>
-        <Left>3.76359in</Left>
-        <Height>0.20833in</Height>
-        <Width>0.34595in</Width>
-        <ZIndex>12</ZIndex>
+        <Width>1.39583in</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -531,10 +245,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Account</Value>
+                    <Value>ACCOUNT</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -542,9 +256,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Left>0.00285in</Left>
-            <Height>0.20833in</Height>
-            <Width>0.75694in</Width>
+            <Top>0.0125in</Top>
+            <Left>0.05285in</Left>
+            <Height>0.25in</Height>
+            <Width>1.10415in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -569,18 +284,25 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Left>0.78756in</Left>
-            <Height>0.20833in</Height>
-            <Width>0.89993in</Width>
+            <Top>0.01516in</Top>
+            <Left>1.22645in</Left>
+            <Height>0.20556in</Height>
+            <Width>1.4955in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
+                <Color>LightGrey</Color>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -601,19 +323,25 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.25in</Top>
-            <Left>0.78756in</Left>
-            <Height>0.20833in</Height>
-            <Width>0.89993in</Width>
+            <Top>0.29016in</Top>
+            <Left>1.22645in</Left>
+            <Height>0.2in</Height>
+            <Width>1.4955in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
+                <Color>LightGrey</Color>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -627,10 +355,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Payment</Value>
+                    <Value>PAYMENT</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -638,10 +366,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.25in</Top>
-            <Left>0.00285in</Left>
-            <Height>0.20833in</Height>
-            <Width>0.75694in</Width>
+            <Top>0.29016in</Top>
+            <Left>0.05285in</Left>
+            <Height>0.25in</Height>
+            <Width>1.10415in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -667,19 +395,25 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.49999in</Top>
-            <Left>0.78756in</Left>
-            <Height>0.20833in</Height>
-            <Width>0.89993in</Width>
+            <Top>0.57765in</Top>
+            <Left>1.22645in</Left>
+            <Height>0.2in</Height>
+            <Width>1.4955in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
+                <Color>LightGrey</Color>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -693,10 +427,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Balance Due</Value>
+                    <Value>BALANCE DUE</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -704,9 +438,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.49999in</Top>
-            <Height>0.20833in</Height>
-            <Width>0.77367in</Width>
+            <Top>0.57905in</Top>
+            <Left>0.05in</Left>
+            <Height>0.25in</Height>
+            <Width>1.107in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -720,49 +455,18 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>1.79166in</Top>
-        <Height>0.70832in</Height>
-        <Width>1.6875in</Width>
-        <ZIndex>13</ZIndex>
+        <Top>1.81402in</Top>
+        <Left>0.0375in</Left>
+        <Height>0.84848in</Height>
+        <Width>2.75945in</Width>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
+            <Color>LightGrey</Color>
             <Style>Solid</Style>
           </Border>
         </Style>
       </Rectangle>
-      <Textbox Name="Textbox8">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Tahoma</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.38572in</Top>
-        <Left>0.00285in</Left>
-        <Height>0.15309in</Height>
-        <Width>4.10669in</Width>
-        <ZIndex>14</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Rectangle Name="Rectangle18">
         <ReportItems>
           <Rectangle Name="Rectangle6">
@@ -770,12 +474,13 @@
               <Rectangle Name="Rectangle7">
                 <KeepTogether>true</KeepTogether>
                 <Top>0.06in</Top>
-                <Left>0.03354in</Left>
+                <Left>0.04604in</Left>
                 <Height>0.07in</Height>
                 <Width>0.07in</Width>
                 <Style>
                   <Border>
-                    <Style>None</Style>
+                    <Color>LightGrey</Color>
+                    <Style>Solid</Style>
                   </Border>
                 </Style>
               </Rectangle>
@@ -789,7 +494,8 @@
                         <Value>CHEQUE</Value>
                         <Style>
                           <FontFamily>Tahoma</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -797,8 +503,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Left>0.14521in</Left>
-                <Height>0.16666in</Height>
+                <Left>0.20771in</Left>
+                <Height>0.2in</Height>
                 <Width>0.59027in</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
@@ -813,9 +519,9 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>0.18556in</Top>
-            <Height>0.16666in</Height>
-            <Width>0.73549in</Width>
+            <Top>0.21467in</Top>
+            <Height>0.2in</Height>
+            <Width>0.89174in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -827,12 +533,13 @@
               <Rectangle Name="Rectangle11">
                 <KeepTogether>true</KeepTogether>
                 <Top>0.06in</Top>
-                <Left>0.03354in</Left>
+                <Left>0.04604in</Left>
                 <Height>0.07in</Height>
                 <Width>0.07in</Width>
                 <Style>
                   <Border>
-                    <Style>None</Style>
+                    <Color>LightGrey</Color>
+                    <Style>Solid</Style>
                   </Border>
                 </Style>
               </Rectangle>
@@ -846,7 +553,8 @@
                         <Value>ADVANCE</Value>
                         <Style>
                           <FontFamily>Tahoma</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -854,9 +562,9 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Left>0.14521in</Left>
-                <Height>0.16666in</Height>
-                <Width>0.59027in</Width>
+                <Left>0.20771in</Left>
+                <Height>0.2in</Height>
+                <Width>0.74652in</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
@@ -870,10 +578,10 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>0.57012in</Top>
+            <Top>0.67423in</Top>
             <Left>0.00001in</Left>
-            <Height>0.16666in</Height>
-            <Width>0.73548in</Width>
+            <Height>0.2in</Height>
+            <Width>0.99177in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -886,12 +594,13 @@
               <Rectangle Name="Rectangle9">
                 <KeepTogether>true</KeepTogether>
                 <Top>0.06in</Top>
-                <Left>0.03354in</Left>
+                <Left>0.04604in</Left>
                 <Height>0.07in</Height>
                 <Width>0.07in</Width>
                 <Style>
                   <Border>
-                    <Style>None</Style>
+                    <Color>LightGrey</Color>
+                    <Style>Solid</Style>
                   </Border>
                 </Style>
               </Rectangle>
@@ -905,7 +614,8 @@
                         <Value>DRAFT</Value>
                         <Style>
                           <FontFamily>Tahoma</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -913,8 +623,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Left>0.14521in</Left>
-                <Height>0.16666in</Height>
+                <Left>0.22021in</Left>
+                <Height>0.2in</Height>
                 <Width>0.59028in</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
@@ -929,9 +639,9 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>0.385in</Top>
-            <Height>0.16666in</Height>
-            <Width>0.73549in</Width>
+            <Top>0.43911in</Top>
+            <Height>0.2in</Height>
+            <Width>0.99178in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -944,12 +654,13 @@
               <Rectangle Name="Rectangle5">
                 <KeepTogether>true</KeepTogether>
                 <Top>0.06in</Top>
-                <Left>0.03354in</Left>
+                <Left>0.04604in</Left>
                 <Height>0.07in</Height>
                 <Width>0.07in</Width>
                 <Style>
                   <Border>
-                    <Style>None</Style>
+                    <Color>LightGrey</Color>
+                    <Style>Solid</Style>
                   </Border>
                 </Style>
               </Rectangle>
@@ -963,7 +674,8 @@
                         <Value>CASH</Value>
                         <Style>
                           <FontFamily>Tahoma</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -971,8 +683,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Left>0.14521in</Left>
-                <Height>0.16666in</Height>
+                <Left>0.20771in</Left>
+                <Height>0.2in</Height>
                 <Width>0.59027in</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
@@ -988,8 +700,8 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Left>0.00001in</Left>
-            <Height>0.16666in</Height>
-            <Width>0.73548in</Width>
+            <Height>0.2in</Height>
+            <Width>0.89173in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -999,11 +711,11 @@
           </Rectangle>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>1.79166in</Top>
-        <Left>1.74305in</Left>
-        <Height>0.73678in</Height>
-        <Width>0.73549in</Width>
-        <ZIndex>15</ZIndex>
+        <Top>1.81402in</Top>
+        <Left>2.89646in</Left>
+        <Height>0.87423in</Height>
+        <Width>0.99178in</Width>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1022,19 +734,24 @@
                     <TextRuns>
                       <TextRun>
                         <Value>Rs.</Value>
-                        <Style />
+                        <Style>
+                          <FontSize>12pt</FontSize>
+                          <FontWeight>Bold</FontWeight>
+                        </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox29</rd:DefaultName>
-                <Height>0.20833in</Height>
-                <Width>0.27336in</Width>
+                <Left>0.075in</Left>
+                <Height>0.3in</Height>
+                <Width>0.39836in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -1043,12 +760,12 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>0.01104in</Top>
-            <Left>0.00001in</Left>
-            <Height>0.22752in</Height>
-            <Width>1.57544in</Width>
+            <Left>0.04583in</Left>
+            <Height>0.3in</Height>
+            <Width>1.8942in</Width>
             <Style>
               <Border>
+                <Color>LightGrey</Color>
                 <Style>Solid</Style>
               </Border>
             </Style>
@@ -1063,7 +780,7 @@
                     <Value>Subject to encashment of Cheque</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>6pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1073,10 +790,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.27493in</Top>
-            <Left>0in</Left>
-            <Height>0.16666in</Height>
-            <Width>1.57545in</Width>
+            <Top>0.31933in</Top>
+            <Left>0.04167in</Left>
+            <Height>0.2in</Height>
+            <Width>2.01169in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1097,8 +814,7 @@
                   <TextRun>
                     <Value>Signature</Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>7pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1108,9 +824,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.5445in</Top>
-            <Height>0.16666in</Height>
-            <Width>1.57545in</Width>
+            <Top>0.69923in</Top>
+            <Left>0.04583in</Left>
+            <Height>0.2in</Height>
+            <Width>2.00752in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1124,27 +841,402 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>1.78061in</Top>
-        <Left>2.53409in</Left>
-        <Height>0.71937in</Height>
-        <Width>1.57545in</Width>
-        <ZIndex>16</ZIndex>
+        <Top>1.81402in</Top>
+        <Left>3.95768in</Left>
+        <Height>0.89923in</Height>
+        <Width>2.06944in</Width>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Rectangle>
+      <Rectangle Name="Rectangle12">
+        <ReportItems>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Drawn on</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Left>0.07292in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.80903in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox16">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0in</Top>
+            <Left>0.92361in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.64931in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>3.99865cm</Top>
+        <Left>11.27283cm</Left>
+        <Height>0.52916cm</Height>
+        <Width>4.03608cm</Width>
+        <ZIndex>7</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Rectangle Name="Rectangle13">
+        <ReportItems>
+          <Textbox Name="Textbox14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Dated</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Height>0.20833in</Height>
+            <Width>0.57778in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.00053in</Top>
+            <Left>0.60555in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.93611in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>3.9973cm</Top>
+        <Left>7.35701cm</Left>
+        <Height>0.5305cm</Height>
+        <Width>3.91582cm</Width>
+        <ZIndex>8</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Rectangle Name="Rectangle14">
+        <ReportItems>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cheque No.</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Height>0.20833in</Height>
+            <Width>0.86459in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Left>0.93403in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.59146in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>3.9973cm</Top>
+        <Left>3.13425cm</Left>
+        <Height>0.52916cm</Height>
+        <Width>4.04637cm</Width>
+        <ZIndex>9</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Rectangle Name="Rectangle15">
+        <ReportItems>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Bank</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Left>0.0125in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.46874in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0in</Top>
+            <Left>0.55069in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.60841in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>3.9973cm</Top>
+        <Left>0.09525cm</Left>
+        <Height>0.52916cm</Height>
+        <Width>3.0637cm</Width>
+        <ZIndex>10</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Textbox Name="Textbox6">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox6</rd:DefaultName>
+        <Top>1.12917in</Top>
+        <Left>1.55083in</Left>
+        <Height>0.40013in</Height>
+        <Width>4.46021in</Width>
+        <ZIndex>11</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox8">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Hello</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox8</rd:DefaultName>
+        <Top>0.87417in</Top>
+        <Left>2.47424in</Left>
+        <Height>0.19791in</Height>
+        <Width>3.5368in</Width>
+        <ZIndex>12</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>2.52843in</Height>
+    <Height>2.77839in</Height>
     <Style />
   </Body>
-  <Width>4.10954in</Width>
+  <Width>6.09375in</Width>
   <Page>
+    <PageHeight>11.69in</PageHeight>
+    <PageWidth>8.27in</PageWidth>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>

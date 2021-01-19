@@ -349,7 +349,7 @@ namespace IMS.Forms.Inventory.Products
             cbCategory.Items.Clear();
             cbCategory.FlatStyle = FlatStyle.Popup;
             cbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            var categories = _productService.GetCategoryList(null);
+            //var categories = _productService.GetCategoryList(null);
             //cbCategory.ValueMember = "Id";
             //cbCategory.DisplayMember = "Name";
             AddCategoryToCombo(null, null, null);
