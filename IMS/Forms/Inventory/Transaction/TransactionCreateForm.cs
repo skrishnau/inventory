@@ -217,6 +217,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void PopulateModel(OrderModel model)
         {
+
             _orderModel = model;
             if (model != null)
             {
@@ -265,10 +266,12 @@ namespace IMS.Forms.Inventory.Transaction
                 case OrderTypeEnum.Purchase:
                     lblClient.Text = "Supplier";
                     this.Text = (model == null ? "Create" : "Edit") + " Purchase Transaction";
+                    saveFooterUC1.btnCheckoutAndPrint.Visible = false;
                     break;
                 case OrderTypeEnum.Sale:
                     lblClient.Text = "Customer";
                     this.Text = (model == null ? "Create" : "Edit") + " Sale Transaction";
+                    saveFooterUC1.btnCheckoutAndPrint.Visible = true;
                     break;
                     //case OrderTypeEnum.Move:
                     //    lblClient.Visible = false;

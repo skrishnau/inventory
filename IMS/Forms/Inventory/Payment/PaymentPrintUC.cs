@@ -7,25 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
+using ViewModel.Core.Orders;
+using Service.Core.Settings;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Payment
 {
     public partial class PaymentPrintUC : UserControl
     {
-        public PaymentPrintUC()
+        private readonly IAppSettingService _settingService;
+
+        PaymentModel _paymentModel;
+
+        public PaymentPrintUC(IAppSettingService appSettingService, PaymentModel paymentModel)
         {
+            this._settingService = appSettingService;
+            this._paymentModel = paymentModel;
             InitializeComponent();
 
             this.Load += PaymentPrintUC_Load;
         }
+
+
         
 
         private void PaymentPrintUC_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Fill;
 
-            //var reportParams = GetReportParametersForSaleTransaction(_orderModel);
-            //this.reportViewer1.LocalReport.SetParameters(reportParams);
+            var reportParams = GetReportParametersForSaleTransaction(_paymentModel);
+            this.reportViewer1.LocalReport.SetParameters(reportParams);
 
             // datasource
             //ReportDataSource reportDataSource = new ReportDataSource("OrderItemDataset", _orderModel.OrderItems);
@@ -35,26 +47,24 @@ namespace IMS.Forms.Inventory.Payment
 
         }
 
-        //public static IEnumerable<ReportParameter> GetReportParametersForSaleTransaction(OrderModel _orderModel)
-        //{
-        //    var reportParam = new List<ReportParameter>();
+        public IEnumerable<ReportParameter> GetReportParametersForSaleTransaction(PaymentModel paymentModel)
+        {
+            var reportParam = new List<ReportParameter>();
+            var company = _settingService.GetCompanyInfoSetting();
+            reportParam.Add(new ReportParameter("CompanyName", company.CompanyName));
+            reportParam.Add(new ReportParameter("CompanyAddress", company.Address));
+            reportParam.Add(new ReportParameter("CompanyPhone", company.Phone));
+            reportParam.Add(new ReportParameter("ReferenceNumber", paymentModel.ReferenceNumber));
+            reportParam.Add(new ReportParameter("Date", paymentModel.Date.ToString("yyyy/MM/dd")));
+            reportParam.Add(new ReportParameter("CustomerName", paymentModel.User));
+            reportParam.Add(new ReportParameter("AmountInWords", NumberHelper.ConvertNumbertoWords((long) paymentModel.Amount) + " ONLY."));
+            reportParam.Add(new ReportParameter("AmountInFigure", paymentModel.Amount.ToString("#,##,##0.00 /-")));
+            reportParam.Add(new ReportParameter("Bank", string.IsNullOrEmpty(paymentModel.Bank)? "-": paymentModel.Bank));
+            reportParam.Add(new ReportParameter("ChequeNumber", string.IsNullOrEmpty(paymentModel.ChequeNo) ? "-" : paymentModel.ChequeNo));
+            reportParam.Add(new ReportParameter("PaymentType", paymentModel.PaymentType.ToString()));
+            reportParam.Add(new ReportParameter("DueAmount", (paymentModel.DueAmount - paymentModel.Amount).ToString("#,##,##0.00 /-")));
 
-        //    string customerName = "", supplierName = "";
-        //    if (_orderModel.OrderType == OrderTypeEnum.Sale.ToString())
-        //        customerName = _orderModel.User;
-        //    else if (_orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
-        //        supplierName = _orderModel.User;
-        //    reportParam.Add(new ReportParameter("CustomerName", customerName));
-        //    reportParam.Add(new ReportParameter("SupplierName", supplierName));
-
-        //    reportParam.Add(new ReportParameter("CustomerPhone", _orderModel.Phone));
-        //    reportParam.Add(new ReportParameter("ReferenceNumber", _orderModel.ReferenceNumber));
-
-        //    reportParam.Add(new ReportParameter("IsCash", (_orderModel.IsCash).ToString()));
-        //    reportParam.Add(new ReportParameter("IsCredit", (_orderModel.IsCredit).ToString()));
-
-        //    reportParam.Add(new ReportParameter("Date", _orderModel.CompletedDate.HasValue ? _orderModel.CompletedDate.Value.ToString("yyyy/MM/dd") : ""));
-        //    return reportParam.AsEnumerable();
-        //}
+            return reportParam.AsEnumerable();
+        }
     }
 }

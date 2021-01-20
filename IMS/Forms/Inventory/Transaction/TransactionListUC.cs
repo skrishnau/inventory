@@ -159,11 +159,11 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void DgvPurchases_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.ColumnIndex == colViewDetail.Index)
-            // {
-            var model = dgvOrders.Rows[e.RowIndex].DataBoundItem as OrderModel;
-            ShowDetail(sender, model);
-            //  }
+            if(e.RowIndex >= 0)
+            {
+                var model = dgvOrders.Rows[e.RowIndex].DataBoundItem as OrderModel;
+                ShowDetail(sender, model);
+            }
         }
 
         private void DgvOrders_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

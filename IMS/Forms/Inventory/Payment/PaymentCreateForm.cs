@@ -1,6 +1,7 @@
 ﻿using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
 using Service.Core.Payment;
+using Service.Core.Settings;
 using Service.Core.Users;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
 using ViewModel.Core.Users;
@@ -20,20 +22,25 @@ namespace IMS.Forms.Inventory.Payment
 {
     public partial class PaymentCreateForm : Form
     {
-        private OrderModel _orderModel;
+        //private OrderModel _orderModel;
         private UserModel _userModel;
         private readonly IPaymentService _paymentService;
         private readonly IUserService _userService;
+        private readonly IAppSettingService _appSettingService;
         private RequiredFieldValidator _requiredFieldValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
 
         private decimal totalAmount;
-        
+        private decimal _dueAmount;
 
-        public PaymentCreateForm(IPaymentService paymentService, IUserService userService)
+
+
+        public PaymentCreateForm(IPaymentService paymentService, IUserService userService, IAppSettingService appSettingService)
         {
             _paymentService = paymentService;
             _userService = userService;
+            _appSettingService = appSettingService;
+
             InitializeComponent();
 
             txtAmount.Maximum = Int32.MaxValue;
@@ -47,20 +54,21 @@ namespace IMS.Forms.Inventory.Payment
         public void SetData(OrderModel orderModel, UserModel userModel)
         {
             var byFrom = "-";
-            if(orderModel != null)
+            if (orderModel != null)
             {
-                 byFrom = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? "By Customer" : "To Supplier";
+                byFrom = orderModel.OrderType == OrderTypeEnum.Sale.ToString() ? "By Customer" : "To Supplier";
                 this.Text = $"New {orderModel.OrderType} Payment {byFrom}";
                 this.headerTemplate1.Text = orderModel.Name;
                 lblRemainingAmount.Text = orderModel.DueAmount.ToString();
                 lblTotalAmount.Text = orderModel.TotalAmount.ToString();
                 txtAmount.Value = 0;//orderModel.RemainingAmount;
-                _orderModel = orderModel;
+                //_orderModel = orderModel;
                 totalAmount = orderModel.TotalAmount;
             }
-            else if(userModel != null)
+            else if (userModel != null)
             {
-                byFrom = userModel.UserType== UserTypeEnum.Customer.ToString()? "By Customer" : "To Supplier";
+                byFrom = userModel.UserType == UserTypeEnum.Customer.ToString() ? "By Customer" : "To Supplier";
+                btnPrint.Visible = userModel.UserType == UserTypeEnum.Customer.ToString();
                 this.Text = $"New Payment {byFrom}";
                 this.headerTemplate1.Text = userModel.Name;
                 var transactionSum = _userService.GetTransactionSumOfUser(userModel.Id);
@@ -68,7 +76,9 @@ namespace IMS.Forms.Inventory.Payment
                 lblTotalAmount.Text = transactionSum?.TotalAmount.ToString();//userModel.TotalAmount.ToString();
                 txtAmount.Value = 0;// userModel.DueAmount;
                 _userModel = userModel;
-                totalAmount = transactionSum?.TotalAmount??0;
+                totalAmount = transactionSum?.TotalAmount ?? 0;
+                _dueAmount = transactionSum?.DueAmount??0;
+                txtBy.Text = userModel.Name;
             }
             lblByFrom.Text = byFrom;
         }
@@ -98,6 +108,7 @@ namespace IMS.Forms.Inventory.Payment
             btnPrint.Click += BtnPrint_Click;
             chkAllPaid.CheckedChanged += ChkAllPaid_CheckedChanged;
             cbPaymentMethod.SelectedValueChanged += CbPaymentMethod_SelectedValueChanged;
+
         }
 
 
@@ -105,7 +116,9 @@ namespace IMS.Forms.Inventory.Payment
 
         private void CbPaymentMethod_SelectedValueChanged(object sender, EventArgs e)
         {
-            txtChequeNo.Enabled = cbPaymentMethod.SelectedValue?.ToString() == PaymentMethodEnum.Cheque.ToString();
+            var enabled = cbPaymentMethod.SelectedValue?.ToString() == PaymentMethodEnum.Cheque.ToString();
+            txtBank.Enabled = enabled;
+            txtChequeNo.Enabled = enabled;
         }
 
         private void ChkAllPaid_CheckedChanged(object sender, EventArgs e)
@@ -113,7 +126,7 @@ namespace IMS.Forms.Inventory.Payment
             txtAmount.Enabled = !chkAllPaid.Checked;
             if (chkAllPaid.Checked)
             {
-                txtAmount.Value = _userModel!=null ? _userModel.DueAmount: _orderModel != null? _orderModel.DueAmount : 0;
+                txtAmount.Value = _userModel != null ? _userModel.DueAmount :  0;
             }
             else
             {
@@ -140,7 +153,7 @@ namespace IMS.Forms.Inventory.Payment
         #endregion
 
 
-        private void Save()
+        private ResponseModel<PaymentModel> Save(bool showPrint = false)
         {
             var payment = GetData();
             if (payment != null)
@@ -148,18 +161,26 @@ namespace IMS.Forms.Inventory.Payment
                 DialogResult dialogResult = MessageBox.Show(this, "Are you sure to save the payment?", "Save", MessageBoxButtons.OKCancel);
                 if (dialogResult.Equals(DialogResult.OK))
                 {
-                    _paymentService.Save(payment);
-                    this.Close();
+                    if (!showPrint)
+                        this.Close();
+                    return _paymentService.Save(payment);
                 }
             }
+            return null;
         }
 
         private void Print()
         {
-            this.Text = "Print Receipt";
-            this.Controls.Clear();
-            var transactionPrintBillUc = new PaymentPrintUC();
-            this.Controls.Add(transactionPrintBillUc);
+            var saved = Save(true);
+            if (saved != null)
+            {
+                saved.Data.DueAmount = _dueAmount;//_orderModel.TotalAmount;
+                this.Text = "Print Receipt";
+                this.Controls.Clear();
+
+                var transactionPrintBillUc = new PaymentPrintUC(_appSettingService, saved.Data);
+                this.Controls.Add(transactionPrintBillUc);
+            }
         }
 
         public PaymentModel GetData()
@@ -167,22 +188,53 @@ namespace IMS.Forms.Inventory.Payment
             var isValid = true;
             isValid = _requiredFieldValidator.IsValid();
             isValid = isValid && _greaterThanZeroFieldValidator.IsValid();
+            if (cbPaymentMethod.SelectedValue?.ToString() == PaymentMethodEnum.Cheque.ToString())
+            {
+                if(string.IsNullOrEmpty(txtBank.Text))
+                {
+                    isValid = false;
+                    errorProvider1.SetError(txtBank, "Required");
+                }
+                else
+                    errorProvider1.SetError(txtBank, string.Empty);
+
+                if (string.IsNullOrEmpty(txtChequeNo.Text))
+                {
+                    isValid = false;
+                    errorProvider1.SetError(txtChequeNo, "Required");
+                }
+                else
+                    errorProvider1.SetError(txtChequeNo, string.Empty);
+
+            }
+            if (string.IsNullOrEmpty(txtReferenceNumber.Text))
+            {
+                isValid = false;
+                errorProvider1.SetError(txtReferenceNumber, "Required");
+            }else
+            {
+                errorProvider1.SetError(txtReferenceNumber, string.Empty);
+            }
             if (!isValid)
             {
                 PopupMessage.ShowMissingInputsMessage();
                 this.Focus();
                 return null;
             }
+
             var model = new PaymentModel
             {
                 Amount = txtAmount.Value,
                 ChequeNo = txtChequeNo.Text.ToString(),
                 Date = DateTime.Now,
                 PaidBy = txtBy.Text.ToString(),
-                PaymentMethod = cbPaymentMethod.SelectedValue.ToString(),
-                OrderId = _orderModel?.Id,
+                PaymentType = cbPaymentMethod.SelectedValue.ToString(),
+               // OrderId = _orderModel?.Id,
                 UserId = _userModel?.Id,
                 TotalAmount = totalAmount,
+                Bank = txtBank.Text,
+                ReferenceNumber = txtReferenceNumber.Text,
+
             };
             return model;
         }

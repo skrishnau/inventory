@@ -86,7 +86,7 @@ namespace IMS.Forms.Inventory.Products
         {
             dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
             dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
-            dgvProductList.CellFormatting += DgvProductList_CellFormatting;
+           // dgvProductList.CellFormatting += DgvProductList_CellFormatting;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
             // btnDelete.Click += BtnDelete_Click;

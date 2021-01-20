@@ -50,6 +50,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblByFrom = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtBank = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtReferenceNumber = new System.Windows.Forms.TextBox();
             this.headerTemplate1 = new IMS.Forms.Common.Display.HeaderTemplate();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -61,7 +65,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 28);
+            this.label4.Location = new System.Drawing.Point(3, 30);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 1;
@@ -70,7 +74,7 @@
             // txtAmount
             // 
             this.txtAmount.DecimalPlaces = 1;
-            this.txtAmount.Location = new System.Drawing.Point(107, 31);
+            this.txtAmount.Location = new System.Drawing.Point(107, 33);
             this.txtAmount.Maximum = new decimal(new int[] {
             200,
             0,
@@ -83,7 +87,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 56);
+            this.label5.Location = new System.Drawing.Point(3, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 4;
@@ -92,7 +96,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(295, 28);
+            this.label6.Location = new System.Drawing.Point(281, 30);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 13);
             this.label6.TabIndex = 5;
@@ -100,7 +104,7 @@
             // 
             // txtBy
             // 
-            this.txtBy.Location = new System.Drawing.Point(107, 59);
+            this.txtBy.Location = new System.Drawing.Point(107, 63);
             this.txtBy.Name = "txtBy";
             this.txtBy.Size = new System.Drawing.Size(126, 20);
             this.txtBy.TabIndex = 7;
@@ -108,7 +112,7 @@
             // txtChequeNo
             // 
             this.txtChequeNo.Enabled = false;
-            this.txtChequeNo.Location = new System.Drawing.Point(409, 59);
+            this.txtChequeNo.Location = new System.Drawing.Point(386, 63);
             this.txtChequeNo.Name = "txtChequeNo";
             this.txtChequeNo.Size = new System.Drawing.Size(121, 20);
             this.txtChequeNo.TabIndex = 9;
@@ -116,27 +120,32 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.09263F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.40454F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.98299F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.14178F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.16508F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.92661F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.26605F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.54128F));
             this.tableLayoutPanel2.Controls.Add(this.chkAllPaid, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtAmount, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.cbPaymentMethod, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtBy, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 2, 3);
             this.tableLayoutPanel2.Controls.Add(this.label7, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtBank, 3, 3);
             this.tableLayoutPanel2.Controls.Add(this.txtChequeNo, 3, 2);
+            this.tableLayoutPanel2.Controls.Add(this.cbPaymentMethod, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label8, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtReferenceNumber, 3, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 56);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(545, 86);
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(545, 121);
             this.tableLayoutPanel2.TabIndex = 7;
             // 
             // chkAllPaid
@@ -151,8 +160,9 @@
             // 
             // cbPaymentMethod
             // 
+            this.cbPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPaymentMethod.FormattingEnabled = true;
-            this.cbPaymentMethod.Location = new System.Drawing.Point(409, 31);
+            this.cbPaymentMethod.Location = new System.Drawing.Point(386, 33);
             this.cbPaymentMethod.Name = "cbPaymentMethod";
             this.cbPaymentMethod.Size = new System.Drawing.Size(121, 21);
             this.cbPaymentMethod.TabIndex = 6;
@@ -160,7 +170,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(295, 56);
+            this.label7.Location = new System.Drawing.Point(281, 60);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 8;
@@ -214,7 +224,7 @@
             this.panel3.Controls.Add(this.btnCancel);
             this.panel3.Controls.Add(this.btnSave);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 142);
+            this.panel3.Location = new System.Drawing.Point(0, 177);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(545, 40);
             this.panel3.TabIndex = 10;
@@ -284,6 +294,38 @@
             this.lblByFrom.Text = "-";
             this.lblByFrom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(281, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Bank";
+            // 
+            // txtBank
+            // 
+            this.txtBank.Location = new System.Drawing.Point(386, 93);
+            this.txtBank.Name = "txtBank";
+            this.txtBank.Size = new System.Drawing.Size(121, 20);
+            this.txtBank.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(281, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Reference No.";
+            // 
+            // txtReferenceNumber
+            // 
+            this.txtReferenceNumber.Location = new System.Drawing.Point(386, 3);
+            this.txtReferenceNumber.Name = "txtReferenceNumber";
+            this.txtReferenceNumber.Size = new System.Drawing.Size(121, 20);
+            this.txtReferenceNumber.TabIndex = 13;
+            // 
             // headerTemplate1
             // 
             this.headerTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -297,7 +339,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(545, 182);
+            this.ClientSize = new System.Drawing.Size(545, 217);
             this.Controls.Add(this.lblByFrom);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.panel3);
@@ -342,5 +384,9 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Label lblByFrom;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtBank;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtReferenceNumber;
     }
 }

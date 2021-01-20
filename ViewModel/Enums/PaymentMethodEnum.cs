@@ -11,7 +11,8 @@ namespace ViewModel.Enums
     {
         Cash = 0,
         Cheque = 1,
-        CreditCard = 2
+        Draft = 2,
+        Advance = 3
     }
 
     public enum PaymentType

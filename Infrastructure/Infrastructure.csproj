@@ -95,6 +95,10 @@
     <Compile Include="Migrations\202101191749238_CompanyColumnAddedInUser.Designer.cs">
       <DependentUpon>202101191749238_CompanyColumnAddedInUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101201635112_PaymentTableUpdated.cs" />
+    <Compile Include="Migrations\202101201635112_PaymentTableUpdated.Designer.cs">
+      <DependentUpon>202101201635112_PaymentTableUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101191749238_CompanyColumnAddedInUser.resx">
       <DependentUpon>202101191749238_CompanyColumnAddedInUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101201635112_PaymentTableUpdated.resx">
+      <DependentUpon>202101201635112_PaymentTableUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

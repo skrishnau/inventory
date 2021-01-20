@@ -16,6 +16,7 @@ namespace ViewModel.Core.Orders
         public string Order { get; set; }
         public string User { get; set; }
 
+        public string ReferenceNumber { get; set; }
         /// <summary>
         /// Dr amt in case of sales , Cr amt in case of purchase
         /// </summary>
@@ -26,14 +27,15 @@ namespace ViewModel.Core.Orders
         /// </summary>
         public decimal Amount { get; set; }
 
-        public string PaymentMethod { get; set; }
+        public string PaymentType { get; set; }
         public DateTime Date { get; set; }
         public string PaidBy { get; set; }
         /// <summary>
         /// If PaymentMethod is Cheque
         /// </summary>
         public string ChequeNo { get; set; }
-
-
+        public string Bank { get; set; }
+        // only used in ui
+        public decimal DueAmount { get; set; }
     }
 }

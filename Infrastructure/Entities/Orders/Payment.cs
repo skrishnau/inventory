@@ -17,14 +17,17 @@ namespace Infrastructure.Entities.Orders
         public int? UserId { get; set; }
         public virtual User User { get; set; }
 
+        public string ReferenceNumber { get; set; }
+
         public decimal Amount { get; set; }
-        public string PaymentMethod { get; set; }
+        public string PaymentType { get; set; }
         public DateTime Date { get; set; }
         public string PaidBy { get; set; }
         /// <summary>
         /// If PaymentMethod is Cheque
         /// </summary>
         public string ChequeNo { get; set; }
+        public string Bank { get; set; }
         
     }
 }

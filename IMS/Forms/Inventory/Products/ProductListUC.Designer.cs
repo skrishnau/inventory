@@ -46,6 +46,11 @@
             this.colReorderPoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cbCategory = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -65,18 +70,13 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbCategory = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvProductList
@@ -231,6 +231,52 @@
             this.panel1.Size = new System.Drawing.Size(888, 53);
             this.panel1.TabIndex = 10;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.cbCategory);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.txtName);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(4, 4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(518, 45);
+            this.panel3.TabIndex = 5;
+            // 
+            // cbCategory
+            // 
+            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Location = new System.Drawing.Point(79, 12);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(176, 21);
+            this.cbCategory.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(304, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Search Name";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(382, 12);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(124, 20);
+            this.txtName.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Category";
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnNew);
@@ -290,6 +336,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(888, 27);
             this.panel2.TabIndex = 11;
+            this.panel2.Visible = false;
             // 
             // label2
             // 
@@ -425,52 +472,6 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.cbCategory);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.txtName);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(4, 4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(518, 45);
-            this.panel3.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(304, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Search Name";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(382, 12);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(124, 20);
-            this.txtName.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Category";
-            // 
-            // cbCategory
-            // 
-            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(79, 12);
-            this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(176, 21);
-            this.cbCategory.TabIndex = 10;
-            // 
             // ProductListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -484,14 +485,14 @@
             this.Size = new System.Drawing.Size(888, 511);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
