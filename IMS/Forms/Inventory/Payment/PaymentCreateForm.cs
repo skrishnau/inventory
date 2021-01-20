@@ -53,6 +53,7 @@ namespace IMS.Forms.Inventory.Payment
 
         public void SetData(OrderModel orderModel, UserModel userModel)
         {
+            var company = _appSettingService.GetCompanyInfoSetting();
             var byFrom = "-";
             if (orderModel != null)
             {
@@ -78,7 +79,7 @@ namespace IMS.Forms.Inventory.Payment
                 _userModel = userModel;
                 totalAmount = transactionSum?.TotalAmount ?? 0;
                 _dueAmount = transactionSum?.DueAmount??0;
-                txtBy.Text = userModel.Name;
+                txtBy.Text = userModel.UserType == UserTypeEnum.Customer.ToString() ? userModel.Name : company.CompanyName;
             }
             lblByFrom.Text = byFrom;
         }

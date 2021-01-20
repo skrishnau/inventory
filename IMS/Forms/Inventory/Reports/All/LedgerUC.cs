@@ -74,7 +74,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void PopulateCustomer()
         {
-            var customers = _userService.GetUserListForCombo(ViewModel.Enums.UserTypeEnum.Customer, new int[0]);
+            var customers = _userService.GetUserListForCombo(ViewModel.Enums.UserTypeEnum.All, new int[0]);
             cbCustomer.DataSource = customers;
 
             cbCustomer.ValueMember = "Id";

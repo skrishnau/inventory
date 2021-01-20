@@ -137,7 +137,7 @@ namespace IMS.Forms.Inventory.Products
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var productCreate = Program.container.GetInstance<ProductCreateForm>();
+                var productCreate = Program.container.GetInstance<ProductCreateBasicForm>();
                 productCreate.SetDataForEdit(productId);
                 productCreate.ShowDialog();
             }
