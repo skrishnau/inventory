@@ -71,12 +71,12 @@ namespace IMS.Forms.Inventory.Settings
 
         private void LnkGeneral_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var uc = Program.container.GetInstance<GeneralSettingsUC>();
+            var uc = Program.container.GetInstance<ProfileUC>();
             _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(uc);
             // set selection
             _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "My Company";
+            _body.SubHeadingText = "Profile";
         }
 
         //private void LnkProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

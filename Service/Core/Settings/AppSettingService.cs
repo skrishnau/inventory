@@ -55,7 +55,6 @@ namespace Service.Core.Settings
                     var settingEntity = AppSettingMapper.MapToAppSettingEntity(model);
                     settingEntity.CreatedAt = DateTime.Now;
                     settingEntity.UpdatedAt = DateTime.Now;
-                    // settingEntity.Group = "Themes";
                     _context.AppSetting.Add(settingEntity);
                 }
                 else
@@ -69,6 +68,26 @@ namespace Service.Core.Settings
                 _context.SaveChanges();
                 return true;
             }
+        }
+
+        public AppSetting SaveAppSettingWithoutCommit(DatabaseContext _context, AppSetting model)
+        {
+            var dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == model.Name);
+            if (dbEntity == null)
+            {
+                dbEntity = model;
+                //var settingEntity = AppSettingMapper.MapToAppSettingEntity(model);
+                dbEntity.CreatedAt = DateTime.Now;
+                dbEntity.UpdatedAt = DateTime.Now;
+                _context.AppSetting.Add(model);
+            }
+            else
+            {
+                // dbEntity.DisplayName = model.DisplayName;
+                dbEntity.Value = model.Value;
+                dbEntity.UpdatedAt = DateTime.Now;
+            }
+            return dbEntity;
         }
 
 
@@ -514,36 +533,36 @@ namespace Service.Core.Settings
             return billSettings.ReceiptNo;
         }
 
-        public bool SavePassword(string password)
+        public bool SavePassword(PasswordModel password)
         {
             using (var _context = new DatabaseContext())
             {
-                var auth = _context.AppSetting.FirstOrDefault(x => x.Name == "Auth"); //GetAppSetting("Auth");
-                if (auth == null)
+                var pass = new AppSetting()
                 {
-                    auth = new AppSetting()
-                    {
-                        Name = "Auth",
-                        CreatedAt = DateTime.Now,
-                        DisplayName = "Auth",
-                        Group = "Authorization",
-                        UpdatedAt = DateTime.Now,
-                        Value = password,
-                    };
-                    _context.AppSetting.Add(auth);
-                }
-                else
+                    Name = "Password",
+                    DisplayName = "Password",
+                    Group = "Authorization",
+                    Value = password.Password,
+                };
+                SaveAppSettingWithoutCommit(_context, pass);
+                var username = new AppSetting()
                 {
-                    auth.Value = password;
-                }
+                    Name = "Username",
+                    DisplayName = "Username",
+                    Group = "Authorization",
+                    Value = password.Username,
+                };
+                SaveAppSettingWithoutCommit(_context, username);
                 _context.SaveChanges();
                 return true;
             }
         }
 
-        public string GetPassword()
+        public PasswordModel GetPassword()
         {
-            return GetAppSetting("Auth")?.Value;
+            var password = GetAppSetting("Password")?.Value;
+            var username = GetAppSetting("Username")?.Value;
+            return new PasswordModel { Password = password, Username = username };
         }
     }
 }

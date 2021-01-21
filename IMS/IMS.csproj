@@ -84,12 +84,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Authorization\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Authorization\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Business\BusinessUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -184,11 +178,23 @@
     <Compile Include="Forms\Inventory\Reports\ReportsUC.Designer.cs">
       <DependentUpon>ReportsUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.cs">
+    <Compile Include="Forms\Inventory\Settings\General\PasswordEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\PasswordEditForm.Designer.cs">
+      <DependentUpon>PasswordEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\ProfileUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Settings\General\GeneralSettingsUC.Designer.cs">
-      <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Settings\General\ProfileUC.Designer.cs">
+      <DependentUpon>ProfileUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\ProfileEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\ProfileEditForm.Designer.cs">
+      <DependentUpon>ProfileEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.cs">
       <SubType>UserControl</SubType>
@@ -618,9 +624,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Helpers\OrderModelReportHelper.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <EmbeddedResource Include="Forms\Authorization\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
       <DependentUpon>BusinessUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -666,8 +669,14 @@
     <EmbeddedResource Include="Forms\Inventory\Reports\ReportsUC.resx">
       <DependentUpon>ReportsUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Settings\General\GeneralSettingsUC.resx">
-      <DependentUpon>GeneralSettingsUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Settings\General\PasswordEditForm.resx">
+      <DependentUpon>PasswordEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\General\ProfileUC.resx">
+      <DependentUpon>ProfileUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\General\ProfileEditForm.resx">
+      <DependentUpon>ProfileEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.resx">
       <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>

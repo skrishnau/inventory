@@ -33,7 +33,7 @@ namespace Service.Core.Settings
         bool SaveCurrentIndex(long index, OrderTypeEnum orderType);
         bool IncrementBillIndex(OrderTypeEnum orderType);
 
-        string GetPassword();
-        bool SavePassword(string password);
+        PasswordModel GetPassword();
+        bool SavePassword(PasswordModel password);
     }
 }

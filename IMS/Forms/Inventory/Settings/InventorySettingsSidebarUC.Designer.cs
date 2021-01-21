@@ -93,10 +93,10 @@
             this.lnkGeneral.Location = new System.Drawing.Point(5, 14);
             this.lnkGeneral.Margin = new System.Windows.Forms.Padding(5);
             this.lnkGeneral.Name = "lnkGeneral";
-            this.lnkGeneral.Size = new System.Drawing.Size(113, 17);
+            this.lnkGeneral.Size = new System.Drawing.Size(72, 17);
             this.lnkGeneral.TabIndex = 11;
             this.lnkGeneral.TabStop = true;
-            this.lnkGeneral.Text = "      My Company";
+            this.lnkGeneral.Text = "      Profile";
             this.lnkGeneral.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // lnkReferences

@@ -178,7 +178,7 @@ namespace IMS
             container.Register<InventorySettingsUC>(Lifestyle.Scoped);
             container.Register<InventorySettingsSidebarUC>(Lifestyle.Scoped);
            // container.Register<CompanySettingsUC>(Lifestyle.Scoped);
-            container.Register<GeneralSettingsUC>(Lifestyle.Scoped);
+            container.Register<ProfileUC>(Lifestyle.Scoped);
             container.Register<ReferenceSettingsUC>(Lifestyle.Scoped);
             //
             // Sales

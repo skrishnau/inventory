@@ -104,6 +104,7 @@
     <Compile Include="Core\Orders\OrderItemModel.cs" />
     <Compile Include="Core\Settings\BillSettingsModel.cs" />
     <Compile Include="Core\Settings\CompanyInfoSettingModel.cs" />
+    <Compile Include="Core\Settings\PasswordModel.cs" />
     <Compile Include="Core\TransactionModel.cs" />
     <Compile Include="Enums\AdjustmentEnum.cs" />
     <Compile Include="Enums\TransactionTypeEnum.cs" />

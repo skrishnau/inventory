@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using IMS.Forms.POS;
 using IMS.Forms.Inventory.Orders;
 using ViewModel.Enums;
-using IMS.Forms.Authorization;
+using IMS.Forms.Inventory.Settings.General;
 
 namespace IMS
 {
@@ -29,10 +29,12 @@ namespace IMS
 
         private void ShowLoginFormOrLogin()
         {
-            DisplayInventory();
-            /*
+           // DisplayInventory();
+            
             // ask for password
-            var loginForm = Program.container.GetInstance<LoginForm>();//new InventoryUC();
+            var loginForm = Program.container.GetInstance<PasswordEditForm>();//new InventoryUC();
+            loginForm.SetData(false, true);
+            loginForm.Height = 144; // small size cause confirmpassword and old password are not shown
             DialogResult result = loginForm.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -49,7 +51,7 @@ namespace IMS
                 }
                 catch (Exception) { }
             }
-            */
+            
         }
 
         private void DisplayInventory()

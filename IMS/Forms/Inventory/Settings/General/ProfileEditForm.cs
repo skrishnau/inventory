@@ -1,69 +1,40 @@
-﻿using System;
+﻿using IMS.Forms.Common;
+using Service.Core.Settings;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Service.Core.Settings;
 using ViewModel.Core.Settings;
-using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Settings.General
 {
-    public partial class GeneralSettingsUC : UserControl
+    public partial class ProfileEditForm : Form
     {
         private readonly IAppSettingService _appSettingService;
-
-        public GeneralSettingsUC(IAppSettingService appSettingService)
+        public ProfileEditForm(IAppSettingService appSettingService)
         {
             this._appSettingService = appSettingService;
             InitializeComponent();
 
-            this.Load += GeneralSettingsUC_Load;
+            this.Load += ProfileEditForm_Load;
         }
 
-        private void GeneralSettingsUC_Load(object sender, EventArgs e)
+        private void ProfileEditForm_Load(object sender, EventArgs e)
         {
-           // btnSaveAppearance.Click += BtnSaveAppearance_Click;
-
             PopulateCompanyInfoSetting();
             btnSaveProfile.Click += BtnSave_Click;
         }
-
-
-
-     /*   private void BtnSaveAppearance_Click(object sender, EventArgs e)
-        {
-            if (cbThemes.Text == "")
-            {
-                cbThemes.BackColor = Color.LightPink;
-                return;
-            }
-            var appsettingModel = new AppSettingModel()
-            {
-                DisplayName = "Themes",
-                Name = "Themes",
-                Group = "Themes",
-                Value = cbThemes.Text
-            };
-
-            if (_appSettingService.SaveAppSetting(appsettingModel))
-                MessageBox.Show("Themes setting updated!!!");
-        }
-        */
-
-
-        #region Profile
 
         private void PopulateCompanyInfoSetting()
         {
             var companysetting = _appSettingService.GetCompanyInfoSetting();
             tbAddress.Text = companysetting.Address;
             tbCompanyName.Text = companysetting.CompanyName;
-            //tbOwner.Text = companysetting.OwnerName;
             tbVAT.Text = companysetting.VATNo;
             tbPAN.Text = companysetting.PANNo;
             tbPhone.Text = companysetting.Phone;
@@ -78,7 +49,6 @@ namespace IMS.Forms.Inventory.Settings.General
                 Address = tbAddress.Text,
                 CompanyName = tbCompanyName.Text,
                 Email = tbEmail.Text,
-                //OwnerName = tbOwner.Text,
                 PANNo = tbPAN.Text,
                 Phone = tbPhone.Text,
                 VATNo = tbVAT.Text,
@@ -86,9 +56,13 @@ namespace IMS.Forms.Inventory.Settings.General
             };
 
             if (_appSettingService.SaveCompanyInfoSetting(companyInfoSettingModel))
+            {
                 PopupMessage.ShowPopupMessage("Update Success", "Company Setting Successfully Updated", PopupMessageType.SUCCESS);
+                this.Close();
+            }else
+            {
+                PopupMessage.ShowErrorMessage("Couldn't Save!");
+            }
         }
-
-        #endregion
     }
 }
