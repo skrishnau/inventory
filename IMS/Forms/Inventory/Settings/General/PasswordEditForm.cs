@@ -50,15 +50,26 @@ namespace IMS.Forms.Inventory.Settings.General
             tbUsername.Text = _passwordModel.Username;
             //tbConfirmPassword.Text = companysetting.VATNo;
             //tbOldPassword.Text = companysetting.PANNo;
-            if (_authMode && !string.IsNullOrEmpty(_passwordModel.Username))
+            if (_authMode)
             {
-                // authenticate
-                tbConfirmPassword.Visible = false;
-                tbOldPassword.Visible = false;
-                lblOldPassword.Visible = false;
-                lblConfirmPassword.Visible = false;
-                this.Text = "Login";
+                if (!string.IsNullOrEmpty(_passwordModel.Username))
+                {
+                    // authenticate
+                    tbConfirmPassword.Visible = false;
+                    tbOldPassword.Visible = false;
+                    lblOldPassword.Visible = false;
+                    lblConfirmPassword.Visible = false;
+                    this.Text = "Login";
+                    this.Height = 144; // small size cause confirmpassword and old password are not shown
+                }
+                else
+                {
+                    tbOldPassword.Visible = false;
+                    lblOldPassword.Visible = false;
+                    this.Height = 174; // hide old password section
+                }
             }
+            
 
         }
 
@@ -81,6 +92,10 @@ namespace IMS.Forms.Inventory.Settings.General
                     OldPassword = tbConfirmPassword.Text,
                 };
                 var success = false;
+                if(_authMode && string.IsNullOrEmpty(_passwordModel.Username))
+                {
+                    _editMode = true;
+                }
                 if (_editMode)
                 {
                     // save the password

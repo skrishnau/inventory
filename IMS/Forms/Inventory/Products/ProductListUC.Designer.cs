@@ -63,6 +63,7 @@
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSupplyPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRetailPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnHoldQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,6 +99,7 @@
             this.colSKU,
             this.colName,
             this.colCategory,
+            this.colSupplyPrice,
             this.colRetailPrice,
             this.colInStockQuantity,
             this.colOnHoldQuantity,
@@ -184,10 +186,10 @@
             this.flowLayoutPanel1.Controls.Add(this.btnNew);
             this.flowLayoutPanel1.Controls.Add(this.btnEdit);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(750, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(734, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(134, 45);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(150, 45);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnNew
@@ -195,7 +197,7 @@
             this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnNew.Location = new System.Drawing.Point(89, 3);
+            this.btnNew.Location = new System.Drawing.Point(105, 3);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(42, 40);
             this.btnNew.TabIndex = 0;
@@ -208,7 +210,7 @@
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(41, 3);
+            this.btnEdit.Location = new System.Drawing.Point(57, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(42, 40);
             this.btnEdit.TabIndex = 1;
@@ -410,14 +412,21 @@
             this.colCategory.ReadOnly = true;
             this.colCategory.Width = 85;
             // 
+            // colSupplyPrice
+            // 
+            this.colSupplyPrice.DataPropertyName = "SupplyPrice";
+            this.colSupplyPrice.HeaderText = "Cost Price";
+            this.colSupplyPrice.Name = "colSupplyPrice";
+            this.colSupplyPrice.ReadOnly = true;
+            // 
             // colRetailPrice
             // 
             this.colRetailPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colRetailPrice.DataPropertyName = "RetailPrice";
-            this.colRetailPrice.HeaderText = "Sales Price";
+            this.colRetailPrice.HeaderText = "Selling Price";
             this.colRetailPrice.Name = "colRetailPrice";
             this.colRetailPrice.ReadOnly = true;
-            this.colRetailPrice.Width = 85;
+            this.colRetailPrice.Width = 90;
             // 
             // colInStockQuantity
             // 
@@ -532,6 +541,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplyPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRetailPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOnHoldQuantity;

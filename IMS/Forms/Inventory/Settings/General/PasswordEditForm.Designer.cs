@@ -129,7 +129,7 @@
             this.panel3.Controls.Add(this.btnCancel);
             this.panel3.Controls.Add(this.btnSaveProfile);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 117);
+            this.panel3.Location = new System.Drawing.Point(0, 121);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(265, 46);
             this.panel3.TabIndex = 10;
@@ -157,7 +157,7 @@
             // 
             // tbConfirmPassword
             // 
-            this.tbConfirmPassword.Location = new System.Drawing.Point(100, 2);
+            this.tbConfirmPassword.Location = new System.Drawing.Point(99, 2);
             this.tbConfirmPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbConfirmPassword.Name = "tbConfirmPassword";
             this.tbConfirmPassword.Size = new System.Drawing.Size(127, 20);
@@ -165,7 +165,7 @@
             // 
             // tbOldPassword
             // 
-            this.tbOldPassword.Location = new System.Drawing.Point(100, 31);
+            this.tbOldPassword.Location = new System.Drawing.Point(99, 31);
             this.tbOldPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbOldPassword.Name = "tbOldPassword";
             this.tbOldPassword.Size = new System.Drawing.Size(127, 20);
@@ -199,7 +199,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(265, 163);
+            this.ClientSize = new System.Drawing.Size(265, 167);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel2);

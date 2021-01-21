@@ -215,8 +215,7 @@ namespace IMS.Forms.Inventory.Dashboard
         private void PopulateDueReceivables()
         {
             var sale = OrderTypeEnum.Sale.ToString();
-            var orders = _orderService.GetDuePayments();
-            orders = orders.Where(x => x.OrderType == sale).OrderBy(x=>x.PaymentDueDays).ToList();
+            var orders = _orderService.GetDueReceivables();
             dgvDueReceivables.AutoGenerateColumns = false;
             dgvDueReceivables.DataSource = orders;
             dgvDueReceivables.AllowUserToAddRows = false;

@@ -36,6 +36,8 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.rbPurchase = new System.Windows.Forms.RadioButton();
             this.rbSale = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -68,11 +70,9 @@
             this.lblCustomer = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.lblReferenceNo = new System.Windows.Forms.Label();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -90,7 +90,7 @@
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 88);
+            this.splitter1.Location = new System.Drawing.Point(0, 73);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(769, 3);
             this.splitter1.TabIndex = 15;
@@ -101,12 +101,12 @@
             this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnNew.Location = new System.Drawing.Point(74, 3);
+            this.btnNew.Location = new System.Drawing.Point(70, 3);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(42, 40);
+            this.btnNew.Size = new System.Drawing.Size(74, 29);
             this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNew.Text = " New";
+            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
@@ -114,9 +114,9 @@
             this.flowLayoutPanel1.Controls.Add(this.btnNew);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(646, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(618, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(119, 48);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(147, 33);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.Visible = false;
             // 
@@ -143,7 +143,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 32);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(769, 56);
+            this.panel1.Size = new System.Drawing.Size(769, 41);
             this.panel1.TabIndex = 14;
             // 
             // panel3
@@ -157,13 +157,29 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(518, 48);
+            this.panel3.Size = new System.Drawing.Size(518, 33);
             this.panel3.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(304, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Search Name";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(382, 6);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(124, 20);
+            this.txtName.TabIndex = 8;
             // 
             // rbPurchase
             // 
             this.rbPurchase.AutoSize = true;
-            this.rbPurchase.Location = new System.Drawing.Point(209, 15);
+            this.rbPurchase.Location = new System.Drawing.Point(209, 7);
             this.rbPurchase.Name = "rbPurchase";
             this.rbPurchase.Size = new System.Drawing.Size(70, 17);
             this.rbPurchase.TabIndex = 3;
@@ -173,7 +189,7 @@
             // rbSale
             // 
             this.rbSale.AutoSize = true;
-            this.rbSale.Location = new System.Drawing.Point(130, 15);
+            this.rbSale.Location = new System.Drawing.Point(130, 7);
             this.rbSale.Name = "rbSale";
             this.rbSale.Size = new System.Drawing.Size(46, 17);
             this.rbSale.TabIndex = 2;
@@ -183,7 +199,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 17);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 1;
@@ -193,7 +209,7 @@
             // 
             this.rbAll.AutoSize = true;
             this.rbAll.Checked = true;
-            this.rbAll.Location = new System.Drawing.Point(66, 15);
+            this.rbAll.Location = new System.Drawing.Point(66, 7);
             this.rbAll.Name = "rbAll";
             this.rbAll.Size = new System.Drawing.Size(36, 17);
             this.rbAll.TabIndex = 0;
@@ -221,7 +237,7 @@
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(342, 401);
+            this.dgvOrders.Size = new System.Drawing.Size(342, 416);
             this.dgvOrders.TabIndex = 13;
             // 
             // colOrderNumber
@@ -304,9 +320,9 @@
             this.panel2.Controls.Add(this.splitter2);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 91);
+            this.panel2.Location = new System.Drawing.Point(0, 76);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(769, 426);
+            this.panel2.Size = new System.Drawing.Size(769, 441);
             this.panel2.TabIndex = 16;
             // 
             // bindingNavigator1
@@ -325,7 +341,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 401);
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 416);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -408,7 +424,7 @@
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Location = new System.Drawing.Point(342, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 426);
+            this.splitter2.Size = new System.Drawing.Size(5, 441);
             this.splitter2.TabIndex = 15;
             this.splitter2.TabStop = false;
             // 
@@ -419,7 +435,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(347, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(422, 426);
+            this.panel4.Size = new System.Drawing.Size(422, 441);
             this.panel4.TabIndex = 16;
             // 
             // dgvItems
@@ -429,7 +445,7 @@
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 43);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(422, 383);
+            this.dgvItems.Size = new System.Drawing.Size(422, 398);
             this.dgvItems.TabIndex = 14;
             // 
             // panel5
@@ -480,6 +496,20 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = false;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
+            this.btnCancel.Location = new System.Drawing.Point(11, 5);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(80, 31);
+            this.btnCancel.TabIndex = 17;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel.UseVisualStyleBackColor = false;
+            // 
             // lblReferenceNo
             // 
             this.lblReferenceNo.AutoSize = true;
@@ -500,36 +530,6 @@
             this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.listHeaderTemplate1.Size = new System.Drawing.Size(769, 32);
             this.listHeaderTemplate1.TabIndex = 17;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnCancel.Location = new System.Drawing.Point(11, 5);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(80, 31);
-            this.btnCancel.TabIndex = 17;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(304, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Search Name";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(382, 12);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(124, 20);
-            this.txtName.TabIndex = 8;
             // 
             // TransactionListUC
             // 

@@ -34,7 +34,6 @@ namespace IMS
             // ask for password
             var loginForm = Program.container.GetInstance<PasswordEditForm>();//new InventoryUC();
             loginForm.SetData(false, true);
-            loginForm.Height = 144; // small size cause confirmpassword and old password are not shown
             DialogResult result = loginForm.ShowDialog();
             if (result == DialogResult.OK)
             {

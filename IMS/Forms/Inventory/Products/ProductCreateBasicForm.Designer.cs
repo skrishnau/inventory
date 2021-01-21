@@ -31,33 +31,33 @@
             this.components = new System.ComponentModel.Container();
             this.tblBasicDetails = new System.Windows.Forms.TableLayoutPanel();
             this.cbCategory = new System.Windows.Forms.ComboBox();
+            this.cbUom = new System.Windows.Forms.ComboBox();
             this.tbSKU = new System.Windows.Forms.MaskedTextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.cbPackage = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tbProductName = new System.Windows.Forms.MaskedTextBox();
             this.lblCategory = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.chkUse = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numSupplyPrice = new System.Windows.Forms.NumericUpDown();
+            this.label32 = new System.Windows.Forms.Label();
+            this.numRetailPrice = new System.Windows.Forms.NumericUpDown();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.numSupplyPrice = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.numRetailPrice = new System.Windows.Forms.NumericUpDown();
             this.gbBasicDetails = new System.Windows.Forms.GroupBox();
-            this.cbUom = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbPackage = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tblBasicDetails.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSupplyPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRetailPrice)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.gbBasicDetails.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -105,6 +105,14 @@
             this.cbCategory.Size = new System.Drawing.Size(149, 21);
             this.cbCategory.TabIndex = 50;
             // 
+            // cbUom
+            // 
+            this.cbUom.FormattingEnabled = true;
+            this.cbUom.Location = new System.Drawing.Point(376, 123);
+            this.cbUom.Name = "cbUom";
+            this.cbUom.Size = new System.Drawing.Size(124, 21);
+            this.cbUom.TabIndex = 14;
+            // 
             // tbSKU
             // 
             this.tbSKU.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -113,6 +121,16 @@
             this.tbSKU.Name = "tbSKU";
             this.tbSKU.Size = new System.Drawing.Size(151, 21);
             this.tbSKU.TabIndex = 10;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(275, 120);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(68, 26);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Base Unit of Measure";
             // 
             // label2
             // 
@@ -123,6 +141,24 @@
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Product Name *";
+            // 
+            // cbPackage
+            // 
+            this.cbPackage.FormattingEnabled = true;
+            this.cbPackage.Location = new System.Drawing.Point(376, 83);
+            this.cbPackage.Name = "cbPackage";
+            this.cbPackage.Size = new System.Drawing.Size(124, 21);
+            this.cbPackage.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(275, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Package Type";
             // 
             // tbProductName
             // 
@@ -176,6 +212,40 @@
             this.toolTip1.SetToolTip(this.chkUse, "Either to Include in product selection in other sections.");
             this.chkUse.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(275, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Cost Price";
+            // 
+            // numSupplyPrice
+            // 
+            this.numSupplyPrice.DecimalPlaces = 1;
+            this.numSupplyPrice.Location = new System.Drawing.Point(376, 3);
+            this.numSupplyPrice.Name = "numSupplyPrice";
+            this.numSupplyPrice.Size = new System.Drawing.Size(124, 20);
+            this.numSupplyPrice.TabIndex = 1;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(275, 40);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(65, 13);
+            this.label32.TabIndex = 2;
+            this.label32.Text = "Selling Price";
+            // 
+            // numRetailPrice
+            // 
+            this.numRetailPrice.DecimalPlaces = 1;
+            this.numRetailPrice.Location = new System.Drawing.Point(376, 43);
+            this.numRetailPrice.Name = "numRetailPrice";
+            this.numRetailPrice.Size = new System.Drawing.Size(124, 20);
+            this.numRetailPrice.TabIndex = 3;
+            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -212,40 +282,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // numSupplyPrice
-            // 
-            this.numSupplyPrice.DecimalPlaces = 1;
-            this.numSupplyPrice.Location = new System.Drawing.Point(376, 3);
-            this.numSupplyPrice.Name = "numSupplyPrice";
-            this.numSupplyPrice.Size = new System.Drawing.Size(124, 20);
-            this.numSupplyPrice.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(275, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Supply Price";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(275, 40);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(61, 13);
-            this.label32.TabIndex = 2;
-            this.label32.Text = "Retail Price";
-            // 
-            // numRetailPrice
-            // 
-            this.numRetailPrice.DecimalPlaces = 1;
-            this.numRetailPrice.Location = new System.Drawing.Point(376, 43);
-            this.numRetailPrice.Name = "numRetailPrice";
-            this.numRetailPrice.Size = new System.Drawing.Size(124, 20);
-            this.numRetailPrice.TabIndex = 3;
-            // 
             // gbBasicDetails
             // 
             this.gbBasicDetails.Controls.Add(this.tblBasicDetails);
@@ -257,42 +293,6 @@
             this.gbBasicDetails.TabIndex = 1;
             this.gbBasicDetails.TabStop = false;
             this.gbBasicDetails.Text = "Basic Details";
-            // 
-            // cbUom
-            // 
-            this.cbUom.FormattingEnabled = true;
-            this.cbUom.Location = new System.Drawing.Point(376, 123);
-            this.cbUom.Name = "cbUom";
-            this.cbUom.Size = new System.Drawing.Size(124, 21);
-            this.cbUom.TabIndex = 14;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(275, 120);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 26);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Base Unit of Measure";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(275, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Package Type";
-            // 
-            // cbPackage
-            // 
-            this.cbPackage.FormattingEnabled = true;
-            this.cbPackage.Location = new System.Drawing.Point(376, 83);
-            this.cbPackage.Name = "cbPackage";
-            this.cbPackage.Size = new System.Drawing.Size(124, 21);
-            this.cbPackage.TabIndex = 13;
             // 
             // panel2
             // 
@@ -321,10 +321,10 @@
             this.Text = "Create Product";
             this.tblBasicDetails.ResumeLayout(false);
             this.tblBasicDetails.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSupplyPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRetailPrice)).EndInit();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.gbBasicDetails.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);

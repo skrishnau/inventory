@@ -55,20 +55,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.dgvDueReceivables = new System.Windows.Forms.DataGridView();
-            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReferenceNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlCompany = new System.Windows.Forms.Panel();
-            this.lblCompanyName = new System.Windows.Forms.Label();
-            this.lblAddress = new System.Windows.Forms.Label();
-            this.lblPhone = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.lblPhone = new System.Windows.Forms.Label();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.lblCompanyName = new System.Windows.Forms.Label();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -390,7 +389,6 @@
             this.dgvDueReceivables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDueReceivables.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colUser,
-            this.colReferenceNo,
             this.colTotalAmount,
             this.colDueAmount,
             this.colDueDays});
@@ -400,55 +398,6 @@
             this.dgvDueReceivables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDueReceivables.Size = new System.Drawing.Size(301, 219);
             this.dgvDueReceivables.TabIndex = 1;
-            // 
-            // colUser
-            // 
-            this.colUser.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colUser.DataPropertyName = "User";
-            this.colUser.HeaderText = "Customer";
-            this.colUser.Name = "colUser";
-            this.colUser.ReadOnly = true;
-            this.colUser.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // colReferenceNo
-            // 
-            this.colReferenceNo.DataPropertyName = "ReferenceNumber";
-            this.colReferenceNo.HeaderText = "Receipt No.";
-            this.colReferenceNo.Name = "colReferenceNo";
-            this.colReferenceNo.ReadOnly = true;
-            this.colReferenceNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colReferenceNo.Visible = false;
-            this.colReferenceNo.Width = 78;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTotalAmount.DataPropertyName = "TotalAmount";
-            this.colTotalAmount.HeaderText = "Total Amt";
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colTotalAmount.Width = 77;
-            // 
-            // colDueAmount
-            // 
-            this.colDueAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDueAmount.DataPropertyName = "PaymentDueAmount";
-            this.colDueAmount.HeaderText = "Due Amt.";
-            this.colDueAmount.Name = "colDueAmount";
-            this.colDueAmount.ReadOnly = true;
-            this.colDueAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colDueAmount.Width = 76;
-            // 
-            // colDueDays
-            // 
-            this.colDueDays.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDueDays.DataPropertyName = "PaymentDueDays";
-            this.colDueDays.HeaderText = "Due Days";
-            this.colDueDays.Name = "colDueDays";
-            this.colDueDays.ReadOnly = true;
-            this.colDueDays.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colDueDays.Width = 79;
             // 
             // label3
             // 
@@ -502,16 +451,28 @@
             this.pnlCompany.Size = new System.Drawing.Size(1027, 49);
             this.pnlCompany.TabIndex = 3;
             // 
-            // lblCompanyName
+            // panel9
             // 
-            this.lblCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCompanyName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompanyName.Location = new System.Drawing.Point(4, 4);
-            this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(1019, 41);
-            this.lblCompanyName.TabIndex = 0;
-            this.lblCompanyName.Text = "My Company";
-            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel9.Controls.Add(this.lblPhone);
+            this.panel9.Controls.Add(this.lblAddress);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel9.Location = new System.Drawing.Point(750, 4);
+            this.panel9.Name = "panel9";
+            this.panel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panel9.Size = new System.Drawing.Size(273, 41);
+            this.panel9.TabIndex = 2;
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPhone.ForeColor = System.Drawing.Color.White;
+            this.lblPhone.Location = new System.Drawing.Point(0, 19);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblPhone.Size = new System.Drawing.Size(273, 20);
+            this.lblPhone.TabIndex = 1;
+            this.lblPhone.Text = "Phone";
+            this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblAddress
             // 
@@ -526,28 +487,55 @@
             this.lblAddress.Text = "Address";
             this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblPhone
+            // lblCompanyName
             // 
-            this.lblPhone.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPhone.ForeColor = System.Drawing.Color.White;
-            this.lblPhone.Location = new System.Drawing.Point(0, 19);
-            this.lblPhone.Name = "lblPhone";
-            this.lblPhone.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblPhone.Size = new System.Drawing.Size(273, 20);
-            this.lblPhone.TabIndex = 1;
-            this.lblPhone.Text = "Phone";
-            this.lblPhone.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCompanyName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompanyName.Location = new System.Drawing.Point(4, 4);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(1019, 41);
+            this.lblCompanyName.TabIndex = 0;
+            this.lblCompanyName.Text = "My Company";
+            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel9
+            // colUser
             // 
-            this.panel9.Controls.Add(this.lblPhone);
-            this.panel9.Controls.Add(this.lblAddress);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(750, 4);
-            this.panel9.Name = "panel9";
-            this.panel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel9.Size = new System.Drawing.Size(273, 41);
-            this.panel9.TabIndex = 2;
+            this.colUser.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colUser.DataPropertyName = "User";
+            this.colUser.HeaderText = "Customer";
+            this.colUser.Name = "colUser";
+            this.colUser.ReadOnly = true;
+            this.colUser.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTotalAmount.DataPropertyName = "TransactionAmount";
+            this.colTotalAmount.HeaderText = "Total Amt";
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colTotalAmount.Width = 77;
+            // 
+            // colDueAmount
+            // 
+            this.colDueAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDueAmount.DataPropertyName = "DueAmount";
+            this.colDueAmount.HeaderText = "Due Amt.";
+            this.colDueAmount.Name = "colDueAmount";
+            this.colDueAmount.ReadOnly = true;
+            this.colDueAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colDueAmount.Width = 76;
+            // 
+            // colDueDays
+            // 
+            this.colDueDays.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDueDays.DataPropertyName = "DueDays";
+            this.colDueDays.HeaderText = "Due Days";
+            this.colDueDays.Name = "colDueDays";
+            this.colDueDays.ReadOnly = true;
+            this.colDueDays.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colDueDays.Width = 79;
             // 
             // DashboardUC
             // 
@@ -610,16 +598,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.DataGridView dgvDueReceivables;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReferenceNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDays;
         private System.Windows.Forms.Panel pnlCompany;
         private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblPhone;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDueDays;
     }
 }

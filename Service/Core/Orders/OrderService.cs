@@ -17,6 +17,7 @@ using Infrastructure.Entities.Users;
 using Service.Core.Users;
 using Infrastructure.Entities;
 using ViewModel.Core;
+using System.Data.Entity.Core.Objects;
 
 namespace Service.Core.Orders
 {
@@ -155,23 +156,7 @@ namespace Service.Core.Orders
             return OrderItemMapper.MapToInventoryUnitModel(models);
         }
 
-        public List<OrderModel> GetDuePayments()
-        {
-            //TODO;;; get the 
-            using (var _context = new DatabaseContext())
-            {
-                var orders = _context.Order.Where(x => x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
-                //var saleType = OrderTypeEnum.Sale.ToString();
-                ////var invoice = TransactionTypeEnum
-                //var transactions = _context.Transaction
-                //    .Where(x=>x.Type == saleType)
-                //    .GroupBy(x=>x.User)
-                //    .Select(x=> new { x.Key.Name, Balance = x.Sum(y=>y.Balance * y.DrCr) })
-
-
-                return OrderMapper.MapToModel(orders);
-            }
-        }
+      
 
         #endregion
 
@@ -731,7 +716,7 @@ namespace Service.Core.Orders
             var to = DateTime.Now.Date.AddDays(1);
             using (var _context = new DatabaseContext())
             {
-                return _context.Order
+                var list = _context.Order
                     .Where(x => x.IsCompleted && x.CompletedDate >= from && x.CompletedDate <= to)
                     .GroupBy(x => new { CompletedDate = DbFunctions.TruncateTime(x.CompletedDate), x.OrderType })
                     .Select(x => new
@@ -741,16 +726,68 @@ namespace Service.Core.Orders
                         PurchaseAmount = x.Where(y => x.Key.OrderType == "Purchase").Sum(y => (decimal?)y.TotalAmount),
                         SaleAmount = x.Where(y => x.Key.OrderType == "Sale").Sum(y => (decimal?)y.TotalAmount),
                     })
+                    .OrderBy(x => x.CompletedDate)
+                    .ThenBy(x=>x.OrderType)
                     .AsEnumerable()
                     .Select(x => new SalePurchaseAmountModel
                     {
                         Date = x.CompletedDate.HasValue ? x.CompletedDate.Value.ToString("M/dd") : "",
                         PurchaseAmount = x.PurchaseAmount.HasValue ? x.PurchaseAmount.Value : 0,
                         SaleAmount = x.SaleAmount.HasValue ? x.SaleAmount.Value : 0,
-                    }).ToList();
+                    })
+                    
+                    .ToList();
+                return list;
             }
         }
 
+        public List<DueAmountModel> GetDueReceivables()
+        {
+            //TODO;;; get the 
+            using (var _context = new DatabaseContext())
+            {
+                var nowDate = DateTime.Now.Date;
+                //var orders = _context.Order.Where(x => x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
+                var sell = OrderTypeEnum.Sale.ToString();
+                var list = _context.Transaction.Where(x => x.Type == sell)
+                    .GroupBy(x => x.User)
+                    .Select(x => new
+                    {
+                        User = x.Key.Name,
+                        TotalAmount = x.Sum(y => y.Debit),
+                        PaidAmount = x.Sum(y => y.Credit),
+                        DueAmount = x.Sum(y => y.Debit - y.Credit),
+                        DueDate = x.Key.PaymentDueDate,
+                        DueDays = DbFunctions.DiffDays(nowDate, x.Key.PaymentDueDate)
+                    })
+                    .Where(x => x.DueAmount > 0)
+                    .OrderBy(x => x.DueDays)
+                    .Take(20)
+                    .AsEnumerable()
+                    .Select(x => new DueAmountModel
+                    {
+                        User = x.User,
+                        DueAmount = x.DueAmount.ToString("##,##,##0.00"),
+                        DueDate = x.DueDate.HasValue ? x.DueDate.Value.ToString("yyyy/MM/dd") : "",
+                        DueDays = x.DueDays.HasValue ? x.DueDays.Value : 0,
+                        TransactionAmount = x.TotalAmount.ToString("##,##,##0.00"),
+                        PaidAmount = x.PaidAmount.ToString("##,##,##0.00")
+                    })
+                    .ToList();
+
+                //_context.User.Where(x=>x.UserType == customer && x.Transactions.A)
+
+                //var saleType = OrderTypeEnum.Sale.ToString();
+                ////var invoice = TransactionTypeEnum
+                //var transactions = _context.Transaction
+                //    .Where(x=>x.Type == saleType)
+                //    .GroupBy(x=>x.User)
+                //    .Select(x=> new { x.Key.Name, Balance = x.Sum(y=>y.Balance * y.DrCr) })
+
+
+                return list;//OrderMapper.MapToModel(new List<Order>());
+            }
+        }
 
         #endregion
 
