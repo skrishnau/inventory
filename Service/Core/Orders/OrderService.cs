@@ -46,21 +46,21 @@ namespace Service.Core.Orders
 
         #region Get Functions
 
-        public int GetAllOrdersCount(OrderTypeEnum orderType, string userSearchText)
+        public int GetAllOrdersCount(OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType, userSearchText);
+                var orders = GetAllOrdersQuery(_context, orderType, userSearchText, receiptNoSearchText);
                 return orders.Count();
             }
         }
 
         // page size: no.of items per page; offset: current page number..
-        public OrderListModel GetAllOrders(OrderTypeEnum orderType, string userSearchText, int pageSize, int offset)
+        public OrderListModel GetAllOrders(OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText, int pageSize, int offset)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType, userSearchText);
+                var orders = GetAllOrdersQuery(_context, orderType, userSearchText, receiptNoSearchText);
                 var totalCount = orders.Count();
                 if (pageSize > 0 && offset >= 0)
                 {
@@ -68,7 +68,7 @@ namespace Service.Core.Orders
                 }
                 var list = orders
                 .AsEnumerable()
-                .MapToModel(); 
+                .MapToModel();
                 return new OrderListModel
                 {
                     OrderList = list,
@@ -76,7 +76,7 @@ namespace Service.Core.Orders
                 };
             }
         }
-        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, string userSearchText)
+        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText)
         {
             var type = orderType.ToString();
             var orders = _context.Order
@@ -87,6 +87,8 @@ namespace Service.Core.Orders
             orders = orders.OrderByDescending(x => x.CreatedAt); //.ThenByDescending(x => x.CreatedAt)
             if (!string.IsNullOrEmpty(userSearchText))
                 orders = orders.Where(x => x.User.Name.Contains(userSearchText) || x.User.Company.Contains(userSearchText));
+            if (!string.IsNullOrEmpty(receiptNoSearchText))
+                orders = orders.Where(x => x.ReferenceNumber == receiptNoSearchText);
             return orders;
         }
 
@@ -156,7 +158,7 @@ namespace Service.Core.Orders
             return OrderItemMapper.MapToInventoryUnitModel(models);
         }
 
-      
+
 
         #endregion
 
@@ -165,6 +167,7 @@ namespace Service.Core.Orders
 
         public ResponseModel<OrderModel> SaveOrder(OrderModel orderModel, bool checkout)
         {
+
             var isEditMode = orderModel.Id > 0;
             var now = DateTime.Now;
             var args = BaseEventArgs<OrderModel>.Instance;
@@ -172,6 +175,15 @@ namespace Service.Core.Orders
             {
                 var entity = _context.Order.Find(orderModel.Id);
                 entity = orderModel.MapToEntity(entity);
+
+                // first update void case if any
+                if (entity.Id == 0 && entity.ParentOrderId > 0)
+                {
+                    // means that a completed order has been edited 
+                    // the completed / previous order is to be made void and new order has to be created
+                    UndoOrderTransactionsWithoutCommit(_context, entity.ParentOrderId);
+
+                }
 
                 var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
@@ -206,6 +218,8 @@ namespace Service.Core.Orders
                         item.WarehouseId = entity.WarehouseId;
                     }
                 }
+
+
                 if (!isEditMode)
                     _appSettingService.IncrementBillIndex((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType));
                 _context.SaveChanges();
@@ -217,6 +231,34 @@ namespace Service.Core.Orders
                 _listener.TriggerUserUpdateEvent(null, null);
                 var newOrder = _context.Order.Find(entity.Id)?.MapToModel(true);
                 return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true };
+            }
+        }
+
+        private void UndoOrderTransactionsWithoutCommit(DatabaseContext _context, int? parentOrderId)
+        {
+            var parent = _context.Order.Find(parentOrderId);
+            if (parent != null)
+            {
+                parent.IsVoid = true;
+                // transaction void
+                foreach (var txn in parent.Transactions)
+                {
+                    txn.IsVoid = true;
+                }
+                // user due date
+                if (parent.User != null)
+                {
+                    parent.User.PaymentDueDate = null;
+                }
+
+                // product count restore
+                foreach (var item in parent.OrderItems)
+                {
+                    if (parent.OrderType == OrderTypeEnum.Sale.ToString())
+                        item.Product.InStockQuantity += item.UnitQuantity;
+                    else
+                        item.Product.InStockQuantity -= item.UnitQuantity;
+                }
             }
         }
 
@@ -727,7 +769,7 @@ namespace Service.Core.Orders
                         SaleAmount = x.Where(y => x.Key.OrderType == "Sale").Sum(y => (decimal?)y.TotalAmount),
                     })
                     .OrderBy(x => x.CompletedDate)
-                    .ThenBy(x=>x.OrderType)
+                    .ThenBy(x => x.OrderType)
                     .AsEnumerable()
                     .Select(x => new SalePurchaseAmountModel
                     {
@@ -735,7 +777,7 @@ namespace Service.Core.Orders
                         PurchaseAmount = x.PurchaseAmount.HasValue ? x.PurchaseAmount.Value : 0,
                         SaleAmount = x.SaleAmount.HasValue ? x.SaleAmount.Value : 0,
                     })
-                    
+
                     .ToList();
                 return list;
             }

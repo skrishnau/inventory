@@ -63,7 +63,9 @@
             // 
             this.tbPassword.Location = new System.Drawing.Point(100, 32);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.tbPassword.MaxLength = 10;
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(127, 20);
             this.tbPassword.TabIndex = 2;
             // 
@@ -159,7 +161,9 @@
             // 
             this.tbConfirmPassword.Location = new System.Drawing.Point(99, 2);
             this.tbConfirmPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.tbConfirmPassword.MaxLength = 10;
             this.tbConfirmPassword.Name = "tbConfirmPassword";
+            this.tbConfirmPassword.PasswordChar = '*';
             this.tbConfirmPassword.Size = new System.Drawing.Size(127, 20);
             this.tbConfirmPassword.TabIndex = 5;
             // 
@@ -167,7 +171,9 @@
             // 
             this.tbOldPassword.Location = new System.Drawing.Point(99, 31);
             this.tbOldPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.tbOldPassword.MaxLength = 10;
             this.tbOldPassword.Name = "tbOldPassword";
+            this.tbOldPassword.PasswordChar = '*';
             this.tbOldPassword.Size = new System.Drawing.Size(127, 20);
             this.tbOldPassword.TabIndex = 6;
             // 

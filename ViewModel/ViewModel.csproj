@@ -121,6 +121,8 @@
     <Compile Include="Core\Orders\OrderModel.cs" />
     <Compile Include="Core\Users\UserModel.cs" />
     <Compile Include="Utility\DateHelper.cs" />
+    <Compile Include="Utility\EncryptionHelper.cs" />
+    <Compile Include="Utility\HashHelper.cs" />
     <Compile Include="Utility\NumberHelper.cs" />
   </ItemGroup>
   <ItemGroup>

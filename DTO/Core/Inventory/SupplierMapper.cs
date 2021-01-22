@@ -40,7 +40,7 @@ namespace DTO.Core.Inventory
             var list = new List<UserModel>();
             foreach (var user in users)
             {
-                var transactions = user.Transactions.ToList();
+                var transactions = user.Transactions.Where(x=>!x.IsVoid).ToList();
                 decimal total = 0, paid = 0;
                 if(user.UserType == UserTypeEnum.Customer.ToString())
                 {

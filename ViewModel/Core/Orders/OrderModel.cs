@@ -32,6 +32,9 @@ namespace ViewModel.Core.Orders
         public string Note { get; set; }
         public DateTime DeliveryDate { get; set; }
         public int? DueDays { get; set; }
+
+        public bool IsVoid { get; set; }
+
         public bool IsVerified { get; set; }
         public DateTime? VerifiedDate { get; set; }
         public bool IsCancelled { get; set; }

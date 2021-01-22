@@ -352,6 +352,7 @@
             this.btnDirectReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnDirectReceive, "Direct Receive");
             this.btnDirectReceive.UseVisualStyleBackColor = true;
+            this.btnDirectReceive.Visible = false;
             // 
             // btnHome
             // 
@@ -480,6 +481,7 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel3.Size = new System.Drawing.Size(11, 68);
             this.panel3.TabIndex = 42;
+            this.panel3.Visible = false;
             // 
             // splitter3
             // 
@@ -663,6 +665,7 @@
             this.pnlAdjustments.Name = "pnlAdjustments";
             this.pnlAdjustments.Size = new System.Drawing.Size(248, 68);
             this.pnlAdjustments.TabIndex = 54;
+            this.pnlAdjustments.Visible = false;
             // 
             // pnlInventory
             // 

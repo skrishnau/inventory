@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -84,10 +85,10 @@ namespace IMS.Forms.Inventory.Settings.General
             var isValid = ValidateInputs();
             if (isValid)
             {
-                var passwordModel = new PasswordModel()
+                var model = new PasswordModel()
                 {
                     Username = tbUsername.Text,
-                    Password = tbPassword.Text,
+                    Password = GetHashString(tbPassword.Text),
                     ConfirmPassword = tbConfirmPassword.Text,
                     OldPassword = tbConfirmPassword.Text,
                 };
@@ -99,14 +100,14 @@ namespace IMS.Forms.Inventory.Settings.General
                 if (_editMode)
                 {
                     // save the password
-                    success = _appSettingService.SavePassword(passwordModel);
+                    success = _appSettingService.SavePassword(model);
                     if (success)
                         PopupMessage.ShowSuccessMessage("Password saved Successfully");
                 }
                 else if(_authMode)
                 {
                     // validate the password
-                     success = tbPassword.Text == _passwordModel.Password && tbUsername.Text == _passwordModel.Username;
+                     success = model.Password == _passwordModel.Password && tbUsername.Text == _passwordModel.Username;
                     if (success)
                         PopupMessage.ShowSuccessMessage("Login success!");
                     else
@@ -181,5 +182,24 @@ namespace IMS.Forms.Inventory.Settings.General
             }
             return isValid;
         }
+
+
+        public static byte[] GetHash(string inputString)
+        {
+            using (HashAlgorithm algorithm = SHA256.Create())
+                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+
+        public static string GetHashString(string inputString)
+        {
+            return inputString;
+
+            //StringBuilder sb = new StringBuilder();
+            //foreach (byte b in GetHash(inputString))
+            //    sb.Append(b.ToString());// ("X2"));
+
+            //return sb.ToString();
+        }
+        
     }
 }

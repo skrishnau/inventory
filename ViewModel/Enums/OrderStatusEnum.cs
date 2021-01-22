@@ -8,6 +8,6 @@ namespace ViewModel.Enums
 {
     public enum OrderStatusEnum
     {
-        Open, Pending, Completed, Cancelled,
+        Open, Pending, Completed, Cancelled, Void
     }
 }

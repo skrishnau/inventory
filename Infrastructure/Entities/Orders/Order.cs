@@ -34,8 +34,11 @@ namespace Infrastructure.Entities.Orders
         // Move Order : Transfer Number
         public string ReferenceNumber { get; set; }
 
-        // in case of partial receive New Purchase Order is created and earlier is received
-        // the newly creaated purchase order will have parent Purchase OrderId
+
+        /*// in case of partial receive New Purchase Order is created and earlier is received
+        // the newly creaated purchase order will have parent Purchase OrderId*/
+        // NEW: In case of editing completed order, the editing order is made void and new order is created
+        //      with parentId pointing to the id of the previous order
         public int? ParentOrderId { get; set; }
         public virtual Order ParentOrder { get; set; }
 
@@ -50,6 +53,11 @@ namespace Infrastructure.Entities.Orders
         public DateTime DeliveryDate { get; set; }
         // no. of maximum delay days 
         public int? DueDays { get; set; }
+
+        // void means the order is cleared from transaction.
+        // only completed order can be made void so it's transaction should be un-done
+        public bool IsVoid { get; set; }
+
         // Verified means different as per order type:
         // Purchase Order : Order Send Date
         // Sale Order : Order Verified Date

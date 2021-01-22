@@ -64,7 +64,8 @@ namespace DTO.Core.Inventory
                .ForMember(x => x.OrderItems, opt => opt.Ignore())
                .ForMember(x => x.Status,
                             opt => opt.MapFrom(src =>
-                                        src.IsCancelled ? OrderStatusEnum.Cancelled.ToString()
+                                        src.IsVoid ? OrderStatusEnum.Void.ToString()
+                                        : src.IsCancelled ? OrderStatusEnum.Cancelled.ToString()
                                         : src.IsCompleted ? OrderStatusEnum.Completed.ToString()
                                         : src.IsVerified ? OrderStatusEnum.Pending.ToString()
                                         : OrderStatusEnum.Open.ToString()

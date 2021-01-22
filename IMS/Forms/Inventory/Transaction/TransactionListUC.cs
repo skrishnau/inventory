@@ -56,16 +56,16 @@ namespace IMS.Forms.Inventory.Transaction
             InitializeGridView();
             InitializeEvents();
             PopulateOrders();
-            
+
             btnPrint.Image = null;
 
-           
+
 
         }
 
         private void InitializeGridView()
         {
-            
+
 
             dgvOrders.AutoGenerateColumns = false;
             //switch (_orderType)
@@ -86,35 +86,42 @@ namespace IMS.Forms.Inventory.Transaction
         private void InitializeEvents()
         {
             _listener.OrderUpdated += _listener_PurchaseOrderUpdated;
-            dgvOrders.CellClick += DgvPurchases_CellClick;
+           // dgvOrders.CellClick += DgvPurchases_CellClick;
+            dgvOrders.SelectionChanged += DgvOrders_SelectionChanged;
             //_purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
             //lnkPurchaseOrderList.Click += Link_Click;
             btnNew.Click += BtnNewOrder_Click;
             rbAll.CheckedChanged += Type_CheckedChanged;
             rbPurchase.CheckedChanged += Type_CheckedChanged;
             rbSale.CheckedChanged += Type_CheckedChanged;
-           // btnPayment.Click += btnPayment_Click;
+            // btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
             btnEdit.Click += BtnEdit_Click;
             btnCancel.Click += BtnCancel_Click;
             dgvOrders.DataBindingComplete += DgvOrders_DataBindingComplete;
-            txtName.TextChanged += TxtName_TextChanged;
+            txtSearchClient.TextChanged += TxtName_TextChanged;
+            txtSearchReceiptNo.TextChanged += TxtSearchReceiptNo_TextChanged;
+            btnViewParentOrder.Click += BtnViewParentOrder_Click;
         }
 
+       
 
         private void Type_CheckedChanged(object sender, EventArgs e)
         {
             if (rbAll.Checked)
             {
                 _orderType = OrderTypeEnum.All;
+                lblSearchClient.Text = "Search Client";
             }
             else if (rbSale.Checked)
             {
                 _orderType = OrderTypeEnum.Sale;
+                lblSearchClient.Text = "Search Customer";
             }
             else if (rbPurchase.Checked)
             {
                 _orderType = OrderTypeEnum.Purchase;
+                lblSearchClient.Text = "Search Supplier";
             }
             PopulateOrders();
         }
@@ -127,7 +134,7 @@ namespace IMS.Forms.Inventory.Transaction
             //bindingNavigator1.BindingSource = _bindingSource;
 
             if (helper != null)
-                helper.Reset(_orderType, txtName.Text);
+                helper.Reset(_orderType, txtSearchClient.Text, txtSearchReceiptNo.Text);
 
             if (_previousSelectedIndex > -1 && dgvOrders.Rows.Count > _previousSelectedIndex)
             {
@@ -140,10 +147,24 @@ namespace IMS.Forms.Inventory.Transaction
                 ShowDetail(this, model);
             }
 
-            
+
         }
 
         #region Event Handlers
+
+        private void BtnViewParentOrder_Click(object sender, EventArgs e)
+        {
+            var order = GetRowDataAndStoreSelectedIndex();
+            if (order != null && order.ParentOrderId > 0)
+            {
+                var parentOrder = _orderService.GetOrder((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order.ParentOrderId ?? 0);
+                if (parentOrder != null)
+                {
+                    dgvOrders.DataSource = null;
+                    dgvOrders.DataSource = new List<OrderModel> { parentOrder };
+                }
+            }
+        }
 
 
         private void TxtName_TextChanged(object sender, EventArgs e)
@@ -152,26 +173,40 @@ namespace IMS.Forms.Inventory.Transaction
             PopulateOrders();
         }
 
+        private void TxtSearchReceiptNo_TextChanged(object sender, EventArgs e)
+        {
+            _previousSelectedIndex = -1;
+            PopulateOrders();
+        }
+
+
         private void _listener_PurchaseOrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
         {
             PopulateOrders();
         }
 
-        private void DgvPurchases_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void DgvOrders_SelectionChanged(object sender, EventArgs e)
         {
-            if(e.RowIndex >= 0)
-            {
-                var model = dgvOrders.Rows[e.RowIndex].DataBoundItem as OrderModel;
-                ShowDetail(sender, model);
-            }
+            var model = GetRowDataAndStoreSelectedIndex();
+           // var model = dgvOrders.Rows[e.RowIndex].DataBoundItem as OrderModel;
+            ShowDetail(sender, model);
         }
+
+        //private void DgvPurchases_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.RowIndex >= 0)
+        //    {
+                
+        //    }
+        //}
 
         private void DgvOrders_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             var selectedIndex = dgvItems.SelectedRows.Count > 0 ? dgvItems.SelectedRows[0].Index : -1;
             if (selectedIndex > -1)
             {
-                if(dgvOrders.Rows.Count > selectedIndex)
+                if (dgvOrders.Rows.Count > selectedIndex)
                     dgvOrders.Rows[selectedIndex].Selected = true;
             }
         }
@@ -180,18 +215,20 @@ namespace IMS.Forms.Inventory.Transaction
         {
             if (model != null)
             {
-                btnEdit.Visible = !model.IsCompleted && !model.IsCancelled;
+                btnEdit.Visible = !model.IsVoid && !model.IsCancelled; //!model.IsCompleted &&
                 btnPrint.Visible = model.OrderType == OrderTypeEnum.Sale.ToString() && model.IsCompleted;
                 btnCancel.Visible = !model.IsCompleted && !model.IsCancelled;
-               // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
+                // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);
                 dgvItems.DataSource = _orderService.GetPurchaseOrderItems(model.Id);
-                lblReferenceNo.Text = model.ReferenceNumber;
+                lblReferenceNo.Text = model.ReferenceNumber + "  (" + model.Status + ")";
+                lblCustomer.Text = model.User;
+                pnlEditedOrder.Visible = model.ParentOrderId > 0;
             }
             else
             {
-               // btnPayment.Visible = false;
+                // btnPayment.Visible = false;
                 btnPrint.Visible = false;
                 btnEdit.Visible = false;
                 btnCancel.Visible = false;
@@ -254,7 +291,20 @@ namespace IMS.Forms.Inventory.Transaction
             var order = GetRowDataAndStoreSelectedIndex();
             if (order != null)
             {
-                ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id ?? 0);
+                if (order.IsCompleted)
+                {
+                    var dialogResult = MessageBox.Show(this, "This transaction is complete. By editing and re-saving " +
+                        "a completed transaction makes it void (deleted) and a new transaction will be created. Are you sure to edit?",
+                        "Are you sure to edit ?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id ?? 0);
+                    }
+                }
+                else
+                {
+                    ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id ?? 0);
+                }
             }
         }
 

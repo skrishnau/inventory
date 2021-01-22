@@ -247,6 +247,10 @@ namespace IMS.Forms.Inventory.Transaction
                     dgvItems.AddRows(OrderItemMapper.MapToInventoryUnitModel(model.OrderItems));
                     if (model?.PaymentDueDate.HasValue ?? false)
                         dtPaymentDueDate.Value = model.PaymentDueDate.Value;
+                    //if (model.IsCompleted)
+                    //{
+                    //    cbClient.Enabled = false;
+                    //}
                 }
             }
             else
@@ -303,6 +307,15 @@ namespace IMS.Forms.Inventory.Transaction
                 msg.Message += "Some Fields are less than zero\n";
             if (txtPaidAmount.Value > txtTotal.Value)
                 msg.Message += "Paid amount cannot be greater than total amount";
+            if (!rbCash.Checked && !rbCredit.Checked)
+            {
+                msg.Message += "Cash/Credit option must be selected";
+                errorProvider.SetError(rbCredit, "Cash/Credit option must be selected");
+            }
+            else
+            {
+                errorProvider.SetError(rbCredit, string.Empty);
+            }
             if (rbCredit.Checked && string.IsNullOrEmpty(cbClient.Text))
             {
                 var creditToAnonumousMsg = $"Credit can't be {givenByTo} anonymous {userType.ToString()}. Please enter {userType.ToString()} name";
@@ -318,6 +331,7 @@ namespace IMS.Forms.Inventory.Transaction
             var model = GetData();
             if (model == null)
                 return null;
+           
             msg = _orderService.SaveOrder(model, checkout);
             if (string.IsNullOrEmpty(msg.Message))
             {
@@ -368,7 +382,21 @@ namespace IMS.Forms.Inventory.Transaction
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;
-
+                // logic: if we are in edit mode and the order is already Completed, then it means that we need to create child 
+                //          order and make the old order as void
+                // else if we are in edit mode of incomplete order then just assign its parentOrderId to the saving model
+                if (_orderModel != null)
+                {
+                    if (_orderModel.IsCompleted)
+                    {
+                        orderModel.ParentOrderId = _orderModel.Id;
+                        orderModel.Id = 0;
+                    }
+                    else
+                    {
+                        orderModel.ParentOrderId = _orderModel.ParentOrderId;
+                    }
+                }
                 return orderModel;
             }
             return null;

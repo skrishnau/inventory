@@ -187,12 +187,10 @@
             // rbCash
             // 
             this.rbCash.AutoSize = true;
-            this.rbCash.Checked = true;
             this.rbCash.Location = new System.Drawing.Point(60, 2);
             this.rbCash.Name = "rbCash";
             this.rbCash.Size = new System.Drawing.Size(74, 17);
             this.rbCash.TabIndex = 5;
-            this.rbCash.TabStop = true;
             this.rbCash.Text = "Cash (Full)";
             this.rbCash.UseVisualStyleBackColor = true;
             // 
