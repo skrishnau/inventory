@@ -26,12 +26,12 @@ namespace Service.Core.Settings
         bool SaveCompanyInfoSetting(CompanyInfoSettingModel model);
 
 
-        BillSettingsModel GetBillSettings(OrderTypeEnum orderType);
+        BillSettingsModel GetBillSettings(ReferencesTypeEnum orderType);
         bool SaveBillSetting(List<BillSettingsModel> modelList);
-        string GetReceiptNumber(OrderTypeEnum orderType);
+        string GetReceiptNumber(ReferencesTypeEnum orderType);
         string GetReceiptNumber(BillSettingsModel setting, long currentIndex);
-        bool SaveCurrentIndex(long index, OrderTypeEnum orderType);
-        bool IncrementBillIndex(OrderTypeEnum orderType);
+        bool SaveCurrentIndex(long index, ReferencesTypeEnum orderType);
+        bool IncrementBillIndex(ReferencesTypeEnum orderType);
 
         PasswordModel GetPassword();
         bool SavePassword(PasswordModel password);

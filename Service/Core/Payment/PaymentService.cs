@@ -3,6 +3,7 @@ using Infrastructure.Context;
 using Infrastructure.Entities.Orders;
 using Infrastructure.Entities.Users;
 using Service.Core.Orders;
+using Service.Core.Settings;
 using Service.DbEventArgs;
 using Service.Listeners;
 using System;
@@ -20,8 +21,10 @@ namespace Service.Core.Payment
     public class PaymentService : IPaymentService
     {
         private readonly IDatabaseChangeListener _listener;
-        public PaymentService(IDatabaseChangeListener listener)
+        private readonly IAppSettingService _appSettingService;
+        public PaymentService(IAppSettingService appSettingService, IDatabaseChangeListener listener)
         {
+            _appSettingService = appSettingService;
             _listener = listener;
         }
 
@@ -105,7 +108,9 @@ namespace Service.Core.Payment
                     
                 }
                 _context.SaveChanges();
-                
+
+                _appSettingService.IncrementBillIndex(ReferencesTypeEnum.Payment);
+
                 if (user != null)
                 {
                     var userModel = UserMapper.MapToUserModel(user);

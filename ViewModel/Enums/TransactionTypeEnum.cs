@@ -7,11 +7,6 @@ using System.Threading.Tasks;
 namespace ViewModel.Enums
 {
 
-    public enum OrderPaymentTypeEnum
-    {
-        Cash,
-        Credit
-    }
 
     public enum TransactionTypeEnum
     {

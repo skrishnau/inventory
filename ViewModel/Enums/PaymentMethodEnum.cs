@@ -20,7 +20,12 @@ namespace ViewModel.Enums
         Credit,
         Debit
     }
-    
+
+    public enum OrderPaymentTypeEnum
+    {
+        Cash,
+        Credit
+    }
 
     //public enum PaymentCategoryEnum
     //{

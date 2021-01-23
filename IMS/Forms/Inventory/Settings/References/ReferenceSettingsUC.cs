@@ -39,7 +39,12 @@ namespace IMS.Forms.Inventory.Settings.References
             tbSaleBody.TextChanged += TbSale_TextChanged;
             tbSalePrefix.TextChanged += TbSale_TextChanged;
             tbSaleSuffix.TextChanged += TbSale_TextChanged;
+
+            tbPaymentBody.TextChanged += TbPayment_TextChanged;
+            tbPaymentPrefix.TextChanged += TbPayment_TextChanged;
+            tbPaymentSuffix.TextChanged += TbPayment_TextChanged;
         }
+
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
@@ -54,7 +59,7 @@ namespace IMS.Forms.Inventory.Settings.References
             var billSettings = new BillSettingsModel
             {
                 Body = tbPurchaseBody.Text,
-                OrderType = OrderTypeEnum.Purchase,
+                Type = ReferencesTypeEnum.Purchase,
                 Prefix = tbPurchasePrefix.Text,
                 Suffix = tbPurchaseSuffix.Text,
             };
@@ -69,7 +74,7 @@ namespace IMS.Forms.Inventory.Settings.References
             var billSettings = new BillSettingsModel
             {
                 Body = tbSaleBody.Text,
-                OrderType = OrderTypeEnum.Sale,
+                Type = ReferencesTypeEnum.Sale,
                 Prefix = tbSalePrefix.Text,
                 Suffix = tbSaleSuffix.Text,
             };
@@ -79,22 +84,43 @@ namespace IMS.Forms.Inventory.Settings.References
             lblSaleReceiptsExample.Text += _appSettingService.GetReceiptNumber(billSettings, 3) + "\n";
         }
 
+
+        private void TbPayment_TextChanged(object sender, EventArgs e)
+        {
+            var billSettings = new BillSettingsModel
+            {
+                Body = tbPaymentBody.Text,
+                Type = ReferencesTypeEnum.Sale,
+                Prefix = tbPaymentPrefix.Text,
+                Suffix = tbPaymentSuffix.Text,
+            };
+            lblPaymentReceiptsExample.Text = "Preview: \n";
+            lblPaymentReceiptsExample.Text += _appSettingService.GetReceiptNumber(billSettings, 1) + "\n";
+            lblPaymentReceiptsExample.Text += _appSettingService.GetReceiptNumber(billSettings, 2) + "\n";
+            lblPaymentReceiptsExample.Text += _appSettingService.GetReceiptNumber(billSettings, 3) + "\n";
+        }
+
         #endregion
 
         private void PopulateBillSetting()
         {
-            var saleBillsetting = _appSettingService.GetBillSettings(ViewModel.Enums.OrderTypeEnum.Sale);
+            var saleBillsetting = _appSettingService.GetBillSettings(ReferencesTypeEnum.Sale);
             tbSaleBody.Text = saleBillsetting.Body;
             tbSalePrefix.Text = saleBillsetting.Prefix;
             tbSaleSuffix.Text = saleBillsetting.Suffix;
             TbSale_TextChanged(this, null);
 
-            var purchaseBillsetting = _appSettingService.GetBillSettings(ViewModel.Enums.OrderTypeEnum.Purchase);
+            var purchaseBillsetting = _appSettingService.GetBillSettings(ReferencesTypeEnum.Purchase);
             tbPurchaseBody.Text = purchaseBillsetting.Body;
             tbPurchasePrefix.Text = purchaseBillsetting.Prefix;
             tbPurchaseSuffix.Text = purchaseBillsetting.Suffix;
             TbPurchase_TextChanged(this, null);
 
+            var paymentBillsetting = _appSettingService.GetBillSettings(ReferencesTypeEnum.Payment);
+            tbPaymentBody.Text = paymentBillsetting.Body;
+            tbPaymentPrefix.Text = paymentBillsetting.Prefix;
+            tbPaymentSuffix.Text = paymentBillsetting.Suffix;
+            TbPayment_TextChanged(this, null);
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -107,16 +133,23 @@ namespace IMS.Forms.Inventory.Settings.References
                     Body = tbPurchaseBody.Text,
                     Prefix = tbPurchasePrefix.Text,
                     Suffix = tbPurchaseSuffix.Text,
-                    OrderType = ViewModel.Enums.OrderTypeEnum.Purchase,
+                    Type = ReferencesTypeEnum.Purchase,
                 };
                 var saleBillSetting = new BillSettingsModel()
                 {
                     Body = tbSaleBody.Text,
                     Prefix = tbSalePrefix.Text,
                     Suffix = tbSaleSuffix.Text,
-                    OrderType = ViewModel.Enums.OrderTypeEnum.Sale,
+                    Type = ReferencesTypeEnum.Sale,
                 };
-                var list = new List<BillSettingsModel> { purchaseBillSetting, saleBillSetting };
+                var paymentBillSetting = new BillSettingsModel
+                {
+                    Body = tbPaymentBody.Text,
+                    Prefix = tbPaymentPrefix.Text,
+                    Suffix = tbPaymentSuffix.Text,
+                    Type = ReferencesTypeEnum.Payment,
+                };
+                var list = new List<BillSettingsModel> { purchaseBillSetting, saleBillSetting , paymentBillSetting};
                 if (_appSettingService.SaveBillSetting(list))
                     PopupMessage.ShowSaveSuccessMessage();
                 else

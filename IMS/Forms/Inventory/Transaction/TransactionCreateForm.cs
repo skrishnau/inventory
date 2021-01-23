@@ -289,7 +289,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             if (_orderModel == null)
             {
-                txtReceiptNo.Text = _appSettingService.GetReceiptNumber(_orderType);
+                txtReceiptNo.Text = _appSettingService.GetReceiptNumber((ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), _orderType.ToString()));
             }
         }
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)

@@ -13,4 +13,5 @@ namespace ViewModel.Enums
         Move=3,
         All=4,
     }
+
 }

@@ -57,9 +57,14 @@ namespace IMS.Forms.Inventory.Payment
             PopulatePaymentTypeCombo();
             PopulatePaymentMethodCombo();
             PopulatePaymentData();
+            PopulateReceiptNumber();
 
         }
 
+        private void PopulateReceiptNumber()
+        {
+            txtReferenceNumber.Text = _appSettingService.GetReceiptNumber(ReferencesTypeEnum.Payment);
+        }
 
         public void SetData(int userId)
         {
@@ -101,7 +106,7 @@ namespace IMS.Forms.Inventory.Payment
                 txtAmount.Value = 0;// userModel.DueAmount;
                 totalAmount = transactionSum?.TotalAmount ?? 0;
                 _dueAmount = transactionSum?.DueAmount ?? 0;
-                txtBy.Text = (_userModel.UserType == UserTypeEnum.Customer.ToString() ? "Paid " + byFrom +" "+ _userModel.Name : company.CompanyName);
+                txtBy.Text = (_userModel.UserType == UserTypeEnum.Customer.ToString() ? "Paid " + byFrom + " " + _userModel.Name : company.CompanyName);
                 if (_userModel.UserType == UserTypeEnum.Customer.ToString())
                 {
                     cbPaymentType.SelectedValue = PaymentTypeEnum.Credit.ToString();
@@ -295,14 +300,15 @@ namespace IMS.Forms.Inventory.Payment
                 return null;
             }
             var dueAmountNow = 0M;
-            if(_userModel.UserType == UserTypeEnum.Customer.ToString())
+            if (_userModel.UserType == UserTypeEnum.Customer.ToString())
             {
-                if((string)cbPaymentType.SelectedValue == PaymentTypeEnum.Credit.ToString())
+                if ((string)cbPaymentType.SelectedValue == PaymentTypeEnum.Credit.ToString())
                 {
                     // received from customer
                     dueAmountNow = _dueAmount - txtAmount.Value;
                 }
-                else {
+                else
+                {
                     // given to customer
                     dueAmountNow = _dueAmount + txtAmount.Value;
                 }
@@ -320,7 +326,7 @@ namespace IMS.Forms.Inventory.Payment
                     dueAmountNow = _dueAmount - txtAmount.Value;
                 }
             }
-            
+
             var model = new PaymentModel
             {
                 Amount = txtAmount.Value,

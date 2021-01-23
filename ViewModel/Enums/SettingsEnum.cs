@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModel.Enums.Settings
+namespace ViewModel.Enums
 {
    public enum BillSettingsEnum
     {
@@ -13,5 +13,13 @@ namespace ViewModel.Enums.Settings
         BILL_BODY,
         BillCurrentIndex,
         //BILL_END_NUMBER, BILL_START_NUMBER
+    }
+
+    public enum ReferencesTypeEnum
+    {
+        Sale,
+        Purchase,
+        Payment,
+             
     }
 }

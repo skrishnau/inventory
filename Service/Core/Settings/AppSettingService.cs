@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO.Core.Settings;
 using Infrastructure.Context;
 using Infrastructure.Entities.AppSettings;
@@ -10,7 +8,6 @@ using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Settings;
 using ViewModel.Enums;
-using ViewModel.Enums.Settings;
 
 namespace Service.Core.Settings
 {
@@ -95,7 +92,7 @@ namespace Service.Core.Settings
 
 
         // get bill settings
-        public BillSettingsModel GetBillSettings(OrderTypeEnum orderType)
+        public BillSettingsModel GetBillSettings(ReferencesTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
@@ -150,7 +147,7 @@ namespace Service.Core.Settings
             {
                 foreach (var model in modelList)
                 {
-                    var orderType = model.OrderType;
+                    var orderType = model.Type;
 
                     // property : StartNum, EndNum, Prefix, Suffix
                     var prefixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_PREFIX.ToString();
@@ -248,13 +245,15 @@ namespace Service.Core.Settings
             }
         }
 
-        public bool IncrementBillIndex(OrderTypeEnum orderType)
+        public bool IncrementBillIndex(ReferencesTypeEnum orderType)
         {
             var sett = GetBillSettings(orderType);
             return SaveCurrentIndex(sett.CurrentIndex + 1, orderType);
         }
 
-        public bool SaveCurrentIndex(long currentIndex, OrderTypeEnum orderType)
+
+
+        public bool SaveCurrentIndex(long currentIndex, ReferencesTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
@@ -527,7 +526,7 @@ namespace Service.Core.Settings
             return setting.Prefix + body + setting.Suffix;
         }
 
-        public string GetReceiptNumber(OrderTypeEnum orderType)
+        public string GetReceiptNumber(ReferencesTypeEnum orderType)
         {
             var billSettings = GetBillSettings(orderType);
             return billSettings.ReceiptNo;

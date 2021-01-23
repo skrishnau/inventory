@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ViewModel.Enums;
+﻿using ViewModel.Enums;
 
 namespace ViewModel.Core.Settings
 {
@@ -16,7 +11,7 @@ namespace ViewModel.Core.Settings
 
         public long CurrentIndex { get; set; }
         public string ReceiptNo { get; set; }
-        public OrderTypeEnum OrderType { get; set; }
+        public ReferencesTypeEnum Type { get; set; }
 
         public static BillSettingsModel GetNewInstance()
         {
