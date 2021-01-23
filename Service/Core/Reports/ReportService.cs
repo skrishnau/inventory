@@ -19,16 +19,28 @@ namespace Service.Core.Reports
 
         }
 
-        public LedgerMasterModel GetLedger(int userId, DateTime from, DateTime to)
+        public LedgerMasterModel GetLedger(LedgerRequestModel model)
         {
+            int userId = model.CustomerId;
+            DateTime from = model.From;
+            DateTime to = model.To;
             using (var _context = new DatabaseContext())
             {
                 from = from.Date;
                 to = to.Date;
                 to = to.AddDays(1);
-                var transactions = _context.Transaction
-                    .Where(x => x.UserId == userId && x.Date >= from && x.Date <= to && !x.IsVoid)
-                    .ToList();
+
+                var query = _context.Transaction.Where(x=> x.UserId == userId);
+                if (model.OnlyAfterLastClearance)
+                {
+                    query = query.Where(x => x.User.AllDuesClearDate == null || x.Date > x.User.AllDuesClearDate);
+                }
+                else
+                {
+                    query = query.Where(x =>  x.Date >= from && x.Date <= to && !x.IsVoid);
+                }
+
+                var transactions = query.ToList();
                 var result = transactions
                     .Select(x => new LedgerModel
                     {

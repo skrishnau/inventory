@@ -80,7 +80,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 423);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(518, 48);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 40;
             // 
             // tableLayoutPanel2
             // 
@@ -106,7 +106,7 @@
             this.txtPaidAmount.Location = new System.Drawing.Point(69, 27);
             this.txtPaidAmount.Name = "txtPaidAmount";
             this.txtPaidAmount.Size = new System.Drawing.Size(139, 20);
-            this.txtPaidAmount.TabIndex = 10;
+            this.txtPaidAmount.TabIndex = 45;
             // 
             // label7
             // 
@@ -134,7 +134,7 @@
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(139, 20);
-            this.txtTotal.TabIndex = 8;
+            this.txtTotal.TabIndex = 44;
             // 
             // panel3
             // 
@@ -173,7 +173,7 @@
             this.dtPaymentDueDate.Location = new System.Drawing.Point(102, 2);
             this.dtPaymentDueDate.Name = "dtPaymentDueDate";
             this.dtPaymentDueDate.Size = new System.Drawing.Size(108, 20);
-            this.dtPaymentDueDate.TabIndex = 5;
+            this.dtPaymentDueDate.TabIndex = 43;
             // 
             // label3
             // 
@@ -190,7 +190,7 @@
             this.rbCash.Location = new System.Drawing.Point(60, 2);
             this.rbCash.Name = "rbCash";
             this.rbCash.Size = new System.Drawing.Size(74, 17);
-            this.rbCash.TabIndex = 5;
+            this.rbCash.TabIndex = 41;
             this.rbCash.Text = "Cash (Full)";
             this.rbCash.UseVisualStyleBackColor = true;
             // 
@@ -200,7 +200,7 @@
             this.rbCredit.Location = new System.Drawing.Point(140, 2);
             this.rbCredit.Name = "rbCredit";
             this.rbCredit.Size = new System.Drawing.Size(90, 17);
-            this.rbCredit.TabIndex = 6;
+            this.rbCredit.TabIndex = 42;
             this.rbCredit.Text = "Credit (Partial)";
             this.rbCredit.UseVisualStyleBackColor = true;
             // 
@@ -221,7 +221,7 @@
             this.dtExpectedDate.Location = new System.Drawing.Point(410, 3);
             this.dtExpectedDate.Name = "dtExpectedDate";
             this.dtExpectedDate.Size = new System.Drawing.Size(104, 20);
-            this.dtExpectedDate.TabIndex = 2;
+            this.dtExpectedDate.TabIndex = 12;
             // 
             // lblExpectedDate
             // 
@@ -254,7 +254,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(518, 27);
-            this.tableLayoutPanel1.TabIndex = 5;
+            this.tableLayoutPanel1.TabIndex = 20;
             // 
             // cbClient
             // 
@@ -263,7 +263,7 @@
             this.cbClient.Margin = new System.Windows.Forms.Padding(2);
             this.cbClient.Name = "cbClient";
             this.cbClient.Size = new System.Drawing.Size(138, 21);
-            this.cbClient.TabIndex = 9;
+            this.cbClient.TabIndex = 21;
             // 
             // label5
             // 
@@ -279,14 +279,14 @@
             this.txtAddress.Location = new System.Drawing.Point(267, 3);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(107, 20);
-            this.txtAddress.TabIndex = 3;
+            this.txtAddress.TabIndex = 22;
             // 
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(433, 3);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(82, 20);
-            this.txtPhone.TabIndex = 5;
+            this.txtPhone.TabIndex = 23;
             // 
             // label4
             // 
@@ -307,14 +307,14 @@
             this.panel9.Location = new System.Drawing.Point(0, 4);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(518, 26);
-            this.panel9.TabIndex = 6;
+            this.panel9.TabIndex = 0;
             // 
             // txtReceiptNo
             // 
             this.txtReceiptNo.Location = new System.Drawing.Point(67, 3);
             this.txtReceiptNo.Name = "txtReceiptNo";
             this.txtReceiptNo.Size = new System.Drawing.Size(141, 20);
-            this.txtReceiptNo.TabIndex = 6;
+            this.txtReceiptNo.TabIndex = 0;
             // 
             // label8
             // 
@@ -346,7 +346,7 @@
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(518, 366);
-            this.dgvItems.TabIndex = 4;
+            this.dgvItems.TabIndex = 30;
             // 
             // saveFooterUC1
             // 
@@ -357,7 +357,7 @@
             this.saveFooterUC1.Name = "saveFooterUC1";
             this.saveFooterUC1.Padding = new System.Windows.Forms.Padding(0, 4, 10, 4);
             this.saveFooterUC1.Size = new System.Drawing.Size(518, 35);
-            this.saveFooterUC1.TabIndex = 9;
+            this.saveFooterUC1.TabIndex = 50;
             // 
             // TransactionCreateForm
             // 

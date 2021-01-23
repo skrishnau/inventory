@@ -242,19 +242,19 @@ namespace IMS.Forms.Inventory.Transaction
 
         #endregion
 
-        private void btnPayment_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var orderModel = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel : null;
-                if (orderModel != null)
-                {
-                    var po = Program.container.GetInstance<PaymentCreateForm>();
-                    po.SetData(orderModel, null);
-                    po.ShowDialog();
-                }
-            }
-        }
+        //private void btnPayment_Click(object sender, EventArgs e)
+        //{
+        //    using (AsyncScopedLifestyle.BeginScope(Program.container))
+        //    {
+        //        var orderModel = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].DataBoundItem as OrderModel : null;
+        //        if (orderModel != null)
+        //        {
+        //            var po = Program.container.GetInstance<PaymentCreateForm>();
+        //            po.SetData(orderModel, null);
+        //            po.ShowDialog();
+        //        }
+        //    }
+        //}
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {

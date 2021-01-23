@@ -14,6 +14,7 @@ namespace Service.Core.Users
         void AddOrUpdateUser(UserModel userModel);
 
         UserModel GetUser(int supplierId);
+        UserModel GetUserWithTotalAndPaidAmounts(int userId);
         void DeleteUser(UserModel user);
 
         int GetAllUsersCount(UserTypeEnum userType, string searchName = "");

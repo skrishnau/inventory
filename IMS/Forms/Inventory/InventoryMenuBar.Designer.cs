@@ -143,12 +143,12 @@
             this.btnReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnReports, "Reports");
             this.btnReports.UseVisualStyleBackColor = false;
+            this.btnReports.Visible = false;
             // 
             // btnAccounts
             // 
             this.btnAccounts.BackColor = System.Drawing.Color.Transparent;
             this.btnAccounts.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnAccounts.Enabled = false;
             this.btnAccounts.FlatAppearance.BorderSize = 0;
             this.btnAccounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAccounts.Image = global::IMS.Properties.Resources.icons8_Calculator_24px;

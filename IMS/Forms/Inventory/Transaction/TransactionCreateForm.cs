@@ -377,7 +377,7 @@ namespace IMS.Forms.Inventory.Transaction
                     Phone = txtPhone.Text,
                     Address = txtAddress.Text,
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.Value : (DateTime?)null,
-                    PaymentType = rbCredit.Checked ? PaymentType.Credit.ToString() : PaymentType.Cash.ToString(),
+                    PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : OrderPaymentTypeEnum.Cash.ToString(),
                     TotalAmount = items.Select(x => x.Total).Sum()
                 };
                 orderModel.User = client;

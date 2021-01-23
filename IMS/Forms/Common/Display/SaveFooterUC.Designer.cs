@@ -46,10 +46,13 @@
             // btnCancel
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.SandyBrown;
+            this.btnCancel.FlatAppearance.BorderSize = 2;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(99, 0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
-            this.btnCancel.TabIndex = 9;
+            this.btnCancel.TabIndex = 91;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -60,7 +63,7 @@
             this.btnSave.Location = new System.Drawing.Point(10, 0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(79, 27);
-            this.btnSave.TabIndex = 8;
+            this.btnSave.TabIndex = 90;
             this.btnSave.Text = "Save Order";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
@@ -87,7 +90,7 @@
             this.btnCheckout.Location = new System.Drawing.Point(0, 0);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(75, 27);
-            this.btnCheckout.TabIndex = 12;
+            this.btnCheckout.TabIndex = 93;
             this.btnCheckout.Text = "Checkout";
             this.btnCheckout.UseVisualStyleBackColor = true;
             // 
@@ -135,7 +138,7 @@
             this.btnCheckoutAndPrint.Location = new System.Drawing.Point(0, 0);
             this.btnCheckoutAndPrint.Name = "btnCheckoutAndPrint";
             this.btnCheckoutAndPrint.Size = new System.Drawing.Size(119, 27);
-            this.btnCheckoutAndPrint.TabIndex = 12;
+            this.btnCheckoutAndPrint.TabIndex = 92;
             this.btnCheckoutAndPrint.Text = "Checkout & Print";
             this.btnCheckoutAndPrint.UseVisualStyleBackColor = true;
             // 

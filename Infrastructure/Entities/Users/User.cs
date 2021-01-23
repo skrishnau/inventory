@@ -71,6 +71,10 @@ namespace Infrastructure.Entities.Users
         /// The last stored due date for customer/supplier. it's updated everytime credit is taken
         /// </summary>
         public DateTime? PaymentDueDate { get; set; }
+        /// <summary>
+        /// Last date of all Due amount paid/recived date. i.e. no further remaining dues
+        /// </summary>
+        public DateTime? AllDuesClearDate { get; set; }
 
         //// payments
         //public decimal TotalAmount { get; set; }

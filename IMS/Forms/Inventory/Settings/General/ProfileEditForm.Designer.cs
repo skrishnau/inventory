@@ -56,49 +56,49 @@
             this.btnSaveProfile.Location = new System.Drawing.Point(80, 11);
             this.btnSaveProfile.Name = "btnSaveProfile";
             this.btnSaveProfile.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveProfile.TabIndex = 3;
+            this.btnSaveProfile.TabIndex = 20;
             this.btnSaveProfile.Text = "Save";
             this.btnSaveProfile.UseVisualStyleBackColor = true;
             // 
             // tbWebsite
             // 
-            this.tbWebsite.Location = new System.Drawing.Point(100, 164);
+            this.tbWebsite.Location = new System.Drawing.Point(100, 110);
             this.tbWebsite.Margin = new System.Windows.Forms.Padding(2);
             this.tbWebsite.Name = "tbWebsite";
             this.tbWebsite.Size = new System.Drawing.Size(127, 20);
-            this.tbWebsite.TabIndex = 21;
+            this.tbWebsite.TabIndex = 5;
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(100, 137);
+            this.tbEmail.Location = new System.Drawing.Point(100, 83);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(2);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(127, 20);
-            this.tbEmail.TabIndex = 20;
+            this.tbEmail.TabIndex = 4;
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(100, 110);
+            this.tbPhone.Location = new System.Drawing.Point(100, 56);
             this.tbPhone.Margin = new System.Windows.Forms.Padding(2);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(127, 20);
-            this.tbPhone.TabIndex = 19;
+            this.tbPhone.TabIndex = 3;
             // 
             // tbPAN
             // 
-            this.tbPAN.Location = new System.Drawing.Point(100, 83);
+            this.tbPAN.Location = new System.Drawing.Point(100, 164);
             this.tbPAN.Margin = new System.Windows.Forms.Padding(2);
             this.tbPAN.Name = "tbPAN";
             this.tbPAN.Size = new System.Drawing.Size(127, 20);
-            this.tbPAN.TabIndex = 18;
+            this.tbPAN.TabIndex = 7;
             // 
             // tbVAT
             // 
-            this.tbVAT.Location = new System.Drawing.Point(100, 56);
+            this.tbVAT.Location = new System.Drawing.Point(100, 137);
             this.tbVAT.Margin = new System.Windows.Forms.Padding(2);
             this.tbVAT.Name = "tbVAT";
             this.tbVAT.Size = new System.Drawing.Size(127, 20);
-            this.tbVAT.TabIndex = 17;
+            this.tbVAT.TabIndex = 6;
             // 
             // tbAddress
             // 
@@ -106,12 +106,12 @@
             this.tbAddress.Margin = new System.Windows.Forms.Padding(2);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(127, 20);
-            this.tbAddress.TabIndex = 15;
+            this.tbAddress.TabIndex = 2;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2, 162);
+            this.label13.Location = new System.Drawing.Point(2, 108);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(46, 13);
@@ -121,7 +121,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 135);
+            this.label12.Location = new System.Drawing.Point(2, 81);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 13);
@@ -131,7 +131,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(2, 108);
+            this.label11.Location = new System.Drawing.Point(2, 54);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(38, 13);
@@ -141,7 +141,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(2, 81);
+            this.label10.Location = new System.Drawing.Point(2, 162);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 13);
@@ -151,7 +151,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 54);
+            this.label9.Location = new System.Drawing.Point(2, 135);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
@@ -174,9 +174,9 @@
             this.label6.Location = new System.Drawing.Point(2, 0);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Name";
+            this.label6.Text = "Company Name";
             // 
             // tbCompanyName
             // 
@@ -191,20 +191,20 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.07165F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.92835F));
-            this.tableLayoutPanel2.Controls.Add(this.tbWebsite, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.tbEmail, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.tbPhone, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.tbPAN, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tbVAT, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.tbAddress, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tbVAT, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tbCompanyName, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tbPhone, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.tbEmail, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.tbWebsite, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.tbPAN, 1, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
@@ -237,7 +237,7 @@
             this.btnCancel.Location = new System.Drawing.Point(178, 11);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 4;
+            this.btnCancel.TabIndex = 21;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 

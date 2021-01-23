@@ -52,6 +52,8 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
+            this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,10 +63,10 @@
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemainAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAllDuesClearDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colEdit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
-            this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -88,6 +90,8 @@
             this.colTotalAmount,
             this.colPaidAmount,
             this.colRemainAmount,
+            this.colPaymentDueDate,
+            this.colAllDuesClearDate,
             this.colUse,
             this.colEdit});
             this.dgvSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -317,6 +321,32 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.Location = new System.Drawing.Point(140, 3);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(78, 40);
+            this.btnPayment.TabIndex = 16;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Visible = false;
+            // 
+            // listHeaderTemplate1
+            // 
+            this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.listHeaderTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listHeaderTemplate1.HeadingText = "Clients";
+            this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
+            this.listHeaderTemplate1.Name = "listHeaderTemplate1";
+            this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.listHeaderTemplate1.Size = new System.Drawing.Size(1044, 32);
+            this.listHeaderTemplate1.TabIndex = 14;
+            // 
             // colId
             // 
             this.colId.DataPropertyName = "Id";
@@ -385,6 +415,21 @@
             this.colRemainAmount.Name = "colRemainAmount";
             this.colRemainAmount.ReadOnly = true;
             // 
+            // colPaymentDueDate
+            // 
+            this.colPaymentDueDate.DataPropertyName = "PaymentDueDate";
+            this.colPaymentDueDate.HeaderText = "Due Date";
+            this.colPaymentDueDate.Name = "colPaymentDueDate";
+            this.colPaymentDueDate.ReadOnly = true;
+            this.colPaymentDueDate.Width = 90;
+            // 
+            // colAllDuesClearDate
+            // 
+            this.colAllDuesClearDate.DataPropertyName = "AllDuesClearDate";
+            this.colAllDuesClearDate.HeaderText = "Last Full Clear";
+            this.colAllDuesClearDate.Name = "colAllDuesClearDate";
+            this.colAllDuesClearDate.ReadOnly = true;
+            // 
             // colUse
             // 
             this.colUse.DataPropertyName = "Use";
@@ -400,32 +445,6 @@
             this.colEdit.Name = "colEdit";
             this.colEdit.ReadOnly = true;
             this.colEdit.Width = 30;
-            // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(140, 3);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(78, 40);
-            this.btnPayment.TabIndex = 16;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Visible = false;
-            // 
-            // listHeaderTemplate1
-            // 
-            this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.listHeaderTemplate1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listHeaderTemplate1.HeadingText = "Clients";
-            this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
-            this.listHeaderTemplate1.Name = "listHeaderTemplate1";
-            this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.listHeaderTemplate1.Size = new System.Drawing.Size(1044, 32);
-            this.listHeaderTemplate1.TabIndex = 14;
             // 
             // SupplierListUC
             // 
@@ -485,6 +504,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemainAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAllDuesClearDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
         private System.Windows.Forms.DataGridViewImageColumn colEdit;
     }

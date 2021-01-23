@@ -25,6 +25,53 @@ namespace Service.Core.Payment
             _listener = listener;
         }
 
+        public int GetAllPaymentsCount(ClientTypeEnum clientType, string searchName = "")
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = GetPaymentQueryable(_context, clientType, searchName);
+                return query.Count();
+            }
+        }
+
+        public PaymentListModel GetAllPayments(ClientTypeEnum clientType, int pageSize, int offset, string searchName = "")
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = GetPaymentQueryable(_context, clientType, searchName);
+                var totalCount = query.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    query = query.Skip(offset).Take(pageSize);
+                }
+                var list = query.MapToModel();// PaymentMapper.MapToPaymentModel(query);
+                return new PaymentListModel
+                {
+                    DataList = list,
+                    TotalCount = totalCount,
+                    Offset = offset,
+                    PageSize = pageSize,
+                };
+            }
+        }
+
+        private IQueryable<Infrastructure.Entities.Orders.Payment> GetPaymentQueryable(DatabaseContext _context, ClientTypeEnum clientType, string searchName)
+        {
+            var query = _context.Payment.AsQueryable();
+                    //.Where(x => x. == null);
+            var customer = UserTypeEnum.Customer.ToString();
+            var supplier = UserTypeEnum.Supplier.ToString();
+
+            var clientTypeStr = clientType.ToString();
+            if(clientType != ClientTypeEnum.All)
+            {
+                query = query.Where(x => x.User.UserType == clientTypeStr);
+            }
+            if (!string.IsNullOrEmpty(searchName))
+                query = query.Where(x => x.User.Name.Contains(searchName));
+            return query.OrderByDescending(x => x.Date);
+        }
+
         public ResponseModel<PaymentModel> Save(PaymentModel model)
         {
             using (var _context = new DatabaseContext())
@@ -42,15 +89,20 @@ namespace Service.Core.Payment
                 {
                     TotalAmount = 0,
                     PaidAmount = model.Amount,
-                    ReferenceNumber = $"Paid by {(string.IsNullOrEmpty(model.PaidBy)? (user?.Name??""): model.PaidBy)}",
+                    ReferenceNumber = $"{(string.IsNullOrEmpty(model.PaidBy)? (user?.Name??""): model.PaidBy)}",
                     UserId = user?.Id,
-                    OrderType = "Sale",
+                    OrderType = model.PaymentType,//"Sale",
                 };
                 var txn = OrderService.GetTransactionWithoutCommit(_context, tempOrder.MapToModel());
                 if (user != null)
                 {
                     user.Transactions.Add(txn);
-                    user.PaymentDueDate = model.TotalAmount <= model.Amount ? null : user.PaymentDueDate;
+                    if(model.DueAmount <= 0)
+                    {
+                        user.PaymentDueDate = null;
+                        user.AllDuesClearDate = DateTime.Now;
+                    }
+                    
                 }
                 _context.SaveChanges();
                 

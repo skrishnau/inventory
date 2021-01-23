@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using IMS.Forms.Inventory.Reports.All;
 using Service.Core.Reports;
 using Service.Core.Users;
+using Service.Listeners;
 
 namespace IMS.Forms.Inventory.Reports
 {
@@ -17,11 +18,13 @@ namespace IMS.Forms.Inventory.Reports
     {
         private readonly IReportService _reportService;
         private readonly IUserService _userService;
+        private readonly IDatabaseChangeListener _listener;
 
-        public ReportsUC(IReportService reportService, IUserService userService)
+        public ReportsUC(IReportService reportService, IUserService userService, IDatabaseChangeListener listener)
         {
             this._reportService = reportService;
             this._userService = userService;
+            _listener = listener;
 
             InitializeComponent();
 
@@ -35,14 +38,14 @@ namespace IMS.Forms.Inventory.Reports
             var sidebarUc = new ReportSidebarUC();
             this.bodyTemplate.pnlSideBar.Controls.Add(sidebarUc);
 
-            sidebarUc.btnLedger.Click += BtnLedger_Click;
+           // sidebarUc.btnLedger.Click += BtnLedger_Click;
         }
 
-        private void BtnLedger_Click(object sender, EventArgs e)
-        {
-            var ledgerUc = new LedgerUC(_reportService, _userService);
-            this.bodyTemplate.SubHeadingText = "Ledger";
-            this.bodyTemplate.pnlBody.Controls.Add(ledgerUc);
-        }
+        //private void BtnLedger_Click(object sender, EventArgs e)
+        //{
+        //    var ledgerUc = new LedgerUC(_reportService, _userService, _listener);
+        //    this.bodyTemplate.SubHeadingText = "Ledger";
+        //    this.bodyTemplate.pnlBody.Controls.Add(ledgerUc);
+        //}
     }
 }

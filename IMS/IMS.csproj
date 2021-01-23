@@ -124,6 +124,24 @@
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Common\Pagination\PaginationHelper.cs" />
+    <Compile Include="Forms\Inventory\Accounts\All\PaymentsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\PaymentsUC.Designer.cs">
+      <DependentUpon>PaymentsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\AccountsSidebarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\AccountsSidebarUC.Designer.cs">
+      <DependentUpon>AccountsSidebarUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\AccountsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\AccountsUC.Designer.cs">
+      <DependentUpon>AccountsUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Dashboard\DashboardUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,10 +178,10 @@
     <Compile Include="Forms\Inventory\Products\ProductCreateBasicForm.Designer.cs">
       <DependentUpon>ProductCreateBasicForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Reports\All\LedgerUC.cs">
+    <Compile Include="Forms\Inventory\Accounts\All\LedgerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Reports\All\LedgerUC.Designer.cs">
+    <Compile Include="Forms\Inventory\Accounts\All\LedgerUC.Designer.cs">
       <DependentUpon>LedgerUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Reports\ReportSidebarUC.cs">
@@ -642,6 +660,15 @@
     <EmbeddedResource Include="Forms\Common\Display\SaveFooterUC.resx">
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\PaymentsUC.resx">
+      <DependentUpon>PaymentsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\AccountsSidebarUC.resx">
+      <DependentUpon>AccountsSidebarUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\AccountsUC.resx">
+      <DependentUpon>AccountsUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Dashboard\DashboardUC.resx">
       <DependentUpon>DashboardUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -660,7 +687,7 @@
     <EmbeddedResource Include="Forms\Inventory\Products\ProductCreateBasicForm.resx">
       <DependentUpon>ProductCreateBasicForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Reports\All\LedgerUC.resx">
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\LedgerUC.resx">
       <DependentUpon>LedgerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Reports\ReportSidebarUC.resx">
@@ -911,6 +938,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\Bills\" />
+    <Folder Include="Forms\Inventory\Reports\All\" />
     <Folder Include="License\" />
   </ItemGroup>
   <ItemGroup>

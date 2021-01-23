@@ -60,6 +60,7 @@
             this.btnLedger.TabIndex = 11;
             this.btnLedger.TabStop = true;
             this.btnLedger.Text = "      Ledger";
+            this.btnLedger.Visible = false;
             this.btnLedger.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // splitter2

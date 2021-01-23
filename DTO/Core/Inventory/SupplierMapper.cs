@@ -80,12 +80,14 @@ namespace DTO.Core.Inventory
                 Password = x.Password,
                 Username = x.Username,
                 UserType = x.UserType,
-                
+
                 IsMarried = x.IsMarried,
                 Gender = x.Gender,
                 TotalAmount = totalAmount,
                 PaidAmount = paidAmount,
                 Company = x.Company,
+                PaymentDueDate = x.PaymentDueDate,
+                AllDuesClearDate = x.AllDuesClearDate,
             };
         }
 

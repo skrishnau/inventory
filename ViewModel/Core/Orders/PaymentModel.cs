@@ -7,12 +7,23 @@ using ViewModel.Enums;
 
 namespace ViewModel.Core.Orders
 {
+
+    public class PaymentListModel
+    {
+        public List<PaymentModel> DataList { get; set; }
+
+        public int TotalCount { get; set; }
+        public int PageSize { get; set; }
+        public int Offset { get; set; }
+    }
+
     public class PaymentModel
     {
         public int Id { get; set; }
 
         public int? UserId { get; set; }
         public string User { get; set; }
+        public string UserType { get; set; }
 
         //public int? OrderId { get; set; }
         //public string Order { get; set; }
@@ -28,7 +39,10 @@ namespace ViewModel.Core.Orders
         /// </summary>
         public decimal Amount { get; set; }
 
-        public string PaymentType { get; set; }
+        // incoming , outgoing
+        public string PaymentType{ get; set; }
+        // cash, cheque, draft, advance
+        public string PaymentMethod { get; set; }
         public DateTime Date { get; set; }
         public string PaidBy { get; set; }
         /// <summary>
@@ -36,7 +50,11 @@ namespace ViewModel.Core.Orders
         /// </summary>
         public string ChequeNo { get; set; }
         public string Bank { get; set; }
-        // only used in ui
+        // 
         public decimal DueAmount { get; set; }
+        public DateTime? DueDate { get; set; }
+
+        public bool IsVoid { get; set; }
+
     }
 }

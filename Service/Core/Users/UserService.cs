@@ -72,12 +72,36 @@ namespace Service.Core.Users
         {
             using (var _context = new DatabaseContext())
             {
-                var supplier = _context.User.Find(userId);
-                if (supplier == null)
+                var user = _context.User.Find(userId);
+                if (user == null)
                     return null;
-                return UserMapper.MapToUserModel(supplier);
+                return UserMapper.MapToUserModel(user);
             }
         }
+
+        public UserModel GetUserWithTotalAndPaidAmounts(int userId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var user = _context.User.Find(userId);
+                if (user == null)
+                    return null;
+                var transactions = user.Transactions.Where(x => !x.IsVoid).ToList();
+                decimal total = 0, paid = 0;
+                if (user.UserType == UserTypeEnum.Customer.ToString())
+                {
+                    total = transactions.Sum(x => x.Debit);
+                    paid = transactions.Sum(x => x.Credit);
+                }
+                else if (user.UserType == UserTypeEnum.Supplier.ToString())
+                {
+                    total = transactions.Sum(x => x.Debit); // incomming stock amount
+                    paid = transactions.Sum(x => x.Credit); // outgoing paid amount
+                }
+                return UserMapper.MapToUserModel(user, total, paid);
+            }
+        }
+
         public int GetAllUsersCount(UserTypeEnum userType, string searchName = "")
         {
             using (var _context = new DatabaseContext())

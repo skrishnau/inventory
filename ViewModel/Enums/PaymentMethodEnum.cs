@@ -14,10 +14,18 @@ namespace ViewModel.Enums
         Draft = 2,
         Advance = 3
     }
-
-    public enum PaymentType
+    
+    public enum PaymentTypeEnum
     {
-        Cash,
-        Credit
+        Credit,
+        Debit
     }
+    
+
+    //public enum PaymentCategoryEnum
+    //{
+    //    All,
+    //    Paid,
+    //    Received,
+    //}
 }

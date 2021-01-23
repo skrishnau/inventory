@@ -44,8 +44,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbCompanyName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnEdit = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnChangePassword = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnEdit = new IMS.Forms.Common.Buttons.MenuButton();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -55,20 +55,20 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.07165F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.92835F));
-            this.tableLayoutPanel2.Controls.Add(this.tbWebsite, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.tbEmail, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.tbPhone, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.tbPAN, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tbVAT, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.tbAddress, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tbPhone, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.tbVAT, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.tbWebsite, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.tbCompanyName, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.tbEmail, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.tbPAN, 1, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 51);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
@@ -87,7 +87,7 @@
             // tbWebsite
             // 
             this.tbWebsite.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbWebsite.Location = new System.Drawing.Point(123, 182);
+            this.tbWebsite.Location = new System.Drawing.Point(123, 122);
             this.tbWebsite.Margin = new System.Windows.Forms.Padding(2);
             this.tbWebsite.Name = "tbWebsite";
             this.tbWebsite.Size = new System.Drawing.Size(127, 13);
@@ -96,7 +96,7 @@
             // tbEmail
             // 
             this.tbEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbEmail.Location = new System.Drawing.Point(123, 152);
+            this.tbEmail.Location = new System.Drawing.Point(123, 92);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(2);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(127, 13);
@@ -105,7 +105,7 @@
             // tbPhone
             // 
             this.tbPhone.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPhone.Location = new System.Drawing.Point(123, 122);
+            this.tbPhone.Location = new System.Drawing.Point(123, 62);
             this.tbPhone.Margin = new System.Windows.Forms.Padding(2);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(127, 13);
@@ -114,7 +114,7 @@
             // tbPAN
             // 
             this.tbPAN.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPAN.Location = new System.Drawing.Point(123, 92);
+            this.tbPAN.Location = new System.Drawing.Point(123, 182);
             this.tbPAN.Margin = new System.Windows.Forms.Padding(2);
             this.tbPAN.Name = "tbPAN";
             this.tbPAN.Size = new System.Drawing.Size(127, 13);
@@ -123,7 +123,7 @@
             // tbVAT
             // 
             this.tbVAT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbVAT.Location = new System.Drawing.Point(123, 62);
+            this.tbVAT.Location = new System.Drawing.Point(123, 152);
             this.tbVAT.Margin = new System.Windows.Forms.Padding(2);
             this.tbVAT.Name = "tbVAT";
             this.tbVAT.Size = new System.Drawing.Size(127, 13);
@@ -141,7 +141,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(2, 180);
+            this.label13.Location = new System.Drawing.Point(2, 120);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(46, 13);
@@ -151,7 +151,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 150);
+            this.label12.Location = new System.Drawing.Point(2, 90);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 13);
@@ -161,7 +161,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(2, 120);
+            this.label11.Location = new System.Drawing.Point(2, 60);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(38, 13);
@@ -171,7 +171,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(2, 90);
+            this.label10.Location = new System.Drawing.Point(2, 180);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 13);
@@ -181,7 +181,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 60);
+            this.label9.Location = new System.Drawing.Point(2, 150);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
@@ -204,9 +204,9 @@
             this.label6.Location = new System.Drawing.Point(2, 0);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Name";
+            this.label6.Text = "Company Name";
             // 
             // tbCompanyName
             // 
@@ -227,20 +227,6 @@
             this.panel1.Size = new System.Drawing.Size(329, 51);
             this.panel1.TabIndex = 4;
             // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
-            this.btnEdit.Location = new System.Drawing.Point(5, 8);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(84, 34);
-            this.btnEdit.TabIndex = 0;
-            this.btnEdit.Text = "Edit Profile";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = false;
-            // 
             // btnChangePassword
             // 
             this.btnChangePassword.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -255,13 +241,27 @@
             this.btnChangePassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnChangePassword.UseVisualStyleBackColor = false;
             // 
-            // GeneralSettingsUC
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
+            this.btnEdit.Location = new System.Drawing.Point(5, 8);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(84, 34);
+            this.btnEdit.TabIndex = 0;
+            this.btnEdit.Text = "Edit Profile";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = false;
+            // 
+            // ProfileUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.panel1);
-            this.Name = "GeneralSettingsUC";
+            this.Name = "ProfileUC";
             this.Size = new System.Drawing.Size(329, 261);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();

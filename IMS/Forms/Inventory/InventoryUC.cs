@@ -276,6 +276,7 @@ namespace IMS.Forms.Inventory
             // settings
             _menubar.btnSettings.Click += BtnSettings_Click;
             _menubar.btnReports.Click += BtnReports_Click;
+            _menubar.btnAccounts.Click += BtnAccounts_Click;
 
 
             //_menubar.btnLocateInventory.Click += BtnLocateInventory_Click;
@@ -608,6 +609,12 @@ namespace IMS.Forms.Inventory
             AddTabPage("Reports", reportUc, sender);
         }
 
+
+        private void BtnAccounts_Click(object sender, EventArgs e)
+        {
+            var reportUc = Program.container.GetInstance<AccountsUC>();
+            AddTabPage("Accounts", reportUc, sender);
+        }
 
         #endregion
     }

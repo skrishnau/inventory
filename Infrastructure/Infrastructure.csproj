@@ -103,6 +103,30 @@
     <Compile Include="Migrations\202101221718081_TableColumnUpdated.Designer.cs">
       <DependentUpon>202101221718081_TableColumnUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101230613262_PaymentTableUpdated1.cs" />
+    <Compile Include="Migrations\202101230613262_PaymentTableUpdated1.Designer.cs">
+      <DependentUpon>202101230613262_PaymentTableUpdated1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101230624515_DueDateAddedInPayment.cs" />
+    <Compile Include="Migrations\202101230624515_DueDateAddedInPayment.Designer.cs">
+      <DependentUpon>202101230624515_DueDateAddedInPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101230633453_UserTypeAddedInPayment.cs" />
+    <Compile Include="Migrations\202101230633453_UserTypeAddedInPayment.Designer.cs">
+      <DependentUpon>202101230633453_UserTypeAddedInPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101230704549_VoidAddedInPayment.cs" />
+    <Compile Include="Migrations\202101230704549_VoidAddedInPayment.Designer.cs">
+      <DependentUpon>202101230704549_VoidAddedInPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101230906426_addedPaymentTypeInPayment.cs" />
+    <Compile Include="Migrations\202101230906426_addedPaymentTypeInPayment.Designer.cs">
+      <DependentUpon>202101230906426_addedPaymentTypeInPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101231038467_AllDuesClearDateColumnAddedInUserTable.cs" />
+    <Compile Include="Migrations\202101231038467_AllDuesClearDateColumnAddedInUserTable.Designer.cs">
+      <DependentUpon>202101231038467_AllDuesClearDateColumnAddedInUserTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -134,6 +158,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101221718081_TableColumnUpdated.resx">
       <DependentUpon>202101221718081_TableColumnUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101230613262_PaymentTableUpdated1.resx">
+      <DependentUpon>202101230613262_PaymentTableUpdated1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101230624515_DueDateAddedInPayment.resx">
+      <DependentUpon>202101230624515_DueDateAddedInPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101230633453_UserTypeAddedInPayment.resx">
+      <DependentUpon>202101230633453_UserTypeAddedInPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101230704549_VoidAddedInPayment.resx">
+      <DependentUpon>202101230704549_VoidAddedInPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101230906426_addedPaymentTypeInPayment.resx">
+      <DependentUpon>202101230906426_addedPaymentTypeInPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101231038467_AllDuesClearDateColumnAddedInUserTable.resx">
+      <DependentUpon>202101231038467_AllDuesClearDateColumnAddedInUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -231,7 +231,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 if (userModel != null)
                 {
                     var po = Program.container.GetInstance<PaymentCreateForm>();
-                    po.SetData(null, userModel);
+                    po.SetData(userModel);
                     po.ShowDialog();
                 }
             }

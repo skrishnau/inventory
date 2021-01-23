@@ -189,6 +189,7 @@ namespace Service.Core.Orders
 
                 SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout);
 
+
                 if (checkout)
                 {
                     // makechecout
@@ -279,12 +280,12 @@ namespace Service.Core.Orders
             var debit = 0M;
             var credit = 0M;
             var balance = orderModel.TotalAmount - orderModel.PaidAmount;
-            if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
+            if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString() || orderModel.OrderType == PaymentTypeEnum.Debit.ToString())
             {
                 debit = orderModel.PaidAmount;
                 credit = orderModel.TotalAmount;
             }
-            else if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
+            else if (orderModel.OrderType == OrderTypeEnum.Sale.ToString() || orderModel.OrderType == PaymentTypeEnum.Credit.ToString())
             {
                 debit = orderModel.TotalAmount;
                 credit = orderModel.PaidAmount;
@@ -370,6 +371,7 @@ namespace Service.Core.Orders
                 // credit ; store payment due date in the customer
                 user.PaymentDueDate = orderModel.PaymentDueDate;
             }
+
             return user;
         }
 

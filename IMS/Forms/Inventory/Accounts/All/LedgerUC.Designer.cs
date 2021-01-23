@@ -43,12 +43,16 @@
             this.colCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDrCr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkOnlyShowAfterLastClearance = new System.Windows.Forms.CheckBox();
+            this.lblLastClearanceDate = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblLastClearanceDate);
+            this.panel1.Controls.Add(this.chkOnlyShowAfterLastClearance);
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -59,12 +63,12 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(831, 46);
+            this.panel1.Size = new System.Drawing.Size(1049, 40);
             this.panel1.TabIndex = 0;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(615, 12);
+            this.btnSearch.Location = new System.Drawing.Point(955, 10);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -74,7 +78,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(456, 16);
+            this.label3.Location = new System.Drawing.Point(411, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 13);
             this.label3.TabIndex = 5;
@@ -83,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(287, 16);
+            this.label2.Location = new System.Drawing.Point(259, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 4;
@@ -93,7 +97,7 @@
             // 
             this.dtTo.CustomFormat = "yyyy/MM/dd";
             this.dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtTo.Location = new System.Drawing.Point(482, 14);
+            this.dtTo.Location = new System.Drawing.Point(437, 14);
             this.dtTo.Name = "dtTo";
             this.dtTo.Size = new System.Drawing.Size(106, 20);
             this.dtTo.TabIndex = 3;
@@ -103,7 +107,7 @@
             this.dtFrom.Checked = false;
             this.dtFrom.CustomFormat = "yyyy/MM/dd";
             this.dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFrom.Location = new System.Drawing.Point(323, 14);
+            this.dtFrom.Location = new System.Drawing.Point(295, 14);
             this.dtFrom.Name = "dtFrom";
             this.dtFrom.Size = new System.Drawing.Size(106, 20);
             this.dtFrom.TabIndex = 2;
@@ -111,7 +115,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 16);
+            this.label1.Location = new System.Drawing.Point(9, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 1;
@@ -121,7 +125,7 @@
             // 
             this.cbCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCustomer.FormattingEnabled = true;
-            this.cbCustomer.Location = new System.Drawing.Point(121, 13);
+            this.cbCustomer.Location = new System.Drawing.Point(111, 13);
             this.cbCustomer.Name = "cbCustomer";
             this.cbCustomer.Size = new System.Drawing.Size(139, 21);
             this.cbCustomer.TabIndex = 0;
@@ -139,10 +143,11 @@
             this.colDrCr,
             this.colBalance});
             this.dgvLedger.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLedger.Location = new System.Drawing.Point(0, 46);
+            this.dgvLedger.Location = new System.Drawing.Point(0, 40);
             this.dgvLedger.Name = "dgvLedger";
             this.dgvLedger.ReadOnly = true;
-            this.dgvLedger.Size = new System.Drawing.Size(831, 422);
+            this.dgvLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLedger.Size = new System.Drawing.Size(1049, 428);
             this.dgvLedger.TabIndex = 1;
             // 
             // colDate
@@ -189,6 +194,25 @@
             this.colBalance.Name = "colBalance";
             this.colBalance.ReadOnly = true;
             // 
+            // chkOnlyShowAfterLastClearance
+            // 
+            this.chkOnlyShowAfterLastClearance.AutoSize = true;
+            this.chkOnlyShowAfterLastClearance.Location = new System.Drawing.Point(555, 16);
+            this.chkOnlyShowAfterLastClearance.Name = "chkOnlyShowAfterLastClearance";
+            this.chkOnlyShowAfterLastClearance.Size = new System.Drawing.Size(225, 17);
+            this.chkOnlyShowAfterLastClearance.TabIndex = 7;
+            this.chkOnlyShowAfterLastClearance.Text = "Only show sransaction after last clearance";
+            this.chkOnlyShowAfterLastClearance.UseVisualStyleBackColor = true;
+            // 
+            // lblLastClearanceDate
+            // 
+            this.lblLastClearanceDate.AutoSize = true;
+            this.lblLastClearanceDate.Location = new System.Drawing.Point(786, 17);
+            this.lblLastClearanceDate.Name = "lblLastClearanceDate";
+            this.lblLastClearanceDate.Size = new System.Drawing.Size(10, 13);
+            this.lblLastClearanceDate.TabIndex = 8;
+            this.lblLastClearanceDate.Text = "-";
+            // 
             // LedgerUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,7 +220,7 @@
             this.Controls.Add(this.dgvLedger);
             this.Controls.Add(this.panel1);
             this.Name = "LedgerUC";
-            this.Size = new System.Drawing.Size(831, 468);
+            this.Size = new System.Drawing.Size(1049, 468);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).EndInit();
@@ -221,5 +245,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCredit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDrCr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
+        private System.Windows.Forms.Label lblLastClearanceDate;
+        private System.Windows.Forms.CheckBox chkOnlyShowAfterLastClearance;
     }
 }

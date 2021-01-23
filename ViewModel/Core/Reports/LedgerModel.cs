@@ -31,4 +31,13 @@ namespace ViewModel.Core.Reports
         // indicates the data is from DB, true when new list-item is added manually (e.g. to show total row)
         public bool IsManualNewRow { get; set; }
     }
+
+    public class LedgerRequestModel
+    {
+        public int CustomerId { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
+        public bool OnlyAfterLastClearance { get; set; }
+
+    }
 }

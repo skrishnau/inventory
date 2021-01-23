@@ -15,4 +15,11 @@ namespace ViewModel.Enums
         All = 5,
 
     }
+
+    public enum ClientTypeEnum
+    {
+        All,
+        Customer,
+        Supplier,
+    }
 }

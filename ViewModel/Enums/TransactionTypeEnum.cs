@@ -6,6 +6,30 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Enums
 {
+
+    public enum OrderPaymentTypeEnum
+    {
+        Cash,
+        Credit
+    }
+
+    public enum TransactionTypeEnum
+    {
+        // sale and purcahse transaction type occur when transaction is saved while creating Order
+        Sale, 
+        Purchase,
+        // Credit and Debit transaction type occur when transaction is saved while creating Payment
+        Credit,
+        Debit
+    }
+    
+
+    //public enum TransactionTypeEnum
+    //{
+    //    Incoming,
+    //    Outgoing
+    //}
+
     ///// <summary>
     ///// Transaction Type (also called Caption)
     ///// </summary>
@@ -32,4 +56,5 @@ namespace ViewModel.Enums
     //    /// </summary>
     //    Sale = 4
     //}
+
 }
