@@ -48,7 +48,7 @@ namespace IMS.Forms.Inventory.Suppliers
             var list = new List<NameValuePair>();
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
-            list.Add(new NameValuePair ("", "--- Select ---"));
+            list.Add(new NameValuePair ("--- Select ---", "" ));
             list.Add(new NameValuePair (customer, customer));
             list.Add(new NameValuePair (supplier, supplier));
 
@@ -98,6 +98,7 @@ namespace IMS.Forms.Inventory.Suppliers
             if(!string.IsNullOrEmpty(msg))
             {
                 PopupMessage.ShowInfoMessage(msg);
+                this.Focus();
                 return;
             }
             var model = new UserModel
@@ -129,10 +130,18 @@ namespace IMS.Forms.Inventory.Suppliers
                 errorProvider1.SetError(tbName, RequiredFieldValidator.REQUIRED);
                 msg += "Name is required.\n";
             }
-            if(string.IsNullOrEmpty(cbUserType.SelectedValue?.ToString()))
+            else
+            {
+                errorProvider1.SetError(tbName, string.Empty);
+            }
+            if (string.IsNullOrEmpty(cbUserType.SelectedValue?.ToString()))
             {
                 errorProvider1.SetError(cbUserType, RequiredFieldValidator.REQUIRED);
                 msg += "Type is required.\n";
+            }
+            else
+            {
+                errorProvider1.SetError(cbUserType, string.Empty);
             }
             return msg;
         }

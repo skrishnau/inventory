@@ -61,8 +61,9 @@ namespace IMS.Forms.Inventory.Payment
             reportParam.Add(new ReportParameter("AmountInFigure", paymentModel.Amount.ToString("#,##,##0.00 /-")));
             reportParam.Add(new ReportParameter("Bank", string.IsNullOrEmpty(paymentModel.Bank)? "-": paymentModel.Bank));
             reportParam.Add(new ReportParameter("ChequeNumber", string.IsNullOrEmpty(paymentModel.ChequeNo) ? "-" : paymentModel.ChequeNo));
-            reportParam.Add(new ReportParameter("PaymentType", paymentModel.PaymentMethod.ToString()));
-            reportParam.Add(new ReportParameter("DueAmount", (paymentModel.DueAmount - paymentModel.Amount).ToString("#,##,##0.00 /-")));
+            reportParam.Add(new ReportParameter("PaymentType", paymentModel.PaymentType.ToString()));
+            reportParam.Add(new ReportParameter("PaymentMethod", paymentModel.PaymentMethod.ToString()));
+            reportParam.Add(new ReportParameter("DueAmount", (paymentModel.DueAmount).ToString("#,##,##0.00 /-")));
 
             return reportParam.AsEnumerable();
         }

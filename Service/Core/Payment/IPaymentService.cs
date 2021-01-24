@@ -14,5 +14,6 @@ namespace Service.Core.Payment
         ResponseModel<PaymentModel> Save(PaymentModel model);
         int GetAllPaymentsCount(ClientTypeEnum clientType, string searchName);
         PaymentListModel GetAllPayments(ClientTypeEnum clientType, int pageSize, int offset, string searchName);
+        PaymentModel GetPayment(int paymentId);
     }
 }

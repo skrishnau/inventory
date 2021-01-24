@@ -124,11 +124,11 @@
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Common\Pagination\PaginationHelper.cs" />
-    <Compile Include="Forms\Inventory\Accounts\All\PaymentsUC.cs">
+    <Compile Include="Forms\Inventory\Accounts\All\PaymentListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Accounts\All\PaymentsUC.Designer.cs">
-      <DependentUpon>PaymentsUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Accounts\All\PaymentListUC.Designer.cs">
+      <DependentUpon>PaymentListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Accounts\AccountsSidebarUC.cs">
       <SubType>UserControl</SubType>
@@ -660,8 +660,8 @@
     <EmbeddedResource Include="Forms\Common\Display\SaveFooterUC.resx">
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Accounts\All\PaymentsUC.resx">
-      <DependentUpon>PaymentsUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\PaymentListUC.resx">
+      <DependentUpon>PaymentListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Accounts\AccountsSidebarUC.resx">
       <DependentUpon>AccountsSidebarUC.cs</DependentUpon>
@@ -906,6 +906,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LedgerReport.rdlc" />
     <EmbeddedResource Include="Reports\SalesTransactionReport_DoublePrint.rdlc" />
     <EmbeddedResource Include="Reports\SalesTransactionReport.rdlc" />
     <EmbeddedResource Include="Reports\TransactionBarReportUC.rdlc" />
@@ -1415,6 +1416,9 @@
   <ItemGroup>
     <None Include="Resources\delete_icon_16px.bmp" />
     <None Include="Resources\icons8-ledger-24.png" />
+    <None Include="Resources\icons8-print-16.png" />
+    <None Include="Resources\icons8-print-16 %281%29.png" />
+    <None Include="Resources\icons8-print-16px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

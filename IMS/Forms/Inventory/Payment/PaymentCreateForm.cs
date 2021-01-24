@@ -33,6 +33,9 @@ namespace IMS.Forms.Inventory.Payment
         private decimal totalAmount;
         private decimal _dueAmount;
 
+        private bool _showPrint;
+        private PaymentModel _paymentModel;
+
 
 
         public PaymentCreateForm(IPaymentService paymentService, IUserService userService, IAppSettingService appSettingService)
@@ -66,8 +69,13 @@ namespace IMS.Forms.Inventory.Payment
             txtReferenceNumber.Text = _appSettingService.GetReceiptNumber(ReferencesTypeEnum.Payment);
         }
 
-        public void SetData(int userId)
+        public void SetData(int userId, int paymentId, bool showPrint)
         {
+            if (showPrint && paymentId > 0)
+            {
+                _showPrint = showPrint;
+                _paymentModel = _paymentService.GetPayment(paymentId);
+            }
             _userModel = _userService.GetUserWithTotalAndPaidAmounts(userId);
         }
 
@@ -90,34 +98,43 @@ namespace IMS.Forms.Inventory.Payment
 
         private void PopulatePaymentData()
         {
-            var company = _appSettingService.GetCompanyInfoSetting();
-            var byFrom = "";
-            var byFromCustomerSupplier = "-";
-            if (_userModel != null)
-            {
-                byFrom = _userModel.UserType == UserTypeEnum.Customer.ToString() ? "By" : "To";
-                byFromCustomerSupplier = byFrom + " " + _userModel.UserType;//_userModel.UserType == UserTypeEnum.Customer.ToString() ? "By Customer" : "To Supplier";
-                btnPrint.Visible = _userModel.UserType == UserTypeEnum.Customer.ToString();
-                this.Text = $"New Payment {byFromCustomerSupplier}";
-                this.headerTemplate1.Text = _userModel.Name;
-                var transactionSum = _userService.GetTransactionSumOfUser(_userModel.Id);
-                lblRemainingAmount.Text = transactionSum?.DueAmount.ToString();//userModel.DueAmount.ToString();
-                lblTotalAmount.Text = transactionSum?.TotalAmount.ToString();//userModel.TotalAmount.ToString();
-                txtAmount.Value = 0;// userModel.DueAmount;
-                totalAmount = transactionSum?.TotalAmount ?? 0;
-                _dueAmount = transactionSum?.DueAmount ?? 0;
-                txtBy.Text = (_userModel.UserType == UserTypeEnum.Customer.ToString() ? "Paid " + byFrom + " " + _userModel.Name : company.CompanyName);
-                if (_userModel.UserType == UserTypeEnum.Customer.ToString())
-                {
-                    cbPaymentType.SelectedValue = PaymentTypeEnum.Credit.ToString();
-                }
-                else
-                {
-                    cbPaymentType.SelectedValue = PaymentTypeEnum.Debit.ToString();
 
-                }
+            if(_paymentModel!=null && _showPrint)
+            {
+                ShowPrint(_paymentModel);
             }
-            lblByFrom.Text = byFromCustomerSupplier;
+            else
+            {
+                var company = _appSettingService.GetCompanyInfoSetting();
+                var byFrom = "";
+                var byFromCustomerSupplier = "-";
+                if (_userModel != null)
+                {
+                    byFrom = _userModel.UserType == UserTypeEnum.Customer.ToString() ? "By" : "To";
+                    byFromCustomerSupplier = byFrom + " " + _userModel.UserType;//_userModel.UserType == UserTypeEnum.Customer.ToString() ? "By Customer" : "To Supplier";
+                    btnPrint.Visible = _userModel.UserType == UserTypeEnum.Customer.ToString();
+                    this.Text = $"New Payment {byFromCustomerSupplier}";
+                    this.headerTemplate1.Text = _userModel.Name;
+                    var transactionSum = _userService.GetTransactionSumOfUser(_userModel.Id);
+                    lblRemainingAmount.Text = transactionSum?.DueAmount.ToString();//userModel.DueAmount.ToString();
+                    lblTotalAmount.Text = transactionSum?.TotalAmount.ToString();//userModel.TotalAmount.ToString();
+                    txtAmount.Value = 0;// userModel.DueAmount;
+                    totalAmount = transactionSum?.TotalAmount ?? 0;
+                    _dueAmount = transactionSum?.DueAmount ?? 0;
+                    txtBy.Text = (_userModel.UserType == UserTypeEnum.Customer.ToString() ? "Paid " + byFrom + " " + _userModel.Name : company.CompanyName);
+                    if (_userModel.UserType == UserTypeEnum.Customer.ToString())
+                    {
+                        cbPaymentType.SelectedValue = PaymentTypeEnum.Credit.ToString();
+                    }
+                    else
+                    {
+                        cbPaymentType.SelectedValue = PaymentTypeEnum.Debit.ToString();
+
+                    }
+                }
+                lblByFrom.Text = byFromCustomerSupplier;
+            }
+          
         }
 
 
@@ -231,7 +248,10 @@ namespace IMS.Forms.Inventory.Payment
                 {
                     if (!showPrint)
                         this.Close();
-                    return _paymentService.Save(payment);
+                    var saved = _paymentService.Save(payment);
+                    //saved.Data.DueAmount = _dueAmount;
+                    //saved.Data.DueAmount -= saved.Data.Amount;
+                    return saved;
                 }
             }
             return null;
@@ -242,13 +262,17 @@ namespace IMS.Forms.Inventory.Payment
             var saved = Save(true);
             if (saved != null)
             {
-                saved.Data.DueAmount = _dueAmount;//_orderModel.TotalAmount;
-                this.Text = "Print Receipt";
-                this.Controls.Clear();
-
-                var transactionPrintBillUc = new PaymentPrintUC(_appSettingService, saved.Data);
-                this.Controls.Add(transactionPrintBillUc);
+                ShowPrint(saved.Data);
             }
+        }
+
+        private void ShowPrint(PaymentModel model)
+        {
+            this.Text = "Print Receipt";
+            this.Controls.Clear();
+
+            var transactionPrintBillUc = new PaymentPrintUC(_appSettingService, model);
+            this.Controls.Add(transactionPrintBillUc);
         }
 
         public PaymentModel GetData()

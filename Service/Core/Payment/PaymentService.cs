@@ -36,7 +36,7 @@ namespace Service.Core.Payment
                 return query.Count();
             }
         }
-
+        
         public PaymentListModel GetAllPayments(ClientTypeEnum clientType, int pageSize, int offset, string searchName = "")
         {
             using (var _context = new DatabaseContext())
@@ -73,6 +73,14 @@ namespace Service.Core.Payment
             if (!string.IsNullOrEmpty(searchName))
                 query = query.Where(x => x.User.Name.Contains(searchName));
             return query.OrderByDescending(x => x.Date);
+        }
+
+        public PaymentModel GetPayment(int paymentId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Payment.Find(paymentId).MapToModel();
+            }
         }
 
         public ResponseModel<PaymentModel> Save(PaymentModel model)

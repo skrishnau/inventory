@@ -48,7 +48,7 @@ namespace IMS.Forms.Inventory.Reports
         private void BtnPayments_Click(object sender, EventArgs e)
         {
             this.bodyTemplate.pnlBody.Controls.Clear();
-            var paymentsUc = new PaymentsUC(_paymentService, _userService, _databaseChangeListener);
+            var paymentsUc = new PaymentListUC(_paymentService, _userService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Payments";
             this.bodyTemplate.pnlBody.Controls.Add(paymentsUc);
         }
