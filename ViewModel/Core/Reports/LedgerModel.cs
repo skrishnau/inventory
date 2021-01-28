@@ -18,6 +18,13 @@ namespace ViewModel.Core.Reports
         public string BalanceSum { get; set; }
         public int DrCr { get; set; }
         public string DrCrString { get; set; }
+
+        // for use in Ledger print
+        public string User { get; set; }
+        public string Address { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+
     }
     public class LedgerModel
     {

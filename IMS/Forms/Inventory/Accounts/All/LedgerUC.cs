@@ -12,6 +12,8 @@ using Service.Core.Users;
 using ViewModel.Core.Reports;
 using Service.Listeners;
 using ViewModel.Core.Common;
+using IMS.Forms.Inventory.Accounts.All;
+using Service.Core.Settings;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -19,15 +21,18 @@ namespace IMS.Forms.Inventory.Reports.All
     {
         private readonly IReportService _reportService;
         private readonly IUserService _userService;
+        private readonly IAppSettingService _appSettingService;
         private readonly IDatabaseChangeListener _listener;
 
         private LedgerMasterModel _ledgerMaster = new LedgerMasterModel();
+        private LedgerMasterModel _ledgerMasterForPrint = new LedgerMasterModel();
 
         BindingSource _bindingSource;
-        public LedgerUC(IReportService reportService, IUserService userService, IDatabaseChangeListener listener)
+        public LedgerUC(IReportService reportService, IUserService userService, IAppSettingService appSettingService, IDatabaseChangeListener listener)
         {
             _reportService = reportService;
             _userService = userService;
+            _appSettingService = appSettingService;
             _listener = listener;
 
             InitializeComponent();
@@ -57,6 +62,14 @@ namespace IMS.Forms.Inventory.Reports.All
             _listener.UserUpdated += _listener_UserUpdated;
             cbCustomer.SelectedValueChanged += CbCustomer_SelectedValueChanged;
             chkOnlyShowAfterLastClearance.CheckedChanged += ChkOnlyShowAfterLastClearance_CheckedChanged;
+            btnPrint.Click += BtnPrint_Click;
+        }
+
+        private void BtnPrint_Click(object sender, EventArgs e)
+        {
+            //var ledgerMaster = GetLedger();
+            var form = new LedgerPrintForm(_appSettingService, _ledgerMasterForPrint);
+            form.ShowDialog();
         }
 
         private void ChkOnlyShowAfterLastClearance_CheckedChanged(object sender, EventArgs e)
@@ -112,8 +125,7 @@ namespace IMS.Forms.Inventory.Reports.All
             cbCustomer.ValueMember = "Id";
             cbCustomer.DisplayMember = "Name";
         }
-
-        private void PopulateLedger()
+       private LedgerMasterModel GetLedger()
         {
             var from = dtFrom.Value;
             var to = dtTo.Value;
@@ -127,7 +139,13 @@ namespace IMS.Forms.Inventory.Reports.All
                 To = to,
                 OnlyAfterLastClearance = chkOnlyShowAfterLastClearance.Checked,
             };
-            _ledgerMaster = _reportService.GetLedger(model);
+            return _reportService.GetLedger(model);
+        }
+
+        private void PopulateLedger()
+        {
+            _ledgerMaster = GetLedger();
+            _ledgerMasterForPrint = GetLedger();
 
             _ledgerMaster.LedgerData.Add(new LedgerModel()
             {

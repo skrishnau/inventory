@@ -12,6 +12,7 @@ using Service.Core.Reports;
 using Service.Core.Users;
 using Service.Core.Payment;
 using Service.Listeners;
+using Service.Core.Settings;
 
 namespace IMS.Forms.Inventory.Reports
 {
@@ -21,13 +22,16 @@ namespace IMS.Forms.Inventory.Reports
         private readonly IPaymentService _paymentService;
         private readonly IReportService _reportService;
         private readonly IDatabaseChangeListener _databaseChangeListener;
+        private readonly IAppSettingService _appSettingService;
 
-        public AccountsUC(IUserService userService, IReportService reportService, IPaymentService paymentService, IDatabaseChangeListener databaseChangeListener)
+        public AccountsUC(IUserService userService, IReportService reportService, IPaymentService paymentService, IDatabaseChangeListener databaseChangeListener, IAppSettingService appSettingService)
         {
             this._userService = userService;
             this._paymentService = paymentService;
             this._reportService = reportService;
             this._databaseChangeListener = databaseChangeListener;
+            this._appSettingService = appSettingService;
+
             InitializeComponent();
 
             this.Load += AccountsUC_Load;
@@ -56,7 +60,7 @@ namespace IMS.Forms.Inventory.Reports
         private void BtnLedger_Click(object sender, EventArgs e)
         {
             this.bodyTemplate.pnlBody.Controls.Clear();
-            var ledgerUc = new LedgerUC(_reportService, _userService, _databaseChangeListener);
+            var ledgerUc = new LedgerUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Ledger";
             this.bodyTemplate.pnlBody.Controls.Add(ledgerUc);
         }

@@ -124,6 +124,12 @@
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Common\Pagination\PaginationHelper.cs" />
+    <Compile Include="Forms\Inventory\Accounts\All\LedgerPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\LedgerPrintForm.Designer.cs">
+      <DependentUpon>LedgerPrintForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Accounts\All\PaymentListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -660,6 +666,9 @@
     <EmbeddedResource Include="Forms\Common\Display\SaveFooterUC.resx">
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\LedgerPrintForm.resx">
+      <DependentUpon>LedgerPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Accounts\All\PaymentListUC.resx">
       <DependentUpon>PaymentListUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -921,6 +930,7 @@
     <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderItemModel.datasource" />
     <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderModel.datasource" />
     <None Include="Properties\DataSources\ViewModel.Core.Orders.SalePurchaseAmountModel.datasource" />
+    <None Include="Properties\DataSources\ViewModel.Core.Reports.LedgerModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
