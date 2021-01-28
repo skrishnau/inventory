@@ -145,7 +145,7 @@ namespace Service.Core.Users
                     .Where(x => x.Use || (!x.Use && includeUserList.Contains(x.Id)))
                     .Select(x => new IdNamePair()
                     {
-                        Name = x.Name,
+                        Name = x.Name + (string.IsNullOrEmpty(x.Company) ? "" : " - "+x.Company),
                         Id = x.Id
                     }).ToList();
             }
@@ -171,6 +171,10 @@ namespace Service.Core.Users
 
         private IQueryable<User> GetUserQueryable(DatabaseContext _context, UserTypeEnum userType, string searchName)
         {
+            var split = string.IsNullOrEmpty(searchName) ? new string[0] : searchName.Split(new char[] { '-' });
+            var name = split.Length > 0 ? split[0].Trim() : "";
+            var company = split.Length > 1 ? split[1].Trim() : "";
+
             var query = _context.User
                     .Where(x => x.DeletedAt == null);
             var customer = UserTypeEnum.Customer.ToString();
@@ -185,7 +189,7 @@ namespace Service.Core.Users
                 query = query.Where(x => x.UserType == userTypeStr);
             }
             if (!string.IsNullOrEmpty(searchName))
-                query = query.Where(x => x.Name.Contains(searchName));
+                query = query.Where(x => x.Name.Contains(name) || x.Company.Contains(name));
             return query.OrderBy(x => x.Name);
         }
 

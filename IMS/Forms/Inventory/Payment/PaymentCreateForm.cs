@@ -158,8 +158,11 @@ namespace IMS.Forms.Inventory.Payment
 
         private void PopulatePaymentTypeCombo()
         {
-            var paymentMethods = Enum.GetValues(typeof(PaymentTypeEnum)).Cast<PaymentTypeEnum>();
-            var dataList = paymentMethods.Select(x => new NameValuePair(x.ToString(), x.ToString())).ToList();
+            var dataList = new List<NameValuePair>();
+            dataList.Add(new NameValuePair(PaymentTypeEnum.Credit.ToString() + " (लिएको)", PaymentTypeEnum.Credit.ToString()));
+            dataList.Add(new NameValuePair(PaymentTypeEnum.Debit.ToString() + " (दिएको)", PaymentTypeEnum.Debit.ToString()));
+            //var paymentMethods = Enum.GetValues(typeof(PaymentTypeEnum)).Cast<PaymentTypeEnum>();
+            //var dataList = paymentMethods.Select(x => new NameValuePair(x.ToString(), x.ToString())).ToList();
             cbPaymentType.DataSource = dataList;
             cbPaymentType.DisplayMember = "Name";
             cbPaymentType.ValueMember = "Value";

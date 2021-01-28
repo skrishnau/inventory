@@ -108,7 +108,7 @@ namespace IMS.Forms.Inventory.Reports.All
                 if ((userId ?? 0) > 0)
                 {
                     var po = Program.container.GetInstance<PaymentCreateForm>();
-                    po.SetData(userId ?? 0, paymentModel.Id, showPrint);
+                    po.SetData(userId ?? 0, paymentModel?.Id??0, showPrint);
                     po.ShowDialog();
                 }
             }

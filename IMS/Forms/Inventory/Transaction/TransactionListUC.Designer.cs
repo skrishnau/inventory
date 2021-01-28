@@ -67,16 +67,16 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblCustomer = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.lblReferenceNo = new System.Windows.Forms.Label();
-            this.pnlEditedOrder = new System.Windows.Forms.Panel();
-            this.btnViewParentOrder = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.pnlEditedOrder = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnViewParentOrder = new System.Windows.Forms.Button();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,10 +86,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel5.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.pnlEditedOrder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
             // splitter1
@@ -303,7 +303,7 @@
             this.colTotalAmount.HeaderText = "Total Amount";
             this.colTotalAmount.Name = "colTotalAmount";
             this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Width = 87;
+            this.colTotalAmount.Width = 95;
             // 
             // colPaidAmount
             // 
@@ -462,6 +462,16 @@
             this.panel4.Size = new System.Drawing.Size(441, 441);
             this.panel4.TabIndex = 16;
             // 
+            // dgvItems
+            // 
+            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(0, 67);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.Size = new System.Drawing.Size(441, 374);
+            this.dgvItems.TabIndex = 14;
+            // 
             // panel5
             // 
             this.panel5.AutoSize = true;
@@ -488,6 +498,17 @@
             this.lblCustomer.TabIndex = 18;
             this.lblCustomer.Text = "-";
             // 
+            // lblReferenceNo
+            // 
+            this.lblReferenceNo.AutoSize = true;
+            this.lblReferenceNo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblReferenceNo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblReferenceNo.Location = new System.Drawing.Point(0, 25);
+            this.lblReferenceNo.Name = "lblReferenceNo";
+            this.lblReferenceNo.Size = new System.Drawing.Size(15, 19);
+            this.lblReferenceNo.TabIndex = 0;
+            this.lblReferenceNo.Text = "-";
+            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.btnPrint);
@@ -500,6 +521,20 @@
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 2, 5, 0);
             this.flowLayoutPanel2.Size = new System.Drawing.Size(286, 32);
             this.flowLayoutPanel2.TabIndex = 17;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.Location = new System.Drawing.Point(182, 5);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(96, 33);
+            this.btnPrint.TabIndex = 16;
+            this.btnPrint.Text = "Print Receipt";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = false;
             // 
             // btnCancel
             // 
@@ -515,17 +550,6 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = false;
             // 
-            // lblReferenceNo
-            // 
-            this.lblReferenceNo.AutoSize = true;
-            this.lblReferenceNo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblReferenceNo.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblReferenceNo.Location = new System.Drawing.Point(0, 25);
-            this.lblReferenceNo.Name = "lblReferenceNo";
-            this.lblReferenceNo.Size = new System.Drawing.Size(15, 19);
-            this.lblReferenceNo.TabIndex = 0;
-            this.lblReferenceNo.Text = "-";
-            // 
             // pnlEditedOrder
             // 
             this.pnlEditedOrder.Controls.Add(this.label3);
@@ -536,17 +560,6 @@
             this.pnlEditedOrder.Size = new System.Drawing.Size(441, 25);
             this.pnlEditedOrder.TabIndex = 19;
             this.pnlEditedOrder.Visible = false;
-            // 
-            // btnViewParentOrder
-            // 
-            this.btnViewParentOrder.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnViewParentOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewParentOrder.Location = new System.Drawing.Point(321, 0);
-            this.btnViewParentOrder.Name = "btnViewParentOrder";
-            this.btnViewParentOrder.Size = new System.Drawing.Size(120, 25);
-            this.btnViewParentOrder.TabIndex = 0;
-            this.btnViewParentOrder.Text = "View Parent Txn";
-            this.btnViewParentOrder.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -559,29 +572,16 @@
             this.label3.Text = "Edited";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // dgvItems
+            // btnViewParentOrder
             // 
-            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 67);
-            this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(441, 374);
-            this.dgvItems.TabIndex = 14;
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(182, 5);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(96, 33);
-            this.btnPrint.TabIndex = 16;
-            this.btnPrint.Text = "Print Receipt";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnViewParentOrder.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnViewParentOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewParentOrder.Location = new System.Drawing.Point(321, 0);
+            this.btnViewParentOrder.Name = "btnViewParentOrder";
+            this.btnViewParentOrder.Size = new System.Drawing.Size(120, 25);
+            this.btnViewParentOrder.TabIndex = 0;
+            this.btnViewParentOrder.Text = "View Parent Txn";
+            this.btnViewParentOrder.UseVisualStyleBackColor = true;
             // 
             // listHeaderTemplate1
             // 
@@ -616,11 +616,11 @@
             this.bindingNavigator1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.pnlEditedOrder.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
         }

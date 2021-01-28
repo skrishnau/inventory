@@ -76,9 +76,9 @@
             this.chkOnlyShowAfterLastClearance.AutoSize = true;
             this.chkOnlyShowAfterLastClearance.Location = new System.Drawing.Point(3, 3);
             this.chkOnlyShowAfterLastClearance.Name = "chkOnlyShowAfterLastClearance";
-            this.chkOnlyShowAfterLastClearance.Size = new System.Drawing.Size(225, 17);
+            this.chkOnlyShowAfterLastClearance.Size = new System.Drawing.Size(223, 17);
             this.chkOnlyShowAfterLastClearance.TabIndex = 7;
-            this.chkOnlyShowAfterLastClearance.Text = "Only show sransaction after last clearance";
+            this.chkOnlyShowAfterLastClearance.Text = "Only show transaction after last clearance";
             this.chkOnlyShowAfterLastClearance.UseVisualStyleBackColor = true;
             // 
             // btnSearch
@@ -183,14 +183,14 @@
             // colDebit
             // 
             this.colDebit.DataPropertyName = "Debit";
-            this.colDebit.HeaderText = "Debit";
+            this.colDebit.HeaderText = "Debit (दिएको)";
             this.colDebit.Name = "colDebit";
             this.colDebit.ReadOnly = true;
             // 
             // colCredit
             // 
             this.colCredit.DataPropertyName = "Credit";
-            this.colCredit.HeaderText = "Credit";
+            this.colCredit.HeaderText = "Credit (लिएको)";
             this.colCredit.Name = "colCredit";
             this.colCredit.ReadOnly = true;
             // 
@@ -324,12 +324,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtTo;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colParticulars;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDebit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCredit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDrCr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
         private System.Windows.Forms.Label lblLastClearanceDate;
         private System.Windows.Forms.CheckBox chkOnlyShowAfterLastClearance;
         private System.Windows.Forms.Panel panel2;
@@ -340,5 +334,11 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel6;
         private Common.Buttons.MenuButton btnPrint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colParticulars;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDebit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCredit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDrCr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
     }
 }

@@ -78,6 +78,9 @@ namespace Service.Core.Orders
         }
         private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText)
         {
+            var split = string.IsNullOrEmpty(userSearchText) ? new string[0] : userSearchText.Split(new char[] { '-' });
+            var name = split.Length>0? split[0].Trim(): "";
+            var company = split.Length > 1 ? split[1].Trim() : "";
             var type = orderType.ToString();
             var orders = _context.Order
                 .Include(x => x.User)
@@ -86,7 +89,7 @@ namespace Service.Core.Orders
                 orders = orders.Where(x => x.OrderType == type);
             orders = orders.OrderByDescending(x => x.CreatedAt); //.ThenByDescending(x => x.CreatedAt)
             if (!string.IsNullOrEmpty(userSearchText))
-                orders = orders.Where(x => x.User.Name.Contains(userSearchText) || x.User.Company.Contains(userSearchText));
+                orders = orders.Where(x => x.User.Name.Contains(name) || x.User.Company.Contains(name));
             if (!string.IsNullOrEmpty(receiptNoSearchText))
                 orders = orders.Where(x => x.ReferenceNumber == receiptNoSearchText);
             return orders;

@@ -17,6 +17,7 @@ using Service.Core.Inventory;
 using IMS.Forms.Inventory.Payment;
 using Service.Interfaces;
 using IMS.Forms.Common.Pagination;
+using Service.Core.Users;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -29,19 +30,21 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IDatabaseChangeListener _listener;
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
+        private readonly IUserService _userService;
 
         int _previousSelectedIndex = -1;
         BindingSource _bindingSource = new BindingSource();
         private TransactionListPaginationHelper helper;
 
 
-        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
+        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
         {
             _orderService = orderService;
             _inventoryService = inventoryService;
             _productService = productService;
             _orderType = orderType; //OrderTypeEnum.Sale;//
             _listener = listener;
+            _userService = userService;
 
             InitializeComponent();
             this.Load += OrderListUC_Load;
@@ -59,14 +62,19 @@ namespace IMS.Forms.Inventory.Transaction
 
             btnPrint.Image = null;
 
+            InitializeSearchTextBox();
 
-
+        }
+        private void InitializeSearchTextBox()
+        {
+            var users = _userService.GetUserListWithCompanyForCombo(UserTypeEnum.All, new int[0]);
+            txtSearchClient.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
+            txtSearchClient.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtSearchClient.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
 
         private void InitializeGridView()
         {
-
-
             dgvOrders.AutoGenerateColumns = false;
             //switch (_orderType)
             //{
