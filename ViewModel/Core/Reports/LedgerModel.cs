@@ -22,6 +22,7 @@ namespace ViewModel.Core.Reports
         // for use in Ledger print
         public string User { get; set; }
         public string Address { get; set; }
+        public string Phone { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
 

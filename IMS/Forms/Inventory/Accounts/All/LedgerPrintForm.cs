@@ -45,12 +45,13 @@ namespace IMS.Forms.Inventory.Accounts.All
         {
             var reportParam = new List<ReportParameter>();
             var company = _settingService.GetCompanyInfoSetting();
-            //reportParam.Add(new ReportParameter("CompanyName", company.CompanyName));
-            //reportParam.Add(new ReportParameter("CompanyAddress", company.Address));
-            //reportParam.Add(new ReportParameter("CompanyPhone", company.Phone));
+            reportParam.Add(new ReportParameter("CompanyName", company.CompanyName));
+            reportParam.Add(new ReportParameter("CompanyAddress", company.Address));
+            reportParam.Add(new ReportParameter("CompanyPhone", company.Phone));
 
             reportParam.Add(new ReportParameter("CustomerName", model.User));
-            reportParam.Add(new ReportParameter("Address", model.Address));
+            reportParam.Add(new ReportParameter("CustomerAddress", model.Address));
+            reportParam.Add(new ReportParameter("CustomerPhone", model.Phone));
             reportParam.Add(new ReportParameter("FromDate", model.FromDate));
             reportParam.Add(new ReportParameter("ToDate", model.ToDate));
             reportParam.Add(new ReportParameter("DebitTotal", model.DebitSum));

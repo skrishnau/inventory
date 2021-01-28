@@ -86,6 +86,7 @@ namespace Service.Core.Reports
                         DrCr = drcr,
                         DrCrString = drcr > 0 ? "Cr" : drcr < 0 ? "Dr" : "",
                         // for ledger print
+                        Phone = user.Phone,
                         Address = user.Address,
                         User = user.Name,
                         FromDate = from.ToString("yyyy/MM/dd"),
