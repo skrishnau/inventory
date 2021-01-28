@@ -194,10 +194,10 @@ namespace IMS.Forms.Inventory.Dashboard
                 {
                     lblCustomers.Text = sum.Value.ToString("0");
                 }
-                else if (sum.Key == TransactionSummaryKeys.InventoryQuantity.ToString())
-                {
-                    lblInventoryQuantity.Text = sum.Value.ToString("0");
-                }
+                //else if (sum.Key == TransactionSummaryKeys.InventoryQuantity.ToString())
+                //{
+                //    lblInventoryQuantity.Text = sum.Value.ToString("0");
+                //}
             }
         }
 

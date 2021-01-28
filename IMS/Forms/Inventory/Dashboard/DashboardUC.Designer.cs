@@ -45,9 +45,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblPurchase = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.lblInventoryQuantity = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblCustomers = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -55,6 +52,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.dgvDueReceivables = new System.Windows.Forms.DataGridView();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -64,16 +65,11 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblCompanyName = new System.Windows.Forms.Label();
-            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDueDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -175,10 +171,10 @@
             this.panel7.Controls.Add(this.label5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel7.Location = new System.Drawing.Point(415, 11);
+            this.panel7.Location = new System.Drawing.Point(517, 11);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(5);
-            this.panel7.Size = new System.Drawing.Size(193, 63);
+            this.panel7.Size = new System.Drawing.Size(244, 63);
             this.panel7.TabIndex = 4;
             // 
             // lblProducts
@@ -187,7 +183,7 @@
             this.lblProducts.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProducts.Location = new System.Drawing.Point(5, 5);
             this.lblProducts.Name = "lblProducts";
-            this.lblProducts.Size = new System.Drawing.Size(183, 28);
+            this.lblProducts.Size = new System.Drawing.Size(234, 28);
             this.lblProducts.TabIndex = 1;
             this.lblProducts.Text = "0";
             this.lblProducts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -197,7 +193,7 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label5.Location = new System.Drawing.Point(5, 33);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(183, 25);
+            this.label5.Size = new System.Drawing.Size(234, 25);
             this.label5.TabIndex = 0;
             this.label5.Text = "Products";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -211,7 +207,7 @@
             this.panel3.Location = new System.Drawing.Point(11, 11);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(193, 63);
+            this.panel3.Size = new System.Drawing.Size(244, 63);
             this.panel3.TabIndex = 5;
             // 
             // lblSale
@@ -220,7 +216,7 @@
             this.lblSale.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSale.Location = new System.Drawing.Point(5, 5);
             this.lblSale.Name = "lblSale";
-            this.lblSale.Size = new System.Drawing.Size(183, 28);
+            this.lblSale.Size = new System.Drawing.Size(234, 28);
             this.lblSale.TabIndex = 1;
             this.lblSale.Text = "0";
             this.lblSale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -230,7 +226,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label4.Location = new System.Drawing.Point(5, 33);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(183, 25);
+            this.label4.Size = new System.Drawing.Size(234, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "Sale Transactioons";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -241,10 +237,10 @@
             this.panel4.Controls.Add(this.label7);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel4.Location = new System.Drawing.Point(213, 11);
+            this.panel4.Location = new System.Drawing.Point(264, 11);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5);
-            this.panel4.Size = new System.Drawing.Size(193, 63);
+            this.panel4.Size = new System.Drawing.Size(244, 63);
             this.panel4.TabIndex = 6;
             // 
             // lblPurchase
@@ -253,7 +249,7 @@
             this.lblPurchase.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPurchase.Location = new System.Drawing.Point(5, 5);
             this.lblPurchase.Name = "lblPurchase";
-            this.lblPurchase.Size = new System.Drawing.Size(183, 28);
+            this.lblPurchase.Size = new System.Drawing.Size(234, 28);
             this.lblPurchase.TabIndex = 1;
             this.lblPurchase.Text = "0";
             this.lblPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -263,43 +259,10 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label7.Location = new System.Drawing.Point(5, 33);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(183, 25);
+            this.label7.Size = new System.Drawing.Size(234, 25);
             this.label7.TabIndex = 0;
             this.label7.Text = "Purchase Transactions";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.lblInventoryQuantity);
-            this.panel5.Controls.Add(this.label9);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel5.Location = new System.Drawing.Point(617, 11);
-            this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(5);
-            this.panel5.Size = new System.Drawing.Size(193, 63);
-            this.panel5.TabIndex = 7;
-            // 
-            // lblInventoryQuantity
-            // 
-            this.lblInventoryQuantity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInventoryQuantity.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInventoryQuantity.Location = new System.Drawing.Point(5, 5);
-            this.lblInventoryQuantity.Name = "lblInventoryQuantity";
-            this.lblInventoryQuantity.Size = new System.Drawing.Size(183, 28);
-            this.lblInventoryQuantity.TabIndex = 1;
-            this.lblInventoryQuantity.Text = "0";
-            this.lblInventoryQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label9.Location = new System.Drawing.Point(5, 33);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(183, 25);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Inventory Quantity";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel6
             // 
@@ -307,10 +270,10 @@
             this.panel6.Controls.Add(this.label11);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel6.Location = new System.Drawing.Point(819, 11);
+            this.panel6.Location = new System.Drawing.Point(770, 11);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(5);
-            this.panel6.Size = new System.Drawing.Size(197, 63);
+            this.panel6.Size = new System.Drawing.Size(246, 63);
             this.panel6.TabIndex = 8;
             // 
             // lblCustomers
@@ -319,7 +282,7 @@
             this.lblCustomers.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustomers.Location = new System.Drawing.Point(5, 5);
             this.lblCustomers.Name = "lblCustomers";
-            this.lblCustomers.Size = new System.Drawing.Size(187, 28);
+            this.lblCustomers.Size = new System.Drawing.Size(236, 28);
             this.lblCustomers.TabIndex = 1;
             this.lblCustomers.Text = "0";
             this.lblCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -329,7 +292,7 @@
             this.label11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label11.Location = new System.Drawing.Point(5, 33);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(187, 25);
+            this.label11.Size = new System.Drawing.Size(236, 25);
             this.label11.TabIndex = 0;
             this.label11.Text = "Customers";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -338,15 +301,13 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetPartial;
-            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Controls.Add(this.panel6, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel6, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel5, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel7, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -398,6 +359,45 @@
             this.dgvDueReceivables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDueReceivables.Size = new System.Drawing.Size(301, 219);
             this.dgvDueReceivables.TabIndex = 1;
+            // 
+            // colUser
+            // 
+            this.colUser.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colUser.DataPropertyName = "User";
+            this.colUser.HeaderText = "Customer";
+            this.colUser.Name = "colUser";
+            this.colUser.ReadOnly = true;
+            this.colUser.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTotalAmount.DataPropertyName = "TransactionAmount";
+            this.colTotalAmount.HeaderText = "Total Amt";
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colTotalAmount.Width = 77;
+            // 
+            // colDueAmount
+            // 
+            this.colDueAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDueAmount.DataPropertyName = "DueAmount";
+            this.colDueAmount.HeaderText = "Due Amt.";
+            this.colDueAmount.Name = "colDueAmount";
+            this.colDueAmount.ReadOnly = true;
+            this.colDueAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colDueAmount.Width = 76;
+            // 
+            // colDueDays
+            // 
+            this.colDueDays.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDueDays.DataPropertyName = "DueDays";
+            this.colDueDays.HeaderText = "Due Days";
+            this.colDueDays.Name = "colDueDays";
+            this.colDueDays.ReadOnly = true;
+            this.colDueDays.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colDueDays.Width = 79;
             // 
             // label3
             // 
@@ -498,45 +498,6 @@
             this.lblCompanyName.Text = "My Company";
             this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // colUser
-            // 
-            this.colUser.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colUser.DataPropertyName = "User";
-            this.colUser.HeaderText = "Customer";
-            this.colUser.Name = "colUser";
-            this.colUser.ReadOnly = true;
-            this.colUser.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTotalAmount.DataPropertyName = "TransactionAmount";
-            this.colTotalAmount.HeaderText = "Total Amt";
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colTotalAmount.Width = 77;
-            // 
-            // colDueAmount
-            // 
-            this.colDueAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDueAmount.DataPropertyName = "DueAmount";
-            this.colDueAmount.HeaderText = "Due Amt.";
-            this.colDueAmount.Name = "colDueAmount";
-            this.colDueAmount.ReadOnly = true;
-            this.colDueAmount.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colDueAmount.Width = 76;
-            // 
-            // colDueDays
-            // 
-            this.colDueDays.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDueDays.DataPropertyName = "DueDays";
-            this.colDueDays.HeaderText = "Due Days";
-            this.colDueDays.Name = "colDueDays";
-            this.colDueDays.ReadOnly = true;
-            this.colDueDays.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.colDueDays.Width = 79;
-            // 
             // DashboardUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,7 +515,6 @@
             this.panel7.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -574,9 +534,6 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblCustomers;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label lblInventoryQuantity;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lblPurchase;
         private System.Windows.Forms.Label label7;
