@@ -116,6 +116,7 @@ namespace IMS.Forms.Inventory.Transaction
             saveFooterUC1.btnCheckoutAndPrint.Click += BtnCheckoutAndPrint_Click;
             saveFooterUC1.btnCheckout.Click += BtnCheckout_Click;
             rbCredit.CheckedChanged += RbCredit_CheckedChanged;
+            rbCash.CheckedChanged += RbCredit_CheckedChanged;
 
             _listener.UserUpdated += _listener_CustomerUpdated;
             lblClient.DoubleClick += LblClient_DoubleClick;
