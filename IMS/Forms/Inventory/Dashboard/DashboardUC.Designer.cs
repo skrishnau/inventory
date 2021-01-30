@@ -124,7 +124,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 49);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1027, 38);
+            this.panel2.Size = new System.Drawing.Size(1138, 38);
             this.panel2.TabIndex = 2;
             // 
             // label2
@@ -171,10 +171,10 @@
             this.panel7.Controls.Add(this.label5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel7.Location = new System.Drawing.Point(517, 11);
+            this.panel7.Location = new System.Drawing.Point(573, 11);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(5);
-            this.panel7.Size = new System.Drawing.Size(244, 63);
+            this.panel7.Size = new System.Drawing.Size(272, 63);
             this.panel7.TabIndex = 4;
             // 
             // lblProducts
@@ -183,7 +183,7 @@
             this.lblProducts.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProducts.Location = new System.Drawing.Point(5, 5);
             this.lblProducts.Name = "lblProducts";
-            this.lblProducts.Size = new System.Drawing.Size(234, 28);
+            this.lblProducts.Size = new System.Drawing.Size(262, 28);
             this.lblProducts.TabIndex = 1;
             this.lblProducts.Text = "0";
             this.lblProducts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -193,7 +193,7 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label5.Location = new System.Drawing.Point(5, 33);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(234, 25);
+            this.label5.Size = new System.Drawing.Size(262, 25);
             this.label5.TabIndex = 0;
             this.label5.Text = "Products";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -207,7 +207,7 @@
             this.panel3.Location = new System.Drawing.Point(11, 11);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(5);
-            this.panel3.Size = new System.Drawing.Size(244, 63);
+            this.panel3.Size = new System.Drawing.Size(272, 63);
             this.panel3.TabIndex = 5;
             // 
             // lblSale
@@ -216,7 +216,7 @@
             this.lblSale.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSale.Location = new System.Drawing.Point(5, 5);
             this.lblSale.Name = "lblSale";
-            this.lblSale.Size = new System.Drawing.Size(234, 28);
+            this.lblSale.Size = new System.Drawing.Size(262, 28);
             this.lblSale.TabIndex = 1;
             this.lblSale.Text = "0";
             this.lblSale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -226,7 +226,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label4.Location = new System.Drawing.Point(5, 33);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(234, 25);
+            this.label4.Size = new System.Drawing.Size(262, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "Sale Transactioons";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -237,10 +237,10 @@
             this.panel4.Controls.Add(this.label7);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel4.Location = new System.Drawing.Point(264, 11);
+            this.panel4.Location = new System.Drawing.Point(292, 11);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5);
-            this.panel4.Size = new System.Drawing.Size(244, 63);
+            this.panel4.Size = new System.Drawing.Size(272, 63);
             this.panel4.TabIndex = 6;
             // 
             // lblPurchase
@@ -249,7 +249,7 @@
             this.lblPurchase.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPurchase.Location = new System.Drawing.Point(5, 5);
             this.lblPurchase.Name = "lblPurchase";
-            this.lblPurchase.Size = new System.Drawing.Size(234, 28);
+            this.lblPurchase.Size = new System.Drawing.Size(262, 28);
             this.lblPurchase.TabIndex = 1;
             this.lblPurchase.Text = "0";
             this.lblPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -259,7 +259,7 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label7.Location = new System.Drawing.Point(5, 33);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(234, 25);
+            this.label7.Size = new System.Drawing.Size(262, 25);
             this.label7.TabIndex = 0;
             this.label7.Text = "Purchase Transactions";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -270,10 +270,10 @@
             this.panel6.Controls.Add(this.label11);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel6.Location = new System.Drawing.Point(770, 11);
+            this.panel6.Location = new System.Drawing.Point(854, 11);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(5);
-            this.panel6.Size = new System.Drawing.Size(246, 63);
+            this.panel6.Size = new System.Drawing.Size(273, 63);
             this.panel6.TabIndex = 8;
             // 
             // lblCustomers
@@ -282,7 +282,7 @@
             this.lblCustomers.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustomers.Location = new System.Drawing.Point(5, 5);
             this.lblCustomers.Name = "lblCustomers";
-            this.lblCustomers.Size = new System.Drawing.Size(236, 28);
+            this.lblCustomers.Size = new System.Drawing.Size(263, 28);
             this.lblCustomers.TabIndex = 1;
             this.lblCustomers.Text = "0";
             this.lblCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -292,7 +292,7 @@
             this.label11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label11.Location = new System.Drawing.Point(5, 33);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(236, 25);
+            this.label11.Size = new System.Drawing.Size(263, 25);
             this.label11.TabIndex = 0;
             this.label11.Text = "Customers";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -316,7 +316,7 @@
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1027, 85);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1138, 85);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // panel1
@@ -328,7 +328,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 177);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1027, 252);
+            this.panel1.Size = new System.Drawing.Size(1138, 252);
             this.panel1.TabIndex = 0;
             // 
             // panel8
@@ -340,7 +340,7 @@
             this.panel8.Location = new System.Drawing.Point(699, 0);
             this.panel8.Name = "panel8";
             this.panel8.Padding = new System.Windows.Forms.Padding(5);
-            this.panel8.Size = new System.Drawing.Size(311, 252);
+            this.panel8.Size = new System.Drawing.Size(413, 252);
             this.panel8.TabIndex = 1;
             // 
             // dgvDueReceivables
@@ -357,7 +357,7 @@
             this.dgvDueReceivables.Location = new System.Drawing.Point(5, 28);
             this.dgvDueReceivables.Name = "dgvDueReceivables";
             this.dgvDueReceivables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDueReceivables.Size = new System.Drawing.Size(301, 219);
+            this.dgvDueReceivables.Size = new System.Drawing.Size(403, 219);
             this.dgvDueReceivables.TabIndex = 1;
             // 
             // colUser
@@ -405,7 +405,7 @@
             this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(5, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(301, 23);
+            this.label3.Size = new System.Drawing.Size(403, 23);
             this.label3.TabIndex = 0;
             this.label3.Text = "Due Receivables";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -434,7 +434,7 @@
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(0, 172);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1027, 5);
+            this.splitter1.Size = new System.Drawing.Size(1138, 5);
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
             // 
@@ -448,7 +448,7 @@
             this.pnlCompany.Location = new System.Drawing.Point(0, 0);
             this.pnlCompany.Name = "pnlCompany";
             this.pnlCompany.Padding = new System.Windows.Forms.Padding(4);
-            this.pnlCompany.Size = new System.Drawing.Size(1027, 49);
+            this.pnlCompany.Size = new System.Drawing.Size(1138, 49);
             this.pnlCompany.TabIndex = 3;
             // 
             // panel9
@@ -456,7 +456,7 @@
             this.panel9.Controls.Add(this.lblPhone);
             this.panel9.Controls.Add(this.lblAddress);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(750, 4);
+            this.panel9.Location = new System.Drawing.Point(861, 4);
             this.panel9.Name = "panel9";
             this.panel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel9.Size = new System.Drawing.Size(273, 41);
@@ -493,7 +493,7 @@
             this.lblCompanyName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompanyName.Location = new System.Drawing.Point(4, 4);
             this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(1019, 41);
+            this.lblCompanyName.Size = new System.Drawing.Size(1130, 41);
             this.lblCompanyName.TabIndex = 0;
             this.lblCompanyName.Text = "My Company";
             this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -508,7 +508,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlCompany);
             this.Name = "DashboardUC";
-            this.Size = new System.Drawing.Size(1027, 525);
+            this.Size = new System.Drawing.Size(1138, 525);
             this.pnlTopUnderstockProducts.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

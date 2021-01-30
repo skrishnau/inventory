@@ -79,7 +79,7 @@ namespace Service.Core.Orders
         private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText)
         {
             var split = string.IsNullOrEmpty(userSearchText) ? new string[0] : userSearchText.Split(new char[] { '-' });
-            var name = split.Length>0? split[0].Trim(): "";
+            var name = split.Length > 0 ? split[0].Trim() : "";
             var company = split.Length > 1 ? split[1].Trim() : "";
             var type = orderType.ToString();
             var orders = _context.Order
@@ -798,11 +798,12 @@ namespace Service.Core.Orders
                 var sell = OrderTypeEnum.Sale.ToString();
                 var customer = UserTypeEnum.Customer.ToString();
                 var list = _context.Transaction//.Where(x => x.Type == sell)
-                    .Where(x=>x.User != null && x.User.UserType == customer)
+                    .Where(x => x.User != null && x.User.UserType == customer)
                     .GroupBy(x => x.User)
                     .Select(x => new
                     {
                         User = x.Key.Name,
+                        Company = x.Key.Company,
                         TotalAmount = x.Sum(y => y.Debit),
                         PaidAmount = x.Sum(y => y.Credit),
                         DueAmount = x.Sum(y => y.Debit - y.Credit),
@@ -815,7 +816,7 @@ namespace Service.Core.Orders
                     .AsEnumerable()
                     .Select(x => new DueAmountModel
                     {
-                        User = x.User,
+                        User = x.User + (string.IsNullOrEmpty(x.Company) ? "" : " - " + x.Company),
                         DueAmount = x.DueAmount.ToString("##,##,##0.00"),
                         DueDate = x.DueDate.HasValue ? x.DueDate.Value.ToString("yyyy/MM/dd") : "",
                         DueDays = x.DueDays.HasValue ? x.DueDays.Value : 0,

@@ -23,6 +23,7 @@ namespace ViewModel.Core.Orders
 
         public int? UserId { get; set; }
         public string User { get; set; }
+        public string Company { get; set; }
         public string UserType { get; set; }
 
         //public int? OrderId { get; set; }

@@ -52,6 +52,7 @@
             this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClientType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,6 +149,7 @@
             this.dgvLedger.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDate,
             this.colUser,
+            this.colCompany,
             this.colClientType,
             this.colReference,
             this.colParticulars,
@@ -306,6 +308,15 @@
             this.colUser.HeaderText = "Client";
             this.colUser.Name = "colUser";
             this.colUser.ReadOnly = true;
+            this.colUser.Width = 90;
+            // 
+            // colCompany
+            // 
+            this.colCompany.DataPropertyName = "Company";
+            this.colCompany.HeaderText = "Company";
+            this.colCompany.Name = "colCompany";
+            this.colCompany.ReadOnly = true;
+            this.colCompany.Width = 90;
             // 
             // colClientType
             // 
@@ -313,7 +324,7 @@
             this.colClientType.HeaderText = "Client Type";
             this.colClientType.Name = "colClientType";
             this.colClientType.ReadOnly = true;
-            this.colClientType.Width = 90;
+            this.colClientType.Width = 70;
             // 
             // colReference
             // 
@@ -321,7 +332,7 @@
             this.colReference.HeaderText = "Reference No";
             this.colReference.Name = "colReference";
             this.colReference.ReadOnly = true;
-            this.colReference.Width = 90;
+            this.colReference.Width = 80;
             // 
             // colParticulars
             // 
@@ -337,7 +348,7 @@
             this.colCredit.HeaderText = "Paid Amount";
             this.colCredit.Name = "colCredit";
             this.colCredit.ReadOnly = true;
-            this.colCredit.Width = 90;
+            this.colCredit.Width = 85;
             // 
             // colType
             // 
@@ -345,7 +356,7 @@
             this.colType.HeaderText = "Type";
             this.colType.Name = "colType";
             this.colType.ReadOnly = true;
-            this.colType.Width = 60;
+            this.colType.Width = 55;
             // 
             // colPaymentMethod
             // 
@@ -353,7 +364,7 @@
             this.colPaymentMethod.HeaderText = "Method";
             this.colPaymentMethod.Name = "colPaymentMethod";
             this.colPaymentMethod.ReadOnly = true;
-            this.colPaymentMethod.Width = 80;
+            this.colPaymentMethod.Width = 55;
             // 
             // colDrCr
             // 
@@ -361,7 +372,7 @@
             this.colDrCr.HeaderText = "Bank";
             this.colDrCr.Name = "colDrCr";
             this.colDrCr.ReadOnly = true;
-            this.colDrCr.Width = 90;
+            this.colDrCr.Width = 80;
             // 
             // colCheque
             // 
@@ -369,7 +380,7 @@
             this.colCheque.HeaderText = "Cheque No.";
             this.colCheque.Name = "colCheque";
             this.colCheque.ReadOnly = true;
-            this.colCheque.Width = 90;
+            this.colCheque.Width = 80;
             // 
             // colBalance
             // 
@@ -432,6 +443,7 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCompany;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClientType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn colParticulars;
