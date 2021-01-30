@@ -71,7 +71,10 @@ namespace Service.Core.Payment
                 query = query.Where(x => x.User.UserType == clientTypeStr);
             }
             if (!string.IsNullOrEmpty(searchName))
-                query = query.Where(x => x.User.Name.Contains(searchName));
+            {
+                var splt = searchName.Split(new char[] { '-' })[0].Trim();
+                query = query.Where(x => x.User.Name.Contains(splt));
+            }
             return query.OrderByDescending(x => x.Date);
         }
 

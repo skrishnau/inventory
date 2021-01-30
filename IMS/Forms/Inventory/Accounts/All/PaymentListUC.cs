@@ -71,11 +71,16 @@ namespace IMS.Forms.Inventory.Reports.All
             cbCustomer.SelectedValueChanged += CbCustomer_SelectedValueChanged;
             cbType.SelectedValueChanged += CbType_SelectedValueChanged;
             _listener.PaymentUpdated += _listener_PaymentUpdated;
+            _listener.UserUpdated += _listener_UserUpdated;
             dgvLedger.SelectionChanged += DgvLedger_SelectionChanged;
             btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
         }
 
+        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
+        {
+            PopulateCustomer();
+        }
 
         private void DgvLedger_SelectionChanged(object sender, EventArgs e)
         {
