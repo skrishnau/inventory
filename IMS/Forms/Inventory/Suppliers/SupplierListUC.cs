@@ -56,6 +56,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void InitializeSearchTextBox()
         {
+            txtName.AutoCompleteCustomSource.Clear();
             var users = _userService.GetUserListWithCompanyForCombo(_userType, new int[0]);
             txtName.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
             txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -138,6 +139,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
+            InitializeSearchTextBox();
             PopulateUserList();
         }
 

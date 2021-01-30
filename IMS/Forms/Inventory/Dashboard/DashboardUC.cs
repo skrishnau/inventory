@@ -48,7 +48,8 @@ namespace IMS.Forms.Inventory.Dashboard
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
             _listener.UserUpdated += _listener_UserUpdated;
             _listener.OrderUpdated += _listener_OrderUpdated;
-            _listener.CompanyUpdated += _listener_CompanyUpdated; ;
+            _listener.CompanyUpdated += _listener_CompanyUpdated;
+            _listener.PaymentUpdated += _listener_PaymentUpdated;
 
             PopulateUnderstockProducts();
             PopulateDueReceivables();
@@ -59,6 +60,11 @@ namespace IMS.Forms.Inventory.Dashboard
 
             PopulateBarDiagram();
             
+        }
+
+        private void _listener_PaymentUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PaymentModel> e)
+        {
+            PopulateDueReceivables();
         }
 
         private void PopulateBarDiagram()

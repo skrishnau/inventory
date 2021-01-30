@@ -796,7 +796,9 @@ namespace Service.Core.Orders
                 var nowDate = DateTime.Now.Date;
                 //var orders = _context.Order.Where(x => x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
                 var sell = OrderTypeEnum.Sale.ToString();
-                var list = _context.Transaction.Where(x => x.Type == sell)
+                var customer = UserTypeEnum.Customer.ToString();
+                var list = _context.Transaction//.Where(x => x.Type == sell)
+                    .Where(x=>x.User != null && x.User.UserType == customer)
                     .GroupBy(x => x.User)
                     .Select(x => new
                     {
