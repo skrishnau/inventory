@@ -112,7 +112,6 @@ namespace IMS.Forms.Inventory.Payment
                 {
                     byFrom = _userModel.UserType == UserTypeEnum.Customer.ToString() ? "By" : "To";
                     byFromCustomerSupplier = byFrom + " " + _userModel.UserType;//_userModel.UserType == UserTypeEnum.Customer.ToString() ? "By Customer" : "To Supplier";
-                    btnPrint.Visible = _userModel.UserType == UserTypeEnum.Customer.ToString();
                     this.Text = $"New Payment {byFromCustomerSupplier}";
                     this.headerTemplate1.Text = _userModel.Name;
                     var transactionSum = _userService.GetTransactionSumOfUser(_userModel.Id);
@@ -129,8 +128,8 @@ namespace IMS.Forms.Inventory.Payment
                     else
                     {
                         cbPaymentType.SelectedValue = PaymentTypeEnum.Debit.ToString();
-
                     }
+                    btnPrint.Visible = (cbPaymentType.SelectedValue as string) == PaymentTypeEnum.Credit.ToString(); //_userModel.UserType == UserTypeEnum.Customer.ToString();
                 }
                 lblByFrom.Text = byFromCustomerSupplier;
             }
@@ -174,7 +173,12 @@ namespace IMS.Forms.Inventory.Payment
             btnPrint.Click += BtnPrint_Click;
             chkAllPaid.CheckedChanged += ChkAllPaid_CheckedChanged;
             cbPaymentMethod.SelectedValueChanged += CbPaymentMethod_SelectedValueChanged;
+            cbPaymentType.SelectedValueChanged += CbPaymentType_SelectedValueChanged;
+        }
 
+        private void CbPaymentType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            btnPrint.Visible = (cbPaymentType.SelectedValue as string) == PaymentTypeEnum.Credit.ToString();
         }
 
 
