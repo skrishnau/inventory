@@ -80,7 +80,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 423);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(518, 48);
-            this.panel1.TabIndex = 40;
+            this.panel1.TabIndex = 6;
             // 
             // tableLayoutPanel2
             // 
@@ -106,7 +106,7 @@
             this.txtPaidAmount.Location = new System.Drawing.Point(69, 27);
             this.txtPaidAmount.Name = "txtPaidAmount";
             this.txtPaidAmount.Size = new System.Drawing.Size(139, 20);
-            this.txtPaidAmount.TabIndex = 45;
+            this.txtPaidAmount.TabIndex = 10;
             // 
             // label7
             // 
@@ -114,7 +114,7 @@
             this.label7.Location = new System.Drawing.Point(3, 24);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 24);
-            this.label7.TabIndex = 11;
+            this.label7.TabIndex = 10;
             this.label7.Text = "Paid Amt.";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -134,7 +134,7 @@
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(139, 20);
-            this.txtTotal.TabIndex = 44;
+            this.txtTotal.TabIndex = 9;
             // 
             // panel3
             // 
@@ -146,7 +146,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(256, 48);
-            this.panel3.TabIndex = 0;
+            this.panel3.TabIndex = 6;
             // 
             // label9
             // 
@@ -154,7 +154,7 @@
             this.label9.Location = new System.Drawing.Point(6, 4);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 13);
-            this.label9.TabIndex = 7;
+            this.label9.TabIndex = 6;
             this.label9.Text = "Payment";
             // 
             // pnlPaymentDueDate
@@ -164,7 +164,7 @@
             this.pnlPaymentDueDate.Location = new System.Drawing.Point(4, 20);
             this.pnlPaymentDueDate.Name = "pnlPaymentDueDate";
             this.pnlPaymentDueDate.Size = new System.Drawing.Size(214, 23);
-            this.pnlPaymentDueDate.TabIndex = 4;
+            this.pnlPaymentDueDate.TabIndex = 8;
             this.pnlPaymentDueDate.Visible = false;
             // 
             // dtPaymentDueDate
@@ -173,7 +173,7 @@
             this.dtPaymentDueDate.Location = new System.Drawing.Point(102, 2);
             this.dtPaymentDueDate.Name = "dtPaymentDueDate";
             this.dtPaymentDueDate.Size = new System.Drawing.Size(108, 20);
-            this.dtPaymentDueDate.TabIndex = 43;
+            this.dtPaymentDueDate.TabIndex = 8;
             // 
             // label3
             // 
@@ -181,7 +181,7 @@
             this.label3.Location = new System.Drawing.Point(3, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
-            this.label3.TabIndex = 4;
+            this.label3.TabIndex = 8;
             this.label3.Text = "Payment Due Date";
             // 
             // rbCash
@@ -190,7 +190,7 @@
             this.rbCash.Location = new System.Drawing.Point(60, 2);
             this.rbCash.Name = "rbCash";
             this.rbCash.Size = new System.Drawing.Size(74, 17);
-            this.rbCash.TabIndex = 41;
+            this.rbCash.TabIndex = 6;
             this.rbCash.Text = "Cash (Full)";
             this.rbCash.UseVisualStyleBackColor = true;
             // 
@@ -200,7 +200,7 @@
             this.rbCredit.Location = new System.Drawing.Point(140, 2);
             this.rbCredit.Name = "rbCredit";
             this.rbCredit.Size = new System.Drawing.Size(90, 17);
-            this.rbCredit.TabIndex = 42;
+            this.rbCredit.TabIndex = 7;
             this.rbCredit.Text = "Credit (Partial)";
             this.rbCredit.UseVisualStyleBackColor = true;
             // 
@@ -221,7 +221,7 @@
             this.dtExpectedDate.Location = new System.Drawing.Point(410, 3);
             this.dtExpectedDate.Name = "dtExpectedDate";
             this.dtExpectedDate.Size = new System.Drawing.Size(104, 20);
-            this.dtExpectedDate.TabIndex = 12;
+            this.dtExpectedDate.TabIndex = 1;
             // 
             // lblExpectedDate
             // 
@@ -254,7 +254,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(518, 27);
-            this.tableLayoutPanel1.TabIndex = 20;
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cbClient
             // 
@@ -263,7 +263,7 @@
             this.cbClient.Margin = new System.Windows.Forms.Padding(2);
             this.cbClient.Name = "cbClient";
             this.cbClient.Size = new System.Drawing.Size(138, 21);
-            this.cbClient.TabIndex = 21;
+            this.cbClient.TabIndex = 2;
             // 
             // label5
             // 
@@ -279,14 +279,14 @@
             this.txtAddress.Location = new System.Drawing.Point(267, 3);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(107, 20);
-            this.txtAddress.TabIndex = 22;
+            this.txtAddress.TabIndex = 3;
             // 
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(433, 3);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(82, 20);
-            this.txtPhone.TabIndex = 23;
+            this.txtPhone.TabIndex = 4;
             // 
             // label4
             // 
@@ -346,7 +346,7 @@
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(518, 366);
-            this.dgvItems.TabIndex = 30;
+            this.dgvItems.TabIndex = 5;
             // 
             // saveFooterUC1
             // 

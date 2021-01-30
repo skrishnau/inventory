@@ -295,6 +295,7 @@ namespace IMS.Forms.Inventory.Transaction
         }
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
         {
+            
             ResponseModel<OrderModel> msg = new ResponseModel<OrderModel>();
             var userType = _orderType == OrderTypeEnum.Sale ? UserTypeEnum.Customer : UserTypeEnum.Supplier;
             var givenByTo = _orderType == OrderTypeEnum.Sale ? "given to" : "taken from";
@@ -332,20 +333,40 @@ namespace IMS.Forms.Inventory.Transaction
             var model = GetData();
             if (model == null)
                 return null;
-           
-            msg = _orderService.SaveOrder(model, checkout);
-            if (string.IsNullOrEmpty(msg.Message))
+
+            var isCanceledByUser = false;
+
+            if (checkout)
             {
-                PopupMessage.ShowSaveSuccessMessage();
-                if (closeFormAftherSave)
-                    this.Close();
-                return msg.Data;
+                DialogResult result = MessageBox.Show(this, "Are you sure to checkout the transaction?", "Checkout?", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    msg = _orderService.SaveOrder(model, checkout);
+                }else
+                {
+                    isCanceledByUser = true;
+                }
             }
             else
             {
-                PopupMessage.ShowErrorMessage(msg.Message);//"Couln't save! Please contact admin.");
-
+                msg = _orderService.SaveOrder(model, checkout);
             }
+            if (!isCanceledByUser)
+            {
+                if (string.IsNullOrEmpty(msg.Message))
+                {
+                    PopupMessage.ShowSaveSuccessMessage();
+                    if (closeFormAftherSave)
+                        this.Close();
+                    return msg.Data;
+                }
+                else
+                {
+                    PopupMessage.ShowErrorMessage(msg.Message);//"Couln't save! Please contact admin.");
+
+                }
+            }
+            
             this.Focus();
             return null;
         }
