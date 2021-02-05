@@ -160,7 +160,7 @@ namespace IMS.Forms.Inventory.Transaction
             // required field validator
             List<Control> requiredControls = new List<Control>()
             {
-                 txtReceiptNo,
+                 //txtReceiptNo, // recipt no . is not required in case of Order-save
             };
             //switch (_orderType)
             //{
@@ -240,8 +240,8 @@ namespace IMS.Forms.Inventory.Transaction
                     cbClient.Text = model.User;
                     if(model.UserId > 0)
                         cbClient.SelectedValue = model.UserId;
-                    rbCash.Checked = model.PaidAmount >= model.TotalAmount;
-                    rbCredit.Checked = !rbCash.Checked;
+                    rbCash.Checked = model.PaymentType == OrderPaymentTypeEnum.Cash.ToString();//model.PaidAmount >= model.TotalAmount;
+                    rbCredit.Checked = model.PaymentType == OrderPaymentTypeEnum.Credit.ToString(); // !rbCash.Checked;
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
                     dtExpectedDate.Value = model.DeliveryDate;
@@ -290,9 +290,13 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void PopulateReceiptNumber()
         {
-            if (_orderModel == null)
+            // orderModel.iscompleted is checked to knwo if it's editing a completed order ; if it is then generate new receipt
+            if ((_orderModel?.IsCompleted??false) || string.IsNullOrEmpty(_orderModel?.ReferenceNumber) || string.IsNullOrWhiteSpace(_orderModel?.ReferenceNumber))
             {
-                txtReceiptNo.Text = _appSettingService.GetReceiptNumber((ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), _orderType.ToString()));
+                var nextReceipt = _appSettingService.GetReceiptNumber((ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), _orderType.ToString()));
+                txtReceiptNo.Text = nextReceipt;
+                if (_orderModel != null)
+                    _orderModel.ReferenceNumber = nextReceipt;
             }
         }
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
@@ -301,6 +305,21 @@ namespace IMS.Forms.Inventory.Transaction
             ResponseModel<OrderModel> msg = new ResponseModel<OrderModel>();
             var userType = _orderType == OrderTypeEnum.Sale ? UserTypeEnum.Customer : UserTypeEnum.Supplier;
             var givenByTo = _orderType == OrderTypeEnum.Sale ? "given to" : "taken from";
+            if (checkout && (string.IsNullOrWhiteSpace(txtReceiptNo.Text) || txtReceiptNo.Text == string.Empty))
+            {
+                msg.Message += "Receipt No. is required\n";
+                errorProvider.SetError(txtReceiptNo, "Receipt No. is required");
+            }
+            else
+                errorProvider.SetError(txtReceiptNo, string.Empty);
+            // cash credit
+            if (checkout && !rbCash.Checked && !rbCredit.Checked)
+            {
+                msg.Message += "Cash/Credit option must be selected";
+                errorProvider.SetError(rbCredit, "Cash/Credit option must be selected");
+            }
+            else
+                errorProvider.SetError(rbCredit, string.Empty);
             if (!checkout)
                 _greaterThanZeroFieldValidator.Remove(txtTotal);
             else 
@@ -311,15 +330,7 @@ namespace IMS.Forms.Inventory.Transaction
                 msg.Message += "Some Fields are less than zero\n";
             if (txtPaidAmount.Value > txtTotal.Value)
                 msg.Message += "Paid amount cannot be greater than total amount";
-            if (!rbCash.Checked && !rbCredit.Checked)
-            {
-                msg.Message += "Cash/Credit option must be selected";
-                errorProvider.SetError(rbCredit, "Cash/Credit option must be selected");
-            }
-            else
-            {
-                errorProvider.SetError(rbCredit, string.Empty);
-            }
+            
             if (rbCredit.Checked && string.IsNullOrEmpty(cbClient.Text))
             {
                 var creditToAnonumousMsg = $"Credit can't be {givenByTo} anonymous {userType.ToString()}. Please enter {userType.ToString()} name";
@@ -401,7 +412,7 @@ namespace IMS.Forms.Inventory.Transaction
                     Phone = txtPhone.Text,
                     Address = txtAddress.Text,
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.Value : (DateTime?)null,
-                    PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : OrderPaymentTypeEnum.Cash.ToString(),
+                    PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : rbCash.Checked ? OrderPaymentTypeEnum.Cash.ToString() : null,
                     TotalAmount = items.Select(x => x.Total).Sum()
                 };
                 orderModel.User = client;

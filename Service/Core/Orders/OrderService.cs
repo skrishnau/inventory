@@ -87,7 +87,7 @@ namespace Service.Core.Orders
                 .Include(x => x.OrderItems);
             if (orderType != OrderTypeEnum.All)
                 orders = orders.Where(x => x.OrderType == type);
-            orders = orders.OrderByDescending(x => x.CreatedAt); //.ThenByDescending(x => x.CreatedAt)
+            orders = orders.OrderByDescending(x => x.UpdatedAt); //.ThenByDescending(x => x.CreatedAt)
             if (!string.IsNullOrEmpty(userSearchText))
                 orders = orders.Where(x => x.User.Name.Contains(name) || x.User.Company.Contains(name));
             if (!string.IsNullOrEmpty(receiptNoSearchText))
@@ -174,6 +174,7 @@ namespace Service.Core.Orders
             var isEditMode = orderModel.Id > 0;
             var now = DateTime.Now;
             var args = BaseEventArgs<OrderModel>.Instance;
+            var voiding = false; // flag to indicate if we are voiding one txn and creating another
             using (var _context = new DatabaseContext())
             {
                 var entity = _context.Order.Find(orderModel.Id);
@@ -182,6 +183,7 @@ namespace Service.Core.Orders
                 // first update void case if any
                 if (entity.Id == 0 && entity.ParentOrderId > 0)
                 {
+                    voiding = true;
                     // means that a completed order has been edited 
                     // the completed / previous order is to be made void and new order has to be created
                     UndoOrderTransactionsWithoutCommit(_context, entity.ParentOrderId);
@@ -223,8 +225,10 @@ namespace Service.Core.Orders
                     }
                 }
 
+                if (!checkout)
+                    entity.ReferenceNumber = null;
 
-                if (!isEditMode)
+                if (checkout) //!isEditMode &&  
                     _appSettingService.IncrementBillIndex((ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), orderModel.OrderType));
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
