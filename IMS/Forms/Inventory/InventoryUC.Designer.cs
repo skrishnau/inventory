@@ -40,11 +40,13 @@
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pnlFooter = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this._menubar = new IMS.Forms.Inventory.InventoryMenuBar();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.pnlFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -55,7 +57,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(0, 0);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(996, 390);
+            this.tabControl.Size = new System.Drawing.Size(996, 385);
             this.tabControl.TabIndex = 0;
             // 
             // splitter1
@@ -73,7 +75,7 @@
             this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter2.Location = new System.Drawing.Point(0, 71);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 390);
+            this.splitter2.Size = new System.Drawing.Size(5, 385);
             this.splitter2.TabIndex = 2;
             this.splitter2.TabStop = false;
             // 
@@ -144,27 +146,40 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // statusStrip1
+            // pnlFooter
             // 
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 461);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.statusStrip1.Size = new System.Drawing.Size(1001, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
+            this.pnlFooter.Controls.Add(this.label3);
+            this.pnlFooter.Controls.Add(this.label1);
+            this.pnlFooter.Controls.Add(this.label2);
+            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlFooter.Location = new System.Drawing.Point(0, 456);
+            this.pnlFooter.Name = "pnlFooter";
+            this.pnlFooter.Size = new System.Drawing.Size(1001, 27);
+            this.pnlFooter.TabIndex = 5;
             // 
-            // toolStripStatusLabel1
+            // label1
             // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 3F);
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(45, 17);
-            this.toolStripStatusLabel1.Text = "Shree Krishna Upadhyaya";
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label1.Location = new System.Drawing.Point(861, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(137, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Code Softech Pvt. Ltd.";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.LightGray;
+            this.label2.Location = new System.Drawing.Point(928, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 7);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Shree Krishna Upadhyaya";
             // 
             // _menubar
             // 
@@ -176,6 +191,17 @@
             this._menubar.Size = new System.Drawing.Size(1001, 66);
             this._menubar.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label3.Location = new System.Drawing.Point(784, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "developed by:";
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,14 +210,14 @@
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this._menubar);
+            this.Controls.Add(this.pnlFooter);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.statusStrip1);
             this.Name = "InventoryUC";
             this.Size = new System.Drawing.Size(1001, 483);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.pnlFooter.ResumeLayout(false);
+            this.pnlFooter.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,7 +238,9 @@
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Panel pnlFooter;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }
