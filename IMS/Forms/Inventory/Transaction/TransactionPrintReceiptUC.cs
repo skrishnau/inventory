@@ -11,15 +11,19 @@ using ViewModel.Core.Orders;
 using Microsoft.Reporting.WinForms;
 using ViewModel.Enums;
 using IMS.Reports.Helpers;
+using Service.Core.Settings;
 
 namespace IMS.Forms.Inventory.Transaction
 {
     public partial class TransactionPrintReceiptUC : UserControl
     {
+        private readonly IAppSettingService _settingService;
         private OrderModel _orderModel;
 
-        public TransactionPrintReceiptUC(OrderModel orderModel)
+        public TransactionPrintReceiptUC(IAppSettingService appSettingService, OrderModel orderModel)
         {
+            this._settingService = appSettingService;
+
             InitializeComponent();
 
             this._orderModel = orderModel;
@@ -48,9 +52,14 @@ namespace IMS.Forms.Inventory.Transaction
 
         }
 
-        public static IEnumerable<ReportParameter> GetReportParametersForSaleTransaction(OrderModel _orderModel)
+        public  IEnumerable<ReportParameter> GetReportParametersForSaleTransaction(OrderModel _orderModel)
         {
             var reportParam = new List<ReportParameter>();
+
+            var company = _settingService.GetCompanyInfoSetting();
+            reportParam.Add(new ReportParameter("CompanyName", company.CompanyName));
+            reportParam.Add(new ReportParameter("CompanyAddress", company.Address));
+            reportParam.Add(new ReportParameter("CompanyPhone", company.Phone));
 
             string customerName = "", supplierName = "";
             if (_orderModel.OrderType == OrderTypeEnum.Sale.ToString())

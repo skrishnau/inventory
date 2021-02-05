@@ -506,7 +506,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             this.Text = "Print Receipt";
             this.Controls.Clear();
-            var transactionPrintBillUc = new TransactionPrintReceiptUC(model);
+            var transactionPrintBillUc = new TransactionPrintReceiptUC(_appSettingService, model);
             this.Controls.Add(transactionPrintBillUc);
         }
 
