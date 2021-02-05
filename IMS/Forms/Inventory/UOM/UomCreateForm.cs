@@ -30,9 +30,12 @@ namespace IMS.Forms.Inventory.UOM
         }
         private void UomCreateForm_Load(object sender, EventArgs e)
         {
+            txtQuantity.Maximum = Int32.MaxValue;
+            txtQuantity.Minimum = 0;
             PopulateUomData();
             PopulateBaseUomCombo();
             InitializeEvents();
+            
         }
 
         private void PopulateBaseUomCombo()
