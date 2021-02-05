@@ -238,6 +238,8 @@ namespace IMS.Forms.Inventory.Transaction
                     txtPhone.Text = model.Phone;
                     txtTotal.Value = model.TotalAmount;
                     cbClient.Text = model.User;
+                    if(model.UserId > 0)
+                        cbClient.SelectedValue = model.UserId;
                     rbCash.Checked = model.PaidAmount >= model.TotalAmount;
                     rbCredit.Checked = !rbCash.Checked;
                     ShowPaymentDueDateLayout(rbCredit.Checked);

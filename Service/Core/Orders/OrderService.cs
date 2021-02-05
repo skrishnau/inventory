@@ -534,7 +534,7 @@ namespace Service.Core.Orders
             var newPackageList = new List<Package>();
             if (order == null)
             {
-                return "The Purchase Order doesn't exist.";
+                return "The Order doesn't exist.";
             }
 
             // validate & assign productId in the items; check if the sku exists

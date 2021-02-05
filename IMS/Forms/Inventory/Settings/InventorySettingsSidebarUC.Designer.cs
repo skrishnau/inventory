@@ -176,6 +176,7 @@
             this.lnkUom.TabIndex = 4;
             this.lnkUom.TabStop = true;
             this.lnkUom.Text = "      Units of Measure";
+            this.lnkUom.Visible = false;
             this.lnkUom.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // lnkAdjustmentCodes
@@ -194,6 +195,7 @@
             this.lnkAdjustmentCodes.TabStop = true;
             this.lnkAdjustmentCodes.Text = "      Adjustment Codes";
             this.lnkAdjustmentCodes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lnkAdjustmentCodes.Visible = false;
             this.lnkAdjustmentCodes.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // splitter6
