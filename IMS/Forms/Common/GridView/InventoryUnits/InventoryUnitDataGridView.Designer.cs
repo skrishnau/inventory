@@ -238,7 +238,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // colUnitQuantity
             // 
             this.colUnitQuantity.DataPropertyName = "UnitQuantity";
-            this.colUnitQuantity.HeaderText = "Units";
+            this.colUnitQuantity.HeaderText = "Qty.";
             this.colUnitQuantity.Name = "colUnitQuantity";
             this.colUnitQuantity.Visible = false;
             this.colUnitQuantity.Width = 70; // 
@@ -254,7 +254,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // colPackageId
             // 
             this.colPackageId.DataPropertyName = "PackageId";
-            this.colPackageId.HeaderText = "Pkg";
+            this.colPackageId.HeaderText = "Unit";
             this.colPackageId.Name = "colPackageId";
             this.colPackageId.Visible = false;
             this.colPackageId.Width = 70;
@@ -262,7 +262,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //// colPackage
             //// 
             this.colPackage.DataPropertyName = "Package";
-            this.colPackage.HeaderText = "Package";
+            this.colPackage.HeaderText = "Unit";
             this.colPackage.Name = "colPackage";
             this.colPackage.Visible = false;
             this.colPackage.Width = 70;
