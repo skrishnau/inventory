@@ -76,14 +76,14 @@
             this.chkOnlyShowAfterLastClearance.AutoSize = true;
             this.chkOnlyShowAfterLastClearance.Location = new System.Drawing.Point(3, 3);
             this.chkOnlyShowAfterLastClearance.Name = "chkOnlyShowAfterLastClearance";
-            this.chkOnlyShowAfterLastClearance.Size = new System.Drawing.Size(223, 17);
+            this.chkOnlyShowAfterLastClearance.Size = new System.Drawing.Size(239, 17);
             this.chkOnlyShowAfterLastClearance.TabIndex = 7;
-            this.chkOnlyShowAfterLastClearance.Text = "Only show transaction after last clearance";
+            this.chkOnlyShowAfterLastClearance.Text = "Only show transaction after last full clearance";
             this.chkOnlyShowAfterLastClearance.UseVisualStyleBackColor = true;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(242, 41);
+            this.btnSearch.Location = new System.Drawing.Point(257, 41);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -255,7 +255,7 @@
             this.panel5.Controls.Add(this.chkOnlyShowAfterLastClearance);
             this.panel5.Location = new System.Drawing.Point(3, 41);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(233, 40);
+            this.panel5.Size = new System.Drawing.Size(248, 40);
             this.panel5.TabIndex = 6;
             // 
             // panel1
