@@ -30,6 +30,9 @@ namespace Service.Core.Settings
         bool SaveBillSetting(List<BillSettingsModel> modelList);
         string GetReceiptNumber(ReferencesTypeEnum orderType);
         string GetReceiptNumber(BillSettingsModel setting, long currentIndex);
+        bool IsLicenseExpired();
+        DateTime?[] GetLicenseExpireDate();
+        void SaveLicenseExpireDate(DateTime date);
         bool SaveCurrentIndex(long index, ReferencesTypeEnum orderType);
         bool IncrementBillIndex(ReferencesTypeEnum orderType);
 

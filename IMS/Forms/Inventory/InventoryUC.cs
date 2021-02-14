@@ -23,6 +23,8 @@ using Service.Core.Inventory;
 using IMS.Forms.Inventory.Reports;
 using Service.Interfaces;
 using Service.Core.Users;
+using Service.Core.Settings;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory
 {
@@ -37,6 +39,7 @@ namespace IMS.Forms.Inventory
         private readonly IProductService _productService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IUserService _userService;
+        private readonly IAppSettingService _appSettingService;
 
         private Transaction.TransactionListUC _transactionListUC;
 
@@ -47,7 +50,7 @@ namespace IMS.Forms.Inventory
         private Dictionary<string, Button> menuButtonsDictionary = new Dictionary<string, Button>();
 
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService)
+        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService)
         {
             _orderService = orderService;
             _productService = productService;
@@ -55,17 +58,43 @@ namespace IMS.Forms.Inventory
             _userService = userService;
             _listener = listener;
             _menubar = menubar;
+            _appSettingService = appSettingService;
 
 
             InitializeComponent();
+
+            this.Load += InventoryUC_Load;
+
+           
+            
+        }
+
+        private void InventoryUC_Load(object sender, EventArgs e)
+        {
+            InitializeLicense();
             this.Dock = DockStyle.Fill;
             // InitializeRootTemplate();
-
             InitializeMenubarButtonEvents();
-
             InitializeTabControl();
-
             ShowDashboard();
+        }
+
+        private void InitializeLicense()
+        {
+            var text = string.Empty;
+            if (Constants.IS_TRIAL)
+            {
+                var date = _appSettingService.GetLicenseExpireDate();
+                try
+                {
+                    text = "Trial Expires After " + (Math.Round((date[0].Value - DateTime.Now).TotalDays) + 1) + " days";
+                }
+                catch (Exception)
+                {
+                    text = "Trial Expires After 0 days";
+                }
+            }
+            lblExpireDays.Text = text;
         }
 
         private void InitializeTabControl()

@@ -8,6 +8,7 @@ using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Settings;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace Service.Core.Settings
 {
@@ -45,7 +46,7 @@ namespace Service.Core.Settings
             using (var _context = new DatabaseContext())
             {
 
-                var dbEntity = _context.AppSetting.FirstOrDefault(x => x.Id == model.Id);
+                var dbEntity = _context.AppSetting.FirstOrDefault(x => x.Id == model.Id || x.Name == model.Name);
                 if (dbEntity == null)
                 {
 
@@ -56,10 +57,11 @@ namespace Service.Core.Settings
                 }
                 else
                 {
-                    dbEntity.Name = model.Name;
+                    //dbEntity.Name = model.Name;
                     dbEntity.DisplayName = model.DisplayName;
-                    dbEntity.Id = model.Id;
+                    //dbEntity.Id = model.Id;
                     //dbEntity.Group = "Themes";
+                    dbEntity.Value = model.Value;
                     dbEntity.UpdatedAt = DateTime.Now;
                 }
                 _context.SaveChanges();
@@ -562,6 +564,85 @@ namespace Service.Core.Settings
             var password = GetAppSetting("Password")?.Value;
             var username = GetAppSetting("Username")?.Value;
             return new PasswordModel { Password = password, Username = username };
+        }
+
+        public void SaveLicenseExpireDate(DateTime date)
+        {
+            var encrypted = StringCipher.Encrypt(date.ToString("yyyy/MM/dd"), "PASS@WORD1");
+            var expireModel = new AppSettingModel()
+            {
+                DisplayName = "Valid Till",
+                Group = "security",
+                Name = "valid_till",
+                Value = encrypted,
+            };
+            SaveAppSetting(expireModel);
+
+            // save in registry
+            Microsoft.Win32.RegistryKey key;
+            key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("win_security_001783462");
+            key.SetValue("win_security_001783462_update1", encrypted);
+            key.Close();
+        }
+
+        public DateTime?[] GetLicenseExpireDate()
+        {
+            var array = new DateTime?[2] { null, null};
+            DateTime expireAtDb;
+            bool expireAtDbParsed = false;
+            var validity = GetAppSetting("valid_till");
+            if (validity != null && validity.Value != null)
+            {
+                try
+                {
+                    var decrypt = StringCipher.Decrypt(validity.Value, "PASS@WORD1");
+                    expireAtDbParsed = DateTime.TryParse(decrypt, out expireAtDb);
+                    if (expireAtDbParsed)
+                        array[0] = expireAtDb;
+                }
+                catch (Exception) { }
+            }
+
+            DateTime expireAtReg;
+            bool expireAtRegParsed;
+            Microsoft.Win32.RegistryKey key;
+            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("win_security_001783462", false);
+            var regValue = key.GetValue("win_security_001783462_update1") as string;
+            key.Close();
+            if (regValue != null)
+            {
+                try
+                {
+                    var decrypt = StringCipher.Decrypt(regValue, "PASS@WORD1");
+                    expireAtRegParsed = DateTime.TryParse(decrypt, out expireAtReg);
+                    if (expireAtRegParsed)
+                        array[1] = expireAtReg;
+                }
+                catch (Exception) { }
+            }
+            return array;
+        }
+
+        public bool IsLicenseExpired()
+        {
+            var expired = false;
+            var dates = GetLicenseExpireDate(); // 0: Db , 1: Reg
+            // if both persistence are null then create new entry
+            if (dates[0] == null && dates[1] == null)
+            {
+                // save the expire date
+                SaveLicenseExpireDate(DateTime.Now.AddDays(10).Date);
+            }
+            var newDates = GetLicenseExpireDate(); // 0: Db , 1: Reg
+            if (newDates[0] == null || newDates[1] == null || newDates[0] != newDates[1])
+            {
+                expired = true;
+            }
+            else if (newDates[0].Value < DateTime.Now)
+            {
+                expired = true;
+            }
+            return expired;
         }
     }
 }

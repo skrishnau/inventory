@@ -5,13 +5,18 @@ using IMS.Forms.POS;
 using IMS.Forms.Inventory.Orders;
 using ViewModel.Enums;
 using IMS.Forms.Inventory.Settings.General;
+using Service.Core.Settings;
+using ViewModel.Utility;
 
 namespace IMS
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private readonly IAppSettingService _appSettingService;
+        public Form1(IAppSettingService appSettingService)
         {
+            _appSettingService = appSettingService;
+
             InitializeComponent();
 
            // InitializeEvents();
@@ -29,8 +34,19 @@ namespace IMS
 
         private void ShowLoginFormOrLogin()
         {
-           // DisplayInventory();
-            
+            // DisplayInventory();
+
+            // check for trial
+            if (Constants.IS_TRIAL)
+            {
+                bool expired = _appSettingService.IsLicenseExpired();
+                if (expired)
+                {
+                    MessageBox.Show(this, "Your license has expired. Please contact sales.", "License Expired!", MessageBoxButtons.OK);
+                    CloseTheApp();
+                }
+            }
+
             // ask for password
             var loginForm = Program.container.GetInstance<PasswordEditForm>();//new InventoryUC();
             loginForm.SetData(false, true);
@@ -42,15 +58,22 @@ namespace IMS
             else if(result == DialogResult.Abort)
             {
                 ShowLoginFormOrLogin();
-            }else
+            }
+            else
             {
-                this.Close();
-                try {
-                    this.Dispose();
-                }
-                catch (Exception) { }
+                CloseTheApp();
             }
             
+        }
+
+        private void CloseTheApp()
+        {
+            this.Close();
+            try
+            {
+                this.Dispose();
+            }
+            catch (Exception) { }
         }
 
         private void DisplayInventory()

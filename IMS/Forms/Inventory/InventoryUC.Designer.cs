@@ -44,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblExpireDays = new System.Windows.Forms.Label();
             this._menubar = new IMS.Forms.Inventory.InventoryMenuBar();
             this.menuStrip1.SuspendLayout();
             this.pnlFooter.SuspendLayout();
@@ -148,6 +149,7 @@
             // 
             // pnlFooter
             // 
+            this.pnlFooter.Controls.Add(this.lblExpireDays);
             this.pnlFooter.Controls.Add(this.label3);
             this.pnlFooter.Controls.Add(this.label1);
             this.pnlFooter.Controls.Add(this.label2);
@@ -167,7 +169,6 @@
             this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "developed by:";
-            this.label3.Visible = false;
             // 
             // label1
             // 
@@ -180,7 +181,6 @@
             this.label1.Size = new System.Drawing.Size(137, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Code Softech Pvt. Ltd.";
-            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -193,6 +193,16 @@
             this.label2.Size = new System.Drawing.Size(70, 7);
             this.label2.TabIndex = 1;
             this.label2.Text = "Shree Krishna Upadhyaya";
+            // 
+            // lblExpireDays
+            // 
+            this.lblExpireDays.AutoSize = true;
+            this.lblExpireDays.ForeColor = System.Drawing.Color.Black;
+            this.lblExpireDays.Location = new System.Drawing.Point(3, 7);
+            this.lblExpireDays.Name = "lblExpireDays";
+            this.lblExpireDays.Size = new System.Drawing.Size(92, 13);
+            this.lblExpireDays.TabIndex = 3;
+            this.lblExpireDays.Text = "Trial Expires After ";
             // 
             // _menubar
             // 
@@ -244,5 +254,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblExpireDays;
     }
 }
