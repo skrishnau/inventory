@@ -14,6 +14,7 @@ using Service.Listeners;
 using ViewModel.Core.Common;
 using IMS.Forms.Inventory.Accounts.All;
 using Service.Core.Settings;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -68,8 +69,15 @@ namespace IMS.Forms.Inventory.Reports.All
         private void BtnPrint_Click(object sender, EventArgs e)
         {
             //var ledgerMaster = GetLedger();
-            var form = new LedgerPrintForm(_appSettingService, _ledgerMasterForPrint);
-            form.ShowDialog();
+            if (_ledgerMasterForPrint != null)
+            {
+                var form = new LedgerPrintForm(_appSettingService, _ledgerMasterForPrint);
+                form.ShowDialog();
+            }
+            else
+            {
+                PopupMessage.ShowInfoMessage("Empty ledger!");
+            }
         }
 
         private void ChkOnlyShowAfterLastClearance_CheckedChanged(object sender, EventArgs e)
@@ -147,20 +155,23 @@ namespace IMS.Forms.Inventory.Reports.All
             _ledgerMaster = GetLedger();
             _ledgerMasterForPrint = GetLedger();
 
-            _ledgerMaster.LedgerData.Add(new LedgerModel()
+            if (_ledgerMaster != null)
             {
-                IsManualNewRow = true,
-                Balance = _ledgerMaster.BalanceSum,
-                Credit = _ledgerMaster.CreditSum,
-                Debit = _ledgerMaster.DebitSum,
-                DrCr = _ledgerMaster.DrCr,
-                DrCrString = _ledgerMaster.DrCrString,
-                Particulars = "Total"
-            });
-            _bindingSource.DataSource = _ledgerMaster.LedgerData;
-            _bindingSource.ResetBindings(false);
-            //dgvLedger.DataSource = ledgerList;
-            //dgvLedger.DataBindings.
+                _ledgerMaster.LedgerData.Add(new LedgerModel()
+                {
+                    IsManualNewRow = true,
+                    Balance = _ledgerMaster.BalanceSum,
+                    Credit = _ledgerMaster.CreditSum,
+                    Debit = _ledgerMaster.DebitSum,
+                    DrCr = _ledgerMaster.DrCr,
+                    DrCrString = _ledgerMaster.DrCrString,
+                    Particulars = "Total"
+                });
+                _bindingSource.DataSource = _ledgerMaster.LedgerData;
+                _bindingSource.ResetBindings(false);
+                //dgvLedger.DataSource = ledgerList;
+                //dgvLedger.DataBindings.
+            }
         }
     }
 }

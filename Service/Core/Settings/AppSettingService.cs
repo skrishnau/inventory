@@ -581,8 +581,11 @@ namespace Service.Core.Settings
             // save in registry
             Microsoft.Win32.RegistryKey key;
             key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("win_security_001783462");
-            key.SetValue("win_security_001783462_update1", encrypted);
-            key.Close();
+            if (key != null)
+            {
+                key.SetValue("win_security_001783462_update1", encrypted);
+                key.Close();
+            }
         }
 
         public DateTime?[] GetLicenseExpireDate()
@@ -607,8 +610,12 @@ namespace Service.Core.Settings
             bool expireAtRegParsed;
             Microsoft.Win32.RegistryKey key;
             key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("win_security_001783462", false);
-            var regValue = key.GetValue("win_security_001783462_update1") as string;
-            key.Close();
+            string regValue = null;
+            if (key != null)
+            {
+                regValue = key.GetValue("win_security_001783462_update1") as string;
+                key.Close();
+            }
             if (regValue != null)
             {
                 try
