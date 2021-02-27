@@ -555,7 +555,7 @@ namespace Service.Core.Orders
                 }
                 if (item.ProductId == 0)
                 {
-                    var productEntity = _context.Product.FirstOrDefault(x =>!x.IsDiscontinued && ( x.Name == item.Product || x.SKU == item.Product));
+                    var productEntity = _context.Product.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == item.Product || x.SKU == item.Product));
                     if (productEntity != null)
                     {
                         item.ProductId = productEntity.Id;
@@ -762,10 +762,9 @@ namespace Service.Core.Orders
 
         }
 
-        public List<SalePurchaseAmountModel> GetSalePurchaseAmountForBarDiagram()
+        public List<SalePurchaseAmountModel> GetSalePurchaseAmountForBarDiagram(DateTime from, DateTime to)
         {
-            var from = DateTime.Now.Date.AddDays(-30);
-            var to = DateTime.Now.Date.AddDays(1);
+            //var from = DateTime.Now.Date.AddDays(-30);
             using (var _context = new DatabaseContext())
             {
                 var list = _context.Order

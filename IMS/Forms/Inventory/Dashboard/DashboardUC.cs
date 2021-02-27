@@ -69,7 +69,10 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void PopulateBarDiagram()
         {
-            List<SalePurchaseAmountModel> amountSummary = _orderService.GetSalePurchaseAmountForBarDiagram();
+            var start = dtStart.Value.Date;
+            var end = dtEnd.Value.Date;
+            end = end.AddDays(1);
+            List<SalePurchaseAmountModel> amountSummary = _orderService.GetSalePurchaseAmountForBarDiagram(start, end);
             ReportDataSource reportDataSource = new ReportDataSource("SalePurchaseAmountDataset", amountSummary);
             this.reportViewer1.LocalReport.DataSources.Clear();
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
@@ -149,6 +152,7 @@ namespace IMS.Forms.Inventory.Dashboard
         private void Date_ValueChanged(object sender, EventArgs e)
         {
             PopulateTransactionSummary();
+            PopulateBarDiagram();
         }
 
         #region Listeners

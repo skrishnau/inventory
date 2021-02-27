@@ -38,6 +38,6 @@ namespace Service.Core.Orders
         string SetIssued(int orderId);
         string SetCancelled(int purchaseOrderId);
         List<DueAmountModel> GetDueReceivables();
-        List<SalePurchaseAmountModel> GetSalePurchaseAmountForBarDiagram();
+        List<SalePurchaseAmountModel> GetSalePurchaseAmountForBarDiagram(DateTime from, DateTime to);
     }
 }
