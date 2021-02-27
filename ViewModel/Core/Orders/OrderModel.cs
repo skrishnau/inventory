@@ -55,8 +55,8 @@ namespace ViewModel.Core.Orders
         public DateTime? PaymentDueDate { get; set; }
         public DateTime? PaymentCompleteDate { get; set; }
 
-        public bool IsCash => PaidAmount >= TotalAmount;
-        public bool IsCredit => PaidAmount < TotalAmount;
+        public bool IsCash => PaidAmount >= SumAmount;
+        public bool IsCredit => PaidAmount < SumAmount;
 
         public int PaymentDueDays
         {
@@ -71,7 +71,7 @@ namespace ViewModel.Core.Orders
         {
             get
             {
-                return TotalAmount - PaidAmount;
+                return SumAmount - PaidAmount;
             }
         }
 
@@ -81,11 +81,11 @@ namespace ViewModel.Core.Orders
         {
             get
             {
-                if(DiscountAmount > 0)
-                    return TotalAmount - DiscountAmount - PaidAmount;
-                if (DiscountPercent > 0)
-                    return TotalAmount - ( TotalAmount * DiscountPercent / 100) - PaidAmount;
-                return TotalAmount - PaidAmount;
+                //if(DiscountAmount > 0)
+                //    return TotalAmount - DiscountAmount - PaidAmount;
+                //if (DiscountPercent > 0)
+                //    return TotalAmount - ( TotalAmount * DiscountPercent / 100) - PaidAmount;
+                return SumAmount - PaidAmount;
             }
         }
 
@@ -114,6 +114,14 @@ namespace ViewModel.Core.Orders
         public OrderModel()
         {
             OrderItems = new List<OrderItemModel>();
+        }
+
+        /// <summary>
+        /// TotalAmount - discount Amount
+        /// </summary>
+        public decimal SumAmount
+        {
+            get { return DiscountAmount > 0 ? TotalAmount - DiscountAmount : TotalAmount - (TotalAmount * DiscountPercent / 100); }
         }
     }
 

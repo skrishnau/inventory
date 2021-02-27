@@ -286,15 +286,16 @@ namespace Service.Core.Orders
         {
             var debit = 0M;
             var credit = 0M;
-            var balance = orderModel.TotalAmount - orderModel.PaidAmount;
+            var totalAmt = orderModel.SumAmount;//orderModel.TotalAmount - orderModel.DiscountAmount;
+            var balance = totalAmt - orderModel.PaidAmount;
             if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString() || orderModel.OrderType == PaymentTypeEnum.Debit.ToString())
             {
                 debit = orderModel.PaidAmount;
-                credit = orderModel.TotalAmount;
+                credit = totalAmt;//orderModel.TotalAmount;
             }
             else if (orderModel.OrderType == OrderTypeEnum.Sale.ToString() || orderModel.OrderType == PaymentTypeEnum.Credit.ToString())
             {
-                debit = orderModel.TotalAmount;
+                debit = totalAmt;//orderModel.TotalAmount;
                 credit = orderModel.PaidAmount;
             }
             balance = credit - debit;
@@ -373,7 +374,7 @@ namespace Service.Core.Orders
 
                 entity.User = user;
             }
-            if (user != null && checkout && orderModel.PaidAmount < orderModel.TotalAmount)
+            if (user != null && checkout && orderModel.PaidAmount < orderModel.SumAmount)
             {
                 // credit ; store payment due date in the customer
                 user.PaymentDueDate = orderModel.PaymentDueDate;
@@ -768,14 +769,14 @@ namespace Service.Core.Orders
             using (var _context = new DatabaseContext())
             {
                 var list = _context.Order
-                    .Where(x => x.IsCompleted && x.CompletedDate >= from && x.CompletedDate <= to)
+                    .Where(x => x.IsCompleted && x.CompletedDate >= from && x.CompletedDate <= to && !x.IsVoid)
                     .GroupBy(x => new { CompletedDate = DbFunctions.TruncateTime(x.CompletedDate), x.OrderType })
                     .Select(x => new
                     {
                         x.Key.CompletedDate,
                         x.Key.OrderType,
-                        PurchaseAmount = x.Where(y => x.Key.OrderType == "Purchase").Sum(y => (decimal?)y.TotalAmount),
-                        SaleAmount = x.Where(y => x.Key.OrderType == "Sale").Sum(y => (decimal?)y.TotalAmount),
+                        PurchaseAmount = x.Where(y => x.Key.OrderType == "Purchase").Sum(y => (decimal?)(y.TotalAmount - y.DiscountAmount)),
+                        SaleAmount = x.Where(y => x.Key.OrderType == "Sale").Sum(y => (decimal?)(y.TotalAmount - y.DiscountAmount)),
                     })
                     .OrderBy(x => x.CompletedDate)
                     .ThenBy(x => x.OrderType)

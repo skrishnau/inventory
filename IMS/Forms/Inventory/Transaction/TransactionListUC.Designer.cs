@@ -74,6 +74,7 @@
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNoOfProducts = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -251,6 +252,7 @@
             this.colOrderType,
             this.colCustomer,
             this.colTotalAmount,
+            this.colDiscountPercent,
             this.colPaidAmount,
             this.colDeliveryDate,
             this.colNoOfProducts,
@@ -562,6 +564,14 @@
             this.colTotalAmount.ReadOnly = true;
             this.colTotalAmount.Width = 87;
             // 
+            // colDiscountPercent
+            // 
+            this.colDiscountPercent.DataPropertyName = "DiscountPercent";
+            this.colDiscountPercent.HeaderText = "Dis. %";
+            this.colDiscountPercent.Name = "colDiscountPercent";
+            this.colDiscountPercent.ReadOnly = true;
+            this.colDiscountPercent.Width = 55;
+            // 
             // colPaidAmount
             // 
             this.colPaidAmount.DataPropertyName = "PaidAmount";
@@ -671,6 +681,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDiscountPercent;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNoOfProducts;

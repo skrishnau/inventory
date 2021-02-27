@@ -15,6 +15,7 @@ using ViewModel.Core.Common;
 using IMS.Forms.Inventory.Accounts.All;
 using Service.Core.Settings;
 using IMS.Forms.Common;
+using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -51,6 +52,7 @@ namespace IMS.Forms.Inventory.Reports.All
             dtFrom.Value = DateTime.Now.AddDays(-7);
 
             InitializeEvents();
+            PopulateType();
             PopulateCustomer();
             PopulateLedger();
 
@@ -61,9 +63,18 @@ namespace IMS.Forms.Inventory.Reports.All
             btnSearch.Click += BtnSearch_Click;
             dgvLedger.DataBindingComplete += DgvLedger_DataBindingComplete;
             _listener.UserUpdated += _listener_UserUpdated;
-            cbCustomer.SelectedValueChanged += CbCustomer_SelectedValueChanged;
             chkOnlyShowAfterLastClearance.CheckedChanged += ChkOnlyShowAfterLastClearance_CheckedChanged;
             btnPrint.Click += BtnPrint_Click;
+
+            cbCustomer.SelectedValueChanged += CbCustomer_SelectedValueChanged;
+            //cbCustomer.TextChanged += CbCustomer_TextChanged;
+            cbType.SelectedValueChanged += CbType_SelectedValueChanged;
+        }
+
+        private void CbType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //InitializeSearchTextBox();
+            PopulateCustomer();
         }
 
         private void BtnPrint_Click(object sender, EventArgs e)
@@ -124,14 +135,32 @@ namespace IMS.Forms.Inventory.Reports.All
         {
             PopulateLedger();
         }
-
+        private void PopulateType()
+        {
+            var values = Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
+                .Select(x => new NameValuePair(x.ToString(), x.ToString()))
+                .ToList();
+            cbType.ValueMember = "Value";
+            cbType.DisplayMember = "Name";
+            cbType.DataSource = values;
+        }
         private void PopulateCustomer()
         {
-            var customers = _userService.GetUserListForCombo(ViewModel.Enums.UserTypeEnum.All, new int[0]);
-            cbCustomer.DataSource = customers;
+            var item = cbType.SelectedItem as NameValuePair;
+            if (item != null)
+            {
+                var userType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), item.Value);
+                var customers = _userService.GetUserListForCombo(userType, new int[0]);
+                customers.Insert(0, new IdNamePair(0, ""));
+                cbCustomer.DataSource = customers;
 
-            cbCustomer.ValueMember = "Id";
-            cbCustomer.DisplayMember = "Name";
+                cbCustomer.ValueMember = "Id";
+                cbCustomer.DisplayMember = "Name";
+            }
+            //var customers = _userService.GetUserListForCombo(ViewModel.Enums.UserTypeEnum.All, new int[0]);
+            //cbCustomer.DataSource = customers;
+            //cbCustomer.ValueMember = "Id";
+            //cbCustomer.DisplayMember = "Name";
         }
        private LedgerMasterModel GetLedger()
         {
@@ -171,6 +200,11 @@ namespace IMS.Forms.Inventory.Reports.All
                 _bindingSource.ResetBindings(false);
                 //dgvLedger.DataSource = ledgerList;
                 //dgvLedger.DataBindings.
+            }
+            else
+            {
+                _bindingSource.DataSource = null;
+                _bindingSource.ResetBindings(false);
             }
         }
     }

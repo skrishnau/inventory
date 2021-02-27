@@ -32,12 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionCreateForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtPaidAmount = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtDiscount = new System.Windows.Forms.NumericUpDown();
+            this.txtSum = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtPaidAmount = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.pnlPaymentDueDate = new System.Windows.Forms.Panel();
             this.dtPaymentDueDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,9 +66,11 @@
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDiscount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSum)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).BeginInit();
             this.pnlPaymentDueDate.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -77,9 +83,9 @@
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 423);
+            this.panel1.Location = new System.Drawing.Point(0, 397);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(518, 48);
+            this.panel1.Size = new System.Drawing.Size(518, 74);
             this.panel1.TabIndex = 6;
             // 
             // tableLayoutPanel2
@@ -87,40 +93,25 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71F));
-            this.tableLayoutPanel2.Controls.Add(this.txtPaidAmount, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtTotal, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtDiscount, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtSum, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(290, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(228, 48);
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(228, 74);
             this.tableLayoutPanel2.TabIndex = 9;
-            // 
-            // txtPaidAmount
-            // 
-            this.txtPaidAmount.Enabled = false;
-            this.txtPaidAmount.Location = new System.Drawing.Point(69, 27);
-            this.txtPaidAmount.Name = "txtPaidAmount";
-            this.txtPaidAmount.Size = new System.Drawing.Size(139, 20);
-            this.txtPaidAmount.TabIndex = 10;
-            // 
-            // label7
-            // 
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 24);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Paid Amt.";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
             // 
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 24);
@@ -130,23 +121,83 @@
             // 
             // txtTotal
             // 
+            this.txtTotal.DecimalPlaces = 1;
+            this.txtTotal.Enabled = false;
             this.txtTotal.Location = new System.Drawing.Point(69, 3);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(139, 20);
             this.txtTotal.TabIndex = 9;
             // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 24);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Discount %";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtDiscount
+            // 
+            this.txtDiscount.DecimalPlaces = 1;
+            this.txtDiscount.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtDiscount.Location = new System.Drawing.Point(69, 27);
+            this.txtDiscount.Name = "txtDiscount";
+            this.txtDiscount.Size = new System.Drawing.Size(139, 20);
+            this.txtDiscount.TabIndex = 12;
+            // 
+            // txtSum
+            // 
+            this.txtSum.DecimalPlaces = 1;
+            this.txtSum.Enabled = false;
+            this.txtSum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtSum.Location = new System.Drawing.Point(69, 51);
+            this.txtSum.Name = "txtSum";
+            this.txtSum.ReadOnly = true;
+            this.txtSum.Size = new System.Drawing.Size(139, 20);
+            this.txtSum.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(3, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 23);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Sum";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.txtPaidAmount);
             this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.pnlPaymentDueDate);
             this.panel3.Controls.Add(this.rbCash);
             this.panel3.Controls.Add(this.rbCredit);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(256, 48);
+            this.panel3.Size = new System.Drawing.Size(256, 74);
             this.panel3.TabIndex = 6;
+            // 
+            // txtPaidAmount
+            // 
+            this.txtPaidAmount.DecimalPlaces = 1;
+            this.txtPaidAmount.Enabled = false;
+            this.txtPaidAmount.Location = new System.Drawing.Point(73, 50);
+            this.txtPaidAmount.Name = "txtPaidAmount";
+            this.txtPaidAmount.Size = new System.Drawing.Size(139, 20);
+            this.txtPaidAmount.TabIndex = 10;
             // 
             // label9
             // 
@@ -157,11 +208,20 @@
             this.label9.TabIndex = 6;
             this.label9.Text = "Payment";
             // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(6, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 24);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Paid Amt.";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // pnlPaymentDueDate
             // 
             this.pnlPaymentDueDate.Controls.Add(this.dtPaymentDueDate);
             this.pnlPaymentDueDate.Controls.Add(this.label3);
-            this.pnlPaymentDueDate.Location = new System.Drawing.Point(4, 20);
+            this.pnlPaymentDueDate.Location = new System.Drawing.Point(4, 23);
             this.pnlPaymentDueDate.Name = "pnlPaymentDueDate";
             this.pnlPaymentDueDate.Size = new System.Drawing.Size(214, 23);
             this.pnlPaymentDueDate.TabIndex = 8;
@@ -345,7 +405,7 @@
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(518, 366);
+            this.dgvItems.Size = new System.Drawing.Size(518, 340);
             this.dgvItems.TabIndex = 5;
             // 
             // saveFooterUC1
@@ -378,10 +438,12 @@
             this.Text = "Create Transaction";
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDiscount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSum)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).EndInit();
             this.pnlPaymentDueDate.ResumeLayout(false);
             this.pnlPaymentDueDate.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -426,5 +488,9 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown txtDiscount;
+        private System.Windows.Forms.NumericUpDown txtSum;
+        private System.Windows.Forms.Label label2;
     }
 }

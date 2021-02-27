@@ -8,7 +8,7 @@ namespace ViewModel.Utility
 {
     public static class Constants
     {
-        public const bool IS_TRIAL = true;
+        public const bool IS_TRIAL = false;
 
     }
 }

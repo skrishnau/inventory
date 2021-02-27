@@ -69,13 +69,15 @@ namespace IMS.Forms.Inventory.Reports.All
         {
             //txtName.TextChanged += TxtName_TextChanged;
             cbCustomer.SelectedValueChanged += CbCustomer_SelectedValueChanged;
+            cbCustomer.TextChanged += CbCustomer_TextChanged;
             cbType.SelectedValueChanged += CbType_SelectedValueChanged;
-            _listener.PaymentUpdated += _listener_PaymentUpdated;
             _listener.UserUpdated += _listener_UserUpdated;
+            _listener.PaymentUpdated += _listener_PaymentUpdated;
             dgvLedger.SelectionChanged += DgvLedger_SelectionChanged;
             btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
         }
+
 
         private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
         {
@@ -129,6 +131,11 @@ namespace IMS.Forms.Inventory.Reports.All
             PopulatePayments();
         }
 
+
+        private void CbCustomer_TextChanged(object sender, EventArgs e)
+        {
+            PopulatePayments();
+        }
         //private void BtnSearch_Click(object sender, EventArgs e)
         //{
         //    PopulatePayments();

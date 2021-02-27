@@ -126,5 +126,12 @@ namespace Infrastructure.Entities.Orders
         public virtual ICollection<Transaction> Transactions { get; set; }
 
 
+        /// <summary>
+        /// TotalAmount - discount Amount
+        /// </summary>
+        public decimal SumAmount
+        {
+            get { return DiscountAmount > 0 ? TotalAmount - DiscountAmount : TotalAmount - (TotalAmount * DiscountPercent / 100); }
+        }
     }
 }

@@ -36,7 +36,6 @@
             this.dtTo = new System.Windows.Forms.DateTimePicker();
             this.dtFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbCustomer = new System.Windows.Forms.ComboBox();
             this.dgvLedger = new System.Windows.Forms.DataGridView();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,7 +43,6 @@
             this.colCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDrCr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -52,14 +50,18 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbType = new System.Windows.Forms.ComboBox();
+            this.cbCustomer = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
-            this.panel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLastClearanceDate
@@ -83,7 +85,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(257, 41);
+            this.btnSearch.Location = new System.Drawing.Point(3, 49);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -130,20 +132,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 7);
+            this.label1.Location = new System.Drawing.Point(189, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Customer/Supplier";
-            // 
-            // cbCustomer
-            // 
-            this.cbCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomer.FormattingEnabled = true;
-            this.cbCustomer.Location = new System.Drawing.Point(101, 4);
-            this.cbCustomer.Name = "cbCustomer";
-            this.cbCustomer.Size = new System.Drawing.Size(139, 21);
-            this.cbCustomer.TabIndex = 0;
             // 
             // dgvLedger
             // 
@@ -158,11 +151,11 @@
             this.colDrCr,
             this.colBalance});
             this.dgvLedger.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLedger.Location = new System.Drawing.Point(0, 86);
+            this.dgvLedger.Location = new System.Drawing.Point(0, 79);
             this.dgvLedger.Name = "dgvLedger";
             this.dgvLedger.ReadOnly = true;
             this.dgvLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLedger.Size = new System.Drawing.Size(697, 382);
+            this.dgvLedger.Size = new System.Drawing.Size(697, 389);
             this.dgvLedger.TabIndex = 1;
             // 
             // colDate
@@ -209,33 +202,23 @@
             this.colBalance.Name = "colBalance";
             this.colBalance.ReadOnly = true;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.cbCustomer);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(248, 32);
-            this.panel2.TabIndex = 2;
-            // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.btnSearch);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 29);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(609, 86);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(609, 50);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.dtFrom);
-            this.panel3.Location = new System.Drawing.Point(257, 3);
+            this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(153, 27);
             this.panel3.TabIndex = 4;
@@ -244,7 +227,7 @@
             // 
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.dtTo);
-            this.panel4.Location = new System.Drawing.Point(416, 3);
+            this.panel4.Location = new System.Drawing.Point(162, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(141, 27);
             this.panel4.TabIndex = 5;
@@ -253,7 +236,7 @@
             // 
             this.panel5.Controls.Add(this.lblLastClearanceDate);
             this.panel5.Controls.Add(this.chkOnlyShowAfterLastClearance);
-            this.panel5.Location = new System.Drawing.Point(3, 41);
+            this.panel5.Location = new System.Drawing.Point(309, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(248, 40);
             this.panel5.TabIndex = 6;
@@ -261,11 +244,12 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.panel7);
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(697, 86);
+            this.panel1.Size = new System.Drawing.Size(697, 79);
             this.panel1.TabIndex = 4;
             // 
             // panel6
@@ -274,7 +258,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel6.Location = new System.Drawing.Point(609, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(88, 86);
+            this.panel6.Size = new System.Drawing.Size(88, 79);
             this.panel6.TabIndex = 5;
             // 
             // btnPrint
@@ -291,6 +275,46 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.UseVisualStyleBackColor = false;
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.cbCustomer);
+            this.panel7.Controls.Add(this.label1);
+            this.panel7.Controls.Add(this.label4);
+            this.panel7.Controls.Add(this.cbType);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(609, 29);
+            this.panel7.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 6);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Type";
+            // 
+            // cbType
+            // 
+            this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(45, 3);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(111, 21);
+            this.cbType.TabIndex = 4;
+            // 
+            // cbCustomer
+            // 
+            this.cbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbCustomer.FormattingEnabled = true;
+            this.cbCustomer.Location = new System.Drawing.Point(289, 4);
+            this.cbCustomer.Name = "cbCustomer";
+            this.cbCustomer.Size = new System.Drawing.Size(132, 21);
+            this.cbCustomer.TabIndex = 6;
+            // 
             // LedgerUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,8 +324,6 @@
             this.Name = "LedgerUC";
             this.Size = new System.Drawing.Size(697, 468);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -311,13 +333,14 @@
             this.panel5.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbCustomer;
         private System.Windows.Forms.DataGridView dgvLedger;
         private System.Windows.Forms.DateTimePicker dtFrom;
         private System.Windows.Forms.Label label3;
@@ -326,7 +349,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblLastClearanceDate;
         private System.Windows.Forms.CheckBox chkOnlyShowAfterLastClearance;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
@@ -340,5 +362,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCredit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDrCr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbType;
+        private System.Windows.Forms.ComboBox cbCustomer;
     }
 }

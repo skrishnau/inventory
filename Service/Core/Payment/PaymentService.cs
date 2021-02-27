@@ -72,8 +72,11 @@ namespace Service.Core.Payment
             }
             if (!string.IsNullOrEmpty(searchName))
             {
-                var splt = searchName.Split(new char[] { '-' })[0].Trim();
-                query = query.Where(x => x.User.Name.Contains(splt));
+                var split = searchName.Split(new char[] { '-' });
+                var namePart = split[0].Trim();
+                // no need to do split[1] search cause it won't occur when user has typed the name manually
+                query = query.Where(x => x.User.Name.Contains(namePart) || x.User.Company.Contains(namePart));
+                
             }
             return query.OrderByDescending(x => x.Date);
         }

@@ -81,6 +81,8 @@ namespace IMS.Forms.Inventory.Transaction
             reportParam.Add(new ReportParameter("PaidAmount", _orderModel.PaidAmount.ToString("#.00")));
             reportParam.Add(new ReportParameter("DueAmount", dueAmt == 0 ? " - " : dueAmt.ToString("#.00")));
 
+            reportParam.Add(new ReportParameter("DiscountAmount", (_orderModel.DiscountAmount).ToString("#.00")));
+            reportParam.Add(new ReportParameter("DiscountPercent", _orderModel.DiscountPercent.ToString("#.00")));
 
             return reportParam.AsEnumerable();
         }

@@ -71,6 +71,8 @@ namespace IMS.Forms.Inventory.Transaction
             this.txtTotal.Minimum = 0;
             this.txtPaidAmount.Maximum = Int32.MaxValue;
             this.txtPaidAmount.Minimum = 0;
+            this.txtSum.Minimum = 0;
+            this.txtSum.Maximum = Int32.MaxValue;
 
             _orderModel = _orderService.GetOrderForDetailView(_orderId);
 
@@ -125,8 +127,10 @@ namespace IMS.Forms.Inventory.Transaction
             //btnPayment.Click += btnPayment_Click;
             cbClient.SelectedValueChanged += CbClient_SelectedValueChanged;
             dgvItems.RowsRemoved += DgvItems_RowsRemoved;
+            txtTotal.ValueChanged += TxtTotal_ValueChanged;
+            txtDiscount.ValueChanged += TxtDiscount_ValueChanged;
         }
-        
+
 
         private void DgvItems_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
@@ -155,12 +159,25 @@ namespace IMS.Forms.Inventory.Transaction
             }
         }
 
+        private void SetSumAmount()
+        {
+            var discount = txtDiscount.Value;
+            var total = txtTotal.Value;
+            var sum = total - (total * discount / 100);
+            txtSum.Value = sum;
+
+            if (rbCash.Checked)
+            {
+                txtPaidAmount.Value = sum;
+            }
+        }
+
         private void InitializeValidation()
         {
             // required field validator
             List<Control> requiredControls = new List<Control>()
             {
-                 //txtReceiptNo, // recipt no . is not required in case of Order-save
+                //txtReceiptNo, // recipt no . is not required in case of Order-save
             };
             //switch (_orderType)
             //{
@@ -173,15 +190,12 @@ namespace IMS.Forms.Inventory.Transaction
             //}
 
             _requiredFieldValidator = new RequiredFieldValidator(errorProvider, requiredControls.ToArray());
-
             // greater than zero field validator
-
             List<Control> controls = new List<Control>()
             {
                     txtTotal,
             };
             _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider, controls.ToArray());
-
 
         }
 
@@ -238,12 +252,13 @@ namespace IMS.Forms.Inventory.Transaction
                     txtPhone.Text = model.Phone;
                     txtTotal.Value = model.TotalAmount;
                     cbClient.Text = model.User;
-                    if(model.UserId > 0)
+                    if (model.UserId > 0)
                         cbClient.SelectedValue = model.UserId;
                     rbCash.Checked = model.PaymentType == OrderPaymentTypeEnum.Cash.ToString();//model.PaidAmount >= model.TotalAmount;
                     rbCredit.Checked = model.PaymentType == OrderPaymentTypeEnum.Credit.ToString(); // !rbCash.Checked;
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
+                    txtDiscount.Value = model.DiscountPercent;
                     dtExpectedDate.Value = model.DeliveryDate;
                     dtPaymentDueDate.Value = model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now;
 
@@ -291,7 +306,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void PopulateReceiptNumber()
         {
             // orderModel.iscompleted is checked to knwo if it's editing a completed order ; if it is then generate new receipt
-            if ((_orderModel?.IsCompleted??false) || string.IsNullOrEmpty(_orderModel?.ReferenceNumber) || string.IsNullOrWhiteSpace(_orderModel?.ReferenceNumber))
+            if (!_showPrintView && ((_orderModel?.IsCompleted ?? false) || string.IsNullOrEmpty(_orderModel?.ReferenceNumber) || string.IsNullOrWhiteSpace(_orderModel?.ReferenceNumber)))
             {
                 var nextReceipt = _appSettingService.GetReceiptNumber((ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), _orderType.ToString()));
                 txtReceiptNo.Text = nextReceipt;
@@ -301,7 +316,7 @@ namespace IMS.Forms.Inventory.Transaction
         }
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
         {
-            
+
             ResponseModel<OrderModel> msg = new ResponseModel<OrderModel>();
             var userType = _orderType == OrderTypeEnum.Sale ? UserTypeEnum.Customer : UserTypeEnum.Supplier;
             var givenByTo = _orderType == OrderTypeEnum.Sale ? "given to" : "taken from";
@@ -321,16 +336,16 @@ namespace IMS.Forms.Inventory.Transaction
             else
                 errorProvider.SetError(rbCredit, string.Empty);
             if (!checkout)
-                _greaterThanZeroFieldValidator.Remove(txtTotal);
-            else 
-                _greaterThanZeroFieldValidator.AddIfNotExists(txtTotal);
+                _greaterThanZeroFieldValidator.Remove(txtSum);
+            else
+                _greaterThanZeroFieldValidator.AddIfNotExists(txtSum);
             if (!_requiredFieldValidator.IsValid())
                 msg.Message += "Some required Fields are empty\n";
             if (!_greaterThanZeroFieldValidator.IsValid())
                 msg.Message += "Some Fields are less than zero\n";
-            if (txtPaidAmount.Value > txtTotal.Value)
+            if (txtPaidAmount.Value > txtSum.Value)
                 msg.Message += "Paid amount cannot be greater than total amount";
-            
+
             if (rbCredit.Checked && string.IsNullOrEmpty(cbClient.Text))
             {
                 var creditToAnonumousMsg = $"Credit can't be {givenByTo} anonymous {userType.ToString()}. Please enter {userType.ToString()} name";
@@ -355,7 +370,8 @@ namespace IMS.Forms.Inventory.Transaction
                 if (result == DialogResult.Yes)
                 {
                     msg = _orderService.SaveOrder(model, checkout);
-                }else
+                }
+                else
                 {
                     isCanceledByUser = true;
                 }
@@ -379,7 +395,7 @@ namespace IMS.Forms.Inventory.Transaction
 
                 }
             }
-            
+
             this.Focus();
             return null;
         }
@@ -393,7 +409,7 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 client = cbClient.Text;
             }
-            
+
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId, dgvItems.colUomId };
             var items = dgvItems.GetItems(ignoreList, false);
 
@@ -406,6 +422,8 @@ namespace IMS.Forms.Inventory.Transaction
                     Name = (string.IsNullOrEmpty(cbClient.Text) ? "" : $"{cbClient.Text}, ") + txtReceiptNo.Text,
                     DeliveryDate = dtExpectedDate.Value,
                     PaidAmount = txtPaidAmount.Value,
+                    DiscountPercent = txtDiscount.Value,
+                    DiscountAmount = txtTotal.Value * txtDiscount.Value / 100,
                     CreatedAt = DateTime.Now,
                     OrderItems = InventoryUnitMapper.MapToOrderItemModel(items, _orderId),
                     ReferenceNumber = txtReceiptNo.Text,
@@ -459,7 +477,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void ShowPaymentDueDateLayout(bool show)
         {
             pnlPaymentDueDate.Visible = show;
-            txtPaidAmount.Value = show ? 0 : txtTotal.Value;
+            txtPaidAmount.Value = show ? 0 : txtSum.Value;
             txtPaidAmount.Enabled = show;
         }
 
@@ -477,6 +495,16 @@ namespace IMS.Forms.Inventory.Transaction
         private void BtnCheckout_Click(object sender, EventArgs e)
         {
             Save(true);
+        }
+
+        private void TxtDiscount_ValueChanged(object sender, EventArgs e)
+        {
+            SetSumAmount();
+        }
+
+        private void TxtTotal_ValueChanged(object sender, EventArgs e)
+        {
+            SetSumAmount();
         }
 
         private void BtnCheckoutAndPrint_Click(object sender, EventArgs e)
@@ -536,8 +564,12 @@ namespace IMS.Forms.Inventory.Transaction
             try
             {
                 txtTotal.Value = totals;
+
                 if (rbCash.Checked)
-                    txtPaidAmount.Value = totals;
+                {
+                    var paidAmount = totals - (totals * txtDiscount.Value / 100);
+                    txtPaidAmount.Value = paidAmount;
+                }
             }
             catch (Exception ex)
             {
