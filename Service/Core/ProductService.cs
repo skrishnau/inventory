@@ -178,10 +178,28 @@ namespace Service.Core
             }
         }
 
+        public async Task<ProductListModel> GetAllProducts()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var products = GetProductListQuery(_context, 0, string.Empty);
+                var totalCount = products.Count();
+                var list = await products.ToListAsync();
+                return new ProductListModel
+                {
+                    DataList = list.MapToModel(),
+                    Offset = -1,
+                    PageSize = -1,
+                    TotalCount = totalCount,
+                };
+            }
+        }
+
         private IQueryable<Product> GetProductListQuery(DatabaseContext _context, int categoryId, string searchText)
         {
             var products = _context.Product
                                 .Include(x => x.ProductAttributes)
+                                .Where(x => !x.IsDiscontinued)
                                //.Include(x => x.ProductAttributes.Select(y => y.Option))
                                // .Include(x => x.Brands)
                                // .Where(x => x.Use == null)
@@ -197,7 +215,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var entity = _context.Product.FirstOrDefault(x => x.SKU == sku);
+                var entity = _context.Product.FirstOrDefault(x => !x.IsDiscontinued && x.SKU == sku);
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }
@@ -205,7 +223,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var entity = _context.Product.FirstOrDefault(x => x.Name == nameOrSku || x.SKU == nameOrSku);
+                var entity = _context.Product.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == nameOrSku || x.SKU == nameOrSku));
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }
@@ -338,6 +356,30 @@ namespace Service.Core
                 return ProductMapper.MapToProductModel(product);
             }
 
+        }
+
+        public bool DeleteProduct(int productId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var now = DateTime.Now;
+
+                var entity = _context.Product
+                    .FirstOrDefault(x => x.Id == productId);
+
+                if (entity != null)
+                {
+                    entity.IsDiscontinued = true;
+                    entity.Use = false;
+                }
+                _context.SaveChanges();
+
+                ProductEventArgs eventArgs = ProductEventArgs.Instance;
+                eventArgs.Mode = UpdateMode.DELETE;
+                eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
+                _listener.TriggerProductUpdateEvent(null, eventArgs);
+                return true;
+            }
         }
     }
 }

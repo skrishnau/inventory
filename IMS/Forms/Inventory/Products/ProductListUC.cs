@@ -18,6 +18,7 @@ using Service.DbEventArgs;
 using Service.Interfaces;
 using IMS.Forms.Common.Pagination;
 using ViewModel.Core.Common;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -86,15 +87,15 @@ namespace IMS.Forms.Inventory.Products
         {
             dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
             dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
-           // dgvProductList.CellFormatting += DgvProductList_CellFormatting;
+            // dgvProductList.CellFormatting += DgvProductList_CellFormatting;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
+            btnDelete.Click += BtnDelete_Click;
             // btnDelete.Click += BtnDelete_Click;
             cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
             txtName.TextChanged += TxtName_TextChanged;
         }
 
-       
 
         private void InitializeListeners()
         {
@@ -141,6 +142,22 @@ namespace IMS.Forms.Inventory.Products
                 productCreate.SetDataForEdit(productId);
                 productCreate.ShowDialog();
             }
+        }
+
+        private void ShowDeleteDialog(ProductModel model)
+        {
+            var dialogResult = MessageBox.Show(this, "You won't be able to retrieve the product after you delete it." +
+                " If you want do a soft-delete, you may uncheck 'Use' checkbox in product edit dialog.\n"+
+                " Are you sure to permanently delete the product '" +
+                model.Name +
+                "'?",
+               "Permanent Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var deleted = _productService.DeleteProduct(model.Id);
+            if (deleted)
+                PopupMessage.ShowSuccessMessage("Deleted successfully!");
+            //else
+            //    PopupMessage.ShowErrorMessage("Couldn't delete! Please contact administrator.");
+            this.Focus();
         }
 
 
@@ -206,6 +223,7 @@ namespace IMS.Forms.Inventory.Products
             {
                 // show edit and delete buttons
                 btnEdit.Visible = true;
+                btnDelete.Visible = true;
                 // btnDelete.Visible = true;
                 var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
                 _selectedProduct = data;
@@ -225,6 +243,15 @@ namespace IMS.Forms.Inventory.Products
             if (_selectedProduct != null)
             {
                 ShowProductAddEditDialog(_selectedProduct.Id);
+            }
+        }
+
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (_selectedProduct != null)
+            {
+                ShowDeleteDialog(_selectedProduct);
             }
         }
 

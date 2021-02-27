@@ -117,10 +117,16 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         #region Get Cell Values
 
-        public List<InventoryUnitModel> GetItems(List<DataGridViewColumn> ignoreColumnsForError = null, bool checkWithInStockQuantity = true)
+        public List<InventoryUnitModel> GetItems(List<DataGridViewColumn> ignoreColumnsForError = null, bool checkWithInStockQuantity = true, bool ignoreAllColumnsForError = false)
         {
             var isValidAll = true; // store for all items (global indicator)
             this.IgnoreColumnsForErrorList = ignoreColumnsForError ?? new List<DataGridViewColumn>();
+            if (ignoreAllColumnsForError)
+            {
+                IgnoreColumnsForErrorList.Clear();
+                for (var i = 0; i < this.ColumnCount; i++)
+                    IgnoreColumnsForErrorList.Add(this.Columns[i]);
+            }
             isValid = true;
             var items = new List<InventoryUnitModel>();
             // clear the invalid column list initially

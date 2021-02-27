@@ -62,6 +62,12 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.pnlParticulars = new System.Windows.Forms.Panel();
+            this.rbReceiptNoParticulars = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.rbAllItemsParticulars = new System.Windows.Forms.RadioButton();
+            this.rbCustomParticulars = new System.Windows.Forms.RadioButton();
+            this.txtParticulars = new System.Windows.Forms.TextBox();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
             this.panel1.SuspendLayout();
@@ -75,6 +81,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.pnlParticulars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,9 +90,9 @@
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 397);
+            this.panel1.Location = new System.Drawing.Point(0, 396);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(518, 74);
+            this.panel1.Size = new System.Drawing.Size(518, 75);
             this.panel1.TabIndex = 6;
             // 
             // tableLayoutPanel2
@@ -107,14 +114,14 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(228, 74);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(228, 75);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // label6
             // 
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 24);
+            this.label6.Size = new System.Drawing.Size(60, 23);
             this.label6.TabIndex = 9;
             this.label6.Text = "Total";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -132,9 +139,9 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 24);
+            this.label1.Location = new System.Drawing.Point(3, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 24);
+            this.label1.Size = new System.Drawing.Size(60, 25);
             this.label1.TabIndex = 11;
             this.label1.Text = "Discount %";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -147,7 +154,7 @@
             0,
             0,
             65536});
-            this.txtDiscount.Location = new System.Drawing.Point(69, 27);
+            this.txtDiscount.Location = new System.Drawing.Point(69, 28);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(139, 20);
             this.txtDiscount.TabIndex = 12;
@@ -161,7 +168,7 @@
             0,
             0,
             65536});
-            this.txtSum.Location = new System.Drawing.Point(69, 51);
+            this.txtSum.Location = new System.Drawing.Point(69, 53);
             this.txtSum.Name = "txtSum";
             this.txtSum.ReadOnly = true;
             this.txtSum.Size = new System.Drawing.Size(139, 20);
@@ -169,7 +176,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 48);
+            this.label2.Location = new System.Drawing.Point(3, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 23);
             this.label2.TabIndex = 14;
@@ -187,7 +194,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(256, 74);
+            this.panel3.Size = new System.Drawing.Size(256, 75);
             this.panel3.TabIndex = 6;
             // 
             // txtPaidAmount
@@ -399,13 +406,74 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
+            // pnlParticulars
+            // 
+            this.pnlParticulars.Controls.Add(this.txtParticulars);
+            this.pnlParticulars.Controls.Add(this.rbCustomParticulars);
+            this.pnlParticulars.Controls.Add(this.rbAllItemsParticulars);
+            this.pnlParticulars.Controls.Add(this.label10);
+            this.pnlParticulars.Controls.Add(this.rbReceiptNoParticulars);
+            this.pnlParticulars.Location = new System.Drawing.Point(93, 213);
+            this.pnlParticulars.Name = "pnlParticulars";
+            this.pnlParticulars.Size = new System.Drawing.Size(293, 44);
+            this.pnlParticulars.TabIndex = 51;
+            this.pnlParticulars.Visible = false;
+            // 
+            // rbReceiptNoParticulars
+            // 
+            this.rbReceiptNoParticulars.AutoSize = true;
+            this.rbReceiptNoParticulars.Checked = true;
+            this.rbReceiptNoParticulars.Location = new System.Drawing.Point(71, 2);
+            this.rbReceiptNoParticulars.Name = "rbReceiptNoParticulars";
+            this.rbReceiptNoParticulars.Size = new System.Drawing.Size(82, 17);
+            this.rbReceiptNoParticulars.TabIndex = 0;
+            this.rbReceiptNoParticulars.TabStop = true;
+            this.rbReceiptNoParticulars.Text = "Receipt No.";
+            this.rbReceiptNoParticulars.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(-1, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Particulars";
+            // 
+            // rbAllItemsParticulars
+            // 
+            this.rbAllItemsParticulars.AutoSize = true;
+            this.rbAllItemsParticulars.Location = new System.Drawing.Point(159, 3);
+            this.rbAllItemsParticulars.Name = "rbAllItemsParticulars";
+            this.rbAllItemsParticulars.Size = new System.Drawing.Size(64, 17);
+            this.rbAllItemsParticulars.TabIndex = 2;
+            this.rbAllItemsParticulars.Text = "All Items";
+            this.rbAllItemsParticulars.UseVisualStyleBackColor = true;
+            // 
+            // rbCustomParticulars
+            // 
+            this.rbCustomParticulars.AutoSize = true;
+            this.rbCustomParticulars.Location = new System.Drawing.Point(229, 2);
+            this.rbCustomParticulars.Name = "rbCustomParticulars";
+            this.rbCustomParticulars.Size = new System.Drawing.Size(60, 17);
+            this.rbCustomParticulars.TabIndex = 3;
+            this.rbCustomParticulars.Text = "Custom";
+            this.rbCustomParticulars.UseVisualStyleBackColor = true;
+            // 
+            // txtParticulars
+            // 
+            this.txtParticulars.Location = new System.Drawing.Point(4, 21);
+            this.txtParticulars.Name = "txtParticulars";
+            this.txtParticulars.Size = new System.Drawing.Size(285, 20);
+            this.txtParticulars.TabIndex = 4;
+            // 
             // dgvItems
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(518, 340);
+            this.dgvItems.Size = new System.Drawing.Size(518, 339);
             this.dgvItems.TabIndex = 5;
             // 
             // saveFooterUC1
@@ -424,6 +492,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 506);
+            this.Controls.Add(this.pnlParticulars);
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
@@ -451,6 +520,8 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.pnlParticulars.ResumeLayout(false);
+            this.pnlParticulars.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
@@ -492,5 +563,11 @@
         private System.Windows.Forms.NumericUpDown txtDiscount;
         private System.Windows.Forms.NumericUpDown txtSum;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel pnlParticulars;
+        private System.Windows.Forms.RadioButton rbCustomParticulars;
+        private System.Windows.Forms.RadioButton rbAllItemsParticulars;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.RadioButton rbReceiptNoParticulars;
+        private System.Windows.Forms.TextBox txtParticulars;
     }
 }

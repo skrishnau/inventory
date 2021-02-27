@@ -12,7 +12,7 @@ namespace Service.Interfaces
     {
         int GetAllProductsCount(int categoryId, string searchText);
         Task<ProductListModel> GetAllProducts(int categoryId, string searchText, int pageSize, int offset);
-
+        Task<ProductListModel> GetAllProducts();
 
         List<IdNamePair> GetProductListForCombo();
 
@@ -31,5 +31,6 @@ namespace Service.Interfaces
         CategoryModel GetCategory(string v);
         void AddUpdateCategory(CategoryModel category);
         void DeleteCategory(CategoryModel categoryModel);
+        bool DeleteProduct(int id);
     }
 }

@@ -97,12 +97,11 @@ namespace IMS.Forms.Inventory.InventoryDetail
             lblSKU.Text = product.SKU;
             // load warehouse products
             PopulateWarehouseProductList();
-
         }
 
         private void PopulateProductList()
         {
-            var products = _productService.GetAllProducts(0, string.Empty, -1, -1);
+            var products = _productService.GetAllProducts();
             dgvProductList.DataSource = products;
         }
 

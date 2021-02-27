@@ -555,7 +555,7 @@ namespace Service.Core.Orders
                 }
                 if (item.ProductId == 0)
                 {
-                    var productEntity = _context.Product.FirstOrDefault(x => x.Name == item.Product || x.SKU == item.Product);
+                    var productEntity = _context.Product.FirstOrDefault(x =>!x.IsDiscontinued && ( x.Name == item.Product || x.SKU == item.Product));
                     if (productEntity != null)
                     {
                         item.ProductId = productEntity.Id;

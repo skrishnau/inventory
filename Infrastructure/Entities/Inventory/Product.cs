@@ -28,6 +28,9 @@ namespace Infrastructure.Entities.Inventory
         public virtual Product ParentProduct { get; set; }
         public int? CategoryId { get; set; } // variant can't change category; changing category on parent should be reflected in Variants
         public virtual Category Category { get; set; }
+        /// <summary>
+        /// Used as hard delete. won't be shown in product list if IsDiscontinued is true
+        /// </summary>
         public bool IsDiscontinued { get; set; }
         // ============== Package ============== //
         public int? PackageId { get; set; }

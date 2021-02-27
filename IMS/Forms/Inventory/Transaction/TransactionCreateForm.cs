@@ -578,6 +578,16 @@ namespace IMS.Forms.Inventory.Transaction
             }
         }
 
+        //private void UpdateParticulars()
+        //{
+        //    if (rbAllItemsParticulars.Checked)
+        //    {
+        //        var items = dgvItems.GetItems(null, false, true);
+        //        txtParticulars.Text = string.Join(",", items.Select(x => x.Product +"  " + x.UnitQuantity + " " + x.Package +" @ Rs. "+ x.Rate + "\n" ));
+        //    }
+        //}
         #endregion
     }
+
+    
 }
