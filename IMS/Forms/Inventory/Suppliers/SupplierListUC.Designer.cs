@@ -42,6 +42,7 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +53,6 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -227,6 +227,21 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Visible = false;
             // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.Location = new System.Drawing.Point(140, 3);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(78, 40);
+            this.btnPayment.TabIndex = 16;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Visible = false;
+            // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = null;
@@ -321,21 +336,6 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(140, 3);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(78, 40);
-            this.btnPayment.TabIndex = 16;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Visible = false;
-            // 
             // listHeaderTemplate1
             // 
             this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -425,7 +425,7 @@
             // 
             // colAllDuesClearDate
             // 
-            this.colAllDuesClearDate.DataPropertyName = "AllDuesClearDate";
+            this.colAllDuesClearDate.DataPropertyName = "AllDuesClearDateBS";
             this.colAllDuesClearDate.HeaderText = "Last Full Clear";
             this.colAllDuesClearDate.Name = "colAllDuesClearDate";
             this.colAllDuesClearDate.ReadOnly = true;

@@ -19,7 +19,7 @@ namespace ViewModel.Utility
         {
             this._Date = givenDate;
         }
-
+        public static DateConverter Instance { get; } = new DateConverter();
         // function get the last day of the fiscal_year
         public string getLastDateOfFiscalYear(int fiscal_year)
         {
@@ -370,26 +370,28 @@ namespace ViewModel.Utility
         }
         public string GetNepaliDayOfWeek(string day)
         {
-
-            switch (day)
-            {
-                case "Sunday":
-                    return "आइतवार";
-                case "Monday":
-                    return "सोमवार";
-                case "Tuesday":
-                    return "मङ्गलवार";
-                case "Wednesday":
-                    return "बुधवार";
-                case "Thursday":
-                    return "बिहिवार";
-                case "Friday":
-                    return "शुक्रवार";
-                case "Saturday":
-                    return "शनिवार";
-                default:
-                    return "";
-            }
+            if (NepDate.daysMapping.ContainsKey(day))
+                return NepDate.daysMapping[day];
+            return "";
+            //switch (day)
+            //{
+            //    case "Sunday":
+            //        return "आइतवार";
+            //    case "Monday":
+            //        return "सोमवार";
+            //    case "Tuesday":
+            //        return "मङ्गलवार";
+            //    case "Wednesday":
+            //        return "बुधवार";
+            //    case "Thursday":
+            //        return "बिहिवार";
+            //    case "Friday":
+            //        return "शुक्रवार";
+            //    case "Saturday":
+            //        return "शनिवार";
+            //    default:
+            //        return "";
+            //}
         }
         public static List<string> GetNepaliWeeksShortList()
         {
@@ -731,7 +733,7 @@ namespace ViewModel.Utility
             };
         private string getNepaliMonth(int month)
         {
-            
+
             return nepaliMonth[month].Trim();
         }
         public double GetUnixTimestamp()
@@ -1064,8 +1066,8 @@ namespace ViewModel.Utility
                     Year = bs.Year,
                     Month = bs.Month,
                     Day = i,
-                    WeekDay = (bs.WeekDay+i-1)%7,
-                    MonthName  = getNepaliMonth(bs.Month),
+                    WeekDay = (bs.WeekDay + i - 1) % 7,
+                    MonthName = getNepaliMonth(bs.Month),
                 };
                 list.Add(nepDate);
             }

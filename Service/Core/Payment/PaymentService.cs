@@ -109,6 +109,9 @@ namespace Service.Core.Payment
                     ReferenceNumber = $"{(string.IsNullOrEmpty(model.PaidBy)? (user?.Name??""): model.PaidBy)}",
                     UserId = user?.Id,
                     OrderType = model.PaymentType,//"Sale",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    DeliveryDate = DateTime.Now,
                 };
                 var txn = OrderService.GetTransactionWithoutCommit(_context, tempOrder.MapToModel());
                 if (user != null)

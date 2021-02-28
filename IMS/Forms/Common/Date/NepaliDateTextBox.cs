@@ -28,19 +28,21 @@ namespace IMS.Forms.Common.Date
             _calendar.CalendarLostFocus += Calendar_CalendarLostFocus;
             _calendar.DateSelected += Calendar_DateSelected;
             AddIcon();
+            this.Text = _calendar.Value.ToString();
         }
 
         private void AddIcon()
         {
             var icon = new PictureBox
             {
-                Image = Properties.Resources.icons8_Energy_Meter_16px,
+                Image = Properties.Resources.icons8_calendar_16px,
                 Size = new Size(18, 18),
                 Top = this.Top,
-                Left = this.Width + 9
+                Left = this.Width - 18
             };
             icon.Click += NepaliDateTextBox_GotFocus;
             this.Controls.Add(icon);
+            icon.BringToFront();
         }
 
         private void Calendar_DateSelected(object sender, DateSelectedEventArgs e)
@@ -73,10 +75,25 @@ namespace IMS.Forms.Common.Date
             _calendar.Show();
 
             Point locationOnForm = this.FindForm().PointToClient(this.Parent.PointToScreen(this.Location));
-            _calendar.Left = locationOnForm.X;//this.Left;
-            _calendar.Top = locationOnForm.Y + this.Height + 2;//this.Top
+            var top = locationOnForm.Y + this.Height + 2;
+            var left = locationOnForm.X;
+            if (_calendar.Height > (this.FindForm().Height - top))
+                _calendar.Top = top - this.Height - 4 - _calendar.Height;
+            else
+                _calendar.Top = top;
+            if (_calendar.Width > (this.FindForm().Width - left))
+                _calendar.Left = locationOnForm.X - _calendar.Width + this.Width - 2;
+            else
+                _calendar.Left = left;//this.Left;
+            _calendar.Anchor = this.Anchor;
             this.FindForm().Controls.Add(_calendar);
             _calendar.BringToFront();
+        }
+
+        public DateTime Value
+        {
+            get { return string.IsNullOrEmpty(this.Text) ? DateTime.Now : _dateConverter.ToAD(this.Text); }
+            set { this.Text = _dateConverter.ToBS(value)?.ToString(); }
         }
 
     }

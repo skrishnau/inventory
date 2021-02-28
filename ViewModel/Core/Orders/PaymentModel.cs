@@ -45,6 +45,7 @@ namespace ViewModel.Core.Orders
         // cash, cheque, draft, advance
         public string PaymentMethod { get; set; }
         public DateTime Date { get; set; }
+        public string DateBS { get; set; }
         public string PaidBy { get; set; }
         /// <summary>
         /// If PaymentMethod is Cheque
@@ -54,6 +55,7 @@ namespace ViewModel.Core.Orders
         // 
         public decimal DueAmount { get; set; }
         public DateTime? DueDate { get; set; }
+        public string DueDateBS { get; set; }
 
         public bool IsVoid { get; set; }
 

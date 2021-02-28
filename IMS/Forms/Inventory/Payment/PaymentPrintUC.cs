@@ -55,7 +55,7 @@ namespace IMS.Forms.Inventory.Payment
             reportParam.Add(new ReportParameter("CompanyAddress", company.Address));
             reportParam.Add(new ReportParameter("CompanyPhone", company.Phone));
             reportParam.Add(new ReportParameter("ReferenceNumber", paymentModel.ReferenceNumber));
-            reportParam.Add(new ReportParameter("Date", paymentModel.Date.ToString("yyyy/MM/dd")));
+            reportParam.Add(new ReportParameter("Date", DateConverter.Instance.ToBS(paymentModel.Date).ToString()));//.ToString("yyyy/MM/dd")));
             reportParam.Add(new ReportParameter("CustomerName", paymentModel.User));
             reportParam.Add(new ReportParameter("AmountInWords", NumberHelper.ConvertNumbertoWords((long) paymentModel.Amount) + " ONLY."));
             reportParam.Add(new ReportParameter("AmountInFigure", paymentModel.Amount.ToString("#,##,##0.00 /-")));

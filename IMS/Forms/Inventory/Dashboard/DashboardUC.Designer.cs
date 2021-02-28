@@ -32,11 +32,9 @@
             this.lbUnderStockProducts = new System.Windows.Forms.ListBox();
             this.lblTopUnderstockProducts = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tbStartNepali = new System.Windows.Forms.TextBox();
+            this.dtStart = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtEnd = new System.Windows.Forms.DateTimePicker();
-            this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.panel7 = new System.Windows.Forms.Panel();
             this.lblProducts = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -66,7 +64,7 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblCompanyName = new System.Windows.Forms.Label();
-            this.nepaliDateTextBox1 = new IMS.Forms.Common.Date.NepaliDateTextBox();
+            this.dtEnd = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -119,24 +117,24 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.nepaliDateTextBox1);
-            this.panel2.Controls.Add(this.tbStartNepali);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.dtEnd);
             this.panel2.Controls.Add(this.dtStart);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 49);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1138, 38);
             this.panel2.TabIndex = 2;
             // 
-            // tbStartNepali
+            // dtStart
             // 
-            this.tbStartNepali.Location = new System.Drawing.Point(593, 9);
-            this.tbStartNepali.Name = "tbStartNepali";
-            this.tbStartNepali.Size = new System.Drawing.Size(138, 20);
-            this.tbStartNepali.TabIndex = 4;
+            this.dtStart.Location = new System.Drawing.Point(50, 9);
+            this.dtStart.Name = "dtStart";
+            this.dtStart.Size = new System.Drawing.Size(100, 20);
+            this.dtStart.TabIndex = 5;
+            this.dtStart.Text = "2077/11/16";
+            this.dtStart.Value = new System.DateTime(2021, 2, 28, 0, 0, 0, 0);
             // 
             // label2
             // 
@@ -157,24 +155,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Start";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dtEnd
-            // 
-            this.dtEnd.CustomFormat = "yyyy/MM/dd";
-            this.dtEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtEnd.Location = new System.Drawing.Point(207, 9);
-            this.dtEnd.Name = "dtEnd";
-            this.dtEnd.Size = new System.Drawing.Size(98, 20);
-            this.dtEnd.TabIndex = 1;
-            // 
-            // dtStart
-            // 
-            this.dtStart.CustomFormat = "yyyy/MM/dd";
-            this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStart.Location = new System.Drawing.Point(50, 9);
-            this.dtStart.Name = "dtStart";
-            this.dtStart.Size = new System.Drawing.Size(98, 20);
-            this.dtStart.TabIndex = 0;
             // 
             // panel7
             // 
@@ -509,12 +489,13 @@
             this.lblCompanyName.Text = "My Company";
             this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nepaliDateTextBox1
+            // dtEnd
             // 
-            this.nepaliDateTextBox1.Location = new System.Drawing.Point(373, 9);
-            this.nepaliDateTextBox1.Name = "nepaliDateTextBox1";
-            this.nepaliDateTextBox1.Size = new System.Drawing.Size(128, 20);
-            this.nepaliDateTextBox1.TabIndex = 5;
+            this.dtEnd.Location = new System.Drawing.Point(207, 9);
+            this.dtEnd.Name = "dtEnd";
+            this.dtEnd.Size = new System.Drawing.Size(100, 20);
+            this.dtEnd.TabIndex = 6;
+            this.dtEnd.Value = new System.DateTime(2021, 2, 28, 21, 27, 2, 333);
             // 
             // DashboardUC
             // 
@@ -565,8 +546,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dtEnd;
-        private System.Windows.Forms.DateTimePicker dtStart;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel panel8;
@@ -583,7 +562,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDays;
-        private System.Windows.Forms.TextBox tbStartNepali;
-        private Common.Date.NepaliDateTextBox nepaliDateTextBox1;
+        private Common.Date.NepaliDateTextBox dtStart;
+        private Common.Date.NepaliDateTextBox dtEnd;
     }
 }

@@ -130,8 +130,8 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void InitializeEvents()
         {
-            dtEnd.ValueChanged += Date_ValueChanged;
-            dtStart.ValueChanged += Date_ValueChanged;
+            dtEnd.TextChanged += Date_ValueChanged;
+            dtStart.TextChanged += Date_ValueChanged;
             //  dgvDueReceivables.CellDoubleClick += DgvDueReceivables_CellDoubleClick;
             
         }

@@ -27,14 +27,15 @@ namespace IMS.Forms.Common.Date
 
             InitializeComponent();
             this.Load += NepaliCalendar_Load;
+            PopulateYearAndMonth();
         }
 
-        private void NepaliCalendar_Load(object sender, EventArgs e)
+        private void PopulateYearAndMonth()
         {
             var years = new List<KeyValuePair<int, int>>();
             for (var i = 1970; i <= _today.Year; i++)
             {
-                years.Add(new KeyValuePair<int, int> (i, i));
+                years.Add(new KeyValuePair<int, int>(i, i));
             }
             cbYear.DataSource = years;
             cbYear.ValueMember = "Key";
@@ -46,7 +47,10 @@ namespace IMS.Forms.Common.Date
             cbMonth.ValueMember = "Key";
             cbMonth.DisplayMember = "Value";
             cbMonth.SelectedValue = _today.Month;
+        }
 
+        private void NepaliCalendar_Load(object sender, EventArgs e)
+        {
             InitializeEvents();
 
             PopulateWeeks();
@@ -163,6 +167,8 @@ namespace IMS.Forms.Common.Date
             this.Hide();
             DateSelected(this, DateSelectedEventArgs.Instance(item));
         }
+
+        public NepDate Value { get { return _today; } }
     }
 
     public class DateSelectedEventArgs: EventArgs

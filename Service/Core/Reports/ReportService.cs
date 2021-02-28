@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Reports;
+using ViewModel.Utility;
 
 namespace Service.Core.Reports
 {
@@ -56,16 +57,16 @@ namespace Service.Core.Reports
                             Debit = x.Debit == 0 ? "" : $"{x.Debit}",//.ToString("#.00"),
                             DrCr = x.DrCr,
                             DrCrString = x.DrCr > 0 ? "Cr" : x.DrCr < 0 ? "Dr" : "",
-                            Date = x.Date.ToString("yyyy/MM/dd"),
+                            Date = DateConverter.Instance.ToBS(x.Date).ToString(),//.ToString("yyyy/MM/dd"),
                             Particulars = x.Particulars,
                         })
                         .ToList();
-                    var fromDate = from.ToString("yyyy/MM/dd");
-                    var toDate = to.AddDays(-1).ToString("yyyy/MM/dd");
+                    var fromDate = DateConverter.Instance.ToBS(from).ToString();// from.ToString("yyyy/MM/dd");
+                    var toDate = DateConverter.Instance.ToBS(to.AddDays(-1)).ToString();// to.AddDays(-1).ToString("yyyy/MM/dd");
                     if (model.OnlyAfterLastClearance)
                     {
-                        fromDate = user.AllDuesClearDate.HasValue ? user.AllDuesClearDate.Value.ToString("yyyy/MM/dd") : result.FirstOrDefault()?.Date??"";
-                        toDate = DateTime.Now.ToString("yyyy/MM/dd");
+                        fromDate = user.AllDuesClearDate.HasValue ? DateConverter.Instance.ToBS(user.AllDuesClearDate.Value).ToString() : result.FirstOrDefault()?.Date??"";//user.AllDuesClearDate.Value.ToString("yyyy/MM/dd") 
+                        toDate = DateConverter.Instance.ToBS(DateTime.Now).ToString();//.ToString("yyyy/MM/dd");
                     }
 
                     var openingBalanceSum = openingBalanceQuery.Sum(x => (decimal?)(x.DrCr * x.Balance)) ?? 0;
@@ -89,8 +90,8 @@ namespace Service.Core.Reports
                         Phone = user.Phone,
                         Address = user.Address,
                         User = user.Name,
-                        FromDate = from.ToString("yyyy/MM/dd"),
-                        ToDate = to.AddDays(-1).ToString("yyyy/MM/dd"),
+                        FromDate = DateConverter.Instance.ToBS(from).ToString(),//from.ToString("yyyy/MM/dd"),
+                        ToDate = DateConverter.Instance.ToBS(to.AddDays(-1)).ToString(), //to.AddDays(-1).ToString("yyyy/MM/dd"),
                     };
                     return master;
                 }

@@ -31,6 +31,7 @@ namespace ViewModel.Core.Orders
 
         public string Note { get; set; }
         public DateTime DeliveryDate { get; set; }
+        public string DeliveryDateBS { get; set; }
         public int? DueDays { get; set; }
 
         public bool IsVoid { get; set; }
@@ -41,10 +42,13 @@ namespace ViewModel.Core.Orders
         public DateTime? CancelledDate { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime? CompletedDate { get; set; }
+        public string CompletedDateBS { get; set; }
         public bool IsReceiptGenerated { get; set; }
         public DateTime? ReceiptGeneratedDate { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string CreatedAtBS { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public string UpdatedAtBS { get; set; }
 
         // DiscountPercent is not used for now
         public decimal DiscountPercent { get; set; }

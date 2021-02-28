@@ -32,7 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentListUC));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.cbCustomer = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbType = new System.Windows.Forms.ComboBox();
@@ -48,8 +50,6 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
-            this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +95,22 @@
             this.panel2.Size = new System.Drawing.Size(200, 46);
             this.panel2.TabIndex = 5;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrint.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = global::IMS.Properties.Resources.icons8_print_16px;
+            this.btnPrint.Location = new System.Drawing.Point(46, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(74, 40);
+            this.btnPrint.TabIndex = 18;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Visible = false;
+            // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -103,6 +119,22 @@
             this.splitter1.Size = new System.Drawing.Size(5, 40);
             this.splitter1.TabIndex = 19;
             this.splitter1.TabStop = false;
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPayment.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
+            this.btnPayment.Location = new System.Drawing.Point(125, 3);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(72, 40);
+            this.btnPayment.TabIndex = 17;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Visible = false;
             // 
             // cbCustomer
             // 
@@ -262,41 +294,9 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnPrint
-            // 
-            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPrint.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Image = global::IMS.Properties.Resources.icons8_print_16px;
-            this.btnPrint.Location = new System.Drawing.Point(46, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(74, 40);
-            this.btnPrint.TabIndex = 18;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPrint.UseVisualStyleBackColor = false;
-            this.btnPrint.Visible = false;
-            // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPayment.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(125, 3);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(72, 40);
-            this.btnPayment.TabIndex = 17;
-            this.btnPayment.Text = "Payment";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Visible = false;
-            // 
             // colDate
             // 
-            this.colDate.DataPropertyName = "Date";
+            this.colDate.DataPropertyName = "DateBS";
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
             this.colDate.ReadOnly = true;
@@ -392,7 +392,7 @@
             // 
             // colDueDate
             // 
-            this.colDueDate.DataPropertyName = "DueDate";
+            this.colDueDate.DataPropertyName = "DueDateBS";
             this.colDueDate.HeaderText = "Due Date";
             this.colDueDate.Name = "colDueDate";
             this.colDueDate.ReadOnly = true;

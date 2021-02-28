@@ -44,7 +44,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(208, 27);
+            this.panel1.Size = new System.Drawing.Size(206, 27);
             this.panel1.TabIndex = 0;
             // 
             // cbMonth
@@ -52,7 +52,7 @@
             this.cbMonth.FormattingEnabled = true;
             this.cbMonth.Location = new System.Drawing.Point(95, 3);
             this.cbMonth.Name = "cbMonth";
-            this.cbMonth.Size = new System.Drawing.Size(110, 21);
+            this.cbMonth.Size = new System.Drawing.Size(108, 21);
             this.cbMonth.TabIndex = 1;
             // 
             // cbYear
@@ -83,7 +83,7 @@
             this.tableDays.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableDays.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableDays.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableDays.Size = new System.Drawing.Size(208, 153);
+            this.tableDays.Size = new System.Drawing.Size(206, 151);
             this.tableDays.TabIndex = 1;
             // 
             // tableWeeks
@@ -101,7 +101,7 @@
             this.tableWeeks.Name = "tableWeeks";
             this.tableWeeks.RowCount = 1;
             this.tableWeeks.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableWeeks.Size = new System.Drawing.Size(208, 24);
+            this.tableWeeks.Size = new System.Drawing.Size(206, 24);
             this.tableWeeks.TabIndex = 2;
             // 
             // splitter1
@@ -110,7 +110,7 @@
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(0, 51);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(208, 1);
+            this.splitter1.Size = new System.Drawing.Size(206, 1);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
@@ -118,12 +118,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.tableDays);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.tableWeeks);
             this.Controls.Add(this.panel1);
             this.Name = "NepaliCalendarUC";
-            this.Size = new System.Drawing.Size(208, 205);
+            this.Size = new System.Drawing.Size(206, 203);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

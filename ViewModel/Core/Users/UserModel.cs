@@ -73,6 +73,7 @@ namespace ViewModel.Core.Users
 
         public DateTime? PaymentDueDate { get; set; }
         public DateTime? AllDuesClearDate { get; set; }
+        public string AllDuesClearDateBS { get; set; }
 
         // ============= Table objects ===============//
         //public virtual Role Role { get; set; }

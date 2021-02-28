@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Orders;
+using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
 {
@@ -45,6 +46,8 @@ namespace DTO.Core.Inventory
                 .ForMember(s=> s.User, opt=>opt.MapFrom(src=>src.User == null ? "" : src.User.Name))
                 .ForMember(s=> s.Company, opt=>opt.MapFrom(src=>src.User == null ? "" : src.User.Company))
                // .ForMember(s=> s.Order, opt=>opt.MapFrom(src=>src.Order == null ? "" : src.Order.Name))
+                .ForMember(s=>s.DueDateBS, opt=>opt.MapFrom(src=>src.DueDate.HasValue ? DateConverter.Instance.ToBS(src.DueDate.Value).ToString(): ""))
+                .ForMember(s=>s.DateBS, opt=>opt.MapFrom(src=>DateConverter.Instance.ToBS(src.Date).ToString()))
                 ;
             CreateMap<PaymentModel, Payment>()
                 .ForMember(s => s.User, opt => opt.Ignore())

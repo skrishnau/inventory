@@ -16,6 +16,7 @@ using IMS.Forms.Inventory.Accounts.All;
 using Service.Core.Settings;
 using IMS.Forms.Common;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -105,7 +106,7 @@ namespace IMS.Forms.Inventory.Reports.All
                 var user = _userService.GetUser(userItem.Id);
                 if (user != null)
                     lblLastClearanceDate.Text = user.AllDuesClearDate.HasValue
-                        ? user.AllDuesClearDate.Value.ToString("(yyyy/MM/dd HH:mm:ss)")
+                        ? DateConverter.Instance.ToBS(user.AllDuesClearDate.Value).ToString()//.ToString("(yyyy/MM/dd HH:mm:ss)")
                         : "";
             }
 

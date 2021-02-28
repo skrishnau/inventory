@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Orders;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
 {
@@ -51,6 +52,7 @@ namespace DTO.Core.Inventory
     {
         public OrderProfile()
         {
+            
             // from entity to model
             CreateMap<Order, OrderModel>()
                 .ForMember(x => x.User, opt => opt.MapFrom(src => src.User == null ? "" : src.User.Name))
@@ -72,6 +74,8 @@ namespace DTO.Core.Inventory
                             ))
                .ForMember(x => x.NoOfProducts,
                             opt => opt.MapFrom(src => src.OrderItems.Select(x=>x.ProductId).Distinct().Count()))
+                .ForMember(x=>x.UpdatedAtBS, opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.UpdatedAt)))
+                .ForMember(x=>x.DeliveryDateBS, opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.DeliveryDate)))
                ;
 
             // from model to entity

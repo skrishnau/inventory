@@ -419,7 +419,7 @@
             </ChartLegends>
             <ChartTitles>
               <ChartTitle Name="Default">
-                <Caption>Sale Vs Purchase (1-Month)</Caption>
+                <Caption>Sale Vs Purchase</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
                   <FontSize>9pt</FontSize>

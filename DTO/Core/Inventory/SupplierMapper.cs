@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ViewModel.Core.Users;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
 {
@@ -88,6 +89,7 @@ namespace DTO.Core.Inventory
                 Company = x.Company,
                 PaymentDueDate = x.PaymentDueDate,
                 AllDuesClearDate = x.AllDuesClearDate,
+                AllDuesClearDateBS = x.AllDuesClearDate.HasValue ? DateConverter.Instance.ToBS(x.AllDuesClearDate.Value).ToString(): ""
             };
         }
 
