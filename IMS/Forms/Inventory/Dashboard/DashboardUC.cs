@@ -16,6 +16,8 @@ using SimpleInjector.Lifestyles;
 using Service.Core.Settings;
 using Service.Interfaces;
 using Microsoft.Reporting.WinForms;
+using ViewModel.Utility;
+using IMS.Forms.Common.Date;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
@@ -130,8 +132,10 @@ namespace IMS.Forms.Inventory.Dashboard
         {
             dtEnd.ValueChanged += Date_ValueChanged;
             dtStart.ValueChanged += Date_ValueChanged;
-          //  dgvDueReceivables.CellDoubleClick += DgvDueReceivables_CellDoubleClick;
+            //  dgvDueReceivables.CellDoubleClick += DgvDueReceivables_CellDoubleClick;
+            
         }
+        
 
         private void DgvDueReceivables_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

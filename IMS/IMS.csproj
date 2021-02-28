@@ -105,6 +105,15 @@
     <Compile Include="Forms\Common\Buttons\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Common\Date\NepaliCalendarUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Common\Date\NepaliCalendarUC.Designer.cs">
+      <DependentUpon>NepaliCalendarUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Common\Date\NepaliDateTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\Common\Display\ListHeaderTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -656,6 +665,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Business\Create\CounterCreate.resx">
       <DependentUpon>CounterCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Date\NepaliCalendarUC.resx">
+      <DependentUpon>NepaliCalendarUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\Display\ListHeaderTemplate.resx">
       <DependentUpon>ListHeaderTemplate.cs</DependentUpon>

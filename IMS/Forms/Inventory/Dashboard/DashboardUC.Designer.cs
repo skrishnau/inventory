@@ -32,6 +32,7 @@
             this.lbUnderStockProducts = new System.Windows.Forms.ListBox();
             this.lblTopUnderstockProducts = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tbStartNepali = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
@@ -65,6 +66,7 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblCompanyName = new System.Windows.Forms.Label();
+            this.nepaliDateTextBox1 = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -117,6 +119,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.nepaliDateTextBox1);
+            this.panel2.Controls.Add(this.tbStartNepali);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.dtEnd);
@@ -126,6 +130,13 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1138, 38);
             this.panel2.TabIndex = 2;
+            // 
+            // tbStartNepali
+            // 
+            this.tbStartNepali.Location = new System.Drawing.Point(593, 9);
+            this.tbStartNepali.Name = "tbStartNepali";
+            this.tbStartNepali.Size = new System.Drawing.Size(138, 20);
+            this.tbStartNepali.TabIndex = 4;
             // 
             // label2
             // 
@@ -498,6 +509,13 @@
             this.lblCompanyName.Text = "My Company";
             this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nepaliDateTextBox1
+            // 
+            this.nepaliDateTextBox1.Location = new System.Drawing.Point(373, 9);
+            this.nepaliDateTextBox1.Name = "nepaliDateTextBox1";
+            this.nepaliDateTextBox1.Size = new System.Drawing.Size(128, 20);
+            this.nepaliDateTextBox1.TabIndex = 5;
+            // 
             // DashboardUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -565,5 +583,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDays;
+        private System.Windows.Forms.TextBox tbStartNepali;
+        private Common.Date.NepaliDateTextBox nepaliDateTextBox1;
     }
 }

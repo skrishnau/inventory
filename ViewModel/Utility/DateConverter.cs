@@ -391,6 +391,13 @@ namespace ViewModel.Utility
                     return "";
             }
         }
+        public static List<string> GetNepaliWeeksShortList()
+        {
+            return new List<string>
+            {
+                "आ", "सो", "म", "बु", "बि", "शु", "श"
+            };
+        }
         public System.DateTime ToAD()
         {
             return (this.ToAD(this._Date.ToShortDateString()));
@@ -708,9 +715,7 @@ namespace ViewModel.Utility
             nepaliDate.MonthName = getNepaliMonth(m);
             return nepaliDate;
         }
-        private string getNepaliMonth(int month)
-        {
-            Dictionary<int, string> nepaliMonth = new Dictionary<int, String>() {
+        public static Dictionary<int, string> nepaliMonth = new Dictionary<int, String>() {
                 {1, "बैशाख"},
                 {2, "जेष्ठ"},
                 {3, "आषाढ"},
@@ -724,6 +729,9 @@ namespace ViewModel.Utility
                 {11, "फागुन"},
                 {12, "चैत्र"},
             };
+        private string getNepaliMonth(int month)
+        {
+            
             return nepaliMonth[month].Trim();
         }
         public double GetUnixTimestamp()
@@ -971,7 +979,7 @@ namespace ViewModel.Utility
             {8, "८"},
             {9, "९"}
             };
-            static Dictionary<string, String> daysMapping = new Dictionary<string, String>() {
+            public static Dictionary<string, String> daysMapping = new Dictionary<string, String>() {
             {"Sunday", "आइतवार"},
             {"Monday", "सोमवार"},
             {"Tuesday", "मंगलवार"},
@@ -1023,12 +1031,50 @@ namespace ViewModel.Utility
 
         }
 
-        //public List<NepDate> GetCalendar(int year)
-        //{
-        //    var list = new List<NepDate>();
-        //    foreach(var i= 1, i<year)
-        //    return list;
-        //}
+        public List<NepDate> GetCalendarFromEnglishDate(int engYear, int engMonth)
+        {
+
+            // var date = DateTime.Parse(engYear + "/" + engMonth + "/1");
+            var bs = ToBS(DateTime.Now);
+
+
+            return GetCalendarFromNepaliDate(bs.Year, bs.Month);
+        }
+
+        public List<NepDate> GetCalendarFromNepaliDate(int nepYear, int nepMonth)
+        {
+            var list = new List<NepDate>();
+
+
+
+            // 2077 poush 
+            var ad = ToAD(nepYear + "/" + nepMonth + "/" + "1");
+            var bs = ToBS(ad);
+            bs.WeekDay = NepDate.daysMapping.Values.ToList().IndexOf(bs.WeekDayName);
+            // add initial remaining days
+            for (var i = 0; i < bs.WeekDay; i++)
+            {
+                list.Add(new NepDate());
+            }
+            var lastDayOfNep = getLastDayOfMonthNep(nepYear, nepMonth);
+            for (var i = 1; i <= lastDayOfNep; i++)
+            {
+                var nepDate = new NepDate()
+                {
+                    Year = bs.Year,
+                    Month = bs.Month,
+                    Day = i,
+                    WeekDay = (bs.WeekDay+i-1)%7,
+                    MonthName  = getNepaliMonth(bs.Month),
+                };
+                list.Add(nepDate);
+            }
+
+
+            var day = ad.DayOfWeek;
+
+            return list;
+        }
 
     }
 }

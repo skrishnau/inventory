@@ -35,6 +35,11 @@ namespace DTO.Core.Inventory
             // quanity ------- Don't assign Quantity ---------- // 
             //entity.CommittedQuantity = model.CommittedQuantity;
             //entity.InStockQuantity = model.InStockQuantity;
+
+            // logic: for opening stock balance: if there's already InStockQuantity value then 
+            //          don't update it else update it from model
+            entity.InStockQuantity = entity.InStockQuantity != 0 ? entity.InStockQuantity : model.InStockQuantity;
+
             //entity.OnHoldQuantity = model.OnHoldQuantity;
             //entity.OnOrderQuantity = model.OnOrderQuantity;
             // extra info
@@ -82,7 +87,7 @@ namespace DTO.Core.Inventory
         public static List<ProductModel> MapToModel(this IQueryable<Product> query)
         {
             var list = new List<ProductModel>();
-            foreach(var p in query)
+            foreach (var p in query)
             {
                 list.Add(p.MapToProductModel());
             }

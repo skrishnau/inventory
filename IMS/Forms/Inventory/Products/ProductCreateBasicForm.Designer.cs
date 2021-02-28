@@ -40,12 +40,14 @@
             this.tbProductName = new System.Windows.Forms.MaskedTextBox();
             this.lblCategory = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.chkUse = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.numSupplyPrice = new System.Windows.Forms.NumericUpDown();
             this.label32 = new System.Windows.Forms.Label();
             this.numRetailPrice = new System.Windows.Forms.NumericUpDown();
+            this.label33 = new System.Windows.Forms.Label();
+            this.chkUse = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbInStockQuantity = new System.Windows.Forms.NumericUpDown();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -56,6 +58,7 @@
             this.tblBasicDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSupplyPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRetailPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbInStockQuantity)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.gbBasicDetails.SuspendLayout();
@@ -79,54 +82,57 @@
             this.tblBasicDetails.Controls.Add(this.tbProductName, 1, 0);
             this.tblBasicDetails.Controls.Add(this.lblCategory, 0, 2);
             this.tblBasicDetails.Controls.Add(this.label12, 0, 1);
-            this.tblBasicDetails.Controls.Add(this.label33, 0, 3);
-            this.tblBasicDetails.Controls.Add(this.chkUse, 1, 3);
             this.tblBasicDetails.Controls.Add(this.label9, 2, 0);
             this.tblBasicDetails.Controls.Add(this.numSupplyPrice, 3, 0);
             this.tblBasicDetails.Controls.Add(this.label32, 2, 1);
             this.tblBasicDetails.Controls.Add(this.numRetailPrice, 3, 1);
+            this.tblBasicDetails.Controls.Add(this.label33, 0, 4);
+            this.tblBasicDetails.Controls.Add(this.chkUse, 1, 4);
+            this.tblBasicDetails.Controls.Add(this.label3, 0, 3);
+            this.tblBasicDetails.Controls.Add(this.tbInStockQuantity, 1, 3);
             this.tblBasicDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblBasicDetails.Location = new System.Drawing.Point(10, 16);
             this.tblBasicDetails.Name = "tblBasicDetails";
-            this.tblBasicDetails.RowCount = 4;
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblBasicDetails.Size = new System.Drawing.Size(527, 160);
-            this.tblBasicDetails.TabIndex = 28;
+            this.tblBasicDetails.RowCount = 5;
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tblBasicDetails.Size = new System.Drawing.Size(527, 182);
+            this.tblBasicDetails.TabIndex = 1;
             // 
             // cbCategory
             // 
             this.cbCategory.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(105, 83);
+            this.cbCategory.Location = new System.Drawing.Point(105, 75);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(149, 21);
-            this.cbCategory.TabIndex = 50;
+            this.cbCategory.TabIndex = 5;
             // 
             // cbUom
             // 
             this.cbUom.FormattingEnabled = true;
-            this.cbUom.Location = new System.Drawing.Point(376, 123);
+            this.cbUom.Location = new System.Drawing.Point(376, 111);
             this.cbUom.Name = "cbUom";
             this.cbUom.Size = new System.Drawing.Size(124, 21);
-            this.cbUom.TabIndex = 14;
+            this.cbUom.TabIndex = 8;
             // 
             // tbSKU
             // 
             this.tbSKU.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSKU.Location = new System.Drawing.Point(104, 42);
+            this.tbSKU.Location = new System.Drawing.Point(104, 38);
             this.tbSKU.Margin = new System.Windows.Forms.Padding(2);
             this.tbSKU.Name = "tbSKU";
             this.tbSKU.Size = new System.Drawing.Size(151, 21);
-            this.tbSKU.TabIndex = 10;
+            this.tbSKU.TabIndex = 3;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(275, 120);
+            this.label6.Location = new System.Drawing.Point(275, 108);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 26);
             this.label6.TabIndex = 2;
@@ -145,16 +151,16 @@
             // cbPackage
             // 
             this.cbPackage.FormattingEnabled = true;
-            this.cbPackage.Location = new System.Drawing.Point(376, 83);
+            this.cbPackage.Location = new System.Drawing.Point(376, 75);
             this.cbPackage.Name = "cbPackage";
             this.cbPackage.Size = new System.Drawing.Size(124, 21);
-            this.cbPackage.TabIndex = 13;
+            this.cbPackage.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(275, 80);
+            this.label1.Location = new System.Drawing.Point(275, 72);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 0;
@@ -167,13 +173,13 @@
             this.tbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.tbProductName.Name = "tbProductName";
             this.tbProductName.Size = new System.Drawing.Size(151, 21);
-            this.tbProductName.TabIndex = 5;
+            this.tbProductName.TabIndex = 1;
             // 
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
             this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(2, 80);
+            this.lblCategory.Location = new System.Drawing.Point(2, 72);
             this.lblCategory.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(56, 13);
@@ -184,33 +190,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 40);
+            this.label12.Location = new System.Drawing.Point(3, 36);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(75, 26);
             this.label12.TabIndex = 41;
             this.label12.Text = "Product Code (SKU)";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(3, 120);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(35, 13);
-            this.label33.TabIndex = 48;
-            this.label33.Text = "Use ?";
-            this.toolTip1.SetToolTip(this.label33, "Either to Include in product selection in other sections.");
-            // 
-            // chkUse
-            // 
-            this.chkUse.AutoSize = true;
-            this.chkUse.Checked = true;
-            this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUse.Location = new System.Drawing.Point(105, 123);
-            this.chkUse.Name = "chkUse";
-            this.chkUse.Size = new System.Drawing.Size(15, 14);
-            this.chkUse.TabIndex = 49;
-            this.toolTip1.SetToolTip(this.chkUse, "Either to Include in product selection in other sections.");
-            this.chkUse.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -227,12 +211,12 @@
             this.numSupplyPrice.Location = new System.Drawing.Point(376, 3);
             this.numSupplyPrice.Name = "numSupplyPrice";
             this.numSupplyPrice.Size = new System.Drawing.Size(124, 20);
-            this.numSupplyPrice.TabIndex = 1;
+            this.numSupplyPrice.TabIndex = 2;
             // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(275, 40);
+            this.label32.Location = new System.Drawing.Point(275, 36);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(65, 13);
             this.label32.TabIndex = 2;
@@ -241,10 +225,49 @@
             // numRetailPrice
             // 
             this.numRetailPrice.DecimalPlaces = 1;
-            this.numRetailPrice.Location = new System.Drawing.Point(376, 43);
+            this.numRetailPrice.Location = new System.Drawing.Point(376, 39);
             this.numRetailPrice.Name = "numRetailPrice";
             this.numRetailPrice.Size = new System.Drawing.Size(124, 20);
-            this.numRetailPrice.TabIndex = 3;
+            this.numRetailPrice.TabIndex = 4;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(3, 144);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(35, 13);
+            this.label33.TabIndex = 48;
+            this.label33.Text = "Use ?";
+            this.toolTip1.SetToolTip(this.label33, "Either to Include in product selection in other sections.");
+            // 
+            // chkUse
+            // 
+            this.chkUse.AutoSize = true;
+            this.chkUse.Checked = true;
+            this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUse.Location = new System.Drawing.Point(105, 147);
+            this.chkUse.Name = "chkUse";
+            this.chkUse.Size = new System.Drawing.Size(15, 14);
+            this.chkUse.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.chkUse, "Either to Include in product selection in other sections.");
+            this.chkUse.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 108);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.TabIndex = 51;
+            this.label3.Text = "In Stock Quantity";
+            // 
+            // tbInStockQuantity
+            // 
+            this.tbInStockQuantity.DecimalPlaces = 2;
+            this.tbInStockQuantity.Location = new System.Drawing.Point(105, 111);
+            this.tbInStockQuantity.Name = "tbInStockQuantity";
+            this.tbInStockQuantity.Size = new System.Drawing.Size(149, 20);
+            this.tbInStockQuantity.TabIndex = 7;
             // 
             // btnCancel
             // 
@@ -253,7 +276,7 @@
             this.btnCancel.Location = new System.Drawing.Point(450, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 102;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -263,7 +286,7 @@
             this.btnSave.Location = new System.Drawing.Point(358, 6);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 101;
+            this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -273,10 +296,10 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 184);
+            this.panel1.Location = new System.Drawing.Point(5, 206);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(547, 37);
-            this.panel1.TabIndex = 100;
+            this.panel1.TabIndex = 10;
             // 
             // errorProvider1
             // 
@@ -289,7 +312,7 @@
             this.gbBasicDetails.Location = new System.Drawing.Point(0, 0);
             this.gbBasicDetails.Name = "gbBasicDetails";
             this.gbBasicDetails.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.gbBasicDetails.Size = new System.Drawing.Size(547, 179);
+            this.gbBasicDetails.Size = new System.Drawing.Size(547, 201);
             this.gbBasicDetails.TabIndex = 1;
             this.gbBasicDetails.TabStop = false;
             this.gbBasicDetails.Text = "Basic Details";
@@ -300,7 +323,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(5, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(547, 179);
+            this.panel2.Size = new System.Drawing.Size(547, 201);
             this.panel2.TabIndex = 101;
             // 
             // ProductCreateBasicForm
@@ -309,7 +332,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(557, 226);
+            this.ClientSize = new System.Drawing.Size(557, 248);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -323,6 +346,7 @@
             this.tblBasicDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSupplyPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRetailPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbInStockQuantity)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.gbBasicDetails.ResumeLayout(false);
@@ -356,5 +380,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.NumericUpDown numRetailPrice;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown tbInStockQuantity;
     }
 }

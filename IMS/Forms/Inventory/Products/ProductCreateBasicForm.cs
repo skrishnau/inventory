@@ -55,6 +55,9 @@ namespace IMS.Forms.Inventory.Products
 
         private void ProductCreate_Load(object sender, EventArgs e)
         {
+            tbInStockQuantity.Minimum = decimal.MinValue;
+            tbInStockQuantity.Maximum = decimal.MaxValue;
+
             InitializeEvents();
             InitializeDatabaseChangeListeners();
 
@@ -117,6 +120,7 @@ namespace IMS.Forms.Inventory.Products
             var uomId = 0;
             var warehouseId = 0;
             int.TryParse(cbUom.SelectedValue as string, out uomId);
+            
             var product = new ProductModel()
             {
                 Id = _productId,
@@ -133,6 +137,7 @@ namespace IMS.Forms.Inventory.Products
                 RetailPrice = numRetailPrice.Value,
                 SupplyPrice = numSupplyPrice.Value,
                 WarehouseId = warehouseId == 0 ? null : (int?)warehouseId,
+                InStockQuantity = (_product?.InStockQuantity??0) == 0 ?  tbInStockQuantity.Value : _product?.InStockQuantity??0,
             };
             product.ProductAttributes = _productAttributes;
             _productService.AddUpdateProduct(product);
@@ -199,6 +204,12 @@ namespace IMS.Forms.Inventory.Products
                 cbPackage.Text = product.Package == null ? "" : product.Package;
                 cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
                 chkUse.Checked = product.Use;
+                tbInStockQuantity.Value = _product.InStockQuantity;// 0 ? 0 : _product.InStockQuantity;
+                if(_product.InStockQuantity != 0)
+                {
+                    tbInStockQuantity.Enabled = false;
+                    
+                }
             }
         }
 
