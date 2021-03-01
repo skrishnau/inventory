@@ -63,10 +63,13 @@ namespace ViewModel.Utility
             return new System.DateTime(fiscal_year, 4, 1);
         }
 
-
+        private static Dictionary<int, int[]> daysInMonthByYear;
         public int getLastDayOfMonthNep(int year, int month)
         {
-            Dictionary<int, int[]> daysInMonthByYear = new Dictionary<int, int[]>();
+            if(daysInMonthByYear != null)
+                return (daysInMonthByYear[year])[month - 1];
+
+            daysInMonthByYear = new Dictionary<int, int[]>();
             daysInMonthByYear.Add(1970, new int[] { 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30 });
             daysInMonthByYear.Add(1971, new int[] { 31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30 });
             daysInMonthByYear.Add(1972, new int[] { 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30 });
@@ -561,6 +564,7 @@ namespace ViewModel.Utility
             return (this.ToBS(this._Date));
         }
 
+        /*
         public NepDate ToBS(System.DateTime gDate)
         {
             NepDate nepaliDate = new NepDate();
@@ -717,6 +721,121 @@ namespace ViewModel.Utility
             nepaliDate.MonthName = getNepaliMonth(m);
             return nepaliDate;
         }
+        */
+
+        //English month data
+        private static int[] month = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        private static int[] lmonth = new int[] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+        public NepDate ToBS(System.DateTime gDate)
+        {
+            NepDate nepaliDate = new NepDate();
+            //Breaking given english date
+            int yy = gDate.Year;
+            int mm = gDate.Month;
+            int dd = gDate.Day;
+            //Initialize english date
+            Tuple<int[], int[], int> initializationDates = getClosestEnglishDateAndNepaliDate(gDate);
+            int[] english_init_date = initializationDates.Item1;
+            int[] nepali_init_date = initializationDates.Item2;
+            // def_eyy = 1944;
+            //int def_eyy = english_init_date[0];
+            //Equivalent nepali date
+            //int def_nyy = nepali_init_date[0];
+            //int def_nmm = nepali_init_date[1];
+            //int def_ndd = nepali_init_date[2];
+            //Initializations
+            int total_eDays = 0;
+            int total_nDays = 0;
+            int a = 0;
+            int day = 6;
+            int m = 0;
+            int i = 0;
+            int j = 0;
+            //Count total number of days in terms of year
+            while ((i < (yy - english_init_date[0])))
+            {
+                j = 0;
+                if ((IsLeapYear(english_init_date[0] + i)))
+                {
+                    while ((j < 12))
+                    {
+                        total_eDays += lmonth[j];
+                        j += 1;
+                    }
+                }
+                else
+                {
+                    while ((j < 12))
+                    {
+                        total_eDays += month[j];
+                        j += 1;
+                    }
+
+                }
+                i += 1;
+            }
+            //Count total number of days in terms of month
+            i = 0;
+            while ((i < (mm - 1)))
+            {
+                if ((this.IsLeapYear(yy)))
+                {
+                    total_eDays += lmonth[i];
+                }
+                else
+                {
+                    total_eDays += month[i];
+                }
+                i += 1;
+            }
+            //Count total number of days in terms of dates
+            total_eDays += dd;
+            //below i is the starting nepali year, used in looping to loop through years above the specified year
+            i = nepali_init_date[0];//def_nyy;
+            j = nepali_init_date[1]; //def_nmm;
+            total_nDays = nepali_init_date[2]; //def_ndd;
+            m = nepali_init_date[1]; //def_nmm;
+            int y = nepali_init_date[0]; //def_nyy;
+
+            //Count nepali date from array
+            while ((!(total_eDays == 0)))
+            {
+                a = this.getLastDayOfMonthNep(i, j);
+                total_nDays += 1;
+                day += 1;
+
+                if ((total_nDays > a))
+                {
+                    m += 1;
+                    total_nDays = 1;
+                    j += 1;
+                }
+
+                if ((day > 7))
+                    day = 1;
+                if ((m > 12))
+                {
+                    y += 1;
+                    m = 1;
+                }
+
+                if ((j > 12))
+                {
+                    j = 1;
+                    i += 1;
+                }
+                total_eDays -= 1;
+            }
+            nepaliDate.Year = y;
+            nepaliDate.Month = m;
+            nepaliDate.Day = total_nDays;
+            nepaliDate.WeekDayName = GetNepaliDayOfWeek(gDate.DayOfWeek.ToString());
+            nepaliDate.MonthName = getNepaliMonth(m);
+            return nepaliDate;
+        }
+
+
         public static Dictionary<int, string> nepaliMonth = new Dictionary<int, String>() {
                 {1, "बैशाख"},
                 {2, "जेष्ठ"},
@@ -733,7 +852,6 @@ namespace ViewModel.Utility
             };
         private string getNepaliMonth(int month)
         {
-
             return nepaliMonth[month].Trim();
         }
         public double GetUnixTimestamp()
