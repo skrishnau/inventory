@@ -32,6 +32,7 @@
             this.lbUnderStockProducts = new System.Windows.Forms.ListBox();
             this.lblTopUnderstockProducts = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dtEnd = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.dtStart = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,7 +65,6 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblCompanyName = new System.Windows.Forms.Label();
-            this.dtEnd = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -127,14 +127,19 @@
             this.panel2.Size = new System.Drawing.Size(1138, 38);
             this.panel2.TabIndex = 2;
             // 
+            // dtEnd
+            // 
+            this.dtEnd.Location = new System.Drawing.Point(207, 9);
+            this.dtEnd.Name = "dtEnd";
+            this.dtEnd.Size = new System.Drawing.Size(100, 20);
+            this.dtEnd.TabIndex = 6;
+            // 
             // dtStart
             // 
             this.dtStart.Location = new System.Drawing.Point(50, 9);
             this.dtStart.Name = "dtStart";
             this.dtStart.Size = new System.Drawing.Size(100, 20);
             this.dtStart.TabIndex = 5;
-            this.dtStart.Text = "2077/11/16";
-            this.dtStart.Value = new System.DateTime(2021, 2, 28, 0, 0, 0, 0);
             // 
             // label2
             // 
@@ -488,14 +493,6 @@
             this.lblCompanyName.TabIndex = 0;
             this.lblCompanyName.Text = "My Company";
             this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dtEnd
-            // 
-            this.dtEnd.Location = new System.Drawing.Point(207, 9);
-            this.dtEnd.Name = "dtEnd";
-            this.dtEnd.Size = new System.Drawing.Size(100, 20);
-            this.dtEnd.TabIndex = 6;
-            this.dtEnd.Value = new System.DateTime(2021, 2, 28, 21, 27, 2, 333);
             // 
             // DashboardUC
             // 

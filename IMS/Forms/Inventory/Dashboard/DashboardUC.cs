@@ -46,6 +46,8 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void DashboardUC_Load(object sender, EventArgs e)
         {
+            this.dtEnd.SetValue(DateTime.Now);
+            this.dtStart.SetValue(DateTime.Now);
             _listener.ProductUpdated += _listener_ProductUpdated;
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
             _listener.UserUpdated += _listener_UserUpdated;
@@ -71,8 +73,8 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void PopulateBarDiagram()
         {
-            var start = dtStart.Value.Date;
-            var end = dtEnd.Value.Date;
+            var start = dtStart.GetValue().Date;
+            var end = dtEnd.GetValue().Date;
             end = end.AddDays(1);
             List<SalePurchaseAmountModel> amountSummary = _orderService.GetSalePurchaseAmountForBarDiagram(start, end);
             ReportDataSource reportDataSource = new ReportDataSource("SalePurchaseAmountDataset", amountSummary);
@@ -178,8 +180,8 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void PopulateTransactionSummary()
         {
-            var start = dtStart.Value.Date;
-            var end = dtEnd.Value.Date;
+            var start = dtStart.GetValue().Date;
+            var end = dtEnd.GetValue().Date;
             end = end.AddDays(1);
             var summary = _inventoryService.GetTransactionSummary(start, end);
             foreach (var sum in summary)

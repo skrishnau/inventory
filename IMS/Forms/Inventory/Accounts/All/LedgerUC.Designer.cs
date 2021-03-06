@@ -302,7 +302,6 @@
             this.dtFrom.Name = "dtFrom";
             this.dtFrom.Size = new System.Drawing.Size(109, 20);
             this.dtFrom.TabIndex = 5;
-            this.dtFrom.Value = new System.DateTime(2021, 2, 28, 22, 13, 43, 467);
             // 
             // dtTo
             // 
@@ -310,7 +309,6 @@
             this.dtTo.Name = "dtTo";
             this.dtTo.Size = new System.Drawing.Size(108, 20);
             this.dtTo.TabIndex = 5;
-            this.dtTo.Value = new System.DateTime(2021, 2, 28, 22, 13, 43, 472);
             // 
             // LedgerUC
             // 

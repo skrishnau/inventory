@@ -67,6 +67,8 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void TransactionCreateForm_Load(object sender, EventArgs e)
         {
+            this.dtExpectedDate.SetValue(DateTime.Now);
+            this.dtPaymentDueDate.SetValue(DateTime.Now);
             this.txtTotal.Maximum = Int32.MaxValue;
             this.txtTotal.Minimum = 0;
             this.txtPaidAmount.Maximum = Int32.MaxValue;
@@ -247,7 +249,7 @@ namespace IMS.Forms.Inventory.Transaction
                     // change button
                     _orderId = model.Id;
                     txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
-                    dtExpectedDate.Value = model.DeliveryDate;
+                    dtExpectedDate.SetValue (model.DeliveryDate);
                     txtAddress.Text = model.Address;
                     txtPhone.Text = model.Phone;
                     txtTotal.Value = model.TotalAmount;
@@ -259,12 +261,12 @@ namespace IMS.Forms.Inventory.Transaction
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
                     txtDiscount.Value = model.DiscountPercent;
-                    dtExpectedDate.Value = model.DeliveryDate;
-                    dtPaymentDueDate.Value = model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now;
+                    dtExpectedDate.SetValue(model.DeliveryDate);
+                    dtPaymentDueDate.SetValue(model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now);
 
                     dgvItems.AddRows(OrderItemMapper.MapToInventoryUnitModel(model.OrderItems));
                     if (model?.PaymentDueDate.HasValue ?? false)
-                        dtPaymentDueDate.Value = model.PaymentDueDate.Value;
+                    dtPaymentDueDate.SetValue( model.PaymentDueDate.Value);
                     //if (model.IsCompleted)
                     //{
                     //    cbClient.Enabled = false;
@@ -420,7 +422,7 @@ namespace IMS.Forms.Inventory.Transaction
                     Id = _orderId,
                     OrderType = _orderType.ToString(),
                     Name = (string.IsNullOrEmpty(cbClient.Text) ? "" : $"{cbClient.Text}, ") + txtReceiptNo.Text,
-                    DeliveryDate = dtExpectedDate.Value,
+                    DeliveryDate = dtExpectedDate.GetValue(),
                     PaidAmount = txtPaidAmount.Value,
                     DiscountPercent = txtDiscount.Value,
                     DiscountAmount = txtTotal.Value * txtDiscount.Value / 100,
@@ -429,7 +431,7 @@ namespace IMS.Forms.Inventory.Transaction
                     ReferenceNumber = txtReceiptNo.Text,
                     Phone = txtPhone.Text,
                     Address = txtAddress.Text,
-                    PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.Value : (DateTime?)null,
+                    PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.GetValue() : (DateTime?)null,
                     PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : rbCash.Checked ? OrderPaymentTypeEnum.Cash.ToString() : null,
                     TotalAmount = items.Select(x => x.Total).Sum()
                 };

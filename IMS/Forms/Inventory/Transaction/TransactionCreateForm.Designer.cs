@@ -56,9 +56,9 @@
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.txtReceiptNo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
@@ -236,12 +236,10 @@
             // 
             // dtPaymentDueDate
             // 
-            this.dtPaymentDueDate.Location = new System.Drawing.Point(108, 1);
+            this.dtPaymentDueDate.Location = new System.Drawing.Point(107, 3);
             this.dtPaymentDueDate.Name = "dtPaymentDueDate";
             this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
             this.dtPaymentDueDate.TabIndex = 9;
-            this.dtPaymentDueDate.Text = "2077/11/16";
-            this.dtPaymentDueDate.Value = new System.DateTime(2021, 2, 28, 0, 0, 0, 0);
             // 
             // label3
             // 
@@ -358,15 +356,22 @@
             // 
             // panel9
             // 
+            this.panel9.Controls.Add(this.dtExpectedDate);
             this.panel9.Controls.Add(this.lblExpectedDate);
             this.panel9.Controls.Add(this.txtReceiptNo);
             this.panel9.Controls.Add(this.label8);
-            this.panel9.Controls.Add(this.dtExpectedDate);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 4);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(518, 26);
             this.panel9.TabIndex = 0;
+            // 
+            // dtExpectedDate
+            // 
+            this.dtExpectedDate.Location = new System.Drawing.Point(410, 3);
+            this.dtExpectedDate.Name = "dtExpectedDate";
+            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtExpectedDate.TabIndex = 6;
             // 
             // txtReceiptNo
             // 
@@ -383,16 +388,6 @@
             this.label8.Size = new System.Drawing.Size(64, 13);
             this.label8.TabIndex = 5;
             this.label8.Text = "Receipt No.";
-            // 
-            // dtExpectedDate
-            // 
-            this.dtExpectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtExpectedDate.Location = new System.Drawing.Point(410, 2);
-            this.dtExpectedDate.Name = "dtExpectedDate";
-            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
-            this.dtExpectedDate.TabIndex = 6;
-            this.dtExpectedDate.Text = "2077/11/16";
-            this.dtExpectedDate.Value = new System.DateTime(2021, 2, 28, 0, 0, 0, 0);
             // 
             // errorProvider
             // 
@@ -569,7 +564,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RadioButton rbReceiptNoParticulars;
         private System.Windows.Forms.TextBox txtParticulars;
-        private Common.Date.NepaliDateTextBox dtExpectedDate;
         private Common.Date.NepaliDateTextBox dtPaymentDueDate;
+        private Common.Date.NepaliDateTextBox dtExpectedDate;
     }
 }

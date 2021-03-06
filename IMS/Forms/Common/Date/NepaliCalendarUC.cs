@@ -17,11 +17,18 @@ namespace IMS.Forms.Common.Date
         public event EventHandler<DateSelectedEventArgs> DateSelected;
         public event EventHandler<EventArgs> CalendarLostFocus;
         DateConverter _converter;
+        NepDate _selectedDate;
         static NepDate _today;
+        System.Drawing.Color todayColor = SystemColors.ControlLight;
+        Color selectedColor = Color.LightGray;
+        Color hoverColor = SystemColors.ControlLightLight;
+
+
 
         public NepaliCalendarUC(DateConverter converter)
         {
             this._converter = converter;
+            _selectedDate = _converter.ToBS(DateTime.Now);
             _today = _converter.ToBS(DateTime.Now);
 
 
@@ -33,20 +40,20 @@ namespace IMS.Forms.Common.Date
         private void PopulateYearAndMonth()
         {
             var years = new List<KeyValuePair<int, int>>();
-            for (var i = 1970; i <= _today.Year; i++)
+            for (var i = 1970; i <= _selectedDate.Year; i++)
             {
                 years.Add(new KeyValuePair<int, int>(i, i));
             }
             cbYear.DataSource = years;
             cbYear.ValueMember = "Key";
             cbMonth.DisplayMember = "Value";
-            cbYear.SelectedValue = _today.Year;
+            cbYear.SelectedValue = _selectedDate.Year;
 
             var months = DateConverter.nepaliMonth.ToList();
             cbMonth.DataSource = months;
             cbMonth.ValueMember = "Key";
             cbMonth.DisplayMember = "Value";
-            cbMonth.SelectedValue = _today.Month;
+            cbMonth.SelectedValue = _selectedDate.Month;
         }
 
         private void NepaliCalendar_Load(object sender, EventArgs e)
@@ -55,15 +62,15 @@ namespace IMS.Forms.Common.Date
 
             PopulateWeeks();
 
-            Populate(_converter.GetCalendarFromNepaliDate(_today.Year, _today.Month));
+            Populate(_converter.GetCalendarFromNepaliDate(_selectedDate.Year, _selectedDate.Month));
         }
 
         internal void ResetDate(string date)
         {
             if (string.IsNullOrEmpty(date) || string.IsNullOrWhiteSpace(date))
             {
-                cbYear.SelectedValue = _today.Year;
-                cbMonth.SelectedValue = _today.Month;
+                cbYear.SelectedValue = _selectedDate.Year;
+                cbMonth.SelectedValue = _selectedDate.Month;
             }
             else
             {
@@ -71,15 +78,20 @@ namespace IMS.Forms.Common.Date
                 if (split.Length >= 3)
                 {
                     int year, month, day;
-                    if(int.TryParse(split[0], out year) && int.TryParse(split[1], out month) && int.TryParse(split[2], out day))
+                    if (int.TryParse(split[0], out year) && int.TryParse(split[1], out month) && int.TryParse(split[2], out day))
                     {
                         cbYear.SelectedValue = year;
                         cbMonth.SelectedValue = month;
-                        _today = new NepDate { Day = day, Month = month, Year = year };
+                        _selectedDate = new NepDate { Day = day, Month = month, Year = year };
                         Populate();
                     }
                 }
             }
+        }
+
+        private bool IsSelected(int year, int month, int day)
+        {
+            return year == _selectedDate.Year && month == _selectedDate.Month && day == _selectedDate.Day;
         }
 
         private bool IsToday(int year, int month, int day)
@@ -134,8 +146,10 @@ namespace IMS.Forms.Common.Date
                 {
                     lbl.Text = item.Day.ToString();
                     lbl.Click += Date_Click;
-                    if (IsToday(item.Year, item.Month, item.Day))//(item.Year == today.Year && item.Month == today.Month && item.Day == today.Day)
-                        lbl.BackColor = Color.LightGray;
+                    if (IsSelected(item.Year, item.Month, item.Day))//(item.Year == today.Year && item.Month == today.Month && item.Day == today.Day)
+                        lbl.BackColor = selectedColor;
+                    else if (IsToday(item.Year, item.Month, item.Day))
+                        lbl.BackColor = todayColor;
                     lbl.MouseLeave += Lbl_MouseLeave;
                     lbl.MouseEnter += Lbl_MouseEnter;
                 }
@@ -147,8 +161,10 @@ namespace IMS.Forms.Common.Date
         {
             var control = sender as Control;
             var item = control.Tag as NepDate;
-            if (IsToday(item.Year, item.Month, item.Day))
-                control.BackColor = Color.LightGray;
+            if (IsSelected(item.Year, item.Month, item.Day))
+                control.BackColor = selectedColor;
+            else if (IsToday(item.Year, item.Month, item.Day))
+                control.BackColor = todayColor;
             else
                 control.BackColor = tableWeeks.BackColor;
         }
@@ -156,19 +172,19 @@ namespace IMS.Forms.Common.Date
         private void Lbl_MouseEnter(object sender, EventArgs e)
         {
             var control = sender as Control;
-            control.BackColor = Color.LightBlue;
+            control.BackColor = hoverColor;
         }
 
         private void Date_Click(object sender, EventArgs e)
         {
             var control = sender as Control;
             var item = control.Tag as NepDate;
-            PopupMessage.ShowSuccessMessage(item.ToStringNepali());
+            //PopupMessage.ShowSuccessMessage(item.ToStringNepali());
             this.Hide();
             DateSelected(this, DateSelectedEventArgs.Instance(item));
         }
 
-        public NepDate Value { get { return _today; } }
+        public NepDate Value { get { return _selectedDate; } }
     }
 
     public class DateSelectedEventArgs: EventArgs

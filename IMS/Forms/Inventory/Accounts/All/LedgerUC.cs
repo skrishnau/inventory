@@ -48,9 +48,9 @@ namespace IMS.Forms.Inventory.Reports.All
         {
             _bindingSource = new BindingSource();
             dgvLedger.DataSource = _bindingSource;
-
             dgvLedger.AutoGenerateColumns = false;
-            dtFrom.Value = DateTime.Now.AddDays(-7);
+            dtFrom.SetValue(DateTime.Now.AddDays(-7));
+            dtTo.SetValue(DateTime.Now);
 
             InitializeEvents();
             PopulateType();
@@ -165,8 +165,8 @@ namespace IMS.Forms.Inventory.Reports.All
         }
        private LedgerMasterModel GetLedger()
         {
-            var from = dtFrom.Value;
-            var to = dtTo.Value;
+            var from = dtFrom.GetValue();
+            var to = dtTo.GetValue();
             var customerIdStr = cbCustomer.SelectedValue?.ToString() ?? "";
             int customerId;
             int.TryParse(customerIdStr, out customerId);

@@ -196,7 +196,6 @@
             this.btnInventoryUnits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnInventoryUnits, "Inventory Units");
             this.btnInventoryUnits.UseVisualStyleBackColor = true;
-            this.btnInventoryUnits.Visible = false;
             // 
             // btnProductList
             // 
@@ -352,7 +351,6 @@
             this.btnDirectReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnDirectReceive, "Direct Receive");
             this.btnDirectReceive.UseVisualStyleBackColor = true;
-            this.btnDirectReceive.Visible = false;
             // 
             // btnHome
             // 
@@ -481,7 +479,6 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel3.Size = new System.Drawing.Size(11, 68);
             this.panel3.TabIndex = 42;
-            this.panel3.Visible = false;
             // 
             // splitter3
             // 
@@ -558,7 +555,6 @@
             this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel7.Size = new System.Drawing.Size(11, 68);
             this.panel7.TabIndex = 49;
-            this.panel7.Visible = false;
             // 
             // splitter6
             // 
@@ -650,7 +646,6 @@
             this.pnlOrders.Name = "pnlOrders";
             this.pnlOrders.Size = new System.Drawing.Size(193, 68);
             this.pnlOrders.TabIndex = 53;
-            this.pnlOrders.Visible = false;
             // 
             // pnlAdjustments
             // 
@@ -665,7 +660,6 @@
             this.pnlAdjustments.Name = "pnlAdjustments";
             this.pnlAdjustments.Size = new System.Drawing.Size(248, 68);
             this.pnlAdjustments.TabIndex = 54;
-            this.pnlAdjustments.Visible = false;
             // 
             // pnlInventory
             // 

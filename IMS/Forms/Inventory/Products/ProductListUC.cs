@@ -60,6 +60,7 @@ namespace IMS.Forms.Inventory.Products
             InitializeListeners();
             PopulateCategoryCombo();
             PopulateProductData();
+
         }
 
         private void PopulateCategoryCombo()
@@ -94,6 +95,7 @@ namespace IMS.Forms.Inventory.Products
             // btnDelete.Click += BtnDelete_Click;
             cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
             txtName.TextChanged += TxtName_TextChanged;
+           
         }
 
 
@@ -101,7 +103,9 @@ namespace IMS.Forms.Inventory.Products
         {
             _listener.ProductUpdated += _listener_ProductUpdated;
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
+            _listener.CategoryUpdated += _listener_CategoryUpdated;
         }
+
 
 
 
@@ -152,9 +156,12 @@ namespace IMS.Forms.Inventory.Products
                 model.Name +
                 "'?",
                "Permanent Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            var deleted = _productService.DeleteProduct(model.Id);
-            if (deleted)
-                PopupMessage.ShowSuccessMessage("Deleted successfully!");
+            if (dialogResult == DialogResult.Yes)
+            {
+                var deleted = _productService.DeleteProduct(model.Id);
+                if (deleted)
+                    PopupMessage.ShowSuccessMessage("Deleted successfully!");
+            }
             //else
             //    PopupMessage.ShowErrorMessage("Couldn't delete! Please contact administrator.");
             this.Focus();
@@ -173,6 +180,11 @@ namespace IMS.Forms.Inventory.Products
         private void CbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateProductData();
+        }
+
+        private void _listener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
+        {
+            PopulateCategoryCombo();
         }
 
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)

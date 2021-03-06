@@ -12,24 +12,48 @@ namespace IMS.Forms.Common.Date
     public class NepaliDateTextBox : TextBox
     {
         NepaliCalendarUC _calendar;
-        DateConverter _dateConverter;
+        static DateConverter _dateConverter = new DateConverter();
+        // used for handling focus and click at same time
+        DateTime _focusedAt;
+
+       // private DateTimePicker picker = new DateTimePicker() { MinDate = DateTime.MinValue };
+
 
         public NepaliDateTextBox()
         {
-            _dateConverter = new DateConverter();
+            this.Text = string.Empty;
+            //this.Value = DateTime.Now;
+
             if (_calendar == null)
                 _calendar = new NepaliCalendarUC(_dateConverter);
 
             // this.GotFocus += NepaliDateTextBox_GotFocus;
             this.Enter += NepaliDateTextBox_GotFocus;
             this.LostFocus += NepaliDateTextBox_LostFocus;
-            //this.Leave += NepaliDateTextBox_LostFocus;
-            this.Click += NepaliDateTextBox_GotFocus;
+            this.Leave += NepaliDateTextBox_LostFocus;
+            this.Click += NepaliDateTextBox_Click;
+            this.DoubleClick += NepaliDateTextBox_DoubleClick;
             _calendar.CalendarLostFocus += Calendar_CalendarLostFocus;
             _calendar.DateSelected += Calendar_DateSelected;
+            //this.Text = _calendar.Value.ToString();
+
             AddIcon();
-            this.Text = _calendar.Value.ToString();
+            //picker.ValueChanged += Picker_ValueChanged;
+            //this.Layout += NepaliDateTextBox_Layout;
+
         }
+
+        private void NepaliDateTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            ShowHideDatePicker();
+            ShowHideDatePicker();
+        }
+
+        //private void NepaliDateTextBox_Layout(object sender, LayoutEventArgs e)
+        //{
+        //    //if (picker.Value.Date != DateTime.Now.Date)
+        //    //this.Text = _dateConverter.ToBS(picker.Value.Date).ToString();
+        //}
 
         private void AddIcon()
         {
@@ -40,9 +64,16 @@ namespace IMS.Forms.Common.Date
                 Top = this.Top,
                 Left = this.Width - 18
             };
-            icon.Click += NepaliDateTextBox_GotFocus;
+            icon.Click += Icon_Click;
+            icon.DoubleClick += NepaliDateTextBox_DoubleClick;
             this.Controls.Add(icon);
             icon.BringToFront();
+        }
+
+        private void Icon_Click(object sender, EventArgs e)
+        {
+            this.Focus();
+            ShowHideDatePicker();
         }
 
         private void Calendar_DateSelected(object sender, DateSelectedEventArgs e)
@@ -64,7 +95,23 @@ namespace IMS.Forms.Common.Date
 
         private void NepaliDateTextBox_GotFocus(object sender, EventArgs e)
         {
+            _focusedAt = DateTime.Now;
             ShowDatePicker();
+        }
+
+        private void NepaliDateTextBox_Click(object sender, EventArgs e)
+        {
+            ShowHideDatePicker();
+        }
+        private void ShowHideDatePicker()
+        {
+            var time = DateTime.Now;
+            if (_calendar.Visible && (time - _focusedAt).TotalMilliseconds > 500)
+                _calendar.Hide();
+            else
+            {
+                ShowDatePicker();
+            }
         }
 
         private void ShowDatePicker()
@@ -89,12 +136,15 @@ namespace IMS.Forms.Common.Date
             this.FindForm().Controls.Add(_calendar);
             _calendar.BringToFront();
         }
-
-        public DateTime Value
+        
+        public void SetValue(DateTime value)
         {
-            get { return string.IsNullOrEmpty(this.Text) ? DateTime.Now : _dateConverter.ToAD(this.Text); }
-            set { this.Text = _dateConverter.ToBS(value)?.ToString(); }
+            this.Text = _dateConverter.ToBS(value).ToString();
         }
 
+        public DateTime GetValue()
+        {
+            return string.IsNullOrEmpty(this.Text) ? DateTime.Now : _dateConverter.ToAD(this.Text);
+        }
     }
 }
