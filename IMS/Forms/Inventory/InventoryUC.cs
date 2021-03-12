@@ -42,6 +42,7 @@ namespace IMS.Forms.Inventory
         private readonly IAppSettingService _appSettingService;
 
         private Transaction.TransactionListUC _transactionListUC;
+        private Transaction.TransactionListUC _orderListUC;
 
         private OrderUC purchaseOrderUC;
         private OrderUC saleOrderUC;
@@ -323,6 +324,7 @@ namespace IMS.Forms.Inventory
             _menubar.btnSaleTransaction.Click += BtnSaleTransaction_Click;
             _menubar.btnPurchaseTransaction.Click += BtnPurchaseTransaction_Click;
             _menubar.btnSaleTransactionList.Click += BtnTransactionList_Click;
+            _menubar.btnOrders.Click += BtnOrders_Click;
 
             _menubar.btnClients.Click += BtnClients_Click;
         }
@@ -561,10 +563,28 @@ namespace IMS.Forms.Inventory
                     _userService,
                     _productService,
                     _listener,
-                    orderType
+                    orderType,
+                    OrderListTypeEnum.Transaction
                     );
             }
             AddTabPage("Transactions", _transactionListUC, sender);
+        }
+
+        private void BtnOrders_Click(object sender, EventArgs e)
+        {
+            var orderType = OrderTypeEnum.All;
+            if (_orderListUC == null)
+            {
+                _orderListUC = new Transaction.TransactionListUC(_orderService,
+                    _inventoryService,
+                    _userService,
+                    _productService,
+                    _listener,
+                    orderType,
+                    OrderListTypeEnum.Order
+                    );
+            }
+            AddTabPage("Orders", _orderListUC, sender);
         }
 
         #endregion

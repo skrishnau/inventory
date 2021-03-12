@@ -1442,6 +1442,11 @@
     <None Include="Resources\icons8-print-16 %281%29.png" />
     <None Include="Resources\icons8-print-16px.png" />
     <None Include="Resources\icons8-calendar-16px.png" />
+    <None Include="Resources\icons8_In_Transit_plus_24px.png" />
+    <None Include="Resources\icons8_Sell_Stock_plus_24px.png" />
+    <None Include="Resources\icons8-order-history-21px.png" />
+    <None Include="Resources\ims_icon.png" />
+    <None Include="Resources\ims_icon.ico" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

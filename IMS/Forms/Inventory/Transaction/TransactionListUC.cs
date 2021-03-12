@@ -36,8 +36,9 @@ namespace IMS.Forms.Inventory.Transaction
         BindingSource _bindingSource = new BindingSource();
         private TransactionListPaginationHelper helper;
 
+        OrderListTypeEnum _orderListTypeEnum;
 
-        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType)
+        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType, OrderListTypeEnum orderListTypeEnum)
         {
             _orderService = orderService;
             _inventoryService = inventoryService;
@@ -45,6 +46,7 @@ namespace IMS.Forms.Inventory.Transaction
             _orderType = orderType; //OrderTypeEnum.Sale;//
             _listener = listener;
             _userService = userService;
+            _orderListTypeEnum = orderListTypeEnum;
 
             InitializeComponent();
             this.Load += OrderListUC_Load;
@@ -63,6 +65,17 @@ namespace IMS.Forms.Inventory.Transaction
             btnPrint.Image = null;
 
             InitializeSearchTextBox();
+
+            if(_orderListTypeEnum == OrderListTypeEnum.Order)
+            {
+                colOrderNumber.Visible = false;
+                colOrderNumber.Width = 0;
+                listHeaderTemplate1.Text = "Orders";
+            }
+            else
+            {
+                listHeaderTemplate1.Text = "Transactions";
+            }
 
         }
         private void InitializeSearchTextBox()
@@ -88,7 +101,7 @@ namespace IMS.Forms.Inventory.Transaction
 
 
             //dgvOrders.DataSource = _bindingSource;
-            helper = new TransactionListPaginationHelper(_bindingSource, dgvOrders, bindingNavigator1, _orderService, _orderType);
+            helper = new TransactionListPaginationHelper(_bindingSource, dgvOrders, bindingNavigator1, _orderService, _orderType, _orderListTypeEnum);
         }
 
         private void InitializeEvents()
@@ -142,7 +155,7 @@ namespace IMS.Forms.Inventory.Transaction
             //bindingNavigator1.BindingSource = _bindingSource;
 
             if (helper != null)
-                helper.Reset(_orderType, txtSearchClient.Text, txtSearchReceiptNo.Text);
+                helper.Reset(_orderType, _orderListTypeEnum, txtSearchClient.Text, txtSearchReceiptNo.Text);
 
             if (_previousSelectedIndex > -1 && dgvOrders.Rows.Count > _previousSelectedIndex)
             {

@@ -31,26 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryMenuBar));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnHelp = new System.Windows.Forms.Button();
-            this.btnSettings = new System.Windows.Forms.Button();
-            this.btnReports = new System.Windows.Forms.Button();
-            this.btnAccounts = new System.Windows.Forms.Button();
-            this.btnManufacturings = new System.Windows.Forms.Button();
-            this.btnInventoryUnits = new System.Windows.Forms.Button();
-            this.btnProductList = new System.Windows.Forms.Button();
-            this.btnPOS = new System.Windows.Forms.Button();
-            this.btnTransferOrder = new System.Windows.Forms.Button();
-            this.btnSellOrder = new System.Windows.Forms.Button();
-            this.btnPurchaseOrder = new System.Windows.Forms.Button();
-            this.btnLocateInventory = new System.Windows.Forms.Button();
-            this.btnDirectMove = new System.Windows.Forms.Button();
-            this.btnDirectIssue = new System.Windows.Forms.Button();
-            this.btnDirectReceive = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
-            this.btnSaleTransaction = new System.Windows.Forms.Button();
-            this.btnSaleTransactionList = new System.Windows.Forms.Button();
-            this.btnPurchaseTransaction = new System.Windows.Forms.Button();
-            this.btnClients = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -77,6 +57,27 @@
             this.pnlMisc = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnHelp = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.btnReports = new System.Windows.Forms.Button();
+            this.btnAccounts = new System.Windows.Forms.Button();
+            this.btnClients = new System.Windows.Forms.Button();
+            this.btnManufacturings = new System.Windows.Forms.Button();
+            this.btnInventoryUnits = new System.Windows.Forms.Button();
+            this.btnProductList = new System.Windows.Forms.Button();
+            this.btnLocateInventory = new System.Windows.Forms.Button();
+            this.btnDirectMove = new System.Windows.Forms.Button();
+            this.btnDirectIssue = new System.Windows.Forms.Button();
+            this.btnDirectReceive = new System.Windows.Forms.Button();
+            this.btnTransferOrder = new System.Windows.Forms.Button();
+            this.btnPurchaseOrder = new System.Windows.Forms.Button();
+            this.btnSellOrder = new System.Windows.Forms.Button();
+            this.btnOrders = new System.Windows.Forms.Button();
+            this.btnSaleTransactionList = new System.Windows.Forms.Button();
+            this.btnPurchaseTransaction = new System.Windows.Forms.Button();
+            this.btnSaleTransaction = new System.Windows.Forms.Button();
+            this.btnPOS = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -91,6 +92,288 @@
             this.pnlMisc.SuspendLayout();
             this.pnlHome.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.splitter1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(78, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel1.Size = new System.Drawing.Size(11, 68);
+            this.panel1.TabIndex = 40;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter1.Location = new System.Drawing.Point(5, 4);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(2, 60);
+            this.splitter1.TabIndex = 0;
+            this.splitter1.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.splitter2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(634, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel2.Size = new System.Drawing.Size(11, 68);
+            this.panel2.TabIndex = 41;
+            this.panel2.Visible = false;
+            // 
+            // splitter2
+            // 
+            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter2.Location = new System.Drawing.Point(5, 4);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(2, 60);
+            this.splitter2.TabIndex = 0;
+            this.splitter2.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.splitter3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(893, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel3.Size = new System.Drawing.Size(11, 68);
+            this.panel3.TabIndex = 42;
+            this.panel3.Visible = false;
+            // 
+            // splitter3
+            // 
+            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter3.Location = new System.Drawing.Point(5, 4);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(2, 60);
+            this.splitter3.TabIndex = 0;
+            this.splitter3.TabStop = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.splitter7);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(1094, 2);
+            this.panel4.Name = "panel4";
+            this.panel4.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel4.Size = new System.Drawing.Size(11, 68);
+            this.panel4.TabIndex = 43;
+            // 
+            // splitter7
+            // 
+            this.splitter7.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter7.Location = new System.Drawing.Point(5, 4);
+            this.splitter7.Name = "splitter7";
+            this.splitter7.Size = new System.Drawing.Size(2, 60);
+            this.splitter7.TabIndex = 0;
+            this.splitter7.TabStop = false;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.splitter4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(2, 2);
+            this.panel5.Name = "panel5";
+            this.panel5.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel5.Size = new System.Drawing.Size(11, 68);
+            this.panel5.TabIndex = 44;
+            // 
+            // splitter4
+            // 
+            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter4.Location = new System.Drawing.Point(5, 4);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(2, 60);
+            this.splitter4.TabIndex = 0;
+            this.splitter4.TabStop = false;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.splitter5);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(1400, 2);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel6.Size = new System.Drawing.Size(11, 68);
+            this.panel6.TabIndex = 45;
+            // 
+            // splitter5
+            // 
+            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter5.Location = new System.Drawing.Point(5, 4);
+            this.splitter5.Name = "splitter5";
+            this.splitter5.Size = new System.Drawing.Size(2, 60);
+            this.splitter5.TabIndex = 0;
+            this.splitter5.TabStop = false;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.splitter6);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(430, 2);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel7.Size = new System.Drawing.Size(11, 68);
+            this.panel7.TabIndex = 49;
+            // 
+            // splitter6
+            // 
+            this.splitter6.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter6.Location = new System.Drawing.Point(5, 4);
+            this.splitter6.Name = "splitter6";
+            this.splitter6.Size = new System.Drawing.Size(2, 60);
+            this.splitter6.TabIndex = 0;
+            this.splitter6.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(341, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Transactions";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(193, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Orders";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(248, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Adjustments";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(190, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Inventory";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(295, 15);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Misc";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlTransactions
+            // 
+            this.pnlTransactions.AutoSize = true;
+            this.pnlTransactions.Controls.Add(this.btnOrders);
+            this.pnlTransactions.Controls.Add(this.btnSaleTransactionList);
+            this.pnlTransactions.Controls.Add(this.btnPurchaseTransaction);
+            this.pnlTransactions.Controls.Add(this.btnSaleTransaction);
+            this.pnlTransactions.Controls.Add(this.btnPOS);
+            this.pnlTransactions.Controls.Add(this.label2);
+            this.pnlTransactions.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlTransactions.Location = new System.Drawing.Point(89, 2);
+            this.pnlTransactions.Name = "pnlTransactions";
+            this.pnlTransactions.Size = new System.Drawing.Size(341, 68);
+            this.pnlTransactions.TabIndex = 52;
+            // 
+            // pnlOrders
+            // 
+            this.pnlOrders.AutoSize = true;
+            this.pnlOrders.Controls.Add(this.btnTransferOrder);
+            this.pnlOrders.Controls.Add(this.btnPurchaseOrder);
+            this.pnlOrders.Controls.Add(this.btnSellOrder);
+            this.pnlOrders.Controls.Add(this.label3);
+            this.pnlOrders.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlOrders.Location = new System.Drawing.Point(441, 2);
+            this.pnlOrders.Name = "pnlOrders";
+            this.pnlOrders.Size = new System.Drawing.Size(193, 68);
+            this.pnlOrders.TabIndex = 53;
+            this.pnlOrders.Visible = false;
+            // 
+            // pnlAdjustments
+            // 
+            this.pnlAdjustments.AutoSize = true;
+            this.pnlAdjustments.Controls.Add(this.btnLocateInventory);
+            this.pnlAdjustments.Controls.Add(this.btnDirectMove);
+            this.pnlAdjustments.Controls.Add(this.btnDirectIssue);
+            this.pnlAdjustments.Controls.Add(this.btnDirectReceive);
+            this.pnlAdjustments.Controls.Add(this.label4);
+            this.pnlAdjustments.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlAdjustments.Location = new System.Drawing.Point(645, 2);
+            this.pnlAdjustments.Name = "pnlAdjustments";
+            this.pnlAdjustments.Size = new System.Drawing.Size(248, 68);
+            this.pnlAdjustments.TabIndex = 54;
+            this.pnlAdjustments.Visible = false;
+            // 
+            // pnlInventory
+            // 
+            this.pnlInventory.AutoSize = true;
+            this.pnlInventory.Controls.Add(this.btnManufacturings);
+            this.pnlInventory.Controls.Add(this.btnInventoryUnits);
+            this.pnlInventory.Controls.Add(this.btnProductList);
+            this.pnlInventory.Controls.Add(this.label5);
+            this.pnlInventory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlInventory.Location = new System.Drawing.Point(904, 2);
+            this.pnlInventory.Name = "pnlInventory";
+            this.pnlInventory.Size = new System.Drawing.Size(190, 68);
+            this.pnlInventory.TabIndex = 55;
+            // 
+            // pnlMisc
+            // 
+            this.pnlMisc.AutoSize = true;
+            this.pnlMisc.Controls.Add(this.btnHelp);
+            this.pnlMisc.Controls.Add(this.btnSettings);
+            this.pnlMisc.Controls.Add(this.btnReports);
+            this.pnlMisc.Controls.Add(this.btnAccounts);
+            this.pnlMisc.Controls.Add(this.btnClients);
+            this.pnlMisc.Controls.Add(this.label6);
+            this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlMisc.Location = new System.Drawing.Point(1105, 2);
+            this.pnlMisc.Name = "pnlMisc";
+            this.pnlMisc.Size = new System.Drawing.Size(295, 68);
+            this.pnlMisc.TabIndex = 56;
+            // 
+            // pnlHome
+            // 
+            this.pnlHome.AutoSize = true;
+            this.pnlHome.Controls.Add(this.btnHome);
+            this.pnlHome.Controls.Add(this.label1);
+            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlHome.Location = new System.Drawing.Point(13, 2);
+            this.pnlHome.Name = "pnlHome";
+            this.pnlHome.Size = new System.Drawing.Size(65, 68);
+            this.pnlHome.TabIndex = 57;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 15);
+            this.label1.TabIndex = 38;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnHelp
             // 
@@ -162,6 +445,22 @@
             this.toolTip1.SetToolTip(this.btnAccounts, "Accounts");
             this.btnAccounts.UseVisualStyleBackColor = false;
             // 
+            // btnClients
+            // 
+            this.btnClients.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnClients.FlatAppearance.BorderSize = 0;
+            this.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClients.Image = global::IMS.Properties.Resources.icons8_Supplier_24px;
+            this.btnClients.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnClients.Location = new System.Drawing.Point(0, 15);
+            this.btnClients.Name = "btnClients";
+            this.btnClients.Size = new System.Drawing.Size(64, 53);
+            this.btnClients.TabIndex = 48;
+            this.btnClients.Text = "Clients";
+            this.btnClients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnClients, "Settings");
+            this.btnClients.UseVisualStyleBackColor = true;
+            // 
             // btnManufacturings
             // 
             this.btnManufacturings.BackColor = System.Drawing.Color.Transparent;
@@ -196,6 +495,7 @@
             this.btnInventoryUnits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnInventoryUnits, "Inventory Units");
             this.btnInventoryUnits.UseVisualStyleBackColor = true;
+            this.btnInventoryUnits.Visible = false;
             // 
             // btnProductList
             // 
@@ -213,74 +513,6 @@
             this.btnProductList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnProductList, "Products");
             this.btnProductList.UseVisualStyleBackColor = true;
-            // 
-            // btnPOS
-            // 
-            this.btnPOS.BackColor = System.Drawing.Color.Transparent;
-            this.btnPOS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPOS.Enabled = false;
-            this.btnPOS.FlatAppearance.BorderSize = 0;
-            this.btnPOS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPOS.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
-            this.btnPOS.Location = new System.Drawing.Point(0, 15);
-            this.btnPOS.Name = "btnPOS";
-            this.btnPOS.Size = new System.Drawing.Size(60, 53);
-            this.btnPOS.TabIndex = 8;
-            this.btnPOS.Text = "POS";
-            this.btnPOS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPOS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnPOS, "Point Of Sale");
-            this.btnPOS.UseVisualStyleBackColor = false;
-            this.btnPOS.Visible = false;
-            // 
-            // btnTransferOrder
-            // 
-            this.btnTransferOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnTransferOrder.FlatAppearance.BorderSize = 0;
-            this.btnTransferOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransferOrder.Image = global::IMS.Properties.Resources.icons8_Move_Stock_24px;
-            this.btnTransferOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTransferOrder.Location = new System.Drawing.Point(129, 15);
-            this.btnTransferOrder.Name = "btnTransferOrder";
-            this.btnTransferOrder.Size = new System.Drawing.Size(64, 53);
-            this.btnTransferOrder.TabIndex = 3;
-            this.btnTransferOrder.Text = "TO";
-            this.btnTransferOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnTransferOrder, "Transfer Orders");
-            this.btnTransferOrder.UseVisualStyleBackColor = true;
-            this.btnTransferOrder.Visible = false;
-            // 
-            // btnSellOrder
-            // 
-            this.btnSellOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSellOrder.FlatAppearance.BorderSize = 0;
-            this.btnSellOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSellOrder.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
-            this.btnSellOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSellOrder.Location = new System.Drawing.Point(0, 15);
-            this.btnSellOrder.Name = "btnSellOrder";
-            this.btnSellOrder.Size = new System.Drawing.Size(59, 53);
-            this.btnSellOrder.TabIndex = 4;
-            this.btnSellOrder.Text = "SO";
-            this.btnSellOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnSellOrder, "Sale Orders");
-            this.btnSellOrder.UseVisualStyleBackColor = true;
-            // 
-            // btnPurchaseOrder
-            // 
-            this.btnPurchaseOrder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPurchaseOrder.FlatAppearance.BorderSize = 0;
-            this.btnPurchaseOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPurchaseOrder.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
-            this.btnPurchaseOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPurchaseOrder.Location = new System.Drawing.Point(59, 15);
-            this.btnPurchaseOrder.Name = "btnPurchaseOrder";
-            this.btnPurchaseOrder.Size = new System.Drawing.Size(70, 53);
-            this.btnPurchaseOrder.TabIndex = 1;
-            this.btnPurchaseOrder.Text = "PO";
-            this.btnPurchaseOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnPurchaseOrder, "Purchase Orders");
-            this.btnPurchaseOrder.UseVisualStyleBackColor = true;
             // 
             // btnLocateInventory
             // 
@@ -352,6 +584,138 @@
             this.toolTip1.SetToolTip(this.btnDirectReceive, "Direct Receive");
             this.btnDirectReceive.UseVisualStyleBackColor = true;
             // 
+            // btnTransferOrder
+            // 
+            this.btnTransferOrder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnTransferOrder.FlatAppearance.BorderSize = 0;
+            this.btnTransferOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTransferOrder.Image = global::IMS.Properties.Resources.icons8_Move_Stock_24px;
+            this.btnTransferOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTransferOrder.Location = new System.Drawing.Point(129, 15);
+            this.btnTransferOrder.Name = "btnTransferOrder";
+            this.btnTransferOrder.Size = new System.Drawing.Size(64, 53);
+            this.btnTransferOrder.TabIndex = 3;
+            this.btnTransferOrder.Text = "TO";
+            this.btnTransferOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnTransferOrder, "Transfer Orders");
+            this.btnTransferOrder.UseVisualStyleBackColor = true;
+            this.btnTransferOrder.Visible = false;
+            // 
+            // btnPurchaseOrder
+            // 
+            this.btnPurchaseOrder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPurchaseOrder.FlatAppearance.BorderSize = 0;
+            this.btnPurchaseOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPurchaseOrder.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
+            this.btnPurchaseOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPurchaseOrder.Location = new System.Drawing.Point(59, 15);
+            this.btnPurchaseOrder.Name = "btnPurchaseOrder";
+            this.btnPurchaseOrder.Size = new System.Drawing.Size(70, 53);
+            this.btnPurchaseOrder.TabIndex = 1;
+            this.btnPurchaseOrder.Text = "PO";
+            this.btnPurchaseOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnPurchaseOrder, "Purchase Orders");
+            this.btnPurchaseOrder.UseVisualStyleBackColor = true;
+            // 
+            // btnSellOrder
+            // 
+            this.btnSellOrder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSellOrder.FlatAppearance.BorderSize = 0;
+            this.btnSellOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSellOrder.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
+            this.btnSellOrder.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSellOrder.Location = new System.Drawing.Point(0, 15);
+            this.btnSellOrder.Name = "btnSellOrder";
+            this.btnSellOrder.Size = new System.Drawing.Size(59, 53);
+            this.btnSellOrder.TabIndex = 4;
+            this.btnSellOrder.Text = "SO";
+            this.btnSellOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnSellOrder, "Sale Orders");
+            this.btnSellOrder.UseVisualStyleBackColor = true;
+            // 
+            // btnOrders
+            // 
+            this.btnOrders.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOrders.FlatAppearance.BorderSize = 0;
+            this.btnOrders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrders.Image = global::IMS.Properties.Resources.icons8_order_history_21px;
+            this.btnOrders.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnOrders.Location = new System.Drawing.Point(271, 15);
+            this.btnOrders.Name = "btnOrders";
+            this.btnOrders.Size = new System.Drawing.Size(70, 53);
+            this.btnOrders.TabIndex = 51;
+            this.btnOrders.Text = "Orders";
+            this.btnOrders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnOrders, "Orders");
+            this.btnOrders.UseVisualStyleBackColor = true;
+            // 
+            // btnSaleTransactionList
+            // 
+            this.btnSaleTransactionList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSaleTransactionList.FlatAppearance.BorderSize = 0;
+            this.btnSaleTransactionList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaleTransactionList.Image = global::IMS.Properties.Resources.icons8_ledger_24;
+            this.btnSaleTransactionList.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSaleTransactionList.Location = new System.Drawing.Point(189, 15);
+            this.btnSaleTransactionList.Name = "btnSaleTransactionList";
+            this.btnSaleTransactionList.Size = new System.Drawing.Size(82, 53);
+            this.btnSaleTransactionList.TabIndex = 5;
+            this.btnSaleTransactionList.Text = "Transactions";
+            this.btnSaleTransactionList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnSaleTransactionList, "Transactions");
+            this.btnSaleTransactionList.UseVisualStyleBackColor = true;
+            // 
+            // btnPurchaseTransaction
+            // 
+            this.btnPurchaseTransaction.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPurchaseTransaction.FlatAppearance.BorderSize = 0;
+            this.btnPurchaseTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPurchaseTransaction.Image = global::IMS.Properties.Resources.icons8_In_Transit_plus_24px;
+            this.btnPurchaseTransaction.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPurchaseTransaction.Location = new System.Drawing.Point(119, 15);
+            this.btnPurchaseTransaction.Name = "btnPurchaseTransaction";
+            this.btnPurchaseTransaction.Size = new System.Drawing.Size(70, 53);
+            this.btnPurchaseTransaction.TabIndex = 50;
+            this.btnPurchaseTransaction.Text = "Purchase";
+            this.btnPurchaseTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnPurchaseTransaction, "Purchases");
+            this.btnPurchaseTransaction.UseVisualStyleBackColor = true;
+            // 
+            // btnSaleTransaction
+            // 
+            this.btnSaleTransaction.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSaleTransaction.FlatAppearance.BorderSize = 0;
+            this.btnSaleTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaleTransaction.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_plus_24px;
+            this.btnSaleTransaction.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSaleTransaction.Location = new System.Drawing.Point(60, 15);
+            this.btnSaleTransaction.Name = "btnSaleTransaction";
+            this.btnSaleTransaction.Size = new System.Drawing.Size(59, 53);
+            this.btnSaleTransaction.TabIndex = 48;
+            this.btnSaleTransaction.Text = "Sale";
+            this.btnSaleTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnSaleTransaction, "Sales");
+            this.btnSaleTransaction.UseVisualStyleBackColor = true;
+            // 
+            // btnPOS
+            // 
+            this.btnPOS.BackColor = System.Drawing.Color.Transparent;
+            this.btnPOS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPOS.Enabled = false;
+            this.btnPOS.FlatAppearance.BorderSize = 0;
+            this.btnPOS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPOS.Image = global::IMS.Properties.Resources.icons8_Pointer_24px_7;
+            this.btnPOS.Location = new System.Drawing.Point(0, 15);
+            this.btnPOS.Name = "btnPOS";
+            this.btnPOS.Size = new System.Drawing.Size(60, 53);
+            this.btnPOS.TabIndex = 8;
+            this.btnPOS.Text = "POS";
+            this.btnPOS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPOS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnPOS, "Point Of Sale");
+            this.btnPOS.UseVisualStyleBackColor = false;
+            this.btnPOS.Visible = false;
+            // 
             // btnHome
             // 
             this.btnHome.Dock = System.Windows.Forms.DockStyle.Left;
@@ -367,347 +731,6 @@
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnHome, "Go to Dashboard");
             this.btnHome.UseVisualStyleBackColor = true;
-            // 
-            // btnSaleTransaction
-            // 
-            this.btnSaleTransaction.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSaleTransaction.FlatAppearance.BorderSize = 0;
-            this.btnSaleTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaleTransaction.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_24px;
-            this.btnSaleTransaction.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSaleTransaction.Location = new System.Drawing.Point(60, 15);
-            this.btnSaleTransaction.Name = "btnSaleTransaction";
-            this.btnSaleTransaction.Size = new System.Drawing.Size(59, 53);
-            this.btnSaleTransaction.TabIndex = 48;
-            this.btnSaleTransaction.Text = "Sale";
-            this.btnSaleTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnSaleTransaction, "Sales");
-            this.btnSaleTransaction.UseVisualStyleBackColor = true;
-            // 
-            // btnSaleTransactionList
-            // 
-            this.btnSaleTransactionList.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSaleTransactionList.FlatAppearance.BorderSize = 0;
-            this.btnSaleTransactionList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaleTransactionList.Image = global::IMS.Properties.Resources.icons8_ledger_24;
-            this.btnSaleTransactionList.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSaleTransactionList.Location = new System.Drawing.Point(189, 15);
-            this.btnSaleTransactionList.Name = "btnSaleTransactionList";
-            this.btnSaleTransactionList.Size = new System.Drawing.Size(82, 53);
-            this.btnSaleTransactionList.TabIndex = 5;
-            this.btnSaleTransactionList.Text = "Transactions";
-            this.btnSaleTransactionList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnSaleTransactionList, "Sale Orders");
-            this.btnSaleTransactionList.UseVisualStyleBackColor = true;
-            // 
-            // btnPurchaseTransaction
-            // 
-            this.btnPurchaseTransaction.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPurchaseTransaction.FlatAppearance.BorderSize = 0;
-            this.btnPurchaseTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPurchaseTransaction.Image = global::IMS.Properties.Resources.icons8_In_Transit_24px;
-            this.btnPurchaseTransaction.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPurchaseTransaction.Location = new System.Drawing.Point(119, 15);
-            this.btnPurchaseTransaction.Name = "btnPurchaseTransaction";
-            this.btnPurchaseTransaction.Size = new System.Drawing.Size(70, 53);
-            this.btnPurchaseTransaction.TabIndex = 50;
-            this.btnPurchaseTransaction.Text = "Purchase";
-            this.btnPurchaseTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnPurchaseTransaction, "Purchases");
-            this.btnPurchaseTransaction.UseVisualStyleBackColor = true;
-            // 
-            // btnClients
-            // 
-            this.btnClients.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnClients.FlatAppearance.BorderSize = 0;
-            this.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClients.Image = global::IMS.Properties.Resources.icons8_Supplier_24px;
-            this.btnClients.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnClients.Location = new System.Drawing.Point(0, 15);
-            this.btnClients.Name = "btnClients";
-            this.btnClients.Size = new System.Drawing.Size(64, 53);
-            this.btnClients.TabIndex = 48;
-            this.btnClients.Text = "Clients";
-            this.btnClients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnClients, "Settings");
-            this.btnClients.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.splitter1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(78, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel1.Size = new System.Drawing.Size(11, 68);
-            this.panel1.TabIndex = 40;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter1.Location = new System.Drawing.Point(5, 4);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(2, 60);
-            this.splitter1.TabIndex = 0;
-            this.splitter1.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.splitter2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(564, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel2.Size = new System.Drawing.Size(11, 68);
-            this.panel2.TabIndex = 41;
-            // 
-            // splitter2
-            // 
-            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter2.Location = new System.Drawing.Point(5, 4);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(2, 60);
-            this.splitter2.TabIndex = 0;
-            this.splitter2.TabStop = false;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.splitter3);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(823, 2);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel3.Size = new System.Drawing.Size(11, 68);
-            this.panel3.TabIndex = 42;
-            // 
-            // splitter3
-            // 
-            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter3.Location = new System.Drawing.Point(5, 4);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(2, 60);
-            this.splitter3.TabIndex = 0;
-            this.splitter3.TabStop = false;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.splitter7);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(1024, 2);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel4.Size = new System.Drawing.Size(11, 68);
-            this.panel4.TabIndex = 43;
-            // 
-            // splitter7
-            // 
-            this.splitter7.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter7.Location = new System.Drawing.Point(5, 4);
-            this.splitter7.Name = "splitter7";
-            this.splitter7.Size = new System.Drawing.Size(2, 60);
-            this.splitter7.TabIndex = 0;
-            this.splitter7.TabStop = false;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.splitter4);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(2, 2);
-            this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel5.Size = new System.Drawing.Size(11, 68);
-            this.panel5.TabIndex = 44;
-            // 
-            // splitter4
-            // 
-            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter4.Location = new System.Drawing.Point(5, 4);
-            this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(2, 60);
-            this.splitter4.TabIndex = 0;
-            this.splitter4.TabStop = false;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.splitter5);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(1330, 2);
-            this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel6.Size = new System.Drawing.Size(11, 68);
-            this.panel6.TabIndex = 45;
-            // 
-            // splitter5
-            // 
-            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter5.Location = new System.Drawing.Point(5, 4);
-            this.splitter5.Name = "splitter5";
-            this.splitter5.Size = new System.Drawing.Size(2, 60);
-            this.splitter5.TabIndex = 0;
-            this.splitter5.TabStop = false;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.splitter6);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(360, 2);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel7.Size = new System.Drawing.Size(11, 68);
-            this.panel7.TabIndex = 49;
-            // 
-            // splitter6
-            // 
-            this.splitter6.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter6.Location = new System.Drawing.Point(5, 4);
-            this.splitter6.Name = "splitter6";
-            this.splitter6.Size = new System.Drawing.Size(2, 60);
-            this.splitter6.TabIndex = 0;
-            this.splitter6.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(271, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Transactions";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(193, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Orders";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(248, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Adjustments";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(190, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Inventory";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(295, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Misc";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlTransactions
-            // 
-            this.pnlTransactions.AutoSize = true;
-            this.pnlTransactions.Controls.Add(this.btnSaleTransactionList);
-            this.pnlTransactions.Controls.Add(this.btnPurchaseTransaction);
-            this.pnlTransactions.Controls.Add(this.btnSaleTransaction);
-            this.pnlTransactions.Controls.Add(this.btnPOS);
-            this.pnlTransactions.Controls.Add(this.label2);
-            this.pnlTransactions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlTransactions.Location = new System.Drawing.Point(89, 2);
-            this.pnlTransactions.Name = "pnlTransactions";
-            this.pnlTransactions.Size = new System.Drawing.Size(271, 68);
-            this.pnlTransactions.TabIndex = 52;
-            // 
-            // pnlOrders
-            // 
-            this.pnlOrders.AutoSize = true;
-            this.pnlOrders.Controls.Add(this.btnTransferOrder);
-            this.pnlOrders.Controls.Add(this.btnPurchaseOrder);
-            this.pnlOrders.Controls.Add(this.btnSellOrder);
-            this.pnlOrders.Controls.Add(this.label3);
-            this.pnlOrders.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlOrders.Location = new System.Drawing.Point(371, 2);
-            this.pnlOrders.Name = "pnlOrders";
-            this.pnlOrders.Size = new System.Drawing.Size(193, 68);
-            this.pnlOrders.TabIndex = 53;
-            // 
-            // pnlAdjustments
-            // 
-            this.pnlAdjustments.AutoSize = true;
-            this.pnlAdjustments.Controls.Add(this.btnLocateInventory);
-            this.pnlAdjustments.Controls.Add(this.btnDirectMove);
-            this.pnlAdjustments.Controls.Add(this.btnDirectIssue);
-            this.pnlAdjustments.Controls.Add(this.btnDirectReceive);
-            this.pnlAdjustments.Controls.Add(this.label4);
-            this.pnlAdjustments.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAdjustments.Location = new System.Drawing.Point(575, 2);
-            this.pnlAdjustments.Name = "pnlAdjustments";
-            this.pnlAdjustments.Size = new System.Drawing.Size(248, 68);
-            this.pnlAdjustments.TabIndex = 54;
-            // 
-            // pnlInventory
-            // 
-            this.pnlInventory.AutoSize = true;
-            this.pnlInventory.Controls.Add(this.btnManufacturings);
-            this.pnlInventory.Controls.Add(this.btnInventoryUnits);
-            this.pnlInventory.Controls.Add(this.btnProductList);
-            this.pnlInventory.Controls.Add(this.label5);
-            this.pnlInventory.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlInventory.Location = new System.Drawing.Point(834, 2);
-            this.pnlInventory.Name = "pnlInventory";
-            this.pnlInventory.Size = new System.Drawing.Size(190, 68);
-            this.pnlInventory.TabIndex = 55;
-            // 
-            // pnlMisc
-            // 
-            this.pnlMisc.AutoSize = true;
-            this.pnlMisc.Controls.Add(this.btnHelp);
-            this.pnlMisc.Controls.Add(this.btnSettings);
-            this.pnlMisc.Controls.Add(this.btnReports);
-            this.pnlMisc.Controls.Add(this.btnAccounts);
-            this.pnlMisc.Controls.Add(this.btnClients);
-            this.pnlMisc.Controls.Add(this.label6);
-            this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMisc.Location = new System.Drawing.Point(1035, 2);
-            this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(295, 68);
-            this.pnlMisc.TabIndex = 56;
-            // 
-            // pnlHome
-            // 
-            this.pnlHome.AutoSize = true;
-            this.pnlHome.Controls.Add(this.btnHome);
-            this.pnlHome.Controls.Add(this.label1);
-            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlHome.Location = new System.Drawing.Point(13, 2);
-            this.pnlHome.Name = "pnlHome";
-            this.pnlHome.Size = new System.Drawing.Size(65, 68);
-            this.pnlHome.TabIndex = 57;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 15);
-            this.label1.TabIndex = 38;
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InventoryMenuBar
             // 
@@ -796,5 +819,6 @@
         protected internal System.Windows.Forms.Button btnSaleTransactionList;
         protected internal System.Windows.Forms.Button btnPurchaseTransaction;
         protected internal System.Windows.Forms.Button btnClients;
+        protected internal System.Windows.Forms.Button btnOrders;
     }
 }

@@ -193,20 +193,22 @@ namespace IMS.Forms.Common.Pagination
         BindingNavigator bindingNavigator1;
         private readonly IOrderService _orderService;
         private OrderTypeEnum _orderType;
+        private OrderListTypeEnum _orderListType;
         private string _searchClient;
         private string _searchReceiptNo;
 
-        public TransactionListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IOrderService orderService, OrderTypeEnum orderType )
+        public TransactionListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IOrderService orderService, OrderTypeEnum orderType, OrderListTypeEnum orderListType )
         {
             this.bindingSource1 = bindingSource;
             this.dataGridView1 = dataGridView;
             this.bindingNavigator1 = bindingNavigator;
             this._orderService = orderService;
             _orderType = orderType;
+            _orderListType = orderListType;
 
             bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
-            var totalRecords = _orderService.GetAllOrdersCount(_orderType, _searchClient, _searchReceiptNo);
+            var totalRecords = _orderService.GetAllOrdersCount(_orderType, _orderListType, _searchClient, _searchReceiptNo);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
 
@@ -217,7 +219,7 @@ namespace IMS.Forms.Common.Pagination
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
-            var records = _orderService.GetAllOrders(_orderType, _searchClient, _searchReceiptNo, pageSize, offset);
+            var records = _orderService.GetAllOrders(_orderType, _orderListType, _searchClient, _searchReceiptNo, pageSize, offset);
             dataGridView1.DataSource = records.OrderList;
             this.totalRecords = records.TotalCount;
         }
@@ -243,7 +245,6 @@ namespace IMS.Forms.Common.Pagination
                 this.pageSize = pageSize;
             }
 
-
             public System.Collections.IList GetList()
             {
                 // Return a list of page offsets based on "totalRecords" and "pageSize"
@@ -254,12 +255,13 @@ namespace IMS.Forms.Common.Pagination
             }
         }
 
-        public void Reset(OrderTypeEnum orderType, string serachClient, string searchReceiptNo)
+        public void Reset(OrderTypeEnum orderType, OrderListTypeEnum orderListType, string serachClient, string searchReceiptNo)
         {
             _orderType = orderType;
             _searchClient = serachClient;
             _searchReceiptNo = searchReceiptNo;
-            var totalRecords = _orderService.GetAllOrdersCount(_orderType, _searchClient, _searchReceiptNo);
+            _orderListType = orderListType;
+            var totalRecords = _orderService.GetAllOrdersCount(_orderType, _orderListType, _searchClient, _searchReceiptNo);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
     }

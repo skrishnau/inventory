@@ -14,4 +14,10 @@ namespace ViewModel.Enums
         All=4,
     }
 
+    public enum OrderListTypeEnum
+    {
+        Transaction,
+        Order
+    }
+
 }

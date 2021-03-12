@@ -46,21 +46,21 @@ namespace Service.Core.Orders
 
         #region Get Functions
 
-        public int GetAllOrdersCount(OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText)
+        public int GetAllOrdersCount(OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType, userSearchText, receiptNoSearchText);
+                var orders = GetAllOrdersQuery(_context, orderType, orderListType, userSearchText, receiptNoSearchText);
                 return orders.Count();
             }
         }
 
         // page size: no.of items per page; offset: current page number..
-        public OrderListModel GetAllOrders(OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText, int pageSize, int offset)
+        public OrderListModel GetAllOrders(OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText, int pageSize, int offset)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType, userSearchText, receiptNoSearchText);
+                var orders = GetAllOrdersQuery(_context, orderType, orderListType, userSearchText, receiptNoSearchText);
                 var totalCount = orders.Count();
                 if (pageSize > 0 && offset >= 0)
                 {
@@ -76,7 +76,7 @@ namespace Service.Core.Orders
                 };
             }
         }
-        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, string userSearchText, string receiptNoSearchText)
+        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
         {
             var split = string.IsNullOrEmpty(userSearchText) ? new string[0] : userSearchText.Split(new char[] { '-' });
             var name = split.Length > 0 ? split[0].Trim() : "";
@@ -85,6 +85,14 @@ namespace Service.Core.Orders
             var orders = _context.Order
                 .Include(x => x.User)
                 .Include(x => x.OrderItems);
+            if(orderListType == OrderListTypeEnum.Transaction)
+            {
+                orders = orders.Where(x => x.IsCompleted);
+            }
+            else
+            {
+                orders = orders.Where(x => !x.IsCompleted);
+            }
             if (orderType != OrderTypeEnum.All)
                 orders = orders.Where(x => x.OrderType == type);
             orders = orders.OrderByDescending(x => x.UpdatedAt); //.ThenByDescending(x => x.CreatedAt)
