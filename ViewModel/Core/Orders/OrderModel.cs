@@ -53,6 +53,18 @@ namespace ViewModel.Core.Orders
         // DiscountPercent is not used for now
         public decimal DiscountPercent { get; set; }
         public decimal DiscountAmount { get; set; }
+        public string DiscountString
+        {
+            get
+            {
+                var ss =  DiscountPercent > 0
+                ? DiscountPercent.ToString("0.0") + " %"
+                : DiscountAmount > 0
+                ? "Rs " + DiscountAmount.ToString("0.0")
+                : string.Empty;
+                return ss;
+            }
+        }
         // payment
         public string PaymentType { get; set; }
         public decimal PaidAmount { get; set; }
@@ -66,7 +78,7 @@ namespace ViewModel.Core.Orders
         {
             get
             {
-                if(PaymentDueDate.HasValue)
+                if (PaymentDueDate.HasValue)
                     return (PaymentDueDate.Value.Date - DateTime.Now.Date.AddDays(1)).Days;
                 return 0;
             }
@@ -99,7 +111,7 @@ namespace ViewModel.Core.Orders
         public string Warehouse { get; set; }
         public string SupplierInvoice { get; set; }
         #endregion
-      
+
         #region Sale Order
         public string VatNumber { get; set; }
         public int? UserId { get; set; }
@@ -107,7 +119,7 @@ namespace ViewModel.Core.Orders
         public string Address { get; set; }
         public string Phone { get; set; }
         #endregion
-     
+
         #region Move Order
         public int? ToWarehouseId { get; set; }
         public string ToWarehouse { get; set; }

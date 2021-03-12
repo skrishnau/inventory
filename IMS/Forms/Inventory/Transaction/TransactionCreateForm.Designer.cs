@@ -43,7 +43,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pnlPaymentDueDate = new System.Windows.Forms.Panel();
-            this.dtPaymentDueDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.rbCash = new System.Windows.Forms.RadioButton();
             this.rbCredit = new System.Windows.Forms.RadioButton();
@@ -56,7 +55,6 @@
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.txtReceiptNo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
@@ -68,7 +66,11 @@
             this.rbAllItemsParticulars = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
             this.rbReceiptNoParticulars = new System.Windows.Forms.RadioButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cbDiscountType = new System.Windows.Forms.ComboBox();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
+            this.dtPaymentDueDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
+            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -82,6 +84,7 @@
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.pnlParticulars.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,23 +101,23 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtTotal, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtDiscount, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtSum, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(290, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(262, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(228, 75);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(256, 75);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // label6
@@ -130,7 +133,7 @@
             // 
             this.txtTotal.DecimalPlaces = 1;
             this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(69, 3);
+            this.txtTotal.Location = new System.Drawing.Point(99, 3);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(139, 20);
@@ -139,12 +142,12 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 25);
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 25);
+            this.label1.Size = new System.Drawing.Size(58, 19);
             this.label1.TabIndex = 11;
-            this.label1.Text = "Discount %";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.Text = "Discount";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtDiscount
             // 
@@ -154,10 +157,10 @@
             0,
             0,
             65536});
-            this.txtDiscount.Location = new System.Drawing.Point(69, 28);
+            this.txtDiscount.Location = new System.Drawing.Point(99, 28);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(139, 20);
-            this.txtDiscount.TabIndex = 12;
+            this.txtDiscount.TabIndex = 13;
             // 
             // txtSum
             // 
@@ -168,11 +171,11 @@
             0,
             0,
             65536});
-            this.txtSum.Location = new System.Drawing.Point(69, 53);
+            this.txtSum.Location = new System.Drawing.Point(99, 53);
             this.txtSum.Name = "txtSum";
             this.txtSum.ReadOnly = true;
             this.txtSum.Size = new System.Drawing.Size(139, 20);
-            this.txtSum.TabIndex = 13;
+            this.txtSum.TabIndex = 14;
             // 
             // label2
             // 
@@ -233,13 +236,6 @@
             this.pnlPaymentDueDate.Size = new System.Drawing.Size(216, 23);
             this.pnlPaymentDueDate.TabIndex = 8;
             this.pnlPaymentDueDate.Visible = false;
-            // 
-            // dtPaymentDueDate
-            // 
-            this.dtPaymentDueDate.Location = new System.Drawing.Point(107, 3);
-            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
-            this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
-            this.dtPaymentDueDate.TabIndex = 9;
             // 
             // label3
             // 
@@ -366,13 +362,6 @@
             this.panel9.Size = new System.Drawing.Size(518, 26);
             this.panel9.TabIndex = 0;
             // 
-            // dtExpectedDate
-            // 
-            this.dtExpectedDate.Location = new System.Drawing.Point(410, 3);
-            this.dtExpectedDate.Name = "dtExpectedDate";
-            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
-            this.dtExpectedDate.TabIndex = 6;
-            // 
             // txtReceiptNo
             // 
             this.txtReceiptNo.Location = new System.Drawing.Point(67, 3);
@@ -464,6 +453,28 @@
             this.rbReceiptNoParticulars.Text = "Receipt No.";
             this.rbReceiptNoParticulars.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.cbDiscountType);
+            this.panel2.Location = new System.Drawing.Point(3, 28);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(90, 19);
+            this.panel2.TabIndex = 12;
+            // 
+            // cbDiscountType
+            // 
+            this.cbDiscountType.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cbDiscountType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDiscountType.FormattingEnabled = true;
+            this.cbDiscountType.Items.AddRange(new object[] {
+            "%",
+            "Rs."});
+            this.cbDiscountType.Location = new System.Drawing.Point(58, 0);
+            this.cbDiscountType.Name = "cbDiscountType";
+            this.cbDiscountType.Size = new System.Drawing.Size(32, 21);
+            this.cbDiscountType.TabIndex = 12;
+            // 
             // dgvItems
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -472,6 +483,20 @@
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(518, 339);
             this.dgvItems.TabIndex = 5;
+            // 
+            // dtPaymentDueDate
+            // 
+            this.dtPaymentDueDate.Location = new System.Drawing.Point(107, 3);
+            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
+            this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
+            this.dtPaymentDueDate.TabIndex = 9;
+            // 
+            // dtExpectedDate
+            // 
+            this.dtExpectedDate.Location = new System.Drawing.Point(410, 3);
+            this.dtExpectedDate.Name = "dtExpectedDate";
+            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtExpectedDate.TabIndex = 6;
             // 
             // saveFooterUC1
             // 
@@ -519,6 +544,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.pnlParticulars.ResumeLayout(false);
             this.pnlParticulars.PerformLayout();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
@@ -566,5 +592,7 @@
         private System.Windows.Forms.TextBox txtParticulars;
         private Common.Date.NepaliDateTextBox dtPaymentDueDate;
         private Common.Date.NepaliDateTextBox dtExpectedDate;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ComboBox cbDiscountType;
     }
 }

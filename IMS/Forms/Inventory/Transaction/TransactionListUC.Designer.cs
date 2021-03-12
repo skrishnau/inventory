@@ -566,11 +566,11 @@
             // 
             // colDiscountPercent
             // 
-            this.colDiscountPercent.DataPropertyName = "DiscountPercent";
-            this.colDiscountPercent.HeaderText = "Dis. %";
+            this.colDiscountPercent.DataPropertyName = "DiscountString";
+            this.colDiscountPercent.HeaderText = "Discount";
             this.colDiscountPercent.Name = "colDiscountPercent";
             this.colDiscountPercent.ReadOnly = true;
-            this.colDiscountPercent.Width = 55;
+            this.colDiscountPercent.Width = 80;
             // 
             // colPaidAmount
             // 

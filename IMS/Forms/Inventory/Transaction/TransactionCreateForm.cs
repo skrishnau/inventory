@@ -67,6 +67,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void TransactionCreateForm_Load(object sender, EventArgs e)
         {
+            this.cbDiscountType.SelectedItem = "%";
             this.dtExpectedDate.SetValue(DateTime.Now);
             this.dtPaymentDueDate.SetValue(DateTime.Now);
             this.txtTotal.Maximum = Int32.MaxValue;
@@ -131,8 +132,22 @@ namespace IMS.Forms.Inventory.Transaction
             dgvItems.RowsRemoved += DgvItems_RowsRemoved;
             txtTotal.ValueChanged += TxtTotal_ValueChanged;
             txtDiscount.ValueChanged += TxtDiscount_ValueChanged;
+            cbDiscountType.SelectedValueChanged += CbDiscountType_SelectedValueChanged;
         }
 
+        private void CbDiscountType_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            if (cbDiscountType.SelectedItem?.ToString() == "%")
+            {
+                txtDiscount.Maximum = 100;
+            }
+            else if (cbDiscountType.SelectedItem?.ToString() == "Rs.")
+            {
+                txtDiscount.Maximum = Int32.MaxValue;
+            }
+            txtDiscount.Value = 0;
+        }
 
         private void DgvItems_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
@@ -163,14 +178,35 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void SetSumAmount()
         {
-            var discount = txtDiscount.Value;
-            var total = txtTotal.Value;
-            var sum = total - (total * discount / 100);
-            txtSum.Value = sum;
-
-            if (rbCash.Checked)
+            try
             {
-                txtPaidAmount.Value = sum;
+                errorProvider.SetError(txtDiscount, string.Empty);
+                var discount = txtDiscount.Value;
+                var total = txtTotal.Value;
+
+                var sum = 0M;
+                if(cbDiscountType.SelectedItem?.ToString() == "%")
+                {
+                    sum = total - (total * discount / 100);
+                }
+                else
+                {
+                     sum = total - discount;
+                }
+                if (sum<=0)
+                {
+                    errorProvider.SetError(txtDiscount, "Can't be zero");
+                    sum = total;
+                }
+                txtSum.Value = sum;
+                if (rbCash.Checked)
+                {
+                    txtPaidAmount.Value = sum;
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
         }
 
@@ -245,6 +281,24 @@ namespace IMS.Forms.Inventory.Transaction
                 }
                 else
                 {
+                    txtDiscount.ValueChanged -= TxtDiscount_ValueChanged;
+                    cbDiscountType.SelectedValueChanged -= CbDiscountType_SelectedValueChanged;
+                    if (model.DiscountPercent > 0)
+                    {
+                        txtDiscount.Maximum = 100;
+                        txtDiscount.Value = model.DiscountPercent;
+                        cbDiscountType.SelectedItem = "%";
+                    }
+                    else if (model.DiscountAmount > 0)
+                    {
+                        txtDiscount.Maximum = Int32.MaxValue;
+                        txtDiscount.Minimum = 0;
+                        txtDiscount.Value = model.DiscountAmount;
+                        cbDiscountType.SelectedItem = "Rs.";
+                    }
+                    txtDiscount.ValueChanged += TxtDiscount_ValueChanged;
+                    cbDiscountType.SelectedValueChanged += CbDiscountType_SelectedValueChanged;
+
                     //btnPayment.Visible = model.RemainingAmount > 0;
                     // change button
                     _orderId = model.Id;
@@ -260,13 +314,14 @@ namespace IMS.Forms.Inventory.Transaction
                     rbCredit.Checked = model.PaymentType == OrderPaymentTypeEnum.Credit.ToString(); // !rbCash.Checked;
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
-                    txtDiscount.Value = model.DiscountPercent;
+                    
                     dtExpectedDate.SetValue(model.DeliveryDate);
                     dtPaymentDueDate.SetValue(model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now);
 
                     dgvItems.AddRows(OrderItemMapper.MapToInventoryUnitModel(model.OrderItems));
                     if (model?.PaymentDueDate.HasValue ?? false)
                     dtPaymentDueDate.SetValue( model.PaymentDueDate.Value);
+
                     //if (model.IsCompleted)
                     //{
                     //    cbClient.Enabled = false;
@@ -424,8 +479,8 @@ namespace IMS.Forms.Inventory.Transaction
                     Name = (string.IsNullOrEmpty(cbClient.Text) ? "" : $"{cbClient.Text}, ") + txtReceiptNo.Text,
                     DeliveryDate = dtExpectedDate.GetValue(),
                     PaidAmount = txtPaidAmount.Value,
-                    DiscountPercent = txtDiscount.Value,
-                    DiscountAmount = txtTotal.Value * txtDiscount.Value / 100,
+                    DiscountPercent = cbDiscountType.SelectedItem?.ToString() == "%" ? txtDiscount.Value : 0,
+                    DiscountAmount = cbDiscountType.SelectedItem?.ToString() == "%"  ? txtTotal.Value * txtDiscount.Value / 100 : txtDiscount.Value,
                     CreatedAt = DateTime.Now,
                     OrderItems = InventoryUnitMapper.MapToOrderItemModel(items, _orderId),
                     ReferenceNumber = txtReceiptNo.Text,

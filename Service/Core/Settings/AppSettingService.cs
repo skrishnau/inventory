@@ -573,7 +573,7 @@ namespace Service.Core.Settings
             {
                 DisplayName = "Valid Till",
                 Group = "security",
-                Name = "valid_till",
+                Name = "valid_till1",
                 Value = encrypted,
             };
             SaveAppSetting(expireModel);
@@ -583,7 +583,7 @@ namespace Service.Core.Settings
             key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("win_security_001783462");
             if (key != null)
             {
-                key.SetValue("win_security_001783462_update1", encrypted);
+                key.SetValue("win_security_001783462_update2", encrypted);
                 key.Close();
             }
         }
@@ -593,7 +593,7 @@ namespace Service.Core.Settings
             var array = new DateTime?[2] { null, null};
             DateTime expireAtDb;
             bool expireAtDbParsed = false;
-            var validity = GetAppSetting("valid_till");
+            var validity = GetAppSetting("valid_till1");
             if (validity != null && validity.Value != null)
             {
                 try
@@ -613,7 +613,7 @@ namespace Service.Core.Settings
             string regValue = null;
             if (key != null)
             {
-                regValue = key.GetValue("win_security_001783462_update1") as string;
+                regValue = key.GetValue("win_security_001783462_update2") as string;
                 key.Close();
             }
             if (regValue != null)
