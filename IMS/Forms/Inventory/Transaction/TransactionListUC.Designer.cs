@@ -172,7 +172,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(430, 10);
+            this.label2.Location = new System.Drawing.Point(456, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 11;
@@ -180,7 +180,7 @@
             // 
             // txtSearchReceiptNo
             // 
-            this.txtSearchReceiptNo.Location = new System.Drawing.Point(537, 6);
+            this.txtSearchReceiptNo.Location = new System.Drawing.Point(563, 6);
             this.txtSearchReceiptNo.Name = "txtSearchReceiptNo";
             this.txtSearchReceiptNo.Size = new System.Drawing.Size(108, 20);
             this.txtSearchReceiptNo.TabIndex = 10;
@@ -188,7 +188,7 @@
             // lblSearchClient
             // 
             this.lblSearchClient.AutoSize = true;
-            this.lblSearchClient.Location = new System.Drawing.Point(233, 10);
+            this.lblSearchClient.Location = new System.Drawing.Point(234, 10);
             this.lblSearchClient.Name = "lblSearchClient";
             this.lblSearchClient.Size = new System.Drawing.Size(70, 13);
             this.lblSearchClient.TabIndex = 9;
@@ -196,7 +196,7 @@
             // 
             // txtSearchClient
             // 
-            this.txtSearchClient.Location = new System.Drawing.Point(309, 6);
+            this.txtSearchClient.Location = new System.Drawing.Point(327, 6);
             this.txtSearchClient.Name = "txtSearchClient";
             this.txtSearchClient.Size = new System.Drawing.Size(108, 20);
             this.txtSearchClient.TabIndex = 8;

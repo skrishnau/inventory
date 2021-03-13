@@ -184,17 +184,12 @@ namespace IMS.Forms.Inventory.Dashboard
             var end = dtEnd.GetValue().Date;
             end = end.AddDays(1);
             var summary = _inventoryService.GetTransactionSummary(start, end);
-            foreach (var sum in summary)
-            {
-                if (sum.Key == TransactionSummaryKeys.Purchase.ToString())
-                {
-                    lblPurchase.Text = sum.Value.ToString("0");
-                }
-                else if (sum.Key == TransactionSummaryKeys.Sale.ToString())
-                {
-                    lblSale.Text = sum.Value.ToString("0");
-                }
-            }
+            var purchase = TransactionSummaryKeys.Purchase.ToString();
+            var sale = TransactionSummaryKeys.Sale.ToString();
+            var purchaseValue = summary.FirstOrDefault(x => x.Key == purchase)?.Value??0;
+            var saleValue = summary.FirstOrDefault(x => x.Key == sale)?.Value ?? 0;
+            lblPurchase.Text = purchaseValue.ToString("0");
+            lblSale.Text = saleValue.ToString("0");
         }
 
         void PopulateInventorySummary()

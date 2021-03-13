@@ -237,7 +237,7 @@ namespace IMS.Forms.Inventory.Transaction
             if (model != null)
             {
                 btnEdit.Visible = !model.IsVoid && !model.IsCancelled; //!model.IsCompleted &&
-                btnPrint.Visible = model.OrderType == OrderTypeEnum.Sale.ToString() && model.IsCompleted;
+                btnPrint.Visible = model.IsCompleted; //model.OrderType == OrderTypeEnum.Sale.ToString() && 
                 btnCancel.Visible = !model.IsCompleted && !model.IsCancelled;
                 // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);

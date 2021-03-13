@@ -697,6 +697,7 @@ namespace Service.Core.Inventory
                     })
                     .ToList();
                 list.AddRange(totalOrders);
+                var sss = _context.Order.ToList();
             }
             return list;
         }

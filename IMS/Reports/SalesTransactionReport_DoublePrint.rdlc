@@ -1015,7 +1015,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -3685,44 +3684,6 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox25">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>BOUGHT OF</Value>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox19</rd:DefaultName>
-              <Top>0.46389in</Top>
-              <Left>2.42708in</Left>
-              <Height>0.18402in</Height>
-              <Width>0.9125in</Width>
-              <ZIndex>6</ZIndex>
-              <Style>
-                <Border>
-                  <Color>Gray</Color>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="Textbox26">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -3747,7 +3708,7 @@
               <Left>0.0125in</Left>
               <Height>0.18402in</Height>
               <Width>0.35in</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -3782,7 +3743,7 @@
               <Left>0.38957in</Left>
               <Height>0.18402in</Height>
               <Width>0.11041in</Width>
-              <ZIndex>8</ZIndex>
+              <ZIndex>7</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -3818,53 +3779,12 @@
               <Left>0.55901in</Left>
               <Height>0.18402in</Height>
               <Width>0.50624in</Width>
-              <ZIndex>9</ZIndex>
+              <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
                   <Style>None</Style>
                 </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox29">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Parameters!SupplierName.Value</Value>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <TextDecoration>None</TextDecoration>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox19</rd:DefaultName>
-              <Top>0.46389in</Top>
-              <Left>3.33958in</Left>
-              <Height>0.22918in</Height>
-              <Width>1.85981in</Width>
-              <ZIndex>10</ZIndex>
-              <Style>
-                <Border>
-                  <Color>Gray</Color>
-                  <Style>None</Style>
-                </Border>
-                <LeftBorder>
-                  <Style>Solid</Style>
-                </LeftBorder>
-                <RightBorder>
-                  <Style>Solid</Style>
-                </RightBorder>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -3895,7 +3815,7 @@
               <Left>6.16315in</Left>
               <Height>0.18402in</Height>
               <Width>4.4556in</Width>
-              <ZIndex>11</ZIndex>
+              <ZIndex>9</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -3934,7 +3854,7 @@
               <Left>5.43746in</Left>
               <Height>0.18402in</Height>
               <Width>0.7118in</Width>
-              <ZIndex>12</ZIndex>
+              <ZIndex>10</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -3970,7 +3890,7 @@
               <Left>9.28191in</Left>
               <Height>0.1875in</Height>
               <Width>0.39236in</Width>
-              <ZIndex>13</ZIndex>
+              <ZIndex>11</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4004,7 +3924,7 @@
               <Left>9.74371in</Left>
               <Height>0.1875in</Height>
               <Width>0.87504in</Width>
-              <ZIndex>14</ZIndex>
+              <ZIndex>12</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4042,7 +3962,7 @@
               <Left>5.44163in</Left>
               <Height>0.18402in</Height>
               <Width>0.30833in</Width>
-              <ZIndex>15</ZIndex>
+              <ZIndex>13</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -4078,7 +3998,7 @@
               <Left>5.81453in</Left>
               <Height>0.18402in</Height>
               <Width>2.91113in</Width>
-              <ZIndex>16</ZIndex>
+              <ZIndex>14</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -4118,8 +4038,8 @@
               <Top>0.47187in</Top>
               <Left>7.96454in</Left>
               <Height>0.18402in</Height>
-              <Width>0.9125in</Width>
-              <ZIndex>17</ZIndex>
+              <Width>0.84306in</Width>
+              <ZIndex>15</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -4155,7 +4075,7 @@
               <Left>5.43746in</Left>
               <Height>0.18402in</Height>
               <Width>0.35in</Width>
-              <ZIndex>18</ZIndex>
+              <ZIndex>16</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -4190,7 +4110,7 @@
               <Left>5.81453in</Left>
               <Height>0.18402in</Height>
               <Width>0.11041in</Width>
-              <ZIndex>19</ZIndex>
+              <ZIndex>17</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -4226,7 +4146,7 @@
               <Left>5.98397in</Left>
               <Height>0.18402in</Height>
               <Width>0.50624in</Width>
-              <ZIndex>20</ZIndex>
+              <ZIndex>18</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -4249,6 +4169,7 @@
                       <Style>
                         <FontFamily>Tahoma</FontFamily>
                         <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
                         <TextDecoration>None</TextDecoration>
                       </Style>
                     </TextRun>
@@ -4258,10 +4179,10 @@
               </Paragraphs>
               <rd:DefaultName>Textbox19</rd:DefaultName>
               <Top>0.47187in</Top>
-              <Left>8.87704in</Left>
+              <Left>8.83537in</Left>
               <Height>0.22918in</Height>
-              <Width>1.74171in</Width>
-              <ZIndex>21</ZIndex>
+              <Width>1.78338in</Width>
+              <ZIndex>19</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
@@ -4273,7 +4194,7 @@
                 <RightBorder>
                   <Style>Solid</Style>
                 </RightBorder>
-                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingLeft>5pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
                 <PaddingBottom>2pt</PaddingBottom>
@@ -4380,7 +4301,7 @@
               <Left>0.0163in</Left>
               <Height>0.43264in</Height>
               <Width>5.18307in</Width>
-              <ZIndex>22</ZIndex>
+              <ZIndex>20</ZIndex>
               <Style>
                 <Border>
                   <Color>LightGrey</Color>
@@ -4493,7 +4414,7 @@
               <Left>5.44163in</Left>
               <Height>0.43264in</Height>
               <Width>5.14559in</Width>
-              <ZIndex>23</ZIndex>
+              <ZIndex>21</ZIndex>
               <Style>
                 <Border>
                   <Color>LightGrey</Color>
@@ -4505,6 +4426,86 @@
                 </BottomBorder>
               </Style>
             </Rectangle>
+            <Textbox Name="Textbox77">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>BOUGHT OF</Value>
+                      <Style>
+                        <FontFamily>Tahoma</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox19</rd:DefaultName>
+              <Top>0.47187in</Top>
+              <Left>2.52706in</Left>
+              <Height>0.18402in</Height>
+              <Width>0.84306in</Width>
+              <ZIndex>22</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Gray</Color>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox78">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!SupplierName.Value</Value>
+                      <Style>
+                        <FontFamily>Tahoma</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox19</rd:DefaultName>
+              <Top>0.47187in</Top>
+              <Left>3.39789in</Left>
+              <Height>0.22918in</Height>
+              <Width>1.78338in</Width>
+              <ZIndex>23</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Gray</Color>
+                  <Style>None</Style>
+                </Border>
+                <LeftBorder>
+                  <Style>Solid</Style>
+                </LeftBorder>
+                <RightBorder>
+                  <Style>Solid</Style>
+                </RightBorder>
+                <PaddingLeft>5pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
