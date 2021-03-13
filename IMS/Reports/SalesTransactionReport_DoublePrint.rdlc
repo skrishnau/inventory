@@ -956,7 +956,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>= "Dis " &amp; Parameters!DiscountPercent.Value &amp; " %"</Value>
+                                  <Value>= "Dis " &amp; IIf(Parameters!DiscountPercent.Value &gt; 0, "" &amp; Parameters!DiscountPercent.Value &amp; " %", "")</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -990,7 +990,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Parameters!DiscountAmount.Value</Value>
+                                  <Value>=IIf(Parameters!DiscountAmount.Value&gt; 0, Parameters!DiscountAmount.Value, "")</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1015,6 +1015,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -2603,7 +2604,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>= "Dis " &amp; Parameters!DiscountPercent.Value &amp; " %"</Value>
+                                  <Value>= "Dis " &amp; IIf(Parameters!DiscountPercent.Value &gt; 0, "" &amp; Parameters!DiscountPercent.Value &amp; " %", "")</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -2637,7 +2638,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Parameters!DiscountAmount.Value</Value>
+                                  <Value>=IIf(Parameters!DiscountAmount.Value&gt; 0, Parameters!DiscountAmount.Value, "")</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>

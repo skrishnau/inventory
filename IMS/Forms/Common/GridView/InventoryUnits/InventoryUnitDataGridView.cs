@@ -160,6 +160,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
                 if (isValid)
                 {
+                    if (product.Id == 0 && string.IsNullOrEmpty(product.Name))
+                        continue;
                     items.Add(new InventoryUnitModel
                     {
                         Id = id,

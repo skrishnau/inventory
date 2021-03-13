@@ -553,11 +553,11 @@ namespace Service.Core.Orders
             // validate & assign productId in the items; check if the sku exists
             foreach (var item in items)
             {
-                if (item.UnitQuantity <= 0)
+                if (item.UnitQuantity <= 0 && checkout)
                 {
                     return "Some of the items have zero quantity. Quantity must be greater than zero";
                 }
-                if (item.Rate <= 0)
+                if (item.Rate <= 0 && checkout)
                 {
                     return "Some of the items have zero rate. Rates must be greater than zero";
                 }
@@ -595,26 +595,35 @@ namespace Service.Core.Orders
             // second add/update
             foreach (var item in items)
             {
+                if (item.ProductId == 0 && string.IsNullOrEmpty(item.Product))
+                    continue;
                 //var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
                 var entity = item.MapToEntity(null);//OrderItemMapper.MapToEntity(item, entity);
                 if (entity.Id == 0)
                 {
                     if ((entity.PackageId ?? 0) == 0)
                     {
-                        var packageInNewList = newPackageList.FirstOrDefault(x => x.Name.Equals(item.Package, StringComparison.OrdinalIgnoreCase));
-                        if (packageInNewList == null)
+                        if (!string.IsNullOrEmpty(item.Package))
                         {
-                            var package = new Package
+                            var packageInNewList = newPackageList.FirstOrDefault(x => x.Name.Equals(item.Package, StringComparison.OrdinalIgnoreCase));
+                            if (packageInNewList == null)
                             {
-                                Use = true,
-                                Name = item.Package,
-                            };
-                            entity.Package = package;
-                            newPackageList.Add(package);
+                                var package = new Package
+                                {
+                                    Use = true,
+                                    Name = item.Package,
+                                };
+                                entity.Package = package;
+                                newPackageList.Add(package);
+                            }
+                            else
+                            {
+                                entity.Package = packageInNewList;
+                            }
                         }
                         else
                         {
-                            entity.Package = packageInNewList;
+                            entity.PackageId = null;
                         }
                     }
                     if (entity.ProductId == 0)

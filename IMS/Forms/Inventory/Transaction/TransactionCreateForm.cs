@@ -417,7 +417,7 @@ namespace IMS.Forms.Inventory.Transaction
                 this.Focus();
                 return null;
             }
-            var model = GetData();
+            var model = GetData(checkout);
             if (model == null)
                 return null;
 
@@ -459,7 +459,7 @@ namespace IMS.Forms.Inventory.Transaction
             return null;
         }
 
-        private OrderModel GetData()
+        private OrderModel GetData(bool checkout)
         {
             var client = "";
             var clientId = 0;
@@ -470,7 +470,7 @@ namespace IMS.Forms.Inventory.Transaction
             }
 
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId, dgvItems.colUomId };
-            var items = dgvItems.GetItems(ignoreList, false);
+            var items = dgvItems.GetItems(ignoreList, false, !checkout);
 
             if (items != null)
             {

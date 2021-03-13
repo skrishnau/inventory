@@ -12,6 +12,7 @@ using Microsoft.Reporting.WinForms;
 using ViewModel.Enums;
 using IMS.Reports.Helpers;
 using Service.Core.Settings;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -75,7 +76,7 @@ namespace IMS.Forms.Inventory.Transaction
             reportParam.Add(new ReportParameter("IsCash", (_orderModel.IsCash).ToString()));
             reportParam.Add(new ReportParameter("IsCredit", (_orderModel.IsCredit).ToString()));
 
-            reportParam.Add(new ReportParameter("Date", _orderModel.CompletedDate.HasValue ? _orderModel.CompletedDate.Value.ToString("yyyy/MM/dd") : ""));
+            reportParam.Add(new ReportParameter("Date", _orderModel.CompletedDate.HasValue ? DateConverter.Instance.ToBS(_orderModel.CompletedDate.Value).ToString() : ""));//.ToString("yyyy/MM/dd") 
 
             var dueAmt = _orderModel.DueAmount;
             reportParam.Add(new ReportParameter("PaidAmount", _orderModel.PaidAmount.ToString("#.00")));
