@@ -59,10 +59,10 @@
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="Manufacturer" Value="SKU"/>
-    <ROW Property="ProductCode" Value="1033:{C1674FE0-AAA1-4DFD-8C66-4D27069E47B3} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{BE1D4ED9-2B42-4B96-ADC5-C893EA1AA3DE} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="IMS"/>
-    <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
+    <ROW Property="ProductName" Value="SRIPARA IMS"/>
+    <ROW Property="ProductVersion" Value="1.1.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{851D37BB-FFFB-47F0-AE39-ACEC8CCA2735}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -76,7 +76,8 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
-    <ROW Directory="IMS_Dir" Directory_Parent="APPDIR" DefaultDir="IMS"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="IMS_Dir" Directory_Parent="APPDIR" DefaultDir="SRIPAR~1|SRIPARA_IMS"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
@@ -250,7 +251,8 @@
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="IMS" Directory_="SHORTCUTDIR" Name="IMS" Component_="IMS_PrimaryOutput" Target="[#IMS.exe]" Hotkey="0" IconIndex="0" ShowCmd="1"/>
+    <ROW Shortcut="IMS" Directory_="SHORTCUTDIR" Name="SRIPAR~1|SRIPARA IMS" Component_="IMS_PrimaryOutput" Target="[#IMS.exe]" Hotkey="0" IconIndex="0" ShowCmd="1"/>
+    <ROW Shortcut="IMS_1" Directory_="DesktopFolder" Name="SRIPAR~1|SRIPARA IMS" Component_="IMS_PrimaryOutput" Target="[#IMS.exe]" Hotkey="0" IconIndex="0" ShowCmd="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>

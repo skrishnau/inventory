@@ -231,7 +231,7 @@ namespace IMS.Forms.Inventory.Transaction
             // greater than zero field validator
             List<Control> controls = new List<Control>()
             {
-                    txtTotal,
+                    txtSum,
             };
             _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider, controls.ToArray());
 
@@ -393,7 +393,9 @@ namespace IMS.Forms.Inventory.Transaction
             else
                 errorProvider.SetError(rbCredit, string.Empty);
             if (!checkout)
+            {
                 _greaterThanZeroFieldValidator.Remove(txtSum);
+            }
             else
                 _greaterThanZeroFieldValidator.AddIfNotExists(txtSum);
             if (!_requiredFieldValidator.IsValid())

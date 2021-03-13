@@ -413,8 +413,6 @@ namespace ViewModel.Utility
         {
             try
             {
-
-
                 int def_eyy = 0;
                 int def_emm = 0;
                 int def_edd = 0;

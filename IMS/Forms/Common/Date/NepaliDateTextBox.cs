@@ -38,9 +38,19 @@ namespace IMS.Forms.Common.Date
             //this.Text = _calendar.Value.ToString();
 
             AddIcon();
+            this.KeyPress += NepaliDateTextBox_KeyPress;
+            
             //picker.ValueChanged += Picker_ValueChanged;
             //this.Layout += NepaliDateTextBox_Layout;
 
+        }
+
+        private void NepaliDateTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '/' || (e.KeyChar >= '0' && e.KeyChar <= '9'))
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
 
         private void NepaliDateTextBox_DoubleClick(object sender, EventArgs e)

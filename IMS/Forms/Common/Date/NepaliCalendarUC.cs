@@ -40,7 +40,7 @@ namespace IMS.Forms.Common.Date
         private void PopulateYearAndMonth()
         {
             var years = new List<KeyValuePair<int, int>>();
-            for (var i = 1970; i <= _selectedDate.Year; i++)
+            for (var i = 1970; i <= _selectedDate.Year + 5; i++)
             {
                 years.Add(new KeyValuePair<int, int>(i, i));
             }
