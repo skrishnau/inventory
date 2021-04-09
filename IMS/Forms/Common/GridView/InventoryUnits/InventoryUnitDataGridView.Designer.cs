@@ -442,13 +442,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colUnitQuantity.Visible = true;
             //colPackageId.Visible = true;
             //colWarehouseId.Visible = true;
-            colWarehouse.Visible = true;
+            //colWarehouse.Visible = true;
             colLotNumber.Visible = true;
-            colProductionDate.Visible = true;
-            colExpirationDate.Visible = true;
+            //colProductionDate.Visible = true;
+            //colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
-            colIsHold.Visible = true;
 
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
@@ -468,10 +467,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colUnitQuantity.Visible = true;
             //colPackageId.Visible = true;
             //colWarehouseId.Visible = true;
-            colWarehouse.Visible = true;
+            //colWarehouse.Visible = true;
             //colLotNumber.Visible = true;
-            colProductionDate.Visible = true;
-            colExpirationDate.Visible = true;
+            //colProductionDate.Visible = true;
+            //colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
             colIsHold.Visible = true;
@@ -479,7 +478,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colTotal.Visible = true;
 
             colInStockQuantity.Visible = true;
-            colOnHoldQuantity.Visible = true;
+            //colOnHoldQuantity.Visible = true;
 
             HideUnusedDefaults();
         }
@@ -535,16 +534,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
-            colWarehouse.Visible = true;
+           // colWarehouse.Visible = true;
             colLotNumber.Visible = true;
-            colProductionDate.Visible = true;
-            colExpirationDate.Visible = true;
+            //colProductionDate.Visible = true;
+            //colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
-            colIsHold.Visible = true;
+            //colIsHold.Visible = false;
             colRemark.Visible = true;
             colInStockQuantity.Visible = true;
-            colOnHoldQuantity.Visible = true;
 
             HideUnusedDefaults();
         }
@@ -564,16 +562,16 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
-            colWarehouse.Visible = true;
+           // colWarehouse.Visible = true;
             colLotNumber.Visible = true;
-            colProductionDate.Visible = true;
-            colExpirationDate.Visible = true;
+            //colProductionDate.Visible = true;
+            //colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
             colReceiveDate.Visible = true;
             colRemark.Visible = true;
-            colIsHold.Visible = true;
-            colIsHold.ReadOnly = true;
+            //colIsHold.Visible = true;
+            //colIsHold.ReadOnly = false;
 
             MakeAllColumnsReadOnly();
             colUnitQuantity.ReadOnly = false;
@@ -599,16 +597,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
-            colWarehouse.Visible = true;
+            //colWarehouse.Visible = true;
 
             colInStockQuantity.Visible = true;
-            colOnHoldQuantity.Visible = true;
             // colLotNumber.Visible = true;
             // colProductionDate.Visible = true;
             // colExpirationDate.Visible = true;
             // colReceiveReference.Visible = true;
             // colReceiveReference.HeaderText = "Reference";
-            // colIsHold.Visible = true;
+            // colIsHold.Visible = false;
             colRemark.Visible = true;
 
             HideUnusedDefaults();
@@ -631,16 +628,16 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
-            colWarehouse.Visible = true;
+            //colWarehouse.Visible = true;
             colLotNumber.Visible = true;
-            colProductionDate.Visible = true;
-            colExpirationDate.Visible = true;
+            //colProductionDate.Visible = true;
+            //colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
             colReceiveDate.Visible = true;
             colRemark.Visible = true;
-            colIsHold.Visible = true;
-            colIsHold.ReadOnly = true;
+            //colIsHold.Visible = true;
+            //colIsHold.ReadOnly = true;
 
             MakeAllColumnsReadOnly();
             //colUnitQuantity.ReadOnly = false;
@@ -663,16 +660,16 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
-            colWarehouse.Visible = true;
+            //colWarehouse.Visible = true;
             colLotNumber.Visible = true;
-            colProductionDate.Visible = true;
-            colExpirationDate.Visible = true;
+            //colProductionDate.Visible = true;
+            //colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
             colReceiveDate.Visible = true;
             colRemark.Visible = true;
-            colIsHold.Visible = true;
-            colIsHold.ReadOnly = true;
+            //colIsHold.Visible = true;
+            //colIsHold.ReadOnly = true;
 
            // MakeAllColumnsReadOnly();
             //colUnitQuantity.ReadOnly = false;

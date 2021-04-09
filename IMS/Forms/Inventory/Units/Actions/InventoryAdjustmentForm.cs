@@ -271,7 +271,9 @@ namespace IMS.Forms.Inventory.Units.Actions
                     actionForMsg = "Issued";
                     ignoreList = new List<DataGridViewColumn>
                     {
-                       dgvInventoryUnit.colRate
+                       dgvInventoryUnit.colRate,
+                       dgvInventoryUnit.colWarehouseId,
+                        dgvInventoryUnit.colUomId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
 
@@ -293,9 +295,12 @@ namespace IMS.Forms.Inventory.Units.Actions
                     break;
                 case MovementTypeEnum.DirectIssueAny:
                     actionForMsg = "Issued";
-                     ignoreList = new List<DataGridViewColumn>
+                    ignoreList = new List<DataGridViewColumn>
                     {
-                        dgvInventoryUnit.colLotNumber, dgvInventoryUnit.colRate
+                        dgvInventoryUnit.colLotNumber,
+                        dgvInventoryUnit.colRate,
+                        dgvInventoryUnit.colWarehouseId,
+                        dgvInventoryUnit.colUomId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
 
@@ -319,7 +324,9 @@ namespace IMS.Forms.Inventory.Units.Actions
                     actionForMsg = "Received";
                     ignoreList = new List<DataGridViewColumn>
                     {
-                        dgvInventoryUnit.colRate
+                        dgvInventoryUnit.colRate,
+                        dgvInventoryUnit.colWarehouseId,
+                        dgvInventoryUnit.colUomId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
                     if (list != null)
@@ -334,7 +341,8 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                     }
                     break;
-                case MovementTypeEnum.POReceive:
+                // no need to go in hierarchy for now
+                /*case MovementTypeEnum.POReceive:
                     // PO Receive
                     actionForMsg = "Received";
                     dialogResult = MessageBox.Show(this, "Are you sure to receive items against this purchase order?", "Receive?", MessageBoxButtons.YesNoCancel);
@@ -344,11 +352,14 @@ namespace IMS.Forms.Inventory.Units.Actions
                         this.Close();
                     }
                     break;
+                    */
                 case MovementTypeEnum.POReceiveEditItems:
                     // PO Receive
                     ignoreList = new List<DataGridViewColumn>
                     {
-                        dgvInventoryUnit.colLotNumber
+                        dgvInventoryUnit.colLotNumber,
+                        dgvInventoryUnit.colWarehouseId,
+                        dgvInventoryUnit.colUomId,
                     };
                     actionForMsg = "Saved";
                     var poItems = dgvInventoryUnit.GetItems(ignoreList);
@@ -362,7 +373,8 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                     }
                     break;
-                case MovementTypeEnum.SOIssue:
+                // we don't need hierarchy for now
+                /*case MovementTypeEnum.SOIssue:
                     // PO Receive
                     actionForMsg = "Issued";
                     dialogResult = MessageBox.Show(this, "Are you sure to issue items against this sales order?", "Issue?", MessageBoxButtons.YesNoCancel);
@@ -372,13 +384,15 @@ namespace IMS.Forms.Inventory.Units.Actions
                         if (string.IsNullOrEmpty(msg))
                             this.Close();
                     }
-                    break;
+                    break;*/
                 case MovementTypeEnum.SOIssueEditItems:
                     // PO Receive
                     actionForMsg = "Saved";
                     ignoreList = new List<DataGridViewColumn>
                     {
-                        dgvInventoryUnit.colLotNumber
+                        dgvInventoryUnit.colLotNumber,
+                        dgvInventoryUnit.colWarehouseId,
+                        dgvInventoryUnit.colUomId,
                     };
                     var soItems = dgvInventoryUnit.GetItems(ignoreList);
                     if (soItems != null)
@@ -406,7 +420,9 @@ namespace IMS.Forms.Inventory.Units.Actions
                     {
                         ignoreList = new List<DataGridViewColumn>
                         {
-                            dgvInventoryUnit.colRate
+                            dgvInventoryUnit.colRate,
+                            dgvInventoryUnit.colWarehouseId,
+                            dgvInventoryUnit.colUomId,
                         };
                         list = dgvInventoryUnit.GetItems();
                         dialogResult = MessageBox.Show(this, "Are you sure to transfer selected items to the '" + warehouse + "' warehouse?", "Transfer?", MessageBoxButtons.YesNoCancel);

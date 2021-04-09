@@ -178,7 +178,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         ProductionDate = productionDate,
                         SupplierId = null,
                         ReceiveReceipt = reference,
-                        PackageId = package.Id,
+                        PackageId = package.Id == 0 ? null : (int?)package.Id,
                         Package = package.Name,
                         UomId = uomId,
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
@@ -369,10 +369,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             return rate;
         }
 
-        private int GetWarehouseId(DataGridViewRow row)
+        private int? GetWarehouseId(DataGridViewRow row)
         {
             var cell = row.Cells[colWarehouseId.Index];
-            var warehouseId = cell.Value == null ? 0 : int.Parse(cell.Value.ToString());
+            var warehouseId = cell.Value == null ? null : (int?)int.Parse(cell.Value.ToString());
             if (IgnoreColumnsForErrorList.Contains(colWarehouseId))
             {
                 return warehouseId;
@@ -432,10 +432,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             return adjCode == null ? "" : adjCode.ToString();
         }
 
-        private int GetUomId(DataGridViewRow row)
+        private int? GetUomId(DataGridViewRow row)
         {
             var cell = row.Cells[colUomId.Index];
-            var value = cell.Value == null ? 0 : int.Parse(cell.Value.ToString());
+            var value = cell.Value == null ? null : (int?)int.Parse(cell.Value.ToString());
             if (IgnoreColumnsForErrorList.Contains(colUomId))
             {
                 return value;

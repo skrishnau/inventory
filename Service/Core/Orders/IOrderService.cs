@@ -32,10 +32,11 @@ namespace Service.Core.Orders
 
         string SavePurchaseOrderItems(int purchaseOrderId, List<OrderItemModel> items);
         string SavePurchaseOrderItems(int purchaseOrderId, List<InventoryUnitModel> items);
-
+        /*
         string SetSent(int orderId);
         string SetReceived(int purchaseOrderId);
         string SetIssued(int orderId);
+        */
         string SetCancelled(int purchaseOrderId);
         List<DueAmountModel> GetDueReceivables();
         List<SalePurchaseAmountModel> GetSalePurchaseAmountForBarDiagram(DateTime from, DateTime to);

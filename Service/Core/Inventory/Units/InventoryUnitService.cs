@@ -176,76 +176,125 @@ namespace Service.Core.Inventory.Units
                 }
             }
         }
+        
+        public void UpdateWarehouseProductWithoutCommit(InventoryMovementModel moveModel, Product product)
+        {
+           // var product = _context.Product.Find(moveModel.InventoryUnit.ProductId);
+            if (product != null)
+            {
+                // subtract from source warehouse (fromWarehouse)
+                if (moveModel.SourceWarehouseId != null)
+                {
+                    var fromWp = product.WarehouseProducts.FirstOrDefault(x=> x.WarehouseId == moveModel.SourceWarehouseId);
+                    if (fromWp != null)
+                    {
+                        // update FromWarehouse
+                        fromWp.InStockQuantity -= moveModel.UnitQuantity;//iuModel.UnitQuantity;
+                        fromWp.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0; //iuModel.OnHoldQuantity : 0;
+                        fromWp.UpdatedAt = moveModel.Date;
+                        fromWp.Product.InStockQuantity -= moveModel.UnitQuantity;// iuModel.UnitQuantity;
+                        fromWp.Product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0;// iuModel.OnHoldQuantity : 0;
+                    }
+                }
+                if (moveModel.TargetWarehouseId != null)
+                {
 
-        public string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> list)
+                    // var toId = target == null ? 0 : target.Id;
+                    var toWp = product.WarehouseProducts.FirstOrDefault(x => x.WarehouseId == moveModel.TargetWarehouseId);
+                        //_context.WarehouseProduct
+                        //.Include(x => x.Warehouse)
+                        //.Include(x => x.Product)
+                        //.FirstOrDefault(x => x.ProductId == moveModel.InventoryUnit.ProductId
+                        //        && x.WarehouseId == moveModel.TargetWarehouseId);
+                    // add to the target warehouse (toWarehouse)
+                    if (toWp == null)
+                    {
+                        // don't do txn
+                        //using (var txn = _context.Database.BeginTransaction())
+                        {
+                            // add
+                            toWp = new WarehouseProduct()
+                            {
+                                WarehouseId = moveModel.TargetWarehouseId ?? 0,
+                                ProductId = moveModel.InventoryUnit.ProductId,
+                            };
+                            // update
+                            toWp.InStockQuantity += moveModel.UnitQuantity; // iuModel.UnitQuantity;
+                            toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
+                            toWp.UpdatedAt = moveModel.Date;
+                            product.WarehouseProducts.Add(toWp);
+                            //// need to do _context.SaveChanges(); Reason: in case of multiple add; the context won't still have the
+                            //// added warehouseProduct. and searching in context in next loop won't give the previously added 
+                            //// warehouseProduct. Hence multiple rows for same (product,warehouse) is created.  so first save it.
+                            //_context.SaveChanges();
+                            //txn.Commit();
+                        }
+
+                    }
+                    else
+                    {
+                        // update
+                        toWp.InStockQuantity += moveModel.InventoryUnit.UnitQuantity;
+                        toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? moveModel.InventoryUnit.OnHoldQuantity : 0;
+                        toWp.UpdatedAt = moveModel.Date;
+                    }
+                    product.InStockQuantity += moveModel.InventoryUnit.UnitQuantity;
+                    product.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? moveModel.InventoryUnit.OnHoldQuantity : 0;
+                }
+            }
+
+        }
+
+
+        private decimal GetPackageQuantity(decimal unitQuantity, decimal unitsInPackage)
+        {
+            unitsInPackage = unitsInPackage == 0 ? 1 : unitsInPackage;
+            return Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
+        }
+
+        public List<MovementModel> GetMovementList()
         {
             using (var _context = new DatabaseContext())
             {
 
-                var msg = string.Empty;
-                if (!list.Any())
-                {
-                    msg = "There aren't any items to move";
-                    return msg;
-                }
-                DateTime now = DateTime.Now;
-                var warehouseEntity = _context.Warehouse.Find(warehouseId);
-                if (warehouseEntity != null)
-                {
-                    foreach (var iuModel in list)
-                    {
-                        // first find
-                        var dbEntity = _context.InventoryUnit
-                            .Include(x => x.Warehouse)
-                            .Include(x => x.Product)
-                            .FirstOrDefault(x => x.Id == iuModel.Id && x.WarehouseId != warehouseId);
-                        if (dbEntity != null)
-                        {
-                            dbEntity.WarehouseId = warehouseId;
-                            //
-                            // Movement
-                            //
-                            var description = "Moved " + dbEntity.UnitQuantity + " qty. of '" + dbEntity.Product.Name + "' from " + dbEntity.Warehouse.Name + " to " + warehouseEntity.Name + ".";
-                            UpdateWarehouseProduct(iuModel, iuModel.UnitQuantity, dbEntity.Warehouse.Id, warehouseEntity.Id, now);
-                            AddMovementWithoutCoomit(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now);
-                        }
-                    }
-                }
-                _context.SaveChanges();
-                var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
-                _listener.TriggerInventoryUnitUpdateEvent(null, args);
-                return msg;
+                var query = _context.Movement
+                    .OrderByDescending(x => x.Date)
+                    .AsQueryable();
+                return MovementMapper.MapToModel(query);
             }
         }
+
+
+        /// <summary>
+        /// Updates WarehouseProduct table
+        /// </summary>
+        /// <param name="iuModel">Inventory Unit</param>
+        /// <param name="sourceWarehouseId">The warehouse from which to subtract the unit's UnitQuantity</param>
+        /// <param name="targetWarehouseId">The warehouse to which to add the unit's UnitQuantity</param>
+        /// <param name="now"></param>
+
+
+        public void AddMovementWithoutCoomit(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now)
+        {
+            var movement = new Movement()
+            {
+                AdjustmentCode = adjustmentCode,
+                Date = now,
+                Description = description,
+                Quantity = quantity,
+                Reference = reference,
+            };
+            _context.Movement.Add(movement);
+        }
+
+
+        #region Adjustments
 
         public string SaveDirectReceive(List<InventoryUnitModel> list, string adjustmentCode)
         {
             using (var _context = new DatabaseContext())
             {
-
-                var now = DateTime.Now;
-                var msg = string.Empty;
-                var entityList = InventoryUnitMapper.MapToEntity(list);
-                _context.InventoryUnit.AddRange(entityList);
-                if (!list.Any())
-                {
-                    msg = "There aren't any items to receive";
-                    return msg;
-                }
-                //
-                // Movement
-                //
-                foreach (var unit in list)
-                {
-                    var product = _context.Product.Find(unit.ProductId);
-                    var warehouse = _context.Warehouse.Find(unit.WarehouseId);
-                    var description = "Received " + unit.UnitQuantity + " quantities of " +
-                        product.Name + " into " + warehouse.Name + " warehouse.";
-                    //var quantity = list.Sum(x => x.UnitQuantity);
-                    AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now);//"Direct Receive"
-                    UpdateWarehouseProduct(unit, unit.UnitQuantity, null, unit.WarehouseId, now);
-                }
-
+                var msg = SaveDirectReceiveWithoutCommit(_context, list, adjustmentCode);
                 _context.SaveChanges();
                 // var list = InventoryUnitMapper.MapToModel(updatedEntryList);
                 var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
@@ -253,10 +302,68 @@ namespace Service.Core.Inventory.Units
                 return msg;
             }
         }
+        public Warehouse FindWarehouseOrReturnMainWarehouse(DatabaseContext _context, int? warehouseId)
+        {
+            var warehouse = _context.Warehouse.Find(warehouseId);
+            if (warehouse == null)
+            {
+                // get main warehouse
+                warehouse = _context.Warehouse.FirstOrDefault();
+                if(warehouse == null)
+                {
+                    warehouse = new Warehouse
+                    {
+                        CreatedAt = DateTime.Now,
+                        Hold = true,
+                        MixedProduct = true,
+                        Name = "Main",
+                        Staging = true,
+                        UpdatedAt = DateTime.Now,
+                        Use = true,
+                    };
+                    _context.Warehouse.Add(warehouse);
+                    _context.SaveChanges();
+                }
+            }
+            return warehouse;
+        }
 
-        //
-        // Direct Issue of whole Inventory-Unit
-        //
+        public string SaveDirectReceiveWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode)
+        {
+            var now = DateTime.Now;
+            var msg = string.Empty;
+            var entityList = InventoryUnitMapper.MapToEntity(list);
+            _context.InventoryUnit.AddRange(entityList);
+            if (!list.Any())
+            {
+                msg = "There aren't any items to receive";
+                return msg;
+            }
+            //
+            // Movement
+            //
+            foreach (var unit in list)
+            {
+                var product = _context.Product.Find(unit.ProductId);
+                var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
+               
+                var description = "Received " + unit.UnitQuantity + " quantities of " +
+                    product.Name;// + " into " + warehouse.Name + " warehouse.";
+                //var quantity = list.Sum(x => x.UnitQuantity);
+                AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now);//"Direct Receive"
+                var invMovement = new InventoryMovementModel
+                {
+                    Date = now,
+                    UnitQuantity = unit.UnitQuantity,
+                    SourceWarehouseId = null,
+                    TargetWarehouseId = unit.WarehouseId,
+                    InventoryUnit = unit
+                };
+                UpdateWarehouseProductWithoutCommit(invMovement, product);
+            }
+            return msg;
+        }
+
         public string SaveDirectIssueInventoryUnit(List<InventoryUnitModel> list, string adjustmentCode)
         {
             using (var _context = new DatabaseContext())
@@ -295,7 +402,15 @@ namespace Service.Core.Inventory.Units
                         //
                         var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
                         AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
-                        UpdateWarehouseProduct(model, issuedQuantity, dbEntity.WarehouseId, null, now);
+                        var invMovement = new InventoryMovementModel
+                        {
+                            Date = now,
+                            UnitQuantity = issuedQuantity,
+                            SourceWarehouseId = dbEntity.WarehouseId,
+                            TargetWarehouseId = null,
+                            InventoryUnit = model
+                        };
+                        UpdateWarehouseProductWithoutCommit( invMovement, dbEntity.Product);
                     }
                 }
 
@@ -306,76 +421,12 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        //
-        // Direct Issue of any product
-        //
         public string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode)
         {
             using (var _context = new DatabaseContext())
             {
 
-                var now = DateTime.Now;
-
-                var msg = string.Empty;
-                foreach (var model in list)
-                {
-                    var invUnit = _context.InventoryUnit
-                        .Include(x => x.Product)
-                        .Include(x => x.Warehouse)
-                        .Where(x => x.WarehouseId == model.WarehouseId
-                                        && x.ProductId == model.ProductId
-                                        && x.IsHold == model.IsHold)
-                        .OrderBy(x=>x.LotNumber)
-                        .ToList();
-                    decimal qtySum = 0;
-                    var fulfilledIndex = -1;
-                    for(var i =0; i < invUnit.Count(); i++)
-                    {
-                        qtySum += invUnit[0].UnitQuantity;
-                        if(qtySum >= model.UnitQuantity)
-                        {
-                            fulfilledIndex = i;
-                            break;
-                        }
-                    }
-                    if (fulfilledIndex < 0)
-                    {
-                        return "Some of the products are insufficient to issue. Please verify again.";
-                    }
-
-                    // start issue 
-                    decimal remainingQty = model.UnitQuantity;
-                    for(var i=0; i<=fulfilledIndex; i++)
-                    {
-                        var dbEntity = invUnit[i];
-                        var productName = dbEntity.Product.Name;
-                        var warehouseName = dbEntity.Warehouse.Name;
-                        var issuedQuantity = 0M;
-                        
-                        if (remainingQty < dbEntity.UnitQuantity)
-                        {
-                            // don't remove; just decrement
-                            issuedQuantity = remainingQty;
-                            dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainingQty;
-                            dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
-                        }
-                        else
-                        {
-                            issuedQuantity = dbEntity.UnitQuantity;
-                            // case is : model.UnitQuantity >= entity.UnitQuantity
-                            // remove the InventoryUnit
-                            _context.InventoryUnit.Remove(dbEntity);
-                            remainingQty -= dbEntity.UnitQuantity;
-                        }
-                        //
-                        // Movement
-                        //
-                        var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                        AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
-                        UpdateWarehouseProduct(model, issuedQuantity, dbEntity.WarehouseId, null, now);
-                    }
-                }
-
+                var msg = SaveDirectIssueAnyWithoutCommit(_context, list, adjustmentCode);
                 _context.SaveChanges();
                 var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.DELETE);
                 _listener.TriggerInventoryUnitUpdateEvent(null, args);
@@ -383,119 +434,131 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        private decimal GetPackageQuantity(decimal unitQuantity, decimal unitsInPackage)
+        public string SaveDirectIssueAnyWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode)
         {
-            unitsInPackage = unitsInPackage == 0 ? 1 : unitsInPackage;
-            return Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
-        }
+            var now = DateTime.Now;
 
-        public List<MovementModel> GetMovementList()
-        {
-            using (var _context = new DatabaseContext())
+            var msg = string.Empty;
+            foreach (var model in list)
             {
-
-                var query = _context.Movement
-                    .OrderByDescending(x => x.Date)
-                    .AsQueryable();
-                return MovementMapper.MapToModel(query);
-            }
-        }
-
-
-        /// <summary>
-        /// Updates WarehouseProduct table
-        /// </summary>
-        /// <param name="iuModel">Inventory Unit</param>
-        /// <param name="sourceWarehouseId">The warehouse from which to subtract the unit's UnitQuantity</param>
-        /// <param name="targetWarehouseId">The warehouse to which to add the unit's UnitQuantity</param>
-        /// <param name="now"></param>
-        public void UpdateWarehouseProduct(InventoryUnitModel iuModel, decimal unitQuantity, int? sourceWarehouseId, int? targetWarehouseId, DateTime now)
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var product = _context.Product.Find(iuModel.ProductId);
-                if (product != null)
+                var invUnit = _context.InventoryUnit
+                    .Include(x => x.Product)
+                    .Include(x => x.Warehouse)
+                    .Where(x => x.WarehouseId == model.WarehouseId
+                                    && x.ProductId == model.ProductId
+                                    && x.IsHold == model.IsHold)
+                    .OrderBy(x => x.LotNumber)
+                    .ToList();
+                decimal qtySum = 0;
+                var fulfilledIndex = -1;
+                for (var i = 0; i < invUnit.Count(); i++)
                 {
-                    // subtract from source warehouse (fromWarehouse)
-                    if (sourceWarehouseId != null)
+                    qtySum += invUnit[0].UnitQuantity;
+                    if (qtySum >= model.UnitQuantity)
                     {
-                        var fromWp = _context.WarehouseProduct
-                            .Include(x => x.Warehouse)
-                            .Include(x => x.Product)
-                            .FirstOrDefault(x => x.ProductId == iuModel.ProductId
-                                    && x.WarehouseId == sourceWarehouseId);
-                        if (fromWp != null)
-                        {
-                            // update FromWarehouse
-                            fromWp.InStockQuantity -= unitQuantity;//iuModel.UnitQuantity;
-                            fromWp.OnHoldQuantity -= iuModel.IsHold ? unitQuantity : 0; //iuModel.OnHoldQuantity : 0;
-                            fromWp.UpdatedAt = now;
-                            fromWp.Product.InStockQuantity -= unitQuantity;// iuModel.UnitQuantity;
-                            fromWp.Product.OnHoldQuantity -= iuModel.IsHold ? unitQuantity : 0;// iuModel.OnHoldQuantity : 0;
-                        }
+                        fulfilledIndex = i;
+                        break;
                     }
-                    if (targetWarehouseId != null)
-                    {
+                }
+                if (fulfilledIndex < 0)
+                {
+                    return "Some of the products are insufficient to issue. Please verify again.";
+                }
 
-                        // var toId = target == null ? 0 : target.Id;
-                        var toWp = _context.WarehouseProduct
+                // start issue 
+                decimal remainingQty = model.UnitQuantity;
+                for (var i = 0; i <= fulfilledIndex; i++)
+                {
+                    var dbEntity = invUnit[i];
+                    var productName = dbEntity.Product.Name;
+                    var warehouseName = dbEntity.Warehouse.Name;
+                    var issuedQuantity = 0M;
+
+                    if (remainingQty < dbEntity.UnitQuantity)
+                    {
+                        // don't remove; just decrement
+                        issuedQuantity = remainingQty;
+                        dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainingQty;
+                        dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
+                    }
+                    else
+                    {
+                        issuedQuantity = dbEntity.UnitQuantity;
+                        // case is : model.UnitQuantity >= entity.UnitQuantity
+                        // remove the InventoryUnit
+                        _context.InventoryUnit.Remove(dbEntity);
+                        remainingQty -= dbEntity.UnitQuantity;
+                    }
+                    //
+                    // Movement
+                    //
+                    var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
+                    AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
+                    var invMovement = new InventoryMovementModel
+                    {
+                        Date = now,
+                        UnitQuantity = issuedQuantity,
+                        SourceWarehouseId = dbEntity.WarehouseId,
+                        TargetWarehouseId = null,
+                        InventoryUnit = model
+                    };
+                    UpdateWarehouseProductWithoutCommit(invMovement, dbEntity.Product);
+                }
+            }
+            return msg;
+        }
+        
+        public string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> list)
+        {
+            using (var _context = new DatabaseContext())
+            {
+
+                var msg = string.Empty;
+                if (!list.Any())
+                {
+                    msg = "There aren't any items to move";
+                    return msg;
+                }
+                DateTime now = DateTime.Now;
+                var warehouseEntity = FindWarehouseOrReturnMainWarehouse(_context, warehouseId);
+
+                if (warehouseEntity != null)
+                {
+                    foreach (var iuModel in list)
+                    {
+                        // first find
+                        var dbEntity = _context.InventoryUnit
                             .Include(x => x.Warehouse)
                             .Include(x => x.Product)
-                            .FirstOrDefault(x => x.ProductId == iuModel.ProductId
-                                    && x.WarehouseId == targetWarehouseId);
-                        // add to the target warehouse (toWarehouse)
-                        if (toWp == null)
+                            .FirstOrDefault(x => x.Id == iuModel.Id && x.WarehouseId != warehouseId);
+                        if (dbEntity != null)
                         {
-                            using (var txn = _context.Database.BeginTransaction())
+                            dbEntity.WarehouseId = warehouseId;
+                            //
+                            // Movement
+                            //
+                            var description = "Moved " + dbEntity.UnitQuantity + " qty. of '" + dbEntity.Product.Name + "' from " + dbEntity.Warehouse.Name + " to " + warehouseEntity.Name + ".";
+                            var invMovement = new InventoryMovementModel
                             {
-                                // add
-                                toWp = new WarehouseProduct()
-                                {
-                                    WarehouseId = targetWarehouseId ?? 0,
-                                    ProductId = iuModel.ProductId,
-                                };
-                                // update
-                                toWp.InStockQuantity += unitQuantity; // iuModel.UnitQuantity;
-                                toWp.OnHoldQuantity += iuModel.IsHold ? unitQuantity : 0;//iuModel.OnHoldQuantity : 0;
-                                toWp.UpdatedAt = now;
-                                _context.WarehouseProduct.Add(toWp);
-                                // need to do _context.SaveChanges(); Reason: in case of multiple add; the context won't still have the
-                                // added warehouseProduct. and searching in context in next loop won't give the previously added 
-                                // warehouseProduct. Hence multiple rows for same (product,warehouse) is created.  so first save it.
-                                _context.SaveChanges();
-                                txn.Commit();
-                            }
-
+                                Date = now,
+                                UnitQuantity = iuModel.UnitQuantity,
+                                SourceWarehouseId = dbEntity.Warehouse.Id,
+                                TargetWarehouseId = warehouseEntity.Id,
+                                InventoryUnit = iuModel
+                            };
+                            UpdateWarehouseProductWithoutCommit( invMovement, dbEntity.Product);
+                            AddMovementWithoutCoomit(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now);
                         }
-                        else
-                        {
-                            // update
-                            toWp.InStockQuantity += iuModel.UnitQuantity;
-                            toWp.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
-                            toWp.UpdatedAt = now;
-                        }
-                        product.InStockQuantity += iuModel.UnitQuantity;
-                        product.OnHoldQuantity += iuModel.IsHold ? iuModel.OnHoldQuantity : 0;
                     }
                 }
                 _context.SaveChanges();
+                var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
+                _listener.TriggerInventoryUnitUpdateEvent(null, args);
+                return msg;
             }
         }
 
-
-        public void AddMovementWithoutCoomit(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now)
-        {
-            var movement = new Movement()
-            {
-                AdjustmentCode = adjustmentCode,
-                Date = now,
-                Description = description,
-                Quantity = quantity,
-                Reference = reference,
-            };
-            _context.Movement.Add(movement);
-        }
-
+        #endregion
 
     }
 }

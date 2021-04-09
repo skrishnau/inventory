@@ -337,7 +337,7 @@ namespace IMS.Forms.Inventory.Purchases
             var dialogResult = MessageBox.Show(this, question, buttonText, MessageBoxButtons.YesNo);
             if (dialogResult.Equals(DialogResult.Yes))
             {
-                var msg = _orderService.SetSent(_orderId);
+                var msg = "SetSent not implemented";//_orderService.SetSent(_orderId);
                 if (string.IsNullOrEmpty(msg))
                     PopupMessage.ShowSuccessMessage(successMsg);
                 else

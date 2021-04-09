@@ -195,7 +195,6 @@
             this.lnkAdjustmentCodes.TabStop = true;
             this.lnkAdjustmentCodes.Text = "      Adjustment Codes";
             this.lnkAdjustmentCodes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lnkAdjustmentCodes.Visible = false;
             this.lnkAdjustmentCodes.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // splitter6

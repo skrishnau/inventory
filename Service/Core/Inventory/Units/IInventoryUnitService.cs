@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Infrastructure.Context;
+using Infrastructure.Entities.Inventory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,13 +28,25 @@ namespace Service.Core.Inventory.Units
         /// <param name="model"></param>
         void SplitInventoryUnit(List<decimal> quantityList, InventoryUnitModel model);
 
+        
+
+        //void UpdateWarehouseProductWithoutCommit(InventoryMovementModel model, Product product);
+
+        #endregion
+
+        #region Adjustments
+
         string SaveDirectReceive(List<InventoryUnitModel> list, string adjustmentCode);
-
+        string SaveDirectReceiveWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode);
+        //
+        // Direct Issue of whole Inventory-Unit
+        //
         string SaveDirectIssueInventoryUnit(List<InventoryUnitModel> list, string adjustmentCode);
-
+        //
+        // Direct Issue of any product
+        //
         string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode);
-
-        void UpdateWarehouseProduct(InventoryUnitModel iuModel, decimal unitQuantity, int? sourceWarehouseId, int? targetWarehouseId, DateTime now);
+        string SaveDirectIssueAnyWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode);
 
         #endregion
 
