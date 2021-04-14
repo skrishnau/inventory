@@ -18,5 +18,7 @@ namespace ViewModel.Core.Inventory
         public decimal Quantity { get; set; }
 
         public string Date { get; set; }
+
+        public int ProductId { get; set; }
     }
 }

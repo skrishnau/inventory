@@ -100,7 +100,7 @@ namespace Service.Core.Inventory.Units
                                 splitString = splitString.Trim();
                                 splitString = splitString.TrimEnd(new char[] { '+' });
                                 var description = "Merged " + splitString + " of '" + product.Name + "' into " + editingRecord.UnitQuantity + " qty.";
-                                AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now);
+                                AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now, editingRecord.ProductId);
 
                             }
 
@@ -142,7 +142,7 @@ namespace Service.Core.Inventory.Units
                             splitString = splitString.Trim();
                             splitString = splitString.TrimEnd(new char[] { '+' });
                             var description = "Splitted " + entity.UnitQuantity + " qty. of '" + entity.Product.Name + "' into " + splitString + ".";
-                            AddMovementWithoutCoomit(_context, description, "----------------", "Split", entity.UnitQuantity, now);
+                            AddMovementWithoutCoomit(_context, description, "----------------", "Split", entity.UnitQuantity, now, entity.ProductId);
 
                             for (var q = 0; q < quantitySplitList.Count; q++)
                             {
@@ -252,12 +252,12 @@ namespace Service.Core.Inventory.Units
             return Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
         }
 
-        public List<MovementModel> GetMovementList()
+        public List<MovementModel> GetMovementList(int productId)
         {
             using (var _context = new DatabaseContext())
             {
-
                 var query = _context.Movement
+                    .Where(x => productId == 0 || x.ProductId == productId)
                     .OrderByDescending(x => x.Date)
                     .AsQueryable();
                 return MovementMapper.MapToModel(query);
@@ -274,7 +274,7 @@ namespace Service.Core.Inventory.Units
         /// <param name="now"></param>
 
 
-        public void AddMovementWithoutCoomit(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now)
+        public void AddMovementWithoutCoomit(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now, int productId)
         {
             var movement = new Movement()
             {
@@ -283,6 +283,7 @@ namespace Service.Core.Inventory.Units
                 Description = description,
                 Quantity = quantity,
                 Reference = reference,
+                ProductId = productId,
             };
             _context.Movement.Add(movement);
         }
@@ -343,7 +344,7 @@ namespace Service.Core.Inventory.Units
             var description = "Received " + unit.UnitQuantity + " quantities of " +
                 product.Name;// + " into " + warehouse.Name + " warehouse.";
                              //var quantity = list.Sum(x => x.UnitQuantity);
-            AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now);//"Direct Receive"
+            AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {
                 Date = now,
@@ -414,7 +415,7 @@ namespace Service.Core.Inventory.Units
                         // Movement
                         //
                         var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                        AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
+                        AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now, dbEntity.ProductId);//"Direct Issue"
                         var invMovement = new InventoryMovementModel
                         {
                             Date = now,
@@ -516,12 +517,12 @@ namespace Service.Core.Inventory.Units
                     _context.InventoryUnit.Remove(dbEntity);
                     remainingQty -= dbEntity.UnitQuantity;
                 }
-                list.Add(new InventoryUnit { Rate= dbEntity.Rate, UnitQuantity = issuedQuantity});
+                list.Add(new InventoryUnit { Rate = dbEntity.Rate, UnitQuantity = issuedQuantity });
                 //
                 // Movement
                 //
                 var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now);//"Direct Issue"
+                AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now, dbEntity.ProductId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {
                     Date = now,
@@ -574,7 +575,7 @@ namespace Service.Core.Inventory.Units
                                 InventoryUnit = iuModel
                             };
                             UpdateWarehouseProductWithoutCommit(invMovement, dbEntity.Product);
-                            AddMovementWithoutCoomit(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now);
+                            AddMovementWithoutCoomit(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now, dbEntity.ProductId);
                         }
                     }
                 }

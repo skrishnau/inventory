@@ -96,6 +96,10 @@
     <Compile Include="Migrations\202104140920336_PriceHistoryAdded.Designer.cs">
       <DependentUpon>202104140920336_PriceHistoryAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104141009562_ProductAddedInMovementTable.cs" />
+    <Compile Include="Migrations\202104141009562_ProductAddedInMovementTable.Designer.cs">
+      <DependentUpon>202104141009562_ProductAddedInMovementTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104140920336_PriceHistoryAdded.resx">
       <DependentUpon>202104140920336_PriceHistoryAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104141009562_ProductAddedInMovementTable.resx">
+      <DependentUpon>202104141009562_ProductAddedInMovementTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
