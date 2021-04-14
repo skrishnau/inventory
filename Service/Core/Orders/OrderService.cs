@@ -207,6 +207,7 @@ namespace Service.Core.Orders
                     // makechecout
                     MakeCheckout(_context, ref entity, ref orderModel);
                     var transaction = GetTransactionWithoutCommit(_context, orderModel);
+                    transaction.CostPriceTotal = entity.CostPriceTotal;
                     if (user != null)
                     {
                         user.Transactions.Add(transaction);
@@ -234,14 +235,6 @@ namespace Service.Core.Orders
                 if (checkout)
                 {
                     _appSettingService.IncrementBillIndex((ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), orderModel.OrderType));
-                    if (orderModel.OrderType == OrderTypeEnum.Purchase.ToString())
-                    {
-                        var msg = _inventoryUnitService.SaveDirectReceiveWithoutCommit(_context, entity.OrderItems.MapToInventoryUnitModel(), "Issue");
-                    }
-                    else if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
-                    {
-                        var msg = _inventoryUnitService.SaveDirectIssueAnyWithoutCommit(_context, entity.OrderItems.MapToInventoryUnitModel(), "Issue");
-                    }
                 }
                 else
                 {
@@ -254,6 +247,7 @@ namespace Service.Core.Orders
                 _listener.TriggerProductUpdateEvent(null, null);
                 _listener.TriggerPackageUpdateEvent(null, null);
                 _listener.TriggerUserUpdateEvent(null, null);
+                _listener.TriggerInventoryUnitUpdateEvent(null, null);
                 var newOrder = _context.Order.Find(entity.Id)?.MapToModel(true);
                 return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true };
             }
@@ -297,11 +291,11 @@ namespace Service.Core.Orders
                 {
                     if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
-                        var msg = _inventoryUnitService.SaveDirectReceiveWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(), "Order Cancelled");
+                        var msg = _inventoryUnitService.SaveDirectReceiveListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Sale), DateTime.Now, "Order Cancelled");
                     }
                     else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                     {
-                        var msg = _inventoryUnitService.SaveDirectIssueAnyWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(), "Order Cancelled");
+                        var msg = _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Purchase), "Order Cancelled");
                     }
                 }
             }
@@ -477,6 +471,8 @@ namespace Service.Core.Orders
             // second add/update
             foreach (var item in items)
             {
+                var warehouse = _inventoryUnitService.FindWarehouseOrReturnMainWarehouse(_context, item.WarehouseId);
+                item.WarehouseId = warehouse.Id;
                 if (item.ProductId == 0 && string.IsNullOrEmpty(item.Product))
                     continue;
                 //var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
@@ -548,10 +544,28 @@ namespace Service.Core.Orders
 
                 // modify product inStock & OnHold quantity
                 if (checkout)
+                {
+                    var msg = "";
                     UpdateProductForOrderItemSaveWithoutCommit(_context, order, entity);
+                    if (order.OrderType == OrderTypeEnum.Purchase.ToString())
+                    {
+                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, "PO Receive", ref msg);
+                    }
+                    else if (order.OrderType == OrderTypeEnum.Sale.ToString())
+                    {
+                        var invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum),order.OrderType)), "SO Issue", ref msg);
+                        var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
+                        if (invUnits.Count > 0 && invUnitsQty > 0)
+                        {
+                            entity.CostPriceRate = invUnits.Sum(x => x.UnitQuantity * x.Rate) / invUnitsQty;
+                            entity.CostPriceTotal = entity.UnitQuantity * entity.CostPriceRate;
+                        }
+                    }
+                }
             }
 
             order.TotalAmount = items.Sum(x => x.Total);
+            order.CostPriceTotal = order.OrderItems.Sum(x => x.CostPriceTotal);
             return string.Empty;
         }
 

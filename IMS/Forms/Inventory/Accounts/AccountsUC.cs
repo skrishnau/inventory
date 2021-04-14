@@ -13,6 +13,7 @@ using Service.Core.Users;
 using Service.Core.Payment;
 using Service.Listeners;
 using Service.Core.Settings;
+using IMS.Forms.Inventory.Accounts.All;
 
 namespace IMS.Forms.Inventory.Reports
 {
@@ -46,7 +47,16 @@ namespace IMS.Forms.Inventory.Reports
 
             sidebarUc.btnPayments.Click += BtnPayments_Click;
             sidebarUc.btnLedger.Click += BtnLedger_Click;
+            sidebarUc.btnProfitAndLoss.Click += BtnProfitAndLoss_Click;
 
+        }
+
+        private void BtnProfitAndLoss_Click(object sender, EventArgs e)
+        {
+            this.bodyTemplate.pnlBody.Controls.Clear();
+            var ledgerUc = new ProfitAndLossUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
+            this.bodyTemplate.SubHeadingText = "Profit and Loss";
+            this.bodyTemplate.pnlBody.Controls.Add(ledgerUc);
         }
 
         private void BtnPayments_Click(object sender, EventArgs e)

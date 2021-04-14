@@ -47,10 +47,9 @@ namespace IMS.Forms.Inventory.Units.Details
         private void WarehouseProductListUC_Load(object sender, EventArgs e)
         {
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
-            _listener.WarehouseUpdated += _listener_WarehouseUpdated;
+           // _listener.WarehouseUpdated += _listener_WarehouseUpdated;
             _listener.ProductUpdated += _listener_ProductUpdated;
-           // InitializeHeader();
-            PopulateWarehouses();
+           // PopulateWarehouses();
             PopulateProducts();
             PopulateWarehouseProducts();
 
@@ -64,10 +63,10 @@ namespace IMS.Forms.Inventory.Units.Details
             PopulateWarehouseProducts();
         }
 
-        private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<WarehouseModel> e)
-        {
-            PopulateWarehouses();
-        }
+        //private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<WarehouseModel> e)
+        //{
+        //    PopulateWarehouses();
+        //}
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
             PopulateProducts();
@@ -87,7 +86,7 @@ namespace IMS.Forms.Inventory.Units.Details
 
         private void InitializeComboBoxEvents()
         {
-            cbWarehouse.SelectedValueChanged += CbWarehouse_SelectedValueChanged;
+            //cbWarehouse.SelectedValueChanged += CbWarehouse_SelectedValueChanged;
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
         }
 
@@ -98,15 +97,15 @@ namespace IMS.Forms.Inventory.Units.Details
 
         #region Populate Functions
 
-        private void PopulateWarehouses()
-        {
-            var warehouses = _inventoryService.GetWarehouseListForCombo();
-            var allWarehouse = new IdNamePair { Id = 0, Name = " ---- All ---- " };
-            warehouses.Insert(0, allWarehouse);
-            cbWarehouse.DataSource = warehouses;
-            cbWarehouse.DisplayMember = "Name";
-            cbWarehouse.ValueMember = "Id";
-        }
+        //private void PopulateWarehouses()
+        //{
+        //    var warehouses = _inventoryService.GetWarehouseListForCombo();
+        //    var allWarehouse = new IdNamePair { Id = 0, Name = " ---- All ---- " };
+        //    warehouses.Insert(0, allWarehouse);
+        //    cbWarehouse.DataSource = warehouses;
+        //    cbWarehouse.DisplayMember = "Name";
+        //    cbWarehouse.ValueMember = "Id";
+        //}
 
         private void PopulateProducts()
         {
@@ -120,9 +119,9 @@ namespace IMS.Forms.Inventory.Units.Details
 
         private void PopulateWarehouseProducts()
         {
-            var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
+            //var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
             var productId = int.Parse(cbProduct.SelectedValue.ToString());
-            var warehouseProducts = _inventoryService.GetWarehouseProductList(warehouseId, productId);
+            var warehouseProducts = _inventoryService.GetWarehouseProductList(0, productId);
             dgvWarehouseProduct.AutoGenerateColumns = false;
             dgvWarehouseProduct.DataSource = warehouseProducts;
         }

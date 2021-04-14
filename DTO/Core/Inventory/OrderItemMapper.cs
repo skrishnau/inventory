@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
+using ViewModel.Enums;
 using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
@@ -151,43 +152,50 @@ namespace DTO.Core.Inventory
             };
         }
 
-        public static List<InventoryUnitModel> MapToInventoryUnitModel(this ICollection<OrderItem> query)
+        public static InventoryUnitModel MapToInventoryUnitModel(this OrderItem model, OrderTypeEnum orderType)
+        {
+            return new InventoryUnitModel()
+            {
+                Id = model.Id,
+                UnitQuantity = model.UnitQuantity,
+                //Rate = model.Rate,
+                //TotalAmount = model.TotalAmount,
+                Product = model.Product?.Name ?? "",
+                SKU = model.Product?.SKU ?? "",
+                IsHold = model.IsHold,
+                // IsReceived = model.IsReceived,
+                ProductId = model.ProductId,
+                // PurchaseOrderId = model.PurchaseOrderId,
+                WarehouseId = model.WarehouseId ?? 0,
+                Warehouse = model.Warehouse?.Name ?? "",
+                //  InStock = model.Product.InStockQuantity,
+                // OnOrder = model.Product.OnOrderQuantity,
+                UomId = model.UomId,
+                SupplierId = model.SupplierId,
+                Supplier = model.Supplier?.Name ?? "",
+                // Adjustment = model.Adjustment,
+                //  ExpirationDate = model.ExpirationDate,
+                GrossWeight = model.GrossWeight,
+                LotNumber = model.LotNumber,
+                NetWeight = model.NetWeight,
+                Package = model.Package?.Name ?? "",
+                PackageId = model.PackageId,
+                PackageQuantity = model.PackageQuantity,
+                //  ProductionDate = model.ProductionDate,
+                // Reference = model.Reference,
+                Uom = model.Uom?.Name ?? "",
+                Rate = orderType == OrderTypeEnum.Sale? (model.CostPriceRate ?? 0): model.Rate,
+
+
+            };
+        }
+
+        public static List<InventoryUnitModel> MapToInventoryUnitModel(this ICollection<OrderItem> query, OrderTypeEnum orderType)
         {
             var list = new List<InventoryUnitModel>();
             foreach (var model in query)
             {
-                list.Add(new InventoryUnitModel()
-                {
-                    Id = model.Id,
-                    UnitQuantity = model.UnitQuantity,
-                    //Rate = model.Rate,
-                    //TotalAmount = model.TotalAmount,
-                    Product = model.Product?.Name??"",
-                    SKU = model.Product?.SKU??"",
-                    IsHold = model.IsHold,
-                   // IsReceived = model.IsReceived,
-                    ProductId = model.ProductId,
-                   // PurchaseOrderId = model.PurchaseOrderId,
-                    WarehouseId = model.WarehouseId??0,
-                    Warehouse = model.Warehouse?.Name??"",
-                  //  InStock = model.Product.InStockQuantity,
-                   // OnOrder = model.Product.OnOrderQuantity,
-                    UomId = model.UomId,
-                    SupplierId = model.SupplierId,
-                    Supplier = model.Supplier?.Name??"",
-                   // Adjustment = model.Adjustment,
-                  //  ExpirationDate = model.ExpirationDate,
-                    GrossWeight = model.GrossWeight,
-                    LotNumber = model.LotNumber,
-                    NetWeight = model.NetWeight,
-                    Package = model.Package?.Name??"",
-                    PackageId = model.PackageId,
-                    PackageQuantity = model.PackageQuantity,
-                  //  ProductionDate = model.ProductionDate,
-                   // Reference = model.Reference,
-                    Uom = model.Uom?.Name??"",
-                    
-                });
+                list.Add(MapToInventoryUnitModel(model, orderType));
             }
             return list;
         }

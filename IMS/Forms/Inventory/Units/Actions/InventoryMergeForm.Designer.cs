@@ -30,22 +30,20 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dgvInventoryUnit = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLotNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouseId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsHold = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colExpirationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventoryUnit)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -74,12 +72,10 @@
             this.colProduct,
             this.colSKU,
             this.colInStockQuantity,
+            this.colRate,
             this.colLotNumber,
             this.colWarehouseId,
-            this.colWarehouse,
-            this.colIsHold,
-            this.colExpirationDate,
-            this.colProductionDate});
+            this.colWarehouse});
             this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 30);
             this.dgvInventoryUnit.MultiSelect = false;
@@ -88,99 +84,6 @@
             this.dgvInventoryUnit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInventoryUnit.Size = new System.Drawing.Size(652, 225);
             this.dgvInventoryUnit.TabIndex = 4;
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "Id";
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.Visible = false;
-            // 
-            // colCheck
-            // 
-            this.colCheck.HeaderText = "";
-            this.colCheck.Name = "colCheck";
-            this.colCheck.Visible = false;
-            this.colCheck.Width = 30;
-            // 
-            // colProductId
-            // 
-            this.colProductId.DataPropertyName = "ProductId";
-            this.colProductId.HeaderText = "ProductId";
-            this.colProductId.Name = "colProductId";
-            this.colProductId.Visible = false;
-            // 
-            // colProduct
-            // 
-            this.colProduct.DataPropertyName = "Product";
-            this.colProduct.HeaderText = "Product";
-            this.colProduct.Name = "colProduct";
-            this.colProduct.ReadOnly = true;
-            this.colProduct.Width = 150;
-            // 
-            // colSKU
-            // 
-            this.colSKU.DataPropertyName = "SKU";
-            this.colSKU.HeaderText = "SKU";
-            this.colSKU.Name = "colSKU";
-            this.colSKU.ReadOnly = true;
-            // 
-            // colInStockQuantity
-            // 
-            this.colInStockQuantity.DataPropertyName = "UnitQuantity";
-            this.colInStockQuantity.HeaderText = "Units";
-            this.colInStockQuantity.Name = "colInStockQuantity";
-            this.colInStockQuantity.ReadOnly = true;
-            // 
-            // colLotNumber
-            // 
-            this.colLotNumber.DataPropertyName = "LotNumber";
-            this.colLotNumber.HeaderText = "Lot #";
-            this.colLotNumber.Name = "colLotNumber";
-            this.colLotNumber.ReadOnly = true;
-            this.colLotNumber.Width = 90;
-            // 
-            // colWarehouseId
-            // 
-            this.colWarehouseId.DataPropertyName = "WarehouseId";
-            this.colWarehouseId.HeaderText = "WarehouseId";
-            this.colWarehouseId.Name = "colWarehouseId";
-            this.colWarehouseId.Visible = false;
-            // 
-            // colWarehouse
-            // 
-            this.colWarehouse.DataPropertyName = "Warehouse";
-            this.colWarehouse.HeaderText = "Warehouse";
-            this.colWarehouse.Name = "colWarehouse";
-            this.colWarehouse.ReadOnly = true;
-            this.colWarehouse.Width = 130;
-            // 
-            // colIsHold
-            // 
-            this.colIsHold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colIsHold.DataPropertyName = "IsHold";
-            this.colIsHold.HeaderText = "Hold";
-            this.colIsHold.Name = "colIsHold";
-            this.colIsHold.ReadOnly = true;
-            this.colIsHold.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colIsHold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsHold.Width = 54;
-            // 
-            // colExpirationDate
-            // 
-            this.colExpirationDate.DataPropertyName = "ExpirationDate";
-            this.colExpirationDate.HeaderText = "Exp Date";
-            this.colExpirationDate.Name = "colExpirationDate";
-            this.colExpirationDate.ReadOnly = true;
-            this.colExpirationDate.Width = 95;
-            // 
-            // colProductionDate
-            // 
-            this.colProductionDate.DataPropertyName = "ProductionDate";
-            this.colProductionDate.HeaderText = "Prod Date";
-            this.colProductionDate.Name = "colProductionDate";
-            this.colProductionDate.ReadOnly = true;
-            this.colProductionDate.Width = 95;
             // 
             // panel1
             // 
@@ -225,6 +128,78 @@
             this.label2.Text = "Note: Units in the same warehouse are only merged.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.Visible = false;
+            // 
+            // colCheck
+            // 
+            this.colCheck.HeaderText = "";
+            this.colCheck.Name = "colCheck";
+            this.colCheck.Visible = false;
+            this.colCheck.Width = 30;
+            // 
+            // colProductId
+            // 
+            this.colProductId.DataPropertyName = "ProductId";
+            this.colProductId.HeaderText = "ProductId";
+            this.colProductId.Name = "colProductId";
+            this.colProductId.Visible = false;
+            // 
+            // colProduct
+            // 
+            this.colProduct.DataPropertyName = "Product";
+            this.colProduct.HeaderText = "Product";
+            this.colProduct.Name = "colProduct";
+            this.colProduct.ReadOnly = true;
+            this.colProduct.Width = 150;
+            // 
+            // colSKU
+            // 
+            this.colSKU.DataPropertyName = "SKU";
+            this.colSKU.HeaderText = "SKU";
+            this.colSKU.Name = "colSKU";
+            this.colSKU.ReadOnly = true;
+            // 
+            // colInStockQuantity
+            // 
+            this.colInStockQuantity.DataPropertyName = "UnitQuantity";
+            this.colInStockQuantity.HeaderText = "Units";
+            this.colInStockQuantity.Name = "colInStockQuantity";
+            this.colInStockQuantity.ReadOnly = true;
+            // 
+            // colRate
+            // 
+            this.colRate.DataPropertyName = "Rate";
+            this.colRate.HeaderText = "Rate";
+            this.colRate.Name = "colRate";
+            // 
+            // colLotNumber
+            // 
+            this.colLotNumber.DataPropertyName = "LotNumber";
+            this.colLotNumber.HeaderText = "Lot #";
+            this.colLotNumber.Name = "colLotNumber";
+            this.colLotNumber.ReadOnly = true;
+            this.colLotNumber.Width = 90;
+            // 
+            // colWarehouseId
+            // 
+            this.colWarehouseId.DataPropertyName = "WarehouseId";
+            this.colWarehouseId.HeaderText = "WarehouseId";
+            this.colWarehouseId.Name = "colWarehouseId";
+            this.colWarehouseId.Visible = false;
+            // 
+            // colWarehouse
+            // 
+            this.colWarehouse.DataPropertyName = "Warehouse";
+            this.colWarehouse.HeaderText = "Warehouse";
+            this.colWarehouse.Name = "colWarehouse";
+            this.colWarehouse.ReadOnly = true;
+            this.colWarehouse.Width = 130;
+            // 
             // InventoryMergeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,18 +229,16 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLotNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouseId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExpirationDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductionDate;
-        private System.Windows.Forms.Label label2;
     }
 }

@@ -45,6 +45,8 @@ namespace Infrastructure.Entities.Orders
         // lot# ; incrementing...
         public int LotNumber { get; set; }
         public decimal TotalAmount { get; set; }
+        // in case of sale : sum of cost price of all items
+        public decimal? CostPriceTotal { get; set; }
         public string Note { get; set; }
         // Expected Date means different for each Order Type
         // Purchase Order : Expected Date

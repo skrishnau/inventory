@@ -7,6 +7,7 @@ using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
@@ -53,6 +54,8 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void InventoryReceiveForm_Load(object sender, EventArgs e)
         {
+            dtReceivedDate.SetValue(DateTime.Now);
+
             PopulateAdjustmentCodeCombo();
         }
 
@@ -76,6 +79,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     cbAdjustmentCode.DataSource = adjustmentList;
                     cbAdjustmentCode.ValueMember = "Id";
                     cbAdjustmentCode.DisplayMember = "Name";
+                    cbAdjustmentCode.SelectedItem = adjustmentList.FirstOrDefault(x => x.Name == "Direct Receive");
                     break;
                 case MovementTypeEnum.SOIssue:
                 case MovementTypeEnum.SOIssueEditItems:
@@ -321,14 +325,17 @@ namespace IMS.Forms.Inventory.Units.Actions
                     }
                     break;
                 case MovementTypeEnum.DirectReceive:
+                    
                     actionForMsg = "Received";
                     ignoreList = new List<DataGridViewColumn>
                     {
-                        dgvInventoryUnit.colRate,
+                        //dgvInventoryUnit.colRate,
                         dgvInventoryUnit.colWarehouseId,
                         dgvInventoryUnit.colUomId,
+                        dgvInventoryUnit.colPackageId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
+                    list.ForEach(x => x.ReceiveDate = dtReceivedDate.GetValue().ToShortDateString());
                     if (list != null)
                     {
                         if (list.Count == 0)
@@ -337,7 +344,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         }
                         else
                         {
-                            msg = _inventoryUnitService.SaveDirectReceive(list, adjustmentCode);
+                            msg = _inventoryUnitService.SaveDirectReceive(list, dtReceivedDate.GetValue(), adjustmentCode);
                         }
                     }
                     break;

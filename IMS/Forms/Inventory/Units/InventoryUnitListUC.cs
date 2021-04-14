@@ -59,7 +59,8 @@ namespace IMS.Forms.Inventory.Units
 
         private void ShowInventoryUnitList()
         {
-            LnkSummary_LinkClicked(_sidebar.lnkSummary, null);
+            //LnkSummary_LinkClicked(_sidebar.lnkSummary, null);
+            LnkManage_LinkClicked(_sidebar.lnkManage, null);
         }
 
         private void LnkMovement_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

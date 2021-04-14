@@ -52,10 +52,10 @@ namespace IMS.Forms.Inventory.Units
         private void InventoryUnitListUC_Load(object sender, EventArgs e)
         {
             // InitializeHeader();  
-            _listener.WarehouseUpdated += _listener_WarehouseUpdated;
+            //_listener.WarehouseUpdated += _listener_WarehouseUpdated;
             _listener.ProductUpdated += _listener_ProductUpdated;
             // InitializeHeader();
-            PopulateWarehouses();
+           // PopulateWarehouses();
             PopulateProducts();
 
             InitializeEvents();
@@ -65,10 +65,10 @@ namespace IMS.Forms.Inventory.Units
             InitializeListeners();
         }
 
-        private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<WarehouseModel> e)
-        {
-            PopulateWarehouses();
-        }
+        //private void _listener_WarehouseUpdated(object sender, Service.DbEventArgs.BaseEventArgs<WarehouseModel> e)
+        //{
+        //    PopulateWarehouses();
+        //}
 
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
@@ -98,7 +98,7 @@ namespace IMS.Forms.Inventory.Units
 
         private void InitializeEvents()
         {
-            cbWarehouse.SelectedValueChanged += CbWarehouse_SelectedValueChanged;
+            //cbWarehouse.SelectedValueChanged += CbWarehouse_SelectedValueChanged;
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
 
             btnMerge.Click += BtnMerge_Click;
@@ -134,15 +134,15 @@ namespace IMS.Forms.Inventory.Units
 
         #region Populate and Get Data
 
-        private void PopulateWarehouses()
-        {
-            var warehouses = _inventoryService.GetWarehouseListForCombo();
-            var allWarehouse = new IdNamePair { Id = 0, Name = " ---- All ---- " };
-            warehouses.Insert(0, allWarehouse);
-            cbWarehouse.DataSource = warehouses;
-            cbWarehouse.DisplayMember = "Name";
-            cbWarehouse.ValueMember = "Id";
-        }
+        //private void PopulateWarehouses()
+        //{
+        //    var warehouses = _inventoryService.GetWarehouseListForCombo();
+        //    var allWarehouse = new IdNamePair { Id = 0, Name = " ---- All ---- " };
+        //    warehouses.Insert(0, allWarehouse);
+        //    cbWarehouse.DataSource = warehouses;
+        //    cbWarehouse.DisplayMember = "Name";
+        //    cbWarehouse.ValueMember = "Id";
+        //}
 
         private void PopulateProducts()
         {
@@ -157,9 +157,9 @@ namespace IMS.Forms.Inventory.Units
         private void PopulateInventoryUnits()
         {
             dgvInventoryUnit.ResetCheckCount();
-            var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
+            //var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
             var productId = int.Parse(cbProduct.SelectedValue.ToString());
-            var inventoryUnits = _inventoryUnitService.GetInventoryUnitList(warehouseId, productId);
+            var inventoryUnits = _inventoryUnitService.GetInventoryUnitList(0, productId);
             dgvInventoryUnit.DataSource = inventoryUnits;
         }
 
@@ -278,39 +278,35 @@ namespace IMS.Forms.Inventory.Units
 
         }
 
-        private void chkBulkActions_CheckedChanged(object sender, EventArgs e)
-        {
-            var check = chkBulkActions.Checked;
-
-           // gbSingleRowActions.Enabled = !check;
-            //gbInformation.Enabled = !check;
-            pnlBulkActions.Enabled = check;
-
-            dgvInventoryUnit.ShowCheckColumn(check);
-
-
-           // lblInformationMessage.Visible = check;
-            //lblSingleRowActionMessage.Visible = check;
-
-            if (check)
-            {
-                chkBulkActions.Text = "Disable";
-               // lblBulkActionsMessage.Text = "Check rows to perform bulk action";
-                // PopupMessage.ShowInfoMessage("Check rows to perform bulk action");
-            }
-            else
-            {
-                chkBulkActions.Text = "Enable";
-                //lblBulkActionsMessage.Text = "Check \"Enable\" button above";
-            }
-        }
-
-
-
-
-
-
-
         #endregion
+
+        /*
+       private void chkBulkActions_CheckedChanged(object sender, EventArgs e)
+       {
+           var check = chkBulkActions.Checked;
+
+          // gbSingleRowActions.Enabled = !check;
+           //gbInformation.Enabled = !check;
+           pnlBulkActions.Enabled = check;
+
+           dgvInventoryUnit.ShowCheckColumn(check);
+
+
+          // lblInformationMessage.Visible = check;
+           //lblSingleRowActionMessage.Visible = check;
+
+           if (check)
+           {
+               chkBulkActions.Text = "Disable";
+              // lblBulkActionsMessage.Text = "Check rows to perform bulk action";
+               // PopupMessage.ShowInfoMessage("Check rows to perform bulk action");
+           }
+           else
+           {
+               chkBulkActions.Text = "Enable";
+               //lblBulkActionsMessage.Text = "Check \"Enable\" button above";
+           }
+       }
+       */
     }
 }

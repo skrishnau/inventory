@@ -10,6 +10,7 @@ namespace Service.Core.Reports
     public interface IReportService
     {
         LedgerMasterModel GetLedger(LedgerRequestModel model);
+        ProfitAndLossMasterModel GetProfitAndLoss(ProfitAndLossRequestModel model);
 
     }
 }

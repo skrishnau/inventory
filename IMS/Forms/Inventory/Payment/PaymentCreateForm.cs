@@ -179,6 +179,7 @@ namespace IMS.Forms.Inventory.Payment
         private void CbPaymentType_SelectedValueChanged(object sender, EventArgs e)
         {
             btnPrint.Visible = (cbPaymentType.SelectedValue as string) == PaymentTypeEnum.Credit.ToString();
+            txtBy.Text = "";
         }
 
 
@@ -287,6 +288,15 @@ namespace IMS.Forms.Inventory.Payment
             var isValid = true;
             isValid = _requiredFieldValidator.IsValid();
             //isValid = isValid && _greaterThanZeroFieldValidator.IsValid();
+            if (string.IsNullOrEmpty(txtBy.Text))
+            {
+                errorProvider1.SetError(txtBy, "Required");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtBy, string.Empty);
+            }
             if (txtAmount.Value <= 0)
             {
                 errorProvider1.SetError(txtAmount, "Should be greater than zero");

@@ -160,6 +160,12 @@
     <Compile Include="Forms\Inventory\Accounts\AccountsUC.Designer.cs">
       <DependentUpon>AccountsUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\ProfitAndLossUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\ProfitAndLossUC.Designer.cs">
+      <DependentUpon>ProfitAndLossUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Dashboard\DashboardUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -692,6 +698,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Accounts\AccountsUC.resx">
       <DependentUpon>AccountsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\ProfitAndLossUC.resx">
+      <DependentUpon>ProfitAndLossUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Dashboard\DashboardUC.resx">
       <DependentUpon>DashboardUC.cs</DependentUpon>

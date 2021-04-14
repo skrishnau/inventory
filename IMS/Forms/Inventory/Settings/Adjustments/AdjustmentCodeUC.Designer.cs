@@ -78,6 +78,7 @@
             // 
             this.colAffectsDemand.HeaderText = "Affects Demand";
             this.colAffectsDemand.Name = "colAffectsDemand";
+            this.colAffectsDemand.Visible = false;
             // 
             // colUse
             // 

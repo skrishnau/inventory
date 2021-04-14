@@ -45,6 +45,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     //var first = invUnitGroup.First();
                     var last = warehouseWiseGroup.Last();
                     var unitQuantity = warehouseWiseGroup.Sum(x => x.UnitQuantity);
+                    var rate = warehouseWiseGroup.Average(x => x.Rate);
                     var packageQuantity = warehouseWiseGroup.Sum(x => x.PackageQuantity);
                     var model = new InventoryUnitModel()
                     {
@@ -65,6 +66,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         PackageId = last.PackageId,
                         Uom = last.Uom,
                         UomId = last.UomId,
+                        Rate = rate,
                     };
                     displayList.Add(model);
                 }

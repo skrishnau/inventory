@@ -11,5 +11,8 @@ namespace ViewModel.Utility
         public const bool IS_TRIAL = false;
         public const bool HAS_STOCK_MANAGEMENT = true;
 
+        // later convert it to appsettings and give on/off feature to user
+        public const bool LEDGER_DISPLAY_TRANSACTION_ITEMS_ALSO = false;
+
     }
 }

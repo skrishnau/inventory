@@ -264,6 +264,7 @@
             // tbInStockQuantity
             // 
             this.tbInStockQuantity.DecimalPlaces = 2;
+            this.tbInStockQuantity.Enabled = false;
             this.tbInStockQuantity.Location = new System.Drawing.Point(105, 111);
             this.tbInStockQuantity.Name = "tbInStockQuantity";
             this.tbInStockQuantity.Size = new System.Drawing.Size(149, 20);

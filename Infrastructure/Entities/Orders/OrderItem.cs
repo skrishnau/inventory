@@ -22,6 +22,9 @@ namespace Infrastructure.Entities.Orders
         public decimal PackageQuantity { get; set; }
         // implement discount in rate in version 2
         public decimal Rate { get; set; }
+        // in case of sale we need costprice of the item (i.e. inventory item)
+        public decimal? CostPriceRate { get; set; }
+        public decimal? CostPriceTotal { get; set; }
         // totalAmount = quantity * rate 
         public decimal Total { get; set; }
         public decimal NetWeight { get; set; }

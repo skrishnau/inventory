@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Common.GridView.InventoryUnits
 {
@@ -448,7 +449,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colExpirationDate.Visible = true;
             colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
-
+            colRate.Visible = true;
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
 
@@ -516,6 +517,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colDelete.Visible = _isEditable;
             //colPackageId.Visible = true;
             colPackage.Visible = true;
+            colInStockQuantity.Visible = Constants.HAS_STOCK_MANAGEMENT;
             HideUnusedDefaults();
         }
 
@@ -543,7 +545,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colIsHold.Visible = false;
             colRemark.Visible = true;
             colInStockQuantity.Visible = true;
-
+            colRate.Visible = true;
             HideUnusedDefaults();
         }
         //

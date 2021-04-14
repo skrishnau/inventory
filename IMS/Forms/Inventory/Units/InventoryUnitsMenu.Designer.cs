@@ -32,8 +32,6 @@
             this.lnkSummary = new System.Windows.Forms.LinkLabel();
             this.lnkManage = new System.Windows.Forms.LinkLabel();
             this.lnkMovement = new System.Windows.Forms.LinkLabel();
-            this.lnkInventoryFlow = new System.Windows.Forms.LinkLabel();
-            this.lnkTraffic = new System.Windows.Forms.LinkLabel();
             this.pnlLinkList = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlBody.SuspendLayout();
             this.SuspendLayout();
@@ -43,8 +41,6 @@
             this.pnlBody.Controls.Add(this.lnkSummary);
             this.pnlBody.Controls.Add(this.lnkManage);
             this.pnlBody.Controls.Add(this.lnkMovement);
-            this.pnlBody.Controls.Add(this.lnkInventoryFlow);
-            this.pnlBody.Controls.Add(this.lnkTraffic);
             this.pnlBody.Controls.Add(this.pnlLinkList);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(8, 0);
@@ -69,6 +65,7 @@
             this.lnkSummary.TabIndex = 2;
             this.lnkSummary.TabStop = true;
             this.lnkSummary.Text = "     • Summary";
+            this.lnkSummary.Visible = false;
             this.lnkSummary.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // lnkManage
@@ -107,48 +104,12 @@
             this.lnkMovement.Text = "     • Movement";
             this.lnkMovement.VisitedLinkColor = System.Drawing.Color.Black;
             // 
-            // lnkInventoryFlow
-            // 
-            this.lnkInventoryFlow.AutoSize = true;
-            this.lnkInventoryFlow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkInventoryFlow.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_16px;
-            this.lnkInventoryFlow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lnkInventoryFlow.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkInventoryFlow.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkInventoryFlow.Location = new System.Drawing.Point(413, 5);
-            this.lnkInventoryFlow.Margin = new System.Windows.Forms.Padding(5);
-            this.lnkInventoryFlow.Name = "lnkInventoryFlow";
-            this.lnkInventoryFlow.Padding = new System.Windows.Forms.Padding(5);
-            this.lnkInventoryFlow.Size = new System.Drawing.Size(137, 27);
-            this.lnkInventoryFlow.TabIndex = 4;
-            this.lnkInventoryFlow.TabStop = true;
-            this.lnkInventoryFlow.Text = "     • Inventory Flow";
-            this.lnkInventoryFlow.VisitedLinkColor = System.Drawing.Color.Black;
-            // 
-            // lnkTraffic
-            // 
-            this.lnkTraffic.AutoSize = true;
-            this.lnkTraffic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkTraffic.Image = global::IMS.Properties.Resources.icons8_Traffic_Light_16px;
-            this.lnkTraffic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lnkTraffic.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkTraffic.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkTraffic.Location = new System.Drawing.Point(560, 5);
-            this.lnkTraffic.Margin = new System.Windows.Forms.Padding(5);
-            this.lnkTraffic.Name = "lnkTraffic";
-            this.lnkTraffic.Padding = new System.Windows.Forms.Padding(5);
-            this.lnkTraffic.Size = new System.Drawing.Size(87, 27);
-            this.lnkTraffic.TabIndex = 5;
-            this.lnkTraffic.TabStop = true;
-            this.lnkTraffic.Text = "     • Traffic";
-            this.lnkTraffic.VisitedLinkColor = System.Drawing.Color.Black;
-            // 
             // pnlLinkList
             // 
             this.pnlLinkList.AutoSize = true;
             this.pnlLinkList.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlLinkList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.pnlLinkList.Location = new System.Drawing.Point(652, 0);
+            this.pnlLinkList.Location = new System.Drawing.Point(408, 0);
             this.pnlLinkList.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLinkList.Name = "pnlLinkList";
             this.pnlLinkList.Size = new System.Drawing.Size(0, 0);
@@ -176,8 +137,6 @@
         protected internal System.Windows.Forms.LinkLabel lnkSummary;
         protected internal System.Windows.Forms.FlowLayoutPanel pnlLinkList;
         protected internal System.Windows.Forms.LinkLabel lnkManage;
-        protected internal System.Windows.Forms.LinkLabel lnkInventoryFlow;
-        protected internal System.Windows.Forms.LinkLabel lnkTraffic;
         protected internal System.Windows.Forms.LinkLabel lnkMovement;
     }
 }

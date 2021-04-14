@@ -31,6 +31,10 @@ namespace Infrastructure.Entities
         /// </summary>
         public decimal Balance { get; set; }
         /// <summary>
+        /// In case of Sale, it's the total cost price of the items
+        /// </summary>
+        public decimal? CostPriceTotal { get; set; }
+        /// <summary>
         /// -1: Dr , 1:Cr for Balance
         /// </summary>
         public int DrCr { get; set; } // 

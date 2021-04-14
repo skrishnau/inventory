@@ -154,7 +154,7 @@ namespace DTO.Core.Inventory
                 UomId = model.UomId,
                 //Warehouse = model.Warehouse,
                 WarehouseId = model.WarehouseId,
-
+                
             };
         }
         public static List<OrderItemModel> MapToOrderItemModel(List<InventoryUnitModel> model, int orderId)

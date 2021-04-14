@@ -21,6 +21,7 @@ using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
 using ViewModel.Core.Users;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -470,7 +471,7 @@ namespace IMS.Forms.Inventory.Transaction
             }
 
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId, dgvItems.colUomId };
-            var items = dgvItems.GetItems(ignoreList, false, !checkout);
+            var items = dgvItems.GetItems(ignoreList, Constants.HAS_STOCK_MANAGEMENT, !checkout);
 
             if (items != null)
             {

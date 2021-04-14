@@ -11,6 +11,8 @@ namespace Service.Core.Inventory.Units
 {
     public interface IInventoryUnitService
     {
+        Warehouse FindWarehouseOrReturnMainWarehouse(DatabaseContext _context, int? warehouseId);
+
         #region Inventory
 
         List<InventoryUnitModel> GetInventoryUnitList(int warehouseId, int productId);
@@ -36,8 +38,9 @@ namespace Service.Core.Inventory.Units
 
         #region Adjustments
 
-        string SaveDirectReceive(List<InventoryUnitModel> list, string adjustmentCode);
-        string SaveDirectReceiveWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode);
+        string SaveDirectReceive(List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode);
+        string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode);
+        InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg);
         //
         // Direct Issue of whole Inventory-Unit
         //
@@ -46,8 +49,8 @@ namespace Service.Core.Inventory.Units
         // Direct Issue of any product
         //
         string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode);
-        string SaveDirectIssueAnyWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode);
-
+        string SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode);
+        List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg);
         #endregion
 
     }

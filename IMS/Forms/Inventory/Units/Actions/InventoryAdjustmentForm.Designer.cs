@@ -32,7 +32,6 @@
             this.pnlAdjustmentCode = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cbAdjustmentCode = new System.Windows.Forms.ComboBox();
-            this.dtReceiveDate = new System.Windows.Forms.DateTimePicker();
             this.pnlWarehouse = new System.Windows.Forms.TableLayoutPanel();
             this.cbWarehouse = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,6 +40,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvInventoryUnit = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
+            this.dtReceivedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlAdjustmentCode.SuspendLayout();
             this.pnlWarehouse.SuspendLayout();
@@ -58,9 +58,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
             this.tableLayoutPanel1.Controls.Add(this.pnlAdjustmentCode, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dtReceiveDate, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlWarehouse, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dtReceivedDate, 5, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -99,15 +99,6 @@
             this.cbAdjustmentCode.Name = "cbAdjustmentCode";
             this.cbAdjustmentCode.Size = new System.Drawing.Size(162, 21);
             this.cbAdjustmentCode.TabIndex = 8;
-            // 
-            // dtReceiveDate
-            // 
-            this.dtReceiveDate.Enabled = false;
-            this.dtReceiveDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtReceiveDate.Location = new System.Drawing.Point(824, 3);
-            this.dtReceiveDate.Name = "dtReceiveDate";
-            this.dtReceiveDate.Size = new System.Drawing.Size(129, 20);
-            this.dtReceiveDate.TabIndex = 5;
             // 
             // pnlWarehouse
             // 
@@ -191,6 +182,13 @@
             this.dgvInventoryUnit.Size = new System.Drawing.Size(973, 369);
             this.dgvInventoryUnit.TabIndex = 4;
             // 
+            // dtReceivedDate
+            // 
+            this.dtReceivedDate.Location = new System.Drawing.Point(824, 3);
+            this.dtReceivedDate.Name = "dtReceivedDate";
+            this.dtReceivedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtReceivedDate.TabIndex = 6;
+            // 
             // InventoryAdjustmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,7 +222,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dtReceiveDate;
         private System.Windows.Forms.ComboBox cbAdjustmentCode;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnCancel;
@@ -234,5 +231,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel pnlWarehouse;
         private System.Windows.Forms.TableLayoutPanel pnlAdjustmentCode;
+        private Common.Date.NepaliDateTextBox dtReceivedDate;
     }
 }
