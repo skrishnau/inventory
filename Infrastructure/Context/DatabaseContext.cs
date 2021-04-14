@@ -81,6 +81,7 @@ namespace Infrastructure.Context
         public virtual DbSet<AppSetting> AppSetting { get; set; }
 
         public virtual DbSet<Movement> Movement { get; set; }
+        public virtual DbSet<PriceHistory> PriceHistory { get; set; }
 
 
 

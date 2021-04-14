@@ -66,7 +66,9 @@ namespace Service.Core
                     .Include(x => x.ProductAttributes)
                     .FirstOrDefault(x => x.Id == model.Id);
 
-                ProductEventArgs eventArgs = ProductEventArgs.Instance; ;
+                ProductEventArgs eventArgs = ProductEventArgs.Instance;
+                var isSellingPriceSame = (entity?.RetailPrice ?? 0) == model.RetailPrice;
+                var isCostPriceSame = (entity?.SupplyPrice ?? 0) == model.SupplyPrice;
                 entity = ProductMapper.MapToEntity(model, entity);
 
                 if (entity.Id == 0)
@@ -89,7 +91,28 @@ namespace Service.Core
                 //  AssignBrandForSave(entity, model, now);
                 AssignProductAttributesForSave(entity, model, now);
                 //  AssignVariantsForSave(entity, model, now);
-
+                if (!isSellingPriceSame)
+                {
+                    var priceHistory = new PriceHistory
+                    {
+                        Date = DateTime.Now,
+                        Price = entity.RetailPrice,
+                        PriceType = PriceTypeEnum.SellingPrice.ToString(),
+                        PackageId = entity.PackageId == 0 ? null : entity.PackageId,
+                    };
+                    entity.PriceHistory.Add(priceHistory);
+                }
+                if (!isCostPriceSame)
+                {
+                    var priceHistory = new PriceHistory
+                    {
+                        Date = DateTime.Now,
+                        Price = entity.SupplyPrice,
+                        PriceType = PriceTypeEnum.CostPrice.ToString(),
+                        PackageId = entity.PackageId == 0 ? null : entity.PackageId,
+                    };
+                    entity.PriceHistory.Add(priceHistory);
+                }
                 _context.SaveChanges();
 
                 eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
@@ -379,6 +402,16 @@ namespace Service.Core
                 eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
                 _listener.TriggerProductUpdateEvent(null, eventArgs);
                 return true;
+            }
+        }
+
+        public List<PriceHistoryModel> GetPriceHistory(int productId)
+        {
+            using(var _context = new DatabaseContext())
+            {
+                var thiryDays = DateTime.Now.AddDays(-31);
+                var priceType = PriceTypeEnum.SellingPrice.ToString();
+                return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x=>x.Date).MapToPriceHistoryModel();
             }
         }
     }

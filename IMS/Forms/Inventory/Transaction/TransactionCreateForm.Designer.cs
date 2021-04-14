@@ -95,7 +95,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 396);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(518, 75);
+            this.panel1.Size = new System.Drawing.Size(590, 75);
             this.panel1.TabIndex = 6;
             // 
             // tableLayoutPanel2
@@ -110,7 +110,7 @@
             this.tableLayoutPanel2.Controls.Add(this.txtSum, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(262, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(334, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -309,7 +309,7 @@
             // 
             this.lblExpectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblExpectedDate.AutoSize = true;
-            this.lblExpectedDate.Location = new System.Drawing.Point(333, 6);
+            this.lblExpectedDate.Location = new System.Drawing.Point(405, 6);
             this.lblExpectedDate.Name = "lblExpectedDate";
             this.lblExpectedDate.Size = new System.Drawing.Size(71, 13);
             this.lblExpectedDate.TabIndex = 3;
@@ -335,13 +335,13 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(518, 27);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(590, 27);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cbClient
             // 
             this.cbClient.FormattingEnabled = true;
-            this.cbClient.Location = new System.Drawing.Point(68, 2);
+            this.cbClient.Location = new System.Drawing.Point(77, 2);
             this.cbClient.Margin = new System.Windows.Forms.Padding(2);
             this.cbClient.Name = "cbClient";
             this.cbClient.Size = new System.Drawing.Size(138, 21);
@@ -350,7 +350,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(211, 0);
+            this.label5.Location = new System.Drawing.Point(240, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 4;
@@ -358,14 +358,14 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(267, 3);
+            this.txtAddress.Location = new System.Drawing.Point(303, 3);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(107, 20);
             this.txtAddress.TabIndex = 3;
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(433, 3);
+            this.txtPhone.Location = new System.Drawing.Point(491, 3);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(82, 20);
             this.txtPhone.TabIndex = 4;
@@ -373,7 +373,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(380, 0);
+            this.label4.Location = new System.Drawing.Point(431, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 2;
@@ -388,12 +388,13 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 4);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(518, 26);
+            this.panel9.Size = new System.Drawing.Size(590, 26);
             this.panel9.TabIndex = 0;
             // 
             // dtExpectedDate
             // 
-            this.dtExpectedDate.Location = new System.Drawing.Point(410, 3);
+            this.dtExpectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtExpectedDate.Location = new System.Drawing.Point(482, 3);
             this.dtExpectedDate.Name = "dtExpectedDate";
             this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
             this.dtExpectedDate.TabIndex = 6;
@@ -495,7 +496,7 @@
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(518, 339);
+            this.dgvItems.Size = new System.Drawing.Size(590, 339);
             this.dgvItems.TabIndex = 5;
             // 
             // saveFooterUC1
@@ -506,14 +507,14 @@
             this.saveFooterUC1.Location = new System.Drawing.Point(0, 471);
             this.saveFooterUC1.Name = "saveFooterUC1";
             this.saveFooterUC1.Padding = new System.Windows.Forms.Padding(0, 4, 10, 4);
-            this.saveFooterUC1.Size = new System.Drawing.Size(518, 35);
+            this.saveFooterUC1.Size = new System.Drawing.Size(590, 35);
             this.saveFooterUC1.TabIndex = 50;
             // 
             // TransactionCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 506);
+            this.ClientSize = new System.Drawing.Size(590, 506);
             this.Controls.Add(this.pnlParticulars);
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.tableLayoutPanel1);

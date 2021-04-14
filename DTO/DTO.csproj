@@ -54,6 +54,7 @@
     <Compile Include="Core\Business\BranchMapper.cs" />
     <Compile Include="Core\Business\CounterMapper.cs" />
     <Compile Include="Core\Inventory\PaymentMapper.cs" />
+    <Compile Include="Core\Inventory\PriceHistoryMapper.cs" />
     <Compile Include="Core\Inventory\WarehouseMapper.cs" />
     <Compile Include="Core\Inventory\BrandMapper.cs" />
     <Compile Include="Core\Inventory\CategoryMapper.cs" />

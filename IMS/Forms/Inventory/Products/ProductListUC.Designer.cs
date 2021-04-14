@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductListUC));
             this.dgvProductList = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +55,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,7 +72,11 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.pnlSideGridView = new System.Windows.Forms.Panel();
+            this.dgvPriceHistory = new System.Windows.Forms.DataGridView();
+            this.colSellingPriceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblProductName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -79,6 +84,8 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            this.pnlSideGridView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPriceHistory)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvProductList
@@ -86,14 +93,14 @@
             this.dgvProductList.AllowUserToAddRows = false;
             this.dgvProductList.AllowUserToDeleteRows = false;
             this.dgvProductList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProductList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
@@ -108,20 +115,20 @@
             this.colPackage,
             this.colReorderPoint,
             this.colUse});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductList.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductList.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProductList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductList.Location = new System.Drawing.Point(0, 56);
             this.dgvProductList.Name = "dgvProductList";
             this.dgvProductList.ReadOnly = true;
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductList.Size = new System.Drawing.Size(888, 428);
+            this.dgvProductList.Size = new System.Drawing.Size(842, 403);
             this.dgvProductList.TabIndex = 7;
             // 
             // colId
@@ -145,8 +152,8 @@
             // colName
             // 
             this.colName.DataPropertyName = "Name";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colName.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
             this.colName.HeaderText = "Description";
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
@@ -239,7 +246,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(888, 53);
+            this.panel1.Size = new System.Drawing.Size(1042, 53);
             this.panel1.TabIndex = 10;
             // 
             // panel3
@@ -294,7 +301,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnEdit);
             this.flowLayoutPanel1.Controls.Add(this.btnDelete);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(710, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(864, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(174, 45);
@@ -327,13 +334,27 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Visible = false;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
+            this.btnDelete.Location = new System.Drawing.Point(26, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(49, 40);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Visible = false;
+            // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(0, 53);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(888, 3);
+            this.splitter1.Size = new System.Drawing.Size(1042, 3);
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
             // 
@@ -346,7 +367,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 484);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(888, 27);
+            this.panel2.Size = new System.Drawing.Size(1042, 27);
             this.panel2.TabIndex = 11;
             this.panel2.Visible = false;
             // 
@@ -413,7 +434,7 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(888, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(1042, 25);
             this.bindingNavigator1.TabIndex = 12;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -484,31 +505,68 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnDelete
+            // pnlSideGridView
             // 
-            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnDelete.Location = new System.Drawing.Point(26, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(49, 40);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Visible = false;
+            this.pnlSideGridView.Controls.Add(this.dgvPriceHistory);
+            this.pnlSideGridView.Controls.Add(this.lblProductName);
+            this.pnlSideGridView.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlSideGridView.Location = new System.Drawing.Point(842, 56);
+            this.pnlSideGridView.Name = "pnlSideGridView";
+            this.pnlSideGridView.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.pnlSideGridView.Size = new System.Drawing.Size(200, 403);
+            this.pnlSideGridView.TabIndex = 13;
+            // 
+            // dgvPriceHistory
+            // 
+            this.dgvPriceHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPriceHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSellingPriceDate,
+            this.colSellingPrice});
+            this.dgvPriceHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPriceHistory.Location = new System.Drawing.Point(5, 27);
+            this.dgvPriceHistory.Name = "dgvPriceHistory";
+            this.dgvPriceHistory.RowHeadersVisible = false;
+            this.dgvPriceHistory.Size = new System.Drawing.Size(195, 376);
+            this.dgvPriceHistory.TabIndex = 0;
+            // 
+            // colSellingPriceDate
+            // 
+            this.colSellingPriceDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colSellingPriceDate.DataPropertyName = "DateString";
+            this.colSellingPriceDate.HeaderText = "Date";
+            this.colSellingPriceDate.Name = "colSellingPriceDate";
+            this.colSellingPriceDate.Width = 55;
+            // 
+            // colSellingPrice
+            // 
+            this.colSellingPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colSellingPrice.DataPropertyName = "Price";
+            this.colSellingPrice.HeaderText = "Selling Price";
+            this.colSellingPrice.Name = "colSellingPrice";
+            // 
+            // lblProductName
+            // 
+            this.lblProductName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductName.Location = new System.Drawing.Point(5, 0);
+            this.lblProductName.Name = "lblProductName";
+            this.lblProductName.Size = new System.Drawing.Size(195, 27);
+            this.lblProductName.TabIndex = 1;
+            this.lblProductName.Text = "-";
+            this.lblProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ProductListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.dgvProductList);
+            this.Controls.Add(this.pnlSideGridView);
+            this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "ProductListUC";
-            this.Size = new System.Drawing.Size(888, 511);
+            this.Size = new System.Drawing.Size(1042, 511);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -519,6 +577,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            this.pnlSideGridView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPriceHistory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -564,5 +624,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colReorderPoint;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
         protected internal System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Panel pnlSideGridView;
+        private System.Windows.Forms.DataGridView dgvPriceHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellingPriceDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSellingPrice;
+        private System.Windows.Forms.Label lblProductName;
     }
 }

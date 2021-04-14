@@ -87,12 +87,13 @@ namespace Infrastructure.Entities.Inventory
       //  public virtual ICollection<Variant> Variants { get; set; }
 
             public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
-
+        public virtual ICollection<PriceHistory> PriceHistory { get; set; }
         public Product()
         {
             ProductAttributes = new List<ProductAttribute>();
-           // Brands = new List<Brand>();
-           // Variants = new List<Variant>();
+            // Brands = new List<Brand>();
+            // Variants = new List<Variant>();
+            PriceHistory = new List<PriceHistory>();
         }
 
 

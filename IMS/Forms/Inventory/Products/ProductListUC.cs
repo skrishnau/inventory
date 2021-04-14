@@ -53,6 +53,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void ProductListUC_Load(object sender, EventArgs e)
         {
+            dgvPriceHistory.AutoGenerateColumns = false;
             // this.heading.Text = "Product List";
             this.Dock = DockStyle.Fill;
             InitializeGridView();
@@ -239,9 +240,17 @@ namespace IMS.Forms.Inventory.Products
                 // btnDelete.Visible = true;
                 var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
                 _selectedProduct = data;
+                lblProductName.Text = data.Name;
                 //var model = _inventoryService.GetProductForEdit(data.Id);
+                PopulatePriceHistory(data);
             }
 
+        }
+
+        private void PopulatePriceHistory(ProductModel data)
+        {
+            List<PriceHistoryModel> history = _productService.GetPriceHistory(data.Id);
+            dgvPriceHistory.DataSource = history;
         }
 
         private void BtnNew_Click(object sender, EventArgs e)

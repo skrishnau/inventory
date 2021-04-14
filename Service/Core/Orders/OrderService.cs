@@ -578,11 +578,39 @@ namespace Service.Core.Orders
             {
                 if (order.OrderType == OrderTypeEnum.Sale.ToString())
                 {
+                    if(product.RetailPrice != entity.Rate)
+                    {
+                        var priceHistory = new PriceHistory
+                        {
+                            Date = DateTime.Now,
+                            Price = entity.Rate,
+                            PriceType = PriceTypeEnum.SellingPrice.ToString(),
+                        };
+                        if(entity.Package!=null)
+                            priceHistory.Package = entity.Package;
+                        else if(entity.PackageId > 0 )
+                            priceHistory.PackageId = entity.PackageId;
+                        product.PriceHistory.Add(priceHistory);
+                    }
                     product.RetailPrice = entity.Rate;
                     product.InStockQuantity -= entity.UnitQuantity;
                 }
                 else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                 {
+                    if (product.SupplyPrice != entity.Rate)
+                    {
+                        var priceHistory = new PriceHistory
+                        {
+                            Date = DateTime.Now,
+                            Price = entity.Rate,
+                            PriceType = PriceTypeEnum.CostPrice.ToString(),
+                        };
+                        if (entity.Package != null)
+                            priceHistory.Package = entity.Package;
+                        else if (entity.PackageId > 0)
+                            priceHistory.PackageId = entity.PackageId;
+                        product.PriceHistory.Add(priceHistory);
+                    }
                     product.SupplyPrice = entity.Rate;
                     product.InStockQuantity += entity.UnitQuantity;
                 }

@@ -69,6 +69,7 @@
     <Compile Include="Core\Inventory\InventoryUnitModel.cs" />
     <Compile Include="Core\Inventory\MovementModel.cs" />
     <Compile Include="Core\Inventory\PackageModel.cs" />
+    <Compile Include="Core\Inventory\PriceHistoryModel.cs" />
     <Compile Include="Core\Inventory\UomModel.cs" />
     <Compile Include="Core\Inventory\WarehouseProductModel.cs" />
     <Compile Include="Core\Orders\DueAmountModel.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Core\Settings\PasswordModel.cs" />
     <Compile Include="Core\TransactionModel.cs" />
     <Compile Include="Enums\AdjustmentEnum.cs" />
+    <Compile Include="Enums\PriceTypeEnum.cs" />
     <Compile Include="Enums\TransactionTypeEnum.cs" />
     <Compile Include="Enums\UserTypeEnum.cs" />
     <Compile Include="Enums\InventoryActionEnum.cs" />

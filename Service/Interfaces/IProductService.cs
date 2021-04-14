@@ -32,5 +32,6 @@ namespace Service.Interfaces
         void AddUpdateCategory(CategoryModel category);
         void DeleteCategory(CategoryModel categoryModel);
         bool DeleteProduct(int id);
+        List<PriceHistoryModel> GetPriceHistory(int id);
     }
 }
