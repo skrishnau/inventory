@@ -15,9 +15,11 @@ namespace Service.Core.Inventory.Units
 
         #region Inventory
 
-        List<InventoryUnitModel> GetInventoryUnitList(int warehouseId, int productId);
+        int GetInventoryUnitCount(int warehouseId, int productId);
+        InventoryUnitListModel GetInventoryUnitList(int warehouseId, int productId, int pageSize, int offset);
 
-        List<MovementModel> GetMovementList(int productId);
+        int GetMovementListCount(int productId);
+        MovementListModel GetMovementList(int productId, int pageSize, int offset);
 
         string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
 

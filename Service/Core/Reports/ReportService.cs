@@ -68,18 +68,19 @@ namespace Service.Core.Reports
                             }
                             else
                             {
+                                actualResult.Add(TransactionToLedgerModel(txn));
                                 // order case
                                 foreach (var x in txn.Order.OrderItems)
                                 {
                                     var led = new LedgerModel
                                     {
-                                        Balance = isIncoming ? $"{x.Total}" : $"({x.Total})",//.ToString("#.00"),
-                                        Credit = isIncoming ? $"{x.Total}" : "",//.ToString("#.00"),
-                                        Debit = isIncoming ? "" : $"{x.Total}",//.ToString("#.00"),
-                                        DrCr = isIncoming ? 1 : -1,
-                                        DrCrString = isIncoming ? "Cr" : "Dr",
-                                        Date = DateConverter.Instance.ToBS(order.CompletedDate.Value).ToString(),//.ToString("yyyy/MM/dd"),
-                                        Particulars = $"{x.Product.Name} (Rate: {x.Rate}, Qty.: {x.UnitQuantity})",
+                                        Balance = "",//isIncoming ? $"{x.Total}" : $"({x.Total})",//.ToString("#.00"),
+                                        Credit = "",//isIncoming ? $"{x.Total}" : "",//.ToString("#.00"),
+                                        Debit = "",//isIncoming ? "" : $"{x.Total}",//.ToString("#.00"),
+                                        DrCr = 0,//isIncoming ? 1 : -1,
+                                        DrCrString = "",//isIncoming ? "Cr" : "Dr",
+                                        Date = "",//DateConverter.Instance.ToBS(order.CompletedDate.Value).ToString(),//.ToString("yyyy/MM/dd"),
+                                        Particulars = $"    {x.Product.Name} ({x.UnitQuantity} {x.Package.Name} @ {x.Rate}) Tot.: {x.Total}",
                                     };
                                     actualResult.Add(led);
                                 }

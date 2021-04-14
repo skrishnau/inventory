@@ -24,12 +24,39 @@ namespace Service.Core.Inventory.Units
             _listener = listener;
         }
 
-        public List<InventoryUnitModel> GetInventoryUnitList(int warehouseId, int productId)
+
+        public int GetInventoryUnitCount(int warehouseId, int productId)
         {
             using (var _context = new DatabaseContext())
             {
+                var query = GetInventoryUnitQueryable(_context, warehouseId, productId);
+                return query.Count();
+            }
+        }
 
-                var query = _context.InventoryUnit
+        public InventoryUnitListModel GetInventoryUnitList(int warehouseId, int productId, int pageSize, int offset)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = GetInventoryUnitQueryable(_context, warehouseId, productId);
+                var totalCount = query.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    query = query.Skip(offset).Take(pageSize);
+                }
+                var list = InventoryUnitMapper.MapToModel(query);
+                return new InventoryUnitListModel
+                {
+                    DataList = list,
+                    TotalCount = totalCount,
+                    Offset = offset,
+                    PageSize = pageSize,
+                };
+            }
+        }
+        public IQueryable<InventoryUnit> GetInventoryUnitQueryable(DatabaseContext _context, int warehouseId, int productId)
+        {
+            return _context.InventoryUnit
                     .Include(x => x.Product)
                     .Include(x => x.Package)
                     .Include(x => x.Supplier)
@@ -41,8 +68,6 @@ namespace Service.Core.Inventory.Units
                     //.ThenBy(x => x.Warehouse.Name)
                     //.ThenBy(x => x.Product.Name)
                     .AsQueryable();
-                return InventoryUnitMapper.MapToModel(query);
-            }
         }
 
         public void MergeInventoryUnits(List<InventoryUnitModel> list)
@@ -252,16 +277,42 @@ namespace Service.Core.Inventory.Units
             return Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
         }
 
-        public List<MovementModel> GetMovementList(int productId)
+        public int GetMovementListCount(int productId)
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.Movement
+                var query = GetMovementListQuery(_context, productId);
+                return query.Count();
+            }
+        }
+
+        public MovementListModel GetMovementList(int productId, int pageSize, int offset)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = GetMovementListQuery(_context, productId);
+                var totalCount = query.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    query = query.Skip(offset).Take(pageSize);
+                }
+                var list = MovementMapper.MapToModel(query);
+                return new MovementListModel
+                {
+                    DataList = list,
+                    TotalCount = totalCount,
+                    Offset = offset,
+                    PageSize = pageSize,
+                };
+            }
+        }
+
+        public IQueryable<Movement> GetMovementListQuery(DatabaseContext _context, int productId)
+        {
+            return _context.Movement
                     .Where(x => productId == 0 || x.ProductId == productId)
                     .OrderByDescending(x => x.Date)
                     .AsQueryable();
-                return MovementMapper.MapToModel(query);
-            }
         }
 
 
@@ -585,6 +636,7 @@ namespace Service.Core.Inventory.Units
                 return msg;
             }
         }
+
 
         #endregion
 

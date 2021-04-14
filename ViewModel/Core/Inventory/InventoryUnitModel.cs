@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Core.Inventory
 {
+    public class InventoryUnitListModel
+    {
+        public List<InventoryUnitModel> DataList { get; set; }
+
+        public int TotalCount { get; set; }
+        public int PageSize { get; set; }
+        public int Offset { get; set; }
+    }
+
     public class InventoryUnitModel
     {
         public int Id { get; set; }

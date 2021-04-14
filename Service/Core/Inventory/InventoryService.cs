@@ -344,7 +344,7 @@ namespace Service.Core.Inventory
                         entity.BaseUomId = baseUomEntity.Id;
                         entity.BaseUom = null;
                     }
-                    else if(model.BaseUom != model.Name)
+                    else if (model.BaseUom != model.Name)
                     {
                         // if the base Uom is not same as the Name then create the base
                         var baseUom = new Uom
@@ -452,6 +452,97 @@ namespace Service.Core.Inventory
             }
         }
 
+        #region Adjustment Code
+
+        public List<IdNamePair> GetAdjustmentCodeListForCombo()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                if (_context.AdjustmentCode.Count() == 0)
+                    SeedAdjustmentCodes(_context);
+                return _context.AdjustmentCode
+                                .Where(x => x.Use)
+                                .Select(x => new IdNamePair()
+                                {
+                                    Id = x.Id,
+                                    Name = x.Name
+                                })
+                                .ToList();
+            }
+
+        }
+
+        public List<IdNamePair> GetPositiveAdjustmentCodeListForCombo()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var positive = AdjustmentType.Positive.ToString();
+                if (_context.AdjustmentCode.Count() == 0)
+                    SeedAdjustmentCodes(_context);
+                return _context.AdjustmentCode
+                   .Where(x => x.Use && x.Type == positive)
+                   .Select(x => new IdNamePair()
+                   {
+                       Id = x.Id,
+                       Name = x.Name
+                   })
+                   .ToList();
+            }
+
+        }
+
+        public List<IdNamePair> GetNegativeAdjustmentCodeListForCombo()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var negative = AdjustmentType.Negative.ToString();
+                if (_context.AdjustmentCode.Count() == 0)
+                    SeedAdjustmentCodes(_context);
+                return _context.AdjustmentCode
+                   .Where(x => x.Use && x.Type == negative)
+                   .Select(x => new IdNamePair()
+                   {
+                       Id = x.Id,
+                       Name = x.Name
+                   })
+                   .ToList();
+            }
+
+        }
+
+        public string SaveAdjustmentCode(AdjustmentCodeModel model)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var msg = "";
+                var args = BaseEventArgs<AdjustmentCodeModel>.Instance;
+                var duplicate = _context.AdjustmentCode.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
+                if (duplicate != null)
+                {
+                    return "Same 'Adjustment Code' already exists";
+                }
+
+                // get the package
+                var entity = _context.AdjustmentCode.FirstOrDefault(x => x.Id == model.Id);
+                entity = model.MapToEntity(entity);//AdjustmentCodeMapper.MapToEntity
+                if (model.Id == 0)
+                {
+                    // add
+                    _context.AdjustmentCode.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    args.Mode = Utility.UpdateMode.EDIT;
+                }
+                _context.SaveChanges();
+                args.Model = entity.MapToModel();//AdjustmentCodeMapper.MapToModel(entity)
+                _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
+                return msg;
+            }
+
+        }
+
         public List<AdjustmentCodeModel> GetAdjustmentCodeList()
         {
             using (var _context = new DatabaseContext())
@@ -465,6 +556,11 @@ namespace Service.Core.Inventory
                 return query.MapToModel();// AdjustmentCodeMapper.MapToModel(query);
 
             }
+        }
+
+        public List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly()
+        {
+            return GetAdjustmentCodeList().Where(x => x.Use).ToList();
         }
 
         private void SeedAdjustmentCodes(DatabaseContext _context)
@@ -552,38 +648,12 @@ namespace Service.Core.Inventory
             _context.SaveChanges();
         }
 
-        public string SaveAdjustmentCode(AdjustmentCodeModel model)
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var msg = "";
-                var args = BaseEventArgs<AdjustmentCodeModel>.Instance;
-                var duplicate = _context.AdjustmentCode.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
-                if (duplicate != null)
-                {
-                    return "Same 'Adjustment Code' already exists";
-                }
 
-                // get the package
-                var entity = _context.AdjustmentCode.FirstOrDefault(x => x.Id == model.Id);
-                entity = model.MapToEntity(entity);//AdjustmentCodeMapper.MapToEntity
-                if (model.Id == 0)
-                {
-                    // add
-                    _context.AdjustmentCode.Add(entity);
-                    args.Mode = Utility.UpdateMode.ADD;
-                }
-                else
-                {
-                    args.Mode = Utility.UpdateMode.EDIT;
-                }
-                _context.SaveChanges();
-                args.Model = entity.MapToModel();//AdjustmentCodeMapper.MapToModel(entity)
-                _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
-                return msg;
-            }
+        #endregion
 
-        }
+
+
+        #region UOM
 
         public List<IdNamePair> GetUomListForCombo()
         {
@@ -595,10 +665,12 @@ namespace Service.Core.Inventory
                 }).ToList();
         }
 
-        public List<AdjustmentCodeModel> GetAdjustmentCodeListUsableOnly()
-        {
-            return GetAdjustmentCodeList().Where(x => x.Use).ToList();
-        }
+        #endregion
+
+
+
+
+
 
 
 
@@ -619,55 +691,6 @@ namespace Service.Core.Inventory
 
         }
 
-        public List<IdNamePair> GetAdjustmentCodeListForCombo()
-        {
-            using (var _context = new DatabaseContext())
-            {
-                return _context.AdjustmentCode
-                                .Where(x => x.Use)
-                                .Select(x => new IdNamePair()
-                                {
-                                    Id = x.Id,
-                                    Name = x.Name
-                                })
-                                .ToList();
-            }
-
-        }
-
-        public List<IdNamePair> GetPositiveAdjustmentCodeListForCombo()
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var positive = AdjustmentType.Positive.ToString();
-                return _context.AdjustmentCode
-                   .Where(x => x.Use && x.Type == positive)
-                   .Select(x => new IdNamePair()
-                   {
-                       Id = x.Id,
-                       Name = x.Name
-                   })
-                   .ToList();
-            }
-
-        }
-
-        public List<IdNamePair> GetNegativeAdjustmentCodeListForCombo()
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var negative = AdjustmentType.Negative.ToString();
-                return _context.AdjustmentCode
-                   .Where(x => x.Use && x.Type == negative)
-                   .Select(x => new IdNamePair()
-                   {
-                       Id = x.Id,
-                       Name = x.Name
-                   })
-                   .ToList();
-            }
-
-        }
 
         public List<IdNamePair> GetSupplierListForCombo()
         {

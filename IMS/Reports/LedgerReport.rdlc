@@ -65,16 +65,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.76745in</Width>
+                  <Width>0.66199in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.10773in</Width>
+                  <Width>2.41031in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.27662in</Width>
+                  <Width>1.18496in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.22579in</Width>
+                  <Width>1.12033in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.52787in</Width>
@@ -98,6 +98,7 @@
                                 <TextRun>
                                   <Value>Date</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -130,6 +131,7 @@
                                 <TextRun>
                                   <Value>Particulars</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -162,6 +164,7 @@
                                 <TextRun>
                                   <Value>Debit</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -194,6 +197,7 @@
                                 <TextRun>
                                   <Value>Credit</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -226,6 +230,7 @@
                                 <TextRun>
                                   <Value>Dr/Cr</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -258,6 +263,7 @@
                                 <TextRun>
                                   <Value>Balance</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -294,7 +300,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Date.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -324,7 +332,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Particulars.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -354,7 +364,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Debit.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -384,7 +396,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Credit.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -414,7 +428,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!DrCrString.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -444,7 +460,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Balance.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -480,6 +498,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -512,6 +531,7 @@
                                 <TextRun>
                                   <Value>Total</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -544,6 +564,7 @@
                                 <TextRun>
                                   <Value>=Parameters!DebitTotal.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -576,6 +597,7 @@
                                 <TextRun>
                                   <Value>=Parameters!CreditTotal.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -608,6 +630,7 @@
                                 <TextRun>
                                   <Value>=Parameters!DrCrTotal.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -640,6 +663,7 @@
                                 <TextRun>
                                   <Value>=Parameters!BalanceTotal.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -699,6 +723,7 @@
               <Border>
                 <Style>None</Style>
               </Border>
+              <FontSize>9pt</FontSize>
             </Style>
           </Tablix>
           <Textbox Name="Textbox8">
@@ -709,7 +734,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Account of</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -738,7 +765,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!CustomerName.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -772,7 +801,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Address</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -802,7 +833,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!CustomerAddress.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -836,7 +869,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>From</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -865,7 +900,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!FromDate.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -895,7 +932,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>To</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -925,7 +964,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!ToDate.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1058,7 +1099,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Phone</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1088,7 +1131,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!CustomerPhone.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -1118,7 +1163,7 @@
         <Height>2.15084in</Height>
         <Style />
       </Body>
-      <Width>7.12777in</Width>
+      <Width>7.13819in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

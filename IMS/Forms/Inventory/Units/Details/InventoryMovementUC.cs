@@ -12,6 +12,7 @@ using Service.Core.Inventory.Units;
 using Service.Listeners;
 using Service.Interfaces;
 using ViewModel.Core.Common;
+using IMS.Forms.Common.Pagination;
 
 namespace IMS.Forms.Inventory.Units.Details
 {
@@ -20,6 +21,9 @@ namespace IMS.Forms.Inventory.Units.Details
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IProductService _productService;
+
+        BindingSource _bindingSource = new BindingSource();
+        private MovementListPaginationHelper helper;
 
         public InventoryMovementUC(IInventoryUnitService inventoryUnitService, IDatabaseChangeListener listener, IProductService productService)
         {
@@ -36,8 +40,13 @@ namespace IMS.Forms.Inventory.Units.Details
         private void InventoryMovementUC_Load(object sender, EventArgs e)
         {
             dgvMovement.AutoGenerateColumns = false;
+            helper = new MovementListPaginationHelper(_bindingSource, dgvMovement, bindingNavigator1, _inventoryUnitService, 0);
+
+
             PopulateMovements();
+
             PopulateProducts();
+
 
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
@@ -60,8 +69,10 @@ namespace IMS.Forms.Inventory.Units.Details
         {
             int productId = 0;
             int.TryParse(cbProduct.SelectedValue?.ToString()??"" , out productId);
-            var movements = _inventoryUnitService.GetMovementList(productId);
-            dgvMovement.DataSource = movements;
+            //var movements = _inventoryUnitService.GetMovementList(productId);
+            //dgvMovement.DataSource = movements;
+            if (helper != null)
+                helper.Reset(productId);
         }
         private void CbProduct_SelectedValueChanged(object sender, EventArgs e)
         {

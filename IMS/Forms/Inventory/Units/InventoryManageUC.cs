@@ -14,6 +14,7 @@ using ViewModel.Enums;
 using ViewModel.Core.Common;
 using ViewModel.Core.Business;
 using Service.Interfaces;
+using IMS.Forms.Common.Pagination;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -29,6 +30,9 @@ namespace IMS.Forms.Inventory.Units
         // private HeaderTemplate _header;
         // private int checkCount;
         // private bool _bulkActionsEnabled;
+        BindingSource _bindingSource = new BindingSource();
+        private InventoryUnitListPaginationHelper helper;
+
 
         public InventoryManageUC(IDatabaseChangeListener listener,
             IInventoryService inventoryService,
@@ -126,6 +130,9 @@ namespace IMS.Forms.Inventory.Units
             dgvInventoryUnit.DesignForInventoryUnitListing();
             dgvInventoryUnit.ShowCheckColumn(true); // 1. first show
             dgvInventoryUnit.SetSelectable(true); // 2. Second set selectable
+            //dgvInventoryUnit.ColumnHeadersVisible = true;
+            //dgvInventoryUnit.ColumnHeadersHeight = 30;
+            helper = new InventoryUnitListPaginationHelper(_bindingSource, dgvInventoryUnit, bindingNavigator1, _inventoryUnitService, 0, 0);
         }
 
         #endregion
@@ -159,8 +166,11 @@ namespace IMS.Forms.Inventory.Units
             dgvInventoryUnit.ResetCheckCount();
             //var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
             var productId = int.Parse(cbProduct.SelectedValue.ToString());
-            var inventoryUnits = _inventoryUnitService.GetInventoryUnitList(0, productId);
-            dgvInventoryUnit.DataSource = inventoryUnits;
+            //var inventoryUnits = _inventoryUnitService.GetInventoryUnitList(0, productId, 10, 0);
+            //dgvInventoryUnit.DataSource = inventoryUnits.DataList;
+            if (helper != null)
+                helper.Reset(0, productId);
+
         }
 
         private List<InventoryUnitModel> GetSelectedRows()

@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Core.Inventory
 {
+
+    public class MovementListModel
+    {
+        public List<MovementModel> DataList { get; set; }
+
+        public int TotalCount { get; set; }
+        public int PageSize { get; set; }
+        public int Offset { get; set; }
+    }
+
     public class MovementModel
     {
         public int Id { get; set; }
