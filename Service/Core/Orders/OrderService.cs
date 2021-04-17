@@ -337,7 +337,7 @@ namespace Service.Core.Orders
             {
                 Balance = Math.Abs(balance),
                 Credit = credit,//orderModel.PaidAmount,
-                Date = DateTime.Now,
+                Date = orderModel.CompletedDate ?? DateTime.Now,
                 Debit = debit, //orderModel.TotalAmount,
                 DrCr = Math.Sign(balance),
                 IsVoid = false,
