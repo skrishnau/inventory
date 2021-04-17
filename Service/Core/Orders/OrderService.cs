@@ -451,7 +451,7 @@ namespace Service.Core.Orders
                     }
                 }
                 item.Total = item.Rate * item.UnitQuantity;
-                if (item.PackageId == 0)
+                if ((item.PackageId??0) == 0)
                 {
                     var packageEntity = _context.Package.FirstOrDefault(x => x.Name == item.Package);
                     if (packageEntity != null)
