@@ -71,10 +71,14 @@ namespace IMS.Forms.Inventory.Transaction
                 colOrderNumber.Visible = false;
                 colOrderNumber.Width = 0;
                 listHeaderTemplate1.Text = "Orders";
+                colCompletedDate.Visible = false;
+                colCompletedDate.Width = 0;
             }
             else
             {
                 listHeaderTemplate1.Text = "Transactions";
+                colCreatedDate.Visible = false;
+                colCreatedDate.Width = 0;
             }
 
         }

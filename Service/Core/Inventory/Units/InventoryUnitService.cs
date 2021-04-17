@@ -217,8 +217,8 @@ namespace Service.Core.Inventory.Units
                         fromWp.InStockQuantity -= moveModel.UnitQuantity;//iuModel.UnitQuantity;
                         fromWp.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0; //iuModel.OnHoldQuantity : 0;
                         fromWp.UpdatedAt = moveModel.Date;
-                        fromWp.Product.InStockQuantity -= moveModel.UnitQuantity;// iuModel.UnitQuantity;
-                        fromWp.Product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0;// iuModel.OnHoldQuantity : 0;
+                        product.InStockQuantity -= moveModel.UnitQuantity;// iuModel.UnitQuantity;
+                        product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0;// iuModel.OnHoldQuantity : 0;
                     }
                 }
                 if (moveModel.TargetWarehouseId != null)
@@ -535,7 +535,7 @@ namespace Service.Core.Inventory.Units
             var fulfilledIndex = -1;
             for (var i = 0; i < invUnit.Count(); i++)
             {
-                qtySum += invUnit[0].UnitQuantity;
+                qtySum += invUnit[i].UnitQuantity;
                 if (qtySum >= model.UnitQuantity)
                 {
                     fulfilledIndex = i;

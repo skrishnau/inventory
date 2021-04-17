@@ -71,6 +71,7 @@ namespace IMS.Forms.Inventory.Transaction
             this.cbDiscountType.SelectedItem = "%";
             this.dtExpectedDate.SetValue(DateTime.Now);
             this.dtPaymentDueDate.SetValue(DateTime.Now);
+            this.dtCompletedDate.SetValue(DateTime.Now);
             this.txtTotal.Maximum = Int32.MaxValue;
             this.txtTotal.Minimum = 0;
             this.txtPaidAmount.Maximum = Int32.MaxValue;
@@ -305,6 +306,8 @@ namespace IMS.Forms.Inventory.Transaction
                     _orderId = model.Id;
                     txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
                     dtExpectedDate.SetValue (model.DeliveryDate);
+                    dtPaymentDueDate.SetValue(model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now);
+                    dtCompletedDate.SetValue (model.CompletedDate.HasValue? model.CompletedDate.Value : DateTime.Now);
                     txtAddress.Text = model.Address;
                     txtPhone.Text = model.Phone;
                     txtTotal.Value = model.TotalAmount;
@@ -316,13 +319,9 @@ namespace IMS.Forms.Inventory.Transaction
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
                     
-                    dtExpectedDate.SetValue(model.DeliveryDate);
-                    dtPaymentDueDate.SetValue(model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now);
 
                     dgvItems.AddRows(OrderItemMapper.MapToInventoryUnitModel(model.OrderItems));
-                    if (model?.PaymentDueDate.HasValue ?? false)
-                    dtPaymentDueDate.SetValue( model.PaymentDueDate.Value);
-
+                   
                     //if (model.IsCompleted)
                     //{
                     //    cbClient.Enabled = false;
@@ -481,6 +480,7 @@ namespace IMS.Forms.Inventory.Transaction
                     OrderType = _orderType.ToString(),
                     Name = (string.IsNullOrEmpty(cbClient.Text) ? "" : $"{cbClient.Text}, ") + txtReceiptNo.Text,
                     DeliveryDate = dtExpectedDate.GetValue(),
+                    CompletedDate = dtCompletedDate.GetValue(),
                     PaidAmount = txtPaidAmount.Value,
                     DiscountPercent = cbDiscountType.SelectedItem?.ToString() == "%" ? txtDiscount.Value : 0,
                     DiscountAmount = cbDiscountType.SelectedItem?.ToString() == "%"  ? txtTotal.Value * txtDiscount.Value / 100 : txtDiscount.Value,

@@ -76,6 +76,7 @@ namespace DTO.Core.Inventory
                             opt => opt.MapFrom(src => src.OrderItems.Select(x=>x.ProductId).Distinct().Count()))
                 .ForMember(x=>x.UpdatedAtBS, opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.UpdatedAt)))
                 .ForMember(x=>x.DeliveryDateBS, opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.DeliveryDate)))
+                .ForMember(x=>x.CompletedDateBS, opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.CompletedDate??DateTime.Now)))
                ;
 
             // from model to entity

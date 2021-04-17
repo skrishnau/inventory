@@ -64,14 +64,12 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.pnlParticulars = new System.Windows.Forms.Panel();
-            this.txtParticulars = new System.Windows.Forms.TextBox();
-            this.rbCustomParticulars = new System.Windows.Forms.RadioButton();
-            this.rbAllItemsParticulars = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
-            this.rbReceiptNoParticulars = new System.Windows.Forms.RadioButton();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
+            this.pnlPayment = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.dtCompletedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
+            this.lblCheckoutDate = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -84,18 +82,19 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.pnlParticulars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            this.pnlPayment.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pnlPayment);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
-            this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 396);
+            this.panel1.Location = new System.Drawing.Point(0, 389);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(590, 75);
+            this.panel1.Size = new System.Drawing.Size(590, 99);
             this.panel1.TabIndex = 6;
             // 
             // tableLayoutPanel2
@@ -117,14 +116,14 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(256, 75);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(256, 99);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.cbDiscountType);
-            this.panel2.Location = new System.Drawing.Point(3, 28);
+            this.panel2.Location = new System.Drawing.Point(3, 36);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(90, 19);
             this.panel2.TabIndex = 12;
@@ -179,7 +178,7 @@
             0,
             0,
             65536});
-            this.txtDiscount.Location = new System.Drawing.Point(99, 28);
+            this.txtDiscount.Location = new System.Drawing.Point(99, 36);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(139, 20);
             this.txtDiscount.TabIndex = 13;
@@ -193,7 +192,7 @@
             0,
             0,
             65536});
-            this.txtSum.Location = new System.Drawing.Point(99, 53);
+            this.txtSum.Location = new System.Drawing.Point(99, 69);
             this.txtSum.Name = "txtSum";
             this.txtSum.ReadOnly = true;
             this.txtSum.Size = new System.Drawing.Size(139, 20);
@@ -201,7 +200,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 50);
+            this.label2.Location = new System.Drawing.Point(3, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 23);
             this.label2.TabIndex = 14;
@@ -307,9 +306,8 @@
             // 
             // lblExpectedDate
             // 
-            this.lblExpectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblExpectedDate.AutoSize = true;
-            this.lblExpectedDate.Location = new System.Drawing.Point(405, 6);
+            this.lblExpectedDate.Location = new System.Drawing.Point(7, 6);
             this.lblExpectedDate.Name = "lblExpectedDate";
             this.lblExpectedDate.Size = new System.Drawing.Size(71, 13);
             this.lblExpectedDate.TabIndex = 3;
@@ -381,8 +379,8 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.dtExpectedDate);
-            this.panel9.Controls.Add(this.lblExpectedDate);
+            this.panel9.Controls.Add(this.dtCompletedDate);
+            this.panel9.Controls.Add(this.lblCheckoutDate);
             this.panel9.Controls.Add(this.txtReceiptNo);
             this.panel9.Controls.Add(this.label8);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
@@ -393,11 +391,10 @@
             // 
             // dtExpectedDate
             // 
-            this.dtExpectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtExpectedDate.Location = new System.Drawing.Point(482, 3);
+            this.dtExpectedDate.Location = new System.Drawing.Point(84, 2);
             this.dtExpectedDate.Name = "dtExpectedDate";
             this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
-            this.dtExpectedDate.TabIndex = 6;
+            this.dtExpectedDate.TabIndex = 11;
             // 
             // txtReceiptNo
             // 
@@ -429,74 +426,13 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // pnlParticulars
-            // 
-            this.pnlParticulars.Controls.Add(this.txtParticulars);
-            this.pnlParticulars.Controls.Add(this.rbCustomParticulars);
-            this.pnlParticulars.Controls.Add(this.rbAllItemsParticulars);
-            this.pnlParticulars.Controls.Add(this.label10);
-            this.pnlParticulars.Controls.Add(this.rbReceiptNoParticulars);
-            this.pnlParticulars.Location = new System.Drawing.Point(93, 213);
-            this.pnlParticulars.Name = "pnlParticulars";
-            this.pnlParticulars.Size = new System.Drawing.Size(293, 44);
-            this.pnlParticulars.TabIndex = 51;
-            this.pnlParticulars.Visible = false;
-            // 
-            // txtParticulars
-            // 
-            this.txtParticulars.Location = new System.Drawing.Point(4, 21);
-            this.txtParticulars.Name = "txtParticulars";
-            this.txtParticulars.Size = new System.Drawing.Size(285, 20);
-            this.txtParticulars.TabIndex = 4;
-            // 
-            // rbCustomParticulars
-            // 
-            this.rbCustomParticulars.AutoSize = true;
-            this.rbCustomParticulars.Location = new System.Drawing.Point(229, 2);
-            this.rbCustomParticulars.Name = "rbCustomParticulars";
-            this.rbCustomParticulars.Size = new System.Drawing.Size(60, 17);
-            this.rbCustomParticulars.TabIndex = 3;
-            this.rbCustomParticulars.Text = "Custom";
-            this.rbCustomParticulars.UseVisualStyleBackColor = true;
-            // 
-            // rbAllItemsParticulars
-            // 
-            this.rbAllItemsParticulars.AutoSize = true;
-            this.rbAllItemsParticulars.Location = new System.Drawing.Point(159, 3);
-            this.rbAllItemsParticulars.Name = "rbAllItemsParticulars";
-            this.rbAllItemsParticulars.Size = new System.Drawing.Size(64, 17);
-            this.rbAllItemsParticulars.TabIndex = 2;
-            this.rbAllItemsParticulars.Text = "All Items";
-            this.rbAllItemsParticulars.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(-1, 4);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(56, 13);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Particulars";
-            // 
-            // rbReceiptNoParticulars
-            // 
-            this.rbReceiptNoParticulars.AutoSize = true;
-            this.rbReceiptNoParticulars.Checked = true;
-            this.rbReceiptNoParticulars.Location = new System.Drawing.Point(71, 2);
-            this.rbReceiptNoParticulars.Name = "rbReceiptNoParticulars";
-            this.rbReceiptNoParticulars.Size = new System.Drawing.Size(82, 17);
-            this.rbReceiptNoParticulars.TabIndex = 0;
-            this.rbReceiptNoParticulars.TabStop = true;
-            this.rbReceiptNoParticulars.Text = "Receipt No.";
-            this.rbReceiptNoParticulars.UseVisualStyleBackColor = true;
-            // 
             // dgvItems
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(590, 339);
+            this.dgvItems.Size = new System.Drawing.Size(590, 332);
             this.dgvItems.TabIndex = 5;
             // 
             // saveFooterUC1
@@ -504,18 +440,55 @@
             this.saveFooterUC1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.saveFooterUC1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.saveFooterUC1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveFooterUC1.Location = new System.Drawing.Point(0, 471);
+            this.saveFooterUC1.Location = new System.Drawing.Point(0, 488);
             this.saveFooterUC1.Name = "saveFooterUC1";
             this.saveFooterUC1.Padding = new System.Windows.Forms.Padding(0, 4, 10, 4);
             this.saveFooterUC1.Size = new System.Drawing.Size(590, 35);
             this.saveFooterUC1.TabIndex = 50;
             // 
+            // pnlPayment
+            // 
+            this.pnlPayment.Controls.Add(this.panel3);
+            this.pnlPayment.Controls.Add(this.panel4);
+            this.pnlPayment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPayment.Location = new System.Drawing.Point(0, 0);
+            this.pnlPayment.Name = "pnlPayment";
+            this.pnlPayment.Size = new System.Drawing.Size(334, 99);
+            this.pnlPayment.TabIndex = 52;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.dtExpectedDate);
+            this.panel4.Controls.Add(this.lblExpectedDate);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 75);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(334, 24);
+            this.panel4.TabIndex = 52;
+            // 
+            // dtCompletedDate
+            // 
+            this.dtCompletedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtCompletedDate.Location = new System.Drawing.Point(485, 2);
+            this.dtCompletedDate.Name = "dtCompletedDate";
+            this.dtCompletedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtCompletedDate.TabIndex = 13;
+            // 
+            // lblCheckoutDate
+            // 
+            this.lblCheckoutDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheckoutDate.AutoSize = true;
+            this.lblCheckoutDate.Location = new System.Drawing.Point(402, 5);
+            this.lblCheckoutDate.Name = "lblCheckoutDate";
+            this.lblCheckoutDate.Size = new System.Drawing.Size(79, 13);
+            this.lblCheckoutDate.TabIndex = 12;
+            this.lblCheckoutDate.Text = "Checkout Date";
+            // 
             // TransactionCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 506);
-            this.Controls.Add(this.pnlParticulars);
+            this.ClientSize = new System.Drawing.Size(590, 523);
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
@@ -544,9 +517,10 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.pnlParticulars.ResumeLayout(false);
-            this.pnlParticulars.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
+            this.pnlPayment.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -585,15 +559,13 @@
         private System.Windows.Forms.NumericUpDown txtDiscount;
         private System.Windows.Forms.NumericUpDown txtSum;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel pnlParticulars;
-        private System.Windows.Forms.RadioButton rbCustomParticulars;
-        private System.Windows.Forms.RadioButton rbAllItemsParticulars;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.RadioButton rbReceiptNoParticulars;
-        private System.Windows.Forms.TextBox txtParticulars;
         private Common.Date.NepaliDateTextBox dtPaymentDueDate;
         private Common.Date.NepaliDateTextBox dtExpectedDate;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox cbDiscountType;
+        private System.Windows.Forms.Panel pnlPayment;
+        private System.Windows.Forms.Panel panel4;
+        private Common.Date.NepaliDateTextBox dtCompletedDate;
+        private System.Windows.Forms.Label lblCheckoutDate;
     }
 }

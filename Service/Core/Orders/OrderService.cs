@@ -87,15 +87,15 @@ namespace Service.Core.Orders
                 .Include(x => x.OrderItems);
             if (orderListType == OrderListTypeEnum.Transaction)
             {
-                orders = orders.Where(x => x.IsCompleted);
+                orders = orders.Where(x => x.IsCompleted).OrderByDescending(x => x.CompletedDate); ;
             }
             else
             {
-                orders = orders.Where(x => !x.IsCompleted);
+                orders = orders.Where(x => !x.IsCompleted).OrderByDescending(x => x.UpdatedAt);
             }
             if (orderType != OrderTypeEnum.All)
                 orders = orders.Where(x => x.OrderType == type);
-            orders = orders.OrderByDescending(x => x.UpdatedAt); //.ThenByDescending(x => x.CreatedAt)
+           
             if (!string.IsNullOrEmpty(userSearchText))
                 orders = orders.Where(x => x.User.Name.Contains(name) || x.User.Company.Contains(name));
             if (!string.IsNullOrEmpty(receiptNoSearchText))
@@ -178,7 +178,7 @@ namespace Service.Core.Orders
 
         public ResponseModel<OrderModel> SaveOrder(OrderModel orderModel, bool checkout)
         {
-
+            var message = "";
             var isEditMode = orderModel.Id > 0;
             var now = DateTime.Now;
             var args = BaseEventArgs<OrderModel>.Instance;
@@ -200,7 +200,9 @@ namespace Service.Core.Orders
 
                 var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
-                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout);
+                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message);
+                if (!string.IsNullOrEmpty(message))
+                    return new ResponseModel<OrderModel> { Message = message, Success = false };
 
                 if (checkout)
                 {
@@ -252,7 +254,7 @@ namespace Service.Core.Orders
                 return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true };
             }
         }
-        
+
         private void UndoOrderTransactionsWithoutCommit(DatabaseContext _context, int? parentOrderId)
         {
             var parent = _context.Order.Find(parentOrderId);
@@ -305,7 +307,7 @@ namespace Service.Core.Orders
         {
             entity.IsCompleted = true;
             entity.IsVerified = true;
-            entity.CompletedDate = DateTime.Now;
+            //entity.CompletedDate = DateTime.Now; // completed date already set by user from UI
             entity.VerifiedDate = DateTime.Now;
             //if (orderModel.OrderType == OrderTypeEnum.Sale.ToString())
             //    SubtractIssuedItemsFromWarehouse(entity.OrderItems);
@@ -417,13 +419,14 @@ namespace Service.Core.Orders
             }
         }
 
-        private string SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout)
+        private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message)
         {
             var newProductList = new List<Product>();
             var newPackageList = new List<Package>();
             if (order == null)
             {
-                return "The Order doesn't exist.";
+                message += "The Order doesn't exist.\n";
+                return;
             }
 
             // validate & assign productId in the items; check if the sku exists
@@ -431,11 +434,13 @@ namespace Service.Core.Orders
             {
                 if (item.UnitQuantity <= 0 && checkout)
                 {
-                    return "Some of the items have zero quantity. Quantity must be greater than zero";
+                    message += "Some of the items have zero quantity. Quantity must be greater than zero\n";
+                    return;
                 }
                 if (item.Rate <= 0 && checkout)
                 {
-                    return "Some of the items have zero rate. Rates must be greater than zero";
+                    message += "Some of the items have zero rate. Rates must be greater than zero\n";
+                    return;
                 }
                 if (item.ProductId == 0)
                 {
@@ -545,15 +550,14 @@ namespace Service.Core.Orders
                 // modify product inStock & OnHold quantity
                 if (checkout)
                 {
-                    var msg = "";
                     UpdateProductForOrderItemSaveWithoutCommit(_context, order, entity);
                     if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                     {
-                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, "PO Receive", ref msg);
+                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, "PO Receive", ref message);
                     }
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
-                        var invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum),order.OrderType)), "SO Issue", ref msg);
+                        var invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), "SO Issue", ref message);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
                         if (invUnits.Count > 0 && invUnitsQty > 0)
                         {
@@ -566,7 +570,7 @@ namespace Service.Core.Orders
 
             order.TotalAmount = items.Sum(x => x.Total);
             order.CostPriceTotal = order.OrderItems.Sum(x => x.CostPriceTotal);
-            return string.Empty;
+            
         }
 
         private void UpdateProductForOrderItemSaveWithoutCommit(DatabaseContext _context, Order order, OrderItem entity)
@@ -578,7 +582,7 @@ namespace Service.Core.Orders
             {
                 if (order.OrderType == OrderTypeEnum.Sale.ToString())
                 {
-                    if(product.RetailPrice != entity.Rate)
+                    if (product.RetailPrice != entity.Rate)
                     {
                         var priceHistory = new PriceHistory
                         {
@@ -586,14 +590,14 @@ namespace Service.Core.Orders
                             Price = entity.Rate,
                             PriceType = PriceTypeEnum.SellingPrice.ToString(),
                         };
-                        if(entity.Package!=null)
+                        if (entity.Package != null)
                             priceHistory.Package = entity.Package;
-                        else if(entity.PackageId > 0 )
+                        else if (entity.PackageId > 0)
                             priceHistory.PackageId = entity.PackageId;
                         product.PriceHistory.Add(priceHistory);
                     }
                     product.RetailPrice = entity.Rate;
-                    product.InStockQuantity -= entity.UnitQuantity;
+                    //product.InStockQuantity -= entity.UnitQuantity; // dont' decrement here cause it's updated in UpdateWarehouseProduct()
                 }
                 else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                 {
@@ -612,7 +616,7 @@ namespace Service.Core.Orders
                         product.PriceHistory.Add(priceHistory);
                     }
                     product.SupplyPrice = entity.Rate;
-                    product.InStockQuantity += entity.UnitQuantity;
+                    //product.InStockQuantity += entity.UnitQuantity; // dont' increment here cause it's updated in UpdateWarehouseProduct()
                 }
                 product.UpdatedAt = DateTime.Now;
             }
@@ -626,8 +630,9 @@ namespace Service.Core.Orders
         {
             using (var _context = new DatabaseContext())
             {
+                var message = "";
                 var poEntity = _context.Order.Find(purchaseOrderId);
-                SaveOrderItemsWithoutCommit(_context, poEntity, items, false);
+                SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message);
 
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);
