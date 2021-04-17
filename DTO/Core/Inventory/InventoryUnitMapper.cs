@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Infrastructure.Entities.Inventory;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
+using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
 {
@@ -54,6 +55,7 @@ namespace DTO.Core.Inventory
                 ProductionDate = entity.ProductionDate.HasValue ? entity.ProductionDate.Value.ToShortDateString() : "",
                 ReceiveAdjustmentCode = entity.ReceiveAdjustment,
                 ReceiveDate = entity.ReceiveDate.HasValue ? entity.ReceiveDate.Value.ToShortDateString() : "",
+                ReceiveDateBS = entity.ReceiveDate.HasValue ? DateConverter.Instance.ToBS(entity.ReceiveDate.Value).ToString() : "",
                 ReceiveReceipt = entity.ReceiveReceipt,
                 Remark = entity.Remark,
                 SKU = entity.Product == null ? "" : entity.Product.SKU,

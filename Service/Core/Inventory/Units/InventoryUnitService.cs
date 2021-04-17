@@ -224,13 +224,8 @@ namespace Service.Core.Inventory.Units
                 if (moveModel.TargetWarehouseId != null)
                 {
 
-                    // var toId = target == null ? 0 : target.Id;
                     var toWp = product.WarehouseProducts.FirstOrDefault(x => x.WarehouseId == moveModel.TargetWarehouseId);
-                    //_context.WarehouseProduct
-                    //.Include(x => x.Warehouse)
-                    //.Include(x => x.Product)
-                    //.FirstOrDefault(x => x.ProductId == moveModel.InventoryUnit.ProductId
-                    //        && x.WarehouseId == moveModel.TargetWarehouseId);
+                  
                     // add to the target warehouse (toWarehouse)
                     if (toWp == null)
                     {
@@ -248,13 +243,7 @@ namespace Service.Core.Inventory.Units
                             toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
                             toWp.UpdatedAt = moveModel.Date;
                             product.WarehouseProducts.Add(toWp);
-                            //// need to do _context.SaveChanges(); Reason: in case of multiple add; the context won't still have the
-                            //// added warehouseProduct. and searching in context in next loop won't give the previously added 
-                            //// warehouseProduct. Hence multiple rows for same (product,warehouse) is created.  so first save it.
-                            //_context.SaveChanges();
-                            //txn.Commit();
                         }
-
                     }
                     else
                     {
@@ -322,15 +311,15 @@ namespace Service.Core.Inventory.Units
         /// <param name="iuModel">Inventory Unit</param>
         /// <param name="sourceWarehouseId">The warehouse from which to subtract the unit's UnitQuantity</param>
         /// <param name="targetWarehouseId">The warehouse to which to add the unit's UnitQuantity</param>
-        /// <param name="now"></param>
+        /// <param name="receiveDate"></param>
 
 
-        public void AddMovementWithoutCoomit(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime now, int productId)
+        public void AddMovementWithoutCoomit(DatabaseContext _context, string description, string reference, string adjustmentCode, decimal quantity, DateTime receiveDate, int productId)
         {
             var movement = new Movement()
             {
                 AdjustmentCode = adjustmentCode,
-                Date = now,
+                Date = receiveDate,
                 Description = description,
                 Quantity = quantity,
                 Reference = reference,
@@ -383,8 +372,6 @@ namespace Service.Core.Inventory.Units
         }
         public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg)
         {
-            var now = DateTime.Now;
-
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
             unit.WarehouseId = warehouse.Id;
             if (!string.IsNullOrEmpty(unit.Package) && (unit.PackageId ?? 0) == 0)
@@ -392,6 +379,8 @@ namespace Service.Core.Inventory.Units
                 unit.PackageId = _context.Package.FirstOrDefault(x => x.Name == unit.Package)?.Id;
             }
             var unitEntity = unit.MapToEntity();
+            unitEntity.ReceiveDate = receivedDate;
+            unitEntity.ReceiveAdjustment = adjustmentCode;
             _context.InventoryUnit.Add(unitEntity);
 
             var product = _context.Product.Find(unit.ProductId);
@@ -400,10 +389,10 @@ namespace Service.Core.Inventory.Units
                 product.Name;// + " into " + warehouse.Name + " warehouse.";
                              //var quantity = list.Sum(x => x.UnitQuantity);
             
-            AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now, unit.ProductId);//"Direct Receive"
+            AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, receivedDate, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {
-                Date = now,
+                Date = receivedDate,
                 UnitQuantity = unit.UnitQuantity,
                 SourceWarehouseId = null,
                 TargetWarehouseId = unit.WarehouseId,

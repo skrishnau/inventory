@@ -221,7 +221,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // 
             // colReceiveAdjustment
             // 
-            this.colReceiveAdjustment.DataPropertyName = "ReceiveAdjustment";
+            this.colReceiveAdjustment.DataPropertyName = "ReceiveAdjustmentCode";
             this.colReceiveAdjustment.HeaderText = "Rcv Adj";
             this.colReceiveAdjustment.Name = "colReceiveAdjustment";
             this.colReceiveAdjustment.Visible = false;
@@ -450,6 +450,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colExpirationDate.Visible = true;
             //colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
+            colReceiveDate.Visible = true;
+            colReceiveAdjustment.Visible = true;
             colRate.Visible = true;
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
