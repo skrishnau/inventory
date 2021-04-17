@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Common;
+using IMS.Forms.Common.GridView;
 using Service.Core.Business;
 using Service.Core.Inventory;
 using Service.Core.Inventory.Units;
@@ -191,6 +192,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     //}
                     break;
             }
+            
         }
 
         // private cause we need to handle 3 cases and shouldn't expose for PurchaseOrder only
@@ -335,9 +337,9 @@ namespace IMS.Forms.Inventory.Units.Actions
                         dgvInventoryUnit.colPackageId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
-                    list.ForEach(x => x.ReceiveDate = dtReceivedDate.GetValue().ToShortDateString());
                     if (list != null)
                     {
+                        list.ForEach(x => x.ReceiveDate = dtReceivedDate.GetValue().ToShortDateString());
                         if (list.Count == 0)
                         {
                             msg = "At least one item expected to receive";

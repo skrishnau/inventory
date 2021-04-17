@@ -387,6 +387,10 @@ namespace Service.Core.Inventory.Units
 
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
             unit.WarehouseId = warehouse.Id;
+            if (!string.IsNullOrEmpty(unit.Package) && (unit.PackageId ?? 0) == 0)
+            {
+                unit.PackageId = _context.Package.FirstOrDefault(x => x.Name == unit.Package)?.Id;
+            }
             var unitEntity = unit.MapToEntity();
             _context.InventoryUnit.Add(unitEntity);
 
@@ -395,6 +399,7 @@ namespace Service.Core.Inventory.Units
             var description = "Received " + unit.UnitQuantity + " quantities of " +
                 product.Name;// + " into " + warehouse.Name + " warehouse.";
                              //var quantity = list.Sum(x => x.UnitQuantity);
+            
             AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, now, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {

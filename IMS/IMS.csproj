@@ -135,6 +135,7 @@
     <Compile Include="Forms\Common\Display\SaveFooterUC.Designer.cs">
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\GridView\GridViewHelper.cs" />
     <Compile Include="Forms\Common\Pagination\PaginationHelper.cs" />
     <Compile Include="Forms\Inventory\Accounts\All\LedgerPrintForm.cs">
       <SubType>Form</SubType>

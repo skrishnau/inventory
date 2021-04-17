@@ -453,7 +453,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colRate.Visible = true;
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
-
+           // this.RowHeadersVisible = true;
             HideUnusedDefaults();
 
         }
@@ -534,6 +534,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colProductId.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
+            colPackage.Visible = true;
+            colPackage.ReadOnly = true;
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
@@ -562,7 +564,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             // colPackageQuantity.Visible = true;
-            //colPackageId.Visible = true;
+            colPackage.Visible = true;
+            colPackage.ReadOnly = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
            // colWarehouse.Visible = true;
@@ -571,7 +574,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colExpirationDate.Visible = true;
             //colReceiveReference.Visible = true;
             //colReceiveReference.HeaderText = "Reference";
-            colReceiveDate.Visible = true;
+            //colReceiveDate.Visible = true;
             //colRemark.Visible = true;
             //colIsHold.Visible = true;
             //colIsHold.ReadOnly = false;

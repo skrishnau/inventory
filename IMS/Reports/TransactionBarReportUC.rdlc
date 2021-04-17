@@ -431,7 +431,8 @@
                 <Position>TopLeft</Position>
               </ChartTitle>
             </ChartTitles>
-            <Palette>Pacific</Palette>
+            <Palette>SemiTransparent</Palette>
+            <PaletteHatchBehavior>None</PaletteHatchBehavior>
             <ChartBorderSkin>
               <Style>
                 <BackgroundColor>Gray</BackgroundColor>

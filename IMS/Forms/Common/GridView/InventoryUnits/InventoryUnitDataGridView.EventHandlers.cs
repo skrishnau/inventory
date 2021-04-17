@@ -37,10 +37,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // Datetime Picker
             //
             _dtPicker.TextChanged += _dtPicker_TextChanged;
-
+            this.RowsAdded += InventoryUnitDataGridView_RowsAdded;
         }
 
 
+
+        //
+        // Rows Added
+        //
+        private void InventoryUnitDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+           // GridViewHelper.setRowNumber(this);
+        }
 
         //
         // Data Error

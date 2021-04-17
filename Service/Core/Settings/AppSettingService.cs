@@ -580,10 +580,10 @@ namespace Service.Core.Settings
 
             // save in registry
             Microsoft.Win32.RegistryKey key;
-            key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("win_security_001783462");
+            key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("win_security_001783463");
             if (key != null)
             {
-                key.SetValue("win_security_001783462_update2", encrypted);
+                key.SetValue("win_security_001783463_update3", encrypted);
                 key.Close();
             }
         }
@@ -609,11 +609,11 @@ namespace Service.Core.Settings
             DateTime expireAtReg;
             bool expireAtRegParsed;
             Microsoft.Win32.RegistryKey key;
-            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("win_security_001783462", false);
+            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("win_security_001783463", false);
             string regValue = null;
             if (key != null)
             {
-                regValue = key.GetValue("win_security_001783462_update2") as string;
+                regValue = key.GetValue("win_security_001783463_update3") as string;
                 key.Close();
             }
             if (regValue != null)

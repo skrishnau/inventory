@@ -199,6 +199,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 PopupMessage.ShowPopupMessage("Invalid Items!", "The items you provided are not valid. Verify again!." + extraMsg,
                     PopupMessageType.ERROR);
+                this.FindForm()?.Focus();
                 return null;
             }
             return items;
