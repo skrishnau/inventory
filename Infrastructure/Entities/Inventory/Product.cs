@@ -94,6 +94,7 @@ namespace Infrastructure.Entities.Inventory
             // Brands = new List<Brand>();
             // Variants = new List<Variant>();
             PriceHistory = new List<PriceHistory>();
+            WarehouseProducts = new List<WarehouseProduct>();
         }
 
 

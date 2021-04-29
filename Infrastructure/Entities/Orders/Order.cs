@@ -60,10 +60,7 @@ namespace Infrastructure.Entities.Orders
         // only completed order can be made void so it's transaction should be un-done
         public bool IsVoid { get; set; }
 
-        // Verified means different as per order type:
-        // Purchase Order : Order Send Date
-        // Sale Order : Order Verified Date
-        // Move Order : Order Verified Date
+        // Verified is like Complete but it is used for transactions without rate of items: Used in Purchase transactions only.
         public bool IsVerified { get; set; }
         public DateTime? VerifiedDate { get; set; }
         // cancels

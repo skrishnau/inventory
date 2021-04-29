@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Infrastructure.Context;
+using Infrastructure.Entities.Inventory;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
@@ -33,5 +33,8 @@ namespace Service.Interfaces
         void DeleteCategory(CategoryModel categoryModel);
         bool DeleteProduct(int id);
         List<PriceHistoryModel> GetPriceHistory(int id);
+
+        // price History
+        void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId);
     }
 }

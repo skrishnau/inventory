@@ -370,7 +370,7 @@ namespace Service.Core.Inventory.Units
                 return msg;
             }
         }
-        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg)
+        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg, Product product)
         {
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
             unit.WarehouseId = warehouse.Id;
@@ -383,7 +383,8 @@ namespace Service.Core.Inventory.Units
             unitEntity.ReceiveAdjustment = adjustmentCode;
             _context.InventoryUnit.Add(unitEntity);
 
-            var product = _context.Product.Find(unit.ProductId);
+            if(product == null)
+                product = _context.Product.Find(unit.ProductId);
 
             var description = "Received " + unit.UnitQuantity + " quantities of " +
                 product.Name;// + " into " + warehouse.Name + " warehouse.";
@@ -418,7 +419,7 @@ namespace Service.Core.Inventory.Units
             //
             foreach (var unit in list)
             {
-                SaveDirectReceiveItemWithoutCommit(_context, unit, receivedDate, adjustmentCode, ref msg);
+                SaveDirectReceiveItemWithoutCommit(_context, unit, receivedDate, adjustmentCode, ref msg, null);
             }
             return msg;
         }

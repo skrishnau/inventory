@@ -106,7 +106,9 @@ namespace IMS.Forms.Inventory.Transaction
             if (_orderType == OrderTypeEnum.Sale)
                 dgvItems.MovementType = MovementTypeEnum.SOIssueEditItems;
             else if (_orderType == OrderTypeEnum.Purchase)
+            {
                 dgvItems.MovementType = MovementTypeEnum.POReceiveEditItems;
+            }
             dgvItems.DesignForTransaction(true);
         }
 
@@ -392,7 +394,7 @@ namespace IMS.Forms.Inventory.Transaction
             }
             else
                 errorProvider.SetError(rbCredit, string.Empty);
-            if (!checkout)
+            if (!checkout || _orderType == OrderTypeEnum.Purchase)
             {
                 _greaterThanZeroFieldValidator.Remove(txtSum);
             }
@@ -420,6 +422,12 @@ namespace IMS.Forms.Inventory.Transaction
             var model = GetData(checkout);
             if (model == null)
                 return null;
+            if(checkout && (model.OrderItems == null || model.OrderItems.Count == 0))
+            {
+                PopupMessage.ShowInfoMessage("At least one item is expected.");
+                this.Focus();
+                return null;
+            }
 
             var isCanceledByUser = false;
 
@@ -470,6 +478,8 @@ namespace IMS.Forms.Inventory.Transaction
             }
 
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId, dgvItems.colUomId };
+            if (_orderType == OrderTypeEnum.Purchase)
+                ignoreList.Add(dgvItems.colRate); // in case of purchase the user may not enter the rate at first
             var items = dgvItems.GetItems(ignoreList, Constants.HAS_STOCK_MANAGEMENT, !checkout);
 
             if (items != null)

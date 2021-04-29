@@ -353,7 +353,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             decimal rate = 0;
             var cell = row.Cells[this.colRate.Index];
             decimal.TryParse(cell.Value == null ? "0" : cell.Value.ToString(), out rate);
-            if (IgnoreColumnsForErrorList.Contains(colRate))
+            if (IgnoreColumnsForErrorList.Contains(colRate) && rate >= 0)
             {
                 return rate;
             }

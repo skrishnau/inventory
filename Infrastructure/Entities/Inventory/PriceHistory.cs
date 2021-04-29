@@ -13,7 +13,7 @@ namespace Infrastructure.Entities.Inventory
         public virtual Product Product { get; set; }
         public decimal Price { get; set; }
         public DateTime Date { get; set; }
-        // from PriceTypeEnum: CostPrice or SellingPrice
+        // from PriceTypeEnum: CostPrice:Purchase or SellingPrice:Sell same to OrderType
         public string PriceType { get; set; }
         public int? PackageId { get; set; }
         public virtual Package Package { get; set; }

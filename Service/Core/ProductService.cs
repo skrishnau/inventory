@@ -20,6 +20,7 @@ using ViewModel.Enums;
 using ViewModel.Core.Orders;
 using Service.Interfaces;
 using System.Threading.Tasks;
+using Infrastructure.Entities.Orders;
 
 namespace Service.Core
 {
@@ -67,8 +68,6 @@ namespace Service.Core
                     .FirstOrDefault(x => x.Id == model.Id);
 
                 ProductEventArgs eventArgs = ProductEventArgs.Instance;
-                var isSellingPriceSame = (entity?.RetailPrice ?? 0) == model.RetailPrice;
-                var isCostPriceSame = (entity?.SupplyPrice ?? 0) == model.SupplyPrice;
                 entity = ProductMapper.MapToEntity(model, entity);
 
                 if (entity.Id == 0)
@@ -91,6 +90,7 @@ namespace Service.Core
                 //  AssignBrandForSave(entity, model, now);
                 AssignProductAttributesForSave(entity, model, now);
                 //  AssignVariantsForSave(entity, model, now);
+                /*AddPriceHistoryWithoutCommit(_context, )
                 if (!isSellingPriceSame)
                 {
                     var priceHistory = new PriceHistory
@@ -112,7 +112,7 @@ namespace Service.Core
                         PackageId = entity.PackageId == 0 ? null : entity.PackageId,
                     };
                     entity.PriceHistory.Add(priceHistory);
-                }
+                }*/
                 _context.SaveChanges();
 
                 eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
@@ -120,6 +120,28 @@ namespace Service.Core
             }
 
         }
+
+        public void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId)
+        {
+            var dt = (completedDate ?? DateTime.Now).Date;
+            var rateHistory = product.PriceHistory.Where(x => x.Date == dt && x.PriceType == orderType).ToList();
+            var rateFromHistory = (rateHistory.LastOrDefault()?.Price??0) != rate;
+            if (rate > 0 && rateFromHistory)
+            {
+                var priceHistory = new PriceHistory
+                {
+                    Date = dt,
+                    Price = rate,
+                    PriceType = orderType,
+                };
+                if (package != null)
+                    priceHistory.Package = package;
+                else if (packageId > 0)
+                    priceHistory.PackageId = packageId;
+                product.PriceHistory.Add(priceHistory);
+            }
+        }
+
         private void AssignProductAttributesForSave(Product productEntity, ProductModel product, DateTime now)
         {
             // dbEntity.ProductAttributes
@@ -410,7 +432,7 @@ namespace Service.Core
             using(var _context = new DatabaseContext())
             {
                 var thiryDays = DateTime.Now.AddDays(-31);
-                var priceType = PriceTypeEnum.SellingPrice.ToString();
+                var priceType = OrderTypeEnum.Sale.ToString();
                 return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x=>x.Date).MapToPriceHistoryModel();
             }
         }

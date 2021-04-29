@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Enums
 {
-    public enum PriceTypeEnum
-    {
-        CostPrice,
-        SellingPrice
-    }
+    //public enum PriceTypeEnum
+    //{
+    //    CostPrice,
+    //    SellingPrice
+    //}
 }
