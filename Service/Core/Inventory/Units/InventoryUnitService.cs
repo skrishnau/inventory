@@ -9,6 +9,7 @@ using System.Data.Entity;
 using Infrastructure.Entities.Inventory;
 using Service.Utility;
 using Service.DbEventArgs;
+using Infrastructure.Entities.Orders;
 
 namespace Service.Core.Inventory.Units
 {
@@ -86,30 +87,32 @@ namespace Service.Core.Inventory.Units
                         {
                             if (invUnitGroup.Count() >= 2)
                             {
+                                
                                 // means there are 2 or more items for this product
                                 var unitQuantity = 0M;
                                 var packageQuantity = 0M;
                                 InventoryUnit editingRecord = null;
-                                for (var i = 0; i < invUnitGroup.Count(); i++)
+                                var withRate = invUnitGroup.Where(x => x.Rate > 0).ToList();
+                                for (var i = 0; i < withRate.Count(); i++)
                                 {
                                     var dbEntity = _context.InventoryUnit
-                                        .Find(invUnitGroup.ElementAt(i).Id);
+                                        .Find(withRate.ElementAt(i).Id);
                                     if (dbEntity != null)
                                     {
                                         unitQuantity += dbEntity.UnitQuantity;
                                         packageQuantity += dbEntity.PackageQuantity;
-                                        if (i < invUnitGroup.Count() - 1)
+                                        if (i < withRate.Count() - 1)
                                         {
                                             // remove
                                             _context.InventoryUnit.Remove(dbEntity);
-                                            invUnitGroup.ElementAt(i).UpdateAction = UpdateMode.DELETE.ToString();
+                                            withRate.ElementAt(i).UpdateAction = UpdateMode.DELETE.ToString();
                                         }
                                         else
                                         {
                                             // get the last entity ; 
                                             // TODO:: assign the value from multiple entities to the newly created 
                                             editingRecord = dbEntity;
-                                            invUnitGroup.ElementAt(i).UpdateAction = UpdateMode.EDIT.ToString();
+                                            withRate.ElementAt(i).UpdateAction = UpdateMode.EDIT.ToString();
                                         }
                                     }
                                 }
@@ -370,7 +373,7 @@ namespace Service.Core.Inventory.Units
                 return msg;
             }
         }
-        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg, Product product)
+        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem)
         {
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
             unit.WarehouseId = warehouse.Id;
@@ -389,8 +392,8 @@ namespace Service.Core.Inventory.Units
             var description = "Received " + unit.UnitQuantity + " quantities of " +
                 product.Name;// + " into " + warehouse.Name + " warehouse.";
                              //var quantity = list.Sum(x => x.UnitQuantity);
-            
-            AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unit.UnitQuantity, receivedDate, unit.ProductId);//"Direct Receive"
+                             //"----------------"
+            AddMovementWithoutCoomit(_context, description, reference, adjustmentCode, unit.UnitQuantity, receivedDate, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {
                 Date = receivedDate,
@@ -400,6 +403,7 @@ namespace Service.Core.Inventory.Units
                 InventoryUnit = unit
             };
             UpdateWarehouseProductWithoutCommit(invMovement, product);
+            unitEntity.OrderItem = orderItem;
             return unitEntity;
         }
         public string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode)
@@ -419,7 +423,7 @@ namespace Service.Core.Inventory.Units
             //
             foreach (var unit in list)
             {
-                SaveDirectReceiveItemWithoutCommit(_context, unit, receivedDate, adjustmentCode, ref msg, null);
+                SaveDirectReceiveItemWithoutCommit(_context, unit, receivedDate, adjustmentCode, ref msg, null, "----------------", null);
             }
             return msg;
         }
@@ -546,7 +550,12 @@ namespace Service.Core.Inventory.Units
                 var productName = dbEntity.Product.Name;
                 var warehouseName = dbEntity.Warehouse.Name;
                 var issuedQuantity = 0M;
-
+                // we shouldn't use dbEntity once it's removed from _context.InventoryUnit so assign the values here before removing
+                var warehouseId = dbEntity.WarehouseId;
+                var product = dbEntity.Product;
+                var productId = dbEntity.ProductId;
+                var rate = dbEntity.Rate;
+                var orderItemId = dbEntity.OrderItemId;
                 if (remainingQty < dbEntity.UnitQuantity)
                 {
                     // don't remove; just decrement
@@ -557,27 +566,28 @@ namespace Service.Core.Inventory.Units
                 else
                 {
                     issuedQuantity = dbEntity.UnitQuantity;
-                    dbEntity.UnitQuantity = 0;
+                    //dbEntity.UnitQuantity = 0;
                     // case is : model.UnitQuantity >= entity.UnitQuantity
                     // remove the InventoryUnit
-                    _context.InventoryUnit.Remove(dbEntity);
                     remainingQty -= dbEntity.UnitQuantity;
+                    _context.InventoryUnit.Remove(dbEntity);
                 }
-                list.Add(new InventoryUnit { Rate = dbEntity.Rate, UnitQuantity = issuedQuantity });
+                // note : don't use dbEntity below this comment line. if you want to use the dbentity then assign it's value to another var before remove() func.
+                list.Add(new InventoryUnit { Rate = rate, UnitQuantity = issuedQuantity, OrderItemId = orderItemId });
                 //
                 // Movement
                 //
                 var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now, dbEntity.ProductId);//"Direct Issue"
+                AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {
                     Date = now,
                     UnitQuantity = issuedQuantity,
-                    SourceWarehouseId = dbEntity.WarehouseId,
+                    SourceWarehouseId = warehouseId,//dbEntity.WarehouseId,
                     TargetWarehouseId = null,
                     InventoryUnit = model
                 };
-                UpdateWarehouseProductWithoutCommit(invMovement, dbEntity.Product);
+                UpdateWarehouseProductWithoutCommit(invMovement, product);
             }
             return list;
         }

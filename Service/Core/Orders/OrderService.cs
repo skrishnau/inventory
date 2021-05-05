@@ -36,7 +36,7 @@ namespace Service.Core.Orders
             IDatabaseChangeListener listener,
             IInventoryUnitService inventoryUnitService,
             IUserService customerService,
-            IAppSettingService appSettingSerivce, 
+            IAppSettingService appSettingSerivce,
             IProductService productService
             )//DatabaseContext context,
         {
@@ -99,7 +99,7 @@ namespace Service.Core.Orders
             }
             if (orderType != OrderTypeEnum.All)
                 orders = orders.Where(x => x.OrderType == type);
-           
+
             if (!string.IsNullOrEmpty(userSearchText))
                 orders = orders.Where(x => x.User.Name.Contains(name) || x.User.Company.Contains(name));
             if (!string.IsNullOrEmpty(receiptNoSearchText))
@@ -180,30 +180,112 @@ namespace Service.Core.Orders
 
         #region Set Functions
 
-        public ResponseModel<OrderModel> SaveVerifiedTransaction(OrderModel orderModel, bool checkout)
+        //public ResponseModel<OrderModel> SaveVerifiedTransaction(OrderModel orderModel, bool checkout)
+        //{
+        //    var message = "";
+        //    var isVerified = false;
+        //    var isCompleted = false;
+        //    using (var _context = new DatabaseContext())
+        //    {
+        //        var dbEntity = _context.Order.Find(orderModel.Id);
+        //        isVerified = dbEntity?.IsVerified ?? false;
+        //        isCompleted = dbEntity?.IsCompleted ?? false;
+        //        var entity = orderModel.MapToEntity(dbEntity);
+        //        entity.IsVerified = isVerified;
+        //        entity.IsCompleted = isCompleted;
+
+        //        // below line
+        //        SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message);
+        //        if (!string.IsNullOrEmpty(message))
+        //            return new ResponseModel<OrderModel> { Message = message, Success = false };
+
+        //    }
+        //}
+
+        public ResponseModel<OrderModel> SaveOrderForRateUpdate(OrderModel orderModel, bool checkout)
         {
-            var message = "";
-            var isVerified = false;
-            var isCompleted = false;
+            // NOTE: in case of zerorateupdate of a purchase txn, we need to update all the sell transaction and txnItem haveing orderItemId as this orderItem Id
+            // AND in csse of zero rate update, we should NOT update any inventory Unit, we will update only transactions
             using (var _context = new DatabaseContext())
             {
-                var dbEntity = _context.Order.Find(orderModel.Id);
-                isVerified = dbEntity?.IsVerified ?? false;
-                isCompleted = dbEntity?.IsCompleted ?? false;
-                var entity = orderModel.MapToEntity(dbEntity);
-                entity.IsVerified = isVerified;
-                entity.IsCompleted = isCompleted;
+                var entity = _context.Order.Find(orderModel.Id);
+                if (entity != null)
+                {
+                    List<Transaction> sellTxns = new List<Transaction>();
+                    List<TransactionItem> allTxnItems = new List<TransactionItem>();
+                    List<InventoryUnit> allInventoryUnits = new List<InventoryUnit>();
+                    foreach (var item in orderModel.OrderItems)
+                    {
+                        var orderItem = entity.OrderItems.FirstOrDefault(x => x.Id == item.Id);
+                        if (orderItem != null)
+                        {
+                            foreach(var inv in orderItem.InventoryUnits)
+                            {
+                                inv.Rate = item.Rate;
+                            }
+                            orderItem.Rate = item.Rate;
+                            orderItem.Total = item.Rate * orderItem.UnitQuantity;
+                            UpdateProductForOrderItemSaveWithoutCommit(_context, entity, orderItem);
+                            // 1. update transaction Items
+                            var txnItems = _context.TransactionItem.Where(x => x.PurchaseOrderItemId == orderItem.Id).ToList();
+                            foreach (var inv in txnItems)
+                            {
+                                inv.CostPriceRate = orderItem.Rate;
+                                inv.CostPriceTotal = inv.CostPriceRate * inv.UnitQuantity;
+                                sellTxns.Add(inv.Transaction);
+                                allTxnItems.Add(inv);
+                            }
+                        }
+                    }
+                    foreach (var txn in sellTxns.Distinct())
+                    {
+                        txn.CostPriceTotal = txn.TransactionItems.Sum(x => x.CostPriceTotal);
+                        txn.Order.CostPriceTotal = txn.CostPriceTotal;
+                        foreach (var oi in txn.Order.OrderItems)
+                        {
+                            var ti = allTxnItems.Where(x => x.SaleOrderItemId == oi.Id);
+                            oi.CostPriceRate = ti.Sum(x => x.CostPriceRate * x.UnitQuantity) / ti.Sum(x => x.UnitQuantity);
+                            oi.CostPriceTotal = oi.UnitQuantity * oi.CostPriceRate;
+                        }
+                    }
+                    // order 
+                    entity.TotalAmount = entity.OrderItems.Sum(x => x.Total);
+                    entity.IsCompleted = true;
+                    // transactions
+                    var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
+                    if (!orderModel.OrderItems.Any(x => x.Rate <= 0))
+                    {
+                        var transaction = GetTransactionWithoutCommit(_context, orderModel);
+                        transaction.CostPriceTotal = entity.CostPriceTotal;
+                        if (user != null)
+                        {
+                            user.Transactions.Add(transaction);
+                        }
+                        entity.Transactions.Add(transaction);
+                    }
+                }
+                _context.SaveChanges();
+                var args = BaseEventArgs<OrderModel>.Instance;
+                args.Mode = Utility.UpdateMode.EDIT;
+                args.Model = entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
 
-                // below line
-                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message);
-                if (!string.IsNullOrEmpty(message))
-                    return new ResponseModel<OrderModel> { Message = message, Success = false };
-
+                _listener.TriggerOrderUpdateEvent(null, args);
+                _listener.TriggerProductUpdateEvent(null, null);
+                _listener.TriggerUserUpdateEvent(null, null);
+                _listener.TriggerInventoryUnitUpdateEvent(null, null);
+                var newOrder = _context.Order.Find(entity.Id)?.MapToModel(true);
+                return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true };
             }
         }
 
         public ResponseModel<OrderModel> SaveOrder(OrderModel orderModel, bool checkout)
         {
+            // Zero-Rate Update case 
+            // in case of zerorateupdate of a purchase txn, we need to update all the sell transaction and txnItem haveing orderItemId as this orderItem Id
+            // AND in csse of zero rate update, we should NOT update any inventory Unit, we will update only transactions
+            if (orderModel.IsVerified)
+                return SaveOrderForRateUpdate(orderModel, checkout);
+
             var message = "";
             var isEditMode = orderModel.Id > 0;
             var now = DateTime.Now;
@@ -228,24 +310,37 @@ namespace Service.Core.Orders
                     UndoOrderTransactionsWithoutCommit(_context, entity.ParentOrderId);
                     UndoInventoryItemsWithoutCommit(_context, entity.ParentOrderId);
                 }
-
                 var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
-                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message);
+                var txnItemsList = new List<TransactionItem>();
+                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message, ref txnItemsList);
+                // items summary in order
+                entity.TotalAmount = entity.OrderItems.Sum(x => x.Total);
+                if (entity.OrderItems.Any(x => (x.CostPriceTotal ?? 0) == 0))
+                    entity.CostPriceTotal = 0;
+                else
+                    entity.CostPriceTotal = entity.OrderItems.Sum(x => x.CostPriceTotal);
+
                 if (!string.IsNullOrEmpty(message))
                     return new ResponseModel<OrderModel> { Message = message, Success = false };
 
                 if (checkout)
                 {
-                    // makechecout
+                    // makecheckout
                     MakeCheckout(_context, ref entity, ref orderModel);
-                    if(!orderModel.OrderItems.Any(x=>x.Rate <= 0))
+                    // add transaction for new checkout ; don't add txn for zero rate case
+                    if (!orderModel.OrderItems.Any(x => x.Rate <= 0))
                     {
                         var transaction = GetTransactionWithoutCommit(_context, orderModel);
                         transaction.CostPriceTotal = entity.CostPriceTotal;
                         if (user != null)
                         {
                             user.Transactions.Add(transaction);
+                        }
+                        if (entity.OrderType == OrderTypeEnum.Sale.ToString())
+                        {
+                            foreach (var txnItem in txnItemsList.Where(x => x.PurchaseOrderItem != null || x.PurchaseOrderItemId > 0 || x.CostPriceRate > 0).ToList())
+                                transaction.TransactionItems.Add(txnItem);
                         }
                         entity.Transactions.Add(transaction);
                     }
@@ -267,9 +362,9 @@ namespace Service.Core.Orders
                         item.WarehouseId = entity.WarehouseId;
                     }
                 }
-                if (checkout)
+                if (checkout && !isVerified)
                 {
-                    _appSettingService.IncrementBillIndex((ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), orderModel.OrderType));
+                    _appSettingService.IncrementBillIndexWithoutCommit(_context, (ReferencesTypeEnum)Enum.Parse(typeof(ReferencesTypeEnum), orderModel.OrderType));
                 }
                 else
                 {
@@ -338,7 +433,7 @@ namespace Service.Core.Orders
 
         private void MakeCheckout(DatabaseContext _context, ref Order entity, ref OrderModel orderModel)
         {
-            if(!orderModel.OrderItems.Any(x=>x.Rate == 0))
+            if (!orderModel.OrderItems.Any(x => x.Rate == 0))
             {
                 entity.IsCompleted = true;
                 //entity.CompletedDate = DateTime.Now; // completed date already set by user from UI
@@ -455,8 +550,9 @@ namespace Service.Core.Orders
             }
         }
 
-        private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message)
+        private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message, ref List<TransactionItem> txnItemsList)
         {
+            // var transactionItems = new List<TransactionItem>();
             var newProductList = new List<Product>();
             var newPackageList = new List<Package>();
             if (order == null)
@@ -487,7 +583,7 @@ namespace Service.Core.Orders
                     }
                 }
                 item.Total = item.Rate * item.UnitQuantity;
-                if ((item.PackageId??0) == 0)
+                if ((item.PackageId ?? 0) == 0)
                 {
                     var packageEntity = _context.Package.FirstOrDefault(x => x.Name == item.Package);
                     if (packageEntity != null)
@@ -512,73 +608,73 @@ namespace Service.Core.Orders
             // second add/update
             foreach (var item in items)
             {
-                Product product = null; ;
+                Product product = null;
                 var warehouse = _inventoryUnitService.FindWarehouseOrReturnMainWarehouse(_context, item.WarehouseId);
                 item.WarehouseId = warehouse.Id;
                 if (item.ProductId == 0 && string.IsNullOrEmpty(item.Product))
                     continue;
-                //var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
-                var entity = item.MapToEntity(null);//OrderItemMapper.MapToEntity(item, entity);
-                if (entity.Id == 0)
+                var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
+                //var entity = item.MapToEntity(null);//OrderItemMapper.MapToEntity(item, entity);
+                entity = item.MapToEntity(entity);
+                if ((entity.PackageId ?? 0) == 0)
                 {
-                    if ((entity.PackageId ?? 0) == 0)
+                    if (!string.IsNullOrEmpty(item.Package))
                     {
-                        if (!string.IsNullOrEmpty(item.Package))
+                        var packageInNewList = newPackageList.FirstOrDefault(x => x.Name.Equals(item.Package, StringComparison.OrdinalIgnoreCase));
+                        if (packageInNewList == null)
                         {
-                            var packageInNewList = newPackageList.FirstOrDefault(x => x.Name.Equals(item.Package, StringComparison.OrdinalIgnoreCase));
-                            if (packageInNewList == null)
-                            {
-                                var package = new Package
-                                {
-                                    Use = true,
-                                    Name = item.Package,
-                                };
-                                entity.Package = package;
-                                newPackageList.Add(package);
-                            }
-                            else
-                            {
-                                entity.Package = packageInNewList;
-                            }
-                        }
-                        else
-                        {
-                            entity.PackageId = null;
-                        }
-                    }
-                    if (entity.ProductId == 0)
-                    {
-                         product = newProductList.FirstOrDefault(x => x.Name.Equals(item.Product, StringComparison.OrdinalIgnoreCase));
-                        if (product == null)
-                        {
-                            // create prouct 
-                            product = new Product
+                            var package = new Package
                             {
                                 Use = true,
-                                Name = item.Product,
-                                SKU = item.Product,
-                                CategoryId = null,
-                                BaseUomId = null,
-                                CreatedAt = DateTime.Now,
-                                UpdatedAt = DateTime.Now,
-                                //PackageId = entity.PackageId > 0 ? entity.PackageId: 0//item.PackageId,
-                                WarehouseId = null,
-                                SupplyPrice = order.OrderType == OrderTypeEnum.Purchase.ToString() ? item.Rate : 0,
-                                RetailPrice = order.OrderType == OrderTypeEnum.Sale.ToString() ? item.Rate : 0,
+                                Name = item.Package,
                             };
-                            if (entity.PackageId > 0)
-                                product.PackageId = entity.PackageId;
-                            else
-                                product.Package = entity.Package;
-                            entity.Product = product;
-                            newProductList.Add(product);
+                            entity.Package = package;
+                            newPackageList.Add(package);
                         }
                         else
                         {
-                            entity.Product = product;
+                            entity.Package = packageInNewList;
                         }
                     }
-
+                    else
+                    {
+                        entity.PackageId = null;
+                    }
+                }
+                if (entity.ProductId == 0)
+                {
+                    product = newProductList.FirstOrDefault(x => x.Name.Equals(item.Product, StringComparison.OrdinalIgnoreCase));
+                    if (product == null)
+                    {
+                        // create prouct 
+                        product = new Product
+                        {
+                            Use = true,
+                            Name = item.Product,
+                            SKU = item.Product,
+                            CategoryId = null,
+                            BaseUomId = null,
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
+                            //PackageId = entity.PackageId > 0 ? entity.PackageId: 0//item.PackageId,
+                            WarehouseId = null,
+                            SupplyPrice = order.OrderType == OrderTypeEnum.Purchase.ToString() ? item.Rate : 0,
+                            RetailPrice = order.OrderType == OrderTypeEnum.Sale.ToString() ? item.Rate : 0,
+                        };
+                        if (entity.PackageId > 0)
+                            product.PackageId = entity.PackageId;
+                        else
+                            product.Package = entity.Package;
+                        entity.Product = product;
+                        newProductList.Add(product);
+                    }
+                    else
+                    {
+                        entity.Product = product;
+                    }
+                }
+                if (entity.Id == 0)
+                {
                     // add
                     order.OrderItems.Add(entity);
                 }
@@ -587,27 +683,41 @@ namespace Service.Core.Orders
                 // modify product inStock & OnHold quantity
                 if (checkout)
                 {
+                    List<InventoryUnit> invUnits = null;
                     UpdateProductForOrderItemSaveWithoutCommit(_context, order, entity);
+
                     if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                     {
-                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, "PO Receive", ref message, product);
+                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, "PO Receive", ref message, product, order.ReferenceNumber, entity);
                     }
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
-                        var invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), "SO Issue", ref message);
+                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), "SO Issue", ref message);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
-                        if (invUnits.Count > 0 && invUnitsQty > 0)
+                        if (invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0))
                         {
                             entity.CostPriceRate = invUnits.Sum(x => x.UnitQuantity * x.Rate) / invUnitsQty;
                             entity.CostPriceTotal = entity.UnitQuantity * entity.CostPriceRate;
                         }
+                        foreach (var inv in invUnits)
+                        {
+                            txnItemsList.Add(new TransactionItem
+                            {
+                                PurchaseOrderItemId = inv.OrderItemId,
+                                SaleOrderItem = entity,
+                                CostPriceRate = inv.Rate,
+                                UnitQuantity = inv.UnitQuantity,
+                                CostPriceTotal = inv.Rate * inv.UnitQuantity,
+                            });
+                        }
+
                     }
+
+
                 }
             }
 
-            order.TotalAmount = items.Sum(x => x.Total);
-            order.CostPriceTotal = order.OrderItems.Sum(x => x.CostPriceTotal);
-            
+
         }
 
         private void UpdateProductForOrderItemSaveWithoutCommit(DatabaseContext _context, Order order, OrderItem entity)
@@ -617,7 +727,7 @@ namespace Service.Core.Orders
                 product = _context.Product.Find(entity.ProductId);
             if (product != null)
             {
-                _productService.AddPriceHistoryWithoutCommit(entity.Product, entity.Rate, order.OrderType, order.CompletedDate, entity.Package, entity.PackageId);
+                _productService.AddPriceHistoryWithoutCommit(product, entity.Rate, order.OrderType, order.CompletedDate, entity.Package, entity.PackageId);
                 product.UpdatedAt = DateTime.Now;
             }
         }
@@ -632,7 +742,8 @@ namespace Service.Core.Orders
             {
                 var message = "";
                 var poEntity = _context.Order.Find(purchaseOrderId);
-                SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message);
+                var txnItemList = new List<TransactionItem>();
+                SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message, ref txnItemList);
 
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);

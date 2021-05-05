@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Context;
 using Infrastructure.Entities.Inventory;
+using Infrastructure.Entities.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace Service.Core.Inventory.Units
 
         string SaveDirectReceive(List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode);
         string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode);
-        InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg, Product product);
+        InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem);
         //
         // Direct Issue of whole Inventory-Unit
         //

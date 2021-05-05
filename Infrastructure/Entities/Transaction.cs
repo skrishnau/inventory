@@ -10,6 +10,12 @@ namespace Infrastructure.Entities
 {
     public class Transaction
     {
+
+        public Transaction()
+        {
+            TransactionItems = new List<TransactionItem>();
+        }
+
         public int Id { get; set; }
 
         public DateTime Date { get; set; }
@@ -50,6 +56,8 @@ namespace Infrastructure.Entities
         /// </summary>
         public string Type { get; set; }
         public bool IsVoid { get; set; }
+
+        public virtual ICollection<TransactionItem> TransactionItems { get; set; }
         
     }
 }

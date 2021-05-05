@@ -13,23 +13,23 @@ namespace DTO.Core.Inventory
 {
     public static class OrderItemMapper
     {
-        public static List<InventoryUnitModel> MapToInventoryUnitModel(ICollection<OrderItemModel> models)
+        public static List<InventoryUnitModel> MapToInventoryUnitModel(ICollection<OrderItemModel> models, bool assignIdAlso = false)
         {
             var list = new List<InventoryUnitModel>();
 
             foreach (var model in models)
             {
-                list.Add(MapToInventoryUnitModel(model));
+                list.Add(MapToInventoryUnitModel(model, assignIdAlso));
             }
 
             return list;
         }
 
-        public static InventoryUnitModel MapToInventoryUnitModel(OrderItemModel model)
+        public static InventoryUnitModel MapToInventoryUnitModel(OrderItemModel model, bool assignIdAlso = false)
         {
             return new InventoryUnitModel()
             {
-                Id = 0,
+                Id = assignIdAlso ? model.Id : 0,
                 ProductId = model.ProductId,
                 Product = model.Product,
                 SKU = model.SKU,

@@ -1,11 +1,17 @@
 ﻿using Infrastructure.Entities.Inventory;
 using Infrastructure.Entities.Users;
 using System;
+using System.Collections.Generic;
 
 namespace Infrastructure.Entities.Orders
 {
     public class OrderItem
     {
+        public OrderItem()
+        {
+            InventoryUnits = new List<InventoryUnit>();
+        }
+
         public int Id { get; set; }
         // to which purchase transaction does this item belongs 
         public int OrderId { get; set; }
@@ -49,7 +55,8 @@ namespace Infrastructure.Entities.Orders
 
         public DateTime? ProductionDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
-
+        
+        public virtual ICollection<InventoryUnit> InventoryUnits { get; set; }
 
         // items will be hard deleted; if the items need to be removed after "Sent" then cancel the whole order
         // an item can be cancelled by customer at any point during transaction

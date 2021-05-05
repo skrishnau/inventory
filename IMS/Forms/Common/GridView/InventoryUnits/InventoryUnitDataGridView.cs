@@ -157,7 +157,6 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var isHold = row.Cells[colIsHold.Index].Value;
                 var expirationDate = GetDateCellValue(row, colExpirationDate);
                 var productionDate = GetDateCellValue(row, colProductionDate);
-
                 if (isValid)
                 {
                     if (product.Id == 0 && string.IsNullOrEmpty(product.Name))
@@ -390,7 +389,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             return warehouseId;
         }
-
+        
         private int GetLotNumber(DataGridViewRow row, object formattedValue)
         {
             var cell = row.Cells[colLotNumber.Index];

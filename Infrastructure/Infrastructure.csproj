@@ -70,6 +70,7 @@
     <Compile Include="Entities\Inventory\VariantAttribute.cs" />
     <Compile Include="Entities\Inventory\WarehouseProduct.cs" />
     <Compile Include="Entities\Orders\OrderItem.cs" />
+    <Compile Include="Entities\TransactionItem.cs" />
     <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
     <Compile Include="Entities\Inventory\Warehouse.cs" />
     <Compile Include="Entities\Common\Settings.cs" />
@@ -100,6 +101,18 @@
     <Compile Include="Migrations\202104141009562_ProductAddedInMovementTable.Designer.cs">
       <DependentUpon>202104141009562_ProductAddedInMovementTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104291835228_AddedTransactionItemTable.cs" />
+    <Compile Include="Migrations\202104291835228_AddedTransactionItemTable.Designer.cs">
+      <DependentUpon>202104291835228_AddedTransactionItemTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104291920038_nullableorderItemId.cs" />
+    <Compile Include="Migrations\202104291920038_nullableorderItemId.Designer.cs">
+      <DependentUpon>202104291920038_nullableorderItemId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105021735424_TransactionItemAddedOrderItem.cs" />
+    <Compile Include="Migrations\202105021735424_TransactionItemAddedOrderItem.Designer.cs">
+      <DependentUpon>202105021735424_TransactionItemAddedOrderItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -128,6 +141,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104141009562_ProductAddedInMovementTable.resx">
       <DependentUpon>202104141009562_ProductAddedInMovementTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104291835228_AddedTransactionItemTable.resx">
+      <DependentUpon>202104291835228_AddedTransactionItemTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104291920038_nullableorderItemId.resx">
+      <DependentUpon>202104291920038_nullableorderItemId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105021735424_TransactionItemAddedOrderItem.resx">
+      <DependentUpon>202105021735424_TransactionItemAddedOrderItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

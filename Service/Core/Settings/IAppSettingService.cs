@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,10 +32,11 @@ namespace Service.Core.Settings
         string GetReceiptNumber(ReferencesTypeEnum orderType);
         string GetReceiptNumber(BillSettingsModel setting, long currentIndex);
         bool IsLicenseExpired();
-        DateTime?[] GetLicenseExpireDate();
-        void SaveLicenseExpireDate(DateTime date);
+        DateTime?[] GetLicenseStartDate();
+        void SaveLicenseStartDate(DateTime date);
         bool SaveCurrentIndex(long index, ReferencesTypeEnum orderType);
         bool IncrementBillIndex(ReferencesTypeEnum orderType);
+        bool IncrementBillIndexWithoutCommit(DatabaseContext _context, ReferencesTypeEnum orderType);
 
         PasswordModel GetPassword();
         bool SavePassword(PasswordModel password);

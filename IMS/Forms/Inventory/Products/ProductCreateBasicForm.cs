@@ -13,6 +13,7 @@ using IMS.Forms.Common.Validations;
 using IMS.Forms.Inventory.Categories;
 using Service.Core.Users;
 using Service.Interfaces;
+using IMS.Forms.Inventory.Packages;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -86,17 +87,22 @@ namespace IMS.Forms.Inventory.Products
             _requiredValidator = new RequiredFieldValidator(errorProvider1, requiredControls);
             var greaterControls = new Control[]
             {
-                numSupplyPrice, numRetailPrice
+                //numSupplyPrice, numRetailPrice
             };
             _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider1, greaterControls);
 
+            lblCategory.DoubleClick += lblCategory_DoubleClick;
+            lblPackage.DoubleClick += LblPackage_DoubleClick;
         }
+
 
         private void InitializeDatabaseChangeListeners()
         {
             _listener.CategoryUpdated += _listener_CategoryUpdated;
+            _listener.PackageUpdated += _listener_PackageUpdated;
         }
 
+       
         #endregion
 
 
@@ -165,6 +171,17 @@ namespace IMS.Forms.Inventory.Products
             }
         }
 
+        private void LblPackage_DoubleClick(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var categoryCreate = Program.container.GetInstance<PackageCreateForm>();
+                categoryCreate.ShowInTaskbar = false;
+                categoryCreate.ShowDialog();
+            }
+        }
+
+
         #endregion
 
 
@@ -175,6 +192,12 @@ namespace IMS.Forms.Inventory.Products
             PopulateCategoryCombo();
             cbCategory.Text = e.Category.Name;
         }
+        private void _listener_PackageUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PackageModel> e)
+        {
+            PopulatePackage();
+            //cbPackage.SelectedValue = e.Model.Id;
+        }
+
 
         #endregion
 

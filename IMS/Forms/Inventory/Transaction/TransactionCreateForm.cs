@@ -189,15 +189,15 @@ namespace IMS.Forms.Inventory.Transaction
                 var total = txtTotal.Value;
 
                 var sum = 0M;
-                if(cbDiscountType.SelectedItem?.ToString() == "%")
+                if (cbDiscountType.SelectedItem?.ToString() == "%")
                 {
                     sum = total - (total * discount / 100);
                 }
                 else
                 {
-                     sum = total - discount;
+                    sum = total - discount;
                 }
-                if (sum<=0)
+                if (sum <= 0)
                 {
                     errorProvider.SetError(txtDiscount, "Can't be zero");
                     sum = total;
@@ -208,7 +208,7 @@ namespace IMS.Forms.Inventory.Transaction
                     txtPaidAmount.Value = sum;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -307,9 +307,9 @@ namespace IMS.Forms.Inventory.Transaction
                     // change button
                     _orderId = model.Id;
                     txtReceiptNo.Text = model.ReferenceNumber;//tbOrderNumber.Text 
-                    dtExpectedDate.SetValue (model.DeliveryDate);
+                    dtExpectedDate.SetValue(model.DeliveryDate);
                     dtPaymentDueDate.SetValue(model.PaymentDueDate.HasValue ? model.PaymentDueDate.Value : DateTime.Now);
-                    dtCompletedDate.SetValue (model.CompletedDate.HasValue? model.CompletedDate.Value : DateTime.Now);
+                    dtCompletedDate.SetValue(model.CompletedDate.HasValue ? model.CompletedDate.Value : DateTime.Now);
                     txtAddress.Text = model.Address;
                     txtPhone.Text = model.Phone;
                     txtTotal.Value = model.TotalAmount;
@@ -320,10 +320,11 @@ namespace IMS.Forms.Inventory.Transaction
                     rbCredit.Checked = model.PaymentType == OrderPaymentTypeEnum.Credit.ToString(); // !rbCash.Checked;
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
-                    
 
-                    dgvItems.AddRows(OrderItemMapper.MapToInventoryUnitModel(model.OrderItems));
-                   
+                    var invModel = OrderItemMapper.MapToInventoryUnitModel(model.OrderItems, true);
+
+                    dgvItems.AddRows(invModel);
+
                     //if (model.IsCompleted)
                     //{
                     //    cbClient.Enabled = false;
@@ -422,7 +423,7 @@ namespace IMS.Forms.Inventory.Transaction
             var model = GetData(checkout);
             if (model == null)
                 return null;
-            if(checkout && (model.OrderItems == null || model.OrderItems.Count == 0))
+            if (checkout && (model.OrderItems == null || model.OrderItems.Count == 0))
             {
                 PopupMessage.ShowInfoMessage("At least one item is expected.");
                 this.Focus();
@@ -493,15 +494,16 @@ namespace IMS.Forms.Inventory.Transaction
                     CompletedDate = dtCompletedDate.GetValue(),
                     PaidAmount = txtPaidAmount.Value,
                     DiscountPercent = cbDiscountType.SelectedItem?.ToString() == "%" ? txtDiscount.Value : 0,
-                    DiscountAmount = cbDiscountType.SelectedItem?.ToString() == "%"  ? txtTotal.Value * txtDiscount.Value / 100 : txtDiscount.Value,
+                    DiscountAmount = cbDiscountType.SelectedItem?.ToString() == "%" ? txtTotal.Value * txtDiscount.Value / 100 : txtDiscount.Value,
                     CreatedAt = DateTime.Now,
-                    OrderItems = InventoryUnitMapper.MapToOrderItemModel(items, _orderId),
+                    OrderItems = InventoryUnitMapper.MapToOrderItemModel(items, _orderId, true),
                     ReferenceNumber = txtReceiptNo.Text,
                     Phone = txtPhone.Text,
                     Address = txtAddress.Text,
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.GetValue() : (DateTime?)null,
                     PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : rbCash.Checked ? OrderPaymentTypeEnum.Cash.ToString() : null,
-                    TotalAmount = items.Select(x => x.Total).Sum()
+                    TotalAmount = items.Select(x => x.Total).Sum(),
+                    IsVerified = _orderModel?.IsVerified??false,
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;
@@ -659,5 +661,5 @@ namespace IMS.Forms.Inventory.Transaction
         #endregion
     }
 
-    
+
 }

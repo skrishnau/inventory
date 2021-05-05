@@ -159,23 +159,23 @@ namespace DTO.Core.Inventory
                 
             };
         }
-        public static List<OrderItemModel> MapToOrderItemModel(List<InventoryUnitModel> model, int orderId)
+        public static List<OrderItemModel> MapToOrderItemModel(List<InventoryUnitModel> model, int orderId, bool assignIdAlso = false)
         {
             var list = new List<OrderItemModel>();
             if (model == null)
                 return list;
             foreach (var m in model)
             {
-                list.Add(MapToOrderItemModel(m, orderId));
+                list.Add(MapToOrderItemModel(m, orderId, assignIdAlso));
             }
             return list;
         }
 
-        public static OrderItemModel MapToOrderItemModel(InventoryUnitModel model, int orderId)
+        public static OrderItemModel MapToOrderItemModel(InventoryUnitModel model, int orderId, bool assignIdAlso = false)
         {
             return new OrderItemModel()
             {
-                Id = 0,
+                Id = assignIdAlso ? model.Id : 0,
                 ProductId = model.ProductId,
                 Product = model.Product,
                 SKU = model.SKU,

@@ -85,10 +85,11 @@ namespace IMS.Forms.Inventory
             var text = string.Empty;
             if (Constants.IS_TRIAL)
             {
-                var date = _appSettingService.GetLicenseExpireDate();
+                var date = _appSettingService.GetLicenseStartDate();
                 try
                 {
-                    text = "Trial Expires After " + (Math.Round((date[0].Value - DateTime.Now).TotalDays) + 1) + " days";
+                    var days = Math.Round((date[0].Value.AddDays(50) - DateTime.Now).TotalDays + 1);
+                    text = "Trial Expires After " + days + " days"; //(Math.Round((date[0].Value - DateTime.Now).TotalDays) + 1) 
                 }
                 catch (Exception)
                 {

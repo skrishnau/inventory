@@ -91,50 +91,53 @@ namespace Service.Core.Settings
 
 
         #endregion
-
-
-        // get bill settings
         public BillSettingsModel GetBillSettings(ReferencesTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
-                //return BillSettingsModel.GetNewInstance();
-                var model = new BillSettingsModel();
-
-                var prefixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_PREFIX.ToString();
-                var prefixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == prefixKey);
-                if (prefixEntity != null)
-                {
-                    model.Prefix = prefixEntity.Value;
-                }
-                // suffix
-                var suffixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_SUFFIX.ToString();
-                var suffixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == suffixKey);
-                if (suffixEntity != null)
-                {
-                    model.Suffix = suffixEntity.Value;
-                }
-                // Body
-                var bodyKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
-                var bodyEntity = _context.AppSetting.FirstOrDefault(x => x.Name == bodyKey);
-                if (bodyEntity != null)
-                {
-                    model.Body = bodyEntity.Value;
-                }
-                // CurrentIndex
-                var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
-                var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
-                if (currentIndexEntity != null)
-                {
-                    long currentIndex;
-                    if (long.TryParse(currentIndexEntity.Value, out currentIndex))
-                        model.CurrentIndex = currentIndex;
-                }
-                model.ReceiptNo = GetReceiptNumber(model, model.CurrentIndex + 1);
-
-                return model;
-
+                return GetBillSettings(_context, orderType);
             }
+        }
+        // get bill settings
+        public BillSettingsModel GetBillSettings(DatabaseContext _context, ReferencesTypeEnum orderType)
+        {
+
+            //return BillSettingsModel.GetNewInstance();
+            var model = new BillSettingsModel();
+
+            var prefixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_PREFIX.ToString();
+            var prefixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == prefixKey);
+            if (prefixEntity != null)
+            {
+                model.Prefix = prefixEntity.Value;
+            }
+            // suffix
+            var suffixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_SUFFIX.ToString();
+            var suffixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == suffixKey);
+            if (suffixEntity != null)
+            {
+                model.Suffix = suffixEntity.Value;
+            }
+            // Body
+            var bodyKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
+            var bodyEntity = _context.AppSetting.FirstOrDefault(x => x.Name == bodyKey);
+            if (bodyEntity != null)
+            {
+                model.Body = bodyEntity.Value;
+            }
+            // CurrentIndex
+            var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
+            var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
+            if (currentIndexEntity != null)
+            {
+                long currentIndex;
+                if (long.TryParse(currentIndexEntity.Value, out currentIndex))
+                    model.CurrentIndex = currentIndex;
+            }
+            model.ReceiptNo = GetReceiptNumber(model, model.CurrentIndex + 1);
+
+            return model;
+
         }
 
         // same as saveappsetting() - not implemented
@@ -253,37 +256,47 @@ namespace Service.Core.Settings
             return SaveCurrentIndex(sett.CurrentIndex + 1, orderType);
         }
 
-
+        public bool IncrementBillIndexWithoutCommit(DatabaseContext _context, ReferencesTypeEnum orderType)
+        {
+            var sett = GetBillSettings(_context, orderType);
+            return SaveCurrentIndexWithoutCommit(_context, sett.CurrentIndex + 1, orderType);
+        }
 
         public bool SaveCurrentIndex(long currentIndex, ReferencesTypeEnum orderType)
         {
             using (var _context = new DatabaseContext())
             {
-                //for CurrentIndex
-                var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
-                var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
-                if (currentIndexEntity == null)
-                {
-                    var currentIndexSetting = new AppSetting()
-                    {
-                        Name = currentIndexKey,
-                        CreatedAt = DateTime.Now,
-                        DisplayName = currentIndexKey,
-                        Group = "Bill",
-                        UpdatedAt = DateTime.Now,
-                        Value = currentIndex.ToString(),//model.CurrentIndex.ToString(),
-
-                    };
-                    _context.AppSetting.Add(currentIndexSetting);
-                }
-                else
-                {
-                    currentIndexEntity.UpdatedAt = DateTime.Now;
-                    currentIndexEntity.Value = currentIndex.ToString();// model.CurrentIndex.ToString();
-                }
+                var result = SaveCurrentIndexWithoutCommit(_context, currentIndex, orderType);
                 _context.SaveChanges();
-                return true;
+                return result;
             }
+        }
+
+        public bool SaveCurrentIndexWithoutCommit(DatabaseContext _context, long currentIndex, ReferencesTypeEnum orderType)
+        {
+            //for CurrentIndex
+            var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
+            var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
+            if (currentIndexEntity == null)
+            {
+                var currentIndexSetting = new AppSetting()
+                {
+                    Name = currentIndexKey,
+                    CreatedAt = DateTime.Now,
+                    DisplayName = currentIndexKey,
+                    Group = "Bill",
+                    UpdatedAt = DateTime.Now,
+                    Value = currentIndex.ToString(),//model.CurrentIndex.ToString(),
+
+                };
+                _context.AppSetting.Add(currentIndexSetting);
+            }
+            else
+            {
+                currentIndexEntity.UpdatedAt = DateTime.Now;
+                currentIndexEntity.Value = currentIndex.ToString();// model.CurrentIndex.ToString();
+            }
+            return true;
         }
 
 
@@ -566,7 +579,7 @@ namespace Service.Core.Settings
             return new PasswordModel { Password = password, Username = username };
         }
 
-        public void SaveLicenseExpireDate(DateTime date)
+        public void SaveLicenseStartDate(DateTime date)
         {
             var encrypted = StringCipher.Encrypt(date.ToString("yyyy/MM/dd"), "PASS@WORD1");
             var expireModel = new AppSettingModel()
@@ -588,9 +601,9 @@ namespace Service.Core.Settings
             }
         }
 
-        public DateTime?[] GetLicenseExpireDate()
+        public DateTime?[] GetLicenseStartDate()
         {
-            var array = new DateTime?[2] { null, null};
+            var array = new DateTime?[2] { null, null };
             DateTime expireAtDb;
             bool expireAtDbParsed = false;
             var validity = GetAppSetting("valid_till1");
@@ -633,19 +646,20 @@ namespace Service.Core.Settings
         public bool IsLicenseExpired()
         {
             var expired = false;
-            var dates = GetLicenseExpireDate(); // 0: Db , 1: Reg
+            var dates = GetLicenseStartDate(); // 0: Db , 1: Reg
             // if both persistence are null then create new entry
-            if (dates[0] == null && dates[1] == null)
+            if (dates[0] == null || dates[1] == null)
             {
                 // save the expire date
-                SaveLicenseExpireDate(DateTime.Now.AddDays(10).Date);
+                SaveLicenseStartDate(DateTime.Now.Date);
             }
-            var newDates = GetLicenseExpireDate(); // 0: Db , 1: Reg
-            if (newDates[0] == null || newDates[1] == null || newDates[0] != newDates[1])
-            {
-                expired = true;
-            }
-            else if (newDates[0].Value < DateTime.Now)
+            var newDates = GetLicenseStartDate(); // 0: Db , 1: Reg
+            //if (newDates[0] == null || newDates[1] == null || newDates[0] != newDates[1])
+            //{
+            //    expired = true;
+            //}
+            //else 
+            if (newDates[0].Value.AddDays(50) < DateTime.Now)
             {
                 expired = true;
             }

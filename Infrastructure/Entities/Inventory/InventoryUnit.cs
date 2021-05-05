@@ -28,7 +28,7 @@ namespace Infrastructure.Entities.Inventory
         public decimal UnitQuantity { get; set; }
         public decimal PackageQuantity { get; set; }
         public decimal Rate { get; set; }
-        public decimal Total{ get; set; }
+        public decimal Total { get; set; }
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
 
@@ -49,6 +49,7 @@ namespace Infrastructure.Entities.Inventory
         public string Remark { get; set; }
         public string Notes { get; set; }
 
-
+        public int? OrderItemId { get; set; }
+        public virtual Orders.OrderItem OrderItem { get; set; }
     }
 }
