@@ -292,7 +292,7 @@ namespace Service.Core
                     _context.SaveChanges();
                 }
             }
-
+            _listener.TriggerCategoryUpdateEvent(null, new CategoryEventArgs(null, UpdateMode.DELETE));
         }
 
         public List<CategoryModel> GetCategoryList(int? parentCateogryId)
@@ -325,13 +325,27 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.Category;
+                var query = _context.Category.Where(x=>x.DeletedAt == null).ToList();
+                var list = new List<IdNamePair>();
+                GetChildCategories(query, null, string.Empty, ref list);
+                return list;
+            }
+        }
 
-                return query.Select(x => new IdNamePair
+        private string GetSpaces()
+        {
+            return "     ";
+        }
+        private void GetChildCategories(List<Category> query, int? parentCategoryId, string spaces, ref List<IdNamePair> list)
+        {
+            foreach (var x in query.Where(x => x.ParentCategoryId == parentCategoryId))
+            {
+                list.Add(new IdNamePair
                 {
                     Id = x.Id,
-                    Name = x.Name
-                }).ToList();
+                    Name = spaces + x.Name
+                });
+                GetChildCategories(query, x.Id, spaces + GetSpaces(), ref list);
             }
         }
         public List<IdNamePair> GetUnderStockProducts()

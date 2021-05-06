@@ -67,7 +67,7 @@ namespace DTO.Core.Inventory
                 UomId = entity.UomId,
                 Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name,
                 WarehouseId = entity.WarehouseId,
-
+                PurchaseOrderItemId = entity.OrderItemId,
             };
         }
 
@@ -105,7 +105,7 @@ namespace DTO.Core.Inventory
                 UomId = entity.UomId,
                 // Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name,
                 WarehouseId = entity.WarehouseId,
-
+                OrderItemId = entity.OrderItemId,
             };
         }
 
@@ -156,7 +156,7 @@ namespace DTO.Core.Inventory
                 UomId = model.UomId,
                 //Warehouse = model.Warehouse,
                 WarehouseId = model.WarehouseId,
-                
+                OrderItemId = model.PurchaseOrderItemId,
             };
         }
         public static List<OrderItemModel> MapToOrderItemModel(List<InventoryUnitModel> model, int orderId, bool assignIdAlso = false)

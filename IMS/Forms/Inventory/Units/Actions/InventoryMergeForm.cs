@@ -42,29 +42,38 @@ namespace IMS.Forms.Inventory.Units.Actions
             {
                 foreach (var warehouseWiseGroup1 in productWiseGroup.GroupBy(x => x.WarehouseId))
                 {
-                    foreach(var whg in warehouseWiseGroup1)
+                    var zeroRateOrderItemIdGroup = warehouseWiseGroup1.Where(x => x.Rate == 0).GroupBy(x => x.PurchaseOrderItemId); ;
+                    foreach (var zwhg in zeroRateOrderItemIdGroup)
                     {
-                        if(whg.Rate == 0)
+                        if (zwhg.Count() > 0)
                         {
-                            var m = GetMergedModel(whg, whg.PackageQuantity, whg.UnitQuantity, whg.Rate);
-                            displayList.Add(m);
-                            // add to the 
+                            var mergedModel = GetMergedModel(zwhg.ToList());
+                            displayList.Add(mergedModel);
                         }
                     }
 
-                    var withoutZeroRate = warehouseWiseGroup1.Where(x => x.Rate > 0 );
-                    //var first = invUnitGroup.First();
-                    var last = withoutZeroRate.Last();
-                    var unitQuantity = withoutZeroRate.Sum(x => x.UnitQuantity);
-                    var rate = withoutZeroRate.Sum(x => x.UnitQuantity * x.Rate) / withoutZeroRate.Sum(x => x.UnitQuantity);
-                    var packageQuantity = withoutZeroRate.Sum(x => x.PackageQuantity);
-                    var model = GetMergedModel(last, packageQuantity, unitQuantity, rate);
-                    displayList.Add(model);
+                    var withoutZeroRate = warehouseWiseGroup1.Where(x => x.Rate > 0).ToList();
+                    if (withoutZeroRate.Count() > 0)
+                    {
+                        var mergedModel = GetMergedModel(withoutZeroRate);
+                        displayList.Add(mergedModel);
+                    }
                 }
-               
+
             }
             dgvInventoryUnit.AutoGenerateColumns = false;
             dgvInventoryUnit.DataSource = displayList;
+        }
+
+        private InventoryUnitModel GetMergedModel(List<InventoryUnitModel> withoutZeroRate)
+        {
+            //var first = invUnitGroup.First();
+            var last = withoutZeroRate.Last();
+            var unitQuantity = withoutZeroRate.Sum(x => x.UnitQuantity);
+            var rate = withoutZeroRate.Sum(x => x.UnitQuantity * x.Rate) / withoutZeroRate.Sum(x => x.UnitQuantity);
+            var packageQuantity = withoutZeroRate.Sum(x => x.PackageQuantity);
+            var model = GetMergedModel(last, packageQuantity, unitQuantity, rate);
+            return model;
         }
 
         private InventoryUnitModel GetMergedModel(InventoryUnitModel last, decimal packageQuantity, decimal unitQuantity, decimal rate)

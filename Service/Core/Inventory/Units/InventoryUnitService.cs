@@ -75,7 +75,6 @@ namespace Service.Core.Inventory.Units
         {
             using (var _context = new DatabaseContext())
             {
-
                 DateTime now = DateTime.Now;
                 foreach (var productWiseGroup in list.GroupBy(x => x.ProductId))
                 {
@@ -85,62 +84,73 @@ namespace Service.Core.Inventory.Units
                     {
                         foreach (var invUnitGroup in productWiseGroup.GroupBy(x => x.WarehouseId))
                         {
-                            if (invUnitGroup.Count() >= 2)
+                            var zeroRateOrderItemIdGroup = invUnitGroup.Where(x => x.Rate == 0).GroupBy(x => x.PurchaseOrderItemId); ;
+                            foreach (var zwhg in zeroRateOrderItemIdGroup)
                             {
-                                
-                                // means there are 2 or more items for this product
-                                var unitQuantity = 0M;
-                                var packageQuantity = 0M;
-                                InventoryUnit editingRecord = null;
-                                var withRate = invUnitGroup.Where(x => x.Rate > 0).ToList();
-                                for (var i = 0; i < withRate.Count(); i++)
+                                var withZeroRate = zwhg.ToList();
+                                // if 2 or more items for this product
+                                if (withZeroRate.Count >= 2)
                                 {
-                                    var dbEntity = _context.InventoryUnit
-                                        .Find(withRate.ElementAt(i).Id);
-                                    if (dbEntity != null)
-                                    {
-                                        unitQuantity += dbEntity.UnitQuantity;
-                                        packageQuantity += dbEntity.PackageQuantity;
-                                        if (i < withRate.Count() - 1)
-                                        {
-                                            // remove
-                                            _context.InventoryUnit.Remove(dbEntity);
-                                            withRate.ElementAt(i).UpdateAction = UpdateMode.DELETE.ToString();
-                                        }
-                                        else
-                                        {
-                                            // get the last entity ; 
-                                            // TODO:: assign the value from multiple entities to the newly created 
-                                            editingRecord = dbEntity;
-                                            withRate.ElementAt(i).UpdateAction = UpdateMode.EDIT.ToString();
-                                        }
-                                    }
+                                    UpdateMerging(_context, withZeroRate, product, now);
                                 }
-                                editingRecord.UnitQuantity = unitQuantity;
-                                //var unitsInPackage = product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage;
-                                editingRecord.PackageQuantity = GetPackageQuantity(unitQuantity, product.UnitsInPackage);// Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
-                                                                                                                         //editingRecord.PackageQuantity = packageQuantity;
-                                                                                                                         //
-                                                                                                                         // Movement
-                                                                                                                         //
-                                string splitString = "";
-                                list.ForEach(x => { splitString += x.UnitQuantity + " + "; });
-                                splitString = splitString.Trim();
-                                splitString = splitString.TrimEnd(new char[] { '+' });
-                                var description = "Merged " + splitString + " of '" + product.Name + "' into " + editingRecord.UnitQuantity + " qty.";
-                                AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now, editingRecord.ProductId);
-
                             }
 
+                            var withRate = invUnitGroup.Where(x => x.Rate > 0).ToList();
+                            // if 2 or more items for this product
+                            if (withRate.Count >= 2)
+                                UpdateMerging(_context, withRate, product, now);
                         }
                     }
                 }
-
-
                 _context.SaveChanges();
                 var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
                 _listener.TriggerInventoryUnitUpdateEvent(null, args);
             }
+        }
+
+        private void UpdateMerging(DatabaseContext _context, List<InventoryUnitModel> invList, Product product, DateTime now)
+        {
+            var unitQuantity = 0M;
+            var packageQuantity = 0M;
+            InventoryUnit editingRecord = null;
+            for (var i = 0; i < invList.Count(); i++)
+            {
+                var dbEntity = _context.InventoryUnit
+                    .Find(invList.ElementAt(i).Id);
+                if (dbEntity != null)
+                {
+                    unitQuantity += dbEntity.UnitQuantity;
+                    packageQuantity += dbEntity.PackageQuantity;
+                    if (i < invList.Count() - 1)
+                    {
+                        // remove
+                        _context.InventoryUnit.Remove(dbEntity);
+                        invList.ElementAt(i).UpdateAction = UpdateMode.DELETE.ToString();
+                    }
+                    else
+                    {
+                        // get the last entity ; 
+                        // TODO:: assign the value from multiple entities to the newly created 
+                        editingRecord = dbEntity;
+                        invList.ElementAt(i).UpdateAction = UpdateMode.EDIT.ToString();
+                    }
+                }
+            }
+            editingRecord.UnitQuantity = unitQuantity;
+            //var unitsInPackage = product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage;
+            editingRecord.PackageQuantity = GetPackageQuantity(unitQuantity, product.UnitsInPackage);
+            // Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
+            //editingRecord.PackageQuantity = packageQuantity;
+            //
+            // Movement
+            //
+            string splitString = "";
+            invList.ForEach(x => { splitString += x.UnitQuantity + " + "; });
+            splitString = splitString.Trim();
+            splitString = splitString.TrimEnd(new char[] { '+' });
+            var description = "Merged " + splitString + " of '" + product.Name + "' into " + editingRecord.UnitQuantity + " qty.";
+            AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now, editingRecord.ProductId);
+
         }
 
         public void SplitInventoryUnit(List<decimal> quantitySplitList, InventoryUnitModel model)
@@ -228,7 +238,7 @@ namespace Service.Core.Inventory.Units
                 {
 
                     var toWp = product.WarehouseProducts.FirstOrDefault(x => x.WarehouseId == moveModel.TargetWarehouseId);
-                  
+
                     // add to the target warehouse (toWarehouse)
                     if (toWp == null)
                     {
@@ -386,7 +396,7 @@ namespace Service.Core.Inventory.Units
             unitEntity.ReceiveAdjustment = adjustmentCode;
             _context.InventoryUnit.Add(unitEntity);
 
-            if(product == null)
+            if (product == null)
                 product = _context.Product.Find(unit.ProductId);
 
             var description = "Received " + unit.UnitQuantity + " quantities of " +

@@ -65,6 +65,8 @@ namespace ViewModel.Core.Inventory
         /// Update Action: "UpdateMode" enum; one of : EDIT, ADD, DELETE
         /// </summary>
         public string UpdateAction{ get; set; } 
+
+        public int? PurchaseOrderItemId { get; set; }
         
 
     }

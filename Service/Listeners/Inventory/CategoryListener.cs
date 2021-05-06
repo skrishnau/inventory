@@ -21,6 +21,11 @@ namespace Service.Listeners.Inventory
         {
             Category = model;
         }
+        public CategoryEventArgs(CategoryModel model, UpdateMode mode)
+        {
+            Category = model;
+            Mode = mode;
+        }
         public static CategoryEventArgs Instance { get { return new CategoryEventArgs(); } }
 
     }

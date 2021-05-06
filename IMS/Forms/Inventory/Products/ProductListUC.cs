@@ -67,7 +67,7 @@ namespace IMS.Forms.Inventory.Products
         private void PopulateCategoryCombo()
         {
             var cats = _productService.GetAllCategoriesForCombo();
-            cats.Insert(0, new IdNamePair(0, ""));
+            cats.Insert(0, new IdNamePair(0, "--- ALL ---"));
             cbCategory.DisplayMember = "Name";
             cbCategory.ValueMember = "Id";
             cbCategory.DataSource = cats;
@@ -181,6 +181,7 @@ namespace IMS.Forms.Inventory.Products
         private void CbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateProductData();
+            //cbCategory.Text = "hello";//= cbCategory.Text.Trim();//(cbCategory.SelectedItem as IdNamePair)?.Name?.Trim()?? cbCategory.Text;
         }
 
         private void _listener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
