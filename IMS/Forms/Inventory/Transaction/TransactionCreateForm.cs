@@ -184,7 +184,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             try
             {
-                errorProvider.SetError(txtDiscount, string.Empty);
+                errorProvider.SetError(txtSum, string.Empty);
                 var discount = txtDiscount.Value;
                 var total = txtTotal.Value;
 
@@ -197,9 +197,9 @@ namespace IMS.Forms.Inventory.Transaction
                 {
                     sum = total - discount;
                 }
-                if (sum <= 0)
+                if (sum < 0)
                 {
-                    errorProvider.SetError(txtDiscount, "Can't be zero");
+                    errorProvider.SetError(txtSum, "Can't be less than zero");
                     sum = total;
                 }
                 txtSum.Value = sum;
@@ -237,7 +237,7 @@ namespace IMS.Forms.Inventory.Transaction
             {
                     txtSum,
             };
-            _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider, controls.ToArray());
+            _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider, controls.ToArray(), true);
 
         }
 
@@ -404,7 +404,7 @@ namespace IMS.Forms.Inventory.Transaction
             if (!_requiredFieldValidator.IsValid())
                 msg.Message += "Some required Fields are empty\n";
             if (!_greaterThanZeroFieldValidator.IsValid())
-                msg.Message += "Some Fields are less than zero\n";
+                msg.Message += "Some Fields are zero or less.\n";
             if (txtPaidAmount.Value > txtSum.Value)
                 msg.Message += "Paid amount cannot be greater than total amount";
 
@@ -414,13 +414,16 @@ namespace IMS.Forms.Inventory.Transaction
                 errorProvider.SetError(cbClient, creditToAnonumousMsg);
                 msg.Message += creditToAnonumousMsg;
             }
+            
+            var model = GetData(checkout);
+
             if (!string.IsNullOrEmpty(msg.Message))
             {
                 PopupMessage.ShowInfoMessage(msg.Message);
                 this.Focus();
                 return null;
             }
-            var model = GetData(checkout);
+
             if (model == null)
                 return null;
             if (checkout && (model.OrderItems == null || model.OrderItems.Count == 0))

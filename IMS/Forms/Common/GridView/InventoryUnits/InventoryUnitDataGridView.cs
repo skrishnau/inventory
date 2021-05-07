@@ -20,7 +20,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
     {
         private string REQUIRED = "Required";
         private string INVALID = "Invalid";
-        private string GREATER_THAN_ZERO = "Greater than zero";
+        private string GREATER_THAN_ZERO = "Should be greater than zero";
 
         //private List<ViewModel.Core.Inventory.InventoryUnitModel> _dataList;
         private bool _isCellDirty;

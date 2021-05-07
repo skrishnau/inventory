@@ -10,6 +10,9 @@ using Infrastructure.Entities.Inventory;
 using Service.Utility;
 using Service.DbEventArgs;
 using Infrastructure.Entities.Orders;
+using Service.Core.Orders;
+using ViewModel.Core.Orders;
+using Infrastructure.Entities;
 
 namespace Service.Core.Inventory.Units
 {
@@ -394,6 +397,9 @@ namespace Service.Core.Inventory.Units
             var unitEntity = unit.MapToEntity();
             unitEntity.ReceiveDate = receivedDate;
             unitEntity.ReceiveAdjustment = adjustmentCode;
+            unitEntity.Supplier = orderItem.Supplier;
+            unitEntity.SupplierId = orderItem.SupplierId;
+            unitEntity.ReceiveReceipt = reference;
             _context.InventoryUnit.Add(unitEntity);
 
             if (product == null)
@@ -442,7 +448,7 @@ namespace Service.Core.Inventory.Units
         {
             using (var _context = new DatabaseContext())
             {
-
+                List<TransactionItem> transactionItems = new List<TransactionItem>();
                 var now = DateTime.Now;
 
                 var msg = string.Empty;
@@ -457,6 +463,11 @@ namespace Service.Core.Inventory.Units
                         var productName = dbEntity.Product.Name;
                         var warehouseName = dbEntity.Warehouse.Name;
                         var issuedQuantity = 0M;
+                        var unitQuantity = dbEntity.UnitQuantity;
+                        var productId = dbEntity.ProductId;
+                        var warehouseId = dbEntity.WarehouseId;
+                        var product = dbEntity.Product;
+                        
                         if (model.UnitQuantity < dbEntity.UnitQuantity)
                         {
                             // don't remove; just decrement
@@ -475,18 +486,25 @@ namespace Service.Core.Inventory.Units
                         // Movement
                         //
                         var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
-                        AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, dbEntity.UnitQuantity, now, dbEntity.ProductId);//"Direct Issue"
+                        AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, unitQuantity, now, productId);//"Direct Issue"
                         var invMovement = new InventoryMovementModel
                         {
                             Date = now,
                             UnitQuantity = issuedQuantity,
-                            SourceWarehouseId = dbEntity.WarehouseId,
+                            SourceWarehouseId = warehouseId,
                             TargetWarehouseId = null,
                             InventoryUnit = model
                         };
-                        UpdateWarehouseProductWithoutCommit(invMovement, dbEntity.Product);
+                        UpdateWarehouseProductWithoutCommit(invMovement, product);
+                        //var ti = new TransactionItem()
+                        //{
+                        //    CostPriceRate = 
+                        //};
+                        //transactionItems.Add(ti);
                     }
                 }
+                //var orderModel = new OrderModel();
+                //OrderService.GetTransactionWithoutCommit(_context, orderModel);
 
                 _context.SaveChanges();
                 var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.DELETE);

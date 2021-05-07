@@ -45,7 +45,7 @@ namespace Service.Core.Reports
                     }
                     else
                     {
-                        query = query.Where(x => x.Date >= from && x.Date <= to );
+                        query = query.Where(x => x.Date >= from && x.Date <= to);
                         openingBalanceQuery = openingBalanceQuery.Where(x => x.Date < from);
                     }
 
@@ -155,61 +155,84 @@ namespace Service.Core.Reports
             {
                 from = from.Date;
                 to = to.Date;
-                var isFromAndToEqual = from == to;
                 to = to.AddDays(1);
-                var query = _context.Transaction.Where(x=> x.Type == TransactionTypeEnum.Sale.ToString() && !x.IsVoid);
+                var query = _context.Transaction.Where(x => x.Type == TransactionTypeEnum.Sale.ToString() && !x.IsVoid);
                 var openingBalanceQuery = query;
-                query = query.Where(x => x.Date >= from && x.Date <= to);
-                openingBalanceQuery = openingBalanceQuery.Where(x => x.Date < from);
-
+                if (!model.YearlyData)
+                {
+                    query = query.Where(x => x.Date >= from && x.Date <= to);
+                    openingBalanceQuery = openingBalanceQuery.Where(x => x.Date < from);
+                }
                 var transactions = query.OrderBy(x => x.Date).ToList();
                 var list = new List<ProfitAndLossModel>();
-                if (isFromAndToEqual)
+                if (model.YearlyData)
                 {
-                    foreach (var txn in transactions)
+                    var debitSum = transactions.Sum(a => a.Debit);
+                    var costPriceSum = (transactions.Sum(a => a.CostPriceTotal ?? 0));
+                    var profit = debitSum - costPriceSum;
+                    var pl = new ProfitAndLossModel
                     {
-                        var profit = txn.Debit - (txn.CostPriceTotal??0);
-                        var pl = new ProfitAndLossModel
-                        {
-                            Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
-                            Revenue = $"{txn.Debit}",//.ToString("#.00"),
-                            Expense = $"{txn.CostPriceTotal}",//.ToString("#.00"),
-                            ProfitLoss = Math.Sign(profit),
-                            ProfitLossString = profit > 0 ? "P" : profit < 0 ? "L" : "",
-                            Date = DateConverter.Instance.ToBS(txn.Date).ToString(),//.ToString("yyyy/MM/dd"),
-                            Particulars = (txn.Order?.User?.Name ?? "") + " (Bill No.: " + txn.Particulars + ")",
-                        };
-                        list.Add(pl);
-                    }
+                        Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
+                        Revenue = $"{debitSum}",//.ToString("#.00"),
+                        Expense = $"{costPriceSum}",//.ToString("#.00"),
+                        ProfitLoss = Math.Sign(profit),
+                        ProfitLossString = profit > 0 ? "P" : profit < 0 ? "L" : "",
+                        Date = "All",//DateConverter.Instance.ToBS(x.Key).ToString(),//.ToString("yyyy/MM/dd"),
+                        Particulars = $"Total: {transactions.Count()} transactions",//(x.Order?.User?.Name?? "" ) +" ("+ x.Particulars + ")",
+                    };
+                    list.Add(pl);
                 }
                 else
                 {
-                    foreach (var x in transactions.GroupBy(x => x.Date.Date))
+                    var isFromAndToEqual = from == to;
+                    if (isFromAndToEqual)
                     {
-                        var debitSum = x.Sum(a => a.Debit);
-                        var costPriceSum = (x.Sum(a => a.CostPriceTotal ?? 0));
-                        var profit = debitSum - costPriceSum;
-                        var pl = new ProfitAndLossModel
+                        foreach (var txn in transactions)
                         {
-                            Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
-                            Revenue = $"{debitSum}",//.ToString("#.00"),
-                            Expense = $"{costPriceSum}",//.ToString("#.00"),
-                            ProfitLoss = Math.Sign(profit),
-                            ProfitLossString = profit > 0 ? "P" : profit < 0 ? "L" : "",
-                            Date = DateConverter.Instance.ToBS(x.Key).ToString(),//.ToString("yyyy/MM/dd"),
-                            Particulars = $"Total: {x.Count()} transactions",//(x.Order?.User?.Name?? "" ) +" ("+ x.Particulars + ")",
-                        };
-                        list.Add(pl);
+                            var profit = txn.Debit - (txn.CostPriceTotal ?? 0);
+                            var pl = new ProfitAndLossModel
+                            {
+                                Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
+                                Revenue = $"{txn.Debit}",//.ToString("#.00"),
+                                Expense = $"{txn.CostPriceTotal}",//.ToString("#.00"),
+                                ProfitLoss = Math.Sign(profit),
+                                ProfitLossString = profit > 0 ? "P" : profit < 0 ? "L" : "",
+                                Date = DateConverter.Instance.ToBS(txn.Date).ToString(),//.ToString("yyyy/MM/dd"),
+                                Particulars = (txn.Order?.User?.Name ?? "") + " (Bill No.: " + txn.Particulars + ")",
+                            };
+                            list.Add(pl);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var x in transactions.GroupBy(x => x.Date.Date))
+                        {
+                            var debitSum = x.Sum(a => a.Debit);
+                            var costPriceSum = (x.Sum(a => a.CostPriceTotal ?? 0));
+                            var profit = debitSum - costPriceSum;
+                            var pl = new ProfitAndLossModel
+                            {
+                                Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
+                                Revenue = $"{debitSum}",//.ToString("#.00"),
+                                Expense = $"{costPriceSum}",//.ToString("#.00"),
+                                ProfitLoss = Math.Sign(profit),
+                                ProfitLossString = profit > 0 ? "P" : profit < 0 ? "L" : "",
+                                Date = DateConverter.Instance.ToBS(x.Key).ToString(),//.ToString("yyyy/MM/dd"),
+                                Particulars = $"Total: {x.Count()} transactions",//(x.Order?.User?.Name?? "" ) +" ("+ x.Particulars + ")",
+                            };
+                            list.Add(pl);
+                        }
                     }
                 }
-                var openingBalanceSum = openingBalanceQuery.Sum(x => (decimal?)(x.Debit - x.CostPriceTotal)) ?? 0;
+
+                var openingBalanceSum = model.YearlyData ? 0 : openingBalanceQuery.Sum(x => (decimal?)(x.Debit - x.CostPriceTotal)) ?? 0;
                 var openingBalanceModel = new ProfitAndLossModel
                 {
-                    Balance = openingBalanceSum > 0 ? openingBalanceSum.ToString("0.00") : "(" + openingBalanceSum.ToString("0.00") + ")",
+                    Balance = openingBalanceSum >= 0 ? openingBalanceSum.ToString("0.00") : "(" + openingBalanceSum.ToString("0.00") + ")",
                     Particulars = "Opening Balance",
                 };
                 list.Insert(0, openingBalanceModel);
-                var balance = transactions.Sum(x => x.Debit - (x.CostPriceTotal??0));
+                var balance = transactions.Sum(x => x.Debit - (x.CostPriceTotal ?? 0));
                 var profitLoss = Math.Sign(balance);
                 var master = new ProfitAndLossMasterModel
                 {

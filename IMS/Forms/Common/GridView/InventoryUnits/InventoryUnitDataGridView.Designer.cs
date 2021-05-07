@@ -64,7 +64,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colPackageId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplierId = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            // this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             this.colProductionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExpirationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,7 +130,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colReceiveReference,
             this.colReceiveAdjustment,
             this.colSupplierId,
-            //this.colSupplier,
+            this.colSupplier,
             this.colIsHold,
             this.colRemark,
             this.colNotes,
@@ -213,9 +213,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // 
             // colReceiveReference
             // 
-            this.colReceiveReference.DataPropertyName = "ReceiveReference";
+            this.colReceiveReference.DataPropertyName = "ReceiveReceipt";
             this.colReceiveReference.HeaderText = "Rcv Ref";
-            this.colReceiveReference.Name = "colReceiveReference";
+            this.colReceiveReference.Name = "colReceiveReceipt";
             this.colReceiveReference.Visible = false;
             this.colReceiveReference.Width = 80;
             // 
@@ -327,11 +327,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //// 
             //// colSupplier
             //// 
-            //this.colSupplier.DataPropertyName = "Supplier";
-            //this.colSupplier.HeaderText = "Supplier";
-            //this.colSupplier.Name = "colSupplier";
-            //this.colSupplier.Visible = false;
-            //this.colSupplier.Width = 40;
+            this.colSupplier.DataPropertyName = "Supplier";
+            this.colSupplier.HeaderText = "Supplier";
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.Visible = false;
+            this.colSupplier.Width = 70;
             // 
             // colProductionDate
             // 
@@ -450,13 +450,21 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colExpirationDate.Visible = true;
             //colReceiveReference.Visible = true;
             colReceiveReference.HeaderText = "Reference";
+            colReceiveReference.Visible = true;
+
             colReceiveDate.Visible = true;
             colReceiveAdjustment.Visible = true;
             colRate.Visible = true;
+            colSupplier.Visible = true;
+            colPackage.Visible = true;
+
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
+            
+
            // this.RowHeadersVisible = true;
             HideUnusedDefaults();
+
 
         }
         //
@@ -562,7 +570,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.SelectionMode = DataGridViewSelectionMode.CellSelect;
             //this.AllowUserToAddRows = true;
             //this.AllowUserToDeleteRows = true;
-            colProductId.Visible = true;
+            colProduct.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             // colPackageQuantity.Visible = true;
@@ -728,7 +736,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewComboBoxColumn colPackageId;
         public System.Windows.Forms.DataGridViewTextBoxColumn colPackage;
         public System.Windows.Forms.DataGridViewComboBoxColumn colSupplierId;
-        // public System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
+         public System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
 
         public System.Windows.Forms.DataGridViewTextBoxColumn colExpirationDate;
         public System.Windows.Forms.DataGridViewTextBoxColumn colProductionDate;

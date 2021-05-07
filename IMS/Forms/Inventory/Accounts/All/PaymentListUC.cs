@@ -159,7 +159,7 @@ namespace IMS.Forms.Inventory.Reports.All
             {
                 var userType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), item.Value);
                 var customers = _userService.GetUserListForCombo(userType, new int[0]);
-                customers.Insert(0, new IdNamePair(0, ""));
+                customers.Insert(0, new IdNamePair(0, "--- All ---"));
                 cbCustomer.DataSource = customers;
 
                 cbCustomer.ValueMember = "Id";

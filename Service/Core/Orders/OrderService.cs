@@ -688,6 +688,8 @@ namespace Service.Core.Orders
 
                     if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                     {
+                        entity.Supplier = order.User;
+                        entity.SupplierId = order.UserId;
                         var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, "PO Receive", ref message, product, order.ReferenceNumber, entity);
                     }
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())

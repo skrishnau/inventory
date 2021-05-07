@@ -43,15 +43,20 @@
             this.colDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDrCr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.chkYearlyData = new System.Windows.Forms.CheckBox();
             this.dtFrom = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.dtTo = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -66,9 +71,8 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.panel3);
-            this.flowLayoutPanel1.Controls.Add(this.panel4);
-            this.flowLayoutPanel1.Controls.Add(this.btnSearch);
+            this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -193,6 +197,26 @@
             this.colBalance.Name = "colBalance";
             this.colBalance.ReadOnly = true;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.btnSearch);
+            this.panel2.Location = new System.Drawing.Point(138, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(391, 36);
+            this.panel2.TabIndex = 7;
+            // 
+            // chkYearlyData
+            // 
+            this.chkYearlyData.AutoSize = true;
+            this.chkYearlyData.Location = new System.Drawing.Point(8, 9);
+            this.chkYearlyData.Name = "chkYearlyData";
+            this.chkYearlyData.Size = new System.Drawing.Size(113, 17);
+            this.chkYearlyData.TabIndex = 0;
+            this.chkYearlyData.Text = "Overall Profit/Loss";
+            this.chkYearlyData.UseVisualStyleBackColor = true;
+            // 
             // dtFrom
             // 
             this.dtFrom.Location = new System.Drawing.Point(41, 3);
@@ -222,6 +246,14 @@
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Visible = false;
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.chkYearlyData);
+            this.panel5.Location = new System.Drawing.Point(3, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(129, 36);
+            this.panel5.TabIndex = 7;
+            // 
             // ProfitAndLossUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +270,9 @@
             this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -262,5 +297,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDebit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDrCr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
+        private System.Windows.Forms.CheckBox chkYearlyData;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel5;
     }
 }

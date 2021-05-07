@@ -14,12 +14,13 @@ namespace IMS.Forms.Common.Validations
         private readonly ErrorProvider _errorProvider;
 
         private readonly List<Control> _requiredControls;
+        private bool _allowEqualToZero;
 
-        public GreaterThanZeroFieldValidator(ErrorProvider errorProvider, Control[] controls)
+        public GreaterThanZeroFieldValidator(ErrorProvider errorProvider, Control[] controls, bool allowEqualToZero = false)
         {
             _errorProvider = errorProvider;
             _requiredControls = controls.ToList();
-
+            _allowEqualToZero = allowEqualToZero;
             // set validating event
             if (controls != null)
             {
@@ -76,7 +77,8 @@ namespace IMS.Forms.Common.Validations
             var text = control.Text;
             decimal value = 0;
             decimal.TryParse(text, out value);
-            if(value <= 0)
+            var invalid = _allowEqualToZero ? value < 0 : value <= 0;
+            if(invalid)
             {
                 _errorProvider.SetError(control, REQUIRED);
                 return false;

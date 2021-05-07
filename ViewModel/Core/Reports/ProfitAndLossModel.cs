@@ -41,7 +41,7 @@ namespace ViewModel.Core.Reports
     {
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-
+        public bool YearlyData { get; set; }
     }
 
 }

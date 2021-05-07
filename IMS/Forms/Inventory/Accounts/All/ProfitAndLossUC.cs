@@ -59,6 +59,14 @@ namespace IMS.Forms.Inventory.Accounts.All
             dgvLedger.DataBindingComplete += DgvLedger_DataBindingComplete;
             _listener.OrderUpdated += _listener_OrderUpdated;
             btnPrint.Click += BtnPrint_Click;
+            chkYearlyData.CheckedChanged += ChkYearlyData_CheckedChanged;
+        }
+
+        private void ChkYearlyData_CheckedChanged(object sender, EventArgs e)
+        {
+            var check = chkYearlyData.Checked;
+            dtFrom.Enabled = !check;
+            dtTo.Enabled = !check;
         }
 
         private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Orders.OrderModel> e)
@@ -108,6 +116,7 @@ namespace IMS.Forms.Inventory.Accounts.All
             {
                 From = from,
                 To = to,
+                YearlyData = chkYearlyData.Checked,
             };
             return _reportService.GetProfitAndLoss(model);
         }
