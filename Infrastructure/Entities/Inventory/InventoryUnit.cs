@@ -32,8 +32,8 @@ namespace Infrastructure.Entities.Inventory
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
 
-        public int? UomId { get; set; }
-        public virtual Uom Uom { get; set; }
+        //public int? UomId { get; set; }
+        //public virtual Uom Uom { get; set; }
         public int? PackageId { get; set; }
         public virtual Package Package { get; set; }
         public int? SupplierId { get; set; }

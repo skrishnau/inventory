@@ -653,7 +653,7 @@ namespace Service.Core.Orders
                             Name = item.Product,
                             SKU = item.Product,
                             CategoryId = null,
-                            BaseUomId = null,
+                           // BaseUomId = null,
                             CreatedAt = DateTime.Now,
                             UpdatedAt = DateTime.Now,
                             //PackageId = entity.PackageId > 0 ? entity.PackageId: 0//item.PackageId,
@@ -661,10 +661,10 @@ namespace Service.Core.Orders
                             SupplyPrice = order.OrderType == OrderTypeEnum.Purchase.ToString() ? item.Rate : 0,
                             RetailPrice = order.OrderType == OrderTypeEnum.Sale.ToString() ? item.Rate : 0,
                         };
-                        if (entity.PackageId > 0)
-                            product.PackageId = entity.PackageId;
-                        else
-                            product.Package = entity.Package;
+                        //if (entity.PackageId > 0)
+                        //    product.PackageId = entity.PackageId;
+                        //else
+                        //    product.Package = entity.Package;
                         entity.Product = product;
                         newProductList.Add(product);
                     }

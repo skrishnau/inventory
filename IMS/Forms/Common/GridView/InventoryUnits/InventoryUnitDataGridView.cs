@@ -153,7 +153,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var reference = GetReference(row);
                 var adjCode = GetAdjustmentCode(row);
                 var package = GetPackage(row);
-                var uomId = GetUomId(row);
+                //var uomId = GetUomId(row);
                 var isHold = row.Cells[colIsHold.Index].Value;
                 var expirationDate = GetDateCellValue(row, colExpirationDate);
                 var productionDate = GetDateCellValue(row, colProductionDate);
@@ -179,7 +179,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         ReceiveReceipt = reference,
                         PackageId = package.Id == 0 ? null : (int?)package.Id,
                         Package = package.Name,
-                        UomId = uomId,
+                      //  UomId = uomId,
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
                     });
                 }
@@ -431,7 +431,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var adjCode = row.Cells[this.colReceiveAdjustment.Index].Value;
             return adjCode == null ? "" : adjCode.ToString();
         }
-
+        /*
         private int? GetUomId(DataGridViewRow row)
         {
             var cell = row.Cells[colUomId.Index];
@@ -452,6 +452,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             return value;
         }
+        */
 
         private string GetDateCellValue(DataGridViewRow row, DataGridViewColumn column)
         {
@@ -463,7 +464,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             if (string.IsNullOrEmpty(valueString) || string.IsNullOrWhiteSpace(valueString))
                 return "";
             DateTime date;
-            if (IgnoreColumnsForErrorList.Contains(colUomId))
+            if (IgnoreColumnsForErrorList.Contains(column))
             {
                 return valueString;
             }

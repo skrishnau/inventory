@@ -53,6 +53,7 @@
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Entities\Accounts\FiscalYear.cs" />
     <Compile Include="Entities\Inventory\PriceHistory.cs" />
+    <Compile Include="Entities\Inventory\ProductPackage.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\AppSettings\AppSetting.cs" />
     <Compile Include="Entities\Bills\Bill.cs" />
@@ -113,6 +114,14 @@
     <Compile Include="Migrations\202105021735424_TransactionItemAddedOrderItem.Designer.cs">
       <DependentUpon>202105021735424_TransactionItemAddedOrderItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105081712155_UOM_Table_Refined.cs" />
+    <Compile Include="Migrations\202105081712155_UOM_Table_Refined.Designer.cs">
+      <DependentUpon>202105081712155_UOM_Table_Refined.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105091903145_precisionOfUOMQuantityChangedTo18_9.cs" />
+    <Compile Include="Migrations\202105091903145_precisionOfUOMQuantityChangedTo18_9.Designer.cs">
+      <DependentUpon>202105091903145_precisionOfUOMQuantityChangedTo18_9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -150,6 +159,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105021735424_TransactionItemAddedOrderItem.resx">
       <DependentUpon>202105021735424_TransactionItemAddedOrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105081712155_UOM_Table_Refined.resx">
+      <DependentUpon>202105081712155_UOM_Table_Refined.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105091903145_precisionOfUOMQuantityChangedTo18_9.resx">
+      <DependentUpon>202105091903145_precisionOfUOMQuantityChangedTo18_9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

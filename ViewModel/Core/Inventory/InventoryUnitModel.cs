@@ -41,8 +41,8 @@ namespace ViewModel.Core.Inventory
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
         
-        public int? UomId { get; set; }
-        public string Uom { get; set; }
+        //public int? UomId { get; set; }
+        //public string Uom { get; set; }
         public int? PackageId { get; set; }
         public string Package { get; set; }
         public int? SupplierId { get; set; }

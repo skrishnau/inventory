@@ -48,8 +48,8 @@ namespace ViewModel.Core.Inventory
         // ============== Package ============== //
         public int? PackageId { get; set; }
         public string Package { get; set; }
-        public int? BaseUomId { get; set; }
-        public string BaseUom { get; set; }
+        //public int? BaseUomId { get; set; }
+        //public string BaseUom { get; set; }
         public decimal UnitsInPackage { get; set; }
         public decimal UnitNetWeight { get; set; }
         public decimal UnitGrossWeight { get; set; }
@@ -99,6 +99,7 @@ namespace ViewModel.Core.Inventory
 
         // used for dynamic attributes adding and for adding SKU directly in Product Create
         public virtual List<ProductAttributeModel> ProductAttributes { get; set; }
+        public virtual List<UomModel> Uoms { get; set; }
         // public List<ProductVariantModel> Variants { get; set; }
         //  public virtual List<BrandModel> Brands { get; set; }
 
@@ -110,6 +111,7 @@ namespace ViewModel.Core.Inventory
             // Category = new CategoryModel();
             // Brands = new List<BrandModel>();
             ProductAttributes = new List<ProductAttributeModel>();
+            Uoms = new List<UomModel>();
             //Variants = new List<ProductVariantModel>();
         }
 

@@ -48,8 +48,8 @@ namespace DTO.Core.Inventory
                 Supplier = model.Supplier,
                 WarehouseId = model.WarehouseId??0,
                 Warehouse = model.Warehouse,
-                Uom = model.Uom,
-                UomId = model.UomId,
+                //Uom = model.Uom,
+                //UomId = model.UomId,
                 IssueDate = null,//model.
                 Notes = null,
                 Package = model.Package,
@@ -92,7 +92,7 @@ namespace DTO.Core.Inventory
             entity.SupplierId = model.SupplierId == 0 ? null : model.SupplierId;
             entity.Total = model.Total;
             entity.UnitQuantity = model.UnitQuantity;
-            entity.UomId = model.UomId == 0 ? null : model.UomId;
+           // entity.UomId = model.UomId == 0 ? null : model.UomId;
             entity.WarehouseId = model.WarehouseId == 0 ? null : model.WarehouseId;
             return entity;
         }
@@ -135,7 +135,7 @@ namespace DTO.Core.Inventory
                 InStockQuantity = model.Product.InStockQuantity,
                 OnOrderQuantity = model.Product.OnOrderQuantity,
                 OnHoldQuantity = model.Product.OnHoldQuantity,
-                UomId = model.UomId,
+               // UomId = model.UomId,
                 SupplierId = model.SupplierId,
                 Supplier = model.Supplier == null ? "" : model.Supplier.Name,
                 Adjustment = model.Adjustment,
@@ -148,7 +148,7 @@ namespace DTO.Core.Inventory
                 PackageQuantity = model.PackageQuantity,
                 ProductionDate = DateHelper.ToFormattedDateString(model.ProductionDate),
                 Reference = model.Reference,
-                Uom = model.Uom == null ? "" : model.Uom.Name,
+               // Uom = model.Uom == null ? "" : model.Uom.Name,
             };
         }
 
@@ -170,7 +170,7 @@ namespace DTO.Core.Inventory
                 Warehouse = model.Warehouse?.Name ?? "",
                 //  InStock = model.Product.InStockQuantity,
                 // OnOrder = model.Product.OnOrderQuantity,
-                UomId = model.UomId,
+               // UomId = model.UomId,
                 SupplierId = model.SupplierId,
                 Supplier = model.Supplier?.Name ?? "",
                 // Adjustment = model.Adjustment,
@@ -183,7 +183,7 @@ namespace DTO.Core.Inventory
                 PackageQuantity = model.PackageQuantity,
                 //  ProductionDate = model.ProductionDate,
                 // Reference = model.Reference,
-                Uom = model.Uom?.Name ?? "",
+                //Uom = model.Uom?.Name ?? "",
                 Rate = orderType == OrderTypeEnum.Sale? (model.CostPriceRate ?? 0): model.Rate,
 
 

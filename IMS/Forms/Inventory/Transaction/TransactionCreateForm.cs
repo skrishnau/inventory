@@ -481,7 +481,7 @@ namespace IMS.Forms.Inventory.Transaction
                 client = cbClient.Text;
             }
 
-            var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId, dgvItems.colUomId };
+            var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId };
             if (_orderType == OrderTypeEnum.Purchase)
                 ignoreList.Add(dgvItems.colRate); // in case of purchase the user may not enter the rate at first
             var items = dgvItems.GetItems(ignoreList, Constants.HAS_STOCK_MANAGEMENT, !checkout);

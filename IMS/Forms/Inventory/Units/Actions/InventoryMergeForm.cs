@@ -95,8 +95,8 @@ namespace IMS.Forms.Inventory.Units.Actions
                 Id = 0,
                 Package = last.Package,
                 PackageId = last.PackageId,
-                Uom = last.Uom,
-                UomId = last.UomId,
+                //Uom = last.Uom,
+                //UomId = last.UomId,
                 Rate = rate,
                 Total = rate * unitQuantity,
             };

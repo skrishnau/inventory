@@ -168,7 +168,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 row.Cells[colOnOrderQuantity.Index].Value = model.OnOrderQuantity;
                 row.Cells[colOnComittedQuantity.Index].Value = model.OnComittedQuantity;
                 row.Cells[colUnitQuantity.Index].Value = model.UnitQuantity;
-                row.Cells[colUomId.Index].Value = model.UomId;
+                //row.Cells[colUomId.Index].Value = model.UomId;
                 row.Cells[colPackageId.Index].Value = model.PackageId;
                 row.Cells[colPackage.Index].Value = model.Package;
                 row.Cells[colPackageQuantity.Index].Value = model.PackageQuantity;

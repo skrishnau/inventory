@@ -64,7 +64,7 @@ namespace Service.Core.Inventory.Units
                     .Include(x => x.Product)
                     .Include(x => x.Package)
                     .Include(x => x.Supplier)
-                    .Include(x => x.Uom)
+                   // .Include(x => x.Uom)
                     .Include(x => x.Warehouse)
                     .Where(x => (warehouseId == 0 || x.WarehouseId == warehouseId)
                             && (productId == 0 || x.ProductId == productId))

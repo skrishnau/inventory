@@ -70,6 +70,28 @@ namespace Service.Core
                 ProductEventArgs eventArgs = ProductEventArgs.Instance;
                 entity = ProductMapper.MapToEntity(model, entity);
 
+                var uomEntities = entity.Uoms.ToList();
+                if (uomEntities.Count > 0)
+                {
+                    for (var i = 0; i < uomEntities.Count; i++)
+                    {
+                        // if it's not in the model then remove it
+                        if (!model.Uoms.Any(x => x.Id == uomEntities[i].Id))
+                        {
+                            _context.Uom.Remove(uomEntities[i]);
+                        }
+                    }
+                }
+                foreach (var uom in model.Uoms)
+                {
+                    var uomEntity = uomEntities.FirstOrDefault(x => x.Id == uom.Id);
+                    uomEntity = uom.MapToEntity(uomEntity);
+                    if (uom.Id == 0)
+                    {
+                        entity.Uoms.Add(uomEntity);
+                    }
+                }
+
                 if (entity.Id == 0)
                 {
                     // add
@@ -113,6 +135,9 @@ namespace Service.Core
                     };
                     entity.PriceHistory.Add(priceHistory);
                 }*/
+
+
+
                 _context.SaveChanges();
 
                 eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
@@ -125,7 +150,7 @@ namespace Service.Core
         {
             var dt = (completedDate ?? DateTime.Now).Date;
             var rateHistory = product.PriceHistory.Where(x => x.Date == dt && x.PriceType == orderType).ToList();
-            var rateFromHistory = (rateHistory.LastOrDefault()?.Price??0) != rate;
+            var rateFromHistory = (rateHistory.LastOrDefault()?.Price ?? 0) != rate;
             if (rate > 0 && rateFromHistory)
             {
                 var priceHistory = new PriceHistory
@@ -325,7 +350,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.Category.Where(x=>x.DeletedAt == null).ToList();
+                var query = _context.Category.Where(x => x.DeletedAt == null).ToList();
                 var list = new List<IdNamePair>();
                 GetChildCategories(query, null, string.Empty, ref list);
                 return list;
@@ -404,15 +429,18 @@ namespace Service.Core
             {
                 var product = _context.Product
                                //.Include(x => x.Variants)
-                               .Include(x => x.BaseUom)
+                               .Include(x => x.Uoms)
                                .Include(x => x.Category)
-                               .Include(x => x.Package)
+                               //.Include(x => x.Package)
                                .Include(x => x.ParentProduct)
                                .Include(x => x.Warehouse)
                                .FirstOrDefault(x => x.Id == productId);
                 if (product == null)
                     return null;
-                return ProductMapper.MapToProductModel(product);
+               
+                var productModel = ProductMapper.MapToProductModel(product);
+                productModel.Uoms = UomMapper.MapToUomModel(product.Uoms.AsQueryable());
+                return productModel;
             }
 
         }
@@ -443,11 +471,11 @@ namespace Service.Core
 
         public List<PriceHistoryModel> GetPriceHistory(int productId)
         {
-            using(var _context = new DatabaseContext())
+            using (var _context = new DatabaseContext())
             {
                 var thiryDays = DateTime.Now.AddDays(-31);
                 var priceType = OrderTypeEnum.Sale.ToString();
-                return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x=>x.Date).MapToPriceHistoryModel();
+                return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x => x.Date).MapToPriceHistoryModel();
             }
         }
     }

@@ -147,7 +147,7 @@ namespace IMS.Forms.Inventory.Products
                 // Variants = variants,
                 AttributesJSON = "",
                 Barcode = tbBarcode.Text,
-                BaseUomId = uomId == 0 ? null : (int?)uomId,
+               // BaseUomId = uomId == 0 ? null : (int?)uomId,
                 Brand = tbBrand.Text,
                 Description = tbDescription.Text,
                 EOQ = numEOQ.Value,
@@ -320,7 +320,7 @@ namespace IMS.Forms.Inventory.Products
 
                 cbCategory.Text = product.Category;
                 cbPackage.Text = product.Package == null ? "" : product.Package;
-                cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
+               // cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
                 cbWarehouse.Text = product.Warehouse == null ? "" : product.Warehouse;
                 //cbSupplier.SelectedValue = product.
 
@@ -437,7 +437,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void PopulateUom()
         {
-            var uoms = _inventoryService.GetUomList();
+            var uoms = _inventoryService.GetRootUomList();
             cbUom.DataSource = uoms;
             cbUom.ValueMember = "Id";
             cbUom.DisplayMember = "Name";

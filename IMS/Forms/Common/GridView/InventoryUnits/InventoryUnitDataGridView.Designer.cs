@@ -59,7 +59,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colNetWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGrossWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
-            this.colUomId = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            //this.colUomId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             // this.colUom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPackageId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,7 +112,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colOnOrderQuantity,
             this.colOnComittedQuantity,
             this.colUnitQuantity,
-             this.colUomId,
+            // this.colUomId,
            // this.colUom,
             this.colPackageId,
             this.colPackage,
@@ -303,11 +303,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // 
             // colUomId
             // 
-            this.colUomId.DataPropertyName = "UomId";
-            this.colUomId.HeaderText = "Uom Id";
-            this.colUomId.Name = "colUomId";
-            this.colUomId.Visible = false;
-            this.colUomId.Width = 50;
+            //this.colUomId.DataPropertyName = "UomId";
+            //this.colUomId.HeaderText = "Uom Id";
+            //this.colUomId.Name = "colUomId";
+            //this.colUomId.Visible = false;
+            //this.colUomId.Width = 50;
             //// 
             //// colUom
             //// 
@@ -731,7 +731,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewTextBoxColumn colNetWeight;
         public System.Windows.Forms.DataGridViewTextBoxColumn colGrossWeight;
 
-        public System.Windows.Forms.DataGridViewComboBoxColumn colUomId;
+        //public System.Windows.Forms.DataGridViewComboBoxColumn colUomId;
         //  public System.Windows.Forms.DataGridViewTextBoxColumn colUom;
         public System.Windows.Forms.DataGridViewComboBoxColumn colPackageId;
         public System.Windows.Forms.DataGridViewTextBoxColumn colPackage;

@@ -93,8 +93,13 @@ namespace IMS.Forms.Inventory.Products
 
             lblCategory.DoubleClick += lblCategory_DoubleClick;
             lblPackage.DoubleClick += LblPackage_DoubleClick;
+            btnAddUom.Click += BtnAddUom_Click;
         }
 
+        private void BtnAddUom_Click(object sender, EventArgs e)
+        {
+            AddUom(null);
+        }
 
         private void InitializeDatabaseChangeListeners()
         {
@@ -126,7 +131,26 @@ namespace IMS.Forms.Inventory.Products
             var uomId = 0;
             var warehouseId = 0;
             int.TryParse(cbUom.SelectedValue as string, out uomId);
-            
+
+            var uomMessage = string.Empty;
+            var uoms = new List<UomModel>();
+            foreach(var control in pnlUomList.Controls)
+            {
+                var productUomUc = control as ProductUomUC;
+                if (productUomUc != null)
+                {
+                    var uom = productUomUc.GetData(errorProvider1, ref uomMessage);
+                    if(uom!=null)
+                        uoms.Add(uom);
+                }
+            }
+            if (!string.IsNullOrEmpty(uomMessage))
+            {
+                PopupMessage.ShowInfoMessage("You have error in UOM. Please check again");
+                this.Focus();
+                return;
+            }
+
             var product = new ProductModel()
             {
                 Id = _productId,
@@ -134,7 +158,7 @@ namespace IMS.Forms.Inventory.Products
                 ReorderAlert = true,
                 Name = tbProductName.Text,
                 AttributesJSON = "",
-                BaseUomId = uomId == 0 ? null : (int?)uomId,
+               // BaseUomId = uomId == 0 ? null : (int?)uomId,
                 PackageId = int.Parse(cbPackage.SelectedValue.ToString()),
                 ParentProductId = null,
                 IsVariant = false,
@@ -144,6 +168,7 @@ namespace IMS.Forms.Inventory.Products
                 SupplyPrice = numSupplyPrice.Value,
                 WarehouseId = warehouseId == 0 ? null : (int?)warehouseId,
                 InStockQuantity = (_product?.InStockQuantity??0) == 0 ?  tbInStockQuantity.Value : _product?.InStockQuantity??0,
+                Uoms = uoms,
             };
             product.ProductAttributes = _productAttributes;
             _productService.AddUpdateProduct(product);
@@ -225,7 +250,7 @@ namespace IMS.Forms.Inventory.Products
                 numSupplyPrice.Value = product.SupplyPrice;
                 cbCategory.Text = product.Category;
                 cbPackage.Text = product.Package == null ? "" : product.Package;
-                cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
+                //cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
                 chkUse.Checked = product.Use;
                 tbInStockQuantity.Value = _product.InStockQuantity;// 0 ? 0 : _product.InStockQuantity;
                 if(_product.InStockQuantity != 0)
@@ -233,7 +258,24 @@ namespace IMS.Forms.Inventory.Products
                     tbInStockQuantity.Enabled = false;
                     
                 }
+                if(product.Uoms.Count > 0)
+                {
+                    foreach(var uom in product.Uoms)
+                    {
+                        AddUom(uom);
+                    }
+                }
             }
+        }
+
+        private void AddUom(UomModel model)
+        {
+            if (model == null)
+                model = new UomModel { ProductId = _product?.Id ?? 0 };
+            var control = new ProductUomUC(_inventoryService, model);
+            control.Dock = DockStyle.Top;
+            pnlUomList.Controls.Add(control);
+            control.BringToFront();
         }
 
         private void PopulateCategoryCombo()
@@ -282,7 +324,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void PopulateUom()
         {
-            var uoms = _inventoryService.GetUomList();
+            var uoms = _inventoryService.GetRootUomList();
             cbUom.DataSource = uoms;
             cbUom.ValueMember = "Id";
             cbUom.DisplayMember = "Name";

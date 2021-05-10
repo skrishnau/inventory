@@ -33,10 +33,11 @@ namespace Infrastructure.Entities.Inventory
         /// </summary>
         public bool IsDiscontinued { get; set; }
         // ============== Package ============== //
-        public int? PackageId { get; set; }
-        public virtual Package Package { get; set; }
-        public int? BaseUomId { get; set; }
-        public virtual Uom BaseUom { get; set; }
+        //public int? PackageId { get; set; }
+        //public virtual Package Package { get; set; }
+        //public int? BaseUomId { get; set; }
+        //public virtual Uom BaseUom { get; set; }
+
         public decimal UnitsInPackage { get; set; }
         public decimal UnitNetWeight { get; set; }
         public decimal UnitGrossWeight { get; set; }
@@ -95,9 +96,12 @@ namespace Infrastructure.Entities.Inventory
             // Variants = new List<Variant>();
             PriceHistory = new List<PriceHistory>();
             WarehouseProducts = new List<WarehouseProduct>();
+            Uoms = new List<Uom>();
+            ProductPackages = new List<ProductPackage>();
         }
 
-
+        public virtual ICollection<Uom> Uoms { get; set; }
+        public virtual ICollection<ProductPackage> ProductPackages { get; set; }
     }
 }
 

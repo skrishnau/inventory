@@ -330,32 +330,33 @@ namespace Service.Core.Inventory
                 entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
                 var args = BaseEventArgs<UomModel>.Instance;
                 // add
-                if (model.Name == model.BaseUom)
+                var package = _context.Package.FirstOrDefault(x=> x.Name.ToLower() == model.Package.ToLower());
+                if(package == null)
                 {
-                    // root uom
-                    entity.BaseUomId = null;// entity;
+                    package = new Package
+                    {
+                        Name = model.Package,
+                        Use = true,
+                    };
+                    entity.Package = package;
                 }
                 else
                 {
-                    // find the unit 
-                    var baseUomEntity = _context.Uom.FirstOrDefault(x => x.Name == model.BaseUom);
-                    if (baseUomEntity != null)
+                    entity.PackageId = package.Id;
+                }
+                var relatedPackage = _context.Package.FirstOrDefault(x => x.Name.ToLower() == model.RelatedPackage.ToLower());
+                if(relatedPackage == null)
+                {
+                    relatedPackage = new Package
                     {
-                        entity.BaseUomId = baseUomEntity.Id;
-                        entity.BaseUom = null;
-                    }
-                    else if (model.BaseUom != model.Name)
-                    {
-                        // if the base Uom is not same as the Name then create the base
-                        var baseUom = new Uom
-                        {
-                            BaseUomId = null,
-                            Name = model.BaseUom,
-                            Quantity = 1,
-                            Use = true,
-                        };
-                        entity.BaseUom = baseUom;
-                    }
+                        Name = model.RelatedPackage,
+                        Use = true,
+                    };
+                    entity.RelatedPackage = relatedPackage;
+                }
+                else
+                {
+                    entity.RelatedPackageId = relatedPackage.Id;
                 }
 
                 if (model.Id == 0)
@@ -376,11 +377,11 @@ namespace Service.Core.Inventory
 
         }
 
-        public List<UomModel> GetUomList()
+        public List<UomModel> GetRootUomList()
         {
             using (var _context = new DatabaseContext())
             {
-                var uoms = _context.Uom.AsQueryable();
+                var uoms = _context.Uom.Where(x=>x.ProductId == null).AsQueryable();
                 return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
             }
 
@@ -395,6 +396,57 @@ namespace Service.Core.Inventory
                 return uom.MapToUomModel();//UomMapper.MapToUomModel(uoms);
             }
 
+        }
+
+        public decimal ConvertUom(DatabaseContext _context, Package from, Package to, Product product)
+        {
+            // Kg -> gm -> mg 
+            // MKm -> Km -> m -> cm -> mm -> nm (where km-> MKm, m-> km, cm->km, cm-> m and cm-> mm  and nm -> mm)
+
+            // get nm from m
+            // 1. first get m ; you get two m-> km and cm->m 
+            // 2. a. then get km for (m->km) ignoring the current id; you get km->MKm, 
+            //    b.     get cm for (cm->m) ignoring the current id; you get cm->mm and cm->km,
+            // 3. then for 2.a. get MKm for (km->Mkm) ignoring the current id; you get empty 
+            //          for 2.b. get mm for (cm->mm) ignoriing the current id and ignore the current hierarchy; you get nm->mm
+            // 5. then for 3.b you get what you needed.
+
+            var globalUoms = _context.Uom.Where(x => x.ProductId == null).ToList();
+            var uoms = product.Uoms;
+            var allRelated = uoms.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id || x.PackageId == to.Id || x.RelatedPackageId == to.Id).ToList();
+            
+            foreach(var uom in allRelated)
+            {
+                if(uom.PackageId == from.Id && uom.RelatedPackageId == to.Id)
+                {
+                    // return uom.quantity
+                    return uom.Quantity;
+                }
+                if (uom.PackageId == to.Id && uom.RelatedPackageId == from.Id)
+                    return 1 / uom.Quantity;
+            }
+            var fromList = allRelated.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id).ToList();
+            if(fromList.Count == 0)
+            {
+                // get from global
+                fromList = globalUoms.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id).ToList();
+            }
+            foreach(var f in fromList)
+            {
+                if(f.PackageId == from.Id)
+                {
+                    
+                }
+            }
+
+            foreach(var uom in allRelated)
+            {
+                if(uom.PackageId == from.Id)
+                {
+                    allRelated.
+                }
+            }
+            return 0;
         }
 
         public ResponseModel<PackageModel> SavePackage(PackageModel package)
@@ -657,11 +709,11 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetUomListForCombo()
         {
-            return GetUomList().Where(x => x.Use)
+            return GetRootUomList().Where(x => x.Use)
                 .Select(x => new IdNamePair()
                 {
                     Id = x.Id,
-                    Name = x.Name,
+                    Name = x.Package,
                 }).ToList();
         }
 

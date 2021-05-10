@@ -20,7 +20,7 @@ namespace IMS.Forms.Common.Buttons
             this.TextImageRelation = TextImageRelation.ImageAboveText;
             this.Width = 60;
             this.Height = 55;
-            this.Text = "Button";
+           // this.Text = "Button";
         }
 
     }

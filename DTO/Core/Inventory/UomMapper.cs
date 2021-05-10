@@ -56,10 +56,14 @@ namespace DTO.Core.Inventory
         public UomProfile()
         {
             CreateMap<Uom, UomModel>()
-                .ForMember(dest => dest.BaseUom,
-                            opt => opt.MapFrom(src => src.BaseUom == null ? src.Name : src.BaseUom.Name));
-            CreateMap<UomModel, Uom>().ForMember(d => d.BaseUom, 
-                            opt=> opt.Ignore());
+                .ForMember(dest => dest.RelatedPackage, opt => opt.MapFrom(src => src.RelatedPackage == null ? (src.Package != null ? src.Package.Name : string.Empty) : src.RelatedPackage.Name))
+                .ForMember(dest => dest.Package, opt => opt.MapFrom(src => src.Package == null ? string.Empty : src.Package.Name))
+                .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product == null ? string.Empty : src.Product.Name))
+                ;
+            CreateMap<UomModel, Uom>()
+                .ForMember(d => d.RelatedPackage, opt=> opt.Ignore())
+                .ForMember(d=>d.Package, opt=>opt.Ignore())
+                .ForMember(d=>d.Product , opt=>opt.Ignore());
         }
     }
 }

@@ -51,9 +51,9 @@ namespace DTO.Core.Inventory
             //entity.Label = model.Label;
             entity.Manufacturer = model.Manufacturer;
             //package
-            entity.PackageId = model.PackageId;
+            //entity.PackageId = model.PackageId;
             //entity.Package = model.Package;
-            entity.BaseUomId = model.BaseUomId;
+            //entity.BaseUomId = model.BaseUomId;
             //entity.BaseUom = model.BaseUom;
             entity.UnitsInPackage = model.UnitsInPackage;
             entity.UnitNetWeight = model.UnitNetWeight;
@@ -137,10 +137,14 @@ namespace DTO.Core.Inventory
             //model.Label = entity.Label;
             model.Manufacturer = entity.Manufacturer;
             //package
-            model.PackageId = entity.PackageId;
-            model.Package = entity.Package == null ? "" : entity.Package.Name; //PackageMapper.MapToModel(entity.Package);
-            model.BaseUomId = entity.BaseUomId;
-            model.BaseUom = entity.BaseUom == null ? "" : entity.BaseUom.Name;// UomMapper.MapToUomModel(entity.BaseUom);
+            var basePackage = entity.ProductPackages.FirstOrDefault(x => x.IsBasePackage)?.Package;
+            if (basePackage == null)
+                basePackage = entity.ProductPackages.FirstOrDefault()?.Package;
+            model.PackageId = basePackage?.Id;
+            model.Package = basePackage?.Name ?? string.Empty;//entity.Package == null ? "" : entity.Package.Name; //PackageMapper.MapToModel(entity.Package);
+            //model.BaseUomId = entity.BaseUomId;
+            //model.BaseUom = entity.BaseUom == null ? "" : entity.BaseUom.Name;// UomMapper.MapToUomModel(entity.BaseUom);
+            //model.Uoms = UomMapper.MapToUomModel(entity.Uoms.AsQueryable());
             model.UnitsInPackage = entity.UnitsInPackage;
             model.UnitNetWeight = entity.UnitNetWeight;
             model.UnitGrossWeight = entity.UnitGrossWeight;

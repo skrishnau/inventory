@@ -84,6 +84,7 @@ namespace Infrastructure.Context
         public virtual DbSet<Movement> Movement { get; set; }
         public virtual DbSet<PriceHistory> PriceHistory { get; set; }
 
+        public virtual DbSet<ProductPackage> ProductPackage { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -97,6 +98,7 @@ namespace Infrastructure.Context
             //    .HasRequired<User>(s=>s.User)
             //    .WithMany()
             //    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Uom>().Property(x => x.Quantity).HasPrecision(18, 9);
         }
 
 

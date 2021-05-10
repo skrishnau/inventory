@@ -69,10 +69,10 @@ namespace IMS.Forms.Inventory.UOM
             if (_uomModel != null)
             {
                 this.Text = "Edit Package";
-                txtName.Text = _uomModel.Name;
+                txtName.Text = _uomModel.Package;
                 chkUse.Checked = _uomModel.Use;
                 txtQuantity.Value = _uomModel.Quantity;
-                txtBaseUnit.Text = _uomModel.BaseUom;
+                txtBaseUnit.Text = _uomModel.RelatedPackage;
             }
         }
 
@@ -92,8 +92,8 @@ namespace IMS.Forms.Inventory.UOM
             var model = new UomModel
             {
                 Use = chkUse.Checked,
-                Name = txtName.Text,
-                BaseUom = txtBaseUnit.Text,
+                Package = txtName.Text,
+                RelatedPackage = txtBaseUnit.Text,
                 Quantity = txtQuantity.Value,
                 Id = _uomId
             };

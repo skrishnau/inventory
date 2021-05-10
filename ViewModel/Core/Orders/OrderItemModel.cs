@@ -42,8 +42,8 @@ namespace ViewModel.Core.Orders
         public string Reference { get; set; }
         public string Adjustment { get; set; }
 
-        public int? UomId { get; set; }
-        public string Uom { get; set; }
+        //public int? UomId { get; set; }
+        //public string Uom { get; set; }
         public int? SupplierId { get; set; }
         public string Supplier { get; set; }
 

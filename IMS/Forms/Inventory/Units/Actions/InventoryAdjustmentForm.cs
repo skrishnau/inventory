@@ -279,7 +279,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     {
                        dgvInventoryUnit.colRate,
                        dgvInventoryUnit.colWarehouseId,
-                        dgvInventoryUnit.colUomId,
+                       // dgvInventoryUnit.colUomId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
 
@@ -306,7 +306,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         dgvInventoryUnit.colLotNumber,
                         dgvInventoryUnit.colRate,
                         dgvInventoryUnit.colWarehouseId,
-                        dgvInventoryUnit.colUomId,
+                      //  dgvInventoryUnit.colUomId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
 
@@ -333,7 +333,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     {
                         //dgvInventoryUnit.colRate,
                         dgvInventoryUnit.colWarehouseId,
-                        dgvInventoryUnit.colUomId,
+                       // dgvInventoryUnit.colUomId,
                         dgvInventoryUnit.colPackageId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
@@ -368,7 +368,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     {
                         dgvInventoryUnit.colLotNumber,
                         dgvInventoryUnit.colWarehouseId,
-                        dgvInventoryUnit.colUomId,
+                       // dgvInventoryUnit.colUomId,
                     };
                     actionForMsg = "Saved";
                     var poItems = dgvInventoryUnit.GetItems(ignoreList);
@@ -401,7 +401,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                     {
                         dgvInventoryUnit.colLotNumber,
                         dgvInventoryUnit.colWarehouseId,
-                        dgvInventoryUnit.colUomId,
+                       // dgvInventoryUnit.colUomId,
                     };
                     var soItems = dgvInventoryUnit.GetItems(ignoreList);
                     if (soItems != null)
@@ -431,7 +431,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         {
                             dgvInventoryUnit.colRate,
                             dgvInventoryUnit.colWarehouseId,
-                            dgvInventoryUnit.colUomId,
+                           // dgvInventoryUnit.colUomId,
                         };
                         list = dgvInventoryUnit.GetItems();
                         dialogResult = MessageBox.Show(this, "Are you sure to transfer selected items to the '" + warehouse + "' warehouse?", "Transfer?", MessageBoxButtons.YesNoCancel);

@@ -82,7 +82,7 @@ namespace IMS.Forms.Inventory.UOM
 
         private void PopulateUomData()
         {
-            var uoms = _inventoryService.GetUomList();
+            var uoms = _inventoryService.GetRootUomList();
             dgvUom.AutoGenerateColumns = false;
             dgvUom.DataSource = uoms;
         }

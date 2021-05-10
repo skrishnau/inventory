@@ -9,7 +9,12 @@ namespace Infrastructure.Entities.Inventory
     public class Package
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+
+        public string Name { get; set; } // Unit
+        
         public bool Use { get; set; }
+
+        public ICollection<ProductPackage> ProductPackages { get; set; }
+        
     }
 }

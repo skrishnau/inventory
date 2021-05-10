@@ -118,38 +118,44 @@
             this.colId.DataPropertyName = "Id";
             this.colId.HeaderText = "Id";
             this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
             this.colId.Visible = false;
             // 
             // colUnit
             // 
-            this.colUnit.DataPropertyName = "Name";
+            this.colUnit.DataPropertyName = "Package";
             this.colUnit.HeaderText = "Unit Of Measure";
             this.colUnit.Name = "colUnit";
+            this.colUnit.ReadOnly = true;
             // 
             // colQuantity
             // 
             this.colQuantity.DataPropertyName = "Quantity";
             this.colQuantity.HeaderText = "Contains";
             this.colQuantity.Name = "colQuantity";
+            this.colQuantity.ReadOnly = true;
             // 
             // colBaseUnitId
             // 
-            this.colBaseUnitId.DataPropertyName = "BaseUomId";
+            this.colBaseUnitId.DataPropertyName = "RelatedPackageId";
             this.colBaseUnitId.HeaderText = "BaseUnitId";
             this.colBaseUnitId.Name = "colBaseUnitId";
+            this.colBaseUnitId.ReadOnly = true;
             this.colBaseUnitId.Visible = false;
             // 
             // colBaseUnit
             // 
-            this.colBaseUnit.DataPropertyName = "BaseUom";
+            this.colBaseUnit.DataPropertyName = "RelatedPackage";
             this.colBaseUnit.HeaderText = "Of Base Unit";
             this.colBaseUnit.Name = "colBaseUnit";
+            this.colBaseUnit.ReadOnly = true;
             // 
             // colUse
             // 
             this.colUse.DataPropertyName = "Use";
             this.colUse.HeaderText = "Use";
             this.colUse.Name = "colUse";
+            this.colUse.ReadOnly = true;
             this.colUse.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colUse.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
