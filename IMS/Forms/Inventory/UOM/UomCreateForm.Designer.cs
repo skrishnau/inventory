@@ -130,6 +130,12 @@
             // 
             // txtQuantity
             // 
+            this.txtQuantity.DecimalPlaces = 8;
+            this.txtQuantity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.txtQuantity.Location = new System.Drawing.Point(106, 36);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(133, 20);

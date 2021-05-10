@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Infrastructure.Context;
+using Infrastructure.Entities.Inventory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,7 @@ using ViewModel.Core.Business;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
+using static Service.Core.Inventory.InventoryService;
 
 namespace Service.Core.Inventory
 {
@@ -80,7 +83,6 @@ namespace Service.Core.Inventory
 
         #endregion
 
-        
 
 
 
@@ -88,9 +90,11 @@ namespace Service.Core.Inventory
 
 
 
-     
 
-       
+
+        decimal ConvertUom(int fromPackageId, int toPackageId, int? productId, decimal value);
+
+
 
 
 

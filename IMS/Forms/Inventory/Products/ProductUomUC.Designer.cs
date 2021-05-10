@@ -77,7 +77,7 @@
             // 
             // txtQuantity
             // 
-            this.txtQuantity.DecimalPlaces = 3;
+            this.txtQuantity.DecimalPlaces = 8;
             this.txtQuantity.Location = new System.Drawing.Point(57, 3);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(120, 20);

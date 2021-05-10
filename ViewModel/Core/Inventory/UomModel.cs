@@ -31,4 +31,6 @@ namespace ViewModel.Core.Inventory
         public string Product { get; set; }
 
     }
+
+   
 }

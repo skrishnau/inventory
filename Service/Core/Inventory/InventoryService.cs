@@ -151,136 +151,6 @@ namespace Service.Core.Inventory
         #endregion
 
 
-
-
-
-
-
-
-        //private void AssignVariantsForSave(Product productEntity, ProductModelForSave product, DateTime now)
-        //{
-        //    // remove the deleted variants
-        //    for (int v = 0; v < productEntity.Variants.Count; v++)
-        //    {
-        //        var variEnity = productEntity.Variants.ElementAt(v);
-        //        if (!product.Variants.Any(x => x.Id == variEnity.Id))
-        //        {
-        //            variEnity.DeletedAt = now;
-        //        }
-        //    }
-        //    // add/update
-        //    foreach (var vari in product.Variants)
-        //    {
-        //        Variant variantEntity;
-        //        if (vari.Id == 0)
-        //        {
-        //            // add
-        //            variantEntity = vari.ToEntity();
-        //            variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
-        //            productEntity.Variants.Add(variantEntity);
-        //            variantEntity.CreatedAt = now;
-        //            variantEntity.UpdatedAt = now;
-        //        }
-
-        //        else
-        //        {
-        //            variantEntity = productEntity.Variants.FirstOrDefault(x => x.Id == vari.Id);
-        //            variantEntity.Alert = vari.Alert;
-        //            variantEntity.MinStockCountForAlert = vari.AlertThreshold;
-        //            variantEntity.SKU = vari.SKU;
-        //            variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
-        //            variantEntity.UpdatedAt = now;
-        //        }
-        //    }
-        //}
-
-
-
-        /*
-        public void AddUpdateBrand(BrandModel brand)
-        {
-            var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brand.Id);
-            if (dbEntity == null)
-            {
-                var brandEntity = brand.ToEntity();
-                brandEntity.CreatedAt = DateTime.Now;
-                brandEntity.UpdatedAt = DateTime.Now;
-                _context.Brand.Add(brandEntity);
-            }
-            else
-            {
-                dbEntity.Name = brand.Name;
-                dbEntity.UpdatedAt = DateTime.Now; // brand.UpdatedAt;
-            }
-            _context.SaveChanges();
-        }
-
-        private void AssignBrandForSave(Product productEntity, ProductModel product, DateTime now)
-        {
-            //dbEntity.Brands
-            foreach (var brand in product.Brands)
-            {
-                // since brand is directly entered in textbox separated by comma, we don't have ids
-                // so lets differentiate names
-
-                Brand brandEntity = productEntity.Brands.FirstOrDefault(x => x.Name == brand.Name);
-                if (brandEntity == null)
-                {
-                    // then add new; else no need to update
-                    brandEntity = brand.ToEntity();
-                    brandEntity.CreatedAt = now;
-                    brandEntity.UpdatedAt = now;
-                    productEntity.Brands.Add(brandEntity);
-                }
-                //else 
-                //{
-                //    if (brandEntity.Id == 0)
-                //    {
-                //        productEntity.Brands.Remove(brandEntity);
-                //        // add
-                //    } 
-                //}
-            }
-            // remove all other brands which don't have same updatedAt date
-            foreach (var brandEntity in productEntity.Brands)
-            {
-                if (!product.Brands.Any(x => x.Name == brandEntity.Name))
-                {
-                    // remove
-                    brandEntity.DeletedAt = now;
-                }
-            }
-        }
-
-        public List<BrandModel> GetBrandList()
-        {
-            var brands = _context.Brand
-                .Where(x => x.DeletedAt == null)
-                .Select(x => new BrandModel()
-                {
-                    Name = x.Name,
-                    Id = x.Id,
-                    CreatedAt = x.CreatedAt,
-                    UpdatedAt = x.UpdatedAt
-                })
-                .ToList();
-
-            return brands;
-        }
-
-        public void DeleteBrand(BrandModel brandModel)
-        {
-            var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brandModel.Id);
-            if (dbEntity != null)
-            {
-                dbEntity.DeletedAt = DateTime.Now;
-                _context.SaveChanges();
-            }
-        }
-        */
-
-
-
         private IQueryable<Product> GetProductEntityList()
         {
             using (var _context = new DatabaseContext())
@@ -292,217 +162,6 @@ namespace Service.Core.Inventory
         }
 
 
-
-
-
-
-
-        //public void DeleteProduct(int id)
-        //{
-        //    var product = _context.Product.Find(id);
-        //    if (product != null)
-        //    {
-        //        product.DeletedAt = DateTime.Now;
-        //        _context.SaveChanges();
-        //        var args = new ProductEventArgs(ProductMapper.MapToProductModel(product));
-        //        _listener.TriggerProductUpdateEvent(null, args);
-        //    }
-        //}
-
-        //public void DeleteProduct(ProductModel produtModel)
-        //{
-        //    var dbEntity = _context.Product.FirstOrDefault(x => x.Id == produtModel.Id);
-        //    if (dbEntity != null)
-        //    {
-        //        dbEntity.DeletedAt = DateTime.Now;
-        //        _context.SaveChanges();
-        //    }
-        //}
-
-
-        #region Settings
-
-        public ResponseModel<UomModel> SaveUom(UomModel model)
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var entity = _context.Uom.Find(model.Id);
-                entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
-                var args = BaseEventArgs<UomModel>.Instance;
-                // add
-                var package = _context.Package.FirstOrDefault(x=> x.Name.ToLower() == model.Package.ToLower());
-                if(package == null)
-                {
-                    package = new Package
-                    {
-                        Name = model.Package,
-                        Use = true,
-                    };
-                    entity.Package = package;
-                }
-                else
-                {
-                    entity.PackageId = package.Id;
-                }
-                var relatedPackage = _context.Package.FirstOrDefault(x => x.Name.ToLower() == model.RelatedPackage.ToLower());
-                if(relatedPackage == null)
-                {
-                    relatedPackage = new Package
-                    {
-                        Name = model.RelatedPackage,
-                        Use = true,
-                    };
-                    entity.RelatedPackage = relatedPackage;
-                }
-                else
-                {
-                    entity.RelatedPackageId = relatedPackage.Id;
-                }
-
-                if (model.Id == 0)
-                {
-                    _context.Uom.Add(entity);
-                    args.Mode = Utility.UpdateMode.ADD;
-                }
-                else
-                {
-                    args.Mode = Utility.UpdateMode.EDIT;
-                }
-
-                _context.SaveChanges();
-                args.Model = entity.MapToUomModel(); //UomMapper.MapToUomModel(entity);
-                _listener.TriggerUomUpdateEvent(null, args);
-                return ResponseModel<UomModel>.GetSaveSuccess(args.Model);
-            }
-
-        }
-
-        public List<UomModel> GetRootUomList()
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var uoms = _context.Uom.Where(x=>x.ProductId == null).AsQueryable();
-                return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
-            }
-
-        }
-
-
-        public UomModel GetUom(int uomId)
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var uom = _context.Uom.Find(uomId);
-                return uom.MapToUomModel();//UomMapper.MapToUomModel(uoms);
-            }
-
-        }
-
-        public decimal ConvertUom(DatabaseContext _context, Package from, Package to, Product product)
-        {
-            // Kg -> gm -> mg 
-            // MKm -> Km -> m -> cm -> mm -> nm (where km-> MKm, m-> km, cm->km, cm-> m and cm-> mm  and nm -> mm)
-
-            // get nm from m
-            // 1. first get m ; you get two m-> km and cm->m 
-            // 2. a. then get km for (m->km) ignoring the current id; you get km->MKm, 
-            //    b.     get cm for (cm->m) ignoring the current id; you get cm->mm and cm->km,
-            // 3. then for 2.a. get MKm for (km->Mkm) ignoring the current id; you get empty 
-            //          for 2.b. get mm for (cm->mm) ignoriing the current id and ignore the current hierarchy; you get nm->mm
-            // 5. then for 3.b you get what you needed.
-
-            var globalUoms = _context.Uom.Where(x => x.ProductId == null).ToList();
-            var uoms = product.Uoms;
-            var allRelated = uoms.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id || x.PackageId == to.Id || x.RelatedPackageId == to.Id).ToList();
-            
-            foreach(var uom in allRelated)
-            {
-                if(uom.PackageId == from.Id && uom.RelatedPackageId == to.Id)
-                {
-                    // return uom.quantity
-                    return uom.Quantity;
-                }
-                if (uom.PackageId == to.Id && uom.RelatedPackageId == from.Id)
-                    return 1 / uom.Quantity;
-            }
-            var fromList = allRelated.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id).ToList();
-            if(fromList.Count == 0)
-            {
-                // get from global
-                fromList = globalUoms.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id).ToList();
-            }
-            foreach(var f in fromList)
-            {
-                if(f.PackageId == from.Id)
-                {
-                    
-                }
-            }
-
-            foreach(var uom in allRelated)
-            {
-                if(uom.PackageId == from.Id)
-                {
-                    allRelated.
-                }
-            }
-            return 0;
-        }
-
-        public ResponseModel<PackageModel> SavePackage(PackageModel package)
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var response = new ResponseModel<PackageModel>();
-                var msg = "";
-                var args = BaseEventArgs<PackageModel>.Instance;
-                var duplicate = _context.Package.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
-                if (duplicate != null)
-                {
-                    response.Message = "Same 'Package' Name already exists";
-                    response.Success = false;
-                    return response;
-                }
-
-                // get the package
-                var entity = _context.Package.FirstOrDefault(x => x.Id == package.Id);
-                entity = PackageMapper.MapToEntity(package, entity);
-                if (package.Id == 0)
-                {
-                    // add
-                    _context.Package.Add(entity);
-                    args.Mode = Utility.UpdateMode.ADD;
-                }
-                else
-                {
-                    args.Mode = Utility.UpdateMode.EDIT;
-                }
-                _context.SaveChanges();
-                args.Model = PackageMapper.MapToModel(entity);
-                _listener.TriggerPackageUpdateEvent(null, args);
-                response.Data = args.Model;
-                response.Success = true;
-                response.Message = "Save Successful";
-                return response;
-            }
-        }
-
-        public List<PackageModel> GetPackageList()
-        {
-            using (var _context = new DatabaseContext())
-            {
-                var query = _context.Package.AsQueryable();
-                return PackageMapper.MapToModel(query);
-            }
-        }
-
-        public PackageModel GetPackage(int packageId)
-        {
-            using (var _context = new DatabaseContext())
-            {
-                return _context.Package.Find(packageId).MapToModel();
-            }
-        }
 
         #region Adjustment Code
 
@@ -700,31 +359,66 @@ namespace Service.Core.Inventory
             _context.SaveChanges();
         }
 
-
         #endregion
 
 
 
-        #region UOM
+        #region Settings
 
-        public List<IdNamePair> GetUomListForCombo()
+        public ResponseModel<PackageModel> SavePackage(PackageModel package)
         {
-            return GetRootUomList().Where(x => x.Use)
-                .Select(x => new IdNamePair()
+            using (var _context = new DatabaseContext())
+            {
+                var response = new ResponseModel<PackageModel>();
+                var msg = "";
+                var args = BaseEventArgs<PackageModel>.Instance;
+                var duplicate = _context.Package.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
+                if (duplicate != null)
                 {
-                    Id = x.Id,
-                    Name = x.Package,
-                }).ToList();
+                    response.Message = "Same 'Package' Name already exists";
+                    response.Success = false;
+                    return response;
+                }
+
+                // get the package
+                var entity = _context.Package.FirstOrDefault(x => x.Id == package.Id);
+                entity = PackageMapper.MapToEntity(package, entity);
+                if (package.Id == 0)
+                {
+                    // add
+                    _context.Package.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    args.Mode = Utility.UpdateMode.EDIT;
+                }
+                _context.SaveChanges();
+                args.Model = PackageMapper.MapToModel(entity);
+                _listener.TriggerPackageUpdateEvent(null, args);
+                response.Data = args.Model;
+                response.Success = true;
+                response.Message = "Save Successful";
+                return response;
+            }
         }
 
-        #endregion
+        public List<PackageModel> GetPackageList()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var query = _context.Package.AsQueryable();
+                return PackageMapper.MapToModel(query);
+            }
+        }
 
-
-
-
-
-
-
+        public PackageModel GetPackage(int packageId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Package.Find(packageId).MapToModel();
+            }
+        }
 
         public List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId)
         {
@@ -742,7 +436,6 @@ namespace Service.Core.Inventory
             }
 
         }
-
 
         public List<IdNamePair> GetSupplierListForCombo()
         {
@@ -777,7 +470,6 @@ namespace Service.Core.Inventory
             return list;
         }
 
-
         public List<TransactionSummaryModel> GetInventorySummary()
         {
             var list = new List<TransactionSummaryModel>();
@@ -798,7 +490,200 @@ namespace Service.Core.Inventory
 
 
 
+        #region UOM
 
+        public ResponseModel<UomModel> SaveUom(UomModel model)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var entity = _context.Uom.Find(model.Id);
+                entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
+                var args = BaseEventArgs<UomModel>.Instance;
+                // add
+                var package = _context.Package.FirstOrDefault(x => x.Name.ToLower() == model.Package.ToLower());
+                if (package == null)
+                {
+                    package = new Package
+                    {
+                        Name = model.Package,
+                        Use = true,
+                    };
+                    entity.Package = package;
+                }
+                else
+                {
+                    entity.PackageId = package.Id;
+                }
+                var relatedPackage = _context.Package.FirstOrDefault(x => x.Name.ToLower() == model.RelatedPackage.ToLower());
+                if (relatedPackage == null)
+                {
+                    relatedPackage = new Package
+                    {
+                        Name = model.RelatedPackage,
+                        Use = true,
+                    };
+                    entity.RelatedPackage = relatedPackage;
+                }
+                else
+                {
+                    entity.RelatedPackageId = relatedPackage.Id;
+                }
+
+                if (model.Id == 0)
+                {
+                    _context.Uom.Add(entity);
+                    args.Mode = Utility.UpdateMode.ADD;
+                }
+                else
+                {
+                    args.Mode = Utility.UpdateMode.EDIT;
+                }
+
+                _context.SaveChanges();
+                args.Model = entity.MapToUomModel(); //UomMapper.MapToUomModel(entity);
+                _listener.TriggerUomUpdateEvent(null, args);
+                return ResponseModel<UomModel>.GetSaveSuccess(args.Model);
+            }
+
+        }
+
+        public List<UomModel> GetRootUomList()
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var uoms = _context.Uom.Where(x => x.ProductId == null).AsQueryable();
+                return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
+            }
+
+        }
+
+        private List<int> MakeCopy(List<int> allEarlierpackages)
+        {
+            return allEarlierpackages.ToArray().ToList();
+        }
+
+        public UomModel GetUom(int uomId)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var uom = _context.Uom.Find(uomId);
+                return uom.MapToUomModel();//UomMapper.MapToUomModel(uoms);
+            }
+
+        }
+
+        public List<IdNamePair> GetUomListForCombo()
+        {
+            return GetRootUomList().Where(x => x.Use)
+                .Select(x => new IdNamePair()
+                {
+                    Id = x.Id,
+                    Name = x.Package,
+                }).ToList();
+        }
+
+        public decimal ConvertUom(int fromPackageId, int toPackageId, int? productId, decimal value)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                var val = ConvertUom(_context, fromPackageId, toPackageId, productId);
+                return val * value;
+            }
+        }
+
+        private decimal ConvertUom(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId)
+        {
+            var isProductSpecific = ((productId ?? 0) > 0);
+            var from = _context.Package.FirstOrDefault(x => x.Id == fromPackageId);
+            var to = _context.Package.FirstOrDefault(x => x.Id == toPackageId);
+            List<Uom> allRelated;
+            if (isProductSpecific)
+                allRelated = _context.Uom.Where(x => x.ProductId == productId).ToList();
+            else
+                allRelated = _context.Uom.Where(x => x.ProductId == null).ToList();
+            //var allRelated = uoms.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id || x.PackageId == to.Id || x.RelatedPackageId == to.Id).ToList();
+            var path = GetUomPath(_context, from, to, allRelated, null, new List<int>());
+            if (path.IsRightPath)
+            {
+                var value = GetUomValue(path, fromPackageId);
+                return value;
+            }
+            else if (isProductSpecific)
+            {
+                // try with both product and global once again
+                allRelated = _context.Uom.Where(x => x.ProductId == productId || x.ProductId == null).ToList();
+                var pathGlobal = GetUomPath(_context, from, to, allRelated, null, new List<int>());
+                if (pathGlobal.IsRightPath)
+                {
+                    var value = GetUomValue(pathGlobal, fromPackageId);
+                    return value;
+                }
+            }
+            return 0;
+        }
+
+        private decimal GetUomValue(UomPath path, int fromPackageId)
+        {
+            var isFromPackageEqualToSource = path.Uom.PackageId == fromPackageId;
+            var convertRatio = isFromPackageEqualToSource ? path.Uom.Quantity : 1 / path.Uom.Quantity;
+            if (path.Paths.Count == 0)
+            {
+                return convertRatio;
+            }
+            var from = isFromPackageEqualToSource ? path.Uom.RelatedPackageId : path.Uom.PackageId;
+            var p = path.Paths.FirstOrDefault();
+            var quantity = GetUomValue(p, from);
+            convertRatio *= quantity;
+            return convertRatio;
+        }
+
+        private UomPath GetUomPath(DatabaseContext _context, Package from, Package to, List<Uom> allRelated, int? currentUomId, List<int> allEarlierPackages)
+        {
+            var uomPath = new UomPath();
+            if (from.Id == to.Id)
+            {
+                return new UomPath { IsRightPath = true, Uom = new Uom() { Package = from, RelatedPackage = to, Quantity = 1 } };
+            }
+            var copy = MakeCopy(allEarlierPackages);
+            copy.Add(from.Id);
+            var source = allRelated.Where(x => x.Use && (x.PackageId == from.Id || x.RelatedPackageId == from.Id) && x.Id != currentUomId).ToList();
+            foreach (var m in source)
+            {
+                // get the other package 
+                var currentPackageToCheck = m.PackageId != from.Id ? m.Package : m.RelatedPackage;
+                if (!copy.Contains(currentPackageToCheck.Id))
+                {
+                    var isRight = currentPackageToCheck.Id == to.Id;
+                    if (isRight)
+                    {
+                        return new UomPath { Uom = m, IsRightPath = isRight };
+                    }
+                    var uomp = GetUomPath(_context, currentPackageToCheck, to, allRelated, m.Id, copy);
+                    if (uomp != null && uomp.IsRightPath)
+                    {
+                        uomPath.IsRightPath = uomp.IsRightPath;//uomp.Paths.Any(x => x.IsRightPath);
+                        uomPath.Uom = m;
+                        uomPath.Paths.Add(uomp);
+                    }
+                }
+            }
+            return uomPath;
+        }
+        #endregion
+
+    }
+
+    public class UomPath
+    {
+        public UomPath()
+        {
+            //Uoms = new List<Uom>();
+            Paths = new List<UomPath>();
+        }
+        public Uom Uom { get; set; }
+        public bool IsRightPath { get; set; }
+
+        public List<UomPath> Paths { get; set; }
     }
 }
 
@@ -1028,3 +913,148 @@ namespace Service.Core.Inventory
 //        return null;
 //    return VariantMapper.MapToVariantModel(variant);
 //}
+
+
+
+//private void AssignVariantsForSave(Product productEntity, ProductModelForSave product, DateTime now)
+//{
+//    // remove the deleted variants
+//    for (int v = 0; v < productEntity.Variants.Count; v++)
+//    {
+//        var variEnity = productEntity.Variants.ElementAt(v);
+//        if (!product.Variants.Any(x => x.Id == variEnity.Id))
+//        {
+//            variEnity.DeletedAt = now;
+//        }
+//    }
+//    // add/update
+//    foreach (var vari in product.Variants)
+//    {
+//        Variant variantEntity;
+//        if (vari.Id == 0)
+//        {
+//            // add
+//            variantEntity = vari.ToEntity();
+//            variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
+//            productEntity.Variants.Add(variantEntity);
+//            variantEntity.CreatedAt = now;
+//            variantEntity.UpdatedAt = now;
+//        }
+
+//        else
+//        {
+//            variantEntity = productEntity.Variants.FirstOrDefault(x => x.Id == vari.Id);
+//            variantEntity.Alert = vari.Alert;
+//            variantEntity.MinStockCountForAlert = vari.AlertThreshold;
+//            variantEntity.SKU = vari.SKU;
+//            variantEntity.AttributesJSON = JsonConvert.SerializeObject(vari.Attributes);
+//            variantEntity.UpdatedAt = now;
+//        }
+//    }
+//}
+
+//public void DeleteProduct(int id)
+//{
+//    var product = _context.Product.Find(id);
+//    if (product != null)
+//    {
+//        product.DeletedAt = DateTime.Now;
+//        _context.SaveChanges();
+//        var args = new ProductEventArgs(ProductMapper.MapToProductModel(product));
+//        _listener.TriggerProductUpdateEvent(null, args);
+//    }
+//}
+
+//public void DeleteProduct(ProductModel produtModel)
+//{
+//    var dbEntity = _context.Product.FirstOrDefault(x => x.Id == produtModel.Id);
+//    if (dbEntity != null)
+//    {
+//        dbEntity.DeletedAt = DateTime.Now;
+//        _context.SaveChanges();
+//    }
+//}
+
+
+/*
+public void AddUpdateBrand(BrandModel brand)
+{
+    var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brand.Id);
+    if (dbEntity == null)
+    {
+        var brandEntity = brand.ToEntity();
+        brandEntity.CreatedAt = DateTime.Now;
+        brandEntity.UpdatedAt = DateTime.Now;
+        _context.Brand.Add(brandEntity);
+    }
+    else
+    {
+        dbEntity.Name = brand.Name;
+        dbEntity.UpdatedAt = DateTime.Now; // brand.UpdatedAt;
+    }
+    _context.SaveChanges();
+}
+
+private void AssignBrandForSave(Product productEntity, ProductModel product, DateTime now)
+{
+    //dbEntity.Brands
+    foreach (var brand in product.Brands)
+    {
+        // since brand is directly entered in textbox separated by comma, we don't have ids
+        // so lets differentiate names
+
+        Brand brandEntity = productEntity.Brands.FirstOrDefault(x => x.Name == brand.Name);
+        if (brandEntity == null)
+        {
+            // then add new; else no need to update
+            brandEntity = brand.ToEntity();
+            brandEntity.CreatedAt = now;
+            brandEntity.UpdatedAt = now;
+            productEntity.Brands.Add(brandEntity);
+        }
+        //else 
+        //{
+        //    if (brandEntity.Id == 0)
+        //    {
+        //        productEntity.Brands.Remove(brandEntity);
+        //        // add
+        //    } 
+        //}
+    }
+    // remove all other brands which don't have same updatedAt date
+    foreach (var brandEntity in productEntity.Brands)
+    {
+        if (!product.Brands.Any(x => x.Name == brandEntity.Name))
+        {
+            // remove
+            brandEntity.DeletedAt = now;
+        }
+    }
+}
+
+public List<BrandModel> GetBrandList()
+{
+    var brands = _context.Brand
+        .Where(x => x.DeletedAt == null)
+        .Select(x => new BrandModel()
+        {
+            Name = x.Name,
+            Id = x.Id,
+            CreatedAt = x.CreatedAt,
+            UpdatedAt = x.UpdatedAt
+        })
+        .ToList();
+
+    return brands;
+}
+
+public void DeleteBrand(BrandModel brandModel)
+{
+    var dbEntity = _context.Brand.FirstOrDefault(x => x.Id == brandModel.Id);
+    if (dbEntity != null)
+    {
+        dbEntity.DeletedAt = DateTime.Now;
+        _context.SaveChanges();
+    }
+}
+*/

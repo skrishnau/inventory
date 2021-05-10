@@ -38,9 +38,15 @@ namespace IMS.Forms.Inventory.UOM
            // InitializeHeader();
             InitializeEvents();
             PopulateUomData();
+            PopulatePackage();
 
             dgvUom.SelectionChanged += DgvUom_SelectionChanged;
             _listener.UomUpdated += _listener_UomUpdated;
+
+            txtValue.Minimum = Int32.MinValue;
+            txtValue.Maximum = Int32.MaxValue;
+            txtValue.Value = 1;
+            
         }
 
         private void DgvUom_SelectionChanged(object sender, EventArgs e)
@@ -52,6 +58,36 @@ namespace IMS.Forms.Inventory.UOM
         {
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
+            btnConvert.Click += BtnConvert_Click;
+        }
+
+        private void BtnConvert_Click(object sender, EventArgs e)
+        {
+            var fromStr = cbFrom.SelectedValue?.ToString() ?? string.Empty;
+            var toStr = cbTo.SelectedValue?.ToString() ?? string.Empty;
+            int fromInt = 0;
+            int toInt = 0;
+            int.TryParse(fromStr, out fromInt);
+            int.TryParse(toStr, out toInt);
+            var message = string.Empty;
+            if (fromInt == 0)
+                message += "From Package is required.";
+            if (toInt == 0)
+                message += "To Package is required";
+            var val = _inventoryService.ConvertUom(fromInt, toInt, null, txtValue.Value);
+            txtResult.Text = val.ToString();
+        }
+        private void PopulatePackage()
+        {
+            var packages = _inventoryService.GetPackageList();
+            cbFrom.DataSource = packages;
+            cbFrom.ValueMember = "Id";
+            cbFrom.DisplayMember = "Name";
+
+            var relatedPackages = _inventoryService.GetPackageList();
+            cbTo.DataSource = relatedPackages;
+            cbTo.ValueMember = "Id";
+            cbTo.DisplayMember = "Name";
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -86,7 +122,6 @@ namespace IMS.Forms.Inventory.UOM
             dgvUom.AutoGenerateColumns = false;
             dgvUom.DataSource = uoms;
         }
-
     }
 }
 
