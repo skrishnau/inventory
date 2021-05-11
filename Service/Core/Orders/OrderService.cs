@@ -576,6 +576,7 @@ namespace Service.Core.Orders
                 }
                 if (item.ProductId == 0)
                 {
+                    item.Product = item.Product.Trim();
                     var productEntity = _context.Product.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == item.Product || x.SKU == item.Product));
                     if (productEntity != null)
                     {

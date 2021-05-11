@@ -244,6 +244,8 @@ namespace IMS.Forms.Inventory.Purchases
             pnlButtonsHeader.Visible = false;
         }
 
+
+
         #endregion
 
 

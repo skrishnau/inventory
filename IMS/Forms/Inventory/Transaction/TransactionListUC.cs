@@ -241,6 +241,7 @@ namespace IMS.Forms.Inventory.Transaction
             if (model != null)
             {
                 btnEdit.Visible = !model.IsVoid && !model.IsCancelled; //!model.IsCompleted &&
+                btnEdit.Text = (model.IsVerified && !model.IsCompleted) ? "Update Rates" : "Edit";
                 btnPrint.Visible = model.IsCompleted; //model.OrderType == OrderTypeEnum.Sale.ToString() && 
                 btnCancel.Visible = !model.IsCompleted && !model.IsCancelled;
                 // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
@@ -316,6 +317,19 @@ namespace IMS.Forms.Inventory.Transaction
             var order = GetRowDataAndStoreSelectedIndex();
             if (order != null)
             {
+                //if(order.OrderType == OrderTypeEnum.Purchase.ToString() && order.IsVerified && !order.IsCompleted)
+                //{
+                //    // zero rate edit case
+                //    var dialogResult = MessageBox.Show(this, "This transaction has items with zero rate. Updating the rates will " +
+                //       "update it's related ledger and also updates cost prices in all of the corresponding sale transactions and their ledger too. " +
+                //       "Are you sure to edit?",
+                //       "Are you sure to edit ?", MessageBoxButtons.YesNo);
+                //    if (dialogResult == DialogResult.Yes)
+                //    {
+                //        ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id ?? 0);
+                //    }
+                //}
+                //else 
                 if (order.IsCompleted)
                 {
                     var dialogResult = MessageBox.Show(this, "This transaction is complete. By editing and re-saving " +

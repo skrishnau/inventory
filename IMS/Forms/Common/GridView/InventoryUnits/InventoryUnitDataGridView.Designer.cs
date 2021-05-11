@@ -435,6 +435,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         #region Design For
 
+        public void DisableAllExceptRate()
+        {
+            MakeAllColumnsReadOnly();
+            colRate.ReadOnly = false;
+            this.AllowUserToAddRows = false;
+            this.AllowUserToDeleteRows = false;
+            colDelete.Visible = false;
+        }
+
         public void DesignForInventoryUnitListing()
         {
             this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

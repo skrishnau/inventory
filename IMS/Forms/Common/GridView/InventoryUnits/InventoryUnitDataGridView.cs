@@ -240,8 +240,6 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         private ProductModel GetProduct(DataGridViewRow row)
         {
-            
-            isValid = false;
             var model = new ProductModel();
             var productIdCell = row.Cells[colProductId.Index];
             var productNameCell = row.Cells[colProduct.Index];

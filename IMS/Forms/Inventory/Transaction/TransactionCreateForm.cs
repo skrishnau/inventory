@@ -325,6 +325,11 @@ namespace IMS.Forms.Inventory.Transaction
 
                     dgvItems.AddRows(invModel);
 
+                    if (model.IsVerified && !model.IsCompleted)
+                    {
+                        // zero rate update case
+                        DisableAllInputsExceptRate();
+                    }
                     //if (model.IsCompleted)
                     //{
                     //    cbClient.Enabled = false;
@@ -361,6 +366,28 @@ namespace IMS.Forms.Inventory.Transaction
                     //    this.Text = (model == null ? "Create" : "Edit") + " Transfer Order";
                     //    break;
             }
+        }
+
+        private void DisableAllInputsExceptRate()
+        {
+            var enabled = false;
+            cbClient.Enabled = enabled;
+            cbDiscountType.Enabled = enabled;
+            txtAddress.Enabled = enabled;
+            txtDiscount.Enabled = enabled;
+            txtPaidAmount.Enabled = enabled;
+            txtPhone.Enabled = enabled;
+            txtReceiptNo.Enabled = enabled;
+            txtSum.Enabled = enabled;
+            txtTotal.Enabled = enabled;
+            rbCash.Enabled = enabled;
+            rbCredit.Enabled = enabled;
+            saveFooterUC1.btnSave.Visible = enabled;
+            dtCompletedDate.Enabled = enabled;
+            dtExpectedDate.Enabled = enabled;
+            dtPaymentDueDate.Enabled = enabled;
+            lblClient.DoubleClick -= LblClient_DoubleClick;
+            dgvItems.DisableAllExceptRate();
         }
 
         private void PopulateReceiptNumber()
@@ -421,12 +448,24 @@ namespace IMS.Forms.Inventory.Transaction
 
             var model = GetData(checkout);
 
+            if (_orderType == OrderTypeEnum.Purchase && (model?.OrderItems?.Any(x => x.Rate == 0) ?? false) && rbCash.Checked)
+            {
+                errorProvider.SetError(rbCredit, "Can't do full cash payment for zero rate items.");
+                msg.Message += "You can't have full cash payment for transaction with zero rate items. Please change it to Partial payment.\n";
+            }
+            else
+            {
+                errorProvider.SetError(rbCredit, string.Empty);
+            }
+
             if (!string.IsNullOrEmpty(msg.Message))
             {
                 PopupMessage.ShowInfoMessage(msg.Message);
                 this.Focus();
                 return null;
             }
+
+
 
             if (model == null)
                 return null;
@@ -441,7 +480,26 @@ namespace IMS.Forms.Inventory.Transaction
 
             if (checkout)
             {
-                DialogResult result = MessageBox.Show(this, "Are you sure to checkout the transaction?", "Checkout?", MessageBoxButtons.YesNo);
+                var warning = string.Empty;
+                if (model.OrderType == OrderTypeEnum.Purchase.ToString())
+                {
+                    if (model.IsVerified && !model.IsCompleted)
+                    {
+                        warning = "This transaction previously had items with zero rate. Checking out this transaction will " +
+                       "update it's related ledger and also updates cost prices in all of the corresponding sale transactions and their ledger too. " +
+                       "Are you sure to checkout the transaction?";
+                    }
+                    else if (model.Id == 0 && model.OrderItems.Any(x => x.Rate == 0))
+                    {
+                        // new purchase with zero rate
+                        warning = "This transaction has items with zero rate. Checking out this transaction will " +
+                        "save it as 'Pending Order' and it's ledger won't be updated. You have to checkout this transaction once again with updated rates. " +
+                        "Are you sure to checkout the transaction?";
+                    }
+                }
+                else warning = "Are you sure to checkout the transaction?";
+
+                DialogResult result = MessageBox.Show(this, warning, "Checkout?", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     msg = _orderService.SaveOrder(model, checkout);
@@ -486,7 +544,8 @@ namespace IMS.Forms.Inventory.Transaction
             }
 
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId };
-            if (_orderType == OrderTypeEnum.Purchase)
+            var isEditForZeroRateUpdate = _orderModel != null && (_orderModel?.IsVerified ?? false) && !(_orderModel?.IsCompleted ?? false);
+            if (_orderType == OrderTypeEnum.Purchase && !isEditForZeroRateUpdate)
                 ignoreList.Add(dgvItems.colRate); // in case of purchase the user may not enter the rate at first
             var items = dgvItems.GetItems(ignoreList, Constants.HAS_STOCK_MANAGEMENT, !checkout);
 
@@ -510,7 +569,7 @@ namespace IMS.Forms.Inventory.Transaction
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.GetValue() : (DateTime?)null,
                     PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : rbCash.Checked ? OrderPaymentTypeEnum.Cash.ToString() : null,
                     TotalAmount = items.Select(x => x.Total).Sum(),
-                    IsVerified = _orderModel?.IsVerified??false,
+                    IsVerified = _orderModel?.IsVerified ?? false,
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;
