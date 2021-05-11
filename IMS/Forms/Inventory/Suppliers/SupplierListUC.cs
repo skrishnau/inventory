@@ -89,7 +89,14 @@ namespace IMS.Forms.Inventory.Suppliers
             dgvSuppliers.ColumnHeaderMouseClick += DgvSuppliers_ColumnHeaderMouseClick;
             dgvSuppliers.CellClick += DgvSuppliers_CellClick;
             txtName.TextChanged += TxtName_TextChanged;
+            dgvSuppliers.DataBindingComplete += DgvSuppliers_DataBindingComplete;
         }
+
+        private void DgvSuppliers_DataBindingComplete(object sender, EventArgs e)
+        {
+            PaginationHelper.SetRowNumber(dgvSuppliers, helper.offset);
+        }
+        
 
 
         #endregion

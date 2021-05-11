@@ -66,7 +66,7 @@ namespace IMS.Forms.Inventory.Transaction
 
             InitializeSearchTextBox();
 
-            if(_orderListTypeEnum == OrderListTypeEnum.Order)
+            if (_orderListTypeEnum == OrderListTypeEnum.Order)
             {
                 colOrderNumber.Visible = false;
                 colOrderNumber.Width = 0;
@@ -111,7 +111,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void InitializeEvents()
         {
             _listener.OrderUpdated += _listener_PurchaseOrderUpdated;
-           // dgvOrders.CellClick += DgvPurchases_CellClick;
+            // dgvOrders.CellClick += DgvPurchases_CellClick;
             dgvOrders.SelectionChanged += DgvOrders_SelectionChanged;
             //_purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
             //lnkPurchaseOrderList.Click += Link_Click;
@@ -128,8 +128,7 @@ namespace IMS.Forms.Inventory.Transaction
             txtSearchReceiptNo.TextChanged += TxtSearchReceiptNo_TextChanged;
             btnViewParentOrder.Click += BtnViewParentOrder_Click;
         }
-
-       
+        
 
         private void Type_CheckedChanged(object sender, EventArgs e)
         {
@@ -214,7 +213,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void DgvOrders_SelectionChanged(object sender, EventArgs e)
         {
             var model = GetRowDataAndStoreSelectedIndex();
-           // var model = dgvOrders.Rows[e.RowIndex].DataBoundItem as OrderModel;
+            // var model = dgvOrders.Rows[e.RowIndex].DataBoundItem as OrderModel;
             ShowDetail(sender, model);
         }
 
@@ -222,7 +221,7 @@ namespace IMS.Forms.Inventory.Transaction
         //{
         //    if (e.RowIndex >= 0)
         //    {
-                
+
         //    }
         //}
 
@@ -234,6 +233,7 @@ namespace IMS.Forms.Inventory.Transaction
                 if (dgvOrders.Rows.Count > selectedIndex)
                     dgvOrders.Rows[selectedIndex].Selected = true;
             }
+            PaginationHelper.SetRowNumber(dgvOrders, helper.offset);
         }
 
         private void ShowDetail(object sender, OrderModel model)

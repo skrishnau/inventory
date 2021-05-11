@@ -57,13 +57,12 @@ namespace IMS.Forms.Inventory.Units
         {
             // InitializeHeader();  
             //_listener.WarehouseUpdated += _listener_WarehouseUpdated;
-            _listener.ProductUpdated += _listener_ProductUpdated;
             // InitializeHeader();
            // PopulateWarehouses();
             PopulateProducts();
+            InitializeGridView();
 
             InitializeEvents();
-            InitializeGridView();
             PopulateInventoryUnits();
 
             InitializeListeners();
@@ -84,6 +83,7 @@ namespace IMS.Forms.Inventory.Units
         private void InitializeListeners()
         {
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
+            _listener.ProductUpdated += _listener_ProductUpdated;
         }
 
         private void _listener_InventoryUnitUpdated(object sender, Service.DbEventArgs.BaseEventArgs<List<InventoryUnitModel>> e)
@@ -111,7 +111,14 @@ namespace IMS.Forms.Inventory.Units
             btnIssue.Click += BtnIssue_Click;
             btnDisassemble.Click += BtnDisassemble_Click;
             btnReceive.Click += BtnReceive_Click;
+            dgvInventoryUnit.DataBindingComplete += DgvInventoryUnit_DataBindingComplete;
         }
+
+        private void DgvInventoryUnit_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            PaginationHelper.SetRowNumber(dgvInventoryUnit, helper.offset);
+        }
+        
 
         private void BtnReceive_Click(object sender, EventArgs e)
         {
@@ -132,6 +139,7 @@ namespace IMS.Forms.Inventory.Units
             dgvInventoryUnit.SetSelectable(true); // 2. Second set selectable
             //dgvInventoryUnit.ColumnHeadersVisible = true;
             //dgvInventoryUnit.ColumnHeadersHeight = 30;
+            dgvInventoryUnit.RowHeadersVisible = true;
             helper = new InventoryUnitListPaginationHelper(_bindingSource, dgvInventoryUnit, bindingNavigator1, _inventoryUnitService, 0, 0);
         }
 

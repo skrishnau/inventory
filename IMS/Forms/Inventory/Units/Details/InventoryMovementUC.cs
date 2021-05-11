@@ -50,7 +50,14 @@ namespace IMS.Forms.Inventory.Units.Details
 
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
+            dgvMovement.DataSourceChanged += DgvMovement_DataSourceChanged;
         }
+
+        private void DgvMovement_DataSourceChanged(object sender, EventArgs e)
+        {
+            PaginationHelper.SetRowNumber(dgvMovement, helper.offset);
+        }
+
         private void PopulateProducts()
         {
             var products = _productService.GetProductListForCombo();

@@ -45,6 +45,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.colOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompletedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNoOfProducts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -69,17 +80,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnViewParentOrder = new System.Windows.Forms.Button();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
-            this.colOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCompletedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNoOfProducts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -267,6 +267,94 @@
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrders.Size = new System.Drawing.Size(567, 416);
             this.dgvOrders.TabIndex = 13;
+            // 
+            // colOrderNumber
+            // 
+            this.colOrderNumber.DataPropertyName = "ReferenceNumber";
+            this.colOrderNumber.HeaderText = "Receipt No.";
+            this.colOrderNumber.Name = "colOrderNumber";
+            this.colOrderNumber.ReadOnly = true;
+            this.colOrderNumber.Width = 120;
+            // 
+            // colCreatedDate
+            // 
+            this.colCreatedDate.DataPropertyName = "UpdatedAtBS";
+            this.colCreatedDate.HeaderText = "Updated On";
+            this.colCreatedDate.Name = "colCreatedDate";
+            this.colCreatedDate.ReadOnly = true;
+            this.colCreatedDate.Width = 80;
+            // 
+            // colCompletedDate
+            // 
+            this.colCompletedDate.DataPropertyName = "CompletedDateBS";
+            this.colCompletedDate.HeaderText = "Checkout Date";
+            this.colCompletedDate.Name = "colCompletedDate";
+            this.colCompletedDate.ReadOnly = true;
+            // 
+            // colOrderType
+            // 
+            this.colOrderType.DataPropertyName = "OrderType";
+            this.colOrderType.HeaderText = "Type";
+            this.colOrderType.Name = "colOrderType";
+            this.colOrderType.ReadOnly = true;
+            this.colOrderType.Width = 80;
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.DataPropertyName = "User";
+            this.colCustomer.HeaderText = "Customer";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
+            this.colCustomer.Width = 150;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTotalAmount.DataPropertyName = "TotalAmount";
+            this.colTotalAmount.HeaderText = "Total Amount";
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Width = 87;
+            // 
+            // colDiscountPercent
+            // 
+            this.colDiscountPercent.DataPropertyName = "DiscountString";
+            this.colDiscountPercent.HeaderText = "Discount";
+            this.colDiscountPercent.Name = "colDiscountPercent";
+            this.colDiscountPercent.ReadOnly = true;
+            this.colDiscountPercent.Width = 80;
+            // 
+            // colPaidAmount
+            // 
+            this.colPaidAmount.DataPropertyName = "PaidAmount";
+            this.colPaidAmount.HeaderText = "Paid Amount";
+            this.colPaidAmount.Name = "colPaidAmount";
+            this.colPaidAmount.ReadOnly = true;
+            // 
+            // colDeliveryDate
+            // 
+            this.colDeliveryDate.DataPropertyName = "DeliveryDateBS";
+            this.colDeliveryDate.HeaderText = "Delivery Date";
+            this.colDeliveryDate.Name = "colDeliveryDate";
+            this.colDeliveryDate.ReadOnly = true;
+            this.colDeliveryDate.Width = 80;
+            // 
+            // colNoOfProducts
+            // 
+            this.colNoOfProducts.DataPropertyName = "NoOfProducts";
+            this.colNoOfProducts.FillWeight = 80F;
+            this.colNoOfProducts.HeaderText = "Products";
+            this.colNoOfProducts.Name = "colNoOfProducts";
+            this.colNoOfProducts.ReadOnly = true;
+            this.colNoOfProducts.Width = 80;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            this.colStatus.Width = 70;
             // 
             // panel2
             // 
@@ -524,94 +612,6 @@
             this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.listHeaderTemplate1.Size = new System.Drawing.Size(1013, 32);
             this.listHeaderTemplate1.TabIndex = 17;
-            // 
-            // colOrderNumber
-            // 
-            this.colOrderNumber.DataPropertyName = "ReferenceNumber";
-            this.colOrderNumber.HeaderText = "Receipt No.";
-            this.colOrderNumber.Name = "colOrderNumber";
-            this.colOrderNumber.ReadOnly = true;
-            this.colOrderNumber.Width = 120;
-            // 
-            // colCreatedDate
-            // 
-            this.colCreatedDate.DataPropertyName = "UpdatedAtBS";
-            this.colCreatedDate.HeaderText = "Updated On";
-            this.colCreatedDate.Name = "colCreatedDate";
-            this.colCreatedDate.ReadOnly = true;
-            this.colCreatedDate.Width = 80;
-            // 
-            // colCompletedDate
-            // 
-            this.colCompletedDate.DataPropertyName = "CompletedDateBS";
-            this.colCompletedDate.HeaderText = "Checkout Date";
-            this.colCompletedDate.Name = "colCompletedDate";
-            this.colCompletedDate.ReadOnly = true;
-            // 
-            // colOrderType
-            // 
-            this.colOrderType.DataPropertyName = "OrderType";
-            this.colOrderType.HeaderText = "Type";
-            this.colOrderType.Name = "colOrderType";
-            this.colOrderType.ReadOnly = true;
-            this.colOrderType.Width = 80;
-            // 
-            // colCustomer
-            // 
-            this.colCustomer.DataPropertyName = "User";
-            this.colCustomer.HeaderText = "Customer";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 150;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTotalAmount.DataPropertyName = "TotalAmount";
-            this.colTotalAmount.HeaderText = "Total Amount";
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Width = 87;
-            // 
-            // colDiscountPercent
-            // 
-            this.colDiscountPercent.DataPropertyName = "DiscountString";
-            this.colDiscountPercent.HeaderText = "Discount";
-            this.colDiscountPercent.Name = "colDiscountPercent";
-            this.colDiscountPercent.ReadOnly = true;
-            this.colDiscountPercent.Width = 80;
-            // 
-            // colPaidAmount
-            // 
-            this.colPaidAmount.DataPropertyName = "PaidAmount";
-            this.colPaidAmount.HeaderText = "Paid Amount";
-            this.colPaidAmount.Name = "colPaidAmount";
-            this.colPaidAmount.ReadOnly = true;
-            // 
-            // colDeliveryDate
-            // 
-            this.colDeliveryDate.DataPropertyName = "DeliveryDateBS";
-            this.colDeliveryDate.HeaderText = "Delivery Date";
-            this.colDeliveryDate.Name = "colDeliveryDate";
-            this.colDeliveryDate.ReadOnly = true;
-            this.colDeliveryDate.Width = 80;
-            // 
-            // colNoOfProducts
-            // 
-            this.colNoOfProducts.DataPropertyName = "NoOfProducts";
-            this.colNoOfProducts.FillWeight = 80F;
-            this.colNoOfProducts.HeaderText = "Products";
-            this.colNoOfProducts.Name = "colNoOfProducts";
-            this.colNoOfProducts.ReadOnly = true;
-            this.colNoOfProducts.Width = 80;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "Status";
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 70;
             // 
             // TransactionListUC
             // 

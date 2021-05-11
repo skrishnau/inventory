@@ -96,9 +96,13 @@ namespace IMS.Forms.Inventory.Products
             // btnDelete.Click += BtnDelete_Click;
             cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
             txtName.TextChanged += TxtName_TextChanged;
-           
+            dgvProductList.DataSourceChanged += DgvProductList_DataSourceChanged;
         }
 
+        private void DgvProductList_DataSourceChanged(object sender, EventArgs e)
+        {
+            PaginationHelper.SetRowNumber(dgvProductList, helper.offset);
+        }
 
         private void InitializeListeners()
         {

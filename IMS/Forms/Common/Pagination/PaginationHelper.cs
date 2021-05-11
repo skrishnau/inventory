@@ -14,6 +14,18 @@ using ViewModel.Enums;
 
 namespace IMS.Forms.Common.Pagination
 {
+    public class PaginationHelper
+    {
+        public static void SetRowNumber(DataGridView dgv, int offset)
+        {
+            dgv.RowHeadersWidth = 55;
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                //row.HeaderCell.Value = (row.Index + 1).ToString();
+                row.HeaderCell.Value = ((offset) + (row.Index + 1)).ToString();
+            }
+        }
+    }
     public class ClientListPaginationHelper
     {
         private UserTypeEnum _userType;
@@ -21,6 +33,7 @@ namespace IMS.Forms.Common.Pagination
 
         private int totalRecords = 0;
         private int pageSize = 20;
+        public int offset = 0;
 
         BindingSource bindingSource1;
         DataGridView dataGridView1;
@@ -47,7 +60,7 @@ namespace IMS.Forms.Common.Pagination
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
 
-            int offset = ((int?)bindingSource1.Current)??0;
+            offset = ((int?)bindingSource1.Current)??0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
@@ -105,6 +118,7 @@ namespace IMS.Forms.Common.Pagination
     {
         private int totalRecords = 0;
         private int pageSize = 20;
+        public int offset = 0;
 
         BindingSource bindingSource1;
         DataGridView dataGridView1;
@@ -130,7 +144,7 @@ namespace IMS.Forms.Common.Pagination
         private async void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            int offset = ((int?)bindingSource1.Current)??0;
+            offset = ((int?)bindingSource1.Current)??0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
@@ -184,8 +198,8 @@ namespace IMS.Forms.Common.Pagination
     public class TransactionListPaginationHelper
     {
         private int totalRecords = 0;
-        private int pageSize = 20;
-
+        public int pageSize = 20;
+        public int offset = 0;
         BindingSource bindingSource1;
         DataGridView dataGridView1;
         BindingNavigator bindingNavigator1;
@@ -213,7 +227,7 @@ namespace IMS.Forms.Common.Pagination
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-            int offset = ((int?)bindingSource1.Current)??0;
+            offset = ((int?)bindingSource1.Current)??0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
@@ -271,6 +285,7 @@ namespace IMS.Forms.Common.Pagination
 
         private int totalRecords = 0;
         private int pageSize = 20;
+        public int offset = 0;
 
         BindingSource bindingSource1;
         DataGridView dataGridView1;
@@ -297,7 +312,7 @@ namespace IMS.Forms.Common.Pagination
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
 
-            int offset = ((int?)bindingSource1.Current) ?? 0;
+            offset = ((int?)bindingSource1.Current) ?? 0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
@@ -356,6 +371,7 @@ namespace IMS.Forms.Common.Pagination
 
         private int totalRecords = 0;
         private int pageSize = 20;
+        public int offset = 0;
 
         BindingSource bindingSource1;
         DataGridView dataGridView1;
@@ -381,8 +397,7 @@ namespace IMS.Forms.Common.Pagination
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-
-            int offset = ((int?)bindingSource1.Current) ?? 0;
+            offset = ((int?)bindingSource1.Current) ?? 0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
@@ -440,6 +455,7 @@ namespace IMS.Forms.Common.Pagination
 
         private int totalRecords = 0;
         private int pageSize = 20;
+        public int offset = 0;
 
         BindingSource bindingSource1;
         DataGridView dataGridView1;
@@ -464,8 +480,7 @@ namespace IMS.Forms.Common.Pagination
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
-
-            int offset = ((int?)bindingSource1.Current) ?? 0;
+            offset = ((int?)bindingSource1.Current) ?? 0;
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });

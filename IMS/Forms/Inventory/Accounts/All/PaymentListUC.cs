@@ -31,7 +31,7 @@ namespace IMS.Forms.Inventory.Reports.All
         private LedgerMasterModel _ledgerMaster = new LedgerMasterModel();
 
         BindingSource _bindingSource = new BindingSource();
-        private PaymentListPaginationHelper paginationHelper;
+        private PaymentListPaginationHelper helper;
 
         public PaymentListUC(IPaymentService reportService, IUserService userService, IDatabaseChangeListener listener)
         {
@@ -62,7 +62,7 @@ namespace IMS.Forms.Inventory.Reports.All
         {
             //dgvLedger.DataSource = _bindingSource;
             dgvLedger.AutoGenerateColumns = false;
-            paginationHelper = new PaymentListPaginationHelper(_bindingSource, dgvLedger, bindingNavigator1, _paymentService, ClientTypeEnum.All, string.Empty);
+            helper = new PaymentListPaginationHelper(_bindingSource, dgvLedger, bindingNavigator1, _paymentService, ClientTypeEnum.All, string.Empty);
         }
 
         private void InitializeEvents()
@@ -76,8 +76,13 @@ namespace IMS.Forms.Inventory.Reports.All
             dgvLedger.SelectionChanged += DgvLedger_SelectionChanged;
             btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
+            dgvLedger.DataBindingComplete += DgvLedger_DataBindingComplete;
         }
 
+        private void DgvLedger_DataBindingComplete(object sender, EventArgs e)
+        {
+            PaginationHelper.SetRowNumber(dgvLedger, helper.offset);
+        }
 
         private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
         {
@@ -187,7 +192,7 @@ namespace IMS.Forms.Inventory.Reports.All
             if (item != null)
             {
                 var userType = (ClientTypeEnum)Enum.Parse(typeof(ClientTypeEnum), item.Value);
-                paginationHelper.Reset(userType, cbCustomer.Text);
+                helper.Reset(userType, cbCustomer.Text);
             }
             //var customerIdStr = cbCustomer.SelectedValue?.ToString() ?? "";
             //int customerId;
