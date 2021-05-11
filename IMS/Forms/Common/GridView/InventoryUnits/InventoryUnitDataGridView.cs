@@ -240,9 +240,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         private ProductModel GetProduct(DataGridViewRow row)
         {
+            
+            isValid = false;
             var model = new ProductModel();
             var productIdCell = row.Cells[colProductId.Index];
             var productNameCell = row.Cells[colProduct.Index];
+            productIdCell.ErrorText = string.Empty;
+            productNameCell.ErrorText = string.Empty;
             if (colProductId.Visible)
             {
                 var productId = 0;
@@ -253,8 +257,21 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 string productNameOrSku = productNameCell.Value as string;
                 model.Name = productNameOrSku;
+                if (!Constants.CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION)
+                {
+                    var prd = _productService.GetProductByNameOrSKU(model.Name.Trim());
+                    if(prd == null)
+                    {
+                        InvalidColumns.Add("Product");
+                        productIdCell.ErrorText = "Invalid Product";
+                        productNameCell.ErrorText = "Invalid Product";
+                        isValid = false;
+                        return model;
+                    }
+                }
             }
 
+            
 
             if (IgnoreColumnsForErrorList.Contains(colProductId))
             {

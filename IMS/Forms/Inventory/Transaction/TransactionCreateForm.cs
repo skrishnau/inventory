@@ -414,7 +414,11 @@ namespace IMS.Forms.Inventory.Transaction
                 errorProvider.SetError(cbClient, creditToAnonumousMsg);
                 msg.Message += creditToAnonumousMsg;
             }
-            
+            else
+            {
+                errorProvider.SetError(cbClient, string.Empty);
+            }
+
             var model = GetData(checkout);
 
             if (!string.IsNullOrEmpty(msg.Message))

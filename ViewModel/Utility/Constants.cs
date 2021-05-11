@@ -14,5 +14,7 @@ namespace ViewModel.Utility
         // later convert it to appsettings and give on/off feature to user
         public const bool LEDGER_DISPLAY_TRANSACTION_ITEMS_ALSO = true;
 
+        public const bool CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION = false;
+
     }
 }
