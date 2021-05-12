@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core.Inventory;
 using Service.Core.Inventory;
+using ViewModel.Core.Common;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -16,6 +17,7 @@ namespace IMS.Forms.Inventory.Products
     {
 
         public event EventHandler<EventArgs> OnDelete;
+        public event EventHandler<EventArgs> OnPackageComboChanged;
         private UomModel _model;
 
         private IInventoryService _inventoryService;
@@ -41,16 +43,19 @@ namespace IMS.Forms.Inventory.Products
             this.btnDelete.Click += BtnDelete_Click;
             cbRelatedPackage.SelectedValueChanged += CbRelatedPackage_SelectedValueChanged;
             cbPackage.SelectedValueChanged += CbPackage_SelectedValueChanged;
+            
         }
 
         private void CbPackage_SelectedValueChanged(object sender, EventArgs e)
         {
             CheckPackagesAndChangeQuantity();
+            OnPackageComboChanged?.Invoke(sender, e);
         }
 
         private void CbRelatedPackage_SelectedValueChanged(object sender, EventArgs e)
         {
             CheckPackagesAndChangeQuantity();
+            OnPackageComboChanged?.Invoke(sender, e);
         }
 
         private void CheckPackagesAndChangeQuantity()
@@ -66,7 +71,7 @@ namespace IMS.Forms.Inventory.Products
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             this.Parent.Controls.Remove(this);
-            //OnDelete(this, e);
+            OnDelete?.Invoke(this, e);
         }
 
         private void PopulatePackage()
@@ -93,6 +98,14 @@ namespace IMS.Forms.Inventory.Products
             }
         }
 
+        private string GetPackage(ComboBox cb)
+        {
+            var val = cb.SelectedItem as PackageModel;
+            if (val != null)
+                return val.Name;
+            return null;
+        }
+
         private int GetPackageId()
         {
             int packageId = 0;
@@ -107,7 +120,7 @@ namespace IMS.Forms.Inventory.Products
             return relatedPackageId;
         }
 
-        public UomModel GetData(ErrorProvider errorProvider, ref string message)
+        public UomModel GetData(ErrorProvider errorProvider, ref string message, bool doValidation = true)
         {
             errorProvider.SetError(cbPackage, string.Empty);
             errorProvider.SetError(cbRelatedPackage, string.Empty);
@@ -121,13 +134,13 @@ namespace IMS.Forms.Inventory.Products
                 message += "Package is required.\n";
                 return null;
             }
-            if (relatedPackageId > 0 && txtQuantity.Value == 0)
+            if ( doValidation && relatedPackageId > 0 && txtQuantity.Value == 0)
             {
                 errorProvider.SetError(txtQuantity, "Quantity should be greater than zero.");
                 message += "Quantity should be greater than zero.\n";
                 return null;
             }
-            if(txtQuantity.Value > 0 && relatedPackageId == 0)
+            if(doValidation && txtQuantity.Value > 0 && relatedPackageId == 0)
             {
                 errorProvider.SetError(cbRelatedPackage, "Required");
                 message += "Related package is required.\n";
@@ -141,6 +154,8 @@ namespace IMS.Forms.Inventory.Products
                 Use = true,
                 ProductId = _model?.ProductId ?? 0,
                 PackageId = packageId,
+                Package = GetPackage(cbPackage),
+                RelatedPackage = GetPackage(cbRelatedPackage),
             };
         }
     }

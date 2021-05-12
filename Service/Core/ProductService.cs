@@ -82,6 +82,13 @@ namespace Service.Core
                         }
                     }
                 }
+                for (var i = 0; i < entity.ProductPackages.Count; i++)
+                {
+                    // need to set the base package to false before deleting from _context cause it's still available in entity.ProductPackages
+                    entity.ProductPackages.ElementAt(i).IsBasePackage = false;
+                    _context.ProductPackage.Remove(entity.ProductPackages.ElementAt(i));
+                }
+                List<ProductPackage> packageList = new List<ProductPackage>();
                 foreach (var uom in model.Uoms)
                 {
                     var uomEntity = uomEntities.FirstOrDefault(x => x.Id == uom.Id);
@@ -90,7 +97,20 @@ namespace Service.Core
                     {
                         entity.Uoms.Add(uomEntity);
                     }
+                    if (!packageList.Any(x => x.PackageId == uom.PackageId))
+                        entity.ProductPackages.Add(new ProductPackage
+                        {
+                            IsBasePackage = model.PackageId == uom.PackageId,
+                            PackageId = uom.PackageId
+                        });
+                    if (!packageList.Any(x => x.PackageId == uom.RelatedPackageId))
+                        entity.ProductPackages.Add(new ProductPackage
+                        {
+                            IsBasePackage = model.PackageId == uom.RelatedPackageId,
+                            PackageId = uom.RelatedPackageId
+                        });
                 }
+
 
                 if (entity.Id == 0)
                 {
@@ -437,7 +457,7 @@ namespace Service.Core
                                .FirstOrDefault(x => x.Id == productId);
                 if (product == null)
                     return null;
-               
+
                 var productModel = ProductMapper.MapToProductModel(product);
                 productModel.Uoms = UomMapper.MapToUomModel(product.Uoms.AsQueryable());
                 return productModel;

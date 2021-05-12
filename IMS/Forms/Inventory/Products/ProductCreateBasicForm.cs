@@ -14,6 +14,8 @@ using IMS.Forms.Inventory.Categories;
 using Service.Core.Users;
 using Service.Interfaces;
 using IMS.Forms.Inventory.Packages;
+using System.Linq;
+using ViewModel.Core.Common;
 
 namespace IMS.Forms.Inventory.Products
 {
@@ -56,22 +58,25 @@ namespace IMS.Forms.Inventory.Products
 
         private void ProductCreate_Load(object sender, EventArgs e)
         {
-            tbInStockQuantity.Minimum = decimal.MinValue;
-            tbInStockQuantity.Maximum = decimal.MaxValue;
+            //tbInStockQuantity.Minimum = decimal.MinValue;
+            //tbInStockQuantity.Maximum = decimal.MaxValue;
 
             InitializeEvents();
             InitializeDatabaseChangeListeners();
 
-            numSupplyPrice.Maximum = Int32.MaxValue;
-            numRetailPrice.Maximum = Int32.MaxValue;
+            //numSupplyPrice.Maximum = Int32.MaxValue;
+            //numRetailPrice.Maximum = Int32.MaxValue;
             // active control
             this.ActiveControl = tbProductName;
             // call all the populating functions
             PopulateCategoryCombo();
-            PopulateUom();
-            PopulatePackage();
+            //PopulateUom();
 
             PopulateDataForEdit(_product);
+            // Note: PopulatePackage() to be called only after PopulateDataForEdit()
+            PopulatePackage();
+            if (_product != null && _product.PackageId != null)
+                cbPackage.SelectedValue = _product.PackageId;
 
         }
 
@@ -92,13 +97,14 @@ namespace IMS.Forms.Inventory.Products
             _greaterThanZeroFieldValidator = new GreaterThanZeroFieldValidator(errorProvider1, greaterControls);
 
             lblCategory.DoubleClick += lblCategory_DoubleClick;
-            lblPackage.DoubleClick += LblPackage_DoubleClick;
+            //lblPackage.DoubleClick += LblPackage_DoubleClick;
             btnAddUom.Click += BtnAddUom_Click;
         }
 
         private void BtnAddUom_Click(object sender, EventArgs e)
         {
             AddUom(null);
+            PopulatePackage();
         }
 
         private void InitializeDatabaseChangeListeners()
@@ -125,32 +131,20 @@ namespace IMS.Forms.Inventory.Products
                 this.Focus(); // return the focus to the current form
                 return;
             }
-
             // since category combo displays text only and doesn't hold id, hence get the category from db
             var category = _productService.GetCategory(cbCategory.SelectedItem.ToString());
-            var uomId = 0;
+            //var uomId = 0;
             var warehouseId = 0;
-            int.TryParse(cbUom.SelectedValue as string, out uomId);
-
+            //int.TryParse(cbUom.SelectedValue as string, out uomId);
             var uomMessage = string.Empty;
-            var uoms = new List<UomModel>();
-            foreach(var control in pnlUomList.Controls)
-            {
-                var productUomUc = control as ProductUomUC;
-                if (productUomUc != null)
-                {
-                    var uom = productUomUc.GetData(errorProvider1, ref uomMessage);
-                    if(uom!=null)
-                        uoms.Add(uom);
-                }
-            }
+            var uoms = GetUomList(ref uomMessage, true);
+
             if (!string.IsNullOrEmpty(uomMessage))
             {
                 PopupMessage.ShowInfoMessage("You have error in UOM. Please check again");
                 this.Focus();
                 return;
             }
-
             var product = new ProductModel()
             {
                 Id = _productId,
@@ -164,16 +158,32 @@ namespace IMS.Forms.Inventory.Products
                 IsVariant = false,
                 Use = chkUse.Checked,
                 SKU = tbSKU.Text,
-                RetailPrice = numRetailPrice.Value,
-                SupplyPrice = numSupplyPrice.Value,
+                //RetailPrice = numRetailPrice.Value,
+                //SupplyPrice = numSupplyPrice.Value,
                 WarehouseId = warehouseId == 0 ? null : (int?)warehouseId,
-                InStockQuantity = (_product?.InStockQuantity??0) == 0 ?  tbInStockQuantity.Value : _product?.InStockQuantity??0,
+               // InStockQuantity = (_product?.InStockQuantity??0) == 0 ?  tbInStockQuantity.Value : _product?.InStockQuantity??0,
                 Uoms = uoms,
             };
             product.ProductAttributes = _productAttributes;
             _productService.AddUpdateProduct(product);
             PopupMessage.ShowSaveSuccessMessage();
             this.Close();
+        }
+
+        private List<UomModel> GetUomList(ref string uomMessage, bool doValidation)
+        {
+            var uoms = new List<UomModel>();
+            foreach (var control in pnlUomList.Controls)
+            {
+                var productUomUc = control as ProductUomUC;
+                if (productUomUc != null)
+                {
+                    var uom = productUomUc.GetData(errorProvider1, ref uomMessage, doValidation);
+                    if (uom != null)
+                        uoms.Add(uom);
+                }
+            }
+            return uoms;
         }
 
         #endregion
@@ -196,15 +206,15 @@ namespace IMS.Forms.Inventory.Products
             }
         }
 
-        private void LblPackage_DoubleClick(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var categoryCreate = Program.container.GetInstance<PackageCreateForm>();
-                categoryCreate.ShowInTaskbar = false;
-                categoryCreate.ShowDialog();
-            }
-        }
+        //private void LblPackage_DoubleClick(object sender, EventArgs e)
+        //{
+        //    using (AsyncScopedLifestyle.BeginScope(Program.container))
+        //    {
+        //        var categoryCreate = Program.container.GetInstance<PackageCreateForm>();
+        //        categoryCreate.ShowInTaskbar = false;
+        //        categoryCreate.ShowDialog();
+        //    }
+        //}
 
 
         #endregion
@@ -246,18 +256,18 @@ namespace IMS.Forms.Inventory.Products
 
                 tbProductName.Text = product.Name;
                 tbSKU.Text = product.SKU;
-                numRetailPrice.Value = product.RetailPrice;
-                numSupplyPrice.Value = product.SupplyPrice;
+                //numRetailPrice.Value = product.RetailPrice;
+                //numSupplyPrice.Value = product.SupplyPrice;
                 cbCategory.Text = product.Category;
                 cbPackage.Text = product.Package == null ? "" : product.Package;
                 //cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
                 chkUse.Checked = product.Use;
-                tbInStockQuantity.Value = _product.InStockQuantity;// 0 ? 0 : _product.InStockQuantity;
-                if(_product.InStockQuantity != 0)
-                {
-                    tbInStockQuantity.Enabled = false;
+                //tbInStockQuantity.Value = _product.InStockQuantity;// 0 ? 0 : _product.InStockQuantity;
+                //if(_product.InStockQuantity != 0)
+                //{
+                //    tbInStockQuantity.Enabled = false;
                     
-                }
+                //}
                 if(product.Uoms.Count > 0)
                 {
                     foreach(var uom in product.Uoms)
@@ -273,9 +283,21 @@ namespace IMS.Forms.Inventory.Products
             if (model == null)
                 model = new UomModel { ProductId = _product?.Id ?? 0 };
             var control = new ProductUomUC(_inventoryService, model);
+            control.OnDelete += ProductUomUC_OnDelete;
+            control.OnPackageComboChanged += ProductUomUC_OnPackageComboChanged;
             control.Dock = DockStyle.Top;
             pnlUomList.Controls.Add(control);
             control.BringToFront();
+        }
+
+        private void ProductUomUC_OnPackageComboChanged(object sender, EventArgs e)
+        {
+            PopulatePackage();
+        }
+
+        private void ProductUomUC_OnDelete(object sender, EventArgs e)
+        {
+            PopulatePackage();
         }
 
         private void PopulateCategoryCombo()
@@ -316,19 +338,44 @@ namespace IMS.Forms.Inventory.Products
         
         private void PopulatePackage()
         {
-            var packages = _inventoryService.GetPackageList();
-            cbPackage.DataSource = packages;
+            var selectedItem = cbPackage.SelectedItem as IdNamePair;
+            var uomMsg = string.Empty;
+            var uomList = GetUomList(ref uomMsg, false);
+            var packages = new List<IdNamePair>();
+            foreach(var uom in uomList)
+            {
+                if(!packages.Any(x=>x.Id == uom.PackageId))
+                {
+                    packages.Add(new IdNamePair
+                    {
+                        Id = uom.PackageId,
+                        Name = uom.Package
+                    });
+                }
+                if (!packages.Any(x => x.Id == uom.RelatedPackageId))
+                {
+                    packages.Add(new IdNamePair
+                    {
+                        Id = uom.RelatedPackageId,
+                        Name = uom.RelatedPackage
+                    });
+                }
+            }
+            //var packages = _inventoryService.GetPackageList();
+            cbPackage.DataSource = packages.OrderBy(x=>x.Name).ToList();
             cbPackage.ValueMember = "Id";
             cbPackage.DisplayMember = "Name";
+            if (selectedItem != null && packages.Any(x => x.Id == selectedItem.Id))
+                cbPackage.SelectedValue = selectedItem.Id;
         }
 
-        private void PopulateUom()
-        {
-            var uoms = _inventoryService.GetRootUomList();
-            cbUom.DataSource = uoms;
-            cbUom.ValueMember = "Id";
-            cbUom.DisplayMember = "Name";
-        }
+        //private void PopulateUom()
+        //{
+        //    var uoms = _inventoryService.GetRootUomList();
+        //    cbUom.DataSource = uoms;
+        //    cbUom.ValueMember = "Id";
+        //    cbUom.DisplayMember = "Name";
+        //}
 
 
         #endregion
