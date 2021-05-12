@@ -73,11 +73,13 @@
     <Compile Include="Core\Inventory\InventoryService.cs" />
     <Compile Include="Core\Sales\ISaleService.cs" />
     <Compile Include="Core\Sales\SaleService.cs" />
+    <Compile Include="Core\UomService.cs" />
     <Compile Include="Core\Users\IUserService.cs" />
     <Compile Include="Core\Users\UserService.cs" />
     <Compile Include="DbEventArgs\BaseEventArgs.cs" />
     <Compile Include="DbEventArgs\IdEventArgs.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="Interfaces\IUomService.cs" />
     <Compile Include="Listeners\Business\BranchListener.cs" />
     <Compile Include="Listeners\DatabaseChangeListener.cs" />
     <Compile Include="Listeners\IDatabaseChangeListener.cs" />

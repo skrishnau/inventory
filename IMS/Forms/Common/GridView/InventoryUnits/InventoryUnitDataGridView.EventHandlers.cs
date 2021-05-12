@@ -134,6 +134,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         {
             if (product != null)
             {
+                row.Cells[this.colProduct.Index].Tag = product;
                 row.Cells[this.colProductId.Index].Value = product.Id;
                 row.Cells[this.colProduct.Index].Value = product.Name;
                 row.Cells[this.colSKU.Index].Value = product.SKU;
@@ -146,8 +147,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         row.Cells[this.colRate.Index].Value = product.SupplyPrice;
                         break;
                 }
-                row.Cells[this.colPackageId.Index].Value = product.PackageId;
-                row.Cells[this.colPackage.Index].Value = product.Package;
+                row.Cells[this.colPackageId.Index].Value = product.BasePackageId;
+                row.Cells[this.colPackage.Index].Value = product.BasePackage;
                // row.Cells[this.colUomId.Index].Value = product.BaseUomId;
                 row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
                 row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
@@ -257,9 +258,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             else if (this.CurrentCell.ColumnIndex == this.colPackage.Index && e.Control is TextBox)
             {
+                var product = this.CurrentRow.Cells[colProduct.Name].Tag as ProductModel;
+                var packageList = product != null && product.Packages != null ? product.Packages : new List<PackageModel>();
                 TextBox textBox = e.Control as TextBox;
                 textBox.AutoCompleteCustomSource.Clear();
-                textBox.AutoCompleteCustomSource.AddRange(_packageList.Select(x => x.Name).ToArray());
+                textBox.AutoCompleteCustomSource.AddRange(packageList.Select(x => x.Name).ToArray());
                 textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
@@ -329,8 +332,6 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var row = this.Rows[currentRowIndex];
             object qtyVal = row.Cells[colUnitQuantity.Name].Value;
             object rateVal = row.Cells[colRate.Name].Value;
-            decimal quantity = 0, rate = 0;
-
             if (currentColumnIndex == colUnitQuantity.Index)
             {
                 qtyVal = formattedValue; // row.Cells[colQuantity.Name].Value;
@@ -339,8 +340,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 rateVal = formattedValue;
             }
-            decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out quantity);
-            decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out rate);
+            decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out decimal quantity);
+            decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out decimal rate);
             row.Cells[colTotal.Index].Value = quantity * rate;
 
             //GetItems();

@@ -15,16 +15,19 @@ using ViewModel.Core.Common;
 using IMS.Forms.Common.GridView;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
+using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.UOM
 {
     public partial class UomUC : UserControl
     {
         private readonly IInventoryService _inventoryService;
+        private readonly IUomService _uomService;
         private readonly IDatabaseChangeListener _listener;
         
-        public UomUC(IInventoryService inventoryService, IDatabaseChangeListener listener)
+        public UomUC(IInventoryService inventoryService, IDatabaseChangeListener listener, IUomService uomService)
         {
+            _uomService = uomService;
             _inventoryService = inventoryService;
             _listener = listener;
 
@@ -74,7 +77,7 @@ namespace IMS.Forms.Inventory.UOM
                 message += "From Package is required.";
             if (toInt == 0)
                 message += "To Package is required";
-            var val = _inventoryService.ConvertUom(fromInt, toInt, null, txtValue.Value);
+            var val = _uomService.ConvertUom(fromInt, toInt, null, txtValue.Value);
             txtResult.Text = val.ToString();
         }
         private void PopulatePackage()

@@ -75,8 +75,8 @@ namespace IMS.Forms.Inventory.Products
             PopulateDataForEdit(_product);
             // Note: PopulatePackage() to be called only after PopulateDataForEdit()
             PopulatePackage();
-            if (_product != null && _product.PackageId != null)
-                cbPackage.SelectedValue = _product.PackageId;
+            if (_product != null && _product.BasePackageId != null)
+                cbPackage.SelectedValue = _product.BasePackageId;
 
         }
 
@@ -153,7 +153,7 @@ namespace IMS.Forms.Inventory.Products
                 Name = tbProductName.Text,
                 AttributesJSON = "",
                // BaseUomId = uomId == 0 ? null : (int?)uomId,
-                PackageId = int.Parse(cbPackage.SelectedValue.ToString()),
+                BasePackageId = int.Parse(cbPackage.SelectedValue.ToString()),
                 ParentProductId = null,
                 IsVariant = false,
                 Use = chkUse.Checked,
@@ -259,7 +259,7 @@ namespace IMS.Forms.Inventory.Products
                 //numRetailPrice.Value = product.RetailPrice;
                 //numSupplyPrice.Value = product.SupplyPrice;
                 cbCategory.Text = product.Category;
-                cbPackage.Text = product.Package == null ? "" : product.Package;
+                cbPackage.Text = product.BasePackage == null ? "" : product.BasePackage;
                 //cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
                 chkUse.Checked = product.Use;
                 //tbInStockQuantity.Value = _product.InStockQuantity;// 0 ? 0 : _product.InStockQuantity;

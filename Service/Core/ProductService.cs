@@ -100,13 +100,13 @@ namespace Service.Core
                     if (!packageList.Any(x => x.PackageId == uom.PackageId))
                         entity.ProductPackages.Add(new ProductPackage
                         {
-                            IsBasePackage = model.PackageId == uom.PackageId,
+                            IsBasePackage = model.BasePackageId == uom.PackageId,
                             PackageId = uom.PackageId
                         });
                     if (!packageList.Any(x => x.PackageId == uom.RelatedPackageId))
                         entity.ProductPackages.Add(new ProductPackage
                         {
-                            IsBasePackage = model.PackageId == uom.RelatedPackageId,
+                            IsBasePackage = model.BasePackageId == uom.RelatedPackageId,
                             PackageId = uom.RelatedPackageId
                         });
                 }

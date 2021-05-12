@@ -159,7 +159,7 @@ namespace IMS.Forms.Inventory.Products
                 //Label = tbLabelCode.Text,
                 LeadDays = (int)numLeadDays.Value,
                 Manufacturer = tbManufacturer.Text,
-                PackageId = int.Parse(cbPackage.SelectedValue.ToString()),
+                BasePackageId = int.Parse(cbPackage.SelectedValue.ToString()),
 
                 ParentProductId = null,
                 IsVariant = false,
@@ -319,7 +319,7 @@ namespace IMS.Forms.Inventory.Products
                 numUnitsInPackage.Value = product.UnitsInPackage;
 
                 cbCategory.Text = product.Category;
-                cbPackage.Text = product.Package == null ? "" : product.Package;
+                cbPackage.Text = product.BasePackage == null ? "" : product.BasePackage;
                // cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
                 cbWarehouse.Text = product.Warehouse == null ? "" : product.Warehouse;
                 //cbSupplier.SelectedValue = product.

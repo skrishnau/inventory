@@ -92,7 +92,6 @@ namespace Service.Core.Inventory
 
 
 
-        decimal ConvertUom(int fromPackageId, int toPackageId, int? productId, decimal value);
 
 
 

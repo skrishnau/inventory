@@ -95,6 +95,7 @@ namespace IMS
             //container.Register<ISaleOrderService, SaleOrderService>(Lifestyle.Singleton);
 
             container.Register<IAppSettingService, AppSettingService>(Lifestyle.Singleton);
+            container.Register<IUomService, UomService>(Lifestyle.Singleton);
 
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //

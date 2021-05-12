@@ -13,6 +13,7 @@ using Infrastructure.Entities.Orders;
 using Service.Core.Orders;
 using ViewModel.Core.Orders;
 using Infrastructure.Entities;
+using Service.Interfaces;
 
 namespace Service.Core.Inventory.Units
 {
@@ -21,11 +22,13 @@ namespace Service.Core.Inventory.Units
         // private readonly DatabaseContext _context;
 
         private readonly IDatabaseChangeListener _listener;
+        private readonly IUomService _uomService;
 
-        public InventoryUnitService(IDatabaseChangeListener listener)//DatabaseContext context,
+        public InventoryUnitService(IDatabaseChangeListener listener, IUomService uomService)//DatabaseContext context,
         {
             //_context = context;
             _listener = listener;
+            _uomService = uomService;
         }
 
 
@@ -555,9 +558,13 @@ namespace Service.Core.Inventory.Units
                 .ToList();
             decimal qtySum = 0;
             var fulfilledIndex = -1;
+            
             for (var i = 0; i < invUnit.Count(); i++)
             {
+                //var conversion = _uomService.ConvertUom(invUnit[i].PackageId??0, model.PackageId??0, model.ProductId);
+                //var invunitqty = invUnit[i].UnitQuantity * conversion;
                 qtySum += invUnit[i].UnitQuantity;
+                //qtySum += invunitqty;
                 if (qtySum >= model.UnitQuantity)
                 {
                     fulfilledIndex = i;
@@ -575,6 +582,7 @@ namespace Service.Core.Inventory.Units
             for (var i = 0; i <= fulfilledIndex; i++)
             {
                 var dbEntity = invUnit[i];
+                //var conversion = _uomService.ConvertUom(model.PackageId ?? 0, dbEntity.PackageId ?? 0, model.ProductId);
                 var productName = dbEntity.Product.Name;
                 var warehouseName = dbEntity.Warehouse.Name;
                 var issuedQuantity = 0M;

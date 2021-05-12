@@ -46,8 +46,8 @@ namespace ViewModel.Core.Inventory
         public string User { get; set; }
 
         // ============== Package ============== //
-        public int? PackageId { get; set; }
-        public string Package { get; set; }
+        public int? BasePackageId { get; set; }
+        public string BasePackage { get; set; }
         //public int? BaseUomId { get; set; }
         //public string BaseUom { get; set; }
         public decimal UnitsInPackage { get; set; }
@@ -79,7 +79,7 @@ namespace ViewModel.Core.Inventory
         public decimal CommittedQuantity { get; set; }
         public decimal OnOrderQuantity { get; set; }
         // ------------ Price -------------- //
-        
+
         public decimal SupplyPrice { get; set; }
         public decimal MarkupPercent { get; set; } // percent to keep for ourselves
         public decimal RetailPrice { get; set; }
@@ -103,6 +103,7 @@ namespace ViewModel.Core.Inventory
         // public List<ProductVariantModel> Variants { get; set; }
         //  public virtual List<BrandModel> Brands { get; set; }
 
+        public List<PackageModel> Packages { get; set; }
 
         public bool IsLessThanMinimumStock { get; set; }
 
@@ -113,6 +114,8 @@ namespace ViewModel.Core.Inventory
             ProductAttributes = new List<ProductAttributeModel>();
             Uoms = new List<UomModel>();
             //Variants = new List<ProductVariantModel>();
+            // only used for entity to model conversion to be used in views
+            Packages = new List<PackageModel>();
         }
 
     }

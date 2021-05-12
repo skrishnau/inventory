@@ -140,8 +140,9 @@ namespace DTO.Core.Inventory
             var basePackage = entity.ProductPackages.FirstOrDefault(x => x.IsBasePackage)?.Package;
             if (basePackage == null)
                 basePackage = entity.ProductPackages.FirstOrDefault()?.Package;
-            model.PackageId = basePackage?.Id;
-            model.Package = basePackage?.Name ?? string.Empty;//entity.Package == null ? "" : entity.Package.Name; //PackageMapper.MapToModel(entity.Package);
+            model.Packages = PackageMapper.MapToModel(entity.ProductPackages.Select(x => x.Package).AsQueryable());
+            model.BasePackageId = basePackage?.Id;
+            model.BasePackage = basePackage?.Name ?? string.Empty;//entity.Package == null ? "" : entity.Package.Name; //PackageMapper.MapToModel(entity.Package);
             //model.BaseUomId = entity.BaseUomId;
             //model.BaseUom = entity.BaseUom == null ? "" : entity.BaseUom.Name;// UomMapper.MapToUomModel(entity.BaseUom);
             //model.Uoms = UomMapper.MapToUomModel(entity.Uoms.AsQueryable());

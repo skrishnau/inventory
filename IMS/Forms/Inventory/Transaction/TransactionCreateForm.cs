@@ -496,6 +496,7 @@ namespace IMS.Forms.Inventory.Transaction
                         "save it as 'Pending Order' and it's ledger won't be updated. You have to checkout this transaction once again with updated rates. " +
                         "Are you sure to checkout the transaction?";
                     }
+                    else warning = "Are you sure to checkout the transaction?";
                 }
                 else warning = "Are you sure to checkout the transaction?";
 
