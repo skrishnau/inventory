@@ -609,6 +609,7 @@ namespace Service.Core.Orders
             // second add/update
             foreach (var item in items)
             {
+                //var rate = _inventoryUnitService.GetRate(item.ProductId, order.CompletedDate);
                 Product product = null;
                 var warehouse = _inventoryUnitService.FindWarehouseOrReturnMainWarehouse(_context, item.WarehouseId);
                 item.WarehouseId = warehouse.Id;

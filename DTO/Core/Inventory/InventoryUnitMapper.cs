@@ -65,6 +65,7 @@ namespace DTO.Core.Inventory
                 UnitQuantity = entity.UnitQuantity,
                 //Uom = entity.Uom == null ? "" : entity.Uom.Package.Name,
                 //UomId = entity.UomId,
+                Total = Decimal.Round(entity.Total == 0 ? entity.UnitQuantity * entity.Rate : entity.Total, 2),
                 Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name,
                 WarehouseId = entity.WarehouseId,
                 PurchaseOrderItemId = entity.OrderItemId,

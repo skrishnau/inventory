@@ -229,7 +229,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // 
             // colReceiveDate
             // 
-            this.colReceiveDate.DataPropertyName = "ReceiveDate";
+            this.colReceiveDate.DataPropertyName = "ReceiveDateBS";
             this.colReceiveDate.HeaderText = "Rcv Date";
             this.colReceiveDate.Name = "colReceiveDate";
             this.colReceiveDate.Visible = false;
@@ -462,10 +462,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.Visible = true;
 
             colReceiveDate.Visible = true;
+            
             colReceiveAdjustment.Visible = true;
             colRate.Visible = true;
             colSupplier.Visible = true;
             colPackage.Visible = true;
+            colTotal.Visible = true;
 
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;

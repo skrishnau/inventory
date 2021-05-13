@@ -56,5 +56,8 @@ namespace Service.Core.Inventory.Units
         List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg);
         #endregion
 
+
+        //PriceHistory GetRate(int productId, DateTime? completedDate);
+
     }
 }

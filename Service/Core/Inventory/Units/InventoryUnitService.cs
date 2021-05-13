@@ -561,10 +561,14 @@ namespace Service.Core.Inventory.Units
             
             for (var i = 0; i < invUnit.Count(); i++)
             {
-                //var conversion = _uomService.ConvertUom(invUnit[i].PackageId??0, model.PackageId??0, model.ProductId);
-                //var invunitqty = invUnit[i].UnitQuantity * conversion;
+                var conversion = _uomService.ConvertUom(invUnit[i].PackageId??0, model.PackageId??0, model.ProductId);
+                var invunitqty = invUnit[i].UnitQuantity * conversion;
+                qtySum += invunitqty;
+
+                /*
+                // earlier 
                 qtySum += invUnit[i].UnitQuantity;
-                //qtySum += invunitqty;
+                */
                 if (qtySum >= model.UnitQuantity)
                 {
                     fulfilledIndex = i;
@@ -582,7 +586,6 @@ namespace Service.Core.Inventory.Units
             for (var i = 0; i <= fulfilledIndex; i++)
             {
                 var dbEntity = invUnit[i];
-                //var conversion = _uomService.ConvertUom(model.PackageId ?? 0, dbEntity.PackageId ?? 0, model.ProductId);
                 var productName = dbEntity.Product.Name;
                 var warehouseName = dbEntity.Warehouse.Name;
                 var issuedQuantity = 0M;
@@ -592,12 +595,21 @@ namespace Service.Core.Inventory.Units
                 var productId = dbEntity.ProductId;
                 var rate = dbEntity.Rate;
                 var orderItemId = dbEntity.OrderItemId;
-                if (remainingQty < dbEntity.UnitQuantity)
+                var packageId = dbEntity.PackageId;
+                var packagename = dbEntity.Package.Name;
+
+                var conversion = _uomService.ConvertUom(model.PackageId ?? 0, dbEntity.PackageId ?? 0, model.ProductId);
+                var remainInvunitQty = remainingQty * conversion;
+
+                //earlier : if (remainingQty < dbEntity.UnitQuantity)
+                if(remainInvunitQty < dbEntity.UnitQuantity)
                 {
                     // don't remove; just decrement
-                    issuedQuantity = remainingQty;
-                    dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainingQty;
-                    dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
+                    //earlier: issuedQuantity = remainingQty;
+                    issuedQuantity = remainInvunitQty;
+                    //earlier : dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainingQty;
+                    dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainInvunitQty;
+                    //dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
                 }
                 else
                 {
@@ -605,15 +617,15 @@ namespace Service.Core.Inventory.Units
                     //dbEntity.UnitQuantity = 0;
                     // case is : model.UnitQuantity >= entity.UnitQuantity
                     // remove the InventoryUnit
-                    remainingQty -= dbEntity.UnitQuantity;
+                    remainingQty -= dbEntity.UnitQuantity/conversion;
                     _context.InventoryUnit.Remove(dbEntity);
                 }
                 // note : don't use dbEntity below this comment line. if you want to use the dbentity then assign it's value to another var before remove() func.
-                list.Add(new InventoryUnit { Rate = rate, UnitQuantity = issuedQuantity, OrderItemId = orderItemId });
+                list.Add(new InventoryUnit { Rate = rate * conversion, UnitQuantity = issuedQuantity / conversion, PackageId = model.PackageId, OrderItemId = orderItemId });
                 //
                 // Movement
                 //
-                var description = "Issued " + issuedQuantity + " qty. of '" + productName + "' from " + warehouseName + " warehouse.";
+                var description = $"Issued {issuedQuantity} {packagename} of '{productName}' from {warehouseName} warehouse.";
                 AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {
@@ -679,7 +691,14 @@ namespace Service.Core.Inventory.Units
         }
 
 
+
         #endregion
 
+
+        public PriceHistory GetRate(DatabaseContext _context, int productId, DateTime completedDate)
+        {
+            var date = completedDate.Date;
+            return _context.PriceHistory.FirstOrDefault(x => x.ProductId == productId && x.Date.Date == date);
+        }
     }
 }
