@@ -334,7 +334,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                         //dgvInventoryUnit.colRate,
                         dgvInventoryUnit.colWarehouseId,
                        // dgvInventoryUnit.colUomId,
-                        dgvInventoryUnit.colPackageId,
+                        //dgvInventoryUnit.colPackageId,
                     };
                     list = dgvInventoryUnit.GetItems(ignoreList);
                     if (list != null)

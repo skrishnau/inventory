@@ -556,7 +556,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackage.Visible = true;
-            colPackage.ReadOnly = true;
+            //colPackage.ReadOnly = true;
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
