@@ -18,9 +18,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
     // 
     public partial class InventoryUnitDataGridView : DataGridViewCustom
     {
-        private string REQUIRED = "Required";
-        private string INVALID = "Invalid";
-        private string GREATER_THAN_ZERO = "Should be greater than zero";
+       
 
         //private List<ViewModel.Core.Inventory.InventoryUnitModel> _dataList;
         private bool _isCellDirty;
@@ -146,13 +144,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     || _movementType == MovementTypeEnum.SOIssue
                     || _movementType == MovementTypeEnum.SOIssueEditItems);
 
+                var productModel = row.Cells[colProduct.Index].Tag as ProductModel;
+
                 var unitQuantity = GetUnitQuantity(row, null, checkWithInStockQuantity);
                 var rate = GetRate(row);
                 var warehouseId = GetWarehouseId(row);
                 var lotNumber = GetLotNumber(row, null);
                 var reference = GetReference(row);
                 var adjCode = GetAdjustmentCode(row);
-                var package = GetPackage(row);
+                var package = GetPackage(row, productModel);
                 //var uomId = GetUomId(row);
                 var isHold = row.Cells[colIsHold.Index].Value;
                 var expirationDate = GetDateCellValue(row, colExpirationDate);
@@ -179,7 +179,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         ReceiveReceipt = reference,
                         PackageId = package.Id == 0 ? null : (int?)package.Id,
                         Package = package.Name,
-                      //  UomId = uomId,
+                        //  UomId = uomId,
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
                     });
                 }
@@ -258,7 +258,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 if (!Constants.CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION)
                 {
                     var prd = _productService.GetProductByNameOrSKU(model.Name.Trim());
-                    if(prd == null)
+                    if (prd == null)
                     {
                         InvalidColumns.Add("Product");
                         productIdCell.ErrorText = "Invalid Product";
@@ -269,11 +269,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 }
             }
 
-            
+
 
             if (IgnoreColumnsForErrorList.Contains(colProductId))
             {
-                return model; 
+                return model;
             }
             // else set error and set invalid flag
             if (model.Id == 0 && string.IsNullOrEmpty(model.Name))
@@ -291,7 +291,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             return model;//productId;
         }
 
-        private PackageModel GetPackage(DataGridViewRow row)
+        private PackageModel GetPackage(DataGridViewRow row, ProductModel product)
         {
             var model = new PackageModel();
             var idCell = row.Cells[colPackageId.Index];
@@ -312,15 +312,30 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 return model;
             }
+
             if (model.Id == 0 && string.IsNullOrEmpty(model.Name))
             {
                 InvalidColumns.Add("Package");
                 isValid = false;
-                idCell.ErrorText = REQUIRED;
-                nameCell.ErrorText = REQUIRED;
+                idCell.ErrorText = Constants.REQUIRED;
+                nameCell.ErrorText = Constants.REQUIRED;
             }
             else
             {
+                if (model.Id == 0 && !Constants.CAN_NEW_PACKAGE_BE_ADDED_FROM_TRANSACTION)
+                {
+                    if (product != null)
+                    {
+                        if (!product.Packages.Any(x => x.Name == model.Name))
+                        {
+                            InvalidColumns.Add("Package");
+                            isValid = false;
+                            idCell.ErrorText = Constants.NOT_AVAILABLE_IN_PRODUCT_UOM;
+                            nameCell.ErrorText = Constants.NOT_AVAILABLE_IN_PRODUCT_UOM;
+                            return model;
+                        }
+                    }
+                }
                 idCell.ErrorText = string.Empty;
                 nameCell.ErrorText = string.Empty;
             }
@@ -374,7 +389,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             if (rate <= 0)
             {
                 InvalidColumns.Add("Rate");
-                cell.ErrorText = GREATER_THAN_ZERO;//"Rate can't be zero or less";
+                cell.ErrorText = Constants.GREATER_THAN_ZERO;//"Rate can't be zero or less";
                 isValid = false;
             }
             else
@@ -396,7 +411,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 InvalidColumns.Add("Warehouse");
                 isValid = false;
-                cell.ErrorText = REQUIRED;
+                cell.ErrorText = Constants.REQUIRED;
             }
             else
             {
@@ -404,7 +419,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             return warehouseId;
         }
-        
+
         private int GetLotNumber(DataGridViewRow row, object formattedValue)
         {
             var cell = row.Cells[colLotNumber.Index];
@@ -492,7 +507,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 InvalidColumns.Add(column.HeaderText);
                 isValid = false;
-                cell.ErrorText = INVALID;
+                cell.ErrorText = Constants.INVALID;
                 return "";
             }
         }

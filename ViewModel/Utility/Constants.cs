@@ -15,6 +15,14 @@ namespace ViewModel.Utility
         public const bool LEDGER_DISPLAY_TRANSACTION_ITEMS_ALSO = true;
 
         public const bool CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION = false;
+        public const bool CAN_NEW_PACKAGE_BE_ADDED_FROM_TRANSACTION = false;
+
+
+
+        public const string REQUIRED = "Required";
+        public const  string INVALID = "Invalid";
+        public const string GREATER_THAN_ZERO = "Should be greater than zero";
+        public const  string NOT_AVAILABLE_IN_PRODUCT_UOM = "Not available in Product's UOM";
 
     }
 }
