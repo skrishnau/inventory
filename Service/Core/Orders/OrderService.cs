@@ -31,13 +31,15 @@ namespace Service.Core.Orders
         private readonly IUserService _customerService;
         private readonly IAppSettingService _appSettingService;
         private readonly IProductService _productService;
+        private readonly IUomService _uomService;
 
         public OrderService(
             IDatabaseChangeListener listener,
             IInventoryUnitService inventoryUnitService,
             IUserService customerService,
             IAppSettingService appSettingSerivce,
-            IProductService productService
+            IProductService productService,
+            IUomService uomService
             )//DatabaseContext context,
         {
             //_context = context;
@@ -46,6 +48,7 @@ namespace Service.Core.Orders
             _customerService = customerService;
             _appSettingService = appSettingSerivce;
             _productService = productService;
+            _uomService = uomService;
         }
 
         #region Get Functions
@@ -228,12 +231,13 @@ namespace Service.Core.Orders
                             UpdateProductForOrderItemSaveWithoutCommit(_context, entity, orderItem);
                             // 1. update transaction Items
                             var txnItems = _context.TransactionItem.Where(x => x.PurchaseOrderItemId == orderItem.Id).ToList();
-                            foreach (var inv in txnItems)
+                            foreach (var ti in txnItems)
                             {
-                                inv.CostPriceRate = orderItem.Rate;
-                                inv.CostPriceTotal = inv.CostPriceRate * inv.UnitQuantity;
-                                sellTxns.Add(inv.Transaction);
-                                allTxnItems.Add(inv);
+                                var conversion = _uomService.ConvertUom(orderItem.PackageId??0, ti.SaleOrderItem.PackageId??0, orderItem.ProductId);
+                                ti.CostPriceRate = orderItem.Rate / conversion;
+                                ti.CostPriceTotal = ti.CostPriceRate * ti.UnitQuantity;
+                                sellTxns.Add(ti.Transaction);
+                                allTxnItems.Add(ti);
                             }
                         }
                     }
@@ -339,7 +343,7 @@ namespace Service.Core.Orders
                         }
                         if (entity.OrderType == OrderTypeEnum.Sale.ToString())
                         {
-                            foreach (var txnItem in txnItemsList.Where(x => x.PurchaseOrderItem != null || x.PurchaseOrderItemId > 0 || x.CostPriceRate > 0).ToList())
+                            foreach (var txnItem in txnItemsList.Where(x => x.PurchaseOrderItemId > 0 || x.CostPriceRate > 0).ToList())
                                 transaction.TransactionItems.Add(txnItem);
                         }
                         entity.Transactions.Add(transaction);
