@@ -42,15 +42,15 @@
             this.pnlSingleRowActions = new System.Windows.Forms.Panel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnReceive = new IMS.Forms.Common.Buttons.MenuButton();
-            this.btnSplit = new IMS.Forms.Common.Buttons.MenuButton();
-            this.btnDisassemble = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnIssue = new IMS.Forms.Common.Buttons.MenuButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlBulkActions = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSplit = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnMerge = new IMS.Forms.Common.Buttons.MenuButton();
-            this.btnIssue = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnMove = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnDisassemble = new IMS.Forms.Common.Buttons.MenuButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -203,8 +203,8 @@
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.AutoSize = true;
-            this.flowLayoutPanel4.Controls.Add(this.btnReceive);
             this.flowLayoutPanel4.Controls.Add(this.btnIssue);
+            this.flowLayoutPanel4.Controls.Add(this.btnReceive);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
@@ -216,7 +216,7 @@
             this.btnReceive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceive.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnReceive.Location = new System.Drawing.Point(3, 3);
+            this.btnReceive.Location = new System.Drawing.Point(87, 3);
             this.btnReceive.Name = "btnReceive";
             this.btnReceive.Size = new System.Drawing.Size(78, 28);
             this.btnReceive.TabIndex = 0;
@@ -224,32 +224,18 @@
             this.btnReceive.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReceive.UseVisualStyleBackColor = true;
             // 
-            // btnSplit
+            // btnIssue
             // 
-            this.btnSplit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplit.Image = global::IMS.Properties.Resources.icons8_Divider_16px;
-            this.btnSplit.Location = new System.Drawing.Point(3, 3);
-            this.btnSplit.Name = "btnSplit";
-            this.btnSplit.Size = new System.Drawing.Size(80, 28);
-            this.btnSplit.TabIndex = 1;
-            this.btnSplit.Text = "Split";
-            this.btnSplit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSplit.UseVisualStyleBackColor = true;
-            // 
-            // btnDisassemble
-            // 
-            this.btnDisassemble.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnDisassemble.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDisassemble.Image = global::IMS.Properties.Resources.icons8_Split_Files_16px;
-            this.btnDisassemble.Location = new System.Drawing.Point(251, 3);
-            this.btnDisassemble.Name = "btnDisassemble";
-            this.btnDisassemble.Size = new System.Drawing.Size(100, 28);
-            this.btnDisassemble.TabIndex = 2;
-            this.btnDisassemble.Text = "Disassemble";
-            this.btnDisassemble.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDisassemble.UseVisualStyleBackColor = true;
-            this.btnDisassemble.Visible = false;
+            this.btnIssue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIssue.Image = global::IMS.Properties.Resources.icons8_Sell_16px;
+            this.btnIssue.Location = new System.Drawing.Point(3, 3);
+            this.btnIssue.Name = "btnIssue";
+            this.btnIssue.Size = new System.Drawing.Size(78, 28);
+            this.btnIssue.TabIndex = 2;
+            this.btnIssue.Text = "Issue";
+            this.btnIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnIssue.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -292,6 +278,19 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(354, 34);
             this.flowLayoutPanel2.TabIndex = 10;
             // 
+            // btnSplit
+            // 
+            this.btnSplit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSplit.Image = global::IMS.Properties.Resources.icons8_Divider_16px;
+            this.btnSplit.Location = new System.Drawing.Point(3, 3);
+            this.btnSplit.Name = "btnSplit";
+            this.btnSplit.Size = new System.Drawing.Size(80, 28);
+            this.btnSplit.TabIndex = 1;
+            this.btnSplit.Text = "Split";
+            this.btnSplit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSplit.UseVisualStyleBackColor = true;
+            // 
             // btnMerge
             // 
             this.btnMerge.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
@@ -304,19 +303,6 @@
             this.btnMerge.Text = "Merge";
             this.btnMerge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMerge.UseVisualStyleBackColor = true;
-            // 
-            // btnIssue
-            // 
-            this.btnIssue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIssue.Image = global::IMS.Properties.Resources.icons8_Sell_16px;
-            this.btnIssue.Location = new System.Drawing.Point(87, 3);
-            this.btnIssue.Name = "btnIssue";
-            this.btnIssue.Size = new System.Drawing.Size(78, 28);
-            this.btnIssue.TabIndex = 2;
-            this.btnIssue.Text = "Issue";
-            this.btnIssue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnIssue.UseVisualStyleBackColor = true;
             // 
             // btnMove
             // 
@@ -331,6 +317,20 @@
             this.btnMove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnMove.UseVisualStyleBackColor = true;
             this.btnMove.Visible = false;
+            // 
+            // btnDisassemble
+            // 
+            this.btnDisassemble.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDisassemble.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDisassemble.Image = global::IMS.Properties.Resources.icons8_Split_Files_16px;
+            this.btnDisassemble.Location = new System.Drawing.Point(251, 3);
+            this.btnDisassemble.Name = "btnDisassemble";
+            this.btnDisassemble.Size = new System.Drawing.Size(100, 28);
+            this.btnDisassemble.TabIndex = 2;
+            this.btnDisassemble.Text = "Disassemble";
+            this.btnDisassemble.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDisassemble.UseVisualStyleBackColor = true;
+            this.btnDisassemble.Visible = false;
             // 
             // panel5
             // 

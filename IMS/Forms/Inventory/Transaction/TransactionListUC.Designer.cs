@@ -115,6 +115,7 @@
             this.pnlNewTransaction.Name = "pnlNewTransaction";
             this.pnlNewTransaction.Size = new System.Drawing.Size(263, 36);
             this.pnlNewTransaction.TabIndex = 3;
+            this.pnlNewTransaction.Visible = false;
             // 
             // btnPurchaseTransaction
             // 

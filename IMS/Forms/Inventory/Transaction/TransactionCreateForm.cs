@@ -630,7 +630,12 @@ namespace IMS.Forms.Inventory.Transaction
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;
-                orderModel.AdjustmentCodeId = (cbAdjustmentCode.SelectedValue as int?) ?? 0;
+                var adjustment = cbAdjustmentCode.SelectedItem as IdNamePair;
+                if (adjustment != null)
+                {
+                    orderModel.AdjustmentCodeId = adjustment.Id;//(cbAdjustmentCode.SelectedValue as int?) ?? 0;
+                    orderModel.AdjustmentCode = adjustment.Name;
+                }
                 // logic: if we are in edit mode and the order is already Completed, then it means that we need to create child 
                 //          order and make the old order as void
                 // else if we are in edit mode of incomplete order then just assign its parentOrderId to the saving model

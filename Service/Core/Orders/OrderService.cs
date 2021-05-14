@@ -317,7 +317,7 @@ namespace Service.Core.Orders
                 var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
                 var txnItemsList = new List<TransactionItem>();
-                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message, ref txnItemsList);
+                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message, ref txnItemsList, orderModel.AdjustmentCode);
                 // items summary in order
                 entity.TotalAmount = entity.OrderItems.Sum(x => x.Total);
                 if (entity.OrderItems.Any(x => (x.CostPriceTotal ?? 0) == 0))
@@ -554,7 +554,7 @@ namespace Service.Core.Orders
             }
         }
 
-        private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message, ref List<TransactionItem> txnItemsList)
+        private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message, ref List<TransactionItem> txnItemsList, string adjustmentCode)
         {
             // var transactionItems = new List<TransactionItem>();
             var newProductList = new List<Product>();
@@ -622,6 +622,8 @@ namespace Service.Core.Orders
                 var entity = dbItems.FirstOrDefault(x => x.Id == item.Id);
                 //var entity = item.MapToEntity(null);//OrderItemMapper.MapToEntity(item, entity);
                 entity = item.MapToEntity(entity);
+                if (!string.IsNullOrEmpty(adjustmentCode))
+                    entity.Adjustment = adjustmentCode;
                 if ((entity.PackageId ?? 0) == 0)
                 {
                     if (!string.IsNullOrEmpty(item.Package))
@@ -696,11 +698,13 @@ namespace Service.Core.Orders
                     {
                         entity.Supplier = order.User;
                         entity.SupplierId = order.UserId;
-                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, "PO Receive", ref message, product, order.ReferenceNumber, entity);
+                        var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "PO Receive" : adjustmentCode;
+                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, adjustment, ref message, product, order.ReferenceNumber, entity);
                     }
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
-                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), "SO Issue", ref message);
+                        var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "SO Issue" : adjustmentCode;
+                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), adjustment, ref message);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
                         if (invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0))
                         {
@@ -751,7 +755,7 @@ namespace Service.Core.Orders
                 var message = "";
                 var poEntity = _context.Order.Find(purchaseOrderId);
                 var txnItemList = new List<TransactionItem>();
-                SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message, ref txnItemList);
+                SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message, ref txnItemList, null);
 
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);

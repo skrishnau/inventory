@@ -397,7 +397,6 @@
             this.btnPurchaseTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnPurchaseTransaction, "Purchases");
             this.btnPurchaseTransaction.UseVisualStyleBackColor = true;
-            this.btnPurchaseTransaction.Visible = false;
             // 
             // btnSaleTransaction
             // 
@@ -414,7 +413,6 @@
             this.btnSaleTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnSaleTransaction, "Sales");
             this.btnSaleTransaction.UseVisualStyleBackColor = true;
-            this.btnSaleTransaction.Visible = false;
             // 
             // btnPOS
             // 
