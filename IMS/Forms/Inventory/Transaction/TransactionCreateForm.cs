@@ -40,6 +40,7 @@ namespace IMS.Forms.Inventory.Transaction
         private OrderModel _orderModel;
         private int _orderId;
         private OrderTypeEnum _orderType;
+        private OrderOrDirectEnum _orderOrDirect;
 
         // to show Print View at first load
         private bool _showPrintView;
@@ -89,16 +90,18 @@ namespace IMS.Forms.Inventory.Transaction
 
             PopulateClientCombo();
             PopulateReceiptNumber();
+            PopulateAdjustmentCodeCombo();
             PopulateModel(_orderModel);
         }
 
         #region Functions
 
-        public void SetDataForEdit(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
+        public void SetDataForEdit(OrderEditModel editModel)//(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
         {
-            _orderType = orderType;
-            _orderId = orderId;
-            _showPrintView = showPrintView;
+            _orderType = editModel.OrderType;
+            _orderId = editModel.OrderId;
+            _showPrintView = editModel.ShowPrintView;
+            _orderOrDirect = editModel.OrderOrDirect;
         }
 
         private void InitializeDataGridView()
@@ -110,6 +113,34 @@ namespace IMS.Forms.Inventory.Transaction
                 dgvItems.MovementType = MovementTypeEnum.POReceiveEditItems;
             }
             dgvItems.DesignForTransaction(true);
+        }
+        private void PopulateAdjustmentCodeCombo()
+        {
+            if (_orderOrDirect == OrderOrDirectEnum.Direct)
+            {
+                List<IdNamePair> adjustmentList;
+                switch (_orderType)
+                {
+                    case OrderTypeEnum.Sale:
+                        //case MovementTypeEnum.DirectIssueAny:
+                        adjustmentList = _inventoryService.GetNegativeAdjustmentCodeListForCombo();
+                        cbAdjustmentCode.DataSource = adjustmentList;
+                        cbAdjustmentCode.ValueMember = "Id";
+                        cbAdjustmentCode.DisplayMember = "Name";
+                        cbAdjustmentCode.SelectedItem = adjustmentList.FirstOrDefault(x => x.Name == "Direct Issue");
+                        break;
+                    case OrderTypeEnum.Purchase:
+                        adjustmentList = _inventoryService.GetPositiveAdjustmentCodeListForCombo();
+                        cbAdjustmentCode.DataSource = adjustmentList;
+                        cbAdjustmentCode.ValueMember = "Id";
+                        cbAdjustmentCode.DisplayMember = "Name";
+                        cbAdjustmentCode.SelectedItem = adjustmentList.FirstOrDefault(x => x.Name == "Direct Receive");
+                        break;
+                    default:
+                        adjustmentList = new List<IdNamePair>();
+                        break;
+                }
+            }
         }
 
         private void InitializeSaveFooter()
@@ -352,12 +383,12 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 case OrderTypeEnum.Purchase:
                     lblClient.Text = "Supplier";
-                    this.Text = (model == null ? "Create" : "Edit") + " Purchase Transaction";
+                    this.Text = (model == null ? "Create" : "Edit") + (_orderOrDirect == OrderOrDirectEnum.Order ? " Purchase Transaction" : " Direct Receive");
                     saveFooterUC1.btnCheckoutAndPrint.Visible = false;
                     break;
                 case OrderTypeEnum.Sale:
                     lblClient.Text = "Customer";
-                    this.Text = (model == null ? "Create" : "Edit") + " Sale Transaction";
+                    this.Text = (model == null ? "Create" : "Edit") + (_orderOrDirect == OrderOrDirectEnum.Order ? " Sale Transaction" : " Direct Issue");
                     saveFooterUC1.btnCheckoutAndPrint.Visible = true;
                     break;
                     //case OrderTypeEnum.Move:
@@ -365,6 +396,23 @@ namespace IMS.Forms.Inventory.Transaction
                     //    cbClient.Visible = false;
                     //    this.Text = (model == null ? "Create" : "Edit") + " Transfer Order";
                     //    break;
+            }
+            DesignViewForOrderOrDirect();
+        }
+
+        private void DesignViewForOrderOrDirect()
+        {
+            if (_orderOrDirect == OrderOrDirectEnum.Direct)
+            {
+                pnlBottomInputs.Visible = false;
+                pnlCustomer.Visible = false;
+                saveFooterUC1.btnCheckout.Text = _orderType == OrderTypeEnum.Purchase ? "Recevie" : "Issue";
+                saveFooterUC1.btnSave.Visible = false;
+                saveFooterUC1.btnCheckoutAndPrint.Visible = false;
+                lblCheckoutDate.Text = "Date";
+                rbCash.Checked = true;
+                cbAdjustmentCode.Visible = true;
+                lblAdjustmentCode.Visible = true;
             }
         }
 
@@ -409,8 +457,8 @@ namespace IMS.Forms.Inventory.Transaction
             var givenByTo = _orderType == OrderTypeEnum.Sale ? "given to" : "taken from";
             if (checkout && (string.IsNullOrWhiteSpace(txtReceiptNo.Text) || txtReceiptNo.Text == string.Empty))
             {
-                msg.Message += "Receipt No. is required\n";
-                errorProvider.SetError(txtReceiptNo, "Receipt No. is required");
+                msg.Message += Constants.RECEIPT_NO_IS_REQUIRED + "\n";
+                errorProvider.SetError(txtReceiptNo, Constants.RECEIPT_NO_IS_REQUIRED);
             }
             else
                 errorProvider.SetError(txtReceiptNo, string.Empty);
@@ -481,24 +529,32 @@ namespace IMS.Forms.Inventory.Transaction
             if (checkout)
             {
                 var warning = string.Empty;
-                if (model.OrderType == OrderTypeEnum.Purchase.ToString())
+                if (_orderOrDirect == OrderOrDirectEnum.Direct)
                 {
-                    if (model.IsVerified && !model.IsCompleted)
+                    warning = $"Are you sure to directly {(_orderType == OrderTypeEnum.Sale ? "issue": "receive")} the items?";
+                }
+                else
+                {
+                    if (model.OrderType == OrderTypeEnum.Purchase.ToString())
                     {
-                        warning = "This transaction previously had items with zero rate. Checking out this transaction will " +
-                       "update it's related ledger and also updates cost prices in all of the corresponding sale transactions and their ledger too. " +
-                       "Are you sure to checkout the transaction?";
-                    }
-                    else if (model.Id == 0 && model.OrderItems.Any(x => x.Rate == 0))
-                    {
-                        // new purchase with zero rate
-                        warning = "This transaction has items with zero rate. Checking out this transaction will " +
-                        "save it as 'Pending Order' and it's ledger won't be updated. You have to checkout this transaction once again with updated rates. " +
-                        "Are you sure to checkout the transaction?";
+                        if (model.IsVerified && !model.IsCompleted)
+                        {
+                            warning = "This transaction previously had items with zero rate. Checking out this transaction will " +
+                           "update it's related ledger and also updates cost prices in all of the corresponding sale transactions and their ledger too. " +
+                           "Are you sure to checkout the transaction?";
+                        }
+                        else if (model.Id == 0 && model.OrderItems.Any(x => x.Rate == 0))
+                        {
+                            // new purchase with zero rate
+                            warning = "This transaction has items with zero rate. Checking out this transaction will " +
+                            "save it as 'Pending Order' and it's ledger won't be updated. You have to checkout this transaction once again with updated rates. " +
+                            "Are you sure to checkout the transaction?";
+                        }
+                        else warning = "Are you sure to checkout the transaction?";
                     }
                     else warning = "Are you sure to checkout the transaction?";
+
                 }
-                else warning = "Are you sure to checkout the transaction?";
 
                 DialogResult result = MessageBox.Show(this, warning, "Checkout?", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -546,7 +602,7 @@ namespace IMS.Forms.Inventory.Transaction
 
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId };
             var isEditForZeroRateUpdate = _orderModel != null && (_orderModel?.IsVerified ?? false) && !(_orderModel?.IsCompleted ?? false);
-            if (_orderType == OrderTypeEnum.Purchase && !isEditForZeroRateUpdate)
+            if (_orderType == OrderTypeEnum.Purchase && !isEditForZeroRateUpdate && _orderOrDirect == OrderOrDirectEnum.Order)
                 ignoreList.Add(dgvItems.colRate); // in case of purchase the user may not enter the rate at first
             var items = dgvItems.GetItems(ignoreList, Constants.HAS_STOCK_MANAGEMENT, !checkout);
 
@@ -570,10 +626,11 @@ namespace IMS.Forms.Inventory.Transaction
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.GetValue() : (DateTime?)null,
                     PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : rbCash.Checked ? OrderPaymentTypeEnum.Cash.ToString() : null,
                     TotalAmount = items.Select(x => x.Total).Sum(),
-                    IsVerified = _orderModel?.IsVerified ?? false,
+                    IsVerified = _orderModel?.IsVerified ?? false, // IsVerified will again be updated in Save(), this value indicates the earlier's Verified state
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;
+                orderModel.AdjustmentCodeId = (cbAdjustmentCode.SelectedValue as int?) ?? 0;
                 // logic: if we are in edit mode and the order is already Completed, then it means that we need to create child 
                 //          order and make the old order as void
                 // else if we are in edit mode of incomplete order then just assign its parentOrderId to the saving model

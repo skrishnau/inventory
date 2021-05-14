@@ -125,6 +125,10 @@ namespace ViewModel.Core.Orders
         public string ToWarehouse { get; set; }
         #endregion
 
+
+        public int AdjustmentCodeId { get; set; }
+        public string AdjustmentCode { get; set; }
+
         public virtual ICollection<OrderItemModel> OrderItems { get; set; }
         public virtual ICollection<PaymentModel> Payments { get; set; }
         public OrderModel()
@@ -139,6 +143,14 @@ namespace ViewModel.Core.Orders
         {
             get { return DiscountAmount > 0 ? TotalAmount - DiscountAmount : TotalAmount - (TotalAmount * DiscountPercent / 100); }
         }
+    }
+
+    public class OrderEditModel
+    {
+        public OrderTypeEnum OrderType { get; set; }
+        public int OrderId { get; set; }
+        public bool ShowPrintView { get; set; }
+        public OrderOrDirectEnum OrderOrDirect { get; set; }
     }
 
 }

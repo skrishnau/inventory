@@ -37,7 +37,6 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnProductDetail = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnUnitDetail = new IMS.Forms.Common.Buttons.MenuButton();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlSingleRowActions = new System.Windows.Forms.Panel();
@@ -45,7 +44,6 @@
             this.btnReceive = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnSplit = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnDisassemble = new IMS.Forms.Common.Buttons.MenuButton();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlBulkActions = new System.Windows.Forms.Panel();
@@ -53,7 +51,6 @@
             this.btnMerge = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnIssue = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnMove = new IMS.Forms.Common.Buttons.MenuButton();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -104,9 +101,8 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 34);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(913, 65);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(913, 50);
             this.flowLayoutPanel1.TabIndex = 5;
-            this.flowLayoutPanel1.Visible = false;
             // 
             // panel7
             // 
@@ -115,7 +111,7 @@
             this.panel7.Location = new System.Drawing.Point(8, 8);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel7.Size = new System.Drawing.Size(11, 49);
+            this.panel7.Size = new System.Drawing.Size(11, 34);
             this.panel7.TabIndex = 44;
             this.panel7.Visible = false;
             // 
@@ -124,7 +120,7 @@
             this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter4.Location = new System.Drawing.Point(5, 4);
             this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(2, 41);
+            this.splitter4.Size = new System.Drawing.Size(2, 26);
             this.splitter4.TabIndex = 0;
             this.splitter4.TabStop = false;
             // 
@@ -132,10 +128,9 @@
             // 
             this.pnlInfo.AutoSize = true;
             this.pnlInfo.Controls.Add(this.flowLayoutPanel3);
-            this.pnlInfo.Controls.Add(this.label3);
             this.pnlInfo.Location = new System.Drawing.Point(25, 8);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(198, 49);
+            this.pnlInfo.Size = new System.Drawing.Size(198, 34);
             this.pnlInfo.TabIndex = 7;
             this.pnlInfo.Visible = false;
             // 
@@ -177,17 +172,6 @@
             this.btnUnitDetail.UseVisualStyleBackColor = true;
             this.btnUnitDetail.Visible = false;
             // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label3.Location = new System.Drawing.Point(0, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(198, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Information";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.splitter3);
@@ -195,7 +179,7 @@
             this.panel6.Location = new System.Drawing.Point(229, 8);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel6.Size = new System.Drawing.Size(11, 49);
+            this.panel6.Size = new System.Drawing.Size(11, 34);
             this.panel6.TabIndex = 43;
             // 
             // splitter3
@@ -203,7 +187,7 @@
             this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter3.Location = new System.Drawing.Point(5, 4);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(2, 41);
+            this.splitter3.Size = new System.Drawing.Size(2, 26);
             this.splitter3.TabIndex = 0;
             this.splitter3.TabStop = false;
             // 
@@ -211,22 +195,20 @@
             // 
             this.pnlSingleRowActions.AutoSize = true;
             this.pnlSingleRowActions.Controls.Add(this.flowLayoutPanel4);
-            this.pnlSingleRowActions.Controls.Add(this.label5);
             this.pnlSingleRowActions.Location = new System.Drawing.Point(246, 8);
             this.pnlSingleRowActions.Name = "pnlSingleRowActions";
-            this.pnlSingleRowActions.Size = new System.Drawing.Size(276, 49);
+            this.pnlSingleRowActions.Size = new System.Drawing.Size(168, 34);
             this.pnlSingleRowActions.TabIndex = 8;
             // 
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.AutoSize = true;
             this.flowLayoutPanel4.Controls.Add(this.btnReceive);
-            this.flowLayoutPanel4.Controls.Add(this.btnSplit);
-            this.flowLayoutPanel4.Controls.Add(this.btnDisassemble);
+            this.flowLayoutPanel4.Controls.Add(this.btnIssue);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(276, 34);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(168, 34);
             this.flowLayoutPanel4.TabIndex = 10;
             // 
             // btnReceive
@@ -247,7 +229,7 @@
             this.btnSplit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSplit.Image = global::IMS.Properties.Resources.icons8_Divider_16px;
-            this.btnSplit.Location = new System.Drawing.Point(87, 3);
+            this.btnSplit.Location = new System.Drawing.Point(3, 3);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(80, 28);
             this.btnSplit.TabIndex = 1;
@@ -260,7 +242,7 @@
             this.btnDisassemble.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnDisassemble.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDisassemble.Image = global::IMS.Properties.Resources.icons8_Split_Files_16px;
-            this.btnDisassemble.Location = new System.Drawing.Point(173, 3);
+            this.btnDisassemble.Location = new System.Drawing.Point(251, 3);
             this.btnDisassemble.Name = "btnDisassemble";
             this.btnDisassemble.Size = new System.Drawing.Size(100, 28);
             this.btnDisassemble.TabIndex = 2;
@@ -269,25 +251,14 @@
             this.btnDisassemble.UseVisualStyleBackColor = true;
             this.btnDisassemble.Visible = false;
             // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label5.Location = new System.Drawing.Point(0, 34);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(276, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Single Row Actions";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.splitter1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(528, 8);
+            this.panel2.Location = new System.Drawing.Point(420, 8);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel2.Size = new System.Drawing.Size(11, 49);
+            this.panel2.Size = new System.Drawing.Size(11, 34);
             this.panel2.TabIndex = 41;
             // 
             // splitter1
@@ -295,7 +266,7 @@
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Location = new System.Drawing.Point(5, 4);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(2, 41);
+            this.splitter1.Size = new System.Drawing.Size(2, 26);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
@@ -303,22 +274,22 @@
             // 
             this.pnlBulkActions.AutoSize = true;
             this.pnlBulkActions.Controls.Add(this.flowLayoutPanel2);
-            this.pnlBulkActions.Controls.Add(this.label6);
-            this.pnlBulkActions.Location = new System.Drawing.Point(545, 8);
+            this.pnlBulkActions.Location = new System.Drawing.Point(437, 8);
             this.pnlBulkActions.Name = "pnlBulkActions";
-            this.pnlBulkActions.Size = new System.Drawing.Size(246, 49);
+            this.pnlBulkActions.Size = new System.Drawing.Size(354, 34);
             this.pnlBulkActions.TabIndex = 9;
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.Controls.Add(this.btnSplit);
             this.flowLayoutPanel2.Controls.Add(this.btnMerge);
-            this.flowLayoutPanel2.Controls.Add(this.btnIssue);
             this.flowLayoutPanel2.Controls.Add(this.btnMove);
+            this.flowLayoutPanel2.Controls.Add(this.btnDisassemble);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(246, 34);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(354, 34);
             this.flowLayoutPanel2.TabIndex = 10;
             // 
             // btnMerge
@@ -326,7 +297,7 @@
             this.btnMerge.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnMerge.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMerge.Image = global::IMS.Properties.Resources.icons8_Merge_Horizontal_16px;
-            this.btnMerge.Location = new System.Drawing.Point(3, 3);
+            this.btnMerge.Location = new System.Drawing.Point(89, 3);
             this.btnMerge.Name = "btnMerge";
             this.btnMerge.Size = new System.Drawing.Size(78, 28);
             this.btnMerge.TabIndex = 0;
@@ -352,7 +323,7 @@
             this.btnMove.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMove.Image = global::IMS.Properties.Resources.icons8_Move_16px;
-            this.btnMove.Location = new System.Drawing.Point(171, 3);
+            this.btnMove.Location = new System.Drawing.Point(173, 3);
             this.btnMove.Name = "btnMove";
             this.btnMove.Size = new System.Drawing.Size(72, 28);
             this.btnMove.TabIndex = 1;
@@ -361,17 +332,6 @@
             this.btnMove.UseVisualStyleBackColor = true;
             this.btnMove.Visible = false;
             // 
-            // label6
-            // 
-            this.label6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label6.Location = new System.Drawing.Point(0, 34);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(246, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Bulk Actions";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.splitter2);
@@ -379,7 +339,7 @@
             this.panel5.Location = new System.Drawing.Point(797, 8);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel5.Size = new System.Drawing.Size(11, 49);
+            this.panel5.Size = new System.Drawing.Size(11, 34);
             this.panel5.TabIndex = 42;
             // 
             // splitter2
@@ -387,7 +347,7 @@
             this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter2.Location = new System.Drawing.Point(5, 4);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(2, 41);
+            this.splitter2.Size = new System.Drawing.Size(2, 26);
             this.splitter2.TabIndex = 0;
             this.splitter2.TabStop = false;
             // 
@@ -438,9 +398,9 @@
             this.dgvInventoryUnit.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvInventoryUnit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInventoryUnit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 99);
+            this.dgvInventoryUnit.Location = new System.Drawing.Point(0, 84);
             this.dgvInventoryUnit.Name = "dgvInventoryUnit";
-            this.dgvInventoryUnit.Size = new System.Drawing.Size(913, 285);
+            this.dgvInventoryUnit.Size = new System.Drawing.Size(913, 300);
             this.dgvInventoryUnit.TabIndex = 6;
             // 
             // bindingNavigator1
@@ -578,7 +538,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvInventoryUnit;
         private System.Windows.Forms.Panel pnlInfo;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private Common.Buttons.MenuButton btnProductDetail;
         private System.Windows.Forms.Panel pnlSingleRowActions;
@@ -586,13 +545,11 @@
         private Common.Buttons.MenuButton btnReceive;
         private Common.Buttons.MenuButton btnSplit;
         private Common.Buttons.MenuButton btnDisassemble;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel pnlBulkActions;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private Common.Buttons.MenuButton btnMerge;
         private Common.Buttons.MenuButton btnMove;
         private Common.Buttons.MenuButton btnIssue;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Splitter splitter4;
         private System.Windows.Forms.Panel panel6;

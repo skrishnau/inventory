@@ -30,7 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionCreateForm));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlBottomInputs = new System.Windows.Forms.Panel();
+            this.pnlPayment = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.txtPaidAmount = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pnlPaymentDueDate = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rbCash = new System.Windows.Forms.RadioButton();
+            this.rbCredit = new System.Windows.Forms.RadioButton();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblExpectedDate = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,62 +51,162 @@
             this.txtDiscount = new System.Windows.Forms.NumericUpDown();
             this.txtSum = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.txtPaidAmount = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pnlPaymentDueDate = new System.Windows.Forms.Panel();
-            this.dtPaymentDueDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.rbCash = new System.Windows.Forms.RadioButton();
-            this.rbCredit = new System.Windows.Forms.RadioButton();
             this.lblClient = new System.Windows.Forms.Label();
-            this.lblExpectedDate = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlCustomer = new System.Windows.Forms.TableLayoutPanel();
             this.cbClient = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
+            this.pnlReceipt = new System.Windows.Forms.Panel();
+            this.lblCheckoutDate = new System.Windows.Forms.Label();
             this.txtReceiptNo = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblReceoptNo = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
-            this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
-            this.pnlPayment = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.dtPaymentDueDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
+            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.dtCompletedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
-            this.lblCheckoutDate = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
+            this.lblAdjustmentCode = new System.Windows.Forms.Label();
+            this.cbAdjustmentCode = new System.Windows.Forms.ComboBox();
+            this.pnlBottomInputs.SuspendLayout();
+            this.pnlPayment.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).BeginInit();
+            this.pnlPaymentDueDate.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSum)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).BeginInit();
-            this.pnlPaymentDueDate.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel9.SuspendLayout();
+            this.pnlCustomer.SuspendLayout();
+            this.pnlReceipt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
-            this.pnlPayment.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlBottomInputs
             // 
-            this.panel1.Controls.Add(this.pnlPayment);
-            this.panel1.Controls.Add(this.tableLayoutPanel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 389);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(590, 99);
-            this.panel1.TabIndex = 6;
+            this.pnlBottomInputs.Controls.Add(this.pnlPayment);
+            this.pnlBottomInputs.Controls.Add(this.tableLayoutPanel2);
+            this.pnlBottomInputs.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottomInputs.Location = new System.Drawing.Point(0, 389);
+            this.pnlBottomInputs.Name = "pnlBottomInputs";
+            this.pnlBottomInputs.Size = new System.Drawing.Size(657, 99);
+            this.pnlBottomInputs.TabIndex = 6;
+            // 
+            // pnlPayment
+            // 
+            this.pnlPayment.Controls.Add(this.panel3);
+            this.pnlPayment.Controls.Add(this.panel4);
+            this.pnlPayment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPayment.Location = new System.Drawing.Point(0, 0);
+            this.pnlPayment.Name = "pnlPayment";
+            this.pnlPayment.Size = new System.Drawing.Size(401, 99);
+            this.pnlPayment.TabIndex = 52;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.txtPaidAmount);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.pnlPaymentDueDate);
+            this.panel3.Controls.Add(this.rbCash);
+            this.panel3.Controls.Add(this.rbCredit);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(256, 75);
+            this.panel3.TabIndex = 6;
+            // 
+            // txtPaidAmount
+            // 
+            this.txtPaidAmount.DecimalPlaces = 1;
+            this.txtPaidAmount.Enabled = false;
+            this.txtPaidAmount.Location = new System.Drawing.Point(73, 50);
+            this.txtPaidAmount.Name = "txtPaidAmount";
+            this.txtPaidAmount.Size = new System.Drawing.Size(139, 20);
+            this.txtPaidAmount.TabIndex = 10;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 4);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Payment";
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(6, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 24);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Paid Amt.";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPaymentDueDate
+            // 
+            this.pnlPaymentDueDate.Controls.Add(this.dtPaymentDueDate);
+            this.pnlPaymentDueDate.Controls.Add(this.label3);
+            this.pnlPaymentDueDate.Location = new System.Drawing.Point(4, 23);
+            this.pnlPaymentDueDate.Name = "pnlPaymentDueDate";
+            this.pnlPaymentDueDate.Size = new System.Drawing.Size(216, 23);
+            this.pnlPaymentDueDate.TabIndex = 8;
+            this.pnlPaymentDueDate.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Payment Due Date";
+            // 
+            // rbCash
+            // 
+            this.rbCash.AutoSize = true;
+            this.rbCash.Location = new System.Drawing.Point(60, 2);
+            this.rbCash.Name = "rbCash";
+            this.rbCash.Size = new System.Drawing.Size(74, 17);
+            this.rbCash.TabIndex = 6;
+            this.rbCash.Text = "Cash (Full)";
+            this.rbCash.UseVisualStyleBackColor = true;
+            // 
+            // rbCredit
+            // 
+            this.rbCredit.AutoSize = true;
+            this.rbCredit.Location = new System.Drawing.Point(140, 2);
+            this.rbCredit.Name = "rbCredit";
+            this.rbCredit.Size = new System.Drawing.Size(90, 17);
+            this.rbCredit.TabIndex = 7;
+            this.rbCredit.Text = "Credit (Partial)";
+            this.rbCredit.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.dtExpectedDate);
+            this.panel4.Controls.Add(this.lblExpectedDate);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 75);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(401, 24);
+            this.panel4.TabIndex = 52;
+            // 
+            // lblExpectedDate
+            // 
+            this.lblExpectedDate.AutoSize = true;
+            this.lblExpectedDate.Location = new System.Drawing.Point(7, 6);
+            this.lblExpectedDate.Name = "lblExpectedDate";
+            this.lblExpectedDate.Size = new System.Drawing.Size(71, 13);
+            this.lblExpectedDate.TabIndex = 3;
+            this.lblExpectedDate.Text = "Delivery Date";
             // 
             // tableLayoutPanel2
             // 
@@ -109,7 +220,7 @@
             this.tableLayoutPanel2.Controls.Add(this.txtSum, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(334, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(401, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -207,93 +318,6 @@
             this.label2.Text = "Sum";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.txtPaidAmount);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.label7);
-            this.panel3.Controls.Add(this.pnlPaymentDueDate);
-            this.panel3.Controls.Add(this.rbCash);
-            this.panel3.Controls.Add(this.rbCredit);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(256, 75);
-            this.panel3.TabIndex = 6;
-            // 
-            // txtPaidAmount
-            // 
-            this.txtPaidAmount.DecimalPlaces = 1;
-            this.txtPaidAmount.Enabled = false;
-            this.txtPaidAmount.Location = new System.Drawing.Point(73, 50);
-            this.txtPaidAmount.Name = "txtPaidAmount";
-            this.txtPaidAmount.Size = new System.Drawing.Size(139, 20);
-            this.txtPaidAmount.TabIndex = 10;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 4);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 13);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "Payment";
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(6, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 24);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Paid Amt.";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pnlPaymentDueDate
-            // 
-            this.pnlPaymentDueDate.Controls.Add(this.dtPaymentDueDate);
-            this.pnlPaymentDueDate.Controls.Add(this.label3);
-            this.pnlPaymentDueDate.Location = new System.Drawing.Point(4, 23);
-            this.pnlPaymentDueDate.Name = "pnlPaymentDueDate";
-            this.pnlPaymentDueDate.Size = new System.Drawing.Size(216, 23);
-            this.pnlPaymentDueDate.TabIndex = 8;
-            this.pnlPaymentDueDate.Visible = false;
-            // 
-            // dtPaymentDueDate
-            // 
-            this.dtPaymentDueDate.Location = new System.Drawing.Point(107, 3);
-            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
-            this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
-            this.dtPaymentDueDate.TabIndex = 9;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Payment Due Date";
-            // 
-            // rbCash
-            // 
-            this.rbCash.AutoSize = true;
-            this.rbCash.Location = new System.Drawing.Point(60, 2);
-            this.rbCash.Name = "rbCash";
-            this.rbCash.Size = new System.Drawing.Size(74, 17);
-            this.rbCash.TabIndex = 6;
-            this.rbCash.Text = "Cash (Full)";
-            this.rbCash.UseVisualStyleBackColor = true;
-            // 
-            // rbCredit
-            // 
-            this.rbCredit.AutoSize = true;
-            this.rbCredit.Location = new System.Drawing.Point(140, 2);
-            this.rbCredit.Name = "rbCredit";
-            this.rbCredit.Size = new System.Drawing.Size(90, 17);
-            this.rbCredit.TabIndex = 7;
-            this.rbCredit.Text = "Credit (Partial)";
-            this.rbCredit.UseVisualStyleBackColor = true;
-            // 
             // lblClient
             // 
             this.lblClient.AutoSize = true;
@@ -304,42 +328,33 @@
             this.lblClient.TabIndex = 0;
             this.lblClient.Text = "Customer";
             // 
-            // lblExpectedDate
+            // pnlCustomer
             // 
-            this.lblExpectedDate.AutoSize = true;
-            this.lblExpectedDate.Location = new System.Drawing.Point(7, 6);
-            this.lblExpectedDate.Name = "lblExpectedDate";
-            this.lblExpectedDate.Size = new System.Drawing.Size(71, 13);
-            this.lblExpectedDate.TabIndex = 3;
-            this.lblExpectedDate.Text = "Delivery Date";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.74131F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.41313F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.81081F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.81467F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.23166F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.79537F));
-            this.tableLayoutPanel1.Controls.Add(this.cbClient, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblClient, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtAddress, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtPhone, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 4, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(590, 27);
-            this.tableLayoutPanel1.TabIndex = 2;
+            this.pnlCustomer.ColumnCount = 6;
+            this.pnlCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.74131F));
+            this.pnlCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.41313F));
+            this.pnlCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.81081F));
+            this.pnlCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.81467F));
+            this.pnlCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.23166F));
+            this.pnlCustomer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.79537F));
+            this.pnlCustomer.Controls.Add(this.cbClient, 1, 0);
+            this.pnlCustomer.Controls.Add(this.lblClient, 0, 0);
+            this.pnlCustomer.Controls.Add(this.label5, 2, 0);
+            this.pnlCustomer.Controls.Add(this.txtAddress, 3, 0);
+            this.pnlCustomer.Controls.Add(this.txtPhone, 5, 0);
+            this.pnlCustomer.Controls.Add(this.label4, 4, 0);
+            this.pnlCustomer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlCustomer.Location = new System.Drawing.Point(0, 30);
+            this.pnlCustomer.Name = "pnlCustomer";
+            this.pnlCustomer.RowCount = 1;
+            this.pnlCustomer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlCustomer.Size = new System.Drawing.Size(657, 27);
+            this.pnlCustomer.TabIndex = 2;
             // 
             // cbClient
             // 
             this.cbClient.FormattingEnabled = true;
-            this.cbClient.Location = new System.Drawing.Point(77, 2);
+            this.cbClient.Location = new System.Drawing.Point(85, 2);
             this.cbClient.Margin = new System.Windows.Forms.Padding(2);
             this.cbClient.Name = "cbClient";
             this.cbClient.Size = new System.Drawing.Size(138, 21);
@@ -348,7 +363,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(240, 0);
+            this.label5.Location = new System.Drawing.Point(266, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 4;
@@ -356,45 +371,50 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(303, 3);
+            this.txtAddress.Location = new System.Drawing.Point(337, 3);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(107, 20);
+            this.txtAddress.Size = new System.Drawing.Size(137, 20);
             this.txtAddress.TabIndex = 3;
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(491, 3);
+            this.txtPhone.Location = new System.Drawing.Point(547, 3);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(82, 20);
+            this.txtPhone.Size = new System.Drawing.Size(92, 20);
             this.txtPhone.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(431, 0);
+            this.label4.Location = new System.Drawing.Point(480, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 2;
             this.label4.Text = "Phone";
             // 
-            // panel9
+            // pnlReceipt
             // 
-            this.panel9.Controls.Add(this.dtCompletedDate);
-            this.panel9.Controls.Add(this.lblCheckoutDate);
-            this.panel9.Controls.Add(this.txtReceiptNo);
-            this.panel9.Controls.Add(this.label8);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 4);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(590, 26);
-            this.panel9.TabIndex = 0;
+            this.pnlReceipt.Controls.Add(this.cbAdjustmentCode);
+            this.pnlReceipt.Controls.Add(this.dtCompletedDate);
+            this.pnlReceipt.Controls.Add(this.lblAdjustmentCode);
+            this.pnlReceipt.Controls.Add(this.lblCheckoutDate);
+            this.pnlReceipt.Controls.Add(this.txtReceiptNo);
+            this.pnlReceipt.Controls.Add(this.lblReceoptNo);
+            this.pnlReceipt.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlReceipt.Location = new System.Drawing.Point(0, 4);
+            this.pnlReceipt.Name = "pnlReceipt";
+            this.pnlReceipt.Size = new System.Drawing.Size(657, 26);
+            this.pnlReceipt.TabIndex = 0;
             // 
-            // dtExpectedDate
+            // lblCheckoutDate
             // 
-            this.dtExpectedDate.Location = new System.Drawing.Point(84, 2);
-            this.dtExpectedDate.Name = "dtExpectedDate";
-            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
-            this.dtExpectedDate.TabIndex = 11;
+            this.lblCheckoutDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCheckoutDate.AutoSize = true;
+            this.lblCheckoutDate.Location = new System.Drawing.Point(469, 5);
+            this.lblCheckoutDate.Name = "lblCheckoutDate";
+            this.lblCheckoutDate.Size = new System.Drawing.Size(79, 13);
+            this.lblCheckoutDate.TabIndex = 12;
+            this.lblCheckoutDate.Text = "Checkout Date";
             // 
             // txtReceiptNo
             // 
@@ -403,14 +423,14 @@
             this.txtReceiptNo.Size = new System.Drawing.Size(141, 20);
             this.txtReceiptNo.TabIndex = 0;
             // 
-            // label8
+            // lblReceoptNo
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(0, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 13);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Receipt No.";
+            this.lblReceoptNo.AutoSize = true;
+            this.lblReceoptNo.Location = new System.Drawing.Point(0, 6);
+            this.lblReceoptNo.Name = "lblReceoptNo";
+            this.lblReceoptNo.Size = new System.Drawing.Size(64, 13);
+            this.lblReceoptNo.TabIndex = 5;
+            this.lblReceoptNo.Text = "Receipt No.";
             // 
             // errorProvider
             // 
@@ -432,8 +452,30 @@
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(590, 332);
+            this.dgvItems.Size = new System.Drawing.Size(657, 332);
             this.dgvItems.TabIndex = 5;
+            // 
+            // dtPaymentDueDate
+            // 
+            this.dtPaymentDueDate.Location = new System.Drawing.Point(107, 3);
+            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
+            this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
+            this.dtPaymentDueDate.TabIndex = 9;
+            // 
+            // dtExpectedDate
+            // 
+            this.dtExpectedDate.Location = new System.Drawing.Point(84, 2);
+            this.dtExpectedDate.Name = "dtExpectedDate";
+            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtExpectedDate.TabIndex = 11;
+            // 
+            // dtCompletedDate
+            // 
+            this.dtCompletedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtCompletedDate.Location = new System.Drawing.Point(552, 2);
+            this.dtCompletedDate.Name = "dtCompletedDate";
+            this.dtCompletedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtCompletedDate.TabIndex = 13;
             // 
             // saveFooterUC1
             // 
@@ -443,56 +485,37 @@
             this.saveFooterUC1.Location = new System.Drawing.Point(0, 488);
             this.saveFooterUC1.Name = "saveFooterUC1";
             this.saveFooterUC1.Padding = new System.Windows.Forms.Padding(0, 4, 10, 4);
-            this.saveFooterUC1.Size = new System.Drawing.Size(590, 35);
+            this.saveFooterUC1.Size = new System.Drawing.Size(657, 35);
             this.saveFooterUC1.TabIndex = 50;
             // 
-            // pnlPayment
+            // lblAdjustmentCode
             // 
-            this.pnlPayment.Controls.Add(this.panel3);
-            this.pnlPayment.Controls.Add(this.panel4);
-            this.pnlPayment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPayment.Location = new System.Drawing.Point(0, 0);
-            this.pnlPayment.Name = "pnlPayment";
-            this.pnlPayment.Size = new System.Drawing.Size(334, 99);
-            this.pnlPayment.TabIndex = 52;
+            this.lblAdjustmentCode.AutoSize = true;
+            this.lblAdjustmentCode.Location = new System.Drawing.Point(214, 6);
+            this.lblAdjustmentCode.Name = "lblAdjustmentCode";
+            this.lblAdjustmentCode.Size = new System.Drawing.Size(81, 13);
+            this.lblAdjustmentCode.TabIndex = 0;
+            this.lblAdjustmentCode.Text = "Ajustment Code";
+            this.lblAdjustmentCode.Visible = false;
             // 
-            // panel4
+            // cbAdjustmentCode
             // 
-            this.panel4.Controls.Add(this.dtExpectedDate);
-            this.panel4.Controls.Add(this.lblExpectedDate);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 75);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(334, 24);
-            this.panel4.TabIndex = 52;
-            // 
-            // dtCompletedDate
-            // 
-            this.dtCompletedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtCompletedDate.Location = new System.Drawing.Point(485, 2);
-            this.dtCompletedDate.Name = "dtCompletedDate";
-            this.dtCompletedDate.Size = new System.Drawing.Size(100, 20);
-            this.dtCompletedDate.TabIndex = 13;
-            // 
-            // lblCheckoutDate
-            // 
-            this.lblCheckoutDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCheckoutDate.AutoSize = true;
-            this.lblCheckoutDate.Location = new System.Drawing.Point(402, 5);
-            this.lblCheckoutDate.Name = "lblCheckoutDate";
-            this.lblCheckoutDate.Size = new System.Drawing.Size(79, 13);
-            this.lblCheckoutDate.TabIndex = 12;
-            this.lblCheckoutDate.Text = "Checkout Date";
+            this.cbAdjustmentCode.FormattingEnabled = true;
+            this.cbAdjustmentCode.Location = new System.Drawing.Point(300, 2);
+            this.cbAdjustmentCode.Name = "cbAdjustmentCode";
+            this.cbAdjustmentCode.Size = new System.Drawing.Size(144, 21);
+            this.cbAdjustmentCode.TabIndex = 8;
+            this.cbAdjustmentCode.Visible = false;
             // 
             // TransactionCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 523);
+            this.ClientSize = new System.Drawing.Size(657, 523);
             this.Controls.Add(this.dgvItems);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel9);
+            this.Controls.Add(this.pnlCustomer);
+            this.Controls.Add(this.pnlBottomInputs);
+            this.Controls.Add(this.pnlReceipt);
             this.Controls.Add(this.saveFooterUC1);
             this.MinimizeBox = false;
             this.Name = "TransactionCreateForm";
@@ -501,33 +524,33 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Transaction";
-            this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDiscount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSum)).EndInit();
+            this.pnlBottomInputs.ResumeLayout(false);
+            this.pnlPayment.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPaidAmount)).EndInit();
             this.pnlPaymentDueDate.ResumeLayout(false);
             this.pnlPaymentDueDate.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
-            this.pnlPayment.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDiscount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSum)).EndInit();
+            this.pnlCustomer.ResumeLayout(false);
+            this.pnlCustomer.PerformLayout();
+            this.pnlReceipt.ResumeLayout(false);
+            this.pnlReceipt.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlBottomInputs;
         private System.Windows.Forms.RadioButton rbCredit;
         private System.Windows.Forms.RadioButton rbCash;
         private System.Windows.Forms.Label lblExpectedDate;
@@ -537,7 +560,7 @@
         private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvItems;
         private System.Windows.Forms.NumericUpDown txtTotal;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel pnlCustomer;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label4;
@@ -545,9 +568,9 @@
         private System.Windows.Forms.NumericUpDown txtPaidAmount;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel pnlReceipt;
         private System.Windows.Forms.TextBox txtReceiptNo;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblReceoptNo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ComboBox cbClient;
         private Common.Display.SaveFooterUC saveFooterUC1;
@@ -567,5 +590,7 @@
         private System.Windows.Forms.Panel panel4;
         private Common.Date.NepaliDateTextBox dtCompletedDate;
         private System.Windows.Forms.Label lblCheckoutDate;
+        private System.Windows.Forms.ComboBox cbAdjustmentCode;
+        private System.Windows.Forms.Label lblAdjustmentCode;
     }
 }

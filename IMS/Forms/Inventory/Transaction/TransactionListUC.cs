@@ -115,7 +115,9 @@ namespace IMS.Forms.Inventory.Transaction
             dgvOrders.SelectionChanged += DgvOrders_SelectionChanged;
             //_purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
             //lnkPurchaseOrderList.Click += Link_Click;
-            btnNew.Click += BtnNewOrder_Click;
+            //btnNew.Click += BtnNewOrder_Click;
+            btnSaleTransaction.Click += BtnSaleTransaction_Click;
+            btnPurchaseTransaction.Click += BtnPurchaseTransaction_Click;
             rbAll.CheckedChanged += Type_CheckedChanged;
             rbPurchase.CheckedChanged += Type_CheckedChanged;
             rbSale.CheckedChanged += Type_CheckedChanged;
@@ -261,10 +263,43 @@ namespace IMS.Forms.Inventory.Transaction
             }
         }
 
-        private void BtnNewOrder_Click(object sender, EventArgs e)
+        //private void BtnNewOrder_Click(object sender, EventArgs e)
+        //{
+        //    ShowAddEditDialog(_orderType, 0);
+        //}
+
+        private void BtnSaleTransaction_Click(object sender, EventArgs e)
         {
-            ShowAddEditDialog(_orderType, 0);
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+                var orderEditModel = new OrderEditModel
+                {
+                    OrderType = OrderTypeEnum.Sale,
+                    OrderId = 0,
+                    OrderOrDirect = OrderOrDirectEnum.Order
+                };
+                form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
+                form.ShowDialog();
+            }
         }
+
+        private void BtnPurchaseTransaction_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+                var orderEditModel = new OrderEditModel
+                {
+                    OrderType = OrderTypeEnum.Purchase,
+                    OrderId = 0,
+                    OrderOrDirect = OrderOrDirectEnum.Order
+                };
+                form.SetDataForEdit(orderEditModel);//OrderTypeEnum.Purchase, 0
+                form.ShowDialog();
+            }
+        }
+
 
         #endregion
 
@@ -290,7 +325,13 @@ namespace IMS.Forms.Inventory.Transaction
                 if (orderModel != null)
                 {
                     var po = Program.container.GetInstance<TransactionCreateForm>();
-                    po.SetDataForEdit((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType), orderModel.Id, true);
+                    var orderEditModel = new OrderEditModel
+                    {
+                        OrderType = (OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType),
+                        OrderId = orderModel.Id,
+                        ShowPrintView = true
+                    };
+                    po.SetDataForEdit(orderEditModel);//(OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), orderModel.OrderType), orderModel.Id, true
                     po.ShowDialog();
                 }
             }
@@ -367,7 +408,12 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 _previousSelectedIndex = dgvOrders.SelectedRows.Count > 0 ? dgvOrders.SelectedRows[0].Index : -1;
                 var orderForm = Program.container.GetInstance<TransactionCreateForm>();
-                orderForm.SetDataForEdit(orderType, orderId);
+                var orderEditModel = new OrderEditModel
+                {
+                    OrderType = orderType,
+                    OrderId = orderId
+                };
+                orderForm.SetDataForEdit(orderEditModel);//orderType, orderId
                 orderForm.ShowDialog();
             }
         }

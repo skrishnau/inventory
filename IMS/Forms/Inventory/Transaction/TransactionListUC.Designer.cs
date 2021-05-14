@@ -31,8 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionListUC));
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlNewTransaction = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnPurchaseTransaction = new System.Windows.Forms.Button();
+            this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -69,18 +70,18 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblCustomer = new System.Windows.Forms.Label();
             this.lblReferenceNo = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnCancel = new System.Windows.Forms.Button();
             this.pnlEditedOrder = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.btnViewParentOrder = new System.Windows.Forms.Button();
-            this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
-            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.pnlNewTransaction.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
@@ -88,45 +89,64 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel5.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.pnlEditedOrder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 73);
+            this.splitter1.Location = new System.Drawing.Point(0, 79);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1013, 3);
+            this.splitter1.Size = new System.Drawing.Size(1068, 3);
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
-            // btnNew
+            // pnlNewTransaction
             // 
-            this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnNew.Location = new System.Drawing.Point(70, 3);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(74, 29);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = " New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.pnlNewTransaction.Controls.Add(this.btnPurchaseTransaction);
+            this.pnlNewTransaction.Controls.Add(this.btnSaleTransaction);
+            this.pnlNewTransaction.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlNewTransaction.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.pnlNewTransaction.Location = new System.Drawing.Point(801, 4);
+            this.pnlNewTransaction.Name = "pnlNewTransaction";
+            this.pnlNewTransaction.Size = new System.Drawing.Size(263, 36);
+            this.pnlNewTransaction.TabIndex = 3;
             // 
-            // flowLayoutPanel1
+            // btnPurchaseTransaction
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnNew);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(862, 4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(147, 33);
-            this.flowLayoutPanel1.TabIndex = 3;
-            this.flowLayoutPanel1.Visible = false;
+            this.btnPurchaseTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPurchaseTransaction.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPurchaseTransaction.FlatAppearance.BorderSize = 0;
+            this.btnPurchaseTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPurchaseTransaction.Image = global::IMS.Properties.Resources.icons8_In_Transit_plus_24px;
+            this.btnPurchaseTransaction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPurchaseTransaction.Location = new System.Drawing.Point(135, 3);
+            this.btnPurchaseTransaction.Name = "btnPurchaseTransaction";
+            this.btnPurchaseTransaction.Size = new System.Drawing.Size(125, 28);
+            this.btnPurchaseTransaction.TabIndex = 52;
+            this.btnPurchaseTransaction.Text = "  New Purchase";
+            this.btnPurchaseTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPurchaseTransaction.UseVisualStyleBackColor = false;
+            // 
+            // btnSaleTransaction
+            // 
+            this.btnSaleTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaleTransaction.BackColor = System.Drawing.SystemColors.Control;
+            this.btnSaleTransaction.FlatAppearance.BorderSize = 0;
+            this.btnSaleTransaction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaleTransaction.Image = global::IMS.Properties.Resources.icons8_Sell_Stock_plus_24px;
+            this.btnSaleTransaction.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaleTransaction.Location = new System.Drawing.Point(27, 3);
+            this.btnSaleTransaction.Name = "btnSaleTransaction";
+            this.btnSaleTransaction.Size = new System.Drawing.Size(102, 28);
+            this.btnSaleTransaction.TabIndex = 51;
+            this.btnSaleTransaction.Text = "  New Sale";
+            this.btnSaleTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaleTransaction.UseVisualStyleBackColor = false;
             // 
             // btnEdit
             // 
@@ -147,12 +167,12 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.pnlNewTransaction);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 32);
+            this.panel1.Location = new System.Drawing.Point(0, 35);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1013, 41);
+            this.panel1.Size = new System.Drawing.Size(1068, 44);
             this.panel1.TabIndex = 14;
             // 
             // panel3
@@ -168,7 +188,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(748, 33);
+            this.panel3.Size = new System.Drawing.Size(760, 36);
             this.panel3.TabIndex = 4;
             // 
             // label2
@@ -266,7 +286,7 @@
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(567, 416);
+            this.dgvOrders.Size = new System.Drawing.Size(622, 410);
             this.dgvOrders.TabIndex = 13;
             // 
             // colOrderNumber
@@ -364,9 +384,9 @@
             this.panel2.Controls.Add(this.splitter2);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 76);
+            this.panel2.Location = new System.Drawing.Point(0, 82);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1013, 441);
+            this.panel2.Size = new System.Drawing.Size(1068, 435);
             this.panel2.TabIndex = 16;
             // 
             // bindingNavigator1
@@ -385,14 +405,14 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 416);
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 410);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(567, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(622, 25);
             this.bindingNavigator1.TabIndex = 17;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -466,9 +486,9 @@
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(567, 0);
+            this.splitter2.Location = new System.Drawing.Point(622, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 441);
+            this.splitter2.Size = new System.Drawing.Size(5, 435);
             this.splitter2.TabIndex = 15;
             this.splitter2.TabStop = false;
             // 
@@ -477,10 +497,20 @@
             this.panel4.Controls.Add(this.dgvItems);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(572, 0);
+            this.panel4.Location = new System.Drawing.Point(627, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(441, 441);
+            this.panel4.Size = new System.Drawing.Size(441, 435);
             this.panel4.TabIndex = 16;
+            // 
+            // dgvItems
+            // 
+            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(0, 67);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.Size = new System.Drawing.Size(441, 368);
+            this.dgvItems.TabIndex = 14;
             // 
             // panel5
             // 
@@ -532,6 +562,20 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(328, 32);
             this.flowLayoutPanel2.TabIndex = 17;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.Location = new System.Drawing.Point(224, 5);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(96, 33);
+            this.btnPrint.TabIndex = 16;
+            this.btnPrint.Text = "Print Receipt";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -579,30 +623,6 @@
             this.btnViewParentOrder.Text = "View Parent Txn";
             this.btnViewParentOrder.UseVisualStyleBackColor = true;
             // 
-            // dgvItems
-            // 
-            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 67);
-            this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(441, 374);
-            this.dgvItems.TabIndex = 14;
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.Location = new System.Drawing.Point(224, 5);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(96, 33);
-            this.btnPrint.TabIndex = 16;
-            this.btnPrint.Text = "Print Receipt";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = false;
-            // 
             // listHeaderTemplate1
             // 
             this.listHeaderTemplate1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -611,7 +631,7 @@
             this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
             this.listHeaderTemplate1.Name = "listHeaderTemplate1";
             this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.listHeaderTemplate1.Size = new System.Drawing.Size(1013, 32);
+            this.listHeaderTemplate1.Size = new System.Drawing.Size(1068, 35);
             this.listHeaderTemplate1.TabIndex = 17;
             // 
             // TransactionListUC
@@ -623,8 +643,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listHeaderTemplate1);
             this.Name = "TransactionListUC";
-            this.Size = new System.Drawing.Size(1013, 517);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(1068, 517);
+            this.pnlNewTransaction.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -636,11 +656,11 @@
             this.bindingNavigator1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.pnlEditedOrder.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -648,8 +668,7 @@
         #endregion
 
         private System.Windows.Forms.Splitter splitter1;
-        protected internal System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel pnlNewTransaction;
         protected internal System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvOrders;
@@ -697,5 +716,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNoOfProducts;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        protected internal System.Windows.Forms.Button btnPurchaseTransaction;
+        protected internal System.Windows.Forms.Button btnSaleTransaction;
     }
 }

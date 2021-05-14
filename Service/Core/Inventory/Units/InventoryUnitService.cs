@@ -553,6 +553,7 @@ namespace Service.Core.Inventory.Units
                 .Include(x => x.Warehouse)
                 .Where(x => x.WarehouseId == model.WarehouseId
                                 && x.ProductId == model.ProductId
+                                && x.PackageId != null
                                 && x.IsHold == model.IsHold)
                 .OrderBy(x => x.LotNumber)
                 .ToList();

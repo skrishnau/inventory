@@ -148,7 +148,12 @@ namespace IMS.Forms.Inventory.Dashboard
                     if (orderModel != null)
                     {
                         var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
-                        form.SetDataForEdit(OrderTypeEnum.Sale, orderModel.Id);
+                        var orderEditModel = new OrderEditModel
+                        {
+                            OrderType = OrderTypeEnum.Sale, 
+                            OrderId = orderModel.Id
+                        };
+                        form.SetDataForEdit(orderEditModel);// (OrderTypeEnum.Sale, orderModel.Id);
                         form.ShowDialog();
                     }
                 }

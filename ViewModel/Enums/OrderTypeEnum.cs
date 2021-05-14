@@ -20,4 +20,16 @@ namespace ViewModel.Enums
         Order
     }
 
+    public enum OrderOrDirectEnum
+    {
+        /// <summary>
+        /// For Purchase Order , Sale Order
+        /// </summary>
+        Order,
+        /// <summary>
+        /// For Direct Receive, Direct Issue
+        /// </summary>
+        Direct
+    }
+
 }

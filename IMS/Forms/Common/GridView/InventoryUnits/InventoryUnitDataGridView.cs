@@ -326,7 +326,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 {
                     if (product != null)
                     {
-                        if (!product.Packages.Any(x => x.Name == model.Name))
+                        var nameLower = model.Name.ToLower();
+                        if (!product.Packages.Any(x => x.Name.ToLower() == nameLower))
                         {
                             InvalidColumns.Add("Package");
                             isValid = false;

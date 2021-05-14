@@ -15,6 +15,7 @@ using ViewModel.Core.Common;
 using ViewModel.Core.Business;
 using Service.Interfaces;
 using IMS.Forms.Common.Pagination;
+using ViewModel.Core.Orders;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -120,15 +121,6 @@ namespace IMS.Forms.Inventory.Units
         }
         
 
-        private void BtnReceive_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
-                directReceiveForm.SetData(MovementTypeEnum.DirectReceive);
-                directReceiveForm.ShowDialog();
-            }
-        }
 
         private void InitializeGridView()
         {
@@ -274,8 +266,34 @@ namespace IMS.Forms.Inventory.Units
             }
         }
 
+        private void BtnReceive_Click(object sender, EventArgs e)
+        {
+            /*
+            // earlier code
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
+                directReceiveForm.SetData(MovementTypeEnum.DirectReceive);
+                directReceiveForm.ShowDialog();
+            }
+            */
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+                var orderEditModel = new OrderEditModel
+                {
+                    OrderType = OrderTypeEnum.Purchase,
+                    OrderId = 0,
+                    OrderOrDirect = OrderOrDirectEnum.Direct
+                };
+                form.SetDataForEdit(orderEditModel);//OrderTypeEnum.Purchase, 0
+                form.ShowDialog();
+            }
+        }
         private void BtnIssue_Click(object sender, EventArgs e)
         {
+            /*
+            // earlier code
             var list = GetSelectedRows();
             if (list.Count == 0)
             {
@@ -288,6 +306,19 @@ namespace IMS.Forms.Inventory.Units
                 var directReceiveForm = Program.container.GetInstance<InventoryAdjustmentForm>();
                 directReceiveForm.SetData(MovementTypeEnum.DirectIssueInventoryUnit, 0, list);
                 directReceiveForm.ShowDialog();
+            }
+            */
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
+                var orderEditModel = new OrderEditModel
+                {
+                    OrderType = OrderTypeEnum.Sale,
+                    OrderId = 0,
+                    OrderOrDirect = OrderOrDirectEnum.Direct
+                };
+                form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
+                form.ShowDialog();
             }
         }
 

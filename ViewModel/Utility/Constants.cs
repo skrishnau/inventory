@@ -20,9 +20,10 @@ namespace ViewModel.Utility
 
 
         public const string REQUIRED = "Required";
-        public const  string INVALID = "Invalid";
+        public const string INVALID = "Invalid";
         public const string GREATER_THAN_ZERO = "Should be greater than zero";
-        public const  string NOT_AVAILABLE_IN_PRODUCT_UOM = "Not available in Product's UOM";
+        public const string NOT_AVAILABLE_IN_PRODUCT_UOM = "Not available in Product's UOM";
+        public const string RECEIPT_NO_IS_REQUIRED = "Receipt No. is required. Please update Receipt settings.";
 
     }
 }
