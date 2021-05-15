@@ -611,7 +611,7 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 var completedDate = dtCompletedDate.GetValue();
                 var now = DateTime.Now;
-                TimeSpan ts = new TimeSpan(0, now.Hour, now.Minute, now.Second, now.Millisecond);
+                TimeSpan ts = new TimeSpan(now.Hour, now.Minute, now.Second);
                 completedDate = completedDate.Date + ts;
                 var orderModel = new OrderModel
                 {

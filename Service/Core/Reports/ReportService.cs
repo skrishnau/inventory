@@ -155,6 +155,7 @@ namespace Service.Core.Reports
             {
                 from = from.Date;
                 to = to.Date;
+                var isFromAndToEqual = from == to;
                 to = to.AddDays(1);
                 var query = _context.Transaction.Where(x => x.Type == TransactionTypeEnum.Sale.ToString() && !x.IsVoid);
                 var openingBalanceQuery = query;
@@ -184,7 +185,6 @@ namespace Service.Core.Reports
                 }
                 else
                 {
-                    var isFromAndToEqual = from == to;
                     if (isFromAndToEqual)
                     {
                         foreach (var txn in transactions)
