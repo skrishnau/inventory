@@ -165,8 +165,11 @@ namespace IMS.Forms.Inventory.Products
                 Uoms = uoms,
             };
             product.ProductAttributes = _productAttributes;
-            _productService.AddUpdateProduct(product);
-            PopupMessage.ShowSaveSuccessMessage();
+            var msg = _productService.AddUpdateProduct(product);
+            if (string.IsNullOrEmpty(msg))
+                PopupMessage.ShowSaveSuccessMessage();
+            else
+                PopupMessage.ShowInfoMessage(msg);
             this.Close();
         }
 

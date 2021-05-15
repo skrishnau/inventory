@@ -27,10 +27,12 @@ namespace Service.Core
     public class ProductService : IProductService
     {
         private readonly IDatabaseChangeListener _listener;
+        private readonly IUomService _uomService;
 
-        public ProductService(IDatabaseChangeListener listener)
+        public ProductService(IDatabaseChangeListener listener, IUomService uomService)
         {
             _listener = listener;
+            _uomService = uomService;
         }
         public void AddUpdateCategory(CategoryModel category)
         {
@@ -57,113 +59,141 @@ namespace Service.Core
             }
 
         }
-        public void AddUpdateProduct(ProductModel model)
+        public string AddUpdateProduct(ProductModel model)
         {
             using (var _context = new DatabaseContext())
             {
-                var now = DateTime.Now;
-
-                var entity = _context.Product
-                    .Include(x => x.ProductAttributes)
-                    .FirstOrDefault(x => x.Id == model.Id);
-
-                ProductEventArgs eventArgs = ProductEventArgs.Instance;
-                entity = ProductMapper.MapToEntity(model, entity);
-
-                var uomEntities = entity.Uoms.ToList();
-                if (uomEntities.Count > 0)
+                using (var txn = _context.Database.BeginTransaction())
                 {
-                    for (var i = 0; i < uomEntities.Count; i++)
+
+                    var now = DateTime.Now;
+
+                    var entity = _context.Product
+                        .Include(x => x.ProductAttributes)
+                        .FirstOrDefault(x => x.Id == model.Id);
+
+                    // check and get if base package has been changed
+                    int? earlierBasePackageId = null;
+                    var isBasePackageSame = true;
+                    if (entity != null)
                     {
-                        // if it's not in the model then remove it
-                        if (!model.Uoms.Any(x => x.Id == uomEntities[i].Id))
+                        var basePackage = entity.ProductPackages.FirstOrDefault(x => x.IsBasePackage);
+                        earlierBasePackageId = basePackage?.PackageId;
+                        isBasePackageSame = basePackage?.PackageId == model.BasePackageId;
+                    }
+                    ProductEventArgs eventArgs = ProductEventArgs.Instance;
+                    entity = ProductMapper.MapToEntity(model, entity);
+
+                    var uomEntities = entity.Uoms.ToList();
+                    if (uomEntities.Count > 0)
+                    {
+                        for (var i = 0; i < uomEntities.Count; i++)
                         {
-                            _context.Uom.Remove(uomEntities[i]);
+                            // if it's not in the model then remove it
+                            if (!model.Uoms.Any(x => x.Id == uomEntities[i].Id))
+                            {
+                                _context.Uom.Remove(uomEntities[i]);
+                            }
                         }
                     }
-                }
-                for (var i = 0; i < entity.ProductPackages.Count; i++)
-                {
-                    // need to set the base package to false before deleting from _context cause it's still available in entity.ProductPackages
-                    entity.ProductPackages.ElementAt(i).IsBasePackage = false;
-                    _context.ProductPackage.Remove(entity.ProductPackages.ElementAt(i));
-                }
-                List<ProductPackage> packageList = new List<ProductPackage>();
-                foreach (var uom in model.Uoms)
-                {
-                    var uomEntity = uomEntities.FirstOrDefault(x => x.Id == uom.Id);
-                    uomEntity = uom.MapToEntity(uomEntity);
-                    if (uom.Id == 0)
+                    for (var i = 0; i < entity.ProductPackages.Count; i++)
                     {
-                        entity.Uoms.Add(uomEntity);
+                        // need to set the base package to false before deleting from _context cause it's still available in entity.ProductPackages
+                        entity.ProductPackages.ElementAt(i).IsBasePackage = false;
+                        _context.ProductPackage.Remove(entity.ProductPackages.ElementAt(i));
                     }
-                    if (!packageList.Any(x => x.PackageId == uom.PackageId))
-                        entity.ProductPackages.Add(new ProductPackage
-                        {
-                            IsBasePackage = model.BasePackageId == uom.PackageId,
-                            PackageId = uom.PackageId
-                        });
-                    if (!packageList.Any(x => x.PackageId == uom.RelatedPackageId))
-                        entity.ProductPackages.Add(new ProductPackage
-                        {
-                            IsBasePackage = model.BasePackageId == uom.RelatedPackageId,
-                            PackageId = uom.RelatedPackageId
-                        });
-                }
-
-
-                if (entity.Id == 0)
-                {
-                    // add
-                    entity.CreatedAt = DateTime.Now;
-                    entity.UpdatedAt = DateTime.Now;
-                    entity.ProductAttributes = new List<ProductAttribute>();
-                    //entity.Variants = new List<Variant>();
-                    // entity.Brands = new List<Brand>();
-                    _context.Product.Add(entity);
-                    eventArgs.Mode = Utility.UpdateMode.ADD;
-                }
-                else
-                {
-                    // udpate
-                    entity.UpdatedAt = DateTime.Now;
-                    eventArgs.Mode = Utility.UpdateMode.EDIT;
-                }
-                //  AssignBrandForSave(entity, model, now);
-                AssignProductAttributesForSave(entity, model, now);
-                //  AssignVariantsForSave(entity, model, now);
-                /*AddPriceHistoryWithoutCommit(_context, )
-                if (!isSellingPriceSame)
-                {
-                    var priceHistory = new PriceHistory
+                    List<ProductPackage> packageList = new List<ProductPackage>();
+                    foreach (var uom in model.Uoms)
                     {
-                        Date = DateTime.Now,
-                        Price = entity.RetailPrice,
-                        PriceType = PriceTypeEnum.SellingPrice.ToString(),
-                        PackageId = entity.PackageId == 0 ? null : entity.PackageId,
-                    };
-                    entity.PriceHistory.Add(priceHistory);
-                }
-                if (!isCostPriceSame)
-                {
-                    var priceHistory = new PriceHistory
+                        var uomEntity = uomEntities.FirstOrDefault(x => x.Id == uom.Id);
+                        uomEntity = uom.MapToEntity(uomEntity);
+                        if (uom.Id == 0)
+                        {
+                            entity.Uoms.Add(uomEntity);
+                        }
+                        if (!packageList.Any(x => x.PackageId == uom.PackageId))
+                            entity.ProductPackages.Add(new ProductPackage
+                            {
+                                IsBasePackage = model.BasePackageId == uom.PackageId,
+                                PackageId = uom.PackageId
+                            });
+                        if (!packageList.Any(x => x.PackageId == uom.RelatedPackageId))
+                            entity.ProductPackages.Add(new ProductPackage
+                            {
+                                IsBasePackage = model.BasePackageId == uom.RelatedPackageId,
+                                PackageId = uom.RelatedPackageId
+                            });
+                    }
+
+
+                    if (entity.Id == 0)
                     {
-                        Date = DateTime.Now,
-                        Price = entity.SupplyPrice,
-                        PriceType = PriceTypeEnum.CostPrice.ToString(),
-                        PackageId = entity.PackageId == 0 ? null : entity.PackageId,
-                    };
-                    entity.PriceHistory.Add(priceHistory);
-                }*/
+                        // add
+                        entity.CreatedAt = DateTime.Now;
+                        entity.UpdatedAt = DateTime.Now;
+                        entity.ProductAttributes = new List<ProductAttribute>();
+                        //entity.Variants = new List<Variant>();
+                        // entity.Brands = new List<Brand>();
+                        _context.Product.Add(entity);
+                        eventArgs.Mode = Utility.UpdateMode.ADD;
+                    }
+                    else
+                    {
+                        // udpate
+                        entity.UpdatedAt = DateTime.Now;
+
+                        if (!isBasePackageSame)
+                        {
+                            // convert the instock and onhold quantity based on current package
+                            var conversion = _uomService.ConvertUom(_context, earlierBasePackageId ?? 0, model.BasePackageId ?? 0, entity.Id);
+                            if (conversion == 0)
+                            {
+                                txn.Rollback();
+                                return "The conversion from earlier base-package to current base-pacakge is not possible. Please update product's UOM";
+                            }
+                            entity.InStockQuantity = entity.InStockQuantity * conversion;
+                            entity.OnHoldQuantity = entity.OnHoldQuantity * conversion;
+                        }
+
+                        eventArgs.Mode = Utility.UpdateMode.EDIT;
+
+                    }
+                    //  AssignBrandForSave(entity, model, now);
+                    AssignProductAttributesForSave(entity, model, now);
+                    //  AssignVariantsForSave(entity, model, now);
+                    /*AddPriceHistoryWithoutCommit(_context, )
+                    if (!isSellingPriceSame)
+                    {
+                        var priceHistory = new PriceHistory
+                        {
+                            Date = DateTime.Now,
+                            Price = entity.RetailPrice,
+                            PriceType = PriceTypeEnum.SellingPrice.ToString(),
+                            PackageId = entity.PackageId == 0 ? null : entity.PackageId,
+                        };
+                        entity.PriceHistory.Add(priceHistory);
+                    }
+                    if (!isCostPriceSame)
+                    {
+                        var priceHistory = new PriceHistory
+                        {
+                            Date = DateTime.Now,
+                            Price = entity.SupplyPrice,
+                            PriceType = PriceTypeEnum.CostPrice.ToString(),
+                            PackageId = entity.PackageId == 0 ? null : entity.PackageId,
+                        };
+                        entity.PriceHistory.Add(priceHistory);
+                    }*/
 
 
 
-                _context.SaveChanges();
-
-                eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
-                _listener.TriggerProductUpdateEvent(null, eventArgs);
+                    _context.SaveChanges();
+                    txn.Commit();
+                    eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
+                    _listener.TriggerProductUpdateEvent(null, eventArgs);
+                    return string.Empty;
+                }
             }
-
         }
 
         public void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId)

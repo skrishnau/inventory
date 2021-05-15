@@ -22,7 +22,7 @@ namespace Service.Interfaces
         ProductModel GetProductByNameOrSKU(string v);
         ProductModel GetProductById(int id);
         List<IdNamePair> GetUnderStockProducts();
-        void AddUpdateProduct(ProductModel product);
+        string AddUpdateProduct(ProductModel product);
 
 
         // category
