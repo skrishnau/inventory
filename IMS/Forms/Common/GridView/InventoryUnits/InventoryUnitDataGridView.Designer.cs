@@ -580,6 +580,24 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             HideUnusedDefaults();
         }
 
+        internal void DesignForMerging()
+        {
+
+            SetEditMode(false);
+            //colProductId.Visible = true;
+            colProduct.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colRate.Visible = true;
+            //colTotal.Visible = true;
+            //colDelete.Visible = _isEditable;
+            //colPackageId.Visible = true;
+            colPackage.Visible = true;
+            //colPackage.ReadOnly = false;
+            //colInStockQuantity.Visible = Constants.HAS_STOCK_MANAGEMENT;
+            HideUnusedDefaults();
+        }
+
         //
         // Direct Receive designs
         //

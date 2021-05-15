@@ -36,7 +36,7 @@ namespace ViewModel.Enums
         TOMoveEditItems,
         DirectMoveInventoryUnit,
         DirectMoveAny,
-
+        Merge,
 
     }
 }

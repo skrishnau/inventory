@@ -67,7 +67,7 @@ namespace Service.Core.Inventory.Units
                     .Include(x => x.Product)
                     .Include(x => x.Package)
                     .Include(x => x.Supplier)
-                   // .Include(x => x.Uom)
+                    // .Include(x => x.Uom)
                     .Include(x => x.Warehouse)
                     .Where(x => (warehouseId == 0 || x.WarehouseId == warehouseId)
                             && (productId == 0 || x.ProductId == productId))
@@ -77,56 +77,81 @@ namespace Service.Core.Inventory.Units
                     .AsQueryable();
         }
 
-        public void MergeInventoryUnits(List<InventoryUnitModel> list)
+        public string MergeInventoryUnits(List<InventoryUnitModel> list)
         {
+            var message = string.Empty;
             using (var _context = new DatabaseContext())
             {
-                DateTime now = DateTime.Now;
-                foreach (var productWiseGroup in list.GroupBy(x => x.ProductId))
+                using (var txn = _context.Database.BeginTransaction())
                 {
-                    var product = _context.Product.Find(productWiseGroup.Key);
-
-                    if (product != null)
+                    DateTime now = DateTime.Now;
+                    foreach (var productWiseGroup in list.GroupBy(x => x.ProductId))
                     {
-                        foreach (var invUnitGroup in productWiseGroup.GroupBy(x => x.WarehouseId))
-                        {
-                            var zeroRateOrderItemIdGroup = invUnitGroup.Where(x => x.Rate == 0).GroupBy(x => x.PurchaseOrderItemId); ;
-                            foreach (var zwhg in zeroRateOrderItemIdGroup)
-                            {
-                                var withZeroRate = zwhg.ToList();
-                                // if 2 or more items for this product
-                                if (withZeroRate.Count >= 2)
-                                {
-                                    UpdateMerging(_context, withZeroRate, product, now);
-                                }
-                            }
+                        var product = _context.Product.Find(productWiseGroup.Key);
 
-                            var withRate = invUnitGroup.Where(x => x.Rate > 0).ToList();
-                            // if 2 or more items for this product
-                            if (withRate.Count >= 2)
-                                UpdateMerging(_context, withRate, product, now);
+                        if (product != null)
+                        {
+                            var productPackage = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage)?.Package;
+                            foreach (var invUnitGroup in productWiseGroup.GroupBy(x => x.WarehouseId))
+                            {
+                                var zeroRateOrderItemIdGroup = invUnitGroup.Where(x => x.Rate == 0).GroupBy(x => x.PurchaseOrderItemId); ;
+                                foreach (var zwhg in zeroRateOrderItemIdGroup)
+                                {
+                                    var withZeroRate = zwhg.ToList();
+                                    // if 2 or more items for this product
+                                    if (withZeroRate.Count >= 2)
+                                    {
+                                        UpdateMerging(_context, withZeroRate, product, productPackage, now, ref message);
+                                    }
+                                }
+
+                                var withRate = invUnitGroup.Where(x => x.Rate > 0).ToList();
+                                // if 2 or more items for this product
+                                if (withRate.Count >= 2)
+                                    UpdateMerging(_context, withRate, product, productPackage, now, ref message);
+                            }
                         }
                     }
+                    if (!string.IsNullOrEmpty(message))
+                    {
+                        txn.Rollback();
+                    }
+                    else
+                    {
+                        _context.SaveChanges();
+                        txn.Commit();
+                    }
+                    var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
+                    _listener.TriggerInventoryUnitUpdateEvent(null, args);
                 }
-                _context.SaveChanges();
-                var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
-                _listener.TriggerInventoryUnitUpdateEvent(null, args);
+                return message;
             }
         }
 
-        private void UpdateMerging(DatabaseContext _context, List<InventoryUnitModel> invList, Product product, DateTime now)
+        private void UpdateMerging(DatabaseContext _context, List<InventoryUnitModel> invList, Product product, Package productPackage, DateTime now, ref string message)
         {
             var unitQuantity = 0M;
-            var packageQuantity = 0M;
+            var totalAmount = 0M;
+            // var packageQuantity = 0M;
             InventoryUnit editingRecord = null;
+            string splitString = "";
             for (var i = 0; i < invList.Count(); i++)
             {
-                var dbEntity = _context.InventoryUnit
-                    .Find(invList.ElementAt(i).Id);
+                var invId = invList.ElementAt(i).Id;
+                var dbEntity = _context.InventoryUnit.Include(x=>x.Package).FirstOrDefault(x => x.Id == invId);
                 if (dbEntity != null)
                 {
-                    unitQuantity += dbEntity.UnitQuantity;
-                    packageQuantity += dbEntity.PackageQuantity;
+                    var conversion = _uomService.ConvertUom(_context, dbEntity.PackageId ?? 0, productPackage?.Id ?? 0, product.Id, 1);
+                    if(conversion == 0)
+                    {
+                        message += "Some items cannot be converted to base unit. Please update product's uom.";
+                        return;
+                    }
+                    unitQuantity += (dbEntity.UnitQuantity * conversion);
+                    totalAmount += dbEntity.Rate * dbEntity.UnitQuantity;
+                    var invUnitQuantity = dbEntity.UnitQuantity;
+                    var invPackgeName = dbEntity.Package?.Name ?? string.Empty;
+                    //packageQuantity += dbEntity.PackageQuantity;
                     if (i < invList.Count() - 1)
                     {
                         // remove
@@ -140,18 +165,20 @@ namespace Service.Core.Inventory.Units
                         editingRecord = dbEntity;
                         invList.ElementAt(i).UpdateAction = UpdateMode.EDIT.ToString();
                     }
+                    splitString += $"{invUnitQuantity} {invPackgeName}  + ";
                 }
+
             }
             editingRecord.UnitQuantity = unitQuantity;
+            editingRecord.Rate = decimal.Round(totalAmount / unitQuantity,3);
+            editingRecord.PackageId = productPackage.Id;
             //var unitsInPackage = product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage;
-            editingRecord.PackageQuantity = GetPackageQuantity(unitQuantity, product.UnitsInPackage);
+            //editingRecord.PackageQuantity = GetPackageQuantity(unitQuantity, product.UnitsInPackage);
             // Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
             //editingRecord.PackageQuantity = packageQuantity;
             //
             // Movement
             //
-            string splitString = "";
-            invList.ForEach(x => { splitString += x.UnitQuantity + " + "; });
             splitString = splitString.Trim();
             splitString = splitString.TrimEnd(new char[] { '+' });
             var description = "Merged " + splitString + " of '" + product.Name + "' into " + editingRecord.UnitQuantity + " qty.";
@@ -197,7 +224,7 @@ namespace Service.Core.Inventory.Units
                                     {
                                         // update the first entry 
                                         entity.UnitQuantity = quantity;
-                                        entity.PackageQuantity = GetPackageQuantity(quantity, entity.Product.UnitsInPackage);//Math.Ceiling(quantity / unitsInPackage) + (quantity % unitsInPackage == 0 ? 0 : 1);
+                                        //entity.PackageQuantity = GetPackageQuantity(quantity, entity.Product.UnitsInPackage);//Math.Ceiling(quantity / unitsInPackage) + (quantity % unitsInPackage == 0 ? 0 : 1);
                                     }
                                     else
                                     {
@@ -205,7 +232,7 @@ namespace Service.Core.Inventory.Units
                                         var newEntity = InventoryUnitMapper.CloneEntity(entity);
                                         newEntity.Id = 0;
                                         newEntity.UnitQuantity = quantity;
-                                        newEntity.PackageQuantity = GetPackageQuantity(quantity, entity.Product.UnitsInPackage); //Math.Ceiling(quantity / unitsInPackage) + (quantity % unitsInPackage == 0 ? 0 : 1);
+                                        //newEntity.PackageQuantity = GetPackageQuantity(quantity, entity.Product.UnitsInPackage); //Math.Ceiling(quantity / unitsInPackage) + (quantity % unitsInPackage == 0 ? 0 : 1);
                                         _context.InventoryUnit.Add(newEntity);
                                     }
 
@@ -225,8 +252,8 @@ namespace Service.Core.Inventory.Units
         {
             var productPackageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage)?.PackageId ?? 0;
             var modelToBase = _uomService.ConvertUom(_context, moveModel.InventoryUnit.PackageId ?? 0, productPackageId, product.Id);
-            var entityToBase = moveModel.PackageId == moveModel.InventoryUnit.PackageId 
-                ? modelToBase 
+            var entityToBase = moveModel.PackageId == moveModel.InventoryUnit.PackageId
+                ? modelToBase
                 : _uomService.ConvertUom(_context, moveModel.PackageId, productPackageId, product.Id);
 
             // var product = _context.Product.Find(moveModel.InventoryUnit.ProductId);
@@ -285,12 +312,13 @@ namespace Service.Core.Inventory.Units
 
         }
 
-
+        /*
         private decimal GetPackageQuantity(decimal unitQuantity, decimal unitsInPackage)
         {
             unitsInPackage = unitsInPackage == 0 ? 1 : unitsInPackage;
             return Math.Ceiling(unitQuantity / unitsInPackage) + (unitQuantity % unitsInPackage == 0 ? 0 : 1);
         }
+        */
 
         public int GetMovementListCount(int productId)
         {
@@ -428,7 +456,7 @@ namespace Service.Core.Inventory.Units
                 TargetWarehouseId = unit.WarehouseId,
                 InventoryUnit = unit
             };
-            
+
             UpdateWarehouseProductWithoutCommit(_context, invMovement, product);
             unitEntity.OrderItem = orderItem;
             return unitEntity;
@@ -478,13 +506,13 @@ namespace Service.Core.Inventory.Units
                         var productId = dbEntity.ProductId;
                         var warehouseId = dbEntity.WarehouseId;
                         var product = dbEntity.Product;
-                        
+
                         if (model.UnitQuantity < dbEntity.UnitQuantity)
                         {
                             // don't remove; just decrement
                             issuedQuantity = model.UnitQuantity;
                             dbEntity.UnitQuantity = dbEntity.UnitQuantity - model.UnitQuantity;
-                            dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
+                            // dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
                         }
                         else
                         {
@@ -567,10 +595,10 @@ namespace Service.Core.Inventory.Units
                 .ToList();
             decimal qtySum = 0;
             var fulfilledIndex = -1;
-            
+
             for (var i = 0; i < invUnit.Count(); i++)
             {
-                var conversion = _uomService.ConvertUom(invUnit[i].PackageId??0, model.PackageId??0, model.ProductId);
+                var conversion = _uomService.ConvertUom(invUnit[i].PackageId ?? 0, model.PackageId ?? 0, model.ProductId);
                 var invunitqty = invUnit[i].UnitQuantity * conversion;
                 qtySum += invunitqty;
 
@@ -611,7 +639,7 @@ namespace Service.Core.Inventory.Units
                 var remainInvunitQty = remainingQty * conversion;
 
                 //earlier : if (remainingQty < dbEntity.UnitQuantity)
-                if(remainInvunitQty < dbEntity.UnitQuantity)
+                if (remainInvunitQty < dbEntity.UnitQuantity)
                 {
                     // don't remove; just decrement
                     //earlier: issuedQuantity = remainingQty;
@@ -626,7 +654,7 @@ namespace Service.Core.Inventory.Units
                     //dbEntity.UnitQuantity = 0;
                     // case is : model.UnitQuantity >= entity.UnitQuantity
                     // remove the InventoryUnit
-                    remainingQty -= dbEntity.UnitQuantity/conversion;
+                    remainingQty -= dbEntity.UnitQuantity / conversion;
                     _context.InventoryUnit.Remove(dbEntity);
                 }
                 // note : don't use dbEntity below this comment line. if you want to use the dbentity then assign it's value to another var before remove() func.
@@ -640,7 +668,7 @@ namespace Service.Core.Inventory.Units
                 {
                     Date = now,
                     UnitQuantity = issuedQuantity,
-                    PackageId = dbEntity.PackageId??0,
+                    PackageId = dbEntity.PackageId ?? 0,
                     SourceWarehouseId = warehouseId,//dbEntity.WarehouseId,
                     TargetWarehouseId = null,
                     InventoryUnit = model
