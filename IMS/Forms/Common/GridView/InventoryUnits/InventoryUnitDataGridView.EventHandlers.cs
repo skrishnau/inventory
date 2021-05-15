@@ -151,6 +151,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 row.Cells[this.colPackage.Index].Value = product.BasePackage;
                // row.Cells[this.colUomId.Index].Value = product.BaseUomId;
                 row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
+                row.Cells[this.colInStockQuantityWithPackage.Index].Value = $"{product.InStockQuantity} {product.BasePackage}";
                 row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
                 row.Cells[this.colWarehouseId.Index].Value = product.WarehouseId;
                 row.Cells[this.colWarehouse.Index].Value = product.Warehouse;

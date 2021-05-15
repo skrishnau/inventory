@@ -70,6 +70,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colExpirationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             this.colInStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInStockQuantityWithPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnOrderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnHoldQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnComittedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,6 +109,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colProduct,
             this.colSKU,
             this.colInStockQuantity,
+            this.colInStockQuantityWithPackage,
             this.colOnHoldQuantity,
             this.colOnOrderQuantity,
             this.colOnComittedQuantity,
@@ -351,12 +353,21 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // 
             // colInStockQuantity
             // 
-            this.colInStockQuantity.DataPropertyName = "UnitQuantity";
+            this.colInStockQuantity.DataPropertyName = "InStockQuantity";
             this.colInStockQuantity.HeaderText = "In Stock";
             this.colInStockQuantity.Name = "colInStockQuantity";
             this.colInStockQuantity.Visible = false;
             this.colInStockQuantity.Width = 70;
             this.colInStockQuantity.ReadOnly = true;
+            // 
+            // colInStockQuantityWithPackage
+            // 
+            this.colInStockQuantityWithPackage.DataPropertyName = "InStockQuantityWithPackage";
+            this.colInStockQuantityWithPackage.HeaderText = "In Stock";
+            this.colInStockQuantityWithPackage.Name = "colInStockQuantityWithPackage";
+            this.colInStockQuantityWithPackage.Visible = false;
+            this.colInStockQuantityWithPackage.Width = 70;
+            this.colInStockQuantityWithPackage.ReadOnly = true;
             // 
             // colOnHoldQuantity
             // 
@@ -539,7 +550,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colDelete.Visible = _isEditable;
             //colPackageId.Visible = true;
             colPackage.Visible = true;
-            colInStockQuantity.Visible = Constants.HAS_STOCK_MANAGEMENT;
+            //colInStockQuantity.Visible = Constants.HAS_STOCK_MANAGEMENT;
+            colInStockQuantityWithPackage.Visible = Constants.HAS_STOCK_MANAGEMENT;
             HideUnusedDefaults();
             colProduct.Width += 10;
             colSKU.Width += 10;
@@ -547,7 +559,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colRate.Width += 10;
             colTotal.Width += 10;
             colPackage.Width += 10;
-            colInStockQuantity.Width += 10;
+            //colInStockQuantity.Width += 10;
+            colInStockQuantityWithPackage.Width += 10;
         }
 
         internal void DesignForTransactionItemListing(bool forEditMode)
@@ -777,6 +790,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewTextBoxColumn colProductionDate;
 
         public System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantity;
+        public System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantityWithPackage;
         public System.Windows.Forms.DataGridViewTextBoxColumn colOnHoldQuantity;
         public System.Windows.Forms.DataGridViewTextBoxColumn colOnOrderQuantity;
         public System.Windows.Forms.DataGridViewTextBoxColumn colOnComittedQuantity;

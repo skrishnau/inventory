@@ -52,6 +52,7 @@ namespace ViewModel.Core.Inventory
         public string ExpirationDate { get; set; }
 
         public decimal InStockQuantity { get; set; }
+        public string InStockQuantityWithPackage { get; set; }
         public decimal OnHoldQuantity { get; set; }
         public decimal OnOrderQuantity { get; set; }
         public decimal OnComittedQuantity { get; set; }
