@@ -55,7 +55,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void OrderListUC_Load(object sender, EventArgs e)
         {
             dgvItems.InitializeGridViewControls(_inventoryService, _productService);
-            dgvItems.DesignForTransaction(false);
+            dgvItems.DesignForTransactionItemListing(false);
 
             this.Dock = DockStyle.Fill;
             InitializeGridView();

@@ -112,7 +112,8 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 dgvItems.MovementType = MovementTypeEnum.POReceiveEditItems;
             }
-            dgvItems.DesignForTransaction(true);
+            dgvItems.DesignForTransactionCreate(true);
+            
         }
         private void PopulateAdjustmentCodeCombo()
         {
@@ -608,13 +609,17 @@ namespace IMS.Forms.Inventory.Transaction
 
             if (items != null)
             {
+                var completedDate = dtCompletedDate.GetValue();
+                var now = DateTime.Now;
+                TimeSpan ts = new TimeSpan(0, now.Hour, now.Minute, now.Second, now.Millisecond);
+                completedDate = completedDate.Date + ts;
                 var orderModel = new OrderModel
                 {
                     Id = _orderId,
                     OrderType = _orderType.ToString(),
                     Name = (string.IsNullOrEmpty(cbClient.Text) ? "" : $"{cbClient.Text}, ") + txtReceiptNo.Text,
                     DeliveryDate = dtExpectedDate.GetValue(),
-                    CompletedDate = dtCompletedDate.GetValue(),
+                    CompletedDate = completedDate,//dtCompletedDate.GetValue(),
                     PaidAmount = txtPaidAmount.Value,
                     DiscountPercent = cbDiscountType.SelectedItem?.ToString() == "%" ? txtDiscount.Value : 0,
                     DiscountAmount = cbDiscountType.SelectedItem?.ToString() == "%" ? txtTotal.Value * txtDiscount.Value / 100 : txtDiscount.Value,

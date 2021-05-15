@@ -526,7 +526,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
         }
 
-        internal void DesignForTransaction(bool forEditMode)
+        internal void DesignForTransactionCreate(bool forEditMode)
         {
 
             SetEditMode(forEditMode);
@@ -540,6 +540,30 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colPackageId.Visible = true;
             colPackage.Visible = true;
             colInStockQuantity.Visible = Constants.HAS_STOCK_MANAGEMENT;
+            HideUnusedDefaults();
+            colProduct.Width += 10;
+            colSKU.Width += 10;
+            colUnitQuantity.Width += 10;
+            colRate.Width += 10;
+            colTotal.Width += 10;
+            colPackage.Width += 10;
+            colInStockQuantity.Width += 10;
+        }
+
+        internal void DesignForTransactionItemListing(bool forEditMode)
+        {
+
+            SetEditMode(forEditMode);
+            //colProductId.Visible = true;
+            colProduct.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colRate.Visible = true;
+            colTotal.Visible = true;
+            colDelete.Visible = _isEditable;
+            //colPackageId.Visible = true;
+            colPackage.Visible = true;
+            //colInStockQuantity.Visible = Constants.HAS_STOCK_MANAGEMENT;
             HideUnusedDefaults();
         }
 

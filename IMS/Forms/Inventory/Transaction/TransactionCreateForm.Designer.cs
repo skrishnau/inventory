@@ -37,10 +37,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pnlPaymentDueDate = new System.Windows.Forms.Panel();
+            this.dtPaymentDueDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.rbCash = new System.Windows.Forms.RadioButton();
             this.rbCredit = new System.Windows.Forms.RadioButton();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.lblExpectedDate = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -59,6 +61,9 @@
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlReceipt = new System.Windows.Forms.Panel();
+            this.cbAdjustmentCode = new System.Windows.Forms.ComboBox();
+            this.dtCompletedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
+            this.lblAdjustmentCode = new System.Windows.Forms.Label();
             this.lblCheckoutDate = new System.Windows.Forms.Label();
             this.txtReceiptNo = new System.Windows.Forms.TextBox();
             this.lblReceoptNo = new System.Windows.Forms.Label();
@@ -66,12 +71,7 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
-            this.dtPaymentDueDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
-            this.dtExpectedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
-            this.dtCompletedDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.saveFooterUC1 = new IMS.Forms.Common.Display.SaveFooterUC();
-            this.lblAdjustmentCode = new System.Windows.Forms.Label();
-            this.cbAdjustmentCode = new System.Windows.Forms.ComboBox();
             this.pnlBottomInputs.SuspendLayout();
             this.pnlPayment.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -160,6 +160,13 @@
             this.pnlPaymentDueDate.TabIndex = 8;
             this.pnlPaymentDueDate.Visible = false;
             // 
+            // dtPaymentDueDate
+            // 
+            this.dtPaymentDueDate.Location = new System.Drawing.Point(107, 3);
+            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
+            this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
+            this.dtPaymentDueDate.TabIndex = 9;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -198,6 +205,13 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(401, 24);
             this.panel4.TabIndex = 52;
+            // 
+            // dtExpectedDate
+            // 
+            this.dtExpectedDate.Location = new System.Drawing.Point(84, 2);
+            this.dtExpectedDate.Name = "dtExpectedDate";
+            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtExpectedDate.TabIndex = 11;
             // 
             // lblExpectedDate
             // 
@@ -406,6 +420,33 @@
             this.pnlReceipt.Size = new System.Drawing.Size(657, 26);
             this.pnlReceipt.TabIndex = 0;
             // 
+            // cbAdjustmentCode
+            // 
+            this.cbAdjustmentCode.FormattingEnabled = true;
+            this.cbAdjustmentCode.Location = new System.Drawing.Point(300, 2);
+            this.cbAdjustmentCode.Name = "cbAdjustmentCode";
+            this.cbAdjustmentCode.Size = new System.Drawing.Size(144, 21);
+            this.cbAdjustmentCode.TabIndex = 8;
+            this.cbAdjustmentCode.Visible = false;
+            // 
+            // dtCompletedDate
+            // 
+            this.dtCompletedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtCompletedDate.Location = new System.Drawing.Point(552, 2);
+            this.dtCompletedDate.Name = "dtCompletedDate";
+            this.dtCompletedDate.Size = new System.Drawing.Size(100, 20);
+            this.dtCompletedDate.TabIndex = 13;
+            // 
+            // lblAdjustmentCode
+            // 
+            this.lblAdjustmentCode.AutoSize = true;
+            this.lblAdjustmentCode.Location = new System.Drawing.Point(214, 6);
+            this.lblAdjustmentCode.Name = "lblAdjustmentCode";
+            this.lblAdjustmentCode.Size = new System.Drawing.Size(81, 13);
+            this.lblAdjustmentCode.TabIndex = 0;
+            this.lblAdjustmentCode.Text = "Ajustment Code";
+            this.lblAdjustmentCode.Visible = false;
+            // 
             // lblCheckoutDate
             // 
             this.lblCheckoutDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -455,28 +496,6 @@
             this.dgvItems.Size = new System.Drawing.Size(657, 332);
             this.dgvItems.TabIndex = 5;
             // 
-            // dtPaymentDueDate
-            // 
-            this.dtPaymentDueDate.Location = new System.Drawing.Point(107, 3);
-            this.dtPaymentDueDate.Name = "dtPaymentDueDate";
-            this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
-            this.dtPaymentDueDate.TabIndex = 9;
-            // 
-            // dtExpectedDate
-            // 
-            this.dtExpectedDate.Location = new System.Drawing.Point(84, 2);
-            this.dtExpectedDate.Name = "dtExpectedDate";
-            this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
-            this.dtExpectedDate.TabIndex = 11;
-            // 
-            // dtCompletedDate
-            // 
-            this.dtCompletedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtCompletedDate.Location = new System.Drawing.Point(552, 2);
-            this.dtCompletedDate.Name = "dtCompletedDate";
-            this.dtCompletedDate.Size = new System.Drawing.Size(100, 20);
-            this.dtCompletedDate.TabIndex = 13;
-            // 
             // saveFooterUC1
             // 
             this.saveFooterUC1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -487,25 +506,6 @@
             this.saveFooterUC1.Padding = new System.Windows.Forms.Padding(0, 4, 10, 4);
             this.saveFooterUC1.Size = new System.Drawing.Size(657, 35);
             this.saveFooterUC1.TabIndex = 50;
-            // 
-            // lblAdjustmentCode
-            // 
-            this.lblAdjustmentCode.AutoSize = true;
-            this.lblAdjustmentCode.Location = new System.Drawing.Point(214, 6);
-            this.lblAdjustmentCode.Name = "lblAdjustmentCode";
-            this.lblAdjustmentCode.Size = new System.Drawing.Size(81, 13);
-            this.lblAdjustmentCode.TabIndex = 0;
-            this.lblAdjustmentCode.Text = "Ajustment Code";
-            this.lblAdjustmentCode.Visible = false;
-            // 
-            // cbAdjustmentCode
-            // 
-            this.cbAdjustmentCode.FormattingEnabled = true;
-            this.cbAdjustmentCode.Location = new System.Drawing.Point(300, 2);
-            this.cbAdjustmentCode.Name = "cbAdjustmentCode";
-            this.cbAdjustmentCode.Size = new System.Drawing.Size(144, 21);
-            this.cbAdjustmentCode.TabIndex = 8;
-            this.cbAdjustmentCode.Visible = false;
             // 
             // TransactionCreateForm
             // 
