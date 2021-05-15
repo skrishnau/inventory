@@ -221,11 +221,19 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        public void UpdateWarehouseProductWithoutCommit(InventoryMovementModel moveModel, Product product)
+        public void UpdateWarehouseProductWithoutCommit(DatabaseContext _context, InventoryMovementModel moveModel, Product product)
         {
+            var productPackageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage)?.PackageId ?? 0;
+            var modelToBase = _uomService.ConvertUom(_context, moveModel.InventoryUnit.PackageId ?? 0, productPackageId, product.Id);
+            var entityToBase = moveModel.PackageId == moveModel.InventoryUnit.PackageId 
+                ? modelToBase 
+                : _uomService.ConvertUom(_context, moveModel.PackageId, productPackageId, product.Id);
+
             // var product = _context.Product.Find(moveModel.InventoryUnit.ProductId);
             if (product != null)
             {
+                var entityQty = moveModel.UnitQuantity * entityToBase;
+                var modelQty = moveModel.InventoryUnit.UnitQuantity * modelToBase;
                 // subtract from source warehouse (fromWarehouse)
                 if (moveModel.SourceWarehouseId != null)
                 {
@@ -233,18 +241,17 @@ namespace Service.Core.Inventory.Units
                     if (fromWp != null)
                     {
                         // update FromWarehouse
-                        fromWp.InStockQuantity -= moveModel.UnitQuantity;//iuModel.UnitQuantity;
-                        fromWp.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0; //iuModel.OnHoldQuantity : 0;
+                        fromWp.InStockQuantity -= entityQty;//iuModel.UnitQuantity;
+                        fromWp.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? entityQty : 0; //iuModel.OnHoldQuantity : 0;
                         fromWp.UpdatedAt = moveModel.Date;
-                        product.InStockQuantity -= moveModel.UnitQuantity;// iuModel.UnitQuantity;
-                        product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0;// iuModel.OnHoldQuantity : 0;
+                        product.InStockQuantity -= entityQty;// iuModel.UnitQuantity;
+                        product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? entityQty : 0;// iuModel.OnHoldQuantity : 0;
                     }
                 }
                 if (moveModel.TargetWarehouseId != null)
                 {
 
                     var toWp = product.WarehouseProducts.FirstOrDefault(x => x.WarehouseId == moveModel.TargetWarehouseId);
-
                     // add to the target warehouse (toWarehouse)
                     if (toWp == null)
                     {
@@ -258,8 +265,8 @@ namespace Service.Core.Inventory.Units
                                 ProductId = moveModel.InventoryUnit.ProductId,
                             };
                             // update
-                            toWp.InStockQuantity += moveModel.UnitQuantity; // iuModel.UnitQuantity;
-                            toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? moveModel.UnitQuantity : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
+                            toWp.InStockQuantity += entityQty; // iuModel.UnitQuantity;
+                            toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? entityQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
                             toWp.UpdatedAt = moveModel.Date;
                             product.WarehouseProducts.Add(toWp);
                         }
@@ -267,12 +274,12 @@ namespace Service.Core.Inventory.Units
                     else
                     {
                         // update
-                        toWp.InStockQuantity += moveModel.InventoryUnit.UnitQuantity;
-                        toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? moveModel.InventoryUnit.OnHoldQuantity : 0;
+                        toWp.InStockQuantity += modelQty;
+                        toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
                         toWp.UpdatedAt = moveModel.Date;
                     }
-                    product.InStockQuantity += moveModel.InventoryUnit.UnitQuantity;
-                    product.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? moveModel.InventoryUnit.OnHoldQuantity : 0;
+                    product.InStockQuantity += modelQty;
+                    product.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity* conversion : 0;
                 }
             }
 
@@ -421,7 +428,8 @@ namespace Service.Core.Inventory.Units
                 TargetWarehouseId = unit.WarehouseId,
                 InventoryUnit = unit
             };
-            UpdateWarehouseProductWithoutCommit(invMovement, product);
+            
+            UpdateWarehouseProductWithoutCommit(_context, invMovement, product);
             unitEntity.OrderItem = orderItem;
             return unitEntity;
         }
@@ -498,7 +506,7 @@ namespace Service.Core.Inventory.Units
                             TargetWarehouseId = null,
                             InventoryUnit = model
                         };
-                        UpdateWarehouseProductWithoutCommit(invMovement, product);
+                        UpdateWarehouseProductWithoutCommit(_context, invMovement, product);
                         //var ti = new TransactionItem()
                         //{
                         //    CostPriceRate = 
@@ -632,11 +640,12 @@ namespace Service.Core.Inventory.Units
                 {
                     Date = now,
                     UnitQuantity = issuedQuantity,
+                    PackageId = dbEntity.PackageId??0,
                     SourceWarehouseId = warehouseId,//dbEntity.WarehouseId,
                     TargetWarehouseId = null,
                     InventoryUnit = model
                 };
-                UpdateWarehouseProductWithoutCommit(invMovement, product);
+                UpdateWarehouseProductWithoutCommit(_context, invMovement, product);
             }
             return list;
         }
@@ -679,7 +688,7 @@ namespace Service.Core.Inventory.Units
                                 TargetWarehouseId = warehouseEntity.Id,
                                 InventoryUnit = iuModel
                             };
-                            UpdateWarehouseProductWithoutCommit(invMovement, dbEntity.Product);
+                            UpdateWarehouseProductWithoutCommit(_context, invMovement, dbEntity.Product);
                             AddMovementWithoutCoomit(_context, description, "--------------", "Move", dbEntity.UnitQuantity, now, dbEntity.ProductId);
                         }
                     }

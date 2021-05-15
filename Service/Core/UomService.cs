@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service.Core
 {
-    public class UomService:IUomService
+    public class UomService : IUomService
     {
         public UomService()
         {
@@ -20,9 +20,16 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var val = ConvertUom(_context, fromPackageId, toPackageId, productId);
-                return val * multiplier;
+                return ConvertUom(_context, fromPackageId, toPackageId, productId, multiplier);
             }
+        }
+
+        public decimal ConvertUom(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId, decimal multiplier = 1)
+        {
+            decimal val = 1;
+            if (fromPackageId > 0 && toPackageId > 0)
+                val = ConvertUom(_context, fromPackageId, toPackageId, productId);
+            return val * multiplier;
         }
 
         private decimal ConvertUom(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId)

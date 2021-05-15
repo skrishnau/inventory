@@ -108,6 +108,7 @@
     <Compile Include="Forms\Common\Buttons\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\Common\ComboUpdateOnDatabaseChange.cs" />
     <Compile Include="Forms\Common\Date\NepaliCalendarUC.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -407,7 +407,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.Package.AsQueryable();
+                var query = _context.Package.OrderBy(x=>x.Name).AsQueryable();
                 return PackageMapper.MapToModel(query);
             }
         }
@@ -542,7 +542,9 @@ namespace Service.Core.Inventory
                 _context.SaveChanges();
                 args.Model = entity.MapToUomModel(); //UomMapper.MapToUomModel(entity);
                 _listener.TriggerUomUpdateEvent(null, args);
+                _listener.TriggerPackageUpdateEvent(null, BaseEventArgs<PackageModel>.Instance);
                 return ResponseModel<UomModel>.GetSaveSuccess(args.Model);
+
             }
 
         }

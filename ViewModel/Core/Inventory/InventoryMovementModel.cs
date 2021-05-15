@@ -10,6 +10,7 @@ namespace ViewModel.Core.Inventory
     {
         public InventoryUnitModel InventoryUnit { get; set; }
         public decimal UnitQuantity { get; set; }
+        public int PackageId { get; set; }
         public int? SourceWarehouseId { get; set; }
         public int? TargetWarehouseId { get; set; }
         public DateTime Date { get; set; }
