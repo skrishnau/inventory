@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tblBasicDetails = new System.Windows.Forms.TableLayoutPanel();
-            this.cbCategory = new System.Windows.Forms.ComboBox();
-            this.tbSKU = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbProductName = new System.Windows.Forms.MaskedTextBox();
-            this.lblCategory = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.tbSKU = new System.Windows.Forms.MaskedTextBox();
+            this.lblCategory = new System.Windows.Forms.Label();
+            this.cbCategory = new System.Windows.Forms.ComboBox();
             this.label33 = new System.Windows.Forms.Label();
             this.chkUse = new System.Windows.Forms.CheckBox();
             this.lblPackage = new System.Windows.Forms.Label();
@@ -50,8 +50,8 @@
             this.gbUom = new System.Windows.Forms.GroupBox();
             this.pnlUomList = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.btnAddUom = new IMS.Forms.Common.Buttons.MenuButton();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.tblBasicDetails.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -85,24 +85,6 @@
             this.tblBasicDetails.Size = new System.Drawing.Size(586, 70);
             this.tblBasicDetails.TabIndex = 1;
             // 
-            // cbCategory
-            // 
-            this.cbCategory.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(117, 38);
-            this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(149, 21);
-            this.cbCategory.TabIndex = 5;
-            // 
-            // tbSKU
-            // 
-            this.tbSKU.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSKU.Location = new System.Drawing.Point(417, 2);
-            this.tbSKU.Margin = new System.Windows.Forms.Padding(2);
-            this.tbSKU.Name = "tbSKU";
-            this.tbSKU.Size = new System.Drawing.Size(151, 21);
-            this.tbSKU.TabIndex = 3;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -122,6 +104,24 @@
             this.tbProductName.Size = new System.Drawing.Size(151, 21);
             this.tbProductName.TabIndex = 1;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(297, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(103, 13);
+            this.label12.TabIndex = 41;
+            this.label12.Text = "Product Code (SKU)";
+            // 
+            // tbSKU
+            // 
+            this.tbSKU.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSKU.Location = new System.Drawing.Point(417, 2);
+            this.tbSKU.Margin = new System.Windows.Forms.Padding(2);
+            this.tbSKU.Name = "tbSKU";
+            this.tbSKU.Size = new System.Drawing.Size(151, 21);
+            this.tbSKU.TabIndex = 3;
+            // 
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
@@ -133,14 +133,14 @@
             this.lblCategory.TabIndex = 16;
             this.lblCategory.Text = "Category *";
             // 
-            // label12
+            // cbCategory
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(297, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(103, 13);
-            this.label12.TabIndex = 41;
-            this.label12.Text = "Product Code (SKU)";
+            this.cbCategory.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Location = new System.Drawing.Point(117, 38);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(149, 21);
+            this.cbCategory.TabIndex = 5;
             // 
             // label33
             // 
@@ -168,7 +168,7 @@
             // 
             this.lblPackage.AutoSize = true;
             this.lblPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPackage.Location = new System.Drawing.Point(359, 10);
+            this.lblPackage.Location = new System.Drawing.Point(342, 10);
             this.lblPackage.Name = "lblPackage";
             this.lblPackage.Size = new System.Drawing.Size(104, 13);
             this.lblPackage.TabIndex = 0;
@@ -178,7 +178,7 @@
             // 
             this.cbPackage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPackage.FormattingEnabled = true;
-            this.cbPackage.Location = new System.Drawing.Point(469, 5);
+            this.cbPackage.Location = new System.Drawing.Point(452, 5);
             this.cbPackage.Name = "cbPackage";
             this.cbPackage.Size = new System.Drawing.Size(124, 21);
             this.cbPackage.TabIndex = 6;
@@ -276,15 +276,6 @@
             this.panel3.Size = new System.Drawing.Size(600, 32);
             this.panel3.TabIndex = 0;
             // 
-            // splitter1
-            // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 89);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(606, 10);
-            this.splitter1.TabIndex = 2;
-            this.splitter1.TabStop = false;
-            // 
             // btnAddUom
             // 
             this.btnAddUom.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
@@ -296,6 +287,15 @@
             this.btnAddUom.TabIndex = 0;
             this.btnAddUom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAddUom.UseVisualStyleBackColor = true;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter1.Location = new System.Drawing.Point(0, 89);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(606, 10);
+            this.splitter1.TabIndex = 2;
+            this.splitter1.TabStop = false;
             // 
             // ProductCreateBasicForm
             // 

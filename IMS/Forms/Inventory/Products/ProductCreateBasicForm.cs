@@ -167,10 +167,15 @@ namespace IMS.Forms.Inventory.Products
             product.ProductAttributes = _productAttributes;
             var msg = _productService.AddUpdateProduct(product);
             if (string.IsNullOrEmpty(msg))
+            {
                 PopupMessage.ShowSaveSuccessMessage();
+                this.Close();
+            }
             else
+            {
                 PopupMessage.ShowInfoMessage(msg);
-            this.Close();
+                this.Focus();
+            }
         }
 
         private List<UomModel> GetUomList(ref string uomMessage, bool doValidation)
