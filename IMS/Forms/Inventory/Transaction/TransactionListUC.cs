@@ -31,6 +31,7 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
         private readonly IUserService _userService;
+        private readonly IUomService _uomService;
 
         int _previousSelectedIndex = -1;
         BindingSource _bindingSource = new BindingSource();
@@ -38,7 +39,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         OrderListTypeEnum _orderListTypeEnum;
 
-        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType, OrderListTypeEnum orderListTypeEnum)
+        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType, OrderListTypeEnum orderListTypeEnum, IUomService uomService)
         {
             _orderService = orderService;
             _inventoryService = inventoryService;
@@ -47,14 +48,14 @@ namespace IMS.Forms.Inventory.Transaction
             _listener = listener;
             _userService = userService;
             _orderListTypeEnum = orderListTypeEnum;
-
+            _uomService = uomService;
             InitializeComponent();
             this.Load += OrderListUC_Load;
         }
 
         private void OrderListUC_Load(object sender, EventArgs e)
         {
-            dgvItems.InitializeGridViewControls(_inventoryService, _productService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
             dgvItems.DesignForTransactionItemListing(false);
 
             this.Dock = DockStyle.Fill;

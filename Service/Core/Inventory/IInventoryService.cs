@@ -31,6 +31,7 @@ namespace Service.Core.Inventory
         List<IdNamePair> GetPackageListForCombo();
         List<PackageModel> GetPackageList();
         PackageModel GetPackage(int packageId);
+        PackageModel GetPackageByName(string packagename);
         ResponseModel<PackageModel> SavePackage(PackageModel package);
 
         #endregion

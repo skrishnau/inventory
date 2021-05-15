@@ -32,6 +32,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         private IInventoryService _inventoryService;
         private IProductService _productService;
+        private IUomService _uomService;
         private List<DataGridViewColumn> IgnoreColumnsForErrorList = new List<DataGridViewColumn>();
 
         public MovementTypeEnum MovementType { get { return _movementType; } internal set { _movementType = value; } }
@@ -57,10 +58,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
 
 
-        public void InitializeGridViewControls(IInventoryService inventoryService, IProductService productService)
+        public void InitializeGridViewControls(IInventoryService inventoryService, IProductService productService, IUomService uomService)
         {
             _inventoryService = inventoryService;
             _productService = productService;
+            _uomService = uomService;
             _productList = _productService.GetProductListForCombo();
             _packageList = _inventoryService.GetPackageListForCombo();
             //
@@ -139,20 +141,22 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 var id = GetId(row);
                 var product = GetProduct(row);
 
-                checkWithInStockQuantity = checkWithInStockQuantity && (_movementType == MovementTypeEnum.DirectIssueAny
+                checkWithInStockQuantity = checkWithInStockQuantity && !Constants.CAN_NEW_PACKAGE_BE_ADDED_FROM_TRANSACTION && (_movementType == MovementTypeEnum.DirectIssueAny
                     || _movementType == MovementTypeEnum.DirectIssueInventoryUnit
                     || _movementType == MovementTypeEnum.SOIssue
                     || _movementType == MovementTypeEnum.SOIssueEditItems);
 
                 var productModel = row.Cells[colProduct.Index].Tag as ProductModel;
 
-                var unitQuantity = GetUnitQuantity(row, null, checkWithInStockQuantity);
+                var package = GetPackage(row, productModel);
+                var packageFromDB = _inventoryService.GetPackageByName(package.Name);
+                package.Id = packageFromDB?.Id ?? 0;
+                var unitQuantity = GetUnitQuantity(row, null, checkWithInStockQuantity, productModel, package);
                 var rate = GetRate(row);
                 var warehouseId = GetWarehouseId(row);
                 var lotNumber = GetLotNumber(row, null);
                 var reference = GetReference(row);
                 var adjCode = GetAdjustmentCode(row);
-                var package = GetPackage(row, productModel);
                 //var uomId = GetUomId(row);
                 var isHold = row.Cells[colIsHold.Index].Value;
                 var expirationDate = GetDateCellValue(row, colExpirationDate);
@@ -343,7 +347,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             return model;
         }
 
-        private decimal GetUnitQuantity(DataGridViewRow row, object formattedValue, bool checkWithInStockQuanity)
+        private decimal GetUnitQuantity(DataGridViewRow row, object formattedValue, bool checkWithInStockQuanity, ProductModel product, PackageModel currentPackage)
         {
             decimal unitQuantity = 0;
             var cell = row.Cells[this.colUnitQuantity.Index];
@@ -364,12 +368,19 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 decimal inStockQuantity = 0;
                 var inStockcell = row.Cells[this.colInStockQuantity.Index];
                 decimal.TryParse(inStockcell.Value == null ? "0" : inStockcell.Value.ToString(), out inStockQuantity);
-                if (unitQuantity > inStockQuantity)
+
+                if(currentPackage.Id > 0)
                 {
-                    InvalidColumns.Add("Quantity");
-                    cell.ErrorText = "Quantity can't be greater than stock quantity. Stock Quanitity is '" + inStockQuantity.ToString("0") + "'";
-                    isValid = false;
+                    var conversion = _uomService.ConvertUom(product.BasePackageId ?? 0, currentPackage.Id, product.Id);
+                    var inStockQuantityConverted = inStockQuantity * conversion;
+                    if (unitQuantity > inStockQuantityConverted)
+                    {
+                        InvalidColumns.Add("Quantity");
+                        cell.ErrorText = $"Quantity can't be greater than stock quantity. Stock Quanitity is '{decimal.Round(inStockQuantityConverted, 2)} {currentPackage.Name}'"; //+ //inStockQuantity.ToString("0") + "'";
+                        isValid = false;
+                    }
                 }
+                
             }
             else
             {

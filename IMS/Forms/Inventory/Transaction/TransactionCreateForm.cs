@@ -34,6 +34,7 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
         private readonly IAppSettingService _appSettingService;
+        private readonly IUomService _uomService;
         private RequiredFieldValidator _requiredFieldValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
 
@@ -41,6 +42,7 @@ namespace IMS.Forms.Inventory.Transaction
         private int _orderId;
         private OrderTypeEnum _orderType;
         private OrderOrDirectEnum _orderOrDirect;
+    
 
         // to show Print View at first load
         private bool _showPrintView;
@@ -52,7 +54,8 @@ namespace IMS.Forms.Inventory.Transaction
             IProductService productService,
             IOrderService purchaseService,
             IDatabaseChangeListener listener,
-            IAppSettingService appSettingService)
+            IAppSettingService appSettingService,
+            IUomService uomService)
         {
             _listener = listener;
             this._businessService = businessService;
@@ -61,7 +64,7 @@ namespace IMS.Forms.Inventory.Transaction
             this._inventoryService = inventoryService;
             this._productService = productService;
             this._appSettingService = appSettingService;
-
+            this._uomService = uomService;
             InitializeComponent();
             this.Load += TransactionCreateForm_Load;
         }
@@ -82,7 +85,7 @@ namespace IMS.Forms.Inventory.Transaction
 
             _orderModel = _orderService.GetOrderForDetailView(_orderId);
 
-            dgvItems.InitializeGridViewControls(_inventoryService, _productService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
             InitializeValidation();
             InitializeEvents();
             InitializeDataGridView();

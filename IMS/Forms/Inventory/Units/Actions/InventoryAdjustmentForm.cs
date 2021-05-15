@@ -24,6 +24,7 @@ namespace IMS.Forms.Inventory.Units.Actions
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
         private readonly IOrderService _orderService;
+        private readonly IUomService _uomService;
 
         //private bool _isCellDirty;
 
@@ -37,17 +38,19 @@ namespace IMS.Forms.Inventory.Units.Actions
             IProductService productService,
             IBusinessService businessService,
             IOrderService purchaseService,
-            IInventoryUnitService inventoryUnitService)
+            IInventoryUnitService inventoryUnitService,
+            IUomService uomService)
         {
             _inventoryService = inventoryService;
             _productService = productService;
             _businessService = businessService;
             _orderService = purchaseService;
             _inventoryUnitService = inventoryUnitService;
+            _uomService = uomService;
 
             InitializeComponent();
 
-            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService);
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService);
 
             this.Load += InventoryReceiveForm_Load;
         }

@@ -420,6 +420,14 @@ namespace Service.Core.Inventory
             }
         }
 
+        public PackageModel GetPackageByName(string packagename)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                return _context.Package.FirstOrDefault(x=>x.Name == packagename).MapToModel();
+            }
+        }
+
         public List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId)
         {
             using (var _context = new DatabaseContext())
