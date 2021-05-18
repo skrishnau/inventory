@@ -3,6 +3,7 @@ using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 
@@ -30,7 +31,7 @@ namespace Service.Interfaces
         List<CategoryModel> GetCategoryList(int? parentCategoryId);
         CategoryModel GetCategory(string v);
         void AddUpdateCategory(CategoryModel category);
-        void DeleteCategory(CategoryModel categoryModel);
+        ResponseModel<CategoryModel> DeleteCategory(CategoryModel categoryModel);
         bool DeleteProduct(int id);
         List<PriceHistoryModel> GetPriceHistory(int id);
 

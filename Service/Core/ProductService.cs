@@ -21,6 +21,7 @@ using ViewModel.Core.Orders;
 using Service.Interfaces;
 using System.Threading.Tasks;
 using Infrastructure.Entities.Orders;
+using ViewModel.Core;
 
 namespace Service.Core
 {
@@ -356,18 +357,26 @@ namespace Service.Core
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }
-        public void DeleteCategory(CategoryModel categoryModel)
+        public ResponseModel<CategoryModel> DeleteCategory(CategoryModel categoryModel)
         {
             using (var _context = new DatabaseContext())
             {
-                var dbEntity = _context.Category.FirstOrDefault(x => x.Id == categoryModel.Id);
+                 // check if category is being used by any product
+                 
+                var dbEntity = _context.Category.Include(x=>x.Products).FirstOrDefault(x => x.Id == categoryModel.Id);
                 if (dbEntity != null)
                 {
+                    var isUsed = dbEntity.Products.Any(x => !x.IsDiscontinued);
+                    if (isUsed)
+                    {
+                        return ResponseModel<CategoryModel>.GetError("This category is referenced by active products. Please delete the products or change those product's category first.");
+                    }
                     dbEntity.DeletedAt = DateTime.Now;
                     _context.SaveChanges();
                 }
             }
             _listener.TriggerCategoryUpdateEvent(null, new CategoryEventArgs(null, UpdateMode.DELETE));
+            return ResponseModel<CategoryModel>.GetSuccess();
         }
 
         public List<CategoryModel> GetCategoryList(int? parentCateogryId)

@@ -14,6 +14,7 @@ using IMS.Forms.Inventory.Create;
 using IMS.Forms.Common.Display;
 using Service.Interfaces;
 using Service.Listeners;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Categories
 {
@@ -91,7 +92,15 @@ namespace IMS.Forms.Inventory.Categories
             if (dialogResult == DialogResult.Yes)
             {
                 // delete
-                _productService.DeleteCategory(categoryModel);
+                var response = _productService.DeleteCategory(categoryModel);
+                if(response.Success)
+                {
+                    PopupMessage.ShowSuccessMessage("Deleted Successfully!");
+                }else
+                {
+                    PopupMessage.ShowInfoMessage(response.Message);
+                }
+                this.Focus();
             }
         }
 
