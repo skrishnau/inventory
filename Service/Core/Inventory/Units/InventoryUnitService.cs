@@ -591,7 +591,7 @@ namespace Service.Core.Inventory.Units
                                 && x.ProductId == model.ProductId
                                 && x.PackageId != null
                                 && x.IsHold == model.IsHold)
-                .OrderBy(x => x.LotNumber)
+                .OrderBy(x => x.ReceiveDate)
                 .ToList();
             decimal qtySum = 0;
             var fulfilledIndex = -1;
