@@ -221,7 +221,7 @@ namespace Service.Core.Inventory
 
         }
 
-        public string SaveAdjustmentCode(AdjustmentCodeModel model)
+        public ResponseModel<AdjustmentCodeModel> SaveAdjustmentCode(AdjustmentCodeModel model)
         {
             using (var _context = new DatabaseContext())
             {
@@ -230,7 +230,7 @@ namespace Service.Core.Inventory
                 var duplicate = _context.AdjustmentCode.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
                 if (duplicate != null)
                 {
-                    return "Same 'Adjustment Code' already exists";
+                    return ResponseModel<AdjustmentCodeModel>.GetError("Same 'Adjustment Code' already exists");
                 }
 
                 // get the package
@@ -249,7 +249,7 @@ namespace Service.Core.Inventory
                 _context.SaveChanges();
                 args.Model = entity.MapToModel();//AdjustmentCodeMapper.MapToModel(entity)
                 _listener.TriggerAdjustmentCodeUpdateEvent(null, args);
-                return msg;
+                return ResponseModel<AdjustmentCodeModel>.GetSaveSuccess(args.Model);
             }
 
         }

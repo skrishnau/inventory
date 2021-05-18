@@ -80,7 +80,7 @@ namespace Service.Core.Inventory
         List<IdNamePair> GetAdjustmentCodeListForCombo();
         List<IdNamePair> GetPositiveAdjustmentCodeListForCombo();
         List<IdNamePair> GetNegativeAdjustmentCodeListForCombo();
-        string SaveAdjustmentCode(AdjustmentCodeModel model);
+        ResponseModel<AdjustmentCodeModel> SaveAdjustmentCode(AdjustmentCodeModel model);
 
         #endregion
 

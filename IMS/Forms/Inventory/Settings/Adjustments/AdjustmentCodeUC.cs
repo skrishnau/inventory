@@ -18,6 +18,7 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
     {
         private readonly IInventoryService _inventoryService;
 
+
         private bool _isRowDirty;
 
         public AdjustmentCodeUC(IInventoryService inventoryService)
@@ -83,15 +84,16 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
                     return;
                 }
                 // save
-                var msg = _inventoryService.SaveAdjustmentCode(adjData);
-                if (string.IsNullOrEmpty(msg))
+                var response = _inventoryService.SaveAdjustmentCode(adjData);
+                if (response.Success)
                 {
+                    dgvAdj.Rows[e.RowIndex].Cells[colId.Index].Value = response.Data.Id;
                     // save success
                     PopupMessage.ShowSaveSuccessMessage();
                 }
                 else
                 {
-                    PopupMessage.ShowErrorMessage(msg);
+                    PopupMessage.ShowErrorMessage(response.Message);
                 }
                 dgvAdj.Focus();
             }
