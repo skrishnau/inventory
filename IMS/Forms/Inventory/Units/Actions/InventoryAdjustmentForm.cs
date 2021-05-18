@@ -324,7 +324,7 @@ namespace IMS.Forms.Inventory.Units.Actions
                             dialogResult = MessageBox.Show(this, "Are you sure to issue the selected items?", "Issue?", MessageBoxButtons.YesNoCancel);
                             if (dialogResult.Equals(DialogResult.Yes))
                             {
-                                msg = _inventoryUnitService.SaveDirectIssueAny(list, adjustmentCode);
+                                msg = _inventoryUnitService.SaveDirectIssueAny(list, adjustmentCode, "-------------------");
                             }
                         }
                     }

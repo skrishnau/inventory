@@ -552,12 +552,12 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        public string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode)
+        public string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode, string referenceNo)
         {
             using (var _context = new DatabaseContext())
             {
 
-                var msg = SaveDirectIssueAnyListWithoutCommit(_context, list, adjustmentCode);
+                var msg = SaveDirectIssueAnyListWithoutCommit(_context, list, adjustmentCode, referenceNo);
                 _context.SaveChanges();
                 var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.DELETE);
                 _listener.TriggerInventoryUnitUpdateEvent(null, args);
@@ -565,19 +565,19 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        public string SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode)
+        public string SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo)
         {
             var now = DateTime.Now;
 
             var msg = string.Empty;
             foreach (var model in list)
             {
-                var invUnits = SaveDirectIssueAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg);
+                var invUnits = SaveDirectIssueAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo);
             }
             return msg;
         }
 
-        public List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg)
+        public List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo)
         {
             var now = DateTime.Now;
             var list = new List<InventoryUnit>();
@@ -663,7 +663,7 @@ namespace Service.Core.Inventory.Units
                 // Movement
                 //
                 var description = $"Issued {issuedQuantity} {packagename} of '{productName}' from {warehouseName} warehouse.";
-                AddMovementWithoutCoomit(_context, description, "----------------", adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
+                AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {
                     Date = now,

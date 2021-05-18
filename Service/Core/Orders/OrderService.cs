@@ -429,7 +429,7 @@ namespace Service.Core.Orders
                     }
                     else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                     {
-                        var msg = _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Purchase), "Order Cancelled");
+                        var msg = _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Purchase), "Order Cancelled", order.ReferenceNumber);
                     }
                 }
             }
@@ -704,7 +704,7 @@ namespace Service.Core.Orders
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
                         var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "SO Issue" : adjustmentCode;
-                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), adjustment, ref message);
+                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), adjustment, ref message, order.ReferenceNumber);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
                         if (invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0))
                         {
