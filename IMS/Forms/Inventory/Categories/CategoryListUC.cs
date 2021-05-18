@@ -13,6 +13,7 @@ using SimpleInjector.Lifestyles;
 using IMS.Forms.Inventory.Create;
 using IMS.Forms.Common.Display;
 using Service.Interfaces;
+using Service.Listeners;
 
 namespace IMS.Forms.Inventory.Categories
 {
@@ -20,10 +21,12 @@ namespace IMS.Forms.Inventory.Categories
     {
         private readonly IProductService _productService;
         //private TreeViewCategory treeView;
+        private readonly IDatabaseChangeListener _databaseChangeListener;
 
-        public CategoryListUC(IProductService inventoryService)
+        public CategoryListUC(IProductService inventoryService, IDatabaseChangeListener databaseChangeListener)
         {
             this._productService = inventoryService;
+            this._databaseChangeListener = databaseChangeListener;
 
             InitializeComponent();
             
@@ -35,6 +38,13 @@ namespace IMS.Forms.Inventory.Categories
         {
             InitializeHeader();
             InitializeEvents();
+            PopulateCategoryData();
+
+            _databaseChangeListener.CategoryUpdated += _databaseChangeListener_CategoryUpdated;
+        }
+
+        private void _databaseChangeListener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
+        {
             PopulateCategoryData();
         }
 
@@ -66,7 +76,6 @@ namespace IMS.Forms.Inventory.Categories
             var categoryCreate = Program.container.GetInstance<CategoryCreate>();
             categoryCreate.SetData(CategoryUpdateType.ADD_SUBCATEGORY, categoryModel); // this node will be parent node
             categoryCreate.ShowDialog();
-            PopulateCategoryData();
         }
 
         private void TreeView_NodeEditClick(CategoryModel categoryModel)
@@ -74,7 +83,6 @@ namespace IMS.Forms.Inventory.Categories
             var categoryCreate = Program.container.GetInstance<CategoryCreate>();
             categoryCreate.SetData(CategoryUpdateType.EDIT_CATEGORY, categoryModel);
             categoryCreate.ShowDialog();
-            PopulateCategoryData();
         }
 
         private void TreeView_NodeDeleteClick(CategoryModel categoryModel)
@@ -84,7 +92,6 @@ namespace IMS.Forms.Inventory.Categories
             {
                 // delete
                 _productService.DeleteCategory(categoryModel);
-                PopulateCategoryData();
             }
         }
 
@@ -95,7 +102,6 @@ namespace IMS.Forms.Inventory.Categories
                 var categoryCreate = Program.container.GetInstance<CategoryCreate>();
                 categoryCreate.ShowInTaskbar = false;
                 categoryCreate.ShowDialog();
-                PopulateCategoryData();
             }
         }
         private void TreeView_AfterCollapse(object sender, TreeViewEventArgs e)
@@ -114,6 +120,7 @@ namespace IMS.Forms.Inventory.Categories
 
             treeView.Nodes.AddRange(GetTreeNodes(categories));
             treeView.ExpandAll();
+            treeView.HideUC();
         }
 
         private TreeNodeCategory[] GetTreeNodes(List<CategoryModel> categories)
