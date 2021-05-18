@@ -500,7 +500,7 @@ namespace IMS.Forms.Inventory.Transaction
 
             var model = GetData(checkout);
 
-            if (_orderType == OrderTypeEnum.Purchase && (model?.OrderItems?.Any(x => x.Rate == 0) ?? false) && rbCash.Checked)
+            if (_orderType == OrderTypeEnum.Purchase && (model?.OrderItems?.Any(x => x.Rate == 0) ?? false) && rbCash.Checked && _orderOrDirect == OrderOrDirectEnum.Order)
             {
                 errorProvider.SetError(rbCredit, "Can't do full cash payment for zero rate items.");
                 msg.Message += "You can't have full cash payment for transaction with zero rate items. Please change it to Partial payment.\n";
@@ -606,8 +606,9 @@ namespace IMS.Forms.Inventory.Transaction
 
             var ignoreList = new List<DataGridViewColumn> { dgvItems.colWarehouseId };
             var isEditForZeroRateUpdate = _orderModel != null && (_orderModel?.IsVerified ?? false) && !(_orderModel?.IsCompleted ?? false);
-            if (_orderType == OrderTypeEnum.Purchase && !isEditForZeroRateUpdate && _orderOrDirect == OrderOrDirectEnum.Order)
-                ignoreList.Add(dgvItems.colRate); // in case of purchase the user may not enter the rate at first
+            if (_orderType == OrderTypeEnum.Purchase && !isEditForZeroRateUpdate && _orderOrDirect == OrderOrDirectEnum.Order
+                || (_orderOrDirect == OrderOrDirectEnum.Direct))
+                ignoreList.Add(dgvItems.colRate); // in case of purchase the user may not enter the rate at first or in case or direct rate can be zero
             var items = dgvItems.GetItems(ignoreList, Constants.HAS_STOCK_MANAGEMENT, !checkout);
 
             if (items != null)
@@ -620,6 +621,7 @@ namespace IMS.Forms.Inventory.Transaction
                 {
                     Id = _orderId,
                     OrderType = _orderType.ToString(),
+                    OrderOrDirect = _orderOrDirect,
                     Name = (string.IsNullOrEmpty(cbClient.Text) ? "" : $"{cbClient.Text}, ") + txtReceiptNo.Text,
                     DeliveryDate = dtExpectedDate.GetValue(),
                     CompletedDate = completedDate,//dtCompletedDate.GetValue(),

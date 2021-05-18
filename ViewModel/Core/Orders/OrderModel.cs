@@ -20,6 +20,7 @@ namespace ViewModel.Core.Orders
     {
         public int Id { get; set; }
         public string OrderType { get; set; }
+        public OrderOrDirectEnum OrderOrDirect { get; set; }
         public string Status { get; set; }
         #region Common
         public string Name { get; set; }

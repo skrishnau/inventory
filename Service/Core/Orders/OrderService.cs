@@ -234,6 +234,10 @@ namespace Service.Core.Orders
                             foreach (var ti in txnItems)
                             {
                                 var conversion = _uomService.ConvertUom(orderItem.PackageId??0, ti.SaleOrderItem.PackageId??0, orderItem.ProductId);
+                                if(conversion == 0)
+                                {
+                                    return new ResponseModel<OrderModel> { Message = $"Can't convert from {orderItem.Package?.Name} to {ti.SaleOrderItem.Package?.Name}. Please update product's UOM." };
+                                }
                                 ti.CostPriceRate = orderItem.Rate / conversion;
                                 ti.CostPriceTotal = ti.CostPriceRate * ti.UnitQuantity;
                                 sellTxns.Add(ti.Transaction);
@@ -257,7 +261,7 @@ namespace Service.Core.Orders
                     entity.IsCompleted = true;
                     // transactions
                     var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
-                    if (!orderModel.OrderItems.Any(x => x.Rate <= 0))
+                    if (!orderModel.OrderItems.Any(x => x.Rate <= 0) || orderModel.OrderOrDirect == OrderOrDirectEnum.Direct)
                     {
                         var transaction = GetTransactionWithoutCommit(_context, orderModel);
                         transaction.CostPriceTotal = entity.CostPriceTotal;
@@ -317,10 +321,10 @@ namespace Service.Core.Orders
                 var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
                 var txnItemsList = new List<TransactionItem>();
-                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message, ref txnItemsList, orderModel.AdjustmentCode);
+                SaveOrderItemsWithoutCommit(_context, entity, orderModel.OrderItems.ToList(), checkout, ref message, ref txnItemsList, orderModel.AdjustmentCode, orderModel.OrderOrDirect);
                 // items summary in order
                 entity.TotalAmount = entity.OrderItems.Sum(x => x.Total);
-                if (entity.OrderItems.Any(x => (x.CostPriceTotal ?? 0) == 0))
+                if (entity.OrderItems.Any(x => (x.CostPriceTotal ?? 0) == 0) && orderModel.OrderOrDirect == OrderOrDirectEnum.Order)
                     entity.CostPriceTotal = 0;
                 else
                     entity.CostPriceTotal = entity.OrderItems.Sum(x => x.CostPriceTotal);
@@ -333,7 +337,7 @@ namespace Service.Core.Orders
                     // makecheckout
                     MakeCheckout(_context, ref entity, ref orderModel);
                     // add transaction for new checkout ; don't add txn for zero rate case
-                    if (!orderModel.OrderItems.Any(x => x.Rate <= 0))
+                    if (!orderModel.OrderItems.Any(x => x.Rate <= 0) || orderModel.OrderOrDirect == OrderOrDirectEnum.Direct)
                     {
                         var transaction = GetTransactionWithoutCommit(_context, orderModel);
                         transaction.CostPriceTotal = entity.CostPriceTotal;
@@ -343,7 +347,7 @@ namespace Service.Core.Orders
                         }
                         if (entity.OrderType == OrderTypeEnum.Sale.ToString())
                         {
-                            foreach (var txnItem in txnItemsList.Where(x => x.PurchaseOrderItemId > 0 || x.CostPriceRate > 0).ToList())
+                            foreach (var txnItem in txnItemsList)//.Where(x => x.PurchaseOrderItemId > 0 || x.CostPriceRate > 0 || orderModel.OrderOrDirect == OrderOrDirectEnum.Direct).ToList())
                                 transaction.TransactionItems.Add(txnItem);
                         }
                         entity.Transactions.Add(transaction);
@@ -437,7 +441,7 @@ namespace Service.Core.Orders
 
         private void MakeCheckout(DatabaseContext _context, ref Order entity, ref OrderModel orderModel)
         {
-            if (!orderModel.OrderItems.Any(x => x.Rate == 0))
+            if (!orderModel.OrderItems.Any(x => x.Rate == 0) || orderModel.OrderOrDirect == OrderOrDirectEnum.Direct)
             {
                 entity.IsCompleted = true;
                 //entity.CompletedDate = DateTime.Now; // completed date already set by user from UI
@@ -554,7 +558,7 @@ namespace Service.Core.Orders
             }
         }
 
-        private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message, ref List<TransactionItem> txnItemsList, string adjustmentCode)
+        private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message, ref List<TransactionItem> txnItemsList, string adjustmentCode, OrderOrDirectEnum orderOrDirect)
         {
             // var transactionItems = new List<TransactionItem>();
             var newProductList = new List<Product>();
@@ -573,7 +577,7 @@ namespace Service.Core.Orders
                     message += "Some of the items have zero quantity. Quantity must be greater than zero\n";
                     return;
                 }
-                if (item.Rate <= 0 && checkout && order.OrderType == OrderTypeEnum.Sale.ToString())
+                if ((item.Rate <= 0 && checkout && order.OrderType == OrderTypeEnum.Sale.ToString()) && orderOrDirect == OrderOrDirectEnum.Order)
                 {
                     message += "Some of the items have zero rate. Rates must be greater than zero\n";
                     return;
@@ -706,7 +710,7 @@ namespace Service.Core.Orders
                         var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "SO Issue" : adjustmentCode;
                         invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), adjustment, ref message, order.ReferenceNumber);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
-                        if (invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0))
+                        if ((invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0)) || (orderOrDirect == OrderOrDirectEnum.Direct))
                         {
                             entity.CostPriceRate = invUnits.Sum(x => x.UnitQuantity * x.Rate) / invUnitsQty;
                             entity.CostPriceTotal = entity.UnitQuantity * entity.CostPriceRate;
@@ -755,7 +759,7 @@ namespace Service.Core.Orders
                 var message = "";
                 var poEntity = _context.Order.Find(purchaseOrderId);
                 var txnItemList = new List<TransactionItem>();
-                SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message, ref txnItemList, null);
+                SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message, ref txnItemList, null, OrderOrDirectEnum.Order);
 
                 _context.SaveChanges();
                 var model = poEntity.MapToModel();// OrderMapper.MapToOrderModel(poEntity);
