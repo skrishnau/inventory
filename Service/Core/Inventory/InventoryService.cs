@@ -504,7 +504,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var alreadyExists = _context.Uom.Any(x => x.Id != model.Id && ((x.Package.Name == model.Package && x.RelatedPackage.Name == model.RelatedPackage)
+                var alreadyExists = _context.Uom.Any(x => x.Id != model.Id && x.ProductId == null && ((x.Package.Name == model.Package && x.RelatedPackage.Name == model.RelatedPackage)
                                        || (x.Package.Name == model.RelatedPackage && x.RelatedPackage.Name == model.Package)));
                 if (alreadyExists)
                     return ResponseModel<UomModel>.GetError($"Uom for relation of {model.Package} and {model.RelatedPackage} already exists. Please enter another or update the existing.");
