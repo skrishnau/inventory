@@ -408,6 +408,7 @@
             // 
             // splitter2
             // 
+            this.splitter2.Enabled = false;
             this.splitter2.Location = new System.Drawing.Point(691, 0);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(8, 252);
@@ -428,6 +429,7 @@
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter1.Enabled = false;
             this.splitter1.Location = new System.Drawing.Point(0, 172);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(1138, 5);

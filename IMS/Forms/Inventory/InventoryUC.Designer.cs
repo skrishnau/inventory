@@ -65,6 +65,7 @@
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter1.Enabled = false;
             this.splitter1.Location = new System.Drawing.Point(0, 66);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(1001, 5);

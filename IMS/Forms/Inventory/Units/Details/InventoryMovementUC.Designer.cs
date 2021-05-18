@@ -224,7 +224,6 @@
             this.colDate.DataPropertyName = "Date";
             this.colDate.HeaderText = "Date";
             this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
             // 
             // colReference
             // 
