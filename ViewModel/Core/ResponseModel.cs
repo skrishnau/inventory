@@ -33,9 +33,9 @@ namespace ViewModel.Core
             return new ResponseModel<T> { Success = true, Message = "Save Successful!", Data = data };
         }
 
-        public static ResponseModel<T> GetError()
+        public static ResponseModel<T> GetError(string msg)
         {
-            return new ResponseModel<T> { Success = false, Message = "Save Successful!" };
+            return new ResponseModel<T> { Success = false, Message = msg };
         }
     }
 }

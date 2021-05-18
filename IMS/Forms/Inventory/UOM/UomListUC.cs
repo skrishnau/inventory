@@ -19,13 +19,13 @@ using Service.Interfaces;
 
 namespace IMS.Forms.Inventory.UOM
 {
-    public partial class UomUC : UserControl
+    public partial class UomListUC : UserControl
     {
         private readonly IInventoryService _inventoryService;
         private readonly IUomService _uomService;
         private readonly IDatabaseChangeListener _listener;
         
-        public UomUC(IInventoryService inventoryService, IDatabaseChangeListener listener, IUomService uomService)
+        public UomListUC(IInventoryService inventoryService, IDatabaseChangeListener listener, IUomService uomService)
         {
             _uomService = uomService;
             _inventoryService = inventoryService;
@@ -117,6 +117,7 @@ namespace IMS.Forms.Inventory.UOM
         private void _listener_UomUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UomModel> e)
         {
             PopulateUomData();
+            PopulatePackage();
         }
 
         private void PopulateUomData()

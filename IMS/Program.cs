@@ -122,7 +122,7 @@ namespace IMS
             // --- inventory related --- //
 
 
-            container.Register<UomUC>(Lifestyle.Scoped);
+            container.Register<UomListUC>(Lifestyle.Scoped);
             container.Register<PackageUC>(Lifestyle.Scoped);
             container.Register<AdjustmentCodeUC>(Lifestyle.Scoped);
 

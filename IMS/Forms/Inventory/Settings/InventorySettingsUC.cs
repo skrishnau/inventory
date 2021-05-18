@@ -111,7 +111,7 @@ namespace IMS.Forms.Inventory.Settings
 
         private void LnkUom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var uc = Program.container.GetInstance<UomUC>();
+            var uc = Program.container.GetInstance<UomListUC>();
             _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);

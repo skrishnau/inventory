@@ -407,7 +407,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.Package.OrderBy(x=>x.Name).AsQueryable();
+                var query = _context.Package.OrderBy(x => x.Name).AsQueryable();
                 return PackageMapper.MapToModel(query);
             }
         }
@@ -424,7 +424,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Package.FirstOrDefault(x=>x.Name == packagename).MapToModel();
+                return _context.Package.FirstOrDefault(x => x.Name == packagename).MapToModel();
             }
         }
 
@@ -504,6 +504,11 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
+                var alreadyExists = _context.Uom.Any(x => x.Id != model.Id && ((x.Package.Name == model.Package && x.RelatedPackage.Name == model.RelatedPackage)
+                                       || (x.Package.Name == model.RelatedPackage && x.RelatedPackage.Name == model.Package)));
+                if (alreadyExists)
+                    return ResponseModel<UomModel>.GetError($"Uom for relation of {model.Package} and {model.RelatedPackage} already exists. Please enter another or update the existing.");
+
                 var entity = _context.Uom.Find(model.Id);
                 entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
                 var args = BaseEventArgs<UomModel>.Instance;
@@ -567,7 +572,7 @@ namespace Service.Core.Inventory
 
         }
 
-       
+
 
         public UomModel GetUom(int uomId)
         {
@@ -589,12 +594,12 @@ namespace Service.Core.Inventory
                 }).ToList();
         }
 
-       
+
         #endregion
 
     }
 
-   
+
 }
 
 
