@@ -55,7 +55,7 @@ namespace IMS.Forms.Inventory.Reports.All
             InitializeEvents();
             PopulateType();
             PopulateCustomer();
-            PopulateLedger();
+            //PopulateLedger();
 
         }
 
@@ -163,13 +163,18 @@ namespace IMS.Forms.Inventory.Reports.All
             //cbCustomer.ValueMember = "Id";
             //cbCustomer.DisplayMember = "Name";
         }
-       private LedgerMasterModel GetLedger()
+        private LedgerMasterModel GetLedger()
         {
             var from = dtFrom.GetValue();
             var to = dtTo.GetValue();
             var customerIdStr = cbCustomer.SelectedValue?.ToString() ?? "";
-            int customerId;
-            int.TryParse(customerIdStr, out customerId);
+            int customerId = 0;
+            if (!int.TryParse(customerIdStr, out customerId) || customerId == 0)
+            {
+                PopupMessage.ShowInfoMessage("Please select client");
+                this.Focus();
+                return null;
+            }
             var model = new LedgerRequestModel
             {
                 CustomerId = customerId,
@@ -183,10 +188,11 @@ namespace IMS.Forms.Inventory.Reports.All
         private void PopulateLedger()
         {
             _ledgerMaster = GetLedger();
-            _ledgerMasterForPrint = GetLedger();
 
             if (_ledgerMaster != null)
             {
+                _ledgerMasterForPrint = GetLedger();
+
                 _ledgerMaster.LedgerData.Add(new LedgerModel()
                 {
                     IsManualNewRow = true,

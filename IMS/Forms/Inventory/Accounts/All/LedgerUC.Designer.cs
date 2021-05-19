@@ -35,6 +35,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvLedger = new System.Windows.Forms.DataGridView();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDrCr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dtFrom = new IMS.Forms.Common.Date.NepaliDateTextBox();
@@ -48,12 +54,6 @@
             this.cbType = new System.Windows.Forms.ComboBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDebit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDrCr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -115,9 +115,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(189, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Customer/Supplier";
+            this.label1.Text = "Customer/Supplier *";
             // 
             // dgvLedger
             // 
@@ -138,6 +138,50 @@
             this.dgvLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLedger.Size = new System.Drawing.Size(697, 389);
             this.dgvLedger.TabIndex = 1;
+            // 
+            // colDate
+            // 
+            this.colDate.DataPropertyName = "Date";
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            // 
+            // colParticulars
+            // 
+            this.colParticulars.DataPropertyName = "Particulars";
+            this.colParticulars.HeaderText = "Particulars";
+            this.colParticulars.Name = "colParticulars";
+            this.colParticulars.ReadOnly = true;
+            this.colParticulars.Width = 250;
+            // 
+            // colDebit
+            // 
+            this.colDebit.DataPropertyName = "Debit";
+            this.colDebit.HeaderText = "Debit (दिएको)";
+            this.colDebit.Name = "colDebit";
+            this.colDebit.ReadOnly = true;
+            // 
+            // colCredit
+            // 
+            this.colCredit.DataPropertyName = "Credit";
+            this.colCredit.HeaderText = "Credit (लिएको)";
+            this.colCredit.Name = "colCredit";
+            this.colCredit.ReadOnly = true;
+            // 
+            // colDrCr
+            // 
+            this.colDrCr.DataPropertyName = "DrCrString";
+            this.colDrCr.HeaderText = "Dr/Cr";
+            this.colDrCr.Name = "colDrCr";
+            this.colDrCr.ReadOnly = true;
+            this.colDrCr.Width = 60;
+            // 
+            // colBalance
+            // 
+            this.colBalance.DataPropertyName = "Balance";
+            this.colBalance.HeaderText = "Balance";
+            this.colBalance.Name = "colBalance";
+            this.colBalance.ReadOnly = true;
             // 
             // flowLayoutPanel1
             // 
@@ -265,50 +309,6 @@
             this.btnPrint.Text = "Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.UseVisualStyleBackColor = false;
-            // 
-            // colDate
-            // 
-            this.colDate.DataPropertyName = "Date";
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            // 
-            // colParticulars
-            // 
-            this.colParticulars.DataPropertyName = "Particulars";
-            this.colParticulars.HeaderText = "Particulars";
-            this.colParticulars.Name = "colParticulars";
-            this.colParticulars.ReadOnly = true;
-            this.colParticulars.Width = 250;
-            // 
-            // colDebit
-            // 
-            this.colDebit.DataPropertyName = "Debit";
-            this.colDebit.HeaderText = "Debit (दिएको)";
-            this.colDebit.Name = "colDebit";
-            this.colDebit.ReadOnly = true;
-            // 
-            // colCredit
-            // 
-            this.colCredit.DataPropertyName = "Credit";
-            this.colCredit.HeaderText = "Credit (लिएको)";
-            this.colCredit.Name = "colCredit";
-            this.colCredit.ReadOnly = true;
-            // 
-            // colDrCr
-            // 
-            this.colDrCr.DataPropertyName = "DrCrString";
-            this.colDrCr.HeaderText = "Dr/Cr";
-            this.colDrCr.Name = "colDrCr";
-            this.colDrCr.ReadOnly = true;
-            this.colDrCr.Width = 60;
-            // 
-            // colBalance
-            // 
-            this.colBalance.DataPropertyName = "Balance";
-            this.colBalance.HeaderText = "Balance";
-            this.colBalance.Name = "colBalance";
-            this.colBalance.ReadOnly = true;
             // 
             // LedgerUC
             // 
