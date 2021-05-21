@@ -39,6 +39,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductId = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,6 +106,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colCheck,
+            this.colDate,
             this.colProductId,
             this.colProduct,
             this.colSKU,
@@ -160,6 +162,14 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colCheck.Name = "colCheck";
             this.colCheck.Visible = false;
             this.colCheck.Width = 30;
+            // 
+            // colDate
+            // 
+            this.colDate.DataPropertyName = "DateString";
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colProduct";
+            this.colDate.Visible = false;
+            this.colDate.Width = 80;
             // 
             // colProductId
             // 
@@ -473,7 +483,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colReceiveReference.Visible = true;
 
             colReceiveDate.Visible = true;
-            
+
             colReceiveAdjustment.Visible = true;
             colRate.Visible = true;
             colSupplier.Visible = true;
@@ -482,9 +492,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             MakeAllColumnsReadOnly();
             this.colCheck.ReadOnly = false;
-            
 
-           // this.RowHeadersVisible = true;
+
+            // this.RowHeadersVisible = true;
             HideUnusedDefaults();
 
 
@@ -615,7 +625,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colPackageId.Visible = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
-           // colWarehouse.Visible = true;
+            // colWarehouse.Visible = true;
             //colLotNumber.Visible = true;
             //colProductionDate.Visible = true;
             //colExpirationDate.Visible = true;
@@ -644,7 +654,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colPackage.ReadOnly = true;
             //colPackageId.ReadOnly = true;
             //colWarehouseId.Visible = true;
-           // colWarehouse.Visible = true;
+            // colWarehouse.Visible = true;
             //colLotNumber.Visible = true;
             //colProductionDate.Visible = true;
             //colExpirationDate.Visible = true;
@@ -661,7 +671,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
             HideUnusedDefaults();
 
-            
+
         }
 
         //
@@ -691,7 +701,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colRemark.Visible = true;
 
             HideUnusedDefaults();
-            
+
         }
 
         //
@@ -753,11 +763,39 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colIsHold.Visible = true;
             //colIsHold.ReadOnly = true;
 
-           // MakeAllColumnsReadOnly();
+            // MakeAllColumnsReadOnly();
             //colUnitQuantity.ReadOnly = false;
             //colPackageQuantity.ReadOnly = false;
             HideUnusedDefaults();
-           
+
+        }
+        public void DesignForPriceHistory(bool showDate, bool showProduct)
+        {
+            if (showDate)
+                colDate.Visible = true;
+            if (showProduct)
+                colProduct.Visible = true;
+            colRate.Visible = true;
+            colPackage.Visible = true;
+
+            colProduct.ReadOnly = true;
+            colPackage.ReadOnly = true;
+            colDate.ReadOnly = true;
+            colRate.ReadOnly = true;
+        }
+
+        public void DesignForPriceHistoryCreate(bool showDate, bool showProduct)
+        {
+            if (showDate)
+                colDate.Visible = true;
+            if (showProduct)
+                colProduct.Visible = true;
+            colRate.Visible = true;
+            colProduct.ReadOnly = true;
+            colDate.ReadOnly = true;
+            colPackage.Visible = true;
+            colPackage.ReadOnly = true;
+            
         }
 
         private void MakeAllColumnsReadOnly()
@@ -802,7 +840,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewComboBoxColumn colPackageId;
         public System.Windows.Forms.DataGridViewTextBoxColumn colPackage;
         public System.Windows.Forms.DataGridViewComboBoxColumn colSupplierId;
-         public System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
+        public System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
 
         public System.Windows.Forms.DataGridViewTextBoxColumn colExpirationDate;
         public System.Windows.Forms.DataGridViewTextBoxColumn colProductionDate;
@@ -823,6 +861,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewTextBoxColumn colNotes;
         public System.Windows.Forms.DataGridViewCheckBoxColumn colIsHold;
         public System.Windows.Forms.DataGridViewImageColumn colDelete;
+
+
+        // for rate / price history dispaly
+        public System.Windows.Forms.DataGridViewTextBoxColumn colDate;
 
         #endregion
 

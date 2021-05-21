@@ -146,6 +146,7 @@ namespace IMS
             container.Register<InventoryMergeForm>(Lifestyle.Scoped);
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
             container.Register<InventoryMovementUC>(Lifestyle.Scoped);
+            container.Register<RateListUC>(Lifestyle.Scoped);
 
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
 

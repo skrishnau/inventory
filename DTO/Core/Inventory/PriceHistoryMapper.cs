@@ -36,9 +36,10 @@ namespace DTO.Core.Inventory
         public PriceHistoryProfile()
         {
             CreateMap<PriceHistory, PriceHistoryModel>()
-                .ForMember(dest => dest.DateString,
-                            opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.Date)));
-            CreateMap<PriceHistoryModel, PriceHistory>();//.ForMember(d => d., opt=> opt.Ignore());
+                .ForMember(dest => dest.DateString, opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.Date)))
+                .ForMember(dest => dest.Rate, opt=>opt.MapFrom(src=>src.Price == 0 ? null : (decimal?)src.Price));
+            CreateMap<PriceHistoryModel, PriceHistory>()
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Rate == null ? 0 : src.Rate));
         }
     }
 }

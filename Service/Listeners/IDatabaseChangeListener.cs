@@ -52,5 +52,8 @@ namespace Service.Listeners
         // Company
         event EventHandler<BaseEventArgs<CompanyInfoSettingModel>> CompanyUpdated;
         void TriggerCompanyUpdateEvent(object p, BaseEventArgs<CompanyInfoSettingModel> eventArgs);
+        // Price History
+        event EventHandler<BaseEventArgs<PriceHistoryModel>> PriceHistoryUpdated;
+        void TriggerPriceHistoryUpdateEvent(object p, BaseEventArgs<PriceHistoryModel> eventArgs);
     }
 }

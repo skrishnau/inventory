@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Enums;
 
 namespace ViewModel.Utility
 {
@@ -25,5 +26,6 @@ namespace ViewModel.Utility
         public const string NOT_AVAILABLE_IN_PRODUCT_UOM = "Not available in Product's UOM";
         public const string RECEIPT_NO_IS_REQUIRED = "Receipt No. is required. Please update Receipt settings.";
 
+        
     }
 }

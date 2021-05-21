@@ -22,6 +22,7 @@ using Service.Interfaces;
 using System.Threading.Tasks;
 using Infrastructure.Entities.Orders;
 using ViewModel.Core;
+using ViewModel.Utility;
 
 namespace Service.Core
 {
@@ -361,9 +362,9 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                 // check if category is being used by any product
-                 
-                var dbEntity = _context.Category.Include(x=>x.Products).FirstOrDefault(x => x.Id == categoryModel.Id);
+                // check if category is being used by any product
+
+                var dbEntity = _context.Category.Include(x => x.Products).FirstOrDefault(x => x.Id == categoryModel.Id);
                 if (dbEntity != null)
                 {
                     var isUsed = dbEntity.Products.Any(x => !x.IsDiscontinued);
@@ -535,6 +536,163 @@ namespace Service.Core
                 var thiryDays = DateTime.Now.AddDays(-31);
                 var priceType = OrderTypeEnum.Sale.ToString();
                 return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x => x.Date).MapToPriceHistoryModel();
+            }
+        }
+
+        // TODO: optimize
+        public List<PriceHistoryModel> GetPriceHistory(int productId, DateTime? date, OrderTypeEnum? type)
+        {
+            using (var _context = new DatabaseContext())
+            {
+
+                //var thiryDays = DateTime.Now.AddDays(-31);
+                //var priceType = OrderTypeEnum.Sale.ToString();
+                //return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x => x.Date).MapToPriceHistoryModel();
+                var sale = OrderTypeEnum.Sale.ToString();
+                var purchase = OrderTypeEnum.Purchase.ToString();
+                var list = new List<PriceHistoryModel>();
+                IQueryable<PriceHistory> query = _context.PriceHistory.AsQueryable();
+                IQueryable<IGrouping<dynamic, PriceHistory>> a;
+                if (productId > 0)
+                {
+                    query = query.Where(x => x.ProductId == productId);
+                }
+                if (date.HasValue)
+                {
+                    var dt = date.Value.Date;
+                    query = query.Where(x => x.Date == dt);
+                }
+                if (type != null)
+                {
+                    var typeStr = type.ToString();
+                    query = query.Where(x => x.PriceType == typeStr);
+                }
+                query = query.OrderBy(x => x.Date);
+
+                if ((productId > 0 && date.HasValue))
+                {
+                    var grp = query.GroupBy(x => new { x.Date, x.Product });
+                    foreach (var g in grp)
+                    {
+                        // list.Add(GetRateModel(g.Key.Product, g.Key.Date, g.ToList(), sale, purchase));
+                        list.Add(GetRateModel(g.Key.Product, g.Key.Date, g.FirstOrDefault(), type.ToString(), sale, purchase));
+                    }
+                }
+                else if (productId > 0)
+                {
+                    var product = _context.Product.Find(productId);
+                    if (product != null)
+                    {
+                        var grp = query.GroupBy(x => new { x.Date });
+                        foreach (var g in grp)
+                        {
+                            //list.Add(GetRateModel(product, g.Key.Date, g.ToList(), sale, purchase));
+                            list.Add(GetRateModel(product, g.Key.Date, g.FirstOrDefault(), type.ToString(), sale, purchase));
+                        }
+                    }
+                }
+                else if (date.HasValue)
+                {
+                    var products = _context.Product.Where(x => !x.IsDiscontinued && x.Use);
+                    var grp = query.GroupBy(x => new { x.Product });
+                    foreach (var prod in products)
+                    {
+                        //list.Add(GetRateModel(prod, date.Value, grp.Where(x => x.Key.Product.Id == prod.Id).SelectMany(x => x).ToList(), sale, purchase));
+                        list.Add(GetRateModel(prod, date.Value, grp.Where(x => x.Key.Product.Id == prod.Id).SelectMany(x => x).FirstOrDefault(), type.ToString(), sale, purchase));
+                    }
+                    foreach (var g in grp)
+                    {
+                        if (!list.Any(x => x.ProductId == g.Key.Product.Id))
+                        {
+                            //list.Add(GetRateModel(g.Key.Product, date.Value, g.ToList(), sale, purchase));
+                            var rm = GetRateModel(g.Key.Product, date.Value, g.FirstOrDefault(), type.ToString(), sale, purchase);
+                            if (rm != null)
+                                list.Add(rm);
+                        }
+                    }
+                }
+                return list.OrderBy(x => x.Product).ToList();
+            }
+        }
+        // private PriceHistoryModel GetRateModel(Product product, DateTime date, List<PriceHistory> priceHistories, string saleType, string purchaseType)
+        private PriceHistoryModel GetRateModel(Product product, DateTime date, PriceHistory priceHistories, string type, string saleType, string purchaseType)
+        {
+            /*
+            var sellingPrice = priceHistories.FirstOrDefault(x => x.PriceType == saleType);
+            var costPrice = priceHistories.FirstOrDefault(x => x.PriceType == purchaseType);
+
+            var rateModel = new RateModel
+            {
+                CostPrice = costPrice?.Price.ToString("#.00") ?? "",
+                SellingPrice = sellingPrice?.Price.ToString("#.00") ?? "",
+                CostPricePackage = costPrice?.Package.Name ?? "",
+                SellingPricePackage = sellingPrice?.Package.Name ?? "",
+                DateString = DateConverter.Instance.ToBS(date).ToString(),
+                Product = product.Name,
+                ProductId = product.Id,
+            };
+            return rateModel;*/
+            //if (priceHistories != null)
+            //{
+            var package = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage);
+            var rateModel = new PriceHistoryModel
+            {
+                Date = date,
+                Package = package?.Package.Name ?? "",
+                PackageId = package?.PackageId ?? 0,
+                Rate = (priceHistories?.Price ?? 0 ) == 0 ? null : priceHistories?.Price,
+                PriceType = type, // priceHistories?.PriceType,
+                DateString = DateConverter.Instance.ToBS(date).ToString(),
+                Product = product.Name,
+                ProductId = product.Id,
+                Id = priceHistories?.Id ?? 0
+            };
+            return rateModel;
+            //}
+            // return null;
+        }
+
+        public ResponseModel<bool> SavePriceHistory(List<InventoryUnitModel> data, DateTime date, OrderTypeEnum type)
+        {
+            using (var _context = new DatabaseContext())
+            {
+                date = date.Date;
+                var typeStr = type.ToString();
+                foreach (var model in data)
+                {
+                    var packageId = model.PackageId;
+                    if (packageId == 0)
+                        packageId = _context.Package.FirstOrDefault(x => x.Name == model.Package)?.Id ?? 0;
+                    var productId = model.ProductId;
+                    if (productId == 0)
+                        productId = _context.Product.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
+                    var entity = _context.PriceHistory.FirstOrDefault(x => x.ProductId == productId && x.Date == date && x.PriceType == typeStr); //&& x.PackageId == packageId
+                    if (entity == null)
+                    {
+                        entity = new PriceHistory
+                        {
+                            Date = date,
+                            PackageId = packageId,
+                            Price = model.Rate,
+                            PriceType = type.ToString(),
+                            ProductId = productId,
+                        };
+                        _context.PriceHistory.Add(entity);
+                    }
+                    else
+                    {
+                        entity.PackageId = model.PackageId;
+                        entity.Price = model.Rate;
+                    }
+                }
+                _context.SaveChanges();
+                var args = new BaseEventArgs<PriceHistoryModel>(null, UpdateMode.EDIT);
+                var priceModel = new PriceHistoryModel
+                {
+                    Date = date,
+                };
+                _listener.TriggerPriceHistoryUpdateEvent(priceModel, args);
+                return ResponseModel<bool>.GetSuccess();
             }
         }
     }

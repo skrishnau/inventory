@@ -190,7 +190,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 else
                 {
                     extraMsg.Append("Row: ").Append(r + 1).Append("; Columns: ");
-                    InvalidColumns.ForEach(x =>
+                    InvalidColumns.Distinct().ToList().ForEach(x =>
                     {
                         extraMsg.Append(x + ", ");
                     });

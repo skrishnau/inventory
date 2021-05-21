@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Infrastructure.Entities.Inventory;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
+using ViewModel.Enums;
 using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
@@ -109,7 +110,6 @@ namespace DTO.Core.Inventory
                 OrderItemId = entity.OrderItemId,
             };
         }
-
         public static List<InventoryUnit> MapToEntity(this List<InventoryUnitModel> modelList)
         {
             var entityList = new List<InventoryUnit>();

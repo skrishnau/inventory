@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Inventory.Units.Details;
+using IMS.Forms.Inventory.Products;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -55,6 +56,16 @@ namespace IMS.Forms.Inventory.Units
             _sidebar.lnkSummary.LinkClicked += LnkSummary_LinkClicked;
             _sidebar.lnkManage.LinkClicked += LnkManage_LinkClicked;
             _sidebar.lnkMovement.LinkClicked += LnkMovement_LinkClicked;
+            _sidebar.btnRates.LinkClicked += BtnRates_LinkClicked;
+        }
+
+        private void BtnRates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var warehouseProductListUC = Program.container.GetInstance<RateListUC>();
+            pnlBody.Controls.Clear();
+            warehouseProductListUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(warehouseProductListUC);
+            _sidebar.SetVisited(sender);
         }
 
         private void ShowInventoryUnitList()

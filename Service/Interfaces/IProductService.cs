@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
+using ViewModel.Enums;
 
 namespace Service.Interfaces
 {
@@ -33,9 +34,12 @@ namespace Service.Interfaces
         void AddUpdateCategory(CategoryModel category);
         ResponseModel<CategoryModel> DeleteCategory(CategoryModel categoryModel);
         bool DeleteProduct(int id);
-        List<PriceHistoryModel> GetPriceHistory(int id);
+        List<PriceHistoryModel> GetPriceHistory(int productId);
+        //List<RateModel> GetPriceHistory(int productId, DateTime? date, OrderTypeEnum? type);
+        List<PriceHistoryModel> GetPriceHistory(int productId, DateTime? date, OrderTypeEnum? type);
 
         // price History
         void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId);
+        ResponseModel<bool> SavePriceHistory(List<InventoryUnitModel> data, DateTime date, OrderTypeEnum type);
     }
 }

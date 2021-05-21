@@ -233,7 +233,8 @@ namespace IMS.Forms.Inventory.Products
         private void _listener_CategoryUpdated(object sender, CategoryEventArgs e)
         {
             PopulateCategoryCombo();
-            cbCategory.Text = e.Category.Name;
+            if(e.Category !=null)
+                cbCategory.Text = e.Category.Name;
         }
         private void _listener_PackageUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PackageModel> e)
         {

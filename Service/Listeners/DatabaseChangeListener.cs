@@ -27,6 +27,7 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<List<InventoryUnitModel>>> InventoryUnitUpdated;
         public event EventHandler<BaseEventArgs<UserModel>> UserUpdated;
         public event EventHandler<BaseEventArgs<CompanyInfoSettingModel>> CompanyUpdated;
+        public event EventHandler<BaseEventArgs<PriceHistoryModel>> PriceHistoryUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -102,6 +103,11 @@ namespace Service.Listeners
         public void TriggerCompanyUpdateEvent(object p, BaseEventArgs<CompanyInfoSettingModel> eventArgs)
         {
             CompanyUpdated?.Invoke(p, eventArgs);
+        }
+
+        public void TriggerPriceHistoryUpdateEvent(object p, BaseEventArgs<PriceHistoryModel> eventArgs)
+        {
+            PriceHistoryUpdated?.Invoke(p, eventArgs);
         }
     }
 }

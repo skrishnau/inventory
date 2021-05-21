@@ -210,6 +210,24 @@
     <Compile Include="Forms\Inventory\Accounts\All\LedgerUC.Designer.cs">
       <DependentUpon>LedgerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Products\RateCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\RateCreateForm.Designer.cs">
+      <DependentUpon>RateCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\RateDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\RateDataGridView.Designer.cs">
+      <DependentUpon>RateDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\RateListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Products\RateListUC.Designer.cs">
+      <DependentUpon>RateListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Products\ProductUomUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -730,6 +748,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Accounts\All\LedgerUC.resx">
       <DependentUpon>LedgerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\RateCreateForm.resx">
+      <DependentUpon>RateCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\RateDataGridView.resx">
+      <DependentUpon>RateDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Products\RateListUC.resx">
+      <DependentUpon>RateListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Products\ProductUomUC.resx">
       <DependentUpon>ProductUomUC.cs</DependentUpon>

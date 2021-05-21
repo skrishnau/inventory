@@ -33,6 +33,7 @@
             this.lnkManage = new System.Windows.Forms.LinkLabel();
             this.lnkMovement = new System.Windows.Forms.LinkLabel();
             this.pnlLinkList = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnRates = new System.Windows.Forms.LinkLabel();
             this.pnlBody.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +43,7 @@
             this.pnlBody.Controls.Add(this.lnkManage);
             this.pnlBody.Controls.Add(this.lnkMovement);
             this.pnlBody.Controls.Add(this.pnlLinkList);
+            this.pnlBody.Controls.Add(this.btnRates);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(8, 0);
             this.pnlBody.Name = "pnlBody";
@@ -116,6 +118,24 @@
             this.pnlLinkList.TabIndex = 1;
             this.pnlLinkList.WrapContents = false;
             // 
+            // btnRates
+            // 
+            this.btnRates.AutoSize = true;
+            this.btnRates.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRates.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_16px;
+            this.btnRates.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRates.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.btnRates.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnRates.Location = new System.Drawing.Point(413, 5);
+            this.btnRates.Margin = new System.Windows.Forms.Padding(5);
+            this.btnRates.Name = "btnRates";
+            this.btnRates.Padding = new System.Windows.Forms.Padding(5);
+            this.btnRates.Size = new System.Drawing.Size(84, 27);
+            this.btnRates.TabIndex = 7;
+            this.btnRates.TabStop = true;
+            this.btnRates.Text = "     • Rates";
+            this.btnRates.VisitedLinkColor = System.Drawing.Color.Black;
+            // 
             // InventoryUnitsMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,5 +158,6 @@
         protected internal System.Windows.Forms.FlowLayoutPanel pnlLinkList;
         protected internal System.Windows.Forms.LinkLabel lnkManage;
         protected internal System.Windows.Forms.LinkLabel lnkMovement;
+        protected internal System.Windows.Forms.LinkLabel btnRates;
     }
 }
