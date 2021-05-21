@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Common.GridView.InventoryUnits
 {
@@ -12,6 +13,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
     //
     public partial class InventoryUnitDataGridView
     {
+
+        private DateTime _date = DateTime.Now;
+
+
         #region Validations
 
         //
@@ -33,6 +38,31 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         #endregion
         
+        public void SetDate(DateTime date)
+        {
+            _date = date;
+            foreach(DataGridViewRow row in this.Rows)
+            {
+                SetRateAsPerDate(row);
+            }
+        }
+
+        private void SetRateAsPerDate(DataGridViewRow row)
+        {
+            var product = row.Cells[colProduct.Index].Tag as ProductModel;
+            if (product != null)
+            {
+                if (row.Cells[colPackage.Index].Value?.ToString()?.ToLower() == product.BasePackage.ToLower())
+                {
+                    try
+                    {
+                        row.Cells[colRate.Index].Value = _productService.GetPrice(product.Id, _date, _movementType, product.BasePackageId ?? 0);
+                    }
+                    catch (Exception) { }
+                }
+            }
+        }
+
         //
         // Combo Box Populations
         //

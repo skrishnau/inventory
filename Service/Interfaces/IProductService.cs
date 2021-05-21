@@ -37,6 +37,7 @@ namespace Service.Interfaces
         List<PriceHistoryModel> GetPriceHistory(int productId);
         //List<RateModel> GetPriceHistory(int productId, DateTime? date, OrderTypeEnum? type);
         List<PriceHistoryModel> GetPriceHistory(int productId, DateTime? date, OrderTypeEnum? type);
+        decimal? GetPrice(int id, DateTime date, MovementTypeEnum movementType, int packageId);
 
         // price History
         void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId);

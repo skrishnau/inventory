@@ -510,20 +510,18 @@
             // 
             // colSupplyPrice
             // 
-            this.colSupplyPrice.DataPropertyName = "SupplyPrice";
+            this.colSupplyPrice.DataPropertyName = "CostPriceWholeText";
             this.colSupplyPrice.HeaderText = "Cost Price";
             this.colSupplyPrice.Name = "colSupplyPrice";
             this.colSupplyPrice.ReadOnly = true;
-            this.colSupplyPrice.Visible = false;
             // 
             // colRetailPrice
             // 
             this.colRetailPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colRetailPrice.DataPropertyName = "RetailPrice";
+            this.colRetailPrice.DataPropertyName = "SellingPriceWholeText";
             this.colRetailPrice.HeaderText = "Selling Price";
             this.colRetailPrice.Name = "colRetailPrice";
             this.colRetailPrice.ReadOnly = true;
-            this.colRetailPrice.Visible = false;
             this.colRetailPrice.Width = 90;
             // 
             // colReorderPoint

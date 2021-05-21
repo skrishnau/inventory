@@ -634,13 +634,13 @@ namespace Service.Core
             return rateModel;*/
             //if (priceHistories != null)
             //{
-            var package = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage);
+            var package = priceHistories?.Package != null ? priceHistories.Package : product.ProductPackages.FirstOrDefault(x => x.IsBasePackage)?.Package;
             var rateModel = new PriceHistoryModel
             {
                 Date = date,
-                Package = package?.Package.Name ?? "",
-                PackageId = package?.PackageId ?? 0,
-                Rate = (priceHistories?.Price ?? 0 ) == 0 ? null : priceHistories?.Price,
+                Package = package?.Name ?? "",
+                PackageId = package?.Id ?? 0,
+                Rate = (priceHistories?.Price ?? 0) == 0 ? null : priceHistories?.Price,
                 PriceType = type, // priceHistories?.PriceType,
                 DateString = DateConverter.Instance.ToBS(date).ToString(),
                 Product = product.Name,
@@ -660,6 +660,7 @@ namespace Service.Core
                 var typeStr = type.ToString();
                 foreach (var model in data)
                 {
+
                     var packageId = model.PackageId;
                     if (packageId == 0)
                         packageId = _context.Package.FirstOrDefault(x => x.Name == model.Package)?.Id ?? 0;
@@ -669,20 +670,30 @@ namespace Service.Core
                     var entity = _context.PriceHistory.FirstOrDefault(x => x.ProductId == productId && x.Date == date && x.PriceType == typeStr); //&& x.PackageId == packageId
                     if (entity == null)
                     {
-                        entity = new PriceHistory
+                        if (model.Rate > 0)
                         {
-                            Date = date,
-                            PackageId = packageId,
-                            Price = model.Rate,
-                            PriceType = type.ToString(),
-                            ProductId = productId,
-                        };
-                        _context.PriceHistory.Add(entity);
+                            entity = new PriceHistory
+                            {
+                                Date = date,
+                                PackageId = packageId,
+                                Price = model.Rate,
+                                PriceType = type.ToString(),
+                                ProductId = productId,
+                            };
+                            _context.PriceHistory.Add(entity);
+                        }
                     }
                     else
                     {
-                        entity.PackageId = model.PackageId;
-                        entity.Price = model.Rate;
+                        if (model.Rate > 0)
+                        {
+                            entity.PackageId = model.PackageId;
+                            entity.Price = model.Rate;
+                        }
+                        else
+                        {
+                            _context.PriceHistory.Remove(entity);
+                        }
                     }
                 }
                 _context.SaveChanges();
@@ -694,6 +705,38 @@ namespace Service.Core
                 _listener.TriggerPriceHistoryUpdateEvent(priceModel, args);
                 return ResponseModel<bool>.GetSuccess();
             }
+        }
+
+        public decimal? GetPrice(int productId, DateTime date, MovementTypeEnum movementType, int packageId)
+        {
+            date = date.Date;
+            using (var _context = new DatabaseContext())
+            {
+                switch (movementType)
+                {
+                    case MovementTypeEnum.DirectIssueAny:
+                    case MovementTypeEnum.DirectIssueInventoryUnit:
+                    case MovementTypeEnum.SOIssue:
+                    case MovementTypeEnum.SOIssueEditItems:
+                        var sale = OrderTypeEnum.Sale.ToString().ToLower();
+                        return _context.PriceHistory
+                            .Where(x => x.Date <= date && x.ProductId == productId && x.PriceType.ToLower() == sale && x.PackageId == packageId)
+                            .OrderByDescending(x => x.Date)
+                            .FirstOrDefault()
+                            ?.Price;
+                    case MovementTypeEnum.DirectReceive:
+                    case MovementTypeEnum.POReceive:
+                    case MovementTypeEnum.POReceiveEditItems:
+                        var purchase = OrderTypeEnum.Purchase.ToString().ToLower();
+                        var st = _context.PriceHistory
+                            .Where(x => x.Date <= date && x.ProductId == productId && x.PriceType.ToLower() == purchase && x.PackageId == packageId)
+                            .OrderByDescending(x => x.Date).ToList();
+                        return st.FirstOrDefault()
+                                ?.Price;
+                }
+            }
+            return null;
+
         }
     }
 }

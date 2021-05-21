@@ -172,6 +172,12 @@ namespace IMS.Forms.Inventory.Transaction
             txtTotal.ValueChanged += TxtTotal_ValueChanged;
             txtDiscount.ValueChanged += TxtDiscount_ValueChanged;
             cbDiscountType.SelectedValueChanged += CbDiscountType_SelectedValueChanged;
+            dtCompletedDate.TextChanged += DtCompletedDate_TextChanged;
+        }
+
+        private void DtCompletedDate_TextChanged(object sender, EventArgs e)
+        {
+            dgvItems.SetDate(dtCompletedDate.GetValue());
         }
 
         private void CbDiscountType_SelectedValueChanged(object sender, EventArgs e)

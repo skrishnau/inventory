@@ -109,6 +109,12 @@ namespace IMS.Forms.Inventory.Products
             _listener.ProductUpdated += _listener_ProductUpdated;
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
             _listener.CategoryUpdated += _listener_CategoryUpdated;
+            _listener.PriceHistoryUpdated += _listener_PriceHistoryUpdated;
+        }
+
+        private void _listener_PriceHistoryUpdated(object sender, BaseEventArgs<PriceHistoryModel> e)
+        {
+            PopulateProductData();
         }
 
 

@@ -17,6 +17,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public delegate void AmountChange(decimal totals);
         public event AmountChange AmountChanged;
 
+
         private void InitializeEvents()
         {
             // 
@@ -47,7 +48,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         private void InventoryUnitDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-           // GridViewHelper.setRowNumber(this);
+            // GridViewHelper.setRowNumber(this);
         }
 
         //
@@ -98,6 +99,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         var productModel = _productService.GetProductByNameOrSKU(e.FormattedValue as string);
                         UpdateProductInfo(this.Rows[e.RowIndex], productModel, e.RowIndex, e.ColumnIndex, null);
                     }
+                    //else if(e.ColumnIndex == colPackage.Index)
+                    //{
+                    //    var product = this.Rows[e.RowIndex].Cells[colProduct.Index].Tag as ProductModel;
+                    //    if (product != null)
+                    //    {
+                    //        if(product.Packages.Any(x=> x.Name.ToLower() == e.FormattedValue?.ToString().ToLower()))
+                    //        {
+                    //            var rate = GetRate(row);
+                    //            _uomService.ConvertUom()
+                    //        }
+                    //    }
+                    //}
                     else if (e.ColumnIndex == this.colSKU.Index)
                     {
                         // check if the sku is valid
@@ -138,24 +151,29 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 row.Cells[this.colProductId.Index].Value = product.Id;
                 row.Cells[this.colProduct.Index].Value = product.Name;
                 row.Cells[this.colSKU.Index].Value = product.SKU;
-                switch (_movementType)
-                {
-                    case ViewModel.Enums.MovementTypeEnum.SOIssueEditItems:
-                        row.Cells[this.colRate.Index].Value = product.RetailPrice;
-                        break;
-                    case ViewModel.Enums.MovementTypeEnum.POReceiveEditItems:
-                        row.Cells[this.colRate.Index].Value = product.SupplyPrice;
-                        break;
-                }
+                //switch (_movementType)
+                //{
+                //    case ViewModel.Enums.MovementTypeEnum.SOIssueEditItems:
+                //        row.Cells[this.colRate.Index].Value = product.SellingPrice;
+                //        break;
+                //    case ViewModel.Enums.MovementTypeEnum.POReceiveEditItems:
+                //        row.Cells[this.colRate.Index].Value = product.CostPrice;
+                //        break;
+                //}
                 row.Cells[this.colPackageId.Index].Value = product.BasePackageId;
                 row.Cells[this.colPackage.Index].Value = product.BasePackage;
-               // row.Cells[this.colUomId.Index].Value = product.BaseUomId;
+                SetRateAsPerDate(row);
+                // row.Cells[this.colUomId.Index].Value = product.BaseUomId;
                 row.Cells[this.colInStockQuantity.Index].Value = product.InStockQuantity;
                 row.Cells[this.colInStockQuantityWithPackage.Index].Value = $"{product.InStockQuantity} {product.BasePackage}";
                 row.Cells[this.colOnOrderQuantity.Index].Value = product.OnOrderQuantity;
                 row.Cells[this.colWarehouseId.Index].Value = product.WarehouseId;
                 row.Cells[this.colWarehouse.Index].Value = product.Warehouse;
                 UpdateTotalColumn(currentRowIndex, currentColumnIndex, formattedValue);
+            }
+            else
+            {
+                row.Cells[this.colProduct.Index].Tag = null;
             }
         }
 

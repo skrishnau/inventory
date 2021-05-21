@@ -356,6 +356,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Editing of completed transaction is not available. Please contact administrator.");
             var order = GetRowDataAndStoreSelectedIndex();
             if (order != null)
             {

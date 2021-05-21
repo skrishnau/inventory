@@ -743,7 +743,7 @@ namespace Service.Core.Orders
                 product = _context.Product.Find(entity.ProductId);
             if (product != null)
             {
-                _productService.AddPriceHistoryWithoutCommit(product, entity.Rate, order.OrderType, order.CompletedDate, entity.Package, entity.PackageId);
+               // _productService.AddPriceHistoryWithoutCommit(product, entity.Rate, order.OrderType, order.CompletedDate, entity.Package, entity.PackageId);
                 product.UpdatedAt = DateTime.Now;
             }
         }

@@ -80,9 +80,17 @@ namespace ViewModel.Core.Inventory
         public decimal OnOrderQuantity { get; set; }
         // ------------ Price -------------- //
 
-        public decimal SupplyPrice { get; set; }
         public decimal MarkupPercent { get; set; } // percent to keep for ourselves
-        public decimal RetailPrice { get; set; }
+
+        public string CostPriceWholeText { get; set; }
+        public decimal CostPrice { get; set; }
+        public string CostPriceDateBS { get; set; }
+        public string CostPricePackage { get; set; }
+
+        public string SellingPriceWholeText { get; set; }
+        public decimal SellingPrice { get; set; }
+        public string SellingPriceDateBS { get; set; }
+        public string SellingPricePackage { get; set; }
 
         // ============= Extra Information ============= //
         //public string Label { get; set; }

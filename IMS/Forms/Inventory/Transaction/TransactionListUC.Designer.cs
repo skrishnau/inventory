@@ -81,6 +81,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnViewParentOrder = new System.Windows.Forms.Button();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.pnlNewTransaction.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -93,6 +94,7 @@
             this.panel5.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.pnlEditedOrder.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitter1
@@ -155,7 +157,7 @@
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(106, 5);
+            this.btnEdit.Location = new System.Drawing.Point(3, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(112, 31);
             this.btnEdit.TabIndex = 1;
@@ -553,7 +555,7 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.btnPrint);
-            this.flowLayoutPanel2.Controls.Add(this.btnEdit);
+            this.flowLayoutPanel2.Controls.Add(this.panel6);
             this.flowLayoutPanel2.Controls.Add(this.btnCancel);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -583,7 +585,7 @@
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnCancel.Location = new System.Drawing.Point(20, 5);
+            this.btnCancel.Location = new System.Drawing.Point(13, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 31);
             this.btnCancel.TabIndex = 17;
@@ -635,6 +637,15 @@
             this.listHeaderTemplate1.Size = new System.Drawing.Size(1068, 35);
             this.listHeaderTemplate1.TabIndex = 17;
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.btnEdit);
+            this.panel6.Location = new System.Drawing.Point(99, 5);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(119, 38);
+            this.panel6.TabIndex = 18;
+            this.panel6.Visible = false;
+            // 
             // TransactionListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -662,6 +673,7 @@
             this.panel5.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.pnlEditedOrder.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -719,5 +731,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         protected internal System.Windows.Forms.Button btnPurchaseTransaction;
         protected internal System.Windows.Forms.Button btnSaleTransaction;
+        private System.Windows.Forms.Panel panel6;
     }
 }

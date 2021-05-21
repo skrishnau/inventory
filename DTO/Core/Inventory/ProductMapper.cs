@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
+using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
 {
@@ -70,9 +72,9 @@ namespace DTO.Core.Inventory
             entity.WarehouseId = model.WarehouseId;
             //entity.Warehouse = model.Warehouse;
             // pricing
-            entity.RetailPrice = model.RetailPrice;
+            entity.RetailPrice = model.SellingPrice;
             entity.MarkupPercent = model.MarkupPercent;
-            entity.SupplyPrice = model.SupplyPrice;
+            entity.SupplyPrice = model.CostPrice;
             // collections
             //entity.ProductAttributes = model.ProductAttributes;
             //entity.Variants = model.Variants;
@@ -161,9 +163,22 @@ namespace DTO.Core.Inventory
             model.WarehouseId = entity.WarehouseId;
             model.Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name;
             // pricing
-            model.RetailPrice = entity.RetailPrice;
+            var prices = entity.PriceHistory.OrderByDescending(x => x.Date);
+            var sale = OrderTypeEnum.Sale.ToString();
+            var sellPrice = prices.FirstOrDefault(x => x.PriceType == sale);
+            model.SellingPrice = sellPrice?.Price??0;//entity.RetailPrice;
+            model.SellingPricePackage = sellPrice?.Package?.Name ?? "";
+            model.SellingPriceDateBS = sellPrice != null ? DateConverter.Instance.ToBS(sellPrice.Date).ToString() : "";
+            model.SellingPriceWholeText = model.SellingPrice == 0 ? "" : $"{model.SellingPrice} / {model.SellingPricePackage}";
+
+            var purchase = OrderTypeEnum.Purchase.ToString();
+            var costPrice = prices.FirstOrDefault(x => x.PriceType == purchase);
+            model.CostPrice = costPrice?.Price ?? 0;//entity.SupplyPrice;
+            model.CostPricePackage = costPrice?.Package?.Name ?? "";
+            model.CostPriceDateBS = costPrice != null ? DateConverter.Instance.ToBS(costPrice.Date).ToString() : "";
+            model.CostPriceWholeText = model.CostPrice == 0 ? "" : $"{model.CostPrice} / {model.CostPricePackage}";
+
             model.MarkupPercent = entity.MarkupPercent;
-            model.SupplyPrice = entity.SupplyPrice;
             // collections
             model.ProductAttributes = MapToProductAttributeModel(entity.ProductAttributes);
             // model.Variants = MapToProductVariant(entity.Variants);

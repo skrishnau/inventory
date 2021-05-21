@@ -171,8 +171,8 @@ namespace IMS.Forms.Inventory.Products
                 UnitNetWeight = numUnitNetWeight.Value,
                 ReorderQuantity = numReorderQuantity.Value,
                 MarkupPercent = numMarkupPercent.Value,
-                RetailPrice = numRetailPrice.Value,
-                SupplyPrice = numSupplyPrice.Value,
+                SellingPrice = numRetailPrice.Value,
+                CostPrice = numSupplyPrice.Value,
                 UnitGrossWeight = numUnitGrossWeight.Value,
                 UnitsInPackage = numUnitsInPackage.Value,
                 WarehouseId = warehouseId == 0 ? null : (int?)warehouseId,
@@ -320,8 +320,8 @@ namespace IMS.Forms.Inventory.Products
                 numMonthlyDemand.Value = product.MonthlyDemand;
                 numReorderPoint.Value = product.ReorderPoint;
                 numReorderQuantity.Value = product.ReorderQuantity;
-                numRetailPrice.Value = product.RetailPrice;
-                numSupplyPrice.Value = product.SupplyPrice;
+                numRetailPrice.Value = product.SellingPrice;
+                numSupplyPrice.Value = product.CostPrice;
                 numUnitGrossWeight.Value = product.UnitGrossWeight;
                 numUnitNetWeight.Value = product.UnitNetWeight;
                 numUnitsInPackage.Value = product.UnitsInPackage;
