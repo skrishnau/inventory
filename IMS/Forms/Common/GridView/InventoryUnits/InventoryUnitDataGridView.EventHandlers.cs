@@ -277,7 +277,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             else if (this.CurrentCell.ColumnIndex == this.colPackage.Index && e.Control is TextBox)
             {
-                var product = this.CurrentRow.Cells[colProduct.Name].Tag as ProductModel;
+                var product = this.CurrentRow.Cells[colProduct.Index].Tag as ProductModel;
                 var packageList = product != null && product.Packages != null ? product.Packages : new List<PackageModel>();
                 TextBox textBox = e.Control as TextBox;
                 textBox.AutoCompleteCustomSource.Clear();
