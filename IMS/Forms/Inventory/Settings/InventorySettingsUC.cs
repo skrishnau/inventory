@@ -130,7 +130,7 @@ namespace IMS.Forms.Inventory.Settings
 
         private void LnkPackages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var uc = Program.container.GetInstance<PackageUC>();
+            var uc = Program.container.GetInstance<PackageListUC>();
             _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);

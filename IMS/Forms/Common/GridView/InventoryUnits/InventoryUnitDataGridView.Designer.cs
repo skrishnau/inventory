@@ -782,6 +782,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colPackage.ReadOnly = true;
             colDate.ReadOnly = true;
             colRate.ReadOnly = true;
+            this.SetSelectable(false);
+            this.MakeAllColumnsReadOnly();
         }
 
         public void DesignForPriceHistoryCreate(bool showDate, bool showProduct)

@@ -20,20 +20,42 @@ namespace Service.Core
             }
         }
 
-        public decimal ConvertUom(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId, decimal multiplier = 1)
+        public decimal ConvertUom(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId, decimal multiplier = 1, List<Uom> includeThisList = null)
         {
             decimal val = 1;
             if (fromPackageId > 0 && toPackageId > 0)
-                val = ConvertUom(_context, fromPackageId, toPackageId, productId);
+                val = GetConversion(_context, fromPackageId, toPackageId, productId, includeThisList);
             return val * multiplier;
         }
 
-        private decimal ConvertUom(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="fromPackageId"></param>
+        /// <param name="toPackageId"></param>
+        /// <param name="productId"></param>
+        /// <param name="includeThisList">Extra list to include in the checking for uom mapping in product edit</param>
+        /// <returns></returns>
+        private decimal GetConversion(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId, List<Uom> includeThisList)
         {
+            
             var isProductSpecific = ((productId ?? 0) > 0);
             var from = _context.Packages.FirstOrDefault(x => x.Id == fromPackageId);
             var to = _context.Packages.FirstOrDefault(x => x.Id == toPackageId);
             List<Uom> allRelated;
+
+            // for includeList
+            if (includeThisList != null && includeThisList.Count > 0)
+            {
+                var includeListPath = GetUomPath(_context, from, to, includeThisList, null, new List<int>());
+                if (includeListPath.IsRightPath)
+                {
+                    var value = GetUomValue(includeListPath, fromPackageId);
+                    return value;
+                }
+            }
+            // general
             if (isProductSpecific)
                 allRelated = _context.Uoms.Where(x => x.ProductId == productId).ToList();
             else

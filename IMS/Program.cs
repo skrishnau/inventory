@@ -130,7 +130,7 @@ namespace IMS
 
 
             container.Register<UomListUC>(Lifestyle.Scoped);
-            container.Register<PackageUC>(Lifestyle.Scoped);
+            container.Register<PackageListUC>(Lifestyle.Scoped);
             container.Register<AdjustmentCodeUC>(Lifestyle.Scoped);
 
             // --- POS related --- //

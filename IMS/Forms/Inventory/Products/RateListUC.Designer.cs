@@ -32,8 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RateListUC));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cbType = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.dtDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnUpdateRates = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,19 +46,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbType = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.btnUpdateRates = new System.Windows.Forms.Button();
-            this.dtDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.rateDataGridView = new IMS.Forms.Inventory.Products.RateDataGridView();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -78,7 +77,6 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnSearch);
             this.panel3.Controls.Add(this.cbType);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label3);
@@ -89,6 +87,24 @@
             this.panel3.Size = new System.Drawing.Size(686, 33);
             this.panel3.TabIndex = 5;
             // 
+            // cbType
+            // 
+            this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(202, 7);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(121, 21);
+            this.cbType.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(165, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Type";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -97,6 +113,13 @@
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Date";
+            // 
+            // dtDate
+            // 
+            this.dtDate.Location = new System.Drawing.Point(46, 7);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(100, 20);
+            this.dtDate.TabIndex = 11;
             // 
             // flowLayoutPanel1
             // 
@@ -107,6 +130,20 @@
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(202, 33);
             this.flowLayoutPanel1.TabIndex = 3;
+            // 
+            // btnUpdateRates
+            // 
+            this.btnUpdateRates.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnUpdateRates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateRates.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdateRates.Image")));
+            this.btnUpdateRates.Location = new System.Drawing.Point(64, 3);
+            this.btnUpdateRates.Name = "btnUpdateRates";
+            this.btnUpdateRates.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnUpdateRates.Size = new System.Drawing.Size(135, 24);
+            this.btnUpdateRates.TabIndex = 1;
+            this.btnUpdateRates.Text = "Update Rates";
+            this.btnUpdateRates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUpdateRates.UseVisualStyleBackColor = true;
             // 
             // splitter1
             // 
@@ -205,6 +242,24 @@
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
@@ -224,56 +279,6 @@
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(165, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Type";
-            // 
-            // cbType
-            // 
-            this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbType.FormattingEnabled = true;
-            this.cbType.Location = new System.Drawing.Point(202, 7);
-            this.cbType.Name = "cbType";
-            this.cbType.Size = new System.Drawing.Size(121, 21);
-            this.cbType.TabIndex = 14;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(342, 6);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 15;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -292,26 +297,10 @@
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
-            // btnUpdateRates
+            // bindingNavigatorSeparator2
             // 
-            this.btnUpdateRates.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUpdateRates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateRates.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdateRates.Image")));
-            this.btnUpdateRates.Location = new System.Drawing.Point(64, 3);
-            this.btnUpdateRates.Name = "btnUpdateRates";
-            this.btnUpdateRates.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnUpdateRates.Size = new System.Drawing.Size(135, 24);
-            this.btnUpdateRates.TabIndex = 1;
-            this.btnUpdateRates.Text = "Update Rates";
-            this.btnUpdateRates.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnUpdateRates.UseVisualStyleBackColor = true;
-            // 
-            // dtDate
-            // 
-            this.dtDate.Location = new System.Drawing.Point(46, 7);
-            this.dtDate.Name = "dtDate";
-            this.dtDate.Size = new System.Drawing.Size(100, 20);
-            this.dtDate.TabIndex = 11;
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // rateDataGridView
             // 
@@ -371,7 +360,6 @@
         private Common.Date.NepaliDateTextBox dtDate;
         private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnSearch;
         private RateDataGridView rateDataGridView;
     }
 }

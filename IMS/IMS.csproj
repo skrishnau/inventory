@@ -450,11 +450,11 @@
     <Compile Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.Designer.cs">
       <DependentUpon>InventoryAdjustmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Packages\PackageUC.cs">
+    <Compile Include="Forms\Inventory\Packages\PackageListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Packages\PackageUC.Designer.cs">
-      <DependentUpon>PackageUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Packages\PackageListUC.Designer.cs">
+      <DependentUpon>PackageListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Orders\OrderDetailUC.cs">
       <SubType>UserControl</SubType>
@@ -857,8 +857,8 @@
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.resx">
       <DependentUpon>InventoryAdjustmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Packages\PackageUC.resx">
-      <DependentUpon>PackageUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Packages\PackageListUC.resx">
+      <DependentUpon>PackageListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Orders\OrderDetailUC.resx">
       <DependentUpon>OrderDetailUC.cs</DependentUpon>

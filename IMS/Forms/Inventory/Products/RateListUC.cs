@@ -80,8 +80,12 @@ namespace IMS.Forms.Inventory.Products
 
             _listener.ProductUpdated += _listener_ProductUpdated;
             _listener.PriceHistoryUpdated += _listener_PriceHistoryUpdated;
-            btnSearch.Click += BtnSearch_Click;
+            //btnSearch.Click += BtnSearch_Click;
+            cbType.SelectedValueChanged += CbType_SelectedValueChanged;
+            dtDate.TextChanged += DtDate_TextChanged;
         }
+
+        
 
 
 
@@ -115,6 +119,15 @@ namespace IMS.Forms.Inventory.Products
 
         #region Event Handlers
 
+        private void DtDate_TextChanged(object sender, EventArgs e)
+        {
+            PopulatePriceData();
+        }
+
+        private void CbType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            PopulatePriceData();
+        }
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
             PopulatePriceData();
@@ -134,10 +147,10 @@ namespace IMS.Forms.Inventory.Products
             rateUpdate.ShowDialog(this);
         }
 
-        private void BtnSearch_Click(object sender, EventArgs e)
-        {
-            PopulatePriceData();
-        }
+        //private void BtnSearch_Click(object sender, EventArgs e)
+        //{
+        //    PopulatePriceData();
+        //}
 
 
         #endregion

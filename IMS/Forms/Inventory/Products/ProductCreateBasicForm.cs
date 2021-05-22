@@ -62,7 +62,6 @@ namespace IMS.Forms.Inventory.Products
             //tbInStockQuantity.Maximum = decimal.MaxValue;
 
             InitializeEvents();
-            InitializeDatabaseChangeListeners();
 
             //numSupplyPrice.Maximum = Int32.MaxValue;
             //numRetailPrice.Maximum = Int32.MaxValue;
@@ -99,6 +98,22 @@ namespace IMS.Forms.Inventory.Products
             lblCategory.DoubleClick += lblCategory_DoubleClick;
             //lblPackage.DoubleClick += LblPackage_DoubleClick;
             btnAddUom.Click += BtnAddUom_Click;
+            lblPackage.DoubleClick += LblPackage_DoubleClick;
+
+
+            _listener.CategoryUpdated += _listener_CategoryUpdated;
+           // _listener.PackageUpdated += _listener_PackageUpdated;
+            
+        }
+
+        private void LblPackage_DoubleClick(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var productCreate = Program.container.GetInstance<PackageCreateForm>();
+                productCreate.SetDataForEdit(0);
+                productCreate.ShowDialog();
+            }
         }
 
         private void BtnAddUom_Click(object sender, EventArgs e)
@@ -106,13 +121,7 @@ namespace IMS.Forms.Inventory.Products
             AddUom(null);
             PopulatePackage();
         }
-
-        private void InitializeDatabaseChangeListeners()
-        {
-            _listener.CategoryUpdated += _listener_CategoryUpdated;
-            _listener.PackageUpdated += _listener_PackageUpdated;
-        }
-
+        
        
         #endregion
 
@@ -236,11 +245,12 @@ namespace IMS.Forms.Inventory.Products
             if(e.Category !=null)
                 cbCategory.Text = e.Category.Name;
         }
-        private void _listener_PackageUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PackageModel> e)
-        {
-            PopulatePackage();
-            //cbPackage.SelectedValue = e.Model.Id;
-        }
+        //private void _listener_PackageUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PackageModel> e)
+        //{
+        //    PopulatePackage();
+        //    if(e.Model!=null)
+        //        cbPackage.SelectedValue = e.Model.Id;
+        //}
 
 
         #endregion

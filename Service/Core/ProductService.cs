@@ -97,6 +97,7 @@ namespace Service.Core
                         _context.ProductPackages.Remove(entity.ProductPackages.ElementAt(i));
                     }
                     List<ProductPackage> packageList = new List<ProductPackage>();
+                    var uomListForConversionUse = new List<Uom>();
                     foreach (var uom in model.Uoms)
                     {
                         var uomEntity = uomEntities.FirstOrDefault(x => x.Id == uom.Id);
@@ -105,6 +106,16 @@ namespace Service.Core
                         {
                             entity.Uoms.Add(uomEntity);
                         }
+                        uomListForConversionUse.Add(new Uom
+                        {
+                            PackageId = uomEntity.PackageId,
+                            RelatedPackageId = uomEntity.RelatedPackageId,
+                            ProductId = entity.Id,
+                            Package = _context.Packages.Find(uomEntity.PackageId),
+                            Package1 = _context.Packages.Find(uomEntity.RelatedPackageId),
+                            Use = true,
+                            Quantity = uomEntity.Quantity,
+                        });
                         if (!packageList.Any(x => x.PackageId == uom.PackageId))
                             entity.ProductPackages.Add(new ProductPackage
                             {
@@ -138,8 +149,9 @@ namespace Service.Core
 
                         if (!isBasePackageSame)
                         {
+
                             // convert the instock and onhold quantity based on current package
-                            var conversion = _uomService.ConvertUom(_context, earlierBasePackageId ?? 0, model.BasePackageId ?? 0, entity.Id);
+                            var conversion = _uomService.ConvertUom(_context, earlierBasePackageId ?? 0, model.BasePackageId ?? 0, entity.Id, 1, uomListForConversionUse);
                             if (conversion == 0)
                             {
                                 txn.Rollback();
