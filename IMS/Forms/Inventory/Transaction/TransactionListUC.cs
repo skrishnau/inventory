@@ -356,7 +356,6 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Editing of completed transaction is not available. Please contact administrator.");
             var order = GetRowDataAndStoreSelectedIndex();
             if (order != null)
             {
@@ -375,6 +374,8 @@ namespace IMS.Forms.Inventory.Transaction
                 //else 
                 if (order.IsCompleted)
                 {
+                    MessageBox.Show("Currently, editing of completed transaction is not available. Please contact administrator.");
+                    return;
                     var dialogResult = MessageBox.Show(this, "This transaction is complete. By editing and re-saving " +
                         "a completed transaction makes it void (deleted) and a new transaction will be created. Are you sure to edit?",
                         "Are you sure to edit ?", MessageBoxButtons.YesNo);

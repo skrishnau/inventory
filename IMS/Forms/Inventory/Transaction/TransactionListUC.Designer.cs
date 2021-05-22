@@ -76,12 +76,12 @@
             this.lblReferenceNo = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.pnlEditedOrder = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.btnViewParentOrder = new System.Windows.Forms.Button();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.pnlNewTransaction.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -93,8 +93,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel5.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.pnlEditedOrder.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.pnlEditedOrder.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitter1
@@ -579,6 +579,14 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = false;
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.btnEdit);
+            this.panel6.Location = new System.Drawing.Point(99, 5);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(119, 38);
+            this.panel6.TabIndex = 18;
+            // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -637,15 +645,6 @@
             this.listHeaderTemplate1.Size = new System.Drawing.Size(1068, 35);
             this.listHeaderTemplate1.TabIndex = 17;
             // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.btnEdit);
-            this.panel6.Location = new System.Drawing.Point(99, 5);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(119, 38);
-            this.panel6.TabIndex = 18;
-            this.panel6.Visible = false;
-            // 
             // TransactionListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -672,8 +671,8 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
-            this.pnlEditedOrder.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.pnlEditedOrder.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
