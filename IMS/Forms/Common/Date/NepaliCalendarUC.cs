@@ -133,7 +133,13 @@ namespace IMS.Forms.Common.Date
         }
         private void Populate()
         {
-            Populate(_converter.GetCalendarFromNepaliDate((int)cbYear.SelectedValue, (int)cbMonth.SelectedValue));
+            var parsedYear = int.TryParse(cbYear.SelectedValue?.ToString()??"", out int year);
+            var parsedMonth = int.TryParse(cbMonth.SelectedValue?.ToString(), out int month);
+            if (year == 0 || month == 0)
+            {
+                return;
+            }
+            Populate(_converter.GetCalendarFromNepaliDate(year, month));
         }
 
         public void Populate(List<NepDate> list)

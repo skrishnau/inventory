@@ -259,9 +259,17 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 string productNameOrSku = productNameCell.Value as string;
                 model.Name = productNameOrSku;
+                if (string.IsNullOrEmpty(productNameOrSku))
+                {
+                    InvalidColumns.Add("Product");
+                    productIdCell.ErrorText = "Required";
+                    productNameCell.ErrorText = "Required";
+                    isValid = false;
+                    return model;
+                }
                 if (!Constants.CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION)
                 {
-                    var prd = _productService.GetProductByNameOrSKU(model.Name.Trim());
+                    var prd = _productService.GetProductByNameOrSKU(model?.Name?.Trim());
                     if (prd == null)
                     {
                         InvalidColumns.Add("Product");

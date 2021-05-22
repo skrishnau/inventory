@@ -47,7 +47,7 @@ namespace IMS.Forms.Common.Date
 
         private void NepaliDateTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '/' || (e.KeyChar >= '0' && e.KeyChar <= '9'))
+            if (e.KeyChar == '/' || (e.KeyChar >= '0' && e.KeyChar <= '9') || e.KeyChar == '\b')
                 e.Handled = false;
             else
                 e.Handled = true;
