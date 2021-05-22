@@ -150,6 +150,7 @@
     <None Include="Context\DatabaseContext.edmx.diagram">
       <DependentUpon>DatabaseContext.edmx</DependentUpon>
     </None>
+    <None Include="Migrations\2021-05-21-backup-initial.bak" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
@@ -168,6 +169,9 @@
       <DependentUpon>DatabaseContext.edmx</DependentUpon>
       <LastGenOutput>DatabaseContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Migrations\2021-05-21-initial.sql" />
+    <Content Include="Migrations\2021-05-22.sql" />
+    <Content Include="Migrations\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
