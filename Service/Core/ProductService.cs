@@ -90,12 +90,14 @@ namespace Service.Core
                             }
                         }
                     }
-                    for (var i = 0; i < entity.ProductPackages.Count; i++)
+                    var ppackages = entity.ProductPackages.ToList();
+                    for (var i = 0; i < ppackages.Count; i++)
                     {
                         // need to set the base package to false before deleting from _context cause it's still available in entity.ProductPackages
-                        entity.ProductPackages.ElementAt(i).IsBasePackage = false;
-                        _context.ProductPackages.Remove(entity.ProductPackages.ElementAt(i));
+                        ppackages.ElementAt(i).IsBasePackage = false;
+                        //_context.ProductPackages.Remove(entity.ProductPackages.ElementAt(i));
                     }
+                    _context.ProductPackages.RemoveRange(entity.ProductPackages);
                     List<ProductPackage> packageList = new List<ProductPackage>();
                     var uomListForConversionUse = new List<Uom>();
                     foreach (var uom in model.Uoms)
@@ -117,17 +119,25 @@ namespace Service.Core
                             Quantity = uomEntity.Quantity,
                         });
                         if (!packageList.Any(x => x.PackageId == uom.PackageId))
-                            entity.ProductPackages.Add(new ProductPackage
+                        {
+                            var pp = new ProductPackage
                             {
                                 IsBasePackage = model.BasePackageId == uom.PackageId,
                                 PackageId = uom.PackageId
-                            });
+                            };
+                            entity.ProductPackages.Add(pp);
+                            packageList.Add(pp);
+                        }
                         if (!packageList.Any(x => x.PackageId == uom.RelatedPackageId))
-                            entity.ProductPackages.Add(new ProductPackage
+                        {
+                            var pp = new ProductPackage
                             {
                                 IsBasePackage = model.BasePackageId == uom.RelatedPackageId,
                                 PackageId = uom.RelatedPackageId
-                            });
+                            };
+                            entity.ProductPackages.Add(pp);
+                            packageList.Add(pp);
+                        }
                     }
 
 
