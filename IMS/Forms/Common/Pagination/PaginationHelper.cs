@@ -22,7 +22,8 @@ namespace IMS.Forms.Common.Pagination
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 //row.HeaderCell.Value = (row.Index + 1).ToString();
-                row.HeaderCell.Value = ((offset) + (row.Index + 1)).ToString();
+                if(!row.IsNewRow)
+                    row.HeaderCell.Value = ((offset) + (row.Index + 1)).ToString();
             }
         }
     }

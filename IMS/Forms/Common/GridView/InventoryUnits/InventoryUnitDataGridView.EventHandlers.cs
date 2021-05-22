@@ -39,8 +39,16 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // Datetime Picker
             //
             _dtPicker.TextChanged += _dtPicker_TextChanged;
-            this.RowsAdded += InventoryUnitDataGridView_RowsAdded;
-            
+            //this.RowsAdded += InventoryUnitDataGridView_RowsAdded;
+            this.UserAddedRow += InventoryUnitDataGridView_UserAddedRow;
+        }
+
+        //
+        // User Added Row
+        //
+        private void InventoryUnitDataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            Pagination.PaginationHelper.SetRowNumber(this, 0);
         }
 
 
@@ -48,10 +56,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         // Rows Added
         //
-        private void InventoryUnitDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            // GridViewHelper.setRowNumber(this);
-        }
+        //private void InventoryUnitDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        //{
+        //    // GridViewHelper.setRowNumber(this);
+        //}
 
         //
         // Data Error

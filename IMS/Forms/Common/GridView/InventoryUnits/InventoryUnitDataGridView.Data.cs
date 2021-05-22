@@ -181,6 +181,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             if(rowsEmpty)
                 this.Rows.RemoveAt(0);
+            Pagination.PaginationHelper.SetRowNumber(this, 0);
         }
         public void AddRow(ViewModel.Core.Inventory.InventoryUnitModel model)
         {
