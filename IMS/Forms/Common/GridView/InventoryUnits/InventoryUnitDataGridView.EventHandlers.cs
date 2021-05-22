@@ -17,6 +17,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public delegate void AmountChange(decimal totals);
         public event AmountChange AmountChanged;
 
+        private TextBox textBox;
 
         private void InitializeEvents()
         {
@@ -39,6 +40,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //
             _dtPicker.TextChanged += _dtPicker_TextChanged;
             this.RowsAdded += InventoryUnitDataGridView_RowsAdded;
+            
         }
 
 
@@ -71,6 +73,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         //
         private void InventoryUnitDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
+            if(textBox!=null)
+                textBox.TextChanged -= TextBox_TextChanged;
 
             // ignore the last row
             if (e.RowIndex <= this.RowCount - 1)
@@ -254,6 +258,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         // Editing Control Showing
         private void InventoryUnitDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
+            textBox = e.Control as TextBox;
+            if(textBox !=null)
+                textBox.TextChanged -= TextBox_TextChanged;
+
             if (this.CurrentCell.ColumnIndex == this.colProductId.Index && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
@@ -268,29 +276,62 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             }
             else if (this.CurrentCell.ColumnIndex == this.colProduct.Index && e.Control is TextBox)
             {
-                TextBox textBox = e.Control as TextBox;
-                textBox.AutoCompleteCustomSource.Clear();
-                textBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.Name).ToArray());
-                //comboBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.ExtraValue).ToArray());
-                textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                if (textBox != null)
+                {
+                    //textBox = e.Control as TextBox;
+                    textBox.AutoCompleteCustomSource.Clear();
+                    textBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.Name).ToArray());
+                    //comboBox.AutoCompleteCustomSource.AddRange(_productList.Select(x => x.ExtraValue).ToArray());
+                    textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
             }
             else if (this.CurrentCell.ColumnIndex == this.colPackage.Index && e.Control is TextBox)
             {
                 var product = this.CurrentRow.Cells[colProduct.Index].Tag as ProductModel;
                 var packageList = product != null && product.Packages != null ? product.Packages : new List<PackageModel>();
-                TextBox textBox = e.Control as TextBox;
-                textBox.AutoCompleteCustomSource.Clear();
-                textBox.AutoCompleteCustomSource.AddRange(packageList.Select(x => x.Name).ToArray());
-                textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
+                //TextBox textBox = e.Control as TextBox;
+                if (textBox != null)
+                {
+                    textBox.AutoCompleteCustomSource.Clear();
+                    textBox.AutoCompleteCustomSource.AddRange(packageList.Select(x => x.Name).ToArray());
+                    textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
+            else if(this.CurrentCell.ColumnIndex == this.colUnitQuantity.Index && e.Control is TextBox)
+            {
+                //TextBox textBox = e.Control as TextBox;
+                if (textBox != null)
+                {
+                    textBox.AutoCompleteCustomSource.Clear();
+                    textBox.TextChanged += TextBox_TextChanged;
+                }
+            }
+            else if (this.CurrentCell.ColumnIndex == this.colRate.Index && e.Control is TextBox)
+            {
+                //TextBox textBox = e.Control as TextBox;
+                if (textBox != null)
+                {
+                    textBox.AutoCompleteCustomSource.Clear();
+                    textBox.TextChanged += TextBox_TextChanged;
+                }
             }
             else
             {
-                TextBox textBox = e.Control as TextBox;
-                textBox.AutoCompleteCustomSource.Clear();
+                if (textBox != null)
+                {
+                    textBox.AutoCompleteCustomSource.Clear();
+                }
             }
+        }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            var row = this.CurrentCell.RowIndex;
+            var column = this.CurrentCell.ColumnIndex;
+            UpdateTotalColumn(row, column, tb.Text);
         }
 
         private void ProductColumnComboSelectionChanged(object sender, EventArgs e)
