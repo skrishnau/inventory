@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Context;
-using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +6,10 @@ using ViewModel.Core.Inventory;
 using System.Data.Entity;
 using DTO.Core.Inventory;
 using Service.Listeners;
-using Service.Listeners.Inventory;
-using Newtonsoft.Json;
 using Service.DbEventArgs;
 using ViewModel.Core.Common;
-using Service.Utility;
 using ViewModel.Enums.Inventory;
 using ViewModel.Core.Business;
-using Infrastructure.Entities.Business;
-using DTO.Core.Business;
 using ViewModel.Enums;
 using ViewModel.Core.Orders;
 using ViewModel.Core;
@@ -40,7 +34,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var entity = _context.Warehouse.FirstOrDefault(x => x.Id == model.Id);
+                var entity = _context.Warehouses.FirstOrDefault(x => x.Id == model.Id);
                 BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
                 entity = model.MapToEntity(entity);
 
@@ -48,7 +42,7 @@ namespace Service.Core.Inventory
                 {
                     entity.CreatedAt = DateTime.Now;
                     entity.UpdatedAt = DateTime.Now;
-                    _context.Warehouse.Add(entity);
+                    _context.Warehouses.Add(entity);
                     args.Mode = Utility.UpdateMode.ADD;
                 }
                 else
@@ -65,7 +59,7 @@ namespace Service.Core.Inventory
 
         //public void DeleteWarehouse(int id)
         //{
-        //    var warehouse = _context.Warehouse.Find(id);
+        //    var warehouse = _context.Warehouses.Find(id);
         //    if (warehouse != null)
         //    {
         //        warehouse.DeletedAt = DateTime.Now;
@@ -79,7 +73,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var warehouse = _context.Warehouse.Find(warehouseId);
+                var warehouse = _context.Warehouses.Find(warehouseId);
                 if (warehouse != null)
                 {
                     return warehouse.MapToModel();// WarehouseMapper.MapToModel(warehouse);
@@ -95,7 +89,7 @@ namespace Service.Core.Inventory
             using (var _context = new DatabaseContext())
             {
                 //var warehouses = 
-                return _context.Warehouse
+                return _context.Warehouses
                     .OrderBy(x => x.Name)
                     .MapToModel();
             }
@@ -110,7 +104,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Warehouse
+                return _context.Warehouses
                               .Where(x => x.Use)
                                  .Select(x => new IdNamePair()
                                  {
@@ -131,7 +125,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Package
+                return _context.Packages
                                 .Where(x => x.Use)
                                 .Select(x => new IdNamePair()
                                 {
@@ -155,7 +149,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Product.AsQueryable();
+                return _context.Products.AsQueryable();
                 //.Where(x => x.DeletedAt == null);
             }
 
@@ -169,9 +163,9 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                if (_context.AdjustmentCode.Count() == 0)
+                if (_context.AdjustmentCodes.Count() == 0)
                     SeedAdjustmentCodes(_context);
-                return _context.AdjustmentCode
+                return _context.AdjustmentCodes
                                 .Where(x => x.Use)
                                 .Select(x => new IdNamePair()
                                 {
@@ -188,9 +182,9 @@ namespace Service.Core.Inventory
             using (var _context = new DatabaseContext())
             {
                 var positive = AdjustmentType.Positive.ToString();
-                if (_context.AdjustmentCode.Count() == 0)
+                if (_context.AdjustmentCodes.Count() == 0)
                     SeedAdjustmentCodes(_context);
-                return _context.AdjustmentCode
+                return _context.AdjustmentCodes
                    .Where(x => x.Use && x.Type == positive)
                    .Select(x => new IdNamePair()
                    {
@@ -207,9 +201,9 @@ namespace Service.Core.Inventory
             using (var _context = new DatabaseContext())
             {
                 var negative = AdjustmentType.Negative.ToString();
-                if (_context.AdjustmentCode.Count() == 0)
+                if (_context.AdjustmentCodes.Count() == 0)
                     SeedAdjustmentCodes(_context);
-                return _context.AdjustmentCode
+                return _context.AdjustmentCodes
                    .Where(x => x.Use && x.Type == negative)
                    .Select(x => new IdNamePair()
                    {
@@ -227,19 +221,19 @@ namespace Service.Core.Inventory
             {
                 var msg = "";
                 var args = BaseEventArgs<AdjustmentCodeModel>.Instance;
-                var duplicate = _context.AdjustmentCode.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
+                var duplicate = _context.AdjustmentCodes.FirstOrDefault(x => x.Id != model.Id && x.Name == model.Name);
                 if (duplicate != null)
                 {
                     return ResponseModel<AdjustmentCodeModel>.GetError("Same 'Adjustment Code' already exists");
                 }
 
                 // get the package
-                var entity = _context.AdjustmentCode.FirstOrDefault(x => x.Id == model.Id);
+                var entity = _context.AdjustmentCodes.FirstOrDefault(x => x.Id == model.Id);
                 entity = model.MapToEntity(entity);//AdjustmentCodeMapper.MapToEntity
                 if (model.Id == 0)
                 {
                     // add
-                    _context.AdjustmentCode.Add(entity);
+                    _context.AdjustmentCodes.Add(entity);
                     args.Mode = Utility.UpdateMode.ADD;
                 }
                 else
@@ -258,7 +252,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.AdjustmentCode.AsEnumerable();
+                var query = _context.AdjustmentCodes.AsEnumerable();
                 if (!query.Any())
                 {
                     // add system defined adj codes
@@ -279,7 +273,7 @@ namespace Service.Core.Inventory
             //
             // Positive
             //
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -287,7 +281,7 @@ namespace Service.Core.Inventory
                 Type = AdjustmentTypeEnum.Positive.ToString(),
                 Use = true,
             });
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -295,7 +289,7 @@ namespace Service.Core.Inventory
                 Type = AdjustmentTypeEnum.Positive.ToString(),
                 Use = true,
             });
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -303,7 +297,7 @@ namespace Service.Core.Inventory
                 Type = AdjustmentTypeEnum.Positive.ToString(),
                 Use = true,
             });
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -315,7 +309,7 @@ namespace Service.Core.Inventory
             //
             // Negative
             //
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -323,7 +317,7 @@ namespace Service.Core.Inventory
                 Type = AdjustmentTypeEnum.Negative.ToString(),
                 Use = true,
             });
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -331,7 +325,7 @@ namespace Service.Core.Inventory
                 Type = AdjustmentTypeEnum.Negative.ToString(),
                 Use = true,
             });
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -339,7 +333,7 @@ namespace Service.Core.Inventory
                 Type = AdjustmentTypeEnum.Negative.ToString(),
                 Use = true,
             });
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -347,7 +341,7 @@ namespace Service.Core.Inventory
                 Type = AdjustmentTypeEnum.Negative.ToString(),
                 Use = true,
             });
-            _context.AdjustmentCode.Add(new AdjustmentCode()
+            _context.AdjustmentCodes.Add(new AdjustmentCode()
             {
                 AffectsDemand = false,
                 IsSystem = true,
@@ -372,7 +366,7 @@ namespace Service.Core.Inventory
                 var response = new ResponseModel<PackageModel>();
                 var msg = "";
                 var args = BaseEventArgs<PackageModel>.Instance;
-                var duplicate = _context.Package.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
+                var duplicate = _context.Packages.FirstOrDefault(x => x.Id != package.Id && x.Name == package.Name);
                 if (duplicate != null)
                 {
                     response.Message = "Same 'Package' Name already exists";
@@ -381,12 +375,12 @@ namespace Service.Core.Inventory
                 }
 
                 // get the package
-                var entity = _context.Package.FirstOrDefault(x => x.Id == package.Id);
+                var entity = _context.Packages.FirstOrDefault(x => x.Id == package.Id);
                 entity = PackageMapper.MapToEntity(package, entity);
                 if (package.Id == 0)
                 {
                     // add
-                    _context.Package.Add(entity);
+                    _context.Packages.Add(entity);
                     args.Mode = Utility.UpdateMode.ADD;
                 }
                 else
@@ -407,7 +401,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.Package.OrderBy(x => x.Name).AsQueryable();
+                var query = _context.Packages.OrderBy(x => x.Name).AsQueryable();
                 return PackageMapper.MapToModel(query);
             }
         }
@@ -416,7 +410,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Package.Find(packageId).MapToModel();
+                return _context.Packages.Find(packageId).MapToModel();
             }
         }
 
@@ -424,7 +418,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Package.FirstOrDefault(x => x.Name == packagename).MapToModel();
+                return _context.Packages.FirstOrDefault(x => x.Name == packagename).MapToModel();
             }
         }
 
@@ -432,7 +426,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var wpList = _context.WarehouseProduct
+                var wpList = _context.WarehouseProducts
                                 .Include(x => x.Product)
                                 .Include(x => x.Warehouse)
                                 .Where(x => x.InStockQuantity > 0
@@ -449,7 +443,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.User
+                return _context.Users
                                 //.Where(x=>x.Use)
                                 .Select(x => new IdNamePair()
                                 {
@@ -464,7 +458,7 @@ namespace Service.Core.Inventory
             var list = new List<TransactionSummaryModel>();
             using (var _context = new DatabaseContext())
             {
-                var totalOrders = _context.Order.Where(x => x.IsCompleted && x.CompletedDate >= start && x.CompletedDate <= end)
+                var totalOrders = _context.Orders.Where(x => x.IsCompleted && x.CompletedDate >= start && x.CompletedDate <= end)
                     .GroupBy(x => x.OrderType)
                     .Select(x => new TransactionSummaryModel
                     {
@@ -473,7 +467,7 @@ namespace Service.Core.Inventory
                     })
                     .ToList();
                 list.AddRange(totalOrders);
-                var sss = _context.Order.ToList();
+                var sss = _context.Orders.ToList();
             }
             return list;
         }
@@ -483,12 +477,12 @@ namespace Service.Core.Inventory
             var list = new List<TransactionSummaryModel>();
             using (var _context = new DatabaseContext())
             {
-                var totalProducts = _context.Product.Count();
+                var totalProducts = _context.Products.Count();
                 list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Product.ToString(), Value = totalProducts });
-                var totalInventoryQty = _context.Product.Select(x => (decimal?)x.InStockQuantity).Sum() ?? 0;
+                var totalInventoryQty = _context.Products.Select(x => (decimal?)x.InStockQuantity).Sum() ?? 0;
                 list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.InventoryQuantity.ToString(), Value = totalInventoryQty });
                 var customer = UserTypeEnum.Customer.ToString();
-                var totalCustomers = _context.User.Where(x => x.UserType == customer).Count();
+                var totalCustomers = _context.Users.Where(x => x.UserType == customer).Count();
                 list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Customer.ToString(), Value = totalCustomers });
             }
             return list;
@@ -504,16 +498,16 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var alreadyExists = _context.Uom.Any(x => x.Id != model.Id && x.ProductId == null && ((x.Package.Name == model.Package && x.RelatedPackage.Name == model.RelatedPackage)
-                                       || (x.Package.Name == model.RelatedPackage && x.RelatedPackage.Name == model.Package)));
+                var alreadyExists = _context.Uoms.Any(x => x.Id != model.Id && x.ProductId == null && ((x.Package.Name == model.Package && x.Package1.Name == model.RelatedPackage)
+                                       || (x.Package.Name == model.RelatedPackage && x.Package1.Name == model.Package)));
                 if (alreadyExists)
                     return ResponseModel<UomModel>.GetError($"Uom for relation of {model.Package} and {model.RelatedPackage} already exists. Please enter another or update the existing.");
 
-                var entity = _context.Uom.Find(model.Id);
+                var entity = _context.Uoms.Find(model.Id);
                 entity = model.MapToEntity(entity); //UomMapper.MapToEntity(model, entity);
                 var args = BaseEventArgs<UomModel>.Instance;
                 // add
-                var package = _context.Package.FirstOrDefault(x => x.Name.ToLower() == model.Package.ToLower());
+                var package = _context.Packages.FirstOrDefault(x => x.Name.ToLower() == model.Package.ToLower());
                 if (package == null)
                 {
                     package = new Package
@@ -527,7 +521,7 @@ namespace Service.Core.Inventory
                 {
                     entity.PackageId = package.Id;
                 }
-                var relatedPackage = _context.Package.FirstOrDefault(x => x.Name.ToLower() == model.RelatedPackage.ToLower());
+                var relatedPackage = _context.Packages.FirstOrDefault(x => x.Name.ToLower() == model.RelatedPackage.ToLower());
                 if (relatedPackage == null)
                 {
                     relatedPackage = new Package
@@ -535,7 +529,7 @@ namespace Service.Core.Inventory
                         Name = model.RelatedPackage,
                         Use = true,
                     };
-                    entity.RelatedPackage = relatedPackage;
+                    entity.Package1 = relatedPackage;
                 }
                 else
                 {
@@ -544,7 +538,7 @@ namespace Service.Core.Inventory
 
                 if (model.Id == 0)
                 {
-                    _context.Uom.Add(entity);
+                    _context.Uoms.Add(entity);
                     args.Mode = Utility.UpdateMode.ADD;
                 }
                 else
@@ -566,7 +560,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var uoms = _context.Uom.Where(x => x.ProductId == null).AsQueryable();
+                var uoms = _context.Uoms.Where(x => x.ProductId == null).AsQueryable();
                 return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
             }
 
@@ -578,7 +572,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = new DatabaseContext())
             {
-                var uom = _context.Uom.Find(uomId);
+                var uom = _context.Uoms.Find(uomId);
                 return uom.MapToUomModel();//UomMapper.MapToUomModel(uoms);
             }
 
@@ -783,7 +777,7 @@ namespace Service.Core.Inventory
          variantEntity.AttributesJSON = JsonConvert.SerializeObject(variant.Attributes);
          productEntity.Variants.Add(variantEntity);
      }
-     _context.Product.Add(productEntity);
+     _context.Products.Add(productEntity);
      _context.SaveChanges();
      _listener.TriggerProductUpdateEvent(null, null);
  }*/
@@ -870,7 +864,7 @@ namespace Service.Core.Inventory
 
 //public void DeleteProduct(int id)
 //{
-//    var product = _context.Product.Find(id);
+//    var product = _context.Products.Find(id);
 //    if (product != null)
 //    {
 //        product.DeletedAt = DateTime.Now;
@@ -882,7 +876,7 @@ namespace Service.Core.Inventory
 
 //public void DeleteProduct(ProductModel produtModel)
 //{
-//    var dbEntity = _context.Product.FirstOrDefault(x => x.Id == produtModel.Id);
+//    var dbEntity = _context.Products.FirstOrDefault(x => x.Id == produtModel.Id);
 //    if (dbEntity != null)
 //    {
 //        dbEntity.DeletedAt = DateTime.Now;

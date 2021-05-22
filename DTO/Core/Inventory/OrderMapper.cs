@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using DTO.AutoMapperBase;
-using Infrastructure.Entities.Orders;
+using Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core.Orders;
 using ViewModel.Enums;
 using ViewModel.Utility;
@@ -61,7 +59,7 @@ namespace DTO.Core.Inventory
                 .ForMember(x => x.Warehouse,
                             opt => opt.MapFrom(src => src.Warehouse == null ? "" : src.Warehouse.Name))
                 .ForMember(x => x.ToWarehouse,
-                            opt => opt.MapFrom(src => src.ToWarehouse == null ? "" : src.ToWarehouse.Name))
+                            opt => opt.MapFrom(src => src.Warehouse1 == null ? "" : src.Warehouse1.Name))
                .ForMember(x => x.ParentOrder, opt => opt.Ignore())
                .ForMember(x => x.OrderItems, opt => opt.Ignore())
                .ForMember(x => x.Status,
@@ -82,9 +80,9 @@ namespace DTO.Core.Inventory
             // from model to entity
             CreateMap<OrderModel, Order>()
                 .ForMember(x => x.Warehouse, src => src.Ignore())
-                .ForMember(x => x.ToWarehouse, src => src.Ignore())
+                .ForMember(x => x.Warehouse1, src => src.Ignore())
                 .ForMember(x => x.User, src => src.Ignore())
-                .ForMember(x => x.ParentOrder, src => src.Ignore())
+                .ForMember(x => x.Order1, src => src.Ignore())
                 .ForMember(x => x.OrderItems, src => src.Ignore())
                 .ForMember(x => x.CreatedAt, src => src.Ignore())
                 .ForMember(x => x.UserId, opt => opt.MapFrom(src=> src.UserId == 0 ? null : src.UserId))

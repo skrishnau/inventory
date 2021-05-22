@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.Entities.Business;
+﻿using System.Collections.Generic;
+using Infrastructure.Context;
 using ViewModel.Core.Business;
 
 namespace DTO.Core.Business

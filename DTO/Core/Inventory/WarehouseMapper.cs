@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using DTO.AutoMapperBase;
-using Infrastructure.Entities.Business;
-using Infrastructure.Entities.Inventory;
+using Infrastructure.Context;
 using ViewModel.Core.Business;
 
 namespace DTO.Core.Inventory

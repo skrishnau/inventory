@@ -1,11 +1,7 @@
 ﻿using Infrastructure.Context;
-using Infrastructure.Entities.Inventory;
 using Service.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Core
 {
@@ -35,13 +31,13 @@ namespace Service.Core
         private decimal ConvertUom(DatabaseContext _context, int fromPackageId, int toPackageId, int? productId)
         {
             var isProductSpecific = ((productId ?? 0) > 0);
-            var from = _context.Package.FirstOrDefault(x => x.Id == fromPackageId);
-            var to = _context.Package.FirstOrDefault(x => x.Id == toPackageId);
+            var from = _context.Packages.FirstOrDefault(x => x.Id == fromPackageId);
+            var to = _context.Packages.FirstOrDefault(x => x.Id == toPackageId);
             List<Uom> allRelated;
             if (isProductSpecific)
-                allRelated = _context.Uom.Where(x => x.ProductId == productId).ToList();
+                allRelated = _context.Uoms.Where(x => x.ProductId == productId).ToList();
             else
-                allRelated = _context.Uom.Where(x => x.ProductId == null).ToList();
+                allRelated = _context.Uoms.Where(x => x.ProductId == null).ToList();
             //var allRelated = uoms.Where(x => x.PackageId == from.Id || x.RelatedPackageId == from.Id || x.PackageId == to.Id || x.RelatedPackageId == to.Id).ToList();
             var path = GetUomPath(_context, from, to, allRelated, null, new List<int>());
             if (path.IsRightPath)
@@ -52,7 +48,7 @@ namespace Service.Core
             else if (isProductSpecific)
             {
                 // try with both product and global once again
-                allRelated = _context.Uom.Where(x => x.ProductId == productId || x.ProductId == null).ToList();
+                allRelated = _context.Uoms.Where(x => x.ProductId == productId || x.ProductId == null).ToList();
                 var pathGlobal = GetUomPath(_context, from, to, allRelated, null, new List<int>());
                 if (pathGlobal.IsRightPath)
                 {
@@ -83,7 +79,7 @@ namespace Service.Core
             var uomPath = new UomPath();
             if (from.Id == to.Id)
             {
-                return new UomPath { IsRightPath = true, Uom = new Uom() { Package = from, RelatedPackage = to, Quantity = 1 } };
+                return new UomPath { IsRightPath = true, Uom = new Uom() { Package = from, Package1 = to, Quantity = 1 } };
             }
             var copy = MakeCopy(allEarlierPackages);
             copy.Add(from.Id);
@@ -91,7 +87,7 @@ namespace Service.Core
             foreach (var m in source)
             {
                 // get the other package 
-                var currentPackageToCheck = m.PackageId != from.Id ? m.Package : m.RelatedPackage;
+                var currentPackageToCheck = m.PackageId != from.Id ? m.Package : m.Package1;
                 if (!copy.Contains(currentPackageToCheck.Id))
                 {
                     var isRight = currentPackageToCheck.Id == to.Id;

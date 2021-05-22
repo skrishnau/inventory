@@ -50,122 +50,124 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\DatabaseContext.cs" />
-    <Compile Include="Entities\Accounts\FiscalYear.cs" />
-    <Compile Include="Entities\Inventory\PriceHistory.cs" />
-    <Compile Include="Entities\Inventory\ProductPackage.cs" />
-    <Compile Include="Entities\Transaction.cs" />
-    <Compile Include="Entities\AppSettings\AppSetting.cs" />
-    <Compile Include="Entities\Bills\Bill.cs" />
-    <Compile Include="Entities\Business\Branch.cs" />
-    <Compile Include="Entities\Business\Company.cs" />
-    <Compile Include="Entities\Business\Counter.cs" />
-    <Compile Include="Entities\Inventory\AdjustmentCode.cs" />
-    <Compile Include="Entities\Inventory\InventoryUnit.cs" />
-    <Compile Include="Entities\Inventory\Movement.cs" />
-    <Compile Include="Entities\Inventory\Package.cs" />
-    <Compile Include="Entities\Inventory\ProductAttribute.cs" />
-    <Compile Include="Entities\Inventory\Transfer.cs" />
-    <Compile Include="Entities\Inventory\Uom.cs" />
-    <Compile Include="Entities\Inventory\Variant.cs" />
-    <Compile Include="Entities\Inventory\VariantAttribute.cs" />
-    <Compile Include="Entities\Inventory\WarehouseProduct.cs" />
-    <Compile Include="Entities\Orders\OrderItem.cs" />
-    <Compile Include="Entities\TransactionItem.cs" />
-    <Compile Include="Entities\zForNextVersion\UserBrach.cs" />
-    <Compile Include="Entities\Inventory\Warehouse.cs" />
-    <Compile Include="Entities\Common\Settings.cs" />
-    <Compile Include="Entities\Common\SystemAction.cs" />
-    <Compile Include="Entities\Inventory\Brand.cs" />
-    <Compile Include="Entities\Inventory\Product.cs" />
-    <Compile Include="Entities\Inventory\Category.cs" />
-    <Compile Include="Entities\Inventory\ProductSupplier.cs" />
-    <Compile Include="Entities\Common\Lead.cs" />
-    <Compile Include="Entities\Orders\Order.cs" />
-    <Compile Include="Entities\Orders\Payment.cs" />
-    <Compile Include="Entities\Users\Permission.cs" />
-    <Compile Include="Entities\Users\Role.cs" />
-    <Compile Include="Entities\Users\User.cs" />
-    <Compile Include="Migrations\202101231159580_InitMigration.cs" />
-    <Compile Include="Migrations\202101231159580_InitMigration.Designer.cs">
-      <DependentUpon>202101231159580_InitMigration.cs</DependentUpon>
+    <Compile Include="Context\AdjustmentCode.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104140647150_CostPriceAdded.cs" />
-    <Compile Include="Migrations\202104140647150_CostPriceAdded.Designer.cs">
-      <DependentUpon>202104140647150_CostPriceAdded.cs</DependentUpon>
+    <Compile Include="Context\AppSetting.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104140920336_PriceHistoryAdded.cs" />
-    <Compile Include="Migrations\202104140920336_PriceHistoryAdded.Designer.cs">
-      <DependentUpon>202104140920336_PriceHistoryAdded.cs</DependentUpon>
+    <Compile Include="Context\Bill.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104141009562_ProductAddedInMovementTable.cs" />
-    <Compile Include="Migrations\202104141009562_ProductAddedInMovementTable.Designer.cs">
-      <DependentUpon>202104141009562_ProductAddedInMovementTable.cs</DependentUpon>
+    <Compile Include="Context\Branch.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104291835228_AddedTransactionItemTable.cs" />
-    <Compile Include="Migrations\202104291835228_AddedTransactionItemTable.Designer.cs">
-      <DependentUpon>202104291835228_AddedTransactionItemTable.cs</DependentUpon>
+    <Compile Include="Context\Category.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104291920038_nullableorderItemId.cs" />
-    <Compile Include="Migrations\202104291920038_nullableorderItemId.Designer.cs">
-      <DependentUpon>202104291920038_nullableorderItemId.cs</DependentUpon>
+    <Compile Include="Context\Counter.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105021735424_TransactionItemAddedOrderItem.cs" />
-    <Compile Include="Migrations\202105021735424_TransactionItemAddedOrderItem.Designer.cs">
-      <DependentUpon>202105021735424_TransactionItemAddedOrderItem.cs</DependentUpon>
+    <Compile Include="Context\C__MigrationHistory.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105081712155_UOM_Table_Refined.cs" />
-    <Compile Include="Migrations\202105081712155_UOM_Table_Refined.Designer.cs">
-      <DependentUpon>202105081712155_UOM_Table_Refined.cs</DependentUpon>
+    <Compile Include="Context\DatabaseContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105091903145_precisionOfUOMQuantityChangedTo18_9.cs" />
-    <Compile Include="Migrations\202105091903145_precisionOfUOMQuantityChangedTo18_9.Designer.cs">
-      <DependentUpon>202105091903145_precisionOfUOMQuantityChangedTo18_9.cs</DependentUpon>
+    <Compile Include="Context\DatabaseContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Context\DatabaseContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Context\InventoryUnit.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Movement.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Order.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\OrderItem.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Package.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Payment.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\PriceHistory.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Product.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ProductAttribute.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ProductPackage.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Transaction.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\TransactionItem.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Transfer.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Uom.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\User.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Warehouse.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\WarehouseProduct.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <EntityDeploy Include="Context\DatabaseContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Context\DatabaseContext.edmx.diagram">
+      <DependentUpon>DatabaseContext.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Entities\zForNextVersion\Readme.txt" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Entities\Items\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101231159580_InitMigration.resx">
-      <DependentUpon>202101231159580_InitMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104140647150_CostPriceAdded.resx">
-      <DependentUpon>202104140647150_CostPriceAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104140920336_PriceHistoryAdded.resx">
-      <DependentUpon>202104140920336_PriceHistoryAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104141009562_ProductAddedInMovementTable.resx">
-      <DependentUpon>202104141009562_ProductAddedInMovementTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104291835228_AddedTransactionItemTable.resx">
-      <DependentUpon>202104291835228_AddedTransactionItemTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104291920038_nullableorderItemId.resx">
-      <DependentUpon>202104291920038_nullableorderItemId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105021735424_TransactionItemAddedOrderItem.resx">
-      <DependentUpon>202105021735424_TransactionItemAddedOrderItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105081712155_UOM_Table_Refined.resx">
-      <DependentUpon>202105081712155_UOM_Table_Refined.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105091903145_precisionOfUOMQuantityChangedTo18_9.resx">
-      <DependentUpon>202105091903145_precisionOfUOMQuantityChangedTo18_9.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Context\DatabaseContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseContext.edmx</DependentUpon>
+      <LastGenOutput>DatabaseContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Context\DatabaseContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseContext.edmx</DependentUpon>
+      <LastGenOutput>DatabaseContext.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

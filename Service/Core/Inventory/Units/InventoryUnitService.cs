@@ -6,13 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ViewModel.Core.Inventory;
 using System.Data.Entity;
-using Infrastructure.Entities.Inventory;
 using Service.Utility;
 using Service.DbEventArgs;
-using Infrastructure.Entities.Orders;
-using Service.Core.Orders;
-using ViewModel.Core.Orders;
-using Infrastructure.Entities;
 using Service.Interfaces;
 
 namespace Service.Core.Inventory.Units
@@ -63,10 +58,10 @@ namespace Service.Core.Inventory.Units
         }
         public IQueryable<InventoryUnit> GetInventoryUnitQueryable(DatabaseContext _context, int warehouseId, int productId)
         {
-            return _context.InventoryUnit
+            return _context.InventoryUnits
                     .Include(x => x.Product)
                     .Include(x => x.Package)
-                    .Include(x => x.Supplier)
+                    .Include(x => x.User)
                     // .Include(x => x.Uom)
                     .Include(x => x.Warehouse)
                     .Where(x => (warehouseId == 0 || x.WarehouseId == warehouseId)
@@ -87,7 +82,7 @@ namespace Service.Core.Inventory.Units
                     DateTime now = DateTime.Now;
                     foreach (var productWiseGroup in list.GroupBy(x => x.ProductId))
                     {
-                        var product = _context.Product.Find(productWiseGroup.Key);
+                        var product = _context.Products.Find(productWiseGroup.Key);
 
                         if (product != null)
                         {
@@ -138,7 +133,7 @@ namespace Service.Core.Inventory.Units
             for (var i = 0; i < invList.Count(); i++)
             {
                 var invId = invList.ElementAt(i).Id;
-                var dbEntity = _context.InventoryUnit.Include(x=>x.Package).FirstOrDefault(x => x.Id == invId);
+                var dbEntity = _context.InventoryUnits.Include(x=>x.Package).FirstOrDefault(x => x.Id == invId);
                 if (dbEntity != null)
                 {
                     var conversion = _uomService.ConvertUom(_context, dbEntity.PackageId ?? 0, productPackage?.Id ?? 0, product.Id, 1);
@@ -155,7 +150,7 @@ namespace Service.Core.Inventory.Units
                     if (i < invList.Count() - 1)
                     {
                         // remove
-                        _context.InventoryUnit.Remove(dbEntity);
+                        _context.InventoryUnits.Remove(dbEntity);
                         invList.ElementAt(i).UpdateAction = UpdateMode.DELETE.ToString();
                     }
                     else
@@ -195,7 +190,7 @@ namespace Service.Core.Inventory.Units
                 //find
                 if (quantitySplitList.Count > 1)
                 {
-                    var entity = _context.InventoryUnit
+                    var entity = _context.InventoryUnits
                         .Include(x => x.Product)
                         .Include(x => x.Warehouse)
                         .FirstOrDefault(x => x.Id == model.Id);
@@ -233,7 +228,7 @@ namespace Service.Core.Inventory.Units
                                         newEntity.Id = 0;
                                         newEntity.UnitQuantity = quantity;
                                         //newEntity.PackageQuantity = GetPackageQuantity(quantity, entity.Product.UnitsInPackage); //Math.Ceiling(quantity / unitsInPackage) + (quantity % unitsInPackage == 0 ? 0 : 1);
-                                        _context.InventoryUnit.Add(newEntity);
+                                        _context.InventoryUnits.Add(newEntity);
                                     }
 
                                 }
@@ -256,7 +251,7 @@ namespace Service.Core.Inventory.Units
                 ? modelToBase
                 : _uomService.ConvertUom(_context, moveModel.PackageId, productPackageId, product.Id);
 
-            // var product = _context.Product.Find(moveModel.InventoryUnit.ProductId);
+            // var product = _context.Products.Find(moveModel.InventoryUnit.ProductId);
             if (product != null)
             {
                 var entityQty = moveModel.UnitQuantity * entityToBase;
@@ -352,7 +347,7 @@ namespace Service.Core.Inventory.Units
 
         public IQueryable<Movement> GetMovementListQuery(DatabaseContext _context, int productId)
         {
-            return _context.Movement
+            return _context.Movements
                     .Where(x => productId == 0 || x.ProductId == productId)
                     .OrderByDescending(x => x.Date)
                     .AsQueryable();
@@ -379,15 +374,15 @@ namespace Service.Core.Inventory.Units
                 Reference = reference,
                 ProductId = productId,
             };
-            _context.Movement.Add(movement);
+            _context.Movements.Add(movement);
         }
         public Warehouse FindWarehouseOrReturnMainWarehouse(DatabaseContext _context, int? warehouseId)
         {
-            var warehouse = _context.Warehouse.Find(warehouseId);
+            var warehouse = _context.Warehouses.Find(warehouseId);
             if (warehouse == null)
             {
                 // get main warehouse
-                warehouse = _context.Warehouse.FirstOrDefault();
+                warehouse = _context.Warehouses.FirstOrDefault();
                 if (warehouse == null)
                 {
                     warehouse = new Warehouse
@@ -402,7 +397,7 @@ namespace Service.Core.Inventory.Units
                     };
                     using (var tempContext = new DatabaseContext())
                     {
-                        tempContext.Warehouse.Add(warehouse);
+                        tempContext.Warehouses.Add(warehouse);
                         tempContext.SaveChanges();
                     }
                 }
@@ -430,18 +425,18 @@ namespace Service.Core.Inventory.Units
             unit.WarehouseId = warehouse.Id;
             if (!string.IsNullOrEmpty(unit.Package) && (unit.PackageId ?? 0) == 0)
             {
-                unit.PackageId = _context.Package.FirstOrDefault(x => x.Name == unit.Package)?.Id;
+                unit.PackageId = _context.Packages.FirstOrDefault(x => x.Name == unit.Package)?.Id;
             }
             var unitEntity = unit.MapToEntity();
             unitEntity.ReceiveDate = receivedDate;
             unitEntity.ReceiveAdjustment = adjustmentCode;
-            unitEntity.Supplier = orderItem.Supplier;
+            unitEntity.User = orderItem.User;
             unitEntity.SupplierId = orderItem.SupplierId;
             unitEntity.ReceiveReceipt = reference;
-            _context.InventoryUnit.Add(unitEntity);
+            _context.InventoryUnits.Add(unitEntity);
 
             if (product == null)
-                product = _context.Product.Find(unit.ProductId);
+                product = _context.Products.Find(unit.ProductId);
 
             var description = "Received " + unit.UnitQuantity + " quantities of " +
                 product.Name;// + " into " + warehouse.Name + " warehouse.";
@@ -467,7 +462,7 @@ namespace Service.Core.Inventory.Units
             var msg = string.Empty;
 
             //var entityList = InventoryUnitMapper.MapToEntity(list);
-            //_context.InventoryUnit.AddRange(entityList);
+            //_context.InventoryUnits.AddRange(entityList);
             if (!list.Any())
             {
                 msg = "There aren't any items to receive";
@@ -493,7 +488,7 @@ namespace Service.Core.Inventory.Units
                 var msg = string.Empty;
                 foreach (var model in list)
                 {
-                    var dbEntity = _context.InventoryUnit
+                    var dbEntity = _context.InventoryUnits
                         .Include(x => x.Product)
                         .Include(x => x.Warehouse)
                         .FirstOrDefault(x => x.Id == model.Id);
@@ -519,7 +514,7 @@ namespace Service.Core.Inventory.Units
                             issuedQuantity = dbEntity.UnitQuantity;
                             // case is : model.UnitQuantity >= entity.UnitQuantity
                             // remove the InventoryUnit
-                            _context.InventoryUnit.Remove(dbEntity);
+                            _context.InventoryUnits.Remove(dbEntity);
                         }
                         //
                         // Movement
@@ -584,7 +579,7 @@ namespace Service.Core.Inventory.Units
 
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, model.WarehouseId);
             model.WarehouseId = warehouse.Id;
-            var invUnit = _context.InventoryUnit
+            var invUnit = _context.InventoryUnits
                 .Include(x => x.Product)
                 .Include(x => x.Warehouse)
                 .Where(x => x.WarehouseId == model.WarehouseId
@@ -626,7 +621,7 @@ namespace Service.Core.Inventory.Units
                 var productName = dbEntity.Product.Name;
                 var warehouseName = dbEntity.Warehouse.Name;
                 var issuedQuantity = 0M;
-                // we shouldn't use dbEntity once it's removed from _context.InventoryUnit so assign the values here before removing
+                // we shouldn't use dbEntity once it's removed from _context.InventoryUnits so assign the values here before removing
                 var warehouseId = dbEntity.WarehouseId;
                 var product = dbEntity.Product;
                 var productId = dbEntity.ProductId;
@@ -655,7 +650,7 @@ namespace Service.Core.Inventory.Units
                     // case is : model.UnitQuantity >= entity.UnitQuantity
                     // remove the InventoryUnit
                     remainingQty -= dbEntity.UnitQuantity / conversion;
-                    _context.InventoryUnit.Remove(dbEntity);
+                    _context.InventoryUnits.Remove(dbEntity);
                 }
                 // note : don't use dbEntity below this comment line. if you want to use the dbentity then assign it's value to another var before remove() func.
                 list.Add(new InventoryUnit { Rate = rate * conversion, UnitQuantity = issuedQuantity / conversion, PackageId = model.PackageId, OrderItemId = orderItemId });
@@ -697,7 +692,7 @@ namespace Service.Core.Inventory.Units
                     foreach (var iuModel in list)
                     {
                         // first find
-                        var dbEntity = _context.InventoryUnit
+                        var dbEntity = _context.InventoryUnits
                             .Include(x => x.Warehouse)
                             .Include(x => x.Product)
                             .FirstOrDefault(x => x.Id == iuModel.Id && x.WarehouseId != warehouseId);
@@ -736,7 +731,7 @@ namespace Service.Core.Inventory.Units
         public PriceHistory GetRate(DatabaseContext _context, int productId, DateTime completedDate)
         {
             var date = completedDate.Date;
-            return _context.PriceHistory.FirstOrDefault(x => x.ProductId == productId && x.Date.Date == date);
+            return _context.PriceHistories.FirstOrDefault(x => x.ProductId == productId && x.Date.Date == date);
         }
     }
 }

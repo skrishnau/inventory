@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using DTO.AutoMapperBase;
-using Infrastructure.Entities.Orders;
-using System;
+using Infrastructure.Context;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core.Orders;
 using ViewModel.Utility;
 

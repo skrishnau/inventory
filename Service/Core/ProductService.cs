@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Context;
-using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +7,12 @@ using System.Data.Entity;
 using DTO.Core.Inventory;
 using Service.Listeners;
 using Service.Listeners.Inventory;
-using Newtonsoft.Json;
 using Service.DbEventArgs;
 using ViewModel.Core.Common;
 using Service.Utility;
-using ViewModel.Enums.Inventory;
-using ViewModel.Core.Business;
-using Infrastructure.Entities.Business;
-using DTO.Core.Business;
 using ViewModel.Enums;
-using ViewModel.Core.Orders;
 using Service.Interfaces;
 using System.Threading.Tasks;
-using Infrastructure.Entities.Orders;
 using ViewModel.Core;
 using ViewModel.Utility;
 
@@ -40,12 +32,12 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var dbEntity = _context.Category.FirstOrDefault(x => x.Id == category.Id);
+                var dbEntity = _context.Categories.FirstOrDefault(x => x.Id == category.Id);
                 var catEventArgs = CategoryEventArgs.Instance;
                 if (dbEntity == null)
                 {
                     dbEntity = category.ToEntity();
-                    _context.Category.Add(dbEntity);
+                    _context.Categories.Add(dbEntity);
                     catEventArgs.Mode = Utility.UpdateMode.ADD;
                 }
                 else
@@ -70,7 +62,7 @@ namespace Service.Core
 
                     var now = DateTime.Now;
 
-                    var entity = _context.Product
+                    var entity = _context.Products
                         .Include(x => x.ProductAttributes)
                         .FirstOrDefault(x => x.Id == model.Id);
 
@@ -94,7 +86,7 @@ namespace Service.Core
                             // if it's not in the model then remove it
                             if (!model.Uoms.Any(x => x.Id == uomEntities[i].Id))
                             {
-                                _context.Uom.Remove(uomEntities[i]);
+                                _context.Uoms.Remove(uomEntities[i]);
                             }
                         }
                     }
@@ -102,7 +94,7 @@ namespace Service.Core
                     {
                         // need to set the base package to false before deleting from _context cause it's still available in entity.ProductPackages
                         entity.ProductPackages.ElementAt(i).IsBasePackage = false;
-                        _context.ProductPackage.Remove(entity.ProductPackages.ElementAt(i));
+                        _context.ProductPackages.Remove(entity.ProductPackages.ElementAt(i));
                     }
                     List<ProductPackage> packageList = new List<ProductPackage>();
                     foreach (var uom in model.Uoms)
@@ -136,7 +128,7 @@ namespace Service.Core
                         entity.ProductAttributes = new List<ProductAttribute>();
                         //entity.Variants = new List<Variant>();
                         // entity.Brands = new List<Brand>();
-                        _context.Product.Add(entity);
+                        _context.Products.Add(entity);
                         eventArgs.Mode = Utility.UpdateMode.ADD;
                     }
                     else
@@ -201,21 +193,21 @@ namespace Service.Core
         public void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId)
         {
             var dt = (completedDate ?? DateTime.Now).Date;
-            var rateHistory = product.PriceHistory.Where(x => x.Date == dt && x.PriceType == orderType).ToList();
-            var rateFromHistory = (rateHistory.LastOrDefault()?.Price ?? 0) != rate;
+            var rateHistory = product.PriceHistories.Where(x => x.Date == dt && x.PriceType == orderType).ToList();
+            var rateFromHistory = (rateHistory.LastOrDefault()?.Rate ?? 0) != rate;
             if (rate > 0 && rateFromHistory)
             {
                 var priceHistory = new PriceHistory
                 {
                     Date = dt,
-                    Price = rate,
+                    Rate = rate,
                     PriceType = orderType,
                 };
                 if (package != null)
                     priceHistory.Package = package;
                 else if (packageId > 0)
                     priceHistory.PackageId = packageId;
-                product.PriceHistory.Add(priceHistory);
+                product.PriceHistories.Add(priceHistory);
             }
         }
 
@@ -255,7 +247,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var products = _context.Product//.AsQueryable()// GetProductEntityList()
+                var products = _context.Products//.AsQueryable()// GetProductEntityList()
                 .Where(x => x.Use)
                 .Select(x => new IdNamePair()
                 {
@@ -319,7 +311,7 @@ namespace Service.Core
 
         private IQueryable<Product> GetProductListQuery(DatabaseContext _context, int categoryId, string searchText)
         {
-            var products = _context.Product
+            var products = _context.Products
                                 .Include(x => x.ProductAttributes)
                                 .Where(x => !x.IsDiscontinued)
                                //.Include(x => x.ProductAttributes.Select(y => y.Option))
@@ -337,7 +329,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var entity = _context.Product.FirstOrDefault(x => !x.IsDiscontinued && x.SKU == sku);
+                var entity = _context.Products.FirstOrDefault(x => !x.IsDiscontinued && x.SKU == sku);
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }
@@ -345,7 +337,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var entity = _context.Product.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == nameOrSku || x.SKU == nameOrSku));
+                var entity = _context.Products.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == nameOrSku || x.SKU == nameOrSku));
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }
@@ -354,7 +346,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var entity = _context.Product.Find(id);
+                var entity = _context.Products.Find(id);
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }
@@ -364,7 +356,7 @@ namespace Service.Core
             {
                 // check if category is being used by any product
 
-                var dbEntity = _context.Category.Include(x => x.Products).FirstOrDefault(x => x.Id == categoryModel.Id);
+                var dbEntity = _context.Categories.Include(x => x.Products).FirstOrDefault(x => x.Id == categoryModel.Id);
                 if (dbEntity != null)
                 {
                     var isUsed = dbEntity.Products.Any(x => !x.IsDiscontinued);
@@ -384,7 +376,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var cats = _context.Category
+                var cats = _context.Categories
                                 .Where(x => x.DeletedAt == null && x.ParentCategoryId == parentCateogryId)
                                 .Select(x => new CategoryModel()
                                 {
@@ -393,7 +385,7 @@ namespace Service.Core
                                     Id = x.Id,
                                     CreatedAt = x.CreatedAt,
                                     UpdatedAt = x.UpdatedAt,
-                                    ParentCategory = (x.ParentCategory == null ? "" : x.ParentCategory.Name)
+                                    ParentCategory = (x.Category1 == null ? "" : x.Category1.Name)
 
                                 }).ToList();
 
@@ -410,7 +402,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.Category.Where(x => x.DeletedAt == null).ToList();
+                var query = _context.Categories.Where(x => x.DeletedAt == null).ToList();
                 var list = new List<IdNamePair>();
                 GetChildCategories(query, null, string.Empty, ref list);
                 return list;
@@ -437,7 +429,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var products = _context.Product
+                var products = _context.Products
                                .Include(x => x.ProductAttributes)
                                .Where(x => x.Use)
                                .Where(x => x.InStockQuantity <= x.ReorderPoint)
@@ -456,7 +448,7 @@ namespace Service.Core
             using (var _context = new DatabaseContext())
             {
                 name = name.Trim();
-                var cat = _context.Category.FirstOrDefault(x => x.DeletedAt == null && x.Name == name);
+                var cat = _context.Categories.FirstOrDefault(x => x.DeletedAt == null && x.Name == name);
 
                 return new CategoryModel
                 {
@@ -475,7 +467,7 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var product = _context.Product.Find(productId);
+                var product = _context.Products.Find(productId);
                 if (product == null)
                     return null;
                 return ProductMapper.MapToProductModel(product);
@@ -487,12 +479,12 @@ namespace Service.Core
         {
             using (var _context = new DatabaseContext())
             {
-                var product = _context.Product
+                var product = _context.Products
                                //.Include(x => x.Variants)
                                .Include(x => x.Uoms)
                                .Include(x => x.Category)
                                //.Include(x => x.Package)
-                               .Include(x => x.ParentProduct)
+                               .Include(x => x.Product1)
                                .Include(x => x.Warehouse)
                                .FirstOrDefault(x => x.Id == productId);
                 if (product == null)
@@ -511,7 +503,7 @@ namespace Service.Core
             {
                 var now = DateTime.Now;
 
-                var entity = _context.Product
+                var entity = _context.Products
                     .FirstOrDefault(x => x.Id == productId);
 
                 if (entity != null)
@@ -535,7 +527,7 @@ namespace Service.Core
             {
                 var thiryDays = DateTime.Now.AddDays(-31);
                 var priceType = OrderTypeEnum.Sale.ToString();
-                return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x => x.Date).MapToPriceHistoryModel();
+                return _context.PriceHistories.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x => x.Date).MapToPriceHistoryModel();
             }
         }
 
@@ -547,11 +539,11 @@ namespace Service.Core
 
                 //var thiryDays = DateTime.Now.AddDays(-31);
                 //var priceType = OrderTypeEnum.Sale.ToString();
-                //return _context.PriceHistory.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x => x.Date).MapToPriceHistoryModel();
+                //return _context.PriceHistories.Where(x => x.ProductId == productId && x.PriceType == priceType && x.Date > thiryDays).OrderByDescending(x => x.Date).MapToPriceHistoryModel();
                 var sale = OrderTypeEnum.Sale.ToString();
                 var purchase = OrderTypeEnum.Purchase.ToString();
                 var list = new List<PriceHistoryModel>();
-                IQueryable<PriceHistory> query = _context.PriceHistory.AsQueryable();
+                IQueryable<PriceHistory> query = _context.PriceHistories.AsQueryable();
                 IQueryable<IGrouping<dynamic, PriceHistory>> a;
                 if (productId > 0)
                 {
@@ -580,7 +572,7 @@ namespace Service.Core
                 }
                 else if (productId > 0)
                 {
-                    var product = _context.Product.Find(productId);
+                    var product = _context.Products.Find(productId);
                     if (product != null)
                     {
                         var grp = query.GroupBy(x => new { x.Date });
@@ -593,7 +585,7 @@ namespace Service.Core
                 }
                 else if (date.HasValue)
                 {
-                    var products = _context.Product.Where(x => !x.IsDiscontinued && x.Use);
+                    var products = _context.Products.Where(x => !x.IsDiscontinued && x.Use);
                     var grp = query.GroupBy(x => new { x.Product });
                     foreach (var prod in products)
                     {
@@ -640,7 +632,7 @@ namespace Service.Core
                 Date = date,
                 Package = package?.Name ?? "",
                 PackageId = package?.Id ?? 0,
-                Rate = (priceHistories?.Price ?? 0) == 0 ? null : priceHistories?.Price,
+                Rate = (priceHistories?.Rate ?? 0) == 0 ? null : priceHistories?.Rate,
                 PriceType = type, // priceHistories?.PriceType,
                 DateString = DateConverter.Instance.ToBS(date).ToString(),
                 Product = product.Name,
@@ -663,11 +655,11 @@ namespace Service.Core
 
                     var packageId = model.PackageId;
                     if (packageId == 0)
-                        packageId = _context.Package.FirstOrDefault(x => x.Name == model.Package)?.Id ?? 0;
+                        packageId = _context.Packages.FirstOrDefault(x => x.Name == model.Package)?.Id ?? 0;
                     var productId = model.ProductId;
                     if (productId == 0)
-                        productId = _context.Product.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
-                    var entity = _context.PriceHistory.FirstOrDefault(x => x.ProductId == productId && x.Date == date && x.PriceType == typeStr); //&& x.PackageId == packageId
+                        productId = _context.Products.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
+                    var entity = _context.PriceHistories.FirstOrDefault(x => x.ProductId == productId && x.Date == date && x.PriceType == typeStr); //&& x.PackageId == packageId
                     if (entity == null)
                     {
                         if (model.Rate > 0)
@@ -676,11 +668,11 @@ namespace Service.Core
                             {
                                 Date = date,
                                 PackageId = packageId,
-                                Price = model.Rate,
+                                Rate = model.Rate,
                                 PriceType = type.ToString(),
                                 ProductId = productId,
                             };
-                            _context.PriceHistory.Add(entity);
+                            _context.PriceHistories.Add(entity);
                         }
                     }
                     else
@@ -688,11 +680,11 @@ namespace Service.Core
                         if (model.Rate > 0)
                         {
                             entity.PackageId = model.PackageId;
-                            entity.Price = model.Rate;
+                            entity.Rate = model.Rate;
                         }
                         else
                         {
-                            _context.PriceHistory.Remove(entity);
+                            _context.PriceHistories.Remove(entity);
                         }
                     }
                 }
@@ -719,20 +711,20 @@ namespace Service.Core
                     case MovementTypeEnum.SOIssue:
                     case MovementTypeEnum.SOIssueEditItems:
                         var sale = OrderTypeEnum.Sale.ToString().ToLower();
-                        return _context.PriceHistory
+                        return _context.PriceHistories
                             .Where(x => x.Date <= date && x.ProductId == productId && x.PriceType.ToLower() == sale && x.PackageId == packageId)
                             .OrderByDescending(x => x.Date)
                             .FirstOrDefault()
-                            ?.Price;
+                            ?.Rate;
                     case MovementTypeEnum.DirectReceive:
                     case MovementTypeEnum.POReceive:
                     case MovementTypeEnum.POReceiveEditItems:
                         var purchase = OrderTypeEnum.Purchase.ToString().ToLower();
-                        var st = _context.PriceHistory
+                        var st = _context.PriceHistories
                             .Where(x => x.Date <= date && x.ProductId == productId && x.PriceType.ToLower() == purchase && x.PackageId == packageId)
                             .OrderByDescending(x => x.Date).ToList();
                         return st.FirstOrDefault()
-                                ?.Price;
+                                ?.Rate;
                 }
             }
             return null;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DTO.Core.Settings;
 using Infrastructure.Context;
-using Infrastructure.Entities.AppSettings;
 using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Settings;
@@ -29,7 +28,7 @@ namespace Service.Core.Settings
         {
             using (var _context = new DatabaseContext())
             {
-                var appsetting = _context.AppSetting.FirstOrDefault(x => x.Name == name);
+                var appsetting = _context.AppSettings.FirstOrDefault(x => x.Name == name);
                 if (appsetting != null)
                 {
                     return AppSettingMapper.MapToAppSettingModel(appsetting);
@@ -46,14 +45,14 @@ namespace Service.Core.Settings
             using (var _context = new DatabaseContext())
             {
 
-                var dbEntity = _context.AppSetting.FirstOrDefault(x => x.Id == model.Id || x.Name == model.Name);
+                var dbEntity = _context.AppSettings.FirstOrDefault(x => x.Id == model.Id || x.Name == model.Name);
                 if (dbEntity == null)
                 {
 
                     var settingEntity = AppSettingMapper.MapToAppSettingEntity(model);
                     settingEntity.CreatedAt = DateTime.Now;
                     settingEntity.UpdatedAt = DateTime.Now;
-                    _context.AppSetting.Add(settingEntity);
+                    _context.AppSettings.Add(settingEntity);
                 }
                 else
                 {
@@ -71,14 +70,14 @@ namespace Service.Core.Settings
 
         public AppSetting SaveAppSettingWithoutCommit(DatabaseContext _context, AppSetting model)
         {
-            var dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == model.Name);
+            var dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == model.Name);
             if (dbEntity == null)
             {
                 dbEntity = model;
                 //var settingEntity = AppSettingMapper.MapToAppSettingEntity(model);
                 dbEntity.CreatedAt = DateTime.Now;
                 dbEntity.UpdatedAt = DateTime.Now;
-                _context.AppSetting.Add(model);
+                _context.AppSettings.Add(model);
             }
             else
             {
@@ -106,28 +105,28 @@ namespace Service.Core.Settings
             var model = new BillSettingsModel();
 
             var prefixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_PREFIX.ToString();
-            var prefixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == prefixKey);
+            var prefixEntity = _context.AppSettings.FirstOrDefault(x => x.Name == prefixKey);
             if (prefixEntity != null)
             {
                 model.Prefix = prefixEntity.Value;
             }
             // suffix
             var suffixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_SUFFIX.ToString();
-            var suffixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == suffixKey);
+            var suffixEntity = _context.AppSettings.FirstOrDefault(x => x.Name == suffixKey);
             if (suffixEntity != null)
             {
                 model.Suffix = suffixEntity.Value;
             }
             // Body
             var bodyKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
-            var bodyEntity = _context.AppSetting.FirstOrDefault(x => x.Name == bodyKey);
+            var bodyEntity = _context.AppSettings.FirstOrDefault(x => x.Name == bodyKey);
             if (bodyEntity != null)
             {
                 model.Body = bodyEntity.Value;
             }
             // CurrentIndex
             var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
-            var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
+            var currentIndexEntity = _context.AppSettings.FirstOrDefault(x => x.Name == currentIndexKey);
             if (currentIndexEntity != null)
             {
                 long currentIndex;
@@ -156,7 +155,7 @@ namespace Service.Core.Settings
 
                     // property : StartNum, EndNum, Prefix, Suffix
                     var prefixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_PREFIX.ToString();
-                    var prefixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == prefixKey);
+                    var prefixEntity = _context.AppSettings.FirstOrDefault(x => x.Name == prefixKey);
                     if (prefixEntity == null)
                     {
                         var prefix = new AppSetting()
@@ -168,7 +167,7 @@ namespace Service.Core.Settings
                             UpdatedAt = DateTime.Now,
                             Value = model.Prefix
                         };
-                        _context.AppSetting.Add(prefix);
+                        _context.AppSettings.Add(prefix);
                     }
                     else
                     {
@@ -178,7 +177,7 @@ namespace Service.Core.Settings
 
                     // for suffix
                     var suffixKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_SUFFIX.ToString();
-                    var suffixEntity = _context.AppSetting.FirstOrDefault(x => x.Name == suffixKey);
+                    var suffixEntity = _context.AppSettings.FirstOrDefault(x => x.Name == suffixKey);
                     if (suffixEntity == null)
                     {
                         var suffix = new AppSetting()
@@ -190,7 +189,7 @@ namespace Service.Core.Settings
                             UpdatedAt = DateTime.Now,
                             Value = model.Suffix,
                         };
-                        _context.AppSetting.Add(suffix);
+                        _context.AppSettings.Add(suffix);
                     }
                     else
                     {
@@ -201,7 +200,7 @@ namespace Service.Core.Settings
 
                     //for Body
                     var bodyKey = orderType.ToString() + "_" + BillSettingsEnum.BILL_BODY.ToString();
-                    var startEntity = _context.AppSetting.FirstOrDefault(x => x.Name == bodyKey);
+                    var startEntity = _context.AppSettings.FirstOrDefault(x => x.Name == bodyKey);
                     if (startEntity == null)
                     {
                         var start = new AppSetting()
@@ -214,7 +213,7 @@ namespace Service.Core.Settings
                             Value = model.Body,
 
                         };
-                        _context.AppSetting.Add(start);
+                        _context.AppSettings.Add(start);
                     }
                     else
                     {
@@ -224,7 +223,7 @@ namespace Service.Core.Settings
 
                     // counter
                     var counterKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
-                    var counterEntity = _context.AppSetting.FirstOrDefault(x => x.Name == counterKey);
+                    var counterEntity = _context.AppSettings.FirstOrDefault(x => x.Name == counterKey);
                     if (counterEntity == null)
                     {
                         var start = new AppSetting()
@@ -236,7 +235,7 @@ namespace Service.Core.Settings
                             UpdatedAt = DateTime.Now,
                             Value = "0",
                         };
-                        _context.AppSetting.Add(start);
+                        _context.AppSettings.Add(start);
                     }
                     else
                     {
@@ -276,7 +275,7 @@ namespace Service.Core.Settings
         {
             //for CurrentIndex
             var currentIndexKey = orderType.ToString() + "_" + BillSettingsEnum.BillCurrentIndex.ToString();
-            var currentIndexEntity = _context.AppSetting.FirstOrDefault(x => x.Name == currentIndexKey);
+            var currentIndexEntity = _context.AppSettings.FirstOrDefault(x => x.Name == currentIndexKey);
             if (currentIndexEntity == null)
             {
                 var currentIndexSetting = new AppSetting()
@@ -289,7 +288,7 @@ namespace Service.Core.Settings
                     Value = currentIndex.ToString(),//model.CurrentIndex.ToString(),
 
                 };
-                _context.AppSetting.Add(currentIndexSetting);
+                _context.AppSettings.Add(currentIndexSetting);
             }
             else
             {
@@ -306,7 +305,7 @@ namespace Service.Core.Settings
             using (var _context = new DatabaseContext())
             {
                 //for CompanyName
-                var companyNameEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "CompanyName");
+                var companyNameEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "CompanyName");
                 if (companyNameEntity == null)
                 {
                     var company = new AppSetting()
@@ -318,7 +317,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.CompanyName,
                     };
-                    _context.AppSetting.Add(company);
+                    _context.AppSettings.Add(company);
                 }
                 else
                 {
@@ -327,7 +326,7 @@ namespace Service.Core.Settings
                 }
 
                 //for Address
-                var addressEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Address");
+                var addressEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Address");
                 if (addressEntity == null)
                 {
                     var address = new AppSetting()
@@ -339,7 +338,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.Address,
                     };
-                    _context.AppSetting.Add(address);
+                    _context.AppSettings.Add(address);
                 }
                 else
                 {
@@ -348,7 +347,7 @@ namespace Service.Core.Settings
                 }
 
                 //for OwnerName
-                var ownerNameEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "OwnerName");
+                var ownerNameEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "OwnerName");
                 if (ownerNameEntity == null)
                 {
                     var owner = new AppSetting()
@@ -360,7 +359,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.OwnerName,
                     };
-                    _context.AppSetting.Add(owner);
+                    _context.AppSettings.Add(owner);
                 }
                 else
                 {
@@ -369,7 +368,7 @@ namespace Service.Core.Settings
                 }
 
                 //for VATNo
-                var vatEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "VATNo");
+                var vatEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "VATNo");
                 if (vatEntity == null)
                 {
                     var vat = new AppSetting()
@@ -381,7 +380,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.VATNo,
                     };
-                    _context.AppSetting.Add(vat);
+                    _context.AppSettings.Add(vat);
                 }
                 else
                 {
@@ -390,7 +389,7 @@ namespace Service.Core.Settings
                 }
 
                 //for PANNo
-                var panEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "PANNo");
+                var panEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "PANNo");
                 if (panEntity == null)
                 {
                     var pan = new AppSetting()
@@ -402,7 +401,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.PANNo,
                     };
-                    _context.AppSetting.Add(pan);
+                    _context.AppSettings.Add(pan);
                 }
                 else
                 {
@@ -411,7 +410,7 @@ namespace Service.Core.Settings
                 }
 
                 //for Phone
-                var phoneEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Phone");
+                var phoneEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Phone");
                 if (phoneEntity == null)
                 {
                     var phone = new AppSetting()
@@ -423,7 +422,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.Phone,
                     };
-                    _context.AppSetting.Add(phone);
+                    _context.AppSettings.Add(phone);
                 }
                 else
                 {
@@ -432,7 +431,7 @@ namespace Service.Core.Settings
                 }
 
                 //for Email
-                var emailEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Email");
+                var emailEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Email");
                 if (emailEntity == null)
                 {
                     var email = new AppSetting()
@@ -444,7 +443,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.Email,
                     };
-                    _context.AppSetting.Add(email);
+                    _context.AppSettings.Add(email);
                 }
                 else
                 {
@@ -453,7 +452,7 @@ namespace Service.Core.Settings
                 }
 
                 //for Website
-                var websiteEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Website");
+                var websiteEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Website");
                 if (websiteEntity == null)
                 {
                     var website = new AppSetting()
@@ -465,7 +464,7 @@ namespace Service.Core.Settings
                         UpdatedAt = DateTime.Now,
                         Value = model.Website,
                     };
-                    _context.AppSetting.Add(website);
+                    _context.AppSettings.Add(website);
                 }
                 else
                 {
@@ -491,35 +490,35 @@ namespace Service.Core.Settings
             {
 
                 var model = new CompanyInfoSettingModel();
-                var dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "CompanyName");
+                var dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "CompanyName");
                 if (dbEntity != null)
                     model.CompanyName = dbEntity.Value;
 
-                dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Address");
+                dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Address");
                 if (dbEntity != null)
                     model.Address = dbEntity.Value;
 
-                dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "OwnerName");
+                dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "OwnerName");
                 if (dbEntity != null)
                     model.OwnerName = dbEntity.Value;
 
-                dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "VATNo");
+                dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "VATNo");
                 if (dbEntity != null)
                     model.VATNo = dbEntity.Value;
 
-                dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "PANNo");
+                dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "PANNo");
                 if (dbEntity != null)
                     model.PANNo = dbEntity.Value;
 
-                dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Phone");
+                dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Phone");
                 if (dbEntity != null)
                     model.Phone = dbEntity.Value;
 
-                dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Email");
+                dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Email");
                 if (dbEntity != null)
                     model.Email = dbEntity.Value;
 
-                dbEntity = _context.AppSetting.FirstOrDefault(x => x.Name == "Website");
+                dbEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "Website");
                 if (dbEntity != null)
                     model.Website = dbEntity.Value;
                 return model;

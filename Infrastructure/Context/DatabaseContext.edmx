@@ -1,0 +1,2595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdjustmentCodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="AffectsDemand" Type="bit" Nullable="false" />
+          <Property Name="Use" Type="bit" Nullable="false" />
+          <Property Name="IsSystem" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="Group" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BillNo" Type="int" Nullable="false" />
+          <Property Name="BIllDate" Type="datetime" Nullable="false" />
+          <Property Name="BillTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Branches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ParentCategoryId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Counters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="OutOfOrder" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventoryUnits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="WarehouseId" Type="int" />
+          <Property Name="LotNumber" Type="int" Nullable="false" />
+          <Property Name="ReceiveReceipt" Type="nvarchar(max)" />
+          <Property Name="ReceiveAdjustment" Type="nvarchar(max)" />
+          <Property Name="ReceiveDate" Type="datetime" />
+          <Property Name="IssueReceipt" Type="nvarchar(max)" />
+          <Property Name="IssueAdjustment" Type="nvarchar(max)" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="UnitQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NetWeight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageId" Type="int" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="ProductionDate" Type="datetime" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="IsHold" Type="bit" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="OrderItemId" Type="int" />
+        </EntityType>
+        <EntityType Name="Movements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Reference" Type="nvarchar(max)" />
+          <Property Name="AdjustmentCode" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="WarehouseId" Type="int" />
+          <Property Name="UnitQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NetWeight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrossWeight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsReceived" Type="bit" Nullable="false" />
+          <Property Name="IsHold" Type="bit" Nullable="false" />
+          <Property Name="LotNumber" Type="int" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar(max)" />
+          <Property Name="Adjustment" Type="nvarchar(max)" />
+          <Property Name="PackageId" Type="int" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="ProductionDate" Type="datetime" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="CostPriceRate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CostPriceTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderType" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ReferenceNumber" Type="nvarchar(max)" />
+          <Property Name="ParentOrderId" Type="int" />
+          <Property Name="LotNumber" Type="int" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="DeliveryDate" Type="datetime" Nullable="false" />
+          <Property Name="DueDays" Type="int" />
+          <Property Name="IsVoid" Type="bit" Nullable="false" />
+          <Property Name="IsVerified" Type="bit" Nullable="false" />
+          <Property Name="VerifiedDate" Type="datetime" />
+          <Property Name="IsCancelled" Type="bit" Nullable="false" />
+          <Property Name="CancelledDate" Type="datetime" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="CompletedDate" Type="datetime" />
+          <Property Name="IsReceiptGenerated" Type="bit" Nullable="false" />
+          <Property Name="ReceiptGeneratedDate" Type="datetime" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="DiscountPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaymentType" Type="nvarchar(max)" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaymentDueDate" Type="datetime" />
+          <Property Name="PaymentCompleteDate" Type="datetime" />
+          <Property Name="WarehouseId" Type="int" />
+          <Property Name="SupplierInvoice" Type="nvarchar(max)" />
+          <Property Name="VatNumber" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="ToWarehouseId" Type="int" />
+          <Property Name="CostPriceTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Packages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Use" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="UserType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReferenceNumber" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DueAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="PaymentType" Type="nvarchar(max)" />
+          <Property Name="PaymentMethod" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="PaidBy" Type="nvarchar(max)" />
+          <Property Name="ChequeNo" Type="nvarchar(max)" />
+          <Property Name="Bank" Type="nvarchar(max)" />
+          <Property Name="IsVoid" Type="bit" Nullable="false" />
+          <Property Name="Order_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="PriceHistories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="PriceType" Type="nvarchar(max)" />
+          <Property Name="PackageId" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductAttributes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Attribute" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ProductPackages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="IsBasePackage" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="SKU" Type="nvarchar(max)" />
+          <Property Name="Barcode" Type="nvarchar(max)" />
+          <Property Name="Use" Type="bit" Nullable="false" />
+          <Property Name="HasVariants" Type="bit" Nullable="false" />
+          <Property Name="IsVariant" Type="bit" Nullable="false" />
+          <Property Name="ParentProductId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="IsDiscontinued" Type="bit" Nullable="false" />
+          <Property Name="UnitsInPackage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UnitNetWeight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UnitGrossWeight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsBuy" Type="bit" Nullable="false" />
+          <Property Name="IsSell" Type="bit" Nullable="false" />
+          <Property Name="IsBuild" Type="bit" Nullable="false" />
+          <Property Name="IsNotMovable" Type="bit" Nullable="false" />
+          <Property Name="WarehouseId" Type="int" />
+          <Property Name="ReorderPoint" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ReorderQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ReorderAlert" Type="bit" Nullable="false" />
+          <Property Name="LeadDays" Type="int" Nullable="false" />
+          <Property Name="EOQ" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MonthlyDemand" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InStockQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OnHoldQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CommittedQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OnOrderQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SupplyPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MarkupPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RetailPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Manufacturer" Type="nvarchar(max)" />
+          <Property Name="Brand" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="AttributesJSON" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionId" Type="int" Nullable="false" />
+          <Property Name="PurchaseOrderItemId" Type="int" />
+          <Property Name="UnitQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SaleOrderItemId" Type="int" />
+          <Property Name="CostPriceRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CostPriceTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="Particulars" Type="nvarchar(max)" />
+          <Property Name="Debit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Credit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DrCr" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="IsVoid" Type="bit" Nullable="false" />
+          <Property Name="CostPriceTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Transfers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferNumber" Type="nvarchar(max)" />
+          <Property Name="FromWarehouseId" Type="int" Nullable="false" />
+          <Property Name="ToWarehouseId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uoms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="9" Nullable="false" />
+          <Property Name="Use" Type="bit" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="RelatedPackageId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="IsCompany" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+          <Property Name="Use" Type="bit" Nullable="false" />
+          <Property Name="SalesPerson" Type="nvarchar(max)" />
+          <Property Name="DeliveryAddress" Type="nvarchar(max)" />
+          <Property Name="UserType" Type="nvarchar(max)" />
+          <Property Name="CanLogin" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="Fax" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Website" Type="nvarchar(max)" />
+          <Property Name="Company" Type="nvarchar(max)" />
+          <Property Name="Gender" Type="nvarchar(max)" />
+          <Property Name="IsMarried" Type="nvarchar(max)" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="PaymentDueDate" Type="datetime" />
+          <Property Name="AllDuesClearDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WarehouseProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WarehouseId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="InStockQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OnHoldQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Warehouses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Hold" Type="bit" Nullable="false" />
+          <Property Name="MixedProduct" Type="bit" Nullable="false" />
+          <Property Name="Staging" Type="bit" Nullable="false" />
+          <Property Name="Use" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Categories_dbo_Categories_ParentCategoryId">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Categories1" Type="Self.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories1">
+              <PropertyRef Name="ParentCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Counters_dbo_Branches_BranchId">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+          <End Role="Counters" Type="Self.Counters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Counters">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Users_SupplierId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Movements_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Movements" Type="Self.Movements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Users_SupplierId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Orders_ParentOrderId">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Orders1" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders1">
+              <PropertyRef Name="ParentOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Warehouses_ToWarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ToWarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payments_dbo_Orders_Order_Id">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Order_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payments_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PriceHistories_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="0..1" />
+          <End Role="PriceHistories" Type="Self.PriceHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceHistories">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PriceHistories_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="PriceHistories" Type="Self.PriceHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceHistories">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductAttributes_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductAttributes" Type="Self.ProductAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductAttributes">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductPackages_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="ProductPackages" Type="Self.ProductPackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPackages">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductPackages_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductPackages" Type="Self.ProductPackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPackages">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_Categories_CategoryId">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_Products_ParentProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Products1" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products1">
+              <PropertyRef Name="ParentProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="0..1" />
+          <End Role="TransactionItems" Type="Self.TransactionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionItems">
+              <PropertyRef Name="PurchaseOrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="0..1" />
+          <End Role="TransactionItems" Type="Self.TransactionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionItems">
+              <PropertyRef Name="SaleOrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TransactionItems_dbo_Transactions_TransactionId">
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="1" />
+          <End Role="TransactionItems" Type="Self.TransactionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transactions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionItems">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="1" />
+          <End Role="Transfers" Type="Self.Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="FromWarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="1" />
+          <End Role="Transfers" Type="Self.Transfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="ToWarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Uoms_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="Uoms" Type="Self.Uoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Uoms">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Uoms_dbo_Packages_RelatedPackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="Uoms" Type="Self.Uoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Uoms">
+              <PropertyRef Name="RelatedPackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Uoms_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Uoms" Type="Self.Uoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Uoms">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WarehouseProducts_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="WarehouseProducts" Type="Self.WarehouseProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="1" />
+          <End Role="WarehouseProducts" Type="Self.WarehouseProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseProducts">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntitiesStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdjustmentCodes" EntityType="Self.AdjustmentCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppSettings" EntityType="Self.AppSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Counters" EntityType="Self.Counters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryUnits" EntityType="Self.InventoryUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movements" EntityType="Self.Movements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Packages" EntityType="Self.Packages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PriceHistories" EntityType="Self.PriceHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductAttributes" EntityType="Self.ProductAttributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductPackages" EntityType="Self.ProductPackages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionItems" EntityType="Self.TransactionItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transfers" EntityType="Self.Transfers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uoms" EntityType="Self.Uoms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseProducts" EntityType="Self.WarehouseProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Categories_dbo_Categories_ParentCategoryId" Association="Self.FK_dbo_Categories_dbo_Categories_ParentCategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Categories1" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Counters_dbo_Branches_BranchId" Association="Self.FK_dbo_Counters_dbo_Branches_BranchId">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Counters" EntitySet="Counters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Packages_PackageId" Association="Self.FK_dbo_InventoryUnits_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Products_ProductId" Association="Self.FK_dbo_InventoryUnits_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Users_SupplierId" Association="Self.FK_dbo_InventoryUnits_dbo_Users_SupplierId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Movements_dbo_Products_ProductId" Association="Self.FK_dbo_Movements_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Movements" EntitySet="Movements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Orders_OrderId" Association="Self.FK_dbo_OrderItems_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Packages_PackageId" Association="Self.FK_dbo_OrderItems_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Products_ProductId" Association="Self.FK_dbo_OrderItems_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Users_SupplierId" Association="Self.FK_dbo_OrderItems_dbo_Users_SupplierId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_OrderItems_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Orders_ParentOrderId" Association="Self.FK_dbo_Orders_dbo_Orders_ParentOrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Orders1" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Users_UserId" Association="Self.FK_dbo_Orders_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Warehouses_ToWarehouseId" Association="Self.FK_dbo_Orders_dbo_Warehouses_ToWarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_Orders_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Orders_Order_Id" Association="Self.FK_dbo_Payments_dbo_Orders_Order_Id">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Users_UserId" Association="Self.FK_dbo_Payments_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PriceHistories_dbo_Packages_PackageId" Association="Self.FK_dbo_PriceHistories_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="PriceHistories" EntitySet="PriceHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PriceHistories_dbo_Products_ProductId" Association="Self.FK_dbo_PriceHistories_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="PriceHistories" EntitySet="PriceHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductAttributes_dbo_Products_ProductId" Association="Self.FK_dbo_ProductAttributes_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductAttributes" EntitySet="ProductAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductPackages_dbo_Packages_PackageId" Association="Self.FK_dbo_ProductPackages_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="ProductPackages" EntitySet="ProductPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductPackages_dbo_Products_ProductId" Association="Self.FK_dbo_ProductPackages_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductPackages" EntitySet="ProductPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="Self.FK_dbo_Products_dbo_Categories_CategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_Products_ParentProductId" Association="Self.FK_dbo_Products_dbo_Products_ParentProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products1" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_Products_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId" Association="Self.FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="TransactionItems" EntitySet="TransactionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId" Association="Self.FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="TransactionItems" EntitySet="TransactionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TransactionItems_dbo_Transactions_TransactionId" Association="Self.FK_dbo_TransactionItems_dbo_Transactions_TransactionId">
+            <End Role="Transactions" EntitySet="Transactions" />
+            <End Role="TransactionItems" EntitySet="TransactionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Orders_OrderId" Association="Self.FK_dbo_Transactions_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Users_UserId" Association="Self.FK_dbo_Transactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId" Association="Self.FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" Association="Self.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Uoms_dbo_Packages_PackageId" Association="Self.FK_dbo_Uoms_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="Uoms" EntitySet="Uoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Uoms_dbo_Packages_RelatedPackageId" Association="Self.FK_dbo_Uoms_dbo_Packages_RelatedPackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="Uoms" EntitySet="Uoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Uoms_dbo_Products_ProductId" Association="Self.FK_dbo_Uoms_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Uoms" EntitySet="Uoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WarehouseProducts_dbo_Products_ProductId" Association="Self.FK_dbo_WarehouseProducts_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="WarehouseProducts" EntitySet="WarehouseProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="WarehouseProducts" EntitySet="WarehouseProducts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdjustmentCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AffectsDemand" Type="Boolean" Nullable="false" />
+          <Property Name="Use" Type="Boolean" Nullable="false" />
+          <Property Name="IsSystem" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillNo" Type="Int32" Nullable="false" />
+          <Property Name="BIllDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BillTotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Counters" Relationship="Self.FK_dbo_Counters_dbo_Branches_BranchId" FromRole="Branches" ToRole="Counters" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentCategoryId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Categories1" Relationship="Self.FK_dbo_Categories_dbo_Categories_ParentCategoryId" FromRole="Categories" ToRole="Categories1" />
+          <NavigationProperty Name="Category1" Relationship="Self.FK_dbo_Categories_dbo_Categories_ParentCategoryId" FromRole="Categories1" ToRole="Categories" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_Categories_CategoryId" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Counter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="OutOfOrder" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_dbo_Counters_dbo_Branches_BranchId" FromRole="Counters" ToRole="Branches" />
+        </EntityType>
+        <EntityType Name="InventoryUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseId" Type="Int32" />
+          <Property Name="LotNumber" Type="Int32" Nullable="false" />
+          <Property Name="ReceiveReceipt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiveAdjustment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
+          <Property Name="IssueReceipt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IssueAdjustment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <Property Name="UnitQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="ProductionDate" Type="DateTime" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="IsHold" Type="Boolean" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderItemId" Type="Int32" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId" FromRole="InventoryUnits" ToRole="OrderItems" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_dbo_InventoryUnits_dbo_Packages_PackageId" FromRole="InventoryUnits" ToRole="Packages" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_InventoryUnits_dbo_Products_ProductId" FromRole="InventoryUnits" ToRole="Products" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_InventoryUnits_dbo_Users_SupplierId" FromRole="InventoryUnits" ToRole="Users" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId" FromRole="InventoryUnits" ToRole="Warehouses" />
+        </EntityType>
+        <EntityType Name="Movement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdjustmentCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductId" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_Movements_dbo_Products_ProductId" FromRole="Movements" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseId" Type="Int32" />
+          <Property Name="UnitQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NetWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrossWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsReceived" Type="Boolean" Nullable="false" />
+          <Property Name="IsHold" Type="Boolean" Nullable="false" />
+          <Property Name="LotNumber" Type="Int32" Nullable="false" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adjustment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PackageId" Type="Int32" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="ProductionDate" Type="DateTime" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="CostPriceRate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CostPriceTotal" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="InventoryUnits" Relationship="Self.FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId" FromRole="OrderItems" ToRole="InventoryUnits" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_dbo_OrderItems_dbo_Orders_OrderId" FromRole="OrderItems" ToRole="Orders" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_dbo_OrderItems_dbo_Packages_PackageId" FromRole="OrderItems" ToRole="Packages" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_OrderItems_dbo_Products_ProductId" FromRole="OrderItems" ToRole="Products" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_OrderItems_dbo_Users_SupplierId" FromRole="OrderItems" ToRole="Users" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_OrderItems_dbo_Warehouses_WarehouseId" FromRole="OrderItems" ToRole="Warehouses" />
+          <NavigationProperty Name="TransactionItems" Relationship="Self.FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId" FromRole="OrderItems" ToRole="TransactionItems" />
+          <NavigationProperty Name="TransactionItems1" Relationship="Self.FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId" FromRole="OrderItems" ToRole="TransactionItems" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentOrderId" Type="Int32" />
+          <Property Name="LotNumber" Type="Int32" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DueDays" Type="Int32" />
+          <Property Name="IsVoid" Type="Boolean" Nullable="false" />
+          <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+          <Property Name="VerifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+          <Property Name="CancelledDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsReceiptGenerated" Type="Boolean" Nullable="false" />
+          <Property Name="ReceiptGeneratedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiscountPercent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaymentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaymentDueDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentCompleteDate" Type="DateTime" Precision="3" />
+          <Property Name="WarehouseId" Type="Int32" />
+          <Property Name="SupplierInvoice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VatNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToWarehouseId" Type="Int32" />
+          <Property Name="CostPriceTotal" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK_dbo_OrderItems_dbo_Orders_OrderId" FromRole="Orders" ToRole="OrderItems" />
+          <NavigationProperty Name="Orders1" Relationship="Self.FK_dbo_Orders_dbo_Orders_ParentOrderId" FromRole="Orders" ToRole="Orders1" />
+          <NavigationProperty Name="Order1" Relationship="Self.FK_dbo_Orders_dbo_Orders_ParentOrderId" FromRole="Orders1" ToRole="Orders" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Orders_dbo_Users_UserId" FromRole="Orders" ToRole="Users" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_Orders_dbo_Warehouses_ToWarehouseId" FromRole="Orders" ToRole="Warehouses" />
+          <NavigationProperty Name="Warehouse1" Relationship="Self.FK_dbo_Orders_dbo_Warehouses_WarehouseId" FromRole="Orders" ToRole="Warehouses" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_dbo_Payments_dbo_Orders_Order_Id" FromRole="Orders" ToRole="Payments" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Orders_OrderId" FromRole="Orders" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Use" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InventoryUnits" Relationship="Self.FK_dbo_InventoryUnits_dbo_Packages_PackageId" FromRole="Packages" ToRole="InventoryUnits" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK_dbo_OrderItems_dbo_Packages_PackageId" FromRole="Packages" ToRole="OrderItems" />
+          <NavigationProperty Name="PriceHistories" Relationship="Self.FK_dbo_PriceHistories_dbo_Packages_PackageId" FromRole="Packages" ToRole="PriceHistories" />
+          <NavigationProperty Name="ProductPackages" Relationship="Self.FK_dbo_ProductPackages_dbo_Packages_PackageId" FromRole="Packages" ToRole="ProductPackages" />
+          <NavigationProperty Name="Uoms" Relationship="Self.FK_dbo_Uoms_dbo_Packages_PackageId" FromRole="Packages" ToRole="Uoms" />
+          <NavigationProperty Name="Uoms1" Relationship="Self.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" FromRole="Packages" ToRole="Uoms" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DueAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaidBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsVoid" Type="Boolean" Nullable="false" />
+          <Property Name="Order_Id" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Payments_dbo_Orders_Order_Id" FromRole="Payments" ToRole="Orders" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Payments_dbo_Users_UserId" FromRole="Payments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PriceHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PriceType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PackageId" Type="Int32" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_dbo_PriceHistories_dbo_Packages_PackageId" FromRole="PriceHistories" ToRole="Packages" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_PriceHistories_dbo_Products_ProductId" FromRole="PriceHistories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ProductAttribute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Attribute" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ProductAttributes_dbo_Products_ProductId" FromRole="ProductAttributes" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ProductPackage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="IsBasePackage" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_dbo_ProductPackages_dbo_Packages_PackageId" FromRole="ProductPackages" ToRole="Packages" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ProductPackages_dbo_Products_ProductId" FromRole="ProductPackages" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SKU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Use" Type="Boolean" Nullable="false" />
+          <Property Name="HasVariants" Type="Boolean" Nullable="false" />
+          <Property Name="IsVariant" Type="Boolean" Nullable="false" />
+          <Property Name="ParentProductId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="IsDiscontinued" Type="Boolean" Nullable="false" />
+          <Property Name="UnitsInPackage" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UnitNetWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UnitGrossWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsBuy" Type="Boolean" Nullable="false" />
+          <Property Name="IsSell" Type="Boolean" Nullable="false" />
+          <Property Name="IsBuild" Type="Boolean" Nullable="false" />
+          <Property Name="IsNotMovable" Type="Boolean" Nullable="false" />
+          <Property Name="WarehouseId" Type="Int32" />
+          <Property Name="ReorderPoint" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ReorderQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ReorderAlert" Type="Boolean" Nullable="false" />
+          <Property Name="LeadDays" Type="Int32" Nullable="false" />
+          <Property Name="EOQ" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MonthlyDemand" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InStockQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OnHoldQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CommittedQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OnOrderQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SupplyPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MarkupPercent" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RetailPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Manufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AttributesJSON" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_dbo_Products_dbo_Categories_CategoryId" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="InventoryUnits" Relationship="Self.FK_dbo_InventoryUnits_dbo_Products_ProductId" FromRole="Products" ToRole="InventoryUnits" />
+          <NavigationProperty Name="Movements" Relationship="Self.FK_dbo_Movements_dbo_Products_ProductId" FromRole="Products" ToRole="Movements" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK_dbo_OrderItems_dbo_Products_ProductId" FromRole="Products" ToRole="OrderItems" />
+          <NavigationProperty Name="PriceHistories" Relationship="Self.FK_dbo_PriceHistories_dbo_Products_ProductId" FromRole="Products" ToRole="PriceHistories" />
+          <NavigationProperty Name="ProductAttributes" Relationship="Self.FK_dbo_ProductAttributes_dbo_Products_ProductId" FromRole="Products" ToRole="ProductAttributes" />
+          <NavigationProperty Name="ProductPackages" Relationship="Self.FK_dbo_ProductPackages_dbo_Products_ProductId" FromRole="Products" ToRole="ProductPackages" />
+          <NavigationProperty Name="Products1" Relationship="Self.FK_dbo_Products_dbo_Products_ParentProductId" FromRole="Products" ToRole="Products1" />
+          <NavigationProperty Name="Product1" Relationship="Self.FK_dbo_Products_dbo_Products_ParentProductId" FromRole="Products1" ToRole="Products" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_Products_dbo_Warehouses_WarehouseId" FromRole="Products" ToRole="Warehouses" />
+          <NavigationProperty Name="Uoms" Relationship="Self.FK_dbo_Uoms_dbo_Products_ProductId" FromRole="Products" ToRole="Uoms" />
+          <NavigationProperty Name="WarehouseProducts" Relationship="Self.FK_dbo_WarehouseProducts_dbo_Products_ProductId" FromRole="Products" ToRole="WarehouseProducts" />
+        </EntityType>
+        <EntityType Name="TransactionItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseOrderItemId" Type="Int32" />
+          <Property Name="UnitQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SaleOrderItemId" Type="Int32" />
+          <Property Name="CostPriceRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CostPriceTotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="OrderItem" Relationship="Self.FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId" FromRole="TransactionItems" ToRole="OrderItems" />
+          <NavigationProperty Name="OrderItem1" Relationship="Self.FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId" FromRole="TransactionItems" ToRole="OrderItems" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK_dbo_TransactionItems_dbo_Transactions_TransactionId" FromRole="TransactionItems" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="Particulars" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DrCr" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsVoid" Type="Boolean" Nullable="false" />
+          <Property Name="CostPriceTotal" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Transactions_dbo_Orders_OrderId" FromRole="Transactions" ToRole="Orders" />
+          <NavigationProperty Name="TransactionItems" Relationship="Self.FK_dbo_TransactionItems_dbo_Transactions_TransactionId" FromRole="Transactions" ToRole="TransactionItems" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Transactions_dbo_Users_UserId" FromRole="Transactions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromWarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="ToWarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId" FromRole="Transfers" ToRole="Warehouses" />
+          <NavigationProperty Name="Warehouse1" Relationship="Self.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" FromRole="Transfers" ToRole="Warehouses" />
+        </EntityType>
+        <EntityType Name="Uom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="9" Nullable="false" />
+          <Property Name="Use" Type="Boolean" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="RelatedPackageId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_dbo_Uoms_dbo_Packages_PackageId" FromRole="Uoms" ToRole="Packages" />
+          <NavigationProperty Name="Package1" Relationship="Self.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" FromRole="Uoms" ToRole="Packages" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_Uoms_dbo_Products_ProductId" FromRole="Uoms" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompany" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Use" Type="Boolean" Nullable="false" />
+          <Property Name="SalesPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CanLogin" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsMarried" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentDueDate" Type="DateTime" Precision="3" />
+          <Property Name="AllDuesClearDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InventoryUnits" Relationship="Self.FK_dbo_InventoryUnits_dbo_Users_SupplierId" FromRole="Users" ToRole="InventoryUnits" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK_dbo_OrderItems_dbo_Users_SupplierId" FromRole="Users" ToRole="OrderItems" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Users_UserId" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_dbo_Payments_dbo_Users_UserId" FromRole="Users" ToRole="Payments" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Users_UserId" FromRole="Users" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="WarehouseProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="InStockQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OnHoldQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_WarehouseProducts_dbo_Products_ProductId" FromRole="WarehouseProducts" ToRole="Products" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" FromRole="WarehouseProducts" ToRole="Warehouses" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hold" Type="Boolean" Nullable="false" />
+          <Property Name="MixedProduct" Type="Boolean" Nullable="false" />
+          <Property Name="Staging" Type="Boolean" Nullable="false" />
+          <Property Name="Use" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="InventoryUnits" Relationship="Self.FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId" FromRole="Warehouses" ToRole="InventoryUnits" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK_dbo_OrderItems_dbo_Warehouses_WarehouseId" FromRole="Warehouses" ToRole="OrderItems" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Warehouses_ToWarehouseId" FromRole="Warehouses" ToRole="Orders" />
+          <NavigationProperty Name="Orders1" Relationship="Self.FK_dbo_Orders_dbo_Warehouses_WarehouseId" FromRole="Warehouses" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_Warehouses_WarehouseId" FromRole="Warehouses" ToRole="Products" />
+          <NavigationProperty Name="Transfers" Relationship="Self.FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId" FromRole="Warehouses" ToRole="Transfers" />
+          <NavigationProperty Name="Transfers1" Relationship="Self.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" FromRole="Warehouses" ToRole="Transfers" />
+          <NavigationProperty Name="WarehouseProducts" Relationship="Self.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" FromRole="Warehouses" ToRole="WarehouseProducts" />
+        </EntityType>
+        <Association Name="FK_dbo_Counters_dbo_Branches_BranchId">
+          <End Role="Branches" Type="Self.Branch" Multiplicity="1" />
+          <End Role="Counters" Type="Self.Counter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Counters">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Categories_dbo_Categories_ParentCategoryId">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Categories1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories1">
+              <PropertyRef Name="ParentCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_Categories_CategoryId">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Package" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Users_SupplierId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Movements_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Movements" Type="Self.Movement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movements">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Package" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Users_SupplierId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderItems_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="0..1" />
+          <End Role="TransactionItems" Type="Self.TransactionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionItems">
+              <PropertyRef Name="PurchaseOrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId">
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="0..1" />
+          <End Role="TransactionItems" Type="Self.TransactionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionItems">
+              <PropertyRef Name="SaleOrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Orders_ParentOrderId">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Orders1" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders1">
+              <PropertyRef Name="ParentOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Warehouses_ToWarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ToWarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Orders_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payments_dbo_Orders_Order_Id">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Order_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Orders_OrderId">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PriceHistories_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Package" Multiplicity="0..1" />
+          <End Role="PriceHistories" Type="Self.PriceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceHistories">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductPackages_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+          <End Role="ProductPackages" Type="Self.ProductPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPackages">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Uoms_dbo_Packages_PackageId">
+          <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+          <End Role="Uoms" Type="Self.Uom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Uoms">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Uoms_dbo_Packages_RelatedPackageId">
+          <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+          <End Role="Uoms" Type="Self.Uom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Uoms">
+              <PropertyRef Name="RelatedPackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Payments_dbo_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PriceHistories_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="PriceHistories" Type="Self.PriceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceHistories">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductAttributes_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductAttributes" Type="Self.ProductAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductAttributes">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProductPackages_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductPackages" Type="Self.ProductPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductPackages">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_Products_ParentProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Products1" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products1">
+              <PropertyRef Name="ParentProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Products_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Uoms_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Uoms" Type="Self.Uom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Uoms">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WarehouseProducts_dbo_Products_ProductId">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="WarehouseProducts" Type="Self.WarehouseProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TransactionItems_dbo_Transactions_TransactionId">
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="TransactionItems" Type="Self.TransactionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transactions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionItems">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="Transfers" Type="Self.Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="FromWarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="Transfers" Type="Self.Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transfers">
+              <PropertyRef Name="ToWarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="WarehouseProducts" Type="Self.WarehouseProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseProducts">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AdjustmentCodes" EntityType="Self.AdjustmentCode" />
+          <EntitySet Name="AppSettings" EntityType="Self.AppSetting" />
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Counters" EntityType="Self.Counter" />
+          <EntitySet Name="InventoryUnits" EntityType="Self.InventoryUnit" />
+          <EntitySet Name="Movements" EntityType="Self.Movement" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItem" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Packages" EntityType="Self.Package" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="PriceHistories" EntityType="Self.PriceHistory" />
+          <EntitySet Name="ProductAttributes" EntityType="Self.ProductAttribute" />
+          <EntitySet Name="ProductPackages" EntityType="Self.ProductPackage" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="TransactionItems" EntityType="Self.TransactionItem" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="Transfers" EntityType="Self.Transfer" />
+          <EntitySet Name="Uoms" EntityType="Self.Uom" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WarehouseProducts" EntityType="Self.WarehouseProduct" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
+          <AssociationSet Name="FK_dbo_Counters_dbo_Branches_BranchId" Association="Self.FK_dbo_Counters_dbo_Branches_BranchId">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Counters" EntitySet="Counters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Categories_dbo_Categories_ParentCategoryId" Association="Self.FK_dbo_Categories_dbo_Categories_ParentCategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Categories1" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="Self.FK_dbo_Products_dbo_Categories_CategoryId">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId" Association="Self.FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Packages_PackageId" Association="Self.FK_dbo_InventoryUnits_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Products_ProductId" Association="Self.FK_dbo_InventoryUnits_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Users_SupplierId" Association="Self.FK_dbo_InventoryUnits_dbo_Users_SupplierId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Movements_dbo_Products_ProductId" Association="Self.FK_dbo_Movements_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Movements" EntitySet="Movements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Orders_OrderId" Association="Self.FK_dbo_OrderItems_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Packages_PackageId" Association="Self.FK_dbo_OrderItems_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Products_ProductId" Association="Self.FK_dbo_OrderItems_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Users_SupplierId" Association="Self.FK_dbo_OrderItems_dbo_Users_SupplierId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderItems_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_OrderItems_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId" Association="Self.FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="TransactionItems" EntitySet="TransactionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId" Association="Self.FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId">
+            <End Role="OrderItems" EntitySet="OrderItems" />
+            <End Role="TransactionItems" EntitySet="TransactionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Orders_ParentOrderId" Association="Self.FK_dbo_Orders_dbo_Orders_ParentOrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Orders1" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Users_UserId" Association="Self.FK_dbo_Orders_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Warehouses_ToWarehouseId" Association="Self.FK_dbo_Orders_dbo_Warehouses_ToWarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Orders_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_Orders_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Orders_Order_Id" Association="Self.FK_dbo_Payments_dbo_Orders_Order_Id">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Orders_OrderId" Association="Self.FK_dbo_Transactions_dbo_Orders_OrderId">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PriceHistories_dbo_Packages_PackageId" Association="Self.FK_dbo_PriceHistories_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="PriceHistories" EntitySet="PriceHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductPackages_dbo_Packages_PackageId" Association="Self.FK_dbo_ProductPackages_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="ProductPackages" EntitySet="ProductPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Uoms_dbo_Packages_PackageId" Association="Self.FK_dbo_Uoms_dbo_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="Uoms" EntitySet="Uoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Uoms_dbo_Packages_RelatedPackageId" Association="Self.FK_dbo_Uoms_dbo_Packages_RelatedPackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="Uoms" EntitySet="Uoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Users_UserId" Association="Self.FK_dbo_Payments_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PriceHistories_dbo_Products_ProductId" Association="Self.FK_dbo_PriceHistories_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="PriceHistories" EntitySet="PriceHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductAttributes_dbo_Products_ProductId" Association="Self.FK_dbo_ProductAttributes_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductAttributes" EntitySet="ProductAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProductPackages_dbo_Products_ProductId" Association="Self.FK_dbo_ProductPackages_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductPackages" EntitySet="ProductPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_Products_ParentProductId" Association="Self.FK_dbo_Products_dbo_Products_ParentProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products1" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Products_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_Products_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Uoms_dbo_Products_ProductId" Association="Self.FK_dbo_Uoms_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Uoms" EntitySet="Uoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WarehouseProducts_dbo_Products_ProductId" Association="Self.FK_dbo_WarehouseProducts_dbo_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="WarehouseProducts" EntitySet="WarehouseProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TransactionItems_dbo_Transactions_TransactionId" Association="Self.FK_dbo_TransactionItems_dbo_Transactions_TransactionId">
+            <End Role="Transactions" EntitySet="Transactions" />
+            <End Role="TransactionItems" EntitySet="TransactionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Users_UserId" Association="Self.FK_dbo_Transactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId" Association="Self.FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" Association="Self.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Transfers" EntitySet="Transfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="WarehouseProducts" EntitySet="WarehouseProducts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="DatabaseContext">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Entities.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdjustmentCodes">
+            <EntityTypeMapping TypeName="Entities.AdjustmentCode">
+              <MappingFragment StoreEntitySet="AdjustmentCodes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="AffectsDemand" ColumnName="AffectsDemand" />
+                <ScalarProperty Name="Use" ColumnName="Use" />
+                <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppSettings">
+            <EntityTypeMapping TypeName="Entities.AppSetting">
+              <MappingFragment StoreEntitySet="AppSettings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="Entities.Bill">
+              <MappingFragment StoreEntitySet="Bills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="BIllDate" ColumnName="BIllDate" />
+                <ScalarProperty Name="BillTotal" ColumnName="BillTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="Entities.Branch">
+              <MappingFragment StoreEntitySet="Branches">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Entities.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentCategoryId" ColumnName="ParentCategoryId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counters">
+            <EntityTypeMapping TypeName="Entities.Counter">
+              <MappingFragment StoreEntitySet="Counters">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="OutOfOrder" ColumnName="OutOfOrder" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryUnits">
+            <EntityTypeMapping TypeName="Entities.InventoryUnit">
+              <MappingFragment StoreEntitySet="InventoryUnits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+                <ScalarProperty Name="ReceiveReceipt" ColumnName="ReceiveReceipt" />
+                <ScalarProperty Name="ReceiveAdjustment" ColumnName="ReceiveAdjustment" />
+                <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+                <ScalarProperty Name="IssueReceipt" ColumnName="IssueReceipt" />
+                <ScalarProperty Name="IssueAdjustment" ColumnName="IssueAdjustment" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="UnitQuantity" ColumnName="UnitQuantity" />
+                <ScalarProperty Name="PackageQuantity" ColumnName="PackageQuantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+                <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="IsHold" ColumnName="IsHold" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movements">
+            <EntityTypeMapping TypeName="Entities.Movement">
+              <MappingFragment StoreEntitySet="Movements">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="AdjustmentCode" ColumnName="AdjustmentCode" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="Entities.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="UnitQuantity" ColumnName="UnitQuantity" />
+                <ScalarProperty Name="PackageQuantity" ColumnName="PackageQuantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+                <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+                <ScalarProperty Name="IsReceived" ColumnName="IsReceived" />
+                <ScalarProperty Name="IsHold" ColumnName="IsHold" />
+                <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Adjustment" ColumnName="Adjustment" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="CostPriceRate" ColumnName="CostPriceRate" />
+                <ScalarProperty Name="CostPriceTotal" ColumnName="CostPriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Entities.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="ParentOrderId" ColumnName="ParentOrderId" />
+                <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="DueDays" ColumnName="DueDays" />
+                <ScalarProperty Name="IsVoid" ColumnName="IsVoid" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+                <ScalarProperty Name="CancelledDate" ColumnName="CancelledDate" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="IsReceiptGenerated" ColumnName="IsReceiptGenerated" />
+                <ScalarProperty Name="ReceiptGeneratedDate" ColumnName="ReceiptGeneratedDate" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="PaymentDueDate" ColumnName="PaymentDueDate" />
+                <ScalarProperty Name="PaymentCompleteDate" ColumnName="PaymentCompleteDate" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="SupplierInvoice" ColumnName="SupplierInvoice" />
+                <ScalarProperty Name="VatNumber" ColumnName="VatNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ToWarehouseId" ColumnName="ToWarehouseId" />
+                <ScalarProperty Name="CostPriceTotal" ColumnName="CostPriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="Entities.Package">
+              <MappingFragment StoreEntitySet="Packages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Use" ColumnName="Use" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="Entities.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PaidBy" ColumnName="PaidBy" />
+                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="IsVoid" ColumnName="IsVoid" />
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceHistories">
+            <EntityTypeMapping TypeName="Entities.PriceHistory">
+              <MappingFragment StoreEntitySet="PriceHistories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PriceType" ColumnName="PriceType" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductAttributes">
+            <EntityTypeMapping TypeName="Entities.ProductAttribute">
+              <MappingFragment StoreEntitySet="ProductAttributes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Attribute" ColumnName="Attribute" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPackages">
+            <EntityTypeMapping TypeName="Entities.ProductPackage">
+              <MappingFragment StoreEntitySet="ProductPackages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="IsBasePackage" ColumnName="IsBasePackage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Entities.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Use" ColumnName="Use" />
+                <ScalarProperty Name="HasVariants" ColumnName="HasVariants" />
+                <ScalarProperty Name="IsVariant" ColumnName="IsVariant" />
+                <ScalarProperty Name="ParentProductId" ColumnName="ParentProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="IsDiscontinued" ColumnName="IsDiscontinued" />
+                <ScalarProperty Name="UnitsInPackage" ColumnName="UnitsInPackage" />
+                <ScalarProperty Name="UnitNetWeight" ColumnName="UnitNetWeight" />
+                <ScalarProperty Name="UnitGrossWeight" ColumnName="UnitGrossWeight" />
+                <ScalarProperty Name="IsBuy" ColumnName="IsBuy" />
+                <ScalarProperty Name="IsSell" ColumnName="IsSell" />
+                <ScalarProperty Name="IsBuild" ColumnName="IsBuild" />
+                <ScalarProperty Name="IsNotMovable" ColumnName="IsNotMovable" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="ReorderPoint" ColumnName="ReorderPoint" />
+                <ScalarProperty Name="ReorderQuantity" ColumnName="ReorderQuantity" />
+                <ScalarProperty Name="ReorderAlert" ColumnName="ReorderAlert" />
+                <ScalarProperty Name="LeadDays" ColumnName="LeadDays" />
+                <ScalarProperty Name="EOQ" ColumnName="EOQ" />
+                <ScalarProperty Name="MonthlyDemand" ColumnName="MonthlyDemand" />
+                <ScalarProperty Name="InStockQuantity" ColumnName="InStockQuantity" />
+                <ScalarProperty Name="OnHoldQuantity" ColumnName="OnHoldQuantity" />
+                <ScalarProperty Name="CommittedQuantity" ColumnName="CommittedQuantity" />
+                <ScalarProperty Name="OnOrderQuantity" ColumnName="OnOrderQuantity" />
+                <ScalarProperty Name="SupplyPrice" ColumnName="SupplyPrice" />
+                <ScalarProperty Name="MarkupPercent" ColumnName="MarkupPercent" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AttributesJSON" ColumnName="AttributesJSON" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionItems">
+            <EntityTypeMapping TypeName="Entities.TransactionItem">
+              <MappingFragment StoreEntitySet="TransactionItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="PurchaseOrderItemId" ColumnName="PurchaseOrderItemId" />
+                <ScalarProperty Name="UnitQuantity" ColumnName="UnitQuantity" />
+                <ScalarProperty Name="SaleOrderItemId" ColumnName="SaleOrderItemId" />
+                <ScalarProperty Name="CostPriceRate" ColumnName="CostPriceRate" />
+                <ScalarProperty Name="CostPriceTotal" ColumnName="CostPriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="Entities.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Particulars" ColumnName="Particulars" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="DrCr" ColumnName="DrCr" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsVoid" ColumnName="IsVoid" />
+                <ScalarProperty Name="CostPriceTotal" ColumnName="CostPriceTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transfers">
+            <EntityTypeMapping TypeName="Entities.Transfer">
+              <MappingFragment StoreEntitySet="Transfers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransferNumber" ColumnName="TransferNumber" />
+                <ScalarProperty Name="FromWarehouseId" ColumnName="FromWarehouseId" />
+                <ScalarProperty Name="ToWarehouseId" ColumnName="ToWarehouseId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uoms">
+            <EntityTypeMapping TypeName="Entities.Uom">
+              <MappingFragment StoreEntitySet="Uoms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Use" ColumnName="Use" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="RelatedPackageId" ColumnName="RelatedPackageId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Entities.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Use" ColumnName="Use" />
+                <ScalarProperty Name="SalesPerson" ColumnName="SalesPerson" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="CanLogin" ColumnName="CanLogin" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="IsMarried" ColumnName="IsMarried" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="PaymentDueDate" ColumnName="PaymentDueDate" />
+                <ScalarProperty Name="AllDuesClearDate" ColumnName="AllDuesClearDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseProducts">
+            <EntityTypeMapping TypeName="Entities.WarehouseProduct">
+              <MappingFragment StoreEntitySet="WarehouseProducts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="InStockQuantity" ColumnName="InStockQuantity" />
+                <ScalarProperty Name="OnHoldQuantity" ColumnName="OnHoldQuantity" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="Entities.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Hold" ColumnName="Hold" />
+                <ScalarProperty Name="MixedProduct" ColumnName="MixedProduct" />
+                <ScalarProperty Name="Staging" ColumnName="Staging" />
+                <ScalarProperty Name="Use" ColumnName="Use" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

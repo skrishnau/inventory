@@ -1,9 +1,6 @@
-﻿using Infrastructure.Entities.Orders;
-using System;
+﻿using Infrastructure.Context;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
 using ViewModel.Enums;
@@ -138,7 +135,7 @@ namespace DTO.Core.Inventory
                 OnHoldQuantity = model.Product.OnHoldQuantity,
                // UomId = model.UomId,
                 SupplierId = model.SupplierId,
-                Supplier = model.Supplier == null ? "" : model.Supplier.Name,
+                Supplier = model.User == null ? "" : model.User.Name,
                 Adjustment = model.Adjustment,
                 ExpirationDate = DateHelper.ToFormattedDateString(model.ExpirationDate),
                 GrossWeight = model.GrossWeight,
@@ -173,7 +170,7 @@ namespace DTO.Core.Inventory
                 // OnOrder = model.Product.OnOrderQuantity,
                // UomId = model.UomId,
                 SupplierId = model.SupplierId,
-                Supplier = model.Supplier?.Name ?? "",
+                Supplier = model.User?.Name ?? "",
                 // Adjustment = model.Adjustment,
                 //  ExpirationDate = model.ExpirationDate,
                 GrossWeight = model.GrossWeight,

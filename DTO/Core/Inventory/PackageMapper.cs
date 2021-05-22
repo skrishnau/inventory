@@ -1,9 +1,6 @@
-﻿using Infrastructure.Entities.Inventory;
-using System;
+﻿using Infrastructure.Context;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 
 namespace DTO.Core.Inventory

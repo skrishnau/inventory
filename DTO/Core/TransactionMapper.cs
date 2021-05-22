@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using DTO.AutoMapperBase;
-using Infrastructure.Entities;
-using System;
+using Infrastructure.Context;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core;
 
 namespace DTO.Core

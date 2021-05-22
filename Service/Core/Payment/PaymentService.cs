@@ -1,7 +1,5 @@
 ﻿using DTO.Core.Inventory;
 using Infrastructure.Context;
-using Infrastructure.Entities.Orders;
-using Infrastructure.Entities.Users;
 using Service.Core.Orders;
 using Service.Core.Settings;
 using Service.DbEventArgs;
@@ -58,9 +56,9 @@ namespace Service.Core.Payment
             }
         }
 
-        private IQueryable<Infrastructure.Entities.Orders.Payment> GetPaymentQueryable(DatabaseContext _context, ClientTypeEnum clientType, string searchName)
+        private IQueryable<Infrastructure.Context.Payment> GetPaymentQueryable(DatabaseContext _context, ClientTypeEnum clientType, string searchName)
         {
-            var query = _context.Payment.AsQueryable();
+            var query = _context.Payments.AsQueryable();
                     //.Where(x => x. == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
@@ -85,7 +83,7 @@ namespace Service.Core.Payment
         {
             using (var _context = new DatabaseContext())
             {
-                return _context.Payment.Find(paymentId).MapToModel();
+                return _context.Payments.Find(paymentId).MapToModel();
             }
         }
 
@@ -94,12 +92,12 @@ namespace Service.Core.Payment
             using (var _context = new DatabaseContext())
             {
                 var entity = model.MapToEntity();
-                _context.Payment.Add(entity);
+                _context.Payments.Add(entity);
                 model.Id = entity.Id;
                 User user = null;
                 if (model.UserId > 0)
                 {
-                    user = _context.User.Find(model.UserId);
+                    user = _context.Users.Find(model.UserId);
                 }
                 // ----- Add Transaction of User ----- //
                 var tempOrder = new Order

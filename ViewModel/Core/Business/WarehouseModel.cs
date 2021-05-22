@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.Entities.Business;
-
-namespace ViewModel.Core.Business
+﻿namespace ViewModel.Core.Business
 {
     public class WarehouseModel
     {

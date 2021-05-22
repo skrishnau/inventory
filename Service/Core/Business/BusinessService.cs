@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO.Core.Business;
 using Infrastructure.Context;
-using Infrastructure.Entities.Business;
-using Service.DbEventArgs;
 using Service.Listeners;
 using Service.Listeners.Business;
 using ViewModel.Core.Business;
-using ViewModel.Core.Common;
 
 namespace Service.Core.Business
 {
@@ -30,18 +25,18 @@ namespace Service.Core.Business
             using (var _context = new DatabaseContext())
             {
 
-            var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branch.Id);
+            var dbEntity = _context.Branches.FirstOrDefault(x => x.Id == branch.Id);
             BranchEventArgs args = BranchEventArgs.Instance;
             if (dbEntity == null)
             {
-                var entity = _context.Branch.FirstOrDefault(x => x.Name == branch.Name);
+                var entity = _context.Branches.FirstOrDefault(x => x.Name == branch.Name);
                 if (entity != null)
                     return 0;
                 // branch save
                 dbEntity = BranchMapper.MapToEntity(branch);// branch.ToEntity();
                 dbEntity.CreatedAt = DateTime.Now;
                 dbEntity.UpdatedAt = DateTime.Now;
-                _context.Branch.Add(dbEntity);
+                _context.Branches.Add(dbEntity);
                 args.Mode = Utility.UpdateMode.ADD;
             }
             else
@@ -62,13 +57,13 @@ namespace Service.Core.Business
             using (var _context = new DatabaseContext())
             {
 
-            var dbEntity = _context.Counter.FirstOrDefault(x => x.Id == counter.Id);
+            var dbEntity = _context.Counters.FirstOrDefault(x => x.Id == counter.Id);
             if (dbEntity == null)
             {
                 var counterEntity = counter.ToEntity();
                 counterEntity.CreatedAt = DateTime.Now;
                 counterEntity.UpdatedAt = DateTime.Now;
-                _context.Counter.Add(counterEntity);
+                _context.Counters.Add(counterEntity);
             }
             else
             {
@@ -84,7 +79,7 @@ namespace Service.Core.Business
 
         //public void DeleteBranch(int branchId)
         //{
-        //    var dbEntity = _context.Branch.FirstOrDefault(x => x.Id == branchId);
+        //    var dbEntity = _context.Branches.FirstOrDefault(x => x.Id == branchId);
         //    if (dbEntity != null)
         //    {
         //        dbEntity.DeletedAt = DateTime.Now;
@@ -99,7 +94,7 @@ namespace Service.Core.Business
             using (var _context = new DatabaseContext())
             {
 
-            var counters = _context.Counter
+            var counters = _context.Counters
                    //.Where(x => x.DeletedAt == null)
                    .Select(x => new CounterModel()
                    {
@@ -121,7 +116,7 @@ namespace Service.Core.Business
             using (var _context = new DatabaseContext())
             {
 
-            var branches = _context.Branch
+            var branches = _context.Branches
                    //.Where(x => x.DeletedAt == null)
                    .Select(x => new BranchModel()
                    {

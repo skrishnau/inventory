@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Context;
-using Infrastructure.Entities.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using DTO.AutoMapperBase;
-using Infrastructure.Entities.Inventory;
-using System;
+using Infrastructure.Context;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core.Inventory;
 using ViewModel.Utility;
 
@@ -37,9 +34,9 @@ namespace DTO.Core.Inventory
         {
             CreateMap<PriceHistory, PriceHistoryModel>()
                 .ForMember(dest => dest.DateString, opt => opt.MapFrom(src => DateConverter.Instance.ToBS(src.Date)))
-                .ForMember(dest => dest.Rate, opt=>opt.MapFrom(src=>src.Price == 0 ? null : (decimal?)src.Price));
+                .ForMember(dest => dest.Rate, opt=>opt.MapFrom(src=>src.Rate == 0 ? null : (decimal?)src.Rate));
             CreateMap<PriceHistoryModel, PriceHistory>()
-                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Rate == null ? 0 : src.Rate));
+                .ForMember(dest => dest.Rate, opt => opt.MapFrom(src => src.Rate == null ? 0 : src.Rate));
         }
     }
 }

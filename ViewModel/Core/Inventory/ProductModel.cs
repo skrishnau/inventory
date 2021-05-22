@@ -1,11 +1,4 @@
-﻿using Infrastructure.Entities.Inventory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ViewModel.Core.Business;
-using ViewModel.Core.Common;
+﻿using System.Collections.Generic;
 
 namespace ViewModel.Core.Inventory
 {

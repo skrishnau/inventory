@@ -8,16 +8,11 @@ using ViewModel.Core.Orders;
 using System.Data.Entity;
 using Service.DbEventArgs;
 using Service.Listeners;
-using Infrastructure.Entities.Orders;
-using Infrastructure.Entities.Inventory;
 using Service.Core.Inventory.Units;
 using ViewModel.Enums;
 using Service.Core.Settings;
-using Infrastructure.Entities.Users;
 using Service.Core.Users;
-using Infrastructure.Entities;
 using ViewModel.Core;
-using System.Data.Entity.Core.Objects;
 using Service.Interfaces;
 
 namespace Service.Core.Orders
@@ -89,7 +84,7 @@ namespace Service.Core.Orders
             var name = split.Length > 0 ? split[0].Trim() : "";
             var company = split.Length > 1 ? split[1].Trim() : "";
             var type = orderType.ToString();
-            var orders = _context.Order
+            var orders = _context.Orders
                 .Include(x => x.User)
                 .Include(x => x.OrderItems);
             if (orderListType == OrderListTypeEnum.Transaction)
@@ -114,7 +109,7 @@ namespace Service.Core.Orders
         {
             using (var _context = new DatabaseContext())
             {
-                int lotNo = _context.Order.Any() ? _context.Order.Max(x => x.LotNumber) : 1;
+                int lotNo = _context.Orders.Any() ? _context.Orders.Max(x => x.LotNumber) : 1;
                 return ++lotNo;
             }
         }
@@ -123,7 +118,7 @@ namespace Service.Core.Orders
         {
             using (var _context = new DatabaseContext())
             {
-                var query = _context.OrderItem
+                var query = _context.OrderItems
                     .Include(x => x.Product)
                     .Where(x => x.OrderId == purchaseOrderId);
                 return OrderItemMapper.MapToOrderItemModel(query);
@@ -137,11 +132,11 @@ namespace Service.Core.Orders
 
                 // don't use enum directly
                 var type = orderType.ToString();
-                var entity = _context.Order
+                var entity = _context.Orders
                      .Include(x => x.Warehouse)
-                     .Include(x => x.ToWarehouse)
+                     .Include(x => x.Warehouse1)
                      .Include(x => x.User)
-                     .Include(x => x.ParentOrder)
+                     .Include(x => x.Order1)
                      .Include(x => x.OrderItems)
                      .Include(x => x.User)
                      .Include(x => x.OrderItems.Select(y => y.Product))
@@ -157,11 +152,11 @@ namespace Service.Core.Orders
             {
                 // don't use enum directly
                 // var type = orderType.ToString();
-                var entity = _context.Order
+                var entity = _context.Orders
                      .Include(x => x.Warehouse)
-                     .Include(x => x.ToWarehouse)
+                     .Include(x => x.Warehouse1)
                      .Include(x => x.User)
-                     .Include(x => x.ParentOrder)
+                     .Include(x => x.Order1)
                      .Include(x => x.OrderItems)
                      .Include(x => x.User)
                      .Include(x => x.OrderItems.Select(y => y.Product))
@@ -190,7 +185,7 @@ namespace Service.Core.Orders
         //    var isCompleted = false;
         //    using (var _context = new DatabaseContext())
         //    {
-        //        var dbEntity = _context.Order.Find(orderModel.Id);
+        //        var dbEntity = _context.Orders.Find(orderModel.Id);
         //        isVerified = dbEntity?.IsVerified ?? false;
         //        isCompleted = dbEntity?.IsCompleted ?? false;
         //        var entity = orderModel.MapToEntity(dbEntity);
@@ -211,7 +206,7 @@ namespace Service.Core.Orders
             // AND in csse of zero rate update, we should NOT update any inventory Unit, we will update only transactions
             using (var _context = new DatabaseContext())
             {
-                var entity = _context.Order.Find(orderModel.Id);
+                var entity = _context.Orders.Find(orderModel.Id);
                 if (entity != null)
                 {
                     List<Transaction> sellTxns = new List<Transaction>();
@@ -230,13 +225,13 @@ namespace Service.Core.Orders
                             orderItem.Total = item.Rate * orderItem.UnitQuantity;
                             UpdateProductForOrderItemSaveWithoutCommit(_context, entity, orderItem);
                             // 1. update transaction Items
-                            var txnItems = _context.TransactionItem.Where(x => x.PurchaseOrderItemId == orderItem.Id).ToList();
+                            var txnItems = _context.TransactionItems.Where(x => x.PurchaseOrderItemId == orderItem.Id).ToList();
                             foreach (var ti in txnItems)
                             {
-                                var conversion = _uomService.ConvertUom(orderItem.PackageId??0, ti.SaleOrderItem.PackageId??0, orderItem.ProductId);
+                                var conversion = _uomService.ConvertUom(orderItem.PackageId??0, ti.OrderItem1.PackageId??0, orderItem.ProductId);
                                 if(conversion == 0)
                                 {
-                                    return new ResponseModel<OrderModel> { Message = $"Can't convert from {orderItem.Package?.Name} to {ti.SaleOrderItem.Package?.Name}. Please update product's UOM." };
+                                    return new ResponseModel<OrderModel> { Message = $"Can't convert from {orderItem.Package?.Name} to {ti.OrderItem1.Package?.Name}. Please update product's UOM." };
                                 }
                                 ti.CostPriceRate = orderItem.Rate / conversion;
                                 ti.CostPriceTotal = ti.CostPriceRate * ti.UnitQuantity;
@@ -281,7 +276,7 @@ namespace Service.Core.Orders
                 _listener.TriggerProductUpdateEvent(null, null);
                 _listener.TriggerUserUpdateEvent(null, null);
                 _listener.TriggerInventoryUnitUpdateEvent(null, null);
-                var newOrder = _context.Order.Find(entity.Id)?.MapToModel(true);
+                var newOrder = _context.Orders.Find(entity.Id)?.MapToModel(true);
                 return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true };
             }
         }
@@ -303,7 +298,7 @@ namespace Service.Core.Orders
             var isCompleted = false;
             using (var _context = new DatabaseContext())
             {
-                var dbEntity = _context.Order.Find(orderModel.Id);
+                var dbEntity = _context.Orders.Find(orderModel.Id);
                 isVerified = dbEntity?.IsVerified ?? false;
                 isCompleted = dbEntity?.IsCompleted ?? false;
                 var entity = orderModel.MapToEntity(dbEntity);
@@ -357,7 +352,7 @@ namespace Service.Core.Orders
                 {
                     entity.CreatedAt = now;
                     entity.UpdatedAt = now;
-                    _context.Order.Add(entity);
+                    _context.Orders.Add(entity);
                     args.Mode = Utility.UpdateMode.ADD;
                 }
                 else
@@ -365,7 +360,7 @@ namespace Service.Core.Orders
                     entity.UpdatedAt = now;
                     args.Mode = Utility.UpdateMode.EDIT;
                     // update the order items' warehouse
-                    foreach (var item in _context.OrderItem.Where(x => x.OrderId == entity.Id))
+                    foreach (var item in _context.OrderItems.Where(x => x.OrderId == entity.Id))
                     {
                         item.WarehouseId = entity.WarehouseId;
                     }
@@ -386,14 +381,14 @@ namespace Service.Core.Orders
                 _listener.TriggerPackageUpdateEvent(null, null);
                 _listener.TriggerUserUpdateEvent(null, null);
                 _listener.TriggerInventoryUnitUpdateEvent(null, null);
-                var newOrder = _context.Order.Find(entity.Id)?.MapToModel(true);
+                var newOrder = _context.Orders.Find(entity.Id)?.MapToModel(true);
                 return new ResponseModel<OrderModel> { Data = newOrder, Message = string.Empty, Success = true };
             }
         }
 
         private void UndoOrderTransactionsWithoutCommit(DatabaseContext _context, int? parentOrderId)
         {
-            var parent = _context.Order.Find(parentOrderId);
+            var parent = _context.Orders.Find(parentOrderId);
             if (parent != null)
             {
                 parent.IsVoid = true;
@@ -421,10 +416,10 @@ namespace Service.Core.Orders
 
         private void UndoInventoryItemsWithoutCommit(DatabaseContext _context, int? parentOrderId)
         {
-            var order = _context.Order.FirstOrDefault(x => x.Id == parentOrderId);
+            var order = _context.Orders.FirstOrDefault(x => x.Id == parentOrderId);
             if (order != null)
             {
-                var items = _context.OrderItem.Where(x => x.OrderId == parentOrderId);
+                var items = _context.OrderItems.Where(x => x.OrderId == parentOrderId);
                 foreach (var oitem in items)
                 {
                     if (order.OrderType == OrderTypeEnum.Sale.ToString())
@@ -485,7 +480,7 @@ namespace Service.Core.Orders
                 //UserId = orderModel.UserId > 0 ? (int?)orderModel.UserId : null, // don't add userid
                 Type = orderModel.OrderType,
             };
-            //_context.Transaction.Add(transaction);
+            //_context.Transactions.Add(transaction);
             return transaction;
         }
 
@@ -494,7 +489,7 @@ namespace Service.Core.Orders
             User user = null;
             if (orderModel.UserId > 0)
             {
-                user = _context.User.Find(orderModel.UserId);
+                user = _context.Users.Find(orderModel.UserId);
                 if (user != null)
                 {
                     user.Address = orderModel.Address;
@@ -540,7 +535,7 @@ namespace Service.Core.Orders
             using (var _context = new DatabaseContext())
             {
 
-                var entity = _context.Order.Find(orderId);
+                var entity = _context.Orders.Find(orderId);
                 if (entity != null)
                 {
                     if (entity.IsCompleted)
@@ -585,7 +580,7 @@ namespace Service.Core.Orders
                 if (item.ProductId == 0)
                 {
                     item.Product = item.Product.Trim();
-                    var productEntity = _context.Product.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == item.Product || x.SKU == item.Product));
+                    var productEntity = _context.Products.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == item.Product || x.SKU == item.Product));
                     if (productEntity != null)
                     {
                         item.ProductId = productEntity.Id;
@@ -594,7 +589,7 @@ namespace Service.Core.Orders
                 item.Total = item.Rate * item.UnitQuantity;
                 if ((item.PackageId ?? 0) == 0)
                 {
-                    var packageEntity = _context.Package.FirstOrDefault(x => x.Name == item.Package);
+                    var packageEntity = _context.Packages.FirstOrDefault(x => x.Name == item.Package);
                     if (packageEntity != null)
                     {
                         item.PackageId = packageEntity.Id;
@@ -610,7 +605,7 @@ namespace Service.Core.Orders
                 var stillExists = items.FirstOrDefault(x => x.Id == entity.Id);
                 if (stillExists == null)
                 {
-                    _context.OrderItem.Remove(entity);
+                    _context.OrderItems.Remove(entity);
                     //order.OrderItems.Remove(entity);
                 }
             }
@@ -700,7 +695,7 @@ namespace Service.Core.Orders
 
                     if (order.OrderType == OrderTypeEnum.Purchase.ToString())
                     {
-                        entity.Supplier = order.User;
+                        entity.User = order.User;
                         entity.SupplierId = order.UserId;
                         var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "PO Receive" : adjustmentCode;
                         var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), order.CompletedDate ?? DateTime.Now, adjustment, ref message, product, order.ReferenceNumber, entity);
@@ -720,7 +715,7 @@ namespace Service.Core.Orders
                             txnItemsList.Add(new TransactionItem
                             {
                                 PurchaseOrderItemId = inv.OrderItemId,
-                                SaleOrderItem = entity,
+                                OrderItem1 = entity,
                                 CostPriceRate = inv.Rate,
                                 UnitQuantity = inv.UnitQuantity,
                                 CostPriceTotal = inv.Rate * inv.UnitQuantity,
@@ -740,7 +735,7 @@ namespace Service.Core.Orders
         {
             var product = entity.Product;
             if (product == null)
-                product = _context.Product.Find(entity.ProductId);
+                product = _context.Products.Find(entity.ProductId);
             if (product != null)
             {
                // _productService.AddPriceHistoryWithoutCommit(product, entity.Rate, order.OrderType, order.CompletedDate, entity.Package, entity.PackageId);
@@ -757,7 +752,7 @@ namespace Service.Core.Orders
             using (var _context = new DatabaseContext())
             {
                 var message = "";
-                var poEntity = _context.Order.Find(purchaseOrderId);
+                var poEntity = _context.Orders.Find(purchaseOrderId);
                 var txnItemList = new List<TransactionItem>();
                 SaveOrderItemsWithoutCommit(_context, poEntity, items, false, ref message, ref txnItemList, null, OrderOrDirectEnum.Order);
 
@@ -774,31 +769,31 @@ namespace Service.Core.Orders
        // will never be used
         private void UndoInventoryItemsWithoutCommit(DatabaseContext _context, int? parentOrderId)
         {
-            var order = _context.Order.FirstOrDefault(x => x.Id == parentOrderId);
+            var order = _context.Orders.FirstOrDefault(x => x.Id == parentOrderId);
             if (order != null)
             {
-                var items = _context.OrderItem.Where(x => x.OrderId == parentOrderId);
+                var items = _context.OrderItems.Where(x => x.OrderId == parentOrderId);
                 foreach (var oitem in items)
                 {
                     if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
                         var unitFound = false;
-                        var viaQty = _context.InventoryUnit.FirstOrDefault(x => x.ProductId == oitem.ProductId && x.UnitQuantity == oitem.UnitQuantity);
+                        var viaQty = _context.InventoryUnits.FirstOrDefault(x => x.ProductId == oitem.ProductId && x.UnitQuantity == oitem.UnitQuantity);
                         if (viaQty != null)
                         {
-                            _context.InventoryUnit.Remove(viaQty);
+                            _context.InventoryUnits.Remove(viaQty);
                             unitFound = true;
                         }
                         if (!unitFound)
                         {
-                            var units = _context.InventoryUnit.Where(x => x.ProductId == oitem.ProductId)
+                            var units = _context.InventoryUnits.Where(x => x.ProductId == oitem.ProductId)
                            .OrderBy(x => x.UnitQuantity);
                             decimal sum = 0;
                             foreach (var unit in units)
                             {
                                 if ((sum + unit.UnitQuantity) <= oitem.UnitQuantity)
                                 {
-                                    _context.InventoryUnit.Remove(unit);
+                                    _context.InventoryUnits.Remove(unit);
                                     sum += unit.UnitQuantity;
                                 }
                                 else
@@ -806,7 +801,7 @@ namespace Service.Core.Orders
                                     var remainQty = unit.UnitQuantity - (oitem.UnitQuantity - sum);
                                     if (remainQty < 0)
                                     {
-                                        _context.InventoryUnit.Remove(unit);
+                                        _context.InventoryUnits.Remove(unit);
                                     }
                                     else
                                     {
@@ -821,10 +816,10 @@ namespace Service.Core.Orders
                             }
                         }
                         // todo for multiple warehouse case
-                        var wp = _context.WarehouseProduct.FirstOrDefault(x => x.ProductId == oitem.ProductId);
+                        var wp = _context.WarehouseProducts.FirstOrDefault(x => x.ProductId == oitem.ProductId);
                         if (wp != null)
                             wp.InStockQuantity -= oitem.UnitQuantity;
-                        var product = _context.Product.FirstOrDefault(x => x.Id == oitem.ProductId);
+                        var product = _context.Products.FirstOrDefault(x => x.Id == oitem.ProductId);
                         if (product != null)
                             product.InStockQuantity -= oitem.UnitQuantity;
                     }
@@ -856,12 +851,12 @@ namespace Service.Core.Orders
                             SupplierId = oitem.SupplierId,
                             UnitQuantity = oitem.UnitQuantity,
                         };
-                        _context.InventoryUnit.Add(invUnit);
+                        _context.InventoryUnits.Add(invUnit);
                         // todo for multiple warehouse case
-                        var wp = _context.WarehouseProduct.FirstOrDefault(x => x.ProductId == oitem.ProductId);
+                        var wp = _context.WarehouseProducts.FirstOrDefault(x => x.ProductId == oitem.ProductId);
                         if (wp != null)
                             wp.InStockQuantity += oitem.UnitQuantity;
-                        var product = _context.Product.FirstOrDefault(x => x.Id == oitem.ProductId);
+                        var product = _context.Products.FirstOrDefault(x => x.Id == oitem.ProductId);
                         if (product != null)
                             product.InStockQuantity += oitem.UnitQuantity;
                     }
@@ -878,7 +873,7 @@ namespace Service.Core.Orders
        {
            foreach (var poItem in items)
            {
-               var product = _context.Product.Find(poItem.ProductId);
+               var product = _context.Products.Find(poItem.ProductId);
                if (product != null)
                {
                    poItem.IsReceived = true;
@@ -917,7 +912,7 @@ namespace Service.Core.Orders
                        InventoryUnit = invmodel
                    };
                    _inventoryUnitService.UpdateWarehouseProductWithoutCommit(_context, invMovement, product);
-                   _context.InventoryUnit.Add(invUnit);
+                   _context.InventoryUnits.Add(invUnit);
                }
            }
        }
@@ -929,7 +924,7 @@ namespace Service.Core.Orders
             {
 
                 var now = DateTime.Now;
-                var entity = _context.Order.Find(orderId);
+                var entity = _context.Orders.Find(orderId);
                 if (entity != null)
                 {
                     if (!entity.IsVerified)
@@ -957,7 +952,7 @@ namespace Service.Core.Orders
             using (var _context = new DatabaseContext())
             {
 
-                var entity = _context.Order.Find(orderId);
+                var entity = _context.Orders.Find(orderId);
                 if (entity != null)
                 {
                     var orderType = Enum.Parse(typeof(OrderTypeEnum), entity.OrderType);
@@ -1005,7 +1000,7 @@ namespace Service.Core.Orders
             {
 
                 var now = DateTime.Now;
-                var entity = _context.Order.Find(orderId);
+                var entity = _context.Orders.Find(orderId);
                 if (entity != null)
                 {
                     if (!entity.IsVerified)
@@ -1041,7 +1036,7 @@ namespace Service.Core.Orders
         // nature of transaction (invoice void, re-save, etc.)
         //private void AddUpdateUserAmount(DatabaseContext _context, OrderModel orderModel, Order entity)
         //{
-        //    var user = _context.User.Find(orderModel.UserId);
+        //    var user = _context.Users.Find(orderModel.UserId);
         //    if (user != null)
         //    {
         //        // new order
@@ -1064,7 +1059,7 @@ namespace Service.Core.Orders
             //var from = DateTime.Now.Date.AddDays(-30);
             using (var _context = new DatabaseContext())
             {
-                var list = _context.Order
+                var list = _context.Orders
                     .Where(x => x.IsCompleted && x.CompletedDate >= from && x.CompletedDate <= to && !x.IsVoid)
                     .GroupBy(x => new { CompletedDate = DbFunctions.TruncateTime(x.CompletedDate), x.OrderType })
                     .Select(x => new
@@ -1095,10 +1090,10 @@ namespace Service.Core.Orders
             using (var _context = new DatabaseContext())
             {
                 var nowDate = DateTime.Now.Date;
-                //var orders = _context.Order.Where(x => x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
+                //var orders = _context.Orders.Where(x => x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();
                 var sell = OrderTypeEnum.Sale.ToString();
                 var customer = UserTypeEnum.Customer.ToString();
-                var list = _context.Transaction//.Where(x => x.Type == sell)
+                var list = _context.Transactions//.Where(x => x.Type == sell)
                     .Where(x => x.User != null && x.User.UserType == customer)
                     .GroupBy(x => x.User)
                     .Select(x => new
@@ -1126,11 +1121,11 @@ namespace Service.Core.Orders
                     })
                     .ToList();
 
-                //_context.User.Where(x=>x.UserType == customer && x.Transactions.A)
+                //_context.Users.Where(x=>x.UserType == customer && x.Transactions.A)
 
                 //var saleType = OrderTypeEnum.Sale.ToString();
                 ////var invoice = TransactionTypeEnum
-                //var transactions = _context.Transaction
+                //var transactions = _context.Transactions
                 //    .Where(x=>x.Type == saleType)
                 //    .GroupBy(x=>x.User)
                 //    .Select(x=> new { x.Key.Name, Balance = x.Sum(y=>y.Balance * y.DrCr) })

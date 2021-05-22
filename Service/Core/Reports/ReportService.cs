@@ -28,14 +28,14 @@ namespace Service.Core.Reports
             DateTime to = model.To;
             using (var _context = new DatabaseContext())
             {
-                var user = _context.User.Find(userId);
+                var user = _context.Users.Find(userId);
                 if (user != null)
                 {
                     from = from.Date;
                     to = to.Date;
                     to = to.AddDays(1);
 
-                    var query = _context.Transaction.Where(x => x.UserId == userId && !x.IsVoid);
+                    var query = _context.Transactions.Where(x => x.UserId == userId && !x.IsVoid);
                     var openingBalanceQuery = query;
                     if (model.OnlyAfterLastClearance)
                     {
@@ -133,7 +133,7 @@ namespace Service.Core.Reports
             }
         }
 
-        private LedgerModel TransactionToLedgerModel(Infrastructure.Entities.Transaction x)
+        private LedgerModel TransactionToLedgerModel(Infrastructure.Context.Transaction x)
         {
             return new LedgerModel
             {
@@ -157,7 +157,7 @@ namespace Service.Core.Reports
                 to = to.Date;
                 var isFromAndToEqual = from == to;
                 to = to.AddDays(1);
-                var query = _context.Transaction.Where(x => x.Type == TransactionTypeEnum.Sale.ToString() && !x.IsVoid);
+                var query = _context.Transactions.Where(x => x.Type == TransactionTypeEnum.Sale.ToString() && !x.IsVoid);
                 var openingBalanceQuery = query;
                 if (!model.YearlyData)
                 {

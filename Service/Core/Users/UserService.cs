@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO.Core.Inventory;
 using Infrastructure.Context;
-using Infrastructure.Entities.Users;
 using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Common;
@@ -28,7 +25,7 @@ namespace Service.Core.Users
             using (var _context = new DatabaseContext())
             {
 
-                var dbEntity = _context.User.FirstOrDefault(x => x.Id == user.Id);
+                var dbEntity = _context.Users.FirstOrDefault(x => x.Id == user.Id);
                 if (dbEntity != null)
                 {
                     dbEntity.DeletedAt = DateTime.Now;
@@ -44,7 +41,7 @@ namespace Service.Core.Users
             {
 
                 var now = DateTime.Now;
-                var dbEntity = _context.User
+                var dbEntity = _context.Users
                     .FirstOrDefault(x => x.Id == supplierModel.Id);
                 BaseEventArgs<UserModel> eventArgs = BaseEventArgs<UserModel>.Instance;
                 dbEntity = UserMapper.MapToEntity(supplierModel, dbEntity);
@@ -53,7 +50,7 @@ namespace Service.Core.Users
                     // add
                     dbEntity.CreatedAt = now;
                     dbEntity.UpdatedAt = now;
-                    _context.User.Add(dbEntity);
+                    _context.Users.Add(dbEntity);
                     eventArgs.Mode = Utility.UpdateMode.ADD;
                 }
                 else
@@ -72,7 +69,7 @@ namespace Service.Core.Users
         {
             using (var _context = new DatabaseContext())
             {
-                var user = _context.User.Find(userId);
+                var user = _context.Users.Find(userId);
                 if (user == null)
                     return null;
                 return UserMapper.MapToUserModel(user);
@@ -83,7 +80,7 @@ namespace Service.Core.Users
         {
             using (var _context = new DatabaseContext())
             {
-                var user = _context.User.Find(userId);
+                var user = _context.Users.Find(userId);
                 if (user == null)
                     return null;
                 var transactions = user.Transactions.Where(x => !x.IsVoid).ToList();
@@ -175,7 +172,7 @@ namespace Service.Core.Users
             var name = split.Length > 0 ? split[0].Trim() : "";
             var company = split.Length > 1 ? split[1].Trim() : "";
 
-            var query = _context.User
+            var query = _context.Users
                     .Where(x => x.DeletedAt == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
@@ -197,10 +194,10 @@ namespace Service.Core.Users
         {
             using (var _context = new DatabaseContext())
             {
-                var user = _context.User.Find(userId);
+                var user = _context.Users.Find(userId);
                 if (user != null)
                 {
-                    var query = _context.Transaction.Where(x => !x.IsVoid && x.UserId == userId)
+                    var query = _context.Transactions.Where(x => !x.IsVoid && x.UserId == userId)
                     .GroupBy(x => x.UserId);
                     if (user.UserType == UserTypeEnum.Customer.ToString())
                     {

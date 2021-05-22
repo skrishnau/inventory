@@ -1,16 +1,10 @@
-﻿using Infrastructure.Context;
-using Infrastructure.Entities.Inventory;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core;
 using ViewModel.Core.Business;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
-using static Service.Core.Inventory.InventoryService;
 
 namespace Service.Core.Inventory
 {

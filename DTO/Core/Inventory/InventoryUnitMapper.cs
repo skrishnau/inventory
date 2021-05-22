@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Infrastructure.Entities.Inventory;
+using Infrastructure.Context;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
-using ViewModel.Enums;
 using ViewModel.Utility;
 
 namespace DTO.Core.Inventory
@@ -60,7 +56,7 @@ namespace DTO.Core.Inventory
                 ReceiveReceipt = entity.ReceiveReceipt,
                 Remark = entity.Remark,
                 SKU = entity.Product == null ? "" : entity.Product.SKU,
-                Supplier = entity.Supplier == null ? "" : entity.Supplier.Name,
+                Supplier = entity.User == null ? "" : entity.User.Name,
                 SupplierId = entity.SupplierId,
                 Rate = entity.Rate,
                 UnitQuantity = entity.UnitQuantity,

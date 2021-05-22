@@ -1,12 +1,7 @@
-﻿using DTO.Core.Business;
-using Infrastructure.Entities.Inventory;
-using Newtonsoft.Json;
+﻿using Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Enums;
 using ViewModel.Utility;
@@ -117,7 +112,7 @@ namespace DTO.Core.Inventory
             model.HasVariants = entity.HasVariants;
             model.IsVariant = entity.IsVariant;
             //entity.ParentProduct = model.ParentProduct;
-            model.ParentProduct = entity.ParentProduct == null ? "" : entity.ParentProduct.Name;// entity.ParentProduct == null ? null : ProductMapper.MapToProductModel(entity.ParentProduct);
+            model.ParentProduct = entity.Product1== null ? "" : entity.Product1.Name;// entity.ParentProduct == null ? null : ProductMapper.MapToProductModel(entity.ParentProduct);
             model.ParentProductId = entity.ParentProductId;
             model.SKU = entity.SKU;
             model.Use = entity.Use;
@@ -163,17 +158,17 @@ namespace DTO.Core.Inventory
             model.WarehouseId = entity.WarehouseId;
             model.Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name;
             // pricing
-            var prices = entity.PriceHistory.OrderByDescending(x => x.Date);
+            var prices = entity.PriceHistories.OrderByDescending(x => x.Date);
             var sale = OrderTypeEnum.Sale.ToString();
             var sellPrice = prices.FirstOrDefault(x => x.PriceType == sale);
-            model.SellingPrice = sellPrice?.Price??0;//entity.RetailPrice;
+            model.SellingPrice = sellPrice?.Rate??0;//entity.RetailPrice;
             model.SellingPricePackage = sellPrice?.Package?.Name ?? "";
             model.SellingPriceDateBS = sellPrice != null ? DateConverter.Instance.ToBS(sellPrice.Date).ToString() : "";
             model.SellingPriceWholeText = model.SellingPrice == 0 ? "" : $"{model.SellingPrice} / {model.SellingPricePackage}";
 
             var purchase = OrderTypeEnum.Purchase.ToString();
             var costPrice = prices.FirstOrDefault(x => x.PriceType == purchase);
-            model.CostPrice = costPrice?.Price ?? 0;//entity.SupplyPrice;
+            model.CostPrice = costPrice?.Rate ?? 0;//entity.SupplyPrice;
             model.CostPricePackage = costPrice?.Package?.Name ?? "";
             model.CostPriceDateBS = costPrice != null ? DateConverter.Instance.ToBS(costPrice.Date).ToString() : "";
             model.CostPriceWholeText = model.CostPrice == 0 ? "" : $"{model.CostPrice} / {model.CostPricePackage}";

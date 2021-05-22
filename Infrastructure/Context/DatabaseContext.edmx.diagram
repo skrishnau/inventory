@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="516187f134c34ea58536b7aa5cb2a8f8" Name="Diagram1">
+        <EntityTypeShape EntityType="Entities.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.AdjustmentCode" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.AppSetting" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Bill" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Branch" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Category" Width="1.5" PointX="9.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Counter" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.InventoryUnit" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Movement" Width="1.5" PointX="14.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.OrderItem" Width="1.5" PointX="6" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Order" Width="1.5" PointX="9" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Package" Width="1.5" PointX="3.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Payment" Width="1.5" PointX="17.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.PriceHistory" Width="1.5" PointX="17.25" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.ProductAttribute" Width="1.5" PointX="14.25" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.ProductPackage" Width="1.5" PointX="14.25" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Product" Width="1.5" PointX="12" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.TransactionItem" Width="1.5" PointX="14.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Transaction" Width="1.5" PointX="17.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Transfer" Width="1.5" PointX="3" PointY="60.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Uom" Width="1.5" PointX="20.25" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.User" Width="1.5" PointX="6.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.WarehouseProduct" Width="1.5" PointX="20.25" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.Warehouse" Width="1.5" PointX="0.75" PointY="24.125" IsExpanded="true" />
+        <AssociationConnector Association="Entities.FK_dbo_Counters_dbo_Branches_BranchId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Categories_dbo_Categories_ParentCategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Products_dbo_Categories_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_InventoryUnits_dbo_Packages_PackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_InventoryUnits_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_InventoryUnits_dbo_Users_SupplierId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Movements_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_OrderItems_dbo_Orders_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_OrderItems_dbo_Packages_PackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_OrderItems_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_OrderItems_dbo_Users_SupplierId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_OrderItems_dbo_Warehouses_WarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_TransactionItems_dbo_OrderItems_InventoryOrderItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_TransactionItems_dbo_OrderItems_SaleOrderItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Orders_dbo_Orders_ParentOrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Orders_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Orders_dbo_Warehouses_ToWarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Orders_dbo_Warehouses_WarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Payments_dbo_Orders_Order_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Transactions_dbo_Orders_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_PriceHistories_dbo_Packages_PackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_ProductPackages_dbo_Packages_PackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Uoms_dbo_Packages_PackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Payments_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_PriceHistories_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_ProductAttributes_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_ProductPackages_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Products_dbo_Products_ParentProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Products_dbo_Warehouses_WarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Uoms_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_WarehouseProducts_dbo_Products_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_TransactionItems_dbo_Transactions_TransactionId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Transactions_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

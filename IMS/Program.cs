@@ -38,6 +38,11 @@ using Service.Core.Reports;
 using Service.Interfaces;
 using Service.Core;
 using Service.Core.Payment;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations.Infrastructure;
+using System.Linq;
+using Infrastructure.Context;
 
 namespace IMS
 {
@@ -59,6 +64,8 @@ namespace IMS
             {
                 Application.Run(container.GetInstance<Form1>());
             }
+
+            
 
         }
 
