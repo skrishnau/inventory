@@ -664,5 +664,16 @@ namespace Service.Core.Settings
             }
             return expired;
         }
+        public bool SaveBackupFolderPath(string folderPath)
+        {
+            var appSetting = new AppSettingModel
+            {
+                DisplayName = "Backup Folder Path",
+                Group = Constants.GROUP_BACKUP,
+                Name = Constants.KEY_BACKUP_FOLDER_PATH,
+                Value = folderPath,
+            };
+            return SaveAppSetting(appSetting);
+        }
     }
 }

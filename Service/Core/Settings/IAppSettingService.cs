@@ -40,5 +40,7 @@ namespace Service.Core.Settings
 
         PasswordModel GetPassword();
         bool SavePassword(PasswordModel password);
+
+        bool SaveBackupFolderPath(string folderPath);
     }
 }

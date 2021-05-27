@@ -66,6 +66,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -86,6 +87,18 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Backup\BackupDatabase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Backup\BackupDatabase.Designer.cs">
+      <DependentUpon>BackupDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Backup\DatabaseBackupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Backup\DatabaseBackupForm.Designer.cs">
+      <DependentUpon>DatabaseBackupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Business\BusinessUC.cs">
       <SubType>UserControl</SubType>
@@ -692,6 +705,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Helpers\OrderModelReportHelper.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="Forms\Backup\BackupDatabase.resx">
+      <DependentUpon>BackupDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Backup\DatabaseBackupForm.resx">
+      <DependentUpon>DatabaseBackupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Business\BusinessUC.resx">
       <DependentUpon>BusinessUC.cs</DependentUpon>
     </EmbeddedResource>

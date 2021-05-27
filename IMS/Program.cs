@@ -43,6 +43,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Linq;
 using Infrastructure.Context;
+using IMS.Forms.Backup;
 
 namespace IMS
 {
@@ -203,6 +204,7 @@ namespace IMS
             // container.Register<OrderListUC>(Lifestyle.Scoped);
             // container.Register<OrderDetailUC>(Lifestyle.Scoped);
             container.Register<OrderCreateForm>(Lifestyle.Scoped);
+            container.Register<DatabaseBackupForm>(Lifestyle.Scoped);
             
 
 

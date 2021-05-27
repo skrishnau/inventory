@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\BackupService.cs" />
     <Compile Include="Core\Inventory\Units\IInventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUpdate.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Core\Users\UserService.cs" />
     <Compile Include="DbEventArgs\BaseEventArgs.cs" />
     <Compile Include="DbEventArgs\IdEventArgs.cs" />
+    <Compile Include="Interfaces\IBackupService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Interfaces\IUomService.cs" />
     <Compile Include="Listeners\Business\BranchListener.cs" />

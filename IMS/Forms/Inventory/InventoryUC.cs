@@ -330,8 +330,21 @@ namespace IMS.Forms.Inventory
             _menubar.btnOrders.Click += BtnOrders_Click;
 
             _menubar.btnClients.Click += BtnClients_Click;
+            _menubar.btnBackup.Click += BtnBackup_Click;
         }
 
+        private void BtnBackup_Click(object sender, EventArgs e)
+        {
+            //var folder = "D:\\sysBackups";
+            //var conn = System.Configuration.ConfigurationManager.ConnectionStrings["DatabaseContextBackup"].ConnectionString;
+            //var backupService = new Service.Core.BackupService(conn, folder);
+            //backupService.BackupDatabase("IMS");
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var transferForm = Program.container.GetInstance<Backup.DatabaseBackupForm>();
+                transferForm.ShowDialog();
+            }
+        }
 
         private void AddTabPage(String text, UserControl uc, Object sender)
         {

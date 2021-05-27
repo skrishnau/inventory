@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryMenuBar));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnHelp = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
             this.btnAccounts = new System.Windows.Forms.Button();
@@ -78,6 +77,8 @@
             this.pnlMisc = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnHelp = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -92,25 +93,6 @@
             this.pnlMisc.SuspendLayout();
             this.pnlHome.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnHelp.Enabled = false;
-            this.btnHelp.FlatAppearance.BorderSize = 0;
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
-            this.btnHelp.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHelp.Location = new System.Drawing.Point(252, 15);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(43, 53);
-            this.btnHelp.TabIndex = 22;
-            this.btnHelp.Text = "Help";
-            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnHelp, "Help and Support");
-            this.btnHelp.UseVisualStyleBackColor = false;
-            this.btnHelp.Visible = false;
             // 
             // btnSettings
             // 
@@ -550,7 +532,7 @@
             // 
             this.panel6.Controls.Add(this.splitter5);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(1400, 2);
+            this.panel6.Location = new System.Drawing.Point(1454, 2);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel6.Size = new System.Drawing.Size(11, 68);
@@ -634,7 +616,7 @@
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(295, 15);
+            this.label6.Size = new System.Drawing.Size(349, 15);
             this.label6.TabIndex = 5;
             this.label6.Text = "Misc";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -699,6 +681,7 @@
             // pnlMisc
             // 
             this.pnlMisc.AutoSize = true;
+            this.pnlMisc.Controls.Add(this.btnBackup);
             this.pnlMisc.Controls.Add(this.btnHelp);
             this.pnlMisc.Controls.Add(this.btnSettings);
             this.pnlMisc.Controls.Add(this.btnReports);
@@ -708,7 +691,7 @@
             this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMisc.Location = new System.Drawing.Point(1105, 2);
             this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(295, 68);
+            this.pnlMisc.Size = new System.Drawing.Size(349, 68);
             this.pnlMisc.TabIndex = 56;
             // 
             // pnlHome
@@ -730,6 +713,42 @@
             this.label1.Size = new System.Drawing.Size(65, 15);
             this.label1.TabIndex = 38;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
+            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnHelp.Enabled = false;
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnHelp.Location = new System.Drawing.Point(252, 15);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(43, 53);
+            this.btnHelp.TabIndex = 22;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnHelp, "Help and Support");
+            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Visible = false;
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.BackColor = System.Drawing.Color.Transparent;
+            this.btnBackup.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBackup.FlatAppearance.BorderSize = 0;
+            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackup.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
+            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBackup.Location = new System.Drawing.Point(295, 15);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(54, 53);
+            this.btnBackup.TabIndex = 49;
+            this.btnBackup.Text = "Backup";
+            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnBackup, "Help and Support");
+            this.btnBackup.UseVisualStyleBackColor = false;
             // 
             // InventoryMenuBar
             // 
@@ -780,7 +799,6 @@
         protected internal System.Windows.Forms.Button btnSellOrder;
         protected internal System.Windows.Forms.Button btnPurchaseOrder;
         protected internal System.Windows.Forms.Button btnReports;
-        protected internal System.Windows.Forms.Button btnHelp;
         protected internal System.Windows.Forms.Button btnDirectIssue;
         protected internal System.Windows.Forms.Button btnDirectMove;
         protected internal System.Windows.Forms.Button btnTransferOrder;
@@ -819,5 +837,7 @@
         protected internal System.Windows.Forms.Button btnPurchaseTransaction;
         protected internal System.Windows.Forms.Button btnClients;
         protected internal System.Windows.Forms.Button btnOrders;
+        protected internal System.Windows.Forms.Button btnBackup;
+        protected internal System.Windows.Forms.Button btnHelp;
     }
 }
