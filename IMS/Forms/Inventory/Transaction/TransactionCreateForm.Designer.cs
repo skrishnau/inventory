@@ -423,7 +423,7 @@
             // cbAdjustmentCode
             // 
             this.cbAdjustmentCode.FormattingEnabled = true;
-            this.cbAdjustmentCode.Location = new System.Drawing.Point(300, 2);
+            this.cbAdjustmentCode.Location = new System.Drawing.Point(296, 2);
             this.cbAdjustmentCode.Name = "cbAdjustmentCode";
             this.cbAdjustmentCode.Size = new System.Drawing.Size(144, 21);
             this.cbAdjustmentCode.TabIndex = 8;
@@ -432,7 +432,7 @@
             // dtCompletedDate
             // 
             this.dtCompletedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtCompletedDate.Location = new System.Drawing.Point(552, 2);
+            this.dtCompletedDate.Location = new System.Drawing.Point(535, 2);
             this.dtCompletedDate.Name = "dtCompletedDate";
             this.dtCompletedDate.Size = new System.Drawing.Size(100, 20);
             this.dtCompletedDate.TabIndex = 13;
@@ -440,7 +440,7 @@
             // lblAdjustmentCode
             // 
             this.lblAdjustmentCode.AutoSize = true;
-            this.lblAdjustmentCode.Location = new System.Drawing.Point(214, 6);
+            this.lblAdjustmentCode.Location = new System.Drawing.Point(213, 6);
             this.lblAdjustmentCode.Name = "lblAdjustmentCode";
             this.lblAdjustmentCode.Size = new System.Drawing.Size(81, 13);
             this.lblAdjustmentCode.TabIndex = 0;
@@ -451,7 +451,7 @@
             // 
             this.lblCheckoutDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCheckoutDate.AutoSize = true;
-            this.lblCheckoutDate.Location = new System.Drawing.Point(469, 5);
+            this.lblCheckoutDate.Location = new System.Drawing.Point(449, 5);
             this.lblCheckoutDate.Name = "lblCheckoutDate";
             this.lblCheckoutDate.Size = new System.Drawing.Size(79, 13);
             this.lblCheckoutDate.TabIndex = 12;

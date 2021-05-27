@@ -503,6 +503,18 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 errorProvider.SetError(cbClient, string.Empty);
             }
+            if (!dtCompletedDate.IsValid())
+            {
+                msg.Message += "Invalid Checkout Date \n";
+            }
+            if (!dtPaymentDueDate.IsValid())
+            {
+                msg.Message += "Invalid Payment Due Date \n";
+            }
+            if (!dtExpectedDate.IsValid())
+            {
+                msg.Message += "Invalid Delivery Date \n";
+            }
 
             var model = GetData(checkout);
 

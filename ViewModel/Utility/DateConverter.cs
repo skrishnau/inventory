@@ -405,11 +405,12 @@ namespace ViewModel.Utility
         }
         public System.DateTime ToAD()
         {
-            return (this.ToAD(this._Date.ToShortDateString()));
+           
+            return (this.ToAD(this._Date.ToShortDateString(), out bool isValid));
 
         }
 
-        public System.DateTime ToAD(string gDate)
+        public System.DateTime ToAD(string gDate, out bool isValid)
         {
             try
             {
@@ -435,6 +436,15 @@ namespace ViewModel.Utility
                 int mm = int.Parse(userDateParts[1]);
                 int dd = int.Parse(userDateParts[2]);
 
+                if (mm > 12)
+                {
+                    throw new Exception("Invalid Month");
+                }
+                var lastDayOfMonth = getLastDayOfMonthNep(yy, mm);
+                if (dd > lastDayOfMonth)
+                {
+                    throw new Exception("Invalid Day");
+                }
                 //get starting nepali and english date for conversion 
                 //Initialize english date
                 Tuple<int, int[]> initializationDates = getClosestEnglishDateAndNepaliDateToAD(yy);
@@ -556,10 +566,10 @@ namespace ViewModel.Utility
 
                 }
                 numDay = day;
-
+                isValid = true;
                 return (new DateTime(y, m, total_eDays));
             }
-            catch (Exception ex) { return DateTime.Now; }
+            catch (Exception ex) { isValid = false; return DateTime.Now; }
         }
 
         public NepDate ToBS()
@@ -839,7 +849,7 @@ namespace ViewModel.Utility
                 nepaliDate.MonthName = getNepaliMonth(m);
                 return nepaliDate;
             }
-            catch (Exception) { return new NepDate(); }
+            catch (Exception) { return new NepDate() { isInvalid = true }; }
         }
 
 
@@ -1088,6 +1098,7 @@ namespace ViewModel.Utility
         public NepDate getCurrentNepaliDate() => this.ToBS(DateTime.Now);
         public class NepDate
         {
+            public bool isInvalid;
             public int Year;
             public int Month;
             public int Day;
@@ -1179,7 +1190,7 @@ namespace ViewModel.Utility
 
 
             // 2077 poush 
-            var ad = ToAD(nepYear + "/" + nepMonth + "/" + "1");
+            var ad = ToAD(nepYear + "/" + nepMonth + "/" + "1", out bool isValid);
             var bs = ToBS(ad);
             bs.WeekDay = NepDate.daysMapping.Values.ToList().IndexOf(bs.WeekDayName);
             // add initial remaining days

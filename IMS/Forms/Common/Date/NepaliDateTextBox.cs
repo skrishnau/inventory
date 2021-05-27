@@ -15,6 +15,8 @@ namespace IMS.Forms.Common.Date
         static DateConverter _dateConverter = new DateConverter();
         // used for handling focus and click at same time
         DateTime _focusedAt;
+        ErrorProvider _errorProvider;
+        private bool _isValid { get; set; }
 
        // private DateTimePicker picker = new DateTimePicker() { MinDate = DateTime.MinValue };
 
@@ -23,7 +25,7 @@ namespace IMS.Forms.Common.Date
         {
             this.Text = string.Empty;
             //this.Value = DateTime.Now;
-
+            _errorProvider = new ErrorProvider();
             if (_calendar == null)
                 _calendar = new NepaliCalendarUC(_dateConverter);
 
@@ -39,10 +41,15 @@ namespace IMS.Forms.Common.Date
 
             AddIcon();
             this.KeyPress += NepaliDateTextBox_KeyPress;
-            
+
             //picker.ValueChanged += Picker_ValueChanged;
             //this.Layout += NepaliDateTextBox_Layout;
+            this.TextChanged += NepaliDateTextBox_TextChanged;
+        }
 
+        private void NepaliDateTextBox_TextChanged(object sender, EventArgs e)
+        {
+            IsValid();
         }
 
         private void NepaliDateTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -126,6 +133,7 @@ namespace IMS.Forms.Common.Date
 
         private void ShowDatePicker()
         {
+            _errorProvider.SetError(this, string.Empty);
             var calendar = _dateConverter.GetCalendarFromEnglishDate(DateTime.Now.Year, DateTime.Now.Month);
             _calendar.ResetDate(this.Text);
 
@@ -154,7 +162,20 @@ namespace IMS.Forms.Common.Date
 
         public DateTime GetValue()
         {
-            return string.IsNullOrEmpty(this.Text) ? DateTime.Now : _dateConverter.ToAD(this.Text);
+            _errorProvider.SetError(this, string.Empty);
+            var date = _dateConverter.ToAD(this.Text, out bool isValid);
+            _isValid = isValid;
+            if (!isValid)
+            {
+                _errorProvider.SetError(this, "Invalid");
+            }
+            return string.IsNullOrEmpty(this.Text) ? DateTime.Now : date;
+        }
+
+        public bool IsValid()
+        {
+            GetValue();
+            return _isValid;
         }
     }
 }
