@@ -51,6 +51,8 @@
             this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnPOS = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -77,8 +79,6 @@
             this.pnlMisc = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnHelp = new System.Windows.Forms.Button();
-            this.btnBackup = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -101,7 +101,7 @@
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Image = global::IMS.Properties.Resources.icons8_Administrative_Tools_24px;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSettings.Location = new System.Drawing.Point(188, 15);
+            this.btnSettings.Location = new System.Drawing.Point(242, 15);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(64, 53);
             this.btnSettings.TabIndex = 20;
@@ -431,6 +431,42 @@
             this.toolTip1.SetToolTip(this.btnHome, "Go to Dashboard");
             this.btnHome.UseVisualStyleBackColor = true;
             // 
+            // btnHelp
+            // 
+            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
+            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnHelp.Enabled = false;
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnHelp.Location = new System.Drawing.Point(306, 15);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(43, 53);
+            this.btnHelp.TabIndex = 22;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnHelp, "Help and Support");
+            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Visible = false;
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.BackColor = System.Drawing.Color.Transparent;
+            this.btnBackup.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBackup.FlatAppearance.BorderSize = 0;
+            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackup.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
+            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBackup.Location = new System.Drawing.Point(188, 15);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(54, 53);
+            this.btnBackup.TabIndex = 49;
+            this.btnBackup.Text = "Backup";
+            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnBackup, "Help and Support");
+            this.btnBackup.UseVisualStyleBackColor = false;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitter1);
@@ -681,9 +717,9 @@
             // pnlMisc
             // 
             this.pnlMisc.AutoSize = true;
-            this.pnlMisc.Controls.Add(this.btnBackup);
             this.pnlMisc.Controls.Add(this.btnHelp);
             this.pnlMisc.Controls.Add(this.btnSettings);
+            this.pnlMisc.Controls.Add(this.btnBackup);
             this.pnlMisc.Controls.Add(this.btnReports);
             this.pnlMisc.Controls.Add(this.btnAccounts);
             this.pnlMisc.Controls.Add(this.btnClients);
@@ -713,42 +749,6 @@
             this.label1.Size = new System.Drawing.Size(65, 15);
             this.label1.TabIndex = 38;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnHelp.Enabled = false;
-            this.btnHelp.FlatAppearance.BorderSize = 0;
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
-            this.btnHelp.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHelp.Location = new System.Drawing.Point(252, 15);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(43, 53);
-            this.btnHelp.TabIndex = 22;
-            this.btnHelp.Text = "Help";
-            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnHelp, "Help and Support");
-            this.btnHelp.UseVisualStyleBackColor = false;
-            this.btnHelp.Visible = false;
-            // 
-            // btnBackup
-            // 
-            this.btnBackup.BackColor = System.Drawing.Color.Transparent;
-            this.btnBackup.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnBackup.FlatAppearance.BorderSize = 0;
-            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackup.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
-            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnBackup.Location = new System.Drawing.Point(295, 15);
-            this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(54, 53);
-            this.btnBackup.TabIndex = 49;
-            this.btnBackup.Text = "Backup";
-            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnBackup, "Help and Support");
-            this.btnBackup.UseVisualStyleBackColor = false;
             // 
             // InventoryMenuBar
             // 
