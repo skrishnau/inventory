@@ -52,11 +52,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var product = row.Cells[colProduct.Index].Tag as ProductModel;
             if (product != null)
             {
-                if (row.Cells[colPackage.Index].Value?.ToString()?.ToLower() == product.BasePackage.ToLower())
+
+               // if (row.Cells[colPackage.Index].Value?.ToString()?.ToLower() == product.BasePackage.ToLower())
                 {
                     try
                     {
-                        row.Cells[colRate.Index].Value = _productService.GetPrice(product.Id, _date, _movementType, product.BasePackageId ?? 0);
+                        var package = row.Cells[this.colPackage.Index].Value;
+                        var packageId = row.Cells[this.colPackageId.Index].Value?.ToString()??"";
+                        int.TryParse(packageId, out int pkgId);
+                        
+                        var price = _productService.GetPrice(product.Id, _date, _movementType, pkgId, package?.ToString());//product.BasePackageId ?? 0
+                        row.Cells[colRate.Index].Value = price?.Rate;
+                        UpdateTotalColumn(row.Index, colRate.Index, price?.Rate);
                     }
                     catch (Exception) { }
                 }

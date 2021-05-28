@@ -721,36 +721,73 @@ namespace Service.Core
             }
         }
 
-        public decimal? GetPrice(int productId, DateTime date, MovementTypeEnum movementType, int packageId)
+        public PriceHistoryModel GetPrice(int productId, DateTime date, MovementTypeEnum movementType, int packageId, string package)
         {
             date = date.Date;
+            var type = "";
             using (var _context = new DatabaseContext())
             {
+                package = package?.Trim();
+                if (!string.IsNullOrEmpty(package))
+                {
+                    var pkg = _context.Packages.FirstOrDefault(x => x.Name == package);
+                    if (pkg != null)
+                        packageId = pkg.Id;
+                }
+                else
+                {
+                    var pkg = _context.Packages.Find(packageId);
+                    if (pkg != null)
+                        package = pkg.Name;
+                }
                 switch (movementType)
                 {
                     case MovementTypeEnum.DirectIssueAny:
                     case MovementTypeEnum.DirectIssueInventoryUnit:
                     case MovementTypeEnum.SOIssue:
                     case MovementTypeEnum.SOIssueEditItems:
-                        var sale = OrderTypeEnum.Sale.ToString().ToLower();
-                        return _context.PriceHistories
-                            .Where(x => x.Date <= date && x.ProductId == productId && x.PriceType.ToLower() == sale && x.PackageId == packageId)
-                            .OrderByDescending(x => x.Date)
-                            .FirstOrDefault()
-                            ?.Rate;
+                        type = OrderTypeEnum.Sale.ToString().ToLower();
+                        break;
                     case MovementTypeEnum.DirectReceive:
                     case MovementTypeEnum.POReceive:
                     case MovementTypeEnum.POReceiveEditItems:
-                        var purchase = OrderTypeEnum.Purchase.ToString().ToLower();
-                        var st = _context.PriceHistories
-                            .Where(x => x.Date <= date && x.ProductId == productId && x.PriceType.ToLower() == purchase && x.PackageId == packageId)
-                            .OrderByDescending(x => x.Date).ToList();
-                        return st.FirstOrDefault()
-                                ?.Rate;
+                        type = OrderTypeEnum.Purchase.ToString().ToLower();
+                        break;
+                }
+
+                //var st = _context.PriceHistories
+                //            .Where(x => x.Date <= date && x.ProductId == productId && x.PriceType.ToLower() == purchase && x.PackageId == packageId)
+                //            .OrderByDescending(x => x.Date).ToList();
+                //return st.FirstOrDefault()
+                //        ?.MapToPriceHistoryModel();//?.Rate;
+
+                var sellHistory = _context.PriceHistories.Where(x => x.Date <= date
+                                                && x.ProductId == productId
+                                                && x.PriceType.ToLower() == type)
+                                                .ToList();
+
+                if (sellHistory.Any())
+                {
+                    var dt = sellHistory.Max(x => x.Date).Date;
+                    var lastPrices = sellHistory.Where(x => x.Date.Date == dt);
+                    var chosenPrice = lastPrices.FirstOrDefault(x => x.PackageId == packageId);
+                    if (chosenPrice != null)
+                    {
+                        return chosenPrice.MapToPriceHistoryModel();
+                    }
+                    chosenPrice = lastPrices.FirstOrDefault();
+                    var conversion = _uomService.ConvertUom(_context, chosenPrice.PackageId ?? 0, packageId, productId, 1, null);
+                    if (conversion > 0)
+                    {
+                        var model = chosenPrice.MapToPriceHistoryModel();
+                        model.Package = package;
+                        model.PackageId = packageId;
+                        model.Rate =  model.Rate / conversion;
+                        return model;
+                    }
                 }
             }
             return null;
-
         }
     }
 }

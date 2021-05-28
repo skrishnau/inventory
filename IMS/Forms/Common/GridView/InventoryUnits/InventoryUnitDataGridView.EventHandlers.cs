@@ -143,9 +143,13 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
                     // handle rate and quantity change to update Total
                     // don't do 'else' here cause supplyPrice and unitQuantity columns are already handeled above
-                    if (e.ColumnIndex == colUnitQuantity.Index || e.ColumnIndex == colRate.Index)
+                    else if (e.ColumnIndex == colUnitQuantity.Index || e.ColumnIndex == colRate.Index)
                     {
                         UpdateTotalColumn(e.RowIndex, e.ColumnIndex, e.FormattedValue);
+                    }
+                    else if(e.ColumnIndex == colPackage.Index || e.ColumnIndex == colPackageId.Index)
+                    {
+                        SetRateAsPerDate(row);
                     }
                 }
             }
