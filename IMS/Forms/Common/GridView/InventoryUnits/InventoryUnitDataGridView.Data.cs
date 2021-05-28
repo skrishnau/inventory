@@ -57,7 +57,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 {
                     try
                     {
-                        var package = row.Cells[this.colPackage.Index].Value;
+                        var package = row.Cells[this.colPackage.Index].EditedFormattedValue;//.FormattedValue;
                         var packageId = row.Cells[this.colPackageId.Index].Value?.ToString()??"";
                         int.TryParse(packageId, out int pkgId);
                         
