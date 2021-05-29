@@ -28,6 +28,11 @@ namespace IMS.Forms.Inventory.Dashboard
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IAppSettingService _appSettingService;
+        public TabPage TabPage { get; set; }
+        public TabControl TabControl { get; set; }
+        //private bool _listenerFired = false;
+
+        List<Action> _listenerActions = new List<Action>();
 
         public DashboardUC(IInventoryService inventoryService, IProductService productService, IOrderService orderService, IAppSettingService appSettingService, IDatabaseChangeListener listener)
         {
@@ -63,13 +68,9 @@ namespace IMS.Forms.Inventory.Dashboard
             PopulateCompany();
 
             PopulateBarDiagram();
-            
+
         }
 
-        private void _listener_PaymentUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PaymentModel> e)
-        {
-            PopulateDueReceivables();
-        }
 
         private void PopulateBarDiagram()
         {
@@ -84,24 +85,14 @@ namespace IMS.Forms.Inventory.Dashboard
             this.reportViewer1.RefreshReport();
         }
 
-        private void _listener_CompanyUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Settings.CompanyInfoSettingModel> e)
-        {
-            PopulateCompany();
-        }
+
 
         private void PopulateCompany()
         {
             var company = _appSettingService.GetCompanyInfoSetting();
             lblAddress.Text = string.IsNullOrEmpty(company.Address) ? "Address" : company.Address;
-            lblCompanyName.Text = string.IsNullOrEmpty(company.CompanyName) ? "My Company" :  company.CompanyName;
+            lblCompanyName.Text = string.IsNullOrEmpty(company.CompanyName) ? "My Company" : company.CompanyName;
             lblPhone.Text = string.IsNullOrEmpty(company.Phone) ? "Phone" : company.Phone;
-        }
-
-        private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
-        {
-            PopulateDueReceivables();
-            PopulateBarDiagram();
-            PopulateTransactionSummary();
         }
 
         // uncomment to give colors to cells 
@@ -125,32 +116,47 @@ namespace IMS.Forms.Inventory.Dashboard
         //    //catch (Exception ex) { }
         //}
 
-        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
-        {
-            PopulateInventorySummary();
-        }
-
         private void InitializeEvents()
         {
             dtEnd.TextChanged += Date_ValueChanged;
             dtStart.TextChanged += Date_ValueChanged;
             //  dgvDueReceivables.CellDoubleClick += DgvDueReceivables_CellDoubleClick;
-            
+            //TabControl.TabIndexChanged += TabControl_TabIndexChanged;
         }
-        
+        public void ExecuteActions()
+        {
+            foreach (var action in _listenerActions)
+            {
+                action?.Invoke();
+            }
+            _listenerActions.Clear();
+
+        }
+        //private void TabControl_TabIndexChanged(object sender, EventArgs e)
+        //{
+        //    if(TabControl.SelectedTab == TabPage)
+        //    {
+        //        foreach(var action in _listenerActions)
+        //        {
+        //            action?.Invoke();
+        //        }
+        //        _listenerActions.Clear();
+        //    }
+        //}
 
         private void DgvDueReceivables_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                if (e.RowIndex >= 0) {
+                if (e.RowIndex >= 0)
+                {
                     var orderModel = dgvDueReceivables.Rows[e.RowIndex].DataBoundItem as OrderModel;
                     if (orderModel != null)
                     {
                         var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
                         var orderEditModel = new OrderEditModel
                         {
-                            OrderType = OrderTypeEnum.Sale, 
+                            OrderType = OrderTypeEnum.Sale,
                             OrderId = orderModel.Id
                         };
                         form.SetDataForEdit(orderEditModel);// (OrderTypeEnum.Sale, orderModel.Id);
@@ -168,17 +174,49 @@ namespace IMS.Forms.Inventory.Dashboard
 
         #region Listeners
 
+        private void AddListenerAction(Action action)
+        {
+            if (TabControl.SelectedTab == TabPage)
+            {
+                action?.Invoke();
+                return;
+            }
+            if (!_listenerActions.Contains(action))
+                _listenerActions.Add(action);
+        }
+
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
-            PopulateUnderstockProducts();
-            PopulateInventorySummary();
-
+            AddListenerAction(PopulateUnderstockProducts);
+            AddListenerAction(PopulateInventorySummary);
         }
 
         private void _listener_InventoryUnitUpdated(object sender, Service.DbEventArgs.BaseEventArgs<List<ViewModel.Core.Inventory.InventoryUnitModel>> e)
         {
-            PopulateUnderstockProducts();
-            PopulateInventorySummary();
+            AddListenerAction(PopulateUnderstockProducts);
+            AddListenerAction(PopulateInventorySummary);
+        }
+
+
+        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
+        {
+            AddListenerAction(PopulateInventorySummary);
+        }
+
+        private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
+        {
+            AddListenerAction(PopulateDueReceivables);
+            AddListenerAction(PopulateBarDiagram);
+            AddListenerAction(PopulateTransactionSummary);
+        }
+        private void _listener_CompanyUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Settings.CompanyInfoSettingModel> e)
+        {
+            AddListenerAction(PopulateCompany);
+        }
+
+        private void _listener_PaymentUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PaymentModel> e)
+        {
+            AddListenerAction(PopulateDueReceivables);
         }
 
         #endregion
@@ -191,7 +229,7 @@ namespace IMS.Forms.Inventory.Dashboard
             var summary = _inventoryService.GetTransactionSummary(start, end);
             var purchase = TransactionSummaryKeys.Purchase.ToString();
             var sale = TransactionSummaryKeys.Sale.ToString();
-            var purchaseValue = summary.FirstOrDefault(x => x.Key == purchase)?.Value??0;
+            var purchaseValue = summary.FirstOrDefault(x => x.Key == purchase)?.Value ?? 0;
             var saleValue = summary.FirstOrDefault(x => x.Key == sale)?.Value ?? 0;
             lblPurchase.Text = purchaseValue.ToString("0");
             lblSale.Text = saleValue.ToString("0");

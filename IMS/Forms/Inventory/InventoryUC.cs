@@ -129,7 +129,10 @@ namespace IMS.Forms.Inventory
                 menuButtonsDictionary[buttonText].BackColor = Color.Transparent;
             }
             menuButtonsDictionary[tabControl.SelectedTab.Text].BackColor = Color.Gainsboro;
-
+            if(tabControl.SelectedTab.Text.Trim() == "Dashboard")
+            {
+                dashboard.ExecuteActions();
+            }
         }
 
         //
@@ -346,7 +349,7 @@ namespace IMS.Forms.Inventory
             }
         }
 
-        private void AddTabPage(String text, UserControl uc, Object sender)
+        private TabPage AddTabPage(String text, UserControl uc, Object sender)
         {
             text += "      ";
             TabPage toSelect = null;
@@ -372,6 +375,7 @@ namespace IMS.Forms.Inventory
             }
 
             tabControl.SelectedTab = toSelect;
+            return toSelect;
         }
 
         private void AddToButtonsDictionary(string text, Button button)
@@ -381,13 +385,16 @@ namespace IMS.Forms.Inventory
                 menuButtonsDictionary.Add(text, button);
             }
         }
-
+        private DashboardUC dashboard;
         private void BtnHome_Click(object sender, EventArgs e)
         {
-            var dashboard = Program.container.GetInstance<DashboardUC>();
+            dashboard = Program.container.GetInstance<DashboardUC>();
+            
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(dashboard);
-            AddTabPage("Dashboard", dashboard, sender);
+            var tabPage = AddTabPage("Dashboard", dashboard, sender);
+            dashboard.TabPage = tabPage;
+            dashboard.TabControl = tabControl;
             //_menubar.SetSelection(sender);
         }
 
