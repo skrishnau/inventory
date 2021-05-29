@@ -594,6 +594,11 @@ namespace Service.Core.Inventory.Units
             for (var i = 0; i < invUnit.Count(); i++)
             {
                 var conversion = _uomService.ConvertUom(invUnit[i].PackageId ?? 0, model.PackageId ?? 0, model.ProductId);
+                if(conversion == 0)
+                {
+                    msg += $"Conversion failed for Unit : {invUnit[i].UnitQuantity} {invUnit[i].Package?.Name??""} of {invUnit[i].Product?.Name??""}\n";
+                    continue;
+                }
                 var invunitqty = invUnit[i].UnitQuantity * conversion;
                 qtySum += invunitqty;
 
@@ -609,7 +614,7 @@ namespace Service.Core.Inventory.Units
             }
             if (fulfilledIndex < 0)
             {
-                msg += "Some of the products are insufficient to issue. Please verify again.";
+                msg += "Some of the products are insufficient to issue. Please verify again.\n";
                 return list;
             }
 

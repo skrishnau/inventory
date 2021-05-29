@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Tulpep.NotificationWindow;
 
 namespace IMS.Forms.Common
@@ -26,36 +27,46 @@ namespace IMS.Forms.Common
 
             // default customization
             var titleColor = Color.Black;
-            var contentColor = Color.DarkGray;
+            var contentColor = Color.Black;
             Bitmap image = Properties.Resources.icons8_View_More_24px;
 
             // customization wrt messageType
             if (messageType == PopupMessageType.ERROR)
             {
                 titleColor = Color.Coral;
-                contentColor = Color.Red;
+                //contentColor = Color.Red;
                 image = Properties.Resources.icons8_Error_24px;
             }
             else if (messageType == PopupMessageType.INFO)
             {
                 titleColor = Color.BlueViolet;
-                contentColor = Color.DarkBlue;
+                //contentColor = Color.DarkBlue;
                 image = Properties.Resources.icons8_Info_24px;
             }
             else if (messageType == PopupMessageType.SUCCESS)
             {
                 titleColor = Color.Green;
-                contentColor = Color.DarkGreen;
+               // contentColor = Color.DarkGreen;
                 image = Properties.Resources.icons8_Ok_24px;
             }
             popup.Image = image;//Properties.Resources.icons8_Lipstick_48px_3;
             popup.TitleColor = titleColor;
+            popup.TitlePadding = new Padding(5, 0, 0, 0);
+            popup.ImagePadding = new Padding(5, 0, 0, 0);
+            popup.ImageSize = new Size(16, 16);
             popup.ContentColor = contentColor;
             popup.Size = new Size(300, 80);
             popup.ShowGrip = false;
             popup.TitleText = title;
             popup.ContentText = message;
             popup.Popup();// show 
+            popup.Click += Popup_Click;
+        }
+
+        private static void Popup_Click(object sender, EventArgs e)
+        {
+            var popup = sender as PopupNotifier;
+            MessageBox.Show(popup.ContentText, popup.TitleText);
         }
 
         internal static void ShowErrorMessage(string msg)

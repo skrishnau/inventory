@@ -705,7 +705,7 @@ namespace Service.Core.Orders
                         var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "SO Issue" : adjustmentCode;
                         invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), adjustment, ref message, order.ReferenceNumber);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
-                        if ((invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0)) || (orderOrDirect == OrderOrDirectEnum.Direct))
+                        if ((invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0)) || (orderOrDirect == OrderOrDirectEnum.Direct && invUnitsQty > 0))
                         {
                             entity.CostPriceRate = invUnits.Sum(x => x.UnitQuantity * x.Rate) / invUnitsQty;
                             entity.CostPriceTotal = entity.UnitQuantity * entity.CostPriceRate;

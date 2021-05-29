@@ -461,7 +461,7 @@ namespace IMS.Forms.Inventory.Transaction
         }
         private OrderModel Save(bool checkout = false, bool closeFormAftherSave = true)
         {
-
+            
             ResponseModel<OrderModel> msg = new ResponseModel<OrderModel>();
             var userType = _orderType == OrderTypeEnum.Sale ? UserTypeEnum.Customer : UserTypeEnum.Supplier;
             var givenByTo = _orderType == OrderTypeEnum.Sale ? "given to" : "taken from";
