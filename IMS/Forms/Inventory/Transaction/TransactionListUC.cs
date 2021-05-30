@@ -18,6 +18,7 @@ using IMS.Forms.Inventory.Payment;
 using Service.Interfaces;
 using IMS.Forms.Common.Pagination;
 using Service.Core.Users;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -131,7 +132,7 @@ namespace IMS.Forms.Inventory.Transaction
             txtSearchReceiptNo.TextChanged += TxtSearchReceiptNo_TextChanged;
             btnViewParentOrder.Click += BtnViewParentOrder_Click;
         }
-        
+
 
         private void Type_CheckedChanged(object sender, EventArgs e)
         {
@@ -246,7 +247,7 @@ namespace IMS.Forms.Inventory.Transaction
                 btnEdit.Visible = !model.IsVoid && !model.IsCancelled; //!model.IsCompleted &&
                 btnEdit.Text = (model.IsVerified && !model.IsCompleted) ? "Update Rates" : "Edit";
                 btnPrint.Visible = model.IsCompleted; //model.OrderType == OrderTypeEnum.Sale.ToString() && 
-                btnCancel.Visible = !model.IsCompleted && !model.IsCancelled;
+                btnCancel.Visible = !model.IsVoid && !model.IsCancelled; //!model.IsCompleted && 
                 // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);
@@ -399,7 +400,16 @@ namespace IMS.Forms.Inventory.Transaction
                 var dialog = MessageBox.Show(this, "Are you sure to cancel the order?", "Cancel?", MessageBoxButtons.YesNo);
                 if (dialog == DialogResult.Yes)
                 {
-                    _orderService.SetCancelled(order.Id);
+                    var msg = _orderService.SetCancelled(order.Id);
+                    if (string.IsNullOrEmpty(msg))
+                    {
+                        PopupMessage.ShowSuccessMessage("Successfully cancelled!");
+                    }
+                    else
+                    {
+                        PopupMessage.ShowInfoMessage(msg);
+                    }
+                    this.Focus();
                 }
             }
         }

@@ -217,7 +217,7 @@ namespace Service.Core.Orders
                         var orderItem = entity.OrderItems.FirstOrDefault(x => x.Id == item.Id);
                         if (orderItem != null)
                         {
-                            foreach(var inv in orderItem.InventoryUnits)
+                            foreach (var inv in orderItem.InventoryUnits)
                             {
                                 inv.Rate = item.Rate;
                             }
@@ -228,8 +228,8 @@ namespace Service.Core.Orders
                             var txnItems = _context.TransactionItems.Where(x => x.PurchaseOrderItemId == orderItem.Id).ToList();
                             foreach (var ti in txnItems)
                             {
-                                var conversion = _uomService.ConvertUom(orderItem.PackageId??0, ti.OrderItem1.PackageId??0, orderItem.ProductId);
-                                if(conversion == 0)
+                                var conversion = _uomService.ConvertUom(orderItem.PackageId ?? 0, ti.OrderItem1.PackageId ?? 0, orderItem.ProductId);
+                                if (conversion == 0)
                                 {
                                     return new ResponseModel<OrderModel> { Message = $"Can't convert from {orderItem.Package?.Name} to {ti.OrderItem1.Package?.Name}. Please update product's UOM." };
                                 }
@@ -286,7 +286,7 @@ namespace Service.Core.Orders
             // Zero-Rate Update case 
             // in case of zerorateupdate of a purchase txn, we need to update all the sell transaction and txnItem haveing orderItemId as this orderItem Id
             // AND in csse of zero rate update, we should NOT update any inventory Unit, we will update only transactions
-            if (orderModel.IsVerified)
+            if (orderModel.IsVerified && !orderModel.IsCompleted)
                 return SaveOrderForRateUpdate(orderModel, checkout);
 
             var message = "";
@@ -310,8 +310,10 @@ namespace Service.Core.Orders
                     voiding = true;
                     // means that a completed order has been edited 
                     // the completed / previous order is to be made void and new order has to be created
-                    UndoOrderTransactionsWithoutCommit(_context, entity.ParentOrderId);
-                    UndoInventoryItemsWithoutCommit(_context, entity.ParentOrderId);
+                    //UndoOrderTransactionsWithoutCommit(_context, entity.ParentOrderId);
+                    //UndoInventoryItemsWithoutCommit(_context, entity.ParentOrderId);
+                    var parentOrder = _context.Orders.Find(entity.ParentOrderId??0);
+                    CancelCompletedTransactionWithoutCommit(_context, parentOrder, ref message);
                 }
                 var user = CheckAndAssignCustomer(_context, ref orderModel, ref entity, checkout);
 
@@ -386,53 +388,112 @@ namespace Service.Core.Orders
             }
         }
 
-        private void UndoOrderTransactionsWithoutCommit(DatabaseContext _context, int? parentOrderId)
-        {
-            var parent = _context.Orders.Find(parentOrderId);
-            if (parent != null)
-            {
-                parent.IsVoid = true;
-                // transaction void
-                foreach (var txn in parent.Transactions)
-                {
-                    txn.IsVoid = true;
-                }
-                // user due date
-                if (parent.User != null)
-                {
-                    parent.User.PaymentDueDate = null;
-                }
 
-                // product count restore
-                foreach (var item in parent.OrderItems)
+        public string SetCancelled(int orderId)
+        {
+            using (var _context = new DatabaseContext())
+                using(var txn = _context.Database.BeginTransaction())
+            {
+                var message = "";
+                var entity = _context.Orders.Find(orderId);
+                if (entity != null)
                 {
-                    if (parent.OrderType == OrderTypeEnum.Sale.ToString())
-                        item.Product.InStockQuantity += item.UnitQuantity;
+                    if (entity.IsCompleted)
+                    {
+                        CancelCompletedTransactionWithoutCommit(_context, entity, ref message);
+                    }
+                    else if (entity.IsCancelled)
+                    {
+                        return "Already cancelled!";
+                    }
                     else
-                        item.Product.InStockQuantity -= item.UnitQuantity;
+                    {
+                        entity.IsCancelled = true;
+                        entity.CancelledDate = DateTime.Now;
+                    }
+                    if (string.IsNullOrEmpty(message))
+                    {
+                        _context.SaveChanges();
+                        txn.Commit();
+                        var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
+                        _listener.TriggerOrderUpdateEvent(null, args);
+                        _listener.TriggerInventoryUnitUpdateEvent(null, null);
+                        return string.Empty;
+                    }
+                    txn.Rollback();
+                    return message;
                 }
+                return "The Order doesn't exist";
             }
         }
 
-        private void UndoInventoryItemsWithoutCommit(DatabaseContext _context, int? parentOrderId)
+        public void CancelCompletedTransactionWithoutCommit(DatabaseContext _context, Order order, ref string message)
         {
-            var order = _context.Orders.FirstOrDefault(x => x.Id == parentOrderId);
-            if (order != null)
+            // ---- Undo Order Transactions 
+            order.IsVoid = true;
+            // transaction void
+            foreach (var txn in order.Transactions)
             {
-                var items = _context.OrderItems.Where(x => x.OrderId == parentOrderId);
-                foreach (var oitem in items)
+                txn.IsVoid = true;
+            }
+            // user due date
+            if (order.User != null)
+            {
+                order.User.PaymentDueDate = null;
+            }
+            order.IsCancelled = true;
+            order.CancelledDate = DateTime.Now;
+            // ---- Undo Inventory Items 
+            if (order.OrderType == OrderTypeEnum.Sale.ToString())
+            {
+                var adjCode = "Re-received from cancelled sale transaction";
+                foreach (var oitem in order.OrderItems)
                 {
-                    if (order.OrderType == OrderTypeEnum.Sale.ToString())
+                    var txnItems = _context.TransactionItems.Where(x => x.SaleOrderItemId == oitem.Id).ToList();
+                    foreach (var ti in txnItems)
                     {
-                        var msg = _inventoryUnitService.SaveDirectReceiveListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Sale), DateTime.Now, "Order Cancelled");
-                    }
-                    else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
-                    {
-                        var msg = _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Purchase), "Order Cancelled", order.ReferenceNumber);
+                        var purchaseitem = ti.OrderItem;
+                        if(purchaseitem != null)
+                        {
+                            var receiveDate = purchaseitem?.Order?.CompletedDate ?? DateTime.Now;
+                            var reference = purchaseitem?.Order?.ReferenceNumber ?? "";
+                            var conversion = _uomService.ConvertUom(_context, oitem.PackageId??0, purchaseitem.PackageId??0, purchaseitem.ProductId, 1, null);
+                            if (conversion == 0)
+                            {
+                                message += $"Cannot convert from {oitem.Package.Name} to {purchaseitem.Package.Name}. Please update uom.\n";
+                                continue;
+                            }
+                            var unitQuantity = conversion * ti.UnitQuantity;
+                            var invUnit = new InventoryUnitModel
+                            {
+                                Rate = purchaseitem.Rate,
+                                UnitQuantity = unitQuantity,
+                                PurchaseOrderItemId = purchaseitem.Id,
+                                ProductId = purchaseitem.ProductId,
+                                PackageId = purchaseitem.PackageId,
+                                //ReceiveDate = receiveDate,
+                                ReceiveReceipt = purchaseitem.Order.ReferenceNumber,
+                                SupplierId = purchaseitem.Order.UserId,
+                                Total = unitQuantity * purchaseitem.Rate,
+                            };
+                            _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, receiveDate, adjCode, ref message, oitem.Product, reference, purchaseitem);
+                        }
+                        else
+                        {
+                            message += "Not able to map purchase price for some of the items\n";
+                        }
                     }
                 }
+                //message += _inventoryUnitService.SaveDirectReceiveListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Purchase), DateTime.Now, adjCode);
+            }
+            else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
+            {
+                 purchase ko nai inventory unit bhetera tesbata ghataune pahile ani napugeko chai aru bata ghataune
+                var adjCode = "Re-issued for cancelled purchase transaction";
+                message += _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Sale), adjCode, order.ReferenceNumber);
             }
         }
+
 
         private void MakeCheckout(DatabaseContext _context, ref Order entity, ref OrderModel orderModel)
         {
@@ -530,28 +591,6 @@ namespace Service.Core.Orders
             return user;
         }
 
-        public string SetCancelled(int orderId)
-        {
-            using (var _context = new DatabaseContext())
-            {
-
-                var entity = _context.Orders.Find(orderId);
-                if (entity != null)
-                {
-                    if (entity.IsCompleted)
-                        return "You have already received against this order. You can't cancel it now.";
-                    if (entity.IsCancelled)
-                        return "Already cancelled!";
-                    entity.IsCancelled = true;
-                    entity.CancelledDate = DateTime.Now;
-                    _context.SaveChanges();
-                    var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
-                    _listener.TriggerOrderUpdateEvent(null, args);
-                    return string.Empty;
-                }
-                return "The Order doesn't exist";
-            }
-        }
 
         private void SaveOrderItemsWithoutCommit(DatabaseContext _context, Order order, List<OrderItemModel> items, bool checkout, ref string message, ref List<TransactionItem> txnItemsList, string adjustmentCode, OrderOrDirectEnum orderOrDirect)
         {
@@ -660,7 +699,7 @@ namespace Service.Core.Orders
                             Name = item.Product,
                             SKU = item.Product,
                             CategoryId = null,
-                           // BaseUomId = null,
+                            // BaseUomId = null,
                             CreatedAt = DateTime.Now,
                             UpdatedAt = DateTime.Now,
                             //PackageId = entity.PackageId > 0 ? entity.PackageId: 0//item.PackageId,
@@ -738,7 +777,7 @@ namespace Service.Core.Orders
                 product = _context.Products.Find(entity.ProductId);
             if (product != null)
             {
-               // _productService.AddPriceHistoryWithoutCommit(product, entity.Rate, order.OrderType, order.CompletedDate, entity.Package, entity.PackageId);
+                // _productService.AddPriceHistoryWithoutCommit(product, entity.Rate, order.OrderType, order.CompletedDate, entity.Package, entity.PackageId);
                 product.UpdatedAt = DateTime.Now;
             }
         }
