@@ -247,7 +247,7 @@ namespace IMS.Forms.Inventory.Transaction
                 btnEdit.Visible = !model.IsVoid && !model.IsCancelled; //!model.IsCompleted &&
                 btnEdit.Text = (model.IsVerified && !model.IsCompleted) ? "Update Rates" : "Edit";
                 btnPrint.Visible = model.IsCompleted; //model.OrderType == OrderTypeEnum.Sale.ToString() && 
-                btnCancel.Visible = !model.IsVoid && !model.IsCancelled; //!model.IsCompleted && 
+                btnCancel.Visible = (!model.IsVoid && !model.IsCancelled) && (!(!model.IsCompleted && model.IsVerified)); //!model.IsCompleted && 
                 // btnPayment.Visible =  model.IsCompleted && model.DueAmount > 0;
                 //var eventArgs = new BaseEventArgs<OrderModel>(model, Service.Utility.UpdateMode.NONE);
                 //RowSelected?.Invoke(sender, eventArgs);
@@ -375,8 +375,8 @@ namespace IMS.Forms.Inventory.Transaction
                 //else 
                 if (order.IsCompleted)
                 {
-                    MessageBox.Show("Currently, editing of completed transaction is not available. Please contact administrator.");
-                    return;
+                    //MessageBox.Show("Currently, editing of completed transaction is not available. Please contact administrator.");
+                    //return;
                     var dialogResult = MessageBox.Show(this, "This transaction is complete. By editing and re-saving " +
                         "a completed transaction makes it void (deleted) and a new transaction will be created. Are you sure to edit?",
                         "Are you sure to edit ?", MessageBoxButtons.YesNo);

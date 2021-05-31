@@ -133,11 +133,11 @@ namespace Service.Core.Inventory.Units
             for (var i = 0; i < invList.Count(); i++)
             {
                 var invId = invList.ElementAt(i).Id;
-                var dbEntity = _context.InventoryUnits.Include(x=>x.Package).FirstOrDefault(x => x.Id == invId);
+                var dbEntity = _context.InventoryUnits.Include(x => x.Package).FirstOrDefault(x => x.Id == invId);
                 if (dbEntity != null)
                 {
                     var conversion = _uomService.ConvertUom(_context, dbEntity.PackageId ?? 0, productPackage?.Id ?? 0, product.Id, 1);
-                    if(conversion == 0)
+                    if (conversion == 0)
                     {
                         message += "Some items cannot be converted to base unit. Please update product's uom.";
                         return;
@@ -165,7 +165,7 @@ namespace Service.Core.Inventory.Units
 
             }
             editingRecord.UnitQuantity = unitQuantity;
-            editingRecord.Rate = decimal.Round(totalAmount / unitQuantity,3);
+            editingRecord.Rate = decimal.Round(totalAmount / unitQuantity, 3);
             editingRecord.PackageId = productPackage.Id;
             //var unitsInPackage = product.UnitsInPackage == 0 ? 1 : product.UnitsInPackage;
             //editingRecord.PackageQuantity = GetPackageQuantity(unitQuantity, product.UnitsInPackage);
@@ -419,7 +419,7 @@ namespace Service.Core.Inventory.Units
                 return msg;
             }
         }
-        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime receivedDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem)
+        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime movementDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem)
         {
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
             unit.WarehouseId = warehouse.Id;
@@ -428,11 +428,11 @@ namespace Service.Core.Inventory.Units
                 unit.PackageId = _context.Packages.FirstOrDefault(x => x.Name == unit.Package)?.Id;
             }
             var unitEntity = unit.MapToEntity();
-            unitEntity.ReceiveDate = receivedDate;
+            unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
             unitEntity.ReceiveAdjustment = adjustmentCode;
             unitEntity.User = orderItem.User;
             unitEntity.SupplierId = orderItem.SupplierId;
-            unitEntity.ReceiveReceipt = reference;
+            unitEntity.ReceiveReceipt = unit.ReceiveReceipt;//reference;
             _context.InventoryUnits.Add(unitEntity);
 
             if (product == null)
@@ -442,10 +442,10 @@ namespace Service.Core.Inventory.Units
                 product.Name;// + " into " + warehouse.Name + " warehouse.";
                              //var quantity = list.Sum(x => x.UnitQuantity);
                              //"----------------"
-            AddMovementWithoutCoomit(_context, description, reference, adjustmentCode, unit.UnitQuantity, receivedDate, unit.ProductId);//"Direct Receive"
+            AddMovementWithoutCoomit(_context, description, reference, adjustmentCode, unit.UnitQuantity, movementDate, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {
-                Date = receivedDate,
+                Date = movementDate,
                 UnitQuantity = unit.UnitQuantity,
                 SourceWarehouseId = null,
                 TargetWarehouseId = unit.WarehouseId,
@@ -473,6 +473,7 @@ namespace Service.Core.Inventory.Units
             //
             foreach (var unit in list)
             {
+                unit.ReceiveDateDate = receivedDate;
                 SaveDirectReceiveItemWithoutCommit(_context, unit, receivedDate, adjustmentCode, ref msg, null, "----------------", null);
             }
             return msg;
@@ -590,13 +591,17 @@ namespace Service.Core.Inventory.Units
                 .ToList();
             decimal qtySum = 0;
             var fulfilledIndex = -1;
-
+            if (model.PurchaseOrderItemId > 0)
+            {
+                // in case of cancelling purchase txn we need to prioritize the one inv units of the given purchase order item.
+                invUnit = invUnit.OrderBy(x => x.OrderItemId != model.PurchaseOrderItemId).ToList();
+            }
             for (var i = 0; i < invUnit.Count(); i++)
             {
                 var conversion = _uomService.ConvertUom(invUnit[i].PackageId ?? 0, model.PackageId ?? 0, model.ProductId);
-                if(conversion == 0)
+                if (conversion == 0)
                 {
-                    msg += $"Conversion failed for Unit : {invUnit[i].UnitQuantity} {invUnit[i].Package?.Name??""} of {invUnit[i].Product?.Name??""}\n";
+                    msg += $"Conversion failed for Unit : {invUnit[i].UnitQuantity} {invUnit[i].Package?.Name ?? ""} of {invUnit[i].Product?.Name ?? ""}\n";
                     continue;
                 }
                 var invunitqty = invUnit[i].UnitQuantity * conversion;

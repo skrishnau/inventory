@@ -654,7 +654,7 @@ namespace IMS.Forms.Inventory.Transaction
                     PaymentDueDate = rbCredit.Checked ? dtPaymentDueDate.GetValue() : (DateTime?)null,
                     PaymentType = rbCredit.Checked ? OrderPaymentTypeEnum.Credit.ToString() : rbCash.Checked ? OrderPaymentTypeEnum.Cash.ToString() : null,
                     TotalAmount = items.Select(x => x.Total).Sum(),
-                    IsVerified = _orderModel?.IsVerified ?? false, // IsVerified will again be updated in Save(), this value indicates the earlier's Verified state
+                    IsVerified = _orderModel.IsCompleted ? false : _orderModel?.IsVerified ?? false, // IsVerified will again be updated in Save(), this value indicates the earlier's Verified state
                 };
                 orderModel.User = client;
                 orderModel.UserId = clientId;

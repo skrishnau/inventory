@@ -29,6 +29,7 @@ namespace ViewModel.Core.Inventory
         public string ReceiveReceipt { get; set; } // RecieveReciept 
         public string ReceiveAdjustmentCode { get; set; } // adjustment code
         public string ReceiveDate { get; set; } // ReceiveDate 
+        public DateTime? ReceiveDateDate { get; set; } // ReceiveDate 
         public string ReceiveDateBS { get; set; } // ReceiveDate 
         public string IssueReceipt { get; set; }
         public string IssueAdjustment { get; set; }// adjustment code
