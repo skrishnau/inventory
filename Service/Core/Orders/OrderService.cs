@@ -89,7 +89,7 @@ namespace Service.Core.Orders
                 .Include(x => x.OrderItems);
             if (orderListType == OrderListTypeEnum.Transaction)
             {
-                orders = orders.Where(x => x.IsCompleted).OrderByDescending(x => x.CompletedDate); ;
+                orders = orders.Where(x => x.IsCompleted).OrderByDescending(x => x.CompletedDate);
             }
             else
             {

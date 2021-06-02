@@ -109,9 +109,8 @@
             // 
             this.pnlNewTransaction.Controls.Add(this.btnPurchaseTransaction);
             this.pnlNewTransaction.Controls.Add(this.btnSaleTransaction);
-            this.pnlNewTransaction.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlNewTransaction.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.pnlNewTransaction.Location = new System.Drawing.Point(801, 4);
+            this.pnlNewTransaction.Location = new System.Drawing.Point(798, 2);
             this.pnlNewTransaction.Name = "pnlNewTransaction";
             this.pnlNewTransaction.Size = new System.Drawing.Size(263, 36);
             this.pnlNewTransaction.TabIndex = 3;
@@ -155,12 +154,12 @@
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(80, 5);
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEdit.Location = new System.Drawing.Point(149, 5);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(63, 31);
+            this.btnEdit.Size = new System.Drawing.Size(105, 28);
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Edit";
-            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = false;
             // 
@@ -168,7 +167,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.pnlNewTransaction);
+            this.panel1.Controls.Add(this.flowLayoutPanel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 35);
             this.panel1.Name = "panel1";
@@ -189,7 +188,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(760, 36);
+            this.panel3.Size = new System.Drawing.Size(690, 36);
             this.panel3.TabIndex = 4;
             // 
             // label2
@@ -497,6 +496,7 @@
             // 
             this.panel4.Controls.Add(this.dgvItems);
             this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.pnlEditedOrder);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(627, 0);
             this.panel4.Name = "panel4";
@@ -505,17 +505,13 @@
             // 
             // panel5
             // 
-            this.panel5.AutoSize = true;
             this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel5.Controls.Add(this.lblCustomer);
             this.panel5.Controls.Add(this.lblReferenceNo);
-            this.panel5.Controls.Add(this.flowLayoutPanel2);
-            this.panel5.Controls.Add(this.pnlEditedOrder);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Location = new System.Drawing.Point(0, 25);
             this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panel5.Size = new System.Drawing.Size(441, 67);
+            this.panel5.Size = new System.Drawing.Size(441, 39);
             this.panel5.TabIndex = 15;
             // 
             // lblCustomer
@@ -523,7 +519,7 @@
             this.lblCustomer.AutoSize = true;
             this.lblCustomer.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblCustomer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomer.Location = new System.Drawing.Point(0, 44);
+            this.lblCustomer.Location = new System.Drawing.Point(0, 19);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(11, 13);
             this.lblCustomer.TabIndex = 18;
@@ -534,7 +530,7 @@
             this.lblReferenceNo.AutoSize = true;
             this.lblReferenceNo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblReferenceNo.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblReferenceNo.Location = new System.Drawing.Point(0, 25);
+            this.lblReferenceNo.Location = new System.Drawing.Point(0, 0);
             this.lblReferenceNo.Name = "lblReferenceNo";
             this.lblReferenceNo.Size = new System.Drawing.Size(15, 19);
             this.lblReferenceNo.TabIndex = 0;
@@ -547,10 +543,10 @@
             this.flowLayoutPanel2.Controls.Add(this.btnCancel);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(201, 25);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(700, 4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 2, 5, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(240, 32);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(364, 36);
             this.flowLayoutPanel2.TabIndex = 17;
             // 
             // btnCancel
@@ -559,9 +555,10 @@
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnCancel.Location = new System.Drawing.Point(4, 5);
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancel.Location = new System.Drawing.Point(71, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(70, 31);
+            this.btnCancel.Size = new System.Drawing.Size(72, 28);
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -605,9 +602,9 @@
             this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 67);
+            this.dgvItems.Location = new System.Drawing.Point(0, 64);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.Size = new System.Drawing.Size(441, 368);
+            this.dgvItems.Size = new System.Drawing.Size(441, 371);
             this.dgvItems.TabIndex = 14;
             // 
             // btnPrint
@@ -615,9 +612,11 @@
             this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Location = new System.Drawing.Point(149, 5);
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint.Location = new System.Drawing.Point(260, 5);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(83, 33);
+            this.btnPrint.Size = new System.Drawing.Size(96, 28);
             this.btnPrint.TabIndex = 16;
             this.btnPrint.Text = "Print Receipt";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -639,6 +638,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pnlNewTransaction);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listHeaderTemplate1);
@@ -655,7 +655,6 @@
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);

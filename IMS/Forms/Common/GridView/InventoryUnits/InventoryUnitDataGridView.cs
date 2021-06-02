@@ -358,9 +358,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private decimal GetUnitQuantity(DataGridViewRow row, object formattedValue, bool checkWithInStockQuanity, ProductModel product, PackageModel currentPackage)
         {
             decimal unitQuantity = 0;
-            var cell = row.Cells[this.colUnitQuantity.Index];
-            var value = formattedValue == null ? cell.Value : formattedValue;
-            decimal.TryParse(value == null ? "0" : value.ToString(), out unitQuantity);
+            var cell = row?.Cells[this.colUnitQuantity.Index];
+            var value = formattedValue == null ? cell?.Value : formattedValue;
+            decimal.TryParse(value == null ? "0" : value?.ToString(), out unitQuantity);
             if (IgnoreColumnsForErrorList.Contains(colUnitQuantity))
             {
                 return unitQuantity;
@@ -374,8 +374,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             else if (checkWithInStockQuanity)
             {
                 decimal inStockQuantity = 0;
-                var inStockcell = row.Cells[this.colInStockQuantity.Index];
-                decimal.TryParse(inStockcell.Value == null ? "0" : inStockcell.Value.ToString(), out inStockQuantity);
+                var inStockcell = row?.Cells[this.colInStockQuantity.Index];
+                decimal.TryParse(inStockcell?.Value == null ? "0" : inStockcell?.Value.ToString(), out inStockQuantity);
 
                 if(currentPackage.Id > 0)
                 {

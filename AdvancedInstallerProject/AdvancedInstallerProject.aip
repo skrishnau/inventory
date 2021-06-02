@@ -2,14 +2,14 @@
 <DOCUMENT Type="Advanced Installer" CreateVersion="17.8" version="17.8" Modules="simple" RootPath="." Language="en" Id="{52017368-27FD-4AF0-A212-C7F0366BB65E}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoMapper.dll" Value="..\DTO\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DTO.dll" Value="..\DTO\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoMapper.dll" Value="..\DTO\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DTO.dll" Value="..\DTO\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.2.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.2.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EnvDTE.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe" Value="..\IMS\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe.config" Value="..\IMS\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Infrastructure.dll" Value="..\Infrastructure\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe" Value="..\IMS\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe.config" Value="..\IMS\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Infrastructure.dll" Value="..\Infrastructure\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.MSXML.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.Common.dll" Value="..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.DataVisualization.dll" Value="..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40"/>
@@ -23,11 +23,11 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.Shell.Interop.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.8.0.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Service.dll" Value="..\Service\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Service.dll" Value="..\Service\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_SimpleInjector.dll" Value="..\packages\SimpleInjector.4.4.3\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.ValueTuple.dll" Value="..\DTO\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.ValueTuple.dll" Value="..\DTO\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Tulpep.NotificationWindow.dll" Value="..\packages\Tulpep.NotificationWindow.1.1.25\lib\net40"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ViewModel.dll" Value="..\ViewModel\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ViewModel.dll" Value="..\ViewModel\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_stdole.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoMapper.dll" Value="AutoMapper.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DTO.dll" Value="DTO.dll"/>
@@ -59,10 +59,10 @@
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="Manufacturer" Value="SKU"/>
-    <ROW Property="ProductCode" Value="1033:{6A81E172-D056-42F5-9E12-BC936E5D3620} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{4D4DD60E-4116-4692-96A9-08DAE410B790} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="SRIPARA IMS"/>
-    <ROW Property="ProductVersion" Value="1.2.2" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.2.3" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{851D37BB-FFFB-47F0-AE39-ACEC8CCA2735}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
