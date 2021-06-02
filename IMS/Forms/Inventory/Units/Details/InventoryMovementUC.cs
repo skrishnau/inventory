@@ -13,10 +13,11 @@ using Service.Listeners;
 using Service.Interfaces;
 using ViewModel.Core.Common;
 using IMS.Forms.Common.Pagination;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Units.Details
 {
-    public partial class InventoryMovementUC : UserControl
+    public partial class InventoryMovementUC : BaseUserControl
     {
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IDatabaseChangeListener _listener;

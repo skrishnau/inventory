@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Common.Display;
 using IMS.Forms.Inventory.Units.Details;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Units
 {
-    public partial class InventoryUnitUC : UserControl
+    public partial class InventoryUnitUC : BaseUserControl
     {
         // private SettingsBodyTemplate _body;
 
@@ -27,6 +28,11 @@ namespace IMS.Forms.Inventory.Units
 
             this.Load += InventoryUnitUC_Load;
 
+        }
+        public override void ExecuteActions()
+        {
+            //base.ExecuteActions();
+            _inventoryUnitListUC.ExecuteActions();
         }
 
         private void InventoryUnitUC_Load(object sender, EventArgs e)

@@ -23,7 +23,7 @@ using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Products
 {
-    public partial class RateListUC : UserControl
+    public partial class RateListUC : BaseUserControl
     {
         private readonly IProductService _productService;
         private readonly IInventoryService _inventoryService;

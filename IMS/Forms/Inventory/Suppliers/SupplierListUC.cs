@@ -10,10 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using IMS.Forms.Inventory.Payment;
 using IMS.Forms.Common.Pagination;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
-    public partial class SupplierListUC : UserControl
+    public partial class SupplierListUC : BaseUserControl
     {
         public event EventHandler<BaseEventArgs<UserModel>> RowSelected;
 
@@ -146,8 +147,10 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
-            InitializeSearchTextBox();
-            PopulateUserList();
+            //InitializeSearchTextBox();
+            //PopulateUserList();
+            AddListenerAction(InitializeSearchTextBox, e);
+            AddListenerAction(PopulateUserList, e);
         }
 
         private void DgvSuppliers_SelectionChanged(object sender, EventArgs e)

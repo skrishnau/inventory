@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Common.Links;
 using IMS.Forms.Common.Display;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Products
 {
-    public partial class ProductUC : UserControl
+    public partial class ProductUC : BaseUserControl
     {
         private readonly ProductListUC _productListUC;
         private readonly ProductDetailUC _productDetailUC;
@@ -34,9 +35,15 @@ namespace IMS.Forms.Inventory.Products
 
             this.Load += ProductUC_Load;
         }
+        public override void ExecuteActions()
+        {
+            //base.ExecuteActions();
+            _productListUC.ExecuteActions();
+        }
 
         private void ProductUC_Load(object sender, EventArgs e)
         {
+            _productListUC.MyTabTitle = MyTabTitle;
             InitializeBody();
 
         }

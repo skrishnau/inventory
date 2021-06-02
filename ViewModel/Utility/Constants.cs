@@ -30,5 +30,20 @@ namespace ViewModel.Utility
         public const string NOT_AVAILABLE_IN_PRODUCT_UOM = "Not available in Product's UOM";
         public const string RECEIPT_NO_IS_REQUIRED = "Receipt No. is required. Please update Receipt settings.";
 
+
+        public const string TAB_DASHBOARD= "Dashboard";
+        public const string TAB_PURCHASES = "Purchases";
+        public const string TAB_SALES = "Sales";
+        public const string TAB_TRANSFERS = "Transfers";
+        public const string TAB_CLIENTS = "Clients";
+        public const string TAB_INVENTORY_UNITS= "Inventory Units";
+        public const string TAB_POS = "POS";
+        public const string TAB_PRODUCTS = "Products";
+        public const string TAB_TRANSACTIONS = "Transactions";
+        public const string TAB_ORDERS = "Orders";
+        public const string TAB_SETTINGS = "Settings";
+        public const string TAB_REPORTS = "Reports";
+        public const string TAB_ACCOUNTS = "Accounts";
+
     }
 }

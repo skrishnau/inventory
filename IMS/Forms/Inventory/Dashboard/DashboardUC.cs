@@ -28,8 +28,9 @@ namespace IMS.Forms.Inventory.Dashboard
         private readonly IOrderService _orderService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IAppSettingService _appSettingService;
-        public TabPage TabPage { get; set; }
-        public TabControl TabControl { get; set; }
+        //public TabPage TabPage { get; set; }
+        //public TabControl TabControl { get; set; }
+        public string MyTabTitle { get; set; }
         //private bool _listenerFired = false;
 
         List<Action> _listenerActions = new List<Action>();
@@ -176,7 +177,7 @@ namespace IMS.Forms.Inventory.Dashboard
 
         private void AddListenerAction(Action action)
         {
-            if (TabControl.SelectedTab == TabPage)
+            if (InventoryUC.CurrentTabTitle == MyTabTitle)//(TabControl.SelectedTab == TabPage)
             {
                 action?.Invoke();
                 return;

@@ -22,7 +22,7 @@ using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Transaction
 {
-    public partial class TransactionListUC : UserControl
+    public partial class TransactionListUC : BaseUserControl
     {
         public event EventHandler<BaseEventArgs<OrderModel>> RowSelected;
 
@@ -112,7 +112,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void InitializeEvents()
         {
-            _listener.OrderUpdated += _listener_PurchaseOrderUpdated;
+            _listener.OrderUpdated += _listener_OrderUpdated;
             // dgvOrders.CellClick += DgvPurchases_CellClick;
             dgvOrders.SelectionChanged += DgvOrders_SelectionChanged;
             //_purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
@@ -208,9 +208,10 @@ namespace IMS.Forms.Inventory.Transaction
         }
 
 
-        private void _listener_PurchaseOrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
+        private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
         {
-            PopulateOrders();
+            //PopulateOrders();
+            AddListenerAction(PopulateOrders, e);
         }
 
 

@@ -19,7 +19,7 @@ using ViewModel.Core.Orders;
 
 namespace IMS.Forms.Inventory.Units
 {
-    public partial class InventoryManageUC : UserControl
+    public partial class InventoryManageUC : BaseUserControl
     {
 
         private readonly IDatabaseChangeListener _listener;

@@ -26,11 +26,14 @@ using Service.Core.Users;
 using Service.Core.Settings;
 using ViewModel.Utility;
 using ViewModel.Core.Orders;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory
 {
     public partial class InventoryUC : UserControl
     {
+        public static string CurrentTabTitle;
+
         private static readonly string MODULE_NAME = "Inventory";
         // private BodyTemplate _bodyTemplate;
         //  private InventoryMenuBar _menubar;
@@ -133,6 +136,7 @@ namespace IMS.Forms.Inventory
             {
                 dashboard.ExecuteActions();
             }
+            CurrentTabTitle = tabControl.SelectedTab.Text;
         }
 
         //
@@ -272,8 +276,6 @@ namespace IMS.Forms.Inventory
 
         #endregion
 
-
-
         private void ShowDashboard()
         {
             BtnHome_Click(_menubar.btnHome, EventArgs.Empty);
@@ -362,19 +364,28 @@ namespace IMS.Forms.Inventory
                     break;
                 }
             }
-
+            var addNewTab = false;
             if (toSelect == null)
             {
-                var tabPage = new TabPage(text);
-                tabPage.Controls.Add(uc);
-                tabControl.TabPages.Add(tabPage);
-
-                toSelect = tabPage;
-
+                toSelect = new TabPage(text);
+                addNewTab = true;
                 AddToButtonsDictionary(text, (Button) sender);
             }
 
+            var baseUserControl = uc as BaseUserControl;
+            if (baseUserControl != null)
+            {
+                baseUserControl.MyTabTitle = toSelect.Text;
+                baseUserControl.ExecuteActions();
+            }
+            if (addNewTab)
+            {
+                toSelect.Controls.Add(uc);
+                tabControl.TabPages.Add(toSelect);
+            }
             tabControl.SelectedTab = toSelect;
+
+
             return toSelect;
         }
 
@@ -392,9 +403,9 @@ namespace IMS.Forms.Inventory
             
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(dashboard);
-            var tabPage = AddTabPage("Dashboard", dashboard, sender);
-            dashboard.TabPage = tabPage;
-            dashboard.TabControl = tabControl;
+            var tabPage = AddTabPage(Constants.TAB_DASHBOARD, dashboard, sender);
+            dashboard.MyTabTitle = tabControl.SelectedTab.Text;//SelectedIndex;
+            
             //_menubar.SetSelection(sender);
         }
 
@@ -410,7 +421,7 @@ namespace IMS.Forms.Inventory
             }
 
             //var purchaseOrderUC = Program.container.GetInstance<OrderUC>();
-            AddTabPage("Purchases", purchaseOrderUC, sender);
+            AddTabPage(Constants.TAB_PURCHASES, purchaseOrderUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(purchaseOrderUC);
             // set selection
@@ -436,7 +447,7 @@ namespace IMS.Forms.Inventory
             // var saleOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(saleOrderUC);
-            AddTabPage("Sales", saleOrderUC, sender);
+            AddTabPage(Constants.TAB_SALES, saleOrderUC, sender);
             // set selection
            // _menubar.SetSelection(sender);
         }
@@ -459,7 +470,7 @@ namespace IMS.Forms.Inventory
             // var transferOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(transferOrderUC);
-            AddTabPage("Transfers", transferOrderUC, sender);
+            AddTabPage(Constants.TAB_TRANSFERS, transferOrderUC, sender);
             // set selection
             // _menubar.SetSelection(sender);
         }
@@ -467,13 +478,13 @@ namespace IMS.Forms.Inventory
         private void BtnClients_Click(object sender, EventArgs e)
         {
             var uc = Program.container.GetInstance<SupplierListUC>();
-            AddTabPage("Clients", uc, sender);
+            AddTabPage(Constants.TAB_CLIENTS, uc, sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
         {
             var inventoryUnitList = Program.container.GetInstance<InventoryUnitUC>();
-            AddTabPage("Inventory Units", inventoryUnitList, sender);
+            AddTabPage(Constants.TAB_INVENTORY_UNITS, inventoryUnitList, sender);
 
             //var inventoryDetailUC = Program.container.GetInstance<InventoryDetailUC>();
             //AddTabPage("Inventory", inventoryDetailUC);
@@ -488,18 +499,17 @@ namespace IMS.Forms.Inventory
         private void BtnPOS_Click(object sender, EventArgs e)
         {
             var posUC = Program.container.GetInstance<PosUC>();
-            AddTabPage("POS", posUC, sender);
+            AddTabPage(Constants.TAB_POS, posUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(posUC);
            // _menubar.SetSelection(sender);
         }
 
         #region Products
-
         private void BtnProductList_Click(object sender, EventArgs e)
         {
-            var productListUC = Program.container.GetInstance<ProductUC>();
-            AddTabPage("Products", productListUC, sender);
+            var productUC = Program.container.GetInstance<ProductUC>();
+            AddTabPage(Constants.TAB_PRODUCTS, productUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(productListUC);
 
@@ -602,7 +612,7 @@ namespace IMS.Forms.Inventory
                     _uomService
                     );
             }
-            AddTabPage("Transactions", _transactionListUC, sender);
+            AddTabPage(Constants.TAB_TRANSACTIONS, _transactionListUC, sender);
         }
 
         private void BtnOrders_Click(object sender, EventArgs e)
@@ -620,7 +630,7 @@ namespace IMS.Forms.Inventory
                     _uomService
                     );
             }
-            AddTabPage("Orders", _orderListUC, sender);
+            AddTabPage(Constants.TAB_ORDERS, _orderListUC, sender);
         }
 
         #endregion
@@ -684,7 +694,7 @@ namespace IMS.Forms.Inventory
             // using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var settingsUC = Program.container.GetInstance<InventorySettingsUC>();
-                AddTabPage("Settings", settingsUC, sender);
+                AddTabPage(Constants.TAB_SETTINGS, settingsUC, sender);
                 //pnlBody.Controls.Clear();
                 //pnlBody.Controls.Add(settingsUC);
                 // set selection
@@ -696,14 +706,14 @@ namespace IMS.Forms.Inventory
         private void BtnReports_Click(object sender, EventArgs e)
         {
             var reportUc = Program.container.GetInstance<ReportsUC>();
-            AddTabPage("Reports", reportUc, sender);
+            AddTabPage(Constants.TAB_REPORTS, reportUc, sender);
         }
 
 
         private void BtnAccounts_Click(object sender, EventArgs e)
         {
             var reportUc = Program.container.GetInstance<AccountsUC>();
-            AddTabPage("Accounts", reportUc, sender);
+            AddTabPage(Constants.TAB_ACCOUNTS, reportUc, sender);
         }
 
         #endregion

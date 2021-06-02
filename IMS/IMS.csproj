@@ -118,6 +118,9 @@
     <Compile Include="Forms\Business\Create\CounterCreate.Designer.cs">
       <DependentUpon>CounterCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Base\BaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\Common\Buttons\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -719,6 +722,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Business\Create\CounterCreate.resx">
       <DependentUpon>CounterCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Common\Base\BaseUserControl.resx">
+      <DependentUpon>BaseUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Common\Date\NepaliCalendarUC.resx">
       <DependentUpon>NepaliCalendarUC.cs</DependentUpon>

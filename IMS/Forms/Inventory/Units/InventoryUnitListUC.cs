@@ -9,18 +9,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IMS.Forms.Inventory.Units.Details;
 using IMS.Forms.Inventory.Products;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Units
 {
-    public partial class InventoryUnitListUC : UserControl
+    public partial class InventoryUnitListUC : BaseUserControl
     {
         private readonly InventoryManageUC _inventoryManageUC;
-       // private readonly InventoryUnitsMenu _sidebar;
+        private readonly RateListUC _rateListUC;
+        private readonly InventoryMovementUC _inventoryMovementUC;
+        // private readonly InventoryUnitsMenu _sidebar;
 
-        public InventoryUnitListUC(InventoryManageUC inventoryManageUC)
+        public InventoryUnitListUC(InventoryManageUC inventoryManageUC, RateListUC rateListUC, InventoryMovementUC inventoryMovementUC)
         {
             //_sidebar = sidebar;
             _inventoryManageUC = inventoryManageUC;
+            _rateListUC = rateListUC;
+            _inventoryMovementUC = inventoryMovementUC;
 
             InitializeComponent();
             this.Dock = DockStyle.Fill;
@@ -35,6 +40,13 @@ namespace IMS.Forms.Inventory.Units
 
             ShowInventoryUnitList();
 
+        }
+        public override void ExecuteActions()
+        {
+            //base.ExecuteActions();
+            _inventoryManageUC.ExecuteActions();
+            _rateListUC.ExecuteActions();
+            _inventoryMovementUC.ExecuteActions();
         }
 
         private void InitializeBody()
@@ -61,10 +73,10 @@ namespace IMS.Forms.Inventory.Units
 
         private void BtnRates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var warehouseProductListUC = Program.container.GetInstance<RateListUC>();
+            //var _rateListUC = Program.container.GetInstance<RateListUC>();
             pnlBody.Controls.Clear();
-            warehouseProductListUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(warehouseProductListUC);
+            _rateListUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(_rateListUC);
             _sidebar.SetVisited(sender);
         }
 
@@ -76,10 +88,10 @@ namespace IMS.Forms.Inventory.Units
 
         private void LnkMovement_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var warehouseProductListUC = Program.container.GetInstance<InventoryMovementUC>();
+            //var _inventoryMovementUC = Program.container.GetInstance<InventoryMovementUC>();
             pnlBody.Controls.Clear();
-            warehouseProductListUC.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(warehouseProductListUC);
+            _inventoryMovementUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(_inventoryMovementUC);
             _sidebar.SetVisited(sender);
             // SubHeadingText = "Inentory Movements";
         }
@@ -96,10 +108,10 @@ namespace IMS.Forms.Inventory.Units
 
         private void LnkManage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var inventoryUnitList = Program.container.GetInstance<InventoryManageUC>();
+            //var _inventoryManageUC = Program.container.GetInstance<InventoryManageUC>();
             pnlBody.Controls.Clear();
-            inventoryUnitList.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(inventoryUnitList);
+            _inventoryManageUC.Dock = DockStyle.Fill;
+            pnlBody.Controls.Add(_inventoryManageUC);
             _sidebar.SetVisited(sender);
             //  SubHeadingText = "Manage Inventory";
         }

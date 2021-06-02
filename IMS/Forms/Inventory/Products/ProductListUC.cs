@@ -22,7 +22,7 @@ using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Products
 {
-    public partial class ProductListUC : UserControl
+    public partial class ProductListUC : BaseUserControl
     {
         public event EventHandler<BaseEventArgs<ProductModel>> RowSelected;
 
@@ -196,12 +196,14 @@ namespace IMS.Forms.Inventory.Products
 
         private void _listener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
         {
-            PopulateCategoryCombo();
+            AddListenerAction(PopulateCategoryCombo, e);
+            //PopulateCategoryCombo();
         }
 
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
-            PopulateProductData();
+            AddListenerAction(PopulateProductData, e);
+            //PopulateProductData();
         }
 
         private void _listener_InventoryUnitUpdated(object sender, BaseEventArgs<List<InventoryUnitModel>> e)
