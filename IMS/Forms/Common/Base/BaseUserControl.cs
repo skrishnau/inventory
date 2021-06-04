@@ -12,6 +12,7 @@ namespace IMS.Forms.Common
     public class BaseUserControl : UserControl
     {
         public string MyTabTitle { get; set; }
+        public string MySubTabTitle { get; set; }
         Dictionary<Action, EventArgs> _listenerActions = new Dictionary<Action, EventArgs>();
 
         public BaseUserControl()
@@ -21,7 +22,8 @@ namespace IMS.Forms.Common
 
         protected void AddListenerAction(Action action, EventArgs e)
         {
-            if (InventoryUC.CurrentTabTitle.Trim() == MyTabTitle.Trim())
+            if (InventoryUC.CurrentTabTitle.Trim() == MyTabTitle.Trim() 
+                && (string.IsNullOrEmpty(InventoryUC.CurrentSubTabTitle) || string.IsNullOrEmpty(MySubTabTitle) || MySubTabTitle.Trim() == InventoryUC.CurrentSubTabTitle.Trim()))
             {
                 action?.Invoke();
                 return;

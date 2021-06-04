@@ -406,12 +406,6 @@
     <Compile Include="Forms\Inventory\Units\InventoryUnitsMenu.Designer.cs">
       <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Units\InventoryUnitUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Units\InventoryUnitUC.Designer.cs">
-      <DependentUpon>InventoryUnitUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\POS\Branches\BranchListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -851,9 +845,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitsMenu.resx">
       <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitUC.resx">
-      <DependentUpon>InventoryUnitUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\Branches\BranchListUC.resx">
       <DependentUpon>BranchListUC.cs</DependentUpon>

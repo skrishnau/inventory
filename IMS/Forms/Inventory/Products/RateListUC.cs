@@ -43,7 +43,6 @@ namespace IMS.Forms.Inventory.Products
 
             this.Load += RateListUC_Load;
             this.dtDate.SetValue(DateTime.Now);
-            rateDataGridView.dgvRates.InitializeGridViewControls(_inventoryService, _productService, _uomService);
         }
 
         private void RateListUC_Load(object sender, EventArgs e)
@@ -51,6 +50,7 @@ namespace IMS.Forms.Inventory.Products
             InitializeEvents();
             PopulateOrderType();
 
+            rateDataGridView.dgvRates.InitializeGridViewControls(_inventoryService, _productService, _uomService);
             rateDataGridView.dgvRates.DesignForPriceHistory(false, true);
             PopulatePriceData();
         }

@@ -32,43 +32,55 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnlBody = new System.Windows.Forms.Panel();
             this._sidebar = new IMS.Forms.Inventory.Units.InventoryUnitsMenu();
+            this.headingControl = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 32);
+            this.panel1.Location = new System.Drawing.Point(0, 64);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(13, 418);
+            this.panel1.Size = new System.Drawing.Size(13, 386);
             this.panel1.TabIndex = 1;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(779, 32);
+            this.panel2.Location = new System.Drawing.Point(779, 64);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(13, 418);
+            this.panel2.Size = new System.Drawing.Size(13, 386);
             this.panel2.TabIndex = 2;
             // 
             // pnlBody
             // 
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(13, 32);
+            this.pnlBody.Location = new System.Drawing.Point(13, 64);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(766, 418);
+            this.pnlBody.Size = new System.Drawing.Size(766, 386);
             this.pnlBody.TabIndex = 3;
             // 
             // _sidebar
             // 
             this._sidebar.BackColor = System.Drawing.Color.Gainsboro;
             this._sidebar.Dock = System.Windows.Forms.DockStyle.Top;
-            this._sidebar.Location = new System.Drawing.Point(0, 0);
+            this._sidebar.Location = new System.Drawing.Point(0, 32);
             this._sidebar.Name = "_sidebar";
             this._sidebar.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this._sidebar.Size = new System.Drawing.Size(792, 32);
             this._sidebar.TabIndex = 0;
+            // 
+            // headingControl
+            // 
+            this.headingControl.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.headingControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headingControl.HeadingText = "Heading";
+            this.headingControl.Location = new System.Drawing.Point(0, 0);
+            this.headingControl.Name = "headingControl";
+            this.headingControl.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.headingControl.Size = new System.Drawing.Size(792, 32);
+            this.headingControl.TabIndex = 4;
             // 
             // InventoryUnitListUC
             // 
@@ -78,6 +90,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this._sidebar);
+            this.Controls.Add(this.headingControl);
             this.Name = "InventoryUnitListUC";
             this.Size = new System.Drawing.Size(792, 450);
             this.ResumeLayout(false);
@@ -90,5 +103,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel pnlBody;
+        protected internal Common.Display.ListHeaderTemplate headingControl;
     }
 }

@@ -50,8 +50,14 @@ namespace IMS.Forms.Inventory.Units.Details
 
 
             _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
+            _listener.ProductUpdated += _listener_ProductUpdated;
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
             dgvMovement.DataSourceChanged += DgvMovement_DataSourceChanged;
+        }
+
+        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        {
+            AddListenerAction(PopulateProducts, e);
         }
 
         private void DgvMovement_DataSourceChanged(object sender, EventArgs e)
@@ -70,7 +76,7 @@ namespace IMS.Forms.Inventory.Units.Details
         }
         private void _listener_InventoryUnitUpdated(object sender, Service.DbEventArgs.BaseEventArgs<List<ViewModel.Core.Inventory.InventoryUnitModel>> e)
         {
-            PopulateMovements();
+            AddListenerAction(PopulateMovements, e);
         }
 
         private void PopulateMovements()

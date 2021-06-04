@@ -59,8 +59,8 @@ namespace IMS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Bootstrap();
             //Application.Run(new Form1());
+            Bootstrap();
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 Application.Run(container.GetInstance<Form1>());
@@ -70,7 +70,7 @@ namespace IMS
 
         }
 
-        private static void Bootstrap()
+        public static void Bootstrap()
         {
             // Create the container as usual.
             container = new Container();
@@ -114,6 +114,7 @@ namespace IMS
 
             container.Register<InventoryUC>(Lifestyle.Scoped);
             container.Register<InventoryMenuBar>(Lifestyle.Scoped);
+            container.Register<RateListUC>(Lifestyle.Scoped);
             //container.Register<InventoryUnitListUC>(Lifestyle.Scoped);
 
             container.Register<PosUC>(Lifestyle.Scoped);
@@ -154,7 +155,6 @@ namespace IMS
             container.Register<InventoryMergeForm>(Lifestyle.Scoped);
             container.Register<InventorySplitForm>(Lifestyle.Scoped);
             container.Register<InventoryMovementUC>(Lifestyle.Scoped);
-            container.Register<RateListUC>(Lifestyle.Scoped);
 
             container.Register<InventoryAdjustmentForm>(Lifestyle.Scoped);
 

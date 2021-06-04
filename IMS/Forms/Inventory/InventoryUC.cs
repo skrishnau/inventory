@@ -33,6 +33,7 @@ namespace IMS.Forms.Inventory
     public partial class InventoryUC : UserControl
     {
         public static string CurrentTabTitle;
+        public static string CurrentSubTabTitle;
 
         private static readonly string MODULE_NAME = "Inventory";
         // private BodyTemplate _bodyTemplate;
@@ -137,6 +138,7 @@ namespace IMS.Forms.Inventory
                 dashboard.ExecuteActions();
             }
             CurrentTabTitle = tabControl.SelectedTab.Text;
+            CurrentSubTabTitle = null;
         }
 
         //
@@ -483,7 +485,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
         {
-            var inventoryUnitList = Program.container.GetInstance<InventoryUnitUC>();
+            var inventoryUnitList = Program.container.GetInstance<InventoryUnitListUC>();
             AddTabPage(Constants.TAB_INVENTORY_UNITS, inventoryUnitList, sender);
 
             //var inventoryDetailUC = Program.container.GetInstance<InventoryDetailUC>();

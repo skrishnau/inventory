@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using IMS.Forms.Inventory.Units.Details;
 using IMS.Forms.Inventory.Products;
 using IMS.Forms.Common;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Units
 {
@@ -20,12 +21,21 @@ namespace IMS.Forms.Inventory.Units
         private readonly InventoryMovementUC _inventoryMovementUC;
         // private readonly InventoryUnitsMenu _sidebar;
 
+        private BaseUserControl _currentTab;
+
         public InventoryUnitListUC(InventoryManageUC inventoryManageUC, RateListUC rateListUC, InventoryMovementUC inventoryMovementUC)
         {
             //_sidebar = sidebar;
             _inventoryManageUC = inventoryManageUC;
             _rateListUC = rateListUC;
             _inventoryMovementUC = inventoryMovementUC;
+
+            _inventoryManageUC.MyTabTitle = MyTabTitle;
+            _inventoryManageUC.MySubTabTitle = Constants.NAME_INVENTORY_MANAGE;
+            _rateListUC.MyTabTitle = MyTabTitle;
+            _rateListUC.MySubTabTitle = Constants.NAME_RATE_LIST;
+            _inventoryMovementUC.MyTabTitle = MyTabTitle;
+            _inventoryMovementUC.MySubTabTitle = Constants.NAME_INVENTORY_MOVEMENT;
 
             InitializeComponent();
             this.Dock = DockStyle.Fill;
@@ -39,14 +49,28 @@ namespace IMS.Forms.Inventory.Units
             InitializeEvents();
 
             ShowInventoryUnitList();
+            this.headingControl.HeadingText = "Inventory";
 
         }
         public override void ExecuteActions()
         {
             //base.ExecuteActions();
-            _inventoryManageUC.ExecuteActions();
-            _rateListUC.ExecuteActions();
-            _inventoryMovementUC.ExecuteActions();
+            //
+            //
+            //
+            if(_currentTab != null)
+            {
+                _currentTab.ExecuteActions();
+            }
+            //else if(_currentTab == _sidebar.lnkMovement.Name)
+            //{
+            //    _inventoryMovementUC.ExecuteActions();
+            //}
+            //else if(_currentTab == _sidebar.btnRates.Name)
+            //{
+            //    _rateListUC.ExecuteActions();
+            //}
+
         }
 
         private void InitializeBody()
@@ -71,13 +95,18 @@ namespace IMS.Forms.Inventory.Units
             _sidebar.btnRates.LinkClicked += BtnRates_LinkClicked;
         }
 
+        
+
         private void BtnRates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            _currentTab = _rateListUC;// _sidebar.btnRates.Name;
+            InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             //var _rateListUC = Program.container.GetInstance<RateListUC>();
             pnlBody.Controls.Clear();
             _rateListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(_rateListUC);
             _sidebar.SetVisited(sender);
+            ExecuteActions();
         }
 
         private void ShowInventoryUnitList()
@@ -88,32 +117,42 @@ namespace IMS.Forms.Inventory.Units
 
         private void LnkMovement_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            _currentTab = _inventoryMovementUC;//_sidebar.lnkMovement.Name;
+            InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
+
             //var _inventoryMovementUC = Program.container.GetInstance<InventoryMovementUC>();
             pnlBody.Controls.Clear();
             _inventoryMovementUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(_inventoryMovementUC);
             _sidebar.SetVisited(sender);
             // SubHeadingText = "Inentory Movements";
+            
+            ExecuteActions();
         }
 
         private void LnkSummary_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //_currentTab = _wa _sidebar.lnkSummary.Name;
             var warehouseProductListUC = Program.container.GetInstance<WarehouseProductListUC>();
             pnlBody.Controls.Clear();
             warehouseProductListUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(warehouseProductListUC);
             _sidebar.SetVisited(sender);
             // SubHeadingText = "Inentory Units Summary";
+            ExecuteActions();
         }
 
         private void LnkManage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            _currentTab = _inventoryManageUC;// _sidebar.lnkManage.Name;
+            InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             //var _inventoryManageUC = Program.container.GetInstance<InventoryManageUC>();
             pnlBody.Controls.Clear();
             _inventoryManageUC.Dock = DockStyle.Fill;
             pnlBody.Controls.Add(_inventoryManageUC);
             _sidebar.SetVisited(sender);
             //  SubHeadingText = "Manage Inventory";
+            ExecuteActions();
         }
     }
 }

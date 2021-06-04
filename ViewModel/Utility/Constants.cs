@@ -31,12 +31,12 @@ namespace ViewModel.Utility
         public const string RECEIPT_NO_IS_REQUIRED = "Receipt No. is required. Please update Receipt settings.";
 
 
-        public const string TAB_DASHBOARD= "Dashboard";
+        public const string TAB_DASHBOARD = "Dashboard";
         public const string TAB_PURCHASES = "Purchases";
         public const string TAB_SALES = "Sales";
         public const string TAB_TRANSFERS = "Transfers";
         public const string TAB_CLIENTS = "Clients";
-        public const string TAB_INVENTORY_UNITS= "Inventory Units";
+        public const string TAB_INVENTORY_UNITS = "Inventory Units";
         public const string TAB_POS = "POS";
         public const string TAB_PRODUCTS = "Products";
         public const string TAB_TRANSACTIONS = "Transactions";
@@ -45,5 +45,8 @@ namespace ViewModel.Utility
         public const string TAB_REPORTS = "Reports";
         public const string TAB_ACCOUNTS = "Accounts";
 
+        public const string NAME_INVENTORY_MANAGE = "Inventory Manage";
+        public const string NAME_RATE_LIST = "Rate List";
+        public const string NAME_INVENTORY_MOVEMENT = "Inventory Movement";
     }
 }

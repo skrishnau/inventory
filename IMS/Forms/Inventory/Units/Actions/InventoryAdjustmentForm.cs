@@ -50,7 +50,6 @@ namespace IMS.Forms.Inventory.Units.Actions
 
             InitializeComponent();
 
-            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService);
 
             this.Load += InventoryReceiveForm_Load;
         }
@@ -58,6 +57,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void InventoryReceiveForm_Load(object sender, EventArgs e)
         {
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService);
             dtReceivedDate.SetValue(DateTime.Now);
 
             PopulateAdjustmentCodeCombo();
