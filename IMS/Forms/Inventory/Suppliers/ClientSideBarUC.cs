@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
-    public partial class SupplierSideBarUC : UserControl
+    public partial class ClientSideBarUC : UserControl
     {
-        public SupplierSideBarUC()
+        public ClientSideBarUC()
         {
             InitializeComponent();
         }

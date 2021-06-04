@@ -772,7 +772,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var supplierCreate = Program.container.GetInstance<SupplierCreate>();
+                var supplierCreate = Program.container.GetInstance<ClientCreateUC>();
                 supplierCreate.SetType(_orderType);
                 supplierCreate.ShowDialog();
             }

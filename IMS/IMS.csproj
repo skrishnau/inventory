@@ -442,17 +442,17 @@
     <Compile Include="Forms\Inventory\Settings\InventorySettingsUC.Designer.cs">
       <DependentUpon>InventorySettingsUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierListUC.cs">
+    <Compile Include="Forms\Inventory\Suppliers\ClientListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierListUC.Designer.cs">
-      <DependentUpon>SupplierListUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Suppliers\ClientListUC.Designer.cs">
+      <DependentUpon>ClientListUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierSideBarUC.cs">
+    <Compile Include="Forms\Inventory\Suppliers\ClientSideBarUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierSideBarUC.Designer.cs">
-      <DependentUpon>SupplierSideBarUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Suppliers\ClientSideBarUC.Designer.cs">
+      <DependentUpon>ClientSideBarUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.cs">
       <SubType>Form</SubType>
@@ -680,23 +680,17 @@
     <Compile Include="Forms\POS\Sales\NewItemAddForm.Designer.cs">
       <DependentUpon>NewItemAddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierCreate.cs">
+    <Compile Include="Forms\Inventory\Suppliers\ClientCreateUC.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierCreate.Designer.cs">
-      <DependentUpon>SupplierCreate.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Suppliers\ClientCreateUC.Designer.cs">
+      <DependentUpon>ClientCreateUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\InventoryUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\SupplierUC.Designer.cs">
-      <DependentUpon>SupplierUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -864,11 +858,11 @@
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsUC.resx">
       <DependentUpon>InventorySettingsUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierListUC.resx">
-      <DependentUpon>SupplierListUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\ClientListUC.resx">
+      <DependentUpon>ClientListUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierSideBarUC.resx">
-      <DependentUpon>SupplierSideBarUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\ClientSideBarUC.resx">
+      <DependentUpon>ClientSideBarUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\Actions\InventoryAdjustmentForm.resx">
       <DependentUpon>InventoryAdjustmentForm.cs</DependentUpon>
@@ -975,17 +969,14 @@
     <EmbeddedResource Include="Forms\POS\Sales\NewItemAddForm.resx">
       <DependentUpon>NewItemAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierCreate.resx">
-      <DependentUpon>SupplierCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\ClientCreateUC.resx">
+      <DependentUpon>ClientCreateUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Categories\CategoryListUC.resx">
       <DependentUpon>CategoryListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Suppliers\SupplierUC.resx">
-      <DependentUpon>SupplierUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

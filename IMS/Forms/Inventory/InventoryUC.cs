@@ -479,7 +479,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnClients_Click(object sender, EventArgs e)
         {
-            var uc = Program.container.GetInstance<SupplierListUC>();
+            var uc = Program.container.GetInstance<ClientListUC>();
             AddTabPage(Constants.TAB_CLIENTS, uc, sender);
         }
 

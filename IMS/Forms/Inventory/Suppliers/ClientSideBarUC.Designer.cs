@@ -1,6 +1,6 @@
 ﻿namespace IMS.Forms.Inventory.Suppliers
 {
-    partial class SupplierSideBarUC
+    partial class ClientSideBarUC
     {
         /// <summary> 
         /// Required designer variable.

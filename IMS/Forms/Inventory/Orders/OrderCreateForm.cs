@@ -286,7 +286,7 @@ namespace IMS.Forms.Inventory.Orders
                 {
                     case OrderTypeEnum.Purchase:
                     case OrderTypeEnum.Sale:
-                        var supplierCreate = Program.container.GetInstance<SupplierCreate>();
+                        var supplierCreate = Program.container.GetInstance<ClientCreateUC>();
                         supplierCreate.ShowDialog();
                         break;
                 }

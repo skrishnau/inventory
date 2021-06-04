@@ -179,8 +179,8 @@ namespace IMS
             // Suppliers
             //
            // container.Register<SupplierUC>(Lifestyle.Scoped);
-           container.Register<SupplierListUC>(Lifestyle.Scoped);
-            container.Register<SupplierCreate>(Lifestyle.Scoped);
+           container.Register<ClientListUC>(Lifestyle.Scoped);
+            container.Register<ClientCreateUC>(Lifestyle.Scoped);
            // container.Register<SupplierSideBarUC>(Lifestyle.Scoped);
             // 
             // Settings

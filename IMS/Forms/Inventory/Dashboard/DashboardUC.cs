@@ -18,10 +18,11 @@ using Service.Interfaces;
 using Microsoft.Reporting.WinForms;
 using ViewModel.Utility;
 using IMS.Forms.Common.Date;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
-    public partial class DashboardUC : UserControl
+    public partial class DashboardUC : BaseUserControl
     {
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
@@ -30,10 +31,10 @@ namespace IMS.Forms.Inventory.Dashboard
         private readonly IAppSettingService _appSettingService;
         //public TabPage TabPage { get; set; }
         //public TabControl TabControl { get; set; }
-        public string MyTabTitle { get; set; }
+       // public string MyTabTitle { get; set; }
         //private bool _listenerFired = false;
 
-        List<Action> _listenerActions = new List<Action>();
+        //List<Action> _listenerActions = new List<Action>();
 
         public DashboardUC(IInventoryService inventoryService, IProductService productService, IOrderService orderService, IAppSettingService appSettingService, IDatabaseChangeListener listener)
         {
@@ -124,15 +125,16 @@ namespace IMS.Forms.Inventory.Dashboard
             //  dgvDueReceivables.CellDoubleClick += DgvDueReceivables_CellDoubleClick;
             //TabControl.TabIndexChanged += TabControl_TabIndexChanged;
         }
-        public void ExecuteActions()
-        {
-            foreach (var action in _listenerActions)
-            {
-                action?.Invoke();
-            }
-            _listenerActions.Clear();
 
-        }
+        //public void ExecuteActions()
+        //{
+        //    foreach (var action in _listenerActions)
+        //    {
+        //        action?.Invoke();
+        //    }
+        //    _listenerActions.Clear();
+
+        //}
         //private void TabControl_TabIndexChanged(object sender, EventArgs e)
         //{
         //    if(TabControl.SelectedTab == TabPage)
@@ -175,49 +177,49 @@ namespace IMS.Forms.Inventory.Dashboard
 
         #region Listeners
 
-        private void AddListenerAction(Action action)
-        {
-            if (InventoryUC.CurrentTabTitle == MyTabTitle)//(TabControl.SelectedTab == TabPage)
-            {
-                action?.Invoke();
-                return;
-            }
-            if (!_listenerActions.Contains(action))
-                _listenerActions.Add(action);
-        }
+        //private void AddListenerAction(Action action)
+        //{
+        //    if (InventoryUC.CurrentTabTitle == MyTabTitle)//(TabControl.SelectedTab == TabPage)
+        //    {
+        //        action?.Invoke();
+        //        return;
+        //    }
+        //    if (!_listenerActions.Contains(action))
+        //        _listenerActions.Add(action);
+        //}
 
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
         {
-            AddListenerAction(PopulateUnderstockProducts);
-            AddListenerAction(PopulateInventorySummary);
+            AddListenerAction(PopulateUnderstockProducts, e);
+            AddListenerAction(PopulateInventorySummary, e);
         }
 
         private void _listener_InventoryUnitUpdated(object sender, Service.DbEventArgs.BaseEventArgs<List<ViewModel.Core.Inventory.InventoryUnitModel>> e)
         {
-            AddListenerAction(PopulateUnderstockProducts);
-            AddListenerAction(PopulateInventorySummary);
+            AddListenerAction(PopulateUnderstockProducts, e);
+            AddListenerAction(PopulateInventorySummary, e);
         }
 
 
         private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
         {
-            AddListenerAction(PopulateInventorySummary);
+            AddListenerAction(PopulateInventorySummary, e);
         }
 
         private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<OrderModel> e)
         {
-            AddListenerAction(PopulateDueReceivables);
-            AddListenerAction(PopulateBarDiagram);
-            AddListenerAction(PopulateTransactionSummary);
+            AddListenerAction(PopulateDueReceivables, e);
+            AddListenerAction(PopulateBarDiagram, e);
+            AddListenerAction(PopulateTransactionSummary, e);
         }
         private void _listener_CompanyUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Settings.CompanyInfoSettingModel> e)
         {
-            AddListenerAction(PopulateCompany);
+            AddListenerAction(PopulateCompany, e);
         }
 
         private void _listener_PaymentUpdated(object sender, Service.DbEventArgs.BaseEventArgs<PaymentModel> e)
         {
-            AddListenerAction(PopulateDueReceivables);
+            AddListenerAction(PopulateDueReceivables, e);
         }
 
         #endregion

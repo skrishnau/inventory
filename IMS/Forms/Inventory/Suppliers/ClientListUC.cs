@@ -14,7 +14,7 @@ using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
-    public partial class SupplierListUC : BaseUserControl
+    public partial class ClientListUC : BaseUserControl
     {
         public event EventHandler<BaseEventArgs<UserModel>> RowSelected;
 
@@ -33,7 +33,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private ClientListPaginationHelper helper;
 
 
-        public SupplierListUC(IUserService userService, IDatabaseChangeListener listener)
+        public ClientListUC(IUserService userService, IDatabaseChangeListener listener)
         {
             this._userService = userService;
             _listener = listener;
@@ -118,7 +118,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var supplierCreate = Program.container.GetInstance<SupplierCreate>();// (supplier);
+                var supplierCreate = Program.container.GetInstance<ClientCreateUC>();// (supplier);
                 supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, _userType);
                 supplierCreate.ShowDialog();
             }

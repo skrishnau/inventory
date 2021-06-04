@@ -11,7 +11,7 @@ using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
-    public partial class SupplierCreate : Form
+    public partial class ClientCreateUC : Form
     {
         private readonly IUserService _supplierService;
         private readonly IDatabaseChangeListener _listener;
@@ -21,7 +21,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private int _supplierId;
         private int _userId;
 
-        public SupplierCreate(IUserService supplierService, IDatabaseChangeListener listener)
+        public ClientCreateUC(IUserService supplierService, IDatabaseChangeListener listener)
         {
             this._supplierService = supplierService;
             _listener = listener;

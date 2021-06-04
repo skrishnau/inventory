@@ -61,7 +61,6 @@ namespace IMS.Forms.Inventory.Settings
            // _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
 
             _sidebar.lnkWarehouses.LinkClicked += LnkWarehouses_LinkClicked;
-            _sidebar.lnkSuppliers.LinkClicked += LnkSuppliers_LinkClicked;
         }
 
         private void SelectGeneralLink()
@@ -101,7 +100,7 @@ namespace IMS.Forms.Inventory.Settings
 
         private void LnkUsers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var userListUC = Program.container.GetInstance<SupplierListUC>();
+            var userListUC = Program.container.GetInstance<ClientListUC>();
             _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(userListUC);
             // set selection
@@ -156,15 +155,7 @@ namespace IMS.Forms.Inventory.Settings
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Warehouses";
         }
-
-        private void LnkSuppliers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var uc = Program.container.GetInstance<SupplierUC>();
-            _body.pnlBody.Controls.Clear();
-            _body.pnlBody.Controls.Add(uc);
-            _sidebar.SetVisited(sender);
-            _body.SubHeadingText = "Suppliers";
-        }
+        
 
         #region Event Handlers
 
