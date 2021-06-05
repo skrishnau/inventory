@@ -4272,7 +4272,7 @@
                     <Paragraph>
                       <TextRuns>
                         <TextRun>
-                          <Value>=Parameters!CompanyPhone.Value</Value>
+                          <Value>=IIF(IsNothing(Parameters!CompanyPhone.Value), "",  "Ph.: " &amp; Parameters!CompanyPhone.Value)</Value>
                           <Style>
                             <FontSize>7pt</FontSize>
                           </Style>
@@ -4385,7 +4385,7 @@
                     <Paragraph>
                       <TextRuns>
                         <TextRun>
-                          <Value>=Parameters!CompanyPhone.Value</Value>
+                          <Value>=IIF(IsNothing(Parameters!CompanyPhone.Value), "",  "Ph.: " &amp; Parameters!CompanyPhone.Value)</Value>
                           <Style>
                             <FontSize>7pt</FontSize>
                           </Style>
