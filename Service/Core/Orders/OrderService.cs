@@ -769,7 +769,9 @@ namespace Service.Core.Orders
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
                         var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "SO Issue" : adjustmentCode;
-                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType)), adjustment, ref message, order.ReferenceNumber);
+                        var invUnit = entity.MapToInventoryUnitModel(OrderTypeEnum.Sale);
+                        invUnit.Rate = entity.Rate;
+                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, invUnit, adjustment, ref message, order.ReferenceNumber);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
                         if ((invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0)) || (orderOrDirect == OrderOrDirectEnum.Direct && invUnitsQty > 0))
                         {

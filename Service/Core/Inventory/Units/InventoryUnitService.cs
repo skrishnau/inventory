@@ -176,7 +176,7 @@ namespace Service.Core.Inventory.Units
             //
             splitString = splitString.Trim();
             splitString = splitString.TrimEnd(new char[] { '+' });
-            var description = "Merged " + splitString + " of '" + product.Name + "' into " + editingRecord.UnitQuantity + " qty.";
+            var description = $"Merged {splitString} of '{product.Name}' into {editingRecord.UnitQuantity} qty with rate {Math.Round(editingRecord.Rate,2)}";
             AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now, editingRecord.ProductId);
 
         }
@@ -207,7 +207,7 @@ namespace Service.Core.Inventory.Units
                             quantitySplitList.ForEach(x => { splitString += x + " + "; });
                             splitString = splitString.Trim();
                             splitString = splitString.TrimEnd(new char[] { '+' });
-                            var description = "Splitted " + entity.UnitQuantity + " qty. of '" + entity.Product.Name + "' into " + splitString + ".";
+                            var description = $"Splitted {entity.UnitQuantity} {entity.Package.Name} of ' {entity.Product.Name}' @{Math.Round(entity.Rate, 2)} into {splitString}.";
                             AddMovementWithoutCoomit(_context, description, "----------------", "Split", entity.UnitQuantity, now, entity.ProductId);
 
                             for (var q = 0; q < quantitySplitList.Count; q++)
@@ -423,9 +423,15 @@ namespace Service.Core.Inventory.Units
         {
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
             unit.WarehouseId = warehouse.Id;
+            Package package;
             if (!string.IsNullOrEmpty(unit.Package) && (unit.PackageId ?? 0) == 0)
             {
-                unit.PackageId = _context.Packages.FirstOrDefault(x => x.Name == unit.Package)?.Id;
+                package = _context.Packages.FirstOrDefault(x => x.Name == unit.Package);
+                unit.PackageId = package?.Id;
+            }
+            else
+            {
+                package = _context.Packages.Find(unit.PackageId);
             }
             var unitEntity = unit.MapToEntity();
             unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
@@ -438,10 +444,7 @@ namespace Service.Core.Inventory.Units
             if (product == null)
                 product = _context.Products.Find(unit.ProductId);
 
-            var description = "Received " + unit.UnitQuantity + " quantities of " +
-                product.Name;// + " into " + warehouse.Name + " warehouse.";
-                             //var quantity = list.Sum(x => x.UnitQuantity);
-                             //"----------------"
+            var description = $"Received {Math.Round(unit.UnitQuantity, 2)} {package?.Name??""} of {product.Name} @ {Math.Round(unit.Rate, 2)}";
             AddMovementWithoutCoomit(_context, description, reference, adjustmentCode, unit.UnitQuantity, movementDate, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {
@@ -667,7 +670,7 @@ namespace Service.Core.Inventory.Units
                 //
                 // Movement
                 //
-                var description = $"Issued {issuedQuantity} {packagename} of '{productName}' from {warehouseName} warehouse.";
+                var description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(model.Rate, 2)}";// from {warehouseName} warehouse.";
                 AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {
