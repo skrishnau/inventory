@@ -453,6 +453,7 @@ namespace IMS.Forms.Common.Pagination
     public class MovementListPaginationHelper
     {
         private int _productId;
+        DateTime? _date;
 
         private int totalRecords = 0;
         private int pageSize = 20;
@@ -464,17 +465,18 @@ namespace IMS.Forms.Common.Pagination
         private readonly IInventoryUnitService _inventoryUnitService;
 
 
-        public MovementListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IInventoryUnitService _inventoryUnitService, int productId)
+        public MovementListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IInventoryUnitService _inventoryUnitService, int productId, DateTime? date)
         {
             this.bindingSource1 = bindingSource;
             this.dataGridView1 = dataGridView;
             this.bindingNavigator1 = bindingNavigator;
             this._inventoryUnitService = _inventoryUnitService;
             _productId = productId;
+            _date = date;
 
             bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
-            var totalRecords = _inventoryUnitService.GetMovementListCount(productId);
+            var totalRecords = _inventoryUnitService.GetMovementListCount(productId, date);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
 
@@ -485,7 +487,7 @@ namespace IMS.Forms.Common.Pagination
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
-            var records = _inventoryUnitService.GetMovementList(_productId, pageSize, offset);
+            var records = _inventoryUnitService.GetMovementList(_productId, _date, pageSize, offset);
             dataGridView1.DataSource = records.DataList;
             this.totalRecords = records.TotalCount;
         }
@@ -523,11 +525,12 @@ namespace IMS.Forms.Common.Pagination
             }
         }
 
-        public void Reset( int productId)
+        public void Reset( int productId, DateTime? date)
         {
             _productId = productId;
+            _date = date;
 
-            totalRecords = _inventoryUnitService.GetMovementListCount( _productId);
+            totalRecords = _inventoryUnitService.GetMovementListCount( _productId, _date);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
     }

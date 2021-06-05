@@ -14,8 +14,8 @@ namespace Service.Core.Inventory.Units
         int GetInventoryUnitCount(int warehouseId, int productId);
         InventoryUnitListModel GetInventoryUnitList(int warehouseId, int productId, int pageSize, int offset);
 
-        int GetMovementListCount(int productId);
-        MovementListModel GetMovementList(int productId, int pageSize, int offset);
+        int GetMovementListCount(int productId, DateTime? date);
+        MovementListModel GetMovementList(int productId, DateTime? date, int pageSize, int offset);
 
         string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> dataList);
 

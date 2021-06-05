@@ -16,9 +16,9 @@ namespace IMS.Forms.Common.Date
         // used for handling focus and click at same time
         DateTime _focusedAt;
         ErrorProvider _errorProvider;
-        private bool _isValid { get; set; }
-
-       // private DateTimePicker picker = new DateTimePicker() { MinDate = DateTime.MinValue };
+        private bool _isValid;
+        private bool _doValidation;
+        // private DateTimePicker picker = new DateTimePicker() { MinDate = DateTime.MinValue };
 
 
         public NepaliDateTextBox()
@@ -154,7 +154,7 @@ namespace IMS.Forms.Common.Date
             this.FindForm().Controls.Add(_calendar);
             _calendar.BringToFront();
         }
-        
+
         public void SetValue(DateTime value)
         {
             this.Text = _dateConverter.ToBS(value).ToString();
@@ -165,12 +165,14 @@ namespace IMS.Forms.Common.Date
             _errorProvider.SetError(this, string.Empty);
             var date = _dateConverter.ToAD(this.Text, out bool isValid);
             _isValid = isValid;
-            if (!isValid)
+            if (!isValid && _doValidation)
             {
                 _errorProvider.SetError(this, "Invalid");
             }
             return string.IsNullOrEmpty(this.Text) ? DateTime.Now : date;
         }
+
+        public bool Validate { get { return _doValidation; } set { _doValidation = value; } }
 
         public bool IsValid()
         {

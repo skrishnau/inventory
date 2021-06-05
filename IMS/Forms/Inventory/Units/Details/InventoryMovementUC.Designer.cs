@@ -29,10 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryMovementUC));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvMovement = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAdjustmentCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.chkDateSelected = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtDate = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,12 +55,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAdjustmentCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovement)).BeginInit();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
@@ -76,8 +80,55 @@
             this.dgvMovement.Size = new System.Drawing.Size(803, 284);
             this.dgvMovement.TabIndex = 0;
             // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.Visible = false;
+            // 
+            // colDate
+            // 
+            this.colDate.DataPropertyName = "Date";
+            this.colDate.HeaderText = "Date";
+            this.colDate.Name = "colDate";
+            // 
+            // colReference
+            // 
+            this.colReference.DataPropertyName = "Reference";
+            this.colReference.HeaderText = "Reference";
+            this.colReference.Name = "colReference";
+            this.colReference.ReadOnly = true;
+            // 
+            // colAdjustmentCode
+            // 
+            this.colAdjustmentCode.DataPropertyName = "AdjustmentCode";
+            this.colAdjustmentCode.HeaderText = "Adj Code";
+            this.colAdjustmentCode.Name = "colAdjustmentCode";
+            this.colAdjustmentCode.ReadOnly = true;
+            // 
+            // colQuantity
+            // 
+            this.colQuantity.DataPropertyName = "Quantity";
+            this.colQuantity.HeaderText = "Quantity";
+            this.colQuantity.Name = "colQuantity";
+            this.colQuantity.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "Description";
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDescription.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.chkDateSelected);
+            this.panel8.Controls.Add(this.label1);
+            this.panel8.Controls.Add(this.dtDate);
             this.panel8.Controls.Add(this.cbProduct);
             this.panel8.Controls.Add(this.label2);
             this.panel8.Controls.Add(this.label7);
@@ -87,6 +138,37 @@
             this.panel8.Padding = new System.Windows.Forms.Padding(3);
             this.panel8.Size = new System.Drawing.Size(803, 34);
             this.panel8.TabIndex = 8;
+            // 
+            // chkDateSelected
+            // 
+            this.chkDateSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkDateSelected.AutoSize = true;
+            this.chkDateSelected.Location = new System.Drawing.Point(433, 11);
+            this.chkDateSelected.Name = "chkDateSelected";
+            this.chkDateSelected.Size = new System.Drawing.Size(15, 14);
+            this.chkDateSelected.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.chkDateSelected, "Click to enable/disable Date");
+            this.chkDateSelected.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(397, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Date";
+            // 
+            // dtDate
+            // 
+            this.dtDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtDate.Enabled = false;
+            this.dtDate.Location = new System.Drawing.Point(454, 7);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(100, 20);
+            this.dtDate.TabIndex = 4;
+            this.dtDate.Validate = false;
             // 
             // cbProduct
             // 
@@ -212,50 +294,6 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "Id";
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.Visible = false;
-            // 
-            // colDate
-            // 
-            this.colDate.DataPropertyName = "Date";
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            // 
-            // colReference
-            // 
-            this.colReference.DataPropertyName = "Reference";
-            this.colReference.HeaderText = "Reference";
-            this.colReference.Name = "colReference";
-            this.colReference.ReadOnly = true;
-            // 
-            // colAdjustmentCode
-            // 
-            this.colAdjustmentCode.DataPropertyName = "AdjustmentCode";
-            this.colAdjustmentCode.HeaderText = "Adj Code";
-            this.colAdjustmentCode.Name = "colAdjustmentCode";
-            this.colAdjustmentCode.ReadOnly = true;
-            // 
-            // colQuantity
-            // 
-            this.colQuantity.DataPropertyName = "Quantity";
-            this.colQuantity.HeaderText = "Quantity";
-            this.colQuantity.Name = "colQuantity";
-            this.colQuantity.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.DataPropertyName = "Description";
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDescription.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
             // InventoryMovementUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,5 +337,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAdjustmentCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
+        private System.Windows.Forms.Label label1;
+        private Common.Date.NepaliDateTextBox dtDate;
+        private System.Windows.Forms.CheckBox chkDateSelected;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

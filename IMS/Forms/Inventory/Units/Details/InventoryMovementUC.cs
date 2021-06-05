@@ -40,8 +40,9 @@ namespace IMS.Forms.Inventory.Units.Details
 
         private void InventoryMovementUC_Load(object sender, EventArgs e)
         {
+            dtDate.SetValue(DateTime.Now);
             dgvMovement.AutoGenerateColumns = false;
-            helper = new MovementListPaginationHelper(_bindingSource, dgvMovement, bindingNavigator1, _inventoryUnitService, 0);
+            helper = new MovementListPaginationHelper(_bindingSource, dgvMovement, bindingNavigator1, _inventoryUnitService, 0, null);
 
 
             PopulateMovements();
@@ -53,6 +54,19 @@ namespace IMS.Forms.Inventory.Units.Details
             _listener.ProductUpdated += _listener_ProductUpdated;
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
             dgvMovement.DataSourceChanged += DgvMovement_DataSourceChanged;
+            dtDate.TextChanged += DtDate_TextChanged;
+            chkDateSelected.CheckedChanged += ChkDateSelected_CheckedChanged;
+        }
+
+        private void ChkDateSelected_CheckedChanged(object sender, EventArgs e)
+        {
+            dtDate.Enabled = chkDateSelected.Checked;
+            PopulateMovements();
+        }
+
+        private void DtDate_TextChanged(object sender, EventArgs e)
+        {
+            PopulateMovements();
         }
 
         private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
@@ -82,11 +96,24 @@ namespace IMS.Forms.Inventory.Units.Details
         private void PopulateMovements()
         {
             int productId = 0;
-            int.TryParse(cbProduct.SelectedValue?.ToString()??"" , out productId);
+            int.TryParse(cbProduct.SelectedValue?.ToString() ?? "", out productId);
+            DateTime? date = null;
+            if (chkDateSelected.Checked)
+            {
+                dtDate.Validate = true;
+                date = dtDate.GetValue();
+                if (!dtDate.IsValid())
+                {
+                    PopupMessage.ShowInfoMessage("Invalid date");
+                    this.Focus();
+                    return;
+                }
+            }
             //var movements = _inventoryUnitService.GetMovementList(productId);
             //dgvMovement.DataSource = movements;
             if (helper != null)
-                helper.Reset(productId);
+                helper.Reset(productId, date);
+
         }
         private void CbProduct_SelectedValueChanged(object sender, EventArgs e)
         {

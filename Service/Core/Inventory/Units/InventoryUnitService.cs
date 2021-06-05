@@ -136,12 +136,14 @@ namespace Service.Core.Inventory.Units
                 var dbEntity = _context.InventoryUnits.Include(x => x.Package).FirstOrDefault(x => x.Id == invId);
                 if (dbEntity != null)
                 {
+
                     var conversion = _uomService.ConvertUom(_context, dbEntity.PackageId ?? 0, productPackage?.Id ?? 0, product.Id, 1);
                     if (conversion == 0)
                     {
                         message += "Some items cannot be converted to base unit. Please update product's uom.";
                         return;
                     }
+                    var rate = dbEntity.Rate;
                     unitQuantity += (dbEntity.UnitQuantity * conversion);
                     totalAmount += dbEntity.Rate * dbEntity.UnitQuantity;
                     var invUnitQuantity = dbEntity.UnitQuantity;
@@ -160,7 +162,7 @@ namespace Service.Core.Inventory.Units
                         editingRecord = dbEntity;
                         invList.ElementAt(i).UpdateAction = UpdateMode.EDIT.ToString();
                     }
-                    splitString += $"{invUnitQuantity} {invPackgeName}  + ";
+                    splitString += $"{invUnitQuantity} {invPackgeName} @ {Math.Round(rate, 2)} + ";
                 }
 
             }
@@ -176,7 +178,7 @@ namespace Service.Core.Inventory.Units
             //
             splitString = splitString.Trim();
             splitString = splitString.TrimEnd(new char[] { '+' });
-            var description = $"Merged {splitString} of '{product.Name}' into {editingRecord.UnitQuantity} qty with rate {Math.Round(editingRecord.Rate,2)}";
+            var description = $"Merged {splitString} of '{product.Name}' into {Math.Round(editingRecord.UnitQuantity, 3)} {productPackage.Name} with rate {Math.Round(editingRecord.Rate,2)}";
             AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now, editingRecord.ProductId);
 
         }
@@ -315,20 +317,20 @@ namespace Service.Core.Inventory.Units
         }
         */
 
-        public int GetMovementListCount(int productId)
+        public int GetMovementListCount(int productId, DateTime? date)
         {
             using (var _context = new DatabaseContext())
             {
-                var query = GetMovementListQuery(_context, productId);
+                var query = GetMovementListQuery(_context, productId, date);
                 return query.Count();
             }
         }
 
-        public MovementListModel GetMovementList(int productId, int pageSize, int offset)
+        public MovementListModel GetMovementList(int productId, DateTime? date, int pageSize, int offset)
         {
             using (var _context = new DatabaseContext())
             {
-                var query = GetMovementListQuery(_context, productId);
+                var query = GetMovementListQuery(_context, productId, date);
                 var totalCount = query.Count();
                 if (pageSize > 0 && offset >= 0)
                 {
@@ -345,12 +347,24 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        public IQueryable<Movement> GetMovementListQuery(DatabaseContext _context, int productId)
+        public IQueryable<Movement> GetMovementListQuery(DatabaseContext _context, int productId, DateTime? date)
         {
-            return _context.Movements
-                    .Where(x => productId == 0 || x.ProductId == productId)
-                    .OrderByDescending(x => x.Date)
-                    .AsQueryable();
+
+            if (date.HasValue)
+            {
+                var dt = date.Value.Date;
+                return _context.Movements
+                     .Where(x => (productId == 0 || x.ProductId == productId) && (DbFunctions.TruncateTime(x.Date) == dt))
+                     .OrderByDescending(x => x.Date)
+                     .AsQueryable();
+            }
+            else
+            {
+                return _context.Movements
+                        .Where(x => productId == 0 || x.ProductId == productId)
+                        .OrderByDescending(x => x.Date)
+                        .AsQueryable();
+            }
         }
 
 
