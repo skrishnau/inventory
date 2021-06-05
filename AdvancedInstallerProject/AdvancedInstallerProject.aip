@@ -2,7 +2,6 @@
 <DOCUMENT Type="Advanced Installer" CreateVersion="17.8" version="17.8" Modules="simple" RootPath="." Language="en" Id="{52017368-27FD-4AF0-A212-C7F0366BB65E}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoMapper.dll" Value="..\DTO\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DTO.dll" Value="..\DTO\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.2.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.2.0\lib\net45"/>
@@ -25,11 +24,9 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Service.dll" Value="..\Service\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_SimpleInjector.dll" Value="..\packages\SimpleInjector.4.4.3\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.ValueTuple.dll" Value="..\DTO\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Tulpep.NotificationWindow.dll" Value="..\packages\Tulpep.NotificationWindow.1.1.25\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ViewModel.dll" Value="..\ViewModel\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_stdole.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoMapper.dll" Value="AutoMapper.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DTO.dll" Value="DTO.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll" Value="EntityFramework.SqlServer.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll" Value="EntityFramework.dll"/>
@@ -52,17 +49,16 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll" Value="Microsoft.VisualStudio.TextManager.Interop.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Service.dll" Value="Service.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SimpleInjector.dll" Value="SimpleInjector.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.ValueTuple.dll" Value="System.ValueTuple.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Tulpep.NotificationWindow.dll" Value="Tulpep.NotificationWindow.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ViewModel.dll" Value="ViewModel.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_stdole.dll" Value="stdole.dll"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="Manufacturer" Value="SKU"/>
-    <ROW Property="ProductCode" Value="1033:{4D4DD60E-4116-4692-96A9-08DAE410B790} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{D8CA9DE4-752A-4423-BCFB-8C7686AAC21A} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="SRIPARA IMS"/>
-    <ROW Property="ProductVersion" Value="1.2.3" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.2.4" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{851D37BB-FFFB-47F0-AE39-ACEC8CCA2735}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -110,11 +106,9 @@
     <ROW File="SimpleInjector.dll" Component_="IMS_References" FileName="SIMPLE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_SimpleInjector.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_SimpleInjector.dll&gt;" SelfReg="false"/>
     <ROW File="Tulpep.NotificationWindow.dll" Component_="IMS_References" FileName="TULPEP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Tulpep.NotificationWindow.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Tulpep.NotificationWindow.dll&gt;" SelfReg="false"/>
     <ROW File="ViewModel.dll" Component_="IMS_References" FileName="VIEWMO~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ViewModel.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ViewModel.dll&gt;" SelfReg="false"/>
-    <ROW File="AutoMapper.dll" Component_="IMS_References" FileName="AUTOMA~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoMapper.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoMapper.dll&gt;" SelfReg="false"/>
     <ROW File="EnvDTE.dll" Component_="IMS_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_EnvDTE.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EnvDTE.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.VisualStudio.Shell.Interop.dll" Component_="IMS_References" FileName="MICROS~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.Shell.Interop.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.VisualStudio.Shell.Interop.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.VisualStudio.Shell.Interop.8.0.dll" Component_="IMS_References" FileName="MICRO~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.Shell.Interop.8.0.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.VisualStudio.Shell.Interop.8.0.dll&gt;" SelfReg="false"/>
-    <ROW File="System.ValueTuple.dll" Component_="IMS_References" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.ValueTuple.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.ValueTuple.dll&gt;" SelfReg="false"/>
     <ROW File="stdole.dll" Component_="IMS_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_stdole.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_stdole.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.VisualStudio.OLE.Interop.dll" Component_="IMS_References" FileName="MICRO~11.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.OLE.Interop.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.VisualStudio.OLE.Interop.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.VisualStudio.TextManager.Interop.dll" Component_="IMS_References" FileName="MICRO~12.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll&gt;" SelfReg="false"/>
@@ -122,7 +116,6 @@
     <ROW File="Microsoft.MSXML.dll" Component_="IMS_References" FileName="MICRO~14.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.MSXML.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.MSXML.dll&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
-    <ROW Name="AI_APPPATH_PERBUILD_AutoMapper.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoMapper.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoMapper.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DTO.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DTO.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DTO.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Type="2" Content="0"/>
@@ -145,7 +138,6 @@
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Service.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Service.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Service.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_SimpleInjector.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SimpleInjector.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SimpleInjector.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_System.ValueTuple.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.ValueTuple.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.ValueTuple.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Tulpep.NotificationWindow.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Tulpep.NotificationWindow.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Tulpep.NotificationWindow.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ViewModel.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ViewModel.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ViewModel.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_stdole.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_stdole.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_stdole.dll]" Type="2" Content="0"/>
@@ -279,11 +271,9 @@
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="SimpleInjector.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Tulpep.NotificationWindow.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="ViewModel.dll"/>
-    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="AutoMapper.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="EnvDTE.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.VisualStudio.Shell.Interop.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.VisualStudio.Shell.Interop.8.0.dll"/>
-    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.ValueTuple.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="stdole.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.VisualStudio.OLE.Interop.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.VisualStudio.TextManager.Interop.dll"/>
