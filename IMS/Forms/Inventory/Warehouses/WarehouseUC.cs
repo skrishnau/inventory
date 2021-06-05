@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using IMS.Forms.Common.Display;
 using IMS.Forms.Common.Links;
 using IMS.Forms.Inventory.Transfers;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Warehouses
 {
-    public partial class WarehouseUC : UserControl
+    public partial class WarehouseUC : BaseUserControl
     {
 
         private SettingsBodyTemplate _subBodyTemplate;

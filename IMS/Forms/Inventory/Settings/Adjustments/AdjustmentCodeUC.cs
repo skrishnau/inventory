@@ -14,7 +14,7 @@ using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Settings.Adjustments
 {
-    public partial class AdjustmentCodeUC : UserControl
+    public partial class AdjustmentCodeUC : BaseUserControl
     {
         private readonly IInventoryService _inventoryService;
 

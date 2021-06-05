@@ -18,7 +18,7 @@ using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Categories
 {
-    public partial class CategoryListUC : UserControl
+    public partial class CategoryListUC : BaseUserControl
     {
         private readonly IProductService _productService;
         //private TreeViewCategory treeView;
@@ -46,7 +46,7 @@ namespace IMS.Forms.Inventory.Categories
 
         private void _databaseChangeListener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
         {
-            PopulateCategoryData();
+           AddListenerAction(PopulateCategoryData, e);
         }
 
         private void InitializeHeader()

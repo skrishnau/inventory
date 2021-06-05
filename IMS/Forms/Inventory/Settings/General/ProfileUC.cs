@@ -14,7 +14,7 @@ using SimpleInjector.Lifestyles;
 
 namespace IMS.Forms.Inventory.Settings.General
 {
-    public partial class ProfileUC : UserControl
+    public partial class ProfileUC : BaseUserControl
     {
         private readonly IAppSettingService _appSettingService;
 

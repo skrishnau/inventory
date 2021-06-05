@@ -9,14 +9,18 @@ using IMS.Forms.Inventory.Settings.References;
 using IMS.Forms.Inventory.Settings.General;
 using IMS.Forms.Inventory.Warehouses;
 using IMS.Forms.Inventory.Suppliers;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Settings
 {
-    public partial class InventorySettingsUC : UserControl
+    public partial class InventorySettingsUC : BaseUserControl
     {
         private SettingsBodyTemplate _body;
 
         private readonly InventorySettingsSidebarUC _sidebar;
+
+        BaseUserControl _currentTab;
+
         public InventorySettingsUC(InventorySettingsSidebarUC sidebar)
         {
             _sidebar = sidebar;
@@ -25,6 +29,13 @@ namespace IMS.Forms.Inventory.Settings
             this.Dock = DockStyle.Fill;
             this.Load += InventorySettingsUC_Load;
 
+        }
+        public override void ExecuteActions()
+        {
+            if(_currentTab != null)
+            {
+                _currentTab.ExecuteActions();
+            }
         }
 
         private void InventorySettingsUC_Load(object sender, EventArgs e)
@@ -76,6 +87,8 @@ namespace IMS.Forms.Inventory.Settings
             // set selection
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Profile";
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
 
         //private void LnkProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -96,6 +109,8 @@ namespace IMS.Forms.Inventory.Settings
             // set selection
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Reference Settings";
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
 
         private void LnkUsers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -106,6 +121,8 @@ namespace IMS.Forms.Inventory.Settings
             // set selection
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Users";
+            _currentTab = userListUC;
+            _currentTab.ExecuteActions();
         }
 
         private void LnkUom_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -115,6 +132,8 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Units of Measure (UOM)";
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
 
 
@@ -125,6 +144,8 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Product Categories";
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
 
         private void LnkPackages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -134,6 +155,8 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Package Types";
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
 
         private void LnkAdjustmentCodes_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -143,6 +166,8 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Adjustment Codes";
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
 
 
@@ -154,12 +179,9 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Warehouses";
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
-        
-
-        #region Event Handlers
-
-        #endregion
 
 
     }

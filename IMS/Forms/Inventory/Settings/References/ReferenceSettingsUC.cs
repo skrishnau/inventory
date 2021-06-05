@@ -14,7 +14,7 @@ using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Settings.References
 {
-    public partial class ReferenceSettingsUC : UserControl
+    public partial class ReferenceSettingsUC : BaseUserControl
     {
         private readonly IAppSettingService _appSettingService;
 
