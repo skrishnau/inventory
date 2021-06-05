@@ -15,7 +15,7 @@ namespace IMS.Forms.Inventory.Settings
 {
     public partial class InventorySettingsUC : BaseUserControl
     {
-        private SettingsBodyTemplate _body;
+        //private SettingsBodyTemplate _body;
 
         private readonly InventorySettingsSidebarUC _sidebar;
 
@@ -32,7 +32,7 @@ namespace IMS.Forms.Inventory.Settings
         }
         public override void ExecuteActions()
         {
-            if(_currentTab != null)
+            if (_currentTab != null)
             {
                 _currentTab.ExecuteActions();
             }
@@ -40,7 +40,7 @@ namespace IMS.Forms.Inventory.Settings
 
         private void InventorySettingsUC_Load(object sender, EventArgs e)
         {
-            
+
             InitializeBody();
 
             InitializeEvents();
@@ -50,13 +50,9 @@ namespace IMS.Forms.Inventory.Settings
 
         private void InitializeBody()
         {
-            _body = new SettingsBodyTemplate
-            {
-                HeadingText = "Settings",
-                SubHeadingText = ""
-            };
+            _body.HeadingText = "Settings";
+            _body.SubHeadingText = "";
             _body.pnlBody.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Controls.Add(_body);
             _body.pnlSideBar.Controls.Add(_sidebar);
         }
 
@@ -69,7 +65,7 @@ namespace IMS.Forms.Inventory.Settings
             _sidebar.lnkUom.LinkClicked += LnkUom_LinkClicked;
             _sidebar.lnkUsers.LinkClicked += LnkUsers_LinkClicked;
             _sidebar.lnkReferences.LinkClicked += LnkReferences_LinkClicked;
-           // _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
+            // _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
 
             _sidebar.lnkWarehouses.LinkClicked += LnkWarehouses_LinkClicked;
         }
@@ -140,7 +136,7 @@ namespace IMS.Forms.Inventory.Settings
         private void LnkProductCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var uc = Program.container.GetInstance<CategoryListUC>();
-           _body. pnlBody.Controls.Clear();
+            _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Product Categories";

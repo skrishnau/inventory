@@ -28,94 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitter5 = new System.Windows.Forms.Splitter();
             this.btnPayments = new System.Windows.Forms.LinkLabel();
-            this.splitter2 = new System.Windows.Forms.Splitter();
             this.btnLedger = new System.Windows.Forms.LinkLabel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.btnProfitAndLoss = new System.Windows.Forms.LinkLabel();
             this.splitter3 = new System.Windows.Forms.Splitter();
+            this.pnlLinks = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlLinks.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // splitter5
-            // 
-            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter5.Location = new System.Drawing.Point(5, 5);
-            this.splitter5.Name = "splitter5";
-            this.splitter5.Size = new System.Drawing.Size(168, 3);
-            this.splitter5.TabIndex = 16;
-            this.splitter5.TabStop = false;
             // 
             // btnPayments
             // 
-            this.btnPayments.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPayments.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPayments.AutoSize = true;
+            this.btnPayments.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnPayments.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
             this.btnPayments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPayments.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.btnPayments.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnPayments.Location = new System.Drawing.Point(5, 8);
+            this.btnPayments.Location = new System.Drawing.Point(5, 5);
             this.btnPayments.Margin = new System.Windows.Forms.Padding(5);
             this.btnPayments.Name = "btnPayments";
-            this.btnPayments.Padding = new System.Windows.Forms.Padding(5);
-            this.btnPayments.Size = new System.Drawing.Size(168, 27);
+            this.btnPayments.Size = new System.Drawing.Size(94, 17);
             this.btnPayments.TabIndex = 11;
             this.btnPayments.TabStop = true;
             this.btnPayments.Text = "      Payments";
             this.btnPayments.VisitedLinkColor = System.Drawing.Color.Black;
             // 
-            // splitter2
-            // 
-            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(5, 35);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(168, 3);
-            this.splitter2.TabIndex = 13;
-            this.splitter2.TabStop = false;
-            // 
             // btnLedger
             // 
-            this.btnLedger.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLedger.AutoSize = true;
             this.btnLedger.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLedger.Image = global::IMS.Properties.Resources.icons8_Deviation_16px;
             this.btnLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLedger.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.btnLedger.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnLedger.Location = new System.Drawing.Point(5, 38);
+            this.btnLedger.Location = new System.Drawing.Point(5, 32);
             this.btnLedger.Margin = new System.Windows.Forms.Padding(5);
             this.btnLedger.Name = "btnLedger";
-            this.btnLedger.Padding = new System.Windows.Forms.Padding(5);
-            this.btnLedger.Size = new System.Drawing.Size(168, 27);
+            this.btnLedger.Size = new System.Drawing.Size(77, 17);
             this.btnLedger.TabIndex = 17;
             this.btnLedger.TabStop = true;
             this.btnLedger.Text = "      Ledger";
             this.btnLedger.VisitedLinkColor = System.Drawing.Color.Black;
             // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(5, 65);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(168, 3);
-            this.splitter1.TabIndex = 18;
-            this.splitter1.TabStop = false;
-            // 
             // btnProfitAndLoss
             // 
-            this.btnProfitAndLoss.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnProfitAndLoss.AutoSize = true;
             this.btnProfitAndLoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProfitAndLoss.Image = global::IMS.Properties.Resources.icons8_Combo_Chart_16px;
             this.btnProfitAndLoss.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProfitAndLoss.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.btnProfitAndLoss.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnProfitAndLoss.Location = new System.Drawing.Point(5, 68);
+            this.btnProfitAndLoss.Location = new System.Drawing.Point(5, 59);
             this.btnProfitAndLoss.Margin = new System.Windows.Forms.Padding(5);
             this.btnProfitAndLoss.Name = "btnProfitAndLoss";
-            this.btnProfitAndLoss.Padding = new System.Windows.Forms.Padding(5);
-            this.btnProfitAndLoss.Size = new System.Drawing.Size(168, 27);
+            this.btnProfitAndLoss.Size = new System.Drawing.Size(128, 17);
             this.btnProfitAndLoss.TabIndex = 19;
             this.btnProfitAndLoss.TabStop = true;
             this.btnProfitAndLoss.Text = "      Profit And Loss";
@@ -125,37 +91,44 @@
             // 
             this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter3.Location = new System.Drawing.Point(5, 95);
+            this.splitter3.Location = new System.Drawing.Point(3, 84);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(168, 3);
+            this.splitter3.Size = new System.Drawing.Size(132, 3);
             this.splitter3.TabIndex = 20;
             this.splitter3.TabStop = false;
+            // 
+            // pnlLinks
+            // 
+            this.pnlLinks.Controls.Add(this.btnPayments);
+            this.pnlLinks.Controls.Add(this.btnLedger);
+            this.pnlLinks.Controls.Add(this.btnProfitAndLoss);
+            this.pnlLinks.Controls.Add(this.splitter3);
+            this.pnlLinks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLinks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlLinks.Location = new System.Drawing.Point(0, 0);
+            this.pnlLinks.Name = "pnlLinks";
+            this.pnlLinks.Size = new System.Drawing.Size(178, 436);
+            this.pnlLinks.TabIndex = 21;
+            this.pnlLinks.WrapContents = false;
             // 
             // AccountsSidebarUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.splitter3);
-            this.Controls.Add(this.btnProfitAndLoss);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.btnLedger);
-            this.Controls.Add(this.splitter2);
-            this.Controls.Add(this.btnPayments);
-            this.Controls.Add(this.splitter5);
+            this.Controls.Add(this.pnlLinks);
             this.Name = "AccountsSidebarUC";
-            this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(178, 436);
+            this.pnlLinks.ResumeLayout(false);
+            this.pnlLinks.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Splitter splitter5;
         protected internal System.Windows.Forms.LinkLabel btnPayments;
-        private System.Windows.Forms.Splitter splitter2;
         protected internal System.Windows.Forms.LinkLabel btnLedger;
-        private System.Windows.Forms.Splitter splitter1;
         protected internal System.Windows.Forms.LinkLabel btnProfitAndLoss;
         private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.FlowLayoutPanel pnlLinks;
     }
 }

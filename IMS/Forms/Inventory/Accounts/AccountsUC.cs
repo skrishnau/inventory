@@ -31,9 +31,10 @@ namespace IMS.Forms.Inventory.Reports
         private readonly ProfitAndLossUC _profitAndLossUC;
         private readonly PaymentListUC _paymentListUC;
         private readonly LedgerUC _ledgerUC;
+        private readonly AccountsSidebarUC sidebarUc;
 
         public AccountsUC(//IUserService userService, IReportService reportService, IPaymentService paymentService, IDatabaseChangeListener databaseChangeListener, IAppSettingService appSettingService,
-            ProfitAndLossUC profitAndLossUC, PaymentListUC paymentListUC, LedgerUC ledgerUC)
+            ProfitAndLossUC profitAndLossUC, PaymentListUC paymentListUC, LedgerUC ledgerUC, AccountsSidebarUC sidebarUC)
         {
             //this._userService = userService;
             //this._paymentService = paymentService;
@@ -44,6 +45,7 @@ namespace IMS.Forms.Inventory.Reports
             _profitAndLossUC = profitAndLossUC;
             _paymentListUC = paymentListUC;
             _ledgerUC = ledgerUC;
+            this.sidebarUc = sidebarUC;
 
             
 
@@ -70,13 +72,12 @@ namespace IMS.Forms.Inventory.Reports
             _paymentListUC.MySubTabTitle = Constants.NAME_PAYMENT_LIST;
 
             this.bodyTemplate.SubHeadingText = "";
-            var sidebarUc = new AccountsSidebarUC();
             this.bodyTemplate.pnlSideBar.Controls.Add(sidebarUc);
 
             sidebarUc.btnPayments.Click += BtnPayments_Click;
             sidebarUc.btnLedger.Click += BtnLedger_Click;
             sidebarUc.btnProfitAndLoss.Click += BtnProfitAndLoss_Click;
-
+            BtnPayments_Click(sidebarUc.btnPayments, null);
         }
 
         private void BtnProfitAndLoss_Click(object sender, EventArgs e)
@@ -84,6 +85,7 @@ namespace IMS.Forms.Inventory.Reports
             _currentTab = _profitAndLossUC;
             InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             this.bodyTemplate.pnlBody.Controls.Clear();
+            sidebarUc.SetVisited(sender);
             //var ledgerUc = new ProfitAndLossUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Profit and Loss";
             this.bodyTemplate.pnlBody.Controls.Add(_profitAndLossUC);
@@ -94,6 +96,7 @@ namespace IMS.Forms.Inventory.Reports
             _currentTab = _paymentListUC;
             InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             this.bodyTemplate.pnlBody.Controls.Clear();
+            sidebarUc.SetVisited(sender);
             //var paymentsUc = new PaymentListUC(_paymentService, _userService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Payments";
             this.bodyTemplate.pnlBody.Controls.Add(_paymentListUC);
@@ -104,6 +107,7 @@ namespace IMS.Forms.Inventory.Reports
             _currentTab = _ledgerUC;
             InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             this.bodyTemplate.pnlBody.Controls.Clear();
+            sidebarUc.SetVisited(sender);
             //var ledgerUc = new LedgerUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Ledger";
             this.bodyTemplate.pnlBody.Controls.Add(_ledgerUC);

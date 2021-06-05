@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pnlLinks = new System.Windows.Forms.FlowLayoutPanel();
-            this.splitter5 = new System.Windows.Forms.Splitter();
             this.lnkGeneral = new System.Windows.Forms.LinkLabel();
             this.lnkReferences = new System.Windows.Forms.LinkLabel();
             this.splitter2 = new System.Windows.Forms.Splitter();
@@ -48,7 +47,6 @@
             // 
             // pnlLinks
             // 
-            this.pnlLinks.Controls.Add(this.splitter5);
             this.pnlLinks.Controls.Add(this.lnkGeneral);
             this.pnlLinks.Controls.Add(this.lnkReferences);
             this.pnlLinks.Controls.Add(this.splitter2);
@@ -70,16 +68,6 @@
             this.pnlLinks.TabIndex = 3;
             this.pnlLinks.WrapContents = false;
             // 
-            // splitter5
-            // 
-            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter5.Location = new System.Drawing.Point(3, 3);
-            this.splitter5.Name = "splitter5";
-            this.splitter5.Size = new System.Drawing.Size(150, 3);
-            this.splitter5.TabIndex = 16;
-            this.splitter5.TabStop = false;
-            // 
             // lnkGeneral
             // 
             this.lnkGeneral.AutoSize = true;
@@ -88,7 +76,7 @@
             this.lnkGeneral.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkGeneral.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkGeneral.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkGeneral.Location = new System.Drawing.Point(5, 14);
+            this.lnkGeneral.Location = new System.Drawing.Point(5, 5);
             this.lnkGeneral.Margin = new System.Windows.Forms.Padding(5);
             this.lnkGeneral.Name = "lnkGeneral";
             this.lnkGeneral.Size = new System.Drawing.Size(72, 17);
@@ -105,7 +93,7 @@
             this.lnkReferences.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkReferences.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkReferences.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkReferences.Location = new System.Drawing.Point(5, 41);
+            this.lnkReferences.Location = new System.Drawing.Point(5, 32);
             this.lnkReferences.Margin = new System.Windows.Forms.Padding(5);
             this.lnkReferences.Name = "lnkReferences";
             this.lnkReferences.Size = new System.Drawing.Size(105, 17);
@@ -118,7 +106,7 @@
             // 
             this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(3, 66);
+            this.splitter2.Location = new System.Drawing.Point(3, 57);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(150, 3);
             this.splitter2.TabIndex = 13;
@@ -132,7 +120,7 @@
             this.lnkProductCategory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkProductCategory.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkProductCategory.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkProductCategory.Location = new System.Drawing.Point(5, 77);
+            this.lnkProductCategory.Location = new System.Drawing.Point(5, 68);
             this.lnkProductCategory.Margin = new System.Windows.Forms.Padding(5);
             this.lnkProductCategory.Name = "lnkProductCategory";
             this.lnkProductCategory.Size = new System.Drawing.Size(142, 17);
@@ -150,7 +138,7 @@
             this.lnkPackages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkPackages.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkPackages.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkPackages.Location = new System.Drawing.Point(5, 104);
+            this.lnkPackages.Location = new System.Drawing.Point(5, 95);
             this.lnkPackages.Margin = new System.Windows.Forms.Padding(5);
             this.lnkPackages.Name = "lnkPackages";
             this.lnkPackages.Size = new System.Drawing.Size(94, 17);
@@ -167,7 +155,7 @@
             this.lnkUom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkUom.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkUom.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkUom.Location = new System.Drawing.Point(5, 131);
+            this.lnkUom.Location = new System.Drawing.Point(5, 122);
             this.lnkUom.Margin = new System.Windows.Forms.Padding(5);
             this.lnkUom.Name = "lnkUom";
             this.lnkUom.Size = new System.Drawing.Size(139, 17);
@@ -184,7 +172,7 @@
             this.lnkAdjustmentCodes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkAdjustmentCodes.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkAdjustmentCodes.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkAdjustmentCodes.Location = new System.Drawing.Point(5, 158);
+            this.lnkAdjustmentCodes.Location = new System.Drawing.Point(5, 149);
             this.lnkAdjustmentCodes.Margin = new System.Windows.Forms.Padding(5);
             this.lnkAdjustmentCodes.Name = "lnkAdjustmentCodes";
             this.lnkAdjustmentCodes.Size = new System.Drawing.Size(146, 17);
@@ -198,7 +186,7 @@
             // 
             this.splitter6.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter6.Location = new System.Drawing.Point(3, 183);
+            this.splitter6.Location = new System.Drawing.Point(3, 174);
             this.splitter6.Name = "splitter6";
             this.splitter6.Size = new System.Drawing.Size(150, 3);
             this.splitter6.TabIndex = 19;
@@ -212,7 +200,7 @@
             this.lnkWarehouses.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkWarehouses.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkWarehouses.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkWarehouses.Location = new System.Drawing.Point(5, 194);
+            this.lnkWarehouses.Location = new System.Drawing.Point(5, 185);
             this.lnkWarehouses.Margin = new System.Windows.Forms.Padding(5);
             this.lnkWarehouses.Name = "lnkWarehouses";
             this.lnkWarehouses.Size = new System.Drawing.Size(112, 17);
@@ -227,7 +215,7 @@
             // 
             this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter3.Location = new System.Drawing.Point(3, 219);
+            this.splitter3.Location = new System.Drawing.Point(3, 210);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(150, 3);
             this.splitter3.TabIndex = 14;
@@ -241,7 +229,7 @@
             this.lnkUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkUsers.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkUsers.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkUsers.Location = new System.Drawing.Point(5, 230);
+            this.lnkUsers.Location = new System.Drawing.Point(5, 221);
             this.lnkUsers.Margin = new System.Windows.Forms.Padding(5);
             this.lnkUsers.Name = "lnkUsers";
             this.lnkUsers.Size = new System.Drawing.Size(69, 17);
@@ -259,7 +247,7 @@
             this.lnkPermissions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lnkPermissions.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lnkPermissions.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lnkPermissions.Location = new System.Drawing.Point(5, 257);
+            this.lnkPermissions.Location = new System.Drawing.Point(5, 248);
             this.lnkPermissions.Margin = new System.Windows.Forms.Padding(5);
             this.lnkPermissions.Name = "lnkPermissions";
             this.lnkPermissions.Size = new System.Drawing.Size(108, 17);
@@ -273,7 +261,7 @@
             // 
             this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter4.Location = new System.Drawing.Point(3, 282);
+            this.splitter4.Location = new System.Drawing.Point(3, 273);
             this.splitter4.Name = "splitter4";
             this.splitter4.Size = new System.Drawing.Size(150, 3);
             this.splitter4.TabIndex = 15;
@@ -304,7 +292,6 @@
         protected internal System.Windows.Forms.LinkLabel lnkUsers;
         protected internal System.Windows.Forms.LinkLabel lnkPermissions;
         protected internal System.Windows.Forms.LinkLabel lnkGeneral;
-        private System.Windows.Forms.Splitter splitter5;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter6;
         protected internal System.Windows.Forms.LinkLabel lnkWarehouses;
