@@ -266,3 +266,7 @@ __pycache__/
 #Ignore Migrations folder
 #dont do this or there will be conflicts in csproj
 #[Ii]nfrastructure/[Mm]igrations 
+
+# Ignore build files
+AdvancedInstallerProject/AdvancedInstallerProject-SetupFiles
+AdvancedInstallerProject/AdvancedInstallerProject-cache
