@@ -22,7 +22,7 @@ namespace IMS.Forms.Common
 
         protected void AddListenerAction(Action action, EventArgs e)
         {
-            if (InventoryUC.CurrentTabTitle.Trim() == MyTabTitle.Trim() 
+            if (InventoryUC.CurrentTabTitle?.Trim() == MyTabTitle?.Trim() 
                 && (string.IsNullOrEmpty(InventoryUC.CurrentSubTabTitle) || string.IsNullOrEmpty(MySubTabTitle) || MySubTabTitle.Trim() == InventoryUC.CurrentSubTabTitle.Trim()))
             {
                 action?.Invoke();

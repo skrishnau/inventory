@@ -48,5 +48,8 @@ namespace ViewModel.Utility
         public const string NAME_INVENTORY_MANAGE = "Inventory Manage";
         public const string NAME_RATE_LIST = "Rate List";
         public const string NAME_INVENTORY_MOVEMENT = "Inventory Movement";
+        public const string NAME_PROFIT_AND_LOSS = "Profit and Loss";
+        public const string NAME_LEDGER = "Ledger";
+        public const string NAME_PAYMENT_LIST = "Payment List";
     }
 }

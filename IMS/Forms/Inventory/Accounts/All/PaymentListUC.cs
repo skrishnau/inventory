@@ -18,10 +18,11 @@ using Service.Listeners;
 using ViewModel.Core.Orders;
 using IMS.Forms.Inventory.Payment;
 using SimpleInjector.Lifestyles;
+using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
-    public partial class PaymentListUC : UserControl
+    public partial class PaymentListUC : BaseUserControl
     {
         private readonly IPaymentService _paymentService;
         private readonly IUserService _userService;
@@ -86,7 +87,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
         {
-            PopulateCustomer();
+           AddListenerAction(PopulateCustomer, e);
         }
 
         private void DgvLedger_SelectionChanged(object sender, EventArgs e)
@@ -128,7 +129,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void _listener_PaymentUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Orders.PaymentModel> e)
         {
-            PopulatePayments();
+            AddListenerAction(PopulatePayments, e);
         }
 
         private void CbCustomer_SelectedValueChanged(object sender, EventArgs e)

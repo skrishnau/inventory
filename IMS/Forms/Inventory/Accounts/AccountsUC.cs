@@ -14,33 +14,61 @@ using Service.Core.Payment;
 using Service.Listeners;
 using Service.Core.Settings;
 using IMS.Forms.Inventory.Accounts.All;
+using IMS.Forms.Common;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Reports
 {
-    public partial class AccountsUC : UserControl
+    public partial class AccountsUC : BaseUserControl
     {
-        private readonly IUserService _userService;
-        private readonly IPaymentService _paymentService;
-        private readonly IReportService _reportService;
-        private readonly IDatabaseChangeListener _databaseChangeListener;
-        private readonly IAppSettingService _appSettingService;
+        //private readonly IUserService _userService;
+        //private readonly IPaymentService _paymentService;
+        //private readonly IReportService _reportService;
+        //private readonly IAppSettingService _appSettingService;
 
-        public AccountsUC(IUserService userService, IReportService reportService, IPaymentService paymentService, IDatabaseChangeListener databaseChangeListener, IAppSettingService appSettingService)
+        private BaseUserControl _currentTab;
+
+        private readonly ProfitAndLossUC _profitAndLossUC;
+        private readonly PaymentListUC _paymentListUC;
+        private readonly LedgerUC _ledgerUC;
+
+        public AccountsUC(//IUserService userService, IReportService reportService, IPaymentService paymentService, IDatabaseChangeListener databaseChangeListener, IAppSettingService appSettingService,
+            ProfitAndLossUC profitAndLossUC, PaymentListUC paymentListUC, LedgerUC ledgerUC)
         {
-            this._userService = userService;
-            this._paymentService = paymentService;
-            this._reportService = reportService;
-            this._databaseChangeListener = databaseChangeListener;
-            this._appSettingService = appSettingService;
+            //this._userService = userService;
+            //this._paymentService = paymentService;
+            //this._reportService = reportService;
+            //this._databaseChangeListener = databaseChangeListener;
+            //this._appSettingService = appSettingService;
+
+            _profitAndLossUC = profitAndLossUC;
+            _paymentListUC = paymentListUC;
+            _ledgerUC = ledgerUC;
+
+            
 
             InitializeComponent();
 
             this.Load += AccountsUC_Load;
             this.Dock = DockStyle.Fill;
         }
+        public override void ExecuteActions()
+        {
+            if (_currentTab != null)
+            {
+                _currentTab.ExecuteActions();
+            }
+        }
 
         private void AccountsUC_Load(object sender, EventArgs e)
         {
+            _profitAndLossUC.MyTabTitle = MyTabTitle;
+            _profitAndLossUC.MySubTabTitle = Constants.NAME_PROFIT_AND_LOSS;
+            _ledgerUC.MyTabTitle = MyTabTitle;
+            _ledgerUC.MySubTabTitle = Constants.NAME_LEDGER;
+            _paymentListUC.MyTabTitle = MyTabTitle;
+            _paymentListUC.MySubTabTitle = Constants.NAME_PAYMENT_LIST;
+
             this.bodyTemplate.SubHeadingText = "";
             var sidebarUc = new AccountsSidebarUC();
             this.bodyTemplate.pnlSideBar.Controls.Add(sidebarUc);
@@ -53,26 +81,32 @@ namespace IMS.Forms.Inventory.Reports
 
         private void BtnProfitAndLoss_Click(object sender, EventArgs e)
         {
+            _currentTab = _profitAndLossUC;
+            InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             this.bodyTemplate.pnlBody.Controls.Clear();
-            var ledgerUc = new ProfitAndLossUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
+            //var ledgerUc = new ProfitAndLossUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Profit and Loss";
-            this.bodyTemplate.pnlBody.Controls.Add(ledgerUc);
+            this.bodyTemplate.pnlBody.Controls.Add(_profitAndLossUC);
         }
 
         private void BtnPayments_Click(object sender, EventArgs e)
         {
+            _currentTab = _paymentListUC;
+            InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             this.bodyTemplate.pnlBody.Controls.Clear();
-            var paymentsUc = new PaymentListUC(_paymentService, _userService, _databaseChangeListener);
+            //var paymentsUc = new PaymentListUC(_paymentService, _userService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Payments";
-            this.bodyTemplate.pnlBody.Controls.Add(paymentsUc);
+            this.bodyTemplate.pnlBody.Controls.Add(_paymentListUC);
         }
 
         private void BtnLedger_Click(object sender, EventArgs e)
         {
+            _currentTab = _ledgerUC;
+            InventoryUC.CurrentSubTabTitle = _currentTab.MySubTabTitle;
             this.bodyTemplate.pnlBody.Controls.Clear();
-            var ledgerUc = new LedgerUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
+            //var ledgerUc = new LedgerUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
             this.bodyTemplate.SubHeadingText = "Ledger";
-            this.bodyTemplate.pnlBody.Controls.Add(ledgerUc);
+            this.bodyTemplate.pnlBody.Controls.Add(_ledgerUC);
         }
     }
 }

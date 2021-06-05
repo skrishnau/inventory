@@ -30,12 +30,7 @@ namespace IMS.Forms.Inventory.Units
             _rateListUC = rateListUC;
             _inventoryMovementUC = inventoryMovementUC;
 
-            _inventoryManageUC.MyTabTitle = MyTabTitle;
-            _inventoryManageUC.MySubTabTitle = Constants.NAME_INVENTORY_MANAGE;
-            _rateListUC.MyTabTitle = MyTabTitle;
-            _rateListUC.MySubTabTitle = Constants.NAME_RATE_LIST;
-            _inventoryMovementUC.MyTabTitle = MyTabTitle;
-            _inventoryMovementUC.MySubTabTitle = Constants.NAME_INVENTORY_MOVEMENT;
+            
 
             InitializeComponent();
             this.Dock = DockStyle.Fill;
@@ -44,6 +39,13 @@ namespace IMS.Forms.Inventory.Units
 
         private void InventoryUnitListUC_Load(object sender, EventArgs e)
         {
+            _inventoryManageUC.MyTabTitle = MyTabTitle;
+            _inventoryManageUC.MySubTabTitle = Constants.NAME_INVENTORY_MANAGE;
+            _rateListUC.MyTabTitle = MyTabTitle;
+            _rateListUC.MySubTabTitle = Constants.NAME_RATE_LIST;
+            _inventoryMovementUC.MyTabTitle = MyTabTitle;
+            _inventoryMovementUC.MySubTabTitle = Constants.NAME_INVENTORY_MOVEMENT;
+
             InitializeBody();
 
             InitializeEvents();
@@ -54,23 +56,10 @@ namespace IMS.Forms.Inventory.Units
         }
         public override void ExecuteActions()
         {
-            //base.ExecuteActions();
-            //
-            //
-            //
             if(_currentTab != null)
             {
                 _currentTab.ExecuteActions();
             }
-            //else if(_currentTab == _sidebar.lnkMovement.Name)
-            //{
-            //    _inventoryMovementUC.ExecuteActions();
-            //}
-            //else if(_currentTab == _sidebar.btnRates.Name)
-            //{
-            //    _rateListUC.ExecuteActions();
-            //}
-
         }
 
         private void InitializeBody()

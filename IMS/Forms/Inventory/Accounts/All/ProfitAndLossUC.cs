@@ -16,7 +16,7 @@ using IMS.Forms.Common;
 
 namespace IMS.Forms.Inventory.Accounts.All
 {
-    public partial class ProfitAndLossUC : UserControl
+    public partial class ProfitAndLossUC : BaseUserControl
     {
         private readonly IReportService _reportService;
         private readonly IUserService _userService;
@@ -71,7 +71,7 @@ namespace IMS.Forms.Inventory.Accounts.All
 
         private void _listener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Orders.OrderModel> e)
         {
-            PopulateProfitAndLoss();
+           AddListenerAction(PopulateProfitAndLoss, e);
         }
 
         private void BtnPrint_Click(object sender, EventArgs e)

@@ -20,7 +20,7 @@ using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
-    public partial class LedgerUC : UserControl
+    public partial class LedgerUC : BaseUserControl
     {
         private readonly IReportService _reportService;
         private readonly IUserService _userService;
@@ -114,7 +114,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
         {
-            PopulateCustomer();
+            AddListenerAction(PopulateCustomer, e);
         }
 
         private void DgvLedger_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

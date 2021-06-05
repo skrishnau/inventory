@@ -44,6 +44,9 @@ using System.Data.Entity.Migrations.Infrastructure;
 using System.Linq;
 using Infrastructure.Context;
 using IMS.Forms.Backup;
+using IMS.Forms.Inventory.Accounts.All;
+using IMS.Forms.Inventory.Reports.All;
+using IMS.Forms.Inventory.Units;
 
 namespace IMS
 {
@@ -115,7 +118,8 @@ namespace IMS
             container.Register<InventoryUC>(Lifestyle.Scoped);
             container.Register<InventoryMenuBar>(Lifestyle.Scoped);
             container.Register<RateListUC>(Lifestyle.Scoped);
-            //container.Register<InventoryUnitListUC>(Lifestyle.Scoped);
+            container.Register<InventoryManageUC>(Lifestyle.Scoped);
+            container.Register<InventoryUnitListUC>(Lifestyle.Scoped);
 
             container.Register<PosUC>(Lifestyle.Scoped);
             container.Register<PosMenuBar>(Lifestyle.Scoped);
@@ -160,6 +164,7 @@ namespace IMS
 
             container.Register<InventoryDetailUC>(Lifestyle.Scoped);
 
+            
 
             //
             // Products
@@ -205,7 +210,13 @@ namespace IMS
             // container.Register<OrderDetailUC>(Lifestyle.Scoped);
             container.Register<OrderCreateForm>(Lifestyle.Scoped);
             container.Register<DatabaseBackupForm>(Lifestyle.Scoped);
-            
+
+
+            // accounts related
+            container.Register<ProfitAndLossUC>(Lifestyle.Scoped);
+            container.Register<PaymentListUC>(Lifestyle.Scoped);
+            container.Register<LedgerUC>(Lifestyle.Scoped);
+
 
 
             // Optionally verify the container.

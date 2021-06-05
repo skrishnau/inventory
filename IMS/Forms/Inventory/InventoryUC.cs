@@ -353,42 +353,42 @@ namespace IMS.Forms.Inventory
             }
         }
 
-        private TabPage AddTabPage(String text, UserControl uc, Object sender)
+        private TabPage AddTabPage(String text, UserControl userControlToAdd, Object sender)
         {
             text += "      ";
-            TabPage toSelect = null;
+            TabPage alreadyExistingTab = null;
             // loop through tab pages to find the string text
             foreach (TabPage tab in tabControl.TabPages)
             {
                 if (tab.Text == text)
                 {
-                    toSelect = tab;
+                    alreadyExistingTab = tab;
                     break;
                 }
             }
-            var addNewTab = false;
-            if (toSelect == null)
+            BaseUserControl currentUserControl;
+            if(alreadyExistingTab == null)
             {
-                toSelect = new TabPage(text);
-                addNewTab = true;
-                AddToButtonsDictionary(text, (Button) sender);
+                alreadyExistingTab = new TabPage(text);
+                AddToButtonsDictionary(text, (Button)sender);
+                currentUserControl = userControlToAdd as BaseUserControl;
+                if (currentUserControl != null)
+                {
+                    currentUserControl.MyTabTitle = alreadyExistingTab.Text;
+                }
+                alreadyExistingTab.Controls.Add(userControlToAdd);
+                tabControl.TabPages.Add(alreadyExistingTab);
             }
-
-            var baseUserControl = uc as BaseUserControl;
-            if (baseUserControl != null)
+            else 
             {
-                baseUserControl.MyTabTitle = toSelect.Text;
-                baseUserControl.ExecuteActions();
+                currentUserControl = alreadyExistingTab.Controls.Count > 0 ? alreadyExistingTab.Controls[0] as BaseUserControl : null;
             }
-            if (addNewTab)
+            if (currentUserControl != null)
             {
-                toSelect.Controls.Add(uc);
-                tabControl.TabPages.Add(toSelect);
+                currentUserControl.ExecuteActions();
             }
-            tabControl.SelectedTab = toSelect;
-
-
-            return toSelect;
+            tabControl.SelectedTab = alreadyExistingTab;
+            return alreadyExistingTab;
         }
 
         private void AddToButtonsDictionary(string text, Button button)
@@ -406,7 +406,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(dashboard);
             var tabPage = AddTabPage(Constants.TAB_DASHBOARD, dashboard, sender);
-            dashboard.MyTabTitle = tabControl.SelectedTab.Text;//SelectedIndex;
+            //dashboard.MyTabTitle = tabControl.SelectedTab.Text;//SelectedIndex;
             
             //_menubar.SetSelection(sender);
         }
