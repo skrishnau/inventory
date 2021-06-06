@@ -10,6 +10,7 @@ namespace DTO.Core.Inventory
 {
     public static class OrderItemMapper
     {
+        // mapProductModel : whether or not to convert product entity to productModel object 
         public static List<InventoryUnitModel> MapToInventoryUnitModel(ICollection<OrderItemModel> models, bool assignIdAlso = false)
         {
             var list = new List<InventoryUnitModel>();
@@ -24,11 +25,12 @@ namespace DTO.Core.Inventory
 
         public static InventoryUnitModel MapToInventoryUnitModel(OrderItemModel model, bool assignIdAlso = false)
         {
-            return new InventoryUnitModel()
+            var iUnit = new InventoryUnitModel()
             {
                 Id = assignIdAlso ? model.Id : 0,
                 ProductId = model.ProductId,
                 Product = model.Product,
+                ProductModel = model.ProductModel,
                 SKU = model.SKU,
                 ExpirationDate = model.ExpirationDate,//.HasValue ? model.ExpirationDate.Value.ToShortDateString() : "",
                 ProductionDate = model.ProductionDate,//.HasValue ? model.ProductionDate.Value.ToShortDateString() : "",
@@ -63,6 +65,7 @@ namespace DTO.Core.Inventory
                 OnHoldQuantity = model.OnHoldQuantity,
                 
             };
+            return iUnit;
         }
 
         public static OrderItem MapToEntity(this OrderItemModel model, OrderItem entity)
@@ -105,18 +108,18 @@ namespace DTO.Core.Inventory
             return list;
         }
 
-        public static List<OrderItemModel> MapToOrderItemModel(this ICollection<OrderItem> query)
+        public static List<OrderItemModel> MapToOrderItemModel(this ICollection<OrderItem> query, bool withProductModel = false)
         {
             var list = new List<OrderItemModel>();
             foreach (var model in query)
             {
-                list.Add(MapToOrderItemModel(model));
+                list.Add(MapToOrderItemModel(model, withProductModel));
             }
             return list;
         }
-        public static OrderItemModel MapToOrderItemModel(OrderItem model)
+        public static OrderItemModel MapToOrderItemModel(OrderItem model, bool withProductModel = false)
         {
-            return new OrderItemModel()
+            var item = new OrderItemModel()
             {
                 Id = model.Id,
                 UnitQuantity = model.UnitQuantity,
@@ -148,6 +151,9 @@ namespace DTO.Core.Inventory
                 Reference = model.Reference,
                // Uom = model.Uom == null ? "" : model.Uom.Name,
             };
+            if(withProductModel)
+                item.ProductModel = ProductMapper.MapToProductModel(model.Product);
+            return item;
         }
 
         public static InventoryUnitModel MapToInventoryUnitModel(this OrderItem model, OrderTypeEnum orderType)

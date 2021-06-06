@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Inventory;
 
 namespace ViewModel.Core.Orders
 {
@@ -12,6 +13,7 @@ namespace ViewModel.Core.Orders
         public int OrderId { get; set; }
         public int ProductId { get; set; }
         public string Product { get; set; }
+        public ProductModel ProductModel { get; set; }
         public string SKU { get; set; }
 
         public decimal InStockQuantity { get; set; }

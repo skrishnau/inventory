@@ -29,7 +29,7 @@ namespace Service.Core.Orders
         List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<OrderItemModel> models);
 
         OrderModel GetOrder(OrderTypeEnum orderType, int orderId);
-        OrderModel GetOrderForDetailView(int orderId);//OrderTypeEnum orderType, 
+        OrderModel GetOrderForDetailView(int orderId, bool withProductModel = false);//OrderTypeEnum orderType, 
 
         string SavePurchaseOrderItems(int purchaseOrderId, List<OrderItemModel> items);
         string SavePurchaseOrderItems(int purchaseOrderId, List<InventoryUnitModel> items);

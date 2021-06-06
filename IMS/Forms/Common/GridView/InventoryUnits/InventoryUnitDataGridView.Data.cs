@@ -200,6 +200,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 row.Cells[colId.Index].Value = model.Id;
                 row.Cells[colProductId.Index].Value = model.ProductId;
                 row.Cells[colProduct.Index].Value = model.Product;
+                row.Cells[colProduct.Index].Tag = model.ProductModel;
                 row.Cells[colSKU.Index].Value = model.SKU;
                 row.Cells[colInStockQuantity.Index].Value = model.InStockQuantity;
                 row.Cells[colInStockQuantityWithPackage.Index].Value = model.InStockQuantityWithPackage;

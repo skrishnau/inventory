@@ -145,8 +145,8 @@ namespace Service.Core.Orders
                 return entity.MapToModel();// OrderMapper.MapToOrderModel(entity);
             }
         }
-
-        public OrderModel GetOrderForDetailView(int orderId) //OrderTypeEnum orderType,
+        // withProductModel: whether to map Product entity to ProductModel 
+        public OrderModel GetOrderForDetailView(int orderId, bool withProductModel = false) //OrderTypeEnum orderType,
         {
             using (var _context = new DatabaseContext())
             {
@@ -162,7 +162,7 @@ namespace Service.Core.Orders
                      .Include(x => x.OrderItems.Select(y => y.Product))
                      .Include(x => x.OrderItems.Select(y => y.Warehouse))
                      .FirstOrDefault(x => x.Id == orderId); //&& x.OrderType == type
-                return entity.MapToModel(true);// OrderMapper.MapToOrderModel(entity);
+                return entity.MapToModel(true, withProductModel: withProductModel);// OrderMapper.MapToOrderModel(entity);
             }
         }
 

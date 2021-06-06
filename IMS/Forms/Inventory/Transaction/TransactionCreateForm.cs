@@ -83,7 +83,7 @@ namespace IMS.Forms.Inventory.Transaction
             this.txtSum.Minimum = 0;
             this.txtSum.Maximum = Int32.MaxValue;
 
-            _orderModel = _orderService.GetOrderForDetailView(_orderId);
+            _orderModel = _orderService.GetOrderForDetailView(_orderId, true);
 
             dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
             InitializeValidation();
@@ -362,7 +362,7 @@ namespace IMS.Forms.Inventory.Transaction
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
 
-                    var invModel = OrderItemMapper.MapToInventoryUnitModel(model.OrderItems, true);
+                    var invModel = OrderItemMapper.MapToInventoryUnitModel(model.OrderItems);
 
                     dgvItems.AddRows(invModel);
 

@@ -70,6 +70,6 @@ namespace ViewModel.Core.Inventory
 
         public int? PurchaseOrderItemId { get; set; }
         
-
+        public ProductModel ProductModel { get; set; }
     }
 }

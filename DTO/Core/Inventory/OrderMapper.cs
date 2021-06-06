@@ -28,20 +28,22 @@ namespace DTO.Core.Inventory
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="withOrderDetails">Also map order items</param>
+        /// <param name="withProductModel">Also map product</param>
         /// <returns></returns>
-        public static OrderModel MapToModel(this Order entity, bool withOrderDetails = false, bool withPayments = false)
+        public static OrderModel MapToModel(this Order entity, bool withOrderDetails = false, bool withPayments = false, bool withProductModel = false)
         {
             if (entity == null)
                 return null;
             var model = Mappings.Mapper.Map<OrderModel>(entity);
             if (withOrderDetails)
             {
-                model.OrderItems = entity.OrderItems.MapToOrderItemModel();
+                model.OrderItems = entity.OrderItems.MapToOrderItemModel(withProductModel);
             }
             if (withPayments)
             {
                 model.Payments = entity.Payments.MapToModel();
             }
+            
             return model;
         }
     }
