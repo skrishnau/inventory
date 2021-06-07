@@ -16,6 +16,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         private DateTime _date = DateTime.Now;
 
+        public int OrderId { get; set; }
 
         #region Validations
 

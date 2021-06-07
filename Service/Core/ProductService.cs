@@ -355,21 +355,60 @@ namespace Service.Core
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
             }
         }
-        public ProductModel GetProductByNameOrSKU(string nameOrSku)
+        // here orderId is the order that we are editing. This order's items will be added/subtracted from the in-stock quantity of this product
+        // when editing a completed sale transaction, we need to show Instock quty as the totalInstock + product's qty in the order
+        // when editing a completed purchase transactio, we need to show Instock qty as the totalInstock - product's qty in the order
+        public ProductModel GetProductByNameOrSKU(string nameOrSku)//, int orderId
         {
             using (var _context = new DatabaseContext())
             {
                 var entity = _context.Products.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == nameOrSku || x.SKU == nameOrSku));
-                return entity == null ? null : ProductMapper.MapToProductModel(entity);
+
+                var model = entity == null ? null : ProductMapper.MapToProductModel(entity);
+                //model.InStockQuantity = AssignInStockQuantityBasedOnOrderForTxnEdit(_context, model, orderId, null);
+                return model;
             }
         }
+        /*
+        public decimal AssignInStockQuantityBasedOnOrderForTxnEdit(DatabaseContext _context, ProductModel product, int orderId, Order order)
+        {
+            var total = product.InStockQuantity;
+            if (orderId > 0 && order == null)
+            {
+                order = _context.Orders.Find(orderId);
+            }
+            if (order != null)
+            {
+                var inStockAddition = order.OrderItems.Where(x => x.ProductId == product.Id).ToList();
+                if (inStockAddition.Any())
+                {
+                    foreach (var item in inStockAddition)
+                    {
+                        var conversion = _uomService.ConvertUom(_context, item.PackageId ?? 0, product.BasePackageId ?? 0, product.Id, 1, null);
+                        if (order.OrderType == OrderTypeEnum.Sale.ToString())
+                        {
+                            total += conversion * item.UnitQuantity;
+                        }
+                        else
+                        {
+                            total -= conversion * item.UnitQuantity;
+                        }
+                    }
+                }
+            }
 
-        public ProductModel GetProductById(int id)
+            return Math.Round(total, 2);
+        }
+        */
+        // here orderId is the order that we are editing. This order's items will be added/subtracted from the in-stock quantity of this product
+        public ProductModel GetProductById(int id)//, int orderId
         {
             using (var _context = new DatabaseContext())
             {
                 var entity = _context.Products.Find(id);
-                return entity == null ? null : ProductMapper.MapToProductModel(entity);
+                var model = entity == null ? null : ProductMapper.MapToProductModel(entity);
+               // model.InStockQuantity = AssignInStockQuantityBasedOnOrderForTxnEdit(_context, model, orderId, null);
+                return model;
             }
         }
         public ResponseModel<CategoryModel> DeleteCategory(CategoryModel categoryModel)
@@ -782,7 +821,7 @@ namespace Service.Core
                         var model = chosenPrice.MapToPriceHistoryModel();
                         model.Package = package;
                         model.PackageId = packageId;
-                        model.Rate =  model.Rate / conversion;
+                        model.Rate = model.Rate / conversion;
                         return model;
                     }
                 }

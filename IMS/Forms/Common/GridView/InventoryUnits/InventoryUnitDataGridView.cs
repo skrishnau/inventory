@@ -269,6 +269,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 }
                 if (!Constants.CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION)
                 {
+                    // send zero in order id cause we don't need to know the total instock qty below
                     var prd = _productService.GetProductByNameOrSKU(model?.Name?.Trim());
                     if (prd == null)
                     {

@@ -20,8 +20,8 @@ namespace Service.Interfaces
         ProductModel GetProduct(int productId);
         ProductModel GetProductForEdit(int productId);
         ProductModel GetProductBySKU(string sku);
-        ProductModel GetProductByNameOrSKU(string v);
-        ProductModel GetProductById(int id);
+        ProductModel GetProductByNameOrSKU(string v);//, int orderId
+        ProductModel GetProductById(int id);//, int orderId
         List<IdNamePair> GetUnderStockProducts();
         string AddUpdateProduct(ProductModel product);
 
@@ -41,5 +41,7 @@ namespace Service.Interfaces
         // price History
         void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId);
         ResponseModel<bool> SavePriceHistory(List<InventoryUnitModel> data, DateTime date, OrderTypeEnum type);
+        // for assigning product's instock quantity from order items while editing completed transaction
+        //decimal AssignInStockQuantityBasedOnOrderForTxnEdit(DatabaseContext _context, ProductModel product, int orderId, Order order);
     }
 }

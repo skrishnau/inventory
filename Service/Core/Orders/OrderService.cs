@@ -162,8 +162,22 @@ namespace Service.Core.Orders
                      .Include(x => x.OrderItems.Select(y => y.Product))
                      .Include(x => x.OrderItems.Select(y => y.Warehouse))
                      .FirstOrDefault(x => x.Id == orderId); //&& x.OrderType == type
-                return entity.MapToModel(true, withProductModel: withProductModel);// OrderMapper.MapToOrderModel(entity);
+                if (entity != null)
+                {
+                    //var assignInStockQtyFromOrder = entity?.IsCompleted == true;
+                    var model = entity.MapToModel(true, withProductModel: withProductModel);// OrderMapper.MapToOrderModel(entity);
+                    //if (model.OrderItems != null && model.OrderItems.Count > 0 && assignInStockQtyFromOrder)
+                    //{
+                    //    foreach (var item in model.OrderItems)
+                    //    {
+                    //        item.ProductModel.InStockQuantity = _productService.AssignInStockQuantityBasedOnOrderForTxnEdit(_context, item.ProductModel, orderId, entity);
+                    //        item.InStockQuantity = item.ProductModel.InStockQuantity;
+                    //    }
+                    //}
+                    return model;
+                }
             }
+            return null;
         }
 
         public List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<OrderItemModel> models)
@@ -314,7 +328,7 @@ namespace Service.Core.Orders
                     //UndoOrderTransactionsWithoutCommit(_context, entity.ParentOrderId);
                     //UndoInventoryItemsWithoutCommit(_context, entity.ParentOrderId);
                     var parentOrder = _context.Orders.Find(entity.ParentOrderId ?? 0);
-                    CancelCompletedTransactionWithoutCommit(_context, parentOrder, ref message);
+                    //CancelCompletedTransactionWithoutCommit(_context, parentOrder, ref message);
                     if (!string.IsNullOrEmpty(message))
                     {
                         txn.Rollback();

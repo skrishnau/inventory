@@ -378,12 +378,19 @@ namespace IMS.Forms.Inventory.Transaction
                 {
                     //MessageBox.Show("Currently, editing of completed transaction is not available. Please contact administrator.");
                     //return;
-                    var dialogResult = MessageBox.Show(this, "This transaction is complete. By editing and re-saving " +
-                        "a completed transaction makes it void (deleted) and a new transaction will be created. Are you sure to edit?",
+                    var dialogResult = MessageBox.Show(this, "This transaction is complete. " +
+                        "By editing a completed transaction makes it void (cancelled) and a new transaction will be created. "+
+                        "Are you sure to edit ?"+
+                        "\n\nWarning: If you click \"Yes\", this transaction will be cancelled now and a copy will be saved automatically." ,
                         "Are you sure to edit ?", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id ?? 0);
+                        _orderService.SetCancelled(order.Id);
+                        //var savedOrder = _orderService.SaveOrder(order, false);
+
+                        ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order.Id, true);
+                        //var newOrderId = 0;
+                        //ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), newOrderId);
                     }
                 }
                 else
@@ -416,7 +423,8 @@ namespace IMS.Forms.Inventory.Transaction
         }
 
 
-        private void ShowAddEditDialog(OrderTypeEnum orderType, int orderId = 0)
+        // saveOrderImmediatelyAfterLoading: saves the order after loading the ui without giving user to enter anything
+        private void ShowAddEditDialog(OrderTypeEnum orderType, int orderId = 0, bool saveOrderImmediatelyAfterLoading = false)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
@@ -427,10 +435,17 @@ namespace IMS.Forms.Inventory.Transaction
                     OrderType = orderType,
                     OrderId = orderId
                 };
-                orderForm.SetDataForEdit(orderEditModel);//orderType, orderId
-                orderForm.ShowDialog();
+                orderForm.SetDataForEdit(orderEditModel, saveOrderImmediatelyAfterLoading);//orderType, orderId
+                orderForm.SavedOrderImmediatelyAfterLoading += OrderForm_SavedOrderImmediatelyAfterLoading;
+                orderForm.ShowDialog(this);
             }
         }
 
+        // Note : this function is called after the crate form saves order immedialy after loading it.
+        //          This occurs in case of editing completed transaaction.
+        private void OrderForm_SavedOrderImmediatelyAfterLoading(object sender, BaseEventArgs<OrderModel> e)
+        {
+            ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), e.Model.OrderType), e.Model.Id);
+        }
     }
 }

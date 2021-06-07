@@ -151,8 +151,10 @@ namespace DTO.Core.Inventory
                 Reference = model.Reference,
                // Uom = model.Uom == null ? "" : model.Uom.Name,
             };
-            if(withProductModel)
+            if (withProductModel)
+            {
                 item.ProductModel = ProductMapper.MapToProductModel(model.Product);
+            }
             return item;
         }
 

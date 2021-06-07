@@ -72,8 +72,8 @@ namespace IMS.Forms.Inventory
 
             this.Load += InventoryUC_Load;
 
-           
-            
+
+
         }
 
         private void InventoryUC_Load(object sender, EventArgs e)
@@ -111,8 +111,8 @@ namespace IMS.Forms.Inventory
             this.tabControl.ItemSize = new Size(90, 25);
             this.tabControl.Padding = new Point(12, 4);
             this.tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
-            
-           // this.tabControl.SizeMode = TabSizeMode.Fixed;
+
+            // this.tabControl.SizeMode = TabSizeMode.Fixed;
 
             this.tabControl.DrawItem += tabControl_DrawItem;
             this.tabControl.MouseDown += tabControl_MouseDown;
@@ -128,14 +128,18 @@ namespace IMS.Forms.Inventory
 
         private void TabControl_TabIndexChanged(object sender, EventArgs e)
         {
-            foreach(var buttonText in menuButtonsDictionary.Keys)
+            foreach (var buttonText in menuButtonsDictionary.Keys)
             {
                 menuButtonsDictionary[buttonText].BackColor = Color.Transparent;
             }
             menuButtonsDictionary[tabControl.SelectedTab.Text].BackColor = Color.Gainsboro;
-            if(tabControl.SelectedTab.Text.Trim() == "Dashboard")
+            var baseUc = tabControl.Controls.Count > 0 ? tabControl.SelectedTab.Controls[0] as BaseUserControl : null;
+            if (baseUc != null)
             {
-                dashboard.ExecuteActions();
+                //if (tabControl.SelectedTab.Text.Trim() == "Dashboard")
+                //{
+                baseUc.ExecuteActions();
+                //}
             }
             CurrentTabTitle = tabControl.SelectedTab.Text;
             CurrentSubTabTitle = null;
@@ -203,7 +207,7 @@ namespace IMS.Forms.Inventory
                 // font, backcolor and foreclor
                 Font font;
                 Brush backBrush;
-              //  Brush foreBrush;
+                //  Brush foreBrush;
                 Color foreColor;
 
                 // decide if the tab is selected and design accordingly
@@ -223,11 +227,11 @@ namespace IMS.Forms.Inventory
                 }
                 // background and foreground
                 var rectangle = e.Bounds;
-              //  rectangle.Inflate(-1, -1);
+                //  rectangle.Inflate(-1, -1);
                 e.Graphics.FillRectangle(backBrush, rectangle);
 
                 var tabPage = this.tabControl.TabPages[e.Index];
-                
+
                 var tabRect = this.tabControl.GetTabRect(e.Index);
                 tabRect.Inflate(-2, -2);
 
@@ -242,7 +246,7 @@ namespace IMS.Forms.Inventory
                     tabRect, foreColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
 
                 backBrush.Dispose();
-               
+
             }
 
 
@@ -308,7 +312,7 @@ namespace IMS.Forms.Inventory
             // adjustments
             _menubar.btnDirectReceive.Click += BtnDirectReceive_Click;
             _menubar.btnDirectIssue.Click += BtnDirectIssue_Click;
-           // _menubar.btnDirectMove.Click += BtnDirectMove_Click;
+            // _menubar.btnDirectMove.Click += BtnDirectMove_Click;
 
             // transfers
             // _menubar.btnInventoryTransfers.Click += BtnInventoryTransfers_Click;
@@ -367,7 +371,7 @@ namespace IMS.Forms.Inventory
                 }
             }
             BaseUserControl currentUserControl;
-            if(alreadyExistingTab == null)
+            if (alreadyExistingTab == null)
             {
                 alreadyExistingTab = new TabPage(text);
                 AddToButtonsDictionary(text, (Button)sender);
@@ -379,15 +383,18 @@ namespace IMS.Forms.Inventory
                 alreadyExistingTab.Controls.Add(userControlToAdd);
                 tabControl.TabPages.Add(alreadyExistingTab);
             }
-            else 
+            else
             {
                 currentUserControl = alreadyExistingTab.Controls.Count > 0 ? alreadyExistingTab.Controls[0] as BaseUserControl : null;
             }
-            if (currentUserControl != null)
-            {
+            //if (currentUserControl != null)
+            //{
+            //    currentUserControl.ExecuteActions();
+            //}
+            if (alreadyExistingTab == tabControl.SelectedTab)
                 currentUserControl.ExecuteActions();
-            }
-            tabControl.SelectedTab = alreadyExistingTab;
+            else
+                tabControl.SelectedTab = alreadyExistingTab;
             return alreadyExistingTab;
         }
 
@@ -402,12 +409,12 @@ namespace IMS.Forms.Inventory
         private void BtnHome_Click(object sender, EventArgs e)
         {
             dashboard = Program.container.GetInstance<DashboardUC>();
-            
+
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(dashboard);
             var tabPage = AddTabPage(Constants.TAB_DASHBOARD, dashboard, sender);
             //dashboard.MyTabTitle = tabControl.SelectedTab.Text;//SelectedIndex;
-            
+
             //_menubar.SetSelection(sender);
         }
 
@@ -451,7 +458,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Add(saleOrderUC);
             AddTabPage(Constants.TAB_SALES, saleOrderUC, sender);
             // set selection
-           // _menubar.SetSelection(sender);
+            // _menubar.SetSelection(sender);
         }
 
         private void BtnTransferOrder_Click(object sender, EventArgs e)
@@ -494,7 +501,7 @@ namespace IMS.Forms.Inventory
 
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(inventoryUnitList);
-           // _menubar.SetSelection(sender);
+            // _menubar.SetSelection(sender);
         }
 
 
@@ -504,7 +511,7 @@ namespace IMS.Forms.Inventory
             AddTabPage(Constants.TAB_POS, posUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(posUC);
-           // _menubar.SetSelection(sender);
+            // _menubar.SetSelection(sender);
         }
 
         #region Products
@@ -515,7 +522,7 @@ namespace IMS.Forms.Inventory
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(productListUC);
 
-           // _menubar.SetSelection(sender);
+            // _menubar.SetSelection(sender);
         }
 
 
@@ -573,7 +580,8 @@ namespace IMS.Forms.Inventory
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
-                var orderEditModel = new OrderEditModel {
+                var orderEditModel = new OrderEditModel
+                {
                     OrderType = OrderTypeEnum.Sale,
                     OrderId = 0,
                     OrderOrDirect = OrderOrDirectEnum.Order
@@ -604,13 +612,13 @@ namespace IMS.Forms.Inventory
             var orderType = OrderTypeEnum.All;
             if (_transactionListUC == null)
             {
-                _transactionListUC = new Transaction.TransactionListUC(_orderService, 
+                _transactionListUC = new Transaction.TransactionListUC(_orderService,
                     _inventoryService,
                     _userService,
                     _productService,
                     _listener,
                     orderType,
-                    OrderListTypeEnum.Transaction, 
+                    OrderListTypeEnum.Transaction,
                     _uomService
                     );
             }
@@ -700,7 +708,7 @@ namespace IMS.Forms.Inventory
                 //pnlBody.Controls.Clear();
                 //pnlBody.Controls.Add(settingsUC);
                 // set selection
-               // _menubar.SetSelection(sender);
+                // _menubar.SetSelection(sender);
             }
         }
 

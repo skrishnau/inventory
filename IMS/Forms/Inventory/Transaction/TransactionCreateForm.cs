@@ -8,6 +8,7 @@ using Service.Core.Inventory;
 using Service.Core.Orders;
 using Service.Core.Settings;
 using Service.Core.Users;
+using Service.DbEventArgs;
 using Service.Interfaces;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
@@ -27,6 +28,7 @@ namespace IMS.Forms.Inventory.Transaction
 {
     public partial class TransactionCreateForm : Form
     {
+        public event EventHandler<BaseEventArgs<OrderModel>> SavedOrderImmediatelyAfterLoading;
         private readonly IUserService _userService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
@@ -47,6 +49,7 @@ namespace IMS.Forms.Inventory.Transaction
         // to show Print View at first load
         private bool _showPrintView;
 
+        private bool _saveOrderImmediatelyAfterLoading;
 
         public TransactionCreateForm(IUserService userService,
             IBusinessService businessService,
@@ -83,7 +86,8 @@ namespace IMS.Forms.Inventory.Transaction
             this.txtSum.Minimum = 0;
             this.txtSum.Maximum = Int32.MaxValue;
 
-            _orderModel = _orderService.GetOrderForDetailView(_orderId, true);
+            
+            _orderModel = _orderService.GetOrderForDetailView(_orderId, withProductModel: true);
 
             dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
             InitializeValidation();
@@ -94,17 +98,27 @@ namespace IMS.Forms.Inventory.Transaction
             PopulateClientCombo();
             PopulateReceiptNumber();
             PopulateAdjustmentCodeCombo();
+
+            dtCompletedDate.TextChanged -= DtCompletedDate_TextChanged;
             PopulateModel(_orderModel);
+            dtCompletedDate.TextChanged += DtCompletedDate_TextChanged;
+            // Note: when editing a txn we cancel the txn and populate its' data in create view then save the data and close the form
+            if (_saveOrderImmediatelyAfterLoading)
+            {
+                var savedOrder = Save(false, true);
+                SavedOrderImmediatelyAfterLoading?.Invoke(this, new BaseEventArgs<OrderModel>(savedOrder, Service.Utility.UpdateMode.ADD));
+            }
         }
 
         #region Functions
 
-        public void SetDataForEdit(OrderEditModel editModel)//(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
+        public void SetDataForEdit(OrderEditModel editModel, bool saveOrderImmediatelyAfterLoading = false)//(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
         {
             _orderType = editModel.OrderType;
             _orderId = editModel.OrderId;
             _showPrintView = editModel.ShowPrintView;
             _orderOrDirect = editModel.OrderOrDirect;
+            _saveOrderImmediatelyAfterLoading = saveOrderImmediatelyAfterLoading;
         }
 
         private void InitializeDataGridView()
@@ -315,10 +329,10 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void PopulateModel(OrderModel model)
         {
-
             _orderModel = model;
             if (model != null)
             {
+                dgvItems.OrderId = model.Id;
                 if (_showPrintView)
                 {
                     ShowPrintView(model);
