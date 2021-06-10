@@ -59,10 +59,10 @@
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="Manufacturer" Value="SKU"/>
-    <ROW Property="ProductCode" Value="1033:{D8CA9DE4-752A-4423-BCFB-8C7686AAC21A} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{4551EDE4-B853-410F-9261-6EC3FB7F92FA} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="SRIPARA IMS"/>
-    <ROW Property="ProductVersion" Value="1.2.4" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.2.5" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{851D37BB-FFFB-47F0-AE39-ACEC8CCA2735}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
