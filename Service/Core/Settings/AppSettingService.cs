@@ -559,7 +559,7 @@ namespace Service.Core.Settings
                     Name = "Password",
                     DisplayName = "Password",
                     Group = "Authorization",
-                    Value = password.Password,
+                    Value = StringCipher.Encrypt(password.Password, StringCipher.PASSWORD),
                 };
                 SaveAppSettingWithoutCommit(_context, pass);
                 var username = new AppSetting()
@@ -577,14 +577,14 @@ namespace Service.Core.Settings
 
         public PasswordModel GetPassword()
         {
-            var password = GetAppSetting("Password")?.Value;
+            var password = StringCipher.Decrypt(GetAppSetting("Password")?.Value, StringCipher.PASSWORD);
             var username = GetAppSetting("Username")?.Value;
             return new PasswordModel { Password = password, Username = username };
         }
 
         public void SaveLicenseStartDate(DateTime date)
         {
-            var encrypted = StringCipher.Encrypt(date.ToString("yyyy/MM/dd"), "PASS@WORD1");
+            var encrypted = StringCipher.Encrypt(date.ToString("yyyy/MM/dd"), StringCipher.PASSWORD);
             var expireModel = new AppSettingModel()
             {
                 DisplayName = "Valid Till",
