@@ -45,8 +45,12 @@ namespace Service.Core.Reports
                     }
                     else
                     {
-                        query = query.Where(x => x.Date >= from && x.Date <= to);
-                        openingBalanceQuery = openingBalanceQuery.Where(x => x.Date < from);
+                        if (model.ApplyDateFilter)
+                        {
+                            query = query.Where(x => x.Date >= from && x.Date <= to);
+                            openingBalanceQuery = openingBalanceQuery.Where(x => x.Date < from);
+                        }
+                        // else Logic should be to make opening Balance empty. but that is constly so we are doing the filter later
                     }
 
                     var transactions = query.OrderBy(x => x.Date).ToList();
@@ -102,8 +106,11 @@ namespace Service.Core.Reports
                         fromDate = user.AllDuesClearDate.HasValue ? DateConverter.Instance.ToBS(user.AllDuesClearDate.Value).ToString() : actualResult.FirstOrDefault()?.Date ?? "";//user.AllDuesClearDate.Value.ToString("yyyy/MM/dd") 
                         toDate = DateConverter.Instance.ToBS(DateTime.Now).ToString();//.ToString("yyyy/MM/dd");
                     }
-
-                    var openingBalanceSum = openingBalanceQuery.Sum(x => (decimal?)(x.DrCr * x.Balance)) ?? 0;
+                    decimal openingBalanceSum = 0;
+                    if (model.OnlyAfterLastClearance || model.ApplyDateFilter)
+                    {
+                        openingBalanceSum = openingBalanceQuery.Sum(x => (decimal?)(x.DrCr * x.Balance)) ?? 0;
+                    }
                     var openingBalanceModel = new LedgerModel
                     {
                         Balance = openingBalanceSum > 0 ? openingBalanceSum.ToString("0.00") : "(" + openingBalanceSum.ToString("0.00") + ")",

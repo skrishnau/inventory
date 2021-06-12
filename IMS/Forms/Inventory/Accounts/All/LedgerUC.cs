@@ -70,6 +70,14 @@ namespace IMS.Forms.Inventory.Reports.All
             cbCustomer.SelectedValueChanged += CbCustomer_SelectedValueChanged;
             //cbCustomer.TextChanged += CbCustomer_TextChanged;
             cbType.SelectedValueChanged += CbType_SelectedValueChanged;
+            chkDateFilter.CheckedChanged += ChkDateFilter_CheckedChanged;
+        }
+
+        private void ChkDateFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            dtFrom.Enabled = chkDateFilter.Checked;
+            dtTo.Enabled = chkDateFilter.Checked;
+
         }
 
         private void CbType_SelectedValueChanged(object sender, EventArgs e)
@@ -94,8 +102,13 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void ChkOnlyShowAfterLastClearance_CheckedChanged(object sender, EventArgs e)
         {
-            dtFrom.Enabled = !chkOnlyShowAfterLastClearance.Checked;
-            dtTo.Enabled = !chkOnlyShowAfterLastClearance.Checked;
+            if (chkOnlyShowAfterLastClearance.Checked)
+            {
+                chkDateFilter.Checked = false;
+                dtFrom.Enabled = !chkOnlyShowAfterLastClearance.Checked;
+                dtTo.Enabled = !chkOnlyShowAfterLastClearance.Checked;
+            }
+            chkDateFilter.Enabled = !chkOnlyShowAfterLastClearance.Checked;
         }
 
         private void CbCustomer_SelectedValueChanged(object sender, EventArgs e)
@@ -181,6 +194,7 @@ namespace IMS.Forms.Inventory.Reports.All
                 From = from,
                 To = to,
                 OnlyAfterLastClearance = chkOnlyShowAfterLastClearance.Checked,
+                ApplyDateFilter = chkDateFilter.Checked,
             };
             return _reportService.GetLedger(model);
         }

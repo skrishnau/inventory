@@ -54,6 +54,9 @@
             this.cbType = new System.Windows.Forms.ComboBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.chkDateFilter = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -62,6 +65,7 @@
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLastClearanceDate
@@ -85,7 +89,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(3, 49);
+            this.btnSearch.Location = new System.Drawing.Point(629, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -136,7 +140,7 @@
             this.dgvLedger.Name = "dgvLedger";
             this.dgvLedger.ReadOnly = true;
             this.dgvLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLedger.Size = new System.Drawing.Size(697, 389);
+            this.dgvLedger.Size = new System.Drawing.Size(991, 389);
             this.dgvLedger.TabIndex = 1;
             // 
             // colDate
@@ -185,6 +189,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
@@ -192,46 +197,50 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 29);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(609, 50);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(903, 50);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.dtFrom);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Location = new System.Drawing.Point(69, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(153, 27);
             this.panel3.TabIndex = 4;
             // 
             // dtFrom
             // 
+            this.dtFrom.Enabled = false;
             this.dtFrom.Location = new System.Drawing.Point(41, 3);
             this.dtFrom.Name = "dtFrom";
             this.dtFrom.Size = new System.Drawing.Size(109, 20);
             this.dtFrom.TabIndex = 5;
+            this.dtFrom.Validate = false;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.dtTo);
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(162, 3);
+            this.panel4.Location = new System.Drawing.Point(228, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(141, 27);
             this.panel4.TabIndex = 5;
             // 
             // dtTo
             // 
+            this.dtTo.Enabled = false;
             this.dtTo.Location = new System.Drawing.Point(30, 3);
             this.dtTo.Name = "dtTo";
             this.dtTo.Size = new System.Drawing.Size(108, 20);
             this.dtTo.TabIndex = 5;
+            this.dtTo.Validate = false;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.lblLastClearanceDate);
             this.panel5.Controls.Add(this.chkOnlyShowAfterLastClearance);
-            this.panel5.Location = new System.Drawing.Point(309, 3);
+            this.panel5.Location = new System.Drawing.Point(375, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(248, 40);
             this.panel5.TabIndex = 6;
@@ -244,7 +253,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(697, 79);
+            this.panel1.Size = new System.Drawing.Size(991, 79);
             this.panel1.TabIndex = 4;
             // 
             // panel7
@@ -256,7 +265,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(609, 29);
+            this.panel7.Size = new System.Drawing.Size(903, 29);
             this.panel7.TabIndex = 5;
             // 
             // cbCustomer
@@ -291,7 +300,7 @@
             // 
             this.panel6.Controls.Add(this.btnPrint);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(609, 0);
+            this.panel6.Location = new System.Drawing.Point(903, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(88, 79);
             this.panel6.TabIndex = 5;
@@ -310,6 +319,33 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.UseVisualStyleBackColor = false;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.chkDateFilter);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(60, 27);
+            this.panel2.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Date";
+            // 
+            // chkDateFilter
+            // 
+            this.chkDateFilter.AutoSize = true;
+            this.chkDateFilter.Location = new System.Drawing.Point(40, 6);
+            this.chkDateFilter.Name = "chkDateFilter";
+            this.chkDateFilter.Size = new System.Drawing.Size(15, 14);
+            this.chkDateFilter.TabIndex = 1;
+            this.chkDateFilter.UseVisualStyleBackColor = true;
+            // 
             // LedgerUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,7 +353,7 @@
             this.Controls.Add(this.dgvLedger);
             this.Controls.Add(this.panel1);
             this.Name = "LedgerUC";
-            this.Size = new System.Drawing.Size(697, 468);
+            this.Size = new System.Drawing.Size(991, 468);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -330,6 +366,8 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -361,5 +399,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCredit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDrCr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.CheckBox chkDateFilter;
+        private System.Windows.Forms.Label label5;
     }
 }
