@@ -195,6 +195,7 @@ namespace IMS
            // container.Register<CompanySettingsUC>(Lifestyle.Scoped);
             container.Register<ProfileUC>(Lifestyle.Scoped);
             container.Register<ReferenceSettingsUC>(Lifestyle.Scoped);
+            container.Register<ReferenceCreateForm>(Lifestyle.Scoped);
             //
             // Sales
             //
@@ -216,6 +217,7 @@ namespace IMS
             container.Register<ProfitAndLossUC>(Lifestyle.Scoped);
             container.Register<PaymentListUC>(Lifestyle.Scoped);
             container.Register<LedgerUC>(Lifestyle.Scoped);
+
 
 
 

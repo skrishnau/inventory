@@ -118,6 +118,9 @@
     <Compile Include="Forms\Business\Create\CounterCreate.Designer.cs">
       <DependentUpon>CounterCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Common\Base\BaseDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Common\Base\BaseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -285,6 +288,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.Designer.cs">
       <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\References\ReferenceCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\References\ReferenceCreateForm.Designer.cs">
+      <DependentUpon>ReferenceCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.cs">
       <SubType>UserControl</SubType>
@@ -791,6 +800,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.resx">
       <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceCreateForm.resx">
+      <DependentUpon>ReferenceCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.resx">
       <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>

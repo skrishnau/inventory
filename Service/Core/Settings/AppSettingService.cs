@@ -245,6 +245,10 @@ namespace Service.Core.Settings
 
                 }
                 _context.SaveChanges();
+                var args = BaseEventArgs<List<BillSettingsModel>>.Instance;
+                args.Model = modelList;
+
+                _listener.TriggerBillSettingUpdateEvent(null, args);
                 return true;
             }
         }

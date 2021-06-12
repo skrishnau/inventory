@@ -83,6 +83,10 @@ namespace IMS.Forms.Inventory.Settings
             // set selection
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Profile";
+
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = uc;
             _currentTab.ExecuteActions();
         }
@@ -105,6 +109,9 @@ namespace IMS.Forms.Inventory.Settings
             // set selection
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Reference Settings";
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = uc;
             _currentTab.ExecuteActions();
         }
@@ -117,6 +124,9 @@ namespace IMS.Forms.Inventory.Settings
             // set selection
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Users";
+            userListUC.MyTabTitle = MyTabTitle;
+            userListUC.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = userListUC;
             _currentTab.ExecuteActions();
         }
@@ -128,6 +138,9 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Units of Measure (UOM)";
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = uc;
             _currentTab.ExecuteActions();
         }
@@ -140,6 +153,9 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Product Categories";
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = uc;
             _currentTab.ExecuteActions();
         }
@@ -151,6 +167,9 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Package Types";
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = uc;
             _currentTab.ExecuteActions();
         }
@@ -162,6 +181,9 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Adjustment Codes";
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = uc;
             _currentTab.ExecuteActions();
         }
@@ -175,6 +197,9 @@ namespace IMS.Forms.Inventory.Settings
             _body.pnlBody.Controls.Add(uc);
             _sidebar.SetVisited(sender);
             _body.SubHeadingText = "Warehouses";
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
             _currentTab = uc;
             _currentTab.ExecuteActions();
         }

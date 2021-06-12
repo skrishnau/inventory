@@ -55,5 +55,9 @@ namespace Service.Listeners
         // Price History
         event EventHandler<BaseEventArgs<PriceHistoryModel>> PriceHistoryUpdated;
         void TriggerPriceHistoryUpdateEvent(object p, BaseEventArgs<PriceHistoryModel> eventArgs);
+
+        // Reference 
+        event EventHandler<BaseEventArgs<List<BillSettingsModel>>> BillSettingUpdated;
+        void TriggerBillSettingUpdateEvent(object p, BaseEventArgs<List<BillSettingsModel>> eventArgs);
     }
 }
