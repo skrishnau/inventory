@@ -103,7 +103,7 @@ namespace IMS.Forms.Inventory.Settings
 
         private void LnkReferences_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var uc = Program.container.GetInstance<ReferenceSettingsUC>();
+            var uc = Program.container.GetInstance<ReferenceListUC>();
             _body.pnlBody.Controls.Clear();
             _body.pnlBody.Controls.Add(uc);
             // set selection

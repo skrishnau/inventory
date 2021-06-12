@@ -295,11 +295,11 @@
     <Compile Include="Forms\Inventory\Settings\References\ReferenceCreateForm.Designer.cs">
       <DependentUpon>ReferenceCreateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.cs">
+    <Compile Include="Forms\Inventory\Settings\References\ReferenceListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.Designer.cs">
-      <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Settings\References\ReferenceListUC.Designer.cs">
+      <DependentUpon>ReferenceListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Transaction\TransactionCreateForm.cs">
       <SubType>Form</SubType>
@@ -804,8 +804,8 @@
     <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceCreateForm.resx">
       <DependentUpon>ReferenceCreateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceSettingsUC.resx">
-      <DependentUpon>ReferenceSettingsUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceListUC.resx">
+      <DependentUpon>ReferenceListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionCreateForm.resx">
       <DependentUpon>TransactionCreateForm.cs</DependentUpon>

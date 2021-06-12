@@ -17,12 +17,12 @@ using Service.Listeners;
 
 namespace IMS.Forms.Inventory.Settings.References
 {
-    public partial class ReferenceSettingsUC : BaseUserControl
+    public partial class ReferenceListUC : BaseUserControl
     {
         private readonly IAppSettingService _appSettingService;
         private readonly IDatabaseChangeListener _databaseChangeListener;
 
-        public ReferenceSettingsUC(IAppSettingService appSettingService, IDatabaseChangeListener databaseChangeListener)
+        public ReferenceListUC(IAppSettingService appSettingService, IDatabaseChangeListener databaseChangeListener)
         {
             this._appSettingService = appSettingService;
             _databaseChangeListener = databaseChangeListener;
@@ -35,6 +35,7 @@ namespace IMS.Forms.Inventory.Settings.References
         private void ReferenceSettingsUC_Load(object sender, EventArgs e)
         {
             _databaseChangeListener.BillSettingUpdated += _databaseChangeListener_BillSettingUpdated;
+            _databaseChangeListener.OrderUpdated += _databaseChangeListener_OrderUpdated;
             PopulateBillSetting();
             //btnSave.Click += BtnSave_Click;
             //btnCancel.Click += BtnCancel_Click;
@@ -55,6 +56,11 @@ namespace IMS.Forms.Inventory.Settings.References
             btnEditPurchase.Click += BtnEdit_Click;
             btnEditSale.Click += BtnEdit_Click;
 
+        }
+
+        private void _databaseChangeListener_OrderUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Orders.OrderModel> e)
+        {
+            AddListenerAction(PopulateBillSetting, e);
         }
 
         private void _databaseChangeListener_BillSettingUpdated(object sender, Service.DbEventArgs.BaseEventArgs<List<BillSettingsModel>> e)

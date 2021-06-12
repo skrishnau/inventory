@@ -53,8 +53,8 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.07165F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.92835F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38037F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61963F));
             this.tableLayoutPanel2.Controls.Add(this.tbAddress, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.tbPhone, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label10, 0, 6);
@@ -81,29 +81,29 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(329, 210);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(489, 210);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // tbAddress
             // 
             this.tbAddress.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbAddress.Location = new System.Drawing.Point(123, 32);
+            this.tbAddress.Location = new System.Drawing.Point(130, 32);
             this.tbAddress.Margin = new System.Windows.Forms.Padding(2);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.ReadOnly = true;
-            this.tbAddress.Size = new System.Drawing.Size(127, 13);
+            this.tbAddress.Size = new System.Drawing.Size(341, 13);
             this.tbAddress.TabIndex = 15;
             // 
             // tbPhone
             // 
             this.tbPhone.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbPhone.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPhone.Location = new System.Drawing.Point(123, 62);
+            this.tbPhone.Location = new System.Drawing.Point(130, 62);
             this.tbPhone.Margin = new System.Windows.Forms.Padding(2);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.ReadOnly = true;
-            this.tbPhone.Size = new System.Drawing.Size(127, 13);
+            this.tbPhone.Size = new System.Drawing.Size(341, 13);
             this.tbPhone.TabIndex = 19;
             // 
             // label10
@@ -120,22 +120,22 @@
             // 
             this.tbVAT.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbVAT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbVAT.Location = new System.Drawing.Point(123, 152);
+            this.tbVAT.Location = new System.Drawing.Point(130, 152);
             this.tbVAT.Margin = new System.Windows.Forms.Padding(2);
             this.tbVAT.Name = "tbVAT";
             this.tbVAT.ReadOnly = true;
-            this.tbVAT.Size = new System.Drawing.Size(127, 13);
+            this.tbVAT.Size = new System.Drawing.Size(341, 13);
             this.tbVAT.TabIndex = 17;
             // 
             // tbWebsite
             // 
             this.tbWebsite.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbWebsite.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbWebsite.Location = new System.Drawing.Point(123, 122);
+            this.tbWebsite.Location = new System.Drawing.Point(130, 122);
             this.tbWebsite.Margin = new System.Windows.Forms.Padding(2);
             this.tbWebsite.Name = "tbWebsite";
             this.tbWebsite.ReadOnly = true;
-            this.tbWebsite.Size = new System.Drawing.Size(127, 13);
+            this.tbWebsite.Size = new System.Drawing.Size(341, 13);
             this.tbWebsite.TabIndex = 21;
             // 
             // label7
@@ -182,11 +182,11 @@
             // 
             this.tbCompanyName.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbCompanyName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbCompanyName.Location = new System.Drawing.Point(123, 2);
+            this.tbCompanyName.Location = new System.Drawing.Point(130, 2);
             this.tbCompanyName.Margin = new System.Windows.Forms.Padding(2);
             this.tbCompanyName.Name = "tbCompanyName";
             this.tbCompanyName.ReadOnly = true;
-            this.tbCompanyName.Size = new System.Drawing.Size(127, 13);
+            this.tbCompanyName.Size = new System.Drawing.Size(341, 13);
             this.tbCompanyName.TabIndex = 1;
             // 
             // label12
@@ -203,11 +203,11 @@
             // 
             this.tbEmail.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbEmail.Location = new System.Drawing.Point(123, 92);
+            this.tbEmail.Location = new System.Drawing.Point(130, 92);
             this.tbEmail.Margin = new System.Windows.Forms.Padding(2);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.ReadOnly = true;
-            this.tbEmail.Size = new System.Drawing.Size(127, 13);
+            this.tbEmail.Size = new System.Drawing.Size(341, 13);
             this.tbEmail.TabIndex = 20;
             // 
             // label13
@@ -224,11 +224,11 @@
             // 
             this.tbPAN.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tbPAN.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPAN.Location = new System.Drawing.Point(123, 182);
+            this.tbPAN.Location = new System.Drawing.Point(130, 182);
             this.tbPAN.Margin = new System.Windows.Forms.Padding(2);
             this.tbPAN.Name = "tbPAN";
             this.tbPAN.ReadOnly = true;
-            this.tbPAN.Size = new System.Drawing.Size(127, 13);
+            this.tbPAN.Size = new System.Drawing.Size(341, 13);
             this.tbPAN.TabIndex = 18;
             // 
             // panel1
@@ -238,7 +238,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(329, 51);
+            this.panel1.Size = new System.Drawing.Size(489, 51);
             this.panel1.TabIndex = 4;
             // 
             // btnChangePassword
@@ -276,7 +276,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.panel1);
             this.Name = "ProfileUC";
-            this.Size = new System.Drawing.Size(329, 261);
+            this.Size = new System.Drawing.Size(489, 261);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel1.ResumeLayout(false);

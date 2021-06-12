@@ -1,6 +1,6 @@
 ﻿namespace IMS.Forms.Inventory.Settings.References
 {
-    partial class ReferenceSettingsUC
+    partial class ReferenceListUC
     {
         /// <summary> 
         /// Required designer variable.
