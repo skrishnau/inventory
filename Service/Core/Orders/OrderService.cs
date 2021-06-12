@@ -442,6 +442,7 @@ namespace Service.Core.Orders
                         var args = new BaseEventArgs<OrderModel>(entity.MapToModel(), Utility.UpdateMode.EDIT);
                         _listener.TriggerOrderUpdateEvent(null, args);
                         _listener.TriggerInventoryUnitUpdateEvent(null, null);
+                        _listener.TriggerUserUpdateEvent(null, null);
                         return string.Empty;
                     }
                     txn.Rollback();
