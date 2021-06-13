@@ -20,10 +20,10 @@ namespace Service.Core.Orders
         /// <param name="purchaseOrderModel"></param>
         /// <param name="checkout">The order is processed and receipt generated at the same time</param>
         ResponseModel<OrderModel> SaveOrder(OrderModel purchaseOrderModel, bool checkout);
-       
 
-        int GetAllOrdersCount(OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearch, string _searchReceiptNo);
-        OrderListModel GetAllOrders(OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearch, string receiptNoSearch, int pageSize, int offset);
+
+        int GetAllOrdersCount(OrderSearchModel searchModel);//OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearch, string _searchReceiptNo);
+        OrderListModel GetAllOrders(OrderSearchModel searchModel, int pageSize, int offset);// OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearch, string receiptNoSearch, int pageSize, int offset);
 
         List<OrderItemModel> GetPurchaseOrderItems(int purchaseId);
         List<InventoryUnitModel> GetInventoryUnitsOfPurchaseOrdeItems(ICollection<OrderItemModel> models);

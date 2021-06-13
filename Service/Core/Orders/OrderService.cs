@@ -48,21 +48,21 @@ namespace Service.Core.Orders
 
         #region Get Functions
 
-        public int GetAllOrdersCount(OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
+        public int GetAllOrdersCount(OrderSearchModel searchModel)//OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType, orderListType, userSearchText, receiptNoSearchText);
+                var orders = GetAllOrdersQuery(_context, searchModel);// orderType, orderListType, userSearchText, receiptNoSearchText);
                 return orders.Count();
             }
         }
 
         // page size: no.of items per page; offset: current page number..
-        public OrderListModel GetAllOrders(OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText, int pageSize, int offset)
+        public OrderListModel GetAllOrders(OrderSearchModel searchModel, int pageSize, int offset)//OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText, int pageSize, int offset)
         {
             using (var _context = new DatabaseContext())
             {
-                var orders = GetAllOrdersQuery(_context, orderType, orderListType, userSearchText, receiptNoSearchText);
+                var orders = GetAllOrdersQuery(_context, searchModel);//orderType, orderListType, userSearchText, receiptNoSearchText);
                 var totalCount = orders.Count();
                 if (pageSize > 0 && offset >= 0)
                 {
@@ -78,16 +78,16 @@ namespace Service.Core.Orders
                 };
             }
         }
-        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
+        private IQueryable<Order> GetAllOrdersQuery(DatabaseContext _context, OrderSearchModel searchModel)// OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
         {
-            var split = string.IsNullOrEmpty(userSearchText) ? new string[0] : userSearchText.Split(new char[] { '-' });
+            var split = string.IsNullOrEmpty(searchModel.Client) ? new string[0] : searchModel.Client.Split(new char[] { '-' });
             var name = split.Length > 0 ? split[0].Trim() : "";
             var company = split.Length > 1 ? split[1].Trim() : "";
-            var type = orderType.ToString();
+            var type = searchModel.OrderType.ToString();
             var orders = _context.Orders
                 .Include(x => x.User)
                 .Include(x => x.OrderItems);
-            if (orderListType == OrderListTypeEnum.Transaction)
+            if (searchModel.OrderListType == OrderListTypeEnum.Transaction)
             {
                 orders = orders.Where(x => x.IsCompleted).OrderByDescending(x => x.CompletedDate);
             }
@@ -95,13 +95,15 @@ namespace Service.Core.Orders
             {
                 orders = orders.Where(x => !x.IsCompleted).OrderByDescending(x => x.UpdatedAt);
             }
-            if (orderType != OrderTypeEnum.All)
+            if (searchModel.OrderType != OrderTypeEnum.All)
                 orders = orders.Where(x => x.OrderType == type);
 
-            if (!string.IsNullOrEmpty(userSearchText))
+            if (!string.IsNullOrEmpty(searchModel.Client))
                 orders = orders.Where(x => x.User.Name.Contains(name) || x.User.Company.Contains(name));
-            if (!string.IsNullOrEmpty(receiptNoSearchText))
-                orders = orders.Where(x => x.ReferenceNumber == receiptNoSearchText);
+            if (!string.IsNullOrEmpty(searchModel.ReceiptNo))
+                orders = orders.Where(x => x.ReferenceNumber == searchModel.ReceiptNo);
+            if (searchModel.ProductId > 0)
+                orders = orders.Where(x => x.OrderItems.Any(y => y.ProductId == searchModel.ProductId));
             return orders;
         }
 

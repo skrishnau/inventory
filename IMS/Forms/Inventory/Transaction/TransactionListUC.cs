@@ -19,6 +19,7 @@ using Service.Interfaces;
 using IMS.Forms.Common.Pagination;
 using Service.Core.Users;
 using IMS.Forms.Common;
+using ViewModel.Core.Common;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -62,6 +63,7 @@ namespace IMS.Forms.Inventory.Transaction
             this.Dock = DockStyle.Fill;
             InitializeGridView();
             InitializeEvents();
+            PopulateProducts();
             PopulateOrders();
 
             btnPrint.Image = null;
@@ -113,6 +115,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void InitializeEvents()
         {
             _listener.OrderUpdated += _listener_OrderUpdated;
+            _listener.ProductUpdated += _listener_ProductUpdated;
             // dgvOrders.CellClick += DgvPurchases_CellClick;
             dgvOrders.SelectionChanged += DgvOrders_SelectionChanged;
             //_purchaseOrderDetailUC.btnBackToList.Click += BtnBackToList_Click;
@@ -131,8 +134,18 @@ namespace IMS.Forms.Inventory.Transaction
             txtSearchClient.TextChanged += TxtName_TextChanged;
             txtSearchReceiptNo.TextChanged += TxtSearchReceiptNo_TextChanged;
             btnViewParentOrder.Click += BtnViewParentOrder_Click;
+            cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
         }
 
+        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        {
+            AddListenerAction(PopulateProducts, e);
+        }
+
+        private void CbProduct_SelectedValueChanged(object sender, EventArgs e)
+        {
+            PopulateOrders();
+        }
 
         private void Type_CheckedChanged(object sender, EventArgs e)
         {
@@ -154,6 +167,15 @@ namespace IMS.Forms.Inventory.Transaction
             PopulateOrders();
         }
 
+        private void PopulateProducts()
+        {
+            var products = _productService.GetProductListForCombo();
+            products.Insert(0, new ViewModel.Core.Common.IdNamePair { Id = 0, Name = "-- All --" });
+            cbProduct.DataSource = products;
+            cbProduct.ValueMember = "Id";
+            cbProduct.DisplayMember = "Name";
+        }
+
         private void PopulateOrders()
         {
             //List<OrderModel> _orderList = new List<OrderModel>();
@@ -162,19 +184,29 @@ namespace IMS.Forms.Inventory.Transaction
             //bindingNavigator1.BindingSource = _bindingSource;
 
             if (helper != null)
-                helper.Reset(_orderType, _orderListTypeEnum, txtSearchClient.Text, txtSearchReceiptNo.Text);
+            {
+                var productId = (cbProduct.SelectedItem as IdNamePair)?.Id ?? 0;
+                var orderSearch = new OrderSearchModel
+                {
+                    Client = txtSearchClient.Text,
+                    OrderListType = _orderListTypeEnum,
+                    OrderType = _orderType,
+                    ReceiptNo = txtSearchReceiptNo.Text,
+                    ProductId = productId,
+                };
+                helper.Reset(orderSearch);
+            }
 
             if (_previousSelectedIndex > -1 && dgvOrders.Rows.Count > _previousSelectedIndex)
             {
                 dgvOrders.Rows[_previousSelectedIndex].Selected = true;
             }
-
+            OrderModel model = null;
             if (dgvOrders.SelectedRows.Count > 0)
             {
-                var model = dgvOrders.Rows[dgvOrders.SelectedRows[0].Index].DataBoundItem as OrderModel;
-                ShowDetail(this, model);
+                model = dgvOrders.Rows[dgvOrders.SelectedRows[0].Index].DataBoundItem as OrderModel;
             }
-
+            ShowDetail(this, model);
 
         }
 
@@ -263,6 +295,7 @@ namespace IMS.Forms.Inventory.Transaction
                 btnPrint.Visible = false;
                 btnEdit.Visible = false;
                 btnCancel.Visible = false;
+                dgvItems.DataSource = null;
             }
         }
 

@@ -153,5 +153,16 @@ namespace ViewModel.Core.Orders
         public bool ShowPrintView { get; set; }
         public OrderOrDirectEnum OrderOrDirect { get; set; }
     }
+    /// <summary>
+    /// Order List filter parameters
+    /// </summary>
+    public class OrderSearchModel
+    {
+        public OrderTypeEnum OrderType { get; set; }
+        public OrderListTypeEnum OrderListType { get; set; }
+        public string Client { get; set; }
+        public string ReceiptNo { get; set; }
+        public int ProductId { get; set; }
+    }
 
 }

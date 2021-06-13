@@ -79,7 +79,16 @@ namespace IMS.Forms.Inventory.Purchases
 
         private void PopulateOrders()
         {
-            var orderListModel = _orderService.GetAllOrders(_orderType, OrderListTypeEnum.Order,  string.Empty, string.Empty, -1, -1);
+            var searchModel = new OrderSearchModel
+            {
+                Client = string.Empty,
+                OrderListType = OrderListTypeEnum.Order,
+                OrderType = _orderType,
+                ProductId = 0,
+                ReceiptNo = string.Empty,
+                
+            };
+            var orderListModel = _orderService.GetAllOrders(searchModel, -1, -1);
             dgvPurchases.DataSource = orderListModel.OrderList;
         }
 

@@ -37,6 +37,8 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cbProduct = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtSearchReceiptNo = new System.Windows.Forms.TextBox();
             this.lblSearchClient = new System.Windows.Forms.Label();
@@ -49,6 +51,16 @@
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnCancel = new System.Windows.Forms.Button();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.colOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompletedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -70,16 +82,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnViewParentOrder = new System.Windows.Forms.Button();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
-            this.colOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCompletedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlNewTransaction.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -98,7 +100,7 @@
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 79);
+            this.splitter1.Location = new System.Drawing.Point(0, 107);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(1068, 3);
             this.splitter1.TabIndex = 15;
@@ -154,7 +156,7 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEdit.Location = new System.Drawing.Point(149, 5);
+            this.btnEdit.Location = new System.Drawing.Point(88, 5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(105, 28);
             this.btnEdit.TabIndex = 1;
@@ -171,11 +173,13 @@
             this.panel1.Location = new System.Drawing.Point(0, 35);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1068, 44);
+            this.panel1.Size = new System.Drawing.Size(1068, 72);
             this.panel1.TabIndex = 14;
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.cbProduct);
+            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.txtSearchReceiptNo);
             this.panel3.Controls.Add(this.lblSearchClient);
@@ -187,8 +191,26 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(690, 36);
+            this.panel3.Size = new System.Drawing.Size(711, 64);
             this.panel3.TabIndex = 4;
+            // 
+            // cbProduct
+            // 
+            this.cbProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProduct.FormattingEnabled = true;
+            this.cbProduct.Location = new System.Drawing.Point(62, 35);
+            this.cbProduct.Name = "cbProduct";
+            this.cbProduct.Size = new System.Drawing.Size(121, 21);
+            this.cbProduct.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Product";
             // 
             // label2
             // 
@@ -270,10 +292,10 @@
             this.flowLayoutPanel2.Controls.Add(this.btnCancel);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(700, 4);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(761, 4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 2, 5, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(364, 36);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(303, 64);
             this.flowLayoutPanel2.TabIndex = 17;
             // 
             // btnPrint
@@ -283,7 +305,7 @@
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.Location = new System.Drawing.Point(260, 5);
+            this.btnPrint.Location = new System.Drawing.Point(199, 5);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(96, 28);
             this.btnPrint.TabIndex = 16;
@@ -298,7 +320,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(71, 5);
+            this.btnCancel.Location = new System.Drawing.Point(10, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 28);
             this.btnCancel.TabIndex = 17;
@@ -327,8 +349,87 @@
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(622, 410);
+            this.dgvOrders.Size = new System.Drawing.Size(622, 382);
             this.dgvOrders.TabIndex = 13;
+            // 
+            // colOrderNumber
+            // 
+            this.colOrderNumber.DataPropertyName = "ReferenceNumber";
+            this.colOrderNumber.HeaderText = "Receipt No.";
+            this.colOrderNumber.Name = "colOrderNumber";
+            this.colOrderNumber.ReadOnly = true;
+            this.colOrderNumber.Width = 120;
+            // 
+            // colCreatedDate
+            // 
+            this.colCreatedDate.DataPropertyName = "UpdatedAtBS";
+            this.colCreatedDate.HeaderText = "Updated On";
+            this.colCreatedDate.Name = "colCreatedDate";
+            this.colCreatedDate.ReadOnly = true;
+            this.colCreatedDate.Width = 80;
+            // 
+            // colCompletedDate
+            // 
+            this.colCompletedDate.DataPropertyName = "CompletedDateBS";
+            this.colCompletedDate.HeaderText = "Checkout Date";
+            this.colCompletedDate.Name = "colCompletedDate";
+            this.colCompletedDate.ReadOnly = true;
+            // 
+            // colOrderType
+            // 
+            this.colOrderType.DataPropertyName = "OrderType";
+            this.colOrderType.HeaderText = "Type";
+            this.colOrderType.Name = "colOrderType";
+            this.colOrderType.ReadOnly = true;
+            this.colOrderType.Width = 80;
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.DataPropertyName = "User";
+            this.colCustomer.HeaderText = "Customer";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
+            this.colCustomer.Width = 150;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTotalAmount.DataPropertyName = "TotalAmount";
+            this.colTotalAmount.HeaderText = "Total Amount";
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Width = 87;
+            // 
+            // colDiscountPercent
+            // 
+            this.colDiscountPercent.DataPropertyName = "DiscountString";
+            this.colDiscountPercent.HeaderText = "Discount";
+            this.colDiscountPercent.Name = "colDiscountPercent";
+            this.colDiscountPercent.ReadOnly = true;
+            this.colDiscountPercent.Width = 80;
+            // 
+            // colPaidAmount
+            // 
+            this.colPaidAmount.DataPropertyName = "PaidAmount";
+            this.colPaidAmount.HeaderText = "Paid Amount";
+            this.colPaidAmount.Name = "colPaidAmount";
+            this.colPaidAmount.ReadOnly = true;
+            // 
+            // colDeliveryDate
+            // 
+            this.colDeliveryDate.DataPropertyName = "DeliveryDateBS";
+            this.colDeliveryDate.HeaderText = "Delivery Date";
+            this.colDeliveryDate.Name = "colDeliveryDate";
+            this.colDeliveryDate.ReadOnly = true;
+            this.colDeliveryDate.Width = 80;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            this.colStatus.Width = 70;
             // 
             // panel2
             // 
@@ -337,9 +438,9 @@
             this.panel2.Controls.Add(this.splitter2);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 82);
+            this.panel2.Location = new System.Drawing.Point(0, 110);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1068, 435);
+            this.panel2.Size = new System.Drawing.Size(1068, 407);
             this.panel2.TabIndex = 16;
             // 
             // bindingNavigator1
@@ -358,7 +459,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 410);
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 382);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -441,7 +542,7 @@
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Location = new System.Drawing.Point(622, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 435);
+            this.splitter2.Size = new System.Drawing.Size(5, 407);
             this.splitter2.TabIndex = 15;
             this.splitter2.TabStop = false;
             // 
@@ -453,7 +554,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(627, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(441, 435);
+            this.panel4.Size = new System.Drawing.Size(441, 407);
             this.panel4.TabIndex = 16;
             // 
             // dgvItems
@@ -464,7 +565,7 @@
             this.dgvItems.Location = new System.Drawing.Point(0, 64);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.OrderId = 0;
-            this.dgvItems.Size = new System.Drawing.Size(441, 371);
+            this.dgvItems.Size = new System.Drawing.Size(441, 343);
             this.dgvItems.TabIndex = 14;
             // 
             // panel5
@@ -543,85 +644,6 @@
             this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
             this.listHeaderTemplate1.Size = new System.Drawing.Size(1068, 35);
             this.listHeaderTemplate1.TabIndex = 17;
-            // 
-            // colOrderNumber
-            // 
-            this.colOrderNumber.DataPropertyName = "ReferenceNumber";
-            this.colOrderNumber.HeaderText = "Receipt No.";
-            this.colOrderNumber.Name = "colOrderNumber";
-            this.colOrderNumber.ReadOnly = true;
-            this.colOrderNumber.Width = 120;
-            // 
-            // colCreatedDate
-            // 
-            this.colCreatedDate.DataPropertyName = "UpdatedAtBS";
-            this.colCreatedDate.HeaderText = "Updated On";
-            this.colCreatedDate.Name = "colCreatedDate";
-            this.colCreatedDate.ReadOnly = true;
-            this.colCreatedDate.Width = 80;
-            // 
-            // colCompletedDate
-            // 
-            this.colCompletedDate.DataPropertyName = "CompletedDateBS";
-            this.colCompletedDate.HeaderText = "Checkout Date";
-            this.colCompletedDate.Name = "colCompletedDate";
-            this.colCompletedDate.ReadOnly = true;
-            // 
-            // colOrderType
-            // 
-            this.colOrderType.DataPropertyName = "OrderType";
-            this.colOrderType.HeaderText = "Type";
-            this.colOrderType.Name = "colOrderType";
-            this.colOrderType.ReadOnly = true;
-            this.colOrderType.Width = 80;
-            // 
-            // colCustomer
-            // 
-            this.colCustomer.DataPropertyName = "User";
-            this.colCustomer.HeaderText = "Customer";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 150;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colTotalAmount.DataPropertyName = "TotalAmount";
-            this.colTotalAmount.HeaderText = "Total Amount";
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Width = 87;
-            // 
-            // colDiscountPercent
-            // 
-            this.colDiscountPercent.DataPropertyName = "DiscountString";
-            this.colDiscountPercent.HeaderText = "Discount";
-            this.colDiscountPercent.Name = "colDiscountPercent";
-            this.colDiscountPercent.ReadOnly = true;
-            this.colDiscountPercent.Width = 80;
-            // 
-            // colPaidAmount
-            // 
-            this.colPaidAmount.DataPropertyName = "PaidAmount";
-            this.colPaidAmount.HeaderText = "Paid Amount";
-            this.colPaidAmount.Name = "colPaidAmount";
-            this.colPaidAmount.ReadOnly = true;
-            // 
-            // colDeliveryDate
-            // 
-            this.colDeliveryDate.DataPropertyName = "DeliveryDateBS";
-            this.colDeliveryDate.HeaderText = "Delivery Date";
-            this.colDeliveryDate.Name = "colDeliveryDate";
-            this.colDeliveryDate.ReadOnly = true;
-            this.colDeliveryDate.Width = 80;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "Status";
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            this.colStatus.Width = 70;
             // 
             // TransactionListUC
             // 
@@ -706,5 +728,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.ComboBox cbProduct;
+        private System.Windows.Forms.Label label4;
     }
 }
