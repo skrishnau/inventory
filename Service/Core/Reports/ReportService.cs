@@ -154,6 +154,96 @@ namespace Service.Core.Reports
             };
         }
 
+
+        public ProductLedgerMasterModel GetProductLedger(ProductLedgerRequestModel model)
+        {
+            int productId = model.ProductId;
+            DateTime from = model.From;
+            DateTime to = model.To;
+            using (var _context = new DatabaseContext())
+            {
+                var product = _context.Products.Find(productId);
+                if (product != null)
+                {
+                    from = from.Date;
+                    to = to.Date;
+                    to = to.AddDays(1);
+
+                    var query = _context.OrderItems.Where(x => x.ProductId == productId && !x.Order.IsVoid && !x.Order.IsCancelled && x.Order.IsCompleted);
+                    var openingBalanceQuery = query;
+                    if (model.ApplyDateFilter)
+                    {
+                        query = query.Where(x => x.Order.CompletedDate >= from && x.Order.CompletedDate <= to);
+                        openingBalanceQuery = openingBalanceQuery.Where(x => x.Order.CompletedDate < from);
+                    }
+
+                    var transactions = query.OrderBy(x => x.Order.CompletedDate).ToList();
+
+                    List<ProductLedgerModel> actualResult;
+                    // order items
+                    actualResult = transactions
+                        .Select(x => OrderItemToProductLedgerModel(x))
+                        .ToList();
+
+                    string fromDate;
+                    string toDate;
+
+                    decimal openingBalanceSum = 0;
+                    if (model.ApplyDateFilter)
+                    {
+                        fromDate = DateConverter.Instance.ToBS(from).ToString(); // from.ToString("yyyy/MM/dd");
+                        toDate = DateConverter.Instance.ToBS(to.AddDays(-1)).ToString();// to.AddDays(-1).ToString("yyyy/MM/dd");
+                        //openingBalanceSum = openingBalanceQuery.Sum(x => (decimal?)(x.DrCr * x.Balance)) ?? 0;
+                    }
+                    //var openingBalanceModel = new ProductLedgerModel
+                    //{
+                    //    Balance = openingBalanceSum > 0 ? openingBalanceSum.ToString("0.00") : "(" + openingBalanceSum.ToString("0.00") + ")",
+                    //    Particulars = "Opening Balance",
+                    //};
+                    //actualResult.Insert(0, openingBalanceModel);
+                    var balance = 0;//transactions.Sum(x => x.Balance * x.DrCr);
+                    var drcr = Math.Sign(balance);
+                    var master = new ProductLedgerMasterModel
+                    {
+                        //BalanceSum = drcr < 0 ? $"({Math.Abs(balance)})" : balance.ToString(),
+                        ProductLedgerData = actualResult,
+                        //CreditSum = "" + transactions.Sum(x => x.Credit),
+                        //DebitSum = "" + transactions.Sum(x => x.Debit),
+                        //DrCr = drcr,
+                        //DrCrString = drcr > 0 ? "Cr" : drcr < 0 ? "Dr" : "",
+                        // for ledger print
+                        Category = product.Category.Name,
+                        Product = product.Name,
+                        FromDate = DateConverter.Instance.ToBS(from).ToString(),
+                        ToDate = DateConverter.Instance.ToBS(to.AddDays(-1)).ToString(),
+                    };
+                    return master;
+                }
+                return null;
+            }
+        }
+
+        private ProductLedgerModel OrderItemToProductLedgerModel(Infrastructure.Context.OrderItem x)
+        {
+            return new ProductLedgerModel
+            {
+                Client = x.Order.User?.Name,
+                OrderType = x.Order.OrderType,
+                UnitQuantity = x.UnitQuantity.ToString("#.00"),
+                Package = x.Package.Name,
+                Rate = x.Rate.ToString("#.00"),
+                ReferenceNo = x.Order.ReferenceNumber,
+                Total = x.Total.ToString("#.00"),
+                CostPrice = x.Order.OrderType == OrderTypeEnum.Sale.ToString()
+                ? (x.CostPriceRate.HasValue ? x.CostPriceRate.Value.ToString("#.00") : "0.00")
+                : "",
+                Date = x.Order.CompletedDate.HasValue ? DateConverter.Instance.ToBS(x.Order.CompletedDate.Value).ToString() : "",
+                //Particulars = x.Order.transa.Particulars,
+
+            };
+        }
+
+
         public ProfitAndLossMasterModel GetProfitAndLoss(ProfitAndLossRequestModel model)
         {
             DateTime from = model.From;

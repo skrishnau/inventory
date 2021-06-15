@@ -217,6 +217,7 @@ namespace IMS
             container.Register<ProfitAndLossUC>(Lifestyle.Scoped);
             container.Register<PaymentListUC>(Lifestyle.Scoped);
             container.Register<LedgerUC>(Lifestyle.Scoped);
+            container.Register<ProductLedgerUC>(Lifestyle.Scoped);
 
 
 

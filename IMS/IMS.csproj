@@ -157,11 +157,23 @@
     </Compile>
     <Compile Include="Forms\Common\GridView\GridViewHelper.cs" />
     <Compile Include="Forms\Common\Pagination\PaginationHelper.cs" />
+    <Compile Include="Forms\Inventory\Accounts\All\ProductLedgerPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\ProductLedgerPrintForm.Designer.cs">
+      <DependentUpon>ProductLedgerPrintForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Accounts\All\LedgerPrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Inventory\Accounts\All\LedgerPrintForm.Designer.cs">
       <DependentUpon>LedgerPrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\ProductLedgerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\ProductLedgerUC.Designer.cs">
+      <DependentUpon>ProductLedgerUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Accounts\All\PaymentListUC.cs">
       <SubType>UserControl</SubType>
@@ -735,8 +747,14 @@
     <EmbeddedResource Include="Forms\Common\Display\SaveFooterUC.resx">
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\ProductLedgerPrintForm.resx">
+      <DependentUpon>ProductLedgerPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Accounts\All\LedgerPrintForm.resx">
       <DependentUpon>LedgerPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\ProductLedgerUC.resx">
+      <DependentUpon>ProductLedgerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Accounts\All\PaymentListUC.resx">
       <DependentUpon>PaymentListUC.cs</DependentUpon>

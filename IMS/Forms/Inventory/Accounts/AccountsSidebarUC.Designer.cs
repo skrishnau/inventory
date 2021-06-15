@@ -33,6 +33,8 @@
             this.btnProfitAndLoss = new System.Windows.Forms.LinkLabel();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlLinks = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnProductLedger = new System.Windows.Forms.LinkLabel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLinks.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,7 +95,7 @@
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter3.Location = new System.Drawing.Point(3, 84);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(132, 3);
+            this.splitter3.Size = new System.Drawing.Size(134, 3);
             this.splitter3.TabIndex = 20;
             this.splitter3.TabStop = false;
             // 
@@ -103,6 +105,8 @@
             this.pnlLinks.Controls.Add(this.btnLedger);
             this.pnlLinks.Controls.Add(this.btnProfitAndLoss);
             this.pnlLinks.Controls.Add(this.splitter3);
+            this.pnlLinks.Controls.Add(this.btnProductLedger);
+            this.pnlLinks.Controls.Add(this.splitter1);
             this.pnlLinks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLinks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlLinks.Location = new System.Drawing.Point(0, 0);
@@ -110,6 +114,33 @@
             this.pnlLinks.Size = new System.Drawing.Size(178, 436);
             this.pnlLinks.TabIndex = 21;
             this.pnlLinks.WrapContents = false;
+            // 
+            // btnProductLedger
+            // 
+            this.btnProductLedger.AutoSize = true;
+            this.btnProductLedger.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductLedger.Image = global::IMS.Properties.Resources.icons8_Deviation_16px;
+            this.btnProductLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnProductLedger.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.btnProductLedger.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnProductLedger.Location = new System.Drawing.Point(5, 95);
+            this.btnProductLedger.Margin = new System.Windows.Forms.Padding(5);
+            this.btnProductLedger.Name = "btnProductLedger";
+            this.btnProductLedger.Size = new System.Drawing.Size(130, 17);
+            this.btnProductLedger.TabIndex = 21;
+            this.btnProductLedger.TabStop = true;
+            this.btnProductLedger.Text = "      Product Ledger";
+            this.btnProductLedger.VisitedLinkColor = System.Drawing.Color.Black;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter1.Location = new System.Drawing.Point(3, 120);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(134, 3);
+            this.splitter1.TabIndex = 22;
+            this.splitter1.TabStop = false;
             // 
             // AccountsSidebarUC
             // 
@@ -130,5 +161,7 @@
         protected internal System.Windows.Forms.LinkLabel btnProfitAndLoss;
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.FlowLayoutPanel pnlLinks;
+        protected internal System.Windows.Forms.LinkLabel btnProductLedger;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }

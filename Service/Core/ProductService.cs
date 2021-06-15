@@ -265,13 +265,15 @@ namespace Service.Core
                 }
             }
         }
-        public List<IdNamePair> GetProductListForCombo()
+        public List<IdNamePair> GetProductListForCombo(int categoryId = 0)
         {
             using (var _context = new DatabaseContext())
             {
-                var products = _context.Products//.AsQueryable()// GetProductEntityList()
-                .Where(x => x.Use)
-                .Select(x => new IdNamePair()
+                var query = _context.Products
+                    .Where(x => x.Use && !x.IsDiscontinued);
+                if (categoryId > 0)
+                    query = query.Where(x => x.CategoryId == categoryId);
+                var products = query.Select(x => new IdNamePair()
                 {
                     Id = x.Id,
                     Name = x.Name,// + " (" + x.SKU + ")",
@@ -492,7 +494,7 @@ namespace Service.Core
             {
                 var products = _context.Products
                                .Include(x => x.ProductAttributes)
-                               .Where(x => x.Use)
+                               .Where(x => x.Use && !x.IsDiscontinued)
                                .Where(x => x.InStockQuantity <= x.ReorderPoint)
                                .OrderByDescending(x => x.ReorderPoint - x.InStockQuantity)
                                .Select(x => new IdNamePair

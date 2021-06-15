@@ -50,6 +50,7 @@ namespace ViewModel.Utility
         public const string NAME_INVENTORY_MOVEMENT = "Inventory Movement";
         public const string NAME_PROFIT_AND_LOSS = "Profit and Loss";
         public const string NAME_LEDGER = "Ledger";
+        public const string NAME_PRODUCT_LEDGER = "Product Ledger";
         public const string NAME_PAYMENT_LIST = "Payment List";
     }
 }
