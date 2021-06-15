@@ -130,6 +130,7 @@
             this.btnProductLedger.TabIndex = 21;
             this.btnProductLedger.TabStop = true;
             this.btnProductLedger.Text = "      Product Ledger";
+            this.btnProductLedger.Visible = false;
             this.btnProductLedger.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // splitter1
@@ -141,6 +142,7 @@
             this.splitter1.Size = new System.Drawing.Size(134, 3);
             this.splitter1.TabIndex = 22;
             this.splitter1.TabStop = false;
+            this.splitter1.Visible = false;
             // 
             // AccountsSidebarUC
             // 

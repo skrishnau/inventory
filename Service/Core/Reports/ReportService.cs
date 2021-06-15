@@ -113,15 +113,16 @@ namespace Service.Core.Reports
                     }
                     var openingBalanceModel = new LedgerModel
                     {
-                        Balance = openingBalanceSum > 0 ? openingBalanceSum.ToString("0.00") : "(" + openingBalanceSum.ToString("0.00") + ")",
+                        Balance = openingBalanceSum < 0 ? "(" + Math.Abs(openingBalanceSum).ToString("0.00") + ")" : openingBalanceSum.ToString("0.00"),
                         Particulars = "Opening Balance",
                     };
                     actualResult.Insert(0, openingBalanceModel);
                     var balance = transactions.Sum(x => x.Balance * x.DrCr);
+                    balance = balance + openingBalanceSum;
                     var drcr = Math.Sign(balance);
                     var master = new LedgerMasterModel
                     {
-                        BalanceSum = drcr < 0 ? $"({Math.Abs(balance)})" : balance.ToString(),
+                        BalanceSum = drcr < 0 ? $"({Math.Abs(balance).ToString("0.00")})" : balance.ToString("0.00"),
                         LedgerData = actualResult,
                         CreditSum = "" + transactions.Sum(x => x.Credit),
                         DebitSum = "" + transactions.Sum(x => x.Debit),
@@ -229,13 +230,13 @@ namespace Service.Core.Reports
             {
                 Client = x.Order.User?.Name,
                 OrderType = x.Order.OrderType,
-                UnitQuantity = x.UnitQuantity.ToString("#.00"),
+                UnitQuantity = x.UnitQuantity.ToString("0.00"),
                 Package = x.Package.Name,
-                Rate = x.Rate.ToString("#.00"),
+                Rate = x.Rate.ToString("0.00"),
                 ReferenceNo = x.Order.ReferenceNumber,
-                Total = x.Total.ToString("#.00"),
+                Total = x.Total.ToString("0.00"),
                 CostPrice = x.Order.OrderType == OrderTypeEnum.Sale.ToString()
-                ? (x.CostPriceRate.HasValue ? x.CostPriceRate.Value.ToString("#.00") : "0.00")
+                ? (x.CostPriceRate.HasValue ? x.CostPriceRate.Value.ToString("0.00") : "0.00")
                 : "",
                 Date = x.Order.CompletedDate.HasValue ? DateConverter.Instance.ToBS(x.Order.CompletedDate.Value).ToString() : "",
                 //Particulars = x.Order.transa.Particulars,
