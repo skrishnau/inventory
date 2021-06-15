@@ -52,8 +52,9 @@
             this.colParticulars = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
@@ -112,8 +113,9 @@
             this.colParticulars,
             this.colOrderType,
             this.colClient,
-            this.colRate,
+            this.colUnitQuantity,
             this.colPackage,
+            this.colRate,
             this.colCostPrice,
             this.colTotal});
             this.dgvLedger.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -301,12 +303,12 @@
             this.colClient.Name = "colClient";
             this.colClient.ReadOnly = true;
             // 
-            // colRate
+            // colUnitQuantity
             // 
-            this.colRate.DataPropertyName = "Rate";
-            this.colRate.HeaderText = "Rate";
-            this.colRate.Name = "colRate";
-            this.colRate.ReadOnly = true;
+            this.colUnitQuantity.DataPropertyName = "UnitQuantity";
+            this.colUnitQuantity.HeaderText = "Quantity";
+            this.colUnitQuantity.Name = "colUnitQuantity";
+            this.colUnitQuantity.ReadOnly = true;
             // 
             // colPackage
             // 
@@ -314,6 +316,13 @@
             this.colPackage.HeaderText = "Package";
             this.colPackage.Name = "colPackage";
             this.colPackage.ReadOnly = true;
+            // 
+            // colRate
+            // 
+            this.colRate.DataPropertyName = "Rate";
+            this.colRate.HeaderText = "Rate";
+            this.colRate.Name = "colRate";
+            this.colRate.ReadOnly = true;
             // 
             // colCostPrice
             // 
@@ -378,8 +387,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colParticulars;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPackage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
     }
