@@ -78,6 +78,16 @@ namespace IMS.Forms.Inventory.Reports.All
             btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
             dgvLedger.DataBindingComplete += DgvLedger_DataBindingComplete;
+            btnCancel.Click += BtnCancel_Click;
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            var paymentModel = dgvLedger.SelectedRows.Count > 0 ? dgvLedger.SelectedRows[0].DataBoundItem as PaymentModel : null;
+            if (paymentModel != null)
+            {
+                var cancelled = _paymentService.CancelPayment(paymentModel.Id);
+            }
         }
 
         private void DgvLedger_DataBindingComplete(object sender, EventArgs e)

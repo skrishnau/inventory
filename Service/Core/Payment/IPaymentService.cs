@@ -15,5 +15,6 @@ namespace Service.Core.Payment
         int GetAllPaymentsCount(ClientTypeEnum clientType, string searchName);
         PaymentListModel GetAllPayments(ClientTypeEnum clientType, int pageSize, int offset, string searchName);
         PaymentModel GetPayment(int paymentId);
+        bool CancelPayment(int paymentId);
     }
 }

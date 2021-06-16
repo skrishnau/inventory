@@ -143,6 +143,19 @@ namespace Service.Core.Payment
             }
         }
 
-      
+        public bool CancelPayment(int paymentId)
+        {
+            using(var _context = new DatabaseContext())
+            {
+                var payment = _context.Payments.Find(paymentId);
+                if (payment != null)
+                {
+                    payment.IsVoid = true;
+                    //Transaction.IsVoid = true;
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }
