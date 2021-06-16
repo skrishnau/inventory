@@ -29,8 +29,10 @@ namespace Infrastructure.Context
         public string Bank { get; set; }
         public bool IsVoid { get; set; }
         public Nullable<int> Order_Id { get; set; }
+        public Nullable<int> TransactionId { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual User User { get; set; }
+        public virtual Transaction Transaction { get; set; }
     }
 }

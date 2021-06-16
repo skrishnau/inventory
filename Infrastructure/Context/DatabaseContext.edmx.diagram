@@ -68,6 +68,7 @@
         <AssociationConnector Association="Entities.FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" ManuallyRouted="false" />
+        <AssociationConnector Association="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

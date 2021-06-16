@@ -143,6 +143,7 @@ namespace Service.Core.Reports
 
         private LedgerModel TransactionToLedgerModel(Infrastructure.Context.Transaction x)
         {
+            
             return new LedgerModel
             {
                 Balance = x.DrCr < 0 ? $"({x.Balance})" : x.DrCr > 0 ? $"{x.Balance}" : "",//.ToString("#.00"),

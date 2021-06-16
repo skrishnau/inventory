@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -213,6 +213,7 @@
           <Property Name="Bank" Type="nvarchar(max)" />
           <Property Name="IsVoid" Type="bit" Nullable="false" />
           <Property Name="Order_Id" Type="int" />
+          <Property Name="TransactionId" Type="int" />
         </EntityType>
         <EntityType Name="PriceHistories">
           <Key>
@@ -220,10 +221,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="PriceType" Type="nvarchar(max)" />
           <Property Name="PackageId" Type="int" />
-          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductAttributes">
           <Key>
@@ -605,6 +606,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Payments_dbo_Transactions_TransactionId">
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transactions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Payments_dbo_Users_UserId">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
@@ -954,6 +967,10 @@
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Payments" EntitySet="Payments" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Transactions_TransactionId" Association="Self.FK_dbo_Payments_dbo_Transactions_TransactionId">
+            <End Role="Transactions" EntitySet="Transactions" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Payments_dbo_Users_UserId" Association="Self.FK_dbo_Payments_dbo_Users_UserId">
             <End Role="Users" EntitySet="Users" />
             <End Role="Payments" EntitySet="Payments" />
@@ -1039,8 +1056,7 @@
             <End Role="WarehouseProducts" EntitySet="WarehouseProducts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1287,6 +1303,8 @@
           <Property Name="Order_Id" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Payments_dbo_Orders_Order_Id" FromRole="Payments" ToRole="Orders" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_Payments_dbo_Users_UserId" FromRole="Payments" ToRole="Users" />
+          <Property Name="TransactionId" Type="Int32" />
+          <NavigationProperty Name="Transaction" Relationship="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId" FromRole="Payment" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="PriceHistory">
           <Key>
@@ -1409,6 +1427,7 @@
           <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Transactions_dbo_Orders_OrderId" FromRole="Transactions" ToRole="Orders" />
           <NavigationProperty Name="TransactionItems" Relationship="Self.FK_dbo_TransactionItems_dbo_Transactions_TransactionId" FromRole="Transactions" ToRole="TransactionItems" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_Transactions_dbo_Users_UserId" FromRole="Transactions" ToRole="Users" />
+          <NavigationProperty Name="Payments" Relationship="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId" FromRole="Transaction" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Transfer">
           <Key>
@@ -2155,7 +2174,23 @@
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="WarehouseProducts" EntitySet="WarehouseProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Payments_dbo_Transactions_TransactionId" Association="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_dbo_Payments_dbo_Transactions_TransactionId">
+          <End Type="Entities.Transaction" Role="Transaction" Multiplicity="0..1" />
+          <End Type="Entities.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2365,6 +2400,7 @@
           <EntitySetMapping Name="Payments">
             <EntityTypeMapping TypeName="Entities.Payment">
               <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />

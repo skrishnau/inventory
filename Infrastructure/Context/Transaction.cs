@@ -18,6 +18,7 @@ namespace Infrastructure.Context
         public Transaction()
         {
             this.TransactionItems = new HashSet<TransactionItem>();
+            this.Payments = new HashSet<Payment>();
         }
     
         public int Id { get; set; }
@@ -37,5 +38,7 @@ namespace Infrastructure.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionItem> TransactionItems { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }
