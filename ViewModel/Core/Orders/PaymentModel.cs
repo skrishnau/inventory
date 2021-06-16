@@ -58,6 +58,7 @@ namespace ViewModel.Core.Orders
         public string DueDateBS { get; set; }
 
         public bool IsVoid { get; set; }
+        public int? TransactionId { get; set; }
 
     }
 }

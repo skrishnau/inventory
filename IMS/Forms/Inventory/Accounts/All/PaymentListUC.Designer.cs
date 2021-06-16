@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentListUC));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.pnlButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnCancel1 = new System.Windows.Forms.Button();
             this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.cbCustomer = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbType = new System.Windows.Forms.ComboBox();
@@ -64,7 +64,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -72,7 +72,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.pnlButtons);
             this.panel1.Controls.Add(this.cbCustomer);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cbType);
@@ -80,43 +80,41 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(831, 46);
+            this.panel1.Size = new System.Drawing.Size(831, 54);
             this.panel1.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // pnlButtons
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnPayment);
-            this.flowLayoutPanel1.Controls.Add(this.btnPrint);
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(554, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 5, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(277, 46);
-            this.flowLayoutPanel1.TabIndex = 21;
+            this.pnlButtons.Controls.Add(this.btnCancel1);
+            this.pnlButtons.Controls.Add(this.btnPayment);
+            this.pnlButtons.Controls.Add(this.btnPrint);
+            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.pnlButtons.Location = new System.Drawing.Point(476, 0);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Padding = new System.Windows.Forms.Padding(0, 5, 5, 0);
+            this.pnlButtons.Size = new System.Drawing.Size(355, 54);
+            this.pnlButtons.TabIndex = 21;
             // 
-            // btnPrint
+            // btnCancel1
             // 
-            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPrint.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Image = global::IMS.Properties.Resources.icons8_print_16px;
-            this.btnPrint.Location = new System.Drawing.Point(108, 8);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(69, 28);
-            this.btnPrint.TabIndex = 18;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPrint.UseVisualStyleBackColor = false;
-            this.btnPrint.Visible = false;
+            this.btnCancel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCancel1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnCancel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel1.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
+            this.btnCancel1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancel1.Location = new System.Drawing.Point(275, 8);
+            this.btnCancel1.Name = "btnCancel1";
+            this.btnCancel1.Size = new System.Drawing.Size(72, 28);
+            this.btnCancel1.TabIndex = 20;
+            this.btnCancel1.Text = "Cancel";
+            this.btnCancel1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancel1.UseVisualStyleBackColor = false;
+            this.btnCancel1.Visible = false;
             // 
             // btnPayment
             // 
             this.btnPayment.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPayment.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
@@ -130,20 +128,21 @@
             this.btnPayment.UseVisualStyleBackColor = false;
             this.btnPayment.Visible = false;
             // 
-            // btnCancel
+            // btnPrint
             // 
-            this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(30, 8);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(72, 28);
-            this.btnCancel.TabIndex = 20;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = global::IMS.Properties.Resources.icons8_print_16px;
+            this.btnPrint.Location = new System.Drawing.Point(108, 8);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(69, 28);
+            this.btnPrint.TabIndex = 18;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Visible = false;
             // 
             // cbCustomer
             // 
@@ -202,11 +201,11 @@
             this.colBalance,
             this.colDueDate});
             this.dgvLedger.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLedger.Location = new System.Drawing.Point(0, 46);
+            this.dgvLedger.Location = new System.Drawing.Point(0, 54);
             this.dgvLedger.Name = "dgvLedger";
             this.dgvLedger.ReadOnly = true;
             this.dgvLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLedger.Size = new System.Drawing.Size(831, 397);
+            this.dgvLedger.Size = new System.Drawing.Size(831, 389);
             this.dgvLedger.TabIndex = 1;
             // 
             // colDate
@@ -418,7 +417,7 @@
             this.Size = new System.Drawing.Size(831, 468);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.pnlButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
@@ -461,7 +460,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheque;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDate;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        protected internal System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.FlowLayoutPanel pnlButtons;
+        protected internal System.Windows.Forms.Button btnCancel1;
     }
 }

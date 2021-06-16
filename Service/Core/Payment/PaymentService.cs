@@ -6,6 +6,7 @@ using Service.DbEventArgs;
 using Service.Listeners;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace Service.Core.Payment
 
         private IQueryable<Infrastructure.Context.Payment> GetPaymentQueryable(DatabaseContext _context, ClientTypeEnum clientType, string searchName)
         {
-            var query = _context.Payments.AsQueryable();
+            var query = _context.Payments.AsQueryable().Where(x=>!x.IsVoid);
                     //.Where(x => x. == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
@@ -92,8 +93,8 @@ namespace Service.Core.Payment
             using (var _context = new DatabaseContext())
             {
                 var entity = model.MapToEntity();
-                _context.Payments.Add(entity);
-                model.Id = entity.Id;
+                
+                //model.Id = entity.Id;
                 User user = null;
                 if (model.UserId > 0)
                 {
@@ -122,6 +123,10 @@ namespace Service.Core.Payment
                     }
                     
                 }
+                // here
+                entity.Transaction = txn;
+                _context.Payments.Add(entity);
+                
                 _context.SaveChanges();
 
                 _appSettingService.IncrementBillIndex(ReferencesTypeEnum.Payment);
@@ -151,7 +156,34 @@ namespace Service.Core.Payment
                 if (payment != null)
                 {
                     payment.IsVoid = true;
+                    if (payment.Transaction != null)
+                    {
+                        payment.Transaction.IsVoid = true;
+                    }
+                    else
+                    {
+                        var date = payment.Date.Date;
+                         var transact = _context.Transactions.Where(x =>  x.UserId == payment.UserId).ToList();// DbFunctions.TruncateTime(x.Date) == date).ToList();
+                        var credit = PaymentTypeEnum.Credit.ToString();
+                        var debit = PaymentTypeEnum.Debit.ToString(); 
+                        var transactions = _context.Transactions
+                            .Where(x => x.OrderId == null && x.UserId == payment.UserId &&  ((payment.PaymentType == debit && x.Debit == payment.Amount) || (payment.PaymentType == credit && x.Credit == payment.Amount)) && DbFunctions.TruncateTime(x.Date) == date)
+                            .ToList();
+                        if(transactions.Count == 1)
+                        {
+                            transactions[0].IsVoid = true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
                     //Transaction.IsVoid = true;
+                    _context.SaveChanges();
+                    var args = BaseEventArgs<PaymentModel>.Instance;
+                    args.Mode = Utility.UpdateMode.DELETE;
+                    args.Model = payment.MapToModel();
+                    _listener.TriggerPaymentUpdateEvent(null, args);
                     return true;
                 }
                 return false;

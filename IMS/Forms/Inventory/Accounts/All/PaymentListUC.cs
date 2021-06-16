@@ -74,11 +74,12 @@ namespace IMS.Forms.Inventory.Reports.All
             cbType.SelectedValueChanged += CbType_SelectedValueChanged;
             _listener.UserUpdated += _listener_UserUpdated;
             _listener.PaymentUpdated += _listener_PaymentUpdated;
-            dgvLedger.SelectionChanged += DgvLedger_SelectionChanged;
+            // section changed event is assigned from PopulatePayments function
+            //dgvLedger.SelectionChanged += DgvLedger_SelectionChanged; 
             btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
             dgvLedger.DataBindingComplete += DgvLedger_DataBindingComplete;
-            btnCancel.Click += BtnCancel_Click;
+            btnCancel1.Click += BtnCancel_Click;
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -86,7 +87,21 @@ namespace IMS.Forms.Inventory.Reports.All
             var paymentModel = dgvLedger.SelectedRows.Count > 0 ? dgvLedger.SelectedRows[0].DataBoundItem as PaymentModel : null;
             if (paymentModel != null)
             {
-                var cancelled = _paymentService.CancelPayment(paymentModel.Id);
+                var dialogResult = MessageBox.Show(this, "Are you sure to cancel this payment?", "Cancel?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    var cancelled = _paymentService.CancelPayment(paymentModel.Id);
+                    if (cancelled)
+                    {
+                        PopupMessage.ShowSuccessMessage("Successfully cancelled");
+                        this.Focus();
+                    }
+                    else
+                    {
+                        PopupMessage.ShowInfoMessage("Couldn't locate the ledger entry of this payment. Please contact administrator.");
+                        this.Focus();
+                    }
+                }
             }
         }
 
@@ -97,7 +112,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
         {
-           AddListenerAction(PopulateCustomer, e);
+            AddListenerAction(PopulateCustomer, e);
         }
 
         private void DgvLedger_SelectionChanged(object sender, EventArgs e)
@@ -106,6 +121,7 @@ namespace IMS.Forms.Inventory.Reports.All
             var selectedUser = cbCustomer.SelectedItem as IdNamePair;
             btnPayment.Visible = paymentModel != null || selectedUser != null;
             btnPrint.Visible = paymentModel != null || selectedUser != null;
+            btnCancel1.Visible = paymentModel != null || selectedUser != null; ;// (paymentModel?.TransactionId ?? 0) > 0;
         }
         private void btnPayment_Click(object sender, EventArgs e)
         {
@@ -131,7 +147,7 @@ namespace IMS.Forms.Inventory.Reports.All
                 if ((userId ?? 0) > 0)
                 {
                     var po = Program.container.GetInstance<PaymentCreateForm>();
-                    po.SetData(userId ?? 0, paymentModel?.Id??0, showPrint);
+                    po.SetData(userId ?? 0, paymentModel?.Id ?? 0, showPrint);
                     po.ShowDialog();
                 }
             }
@@ -203,7 +219,9 @@ namespace IMS.Forms.Inventory.Reports.All
             if (item != null)
             {
                 var userType = (ClientTypeEnum)Enum.Parse(typeof(ClientTypeEnum), item.Value);
+                dgvLedger.SelectionChanged -= DgvLedger_SelectionChanged;
                 helper.Reset(userType, cbCustomer.Text);
+                dgvLedger.SelectionChanged += DgvLedger_SelectionChanged;
             }
             //var customerIdStr = cbCustomer.SelectedValue?.ToString() ?? "";
             //int customerId;
