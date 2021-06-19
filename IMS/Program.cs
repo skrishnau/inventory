@@ -47,6 +47,7 @@ using IMS.Forms.Backup;
 using IMS.Forms.Inventory.Accounts.All;
 using IMS.Forms.Inventory.Reports.All;
 using IMS.Forms.Inventory.Units;
+using IMS.Forms.Inventory.Transaction;
 
 namespace IMS
 {
@@ -218,6 +219,9 @@ namespace IMS
             container.Register<PaymentListUC>(Lifestyle.Scoped);
             container.Register<LedgerUC>(Lifestyle.Scoped);
             container.Register<ProductLedgerUC>(Lifestyle.Scoped);
+
+            //container.Register<TransactionCreateForm>(Lifestyle.Scoped);
+            //container.Register<TransactionCreateLargeUC>(Lifestyle.Scoped);
 
 
 

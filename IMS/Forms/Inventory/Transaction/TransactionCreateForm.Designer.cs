@@ -166,6 +166,7 @@
             this.dtPaymentDueDate.Name = "dtPaymentDueDate";
             this.dtPaymentDueDate.Size = new System.Drawing.Size(100, 20);
             this.dtPaymentDueDate.TabIndex = 9;
+            this.dtPaymentDueDate.Validate = false;
             // 
             // label3
             // 
@@ -212,6 +213,7 @@
             this.dtExpectedDate.Name = "dtExpectedDate";
             this.dtExpectedDate.Size = new System.Drawing.Size(100, 20);
             this.dtExpectedDate.TabIndex = 11;
+            this.dtExpectedDate.Validate = false;
             // 
             // lblExpectedDate
             // 
@@ -436,6 +438,7 @@
             this.dtCompletedDate.Name = "dtCompletedDate";
             this.dtCompletedDate.Size = new System.Drawing.Size(100, 20);
             this.dtCompletedDate.TabIndex = 13;
+            this.dtCompletedDate.Validate = false;
             // 
             // lblAdjustmentCode
             // 
@@ -493,6 +496,7 @@
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(0, 57);
             this.dgvItems.Name = "dgvItems";
+            this.dgvItems.OrderId = 0;
             this.dgvItems.Size = new System.Drawing.Size(657, 332);
             this.dgvItems.TabIndex = 5;
             // 

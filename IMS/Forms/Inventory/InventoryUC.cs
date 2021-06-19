@@ -579,6 +579,7 @@ namespace IMS.Forms.Inventory
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
+                /*
                 var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
                 var orderEditModel = new OrderEditModel
                 {
@@ -588,7 +589,25 @@ namespace IMS.Forms.Inventory
                 };
                 form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
                 form.ShowDialog();
+                */
+                var form = Program.container.GetInstance<Transaction.TransactionCreateLargeForm>();
+                var orderEditModel = new OrderEditModel
+                {
+                    OrderType = OrderTypeEnum.Sale,
+                    OrderId = 0,
+                    OrderOrDirect = OrderOrDirectEnum.Order
+                };
+                form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
+                form.WindowState = FormWindowState.Maximized;
+                form.Show();
+                ParentForm.Hide();
+                form.FormClosed += TransactionCreateLargeForm_FormClosed;
             }
+        }
+
+        private void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ParentForm.Show();
         }
 
         private void BtnPurchaseTransaction_Click(object sender, EventArgs e)

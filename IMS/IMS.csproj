@@ -319,6 +319,18 @@
     <Compile Include="Forms\Inventory\Transaction\TransactionCreateForm.Designer.cs">
       <DependentUpon>TransactionCreateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionCreateLargeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionCreateLargeForm.Designer.cs">
+      <DependentUpon>TransactionCreateLargeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionCreateLargeUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionCreateLargeUC.Designer.cs">
+      <DependentUpon>TransactionCreateLargeUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Transaction\TransactionListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -827,6 +839,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionCreateForm.resx">
       <DependentUpon>TransactionCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionCreateLargeForm.resx">
+      <DependentUpon>TransactionCreateLargeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionCreateLargeUC.resx">
+      <DependentUpon>TransactionCreateLargeUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionListUC.resx">
       <DependentUpon>TransactionListUC.cs</DependentUpon>
