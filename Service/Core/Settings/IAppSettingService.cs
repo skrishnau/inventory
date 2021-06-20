@@ -37,10 +37,12 @@ namespace Service.Core.Settings
         bool SaveCurrentIndex(long index, ReferencesTypeEnum orderType);
         bool IncrementBillIndex(ReferencesTypeEnum orderType);
         bool IncrementBillIndexWithoutCommit(DatabaseContext _context, ReferencesTypeEnum orderType);
-
         PasswordModel GetPassword();
         bool SavePassword(PasswordModel password);
-
         bool SaveBackupFolderPath(string folderPath);
+
+        bool GetShowTransactionCreateInFullPage();
+        bool GetIsTransactionCreatePageLocked();
+        void SaveLockTransactionCreatePage(bool p);
     }
 }

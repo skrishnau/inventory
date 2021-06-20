@@ -1555,6 +1555,7 @@
     <None Include="Resources\ims_icon_1.ico" />
     <Content Include="ims_icon.ico" />
     <Content Include="ims_icon_1.ico" />
+    <None Include="Resources\icons8-lock-16.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -34,9 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 552);
+            this.ClientSize = new System.Drawing.Size(657, 523);
             this.Name = "TransactionCreateLargeForm";
-            this.Text = "TransactionCreateLargeForm";
+            this.Text = "Transaction Add/Edit";
             this.ResumeLayout(false);
 
         }

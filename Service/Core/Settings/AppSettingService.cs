@@ -679,5 +679,31 @@ namespace Service.Core.Settings
             };
             return SaveAppSetting(appSetting);
         }
+
+        public bool GetShowTransactionCreateInFullPage()
+        {
+            var appSett = GetAppSetting(Constants.KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE);
+            bool.TryParse(appSett?.Value ?? "", out bool value);
+            return value;
+        }
+
+        public bool GetIsTransactionCreatePageLocked()
+        {
+            var appSett = GetAppSetting(Constants.KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED);
+            bool.TryParse(appSett?.Value ?? "", out bool value);
+            return value;
+        }
+
+        public void SaveLockTransactionCreatePage(bool p)
+        {
+            var appSettingModel = new AppSettingModel
+            {
+                DisplayName = Constants.DISPLAY_IS_TRANSACTION_CRETE_PAGE_LOCKED,
+                Group = Constants.GROUP_SYSTEM,
+                Name = Constants.KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED,
+                Value = p.ToString()
+            };
+            SaveAppSetting(appSettingModel);
+        }
     }
 }

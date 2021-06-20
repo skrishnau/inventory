@@ -38,6 +38,7 @@
             this.pnlCheckoutAndPrint = new System.Windows.Forms.Panel();
             this.btnCheckoutAndPrint = new System.Windows.Forms.Button();
             this.splitter3 = new System.Windows.Forms.Splitter();
+            this.btnLock = new IMS.Forms.Common.Buttons.MenuButton();
             this.pnlCheckout.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlCheckoutAndPrint.SuspendLayout();
@@ -151,11 +152,26 @@
             this.splitter3.TabIndex = 16;
             this.splitter3.TabStop = false;
             // 
+            // btnLock
+            // 
+            this.btnLock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLock.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnLock.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnLock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLock.Image = global::IMS.Properties.Resources.icons8_lock_16;
+            this.btnLock.Location = new System.Drawing.Point(338, 4);
+            this.btnLock.Name = "btnLock";
+            this.btnLock.Size = new System.Drawing.Size(30, 27);
+            this.btnLock.TabIndex = 56;
+            this.btnLock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnLock.UseVisualStyleBackColor = false;
+            // 
             // SaveFooterUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Controls.Add(this.btnLock);
             this.Controls.Add(this.pnlCheckoutAndPrint);
             this.Controls.Add(this.splitter3);
             this.Controls.Add(this.panel1);
@@ -183,5 +199,6 @@
         protected internal System.Windows.Forms.Panel pnlCheckoutAndPrint;
         protected internal System.Windows.Forms.Button btnCheckoutAndPrint;
         private System.Windows.Forms.Splitter splitter3;
+        public Buttons.MenuButton btnLock;
     }
 }

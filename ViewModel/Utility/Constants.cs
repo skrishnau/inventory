@@ -11,8 +11,12 @@ namespace ViewModel.Utility
     {
         public const string DATABASE_NAME = "IMS";
         public const string GROUP_BACKUP = "Backup";
-        public const string KEY_BACKUP_FOLDER_PATH = "BackupFolderPath";
+        public const string GROUP_SYSTEM = "System";
 
+        public const string KEY_BACKUP_FOLDER_PATH = "BackupFolderPath";
+        public const string KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE = "show_transaction_create_in_full_page";
+        public const string KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED = "is_transaction_create_page_locked";
+        public const string DISPLAY_IS_TRANSACTION_CRETE_PAGE_LOCKED = "Is Transaction Create Page Locked";
 
 
         public const bool IS_TRIAL = true;
@@ -21,6 +25,7 @@ namespace ViewModel.Utility
         public const bool LEDGER_DISPLAY_TRANSACTION_ITEMS_ALSO = true;
         public const bool CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION = false;
         public const bool CAN_NEW_PACKAGE_BE_ADDED_FROM_TRANSACTION = false;
+        
 
 
 

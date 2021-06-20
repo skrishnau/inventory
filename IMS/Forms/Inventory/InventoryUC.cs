@@ -598,16 +598,36 @@ namespace IMS.Forms.Inventory
                     OrderOrDirect = OrderOrDirectEnum.Order
                 };
                 form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
-                form.WindowState = FormWindowState.Maximized;
-                form.Show();
-                ParentForm.Hide();
-                form.FormClosed += TransactionCreateLargeForm_FormClosed;
+                var showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
+                if (showTransactionCreateInFullPage)
+                {
+                    form.Show();
+                    ParentForm.Hide();
+                    form.FormClosed += TransactionCreateLargeForm_FormClosed;
+                }
+                else
+                {
+                    form.ShowDialog();
+                }
             }
         }
 
         private void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ParentForm.Show();
+            var showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
+            var isTransactionCreateLocked = _appSettingService.GetIsTransactionCreatePageLocked();
+            if (showTransactionCreateInFullPage)
+            {
+                if (isTransactionCreateLocked)
+                {
+                    ParentForm.Close();
+                    ParentForm?.Dispose();
+                }
+                else
+                {
+                    ParentForm.Show();
+                }
+            }
         }
 
         private void BtnPurchaseTransaction_Click(object sender, EventArgs e)

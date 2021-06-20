@@ -73,23 +73,23 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtTotalAdd = new System.Windows.Forms.NumericUpDown();
+            this.txtQuantityAdd = new System.Windows.Forms.NumericUpDown();
+            this.txtRateAdd = new System.Windows.Forms.NumericUpDown();
+            this.cbPackageAdd = new System.Windows.Forms.ComboBox();
             this.cbProductAdd = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtTotalAdd = new System.Windows.Forms.TextBox();
-            this.txtRateAdd = new System.Windows.Forms.TextBox();
-            this.txtUnitAdd = new System.Windows.Forms.TextBox();
-            this.txtQuantityAdd = new System.Windows.Forms.TextBox();
             this.txtInStockQuantityAdd = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnResetAdd = new System.Windows.Forms.Button();
+            this.btnAddAdd = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlReceipt.SuspendLayout();
             this.pnlCustomer.SuspendLayout();
@@ -107,6 +107,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalAdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantityAdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRateAdd)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
@@ -542,16 +545,16 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.50996F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.50996F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.50996F));
+            this.tableLayoutPanel1.Controls.Add(this.txtTotalAdd, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtQuantityAdd, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtRateAdd, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cbPackageAdd, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbProductAdd, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label14, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.label13, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label12, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label11, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label10, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtTotalAdd, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtRateAdd, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtUnitAdd, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtQuantityAdd, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtInStockQuantityAdd, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -563,13 +566,49 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(972, 42);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // txtTotalAdd
+            // 
+            this.txtTotalAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTotalAdd.Enabled = false;
+            this.txtTotalAdd.Location = new System.Drawing.Point(842, 19);
+            this.txtTotalAdd.Name = "txtTotalAdd";
+            this.txtTotalAdd.ReadOnly = true;
+            this.txtTotalAdd.Size = new System.Drawing.Size(127, 20);
+            this.txtTotalAdd.TabIndex = 11;
+            // 
+            // txtQuantityAdd
+            // 
+            this.txtQuantityAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtQuantityAdd.Location = new System.Drawing.Point(449, 19);
+            this.txtQuantityAdd.Name = "txtQuantityAdd";
+            this.txtQuantityAdd.Size = new System.Drawing.Size(125, 20);
+            this.txtQuantityAdd.TabIndex = 8;
+            // 
+            // txtRateAdd
+            // 
+            this.txtRateAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRateAdd.Location = new System.Drawing.Point(711, 19);
+            this.txtRateAdd.Name = "txtRateAdd";
+            this.txtRateAdd.Size = new System.Drawing.Size(125, 20);
+            this.txtRateAdd.TabIndex = 10;
+            // 
+            // cbPackageAdd
+            // 
+            this.cbPackageAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbPackageAdd.FormattingEnabled = true;
+            this.cbPackageAdd.Location = new System.Drawing.Point(580, 19);
+            this.cbPackageAdd.Name = "cbPackageAdd";
+            this.cbPackageAdd.Size = new System.Drawing.Size(125, 21);
+            this.cbPackageAdd.TabIndex = 9;
+            // 
             // cbProductAdd
             // 
+            this.cbProductAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbProductAdd.FormattingEnabled = true;
-            this.cbProductAdd.Location = new System.Drawing.Point(3, 18);
+            this.cbProductAdd.Location = new System.Drawing.Point(3, 19);
             this.cbProductAdd.Name = "cbProductAdd";
             this.cbProductAdd.Size = new System.Drawing.Size(262, 21);
-            this.cbProductAdd.TabIndex = 55;
+            this.cbProductAdd.TabIndex = 6;
             // 
             // label14
             // 
@@ -616,47 +655,15 @@
             this.label10.TabIndex = 7;
             this.label10.Text = "In Stock Quantity";
             // 
-            // txtTotalAdd
-            // 
-            this.txtTotalAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTotalAdd.Location = new System.Drawing.Point(842, 18);
-            this.txtTotalAdd.Name = "txtTotalAdd";
-            this.txtTotalAdd.ReadOnly = true;
-            this.txtTotalAdd.Size = new System.Drawing.Size(127, 20);
-            this.txtTotalAdd.TabIndex = 5;
-            // 
-            // txtRateAdd
-            // 
-            this.txtRateAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRateAdd.Location = new System.Drawing.Point(711, 18);
-            this.txtRateAdd.Name = "txtRateAdd";
-            this.txtRateAdd.Size = new System.Drawing.Size(125, 20);
-            this.txtRateAdd.TabIndex = 4;
-            // 
-            // txtUnitAdd
-            // 
-            this.txtUnitAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUnitAdd.Location = new System.Drawing.Point(580, 18);
-            this.txtUnitAdd.Name = "txtUnitAdd";
-            this.txtUnitAdd.Size = new System.Drawing.Size(125, 20);
-            this.txtUnitAdd.TabIndex = 3;
-            // 
-            // txtQuantityAdd
-            // 
-            this.txtQuantityAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtQuantityAdd.Location = new System.Drawing.Point(449, 18);
-            this.txtQuantityAdd.Name = "txtQuantityAdd";
-            this.txtQuantityAdd.Size = new System.Drawing.Size(125, 20);
-            this.txtQuantityAdd.TabIndex = 2;
-            // 
             // txtInStockQuantityAdd
             // 
             this.txtInStockQuantityAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInStockQuantityAdd.Location = new System.Drawing.Point(271, 18);
+            this.txtInStockQuantityAdd.Enabled = false;
+            this.txtInStockQuantityAdd.Location = new System.Drawing.Point(271, 19);
             this.txtInStockQuantityAdd.Name = "txtInStockQuantityAdd";
             this.txtInStockQuantityAdd.ReadOnly = true;
             this.txtInStockQuantityAdd.Size = new System.Drawing.Size(172, 20);
-            this.txtInStockQuantityAdd.TabIndex = 1;
+            this.txtInStockQuantityAdd.TabIndex = 7;
             // 
             // label8
             // 
@@ -688,35 +695,35 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.button2);
-            this.panel6.Controls.Add(this.button1);
+            this.panel6.Controls.Add(this.btnResetAdd);
+            this.panel6.Controls.Add(this.btnAddAdd);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel6.Location = new System.Drawing.Point(1009, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(27, 51);
             this.panel6.TabIndex = 56;
             // 
-            // button2
+            // btnResetAdd
             // 
-            this.button2.BackColor = System.Drawing.Color.Pink;
-            this.button2.Location = new System.Drawing.Point(5, 25);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(20, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "X";
-            this.toolTip1.SetToolTip(this.button2, "Reset");
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnResetAdd.BackColor = System.Drawing.Color.Pink;
+            this.btnResetAdd.Location = new System.Drawing.Point(5, 25);
+            this.btnResetAdd.Name = "btnResetAdd";
+            this.btnResetAdd.Size = new System.Drawing.Size(20, 23);
+            this.btnResetAdd.TabIndex = 13;
+            this.btnResetAdd.Text = "X";
+            this.toolTip1.SetToolTip(this.btnResetAdd, "Reset");
+            this.btnResetAdd.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btnAddAdd
             // 
-            this.button1.BackColor = System.Drawing.Color.GreenYellow;
-            this.button1.Location = new System.Drawing.Point(4, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "+";
-            this.toolTip1.SetToolTip(this.button1, "Add");
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAddAdd.BackColor = System.Drawing.Color.GreenYellow;
+            this.btnAddAdd.Location = new System.Drawing.Point(4, 2);
+            this.btnAddAdd.Name = "btnAddAdd";
+            this.btnAddAdd.Size = new System.Drawing.Size(20, 23);
+            this.btnAddAdd.TabIndex = 12;
+            this.btnAddAdd.Text = "+";
+            this.toolTip1.SetToolTip(this.btnAddAdd, "Add");
+            this.btnAddAdd.UseVisualStyleBackColor = false;
             // 
             // TransactionCreateLargeUC
             // 
@@ -752,6 +759,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotalAdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantityAdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRateAdd)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -803,10 +813,6 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox txtTotalAdd;
-        private System.Windows.Forms.TextBox txtRateAdd;
-        private System.Windows.Forms.TextBox txtUnitAdd;
-        private System.Windows.Forms.TextBox txtQuantityAdd;
         private System.Windows.Forms.TextBox txtInStockQuantityAdd;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel5;
@@ -818,8 +824,12 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbProductAdd;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnResetAdd;
+        private System.Windows.Forms.Button btnAddAdd;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ComboBox cbPackageAdd;
+        private System.Windows.Forms.NumericUpDown txtQuantityAdd;
+        private System.Windows.Forms.NumericUpDown txtRateAdd;
+        private System.Windows.Forms.NumericUpDown txtTotalAdd;
     }
 }

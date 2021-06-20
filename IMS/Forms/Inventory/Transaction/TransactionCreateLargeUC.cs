@@ -19,6 +19,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ViewModel.Core;
 using ViewModel.Core.Common;
+using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
 using ViewModel.Core.Users;
 using ViewModel.Enums;
@@ -49,6 +50,8 @@ namespace IMS.Forms.Inventory.Transaction
 
         // to show Print View at first load
         private bool _showPrintView;
+        private bool _isTransactionCreatePageLocked;
+        private bool _showTransactionCreateInFullPage;
 
         private bool _saveOrderImmediatelyAfterLoading;
 
@@ -87,6 +90,9 @@ namespace IMS.Forms.Inventory.Transaction
             this.txtSum.Minimum = 0;
             this.txtSum.Maximum = Int32.MaxValue;
 
+            this.txtRateAdd.Maximum = Int32.MaxValue;
+            this.txtTotalAdd.Maximum = Int32.MaxValue;
+            this.txtQuantityAdd.Maximum = Int32.MaxValue;
 
             _orderModel = _orderService.GetOrderForDetailView(_orderId, withProductModel: true);
 
@@ -112,9 +118,25 @@ namespace IMS.Forms.Inventory.Transaction
             }
 
             MakeColumnsAutoSize();
+            UpdateLock();
         }
 
         #region Functions
+
+        private void UpdateLock()
+        {
+            _showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
+            if (_showTransactionCreateInFullPage)
+            {
+                _isTransactionCreatePageLocked = _appSettingService.GetIsTransactionCreatePageLocked();
+                saveFooterUC1.btnLock.BackColor = _isTransactionCreatePageLocked ? Color.Green : SystemColors.ButtonFace;
+                saveFooterUC1.btnLock.Visible = true;
+            }
+            else
+            {
+                saveFooterUC1.btnLock.Visible = false;
+            }
+        }
 
         private void MakeColumnsAutoSize()
         {
@@ -200,18 +222,31 @@ namespace IMS.Forms.Inventory.Transaction
 
             _listener.UserUpdated += _listener_CustomerUpdated;
             lblClient.DoubleClick += LblClient_DoubleClick;
-            
+
             dgvItems.AmountChanged += DgvItems_AmountChnanged;
             //btnPayment.Click += btnPayment_Click;
             cbClient.SelectedValueChanged += CbClient_SelectedValueChanged;
-            cbProductAdd.SelectedValueChanged += CbProductAdd_SelectedValueChanged;
             dgvItems.RowsRemoved += DgvItems_RowsRemoved;
             txtTotal.ValueChanged += TxtTotal_ValueChanged;
             txtDiscount.ValueChanged += TxtDiscount_ValueChanged;
             cbDiscountType.SelectedValueChanged += CbDiscountType_SelectedValueChanged;
             dtCompletedDate.TextChanged += DtCompletedDate_TextChanged;
+
+            // Add controls
+            saveFooterUC1.btnLock.Click += BtnLock_Click;
+            cbProductAdd.SelectedValueChanged += CbProductAdd_SelectedValueChanged;
+            cbPackageAdd.SelectedValueChanged += CbPackageAdd_SelectedValueChanged;
+            txtRateAdd.ValueChanged += TxtRateAdd_ValueChanged;
+            txtQuantityAdd.ValueChanged += TxtQuantityAdd_ValueChanged;
+            btnAddAdd.Click += BtnAddAdd_Click;
+            btnResetAdd.Click += BtnResetAdd_Click;
         }
 
+        private void BtnLock_Click(object sender, EventArgs e)
+        {
+            var isLocked = _isTransactionCreatePageLocked;
+            _appSettingService.SaveLockTransactionCreatePage(!isLocked);
+        }
 
         private void DtCompletedDate_TextChanged(object sender, EventArgs e)
         {
@@ -259,10 +294,7 @@ namespace IMS.Forms.Inventory.Transaction
             }
         }
 
-        private void CbProductAdd_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //PopulateProductInfo();
-        }
+
 
         private void SetSumAmount()
         {
@@ -375,6 +407,7 @@ namespace IMS.Forms.Inventory.Transaction
             cbProductAdd.AutoCompleteSource = AutoCompleteSource.CustomSource;
             cbProductAdd.AutoCompleteCustomSource.AddRange(list.Select(x => x.Name).ToArray());
         }
+
 
         private void PopulateModel(OrderModel model)
         {
@@ -509,6 +542,13 @@ namespace IMS.Forms.Inventory.Transaction
             dtPaymentDueDate.Enabled = enabled;
             lblClient.DoubleClick -= LblClient_DoubleClick;
             dgvItems.DisableAllExceptRate();
+            // add controls
+            cbProductAdd.Enabled = enabled;
+            cbPackageAdd.Enabled = enabled;
+            txtRateAdd.Enabled = enabled;
+            txtQuantityAdd.Enabled = enabled;
+            btnAddAdd.Enabled = enabled;
+            btnResetAdd.Enabled = enabled;
         }
 
         private void PopulateReceiptNumber()
@@ -880,5 +920,141 @@ namespace IMS.Forms.Inventory.Transaction
         //}
         #endregion
 
+
+        #region Add Controls
+
+        private void CbProductAdd_SelectedValueChanged(object sender, EventArgs e)
+        {
+            PopulateProductAddInfo();
+        }
+        private void CbPackageAdd_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SetRateAsPerDate();
+        }
+
+        private void PopulateProductAddInfo()
+        {
+            ClearPackageAdd();
+            var productModel = _productService.GetProductByNameOrSKU(cbProductAdd.Text);
+            if (productModel != null)
+            {
+                cbProductAdd.Tag = productModel;
+                txtInStockQuantityAdd.Text = $"{productModel.InStockQuantity} {productModel.BasePackage}";
+                PopulatePackageAdd(productModel);
+                SetRateAsPerDate();
+            }
+        }
+
+        private void SetRateAsPerDate()
+        {
+            var product = cbProductAdd.Tag as ProductModel;
+            if (product != null)
+            {
+                var _date = dtCompletedDate.GetValue();
+                var package = cbPackageAdd.Text;
+                var price = _productService.GetPrice(product.Id, _date, dgvItems.MovementType, 0, package);
+                txtRateAdd.Value = price?.Rate ?? 0;
+                UpdateTotalAdd(price?.Rate ?? 0, txtQuantityAdd.Value);
+            }
+        }
+        private void UpdateTotalAdd(decimal rate, decimal quantity)
+        {
+            txtTotalAdd.Value = rate * quantity;
+        }
+        private void PopulatePackageAdd(ProductModel productModel)
+        {
+            ClearPackageAdd();
+            List<IdNamePair> list = productModel.Packages.Select(x => new IdNamePair { Id = x.Id, Name = x.Name }).ToList();
+            if (list != null)
+            {
+                list.Insert(0, new IdNamePair
+                {
+                    Id = 0,
+                    Name = ""
+                });
+                cbPackageAdd.DisplayMember = "Name";
+                cbPackageAdd.ValueMember = "Id";
+                cbPackageAdd.DataSource = list;
+                cbPackageAdd.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                cbPackageAdd.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                cbPackageAdd.AutoCompleteCustomSource.AddRange(list.Select(x => x.Name).ToArray());
+                cbPackageAdd.SelectedText = productModel.BasePackage;
+            }
+        }
+        private void ClearPackageAdd()
+        {
+            cbPackageAdd.DataSource = null;
+            cbPackageAdd.AutoCompleteCustomSource?.Clear();
+        }
+
+        private void TxtRateAdd_ValueChanged(object sender, EventArgs e)
+        {
+
+            UpdateTotalAdd(txtRateAdd.Value, txtQuantityAdd.Value);
+        }
+
+        private void TxtQuantityAdd_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateTotalAdd(txtRateAdd.Value, txtQuantityAdd.Value);
+        }
+        private void BtnResetAdd_Click(object sender, EventArgs e)
+        {
+            cbProductAdd.Tag = null;
+            cbProductAdd.SelectedIndex = 0;
+            cbProductAdd.Text = string.Empty;
+            txtRateAdd.Value = 0;
+            txtQuantityAdd.Value = 0;
+            txtInStockQuantityAdd.Text = string.Empty;
+            ClearPackageAdd();
+        }
+
+        private void BtnAddAdd_Click(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cbProductAdd, string.Empty);
+            errorProvider.SetError(cbPackageAdd, string.Empty);
+            errorProvider.SetError(txtQuantityAdd, string.Empty);
+            var message = string.Empty;
+            var productModel = cbProductAdd.Tag as ProductModel;
+            if (productModel == null)
+            {
+                message += "Invalid Product. ";
+                errorProvider.SetError(cbProductAdd, "Invalid");
+            }
+            var packageText = cbPackageAdd.Text;
+            var package = _inventoryService.GetPackageByName(packageText);
+            if (package == null)
+            {
+                message += "Invalid Package. ";
+                errorProvider.SetError(cbPackageAdd, "Invalid");
+            }
+            if (txtQuantityAdd.Value <= 0)
+            {
+                message += "Quanitty should be greater than zero. ";
+                errorProvider.SetError(txtQuantityAdd, "Quanitty should be greater than zero");
+            }
+            if (!string.IsNullOrEmpty(message))
+            {
+                PopupMessage.ShowInfoMessage(message);
+                this.Focus();
+                return;
+            }
+            var invUnitModel = new InventoryUnitModel()
+            {
+                Product = productModel.Name,
+                ProductId = productModel.Id,
+                InStockQuantity = productModel.InStockQuantity,
+                InStockQuantityWithPackage = productModel.InStockQuantity + " " + productModel.BasePackage,
+                UnitQuantity = txtQuantityAdd.Value,
+                Package = package.Name,
+                PackageId = package.Id,
+                Rate = txtRateAdd.Value,
+                Total = txtTotal.Value,
+                ProductModel = productModel,
+            };
+            dgvItems.AddRows(new List<InventoryUnitModel> { invUnitModel });
+            BtnResetAdd_Click(btnResetAdd, EventArgs.Empty);
+        }
+
+        #endregion
     }
 }

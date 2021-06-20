@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Common.Base;
+using Service.Core.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,16 +16,23 @@ namespace IMS.Forms.Inventory.Transaction
 {
     public partial class TransactionCreateLargeForm : BaseDialogForm
     {
+
+        private readonly IAppSettingService _appSettingService;
+
         OrderEditModel _editModel;
         bool _saveOrderImmediatelyAfterLoading;
 
-        public TransactionCreateLargeForm()
+        
+
+        public TransactionCreateLargeForm(IAppSettingService appSettingService)
         {
+            _appSettingService = appSettingService;
+
             InitializeComponent();
             this.Load += TransactionCreateLargeForm_Load;
         }
 
-        public void SetDataForEdit(OrderEditModel editModel, bool saveOrderImmediatelyAfterLoading = false)//(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
+        public void SetDataForEdit(OrderEditModel editModel, bool saveOrderImmediatelyAfterLoading = false)
         {
             _editModel = editModel;
             _saveOrderImmediatelyAfterLoading = saveOrderImmediatelyAfterLoading;
@@ -32,15 +40,21 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void TransactionCreateLargeForm_Load(object sender, EventArgs e)
         {
+            this.Text = _editModel.OrderType.ToString() + " Transaction";
+            var showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
             this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.ShowInTaskbar = true;
+            this.Icon = Properties.Resources.ims_icon;
+            if (showTransactionCreateInFullPage)
+            {
+                this.ShowInTaskbar = true;
+                WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.ShowInTaskbar = false;
+            }
             var uc = Program.container.GetInstance<Transaction.TransactionCreateLargeUC>();
-            //var orderEditModel = new OrderEditModel
-            //{
-            //    OrderType = OrderTypeEnum.Purchase,
-            //    OrderId = 0,
-            //    OrderOrDirect = OrderOrDirectEnum.Order
-            //};
+            
             uc.Dock = DockStyle.Fill;
             uc.SetDataForEdit(_editModel);//OrderTypeEnum.Purchase, 0
             //uc.ShowDialog();
