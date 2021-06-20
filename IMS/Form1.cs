@@ -7,20 +7,25 @@ using ViewModel.Enums;
 using IMS.Forms.Inventory.Settings.General;
 using Service.Core.Settings;
 using ViewModel.Utility;
+using ViewModel.Core.Orders;
+using IMS.Forms.Inventory.Transaction;
 
 namespace IMS
 {
     public partial class Form1 : Form
     {
         private readonly IAppSettingService _appSettingService;
+
+        private TransactionCreateLargeForm form;
+
         public Form1(IAppSettingService appSettingService)
         {
             _appSettingService = appSettingService;
 
             InitializeComponent();
 
-           // InitializeEvents();
-            
+            // InitializeEvents();
+
             // open inventory at first initialization
 
             this.Load += Form1_Load;
@@ -32,14 +37,14 @@ namespace IMS
             ShowLoginFormOrLogin();
         }
 
-        private void ShowLoginFormOrLogin()
+        private async void ShowLoginFormOrLogin()
         {
             // DisplayInventory();
 
             // check for trial
             if (Constants.IS_TRIAL)
             {
-                bool expired = _appSettingService.IsLicenseExpired();
+                bool expired = await _appSettingService.IsLicenseExpired();
                 if (expired)
                 {
                     MessageBox.Show(this, "Your license has expired. Please contact sales.", "License Expired!", MessageBoxButtons.OK);
@@ -55,7 +60,7 @@ namespace IMS
             {
                 DisplayInventory();
             }
-            else if(result == DialogResult.Abort)
+            else if (result == DialogResult.Abort)
             {
                 ShowLoginFormOrLogin();
             }
@@ -63,7 +68,7 @@ namespace IMS
             {
                 CloseTheApp();
             }
-            
+
         }
 
         private void CloseTheApp()
@@ -76,11 +81,51 @@ namespace IMS
             catch (Exception) { }
         }
 
-        private void DisplayInventory()
+        private async void DisplayInventory()
         {
+            var lockTxnCreate = await _appSettingService.GetIsTransactionCreatePageLocked();
             this.Controls.Clear();
-            var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
-            this.Controls.Add(productListUC);
+            //var inventoryUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
+            //this.Controls.Add(inventoryUC);
+            
+            if (lockTxnCreate)
+            {
+                form = Program.container.GetInstance<TransactionCreateLargeForm>();
+                var orderEditModel = new OrderEditModel
+                {
+                    OrderType = OrderTypeEnum.Sale,
+                    OrderId = 0,
+                    OrderOrDirect = OrderOrDirectEnum.Order
+                };
+                form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
+                form.Show();
+                this.Hide();
+                form.FormClosed += TransactionCreateLargeForm_FormClosed;
+
+            }
+            else
+            {
+                var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
+                this.Controls.Add(productListUC);
+            }
+        }
+        private async void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (form != null)
+                form.FormClosed -= TransactionCreateLargeForm_FormClosed;
+            var lockTxnCreate = await _appSettingService.GetIsTransactionCreatePageLocked();
+            if (lockTxnCreate)
+            {
+                this.Close();
+                this?.Dispose();
+            }
+            else
+            {
+                this.Controls.Clear();
+                var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
+                this.Controls.Add(productListUC);
+                this.Show();
+            }
         }
 
         //private void InitializeEvents()

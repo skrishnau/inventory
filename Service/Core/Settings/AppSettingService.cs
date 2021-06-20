@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using DTO.Core.Settings;
 using Infrastructure.Context;
 using Service.DbEventArgs;
@@ -24,11 +26,11 @@ namespace Service.Core.Settings
         #region AppSettings Core
 
         //get app settings
-        public AppSettingModel GetAppSetting(string name)
+        public async Task<AppSettingModel> GetAppSetting(string name)
         {
             using (var _context = new DatabaseContext())
             {
-                var appsetting = _context.AppSettings.FirstOrDefault(x => x.Name == name);
+                var appsetting = await _context.AppSettings.FirstOrDefaultAsync(x => x.Name == name);
                 if (appsetting != null)
                 {
                     return AppSettingMapper.MapToAppSettingModel(appsetting);
@@ -575,11 +577,12 @@ namespace Service.Core.Settings
             }
         }
 
-        public PasswordModel GetPassword()
+        public async  Task<PasswordModel> GetPassword()
         {
-            var password = StringCipher.Decrypt(GetAppSetting("Password")?.Value, StringCipher.PASSWORD);
-            var username = GetAppSetting("Username")?.Value;
-            return new PasswordModel { Password = password, Username = username };
+            var pass = await GetAppSetting("Password");
+            var password = StringCipher.Decrypt(pass?.Value, StringCipher.PASSWORD);
+            var username = await GetAppSetting("Username");
+            return new PasswordModel { Password = password, Username = username?.Value };
         }
 
         public void SaveLicenseStartDate(DateTime date)
@@ -604,12 +607,12 @@ namespace Service.Core.Settings
             }
         }
 
-        public DateTime?[] GetLicenseStartDate()
+        public async Task<DateTime?[]> GetLicenseStartDate()
         {
             var array = new DateTime?[2] { null, null };
             DateTime expireAtDb;
             bool expireAtDbParsed = false;
-            var validity = GetAppSetting("valid_till1");
+            var validity = await GetAppSetting("valid_till1");
             if (validity != null && validity.Value != null)
             {
                 try
@@ -646,17 +649,17 @@ namespace Service.Core.Settings
             return array;
         }
 
-        public bool IsLicenseExpired()
+        public async Task<bool> IsLicenseExpired()
         {
             var expired = false;
-            var dates = GetLicenseStartDate(); // 0: Db , 1: Reg
+            var dates = await GetLicenseStartDate(); // 0: Db , 1: Reg
             // if both persistence are null then create new entry
             if (dates[0] == null || dates[1] == null)
             {
                 // save the expire date
                 SaveLicenseStartDate(DateTime.Now.Date);
             }
-            var newDates = GetLicenseStartDate(); // 0: Db , 1: Reg
+            var newDates = await GetLicenseStartDate(); // 0: Db , 1: Reg
             //if (newDates[0] == null || newDates[1] == null || newDates[0] != newDates[1])
             //{
             //    expired = true;
@@ -680,21 +683,34 @@ namespace Service.Core.Settings
             return SaveAppSetting(appSetting);
         }
 
-        public bool GetShowTransactionCreateInFullPage()
+        public async Task<bool> GetShowTransactionCreateInFullPage()
         {
-            var appSett = GetAppSetting(Constants.KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE);
+            var appSett = await GetAppSetting(Constants.KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE);
+            bool.TryParse(appSett?.Value ?? "", out bool value);
+            return value;
+        }
+        public void SaveShowTransactionCreateInFullPage(bool p)
+        {
+            var appSettingModel = new AppSettingModel
+            {
+                DisplayName = Constants.KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE,
+                Group = Constants.GROUP_SYSTEM,
+                Name = Constants.KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE,
+                Value = p.ToString()
+            };
+            SaveAppSetting(appSettingModel);
+            if (!p)
+                SaveIsTransactionCreatePageLocked(false);
+        }
+
+        public async Task<bool> GetIsTransactionCreatePageLocked()
+        {
+            var appSett = await GetAppSetting(Constants.KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED);
             bool.TryParse(appSett?.Value ?? "", out bool value);
             return value;
         }
 
-        public bool GetIsTransactionCreatePageLocked()
-        {
-            var appSett = GetAppSetting(Constants.KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED);
-            bool.TryParse(appSett?.Value ?? "", out bool value);
-            return value;
-        }
-
-        public void SaveLockTransactionCreatePage(bool p)
+        public void SaveIsTransactionCreatePageLocked(bool p)
         {
             var appSettingModel = new AppSettingModel
             {

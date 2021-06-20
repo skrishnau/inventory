@@ -15,14 +15,14 @@ namespace Service.Core.Settings
         /// Retrive
         /// </summary>
         /// <param name="name"></param>
-        AppSettingModel GetAppSetting(string name);
+        Task<AppSettingModel> GetAppSetting(string name);
         /// <summary>
         /// Add or Update
         /// </summary>
         /// <param name="model"></param>
         bool SaveAppSetting(AppSettingModel model);
         void AddOrUpdateAppSetting();
-        
+
         CompanyInfoSettingModel GetCompanyInfoSetting();
         bool SaveCompanyInfoSetting(CompanyInfoSettingModel model);
 
@@ -31,18 +31,19 @@ namespace Service.Core.Settings
         bool SaveBillSetting(List<BillSettingsModel> modelList);
         string GetReceiptNumber(ReferencesTypeEnum orderType);
         string GetReceiptNumber(BillSettingsModel setting, long currentIndex);
-        bool IsLicenseExpired();
-        DateTime?[] GetLicenseStartDate();
+        Task<bool> IsLicenseExpired();
+        Task<DateTime?[]> GetLicenseStartDate();
         void SaveLicenseStartDate(DateTime date);
         bool SaveCurrentIndex(long index, ReferencesTypeEnum orderType);
         bool IncrementBillIndex(ReferencesTypeEnum orderType);
         bool IncrementBillIndexWithoutCommit(DatabaseContext _context, ReferencesTypeEnum orderType);
-        PasswordModel GetPassword();
+        Task<PasswordModel> GetPassword();
         bool SavePassword(PasswordModel password);
         bool SaveBackupFolderPath(string folderPath);
 
-        bool GetShowTransactionCreateInFullPage();
-        bool GetIsTransactionCreatePageLocked();
-        void SaveLockTransactionCreatePage(bool p);
+        Task<bool> GetShowTransactionCreateInFullPage();
+        void SaveShowTransactionCreateInFullPage(bool p);
+        Task<bool> GetIsTransactionCreatePageLocked();
+        void SaveIsTransactionCreatePageLocked(bool p);
     }
 }

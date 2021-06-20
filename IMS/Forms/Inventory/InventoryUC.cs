@@ -76,7 +76,7 @@ namespace IMS.Forms.Inventory
 
         }
 
-        private void InventoryUC_Load(object sender, EventArgs e)
+        private async void InventoryUC_Load(object sender, EventArgs e)
         {
             InitializeLicense();
             this.Dock = DockStyle.Fill;
@@ -84,14 +84,17 @@ namespace IMS.Forms.Inventory
             InitializeMenubarButtonEvents();
             InitializeTabControl();
             ShowDashboard();
+            var lockTxnCreate = await _appSettingService.GetIsTransactionCreatePageLocked();
+            if (lockTxnCreate)
+                BtnSaleTransaction_Click(_menubar.btnSaleTransaction, EventArgs.Empty);
         }
 
-        private void InitializeLicense()
+        private async void InitializeLicense()
         {
             var text = string.Empty;
             if (Constants.IS_TRIAL)
             {
-                var date = _appSettingService.GetLicenseStartDate();
+                var date = await _appSettingService.GetLicenseStartDate();
                 try
                 {
                     var days = Math.Round((date[0].Value.AddDays(50) - DateTime.Now).TotalDays + 1);
@@ -575,7 +578,7 @@ namespace IMS.Forms.Inventory
         #region Transactions
 
 
-        private void BtnSaleTransaction_Click(object sender, EventArgs e)
+        private async void BtnSaleTransaction_Click(object sender, EventArgs e)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
@@ -598,7 +601,7 @@ namespace IMS.Forms.Inventory
                     OrderOrDirect = OrderOrDirectEnum.Order
                 };
                 form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
-                var showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
+                var showTransactionCreateInFullPage = await _appSettingService.GetShowTransactionCreateInFullPage();
                 if (showTransactionCreateInFullPage)
                 {
                     form.Show();
@@ -612,10 +615,10 @@ namespace IMS.Forms.Inventory
             }
         }
 
-        private void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
+        private async void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            var showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
-            var isTransactionCreateLocked = _appSettingService.GetIsTransactionCreatePageLocked();
+            var showTransactionCreateInFullPage = await _appSettingService.GetShowTransactionCreateInFullPage();
+            var isTransactionCreateLocked = await _appSettingService.GetIsTransactionCreatePageLocked();
             if (showTransactionCreateInFullPage)
             {
                 if (isTransactionCreateLocked)

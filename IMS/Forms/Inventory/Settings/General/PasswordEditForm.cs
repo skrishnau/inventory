@@ -44,9 +44,9 @@ namespace IMS.Forms.Inventory.Settings.General
 
         }
 
-        private void PopulatePassword()
+        private async void PopulatePassword()
         {
-            _passwordModel = _appSettingService.GetPassword();
+            _passwordModel = await _appSettingService.GetPassword();
             //tbPassword.Text = companysetting.Password;
             tbUsername.Text = _passwordModel.Username;
             //tbConfirmPassword.Text = companysetting.VATNo;

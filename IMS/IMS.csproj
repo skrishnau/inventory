@@ -277,6 +277,18 @@
     <Compile Include="Forms\Inventory\Reports\ReportsUC.Designer.cs">
       <DependentUpon>ReportsUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\PreferenceSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\PreferenceSettingsForm.Designer.cs">
+      <DependentUpon>PreferenceSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\PreferenceSettingsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\PreferenceSettingsUC.Designer.cs">
+      <DependentUpon>PreferenceSettingsUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Settings\General\PasswordEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -818,6 +830,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Reports\ReportsUC.resx">
       <DependentUpon>ReportsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\General\PreferenceSettingsForm.resx">
+      <DependentUpon>PreferenceSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\General\PreferenceSettingsUC.resx">
+      <DependentUpon>PreferenceSettingsUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\General\PasswordEditForm.resx">
       <DependentUpon>PasswordEditForm.cs</DependentUpon>
@@ -1556,6 +1574,7 @@
     <Content Include="ims_icon.ico" />
     <Content Include="ims_icon_1.ico" />
     <None Include="Resources\icons8-lock-16.png" />
+    <None Include="Resources\icons8-unlock-16.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

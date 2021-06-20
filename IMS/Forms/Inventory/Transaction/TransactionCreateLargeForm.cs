@@ -1,5 +1,6 @@
 ﻿using IMS.Forms.Common.Base;
 using Service.Core.Settings;
+using Service.DbEventArgs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,10 +39,10 @@ namespace IMS.Forms.Inventory.Transaction
             _saveOrderImmediatelyAfterLoading = saveOrderImmediatelyAfterLoading;
         }
 
-        private void TransactionCreateLargeForm_Load(object sender, EventArgs e)
+        private async void TransactionCreateLargeForm_Load(object sender, EventArgs e)
         {
             this.Text = _editModel.OrderType.ToString() + " Transaction";
-            var showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
+            var showTransactionCreateInFullPage = await _appSettingService.GetShowTransactionCreateInFullPage();
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.Icon = Properties.Resources.ims_icon;
             if (showTransactionCreateInFullPage)
@@ -62,9 +63,25 @@ namespace IMS.Forms.Inventory.Transaction
             uc.CloseParentForm += Uc_CloseParentForm;
         }
 
-        private void Uc_CloseParentForm(object sender, EventArgs e)
+        private async void Uc_CloseParentForm(object sender, IdEventArgs e)
         {
-            this.Close();
+            if(e.Id > 0)
+            {
+                // reset
+                if (await _appSettingService.GetIsTransactionCreatePageLocked())
+                {
+                    this.Controls.Clear();
+                    TransactionCreateLargeForm_Load(this, EventArgs.Empty);
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }

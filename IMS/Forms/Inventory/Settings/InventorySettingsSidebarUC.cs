@@ -20,8 +20,8 @@ namespace IMS.Forms.Inventory.Settings
 
         public void SetVisited(object sender)
         {
-            var regularFont = new Font(lnkGeneral.Font, FontStyle.Regular);
-            var boldFont = new Font(lnkGeneral.Font, FontStyle.Bold);
+            var regularFont = new Font(lnkProfile.Font, FontStyle.Regular);
+            var boldFont = new Font(lnkProfile.Font, FontStyle.Bold);
             // clear first
             foreach (Control control in pnlLinks.Controls)
             {

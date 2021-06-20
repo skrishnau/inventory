@@ -58,7 +58,7 @@ namespace IMS.Forms.Inventory.Settings
 
         private void InitializeEvents()
         {
-            _sidebar.lnkGeneral.LinkClicked += LnkGeneral_LinkClicked;
+            _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
             _sidebar.lnkAdjustmentCodes.LinkClicked += LnkAdjustmentCodes_LinkClicked;
             _sidebar.lnkPackages.LinkClicked += LnkPackages_LinkClicked;
             _sidebar.lnkProductCategory.LinkClicked += LnkProductCategory_LinkClicked;
@@ -68,14 +68,31 @@ namespace IMS.Forms.Inventory.Settings
             // _sidebar.lnkProfile.LinkClicked += LnkProfile_LinkClicked;
 
             _sidebar.lnkWarehouses.LinkClicked += LnkWarehouses_LinkClicked;
+            _sidebar.lnkPreferences.LinkClicked += LnkPreferences_LinkClicked;
+        }
+
+        private void LnkPreferences_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var uc = Program.container.GetInstance<PreferenceSettingsUC>();
+            uc.SetViewMode(false);
+            _body.pnlBody.Controls.Clear();
+            _body.pnlBody.Controls.Add(uc);
+            // set selection
+            _sidebar.SetVisited(sender);
+            _body.SubHeadingText = "General";
+            uc.MyTabTitle = MyTabTitle;
+            uc.MySubTabTitle = _body.SubHeadingText;
+            InventoryUC.CurrentSubTabTitle = _body.SubHeadingText;
+            _currentTab = uc;
+            _currentTab.ExecuteActions();
         }
 
         private void SelectGeneralLink()
         {
-            LnkGeneral_LinkClicked(_sidebar.lnkGeneral, null);
+            LnkProfile_LinkClicked(_sidebar.lnkProfile, null);
         }
 
-        private void LnkGeneral_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LnkProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var uc = Program.container.GetInstance<ProfileUC>();
             _body.pnlBody.Controls.Clear();

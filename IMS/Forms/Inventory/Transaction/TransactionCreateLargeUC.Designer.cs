@@ -91,6 +91,7 @@
             this.btnResetAdd = new System.Windows.Forms.Button();
             this.btnAddAdd = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.splitterAdd = new System.Windows.Forms.Splitter();
             this.pnlReceipt.SuspendLayout();
             this.pnlCustomer.SuspendLayout();
             this.pnlBottomInputs.SuspendLayout();
@@ -516,10 +517,10 @@
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 104);
+            this.dgvItems.Location = new System.Drawing.Point(0, 109);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.OrderId = 0;
-            this.dgvItems.Size = new System.Drawing.Size(1036, 274);
+            this.dgvItems.Size = new System.Drawing.Size(1036, 269);
             this.dgvItems.TabIndex = 53;
             // 
             // errorProvider
@@ -680,7 +681,7 @@
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 53);
+            this.panel1.Location = new System.Drawing.Point(0, 58);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1036, 51);
             this.panel1.TabIndex = 54;
@@ -725,12 +726,24 @@
             this.toolTip1.SetToolTip(this.btnAddAdd, "Add");
             this.btnAddAdd.UseVisualStyleBackColor = false;
             // 
+            // splitterAdd
+            // 
+            this.splitterAdd.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitterAdd.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitterAdd.Enabled = false;
+            this.splitterAdd.Location = new System.Drawing.Point(0, 53);
+            this.splitterAdd.Name = "splitterAdd";
+            this.splitterAdd.Size = new System.Drawing.Size(1036, 5);
+            this.splitterAdd.TabIndex = 55;
+            this.splitterAdd.TabStop = false;
+            // 
             // TransactionCreateLargeUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.splitterAdd);
             this.Controls.Add(this.pnlBottomInputs);
             this.Controls.Add(this.saveFooterUC1);
             this.Controls.Add(this.pnlCustomer);
@@ -831,5 +844,6 @@
         private System.Windows.Forms.NumericUpDown txtQuantityAdd;
         private System.Windows.Forms.NumericUpDown txtRateAdd;
         private System.Windows.Forms.NumericUpDown txtTotalAdd;
+        private System.Windows.Forms.Splitter splitterAdd;
     }
 }

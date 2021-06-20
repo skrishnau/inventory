@@ -57,5 +57,8 @@ namespace ViewModel.Utility
         public const string NAME_LEDGER = "Ledger";
         public const string NAME_PRODUCT_LEDGER = "Product Ledger";
         public const string NAME_PAYMENT_LIST = "Payment List";
+
+        public const string YES = "Yes";
+        public const string NO = "No";
     }
 }

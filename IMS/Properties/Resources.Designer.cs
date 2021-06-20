@@ -1103,6 +1103,16 @@ namespace IMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_unlock_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_unlock_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_User_Account_16px {
             get {
                 object obj = ResourceManager.GetObject("icons8_User_Account_16px", resourceCulture);

@@ -30,7 +30,7 @@ namespace IMS.Forms.Inventory.Transaction
     public partial class TransactionCreateLargeUC : BaseUserControl
     {
         public event EventHandler<BaseEventArgs<OrderModel>> SavedOrderImmediatelyAfterLoading;
-        public event EventHandler<EventArgs> CloseParentForm;
+        public event EventHandler<IdEventArgs> CloseParentForm;
         private readonly IUserService _userService;
         private readonly IDatabaseChangeListener _listener;
         private readonly IBusinessService _businessService;
@@ -77,7 +77,7 @@ namespace IMS.Forms.Inventory.Transaction
         }
 
 
-        private void TransactionCreateForm_Load(object sender, EventArgs e)
+        private async void TransactionCreateForm_Load(object sender, EventArgs e)
         {
             this.cbDiscountType.SelectedItem = "%";
             this.dtExpectedDate.SetValue(DateTime.Now);
@@ -118,24 +118,31 @@ namespace IMS.Forms.Inventory.Transaction
             }
 
             MakeColumnsAutoSize();
-            UpdateLock();
+            _showTransactionCreateInFullPage = await _appSettingService.GetShowTransactionCreateInFullPage();
+            UpdateLock(null);
         }
 
         #region Functions
 
-        private void UpdateLock()
+        private async void UpdateLock(bool? locked = null)
         {
-            _showTransactionCreateInFullPage = _appSettingService.GetShowTransactionCreateInFullPage();
+            var tooltipText = string.Empty;
             if (_showTransactionCreateInFullPage)
             {
-                _isTransactionCreatePageLocked = _appSettingService.GetIsTransactionCreatePageLocked();
-                saveFooterUC1.btnLock.BackColor = _isTransactionCreatePageLocked ? Color.Green : SystemColors.ButtonFace;
+                _isTransactionCreatePageLocked = locked == null ? (await _appSettingService.GetIsTransactionCreatePageLocked()): locked??false;
+                //saveFooterUC1.btnLock.BackColor = _isTransactionCreatePageLocked ? Color.LightGreen : SystemColors.ControlLightLight;
+                saveFooterUC1.btnLock.Image = _isTransactionCreatePageLocked ? Properties.Resources.icons8_lock_16: Properties.Resources.icons8_unlock_16;
                 saveFooterUC1.btnLock.Visible = true;
+                tooltipText = _isTransactionCreatePageLocked ? 
+                    "(Locked). UnLock tranasction create page"
+                    : "Lock tranasction create page to open it automatically on startup";
             }
             else
             {
                 saveFooterUC1.btnLock.Visible = false;
             }
+            toolTip1.SetToolTip(saveFooterUC1.btnLock, tooltipText);
+
         }
 
         private void MakeColumnsAutoSize()
@@ -245,7 +252,10 @@ namespace IMS.Forms.Inventory.Transaction
         private void BtnLock_Click(object sender, EventArgs e)
         {
             var isLocked = _isTransactionCreatePageLocked;
-            _appSettingService.SaveLockTransactionCreatePage(!isLocked);
+            isLocked = !isLocked;
+            _appSettingService.SaveIsTransactionCreatePageLocked(isLocked);
+            PopupMessage.ShowSuccessMessage("Successfully " + (isLocked? "Locked" : "Unlocked"));
+            UpdateLock(isLocked);
         }
 
         private void DtCompletedDate_TextChanged(object sender, EventArgs e)
@@ -701,7 +711,7 @@ namespace IMS.Forms.Inventory.Transaction
                 {
                     PopupMessage.ShowSaveSuccessMessage();
                     if (closeFormAftherSave)
-                        CloseParentForm?.Invoke(this, EventArgs.Empty);//this.Close();
+                        CloseParentForm?.Invoke(this, new IdEventArgs(msg?.Data?.Id??0));//this.Close();
                     return msg.Data;
                 }
                 else
@@ -821,7 +831,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            CloseParentForm?.Invoke(this, EventArgs.Empty);//this.Close();
+            CloseParentForm?.Invoke(this, new IdEventArgs(0));//this.Close();
         }
 
         private void BtnCheckout_Click(object sender, EventArgs e)
@@ -1048,11 +1058,12 @@ namespace IMS.Forms.Inventory.Transaction
                 Package = package.Name,
                 PackageId = package.Id,
                 Rate = txtRateAdd.Value,
-                Total = txtTotal.Value,
+                Total = txtTotalAdd.Value,
                 ProductModel = productModel,
             };
             dgvItems.AddRows(new List<InventoryUnitModel> { invUnitModel });
             BtnResetAdd_Click(btnResetAdd, EventArgs.Empty);
+            cbProductAdd.Focus();
         }
 
         #endregion
