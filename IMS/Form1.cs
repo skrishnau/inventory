@@ -83,6 +83,7 @@ namespace IMS
 
         private async void DisplayInventory()
         {
+            /*
             var lockTxnCreate = await _appSettingService.GetIsTransactionCreatePageLocked();
             this.Controls.Clear();
             //var inventoryUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
@@ -105,9 +106,10 @@ namespace IMS
             }
             else
             {
+            */
                 var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
                 this.Controls.Add(productListUC);
-            }
+           /* }*/
         }
         private async void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
         {

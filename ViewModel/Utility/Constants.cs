@@ -18,14 +18,15 @@ namespace ViewModel.Utility
         public const string KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED = "is_transaction_create_page_locked";
         public const string DISPLAY_IS_TRANSACTION_CRETE_PAGE_LOCKED = "Is Transaction Create Page Locked";
 
-
-        public const bool IS_TRIAL = true;
+        // region: for Bibek Client Kalimati
+        public const bool IS_TRIAL = false;
         public const bool HAS_STOCK_MANAGEMENT = true;
         // later convert it to appsettings and give on/off feature to user
         public const bool LEDGER_DISPLAY_TRANSACTION_ITEMS_ALSO = true;
         public const bool CAN_NEW_PRODUCT_BE_ADDED_FROM_TRANSACTION = false;
         public const bool CAN_NEW_PACKAGE_BE_ADDED_FROM_TRANSACTION = false;
         
+        // endregion: for Bibek Client Kalimati
 
 
 

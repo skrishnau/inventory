@@ -582,7 +582,7 @@ namespace IMS.Forms.Inventory
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                /*
+               
                 var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
                 var orderEditModel = new OrderEditModel
                 {
@@ -592,7 +592,8 @@ namespace IMS.Forms.Inventory
                 };
                 form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
                 form.ShowDialog();
-                */
+               
+                /*
                 var form = Program.container.GetInstance<Transaction.TransactionCreateLargeForm>();
                 var orderEditModel = new OrderEditModel
                 {
@@ -612,6 +613,7 @@ namespace IMS.Forms.Inventory
                 {
                     form.ShowDialog();
                 }
+                */
             }
         }
 

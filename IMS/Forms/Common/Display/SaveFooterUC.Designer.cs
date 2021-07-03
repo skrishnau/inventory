@@ -165,6 +165,7 @@
             this.btnLock.TabIndex = 56;
             this.btnLock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnLock.UseVisualStyleBackColor = false;
+            this.btnLock.Visible = false;
             // 
             // SaveFooterUC
             // 
