@@ -86,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Context\DynamicConnection.cs" />
     <Compile Include="Context\InventoryUnit.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>

@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         UserModel _selectedSupplierModel;
 
-        UserTypeEnum _userType = UserTypeEnum.Client;
+        UserTypeEnum _userType = UserTypeEnum.All;//Client;
         BindingSource _bindingSource = new BindingSource();
 
         private int _previousIndex;
@@ -215,7 +215,7 @@ namespace IMS.Forms.Inventory.Suppliers
             }
             else
             {
-                _userType = UserTypeEnum.Client;
+                _userType = UserTypeEnum.All;// Client;
                 //btnNew.Visible = false;
             }
             PopulateUserList();

@@ -53,8 +53,8 @@ namespace IMS
             }
 
             // ask for password
-            var loginForm = Program.container.GetInstance<PasswordEditForm>();//new InventoryUC();
-            loginForm.SetData(false, true);
+            var loginForm = Program.container.GetInstance<LoginForm>();//new InventoryUC();
+            
             DialogResult result = loginForm.ShowDialog();
             if (result == DialogResult.OK)
             {

@@ -1,5 +1,6 @@
 ﻿using IMS.Forms.Common;
 using Service.Core.Settings;
+using Service.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,34 +17,34 @@ namespace IMS.Forms.Inventory.Settings.General
 {
     public partial class PasswordEditForm : Form
     {
-        private readonly IAppSettingService _appSettingService;
+        //private readonly IAppSettingService _appSettingService;
+        private readonly IUserService _userService;
 
-        private PasswordModel _passwordModel;
+        //private PasswordModel _passwordModel;
 
-        private bool _editMode;
-        private bool _authMode;
+        //private bool _editMode;
+        //private bool _authMode;
 
-        public PasswordEditForm(IAppSettingService appSettingService)
+        public PasswordEditForm(IUserService userService)
         {
-            this._appSettingService = appSettingService;
+            //this._appSettingService = appSettingService;
             InitializeComponent();
 
             this.Load += ProfileEditForm_Load;
         }
 
-        public void SetData(bool editMode, bool authMode)
-        {
-            _editMode = editMode;
-            _authMode = authMode;
-        }
+        //public void SetData(bool editMode, bool authMode)
+        //{
+        //    //_editMode = editMode;
+        //    //_authMode = authMode;
+        //}
 
         private void ProfileEditForm_Load(object sender, EventArgs e)
         {
-            PopulatePassword();
+            //PopulatePassword();
             btnSaveProfile.Click += BtnSave_Click;
-
         }
-
+        /*
         private async void PopulatePassword()
         {
             _passwordModel = await _appSettingService.GetPassword();
@@ -73,11 +74,10 @@ namespace IMS.Forms.Inventory.Settings.General
             
 
         }
-
+        */
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
-
         }
 
         private void Save()
@@ -93,31 +93,25 @@ namespace IMS.Forms.Inventory.Settings.General
                     OldPassword = tbConfirmPassword.Text,
                 };
                 var success = false;
-                if(_authMode && string.IsNullOrEmpty(_passwordModel.Username))
-                {
-                    _editMode = true;
-                }
-                if (_editMode)
-                {
-                    // save the password
-                    success = _appSettingService.SavePassword(model);
-                    if (success)
-                        PopupMessage.ShowSuccessMessage("Password saved Successfully");
-                }
-                else if(_authMode)
-                {
-                    // validate the password
-                     success = model.Password == _passwordModel.Password && tbUsername.Text == _passwordModel.Username;
-                    if (success)
-                        PopupMessage.ShowSuccessMessage("Login success!");
-                    else
-                        PopupMessage.ShowInfoMessage("Couldn't authenticate. Check again");
-                }
-                this.Focus();
+                //if(_authMode && string.IsNullOrEmpty(_passwordModel.Username))
+                //{
+                //    _editMode = true;
+                //}
+                //if (_editMode)
+                //{
+                // save the password
+                success = _userService.SavePassword(model);
+                //}
                 if (success)
                 {
+                    PopupMessage.ShowSuccessMessage("Password saved Successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
+                }
+                else
+                {
+                    PopupMessage.ShowInfoMessage("Couldn't save password!");
+                    this.Focus();
                 }
             }
             else
@@ -130,7 +124,7 @@ namespace IMS.Forms.Inventory.Settings.General
         private bool ValidateInputs()
         {
             var isValid = true;
-            if (_editMode && tbConfirmPassword.Text != tbPassword.Text)
+            if (tbConfirmPassword.Text != tbPassword.Text)
             {
                 isValid = false;
                 errorProvider1.SetError(tbConfirmPassword, "Confirm Password should be equal to Password");
@@ -141,7 +135,7 @@ namespace IMS.Forms.Inventory.Settings.General
                 errorProvider1.SetError(tbConfirmPassword, string.Empty);
                 errorProvider1.SetError(tbPassword, string.Empty);
             }
-            if (_editMode && string.IsNullOrEmpty(tbConfirmPassword.Text))
+            if (string.IsNullOrEmpty(tbConfirmPassword.Text))
             {
                 isValid = false;
                 errorProvider1.SetError(tbConfirmPassword, "Required");
@@ -170,16 +164,6 @@ namespace IMS.Forms.Inventory.Settings.General
             {
                 errorProvider1.SetError(tbOldPassword, string.Empty);
             }
-
-            if (!string.IsNullOrEmpty(_passwordModel.Username) && tbUsername.Text != _passwordModel.Username)
-            {
-                isValid = false;
-                errorProvider1.SetError(tbUsername, "Incorrect!");
-            }
-            else
-            {
-                errorProvider1.SetError(tbUsername, string.Empty);
-            }
             return isValid;
         }
 
@@ -200,6 +184,6 @@ namespace IMS.Forms.Inventory.Settings.General
 
             //return sb.ToString();
         }
-        
+
     }
 }

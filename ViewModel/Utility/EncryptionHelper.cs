@@ -21,7 +21,11 @@ namespace ViewModel.Utility
         // This constant determines the number of iterations for the password bytes generation function.
         private const int DerivationIterations = 1000;
 
-        public static string Encrypt(string plainText, string passPhrase)
+        public static string Encrypt(string plainText)
+        {
+            return Encrypt(plainText, PASSWORD);
+        }
+        private static string Encrypt(string plainText, string passPhrase)
         {
             if (string.IsNullOrEmpty(plainText))
                 return plainText;
@@ -60,7 +64,12 @@ namespace ViewModel.Utility
             }
         }
 
-        public static string Decrypt(string cipherText, string passPhrase)
+        public static string Decrypt(string cipherText)
+        {
+            return Decrypt(cipherText, PASSWORD);
+        }
+
+        private static string Decrypt(string cipherText, string passPhrase)
         {
             if (string.IsNullOrEmpty(cipherText))
                 return cipherText;

@@ -61,5 +61,8 @@ namespace ViewModel.Utility
 
         public const string YES = "Yes";
         public const string NO = "No";
+
+        public const string ADMIN_USERNAME = "admin";
+        public const string ADMIN_NAME = "Administrator";
     }
 }

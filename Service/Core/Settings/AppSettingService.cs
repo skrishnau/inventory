@@ -561,7 +561,7 @@ namespace Service.Core.Settings
                     Name = "Password",
                     DisplayName = "Password",
                     Group = "Authorization",
-                    Value = StringCipher.Encrypt(password.Password, StringCipher.PASSWORD),
+                    Value = StringCipher.Encrypt(password.Password),
                 };
                 SaveAppSettingWithoutCommit(_context, pass);
                 var username = new AppSetting()
@@ -580,14 +580,14 @@ namespace Service.Core.Settings
         public async  Task<PasswordModel> GetPassword()
         {
             var pass = await GetAppSetting("Password");
-            var password = StringCipher.Decrypt(pass?.Value, StringCipher.PASSWORD);
+            var password = StringCipher.Decrypt(pass?.Value);
             var username = await GetAppSetting("Username");
             return new PasswordModel { Password = password, Username = username?.Value };
         }
 
         public void SaveLicenseStartDate(DateTime date)
         {
-            var encrypted = StringCipher.Encrypt(date.ToString("yyyy/MM/dd"), StringCipher.PASSWORD);
+            var encrypted = StringCipher.Encrypt(date.ToString("yyyy/MM/dd"));
             var expireModel = new AppSettingModel()
             {
                 DisplayName = "Valid Till",
@@ -617,7 +617,7 @@ namespace Service.Core.Settings
             {
                 try
                 {
-                    var decrypt = StringCipher.Decrypt(validity.Value, "PASS@WORD1");
+                    var decrypt = StringCipher.Decrypt(validity.Value);
                     expireAtDbParsed = DateTime.TryParse(decrypt, out expireAtDb);
                     if (expireAtDbParsed)
                         array[0] = expireAtDb;
@@ -639,7 +639,7 @@ namespace Service.Core.Settings
             {
                 try
                 {
-                    var decrypt = StringCipher.Decrypt(regValue, "PASS@WORD1");
+                    var decrypt = StringCipher.Decrypt(regValue);
                     expireAtRegParsed = DateTime.TryParse(decrypt, out expireAtReg);
                     if (expireAtRegParsed)
                         array[1] = expireAtReg;

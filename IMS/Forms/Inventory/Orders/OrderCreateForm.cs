@@ -132,7 +132,7 @@ namespace IMS.Forms.Inventory.Orders
         private void PopulateClientCombo()
         {
             List<IdNamePair> list = null;
-            var userType = UserTypeEnum.Client;
+            var userType = UserTypeEnum.All;
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:

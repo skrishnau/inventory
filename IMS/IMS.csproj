@@ -88,6 +88,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Accounts\LoginUserCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Accounts\LoginUserCreate.Designer.cs">
+      <DependentUpon>LoginUserCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Backup\BackupDatabase.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -276,6 +282,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Reports\ReportsUC.Designer.cs">
       <DependentUpon>ReportsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\General\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Settings\General\PreferenceSettingsForm.cs">
       <SubType>Form</SubType>
@@ -741,6 +753,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Helpers\OrderModelReportHelper.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="Forms\Accounts\LoginUserCreate.resx">
+      <DependentUpon>LoginUserCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Backup\BackupDatabase.resx">
       <DependentUpon>BackupDatabase.cs</DependentUpon>
     </EmbeddedResource>
@@ -830,6 +845,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Reports\ReportsUC.resx">
       <DependentUpon>ReportsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\General\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\General\PreferenceSettingsForm.resx">
       <DependentUpon>PreferenceSettingsForm.cs</DependentUpon>

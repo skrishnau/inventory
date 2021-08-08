@@ -8,6 +8,7 @@ using Service.Listeners;
 using ViewModel.Core.Common;
 using ViewModel.Core.Users;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace Service.Core.Users
 {
@@ -142,7 +143,7 @@ namespace Service.Core.Users
                     .Where(x => x.Use || (!x.Use && includeUserList.Contains(x.Id)))
                     .Select(x => new IdNamePair()
                     {
-                        Name = x.Name + (string.IsNullOrEmpty(x.Company) ? "" : " - "+x.Company),
+                        Name = x.Name + (string.IsNullOrEmpty(x.Company) ? "" : " - " + x.Company),
                         Id = x.Id
                     }).ToList();
             }
@@ -176,11 +177,11 @@ namespace Service.Core.Users
                     .Where(x => x.DeletedAt == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
-            if (userType == UserTypeEnum.Client) // client means both Customer and Supplier
+            if (userType == UserTypeEnum.All) // client means both Customer and Supplier
             {
                 query = query.Where(x => x.UserType == customer || x.UserType == supplier);
             }
-            else if (userType != UserTypeEnum.All)
+            else //if (userType != UserTypeEnum.All)
             {
                 var userTypeStr = userType.ToString();
                 query = query.Where(x => x.UserType == userTypeStr);
@@ -218,6 +219,60 @@ namespace Service.Core.Users
                 }
                 return null;
             }
+        }
+
+        public UserModel Authenticate(string username, string password)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                if (username == Constants.ADMIN_USERNAME)
+                {
+                    var adminExists = _context.Users.Any(x => x.Username == username);
+                    if (!adminExists)
+                    {
+                        var adminUser = new User
+                        {
+                            Username = username,
+                            Password = StringCipher.Encrypt(password),
+                            CanLogin = true,
+                            CreatedAt = DateTime.Now,
+                            IsCompany = false,
+                            UpdatedAt = DateTime.Now,
+                            Use = true,
+                            Name = Constants.ADMIN_NAME,
+                            UserType = UserTypeEnum.User.ToString(),
+                        };
+                        _context.Users.Add(adminUser);
+                        _context.SaveChanges();
+                    }
+                }
+                var passwordEncrypt = StringCipher.Encrypt(password);
+                var user = _context.Users.FirstOrDefault(x =>
+                    x.Username == username
+                    && x.CanLogin
+                    && x.DeletedAt == null
+                    && x.Use == true
+                    );
+                if( password == StringCipher.Decrypt(user?.Password))
+                {
+                    return UserMapper.MapToUserModel(user);
+                }
+                return null;
+            }
+        }
+
+        public bool IsAnyUser()
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var userType = UserTypeEnum.User.ToString();
+                return _context.Users.Any(x => (x.Username == Constants.ADMIN_USERNAME)
+                    || (x.CanLogin
+                        && x.DeletedAt == null
+                        && x.Use == true
+                    ));
+            }
+
         }
     }
 

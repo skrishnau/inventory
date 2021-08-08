@@ -299,7 +299,7 @@ namespace IMS.Forms.Inventory.Transaction
         private void PopulateClientCombo()
         {
             List<IdNamePair> list = null;
-            var userType = UserTypeEnum.Client;
+            var userType = UserTypeEnum.All;//.Client;
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:

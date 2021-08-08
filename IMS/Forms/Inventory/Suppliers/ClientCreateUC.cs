@@ -55,7 +55,7 @@ namespace IMS.Forms.Inventory.Suppliers
             cbUserType.DataSource = list;
             cbUserType.ValueMember = "Value";
             cbUserType.DisplayMember = "name";
-            if(_userType != UserTypeEnum.All && _userType != UserTypeEnum.Client)
+            if(_userType == UserTypeEnum.Customer || _userType == UserTypeEnum.Supplier)
                 cbUserType.SelectedValue = _userType.ToString();
         }
 
@@ -156,9 +156,9 @@ namespace IMS.Forms.Inventory.Suppliers
                 case OrderTypeEnum.Purchase:
                     _userType = UserTypeEnum.Supplier;
                     break;
-                case OrderTypeEnum.All:
-                    _userType = UserTypeEnum.All;
-                    break;
+                //case OrderTypeEnum.All:
+                //    _userType = 
+                //    break;
             }
         }
     }

@@ -11,7 +11,7 @@ namespace ViewModel.Enums
         Customer = 1,
         Supplier = 2,
         User = 3,
-        Client = 4, // Customer and Suppliers are Clients but User isn't
+        //Client = 4, // Customer and Suppliers are Clients but User isn't
         All = 5,
 
     }

@@ -220,6 +220,8 @@ namespace IMS
             container.Register<LedgerUC>(Lifestyle.Scoped);
             container.Register<ProductLedgerUC>(Lifestyle.Scoped);
 
+            container.Register<LoginForm>(Lifestyle.Scoped);
+
             //container.Register<TransactionCreateForm>(Lifestyle.Scoped);
             //container.Register<TransactionCreateLargeUC>(Lifestyle.Scoped);
 
