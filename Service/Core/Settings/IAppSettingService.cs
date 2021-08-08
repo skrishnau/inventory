@@ -37,8 +37,8 @@ namespace Service.Core.Settings
         bool SaveCurrentIndex(long index, ReferencesTypeEnum orderType);
         bool IncrementBillIndex(ReferencesTypeEnum orderType);
         bool IncrementBillIndexWithoutCommit(DatabaseContext _context, ReferencesTypeEnum orderType);
-        Task<PasswordModel> GetPassword();
-        bool SavePassword(PasswordModel password);
+        //Task<PasswordModel> GetPassword();
+        //bool SavePassword(PasswordModel password);
         bool SaveBackupFolderPath(string folderPath);
 
         Task<bool> GetShowTransactionCreateInFullPage();

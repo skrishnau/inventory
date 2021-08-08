@@ -551,7 +551,7 @@ namespace Service.Core.Settings
             var billSettings = GetBillSettings(orderType);
             return billSettings.ReceiptNo;
         }
-
+        /*
         public bool SavePassword(PasswordModel password)
         {
             using (var _context = new DatabaseContext())
@@ -584,7 +584,7 @@ namespace Service.Core.Settings
             var username = await GetAppSetting("Username");
             return new PasswordModel { Password = password, Username = username?.Value };
         }
-
+        */
         public void SaveLicenseStartDate(DateTime date)
         {
             var encrypted = StringCipher.Encrypt(date.ToString("yyyy/MM/dd"));

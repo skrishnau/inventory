@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Common;
+using Service;
 using Service.Core.Settings;
 using Service.Core.Users;
 using System;
@@ -68,6 +69,7 @@ namespace IMS.Forms.Inventory.Settings.General
                 var authorizedUser = _userService.Authenticate(tbUsername.Text, tbPassword.Text);
                 if (authorizedUser != null)
                 {
+                    UserSession.User = authorizedUser;
                     PopupMessage.ShowSuccessMessage("Login success!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();

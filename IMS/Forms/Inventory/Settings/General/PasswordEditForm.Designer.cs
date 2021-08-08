@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.btnSaveProfile = new System.Windows.Forms.Button();
-            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.tbNewPassword = new System.Windows.Forms.TextBox();
             this.lblOldPassword = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -59,20 +59,20 @@
             this.btnSaveProfile.Text = "Save";
             this.btnSaveProfile.UseVisualStyleBackColor = true;
             // 
-            // tbPassword
+            // tbNewPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(100, 32);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(2);
-            this.tbPassword.MaxLength = 10;
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(127, 20);
-            this.tbPassword.TabIndex = 2;
+            this.tbNewPassword.Location = new System.Drawing.Point(99, 2);
+            this.tbNewPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.tbNewPassword.MaxLength = 10;
+            this.tbNewPassword.Name = "tbNewPassword";
+            this.tbNewPassword.PasswordChar = '*';
+            this.tbNewPassword.Size = new System.Drawing.Size(127, 20);
+            this.tbNewPassword.TabIndex = 2;
             // 
             // lblOldPassword
             // 
             this.lblOldPassword.AutoSize = true;
-            this.lblOldPassword.Location = new System.Drawing.Point(2, 29);
+            this.lblOldPassword.Location = new System.Drawing.Point(2, 30);
             this.lblOldPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOldPassword.Name = "lblOldPassword";
             this.lblOldPassword.Size = new System.Drawing.Size(72, 13);
@@ -82,12 +82,12 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 30);
+            this.label7.Location = new System.Drawing.Point(2, 0);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 13);
+            this.label7.Size = new System.Drawing.Size(78, 13);
             this.label7.TabIndex = 2;
-            this.label7.Text = "Password";
+            this.label7.Text = "New Password";
             // 
             // label6
             // 
@@ -112,9 +112,9 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.07165F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.92835F));
-            this.tableLayoutPanel2.Controls.Add(this.tbPassword, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tbOldPassword, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblOldPassword, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tbUsername, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -150,7 +150,7 @@
             // lblConfirmPassword
             // 
             this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Location = new System.Drawing.Point(2, 0);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(2, 29);
             this.lblConfirmPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
             this.lblConfirmPassword.Size = new System.Drawing.Size(91, 13);
@@ -159,7 +159,7 @@
             // 
             // tbConfirmPassword
             // 
-            this.tbConfirmPassword.Location = new System.Drawing.Point(99, 2);
+            this.tbConfirmPassword.Location = new System.Drawing.Point(99, 31);
             this.tbConfirmPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbConfirmPassword.MaxLength = 10;
             this.tbConfirmPassword.Name = "tbConfirmPassword";
@@ -169,7 +169,7 @@
             // 
             // tbOldPassword
             // 
-            this.tbOldPassword.Location = new System.Drawing.Point(99, 31);
+            this.tbOldPassword.Location = new System.Drawing.Point(100, 32);
             this.tbOldPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbOldPassword.MaxLength = 10;
             this.tbOldPassword.Name = "tbOldPassword";
@@ -186,10 +186,10 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.98113F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.01887F));
-            this.tableLayoutPanel1.Controls.Add(this.tbOldPassword, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblConfirmPassword, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbConfirmPassword, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblOldPassword, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbNewPassword, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblConfirmPassword, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbConfirmPassword, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 61);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -226,7 +226,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnSaveProfile;
-        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.TextBox tbNewPassword;
         private System.Windows.Forms.Label lblOldPassword;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;

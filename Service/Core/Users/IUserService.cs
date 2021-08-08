@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core.Common;
+using ViewModel.Core.Settings;
 using ViewModel.Core.Users;
 using ViewModel.Enums;
 
@@ -32,5 +33,6 @@ namespace Service.Core.Users
 
         UserModel GetTransactionSumOfUser(int userId);
         UserModel Authenticate(string username, string password);
+        bool SavePassword(PasswordModel model);
     }
 }

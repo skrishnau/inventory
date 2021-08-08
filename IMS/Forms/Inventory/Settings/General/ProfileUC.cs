@@ -40,7 +40,6 @@ namespace IMS.Forms.Inventory.Settings.General
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var form = Program.container.GetInstance<PasswordEditForm>();
-                form.SetData(true, false);
                 form.ShowDialog();
             }
         }

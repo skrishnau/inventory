@@ -6,6 +6,7 @@ using Infrastructure.Context;
 using Service.DbEventArgs;
 using Service.Listeners;
 using ViewModel.Core.Common;
+using ViewModel.Core.Settings;
 using ViewModel.Core.Users;
 using ViewModel.Enums;
 using ViewModel.Utility;
@@ -265,12 +266,27 @@ namespace Service.Core.Users
         {
             using (var _context = DatabaseContext.Context)
             {
-                var userType = UserTypeEnum.User.ToString();
                 return _context.Users.Any(x => (x.Username == Constants.ADMIN_USERNAME)
                     || (x.CanLogin
                         && x.DeletedAt == null
                         && x.Use == true
                     ));
+            }
+
+        }
+
+        public bool SavePassword(PasswordModel model)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var user = _context.Users.FirstOrDefault(x => x.Username == model.Username);
+                if (user != null)
+                {
+                    user.Password = StringCipher.Encrypt(model.Password);
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
             }
 
         }

@@ -98,7 +98,7 @@
     <Compile Include="Core\Users\Accounts\IAccountService.cs" />
     <Compile Include="Core\Users\Roles\IRoleService.cs" />
     <Compile Include="Core\Users\Roles\RoleService.cs" />
-    <Compile Include="Utility\Session.cs" />
+    <Compile Include="Utility\UserSession.cs" />
     <Compile Include="Utility\UpdateMode.cs" />
     <Compile Include="Utility\ProductOptionTypeEnum.cs" />
   </ItemGroup>

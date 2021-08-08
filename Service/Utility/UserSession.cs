@@ -7,7 +7,7 @@ using ViewModel.Core.Users;
 
 namespace Service
 {
-    class Session
+    public class UserSession
     {
         public static UserModel User { get; set; }
     }

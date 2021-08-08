@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Common;
+using Service;
 using Service.Core.Settings;
 using Service.Core.Users;
 using System;
@@ -17,64 +18,24 @@ namespace IMS.Forms.Inventory.Settings.General
 {
     public partial class PasswordEditForm : Form
     {
-        //private readonly IAppSettingService _appSettingService;
         private readonly IUserService _userService;
-
-        //private PasswordModel _passwordModel;
-
-        //private bool _editMode;
-        //private bool _authMode;
-
+        
         public PasswordEditForm(IUserService userService)
         {
-            //this._appSettingService = appSettingService;
+            _userService = userService;
             InitializeComponent();
 
             this.Load += ProfileEditForm_Load;
         }
 
-        //public void SetData(bool editMode, bool authMode)
-        //{
-        //    //_editMode = editMode;
-        //    //_authMode = authMode;
-        //}
-
         private void ProfileEditForm_Load(object sender, EventArgs e)
         {
-            //PopulatePassword();
+            tbUsername.Text = UserSession.User.Username;
+            tbUsername.Enabled = false;
+            tbNewPassword.Focus();
             btnSaveProfile.Click += BtnSave_Click;
         }
-        /*
-        private async void PopulatePassword()
-        {
-            _passwordModel = await _appSettingService.GetPassword();
-            //tbPassword.Text = companysetting.Password;
-            tbUsername.Text = _passwordModel.Username;
-            //tbConfirmPassword.Text = companysetting.VATNo;
-            //tbOldPassword.Text = companysetting.PANNo;
-            if (_authMode)
-            {
-                if (!string.IsNullOrEmpty(_passwordModel.Username))
-                {
-                    // authenticate
-                    tbConfirmPassword.Visible = false;
-                    tbOldPassword.Visible = false;
-                    lblOldPassword.Visible = false;
-                    lblConfirmPassword.Visible = false;
-                    this.Text = "Login";
-                    this.Height = 144; // small size cause confirmpassword and old password are not shown
-                }
-                else
-                {
-                    tbOldPassword.Visible = false;
-                    lblOldPassword.Visible = false;
-                    this.Height = 174; // hide old password section
-                }
-            }
-            
-
-        }
-        */
+      
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
@@ -88,29 +49,29 @@ namespace IMS.Forms.Inventory.Settings.General
                 var model = new PasswordModel()
                 {
                     Username = tbUsername.Text,
-                    Password = GetHashString(tbPassword.Text),
+                    Password = tbNewPassword.Text,
                     ConfirmPassword = tbConfirmPassword.Text,
-                    OldPassword = tbConfirmPassword.Text,
+                    OldPassword = tbOldPassword.Text,
                 };
                 var success = false;
-                //if(_authMode && string.IsNullOrEmpty(_passwordModel.Username))
-                //{
-                //    _editMode = true;
-                //}
-                //if (_editMode)
-                //{
                 // save the password
+                var isAuthorized = _userService.Authenticate(tbUsername.Text, tbOldPassword.Text);
+                if(isAuthorized == null)
+                {
+                    PopupMessage.ShowInfoMessage("Invalid password!");
+                    this.Focus();
+                    return;
+                }
                 success = _userService.SavePassword(model);
-                //}
                 if (success)
                 {
-                    PopupMessage.ShowSuccessMessage("Password saved Successfully!");
+                    PopupMessage.ShowSuccessMessage("Password updated successfully!");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    PopupMessage.ShowInfoMessage("Couldn't save password!");
+                    PopupMessage.ShowInfoMessage("Couldn't update password!");
                     this.Focus();
                 }
             }
@@ -124,16 +85,16 @@ namespace IMS.Forms.Inventory.Settings.General
         private bool ValidateInputs()
         {
             var isValid = true;
-            if (tbConfirmPassword.Text != tbPassword.Text)
+            if (tbConfirmPassword.Text != tbNewPassword.Text)
             {
                 isValid = false;
                 errorProvider1.SetError(tbConfirmPassword, "Confirm Password should be equal to Password");
-                errorProvider1.SetError(tbPassword, "Confirm Password should be equal to Password");
+                errorProvider1.SetError(tbNewPassword, "Confirm Password should be equal to Password");
             }
             else
             {
                 errorProvider1.SetError(tbConfirmPassword, string.Empty);
-                errorProvider1.SetError(tbPassword, string.Empty);
+                errorProvider1.SetError(tbNewPassword, string.Empty);
             }
             if (string.IsNullOrEmpty(tbConfirmPassword.Text))
             {
@@ -145,45 +106,20 @@ namespace IMS.Forms.Inventory.Settings.General
                 errorProvider1.SetError(tbConfirmPassword, string.Empty);
             }
 
-            if (string.IsNullOrEmpty(tbPassword.Text))
+            if (string.IsNullOrEmpty(tbNewPassword.Text))
             {
                 isValid = false;
-                errorProvider1.SetError(tbPassword, "Required");
+                errorProvider1.SetError(tbNewPassword, "Required");
             }
             else
             {
-                errorProvider1.SetError(tbPassword, string.Empty);
+                errorProvider1.SetError(tbNewPassword, string.Empty);
             }
-
-            if (_editMode && !string.IsNullOrEmpty(_passwordModel.Password) && tbOldPassword.Text != _passwordModel.Password)
-            {
-                isValid = false;
-                errorProvider1.SetError(tbOldPassword, "Incorrect!");
-            }
-            else
-            {
-                errorProvider1.SetError(tbOldPassword, string.Empty);
-            }
+            
             return isValid;
         }
 
 
-        public static byte[] GetHash(string inputString)
-        {
-            using (HashAlgorithm algorithm = SHA256.Create())
-                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
-        }
-
-        public static string GetHashString(string inputString)
-        {
-            return inputString;
-
-            //StringBuilder sb = new StringBuilder();
-            //foreach (byte b in GetHash(inputString))
-            //    sb.Append(b.ToString());// ("X2"));
-
-            //return sb.ToString();
-        }
 
     }
 }
