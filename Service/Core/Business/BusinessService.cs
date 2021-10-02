@@ -22,7 +22,7 @@ namespace Service.Core.Business
 
         public int AddOrUpdateBranch(BranchModel branch)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
             var dbEntity = _context.Branches.FirstOrDefault(x => x.Id == branch.Id);
@@ -54,7 +54,7 @@ namespace Service.Core.Business
 
         public void AddOrUpdateCounter(CounterModel counter)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
             var dbEntity = _context.Counters.FirstOrDefault(x => x.Id == counter.Id);
@@ -91,7 +91,7 @@ namespace Service.Core.Business
 
         public List<CounterModel> GetCounterList()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
             var counters = _context.Counters
@@ -113,7 +113,7 @@ namespace Service.Core.Business
 
         public List<BranchModel> GetBranchList()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
             var branches = _context.Branches

@@ -50,7 +50,7 @@ namespace Service.Core.Orders
 
         public int GetAllOrdersCount(OrderSearchModel searchModel)//OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var orders = GetAllOrdersQuery(_context, searchModel);// orderType, orderListType, userSearchText, receiptNoSearchText);
                 return orders.Count();
@@ -60,7 +60,7 @@ namespace Service.Core.Orders
         // page size: no.of items per page; offset: current page number..
         public OrderListModel GetAllOrders(OrderSearchModel searchModel, int pageSize, int offset)//OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText, int pageSize, int offset)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var orders = GetAllOrdersQuery(_context, searchModel);//orderType, orderListType, userSearchText, receiptNoSearchText);
                 var totalCount = orders.Count();
@@ -109,7 +109,7 @@ namespace Service.Core.Orders
 
         public int GetNextLotNumber()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 int lotNo = _context.Orders.Any() ? _context.Orders.Max(x => x.LotNumber) : 1;
                 return ++lotNo;
@@ -118,7 +118,7 @@ namespace Service.Core.Orders
 
         public List<OrderItemModel> GetPurchaseOrderItems(int purchaseOrderId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = _context.OrderItems
                     .Include(x => x.Product)
@@ -129,7 +129,7 @@ namespace Service.Core.Orders
 
         public OrderModel GetOrder(OrderTypeEnum orderType, int orderId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 // don't use enum directly
@@ -150,7 +150,7 @@ namespace Service.Core.Orders
         // withProductModel: whether to map Product entity to ProductModel 
         public OrderModel GetOrderForDetailView(int orderId, bool withProductModel = false) //OrderTypeEnum orderType,
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 // don't use enum directly
                 // var type = orderType.ToString();
@@ -199,7 +199,7 @@ namespace Service.Core.Orders
         //    var message = "";
         //    var isVerified = false;
         //    var isCompleted = false;
-        //    using (var _context = new DatabaseContext())
+        //    using (var _context = DatabaseContext.Context)
         //    {
         //        var dbEntity = _context.Orders.Find(orderModel.Id);
         //        isVerified = dbEntity?.IsVerified ?? false;
@@ -220,7 +220,7 @@ namespace Service.Core.Orders
         {
             // NOTE: in case of zerorateupdate of a purchase txn, we need to update all the sell transaction and txnItem haveing orderItemId as this orderItem Id
             // AND in csse of zero rate update, we should NOT update any inventory Unit, we will update only transactions
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var entity = _context.Orders.Find(orderModel.Id);
                 if (entity != null)
@@ -312,7 +312,7 @@ namespace Service.Core.Orders
             var voiding = false; // flag to indicate if we are voiding one txn and creating another
             var isVerified = false;
             var isCompleted = false;
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             using (var txn = _context.Database.BeginTransaction())
             {
                 var dbEntity = _context.Orders.Find(orderModel.Id);
@@ -417,7 +417,7 @@ namespace Service.Core.Orders
 
         public string SetCancelled(int orderId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             using (var txn = _context.Database.BeginTransaction())
             {
                 var message = "";
@@ -834,7 +834,7 @@ namespace Service.Core.Orders
         }
         public string SavePurchaseOrderItems(int purchaseOrderId, List<OrderItemModel> items)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var message = "";
                 var poEntity = _context.Orders.Find(purchaseOrderId);
@@ -1005,7 +1005,7 @@ namespace Service.Core.Orders
         /*
         public string SetReceived(int orderId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var now = DateTime.Now;
@@ -1034,7 +1034,7 @@ namespace Service.Core.Orders
         }
         public string SetSent(int orderId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var entity = _context.Orders.Find(orderId);
@@ -1081,7 +1081,7 @@ namespace Service.Core.Orders
         }
         public string SetIssued(int orderId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var now = DateTime.Now;
@@ -1142,7 +1142,7 @@ namespace Service.Core.Orders
         public List<SalePurchaseAmountModel> GetSalePurchaseAmountForBarDiagram(DateTime from, DateTime to)
         {
             //var from = DateTime.Now.Date.AddDays(-30);
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var list = _context.Orders
                     .Where(x => x.IsCompleted && x.CompletedDate >= from && x.CompletedDate <= to && !x.IsVoid)
@@ -1172,7 +1172,7 @@ namespace Service.Core.Orders
         public List<DueAmountModel> GetDueReceivables()
         {
             //TODO;;; get the 
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var nowDate = DateTime.Now.Date;
                 //var orders = _context.Orders.Where(x => x.IsCompleted && x.PaidAmount < x.TotalAmount).ToList();

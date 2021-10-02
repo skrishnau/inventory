@@ -66,7 +66,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         row.Cells[colRate.Index].Value = price?.Rate;
                         UpdateTotalColumn(row.Index, colRate.Index, price?.Rate);
                     }
-                    catch (Exception) { }
+                    catch (Exception ex) { }
                 }
             }
         }

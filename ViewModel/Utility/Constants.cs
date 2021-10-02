@@ -9,6 +9,7 @@ namespace ViewModel.Utility
 {
     public static class Constants
     {
+        public const string DATABASE_CONFIG_FILENAME = "imsconfig.config";
         public const string DATABASE_NAME = "IMS";
         public const string GROUP_BACKUP = "Backup";
         public const string GROUP_SYSTEM = "System";
@@ -64,5 +65,7 @@ namespace ViewModel.Utility
 
         public const string ADMIN_USERNAME = "admin";
         public const string ADMIN_NAME = "Administrator";
+
+        public const string CONFIG_DATABASE = "database";
     }
 }

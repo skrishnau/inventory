@@ -14,7 +14,7 @@ namespace Service.Core
 
         public decimal ConvertUom(int fromPackageId, int toPackageId, int? productId, decimal multiplier = 1)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return ConvertUom(_context, fromPackageId, toPackageId, productId, multiplier);
             }

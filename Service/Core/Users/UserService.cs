@@ -24,7 +24,7 @@ namespace Service.Core.Users
 
         public void DeleteUser(UserModel user)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var dbEntity = _context.Users.FirstOrDefault(x => x.Id == user.Id);
@@ -39,7 +39,7 @@ namespace Service.Core.Users
 
         public void AddOrUpdateUser(UserModel supplierModel)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var now = DateTime.Now;
@@ -69,7 +69,7 @@ namespace Service.Core.Users
 
         public UserModel GetUser(int userId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var user = _context.Users.Find(userId);
                 if (user == null)
@@ -80,7 +80,7 @@ namespace Service.Core.Users
 
         public UserModel GetUserWithTotalAndPaidAmounts(int userId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var user = _context.Users.Find(userId);
                 if (user == null)
@@ -103,7 +103,7 @@ namespace Service.Core.Users
 
         public int GetAllUsersCount(UserTypeEnum userType, string searchName = "")
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetUserQueryable(_context, userType, searchName);
                 return query.Count();
@@ -112,7 +112,7 @@ namespace Service.Core.Users
 
         public UserListModel GetAllUsers(UserTypeEnum userType, int pageSize, int offset, string searchName = "")
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetUserQueryable(_context, userType, searchName);
                 var totalCount = query.Count();
@@ -136,7 +136,7 @@ namespace Service.Core.Users
         {
             if (includeUserList == null)
                 includeUserList = new int[0];
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetUserQueryable(_context, userType, string.Empty);
 
@@ -154,7 +154,7 @@ namespace Service.Core.Users
         {
             if (includeUserList == null)
                 includeUserList = new int[0];
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetUserQueryable(_context, userType, string.Empty);
 
@@ -194,7 +194,7 @@ namespace Service.Core.Users
 
         public UserModel GetTransactionSumOfUser(int userId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var user = _context.Users.Find(userId);
                 if (user != null)

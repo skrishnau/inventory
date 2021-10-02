@@ -30,7 +30,7 @@ namespace Service.Core
         }
         public void AddUpdateCategory(CategoryModel category)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var dbEntity = _context.Categories.FirstOrDefault(x => x.Id == category.Id);
                 var catEventArgs = CategoryEventArgs.Instance;
@@ -55,7 +55,7 @@ namespace Service.Core
         }
         public string AddUpdateProduct(ProductModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 using (var txn = _context.Database.BeginTransaction())
                 {
@@ -267,7 +267,7 @@ namespace Service.Core
         }
         public List<IdNamePair> GetProductListForCombo(int categoryId = 0)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = _context.Products
                     .Where(x => x.Use && !x.IsDiscontinued);
@@ -287,7 +287,7 @@ namespace Service.Core
 
         public int GetAllProductsCount(int categoryId, string searchText)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetProductListQuery(_context, categoryId, searchText);
                 return query.Count();
@@ -296,7 +296,7 @@ namespace Service.Core
 
         public async Task<ProductListModel> GetAllProducts(int categoryId, string searchText, int pageSize, int offset)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var products = GetProductListQuery(_context, categoryId, searchText);
                 var totalCount = products.Count();
@@ -318,7 +318,7 @@ namespace Service.Core
 
         public async Task<ProductListModel> GetAllProducts()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var products = GetProductListQuery(_context, 0, string.Empty);
                 var totalCount = products.Count();
@@ -351,7 +351,7 @@ namespace Service.Core
 
         public ProductModel GetProductBySKU(string sku)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var entity = _context.Products.FirstOrDefault(x => !x.IsDiscontinued && x.SKU == sku);
                 return entity == null ? null : ProductMapper.MapToProductModel(entity);
@@ -362,7 +362,7 @@ namespace Service.Core
         // when editing a completed purchase transactio, we need to show Instock qty as the totalInstock - product's qty in the order
         public ProductModel GetProductByNameOrSKU(string nameOrSku)//, int orderId
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var entity = _context.Products.FirstOrDefault(x => !x.IsDiscontinued && (x.Name == nameOrSku || x.SKU == nameOrSku));
 
@@ -405,7 +405,7 @@ namespace Service.Core
         // here orderId is the order that we are editing. This order's items will be added/subtracted from the in-stock quantity of this product
         public ProductModel GetProductById(int id)//, int orderId
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var entity = _context.Products.Find(id);
                 var model = entity == null ? null : ProductMapper.MapToProductModel(entity);
@@ -415,7 +415,7 @@ namespace Service.Core
         }
         public ResponseModel<CategoryModel> DeleteCategory(CategoryModel categoryModel)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 // check if category is being used by any product
 
@@ -437,7 +437,7 @@ namespace Service.Core
 
         public List<CategoryModel> GetCategoryList(int? parentCateogryId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var cats = _context.Categories
                                 .Where(x => x.DeletedAt == null && x.ParentCategoryId == parentCateogryId)
@@ -463,7 +463,7 @@ namespace Service.Core
 
         public List<IdNamePair> GetAllCategoriesForCombo()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = _context.Categories.Where(x => x.DeletedAt == null).ToList();
                 var list = new List<IdNamePair>();
@@ -490,7 +490,7 @@ namespace Service.Core
         }
         public List<IdNamePair> GetUnderStockProducts()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var products = _context.Products
                                .Include(x => x.ProductAttributes)
@@ -508,7 +508,7 @@ namespace Service.Core
         }
         public CategoryModel GetCategory(string name)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 name = name.Trim();
                 var cat = _context.Categories.FirstOrDefault(x => x.DeletedAt == null && x.Name == name);
@@ -528,7 +528,7 @@ namespace Service.Core
 
         public ProductModel GetProduct(int productId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var product = _context.Products.Find(productId);
                 if (product == null)
@@ -540,7 +540,7 @@ namespace Service.Core
 
         public ProductModel GetProductForEdit(int productId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var product = _context.Products
                                //.Include(x => x.Variants)
@@ -562,7 +562,7 @@ namespace Service.Core
 
         public bool DeleteProduct(int productId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var now = DateTime.Now;
 
@@ -586,7 +586,7 @@ namespace Service.Core
 
         public List<PriceHistoryModel> GetPriceHistory(int productId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var thiryDays = DateTime.Now.AddDays(-31);
                 var priceType = OrderTypeEnum.Sale.ToString();
@@ -597,7 +597,7 @@ namespace Service.Core
         // TODO: optimize
         public List<PriceHistoryModel> GetPriceHistory(int productId, DateTime? date, OrderTypeEnum? type)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 //var thiryDays = DateTime.Now.AddDays(-31);
@@ -709,7 +709,7 @@ namespace Service.Core
 
         public ResponseModel<bool> SavePriceHistory(List<InventoryUnitModel> data, DateTime date, OrderTypeEnum type)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 date = date.Date;
                 var typeStr = type.ToString();
@@ -721,7 +721,7 @@ namespace Service.Core
                         packageId = _context.Packages.FirstOrDefault(x => x.Name == model.Package)?.Id ?? 0;
                     var productId = model.ProductId;
                     if (productId == 0)
-                        productId = _context.Products.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
+                        productId = _context.Products.FirstOrDefault(x => x.Use && x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
                     var entity = _context.PriceHistories.FirstOrDefault(x => x.ProductId == productId && x.Date == date && x.PriceType == typeStr); //&& x.PackageId == packageId
                     if (entity == null)
                     {
@@ -766,7 +766,7 @@ namespace Service.Core
         {
             date = date.Date;
             var type = "";
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 package = package?.Trim();
                 if (!string.IsNullOrEmpty(package))
@@ -806,7 +806,7 @@ namespace Service.Core
                                                 && x.ProductId == productId
                                                 && x.PriceType.ToLower() == type)
                                                 .ToList();
-
+                var lastPrice = _context.PriceHistories.FirstOrDefault();
                 if (sellHistory.Any())
                 {
                     var dt = sellHistory.Max(x => x.Date).Date;

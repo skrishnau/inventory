@@ -32,7 +32,7 @@ namespace Service.Core.Inventory
 
         public void AddOrUpdateWarehouse(WarehouseModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var entity = _context.Warehouses.FirstOrDefault(x => x.Id == model.Id);
                 BaseEventArgs<WarehouseModel> args = BaseEventArgs<WarehouseModel>.Instance;
@@ -71,7 +71,7 @@ namespace Service.Core.Inventory
 
         public WarehouseModel GetWarehouse(int warehouseId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var warehouse = _context.Warehouses.Find(warehouseId);
                 if (warehouse != null)
@@ -86,7 +86,7 @@ namespace Service.Core.Inventory
 
         public List<WarehouseModel> GetWarehouseList()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 //var warehouses = 
                 return _context.Warehouses
@@ -102,7 +102,7 @@ namespace Service.Core.Inventory
         /// <returns>List of IdNamePair </returns>
         public List<IdNamePair> GetWarehouseListForCombo()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.Warehouses
                               .Where(x => x.Use)
@@ -123,7 +123,7 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetPackageListForCombo()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.Packages
                                 .Where(x => x.Use)
@@ -147,7 +147,7 @@ namespace Service.Core.Inventory
 
         private IQueryable<Product> GetProductEntityList()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.Products.AsQueryable();
                 //.Where(x => x.DeletedAt == null);
@@ -161,7 +161,7 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetAdjustmentCodeListForCombo()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 if (_context.AdjustmentCodes.Count() == 0)
                     SeedAdjustmentCodes(_context);
@@ -179,7 +179,7 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetPositiveAdjustmentCodeListForCombo()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var positive = AdjustmentType.Positive.ToString();
                 if (_context.AdjustmentCodes.Count() == 0)
@@ -198,7 +198,7 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetNegativeAdjustmentCodeListForCombo()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var negative = AdjustmentType.Negative.ToString();
                 if (_context.AdjustmentCodes.Count() == 0)
@@ -217,7 +217,7 @@ namespace Service.Core.Inventory
 
         public ResponseModel<AdjustmentCodeModel> SaveAdjustmentCode(AdjustmentCodeModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var msg = "";
                 var args = BaseEventArgs<AdjustmentCodeModel>.Instance;
@@ -250,7 +250,7 @@ namespace Service.Core.Inventory
 
         public List<AdjustmentCodeModel> GetAdjustmentCodeList()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = _context.AdjustmentCodes.AsEnumerable();
                 if (!query.Any())
@@ -361,7 +361,7 @@ namespace Service.Core.Inventory
 
         public ResponseModel<PackageModel> SavePackage(PackageModel package)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var response = new ResponseModel<PackageModel>();
                 var msg = "";
@@ -399,7 +399,7 @@ namespace Service.Core.Inventory
 
         public List<PackageModel> GetPackageList()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = _context.Packages.OrderBy(x => x.Name).AsQueryable();
                 return PackageMapper.MapToModel(query);
@@ -408,7 +408,7 @@ namespace Service.Core.Inventory
 
         public PackageModel GetPackage(int packageId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.Packages.Find(packageId).MapToModel();
             }
@@ -416,7 +416,7 @@ namespace Service.Core.Inventory
 
         public PackageModel GetPackageByName(string packagename)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.Packages.FirstOrDefault(x => x.Name == packagename).MapToModel();
             }
@@ -424,7 +424,7 @@ namespace Service.Core.Inventory
 
         public List<WarehouseProductModel> GetWarehouseProductList(int warehouseId, int productId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var wpList = _context.WarehouseProducts
                                 .Include(x => x.Product)
@@ -441,7 +441,7 @@ namespace Service.Core.Inventory
 
         public List<IdNamePair> GetSupplierListForCombo()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.Users
                                 //.Where(x=>x.Use)
@@ -456,7 +456,7 @@ namespace Service.Core.Inventory
         public List<TransactionSummaryModel> GetTransactionSummary(DateTime start, DateTime end)
         {
             var list = new List<TransactionSummaryModel>();
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var totalOrders = _context.Orders.Where(x => x.IsCompleted && x.CompletedDate >= start && x.CompletedDate <= end)
                     .GroupBy(x => x.OrderType)
@@ -475,7 +475,7 @@ namespace Service.Core.Inventory
         public List<TransactionSummaryModel> GetInventorySummary()
         {
             var list = new List<TransactionSummaryModel>();
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var totalProducts = _context.Products.Count();
                 list.Add(new TransactionSummaryModel { Key = TransactionSummaryKeys.Product.ToString(), Value = totalProducts });
@@ -496,7 +496,7 @@ namespace Service.Core.Inventory
 
         public ResponseModel<UomModel> SaveUom(UomModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var alreadyExists = _context.Uoms.Any(x => x.Id != model.Id && x.ProductId == null && ((x.Package.Name == model.Package && x.Package1.Name == model.RelatedPackage)
                                        || (x.Package.Name == model.RelatedPackage && x.Package1.Name == model.Package)));
@@ -558,7 +558,7 @@ namespace Service.Core.Inventory
 
         public List<UomModel> GetRootUomList()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var uoms = _context.Uoms.Where(x => x.ProductId == null).AsQueryable();
                 return uoms.MapToUomModel();//UomMapper.MapToUomModel(uoms);
@@ -570,7 +570,7 @@ namespace Service.Core.Inventory
 
         public UomModel GetUom(int uomId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var uom = _context.Uoms.Find(uomId);
                 return uom.MapToUomModel();//UomMapper.MapToUomModel(uoms);

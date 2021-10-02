@@ -28,7 +28,7 @@ namespace Service.Core.Settings
         //get app settings
         public async Task<AppSettingModel> GetAppSetting(string name)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var appsetting = await _context.AppSettings.FirstOrDefaultAsync(x => x.Name == name);
                 if (appsetting != null)
@@ -44,7 +44,7 @@ namespace Service.Core.Settings
         //save app settings
         public bool SaveAppSetting(AppSettingModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var dbEntity = _context.AppSettings.FirstOrDefault(x => x.Id == model.Id || x.Name == model.Name);
@@ -94,7 +94,7 @@ namespace Service.Core.Settings
         #endregion
         public BillSettingsModel GetBillSettings(ReferencesTypeEnum orderType)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return GetBillSettings(_context, orderType);
             }
@@ -149,7 +149,7 @@ namespace Service.Core.Settings
 
         public bool SaveBillSetting(List<BillSettingsModel> modelList)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 foreach (var model in modelList)
                 {
@@ -269,7 +269,7 @@ namespace Service.Core.Settings
 
         public bool SaveCurrentIndex(long currentIndex, ReferencesTypeEnum orderType)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var result = SaveCurrentIndexWithoutCommit(_context, currentIndex, orderType);
                 _context.SaveChanges();
@@ -308,7 +308,7 @@ namespace Service.Core.Settings
         //SaveCompanyInfoSetting
         public bool SaveCompanyInfoSetting(CompanyInfoSettingModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 //for CompanyName
                 var companyNameEntity = _context.AppSettings.FirstOrDefault(x => x.Name == "CompanyName");
@@ -492,7 +492,7 @@ namespace Service.Core.Settings
         //CompanyInfoSettingModel
         public CompanyInfoSettingModel GetCompanyInfoSetting()
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var model = new CompanyInfoSettingModel();
@@ -554,7 +554,7 @@ namespace Service.Core.Settings
         /*
         public bool SavePassword(PasswordModel password)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var pass = new AppSetting()
                 {

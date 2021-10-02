@@ -29,7 +29,7 @@ namespace Service.Core.Inventory.Units
 
         public int GetInventoryUnitCount(int warehouseId, int productId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetInventoryUnitQueryable(_context, warehouseId, productId);
                 return query.Count();
@@ -38,7 +38,7 @@ namespace Service.Core.Inventory.Units
 
         public InventoryUnitListModel GetInventoryUnitList(int warehouseId, int productId, int pageSize, int offset)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetInventoryUnitQueryable(_context, warehouseId, productId);
                 var totalCount = query.Count();
@@ -75,7 +75,7 @@ namespace Service.Core.Inventory.Units
         public string MergeInventoryUnits(List<InventoryUnitModel> list)
         {
             var message = string.Empty;
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 using (var txn = _context.Database.BeginTransaction())
                 {
@@ -178,14 +178,14 @@ namespace Service.Core.Inventory.Units
             //
             splitString = splitString.Trim();
             splitString = splitString.TrimEnd(new char[] { '+' });
-            var description = $"Merged {splitString} of '{product.Name}' into {Math.Round(editingRecord.UnitQuantity, 3)} {productPackage.Name} with rate {Math.Round(editingRecord.Rate,2)}";
+            var description = $"Merged {splitString} of '{product.Name}' into {Math.Round(editingRecord.UnitQuantity, 3)} {productPackage.Name} with rate {Math.Round(editingRecord.Rate, 2)}";
             AddMovementWithoutCoomit(_context, description, "-------------", "Merge", editingRecord.UnitQuantity, now, editingRecord.ProductId);
 
         }
 
         public void SplitInventoryUnit(List<decimal> quantitySplitList, InventoryUnitModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var now = DateTime.Now;
@@ -245,6 +245,7 @@ namespace Service.Core.Inventory.Units
             }
         }
 
+        // TODO: Transfer isn't handled property/with care .. so look deep into the logic while adding transfer logic
         public void UpdateWarehouseProductWithoutCommit(DatabaseContext _context, InventoryMovementModel moveModel, Product product)
         {
             var productPackageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage)?.PackageId ?? 0;
@@ -279,29 +280,30 @@ namespace Service.Core.Inventory.Units
                     // add to the target warehouse (toWarehouse)
                     if (toWp == null)
                     {
+                        //throw new NotImplementedException("please consider model and entity quantity in this");
                         // don't do txn
                         //using (var txn = _context.Database.BeginTransaction())
+                        //{
+                        // add
+                        toWp = new WarehouseProduct()
                         {
-                            // add
-                            toWp = new WarehouseProduct()
-                            {
-                                WarehouseId = moveModel.TargetWarehouseId ?? 0,
-                                ProductId = moveModel.InventoryUnit.ProductId,
-                            };
-                            // update
-                            toWp.InStockQuantity += entityQty; // iuModel.UnitQuantity;
-                            toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? entityQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
-                            toWp.UpdatedAt = moveModel.Date;
-                            product.WarehouseProducts.Add(toWp);
-                        }
-                    }
-                    else
-                    {
+                            WarehouseId = moveModel.TargetWarehouseId ?? 0,
+                            ProductId = moveModel.InventoryUnit.ProductId,
+                        };
                         // update
-                        toWp.InStockQuantity += modelQty;
-                        toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
-                        toWp.UpdatedAt = moveModel.Date;
+                        //toWp.InStockQuantity += modelQty; // iuModel.UnitQuantity;
+                        //toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
+                        //toWp.UpdatedAt = moveModel.Date;
+                        product.WarehouseProducts.Add(toWp);
+                        //}
                     }
+                    //else
+                    //{
+                    // update
+                    toWp.InStockQuantity += modelQty;
+                    toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
+                    toWp.UpdatedAt = moveModel.Date;
+                    // }
                     product.InStockQuantity += modelQty;
                     product.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity* conversion : 0;
                 }
@@ -319,7 +321,7 @@ namespace Service.Core.Inventory.Units
 
         public int GetMovementListCount(int productId, DateTime? date)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetMovementListQuery(_context, productId, date);
                 return query.Count();
@@ -328,7 +330,7 @@ namespace Service.Core.Inventory.Units
 
         public MovementListModel GetMovementList(int productId, DateTime? date, int pageSize, int offset)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetMovementListQuery(_context, productId, date);
                 var totalCount = query.Count();
@@ -409,7 +411,7 @@ namespace Service.Core.Inventory.Units
                         UpdatedAt = DateTime.Now,
                         Use = true,
                     };
-                    using (var tempContext = new DatabaseContext())
+                    using (var tempContext = DatabaseContext.Context)
                     {
                         tempContext.Warehouses.Add(warehouse);
                         tempContext.SaveChanges();
@@ -423,7 +425,7 @@ namespace Service.Core.Inventory.Units
 
         public string SaveDirectReceive(List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var msg = SaveDirectReceiveListWithoutCommit(_context, list, receivedDate, adjustmentCode);
                 _context.SaveChanges();
@@ -458,7 +460,7 @@ namespace Service.Core.Inventory.Units
             if (product == null)
                 product = _context.Products.Find(unit.ProductId);
 
-            var description = $"Received {Math.Round(unit.UnitQuantity, 2)} {package?.Name??""} of {product.Name} @ {Math.Round(unit.Rate, 2)}";
+            var description = $"Received {Math.Round(unit.UnitQuantity, 2)} {package?.Name ?? ""} of {product.Name} @ {Math.Round(unit.Rate, 2)}";
             AddMovementWithoutCoomit(_context, description, reference, adjustmentCode, unit.UnitQuantity, movementDate, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {
@@ -498,7 +500,7 @@ namespace Service.Core.Inventory.Units
 
         public string SaveDirectIssueInventoryUnit(List<InventoryUnitModel> list, string adjustmentCode)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 List<TransactionItem> transactionItems = new List<TransactionItem>();
                 var now = DateTime.Now;
@@ -567,7 +569,7 @@ namespace Service.Core.Inventory.Units
 
         public string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode, string referenceNo)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var msg = SaveDirectIssueAnyListWithoutCommit(_context, list, adjustmentCode, referenceNo);
@@ -684,13 +686,13 @@ namespace Service.Core.Inventory.Units
                 //
                 // Movement
                 //
-                var description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(model.Rate, 2)}";// from {warehouseName} warehouse.";
+                var description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {
                     Date = now,
                     UnitQuantity = issuedQuantity,
-                    PackageId = dbEntity.PackageId ?? 0,
+                    PackageId = packageId ?? 0, //dbEntity.PackageId ?? 0,
                     SourceWarehouseId = warehouseId,//dbEntity.WarehouseId,
                     TargetWarehouseId = null,
                     InventoryUnit = model
@@ -702,7 +704,7 @@ namespace Service.Core.Inventory.Units
 
         public string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> list)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
 
                 var msg = string.Empty;

@@ -29,7 +29,7 @@ namespace Service.Core.Payment
 
         public int GetAllPaymentsCount(ClientTypeEnum clientType, string searchName = "")
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetPaymentQueryable(_context, clientType, searchName);
                 return query.Count();
@@ -38,7 +38,7 @@ namespace Service.Core.Payment
         
         public PaymentListModel GetAllPayments(ClientTypeEnum clientType, int pageSize, int offset, string searchName = "")
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetPaymentQueryable(_context, clientType, searchName);
                 var totalCount = query.Count();
@@ -82,7 +82,7 @@ namespace Service.Core.Payment
 
         public PaymentModel GetPayment(int paymentId)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.Payments.Find(paymentId).MapToModel();
             }
@@ -90,7 +90,7 @@ namespace Service.Core.Payment
 
         public ResponseModel<PaymentModel> Save(PaymentModel model)
         {
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var entity = model.MapToEntity();
                 
@@ -150,7 +150,7 @@ namespace Service.Core.Payment
 
         public bool CancelPayment(int paymentId)
         {
-            using(var _context = new DatabaseContext())
+            using(var _context = DatabaseContext.Context)
             {
                 var payment = _context.Payments.Find(paymentId);
                 if (payment != null)

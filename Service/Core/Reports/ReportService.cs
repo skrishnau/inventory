@@ -26,7 +26,7 @@ namespace Service.Core.Reports
             int userId = model.CustomerId;
             DateTime from = model.From;
             DateTime to = model.To;
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var user = _context.Users.Find(userId);
                 if (user != null)
@@ -162,7 +162,7 @@ namespace Service.Core.Reports
             int productId = model.ProductId;
             DateTime from = model.From;
             DateTime to = model.To;
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 var product = _context.Products.Find(productId);
                 if (product != null)
@@ -250,7 +250,7 @@ namespace Service.Core.Reports
         {
             DateTime from = model.From;
             DateTime to = model.To;
-            using (var _context = new DatabaseContext())
+            using (var _context = DatabaseContext.Context)
             {
                 from = from.Date;
                 to = to.Date;

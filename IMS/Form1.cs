@@ -9,6 +9,9 @@ using Service.Core.Settings;
 using ViewModel.Utility;
 using ViewModel.Core.Orders;
 using IMS.Forms.Inventory.Transaction;
+using System.IO;
+using Service;
+using Newtonsoft.Json;
 
 namespace IMS
 {
@@ -34,7 +37,32 @@ namespace IMS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ShowLoginFormOrLogin();
+            //GetDatabaseConnection();
+            //if (string.IsNullOrEmpty(UserSession.Database))
+            //{
+
+            //}
+            //else
+            //{
+                ShowLoginFormOrLogin();
+            //}
+        }
+
+        private void GetDatabaseConnection()
+        {
+            // get connection string
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var lines = File.ReadAllText(Path.Combine(path, Constants.DATABASE_CONFIG_FILENAME));
+            var obj = JsonConvert.DeserializeObject<ApplicationSettings>(lines);
+            if (obj != null)
+            {
+                UserSession.Database = obj.ConnectionString;
+            }
+            if (string.IsNullOrWhiteSpace(UserSession.Database))
+            {
+                // show database configuation page
+               // var databaseConfigForm = new DatabaseConfigForm();
+            }
         }
 
         private async void ShowLoginFormOrLogin()
@@ -54,7 +82,7 @@ namespace IMS
 
             // ask for password
             var loginForm = Program.container.GetInstance<LoginForm>();//new InventoryUC();
-            
+
             DialogResult result = loginForm.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -107,9 +135,9 @@ namespace IMS
             else
             {
             */
-                var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
-                this.Controls.Add(productListUC);
-           /* }*/
+            var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
+            this.Controls.Add(productListUC);
+            /* }*/
         }
         private async void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
