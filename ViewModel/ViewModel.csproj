@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Core\Common\IdNamePair.cs" />
     <Compile Include="Core\Common\NameValuePair.cs" />
+    <Compile Include="Core\Common\ViewListModel.cs" />
     <Compile Include="Core\Inventory\AdjustmentCodeModel.cs" />
     <Compile Include="Core\Inventory\InventoryMovementModel.cs" />
     <Compile Include="Core\Inventory\InventoryUnitModel.cs" />

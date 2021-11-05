@@ -19,28 +19,28 @@ using Service.Interfaces;
 using IMS.Forms.Common.Pagination;
 using ViewModel.Core.Common;
 using IMS.Forms.Common;
+using ViewModel.Core;
 
 namespace IMS.Forms.MRP
 {
     public partial class ManufactureListUC : BaseUserControl
     {
-        public event EventHandler<BaseEventArgs<ProductModel>> RowSelected;
+        public event EventHandler<BaseEventArgs<ManufactureModel>> RowSelected;
 
-        private readonly IManufactureService _productService;
+        private readonly IManufactureService _manufactureService;
         private readonly IDatabaseChangeListener _listener;
 
-        private ProductModel _selectedProduct;
-        // private HeaderTemplate _header;
+        private ManufactureModel _selectedManufacture;
 
         BindingSource _bindingSource = new BindingSource();
-        private ProductListPaginationHelper helper;
+        private ManufactureListPaginationHelper helper;
         int _previousSelectedIndex = -1;
 
-        private List<ProductModel> _productList;
+        private List<ManufactureModel> _manufactureList;
 
         public ManufactureListUC(IManufactureService inventoryService, IDatabaseChangeListener listener)
         {
-            this._productService = inventoryService;
+            this._manufactureService = inventoryService;
             this._listener = listener;
 
             InitializeComponent();
@@ -48,31 +48,21 @@ namespace IMS.Forms.MRP
             // InitializeHeader();
 
             this.dgvProductList.AutoGenerateColumns = false;
-            this.Load += ProductListUC_Load;
+            this.Load += ListUC_Load;
         }
 
-        private void ProductListUC_Load(object sender, EventArgs e)
+        private void ListUC_Load(object sender, EventArgs e)
         {
-            dgvPriceHistory.AutoGenerateColumns = false;
-            // this.heading.Text = "Product List";
+            //dgvPriceHistory.AutoGenerateColumns = false;
             this.Dock = DockStyle.Fill;
             InitializeGridView();
             InitializeEvents();
             InitializeListeners();
             //PopulateCategoryCombo();
-            PopulateProductData();
+            PopulateManufactureData();
 
         }
-
-        //private void PopulateCategoryCombo()
-        //{
-        //    var cats = _productService.GetAllCategoriesForCombo();
-        //    cats.Insert(0, new IdNamePair(0, "--- ALL ---"));
-        //    cbCategory.DisplayMember = "Name";
-        //    cbCategory.ValueMember = "Id";
-        //    cbCategory.DataSource = cats;
-        //}
-
+        
 
         #region Initialize Functions
 
@@ -80,21 +70,19 @@ namespace IMS.Forms.MRP
         private void InitializeGridView()
         {
             dgvProductList.AutoGenerateColumns = false;
-            helper = new ProductListPaginationHelper(_bindingSource, dgvProductList, bindingNavigator1, _productService);
+            helper = new ManufactureListPaginationHelper(_bindingSource, dgvProductList, bindingNavigator1, _manufactureService);
 
         }
 
 
         private void InitializeEvents()
         {
-            dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
-            dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
-            // dgvProductList.CellFormatting += DgvProductList_CellFormatting;
+            //dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
+            //dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
             btnDelete.Click += BtnDelete_Click;
-            // btnDelete.Click += BtnDelete_Click;
-            cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
+            //cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
             txtName.TextChanged += TxtName_TextChanged;
             dgvProductList.DataSourceChanged += DgvProductList_DataSourceChanged;
         }
@@ -106,47 +94,24 @@ namespace IMS.Forms.MRP
 
         private void InitializeListeners()
         {
-            _listener.ProductUpdated += _listener_ProductUpdated;
-            _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
-            _listener.CategoryUpdated += _listener_CategoryUpdated;
-            _listener.PriceHistoryUpdated += _listener_PriceHistoryUpdated;
+            _listener.ManufactureUpdated += _listener_ManufactureUpdated;
+            //_listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
+            //_listener.CategoryUpdated += _listener_CategoryUpdated;
+            //_listener.PriceHistoryUpdated += _listener_PriceHistoryUpdated;
         }
-
-        private void _listener_PriceHistoryUpdated(object sender, BaseEventArgs<PriceHistoryModel> e)
-        {
-            PopulateProductData();
-        }
-
-
-
 
         #endregion
 
         #region Populate Functions
 
 
-        private void PopulateProductData()
+        private void PopulateManufactureData()
         {
-            //_productList = _productService.GetProductList();
-            //dgvProductList.DataSource = _productList;
-
-            var category = cbCategory.SelectedItem as IdNamePair;
-
+            //var category = cbCategory.SelectedItem as IdNamePair;
 
             if (helper != null)
-                helper.Reset(category?.Id ?? 0, txtName.Text);
+                helper.Reset( 0, txtName.Text);
 
-            // in case new product is added the index will change
-            //if (_previousSelectedIndex > -1 && dgvProductList.Rows.Count)
-            //{
-            //    dgvProductList.Rows[_previousSelectedIndex].Selected = true;
-            //}
-
-            //dgvProductList.ClearSelection();
-            //foreach (DataGridViewRow row in dgvProductList.Rows)
-            //{
-            //    row.Cells[this.colSKU.Index].Style.ForeColor = Color.Red;
-            //}
         }
 
         private void ShowManufactureAddEditDialog(int productId)
@@ -159,18 +124,15 @@ namespace IMS.Forms.MRP
             }
         }
 
-        private void ShowDeleteDialog(ProductModel model)
+        private void ShowDeleteDialog(ManufactureModel model)
         {
             var dialogResult = MessageBox.Show(this, "Are you sure to permanently delete this manufacture plan?",
                "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                var deleted = _productService.DeleteProduct(model.Id);
-                if (deleted)
-                    PopupMessage.ShowSuccessMessage("Deleted successfully!");
+                var deleted = _manufactureService.DeleteManufacture(model.Id);
+                PopupMessage.ShowMessage(deleted);
             }
-            //else
-            //    PopupMessage.ShowErrorMessage("Couldn't delete! Please contact administrator.");
             this.Focus();
         }
 
@@ -181,39 +143,36 @@ namespace IMS.Forms.MRP
 
         private void TxtName_TextChanged(object sender, EventArgs e)
         {
-            PopulateProductData();
+            PopulateManufactureData();
         }
 
-        private void CbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void CbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulateProductData();
-            //cbCategory.Text = "hello";//= cbCategory.Text.Trim();//(cbCategory.SelectedItem as IdNamePair)?.Name?.Trim()?? cbCategory.Text;
-        }
+            PopulateManufactureData();
+        }*/
 
-        private void _listener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
+        /*private void _listener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
         {
             AddListenerAction(PopulateCategoryCombo, e);
-            //PopulateCategoryCombo();
-        }
+        }*/
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ManufactureUpdated(object sender, BaseEventArgs<ManufactureModel> e)
         {
-            AddListenerAction(PopulateProductData, e);
-            //PopulateProductData();
+            AddListenerAction(PopulateManufactureData, e);
         }
 
         private void _listener_InventoryUnitUpdated(object sender, BaseEventArgs<List<InventoryUnitModel>> e)
         {
-            PopulateProductData();
+            PopulateManufactureData();
         }
-
+        /*
         private void DgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // if (e.ColumnIndex == this.colSKU.Index || e.ColumnIndex == this.colName.Index)
             {
                 try
                 {
-                    if (_productList[e.RowIndex].IsLessThanMinimumStock)
+                    if (_manufactureList[e.RowIndex].IsLessThanMinimumStock)
                     {
                         e.CellStyle.ForeColor = Color.Red;
                         e.CellStyle.SelectionForeColor = Color.Red;
@@ -236,7 +195,8 @@ namespace IMS.Forms.MRP
                 }
             }
         }
-
+       */
+        /*
         private void DgvProductList_SelectionChanged(object sender, EventArgs e)
         {
             // populate detail 
@@ -260,7 +220,7 @@ namespace IMS.Forms.MRP
         {
             List<PriceHistoryModel> history = _productService.GetPriceHistory(data.Id);
             dgvPriceHistory.DataSource = history;
-        }
+        }*/
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
@@ -270,78 +230,28 @@ namespace IMS.Forms.MRP
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             // get the id from selected row
-            if (_selectedProduct != null)
+            if (_selectedManufacture != null)
             {
-                ShowManufactureAddEditDialog(_selectedProduct.Id);
+                ShowManufactureAddEditDialog(_selectedManufacture.Id);
             }
         }
 
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            if (_selectedProduct != null)
+            if (_selectedManufacture != null)
             {
-                ShowDeleteDialog(_selectedProduct);
+                ShowDeleteDialog(_selectedManufacture);
             }
         }
-
-        //private void BtnDelete_Click(object sender, EventArgs e)
-        //{
-        //    if (_selectedProduct != null)
-        //    {
-        //        var dialogResult = MessageBox.Show(this, "Are you sure to delete?", "Delete", MessageBoxButtons.YesNo);
-        //        if (dialogResult.Equals(DialogResult.Yes))
-        //        {
-        //            // delete
-        //            _inventoryService.DeleteProduct(_selectedProduct.Id);
-        //        }
-        //    }
-        //}
+        
 
 
         #endregion
 
 
-
-
-
+        
 
     }
 }
 
-
-//private void btnEditSKU_Click(object sender, EventArgs e)
-//{
-//    // var skuEditForm = new VariantEditForm(inventoryService, _selectedProduct.Id);
-//    //skuEditForm.ShowDialog();
-//}
-
-//private void BtnAddProduct_Click(object sender, EventArgs e)
-//{
-//    using (AsyncScopedLifestyle.BeginScope(Program.container))
-//    {
-//        var productCreate = Program.container.GetInstance<ProductCreate>();
-//        productCreate.ShowInTaskbar = false;
-//        productCreate.ShowDialog();
-//    }
-//}
-
-//public void PopulateSKUGridView()
-//{
-//    var skus = _inventoryService.GetVariantList();
-//    dgvSKUListing.AutoGenerateColumns = false;
-//    dgvSKUListing.DataSource = skus;
-//}
-
-//private void InitializeHeader()
-//{
-//    _header = HeaderTemplate.Instance;
-//    _header.btnNew.Visible = true;
-//    _header.btnNew.Click += BtnNew_Click;
-//    _header.btnEdit.Click += BtnEdit_Click;
-//    _header.btnDelete.Click += BtnDelete_Click;
-//    this.Controls.Add(_header);
-//    _header.SendToBack();
-//    // header text
-//    _header.lblHeading.Text = "Products";
-//}

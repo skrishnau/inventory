@@ -21,21 +21,34 @@ namespace DTO.Core
         {
             return Mappings.Mapper.Map(model, entity);
         }
+        public static List<ManufactureModel> MapToModel(this ICollection<Manufacture> entityQuery)
+        {
+            var list = new List<ManufactureModel>();
+            foreach (var s in entityQuery)
+            {
+                list.Add(s.MapToModel());
+            }
+            return list;
+        }
+
     }
     public class ManufactureProfile : Profile
     {
         public ManufactureProfile()
         {
-            CreateMap<Manufacture, ManufactureModel>();
+            CreateMap<Manufacture, ManufactureModel>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.CompletedAt != null ? "Complete" : src.CancelledAt != null ? "Cancelled" : src.DeletedAt != null ? "Deleted" : src.StartedAt != null ? "In-Process" : "New"))
+                ;
             CreateMap<ManufactureModel, Manufacture>()
-                .ForMember(dest=>dest.CancelledAt, opt=>opt.Ignore())
-                .ForMember(dest=>dest.CancelledByUserId, opt=>opt.Ignore())
-                .ForMember(dest=>dest.CompletedAt, opt=>opt.Ignore())
-                .ForMember(dest=>dest.CompletedByUserId, opt=>opt.Ignore())
-                .ForMember(dest=>dest.CreatedAt, opt=>opt.Ignore())
-                .ForMember(dest=>dest.CreatedByUserId, opt=>opt.Ignore())
-                .ForMember(dest=>dest.StartedAt, opt=>opt.Ignore())
-                .ForMember(dest=>dest.StartedByUserId, opt=>opt.Ignore())
+                .ForMember(dest => dest.CancelledAt, opt => opt.Ignore())
+                .ForMember(dest => dest.CancelledByUserId, opt => opt.Ignore())
+                .ForMember(dest => dest.CompletedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.CompletedByUserId, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedByUserId, opt => opt.Ignore())
+                .ForMember(dest => dest.StartedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.StartedByUserId, opt => opt.Ignore())
+
                 ;
         }
     }

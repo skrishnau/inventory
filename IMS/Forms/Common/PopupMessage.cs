@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
+using ViewModel.Core;
 
 namespace IMS.Forms.Common
 {
@@ -87,6 +88,13 @@ namespace IMS.Forms.Common
         internal static void ShowInfoMessage(string msg)
         {
             ShowPopupMessage("Alert!", msg, PopupMessageType.INFO);
+        }
+        public static void ShowMessage(ResponseModel<bool> msg)
+        {
+            if (msg.Success)
+                ShowSuccessMessage(msg.Message);
+            else
+                ShowInfoMessage(msg.Message);
         }
     }
 

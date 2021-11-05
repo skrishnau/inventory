@@ -13,6 +13,7 @@ namespace Service.Interfaces
         bool SaveManufacture(ManufactureModel model);
         int GetLastLotNo();
         int GetAllManufacturesCount(int categoryId, string searchText);
-        Task GetAllManufactures(int categoryId, string searchText, int pageSize, int offset);
+        Task<ViewListModel<ManufactureModel>> GetAllManufactures(int categoryId, string searchText, int pageSize, int offset);
+        ResponseModel<bool> DeleteManufacture(int id);
     }
 }

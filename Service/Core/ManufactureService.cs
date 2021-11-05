@@ -5,6 +5,7 @@ using Service.Interfaces;
 using Service.Listeners;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,11 +43,11 @@ namespace Service.Core
                 var entity = _context.Manufactures.Find(model.Id);
                 var isEdit = entity != null;
 
-                model.MapToEntity(entity);
+                entity = model.MapToEntity(entity);
                 if (!isEdit)
                 {
                     entity.CreatedAt = DateTime.Now;
-                    entity.CreatedByUserId = GetAdminId(_context);
+                    //entity.CreatedByUserId = GetAdminId(_context);
                     _context.Manufactures.Add(entity);
                 }
                 _context.SaveChanges();
@@ -62,19 +63,6 @@ namespace Service.Core
             return _context.Users.Where(x => x.Username == "admin" && x.UserType == userTypeEnum).Select(x => x.Id).FirstOrDefault();
         }
 
-        public IQueryable<Manufacture> GetAllManufacutureQuery(DatabaseContext _context)
-        {
-            //_context.Manufactures.Where(x=>x.)
-            return null;
-        }
-        public int GetAllManufacturesCount(int categoryId, string searchText)
-        {
-            using(var _context = DatabaseContext.Context)
-            {
-                //var query = 
-                return 0;
-            }
-        }
 
         public int GetLastLotNo()
         {
@@ -102,13 +90,52 @@ namespace Service.Core
             }
         }
 
-        public Task GetAllManufactures(int categoryId, string searchText, int pageSize, int offset)
+
+        public IQueryable<Manufacture> GetAllManufacutureQuery(DatabaseContext _context)
         {
-            using(var _context = DatabaseContext.Context)
+            return _context.Manufactures.Where(x => x.DeletedAt == null).OrderBy(x=>x.CreatedAt);
+        }
+        public int GetAllManufacturesCount(int categoryId, string searchText)
+        {
+            using (var _context = DatabaseContext.Context)
             {
                 var query = GetAllManufacutureQuery(_context);
-                return null;
-                //return query.ToList().
+                return query.Count();
+            }
+        }
+        public async Task<ViewListModel<ManufactureModel>> GetAllManufactures(int categoryId, string searchText, int pageSize, int offset)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var query = GetAllManufacutureQuery(_context);
+                var totalCount = query.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    query = query.Skip(offset).Take(pageSize);
+                }
+                var list = await query.ToListAsync();
+                return new ViewModel.Core.ViewListModel<ManufactureModel>
+                {
+                    DataList = list.MapToModel(),
+                    Offset = offset,
+                    PageSize = pageSize,
+                    TotalCount = totalCount,
+                };
+            }
+        }
+
+        public ResponseModel<bool> DeleteManufacture(int id)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var manufacture = _context.Manufactures.Find(id);
+                if (manufacture == null)
+                    return new ResponseModel<bool> { Message = "Manufacture not found", Success = false};
+                if(manufacture.StartedAt != null)
+                    return new ResponseModel<bool> { Message = "Manufacture already started. You can't delete but you may cancel it.", Success = false };
+                _context.Manufactures.Remove(manufacture);
+                _context.SaveChanges();
+                return new ResponseModel<bool> { Message = "Delete Sucess!", Success = true };
             }
         }
     }

@@ -32,7 +32,7 @@ namespace Infrastructure.Context
         public Nullable<int> TransactionId { get; set; }
     
         public virtual Order Order { get; set; }
-        public virtual User User { get; set; }
         public virtual Transaction Transaction { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -569,9 +569,6 @@ namespace IMS.Forms.Common.Pagination
         {
             // The desired page has changed, so fetch the page of records using the "Current" offset 
             offset = ((int?)bindingSource1.Current) ?? 0;
-            //var records = new List<OrderModel>();
-            //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
-            //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
             var records = await _productService.GetAllManufactures(_categoryId, _searchText, pageSize, offset);
             dataGridView1.DataSource = records.DataList;
             this.totalRecords = records.TotalCount;
@@ -614,7 +611,7 @@ namespace IMS.Forms.Common.Pagination
         {
             _categoryId = categoryId;
             _searchText = searchText;
-            var totalRecords = _productService.GetAllProductsCount(_categoryId, _searchText);
+            var totalRecords = _productService.GetAllManufacturesCount(_categoryId, _searchText);
             bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
         }
     }

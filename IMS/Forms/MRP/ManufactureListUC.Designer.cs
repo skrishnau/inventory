@@ -31,20 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManufactureListUC));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvProductList = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOnHoldQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplyPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRetailPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReorderPoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.cbCategory = new System.Windows.Forms.ComboBox();
@@ -72,10 +61,10 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlSideGridView = new System.Windows.Forms.Panel();
-            this.dgvPriceHistory = new System.Windows.Forms.DataGridView();
-            this.colSellingPriceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblProductName = new System.Windows.Forms.Label();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -84,7 +73,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.pnlSideGridView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPriceHistory)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvProductList
@@ -104,15 +92,7 @@
             this.dgvProductList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
-            this.colSKU,
-            this.colCategory,
-            this.colInStockQuantity,
-            this.colOnHoldQuantity,
-            this.colPackage,
-            this.colSupplyPrice,
-            this.colRetailPrice,
-            this.colReorderPoint,
-            this.colUse});
+            this.colStatus});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -128,100 +108,6 @@
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductList.Size = new System.Drawing.Size(842, 403);
             this.dgvProductList.TabIndex = 7;
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "Id";
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            this.colId.Width = 20;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "Name";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colName.HeaderText = "Name";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 200;
-            // 
-            // colSKU
-            // 
-            this.colSKU.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colSKU.DataPropertyName = "SKU";
-            this.colSKU.HeaderText = "SKU";
-            this.colSKU.Name = "colSKU";
-            this.colSKU.ReadOnly = true;
-            this.colSKU.Width = 90;
-            // 
-            // colCategory
-            // 
-            this.colCategory.DataPropertyName = "Category";
-            this.colCategory.HeaderText = "Category";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colInStockQuantity
-            // 
-            this.colInStockQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colInStockQuantity.DataPropertyName = "InStockQuantity";
-            this.colInStockQuantity.HeaderText = "In Stock";
-            this.colInStockQuantity.Name = "colInStockQuantity";
-            this.colInStockQuantity.ReadOnly = true;
-            this.colInStockQuantity.Width = 90;
-            // 
-            // colOnHoldQuantity
-            // 
-            this.colOnHoldQuantity.DataPropertyName = "OnHoldQuantity";
-            this.colOnHoldQuantity.HeaderText = "On Hold";
-            this.colOnHoldQuantity.Name = "colOnHoldQuantity";
-            this.colOnHoldQuantity.ReadOnly = true;
-            this.colOnHoldQuantity.Visible = false;
-            this.colOnHoldQuantity.Width = 90;
-            // 
-            // colPackage
-            // 
-            this.colPackage.DataPropertyName = "BasePackage";
-            this.colPackage.HeaderText = "Unit";
-            this.colPackage.Name = "colPackage";
-            this.colPackage.ReadOnly = true;
-            this.colPackage.Width = 90;
-            // 
-            // colSupplyPrice
-            // 
-            this.colSupplyPrice.DataPropertyName = "CostPriceWholeText";
-            this.colSupplyPrice.HeaderText = "Cost Price";
-            this.colSupplyPrice.Name = "colSupplyPrice";
-            this.colSupplyPrice.ReadOnly = true;
-            // 
-            // colRetailPrice
-            // 
-            this.colRetailPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colRetailPrice.DataPropertyName = "SellingPriceWholeText";
-            this.colRetailPrice.HeaderText = "Selling Price";
-            this.colRetailPrice.Name = "colRetailPrice";
-            this.colRetailPrice.ReadOnly = true;
-            this.colRetailPrice.Width = 90;
-            // 
-            // colReorderPoint
-            // 
-            this.colReorderPoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colReorderPoint.DataPropertyName = "ReorderPoint";
-            this.colReorderPoint.HeaderText = "Reorder At";
-            this.colReorderPoint.Name = "colReorderPoint";
-            this.colReorderPoint.ReadOnly = true;
-            this.colReorderPoint.Visible = false;
-            // 
-            // colUse
-            // 
-            this.colUse.DataPropertyName = "Use";
-            this.colUse.HeaderText = "Use";
-            this.colUse.Name = "colUse";
-            this.colUse.ReadOnly = true;
-            this.colUse.Width = 40;
             // 
             // panel1
             // 
@@ -277,9 +163,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 17);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.Size = new System.Drawing.Size(37, 13);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Category";
+            this.label4.Text = "Status";
             // 
             // flowLayoutPanel1
             // 
@@ -493,7 +379,6 @@
             // 
             // pnlSideGridView
             // 
-            this.pnlSideGridView.Controls.Add(this.dgvPriceHistory);
             this.pnlSideGridView.Controls.Add(this.lblProductName);
             this.pnlSideGridView.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlSideGridView.Location = new System.Drawing.Point(842, 56);
@@ -501,34 +386,6 @@
             this.pnlSideGridView.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.pnlSideGridView.Size = new System.Drawing.Size(200, 403);
             this.pnlSideGridView.TabIndex = 13;
-            // 
-            // dgvPriceHistory
-            // 
-            this.dgvPriceHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPriceHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSellingPriceDate,
-            this.colSellingPrice});
-            this.dgvPriceHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPriceHistory.Location = new System.Drawing.Point(5, 27);
-            this.dgvPriceHistory.Name = "dgvPriceHistory";
-            this.dgvPriceHistory.RowHeadersVisible = false;
-            this.dgvPriceHistory.Size = new System.Drawing.Size(195, 376);
-            this.dgvPriceHistory.TabIndex = 0;
-            // 
-            // colSellingPriceDate
-            // 
-            this.colSellingPriceDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSellingPriceDate.DataPropertyName = "DateString";
-            this.colSellingPriceDate.HeaderText = "Date";
-            this.colSellingPriceDate.Name = "colSellingPriceDate";
-            this.colSellingPriceDate.Width = 55;
-            // 
-            // colSellingPrice
-            // 
-            this.colSellingPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSellingPrice.DataPropertyName = "Rate";
-            this.colSellingPrice.HeaderText = "Selling Price";
-            this.colSellingPrice.Name = "colSellingPrice";
             // 
             // lblProductName
             // 
@@ -540,6 +397,32 @@
             this.lblProductName.TabIndex = 1;
             this.lblProductName.Text = "-";
             this.lblProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            this.colId.Width = 20;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "Name";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 200;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.HeaderText = "Staus";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
             // 
             // ManufactureListUC
             // 
@@ -564,7 +447,6 @@
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             this.pnlSideGridView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPriceHistory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -599,20 +481,9 @@
         private System.Windows.Forms.Label label4;
         protected internal System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel pnlSideGridView;
-        private System.Windows.Forms.DataGridView dgvPriceHistory;
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSKU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInStockQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOnHoldQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPackage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplyPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRetailPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReorderPoint;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellingPriceDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSellingPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
     }
 }

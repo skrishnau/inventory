@@ -51,6 +51,7 @@ namespace ViewModel.Utility
         public const string TAB_SETTINGS = "Settings";
         public const string TAB_REPORTS = "Reports";
         public const string TAB_ACCOUNTS = "Accounts";
+        public const string TAB_MANUFACTURE = "Manufacture";
 
         public const string NAME_INVENTORY_MANAGE = "Inventory Manage";
         public const string NAME_RATE_LIST = "Rate List";

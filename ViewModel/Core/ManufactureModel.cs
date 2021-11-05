@@ -12,6 +12,9 @@ namespace ViewModel.Core
         public string Name { get; set; }
         public int LotNo { get; set; }
         public string Remarks { get; set; }
+
+        public string Status { get; set; }
+
         public System.DateTime CreatedAt { get; set; }
         public int CreatedByUserId { get; set; }
         public Nullable<System.DateTime> StartedAt { get; set; }

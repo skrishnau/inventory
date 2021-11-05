@@ -32,7 +32,14 @@ namespace Infrastructure.Context
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Counter> Counters { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<DepartmentUser> DepartmentUsers { get; set; }
         public virtual DbSet<InventoryUnit> InventoryUnits { get; set; }
+        public virtual DbSet<ManufactureDepartmentProduct> ManufactureDepartmentProducts { get; set; }
+        public virtual DbSet<ManufactureDepartment> ManufactureDepartments { get; set; }
+        public virtual DbSet<ManufactureDepartmentUser> ManufactureDepartmentUsers { get; set; }
+        public virtual DbSet<ManufactureProduct> ManufactureProducts { get; set; }
+        public virtual DbSet<Manufacture> Manufactures { get; set; }
         public virtual DbSet<Movement> Movements { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -46,19 +53,12 @@ namespace Infrastructure.Context
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<Transfer> Transfers { get; set; }
         public virtual DbSet<Uom> Uoms { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<WarehouseProduct> WarehouseProducts { get; set; }
-        public virtual DbSet<Warehouse> Warehouses { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<DepartmentUser> DepartmentUsers { get; set; }
-        public virtual DbSet<ManufactureDepartmentProduct> ManufactureDepartmentProducts { get; set; }
-        public virtual DbSet<ManufactureDepartment> ManufactureDepartments { get; set; }
-        public virtual DbSet<ManufactureDepartmentUser> ManufactureDepartmentUsers { get; set; }
-        public virtual DbSet<ManufactureProduct> ManufactureProducts { get; set; }
-        public virtual DbSet<Manufacture> Manufactures { get; set; }
         public virtual DbSet<UserManufactureProduct> UserManufactureProducts { get; set; }
         public virtual DbSet<UserManufacture> UserManufactures { get; set; }
         public virtual DbSet<UserProductHistory> UserProductHistories { get; set; }
         public virtual DbSet<UserProduct> UserProducts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<WarehouseProduct> WarehouseProducts { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
     }
 }

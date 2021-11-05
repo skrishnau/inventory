@@ -48,6 +48,7 @@ using IMS.Forms.Inventory.Accounts.All;
 using IMS.Forms.Inventory.Reports.All;
 using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Transaction;
+using IMS.Forms.MRP;
 
 namespace IMS
 {
@@ -108,6 +109,8 @@ namespace IMS
 
             container.Register<IAppSettingService, AppSettingService>(Lifestyle.Singleton);
             container.Register<IUomService, UomService>(Lifestyle.Singleton);
+
+            container.Register<IManufactureService, ManufactureService>(Lifestyle.Singleton);
 
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //
@@ -225,8 +228,8 @@ namespace IMS
             //container.Register<TransactionCreateForm>(Lifestyle.Scoped);
             //container.Register<TransactionCreateLargeUC>(Lifestyle.Scoped);
 
-
-
+            container.Register<ManufactureListUC>(Lifestyle.Scoped);
+            container.Register<ManufactureCreateForm>(Lifestyle.Scoped);
 
             // Optionally verify the container.
             container.Verify();

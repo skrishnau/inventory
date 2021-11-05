@@ -581,7 +581,7 @@ namespace IMS.Forms.Inventory
         private void BtnManufacturings_Click(object sender, EventArgs e)
         {
             var uc = Program.container.GetInstance<ManufactureListUC>();
-            AddTabPage(Constants.TAB_PRODUCTS, uc, sender);
+            AddTabPage(Constants.TAB_MANUFACTURE, uc, sender);
         }
 
         #region Transactions

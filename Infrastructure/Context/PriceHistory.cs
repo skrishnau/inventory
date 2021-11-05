@@ -16,10 +16,10 @@ namespace Infrastructure.Context
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
+        public decimal Rate { get; set; }
         public System.DateTime Date { get; set; }
         public string PriceType { get; set; }
         public Nullable<int> PackageId { get; set; }
-        public decimal Rate { get; set; }
     
         public virtual Package Package { get; set; }
         public virtual Product Product { get; set; }

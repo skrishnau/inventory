@@ -25,8 +25,10 @@ namespace Infrastructure.Context
         public string Name { get; set; }
         public int LotNo { get; set; }
         public string Remarks { get; set; }
-        public System.DateTime CreatedAt { get; set; }
-        public int CreatedByUserId { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<int> CreatedByUserId { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
+        public Nullable<int> DeletedByUserId { get; set; }
         public Nullable<System.DateTime> StartedAt { get; set; }
         public Nullable<int> StartedByUserId { get; set; }
         public Nullable<System.DateTime> CompletedAt { get; set; }
@@ -42,5 +44,6 @@ namespace Infrastructure.Context
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
         public virtual User User3 { get; set; }
+        public virtual User User4 { get; set; }
     }
 }
