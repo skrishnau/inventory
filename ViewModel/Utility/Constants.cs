@@ -67,5 +67,7 @@ namespace ViewModel.Utility
         public const string ADMIN_NAME = "Administrator";
 
         public const string CONFIG_DATABASE = "database";
+
+        public const string KEY_MANUFACTURE_LOT_NO_START_FROM = "manufacture_lot_no_start_from";
     }
 }

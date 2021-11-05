@@ -25,8 +25,21 @@ namespace Service.Core.Settings
         }
         #region AppSettings Core
 
+        public AppSettingModel GetAppSetting(string name)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var appsetting = _context.AppSettings.FirstOrDefault(x => x.Name == name);
+                if (appsetting != null)
+                {
+                    return AppSettingMapper.MapToAppSettingModel(appsetting);
+                }
+                return null;
+            }
+
+        }
         //get app settings
-        public async Task<AppSettingModel> GetAppSetting(string name)
+        public async Task<AppSettingModel> GetAppSettingAsync(string name)
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -612,7 +625,7 @@ namespace Service.Core.Settings
             var array = new DateTime?[2] { null, null };
             DateTime expireAtDb;
             bool expireAtDbParsed = false;
-            var validity = await GetAppSetting("valid_till1");
+            var validity = await GetAppSettingAsync("valid_till1");
             if (validity != null && validity.Value != null)
             {
                 try
@@ -685,7 +698,7 @@ namespace Service.Core.Settings
 
         public async Task<bool> GetShowTransactionCreateInFullPage()
         {
-            var appSett = await GetAppSetting(Constants.KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE);
+            var appSett = await GetAppSettingAsync(Constants.KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE);
             bool.TryParse(appSett?.Value ?? "", out bool value);
             return value;
         }
@@ -705,7 +718,7 @@ namespace Service.Core.Settings
 
         public async Task<bool> GetIsTransactionCreatePageLocked()
         {
-            var appSett = await GetAppSetting(Constants.KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED);
+            var appSett = await GetAppSettingAsync(Constants.KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED);
             bool.TryParse(appSett?.Value ?? "", out bool value);
             return value;
         }

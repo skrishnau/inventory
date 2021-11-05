@@ -1,3 +1,20 @@
+/*
+--all  drop queries
+drop table UserManufactureProducts
+drop table UserManufactures
+drop table ManufactureDepartmentProducts
+drop table ManufactureDepartmentUsers
+drop table ManufactureDepartments
+drop table ManufactureProducts
+drop table Manufactures
+drop table UserProductHistories
+drop table UserProducts
+drop table DepartmentUsers
+drop table Departments
+*/
+
+
+
 -- Manufacture create table queries
 create table Departments (
 	Id int not null primary key identity(1,1),
@@ -41,8 +58,10 @@ create table Manufactures(
 	Name nvarchar(250) not null,
 	LotNo int not null,
 	Remarks nvarchar(250) null,
-	CreatedAt datetime not null,
-	CreatedByUserId int not null constraint FK_Manufactures_Users_CreatedByUserId foreign key references Users(Id),
+	CreatedAt datetime null,
+	CreatedByUserId int null constraint FK_Manufactures_Users_CreatedByUserId foreign key references Users(Id),
+	DeletedAt datetime null,
+	DeletedByUserId int null constraint FK_Manufactures_Users_DeletedByUserId foreign key references Users(Id),
 	StartedAt datetime null,
 	StartedByUserId int null constraint FK_Manufactures_Users_StartedByUserId foreign key references Users(Id),
 	CompletedAt datetime null,

@@ -31,28 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryMenuBar));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSettings = new System.Windows.Forms.Button();
-            this.btnReports = new System.Windows.Forms.Button();
-            this.btnAccounts = new System.Windows.Forms.Button();
-            this.btnClients = new System.Windows.Forms.Button();
-            this.btnManufacturings = new System.Windows.Forms.Button();
-            this.btnInventoryUnits = new System.Windows.Forms.Button();
-            this.btnProductList = new System.Windows.Forms.Button();
-            this.btnLocateInventory = new System.Windows.Forms.Button();
-            this.btnDirectMove = new System.Windows.Forms.Button();
-            this.btnDirectIssue = new System.Windows.Forms.Button();
-            this.btnDirectReceive = new System.Windows.Forms.Button();
-            this.btnTransferOrder = new System.Windows.Forms.Button();
-            this.btnPurchaseOrder = new System.Windows.Forms.Button();
-            this.btnSellOrder = new System.Windows.Forms.Button();
-            this.btnOrders = new System.Windows.Forms.Button();
-            this.btnSaleTransactionList = new System.Windows.Forms.Button();
-            this.btnPurchaseTransaction = new System.Windows.Forms.Button();
-            this.btnSaleTransaction = new System.Windows.Forms.Button();
-            this.btnPOS = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
-            this.btnHelp = new System.Windows.Forms.Button();
-            this.btnBackup = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -83,6 +61,28 @@
             this.label7 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.splitter8 = new System.Windows.Forms.Splitter();
+            this.btnHelp = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.btnReports = new System.Windows.Forms.Button();
+            this.btnAccounts = new System.Windows.Forms.Button();
+            this.btnClients = new System.Windows.Forms.Button();
+            this.btnManufacturings = new System.Windows.Forms.Button();
+            this.btnInventoryUnits = new System.Windows.Forms.Button();
+            this.btnProductList = new System.Windows.Forms.Button();
+            this.btnLocateInventory = new System.Windows.Forms.Button();
+            this.btnDirectMove = new System.Windows.Forms.Button();
+            this.btnDirectIssue = new System.Windows.Forms.Button();
+            this.btnDirectReceive = new System.Windows.Forms.Button();
+            this.btnTransferOrder = new System.Windows.Forms.Button();
+            this.btnPurchaseOrder = new System.Windows.Forms.Button();
+            this.btnSellOrder = new System.Windows.Forms.Button();
+            this.btnOrders = new System.Windows.Forms.Button();
+            this.btnSaleTransactionList = new System.Windows.Forms.Button();
+            this.btnPurchaseTransaction = new System.Windows.Forms.Button();
+            this.btnSaleTransaction = new System.Windows.Forms.Button();
+            this.btnPOS = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -99,6 +99,365 @@
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.splitter1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(78, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel1.Size = new System.Drawing.Size(11, 68);
+            this.panel1.TabIndex = 40;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter1.Location = new System.Drawing.Point(5, 4);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(2, 60);
+            this.splitter1.TabIndex = 0;
+            this.splitter1.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.splitter2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(634, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel2.Size = new System.Drawing.Size(11, 68);
+            this.panel2.TabIndex = 41;
+            this.panel2.Visible = false;
+            // 
+            // splitter2
+            // 
+            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter2.Location = new System.Drawing.Point(5, 4);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(2, 60);
+            this.splitter2.TabIndex = 0;
+            this.splitter2.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.splitter3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(893, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel3.Size = new System.Drawing.Size(11, 68);
+            this.panel3.TabIndex = 42;
+            this.panel3.Visible = false;
+            // 
+            // splitter3
+            // 
+            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter3.Location = new System.Drawing.Point(5, 4);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(2, 60);
+            this.splitter3.TabIndex = 0;
+            this.splitter3.TabStop = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.splitter7);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(1112, 2);
+            this.panel4.Name = "panel4";
+            this.panel4.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel4.Size = new System.Drawing.Size(11, 68);
+            this.panel4.TabIndex = 43;
+            // 
+            // splitter7
+            // 
+            this.splitter7.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter7.Location = new System.Drawing.Point(5, 4);
+            this.splitter7.Name = "splitter7";
+            this.splitter7.Size = new System.Drawing.Size(2, 60);
+            this.splitter7.TabIndex = 0;
+            this.splitter7.TabStop = false;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.splitter4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(2, 2);
+            this.panel5.Name = "panel5";
+            this.panel5.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel5.Size = new System.Drawing.Size(11, 68);
+            this.panel5.TabIndex = 44;
+            // 
+            // splitter4
+            // 
+            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter4.Location = new System.Drawing.Point(5, 4);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(2, 60);
+            this.splitter4.TabIndex = 0;
+            this.splitter4.TabStop = false;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.splitter5);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(1375, 2);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel6.Size = new System.Drawing.Size(11, 68);
+            this.panel6.TabIndex = 45;
+            // 
+            // splitter5
+            // 
+            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter5.Location = new System.Drawing.Point(5, 4);
+            this.splitter5.Name = "splitter5";
+            this.splitter5.Size = new System.Drawing.Size(2, 60);
+            this.splitter5.TabIndex = 0;
+            this.splitter5.TabStop = false;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.splitter6);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(430, 2);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel7.Size = new System.Drawing.Size(11, 68);
+            this.panel7.TabIndex = 49;
+            // 
+            // splitter6
+            // 
+            this.splitter6.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter6.Location = new System.Drawing.Point(5, 4);
+            this.splitter6.Name = "splitter6";
+            this.splitter6.Size = new System.Drawing.Size(2, 60);
+            this.splitter6.TabIndex = 0;
+            this.splitter6.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(341, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Transactions";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(193, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Orders";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(248, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Adjustments";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(208, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Inventory";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(252, 15);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "General";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlTransactions
+            // 
+            this.pnlTransactions.AutoSize = true;
+            this.pnlTransactions.Controls.Add(this.btnOrders);
+            this.pnlTransactions.Controls.Add(this.btnSaleTransactionList);
+            this.pnlTransactions.Controls.Add(this.btnPurchaseTransaction);
+            this.pnlTransactions.Controls.Add(this.btnSaleTransaction);
+            this.pnlTransactions.Controls.Add(this.btnPOS);
+            this.pnlTransactions.Controls.Add(this.label2);
+            this.pnlTransactions.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlTransactions.Location = new System.Drawing.Point(89, 2);
+            this.pnlTransactions.Name = "pnlTransactions";
+            this.pnlTransactions.Size = new System.Drawing.Size(341, 68);
+            this.pnlTransactions.TabIndex = 52;
+            // 
+            // pnlOrders
+            // 
+            this.pnlOrders.AutoSize = true;
+            this.pnlOrders.Controls.Add(this.btnTransferOrder);
+            this.pnlOrders.Controls.Add(this.btnPurchaseOrder);
+            this.pnlOrders.Controls.Add(this.btnSellOrder);
+            this.pnlOrders.Controls.Add(this.label3);
+            this.pnlOrders.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlOrders.Location = new System.Drawing.Point(441, 2);
+            this.pnlOrders.Name = "pnlOrders";
+            this.pnlOrders.Size = new System.Drawing.Size(193, 68);
+            this.pnlOrders.TabIndex = 53;
+            this.pnlOrders.Visible = false;
+            // 
+            // pnlAdjustments
+            // 
+            this.pnlAdjustments.AutoSize = true;
+            this.pnlAdjustments.Controls.Add(this.btnLocateInventory);
+            this.pnlAdjustments.Controls.Add(this.btnDirectMove);
+            this.pnlAdjustments.Controls.Add(this.btnDirectIssue);
+            this.pnlAdjustments.Controls.Add(this.btnDirectReceive);
+            this.pnlAdjustments.Controls.Add(this.label4);
+            this.pnlAdjustments.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlAdjustments.Location = new System.Drawing.Point(645, 2);
+            this.pnlAdjustments.Name = "pnlAdjustments";
+            this.pnlAdjustments.Size = new System.Drawing.Size(248, 68);
+            this.pnlAdjustments.TabIndex = 54;
+            this.pnlAdjustments.Visible = false;
+            // 
+            // pnlInventory
+            // 
+            this.pnlInventory.AutoSize = true;
+            this.pnlInventory.Controls.Add(this.btnManufacturings);
+            this.pnlInventory.Controls.Add(this.btnInventoryUnits);
+            this.pnlInventory.Controls.Add(this.btnProductList);
+            this.pnlInventory.Controls.Add(this.label5);
+            this.pnlInventory.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlInventory.Location = new System.Drawing.Point(904, 2);
+            this.pnlInventory.Name = "pnlInventory";
+            this.pnlInventory.Size = new System.Drawing.Size(208, 68);
+            this.pnlInventory.TabIndex = 55;
+            // 
+            // pnlMisc
+            // 
+            this.pnlMisc.AutoSize = true;
+            this.pnlMisc.Controls.Add(this.btnSettings);
+            this.pnlMisc.Controls.Add(this.btnReports);
+            this.pnlMisc.Controls.Add(this.btnAccounts);
+            this.pnlMisc.Controls.Add(this.btnClients);
+            this.pnlMisc.Controls.Add(this.label6);
+            this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlMisc.Location = new System.Drawing.Point(1123, 2);
+            this.pnlMisc.Name = "pnlMisc";
+            this.pnlMisc.Size = new System.Drawing.Size(252, 68);
+            this.pnlMisc.TabIndex = 56;
+            // 
+            // pnlHome
+            // 
+            this.pnlHome.AutoSize = true;
+            this.pnlHome.Controls.Add(this.btnHome);
+            this.pnlHome.Controls.Add(this.label1);
+            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlHome.Location = new System.Drawing.Point(13, 2);
+            this.pnlHome.Name = "pnlHome";
+            this.pnlHome.Size = new System.Drawing.Size(65, 68);
+            this.pnlHome.TabIndex = 57;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 15);
+            this.label1.TabIndex = 38;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel8
+            // 
+            this.panel8.AutoSize = true;
+            this.panel8.Controls.Add(this.btnHelp);
+            this.panel8.Controls.Add(this.btnBackup);
+            this.panel8.Controls.Add(this.label7);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel8.Location = new System.Drawing.Point(1386, 2);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(97, 68);
+            this.panel8.TabIndex = 58;
+            // 
+            // label7
+            // 
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(97, 15);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Misc";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.splitter8);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(1483, 2);
+            this.panel9.Name = "panel9";
+            this.panel9.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
+            this.panel9.Size = new System.Drawing.Size(11, 68);
+            this.panel9.TabIndex = 59;
+            // 
+            // splitter8
+            // 
+            this.splitter8.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitter8.Location = new System.Drawing.Point(5, 4);
+            this.splitter8.Name = "splitter8";
+            this.splitter8.Size = new System.Drawing.Size(2, 60);
+            this.splitter8.TabIndex = 0;
+            this.splitter8.TabStop = false;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
+            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnHelp.Enabled = false;
+            this.btnHelp.FlatAppearance.BorderSize = 0;
+            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnHelp.Location = new System.Drawing.Point(54, 15);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(43, 53);
+            this.btnHelp.TabIndex = 22;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnHelp, "Help and Support");
+            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Visible = false;
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.BackColor = System.Drawing.Color.Transparent;
+            this.btnBackup.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnBackup.FlatAppearance.BorderSize = 0;
+            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackup.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
+            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnBackup.Location = new System.Drawing.Point(0, 15);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(54, 53);
+            this.btnBackup.TabIndex = 49;
+            this.btnBackup.Text = "Backup";
+            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnBackup, "Help and Support");
+            this.btnBackup.UseVisualStyleBackColor = false;
             // 
             // btnSettings
             // 
@@ -178,13 +537,12 @@
             this.btnManufacturings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnManufacturings.Location = new System.Drawing.Point(125, 15);
             this.btnManufacturings.Name = "btnManufacturings";
-            this.btnManufacturings.Size = new System.Drawing.Size(65, 53);
+            this.btnManufacturings.Size = new System.Drawing.Size(83, 53);
             this.btnManufacturings.TabIndex = 46;
-            this.btnManufacturings.Text = "MRP II";
+            this.btnManufacturings.Text = "Manufacture";
             this.btnManufacturings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnManufacturings, "Manufacturing Resource Planning");
             this.btnManufacturings.UseVisualStyleBackColor = false;
-            this.btnManufacturings.Visible = false;
             // 
             // btnInventoryUnits
             // 
@@ -436,365 +794,6 @@
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnHome, "Go to Dashboard");
             this.btnHome.UseVisualStyleBackColor = true;
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnHelp.Enabled = false;
-            this.btnHelp.FlatAppearance.BorderSize = 0;
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
-            this.btnHelp.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnHelp.Location = new System.Drawing.Point(54, 15);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(43, 53);
-            this.btnHelp.TabIndex = 22;
-            this.btnHelp.Text = "Help";
-            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnHelp, "Help and Support");
-            this.btnHelp.UseVisualStyleBackColor = false;
-            this.btnHelp.Visible = false;
-            // 
-            // btnBackup
-            // 
-            this.btnBackup.BackColor = System.Drawing.Color.Transparent;
-            this.btnBackup.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnBackup.FlatAppearance.BorderSize = 0;
-            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackup.Image = global::IMS.Properties.Resources.icons8_Inventory_Flow_24px;
-            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnBackup.Location = new System.Drawing.Point(0, 15);
-            this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(54, 53);
-            this.btnBackup.TabIndex = 49;
-            this.btnBackup.Text = "Backup";
-            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnBackup, "Help and Support");
-            this.btnBackup.UseVisualStyleBackColor = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.splitter1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(78, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel1.Size = new System.Drawing.Size(11, 68);
-            this.panel1.TabIndex = 40;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter1.Location = new System.Drawing.Point(5, 4);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(2, 60);
-            this.splitter1.TabIndex = 0;
-            this.splitter1.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.splitter2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(634, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel2.Size = new System.Drawing.Size(11, 68);
-            this.panel2.TabIndex = 41;
-            this.panel2.Visible = false;
-            // 
-            // splitter2
-            // 
-            this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter2.Location = new System.Drawing.Point(5, 4);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(2, 60);
-            this.splitter2.TabIndex = 0;
-            this.splitter2.TabStop = false;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.splitter3);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(893, 2);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel3.Size = new System.Drawing.Size(11, 68);
-            this.panel3.TabIndex = 42;
-            this.panel3.Visible = false;
-            // 
-            // splitter3
-            // 
-            this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter3.Location = new System.Drawing.Point(5, 4);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(2, 60);
-            this.splitter3.TabIndex = 0;
-            this.splitter3.TabStop = false;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.splitter7);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(1094, 2);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel4.Size = new System.Drawing.Size(11, 68);
-            this.panel4.TabIndex = 43;
-            // 
-            // splitter7
-            // 
-            this.splitter7.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter7.Location = new System.Drawing.Point(5, 4);
-            this.splitter7.Name = "splitter7";
-            this.splitter7.Size = new System.Drawing.Size(2, 60);
-            this.splitter7.TabIndex = 0;
-            this.splitter7.TabStop = false;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.splitter4);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(2, 2);
-            this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel5.Size = new System.Drawing.Size(11, 68);
-            this.panel5.TabIndex = 44;
-            // 
-            // splitter4
-            // 
-            this.splitter4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter4.Location = new System.Drawing.Point(5, 4);
-            this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(2, 60);
-            this.splitter4.TabIndex = 0;
-            this.splitter4.TabStop = false;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.splitter5);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(1357, 2);
-            this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel6.Size = new System.Drawing.Size(11, 68);
-            this.panel6.TabIndex = 45;
-            // 
-            // splitter5
-            // 
-            this.splitter5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter5.Location = new System.Drawing.Point(5, 4);
-            this.splitter5.Name = "splitter5";
-            this.splitter5.Size = new System.Drawing.Size(2, 60);
-            this.splitter5.TabIndex = 0;
-            this.splitter5.TabStop = false;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.splitter6);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(430, 2);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel7.Size = new System.Drawing.Size(11, 68);
-            this.panel7.TabIndex = 49;
-            // 
-            // splitter6
-            // 
-            this.splitter6.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter6.Location = new System.Drawing.Point(5, 4);
-            this.splitter6.Name = "splitter6";
-            this.splitter6.Size = new System.Drawing.Size(2, 60);
-            this.splitter6.TabIndex = 0;
-            this.splitter6.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(341, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Transactions";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(193, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Orders";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(248, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Adjustments";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(190, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Inventory";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(252, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "General";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlTransactions
-            // 
-            this.pnlTransactions.AutoSize = true;
-            this.pnlTransactions.Controls.Add(this.btnOrders);
-            this.pnlTransactions.Controls.Add(this.btnSaleTransactionList);
-            this.pnlTransactions.Controls.Add(this.btnPurchaseTransaction);
-            this.pnlTransactions.Controls.Add(this.btnSaleTransaction);
-            this.pnlTransactions.Controls.Add(this.btnPOS);
-            this.pnlTransactions.Controls.Add(this.label2);
-            this.pnlTransactions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlTransactions.Location = new System.Drawing.Point(89, 2);
-            this.pnlTransactions.Name = "pnlTransactions";
-            this.pnlTransactions.Size = new System.Drawing.Size(341, 68);
-            this.pnlTransactions.TabIndex = 52;
-            // 
-            // pnlOrders
-            // 
-            this.pnlOrders.AutoSize = true;
-            this.pnlOrders.Controls.Add(this.btnTransferOrder);
-            this.pnlOrders.Controls.Add(this.btnPurchaseOrder);
-            this.pnlOrders.Controls.Add(this.btnSellOrder);
-            this.pnlOrders.Controls.Add(this.label3);
-            this.pnlOrders.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlOrders.Location = new System.Drawing.Point(441, 2);
-            this.pnlOrders.Name = "pnlOrders";
-            this.pnlOrders.Size = new System.Drawing.Size(193, 68);
-            this.pnlOrders.TabIndex = 53;
-            this.pnlOrders.Visible = false;
-            // 
-            // pnlAdjustments
-            // 
-            this.pnlAdjustments.AutoSize = true;
-            this.pnlAdjustments.Controls.Add(this.btnLocateInventory);
-            this.pnlAdjustments.Controls.Add(this.btnDirectMove);
-            this.pnlAdjustments.Controls.Add(this.btnDirectIssue);
-            this.pnlAdjustments.Controls.Add(this.btnDirectReceive);
-            this.pnlAdjustments.Controls.Add(this.label4);
-            this.pnlAdjustments.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlAdjustments.Location = new System.Drawing.Point(645, 2);
-            this.pnlAdjustments.Name = "pnlAdjustments";
-            this.pnlAdjustments.Size = new System.Drawing.Size(248, 68);
-            this.pnlAdjustments.TabIndex = 54;
-            this.pnlAdjustments.Visible = false;
-            // 
-            // pnlInventory
-            // 
-            this.pnlInventory.AutoSize = true;
-            this.pnlInventory.Controls.Add(this.btnManufacturings);
-            this.pnlInventory.Controls.Add(this.btnInventoryUnits);
-            this.pnlInventory.Controls.Add(this.btnProductList);
-            this.pnlInventory.Controls.Add(this.label5);
-            this.pnlInventory.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlInventory.Location = new System.Drawing.Point(904, 2);
-            this.pnlInventory.Name = "pnlInventory";
-            this.pnlInventory.Size = new System.Drawing.Size(190, 68);
-            this.pnlInventory.TabIndex = 55;
-            // 
-            // pnlMisc
-            // 
-            this.pnlMisc.AutoSize = true;
-            this.pnlMisc.Controls.Add(this.btnSettings);
-            this.pnlMisc.Controls.Add(this.btnReports);
-            this.pnlMisc.Controls.Add(this.btnAccounts);
-            this.pnlMisc.Controls.Add(this.btnClients);
-            this.pnlMisc.Controls.Add(this.label6);
-            this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMisc.Location = new System.Drawing.Point(1105, 2);
-            this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(252, 68);
-            this.pnlMisc.TabIndex = 56;
-            // 
-            // pnlHome
-            // 
-            this.pnlHome.AutoSize = true;
-            this.pnlHome.Controls.Add(this.btnHome);
-            this.pnlHome.Controls.Add(this.label1);
-            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlHome.Location = new System.Drawing.Point(13, 2);
-            this.pnlHome.Name = "pnlHome";
-            this.pnlHome.Size = new System.Drawing.Size(65, 68);
-            this.pnlHome.TabIndex = 57;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 15);
-            this.label1.TabIndex = 38;
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel8
-            // 
-            this.panel8.AutoSize = true;
-            this.panel8.Controls.Add(this.btnHelp);
-            this.panel8.Controls.Add(this.btnBackup);
-            this.panel8.Controls.Add(this.label7);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(1368, 2);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(97, 68);
-            this.panel8.TabIndex = 58;
-            // 
-            // label7
-            // 
-            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 15);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Misc";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.splitter8);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(1465, 2);
-            this.panel9.Name = "panel9";
-            this.panel9.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
-            this.panel9.Size = new System.Drawing.Size(11, 68);
-            this.panel9.TabIndex = 59;
-            // 
-            // splitter8
-            // 
-            this.splitter8.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.splitter8.Location = new System.Drawing.Point(5, 4);
-            this.splitter8.Name = "splitter8";
-            this.splitter8.Size = new System.Drawing.Size(2, 60);
-            this.splitter8.TabIndex = 0;
-            this.splitter8.TabStop = false;
             // 
             // InventoryMenuBar
             // 

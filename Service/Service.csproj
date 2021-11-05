@@ -55,6 +55,7 @@
     <Compile Include="Core\Inventory\Units\IInventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUpdate.cs" />
+    <Compile Include="Core\ManufactureService.cs" />
     <Compile Include="Core\Payment\IPaymentService.cs" />
     <Compile Include="Core\Payment\PaymentService.cs" />
     <Compile Include="Core\ProductService.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="DbEventArgs\BaseEventArgs.cs" />
     <Compile Include="DbEventArgs\IdEventArgs.cs" />
     <Compile Include="Interfaces\IBackupService.cs" />
+    <Compile Include="Interfaces\IManufactureService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Interfaces\IUomService.cs" />
     <Compile Include="Listeners\Business\BranchListener.cs" />
@@ -118,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Base\" />
+    <Folder Include="Core\Inter\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

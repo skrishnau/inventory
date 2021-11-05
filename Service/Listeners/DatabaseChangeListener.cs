@@ -3,6 +3,7 @@ using Service.Listeners.Business;
 using Service.Listeners.Inventory;
 using System;
 using System.Collections.Generic;
+using ViewModel.Core;
 using ViewModel.Core.Business;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
@@ -29,6 +30,7 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<CompanyInfoSettingModel>> CompanyUpdated;
         public event EventHandler<BaseEventArgs<PriceHistoryModel>> PriceHistoryUpdated;
         public event EventHandler<BaseEventArgs<List<BillSettingsModel>>> BillSettingUpdated;
+        public event EventHandler<BaseEventArgs<ManufactureModel>> ManufactureUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -114,6 +116,11 @@ namespace Service.Listeners
         public void TriggerBillSettingUpdateEvent(object p, BaseEventArgs<List<BillSettingsModel>> eventArgs)
         {
             BillSettingUpdated?.Invoke(p, eventArgs);
+        }
+
+        public void TriggerManufactureUpdateEvent(object p, BaseEventArgs<ManufactureModel> eventArgs)
+        {
+            ManufactureUpdated?.Invoke(p, eventArgs);
         }
     }
 }

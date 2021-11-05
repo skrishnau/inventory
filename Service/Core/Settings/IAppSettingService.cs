@@ -15,7 +15,7 @@ namespace Service.Core.Settings
         /// Retrive
         /// </summary>
         /// <param name="name"></param>
-        Task<AppSettingModel> GetAppSetting(string name);
+        Task<AppSettingModel> GetAppSettingAsync(string name);
         /// <summary>
         /// Add or Update
         /// </summary>
@@ -35,6 +35,7 @@ namespace Service.Core.Settings
         Task<DateTime?[]> GetLicenseStartDate();
         void SaveLicenseStartDate(DateTime date);
         bool SaveCurrentIndex(long index, ReferencesTypeEnum orderType);
+        AppSettingModel GetAppSetting(string key);
         bool IncrementBillIndex(ReferencesTypeEnum orderType);
         bool IncrementBillIndexWithoutCommit(DatabaseContext _context, ReferencesTypeEnum orderType);
         //Task<PasswordModel> GetPassword();
@@ -45,5 +46,6 @@ namespace Service.Core.Settings
         void SaveShowTransactionCreateInFullPage(bool p);
         Task<bool> GetIsTransactionCreatePageLocked();
         void SaveIsTransactionCreatePageLocked(bool p);
+        
     }
 }

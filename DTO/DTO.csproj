@@ -65,6 +65,7 @@
     <Compile Include="Core\Inventory\UserMapper.cs" />
     <Compile Include="Core\Inventory\UomMapper.cs" />
     <Compile Include="Core\Inventory\WarehouseProductMapper.cs" />
+    <Compile Include="Core\ManufactureMapper.cs" />
     <Compile Include="Core\POS\Store.cs" />
     <Compile Include="Core\Settings\AppSettingMapper.cs" />
     <Compile Include="Core\Inventory\ProductMapper.cs" />

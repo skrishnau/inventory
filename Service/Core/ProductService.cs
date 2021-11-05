@@ -49,7 +49,6 @@ namespace Service.Core
                 _context.SaveChanges();
                 catEventArgs.Category = CategoryMapper.MapToCategoryModel(dbEntity);
                 _listener.TriggerCategoryUpdateEvent(null, catEventArgs);
-
             }
 
         }

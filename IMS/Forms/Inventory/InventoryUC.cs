@@ -27,6 +27,7 @@ using Service.Core.Settings;
 using ViewModel.Utility;
 using ViewModel.Core.Orders;
 using IMS.Forms.Common;
+using IMS.Forms.MRP;
 
 namespace IMS.Forms.Inventory
 {
@@ -345,7 +346,9 @@ namespace IMS.Forms.Inventory
 
             _menubar.btnClients.Click += BtnClients_Click;
             _menubar.btnBackup.Click += BtnBackup_Click;
+            _menubar.btnManufacturings.Click += BtnManufacturings_Click;
         }
+
 
         private void BtnBackup_Click(object sender, EventArgs e)
         {
@@ -574,6 +577,12 @@ namespace IMS.Forms.Inventory
         //}
 
         #endregion
+
+        private void BtnManufacturings_Click(object sender, EventArgs e)
+        {
+            var uc = Program.container.GetInstance<ManufactureListUC>();
+            AddTabPage(Constants.TAB_PRODUCTS, uc, sender);
+        }
 
         #region Transactions
 
