@@ -23,6 +23,11 @@ namespace Infrastructure.Context
             this.ProductPackages = new HashSet<ProductPackage>();
             this.Uoms = new HashSet<Uom>();
             this.Uoms1 = new HashSet<Uom>();
+            this.ManufactureDepartmentProducts = new HashSet<ManufactureDepartmentProduct>();
+            this.ManufactureProducts = new HashSet<ManufactureProduct>();
+            this.UserManufactureProducts = new HashSet<UserManufactureProduct>();
+            this.UserProductHistories = new HashSet<UserProductHistory>();
+            this.UserProducts = new HashSet<UserProduct>();
         }
     
         public int Id { get; set; }
@@ -41,5 +46,15 @@ namespace Infrastructure.Context
         public virtual ICollection<Uom> Uoms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Uom> Uoms1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartmentProduct> ManufactureDepartmentProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureProduct> ManufactureProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserManufactureProduct> UserManufactureProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProductHistory> UserProductHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProduct> UserProducts { get; set; }
     }
 }

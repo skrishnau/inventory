@@ -79,6 +79,28 @@
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="IsVendor" Type="bit" Nullable="false" />
+          <Property Name="HeadUserId" Type="int" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DepartmentUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="VendorId" Type="int" />
+          <Property Name="DeletedAt" Type="datetime" />
+        </EntityType>
         <EntityType Name="InventoryUnits">
           <Key>
             <PropertyRef Name="Id" />
@@ -107,6 +129,80 @@
           <Property Name="Remark" Type="nvarchar(max)" />
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="OrderItemId" Type="int" />
+        </EntityType>
+        <EntityType Name="ManufactureDepartmentProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManufactureDepartmentId" Type="int" Nullable="false" />
+          <Property Name="ProposedOrProduction" Type="bit" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InOut" Type="bit" Nullable="false" />
+          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+        </EntityType>
+        <EntityType Name="ManufactureDepartments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManufactureId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsVendor" Type="bit" Nullable="false" />
+          <Property Name="HeadUserId" Type="int" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="StartedAt" Type="datetime" />
+          <Property Name="StartedByUserId" Type="int" />
+          <Property Name="CompletedAt" Type="datetime" />
+          <Property Name="CompletedByUserId" Type="int" />
+          <Property Name="CancelledAt" Type="datetime" />
+          <Property Name="CancelledByUserId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ManufactureDepartmentUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManufactureDepartmentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+        </EntityType>
+        <EntityType Name="ManufactureProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManufactureId" Type="int" Nullable="false" />
+          <Property Name="ProposedOrProduction" Type="bit" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="InOut" Type="bit" Nullable="false" />
+          <Property Name="CostRate" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+        </EntityType>
+        <EntityType Name="Manufactures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="LotNo" Type="int" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+          <Property Name="StartedAt" Type="datetime" />
+          <Property Name="StartedByUserId" Type="int" />
+          <Property Name="CompletedAt" Type="datetime" />
+          <Property Name="CompletedByUserId" Type="int" />
+          <Property Name="CancelledAt" Type="datetime" />
+          <Property Name="CancelledByUserId" Type="int" />
         </EntityType>
         <EntityType Name="Movements">
           <Key>
@@ -335,6 +431,54 @@
           <Property Name="PackageId" Type="int" Nullable="false" />
           <Property Name="RelatedPackageId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserManufactureProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserManufactureId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InOut" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserManufactures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManufactureDepartmentUserId" Type="int" Nullable="false" />
+          <Property Name="StartedAt" Type="datetime" />
+          <Property Name="CompletedAt" Type="datetime" />
+          <Property Name="CancelledAt" Type="datetime" />
+          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="UserProductHistories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="9" Nullable="false" />
+          <Property Name="FromToUserId" Type="int" />
+          <Property Name="InOut" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="256" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -870,6 +1014,402 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Departments_Users_HeadUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="HeadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUsers_Departments_DepartmentId">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="DepartmentUsers" Type="Self.DepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUsers">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUsers_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="DepartmentUsers" Type="Self.DepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUsers_Users_VendorId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="DepartmentUsers" Type="Self.DepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUsers">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="1" />
+          <End Role="ManufactureDepartmentProducts" Type="Self.ManufactureDepartmentProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManufactureDepartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentProducts">
+              <PropertyRef Name="ManufactureDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentProducts_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="ManufactureDepartmentProducts" Type="Self.ManufactureDepartmentProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentProducts">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentProducts_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ManufactureDepartmentProducts" Type="Self.ManufactureDepartmentProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Departments_DepartmentId">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartments">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Manufactures_ManufactureId">
+          <End Role="Manufactures" Type="Self.Manufactures" Multiplicity="1" />
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufactures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartments">
+              <PropertyRef Name="ManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_CancelledByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartments">
+              <PropertyRef Name="CancelledByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_CompletedByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartments">
+              <PropertyRef Name="CompletedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_StartedByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartments">
+              <PropertyRef Name="StartedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartments">
+              <PropertyRef Name="HeadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId">
+          <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="1" />
+          <End Role="ManufactureDepartmentUsers" Type="Self.ManufactureDepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManufactureDepartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUsers">
+              <PropertyRef Name="ManufactureDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ManufactureDepartmentUsers" Type="Self.ManufactureDepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureProducts_Manufatures_ManufactureId">
+          <End Role="Manufactures" Type="Self.Manufactures" Multiplicity="1" />
+          <End Role="ManufactureProducts" Type="Self.ManufactureProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufactures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureProducts">
+              <PropertyRef Name="ManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureProducts_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="ManufactureProducts" Type="Self.ManufactureProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureProducts">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureProducts_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ManufactureProducts" Type="Self.ManufactureProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_CancelledByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Manufactures" Type="Self.Manufactures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufactures">
+              <PropertyRef Name="CancelledByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_CompletedByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Manufactures" Type="Self.Manufactures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufactures">
+              <PropertyRef Name="CompletedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_CreatedByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Manufactures" Type="Self.Manufactures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufactures">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_StartedByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Manufactures" Type="Self.Manufactures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufactures">
+              <PropertyRef Name="StartedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactureProducts_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="UserManufactureProducts" Type="Self.UserManufactureProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactureProducts">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactureProducts_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="UserManufactureProducts" Type="Self.UserManufactureProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactureProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
+          <End Role="UserManufactures" Type="Self.UserManufactures" Multiplicity="1" />
+          <End Role="UserManufactureProducts" Type="Self.UserManufactureProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserManufactures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactureProducts">
+              <PropertyRef Name="UserManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId">
+          <End Role="ManufactureDepartmentUsers" Type="Self.ManufactureDepartmentUsers" Multiplicity="1" />
+          <End Role="UserManufactures" Type="Self.UserManufactures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManufactureDepartmentUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactures">
+              <PropertyRef Name="ManufactureDepartmentUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistories">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistories">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Users_FromUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistories">
+              <PropertyRef Name="FromToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistories">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProducts_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProducts_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProducts_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EntitiesStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdjustmentCodes" EntityType="Self.AdjustmentCodes" Schema="dbo" store:Type="Tables" />
@@ -878,7 +1418,14 @@
           <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Counters" EntityType="Self.Counters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentUsers" EntityType="Self.DepartmentUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryUnits" EntityType="Self.InventoryUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManufactureDepartmentProducts" EntityType="Self.ManufactureDepartmentProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManufactureDepartments" EntityType="Self.ManufactureDepartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManufactureDepartmentUsers" EntityType="Self.ManufactureDepartmentUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManufactureProducts" EntityType="Self.ManufactureProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufactures" EntityType="Self.Manufactures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movements" EntityType="Self.Movements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -892,6 +1439,10 @@
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transfers" EntityType="Self.Transfers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Uoms" EntityType="Self.Uoms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserManufactureProducts" EntityType="Self.UserManufactureProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserManufactures" EntityType="Self.UserManufactures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProductHistories" EntityType="Self.UserProductHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProducts" EntityType="Self.UserProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WarehouseProducts" EntityType="Self.WarehouseProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
@@ -1054,6 +1605,138 @@
           <AssociationSet Name="FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" Association="Self.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="WarehouseProducts" EntitySet="WarehouseProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departments_Users_HeadUserId" Association="Self.FK_Departments_Users_HeadUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUsers_Departments_DepartmentId" Association="Self.FK_DepartmentUsers_Departments_DepartmentId">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="DepartmentUsers" EntitySet="DepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUsers_Users_UserId" Association="Self.FK_DepartmentUsers_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DepartmentUsers" EntitySet="DepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUsers_Users_VendorId" Association="Self.FK_DepartmentUsers_Users_VendorId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DepartmentUsers" EntitySet="DepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" Association="Self.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+            <End Role="ManufactureDepartmentProducts" EntitySet="ManufactureDepartmentProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentProducts_Packages_PackageId" Association="Self.FK_ManufactureDepartmentProducts_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="ManufactureDepartmentProducts" EntitySet="ManufactureDepartmentProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentProducts_Products_ProductId" Association="Self.FK_ManufactureDepartmentProducts_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ManufactureDepartmentProducts" EntitySet="ManufactureDepartmentProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Departments_DepartmentId" Association="Self.FK_ManufactureDepartments_Departments_DepartmentId">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Manufactures_ManufactureId" Association="Self.FK_ManufactureDepartments_Manufactures_ManufactureId">
+            <End Role="Manufactures" EntitySet="Manufactures" />
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_CancelledByUserId" Association="Self.FK_ManufactureDepartments_Users_CancelledByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_CompletedByUserId" Association="Self.FK_ManufactureDepartments_Users_CompletedByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_StartedByUserId" Association="Self.FK_ManufactureDepartments_Users_StartedByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_UserId" Association="Self.FK_ManufactureDepartments_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" Association="Self.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId">
+            <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
+            <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_UserId" Association="Self.FK_ManufactureDepartmentUsers_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureProducts_Manufatures_ManufactureId" Association="Self.FK_ManufactureProducts_Manufatures_ManufactureId">
+            <End Role="Manufactures" EntitySet="Manufactures" />
+            <End Role="ManufactureProducts" EntitySet="ManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureProducts_Packages_PackageId" Association="Self.FK_ManufactureProducts_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="ManufactureProducts" EntitySet="ManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureProducts_Products_ProductId" Association="Self.FK_ManufactureProducts_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ManufactureProducts" EntitySet="ManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_CancelledByUserId" Association="Self.FK_Manufactures_Users_CancelledByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Manufactures" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_CompletedByUserId" Association="Self.FK_Manufactures_Users_CompletedByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Manufactures" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_CreatedByUserId" Association="Self.FK_Manufactures_Users_CreatedByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Manufactures" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_StartedByUserId" Association="Self.FK_Manufactures_Users_StartedByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Manufactures" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_Packages_PackageId" Association="Self.FK_UserManufactureProducts_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="UserManufactureProducts" EntitySet="UserManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_Products_ProductId" Association="Self.FK_UserManufactureProducts_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="UserManufactureProducts" EntitySet="UserManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" Association="Self.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
+            <End Role="UserManufactures" EntitySet="UserManufactures" />
+            <End Role="UserManufactureProducts" EntitySet="UserManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" Association="Self.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId">
+            <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
+            <End Role="UserManufactures" EntitySet="UserManufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Packages_PackageId" Association="Self.FK_UserProductHistories_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Products_ProductId" Association="Self.FK_UserProductHistories_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Users_FromUserId" Association="Self.FK_UserProductHistories_Users_FromUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Users_UserId" Association="Self.FK_UserProductHistories_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_Packages_PackageId" Association="Self.FK_UserProducts_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_Products_ProductId" Association="Self.FK_UserProducts_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_Users_UserId" Association="Self.FK_UserProducts_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1281,6 +1964,11 @@
           <NavigationProperty Name="ProductPackages" Relationship="Self.FK_dbo_ProductPackages_dbo_Packages_PackageId" FromRole="Packages" ToRole="ProductPackages" />
           <NavigationProperty Name="Uoms" Relationship="Self.FK_dbo_Uoms_dbo_Packages_PackageId" FromRole="Packages" ToRole="Uoms" />
           <NavigationProperty Name="Uoms1" Relationship="Self.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" FromRole="Packages" ToRole="Uoms" />
+          <NavigationProperty Name="ManufactureDepartmentProducts" Relationship="Entities.FK_ManufactureDepartmentProducts_Packages_PackageId" FromRole="Package" ToRole="ManufactureDepartmentProduct" />
+          <NavigationProperty Name="ManufactureProducts" Relationship="Entities.FK_ManufactureProducts_Packages_PackageId" FromRole="Package" ToRole="ManufactureProduct" />
+          <NavigationProperty Name="UserManufactureProducts" Relationship="Entities.FK_UserManufactureProducts_Packages_PackageId" FromRole="Package" ToRole="UserManufactureProduct" />
+          <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Packages_PackageId" FromRole="Package" ToRole="UserProductHistory" />
+          <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Packages_PackageId" FromRole="Package" ToRole="UserProduct" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -1392,6 +2080,11 @@
           <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_Products_dbo_Warehouses_WarehouseId" FromRole="Products" ToRole="Warehouses" />
           <NavigationProperty Name="Uoms" Relationship="Self.FK_dbo_Uoms_dbo_Products_ProductId" FromRole="Products" ToRole="Uoms" />
           <NavigationProperty Name="WarehouseProducts" Relationship="Self.FK_dbo_WarehouseProducts_dbo_Products_ProductId" FromRole="Products" ToRole="WarehouseProducts" />
+          <NavigationProperty Name="ManufactureDepartmentProducts" Relationship="Entities.FK_ManufactureDepartmentProducts_Products_ProductId" FromRole="Product" ToRole="ManufactureDepartmentProduct" />
+          <NavigationProperty Name="ManufactureProducts" Relationship="Entities.FK_ManufactureProducts_Products_ProductId" FromRole="Product" ToRole="ManufactureProduct" />
+          <NavigationProperty Name="UserManufactureProducts" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="Product" ToRole="UserManufactureProduct" />
+          <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Products_ProductId" FromRole="Product" ToRole="UserProductHistory" />
+          <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Products_ProductId" FromRole="Product" ToRole="UserProduct" />
         </EntityType>
         <EntityType Name="TransactionItem">
           <Key>
@@ -1490,6 +2183,21 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Users_UserId" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_dbo_Payments_dbo_Users_UserId" FromRole="Users" ToRole="Payments" />
           <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Users_UserId" FromRole="Users" ToRole="Transactions" />
+          <NavigationProperty Name="Departments" Relationship="Entities.FK_Departments_Users_HeadUserId" FromRole="User" ToRole="Department" />
+          <NavigationProperty Name="DepartmentUsers" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="User" ToRole="DepartmentUser" />
+          <NavigationProperty Name="DepartmentUsers1" Relationship="Entities.FK_DepartmentUsers_Users_VendorId" FromRole="User" ToRole="DepartmentUser" />
+          <NavigationProperty Name="ManufactureDepartments" Relationship="Entities.FK_ManufactureDepartments_Users_CancelledByUserId" FromRole="User" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="ManufactureDepartments1" Relationship="Entities.FK_ManufactureDepartments_Users_CompletedByUserId" FromRole="User" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="ManufactureDepartments2" Relationship="Entities.FK_ManufactureDepartments_Users_StartedByUserId" FromRole="User" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="ManufactureDepartments3" Relationship="Entities.FK_ManufactureDepartments_Users_UserId" FromRole="User" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="ManufactureDepartmentUsers" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_UserId" FromRole="User" ToRole="ManufactureDepartmentUser" />
+          <NavigationProperty Name="Manufactures" Relationship="Entities.FK_Manufactures_Users_CancelledByUserId" FromRole="User" ToRole="Manufacture" />
+          <NavigationProperty Name="Manufactures1" Relationship="Entities.FK_Manufactures_Users_CompletedByUserId" FromRole="User" ToRole="Manufacture" />
+          <NavigationProperty Name="Manufactures2" Relationship="Entities.FK_Manufactures_Users_CreatedByUserId" FromRole="User" ToRole="Manufacture" />
+          <NavigationProperty Name="Manufactures3" Relationship="Entities.FK_Manufactures_Users_StartedByUserId" FromRole="User" ToRole="Manufacture" />
+          <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Users_FromUserId" FromRole="User" ToRole="UserProductHistory" />
+          <NavigationProperty Name="UserProductHistories1" Relationship="Entities.FK_UserProductHistories_Users_UserId" FromRole="User" ToRole="UserProductHistory" />
+          <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Users_UserId" FromRole="User" ToRole="UserProduct" />
         </EntityType>
         <EntityType Name="WarehouseProduct">
           <Key>
@@ -2178,6 +2886,149 @@
             <End Role="Transaction" EntitySet="Transactions" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
+          <EntitySet Name="Departments" EntityType="Entities.Department" />
+          <EntitySet Name="DepartmentUsers" EntityType="Entities.DepartmentUser" />
+          <EntitySet Name="ManufactureDepartmentProducts" EntityType="Entities.ManufactureDepartmentProduct" />
+          <EntitySet Name="ManufactureDepartments" EntityType="Entities.ManufactureDepartment" />
+          <EntitySet Name="ManufactureDepartmentUsers" EntityType="Entities.ManufactureDepartmentUser" />
+          <EntitySet Name="ManufactureProducts" EntityType="Entities.ManufactureProduct" />
+          <EntitySet Name="Manufactures" EntityType="Entities.Manufacture" />
+          <EntitySet Name="UserManufactureProducts" EntityType="Entities.UserManufactureProduct" />
+          <EntitySet Name="UserManufactures" EntityType="Entities.UserManufacture" />
+          <EntitySet Name="UserProductHistories" EntityType="Entities.UserProductHistory" />
+          <EntitySet Name="UserProducts" EntityType="Entities.UserProduct" />
+          <AssociationSet Name="FK_Departments_Users_HeadUserId" Association="Entities.FK_Departments_Users_HeadUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUsers_Departments_DepartmentId" Association="Entities.FK_DepartmentUsers_Departments_DepartmentId">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Departments_DepartmentId" Association="Entities.FK_ManufactureDepartments_Departments_DepartmentId">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUsers_Users_UserId" Association="Entities.FK_DepartmentUsers_Users_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentUsers_Users_VendorId" Association="Entities.FK_DepartmentUsers_Users_VendorId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DepartmentUser" EntitySet="DepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" Association="Entities.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+            <End Role="ManufactureDepartmentProduct" EntitySet="ManufactureDepartmentProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentProducts_Packages_PackageId" Association="Entities.FK_ManufactureDepartmentProducts_Packages_PackageId">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="ManufactureDepartmentProduct" EntitySet="ManufactureDepartmentProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentProducts_Products_ProductId" Association="Entities.FK_ManufactureDepartmentProducts_Products_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ManufactureDepartmentProduct" EntitySet="ManufactureDepartmentProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Manufactures_ManufactureId" Association="Entities.FK_ManufactureDepartments_Manufactures_ManufactureId">
+            <End Role="Manufacture" EntitySet="Manufactures" />
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_CancelledByUserId" Association="Entities.FK_ManufactureDepartments_Users_CancelledByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_CompletedByUserId" Association="Entities.FK_ManufactureDepartments_Users_CompletedByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_StartedByUserId" Association="Entities.FK_ManufactureDepartments_Users_StartedByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartments_Users_UserId" Association="Entities.FK_ManufactureDepartments_Users_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" Association="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId">
+            <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+            <End Role="ManufactureDepartmentUser" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_UserId" Association="Entities.FK_ManufactureDepartmentUsers_Users_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureDepartmentUser" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" Association="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId">
+            <End Role="ManufactureDepartmentUser" EntitySet="ManufactureDepartmentUsers" />
+            <End Role="UserManufacture" EntitySet="UserManufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureProducts_Manufatures_ManufactureId" Association="Entities.FK_ManufactureProducts_Manufatures_ManufactureId">
+            <End Role="Manufacture" EntitySet="Manufactures" />
+            <End Role="ManufactureProduct" EntitySet="ManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureProducts_Packages_PackageId" Association="Entities.FK_ManufactureProducts_Packages_PackageId">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="ManufactureProduct" EntitySet="ManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureProducts_Products_ProductId" Association="Entities.FK_ManufactureProducts_Products_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ManufactureProduct" EntitySet="ManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_CancelledByUserId" Association="Entities.FK_Manufactures_Users_CancelledByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Manufacture" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_CompletedByUserId" Association="Entities.FK_Manufactures_Users_CompletedByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Manufacture" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_CreatedByUserId" Association="Entities.FK_Manufactures_Users_CreatedByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Manufacture" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manufactures_Users_StartedByUserId" Association="Entities.FK_Manufactures_Users_StartedByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Manufacture" EntitySet="Manufactures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_Packages_PackageId" Association="Entities.FK_UserManufactureProducts_Packages_PackageId">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="UserManufactureProduct" EntitySet="UserManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Packages_PackageId" Association="Entities.FK_UserProductHistories_Packages_PackageId">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_Packages_PackageId" Association="Entities.FK_UserProducts_Packages_PackageId">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="UserProduct" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_Products_ProductId" Association="Entities.FK_UserManufactureProducts_Products_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="UserManufactureProduct" EntitySet="UserManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Products_ProductId" Association="Entities.FK_UserProductHistories_Products_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_Products_ProductId" Association="Entities.FK_UserProducts_Products_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="UserProduct" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" Association="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
+            <End Role="UserManufacture" EntitySet="UserManufactures" />
+            <End Role="UserManufactureProduct" EntitySet="UserManufactureProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Users_FromUserId" Association="Entities.FK_UserProductHistories_Users_FromUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProductHistories_Users_UserId" Association="Entities.FK_UserProductHistories_Users_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_Users_UserId" Association="Entities.FK_UserProducts_Users_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProduct" EntitySet="UserProducts" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_dbo_Payments_dbo_Transactions_TransactionId">
           <End Type="Entities.Transaction" Role="Transaction" Multiplicity="0..1" />
@@ -2188,6 +3039,587 @@
             </Principal>
             <Dependent Role="Payment">
               <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsVendor" Type="Boolean" Nullable="false" />
+          <Property Name="HeadUserId" Type="Int32" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_Departments_Users_HeadUserId" FromRole="Department" ToRole="User" />
+          <NavigationProperty Name="DepartmentUsers" Relationship="Entities.FK_DepartmentUsers_Departments_DepartmentId" FromRole="Department" ToRole="DepartmentUser" />
+          <NavigationProperty Name="ManufactureDepartments" Relationship="Entities.FK_ManufactureDepartments_Departments_DepartmentId" FromRole="Department" ToRole="ManufactureDepartment" />
+        </EntityType>
+        <EntityType Name="DepartmentUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="VendorId" Type="Int32" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Department" Relationship="Entities.FK_DepartmentUsers_Departments_DepartmentId" FromRole="DepartmentUser" ToRole="Department" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="DepartmentUser" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Entities.FK_DepartmentUsers_Users_VendorId" FromRole="DepartmentUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ManufactureDepartmentProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManufactureDepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="ProposedOrProduction" Type="Boolean" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="InOut" Type="Boolean" Nullable="false" />
+          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <NavigationProperty Name="ManufactureDepartment" Relationship="Entities.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" FromRole="ManufactureDepartmentProduct" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_ManufactureDepartmentProducts_Packages_PackageId" FromRole="ManufactureDepartmentProduct" ToRole="Package" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_ManufactureDepartmentProducts_Products_ProductId" FromRole="ManufactureDepartmentProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ManufactureDepartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManufactureId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsVendor" Type="Boolean" Nullable="false" />
+          <Property Name="HeadUserId" Type="Int32" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="StartedAt" Type="DateTime" Precision="3" />
+          <Property Name="StartedByUserId" Type="Int32" />
+          <Property Name="CompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompletedByUserId" Type="Int32" />
+          <Property Name="CancelledAt" Type="DateTime" Precision="3" />
+          <Property Name="CancelledByUserId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="Entities.FK_ManufactureDepartments_Departments_DepartmentId" FromRole="ManufactureDepartment" ToRole="Department" />
+          <NavigationProperty Name="ManufactureDepartmentProducts" Relationship="Entities.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" FromRole="ManufactureDepartment" ToRole="ManufactureDepartmentProduct" />
+          <NavigationProperty Name="Manufacture" Relationship="Entities.FK_ManufactureDepartments_Manufactures_ManufactureId" FromRole="ManufactureDepartment" ToRole="Manufacture" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_ManufactureDepartments_Users_CancelledByUserId" FromRole="ManufactureDepartment" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Entities.FK_ManufactureDepartments_Users_CompletedByUserId" FromRole="ManufactureDepartment" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="Entities.FK_ManufactureDepartments_Users_StartedByUserId" FromRole="ManufactureDepartment" ToRole="User" />
+          <NavigationProperty Name="User3" Relationship="Entities.FK_ManufactureDepartments_Users_UserId" FromRole="ManufactureDepartment" ToRole="User" />
+          <NavigationProperty Name="ManufactureDepartmentUsers" Relationship="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" FromRole="ManufactureDepartment" ToRole="ManufactureDepartmentUser" />
+        </EntityType>
+        <EntityType Name="ManufactureDepartmentUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManufactureDepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <NavigationProperty Name="ManufactureDepartment" Relationship="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" FromRole="ManufactureDepartmentUser" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_UserId" FromRole="ManufactureDepartmentUser" ToRole="User" />
+          <NavigationProperty Name="UserManufactures" Relationship="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" FromRole="ManufactureDepartmentUser" ToRole="UserManufacture" />
+        </EntityType>
+        <EntityType Name="ManufactureProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManufactureId" Type="Int32" Nullable="false" />
+          <Property Name="ProposedOrProduction" Type="Boolean" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="InOut" Type="Boolean" Nullable="false" />
+          <Property Name="CostRate" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <NavigationProperty Name="Manufacture" Relationship="Entities.FK_ManufactureProducts_Manufatures_ManufactureId" FromRole="ManufactureProduct" ToRole="Manufacture" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_ManufactureProducts_Packages_PackageId" FromRole="ManufactureProduct" ToRole="Package" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_ManufactureProducts_Products_ProductId" FromRole="ManufactureProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Manufacture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LotNo" Type="Int32" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="StartedAt" Type="DateTime" Precision="3" />
+          <Property Name="StartedByUserId" Type="Int32" />
+          <Property Name="CompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompletedByUserId" Type="Int32" />
+          <Property Name="CancelledAt" Type="DateTime" Precision="3" />
+          <Property Name="CancelledByUserId" Type="Int32" />
+          <NavigationProperty Name="ManufactureDepartments" Relationship="Entities.FK_ManufactureDepartments_Manufactures_ManufactureId" FromRole="Manufacture" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="ManufactureProducts" Relationship="Entities.FK_ManufactureProducts_Manufatures_ManufactureId" FromRole="Manufacture" ToRole="ManufactureProduct" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_Manufactures_Users_CancelledByUserId" FromRole="Manufacture" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Entities.FK_Manufactures_Users_CompletedByUserId" FromRole="Manufacture" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="Entities.FK_Manufactures_Users_CreatedByUserId" FromRole="Manufacture" ToRole="User" />
+          <NavigationProperty Name="User3" Relationship="Entities.FK_Manufactures_Users_StartedByUserId" FromRole="Manufacture" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserManufactureProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserManufactureId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="InOut" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_UserManufactureProducts_Packages_PackageId" FromRole="UserManufactureProduct" ToRole="Package" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="UserManufactureProduct" ToRole="Product" />
+          <NavigationProperty Name="UserManufacture" Relationship="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" FromRole="UserManufactureProduct" ToRole="UserManufacture" />
+        </EntityType>
+        <EntityType Name="UserManufacture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManufactureDepartmentUserId" Type="Int32" Nullable="false" />
+          <Property Name="StartedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="CancelledAt" Type="DateTime" Precision="3" />
+          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ManufactureDepartmentUser" Relationship="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" FromRole="UserManufacture" ToRole="ManufactureDepartmentUser" />
+          <NavigationProperty Name="UserManufactureProducts" Relationship="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" FromRole="UserManufacture" ToRole="UserManufactureProduct" />
+        </EntityType>
+        <EntityType Name="UserProductHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="9" />
+          <Property Name="FromToUserId" Type="Int32" />
+          <Property Name="InOut" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_UserProductHistories_Packages_PackageId" FromRole="UserProductHistory" ToRole="Package" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_UserProductHistories_Products_ProductId" FromRole="UserProductHistory" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_UserProductHistories_Users_FromUserId" FromRole="UserProductHistory" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Entities.FK_UserProductHistories_Users_UserId" FromRole="UserProductHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_UserProducts_Packages_PackageId" FromRole="UserProduct" ToRole="Package" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_UserProducts_Products_ProductId" FromRole="UserProduct" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_UserProducts_Users_UserId" FromRole="UserProduct" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Departments_Users_HeadUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="HeadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUsers_Departments_DepartmentId">
+          <End Type="Entities.Department" Role="Department" Multiplicity="1" />
+          <End Type="Entities.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Departments_DepartmentId">
+          <End Type="Entities.Department" Role="Department" Multiplicity="1" />
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartment">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUsers_Users_UserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentUsers_Users_VendorId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DepartmentUser">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="1" />
+          <End Type="Entities.ManufactureDepartmentProduct" Role="ManufactureDepartmentProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManufactureDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentProduct">
+              <PropertyRef Name="ManufactureDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentProducts_Packages_PackageId">
+          <End Type="Entities.Package" Role="Package" Multiplicity="1" />
+          <End Type="Entities.ManufactureDepartmentProduct" Role="ManufactureDepartmentProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentProduct">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentProducts_Products_ProductId">
+          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entities.ManufactureDepartmentProduct" Role="ManufactureDepartmentProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Manufactures_ManufactureId">
+          <End Type="Entities.Manufacture" Role="Manufacture" Multiplicity="1" />
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacture">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartment">
+              <PropertyRef Name="ManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_CancelledByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartment">
+              <PropertyRef Name="CancelledByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_CompletedByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartment">
+              <PropertyRef Name="CompletedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_StartedByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartment">
+              <PropertyRef Name="StartedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartments_Users_UserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartment">
+              <PropertyRef Name="HeadUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId">
+          <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="1" />
+          <End Type="Entities.ManufactureDepartmentUser" Role="ManufactureDepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManufactureDepartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUser">
+              <PropertyRef Name="ManufactureDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_UserId">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.ManufactureDepartmentUser" Role="ManufactureDepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId">
+          <End Type="Entities.ManufactureDepartmentUser" Role="ManufactureDepartmentUser" Multiplicity="1" />
+          <End Type="Entities.UserManufacture" Role="UserManufacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManufactureDepartmentUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufacture">
+              <PropertyRef Name="ManufactureDepartmentUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureProducts_Manufatures_ManufactureId">
+          <End Type="Entities.Manufacture" Role="Manufacture" Multiplicity="1" />
+          <End Type="Entities.ManufactureProduct" Role="ManufactureProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacture">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureProduct">
+              <PropertyRef Name="ManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureProducts_Packages_PackageId">
+          <End Type="Entities.Package" Role="Package" Multiplicity="1" />
+          <End Type="Entities.ManufactureProduct" Role="ManufactureProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureProduct">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureProducts_Products_ProductId">
+          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entities.ManufactureProduct" Role="ManufactureProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_CancelledByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.Manufacture" Role="Manufacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufacture">
+              <PropertyRef Name="CancelledByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_CompletedByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.Manufacture" Role="Manufacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufacture">
+              <PropertyRef Name="CompletedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_CreatedByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.Manufacture" Role="Manufacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufacture">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manufactures_Users_StartedByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.Manufacture" Role="Manufacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manufacture">
+              <PropertyRef Name="StartedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactureProducts_Packages_PackageId">
+          <End Type="Entities.Package" Role="Package" Multiplicity="1" />
+          <End Type="Entities.UserManufactureProduct" Role="UserManufactureProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactureProduct">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Packages_PackageId">
+          <End Type="Entities.Package" Role="Package" Multiplicity="1" />
+          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistory">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProducts_Packages_PackageId">
+          <End Type="Entities.Package" Role="Package" Multiplicity="1" />
+          <End Type="Entities.UserProduct" Role="UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProduct">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactureProducts_Products_ProductId">
+          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entities.UserManufactureProduct" Role="UserManufactureProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactureProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Products_ProductId">
+          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProducts_Products_ProductId">
+          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entities.UserProduct" Role="UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
+          <End Type="Entities.UserManufacture" Role="UserManufacture" Multiplicity="1" />
+          <End Type="Entities.UserManufactureProduct" Role="UserManufactureProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserManufacture">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactureProduct">
+              <PropertyRef Name="UserManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Users_FromUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistory">
+              <PropertyRef Name="FromToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProductHistories_Users_UserId">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProductHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProducts_Users_UserId">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.UserProduct" Role="UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProduct">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2602,6 +4034,161 @@
                 <ScalarProperty Name="Use" ColumnName="Use" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Entities.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="HeadUserId" ColumnName="HeadUserId" />
+                <ScalarProperty Name="IsVendor" ColumnName="IsVendor" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentUsers">
+            <EntityTypeMapping TypeName="Entities.DepartmentUser">
+              <MappingFragment StoreEntitySet="DepartmentUsers">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManufactureDepartmentProducts">
+            <EntityTypeMapping TypeName="Entities.ManufactureDepartmentProduct">
+              <MappingFragment StoreEntitySet="ManufactureDepartmentProducts">
+                <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
+                <ScalarProperty Name="InOut" ColumnName="InOut" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProposedOrProduction" ColumnName="ProposedOrProduction" />
+                <ScalarProperty Name="ManufactureDepartmentId" ColumnName="ManufactureDepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManufactureDepartments">
+            <EntityTypeMapping TypeName="Entities.ManufactureDepartment">
+              <MappingFragment StoreEntitySet="ManufactureDepartments">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CancelledByUserId" ColumnName="CancelledByUserId" />
+                <ScalarProperty Name="CancelledAt" ColumnName="CancelledAt" />
+                <ScalarProperty Name="CompletedByUserId" ColumnName="CompletedByUserId" />
+                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
+                <ScalarProperty Name="StartedByUserId" ColumnName="StartedByUserId" />
+                <ScalarProperty Name="StartedAt" ColumnName="StartedAt" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="HeadUserId" ColumnName="HeadUserId" />
+                <ScalarProperty Name="IsVendor" ColumnName="IsVendor" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ManufactureId" ColumnName="ManufactureId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManufactureDepartmentUsers">
+            <EntityTypeMapping TypeName="Entities.ManufactureDepartmentUser">
+              <MappingFragment StoreEntitySet="ManufactureDepartmentUsers">
+                <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ManufactureDepartmentId" ColumnName="ManufactureDepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManufactureProducts">
+            <EntityTypeMapping TypeName="Entities.ManufactureProduct">
+              <MappingFragment StoreEntitySet="ManufactureProducts">
+                <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
+                <ScalarProperty Name="CostRate" ColumnName="CostRate" />
+                <ScalarProperty Name="InOut" ColumnName="InOut" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProposedOrProduction" ColumnName="ProposedOrProduction" />
+                <ScalarProperty Name="ManufactureId" ColumnName="ManufactureId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufactures">
+            <EntityTypeMapping TypeName="Entities.Manufacture">
+              <MappingFragment StoreEntitySet="Manufactures">
+                <ScalarProperty Name="CancelledByUserId" ColumnName="CancelledByUserId" />
+                <ScalarProperty Name="CancelledAt" ColumnName="CancelledAt" />
+                <ScalarProperty Name="CompletedByUserId" ColumnName="CompletedByUserId" />
+                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
+                <ScalarProperty Name="StartedByUserId" ColumnName="StartedByUserId" />
+                <ScalarProperty Name="StartedAt" ColumnName="StartedAt" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="LotNo" ColumnName="LotNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserManufactureProducts">
+            <EntityTypeMapping TypeName="Entities.UserManufactureProduct">
+              <MappingFragment StoreEntitySet="UserManufactureProducts">
+                <ScalarProperty Name="InOut" ColumnName="InOut" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="UserManufactureId" ColumnName="UserManufactureId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserManufactures">
+            <EntityTypeMapping TypeName="Entities.UserManufacture">
+              <MappingFragment StoreEntitySet="UserManufactures">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
+                <ScalarProperty Name="CancelledAt" ColumnName="CancelledAt" />
+                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
+                <ScalarProperty Name="StartedAt" ColumnName="StartedAt" />
+                <ScalarProperty Name="ManufactureDepartmentUserId" ColumnName="ManufactureDepartmentUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProductHistories">
+            <EntityTypeMapping TypeName="Entities.UserProductHistory">
+              <MappingFragment StoreEntitySet="UserProductHistories">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="InOut" ColumnName="InOut" />
+                <ScalarProperty Name="FromToUserId" ColumnName="FromToUserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProducts">
+            <EntityTypeMapping TypeName="Entities.UserProduct">
+              <MappingFragment StoreEntitySet="UserProducts">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

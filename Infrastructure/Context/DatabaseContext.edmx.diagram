@@ -69,6 +69,50 @@
         <AssociationConnector Association="Entities.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId" />
+        <EntityTypeShape EntityType="Entities.Department" Width="1.5" PointX="9" PointY="31.75" />
+        <EntityTypeShape EntityType="Entities.DepartmentUser" Width="1.5" PointX="20.25" PointY="29.25" />
+        <EntityTypeShape EntityType="Entities.ManufactureDepartmentProduct" Width="1.5" PointX="16.25" PointY="11.375" />
+        <EntityTypeShape EntityType="Entities.ManufactureDepartment" Width="1.5" PointX="11.25" PointY="11.5" />
+        <EntityTypeShape EntityType="Entities.ManufactureDepartmentUser" Width="1.5" PointX="13.5" PointY="11.625" />
+        <EntityTypeShape EntityType="Entities.ManufactureProduct" Width="1.5" PointX="14.25" PointY="15.375" />
+        <EntityTypeShape EntityType="Entities.Manufacture" Width="1.5" PointX="9" PointY="11.75" />
+        <EntityTypeShape EntityType="Entities.UserManufactureProduct" Width="1.5" PointX="23" PointY="18.625" />
+        <EntityTypeShape EntityType="Entities.UserManufacture" Width="1.5" PointX="15.75" PointY="7.625" />
+        <EntityTypeShape EntityType="Entities.UserProductHistory" Width="1.5" PointX="20.25" PointY="15.875" />
+        <EntityTypeShape EntityType="Entities.UserProduct" Width="1.5" PointX="17.25" PointY="15.25" />
+        <AssociationConnector Association="Entities.FK_Departments_Users_HeadUserId" />
+        <AssociationConnector Association="Entities.FK_DepartmentUsers_Departments_DepartmentId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartments_Departments_DepartmentId" />
+        <AssociationConnector Association="Entities.FK_DepartmentUsers_Users_UserId" />
+        <AssociationConnector Association="Entities.FK_DepartmentUsers_Users_VendorId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentProducts_Packages_PackageId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentProducts_Products_ProductId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartments_Manufactures_ManufactureId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartments_Users_CancelledByUserId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartments_Users_CompletedByUserId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartments_Users_StartedByUserId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartments_Users_UserId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentUsers_Users_UserId" />
+        <AssociationConnector Association="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" />
+        <AssociationConnector Association="Entities.FK_ManufactureProducts_Manufatures_ManufactureId" />
+        <AssociationConnector Association="Entities.FK_ManufactureProducts_Packages_PackageId" />
+        <AssociationConnector Association="Entities.FK_ManufactureProducts_Products_ProductId" />
+        <AssociationConnector Association="Entities.FK_Manufactures_Users_CancelledByUserId" />
+        <AssociationConnector Association="Entities.FK_Manufactures_Users_CompletedByUserId" />
+        <AssociationConnector Association="Entities.FK_Manufactures_Users_CreatedByUserId" />
+        <AssociationConnector Association="Entities.FK_Manufactures_Users_StartedByUserId" />
+        <AssociationConnector Association="Entities.FK_UserManufactureProducts_Packages_PackageId" />
+        <AssociationConnector Association="Entities.FK_UserProductHistories_Packages_PackageId" />
+        <AssociationConnector Association="Entities.FK_UserProducts_Packages_PackageId" />
+        <AssociationConnector Association="Entities.FK_UserManufactureProducts_Products_ProductId" />
+        <AssociationConnector Association="Entities.FK_UserProductHistories_Products_ProductId" />
+        <AssociationConnector Association="Entities.FK_UserProducts_Products_ProductId" />
+        <AssociationConnector Association="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" />
+        <AssociationConnector Association="Entities.FK_UserProductHistories_Users_FromUserId" />
+        <AssociationConnector Association="Entities.FK_UserProductHistories_Users_UserId" />
+        <AssociationConnector Association="Entities.FK_UserProducts_Users_UserId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

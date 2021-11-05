@@ -22,6 +22,21 @@ namespace Infrastructure.Context
             this.Orders = new HashSet<Order>();
             this.Payments = new HashSet<Payment>();
             this.Transactions = new HashSet<Transaction>();
+            this.Departments = new HashSet<Department>();
+            this.DepartmentUsers = new HashSet<DepartmentUser>();
+            this.DepartmentUsers1 = new HashSet<DepartmentUser>();
+            this.ManufactureDepartments = new HashSet<ManufactureDepartment>();
+            this.ManufactureDepartments1 = new HashSet<ManufactureDepartment>();
+            this.ManufactureDepartments2 = new HashSet<ManufactureDepartment>();
+            this.ManufactureDepartments3 = new HashSet<ManufactureDepartment>();
+            this.ManufactureDepartmentUsers = new HashSet<ManufactureDepartmentUser>();
+            this.Manufactures = new HashSet<Manufacture>();
+            this.Manufactures1 = new HashSet<Manufacture>();
+            this.Manufactures2 = new HashSet<Manufacture>();
+            this.Manufactures3 = new HashSet<Manufacture>();
+            this.UserProductHistories = new HashSet<UserProductHistory>();
+            this.UserProductHistories1 = new HashSet<UserProductHistory>();
+            this.UserProducts = new HashSet<UserProduct>();
         }
     
         public int Id { get; set; }
@@ -60,5 +75,35 @@ namespace Infrastructure.Context
         public virtual ICollection<Payment> Payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepartmentUser> DepartmentUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepartmentUser> DepartmentUsers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartment> ManufactureDepartments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartment> ManufactureDepartments1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartment> ManufactureDepartments2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartment> ManufactureDepartments3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartmentUser> ManufactureDepartmentUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manufacture> Manufactures { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manufacture> Manufactures1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manufacture> Manufactures2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manufacture> Manufactures3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProductHistory> UserProductHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProductHistory> UserProductHistories1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProduct> UserProducts { get; set; }
     }
 }

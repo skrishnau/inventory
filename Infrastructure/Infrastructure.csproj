@@ -86,8 +86,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Context\Department.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DepartmentUser.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\DynamicConnection.cs" />
     <Compile Include="Context\InventoryUnit.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Manufacture.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ManufactureDepartment.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ManufactureDepartmentProduct.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ManufactureDepartmentUser.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ManufactureProduct.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Movement.cs">
@@ -132,6 +153,18 @@
     <Compile Include="Context\User.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\UserManufacture.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\UserManufactureProduct.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\UserProduct.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\UserProductHistory.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\Warehouse.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
@@ -172,6 +205,7 @@
     </Content>
     <Content Include="Migrations\2021-05-21-initial.sql" />
     <Content Include="Migrations\2021-05-22.sql" />
+    <Content Include="Migrations\2021-11-01-Manufacture.sql" />
     <Content Include="Migrations\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
