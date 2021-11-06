@@ -96,6 +96,13 @@ namespace IMS.Forms.Common
             else
                 ShowInfoMessage(msg.Message);
         }
+        public static void ShowMessage(bool success, string message)
+        {
+            if (success)
+                ShowSuccessMessage(message);
+            else
+                ShowInfoMessage(message);
+        }
     }
 
     public enum PopupMessageType

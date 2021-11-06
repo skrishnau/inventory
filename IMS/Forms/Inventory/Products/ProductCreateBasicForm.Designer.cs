@@ -52,6 +52,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddUom = new IMS.Forms.Common.Buttons.MenuButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkIsABuild = new System.Windows.Forms.CheckBox();
             this.tblBasicDetails.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -64,10 +66,12 @@
             // tblBasicDetails
             // 
             this.tblBasicDetails.ColumnCount = 4;
-            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.4617F));
-            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.76923F));
-            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.62937F));
-            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.98551F));
+            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.49175F));
+            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.81675F));
+            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.66123F));
+            this.tblBasicDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.03027F));
+            this.tblBasicDetails.Controls.Add(this.chkIsABuild, 3, 2);
+            this.tblBasicDetails.Controls.Add(this.label1, 2, 2);
             this.tblBasicDetails.Controls.Add(this.label2, 0, 0);
             this.tblBasicDetails.Controls.Add(this.tbProductName, 1, 0);
             this.tblBasicDetails.Controls.Add(this.label12, 2, 0);
@@ -79,10 +83,11 @@
             this.tblBasicDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblBasicDetails.Location = new System.Drawing.Point(10, 16);
             this.tblBasicDetails.Name = "tblBasicDetails";
-            this.tblBasicDetails.RowCount = 2;
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblBasicDetails.Size = new System.Drawing.Size(586, 70);
+            this.tblBasicDetails.RowCount = 3;
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblBasicDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tblBasicDetails.Size = new System.Drawing.Size(586, 90);
             this.tblBasicDetails.TabIndex = 1;
             // 
             // label2
@@ -126,7 +131,7 @@
             // 
             this.lblCategory.AutoSize = true;
             this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(2, 35);
+            this.lblCategory.Location = new System.Drawing.Point(2, 29);
             this.lblCategory.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(56, 13);
@@ -137,7 +142,7 @@
             // 
             this.cbCategory.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(117, 38);
+            this.cbCategory.Location = new System.Drawing.Point(117, 32);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(149, 21);
             this.cbCategory.TabIndex = 5;
@@ -145,7 +150,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(297, 35);
+            this.label33.Location = new System.Drawing.Point(297, 29);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(35, 13);
             this.label33.TabIndex = 48;
@@ -157,7 +162,7 @@
             this.chkUse.AutoSize = true;
             this.chkUse.Checked = true;
             this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUse.Location = new System.Drawing.Point(418, 38);
+            this.chkUse.Location = new System.Drawing.Point(418, 32);
             this.chkUse.Name = "chkUse";
             this.chkUse.Size = new System.Drawing.Size(15, 14);
             this.chkUse.TabIndex = 9;
@@ -210,7 +215,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 368);
+            this.panel1.Location = new System.Drawing.Point(5, 398);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(606, 37);
             this.panel1.TabIndex = 10;
@@ -227,7 +232,7 @@
             this.gbBasicDetails.Location = new System.Drawing.Point(0, 0);
             this.gbBasicDetails.Name = "gbBasicDetails";
             this.gbBasicDetails.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.gbBasicDetails.Size = new System.Drawing.Size(606, 89);
+            this.gbBasicDetails.Size = new System.Drawing.Size(606, 109);
             this.gbBasicDetails.TabIndex = 1;
             this.gbBasicDetails.TabStop = false;
             this.gbBasicDetails.Text = "Basic Details";
@@ -240,7 +245,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(5, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(606, 363);
+            this.panel2.Size = new System.Drawing.Size(606, 393);
             this.panel2.TabIndex = 101;
             // 
             // gbUom
@@ -249,9 +254,9 @@
             this.gbUom.Controls.Add(this.pnlUomList);
             this.gbUom.Controls.Add(this.panel3);
             this.gbUom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbUom.Location = new System.Drawing.Point(0, 99);
+            this.gbUom.Location = new System.Drawing.Point(0, 119);
             this.gbUom.Name = "gbUom";
-            this.gbUom.Size = new System.Drawing.Size(606, 264);
+            this.gbUom.Size = new System.Drawing.Size(606, 274);
             this.gbUom.TabIndex = 3;
             this.gbUom.TabStop = false;
             this.gbUom.Text = "UOM (Unit of Measurements)";
@@ -262,7 +267,7 @@
             this.pnlUomList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlUomList.Location = new System.Drawing.Point(3, 48);
             this.pnlUomList.Name = "pnlUomList";
-            this.pnlUomList.Size = new System.Drawing.Size(600, 213);
+            this.pnlUomList.Size = new System.Drawing.Size(600, 223);
             this.pnlUomList.TabIndex = 1;
             // 
             // panel3
@@ -291,11 +296,31 @@
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 89);
+            this.splitter1.Location = new System.Drawing.Point(0, 109);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(606, 10);
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(297, 58);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 49;
+            this.label1.Text = "Is a Build?";
+            this.toolTip1.SetToolTip(this.label1, "Either to Include in product selection in other sections.");
+            // 
+            // chkIsABuild
+            // 
+            this.chkIsABuild.AutoSize = true;
+            this.chkIsABuild.Location = new System.Drawing.Point(418, 61);
+            this.chkIsABuild.Name = "chkIsABuild";
+            this.chkIsABuild.Size = new System.Drawing.Size(15, 14);
+            this.chkIsABuild.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.chkIsABuild, "Either to Include in product selection in other sections.");
+            this.chkIsABuild.UseVisualStyleBackColor = true;
             // 
             // ProductCreateBasicForm
             // 
@@ -303,7 +328,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(616, 410);
+            this.ClientSize = new System.Drawing.Size(616, 440);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -350,5 +375,7 @@
         private System.Windows.Forms.Panel panel3;
         private Common.Buttons.MenuButton btnAddUom;
         private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.CheckBox chkIsABuild;
+        private System.Windows.Forms.Label label1;
     }
 }

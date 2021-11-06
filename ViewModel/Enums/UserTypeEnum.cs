@@ -8,11 +8,12 @@ namespace ViewModel.Enums
 {
     public enum UserTypeEnum
     {
-        Customer = 1,
-        Supplier = 2,
-        User = 3,
+        Customer,
+        Supplier,
+        User,
+        Vendor,
         //Client = 4, // Customer and Suppliers are Clients but User isn't
-        All = 5,
+        All,
 
     }
 

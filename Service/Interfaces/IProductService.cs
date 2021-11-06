@@ -16,6 +16,7 @@ namespace Service.Interfaces
         Task<ProductListModel> GetAllProducts();
 
         List<IdNamePair> GetProductListForCombo(int categoryId = 0);
+        List<IdNamePair> GetBuildProductListForCombo(int categoryId = 0);
 
         ProductModel GetProduct(int productId);
         ProductModel GetProductForEdit(int productId);
@@ -41,6 +42,7 @@ namespace Service.Interfaces
         // price History
         void AddPriceHistoryWithoutCommit(Product product, decimal rate, string orderType, DateTime? completedDate, Package package, int? packageId);
         ResponseModel<bool> SavePriceHistory(List<InventoryUnitModel> data, DateTime date, OrderTypeEnum type);
+        List<IdNamePair> GetPackagesOfProduct(int productId);
         // for assigning product's instock quantity from order items while editing completed transaction
         //decimal AssignInStockQuantityBasedOnOrderForTxnEdit(DatabaseContext _context, ProductModel product, int orderId, Order order);
     }

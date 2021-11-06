@@ -15,5 +15,8 @@ namespace Service.Interfaces
         int GetAllManufacturesCount(int categoryId, string searchText);
         Task<ViewListModel<ManufactureModel>> GetAllManufactures(int categoryId, string searchText, int pageSize, int offset);
         ResponseModel<bool> DeleteManufacture(int id);
+        List<DepartmentModel> GetDepartmentList();
+        DepartmentModel GetDepartment(int departmentId);
+        ResponseModel<DepartmentModel> SaveDepartment(DepartmentModel model);
     }
 }

@@ -283,6 +283,26 @@ namespace Service.Core
                 //.Where(x => x.DeletedAt == null);
             }
         }
+        public List<IdNamePair> GetBuildProductListForCombo(int categoryId = 0)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var query = _context.Products
+                    .Where(x => x.Use && !x.IsDiscontinued && x.IsBuild);
+                if (categoryId > 0)
+                    query = query.Where(x => x.CategoryId == categoryId);
+                var products = query.Select(x => new IdNamePair()
+                {
+                    Id = x.Id,
+                    Name = x.Name,// + " (" + x.SKU + ")",
+                    ExtraValue = x.SKU
+                })
+                .ToList();
+                return products;
+                //.Where(x => x.DeletedAt == null);
+            }
+        }
+        
 
         public int GetAllProductsCount(int categoryId, string searchText)
         {
@@ -828,6 +848,19 @@ namespace Service.Core
                 }
             }
             return null;
+        }
+
+        public List<IdNamePair> GetPackagesOfProduct(int productId)
+        {
+            using(var _context = DatabaseContext.Context)
+            {
+                return _context.ProductPackages.Where(x => x.ProductId == productId && x.Package.Use)
+                    .Select(x => new IdNamePair
+                    {
+                        Id = x.PackageId,
+                        Name = x.Package.Name
+                    }).ToList();
+            }
         }
     }
 }

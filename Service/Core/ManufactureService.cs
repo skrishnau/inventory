@@ -26,6 +26,10 @@ namespace Service.Core
             _appSettingService = appSettingService;
         }
 
+        #region Manufacture
+
+
+
         public ManufactureModel GetManufacture(int id)
         {
             using (var _context = DatabaseContext.Context)
@@ -93,7 +97,7 @@ namespace Service.Core
 
         public IQueryable<Manufacture> GetAllManufacutureQuery(DatabaseContext _context)
         {
-            return _context.Manufactures.Where(x => x.DeletedAt == null).OrderBy(x=>x.CreatedAt);
+            return _context.Manufactures.Where(x => x.DeletedAt == null).OrderBy(x => x.CreatedAt);
         }
         public int GetAllManufacturesCount(int categoryId, string searchText)
         {
@@ -130,13 +134,78 @@ namespace Service.Core
             {
                 var manufacture = _context.Manufactures.Find(id);
                 if (manufacture == null)
-                    return new ResponseModel<bool> { Message = "Manufacture not found", Success = false};
-                if(manufacture.StartedAt != null)
+                    return new ResponseModel<bool> { Message = "Manufacture not found", Success = false };
+                if (manufacture.StartedAt != null)
                     return new ResponseModel<bool> { Message = "Manufacture already started. You can't delete but you may cancel it.", Success = false };
                 _context.Manufactures.Remove(manufacture);
                 _context.SaveChanges();
                 return new ResponseModel<bool> { Message = "Delete Sucess!", Success = true };
             }
         }
+        #endregion
+
+        #region Department
+
+        public List<DepartmentModel> GetDepartmentList()
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                return _context.Departments.Where(x => x.DeletedAt == null)
+                    .Select(s => new DepartmentModel
+                    {
+                        IsVendor = s.IsVendor,
+                        Name = s.Name,
+                        Id = s.Id,
+                        HeadUserId = s.HeadUserId,
+                    }).ToList();
+            }
+        }
+
+        public DepartmentModel GetDepartment(int departmentId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var department = _context.Departments.Find(departmentId);
+                if (department == null) return null;
+                var model = department.MapToModel();
+                model.DepartmentUsers = department.DepartmentUsers.ToList()
+                    .Select(x => new ViewModel.Core.Users.UserModel
+                    {
+                        Id = x.UserId ?? 0,
+                        Name = _context.Users.Where(y => y.Id == x.UserId).Select(y => y.Name).FirstOrDefault()
+                    }).ToList();
+                return model;
+            }
+        }
+
+        public ResponseModel<DepartmentModel> SaveDepartment(DepartmentModel model)
+        {
+            var isEdit = model.Id > 0;
+            using (var _context = DatabaseContext.Context)
+            {
+                Department entity = null;
+                if (isEdit)
+                {
+                    entity = _context.Departments.Find(model.Id);
+                }
+                entity = model.MapToEntity(entity);
+                if (_context.Departments.Any(x => x.Id != model.Id && x.Name == model.Name))
+                    return new ResponseModel<DepartmentModel> { Message = "Another department with same name already exists. Please enter unique name", Success = false};
+                if (!isEdit)
+                {
+                    _context.Departments.Add(entity);
+                }
+                _context.SaveChanges();
+                model.Id = entity.Id;
+                return new ResponseModel<DepartmentModel>
+                {
+                    Message = Constants.SAVED_SUCCESSFULLY,
+                    Success = true,
+                    Data = model
+                };
+            }
+        }
+
+        #endregion
     }
 }

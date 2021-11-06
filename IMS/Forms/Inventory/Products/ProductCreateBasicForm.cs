@@ -166,6 +166,7 @@ namespace IMS.Forms.Inventory.Products
                 ParentProductId = null,
                 IsVariant = false,
                 Use = chkUse.Checked,
+                IsBuild = chkIsABuild.Checked,
                 SKU = tbSKU.Text,
                 //RetailPrice = numRetailPrice.Value,
                 //SupplyPrice = numSupplyPrice.Value,
@@ -281,6 +282,7 @@ namespace IMS.Forms.Inventory.Products
                 cbPackage.Text = product.BasePackage == null ? "" : product.BasePackage;
                 //cbUom.Text = product.BaseUom == null ? "" : product.BaseUom;
                 chkUse.Checked = product.Use;
+                chkIsABuild.Checked = product.IsBuild;
                 //tbInStockQuantity.Value = _product.InStockQuantity;// 0 ? 0 : _product.InStockQuantity;
                 //if(_product.InStockQuantity != 0)
                 //{

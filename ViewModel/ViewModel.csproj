@@ -65,6 +65,7 @@
     <Compile Include="Core\Common\IdNamePair.cs" />
     <Compile Include="Core\Common\NameValuePair.cs" />
     <Compile Include="Core\Common\ViewListModel.cs" />
+    <Compile Include="Core\DepartmentModel.cs" />
     <Compile Include="Core\Inventory\AdjustmentCodeModel.cs" />
     <Compile Include="Core\Inventory\InventoryMovementModel.cs" />
     <Compile Include="Core\Inventory\InventoryUnitModel.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Core\TransactionModel.cs" />
     <Compile Include="Enums\AdjustmentEnum.cs" />
     <Compile Include="Enums\CreateFormTypeEnum.cs" />
+    <Compile Include="Enums\DepartmentTypeEnum.cs" />
     <Compile Include="Enums\PriceTypeEnum.cs" />
     <Compile Include="Enums\TransactionTypeEnum.cs" />
     <Compile Include="Enums\UserTypeEnum.cs" />

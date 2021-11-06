@@ -472,6 +472,12 @@
     <Compile Include="Forms\Inventory\Units\InventoryUnitsMenu.Designer.cs">
       <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MRP\Departments\DepartmentCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MRP\Departments\DepartmentCreateForm.Designer.cs">
+      <DependentUpon>DepartmentCreateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MRP\ManufactureCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -947,6 +953,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitsMenu.resx">
       <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MRP\Departments\DepartmentCreateForm.resx">
+      <DependentUpon>DepartmentCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\ManufactureCreateForm.resx">
       <DependentUpon>ManufactureCreateForm.cs</DependentUpon>

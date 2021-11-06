@@ -30,92 +30,187 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.cbFinalPackage = new System.Windows.Forms.ComboBox();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtLotNo = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbFinalProduct = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pnlFooter = new System.Windows.Forms.Panel();
+            this.pnlBasic = new System.Windows.Forms.Panel();
+            this.pnlDepartments = new System.Windows.Forms.Panel();
+            this.btnDepartmentAdd = new System.Windows.Forms.Button();
+            this.dgvDepartments = new System.Windows.Forms.DataGridView();
+            this.colDepartmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDepartmentName = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button4 = new System.Windows.Forms.Button();
+            this.pnlEmployees = new System.Windows.Forms.Panel();
+            this.dgvEmployees = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pnlExtra = new System.Windows.Forms.Panel();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.pnlFooter.SuspendLayout();
+            this.pnlBasic.SuspendLayout();
+            this.pnlDepartments.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.pnlEmployees.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
+            this.pnlExtra.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.38853F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.61147F));
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.25952F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.74049F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDown1, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cbFinalPackage, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtRemarks, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtLotNo, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbFinalProduct, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 2, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(338, 87);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 97);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(374, 67);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(170, 20);
+            this.numericUpDown1.TabIndex = 7;
+            // 
+            // cbFinalPackage
+            // 
+            this.cbFinalPackage.FormattingEnabled = true;
+            this.cbFinalPackage.Location = new System.Drawing.Point(374, 35);
+            this.cbFinalPackage.Name = "cbFinalPackage";
+            this.cbFinalPackage.Size = new System.Drawing.Size(169, 21);
+            this.cbFinalPackage.TabIndex = 8;
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(95, 61);
+            this.txtRemarks.Location = new System.Drawing.Point(73, 67);
             this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(230, 20);
+            this.txtRemarks.Size = new System.Drawing.Size(170, 20);
             this.txtRemarks.TabIndex = 5;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 29);
+            this.label2.Location = new System.Drawing.Point(3, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 25);
+            this.label2.Size = new System.Drawing.Size(56, 25);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Lot No.";
+            this.label2.Text = "Lot No. *";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 25);
+            this.label1.Size = new System.Drawing.Size(56, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
+            this.label1.Text = "Name *";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(3, 58);
+            this.label3.Location = new System.Drawing.Point(3, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 20);
+            this.label3.Size = new System.Drawing.Size(56, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Remarks";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(95, 3);
+            this.txtName.Location = new System.Drawing.Point(73, 3);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(230, 20);
+            this.txtName.Size = new System.Drawing.Size(170, 20);
             this.txtName.TabIndex = 3;
             // 
             // txtLotNo
             // 
-            this.txtLotNo.Location = new System.Drawing.Point(95, 32);
+            this.txtLotNo.Enabled = false;
+            this.txtLotNo.Location = new System.Drawing.Point(73, 35);
             this.txtLotNo.Name = "txtLotNo";
-            this.txtLotNo.Size = new System.Drawing.Size(230, 20);
+            this.txtLotNo.Size = new System.Drawing.Size(170, 20);
             this.txtLotNo.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(280, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 25);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Final Product *";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbFinalProduct
+            // 
+            this.cbFinalProduct.FormattingEnabled = true;
+            this.cbFinalProduct.Location = new System.Drawing.Point(374, 3);
+            this.cbFinalProduct.Name = "cbFinalProduct";
+            this.cbFinalProduct.Size = new System.Drawing.Size(169, 21);
+            this.cbFinalProduct.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(280, 64);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 25);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Quantity *";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(280, 32);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(85, 25);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Package *";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(163, 98);
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(400, 7);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -124,8 +219,9 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(255, 98);
+            this.btnCancel.Location = new System.Drawing.Point(492, 7);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -136,23 +232,221 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // pnlFooter
+            // 
+            this.pnlFooter.Controls.Add(this.btnCancel);
+            this.pnlFooter.Controls.Add(this.btnSave);
+            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlFooter.Location = new System.Drawing.Point(5, 392);
+            this.pnlFooter.Name = "pnlFooter";
+            this.pnlFooter.Size = new System.Drawing.Size(578, 35);
+            this.pnlFooter.TabIndex = 3;
+            // 
+            // pnlBasic
+            // 
+            this.pnlBasic.Controls.Add(this.tableLayoutPanel1);
+            this.pnlBasic.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlBasic.Location = new System.Drawing.Point(5, 5);
+            this.pnlBasic.Name = "pnlBasic";
+            this.pnlBasic.Size = new System.Drawing.Size(578, 97);
+            this.pnlBasic.TabIndex = 4;
+            // 
+            // pnlDepartments
+            // 
+            this.pnlDepartments.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDepartments.Controls.Add(this.btnDepartmentAdd);
+            this.pnlDepartments.Controls.Add(this.dgvDepartments);
+            this.pnlDepartments.Controls.Add(this.flowLayoutPanel1);
+            this.pnlDepartments.Controls.Add(this.label4);
+            this.pnlDepartments.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlDepartments.Location = new System.Drawing.Point(0, 0);
+            this.pnlDepartments.Name = "pnlDepartments";
+            this.pnlDepartments.Size = new System.Drawing.Size(299, 290);
+            this.pnlDepartments.TabIndex = 5;
+            // 
+            // btnDepartmentAdd
+            // 
+            this.btnDepartmentAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDepartmentAdd.Location = new System.Drawing.Point(224, 2);
+            this.btnDepartmentAdd.Name = "btnDepartmentAdd";
+            this.btnDepartmentAdd.Size = new System.Drawing.Size(39, 23);
+            this.btnDepartmentAdd.TabIndex = 3;
+            this.btnDepartmentAdd.Text = "Add";
+            this.toolTip1.SetToolTip(this.btnDepartmentAdd, "Add Department");
+            this.btnDepartmentAdd.UseVisualStyleBackColor = true;
+            // 
+            // dgvDepartments
+            // 
+            this.dgvDepartments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDepartments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colDepartmentId,
+            this.colDepartmentName});
+            this.dgvDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDepartments.Location = new System.Drawing.Point(0, 26);
+            this.dgvDepartments.Name = "dgvDepartments";
+            this.dgvDepartments.Size = new System.Drawing.Size(263, 264);
+            this.dgvDepartments.TabIndex = 1;
+            // 
+            // colDepartmentId
+            // 
+            this.colDepartmentId.DataPropertyName = "Id";
+            this.colDepartmentId.HeaderText = "Id";
+            this.colDepartmentId.Name = "colDepartmentId";
+            this.colDepartmentId.Visible = false;
+            // 
+            // colDepartmentName
+            // 
+            this.colDepartmentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDepartmentName.DataPropertyName = "Name";
+            this.colDepartmentName.HeaderText = "Name";
+            this.colDepartmentName.Name = "colDepartmentName";
+            this.colDepartmentName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDepartmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(263, 26);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(36, 264);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 31);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "↑";
+            this.toolTip1.SetToolTip(this.button1, "Move up in the sequence");
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(3, 40);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(30, 31);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "↓";
+            this.toolTip1.SetToolTip(this.button2, "Move down in the sequence");
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(299, 26);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Departments";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(206, 2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(39, 23);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "Add";
+            this.toolTip1.SetToolTip(this.button4, "Add Department");
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // pnlEmployees
+            // 
+            this.pnlEmployees.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlEmployees.Controls.Add(this.button4);
+            this.pnlEmployees.Controls.Add(this.dgvEmployees);
+            this.pnlEmployees.Controls.Add(this.label5);
+            this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlEmployees.Location = new System.Drawing.Point(304, 0);
+            this.pnlEmployees.Name = "pnlEmployees";
+            this.pnlEmployees.Size = new System.Drawing.Size(251, 290);
+            this.pnlEmployees.TabIndex = 6;
+            // 
+            // dgvEmployees
+            // 
+            this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEmployees.Location = new System.Drawing.Point(0, 26);
+            this.dgvEmployees.Name = "dgvEmployees";
+            this.dgvEmployees.Size = new System.Drawing.Size(251, 264);
+            this.dgvEmployees.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(251, 26);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Employees of ______";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlExtra
+            // 
+            this.pnlExtra.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pnlExtra.Controls.Add(this.splitter2);
+            this.pnlExtra.Controls.Add(this.pnlEmployees);
+            this.pnlExtra.Controls.Add(this.splitter1);
+            this.pnlExtra.Controls.Add(this.pnlDepartments);
+            this.pnlExtra.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlExtra.Location = new System.Drawing.Point(5, 102);
+            this.pnlExtra.Name = "pnlExtra";
+            this.pnlExtra.Size = new System.Drawing.Size(578, 290);
+            this.pnlExtra.TabIndex = 7;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Enabled = false;
+            this.splitter2.Location = new System.Drawing.Point(555, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 290);
+            this.splitter2.TabIndex = 8;
+            this.splitter2.TabStop = false;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Enabled = false;
+            this.splitter1.Location = new System.Drawing.Point(299, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(5, 290);
+            this.splitter1.TabIndex = 7;
+            this.splitter1.TabStop = false;
+            // 
             // ManufactureCreateForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(348, 141);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(588, 432);
+            this.Controls.Add(this.pnlExtra);
+            this.Controls.Add(this.pnlBasic);
+            this.Controls.Add(this.pnlFooter);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ManufactureCreateForm";
             this.Padding = new System.Windows.Forms.Padding(5);
-            this.Text = "Manufacture";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Manufacture Plan";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.pnlFooter.ResumeLayout(false);
+            this.pnlBasic.ResumeLayout(false);
+            this.pnlDepartments.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.pnlEmployees.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
+            this.pnlExtra.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -169,5 +463,30 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Panel pnlFooter;
+        private System.Windows.Forms.Panel pnlExtra;
+        private System.Windows.Forms.Panel pnlEmployees;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel pnlDepartments;
+        private System.Windows.Forms.Button btnDepartmentAdd;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridView dgvDepartments;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pnlBasic;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.DataGridView dgvEmployees;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbFinalProduct;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentId;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colDepartmentName;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox cbFinalPackage;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }

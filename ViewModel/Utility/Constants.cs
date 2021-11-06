@@ -70,5 +70,6 @@ namespace ViewModel.Utility
         public const string CONFIG_DATABASE = "database";
 
         public const string KEY_MANUFACTURE_LOT_NO_START_FROM = "manufacture_lot_no_start_from";
+        public const string SAVED_SUCCESSFULLY = "Saved Successfully!";
     }
 }

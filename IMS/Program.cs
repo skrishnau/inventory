@@ -230,7 +230,7 @@ namespace IMS
 
             container.Register<ManufactureListUC>(Lifestyle.Scoped);
             container.Register<ManufactureCreateForm>(Lifestyle.Scoped);
-
+            container.Register<DepartmentCreateForm>(Lifestyle.Scoped);
             // Optionally verify the container.
             container.Verify();
 
