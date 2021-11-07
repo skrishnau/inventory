@@ -347,8 +347,8 @@ namespace IMS.Forms.Inventory
             _menubar.btnClients.Click += BtnClients_Click;
             _menubar.btnBackup.Click += BtnBackup_Click;
             _menubar.btnManufacturings.Click += BtnManufacturings_Click;
+            _menubar.btnVendor.Click += BtnVendor_Click;
         }
-
 
         private void BtnBackup_Click(object sender, EventArgs e)
         {
@@ -494,6 +494,13 @@ namespace IMS.Forms.Inventory
         {
             var uc = Program.container.GetInstance<ClientListUC>();
             AddTabPage(Constants.TAB_CLIENTS, uc, sender);
+        }
+
+        private void BtnVendor_Click(object sender, EventArgs e)
+        {
+            //var uc = Program.container.GetInstance<ClientListUC>();
+            var uc = new ClientListUC(_userService, _listener);
+            AddTabPage(Constants.TAB_VENDOR, uc, sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)

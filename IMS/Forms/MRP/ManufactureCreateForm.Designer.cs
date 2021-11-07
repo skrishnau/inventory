@@ -50,8 +50,6 @@
             this.pnlDepartments = new System.Windows.Forms.Panel();
             this.btnDepartmentAdd = new System.Windows.Forms.Button();
             this.dgvDepartments = new System.Windows.Forms.DataGridView();
-            this.colDepartmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDepartmentName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -59,12 +57,13 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlEmployees = new System.Windows.Forms.Panel();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblEmployees = new System.Windows.Forms.Label();
             this.pnlExtra = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.colEmployeesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmployeesCheck = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmployeesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDepartmentName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNo)).BeginInit();
@@ -280,29 +279,12 @@
             // 
             this.dgvDepartments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDepartments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colDepartmentId,
             this.colDepartmentName});
             this.dgvDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDepartments.Location = new System.Drawing.Point(0, 26);
             this.dgvDepartments.Name = "dgvDepartments";
             this.dgvDepartments.Size = new System.Drawing.Size(291, 264);
             this.dgvDepartments.TabIndex = 1;
-            // 
-            // colDepartmentId
-            // 
-            this.colDepartmentId.DataPropertyName = "Id";
-            this.colDepartmentId.HeaderText = "Id";
-            this.colDepartmentId.Name = "colDepartmentId";
-            this.colDepartmentId.Visible = false;
-            // 
-            // colDepartmentName
-            // 
-            this.colDepartmentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDepartmentName.DataPropertyName = "Name";
-            this.colDepartmentName.HeaderText = "Name";
-            this.colDepartmentName.Name = "colDepartmentName";
-            this.colDepartmentName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDepartmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // flowLayoutPanel1
             // 
@@ -351,7 +333,7 @@
             // 
             this.pnlEmployees.BackColor = System.Drawing.SystemColors.Control;
             this.pnlEmployees.Controls.Add(this.dgvEmployees);
-            this.pnlEmployees.Controls.Add(this.label5);
+            this.pnlEmployees.Controls.Add(this.lblEmployees);
             this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlEmployees.Location = new System.Drawing.Point(327, 0);
             this.pnlEmployees.Name = "pnlEmployees";
@@ -371,15 +353,15 @@
             this.dgvEmployees.Size = new System.Drawing.Size(251, 264);
             this.dgvEmployees.TabIndex = 2;
             // 
-            // label5
+            // lblEmployees
             // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(251, 26);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Employees of ______";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEmployees.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblEmployees.Location = new System.Drawing.Point(0, 0);
+            this.lblEmployees.Name = "lblEmployees";
+            this.lblEmployees.Size = new System.Drawing.Size(251, 26);
+            this.lblEmployees.TabIndex = 1;
+            this.lblEmployees.Text = "Employees of ______";
+            this.lblEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlExtra
             // 
@@ -423,6 +405,15 @@
             this.colEmployeesName.HeaderText = "Name";
             this.colEmployeesName.Name = "colEmployeesName";
             this.colEmployeesName.Width = 180;
+            // 
+            // colDepartmentName
+            // 
+            this.colDepartmentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDepartmentName.DataPropertyName = "Name";
+            this.colDepartmentName.HeaderText = "Name";
+            this.colDepartmentName.Name = "colDepartmentName";
+            this.colDepartmentName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDepartmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ManufactureCreateForm
             // 
@@ -471,7 +462,7 @@
         private System.Windows.Forms.Panel pnlFooter;
         private System.Windows.Forms.Panel pnlExtra;
         private System.Windows.Forms.Panel pnlEmployees;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblEmployees;
         private System.Windows.Forms.Panel pnlDepartments;
         private System.Windows.Forms.Button btnDepartmentAdd;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -485,8 +476,6 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbFinalProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentId;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colDepartmentName;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.ComboBox cbFinalPackage;
         private System.Windows.Forms.Label label7;
@@ -494,5 +483,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesName;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colDepartmentName;
     }
 }

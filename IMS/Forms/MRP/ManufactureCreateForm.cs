@@ -27,6 +27,7 @@ namespace IMS.Forms.MRP
 
         int _id = 0;
 
+        private Dictionary<int, List<IdNamePair>> _employees = new Dictionary<int, List<IdNamePair>>();
 
         public ManufactureCreateForm(IManufactureService manufactureService, IAppSettingService appSettingService, IProductService productService, IDatabaseChangeListener databaseChangeListener, IUserService userService)
         {
@@ -52,6 +53,12 @@ namespace IMS.Forms.MRP
             btnDepartmentAdd.Click += BtnDepartmentAdd_Click;
             dgvDepartments.DataError += DgvDepartments_DataError;
             dgvDepartments.SelectionChanged += DgvDepartments_SelectionChanged;
+            dgvEmployees.CellEndEdit += DgvEmployees_CellEndEdit;
+        }
+
+        private void DgvEmployees_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
 
         #region Populate Functions
@@ -138,7 +145,7 @@ namespace IMS.Forms.MRP
         private void PopulateDepartmentCombo()
         {
             var departments = _manufactureService.GetDepartmentList();
-            var departmentColumn = dgvDepartments.Columns[colDepartmentId.Index] as DataGridViewComboBoxColumn;
+            var departmentColumn = dgvDepartments.Columns[colDepartmentName.Index] as DataGridViewComboBoxColumn;
             if (departmentColumn != null)
             {
                 departmentColumn.DataSource = departments;
@@ -149,7 +156,27 @@ namespace IMS.Forms.MRP
 
         private void PopulateEmployees(int depId)
         {
-            var users = _userService.GetUserListForComboByDepartmentId(depId, new int[0]);
+            List<IdNamePair> users = _userService.GetUserListForComboByDepartmentId(depId, new int[0]);
+            // at initial point set Check = true for all
+            foreach(var user in users)
+            {
+                user.Check = true;
+            }
+            // uncheck those that were already unchecked earlier
+            if (_employees.ContainsKey(depId))
+            {
+                foreach(var u in _employees[depId])
+                {
+                    if (!u.Check)
+                    {
+                        var existing = users.FirstOrDefault(x => x.Id == u.Id);
+                        if (existing != null)
+                        {
+                            existing.Check = u.Check;
+                        }
+                    }
+                }
+            }
             dgvEmployees.DataSource = users;
         }
 
@@ -181,16 +208,25 @@ namespace IMS.Forms.MRP
         }
         private void DgvDepartments_SelectionChanged(object sender, EventArgs e)
         {
-            var row = dgvDepartments.SelectedRows.Count > 0 ? dgvDepartments.SelectedRows[0] : null;
-            if (row != null)
+            var selectedCell = dgvDepartments.SelectedCells.Count > 0 ? dgvDepartments.SelectedCells[0] : null;
+            if (selectedCell != null)
             {
-                var cell = dgvDepartments.SelectedRows[0].Cells[colDepartmentName.Index] as DataGridViewComboBoxCell;
+                var cell = dgvDepartments.Rows[selectedCell.RowIndex].Cells[colDepartmentName.Index] as DataGridViewComboBoxCell;
                 if (cell != null)
                 {
                     var depId = cell.Value as int?;
                     if (depId != null)
                     {
-                        PopulateEmployees((int)depId);
+                        var depIdInt = (int)depId;
+                        var department = _manufactureService.GetDepartment(depIdInt);
+                        if (department != null)
+                        {
+                            if (department.IsVendor)
+                                lblEmployees.Text = $"Vendors of {department.Name}";
+                            else
+                                lblEmployees.Text = $"Employees of {department.Name}";
+                            PopulateEmployees(depIdInt);
+                        }
                     }
                 }
             }

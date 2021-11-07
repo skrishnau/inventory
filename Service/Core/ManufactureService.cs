@@ -190,10 +190,50 @@ namespace Service.Core
                 }
                 entity = model.MapToEntity(entity);
                 if (_context.Departments.Any(x => x.Id != model.Id && x.Name == model.Name))
-                    return new ResponseModel<DepartmentModel> { Message = "Another department with same name already exists. Please enter unique name", Success = false};
+                    return new ResponseModel<DepartmentModel> { Message = "Another department with same name already exists. Please enter unique name", Success = false };
+                if (model.DepartmentUsers != null && model.DepartmentUsers.Any())
+                {
+
+                }
                 if (!isEdit)
                 {
+                    // add
+                    foreach (var us in model.DepartmentUsers)
+                    {
+                        // add
+                        var du = new DepartmentUser
+                        {
+                            UserId = us.Id,
+                        };
+                        entity.DepartmentUsers.Add(du);
+                    }
                     _context.Departments.Add(entity);
+                }
+                else
+                {
+                    // edit
+                    var allUserIds = model.DepartmentUsers?.Select(x => x.Id).ToList();
+                    foreach (var us in entity.DepartmentUsers)
+                    {
+                        if (!(model.DepartmentUsers?.Any(x => x.Id == us.UserId) ?? false))
+                        {
+                            // delete
+                            us.DeletedAt = DateTime.Now;
+                        }
+                    }
+                    
+                    foreach (var us in model.DepartmentUsers)
+                    {
+                        if (!entity.DepartmentUsers.Any(x => x.UserId == us.Id))
+                        {
+                            // add
+                            var du = new DepartmentUser
+                            {
+                                UserId = us.Id,
+                            };
+                            entity.DepartmentUsers.Add(du);
+                        }
+                    }
                 }
                 _context.SaveChanges();
                 model.Id = entity.Id;
