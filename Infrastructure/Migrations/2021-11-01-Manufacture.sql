@@ -27,10 +27,8 @@ create table Departments (
 --departmentusers ra manufacturedepartmentusers ko same data hunu parxa.. userproducthistory baaki
 create table DepartmentUsers(
 	Id int not null primary key identity(1,1),
-	Name nvarchar(150) not null,
 	DepartmentId int not null constraint FK_DepartmentUsers_Departments_DepartmentId foreign key references Departments(Id),
 	UserId int null constraint FK_DepartmentUsers_Users_UserId foreign key references Users(Id),
-	VendorId int null constraint FK_DepartmentUsers_Users_VendorId foreign key references Users(Id),
 	DeletedAt datetime null,
 );
 create table UserProducts (
