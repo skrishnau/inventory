@@ -10,12 +10,12 @@ namespace Service.Interfaces
     public interface IManufactureService
     {
         ManufactureModel GetManufacture(int id);
-        bool SaveManufacture(ManufactureModel model);
+        ResponseModel<ManufactureModel> SaveManufacture(ManufactureModel model);
         int GetLastLotNo();
         int GetAllManufacturesCount(int categoryId, string searchText);
         Task<ViewListModel<ManufactureModel>> GetAllManufactures(int categoryId, string searchText, int pageSize, int offset);
         ResponseModel<bool> DeleteManufacture(int id);
-        List<DepartmentModel> GetDepartmentList();
+        List<ManufactureDepartmentModel> GetDepartmentListForManufacture();
         DepartmentModel GetDepartment(int departmentId);
         ResponseModel<DepartmentModel> SaveDepartment(DepartmentModel model);
     }

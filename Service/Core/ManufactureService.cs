@@ -40,7 +40,7 @@ namespace Service.Core
             }
         }
 
-        public bool SaveManufacture(ManufactureModel model)
+        public ResponseModel<ManufactureModel> SaveManufacture(ManufactureModel model)
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -50,15 +50,49 @@ namespace Service.Core
                 entity = model.MapToEntity(entity);
                 if (!isEdit)
                 {
+                    // add
                     entity.CreatedAt = DateTime.Now;
                     //entity.CreatedByUserId = GetAdminId(_context);
                     _context.Manufactures.Add(entity);
                 }
+                // remove those that are removed from view
+                var removeList = new List<ManufactureDepartment>();
+                foreach (var dep in entity.ManufactureDepartments)
+                {
+                    if (!model.Departments.Any(x => x.DepartmentId == dep.DepartmentId))
+                        removeList.Add(dep);
+                }
+                if (removeList.Any(x => x.ManufactureDepartmentUsers.Any(y => y.UserManufactures.Any())))
+                    return new ResponseModel<ManufactureModel> { Success = false, Message = "Manufacture already in process. Can't update the departments" };
+                _context.ManufactureDepartmentUsers.RemoveRange(removeList.SelectMany(x => x.ManufactureDepartmentUsers));
+                _context.ManufactureDepartments.RemoveRange(removeList);
+                // add or update the departments
+                foreach (var dep in model.Departments)
+                {
+                    var depEntity = entity.ManufactureDepartments.FirstOrDefault(x => x.DepartmentId == dep.DepartmentId);
+                    if (depEntity == null)
+                    {
+                        depEntity = new ManufactureDepartment { DepartmentId = dep.DepartmentId };
+                        entity.ManufactureDepartments.Add(depEntity);
+                    }
+                    depEntity.Position = dep.Position;
+                    depEntity.Name = dep.Name ?? string.Empty;
+                    depEntity.HeadUserId = dep.HeadUserId;
+                    if (depEntity.ManufactureDepartmentUsers.Any())
+                        _context.ManufactureDepartmentUsers.RemoveRange(depEntity.ManufactureDepartmentUsers);
+                    foreach (var manuDepUser in dep.ManufactureDepartmentUsers)
+                    {
+                        var manuDepUserEntity = new ManufactureDepartmentUser { BuildRate = manuDepUser.BuildRate, UserId = manuDepUser.UserId};
+                        depEntity.ManufactureDepartmentUsers.Add(manuDepUserEntity);
+                    }
+                }
+
                 _context.SaveChanges();
                 model.Id = entity.Id;
                 var updateMode = isEdit ? Utility.UpdateMode.EDIT : Utility.UpdateMode.ADD;
                 _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(model, updateMode));
-                return true;
+                
+                return new ResponseModel<ManufactureModel> { Data = model, Success = true, Message = Constants.SAVED_SUCCESSFULLY};
             }
         }
         private int GetAdminId(DatabaseContext _context)
@@ -146,16 +180,16 @@ namespace Service.Core
 
         #region Department
 
-        public List<DepartmentModel> GetDepartmentList()
+        public List<ManufactureDepartmentModel> GetDepartmentListForManufacture()
         {
             using (var _context = DatabaseContext.Context)
             {
                 return _context.Departments.Where(x => x.DeletedAt == null)
-                    .Select(s => new DepartmentModel
+                    .Select(s => new ManufactureDepartmentModel
                     {
                         IsVendor = s.IsVendor,
                         Name = s.Name,
-                        Id = s.Id,
+                        DepartmentId = s.Id,
                         HeadUserId = s.HeadUserId,
                     }).ToList();
             }
@@ -221,7 +255,7 @@ namespace Service.Core
                             us.DeletedAt = DateTime.Now;
                         }
                     }
-                    
+
                     foreach (var us in model.DepartmentUsers)
                     {
                         if (!entity.DepartmentUsers.Any(x => x.UserId == us.Id))

@@ -9,6 +9,7 @@ namespace ViewModel.Utility
 {
     public static class Constants
     {
+        public const string APP_NAME = "MAX IMS";
         public const string DATABASE_CONFIG_FILENAME = "imsconfig.config";
         public const string DATABASE_NAME = "IMS";
         public const string GROUP_BACKUP = "Backup";

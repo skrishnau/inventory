@@ -2,5 +2,8 @@
 
 TODOS
 --2021-11-06 
-remove Name column from DepartmentUser table
-remove VendorId column from DepartmentUser table
+--done remove Name column from DepartmentUser table
+--done remove VendorId column from DepartmentUser table
+
+change nullable userId to non-nullable from DepartmentUser table
+remove createdAt and deletedAt from ManufactureDepartmentUserModel

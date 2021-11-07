@@ -37,6 +37,7 @@ namespace IMS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Text = Constants.APP_NAME;
             //GetDatabaseConnection();
             //if (string.IsNullOrEmpty(UserSession.Database))
             //{
