@@ -885,7 +885,7 @@ namespace IMS.Forms.Inventory.Transaction
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var supplierCreate = Program.container.GetInstance<ClientCreateUC>();
+                var supplierCreate = Program.container.GetInstance<ClientCreateForm>();
                 supplierCreate.SetType(_orderType);
                 supplierCreate.ShowDialog();
             }

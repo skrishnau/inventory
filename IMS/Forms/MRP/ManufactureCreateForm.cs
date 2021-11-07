@@ -1,4 +1,5 @@
 ﻿using Service.Core.Settings;
+using Service.Core.Users;
 using Service.Interfaces;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
@@ -22,16 +23,18 @@ namespace IMS.Forms.MRP
         private readonly IAppSettingService _appSettingService;
         private readonly IProductService _productService;
         private readonly IDatabaseChangeListener _databaseChangeListener;
+        private readonly IUserService _userService;
 
         int _id = 0;
 
 
-        public ManufactureCreateForm(IManufactureService manufactureService, IAppSettingService appSettingService, IProductService productService, IDatabaseChangeListener databaseChangeListener)
+        public ManufactureCreateForm(IManufactureService manufactureService, IAppSettingService appSettingService, IProductService productService, IDatabaseChangeListener databaseChangeListener, IUserService userService)
         {
             _manufactureService = manufactureService;
             _appSettingService = appSettingService;
             _productService = productService;
             _databaseChangeListener = databaseChangeListener;
+            _userService = userService;
 
             InitializeComponent();
 
@@ -47,62 +50,26 @@ namespace IMS.Forms.MRP
             cbFinalProduct.SelectedValueChanged += CbFinalProduct_SelectedValueChanged;
             PopulateDepartmentCombo();
             btnDepartmentAdd.Click += BtnDepartmentAdd_Click;
+            dgvDepartments.DataError += DgvDepartments_DataError;
+            dgvDepartments.SelectionChanged += DgvDepartments_SelectionChanged;
         }
 
-        private void BtnDepartmentAdd_Click(object sender, EventArgs e)
-        {
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var form = Program.container.GetInstance<DepartmentCreateForm>();
-                form.ShowDialog();
-                this.Focus();
-            }
-        }
+        #region Populate Functions
 
         private void InitializeDepartmentGridView()
         {
             dgvDepartments.AutoGenerateColumns = false;
             dgvDepartments.AllowUserToAddRows = true;
             dgvDepartments.AllowUserToDeleteRows = true;
-        }
+            dgvDepartments.MultiSelect = false;
+            dgvDepartments.SelectionMode = DataGridViewSelectionMode.CellSelect;
 
-        private void PopulateDepartmentCombo()
-        {
-            var departments = _manufactureService.GetDepartmentList();
-            var departmentColumn = dgvDepartments.Columns[colDepartmentId.Index] as DataGridViewComboBoxColumn;
-            if(departmentColumn != null)
-            {
-                departmentColumn.DataSource = departments;
-                departmentColumn.ValueMember = "Id";
-                departmentColumn.DisplayMember = "Name";
-            }
+            //dgvDepartments.AutoGenerateColumns = false;
+            //dgvDepartments.AllowUserToAddRows = true;
+            //dgvDepartments.AllowUserToDeleteRows = true;
+            //dgvDepartments.MultiSelect = false;
+            //dgvDepartments.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
-
-        private void CbFinalProduct_SelectedValueChanged(object sender, EventArgs e)
-        {
-            PopulateFinalPackage();
-        }
-
-        private void PopulateFinalProduct()
-        {
-            var products = _productService.GetBuildProductListForCombo();
-            products.Insert(0, new IdNamePair { Id = 0, Name = "--- Select ---" });
-            cbFinalProduct.DataSource = products;
-            cbFinalProduct.ValueMember = "Id";
-            cbFinalProduct.DisplayMember = "Name";
-        }
-        private void PopulateFinalPackage()
-        {
-            var product = cbFinalProduct.SelectedItem as IdNamePair;
-            if (product != null)
-            {
-                var packages = _productService.GetPackagesOfProduct(product.Id);
-                cbFinalPackage.DataSource = packages;
-                cbFinalPackage.ValueMember = "Id";
-                cbFinalPackage.DisplayMember = "Name";
-            }
-        }
-
         public void SetDataForEdit(int id)
         {
             var model = _manufactureService.GetManufacture(id);
@@ -117,12 +84,6 @@ namespace IMS.Forms.MRP
             {
                 txtLotNo.Value = _manufactureService.GetLastLotNo() + 1;
             }
-        }
-
-
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            Save();
         }
 
         private void Save()
@@ -153,5 +114,102 @@ namespace IMS.Forms.MRP
             bool success = _manufactureService.SaveManufacture(model);
             this.Close();
         }
+
+        private void PopulateFinalProduct()
+        {
+            var products = _productService.GetBuildProductListForCombo();
+            products.Insert(0, new IdNamePair { Id = 0, Name = "--- Select ---" });
+            cbFinalProduct.DataSource = products;
+            cbFinalProduct.ValueMember = "Id";
+            cbFinalProduct.DisplayMember = "Name";
+        }
+        private void PopulateFinalPackage()
+        {
+            var product = cbFinalProduct.SelectedItem as IdNamePair;
+            if (product != null)
+            {
+                var packages = _productService.GetPackagesOfProduct(product.Id);
+                cbFinalPackage.DataSource = packages;
+                cbFinalPackage.ValueMember = "Id";
+                cbFinalPackage.DisplayMember = "Name";
+            }
+        }
+
+        private void PopulateDepartmentCombo()
+        {
+            var departments = _manufactureService.GetDepartmentList();
+            var departmentColumn = dgvDepartments.Columns[colDepartmentId.Index] as DataGridViewComboBoxColumn;
+            if (departmentColumn != null)
+            {
+                departmentColumn.DataSource = departments;
+                departmentColumn.ValueMember = "Id";
+                departmentColumn.DisplayMember = "Name";
+            }
+        }
+
+        private void PopulateEmployees(int depId)
+        {
+            var users = _userService.GetUserListForComboByDepartmentId(depId, new int[0]);
+            dgvEmployees.DataSource = users;
+        }
+
+        #endregion
+
+
+        #region Events
+
+
+        private void CbFinalProduct_SelectedValueChanged(object sender, EventArgs e)
+        {
+            PopulateFinalPackage();
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void BtnDepartmentAdd_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<DepartmentCreateForm>();
+                form.ShowDialog();
+                this.Focus();
+                PopulateDepartmentCombo();
+            }
+        }
+        private void DgvDepartments_SelectionChanged(object sender, EventArgs e)
+        {
+            var row = dgvDepartments.SelectedRows.Count > 0 ? dgvDepartments.SelectedRows[0] : null;
+            if (row != null)
+            {
+                var cell = dgvDepartments.SelectedRows[0].Cells[colDepartmentName.Index] as DataGridViewComboBoxCell;
+                if (cell != null)
+                {
+                    var depId = cell.Value as int?;
+                    if (depId != null)
+                    {
+                        PopulateEmployees((int)depId);
+                    }
+                }
+            }
+        }
+
+        private void DgvDepartments_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvDepartments.Rows)
+            {
+                var cell = row.Cells[colDepartmentName.Index] as DataGridViewComboBoxCell;
+                if (cell != null)
+                {
+                    cell.Value = null;
+                }
+            }
+        }
+
+        #endregion
+
+
     }
 }

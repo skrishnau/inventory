@@ -46,6 +46,7 @@
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
             this.colEmployeeName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lblEmployeesHeader = new System.Windows.Forms.Label();
+            this.btnAddUser = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlFooter.SuspendLayout();
@@ -172,6 +173,7 @@
             // pnlEmployees
             // 
             this.pnlEmployees.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlEmployees.Controls.Add(this.btnAddUser);
             this.pnlEmployees.Controls.Add(this.dgvEmployees);
             this.pnlEmployees.Controls.Add(this.lblEmployeesHeader);
             this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -209,6 +211,15 @@
             this.lblEmployeesHeader.TabIndex = 1;
             this.lblEmployeesHeader.Text = "Employees";
             this.lblEmployeesHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Location = new System.Drawing.Point(328, 1);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(48, 23);
+            this.btnAddUser.TabIndex = 3;
+            this.btnAddUser.Text = "Add";
+            this.btnAddUser.UseVisualStyleBackColor = true;
             // 
             // DepartmentCreateForm
             // 
@@ -255,5 +266,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbDepartmentType;
         private System.Windows.Forms.DataGridViewComboBoxColumn colEmployeeName;
+        private System.Windows.Forms.Button btnAddUser;
     }
 }

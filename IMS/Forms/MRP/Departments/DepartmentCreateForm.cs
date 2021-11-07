@@ -1,8 +1,10 @@
 ﻿using IMS.Forms.Common;
+using IMS.Forms.Inventory.Suppliers;
 using Service.Core.Settings;
 using Service.Core.Users;
 using Service.Interfaces;
 using Service.Listeners;
+using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,6 +49,31 @@ namespace IMS.Forms.MRP
             btnSave.Click += BtnSave_Click;
             PopulateEmployeeCombo();
             cbDepartmentType.SelectedIndexChanged += CbDepartmentType_SelectedIndexChanged;
+            btnAddUser.Click += BtnAddUser_Click;
+            dgvEmployees.DataError += DgvEmployees_DataError;
+        }
+
+        private void DgvEmployees_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            foreach(DataGridViewRow row in dgvEmployees.Rows)
+            {
+                var cell = row.Cells[colEmployeeName.Index] as DataGridViewComboBoxCell;
+                if(cell != null)
+                {
+                    cell.Value = null;
+                }
+            }
+        }
+
+        private void BtnAddUser_Click(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var form = Program.container.GetInstance<ClientCreateForm>();
+                form.SetDataForEdit(0, UserTypeEnum.Vendor);
+                form.ShowDialog();
+                PopulateEmployeeCombo();
+            }
         }
 
         private void CbDepartmentType_SelectedIndexChanged(object sender, EventArgs e)

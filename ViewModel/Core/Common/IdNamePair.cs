@@ -31,6 +31,8 @@ namespace ViewModel.Core.Common
         // extra value if needed
         public string ExtraValue { get; set; }
 
+        public bool Check { get; set; }
+
         public static IdNamePair Instance { get { return new IdNamePair(); } }
     }
 }

@@ -189,7 +189,7 @@ namespace IMS
             //
            // container.Register<SupplierUC>(Lifestyle.Scoped);
            container.Register<ClientListUC>(Lifestyle.Scoped);
-            container.Register<ClientCreateUC>(Lifestyle.Scoped);
+            container.Register<ClientCreateForm>(Lifestyle.Scoped);
            // container.Register<SupplierSideBarUC>(Lifestyle.Scoped);
             // 
             // Settings

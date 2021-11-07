@@ -764,11 +764,11 @@
     <Compile Include="Forms\POS\Sales\NewItemAddForm.Designer.cs">
       <DependentUpon>NewItemAddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\ClientCreateUC.cs">
+    <Compile Include="Forms\Inventory\Suppliers\ClientCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Suppliers\ClientCreateUC.Designer.cs">
-      <DependentUpon>ClientCreateUC.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Suppliers\ClientCreateForm.Designer.cs">
+      <DependentUpon>ClientCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\InventoryUC.cs">
       <SubType>UserControl</SubType>
@@ -1092,8 +1092,8 @@
     <EmbeddedResource Include="Forms\POS\Sales\NewItemAddForm.resx">
       <DependentUpon>NewItemAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Suppliers\ClientCreateUC.resx">
-      <DependentUpon>ClientCreateUC.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Suppliers\ClientCreateForm.resx">
+      <DependentUpon>ClientCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Categories\CategoryListUC.resx">
       <DependentUpon>CategoryListUC.cs</DependentUpon>

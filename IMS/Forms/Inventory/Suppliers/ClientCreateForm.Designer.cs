@@ -1,6 +1,6 @@
 ﻿namespace IMS.Forms.Inventory.Suppliers
 {
-    partial class ClientCreateUC
+    partial class ClientCreateForm
     {
         /// <summary>
         /// Required designer variable.

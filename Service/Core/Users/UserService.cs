@@ -150,6 +150,22 @@ namespace Service.Core.Users
             }
         }
 
+        // includeUserList : includes the given users even if Use property is false
+        public List<IdNamePair> GetUserListForComboByDepartmentId(int departmentId, int[] includeUserList)
+        {
+            if (includeUserList == null)
+                includeUserList = new int[0];
+            using (var _context = DatabaseContext.Context)
+            {
+                return _context.DepartmentUsers.Where(x=>x.DepartmentId == departmentId && x.DeletedAt == null)
+                    .Select(x => new IdNamePair()
+                    {
+                        Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
+                        Id = x.Id
+                    }).ToList();
+            }
+        }
+
         public List<IdNamePair> GetUserListWithCompanyForCombo(UserTypeEnum userType, int[] includeUserList)
         {
             if (includeUserList == null)

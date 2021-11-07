@@ -11,7 +11,7 @@ using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
-    public partial class ClientCreateUC : Form
+    public partial class ClientCreateForm : Form
     {
         private readonly IUserService _supplierService;
         private readonly IDatabaseChangeListener _listener;
@@ -21,7 +21,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private int _supplierId;
         private int _userId;
 
-        public ClientCreateUC(IUserService supplierService, IDatabaseChangeListener listener)
+        public ClientCreateForm(IUserService supplierService, IDatabaseChangeListener listener)
         {
             this._supplierService = supplierService;
             _listener = listener;
@@ -34,7 +34,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void SupplierCreate_Load(object sender, EventArgs e)
         {
-            this.Text = _userType + " Create";
+            this.Text = (_userType!= UserTypeEnum.All ? _userType.ToString() : "") + "Create";
             InitializeEvents();
             this.ActiveControl = tbName;
             PopulateUserType();
@@ -46,17 +46,28 @@ namespace IMS.Forms.Inventory.Suppliers
         private void PopulateUserType()
         {
             var list = new List<NameValuePair>();
-            var customer = UserTypeEnum.Customer.ToString();
-            var supplier = UserTypeEnum.Supplier.ToString();
-            list.Add(new NameValuePair ("--- Select ---", "" ));
-            list.Add(new NameValuePair (customer, customer));
-            list.Add(new NameValuePair (supplier, supplier));
-
+            if (_userType == UserTypeEnum.Customer || _userType == UserTypeEnum.Supplier)
+            {
+                var customer = UserTypeEnum.Customer.ToString();
+                var supplier = UserTypeEnum.Supplier.ToString();
+                list.Add(new NameValuePair("--- Select ---", ""));
+                list.Add(new NameValuePair(customer, customer));
+                list.Add(new NameValuePair(supplier, supplier));
+            }
+            else if(_userType == UserTypeEnum.Vendor)
+            {
+                var vendor = UserTypeEnum.Vendor.ToString();
+                list.Add(new NameValuePair("--- Select ---", ""));
+                list.Add(new NameValuePair(vendor, vendor));
+            }
             cbUserType.DataSource = list;
             cbUserType.ValueMember = "Value";
             cbUserType.DisplayMember = "name";
-            if(_userType == UserTypeEnum.Customer || _userType == UserTypeEnum.Supplier)
+            try
+            {
                 cbUserType.SelectedValue = _userType.ToString();
+            }
+            catch (Exception) { }
         }
 
         private void InitializeEvents()

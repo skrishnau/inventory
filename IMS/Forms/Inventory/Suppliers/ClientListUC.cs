@@ -118,7 +118,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var supplierCreate = Program.container.GetInstance<ClientCreateUC>();// (supplier);
+                var supplierCreate = Program.container.GetInstance<ClientCreateForm>();// (supplier);
                 supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, _userType);
                 supplierCreate.ShowDialog();
             }

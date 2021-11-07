@@ -34,5 +34,6 @@ namespace Service.Core.Users
         UserModel GetTransactionSumOfUser(int userId);
         UserModel Authenticate(string username, string password);
         bool SavePassword(PasswordModel model);
+        List<IdNamePair> GetUserListForComboByDepartmentId(int departmentId, int[] includeUserList);
     }
 }
