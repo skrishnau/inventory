@@ -15,14 +15,11 @@ namespace Infrastructure.Context
     public partial class DepartmentUser
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public int DepartmentId { get; set; }
         public Nullable<int> UserId { get; set; }
-        public Nullable<int> VendorId { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
     }
 }

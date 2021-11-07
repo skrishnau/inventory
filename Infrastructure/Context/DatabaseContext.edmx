@@ -95,10 +95,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" />
-          <Property Name="VendorId" Type="int" />
           <Property Name="DeletedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="InventoryUnits">
@@ -1052,18 +1050,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DepartmentUsers_Users_VendorId">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="DepartmentUsers" Type="Self.DepartmentUsers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DepartmentUsers">
-              <PropertyRef Name="VendorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
           <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="1" />
           <End Role="ManufactureDepartmentProducts" Type="Self.ManufactureDepartmentProducts" Multiplicity="*" />
@@ -1632,10 +1618,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="DepartmentUsers" EntitySet="DepartmentUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_DepartmentUsers_Users_VendorId" Association="Self.FK_DepartmentUsers_Users_VendorId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="DepartmentUsers" EntitySet="DepartmentUsers" />
-          </AssociationSet>
           <AssociationSet Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" Association="Self.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
             <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
             <End Role="ManufactureDepartmentProducts" EntitySet="ManufactureDepartmentProducts" />
@@ -1822,10 +1804,6 @@
             <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
           </AssociationSet>
           <AssociationSet Name="FK_DepartmentUsers_Users_UserId" Association="Entities.FK_DepartmentUsers_Users_UserId">
-            <End Role="User" EntitySet="Users" />
-            <End Role="DepartmentUser" EntitySet="DepartmentUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DepartmentUsers_Users_VendorId" Association="Entities.FK_DepartmentUsers_Users_VendorId">
             <End Role="User" EntitySet="Users" />
             <End Role="DepartmentUser" EntitySet="DepartmentUsers" />
           </AssociationSet>
@@ -2192,14 +2170,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" />
-          <Property Name="VendorId" Type="Int32" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Department" Relationship="Entities.FK_DepartmentUsers_Departments_DepartmentId" FromRole="DepartmentUser" ToRole="Department" />
           <NavigationProperty Name="User" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="DepartmentUser" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Entities.FK_DepartmentUsers_Users_VendorId" FromRole="DepartmentUser" ToRole="User" />
         </EntityType>
         <EntityType Name="InventoryUnit">
           <Key>
@@ -2719,7 +2694,6 @@
           <Property Name="AllDuesClearDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Departments" Relationship="Entities.FK_Departments_Users_HeadUserId" FromRole="User" ToRole="Department" />
           <NavigationProperty Name="DepartmentUsers" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="User" ToRole="DepartmentUser" />
-          <NavigationProperty Name="DepartmentUsers1" Relationship="Entities.FK_DepartmentUsers_Users_VendorId" FromRole="User" ToRole="DepartmentUser" />
           <NavigationProperty Name="InventoryUnits" Relationship="Entities.FK_dbo_InventoryUnits_dbo_Users_SupplierId" FromRole="User" ToRole="InventoryUnit" />
           <NavigationProperty Name="ManufactureDepartments" Relationship="Entities.FK_ManufactureDepartments_Users_CancelledByUserId" FromRole="User" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="ManufactureDepartments1" Relationship="Entities.FK_ManufactureDepartments_Users_CompletedByUserId" FromRole="User" ToRole="ManufactureDepartment" />
@@ -2854,18 +2828,6 @@
             </Principal>
             <Dependent Role="DepartmentUser">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DepartmentUsers_Users_VendorId">
-          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
-          <End Type="Entities.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DepartmentUser">
-              <PropertyRef Name="VendorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3763,10 +3725,8 @@
             <EntityTypeMapping TypeName="Entities.DepartmentUser">
               <MappingFragment StoreEntitySet="DepartmentUsers">
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
