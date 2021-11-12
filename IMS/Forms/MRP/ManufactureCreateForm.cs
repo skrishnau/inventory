@@ -45,7 +45,7 @@ namespace IMS.Forms.MRP
 
         private void ManufactureCreateForm_Load(object sender, EventArgs e)
         {
-            InitializeDepartmentGridView();
+            InitializeGridView();
             btnSave.Click += BtnSave_Click;
             PopulateFinalProduct();
             PopulateFinalPackage();
@@ -53,6 +53,7 @@ namespace IMS.Forms.MRP
             PopulateDepartmentCombo();
             btnDepartmentAdd.Click += BtnDepartmentAdd_Click;
             dgvDepartments.DataError += DgvDepartments_DataError;
+            dgvEmployees.DataError += DgvEmployees_DataError;
             dgvDepartments.SelectionChanged += DgvDepartments_SelectionChanged;
             dgvEmployees.CellEndEdit += DgvEmployees_CellEndEdit;
             dgvDepartments.EditingControlShowing += DgvDepartments_EditingControlShowing;
@@ -60,13 +61,57 @@ namespace IMS.Forms.MRP
             btnMoveDown.Click += BtnMoveDown_Click;
             dgvDepartments.RowsAdded += DgvDepartments_RowsAdded;
 
+            PopulateDataForEdit();
+        }
+
+
+        private void PopulateDataForEdit()
+        {
+            var model = _manufactureService.GetManufacture(_id);
+            if (model != null)
+            {
+                txtName.Text = model.Name;
+                txtLotNo.Value = model.LotNo;
+                txtRemarks.Text = model.Remarks;
+
+                var rowsEmpty = dgvDepartments.Rows.Count == 0;
+                foreach(var dep in model.ManufactureDepartments)
+                {
+                    AddRow(dep);
+                    // employees data add
+                    if (!_employees.ContainsKey(dep.DepartmentId))
+                        _employees.Add(dep.DepartmentId, new List<IdNamePair>());
+                    _employees[dep.DepartmentId].Clear();
+                    _employees[dep.DepartmentId].AddRange(dep.ManufactureDepartmentUsers.Select(x=> new IdNamePair { Id = x.UserId, Check = true }).ToList());
+                }
+                if (rowsEmpty)
+                    dgvDepartments.Rows.RemoveAt(0);
+
+                PopulateEmployeesDataAndGridview();
+            }
+            else
+            {
+                txtLotNo.Value = _manufactureService.GetLastLotNo() + 1;
+            }
+        }
+
+        private void AddRow(ManufactureDepartmentModel dep)
+        {
+            if(dgvDepartments.Rows.Count > 0)
+            {
+                DataGridViewRow row = (DataGridViewRow)dgvDepartments.Rows[0].Clone();
+                row.Cells[colDepartmentName.Index].Value = dep.DepartmentId;
+                row.Cells[colDepartmentPosition.Index].Value = dep.Position;
+                dgvDepartments.Rows.Add(row);
+            }
         }
 
 
 
         #region Populate Functions
 
-        private void InitializeDepartmentGridView()
+
+        private void InitializeGridView()
         {
             dgvDepartments.AutoGenerateColumns = false;
             dgvDepartments.AllowUserToAddRows = true;
@@ -80,20 +125,10 @@ namespace IMS.Forms.MRP
             dgvEmployees.MultiSelect = false;
             dgvEmployees.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
+
         public void SetDataForEdit(int id)
         {
-            var model = _manufactureService.GetManufacture(id);
-            if (model != null)
-            {
-                _id = model.Id;
-                txtName.Text = model.Name;
-                txtLotNo.Value = model.LotNo;
-                txtRemarks.Text = model.Remarks;
-            }
-            else
-            {
-                txtLotNo.Value = _manufactureService.GetLastLotNo() + 1;
-            }
+            _id = id;
         }
 
         private void Save()
@@ -119,6 +154,7 @@ namespace IMS.Forms.MRP
                     continue;
                 
                 var depCell = row.Cells[colDepartmentName.Index];
+                depCell.ErrorText = string.Empty;
                 if (!int.TryParse(depCell.Value?.ToString(), out int depIdInt))
                 {
                     depCell.ErrorText = "Required";
@@ -131,7 +167,7 @@ namespace IMS.Forms.MRP
                 }
                 var employees = new List<ManufactureDepartmentUserModel>();
                 if (_employees.ContainsKey(depIdInt))
-                    employees = _employees[depIdInt].Select(x=>new ManufactureDepartmentUserModel { UserId = x.Id }).ToList();
+                    employees = _employees[depIdInt].Where(x=>x.Check).Select(x=>new ManufactureDepartmentUserModel { UserId = x.Id }).ToList();
                 var dep = new ManufactureDepartmentModel()
                 {
                     Position = i,
@@ -149,14 +185,13 @@ namespace IMS.Forms.MRP
                 LotNo = (int)txtLotNo.Value,
                 Name = txtName.Text,
                 Remarks = txtRemarks.Text,
-                Departments = departments,
+                ManufactureDepartments = departments,
             };
             var  success = _manufactureService.SaveManufacture(model);
             PopupMessage.ShowMessage(success.Success, success.Message);
             if(success.Success)
                 this.Close();
         }
-
 
         private void PopulateFinalProduct()
         {
@@ -166,6 +201,7 @@ namespace IMS.Forms.MRP
             cbFinalProduct.ValueMember = "Id";
             cbFinalProduct.DisplayMember = "Name";
         }
+
         private void PopulateFinalPackage()
         {
             var product = cbFinalProduct.SelectedItem as IdNamePair;
@@ -226,11 +262,21 @@ namespace IMS.Forms.MRP
         }
         private void PopulateEmployeesGridview(int depId)
         {
-            List<IdNamePair> users = _userService.GetUserListForComboByDepartmentId(depId, new int[0]);
+            List<IdNamePair> users = _userService.GetUserListForComboByDepartmentId(_id, depId, new int[0]);
             // at initial point set Check = true for all
             foreach (var user in users)
             {
-                user.Check = true;
+                if (_employees.ContainsKey(depId))
+                {
+                    if (_employees[depId].Any(x => x.Id == user.Id))
+                        user.Check = true;
+                    else
+                        user.Check = false;
+                }
+                else
+                {
+                    user.Check = true;
+                }
             }
             // uncheck those that were already unchecked earlier
             if (_employees.ContainsKey(depId))
@@ -397,6 +443,18 @@ namespace IMS.Forms.MRP
                     cell.Value = null;
                 }
             }
+        }
+
+        private void DgvEmployees_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            //foreach (DataGridViewRow row in dgvEmployees.Rows)
+            //{
+            //    var cell = row.Cells[colEmployeesName.Index] as DataGridViewComboBoxCell;
+            //    if (cell != null)
+            //    {
+            //        cell.Value = null;
+            //    }
+            //}
         }
 
         #endregion

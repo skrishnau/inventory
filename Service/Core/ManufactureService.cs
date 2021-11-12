@@ -36,7 +36,9 @@ namespace Service.Core
             {
                 var entity = _context.Manufactures.FirstOrDefault(x => x.Id == id);
                 if (entity == null) return null;
-                return entity.MapToModel();
+                var model = entity.MapToModel();
+                model.ManufactureDepartments = entity.ManufactureDepartments.MapToModel();
+                return model;
             }
         }
 
@@ -59,7 +61,7 @@ namespace Service.Core
                 var removeList = new List<ManufactureDepartment>();
                 foreach (var dep in entity.ManufactureDepartments)
                 {
-                    if (!model.Departments.Any(x => x.DepartmentId == dep.DepartmentId))
+                    if (!model.ManufactureDepartments.Any(x => x.DepartmentId == dep.DepartmentId))
                         removeList.Add(dep);
                 }
                 if (removeList.Any(x => x.ManufactureDepartmentUsers.Any(y => y.UserManufactures.Any())))
@@ -67,7 +69,7 @@ namespace Service.Core
                 _context.ManufactureDepartmentUsers.RemoveRange(removeList.SelectMany(x => x.ManufactureDepartmentUsers));
                 _context.ManufactureDepartments.RemoveRange(removeList);
                 // add or update the departments
-                foreach (var dep in model.Departments)
+                foreach (var dep in model.ManufactureDepartments)
                 {
                     var depEntity = entity.ManufactureDepartments.FirstOrDefault(x => x.DepartmentId == dep.DepartmentId);
                     if (depEntity == null)

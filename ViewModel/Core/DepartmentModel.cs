@@ -22,7 +22,6 @@ namespace ViewModel.Core
 
     public class ManufactureDepartmentModel
     {
-        //public int Id { get; set; }
         public int ManufactureId { get; set; }
         public int DepartmentId { get; set; }
         public string Name { get; set; }

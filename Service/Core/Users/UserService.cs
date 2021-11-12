@@ -151,18 +151,40 @@ namespace Service.Core.Users
         }
 
         // includeUserList : includes the given users even if Use property is false
-        public List<IdNamePair> GetUserListForComboByDepartmentId(int departmentId, int[] includeUserList)
+        public List<IdNamePair> GetUserListForComboByDepartmentId(int manufactureId, int departmentId, int[] includeUserList)
         {
             if (includeUserList == null)
                 includeUserList = new int[0];
             using (var _context = DatabaseContext.Context)
             {
-                return _context.DepartmentUsers.Where(x=>x.DepartmentId == departmentId && x.DeletedAt == null)
-                    .Select(x => new IdNamePair()
+                var departmentUsers = _context.DepartmentUsers
+                        .Where(x => x.DepartmentId == departmentId && x.DeletedAt == null)
+                        .Select(x => new IdNamePair()
+                        {
+                            Check = true,
+                            Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
+                            Id = (int)x.UserId
+                        }).ToList();
+                if (manufactureId > 0)
+                {
+                    var manufactureDepUsers =  _context.ManufactureDepartmentUsers
+                        .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == departmentId)
+                        .Select(x => new IdNamePair
+                        {
+                            Check = true,
+                            Id = x.UserId,
+                            Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
+                        })
+                        .ToList();
+                    foreach(var depUser in departmentUsers)
                     {
-                        Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
-                        Id = x.Id
-                    }).ToList();
+                        depUser.Check = false; // uncheck the unselected cause we are in edit mode
+                        if (!manufactureDepUsers.Any(x => x.Id == depUser.Id))
+                            manufactureDepUsers.Add(depUser);
+                    }
+                    return manufactureDepUsers;
+                }
+                return departmentUsers;
             }
         }
 
@@ -270,7 +292,7 @@ namespace Service.Core.Users
                     && x.DeletedAt == null
                     && x.Use == true
                     );
-                if( password == StringCipher.Decrypt(user?.Password))
+                if (password == StringCipher.Decrypt(user?.Password))
                 {
                     return UserMapper.MapToUserModel(user);
                 }

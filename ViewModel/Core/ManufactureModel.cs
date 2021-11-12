@@ -24,6 +24,6 @@ namespace ViewModel.Core
         public Nullable<System.DateTime> CancelledAt { get; set; }
         public Nullable<int> CancelledByUserId { get; set; }
 
-        public List<ManufactureDepartmentModel> Departments { get; set; }
+        public List<ManufactureDepartmentModel> ManufactureDepartments { get; set; }
     }
 }

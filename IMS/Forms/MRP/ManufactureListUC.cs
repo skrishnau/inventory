@@ -77,7 +77,7 @@ namespace IMS.Forms.MRP
 
         private void InitializeEvents()
         {
-            //dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
+            dgvProductList.SelectionChanged += DgvProductList_SelectionChanged;
             //dgvProductList.CellDoubleClick += DgvProductList_CellDoubleClick;
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
@@ -196,7 +196,7 @@ namespace IMS.Forms.MRP
             }
         }
        */
-        /*
+        
         private void DgvProductList_SelectionChanged(object sender, EventArgs e)
         {
             // populate detail 
@@ -207,15 +207,17 @@ namespace IMS.Forms.MRP
                 btnEdit.Visible = true;
                 btnDelete.Visible = true;
                 // btnDelete.Visible = true;
-                var data = (ProductModel)dgvProductList.SelectedRows[0].DataBoundItem;
-                _selectedProduct = data;
-                lblProductName.Text = data.Name;
-                //var model = _inventoryService.GetProductForEdit(data.Id);
-                PopulatePriceHistory(data);
+                var data = dgvProductList.SelectedRows[0].DataBoundItem as ManufactureModel;
+                if (data != null)
+                {
+                    //_selectedProduct = data;
+                    lblProductName.Text = data.Name;
+                    //var model = _inventoryService.GetProductForEdit(data.Id);
+                    //PopulatePriceHistory(data);
+                }
             }
-
         }
-
+        /*
         private void PopulatePriceHistory(ProductModel data)
         {
             List<PriceHistoryModel> history = _productService.GetPriceHistory(data.Id);
@@ -230,12 +232,16 @@ namespace IMS.Forms.MRP
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             // get the id from selected row
-            if (_selectedManufacture != null)
+            var selectedManufacture = GetSelectedManufacture();
+            if (selectedManufacture!=null)
             {
-                ShowManufactureAddEditDialog(_selectedManufacture.Id);
+                ShowManufactureAddEditDialog(selectedManufacture.Id);
             }
         }
-
+        private ManufactureModel GetSelectedManufacture()
+        {
+            return dgvProductList.SelectedRows.Count > 0 ? dgvProductList.SelectedRows[0].DataBoundItem as ManufactureModel : null;
+        }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {

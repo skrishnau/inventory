@@ -38,6 +38,7 @@ namespace DTO.Core
         {
             CreateMap<Manufacture, ManufactureModel>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.CompletedAt != null ? "Complete" : src.CancelledAt != null ? "Cancelled" : src.DeletedAt != null ? "Deleted" : src.StartedAt != null ? "In-Process" : "New"))
+                .ForMember(dest => dest.ManufactureDepartments, opt => opt.Ignore())
                 ;
             CreateMap<ManufactureModel, Manufacture>()
                 .ForMember(dest => dest.CancelledAt, opt => opt.Ignore())
@@ -48,6 +49,7 @@ namespace DTO.Core
                 .ForMember(dest => dest.CreatedByUserId, opt => opt.Ignore())
                 .ForMember(dest => dest.StartedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.StartedByUserId, opt => opt.Ignore())
+                .ForMember(dest=> dest.ManufactureDepartments, opt=>opt.Ignore())
 
                 ;
         }
