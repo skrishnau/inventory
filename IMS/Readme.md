@@ -9,3 +9,4 @@ change nullable userId to non-nullable from DepartmentUser table
 remove createdAt and deletedAt from ManufactureDepartmentUserModel
 
 make non null of UserId in DepartmentUser table
+add BuildRate in DepartmentUser table

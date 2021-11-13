@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Settings;
 using ViewModel.Core.Users;
@@ -34,6 +35,6 @@ namespace Service.Core.Users
         UserModel GetTransactionSumOfUser(int userId);
         UserModel Authenticate(string username, string password);
         bool SavePassword(PasswordModel model);
-        List<IdNamePair> GetUserListForComboByDepartmentId(int manufactureId, int departmentId, int[] includeUserList);
+        List<ManufactureDepartmentUserModel> GetUserListForComboByDepartmentId(int manufactureId, int departmentId, int[] includeUserList);
     }
 }

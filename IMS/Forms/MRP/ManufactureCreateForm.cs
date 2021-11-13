@@ -28,7 +28,7 @@ namespace IMS.Forms.MRP
 
         int _id = 0;
 
-        private Dictionary<int, List<IdNamePair>> _employees = new Dictionary<int, List<IdNamePair>>();
+        private Dictionary<int, List<ManufactureDepartmentUserModel>> _employees = new Dictionary<int, List<ManufactureDepartmentUserModel>>();
 
         public ManufactureCreateForm(IManufactureService manufactureService, IAppSettingService appSettingService, IProductService productService, IDatabaseChangeListener databaseChangeListener, IUserService userService)
         {
@@ -80,9 +80,9 @@ namespace IMS.Forms.MRP
                     AddRow(dep);
                     // employees data add
                     if (!_employees.ContainsKey(dep.DepartmentId))
-                        _employees.Add(dep.DepartmentId, new List<IdNamePair>());
+                        _employees.Add(dep.DepartmentId, new List<ManufactureDepartmentUserModel>());
                     _employees[dep.DepartmentId].Clear();
-                    _employees[dep.DepartmentId].AddRange(dep.ManufactureDepartmentUsers.Select(x=> new IdNamePair { Id = x.UserId, Check = true }).ToList());
+                    _employees[dep.DepartmentId].AddRange(dep.ManufactureDepartmentUsers.Select(x=> new ManufactureDepartmentUserModel { UserId = x.UserId, Check = true }).ToList());
                 }
                 if (rowsEmpty)
                     dgvDepartments.Rows.RemoveAt(0);
@@ -102,6 +102,7 @@ namespace IMS.Forms.MRP
                 DataGridViewRow row = (DataGridViewRow)dgvDepartments.Rows[0].Clone();
                 row.Cells[colDepartmentName.Index].Value = dep.DepartmentId;
                 row.Cells[colDepartmentPosition.Index].Value = dep.Position;
+                row.DefaultCellStyle.BackColor = Color.White;
                 dgvDepartments.Rows.Add(row);
             }
         }
@@ -167,7 +168,7 @@ namespace IMS.Forms.MRP
                 }
                 var employees = new List<ManufactureDepartmentUserModel>();
                 if (_employees.ContainsKey(depIdInt))
-                    employees = _employees[depIdInt].Where(x=>x.Check).Select(x=>new ManufactureDepartmentUserModel { UserId = x.Id }).ToList();
+                    employees = _employees[depIdInt].Where(x=>x.Check).Select(x=>new ManufactureDepartmentUserModel { UserId = x.UserId }).ToList();
                 var dep = new ManufactureDepartmentModel()
                 {
                     Position = i,
@@ -262,13 +263,13 @@ namespace IMS.Forms.MRP
         }
         private void PopulateEmployeesGridview(int depId)
         {
-            List<IdNamePair> users = _userService.GetUserListForComboByDepartmentId(_id, depId, new int[0]);
+            List<ManufactureDepartmentUserModel> users = _userService.GetUserListForComboByDepartmentId(_id, depId, new int[0]);
             // at initial point set Check = true for all
             foreach (var user in users)
             {
                 if (_employees.ContainsKey(depId))
                 {
-                    if (_employees[depId].Any(x => x.Id == user.Id))
+                    if (_employees[depId].Any(x => x.UserId == user.UserId))
                         user.Check = true;
                     else
                         user.Check = false;
@@ -285,7 +286,7 @@ namespace IMS.Forms.MRP
                 {
                     if (!u.Check)
                     {
-                        var existing = users.FirstOrDefault(x => x.Id == u.Id);
+                        var existing = users.FirstOrDefault(x => x.UserId == u.UserId);
                         if (existing != null)
                         {
                             existing.Check = u.Check;
@@ -299,41 +300,46 @@ namespace IMS.Forms.MRP
 
         private void ReorderDepartmentList(int v)
         {
-            var rowIndex = dgvDepartments.CurrentCell.RowIndex;
-            if (v == 1 && rowIndex == 0)
-                return;
-            if (v == -1 && rowIndex == dgvDepartments.Rows.Count - 2) // new row is always present which shouldn't be counted hence done -2 instead of -1
-                return;
-
-            var cell = dgvDepartments.Rows[rowIndex].Cells[colDepartmentPosition.Index];
-            var value = cell.Value?.ToString();
-            int.TryParse(value, out int valueInt);
-            // lowest on top. so when btnDown is clicked v=-1 but we need to increment the index hence, it's done => minus v
-            cell.Value = valueInt - v;
-            if (v == -1)
+            try
             {
-                if (dgvDepartments.RowCount > (rowIndex + 1))
+                var rowIndex = dgvDepartments.CurrentCell.RowIndex;
+                if (v == 1 && rowIndex == 0)
+                    return;
+                if (v == -1 && rowIndex == dgvDepartments.Rows.Count - 2) // new row is always present which shouldn't be counted hence done -2 instead of -1
+                    return;
+                if (dgvDepartments.Rows[dgvDepartments.CurrentCell.RowIndex].IsNewRow)
+                    return;
+                var cell = dgvDepartments.Rows[rowIndex].Cells[colDepartmentPosition.Index];
+                var value = cell.Value?.ToString();
+                int.TryParse(value, out int valueInt);
+                // lowest on top. so when btnDown is clicked v=-1 but we need to increment the index hence, it's done => minus v
+                cell.Value = valueInt - v;
+                if (v == -1)
                 {
-                    var belowCell = dgvDepartments.Rows[rowIndex + 1].Cells[colDepartmentPosition.Index];
-                    if (belowCell.Value != null)
+                    if (dgvDepartments.RowCount > (rowIndex + 1))
                     {
-                        belowCell.Value = valueInt;
+                        var belowCell = dgvDepartments.Rows[rowIndex + 1].Cells[colDepartmentPosition.Index];
+                        if (belowCell.Value != null)
+                        {
+                            belowCell.Value = valueInt;
+                        }
                     }
                 }
-            }
-            else if (v == 1)
-            {
-                if (dgvDepartments.RowCount > (rowIndex + 1))
+                else if (v == 1)
                 {
-                    var belowCell = dgvDepartments.Rows[rowIndex - 1].Cells[colDepartmentPosition.Index];
-                    if (belowCell.Value != null)
+                    if (dgvDepartments.RowCount > (rowIndex + 1))
                     {
-                        belowCell.Value = valueInt;
+                        var belowCell = dgvDepartments.Rows[rowIndex - 1].Cells[colDepartmentPosition.Index];
+                        if (belowCell.Value != null)
+                        {
+                            belowCell.Value = valueInt;
+                        }
                     }
                 }
+                dgvDepartments.NotifyCurrentCellDirty(true);
+                dgvDepartments.Sort(colDepartmentPosition, ListSortDirection.Ascending);
             }
-            dgvDepartments.NotifyCurrentCellDirty(true);
-            dgvDepartments.Sort(colDepartmentPosition, ListSortDirection.Ascending);
+            catch (Exception ex) { }
         }
 
         #endregion
@@ -392,7 +398,7 @@ namespace IMS.Forms.MRP
             {
                 var depIdInt = (int)depId;
                 if (!_employees.ContainsKey(depIdInt))
-                    _employees.Add(depIdInt, new List<IdNamePair>());
+                    _employees.Add(depIdInt, new List<ManufactureDepartmentUserModel>());
                 _employees[depIdInt].Clear();
                 foreach (DataGridViewRow row in dgvEmployees.Rows)
                 {
@@ -401,7 +407,7 @@ namespace IMS.Forms.MRP
                     var check = row.Cells[colEmployeesCheck.Index].FormattedValue?.ToString();
                     var userId = row.Cells[colEmployeesId.Index].Value?.ToString();
                     if (int.TryParse(userId, out int userIdInt))
-                        _employees[depIdInt].Add(new IdNamePair { Check = check == "True", Id = userIdInt });
+                        _employees[depIdInt].Add(new ManufactureDepartmentUserModel { Check = check == "True", UserId = userIdInt });
                 }
             }
         }
@@ -430,6 +436,14 @@ namespace IMS.Forms.MRP
         private void DgvDepartments_SelectionChanged(object sender, EventArgs e)
         {
             PopulateEmployeesDataAndGridview();
+            var selectedRowIndex = dgvDepartments.SelectedCells.Count > 0 ? dgvDepartments.SelectedCells[0].RowIndex : 0;
+            foreach(DataGridViewRow row in dgvDepartments.Rows)
+            {
+                if (row.Index == selectedRowIndex)
+                    row.DefaultCellStyle.BackColor = Color.LightBlue;
+                else 
+                    row.DefaultCellStyle.BackColor = Color.White;
+            }
         }
 
 

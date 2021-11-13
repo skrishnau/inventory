@@ -66,6 +66,7 @@
     <Compile Include="Core\Common\NameValuePair.cs" />
     <Compile Include="Core\Common\ViewListModel.cs" />
     <Compile Include="Core\DepartmentModel.cs" />
+    <Compile Include="Core\DepartmentUserModel.cs" />
     <Compile Include="Core\Inventory\AdjustmentCodeModel.cs" />
     <Compile Include="Core\Inventory\InventoryMovementModel.cs" />
     <Compile Include="Core\Inventory\InventoryUnitModel.cs" />
@@ -74,6 +75,8 @@
     <Compile Include="Core\Inventory\PriceHistoryModel.cs" />
     <Compile Include="Core\Inventory\UomModel.cs" />
     <Compile Include="Core\Inventory\WarehouseProductModel.cs" />
+    <Compile Include="Core\ManufactureDepartmentModel.cs" />
+    <Compile Include="Core\ManufactureDepartmentUserModel.cs" />
     <Compile Include="Core\ManufactureModel.cs" />
     <Compile Include="Core\Orders\DueAmountModel.cs" />
     <Compile Include="Core\Orders\PaymentModel.cs" />

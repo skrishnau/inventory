@@ -5,6 +5,7 @@ using DTO.Core.Inventory;
 using Infrastructure.Context;
 using Service.DbEventArgs;
 using Service.Listeners;
+using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Settings;
 using ViewModel.Core.Users;
@@ -151,7 +152,7 @@ namespace Service.Core.Users
         }
 
         // includeUserList : includes the given users even if Use property is false
-        public List<IdNamePair> GetUserListForComboByDepartmentId(int manufactureId, int departmentId, int[] includeUserList)
+        public List<ManufactureDepartmentUserModel> GetUserListForComboByDepartmentId(int manufactureId, int departmentId, int[] includeUserList)
         {
             if (includeUserList == null)
                 includeUserList = new int[0];
@@ -159,27 +160,30 @@ namespace Service.Core.Users
             {
                 var departmentUsers = _context.DepartmentUsers
                         .Where(x => x.DepartmentId == departmentId && x.DeletedAt == null)
-                        .Select(x => new IdNamePair()
+                        .Select(x => new ManufactureDepartmentUserModel()
                         {
                             Check = true,
                             Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
-                            Id = (int)x.UserId
+                            UserId = (int)x.UserId,
+                            BuildRate = x.BuildRate,
                         }).ToList();
                 if (manufactureId > 0)
                 {
                     var manufactureDepUsers =  _context.ManufactureDepartmentUsers
                         .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == departmentId)
-                        .Select(x => new IdNamePair
+                        .Select(x => new ManufactureDepartmentUserModel
                         {
                             Check = true,
-                            Id = x.UserId,
+                            UserId = x.UserId,
                             Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
+                            BuildRate = x.BuildRate,
+                            //ManufactureDepartmentId = x.ManufactureDepartmentId
                         })
                         .ToList();
                     foreach(var depUser in departmentUsers)
                     {
                         depUser.Check = false; // uncheck the unselected cause we are in edit mode
-                        if (!manufactureDepUsers.Any(x => x.Id == depUser.Id))
+                        if (!manufactureDepUsers.Any(x => x.UserId == depUser.UserId))
                             manufactureDepUsers.Add(depUser);
                     }
                     return manufactureDepUsers;
