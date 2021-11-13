@@ -23,8 +23,6 @@ namespace Infrastructure.Context
         public int Id { get; set; }
         public int ManufactureDepartmentId { get; set; }
         public int UserId { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
         public Nullable<decimal> BuildRate { get; set; }
     
         public virtual ManufactureDepartment ManufactureDepartment { get; set; }

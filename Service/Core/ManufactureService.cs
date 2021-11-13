@@ -207,7 +207,7 @@ namespace Service.Core
                 model.DepartmentUsers = department.DepartmentUsers.ToList()
                     .Select(x => new ViewModel.Core.Users.UserModel
                     {
-                        Id = x.UserId ?? 0,
+                        Id = x.UserId,
                         Name = _context.Users.Where(y => y.Id == x.UserId).Select(y => y.Name).FirstOrDefault()
                     }).ToList();
                 return model;

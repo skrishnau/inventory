@@ -96,7 +96,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
           <Property Name="DeletedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="InventoryUnits">
@@ -167,8 +168,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ManufactureDepartmentId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetime" />
-          <Property Name="DeletedAt" Type="datetime" />
           <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
         </EntityType>
         <EntityType Name="ManufactureProducts">
@@ -1039,7 +1038,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DepartmentUsers_Users_UserId">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="DepartmentUsers" Type="Self.DepartmentUsers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -2171,7 +2170,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Department" Relationship="Entities.FK_DepartmentUsers_Departments_DepartmentId" FromRole="DepartmentUser" ToRole="Department" />
           <NavigationProperty Name="User" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="DepartmentUser" ToRole="User" />
@@ -2260,8 +2260,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ManufactureDepartmentId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
           <NavigationProperty Name="ManufactureDepartment" Relationship="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" FromRole="ManufactureDepartmentUser" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="User" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_UserId" FromRole="ManufactureDepartmentUser" ToRole="User" />
@@ -2820,7 +2818,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DepartmentUsers_Users_UserId">
-          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
           <End Type="Entities.DepartmentUser" Role="DepartmentUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -3725,6 +3723,7 @@
             <EntityTypeMapping TypeName="Entities.DepartmentUser">
               <MappingFragment StoreEntitySet="DepartmentUsers">
                 <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -3799,8 +3798,6 @@
             <EntityTypeMapping TypeName="Entities.ManufactureDepartmentUser">
               <MappingFragment StoreEntitySet="ManufactureDepartmentUsers">
                 <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ManufactureDepartmentId" ColumnName="ManufactureDepartmentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

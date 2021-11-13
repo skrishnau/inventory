@@ -28,7 +28,8 @@ create table Departments (
 create table DepartmentUsers(
 	Id int not null primary key identity(1,1),
 	DepartmentId int not null constraint FK_DepartmentUsers_Departments_DepartmentId foreign key references Departments(Id),
-	UserId int null constraint FK_DepartmentUsers_Users_UserId foreign key references Users(Id),
+	UserId int not null constraint FK_DepartmentUsers_Users_UserId foreign key references Users(Id),
+	BuildRate decimal (11,4) null,
 	DeletedAt datetime null,
 );
 create table UserProducts (
@@ -101,8 +102,6 @@ create table ManufactureDepartmentUsers(
 	Id int not null primary key identity(1,1),
 	ManufactureDepartmentId int not null constraint FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId foreign key references ManufactureDepartments(Id),
 	UserId int not null constraint FK_ManufactureDepartmentUsers_Users_UserId foreign key references Users(Id),
-	CreatedAt datetime null,
-	DeletedAt datetime null,
 	BuildRate decimal (11,4) null,
 );
 create table ManufactureDepartmentProducts(
