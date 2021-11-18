@@ -472,6 +472,12 @@
     <Compile Include="Forms\Inventory\Units\InventoryUnitsMenu.Designer.cs">
       <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MRP\DepartmentSequenceItemUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MRP\DepartmentSequenceItemUC.Designer.cs">
+      <DependentUpon>DepartmentSequenceItemUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MRP\Departments\DepartmentCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,11 +490,23 @@
     <Compile Include="Forms\MRP\ManufactureCreateForm.Designer.cs">
       <DependentUpon>ManufactureCreateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MRP\ManufactureDetailSmallUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MRP\ManufactureDetailSmallUC.Designer.cs">
+      <DependentUpon>ManufactureDetailSmallUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MRP\ManufactureListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\MRP\ManufactureListUC.Designer.cs">
       <DependentUpon>ManufactureListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MRP\ManufactureViewUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MRP\ManufactureViewUC.Designer.cs">
+      <DependentUpon>ManufactureViewUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\POS\Branches\BranchListUC.cs">
       <SubType>UserControl</SubType>
@@ -954,14 +972,23 @@
     <EmbeddedResource Include="Forms\Inventory\Units\InventoryUnitsMenu.resx">
       <DependentUpon>InventoryUnitsMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MRP\DepartmentSequenceItemUC.resx">
+      <DependentUpon>DepartmentSequenceItemUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\Departments\DepartmentCreateForm.resx">
       <DependentUpon>DepartmentCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\ManufactureCreateForm.resx">
       <DependentUpon>ManufactureCreateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MRP\ManufactureDetailSmallUC.resx">
+      <DependentUpon>ManufactureDetailSmallUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\ManufactureListUC.resx">
       <DependentUpon>ManufactureListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MRP\ManufactureViewUC.resx">
+      <DependentUpon>ManufactureViewUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\Branches\BranchListUC.resx">
       <DependentUpon>BranchListUC.cs</DependentUpon>

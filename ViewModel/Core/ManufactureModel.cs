@@ -16,14 +16,19 @@ namespace ViewModel.Core
         public string Status { get; set; }
 
         public System.DateTime CreatedAt { get; set; }
+        public string CreatedAtString { get; set; }
         public int CreatedByUserId { get; set; }
         public Nullable<System.DateTime> StartedAt { get; set; }
+        public string StartedAtString { get; set; }
         public Nullable<int> StartedByUserId { get; set; }
         public Nullable<System.DateTime> CompletedAt { get; set; }
+        public string CompletedAtString { get; set; }
         public Nullable<int> CompletedByUserId { get; set; }
         public Nullable<System.DateTime> CancelledAt { get; set; }
+        public string CancelledAtString { get; set; }
         public Nullable<int> CancelledByUserId { get; set; }
 
         public List<ManufactureDepartmentModel> ManufactureDepartments { get; set; }
+        public List<ManufactureProductModel> ManufactureProducts { get; set; }
     }
 }

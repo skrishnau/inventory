@@ -210,10 +210,15 @@ namespace IMS.Forms.MRP
                 var data = dgvProductList.SelectedRows[0].DataBoundItem as ManufactureModel;
                 if (data != null)
                 {
-                    //_selectedProduct = data;
-                    lblProductName.Text = data.Name;
-                    //var model = _inventoryService.GetProductForEdit(data.Id);
-                    //PopulatePriceHistory(data);
+                    var manufactureModel = _manufactureService.GetManufacture(data.Id);
+                    if (manufactureModel != null)
+                    {
+                        var ucManufactureDetail = Program.container.GetInstance<ManufactureDetailSmallUC>();
+                        ucManufactureDetail.PopulateData(manufactureModel);
+                        ucManufactureDetail.Dock = DockStyle.Right;
+                        pnlGridView.Controls.Add(ucManufactureDetail);
+                        ucManufactureDetail.SendToBack();
+                    }
                 }
             }
         }
@@ -250,14 +255,13 @@ namespace IMS.Forms.MRP
                 ShowDeleteDialog(_selectedManufacture);
             }
         }
-        
+
+
+
+
 
 
         #endregion
-
-
-        
-
     }
 }
 

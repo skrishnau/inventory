@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.txtFinalQuantity = new System.Windows.Forms.NumericUpDown();
             this.cbFinalPackage = new System.Windows.Forms.ComboBox();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,9 +50,6 @@
             this.pnlDepartments = new System.Windows.Forms.Panel();
             this.btnDepartmentAdd = new System.Windows.Forms.Button();
             this.dgvDepartments = new System.Windows.Forms.DataGridView();
-            this.colDepartmentName = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colDepartmentPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeparmentDelete = new System.Windows.Forms.DataGridViewImageColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
@@ -68,8 +65,11 @@
             this.colEmployeesCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colEmployeesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmployeesRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDepartmentName = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colDepartmentPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeparmentDelete = new System.Windows.Forms.DataGridViewImageColumn();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinalQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlFooter.SuspendLayout();
@@ -88,8 +88,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.25952F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.74049F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207F));
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDown1, 3, 2);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 209F));
+            this.tableLayoutPanel1.Controls.Add(this.txtFinalQuantity, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.cbFinalPackage, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtRemarks, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
@@ -111,24 +111,25 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 97);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // numericUpDown1
+            // txtFinalQuantity
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(367, 67);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(170, 20);
-            this.numericUpDown1.TabIndex = 7;
+            this.txtFinalQuantity.Location = new System.Drawing.Point(365, 67);
+            this.txtFinalQuantity.Name = "txtFinalQuantity";
+            this.txtFinalQuantity.Size = new System.Drawing.Size(170, 20);
+            this.txtFinalQuantity.TabIndex = 7;
             // 
             // cbFinalPackage
             // 
+            this.cbFinalPackage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFinalPackage.FormattingEnabled = true;
-            this.cbFinalPackage.Location = new System.Drawing.Point(367, 35);
+            this.cbFinalPackage.Location = new System.Drawing.Point(365, 35);
             this.cbFinalPackage.Name = "cbFinalPackage";
             this.cbFinalPackage.Size = new System.Drawing.Size(169, 21);
             this.cbFinalPackage.TabIndex = 8;
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(71, 67);
+            this.txtRemarks.Location = new System.Drawing.Point(70, 67);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(170, 20);
             this.txtRemarks.TabIndex = 5;
@@ -162,7 +163,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(71, 3);
+            this.txtName.Location = new System.Drawing.Point(70, 3);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(170, 20);
             this.txtName.TabIndex = 3;
@@ -170,7 +171,7 @@
             // txtLotNo
             // 
             this.txtLotNo.Enabled = false;
-            this.txtLotNo.Location = new System.Drawing.Point(71, 35);
+            this.txtLotNo.Location = new System.Drawing.Point(70, 35);
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.Size = new System.Drawing.Size(170, 20);
             this.txtLotNo.TabIndex = 6;
@@ -178,7 +179,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(273, 0);
+            this.label6.Location = new System.Drawing.Point(271, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 25);
             this.label6.TabIndex = 1;
@@ -188,14 +189,14 @@
             // cbFinalProduct
             // 
             this.cbFinalProduct.FormattingEnabled = true;
-            this.cbFinalProduct.Location = new System.Drawing.Point(367, 3);
+            this.cbFinalProduct.Location = new System.Drawing.Point(365, 3);
             this.cbFinalProduct.Name = "cbFinalProduct";
             this.cbFinalProduct.Size = new System.Drawing.Size(169, 21);
             this.cbFinalProduct.TabIndex = 7;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(273, 64);
+            this.label7.Location = new System.Drawing.Point(271, 64);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 25);
             this.label7.TabIndex = 8;
@@ -204,7 +205,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(273, 32);
+            this.label8.Location = new System.Drawing.Point(271, 32);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(85, 25);
             this.label8.TabIndex = 9;
@@ -291,30 +292,6 @@
             this.dgvDepartments.Name = "dgvDepartments";
             this.dgvDepartments.Size = new System.Drawing.Size(329, 261);
             this.dgvDepartments.TabIndex = 1;
-            // 
-            // colDepartmentName
-            // 
-            this.colDepartmentName.DataPropertyName = "Name";
-            this.colDepartmentName.HeaderText = "Name";
-            this.colDepartmentName.Name = "colDepartmentName";
-            this.colDepartmentName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDepartmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colDepartmentName.Width = 180;
-            // 
-            // colDepartmentPosition
-            // 
-            this.colDepartmentPosition.HeaderText = "Sequence";
-            this.colDepartmentPosition.Name = "colDepartmentPosition";
-            this.colDepartmentPosition.Width = 50;
-            // 
-            // colDeparmentDelete
-            // 
-            this.colDeparmentDelete.HeaderText = "";
-            this.colDeparmentDelete.Image = global::IMS.Properties.Resources.icons8_Delete_Red_16px;
-            this.colDeparmentDelete.Name = "colDeparmentDelete";
-            this.colDeparmentDelete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDeparmentDelete.ToolTipText = "Remove";
-            this.colDeparmentDelete.Width = 26;
             // 
             // flowLayoutPanel1
             // 
@@ -428,7 +405,7 @@
             // 
             // colEmployeesId
             // 
-            this.colEmployeesId.DataPropertyName = "Id";
+            this.colEmployeesId.DataPropertyName = "UserId";
             this.colEmployeesId.HeaderText = "Id";
             this.colEmployeesId.Name = "colEmployeesId";
             this.colEmployeesId.Visible = false;
@@ -457,6 +434,31 @@
             this.colEmployeesRate.Name = "colEmployeesRate";
             this.colEmployeesRate.Width = 70;
             // 
+            // colDepartmentName
+            // 
+            this.colDepartmentName.DataPropertyName = "Name";
+            this.colDepartmentName.HeaderText = "Name";
+            this.colDepartmentName.Name = "colDepartmentName";
+            this.colDepartmentName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDepartmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colDepartmentName.Width = 180;
+            // 
+            // colDepartmentPosition
+            // 
+            this.colDepartmentPosition.DataPropertyName = "Position";
+            this.colDepartmentPosition.HeaderText = "Sequence";
+            this.colDepartmentPosition.Name = "colDepartmentPosition";
+            this.colDepartmentPosition.Width = 60;
+            // 
+            // colDeparmentDelete
+            // 
+            this.colDeparmentDelete.HeaderText = "";
+            this.colDeparmentDelete.Image = global::IMS.Properties.Resources.icons8_Delete_Red_16px;
+            this.colDeparmentDelete.Name = "colDeparmentDelete";
+            this.colDeparmentDelete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDeparmentDelete.ToolTipText = "Remove";
+            this.colDeparmentDelete.Width = 26;
+            // 
             // ManufactureCreateForm
             // 
             this.AcceptButton = this.btnSave;
@@ -475,7 +477,7 @@
             this.Text = "Manufacture Plan";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFinalQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pnlFooter.ResumeLayout(false);
@@ -519,17 +521,17 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbFinalProduct;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown txtFinalQuantity;
         private System.Windows.Forms.ComboBox cbFinalPackage;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colDepartmentName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentPosition;
-        private System.Windows.Forms.DataGridViewImageColumn colDeparmentDelete;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesId;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colEmployeesCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesRate;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colDepartmentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentPosition;
+        private System.Windows.Forms.DataGridViewImageColumn colDeparmentDelete;
     }
 }

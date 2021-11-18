@@ -31,9 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManufactureListUC));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManufactureListUC));
             this.dgvProductList = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLotNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.cbCategory = new System.Windows.Forms.ComboBox();
@@ -60,11 +64,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.pnlSideGridView = new System.Windows.Forms.Panel();
-            this.lblProductName = new System.Windows.Forms.Label();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlGridView = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -72,7 +72,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            this.pnlSideGridView.SuspendLayout();
+            this.pnlGridView.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvProductList
@@ -92,6 +92,7 @@
             this.dgvProductList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
+            this.colLotNo,
             this.colStatus});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -102,12 +103,45 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProductList.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProductList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProductList.Location = new System.Drawing.Point(0, 56);
+            this.dgvProductList.Location = new System.Drawing.Point(0, 0);
             this.dgvProductList.Name = "dgvProductList";
             this.dgvProductList.ReadOnly = true;
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductList.Size = new System.Drawing.Size(842, 403);
+            this.dgvProductList.Size = new System.Drawing.Size(1042, 403);
             this.dgvProductList.TabIndex = 7;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            this.colId.Width = 20;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "Name";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 200;
+            // 
+            // colLotNo
+            // 
+            this.colLotNo.DataPropertyName = "LotNo";
+            this.colLotNo.HeaderText = "Lot No.";
+            this.colLotNo.Name = "colLotNo";
+            this.colLotNo.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.HeaderText = "Staus";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
             // 
             // panel1
             // 
@@ -377,59 +411,20 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // pnlSideGridView
+            // pnlGridView
             // 
-            this.pnlSideGridView.Controls.Add(this.lblProductName);
-            this.pnlSideGridView.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlSideGridView.Location = new System.Drawing.Point(842, 56);
-            this.pnlSideGridView.Name = "pnlSideGridView";
-            this.pnlSideGridView.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.pnlSideGridView.Size = new System.Drawing.Size(200, 403);
-            this.pnlSideGridView.TabIndex = 13;
-            // 
-            // lblProductName
-            // 
-            this.lblProductName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductName.Location = new System.Drawing.Point(5, 0);
-            this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(195, 27);
-            this.lblProductName.TabIndex = 1;
-            this.lblProductName.Text = "-";
-            this.lblProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "Id";
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            this.colId.Width = 20;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "Name";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colName.HeaderText = "Name";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 200;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "Status";
-            this.colStatus.HeaderText = "Staus";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
+            this.pnlGridView.Controls.Add(this.dgvProductList);
+            this.pnlGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlGridView.Location = new System.Drawing.Point(0, 56);
+            this.pnlGridView.Name = "pnlGridView";
+            this.pnlGridView.Size = new System.Drawing.Size(1042, 403);
+            this.pnlGridView.TabIndex = 13;
             // 
             // ManufactureListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dgvProductList);
-            this.Controls.Add(this.pnlSideGridView);
+            this.Controls.Add(this.pnlGridView);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel1);
@@ -446,7 +441,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            this.pnlSideGridView.ResumeLayout(false);
+            this.pnlGridView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,10 +475,10 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label4;
         protected internal System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Panel pnlSideGridView;
-        private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLotNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.Panel pnlGridView;
     }
 }

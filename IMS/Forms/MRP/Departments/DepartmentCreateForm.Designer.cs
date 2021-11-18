@@ -43,10 +43,10 @@
             this.pnlBasic = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlEmployees = new System.Windows.Forms.Panel();
+            this.btnAddUser = new System.Windows.Forms.Button();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
             this.colEmployeeName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lblEmployeesHeader = new System.Windows.Forms.Label();
-            this.btnAddUser = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlFooter.SuspendLayout();
@@ -129,7 +129,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(198, 7);
+            this.btnSave.Location = new System.Drawing.Point(188, 7);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -140,7 +140,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(290, 7);
+            this.btnCancel.Location = new System.Drawing.Point(280, 7);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -158,7 +158,7 @@
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlFooter.Location = new System.Drawing.Point(5, 297);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(376, 35);
+            this.pnlFooter.Size = new System.Drawing.Size(366, 35);
             this.pnlFooter.TabIndex = 3;
             // 
             // pnlBasic
@@ -167,7 +167,7 @@
             this.pnlBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBasic.Location = new System.Drawing.Point(5, 5);
             this.pnlBasic.Name = "pnlBasic";
-            this.pnlBasic.Size = new System.Drawing.Size(376, 91);
+            this.pnlBasic.Size = new System.Drawing.Size(366, 91);
             this.pnlBasic.TabIndex = 4;
             // 
             // pnlEmployees
@@ -179,8 +179,17 @@
             this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEmployees.Location = new System.Drawing.Point(5, 96);
             this.pnlEmployees.Name = "pnlEmployees";
-            this.pnlEmployees.Size = new System.Drawing.Size(376, 201);
+            this.pnlEmployees.Size = new System.Drawing.Size(366, 201);
             this.pnlEmployees.TabIndex = 6;
+            // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Location = new System.Drawing.Point(328, 1);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(48, 23);
+            this.btnAddUser.TabIndex = 3;
+            this.btnAddUser.Text = "Add";
+            this.btnAddUser.UseVisualStyleBackColor = true;
             // 
             // dgvEmployees
             // 
@@ -190,7 +199,7 @@
             this.dgvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEmployees.Location = new System.Drawing.Point(0, 26);
             this.dgvEmployees.Name = "dgvEmployees";
-            this.dgvEmployees.Size = new System.Drawing.Size(376, 175);
+            this.dgvEmployees.Size = new System.Drawing.Size(366, 175);
             this.dgvEmployees.TabIndex = 2;
             // 
             // colEmployeeName
@@ -207,19 +216,10 @@
             this.lblEmployeesHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEmployeesHeader.Location = new System.Drawing.Point(0, 0);
             this.lblEmployeesHeader.Name = "lblEmployeesHeader";
-            this.lblEmployeesHeader.Size = new System.Drawing.Size(376, 26);
+            this.lblEmployeesHeader.Size = new System.Drawing.Size(366, 26);
             this.lblEmployeesHeader.TabIndex = 1;
             this.lblEmployeesHeader.Text = "Employees";
             this.lblEmployeesHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnAddUser
-            // 
-            this.btnAddUser.Location = new System.Drawing.Point(328, 1);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(48, 23);
-            this.btnAddUser.TabIndex = 3;
-            this.btnAddUser.Text = "Add";
-            this.btnAddUser.UseVisualStyleBackColor = true;
             // 
             // DepartmentCreateForm
             // 
@@ -233,7 +233,7 @@
             this.Controls.Add(this.pnlFooter);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DepartmentCreateForm";
-            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Padding = new System.Windows.Forms.Padding(5, 5, 15, 5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Department";
             this.tableLayoutPanel1.ResumeLayout(false);

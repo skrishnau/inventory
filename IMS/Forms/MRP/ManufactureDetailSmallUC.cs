@@ -1,0 +1,197 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ViewModel.Core;
+using ViewModel.Enums;
+using Service.Interfaces;
+using IMS.Forms.Common;
+
+namespace IMS.Forms.MRP
+{
+    public partial class ManufactureDetailSmallUC : UserControl
+    {
+
+        private readonly IManufactureService _manufactureService;
+
+        ManufactureModel _model;
+
+        public ManufactureDetailSmallUC(IManufactureService manufactureService)
+        {
+            _manufactureService = manufactureService;
+
+            InitializeComponent();
+            this.Load += ManufactureDetailSmallUC_Load;
+        }
+
+        private void ManufactureDetailSmallUC_Load(object sender, EventArgs e)
+        {
+            btnStart.Click += BtnStart_Click;
+            btnCancel.Click += BtnCancel_Click;
+            btnComplete.Click += BtnComplete_Click;
+            dgvDepartments.SelectionChanged += DgvDepartments_SelectionChanged;
+            dgvEmployees.SelectionChanged += DgvEmployees_SelectionChanged;
+            btnAddQuantity.Click += BtnAddQuantity_Click;
+        }
+
+        private void BtnAddQuantity_Click(object sender, EventArgs e)
+        {
+            //using(AsyncScoped)
+        }
+
+        private void DgvEmployees_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvEmployees.SelectedRows.Count > 0)
+            {
+                PopulateEmployeesHistory();
+            }
+        }
+
+        private void DgvDepartments_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDepartments.SelectedRows.Count > 0)
+            {
+                PopulateEmployeesDataAndGridview();
+            }
+        }
+
+        private void PopulateEmployeesDataAndGridview(int? depId = null)
+        {
+            try
+            {
+                if (depId == null)
+                    depId = GetSelectedDepartmentId();
+
+                if (depId != null)
+                {
+                    var depIdInt = (int)depId;
+                    var department = _manufactureService.GetDepartment(depIdInt);
+                    if (department != null)
+                    {
+                        if (department.IsVendor)
+                            lblEmployees.Text = $"Vendors of {department.Name}";
+                        else
+                            lblEmployees.Text = $"Employees of {department.Name}";
+                        // populate grid view
+                        List<ManufactureDepartmentUserModel> users = _manufactureService.GetEmployeesOfManufactureDepartment(_model.Id, depId ?? 0);
+                        dgvEmployees.DataSource = users;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                PopupMessage.ShowInfoMessage("Couldn't populate data! Error: " + ex.Message);
+                this.Focus();
+            }
+        }
+        private void PopulateEmployeesHistory()
+        {
+            if (dgvEmployees.SelectedRows.Count > 0)
+            {
+                var departmentId = GetSelectedDepartmentId();
+                if (departmentId > 0)
+                {
+                    var userId = dgvEmployees.SelectedRows.Count > 0 ? dgvEmployees.SelectedRows[0].Cells[colEmployeesUserId.Index].Value as int? : null;
+                    if(userId > 0)
+                    {
+                        var employeHistory = _manufactureService.GetEmployeesHistoryOfManufactureDepartment(_model.Id, departmentId ?? 0, userId ?? 0);
+                        dgvEmployeeHistory.DataSource = employeHistory;
+                    }
+                }
+            }
+
+
+        }
+
+        private int? GetSelectedDepartmentId()
+        {
+            return dgvDepartments.SelectedRows.Count > 0 ? dgvDepartments.SelectedRows[0].Cells[colDepartmentId.Index].Value as int? : null;
+        }
+
+        public void PopulateData(ManufactureModel model)
+        {
+            _model = model;
+
+            btnCancel.Visible = false;
+            btnComplete.Visible = false;
+            btnStart.Visible = false;
+
+            if (_model != null)
+            {
+                lblFinalProduct.Text = _model.ManufactureProducts[0].ProductName;
+                lblFinalPackage.Text = _model.ManufactureProducts[0].PackageName;
+                lblFinalQuantity.Text = _model.ManufactureProducts[0].Quantity.Value.ToString("0.00");
+                lblLotNo.Text = _model.LotNo.ToString();
+                lblManufactureName.Text = _model.Name;
+                lblStatus.Text = _model.Status;
+
+
+                if (Enum.TryParse(_model.Status, out ManufactureStatusEnum statusEnum))
+                {
+                    switch (statusEnum)
+                    {
+                        case ManufactureStatusEnum.Cancelled:
+                            break;
+                        case ManufactureStatusEnum.Completed:
+                            break;
+                        case ManufactureStatusEnum.Deleted:
+                            break;
+                        case ManufactureStatusEnum.In_Process:
+                            // if final product's quantity is equal to the proposed product's quantity then show complete button
+                            break;
+                        case ManufactureStatusEnum.New:
+                            btnStart.Visible = true;
+                            break;
+                    }
+                }
+                dgvDepartments.DataSource = model.ManufactureDepartments;
+
+
+
+            }
+        }
+
+
+
+        private void BtnComplete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(this, "Are you sure to complete this Manufacture Plan?", "Complete?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                ResponseModel<bool> response = _manufactureService.SetManufactureComplete(_model.Id);
+                PopupMessage.ShowMessage(response);
+                this.Focus();
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(this, "Are you sure to cancel this Manufacture Plan?", "Cancel?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                ResponseModel<bool> response = _manufactureService.SetManufactureCancel(_model.Id);
+                PopupMessage.ShowMessage(response);
+                this.Focus();
+            }
+        }
+
+        private void BtnStart_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(this, "Are you sure to start this Manufacture Plan?", "Start?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                ResponseModel<bool> response = _manufactureService.SetManufactureStart(_model.Id);
+                PopupMessage.ShowMessage(response);
+                this.Focus();
+            }
+        }
+
+
+    }
+}

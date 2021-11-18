@@ -9,3 +9,9 @@ TODOS
 --done make non null of UserId in DepartmentUser table
 --done add BuildRate in DepartmentUser table
 
+make decimal(9,2) in DepartmentUser 's BuildRate. 
+all BuildRate in all table should be decimal(9,2). not (9,4)
+make non-null of quantity in manufactureproduct
+
+add date in UserManufactureProduct table 
+

@@ -69,11 +69,26 @@ namespace IMS.Forms.MRP
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
+                var type = GetSelectedDepartmentType();
+                var userType = type == null ? UserTypeEnum.User : GetUserTypeFromDepartmentType((DepartmentTypeEnum)type);
                 var form = Program.container.GetInstance<ClientCreateForm>();
-                form.SetDataForEdit(0, UserTypeEnum.Vendor);
+                form.SetDataForEdit(0, userType);
                 form.ShowDialog();
                 PopulateEmployeeCombo();
             }
+        }
+        private DepartmentTypeEnum? GetSelectedDepartmentType()
+        {
+            var type = cbDepartmentType.SelectedItem as IdNamePair;
+            if (type != null)
+            {
+                return (DepartmentTypeEnum)type.Id;
+            }
+            return null;
+        }
+        private UserTypeEnum GetUserTypeFromDepartmentType(DepartmentTypeEnum departmentType)
+        {
+            return departmentType == DepartmentTypeEnum.Vendor ? UserTypeEnum.Vendor : UserTypeEnum.User;
         }
 
         private void CbDepartmentType_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,10 +99,11 @@ namespace IMS.Forms.MRP
 
         private void SetEmployeeHeader()
         {
-            var type = cbDepartmentType.SelectedItem as IdNamePair;
+            //var type = cbDepartmentType.SelectedItem as IdNamePair;
+            var type = GetSelectedDepartmentType();
             if (type != null)
             {
-                lblEmployeesHeader.Text = type.Id == (int)DepartmentTypeEnum.Vendor ? "Vendors" : "Employees";
+                lblEmployeesHeader.Text = type == DepartmentTypeEnum.Vendor ? "Vendors" : "Employees";
             }
         }
 
@@ -143,9 +159,11 @@ namespace IMS.Forms.MRP
 
         private void Save()
         {
+            string message = string.Empty;
             var isInvalid = false;
             errorProvider1.SetError(txtName, string.Empty);
             errorProvider1.SetError(cbDepartmentType, string.Empty);
+            errorProvider1.SetError(dgvEmployees, string.Empty);
             if (string.IsNullOrEmpty(txtName.Text))
             {
                 isInvalid = true;
@@ -159,8 +177,6 @@ namespace IMS.Forms.MRP
                 errorProvider1.SetError(cbDepartmentType, "Required");
             }
 
-            if (isInvalid)
-                return;
             var users = new List<UserModel>();
             foreach(DataGridViewRow r in dgvEmployees.Rows)
             {
@@ -177,6 +193,23 @@ namespace IMS.Forms.MRP
                     }
                 }
             }
+            if(users.Count == 0)
+            {
+                isInvalid = true;
+                errorProvider1.SetError(dgvEmployees, "At one one required");
+                message += "At least one employee/vendor is required";
+            }
+
+            if (isInvalid)
+            {
+                if (!string.IsNullOrEmpty(message))
+                {
+                    PopupMessage.ShowInfoMessage(message);
+                    this.Focus();
+                }
+                return;
+            }
+
             var model = new DepartmentModel()
             {
                 Id = _model?.Id ?? 0,

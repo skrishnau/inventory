@@ -66,6 +66,7 @@
     <Compile Include="Core\Inventory\UomMapper.cs" />
     <Compile Include="Core\Inventory\WarehouseProductMapper.cs" />
     <Compile Include="Core\DepartmentMapper.cs" />
+    <Compile Include="Core\ManufactureProductMapper.cs" />
     <Compile Include="Core\ManufactureDepartmentUserMapper.cs" />
     <Compile Include="Core\ManufactureDepartmentMapper.cs" />
     <Compile Include="Core\ManufactureMapper.cs" />

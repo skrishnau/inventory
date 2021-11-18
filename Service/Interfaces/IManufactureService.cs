@@ -18,5 +18,10 @@ namespace Service.Interfaces
         List<ManufactureDepartmentModel> GetDepartmentListForManufacture();
         DepartmentModel GetDepartment(int departmentId);
         ResponseModel<DepartmentModel> SaveDepartment(DepartmentModel model);
+        ResponseModel<bool> SetManufactureComplete(int id);
+        ResponseModel<bool> SetManufactureCancel(int id);
+        ResponseModel<bool> SetManufactureStart(int id);
+        List<ManufactureDepartmentUserModel> GetEmployeesOfManufactureDepartment(int manufactureId, int depId);
+        List<UserManufactureProductModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId);
     }
 }

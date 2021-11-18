@@ -38,6 +38,7 @@ namespace Service.Core
                 if (entity == null) return null;
                 var model = entity.MapToModel();
                 model.ManufactureDepartments = entity.ManufactureDepartments.MapToModel();
+                model.ManufactureProducts = entity.ManufactureProducts.MapToModel();
                 return model;
             }
         }
@@ -46,55 +47,80 @@ namespace Service.Core
         {
             using (var _context = DatabaseContext.Context)
             {
-                var entity = _context.Manufactures.Find(model.Id);
-                var isEdit = entity != null;
+                try
+                {
 
-                entity = model.MapToEntity(entity);
-                if (!isEdit)
-                {
-                    // add
-                    entity.CreatedAt = DateTime.Now;
-                    //entity.CreatedByUserId = GetAdminId(_context);
-                    _context.Manufactures.Add(entity);
-                }
-                // remove those that are removed from view
-                var removeList = new List<ManufactureDepartment>();
-                foreach (var dep in entity.ManufactureDepartments)
-                {
-                    if (!model.ManufactureDepartments.Any(x => x.DepartmentId == dep.DepartmentId))
-                        removeList.Add(dep);
-                }
-                if (removeList.Any(x => x.ManufactureDepartmentUsers.Any(y => y.UserManufactures.Any())))
-                    return new ResponseModel<ManufactureModel> { Success = false, Message = "Manufacture already in process. Can't update the departments" };
-                _context.ManufactureDepartmentUsers.RemoveRange(removeList.SelectMany(x => x.ManufactureDepartmentUsers));
-                _context.ManufactureDepartments.RemoveRange(removeList);
-                // add or update the departments
-                foreach (var dep in model.ManufactureDepartments)
-                {
-                    var depEntity = entity.ManufactureDepartments.FirstOrDefault(x => x.DepartmentId == dep.DepartmentId);
-                    if (depEntity == null)
-                    {
-                        depEntity = new ManufactureDepartment { DepartmentId = dep.DepartmentId };
-                        entity.ManufactureDepartments.Add(depEntity);
-                    }
-                    depEntity.Position = dep.Position;
-                    depEntity.Name = dep.Name ?? string.Empty;
-                    depEntity.HeadUserId = dep.HeadUserId;
-                    if (depEntity.ManufactureDepartmentUsers.Any())
-                        _context.ManufactureDepartmentUsers.RemoveRange(depEntity.ManufactureDepartmentUsers);
-                    foreach (var manuDepUser in dep.ManufactureDepartmentUsers)
-                    {
-                        var manuDepUserEntity = new ManufactureDepartmentUser { BuildRate = manuDepUser.BuildRate, UserId = manuDepUser.UserId};
-                        depEntity.ManufactureDepartmentUsers.Add(manuDepUserEntity);
-                    }
-                }
+                    var entity = _context.Manufactures.Find(model.Id);
+                    var isEdit = entity != null;
 
-                _context.SaveChanges();
-                model.Id = entity.Id;
-                var updateMode = isEdit ? Utility.UpdateMode.EDIT : Utility.UpdateMode.ADD;
-                _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(model, updateMode));
-                
-                return new ResponseModel<ManufactureModel> { Data = model, Success = true, Message = Constants.SAVED_SUCCESSFULLY};
+                    entity = model.MapToEntity(entity);
+                    if (!isEdit)
+                    {
+                        // add
+                        entity.CreatedAt = DateTime.Now;
+                        //entity.CreatedByUserId = GetAdminId(_context);
+                        _context.Manufactures.Add(entity);
+                    }
+                    // remove those that are removed from view
+                    var removeList = new List<ManufactureDepartment>();
+                    foreach (var dep in entity.ManufactureDepartments)
+                    {
+                        if (!model.ManufactureDepartments.Any(x => x.DepartmentId == dep.DepartmentId))
+                            removeList.Add(dep);
+                    }
+                    if (removeList.Any(x => x.ManufactureDepartmentUsers.Any(y => y.UserManufactures.Any())))
+                        return new ResponseModel<ManufactureModel> { Success = false, Message = "Manufacture already in process. Can't update the departments" };
+                    _context.ManufactureDepartmentUsers.RemoveRange(removeList.SelectMany(x => x.ManufactureDepartmentUsers));
+                    _context.ManufactureDepartments.RemoveRange(removeList);
+                    // add or update the departments
+                    foreach (var dep in model.ManufactureDepartments)
+                    {
+                        var depEntity = entity.ManufactureDepartments.FirstOrDefault(x => x.DepartmentId == dep.DepartmentId);
+                        if (depEntity == null)
+                        {
+                            depEntity = new ManufactureDepartment { DepartmentId = dep.DepartmentId };
+                            entity.ManufactureDepartments.Add(depEntity);
+                        }
+                        depEntity.Position = dep.Position;
+                        depEntity.Name = dep.Name ?? string.Empty;
+                        depEntity.HeadUserId = dep.HeadUserId;
+                        if (depEntity.ManufactureDepartmentUsers.Any())
+                            _context.ManufactureDepartmentUsers.RemoveRange(depEntity.ManufactureDepartmentUsers);
+                        foreach (var manuDepUser in dep.ManufactureDepartmentUsers)
+                        {
+                            var manuDepUserEntity = new ManufactureDepartmentUser { BuildRate = manuDepUser.BuildRate, UserId = manuDepUser.UserId };
+                            depEntity.ManufactureDepartmentUsers.Add(manuDepUserEntity);
+                        }
+                    }
+                    if (entity.ManufactureProducts.Any())
+                        _context.ManufactureProducts.RemoveRange(entity.ManufactureProducts);
+                    foreach (var prod in model.ManufactureProducts)
+                    {
+                        //var manuProd = new ManufactureProduct
+                        //{
+                        //    BuildRate = prod.BuildRate,
+                        //    CostRate = prod.CostRate,
+                        //    InOut = prod.InOut,
+                        //    PackageId = prod.PackageId,
+                        //    ProductId = prod.ProductId,
+                        //    ProposedOrProduction = prod.ProposedOrProduction,
+                        //    Quantity = prod.Quantity,
+                        //};
+                        entity.ManufactureProducts.Add(prod.MapToEntity());
+                    }
+
+                    _context.SaveChanges();
+                    model.Id = entity.Id;
+                    var updateMode = isEdit ? Utility.UpdateMode.EDIT : Utility.UpdateMode.ADD;
+                    _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(model, updateMode));
+
+                    return new ResponseModel<ManufactureModel> { Data = model, Success = true, Message = Constants.SAVED_SUCCESSFULLY };
+
+                }
+                catch (Exception ex)
+                {
+                    return new ResponseModel<ManufactureModel> { Success = false, Message = Constants.COULDNT_SAVE_CONTACT_ADMIN };
+                }
             }
         }
         private int GetAdminId(DatabaseContext _context)
@@ -279,6 +305,95 @@ namespace Service.Core
                     Success = true,
                     Data = model
                 };
+            }
+        }
+
+        public ResponseModel<bool> SetManufactureComplete(int id)
+        {
+            using(var _context = DatabaseContext.Context)
+            {
+                var entity = _context.Manufactures.Find(id);
+                if(entity != null)
+                {
+                    entity.CompletedAt = DateTime.Now;
+                    _context.SaveChanges();
+                    _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(entity.MapToModel(), Utility.UpdateMode.EDIT));
+                    return new ResponseModel<bool> {  Message = "Manufacture Plan completed successfully!", Success = true };
+                }
+                return new ResponseModel<bool> { Message = "Couldn't find the Manufacture Plan", Success = false };
+            }
+        }
+
+        public ResponseModel<bool> SetManufactureCancel(int id)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var entity = _context.Manufactures.Find(id);
+                if (entity != null)
+                {
+                    entity.CancelledAt = DateTime.Now;
+                    _context.SaveChanges();
+                    _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(entity.MapToModel(), Utility.UpdateMode.EDIT));
+                    return new ResponseModel<bool> { Message = "Manufacture Plan cancelled successfully!", Success = true };
+                }
+                return new ResponseModel<bool> { Message = "Couldn't find the Manufacture Plan", Success = false };
+            }
+        }
+
+        public ResponseModel<bool> SetManufactureStart(int id)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var entity = _context.Manufactures.Find(id);
+                if (entity != null)
+                {
+                    entity.StartedAt = DateTime.Now;
+                    _context.SaveChanges();
+                    _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(entity.MapToModel(), Utility.UpdateMode.EDIT));
+                    return new ResponseModel<bool> { Message = "Manufacture Plan started successfully!", Success = true };
+                }
+                return new ResponseModel<bool> { Message = "Couldn't find the Manufacture Plan", Success = false };
+            }
+        }
+
+        public List<ManufactureDepartmentUserModel> GetEmployeesOfManufactureDepartment(int manufactureId, int depId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                return _context.ManufactureDepartmentUsers
+                    .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == depId)
+                    .Select(s => new ManufactureDepartmentUserModel
+                    {
+                        BuildRate = s.BuildRate,
+                        Check = true,
+                        ManufactureDepartmentId = s.ManufactureDepartmentId,
+                        Name = s.User.Name,
+                        UserId = s.UserId
+                    }).ToList();
+
+            }
+        }
+
+        public List<UserManufactureProductModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                return _context.UserManufactureProducts
+                    .Where(x => x.UserManufacture.ManufactureDepartmentUser.ManufactureDepartment.ManufactureId == manufactureId 
+                                && x.UserManufacture.ManufactureDepartmentUser.ManufactureDepartment.DepartmentId == departmentId
+                                && x.InOut == false /*only out*/)
+                    .Select(s => new UserManufactureProductModel
+                    {
+                        InOut = s.InOut,
+                        PackageId = s.PackageId,
+                        PackageName = s.Package.Name,
+                        ProductId = s.ProductId,
+                        ProductName = s.Product.Name,
+                        Quantity = s.Quantity,
+                        UserId = s.UserManufacture.ManufactureDepartmentUser.UserId,
+                        UserManufactureId = s.UserManufactureId
+                    }).ToList();
+
             }
         }
 

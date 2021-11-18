@@ -19,7 +19,13 @@ namespace DTO.Core
 
         public static Manufacture MapToEntity(this ManufactureModel model, Manufacture entity = null)
         {
-            return Mappings.Mapper.Map(model, entity);
+            if (entity == null)
+                entity = new Manufacture();
+            entity.LotNo = model.LotNo;
+            entity.Name = model.Name;
+            entity.Remarks = model.Remarks;
+            return entity;
+            //return Mappings.Mapper.Map(model, entity);
         }
         public static List<ManufactureModel> MapToModel(this ICollection<Manufacture> entityQuery)
         {
@@ -37,8 +43,9 @@ namespace DTO.Core
         public ManufactureProfile()
         {
             CreateMap<Manufacture, ManufactureModel>()
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.CompletedAt != null ? "Complete" : src.CancelledAt != null ? "Cancelled" : src.DeletedAt != null ? "Deleted" : src.StartedAt != null ? "In-Process" : "New"))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.CompletedAt != null ? "Completed" : src.CancelledAt != null ? "Cancelled" : src.DeletedAt != null ? "Deleted" : src.StartedAt != null ? "In_Process" : "New"))
                 .ForMember(dest => dest.ManufactureDepartments, opt => opt.Ignore())
+                .ForMember(dest => dest.ManufactureProducts, opt => opt.Ignore())
                 ;
             CreateMap<ManufactureModel, Manufacture>()
                 .ForMember(dest => dest.CancelledAt, opt => opt.Ignore())
@@ -50,6 +57,12 @@ namespace DTO.Core
                 .ForMember(dest => dest.StartedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.StartedByUserId, opt => opt.Ignore())
                 .ForMember(dest=> dest.ManufactureDepartments, opt=>opt.Ignore())
+                .ForMember(dest=> dest.ManufactureProducts, opt=>opt.Ignore())
+                .ForMember(dest=> dest.User, opt=>opt.Ignore())
+                .ForMember(dest=> dest.User1, opt=>opt.Ignore())
+                .ForMember(dest=> dest.User2, opt=>opt.Ignore())
+                .ForMember(dest=> dest.User3, opt=>opt.Ignore())
+                .ForMember(dest=> dest.User4, opt=>opt.Ignore())
 
                 ;
         }
