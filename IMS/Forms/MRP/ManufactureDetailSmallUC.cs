@@ -11,6 +11,7 @@ using ViewModel.Core;
 using ViewModel.Enums;
 using Service.Interfaces;
 using IMS.Forms.Common;
+using SimpleInjector.Lifestyles;
 
 namespace IMS.Forms.MRP
 {
@@ -31,6 +32,10 @@ namespace IMS.Forms.MRP
 
         private void ManufactureDetailSmallUC_Load(object sender, EventArgs e)
         {
+            dgvDepartments.AutoGenerateColumns = false;
+            dgvEmployees.AutoGenerateColumns = false;
+            dgvEmployeeHistory.AutoGenerateColumns = false;
+
             btnStart.Click += BtnStart_Click;
             btnCancel.Click += BtnCancel_Click;
             btnComplete.Click += BtnComplete_Click;
@@ -41,7 +46,20 @@ namespace IMS.Forms.MRP
 
         private void BtnAddQuantity_Click(object sender, EventArgs e)
         {
-            //using(AsyncScoped)
+            var departmentId = GetSelectedDepartmentId();
+            if(departmentId > 0)
+            {
+                var userId = GetSelectedEmployee();
+                if(userId > 0)
+                {
+                    using (AsyncScopedLifestyle.BeginScope(Program.container))
+                    {
+                        var productCreate = Program.container.GetInstance<UserManufactureCreateForm>();
+                        //productCreate.SetDataForEdit(0, departmentId ?? 0, userId ?? 0);
+                        productCreate.ShowDialog();
+                    }
+                }
+            }
         }
 
         private void DgvEmployees_SelectionChanged(object sender, EventArgs e)
@@ -74,9 +92,15 @@ namespace IMS.Forms.MRP
                     if (department != null)
                     {
                         if (department.IsVendor)
-                            lblEmployees.Text = $"Vendors of {department.Name}";
+                        {
+                            lblEmployees.Text = department.Name;
+                            lblEmployeesVendor.Text = "Vendors";
+                        }
                         else
-                            lblEmployees.Text = $"Employees of {department.Name}";
+                        {
+                            lblEmployees.Text = department.Name;
+                            lblEmployeesVendor.Text = "Employees";
+                        }
                         // populate grid view
                         List<ManufactureDepartmentUserModel> users = _manufactureService.GetEmployeesOfManufactureDepartment(_model.Id, depId ?? 0);
                         dgvEmployees.DataSource = users;
@@ -94,19 +118,26 @@ namespace IMS.Forms.MRP
         {
             if (dgvEmployees.SelectedRows.Count > 0)
             {
-                var departmentId = GetSelectedDepartmentId();
-                if (departmentId > 0)
+                var employee = dgvEmployees.SelectedRows[0].DataBoundItem as ManufactureDepartmentUserModel;
+                if (employee != null)
                 {
-                    var userId = dgvEmployees.SelectedRows.Count > 0 ? dgvEmployees.SelectedRows[0].Cells[colEmployeesUserId.Index].Value as int? : null;
-                    if(userId > 0)
+                    lblEmployeeName.Text = "Manufacture History of " + employee.Name;
+                    var departmentId = GetSelectedDepartmentId();
+                    if (departmentId > 0)
                     {
-                        var employeHistory = _manufactureService.GetEmployeesHistoryOfManufactureDepartment(_model.Id, departmentId ?? 0, userId ?? 0);
-                        dgvEmployeeHistory.DataSource = employeHistory;
+                        var userId = employee.UserId;//
+                        if (userId > 0)
+                        {
+                            var employeHistory = _manufactureService.GetEmployeesHistoryOfManufactureDepartment(_model.Id, departmentId ?? 0, userId);
+                            dgvEmployeeHistory.DataSource = employeHistory;
+                        }
                     }
                 }
             }
-
-
+        }
+        private int? GetSelectedEmployee()
+        {
+            return dgvEmployees.SelectedRows.Count > 0 ? dgvEmployees.SelectedRows[0].Cells[colEmployeesUserId.Index].Value as int? : null;
         }
 
         private int? GetSelectedDepartmentId()

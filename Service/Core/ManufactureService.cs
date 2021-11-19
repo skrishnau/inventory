@@ -43,6 +43,17 @@ namespace Service.Core
             }
         }
 
+        public ManufactureModel GetManufactureOnly(int id)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var entity = _context.Manufactures.FirstOrDefault(x => x.Id == id);
+                if (entity == null) return null;
+                var model = entity.MapToModel();
+                return model;
+            }
+        }
+
         public ResponseModel<ManufactureModel> SaveManufacture(ManufactureModel model)
         {
             using (var _context = DatabaseContext.Context)
@@ -310,15 +321,15 @@ namespace Service.Core
 
         public ResponseModel<bool> SetManufactureComplete(int id)
         {
-            using(var _context = DatabaseContext.Context)
+            using (var _context = DatabaseContext.Context)
             {
                 var entity = _context.Manufactures.Find(id);
-                if(entity != null)
+                if (entity != null)
                 {
                     entity.CompletedAt = DateTime.Now;
                     _context.SaveChanges();
                     _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(entity.MapToModel(), Utility.UpdateMode.EDIT));
-                    return new ResponseModel<bool> {  Message = "Manufacture Plan completed successfully!", Success = true };
+                    return new ResponseModel<bool> { Message = "Manufacture Plan completed successfully!", Success = true };
                 }
                 return new ResponseModel<bool> { Message = "Couldn't find the Manufacture Plan", Success = false };
             }
@@ -379,7 +390,7 @@ namespace Service.Core
             using (var _context = DatabaseContext.Context)
             {
                 return _context.UserManufactureProducts
-                    .Where(x => x.UserManufacture.ManufactureDepartmentUser.ManufactureDepartment.ManufactureId == manufactureId 
+                    .Where(x => x.UserManufacture.ManufactureDepartmentUser.ManufactureDepartment.ManufactureId == manufactureId
                                 && x.UserManufacture.ManufactureDepartmentUser.ManufactureDepartment.DepartmentId == departmentId
                                 && x.InOut == false /*only out*/)
                     .Select(s => new UserManufactureProductModel
@@ -394,6 +405,48 @@ namespace Service.Core
                         UserManufactureId = s.UserManufactureId
                     }).ToList();
 
+            }
+        }
+
+        public ManufactureDepartmentUserModel GetManufactureDepartmentUser(int manufactureId, int departmentId, int userId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var entity = _context.ManufactureDepartmentUsers
+                    .FirstOrDefault(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == departmentId && x.UserId == userId);
+                return entity.MapToModel();
+            }
+        }
+
+        public ResponseModel<UserManufactureModel> AddUserManufacture(UserManufactureModel userManufactureModel)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var userManufactureEntity = _context.UserManufactures.FirstOrDefault(x => x.ManufactureDepartmentUserId == userManufactureModel.ManufactureDepartmentUserId);
+                if (userManufactureEntity == null)
+                {
+                    userManufactureEntity = new UserManufacture
+                    {
+                        BuildRate = userManufactureModel.BuildRate,
+                        StartedAt = DateTime.Now,
+                        ManufactureDepartmentUserId = userManufactureModel.ManufactureDepartmentUserId,
+
+                    };
+                }
+                foreach (var uProd in userManufactureModel.UserManufactureProducts)
+                {
+                    var userManufactureProduct = new UserManufactureProduct
+                    {
+                        InOut = false,
+                        PackageId = uProd.PackageId,
+                        ProductId = uProd.ProductId,
+                        Quantity = uProd.Quantity,
+                        
+
+                    };
+                    userManufactureEntity.UserManufactureProducts.Add(userManufactureProduct);
+                }
+                return new ResponseModel<UserManufactureModel> { Message = Constants.SAVED_SUCCESSFULLY, Data = userManufactureModel, Success = true };
             }
         }
 

@@ -508,6 +508,12 @@
     <Compile Include="Forms\MRP\ManufactureViewUC.Designer.cs">
       <DependentUpon>ManufactureViewUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MRP\UserManufactureCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MRP\UserManufactureCreateForm.Designer.cs">
+      <DependentUpon>UserManufactureCreateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\POS\Branches\BranchListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -989,6 +995,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\ManufactureViewUC.resx">
       <DependentUpon>ManufactureViewUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MRP\UserManufactureCreateForm.resx">
+      <DependentUpon>UserManufactureCreateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\POS\Branches\BranchListUC.resx">
       <DependentUpon>BranchListUC.cs</DependentUpon>

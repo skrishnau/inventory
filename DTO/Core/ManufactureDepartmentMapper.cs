@@ -38,6 +38,7 @@ namespace DTO.Core
         {
             CreateMap<ManufactureDepartment, ManufactureDepartmentModel>()
                 .ForMember(dest => dest.ManufactureDepartmentUsers, opt => opt.MapFrom(src=>src.ManufactureDepartmentUsers))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Department.Name))
                 ;
             CreateMap<ManufactureDepartmentModel, ManufactureDepartment>()
                 .ForMember(dest => dest.CancelledAt, opt => opt.Ignore())

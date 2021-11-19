@@ -15,6 +15,8 @@ namespace ViewModel.Core
         public Nullable<System.DateTime> CancelledAt { get; set; }
         public Nullable<decimal> BuildRate { get; set; }
         public string Remarks { get; set; }
+
+        public List<UserManufactureProductModel> UserManufactureProducts { get; set; }
     }
 
     public class UserManufactureProductModel

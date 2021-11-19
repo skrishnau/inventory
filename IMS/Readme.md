@@ -14,4 +14,7 @@ all BuildRate in all table should be decimal(9,2). not (9,4)
 make non-null of quantity in manufactureproduct
 
 add date in UserManufactureProduct table 
+remove packageId from UserManufactureProduct table ; will use packageId from ManufactureDepartmentProduct table
+remove ProposedOrProduction from ManufactureProducts; it will always be Proposed
+remove ProposedOrProduction from ManufactureDepartmentProducts; it will always be Proposed
 

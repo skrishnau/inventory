@@ -8,6 +8,7 @@ namespace ViewModel.Core
 {
     public class ManufactureDepartmentUserModel
     {
+        public int Id { get; set; }
         public int ManufactureDepartmentId { get; set; }
         public int UserId { get; set; }
         public Nullable<decimal> BuildRate { get; set; }

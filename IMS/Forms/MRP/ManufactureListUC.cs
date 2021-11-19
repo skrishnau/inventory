@@ -37,6 +37,7 @@ namespace IMS.Forms.MRP
         int _previousSelectedIndex = -1;
 
         private List<ManufactureModel> _manufactureList;
+        private ManufactureDetailSmallUC _manufactureDetailSmallUC;
 
         public ManufactureListUC(IManufactureService inventoryService, IDatabaseChangeListener listener)
         {
@@ -213,11 +214,22 @@ namespace IMS.Forms.MRP
                     var manufactureModel = _manufactureService.GetManufacture(data.Id);
                     if (manufactureModel != null)
                     {
-                        var ucManufactureDetail = Program.container.GetInstance<ManufactureDetailSmallUC>();
-                        ucManufactureDetail.PopulateData(manufactureModel);
-                        ucManufactureDetail.Dock = DockStyle.Right;
-                        pnlGridView.Controls.Add(ucManufactureDetail);
-                        ucManufactureDetail.SendToBack();
+                        if (_manufactureDetailSmallUC == null)
+                        {
+                            _manufactureDetailSmallUC = Program.container.GetInstance<ManufactureDetailSmallUC>();
+                            _manufactureDetailSmallUC.Dock = DockStyle.Right;
+                            pnlGridView.Controls.Add(_manufactureDetailSmallUC);
+                            _manufactureDetailSmallUC.SendToBack();
+                        }
+                        _manufactureDetailSmallUC.PopulateData(manufactureModel);
+                        _manufactureDetailSmallUC.Visible = true;
+                    }
+                }
+                else
+                {
+                    if (_manufactureDetailSmallUC != null)
+                    {
+                        _manufactureDetailSmallUC.Visible = false;
                     }
                 }
             }

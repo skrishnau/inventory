@@ -10,6 +10,7 @@ namespace Service.Interfaces
     public interface IManufactureService
     {
         ManufactureModel GetManufacture(int id);
+        ManufactureModel GetManufactureOnly(int id);
         ResponseModel<ManufactureModel> SaveManufacture(ManufactureModel model);
         int GetLastLotNo();
         int GetAllManufacturesCount(int categoryId, string searchText);
@@ -22,6 +23,8 @@ namespace Service.Interfaces
         ResponseModel<bool> SetManufactureCancel(int id);
         ResponseModel<bool> SetManufactureStart(int id);
         List<ManufactureDepartmentUserModel> GetEmployeesOfManufactureDepartment(int manufactureId, int depId);
+        ManufactureDepartmentUserModel GetManufactureDepartmentUser(int manufactureId, int departmentId, int userId);
         List<UserManufactureProductModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId);
+        ResponseModel<UserManufactureModel> AddUserManufacture(UserManufactureModel userManufactureModel);
     }
 }
