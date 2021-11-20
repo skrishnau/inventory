@@ -12,21 +12,19 @@ namespace Infrastructure.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class UserProductHistory
+    public partial class ProductOwner
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
         public int ProductId { get; set; }
         public int PackageId { get; set; }
         public decimal Quantity { get; set; }
-        public Nullable<int> FromToUserId { get; set; }
-        public bool InOut { get; set; }
-        public string Remarks { get; set; }
         public System.DateTime UpdatedAt { get; set; }
     
+        public virtual Department Department { get; set; }
         public virtual Package Package { get; set; }
         public virtual Product Product { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
     }
 }

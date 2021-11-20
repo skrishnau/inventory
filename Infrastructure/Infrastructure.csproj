@@ -135,6 +135,12 @@
     <Compile Include="Context\ProductAttribute.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\ProductOwner.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ProductOwnerHistory.cs">
+      <DependentUpon>DatabaseContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\ProductPackage.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
@@ -154,12 +160,6 @@
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\UserManufacture.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\UserProduct.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\UserProductHistory.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Warehouse.cs">

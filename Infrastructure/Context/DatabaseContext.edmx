@@ -334,6 +334,33 @@
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Attribute" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="ProductOwnerHistories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="9" Nullable="false" />
+          <Property Name="FromToUserId" Type="int" />
+          <Property Name="InOut" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="256" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductOwners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductPackages">
           <Key>
             <PropertyRef Name="Id" />
@@ -448,31 +475,6 @@
           <Property Name="InOut" Type="bit" Nullable="false" />
           <Property Name="BuildRate" Type="decimal" Precision="9" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="UserProductHistories">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="PackageId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="18" Scale="9" Nullable="false" />
-          <Property Name="FromToUserId" Type="int" />
-          <Property Name="InOut" Type="bit" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar" MaxLength="256" />
-          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserProducts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="PackageId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="9" Scale="2" Nullable="false" />
-          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -1308,6 +1310,114 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductOwnerHistories_Departments_DepartmentId">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="ProductOwnerHistories" Type="Self.ProductOwnerHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistories">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="ProductOwnerHistories" Type="Self.ProductOwnerHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistories">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductOwnerHistories" Type="Self.ProductOwnerHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistories">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Users_FromUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ProductOwnerHistories" Type="Self.ProductOwnerHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistories">
+              <PropertyRef Name="FromToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ProductOwnerHistories" Type="Self.ProductOwnerHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistories">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwners_Departments_DepartmentId">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="ProductOwners" Type="Self.ProductOwners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwners">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwners_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="ProductOwners" Type="Self.ProductOwners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwners">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwners_Products_ProductId">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductOwners" Type="Self.ProductOwners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwners">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwners_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ProductOwners" Type="Self.ProductOwners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwners">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserManufactureProducts_Products_ProductId">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="UserManufactures" Type="Self.UserManufactures" Multiplicity="*" />
@@ -1329,90 +1439,6 @@
             </Principal>
             <Dependent Role="UserManufactures">
               <PropertyRef Name="ManufactureDepartmentUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProductHistories_Packages_PackageId">
-          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
-          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Packages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProductHistories">
-              <PropertyRef Name="PackageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProductHistories_Products_ProductId">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProductHistories">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProductHistories_Users_FromUserId">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProductHistories">
-              <PropertyRef Name="FromToUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProductHistories_Users_UserId">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="UserProductHistories" Type="Self.UserProductHistories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProductHistories">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProducts_Packages_PackageId">
-          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
-          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Packages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProducts">
-              <PropertyRef Name="PackageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProducts_Products_ProductId">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProducts">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProducts_Users_UserId">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProducts">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1439,6 +1465,8 @@
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PriceHistories" EntityType="Self.PriceHistories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductAttributes" EntityType="Self.ProductAttributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductOwnerHistories" EntityType="Self.ProductOwnerHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductOwners" EntityType="Self.ProductOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPackages" EntityType="Self.ProductPackages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionItems" EntityType="Self.TransactionItems" Schema="dbo" store:Type="Tables" />
@@ -1446,8 +1474,6 @@
           <EntitySet Name="Transfers" EntityType="Self.Transfers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Uoms" EntityType="Self.Uoms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserManufactures" EntityType="Self.UserManufactures" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserProductHistories" EntityType="Self.UserProductHistories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserProducts" EntityType="Self.UserProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WarehouseProducts" EntityType="Self.WarehouseProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
@@ -1711,6 +1737,42 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Manufactures" EntitySet="Manufactures" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Departments_DepartmentId" Association="Self.FK_ProductOwnerHistories_Departments_DepartmentId">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="ProductOwnerHistories" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Packages_PackageId" Association="Self.FK_ProductOwnerHistories_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="ProductOwnerHistories" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Products_ProductId" Association="Self.FK_ProductOwnerHistories_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductOwnerHistories" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Users_FromUserId" Association="Self.FK_ProductOwnerHistories_Users_FromUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProductOwnerHistories" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Users_UserId" Association="Self.FK_ProductOwnerHistories_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProductOwnerHistories" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwners_Departments_DepartmentId" Association="Self.FK_ProductOwners_Departments_DepartmentId">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="ProductOwners" EntitySet="ProductOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwners_Packages_PackageId" Association="Self.FK_ProductOwners_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="ProductOwners" EntitySet="ProductOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwners_Products_ProductId" Association="Self.FK_ProductOwners_Products_ProductId">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductOwners" EntitySet="ProductOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwners_Users_UserId" Association="Self.FK_ProductOwners_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ProductOwners" EntitySet="ProductOwners" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserManufactureProducts_Products_ProductId" Association="Self.FK_UserManufactureProducts_Products_ProductId">
             <End Role="Products" EntitySet="Products" />
             <End Role="UserManufactures" EntitySet="UserManufactures" />
@@ -1718,34 +1780,6 @@
           <AssociationSet Name="FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" Association="Self.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId">
             <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
             <End Role="UserManufactures" EntitySet="UserManufactures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Packages_PackageId" Association="Self.FK_UserProductHistories_Packages_PackageId">
-            <End Role="Packages" EntitySet="Packages" />
-            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Products_ProductId" Association="Self.FK_UserProductHistories_Products_ProductId">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Users_FromUserId" Association="Self.FK_UserProductHistories_Users_FromUserId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Users_UserId" Association="Self.FK_UserProductHistories_Users_UserId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserProductHistories" EntitySet="UserProductHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProducts_Packages_PackageId" Association="Self.FK_UserProducts_Packages_PackageId">
-            <End Role="Packages" EntitySet="Packages" />
-            <End Role="UserProducts" EntitySet="UserProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProducts_Products_ProductId" Association="Self.FK_UserProducts_Products_ProductId">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="UserProducts" EntitySet="UserProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProducts_Users_UserId" Association="Self.FK_UserProducts_Users_UserId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1775,6 +1809,8 @@
           <EntitySet Name="Payments" EntityType="Entities.Payment" />
           <EntitySet Name="PriceHistories" EntityType="Entities.PriceHistory" />
           <EntitySet Name="ProductAttributes" EntityType="Entities.ProductAttribute" />
+          <EntitySet Name="ProductOwnerHistories" EntityType="Entities.ProductOwnerHistory" />
+          <EntitySet Name="ProductOwners" EntityType="Entities.ProductOwner" />
           <EntitySet Name="ProductPackages" EntityType="Entities.ProductPackage" />
           <EntitySet Name="Products" EntityType="Entities.Product" />
           <EntitySet Name="TransactionItems" EntityType="Entities.TransactionItem" />
@@ -1782,8 +1818,6 @@
           <EntitySet Name="Transfers" EntityType="Entities.Transfer" />
           <EntitySet Name="Uoms" EntityType="Entities.Uom" />
           <EntitySet Name="UserManufactures" EntityType="Entities.UserManufacture" />
-          <EntitySet Name="UserProductHistories" EntityType="Entities.UserProductHistory" />
-          <EntitySet Name="UserProducts" EntityType="Entities.UserProduct" />
           <EntitySet Name="Users" EntityType="Entities.User" />
           <EntitySet Name="WarehouseProducts" EntityType="Entities.WarehouseProduct" />
           <EntitySet Name="Warehouses" EntityType="Entities.Warehouse" />
@@ -1810,6 +1844,14 @@
           <AssociationSet Name="FK_ManufactureDepartments_Departments_DepartmentId" Association="Entities.FK_ManufactureDepartments_Departments_DepartmentId">
             <End Role="Department" EntitySet="Departments" />
             <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Departments_DepartmentId" Association="Entities.FK_ProductOwnerHistories_Departments_DepartmentId">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="ProductOwnerHistory" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwners_Departments_DepartmentId" Association="Entities.FK_ProductOwners_Departments_DepartmentId">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="ProductOwner" EntitySet="ProductOwners" />
           </AssociationSet>
           <AssociationSet Name="FK_DepartmentUsers_Users_UserId" Association="Entities.FK_DepartmentUsers_Users_UserId">
             <End Role="User" EntitySet="Users" />
@@ -1995,13 +2037,13 @@
             <End Role="Package" EntitySet="Packages" />
             <End Role="Uom" EntitySet="Uoms" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Packages_PackageId" Association="Entities.FK_UserProductHistories_Packages_PackageId">
+          <AssociationSet Name="FK_ProductOwnerHistories_Packages_PackageId" Association="Entities.FK_ProductOwnerHistories_Packages_PackageId">
             <End Role="Package" EntitySet="Packages" />
-            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
+            <End Role="ProductOwnerHistory" EntitySet="ProductOwnerHistories" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserProducts_Packages_PackageId" Association="Entities.FK_UserProducts_Packages_PackageId">
+          <AssociationSet Name="FK_ProductOwners_Packages_PackageId" Association="Entities.FK_ProductOwners_Packages_PackageId">
             <End Role="Package" EntitySet="Packages" />
-            <End Role="UserProduct" EntitySet="UserProducts" />
+            <End Role="ProductOwner" EntitySet="ProductOwners" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Payments_dbo_Transactions_TransactionId" Association="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId">
             <End Role="Transaction" EntitySet="Transactions" />
@@ -2018,6 +2060,26 @@
           <AssociationSet Name="FK_dbo_ProductAttributes_dbo_Products_ProductId" Association="Entities.FK_dbo_ProductAttributes_dbo_Products_ProductId">
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductAttribute" EntitySet="ProductAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Products_ProductId" Association="Entities.FK_ProductOwnerHistories_Products_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductOwnerHistory" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Users_FromUserId" Association="Entities.FK_ProductOwnerHistories_Users_FromUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProductOwnerHistory" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwnerHistories_Users_UserId" Association="Entities.FK_ProductOwnerHistories_Users_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProductOwnerHistory" EntitySet="ProductOwnerHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwners_Products_ProductId" Association="Entities.FK_ProductOwners_Products_ProductId">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductOwner" EntitySet="ProductOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductOwners_Users_UserId" Association="Entities.FK_ProductOwners_Users_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProductOwner" EntitySet="ProductOwners" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ProductPackages_dbo_Products_ProductId" Association="Entities.FK_dbo_ProductPackages_dbo_Products_ProductId">
             <End Role="Product" EntitySet="Products" />
@@ -2043,14 +2105,6 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="UserManufacture" EntitySet="UserManufactures" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Products_ProductId" Association="Entities.FK_UserProductHistories_Products_ProductId">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProducts_Products_ProductId" Association="Entities.FK_UserProducts_Products_ProductId">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="UserProduct" EntitySet="UserProducts" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_TransactionItems_dbo_Transactions_TransactionId" Association="Entities.FK_dbo_TransactionItems_dbo_Transactions_TransactionId">
             <End Role="Transaction" EntitySet="Transactions" />
             <End Role="TransactionItem" EntitySet="TransactionItems" />
@@ -2066,18 +2120,6 @@
           <AssociationSet Name="FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" Association="Entities.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId">
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="Transfer" EntitySet="Transfers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Users_FromUserId" Association="Entities.FK_UserProductHistories_Users_FromUserId">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProductHistories_Users_UserId" Association="Entities.FK_UserProductHistories_Users_UserId">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserProductHistory" EntitySet="UserProductHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProducts_Users_UserId" Association="Entities.FK_UserProducts_Users_UserId">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserProduct" EntitySet="UserProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId" Association="Entities.FK_dbo_WarehouseProducts_dbo_Warehouses_WarehouseId">
             <End Role="Warehouse" EntitySet="Warehouses" />
@@ -2176,6 +2218,8 @@
           <NavigationProperty Name="User" Relationship="Entities.FK_Departments_Users_HeadUserId" FromRole="Department" ToRole="User" />
           <NavigationProperty Name="DepartmentUsers" Relationship="Entities.FK_DepartmentUsers_Departments_DepartmentId" FromRole="Department" ToRole="DepartmentUser" />
           <NavigationProperty Name="ManufactureDepartments" Relationship="Entities.FK_ManufactureDepartments_Departments_DepartmentId" FromRole="Department" ToRole="ManufactureDepartment" />
+          <NavigationProperty Name="ProductOwnerHistories" Relationship="Entities.FK_ProductOwnerHistories_Departments_DepartmentId" FromRole="Department" ToRole="ProductOwnerHistory" />
+          <NavigationProperty Name="ProductOwners" Relationship="Entities.FK_ProductOwners_Departments_DepartmentId" FromRole="Department" ToRole="ProductOwner" />
         </EntityType>
         <EntityType Name="DepartmentUser">
           <Key>
@@ -2439,8 +2483,8 @@
           <NavigationProperty Name="ProductPackages" Relationship="Entities.FK_dbo_ProductPackages_dbo_Packages_PackageId" FromRole="Package" ToRole="ProductPackage" />
           <NavigationProperty Name="Uoms" Relationship="Entities.FK_dbo_Uoms_dbo_Packages_PackageId" FromRole="Package" ToRole="Uom" />
           <NavigationProperty Name="Uoms1" Relationship="Entities.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" FromRole="Package" ToRole="Uom" />
-          <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Packages_PackageId" FromRole="Package" ToRole="UserProductHistory" />
-          <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Packages_PackageId" FromRole="Package" ToRole="UserProduct" />
+          <NavigationProperty Name="ProductOwnerHistories" Relationship="Entities.FK_ProductOwnerHistories_Packages_PackageId" FromRole="Package" ToRole="ProductOwnerHistory" />
+          <NavigationProperty Name="ProductOwners" Relationship="Entities.FK_ProductOwners_Packages_PackageId" FromRole="Package" ToRole="ProductOwner" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -2487,6 +2531,42 @@
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="Attribute" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_dbo_ProductAttributes_dbo_Products_ProductId" FromRole="ProductAttribute" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductOwnerHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="9" />
+          <Property Name="FromToUserId" Type="Int32" />
+          <Property Name="InOut" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Department" Relationship="Entities.FK_ProductOwnerHistories_Departments_DepartmentId" FromRole="ProductOwnerHistory" ToRole="Department" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_ProductOwnerHistories_Packages_PackageId" FromRole="ProductOwnerHistory" ToRole="Package" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_ProductOwnerHistories_Products_ProductId" FromRole="ProductOwnerHistory" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_ProductOwnerHistories_Users_FromUserId" FromRole="ProductOwnerHistory" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Entities.FK_ProductOwnerHistories_Users_UserId" FromRole="ProductOwnerHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ProductOwner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Department" Relationship="Entities.FK_ProductOwners_Departments_DepartmentId" FromRole="ProductOwner" ToRole="Department" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_ProductOwners_Packages_PackageId" FromRole="ProductOwner" ToRole="Package" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_ProductOwners_Products_ProductId" FromRole="ProductOwner" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_ProductOwners_Users_UserId" FromRole="ProductOwner" ToRole="User" />
         </EntityType>
         <EntityType Name="ProductPackage">
           <Key>
@@ -2548,6 +2628,8 @@
           <NavigationProperty Name="OrderItems" Relationship="Entities.FK_dbo_OrderItems_dbo_Products_ProductId" FromRole="Product" ToRole="OrderItem" />
           <NavigationProperty Name="PriceHistories" Relationship="Entities.FK_dbo_PriceHistories_dbo_Products_ProductId" FromRole="Product" ToRole="PriceHistory" />
           <NavigationProperty Name="ProductAttributes" Relationship="Entities.FK_dbo_ProductAttributes_dbo_Products_ProductId" FromRole="Product" ToRole="ProductAttribute" />
+          <NavigationProperty Name="ProductOwnerHistories" Relationship="Entities.FK_ProductOwnerHistories_Products_ProductId" FromRole="Product" ToRole="ProductOwnerHistory" />
+          <NavigationProperty Name="ProductOwners" Relationship="Entities.FK_ProductOwners_Products_ProductId" FromRole="Product" ToRole="ProductOwner" />
           <NavigationProperty Name="ProductPackages" Relationship="Entities.FK_dbo_ProductPackages_dbo_Products_ProductId" FromRole="Product" ToRole="ProductPackage" />
           <NavigationProperty Name="Products1" Relationship="Entities.FK_dbo_Products_dbo_Products_ParentProductId" FromRole="Product" ToRole="Product1" />
           <NavigationProperty Name="Product1" Relationship="Entities.FK_dbo_Products_dbo_Products_ParentProductId" FromRole="Product1" ToRole="Product" />
@@ -2555,8 +2637,6 @@
           <NavigationProperty Name="Uoms" Relationship="Entities.FK_dbo_Uoms_dbo_Products_ProductId" FromRole="Product" ToRole="Uom" />
           <NavigationProperty Name="WarehouseProducts" Relationship="Entities.FK_dbo_WarehouseProducts_dbo_Products_ProductId" FromRole="Product" ToRole="WarehouseProduct" />
           <NavigationProperty Name="UserManufactures" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="Product" ToRole="UserManufacture" />
-          <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Products_ProductId" FromRole="Product" ToRole="UserProductHistory" />
-          <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Products_ProductId" FromRole="Product" ToRole="UserProduct" />
         </EntityType>
         <EntityType Name="TransactionItem">
           <Key>
@@ -2636,38 +2716,6 @@
           <NavigationProperty Name="ManufactureDepartmentUser" Relationship="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" FromRole="UserManufacture" ToRole="ManufactureDepartmentUser" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="UserManufacture" ToRole="Product" />
         </EntityType>
-        <EntityType Name="UserProductHistory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="PackageId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="9" />
-          <Property Name="FromToUserId" Type="Int32" />
-          <Property Name="InOut" Type="Boolean" Nullable="false" />
-          <Property Name="Remarks" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Package" Relationship="Entities.FK_UserProductHistories_Packages_PackageId" FromRole="UserProductHistory" ToRole="Package" />
-          <NavigationProperty Name="Product" Relationship="Entities.FK_UserProductHistories_Products_ProductId" FromRole="UserProductHistory" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Entities.FK_UserProductHistories_Users_FromUserId" FromRole="UserProductHistory" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Entities.FK_UserProductHistories_Users_UserId" FromRole="UserProductHistory" ToRole="User" />
-        </EntityType>
-        <EntityType Name="UserProduct">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="PackageId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Package" Relationship="Entities.FK_UserProducts_Packages_PackageId" FromRole="UserProduct" ToRole="Package" />
-          <NavigationProperty Name="Product" Relationship="Entities.FK_UserProducts_Products_ProductId" FromRole="UserProduct" ToRole="Product" />
-          <NavigationProperty Name="User" Relationship="Entities.FK_UserProducts_Users_UserId" FromRole="UserProduct" ToRole="User" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -2716,10 +2764,10 @@
           <NavigationProperty Name="OrderItems" Relationship="Entities.FK_dbo_OrderItems_dbo_Users_SupplierId" FromRole="User" ToRole="OrderItem" />
           <NavigationProperty Name="Orders" Relationship="Entities.FK_dbo_Orders_dbo_Users_UserId" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Payments" Relationship="Entities.FK_dbo_Payments_dbo_Users_UserId" FromRole="User" ToRole="Payment" />
+          <NavigationProperty Name="ProductOwnerHistories" Relationship="Entities.FK_ProductOwnerHistories_Users_FromUserId" FromRole="User" ToRole="ProductOwnerHistory" />
+          <NavigationProperty Name="ProductOwnerHistories1" Relationship="Entities.FK_ProductOwnerHistories_Users_UserId" FromRole="User" ToRole="ProductOwnerHistory" />
+          <NavigationProperty Name="ProductOwners" Relationship="Entities.FK_ProductOwners_Users_UserId" FromRole="User" ToRole="ProductOwner" />
           <NavigationProperty Name="Transactions" Relationship="Entities.FK_dbo_Transactions_dbo_Users_UserId" FromRole="User" ToRole="Transaction" />
-          <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Users_FromUserId" FromRole="User" ToRole="UserProductHistory" />
-          <NavigationProperty Name="UserProductHistories1" Relationship="Entities.FK_UserProductHistories_Users_UserId" FromRole="User" ToRole="UserProductHistory" />
-          <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Users_UserId" FromRole="User" ToRole="UserProduct" />
         </EntityType>
         <EntityType Name="WarehouseProduct">
           <Key>
@@ -2823,6 +2871,30 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ManufactureDepartment">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Departments_DepartmentId">
+          <End Type="Entities.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="Entities.ProductOwnerHistory" Role="ProductOwnerHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistory">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwners_Departments_DepartmentId">
+          <End Type="Entities.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="Entities.ProductOwner" Role="ProductOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwner">
               <PropertyRef Name="DepartmentId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3379,26 +3451,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserProductHistories_Packages_PackageId">
+        <Association Name="FK_ProductOwnerHistories_Packages_PackageId">
           <End Type="Entities.Package" Role="Package" Multiplicity="1" />
-          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
+          <End Type="Entities.ProductOwnerHistory" Role="ProductOwnerHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Package">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserProductHistory">
+            <Dependent Role="ProductOwnerHistory">
               <PropertyRef Name="PackageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserProducts_Packages_PackageId">
+        <Association Name="FK_ProductOwners_Packages_PackageId">
           <End Type="Entities.Package" Role="Package" Multiplicity="1" />
-          <End Type="Entities.UserProduct" Role="UserProduct" Multiplicity="*" />
+          <End Type="Entities.ProductOwner" Role="ProductOwner" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Package">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserProduct">
+            <Dependent Role="ProductOwner">
               <PropertyRef Name="PackageId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3448,6 +3520,66 @@
             </Principal>
             <Dependent Role="ProductAttribute">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Products_ProductId">
+          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entities.ProductOwnerHistory" Role="ProductOwnerHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Users_FromUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ProductOwnerHistory" Role="ProductOwnerHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistory">
+              <PropertyRef Name="FromToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwnerHistories_Users_UserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ProductOwnerHistory" Role="ProductOwnerHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwnerHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwners_Products_ProductId">
+          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
+          <End Type="Entities.ProductOwner" Role="ProductOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwner">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductOwners_Users_UserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ProductOwner" Role="ProductOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOwner">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3523,30 +3655,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserProductHistories_Products_ProductId">
-          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
-          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProductHistory">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProducts_Products_ProductId">
-          <End Type="Entities.Product" Role="Product" Multiplicity="1" />
-          <End Type="Entities.UserProduct" Role="UserProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProduct">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_TransactionItems_dbo_Transactions_TransactionId">
           <End Type="Entities.Transaction" Role="Transaction" Multiplicity="1" />
           <End Type="Entities.TransactionItem" Role="TransactionItem" Multiplicity="*" />
@@ -3592,42 +3700,6 @@
             </Principal>
             <Dependent Role="Transfer">
               <PropertyRef Name="ToWarehouseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProductHistories_Users_FromUserId">
-          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
-          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProductHistory">
-              <PropertyRef Name="FromToUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProductHistories_Users_UserId">
-          <End Type="Entities.User" Role="User" Multiplicity="1" />
-          <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProductHistory">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProducts_Users_UserId">
-          <End Type="Entities.User" Role="User" Multiplicity="1" />
-          <End Type="Entities.UserProduct" Role="UserProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProduct">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3999,6 +4071,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductOwnerHistories">
+            <EntityTypeMapping TypeName="Entities.ProductOwnerHistory">
+              <MappingFragment StoreEntitySet="ProductOwnerHistories">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="InOut" ColumnName="InOut" />
+                <ScalarProperty Name="FromToUserId" ColumnName="FromToUserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductOwners">
+            <EntityTypeMapping TypeName="Entities.ProductOwner">
+              <MappingFragment StoreEntitySet="ProductOwners">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductPackages">
             <EntityTypeMapping TypeName="Entities.ProductPackage">
               <MappingFragment StoreEntitySet="ProductPackages">
@@ -4117,33 +4218,6 @@
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ManufactureDepartmentUserId" ColumnName="ManufactureDepartmentUserId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserProductHistories">
-            <EntityTypeMapping TypeName="Entities.UserProductHistory">
-              <MappingFragment StoreEntitySet="UserProductHistories">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="InOut" ColumnName="InOut" />
-                <ScalarProperty Name="FromToUserId" ColumnName="FromToUserId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserProducts">
-            <EntityTypeMapping TypeName="Entities.UserProduct">
-              <MappingFragment StoreEntitySet="UserProducts">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

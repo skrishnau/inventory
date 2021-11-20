@@ -19,11 +19,13 @@ namespace Service.Core
     {
         private readonly IDatabaseChangeListener _listener;
         private readonly IAppSettingService _appSettingService;
+        private readonly IUomService _uomService;
 
-        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService)
+        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService, IUomService uomService)
         {
             _listener = listener;
             _appSettingService = appSettingService;
+            _uomService = uomService;
         }
 
         #region Manufacture
@@ -37,7 +39,26 @@ namespace Service.Core
                 var entity = _context.Manufactures.FirstOrDefault(x => x.Id == id);
                 if (entity == null) return null;
                 var model = entity.MapToModel();
-                model.ManufactureDepartments = entity.ManufactureDepartments.MapToModel();
+                model.ManufactureDepartments = new List<ManufactureDepartmentModel>();
+                //model.ManufactureDepartments = entity.ManufactureDepartments.MapToModel();
+                foreach (var dep in entity.ManufactureDepartments.OrderBy(x => x.Position).ToList())
+                {
+                    var depModel = dep.MapToModel();
+                    depModel.ManufactureDepartmentUsers = new List<ManufactureDepartmentUserModel>();
+                    foreach (var user in dep.ManufactureDepartmentUsers)
+                    {
+                        var userModel = user.MapToModel();
+                        userModel.Name = _context.Users.Find(user.UserId)?.Name;
+                        depModel.ManufactureDepartmentUsers.Add(userModel);
+                    }
+                    model.ManufactureDepartments.Add(depModel);
+                    depModel.ManufactureDepartmentProducts = new List<ManufactureDepartmentProductModel>();
+                    foreach (var prod in dep.ManufactureDepartmentProducts)
+                    {
+                        var prodModel = prod.MapToModel();
+                        depModel.ManufactureDepartmentProducts.Add(prodModel);
+                    }
+                }
                 model.ManufactureProducts = entity.ManufactureProducts.MapToModel();
                 return model;
             }
@@ -60,7 +81,6 @@ namespace Service.Core
             {
                 try
                 {
-
                     var entity = _context.Manufactures.Find(model.Id);
                     var isEdit = entity != null;
 
@@ -102,6 +122,22 @@ namespace Service.Core
                             var manuDepUserEntity = new ManufactureDepartmentUser { BuildRate = manuDepUser.BuildRate, UserId = manuDepUser.UserId };
                             depEntity.ManufactureDepartmentUsers.Add(manuDepUserEntity);
                         }
+
+                        if (depEntity.ManufactureDepartmentProducts.Any())
+                            _context.ManufactureDepartmentProducts.RemoveRange(depEntity.ManufactureDepartmentProducts);
+                        foreach (var depProd in dep.ManufactureDepartmentProducts)
+                        {
+                            var depProdEntity = new ManufactureDepartmentProduct
+                            {
+                                BuildRate = null,
+                                InOut = depProd.InOut,
+                                PackageId = depProd.PackageId,
+                                ProductId = depProd.ProductId,
+                                Quantity = depProd.Quantity,
+                            };
+                            depEntity.ManufactureDepartmentProducts.Add(depProdEntity);
+                        }
+
                     }
                     if (entity.ManufactureProducts.Any())
                         _context.ManufactureProducts.RemoveRange(entity.ManufactureProducts);
@@ -367,20 +403,34 @@ namespace Service.Core
             }
         }
 
-        public List<ManufactureDepartmentUserModel> GetEmployeesOfManufactureDepartment(int manufactureId, int depId)
+        public List<ManufactureDepartmentUserModel> GetEmployeesOfManufactureDepartment(int manufactureId, int departmentId)
         {
             using (var _context = DatabaseContext.Context)
             {
-                return _context.ManufactureDepartmentUsers
-                    .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == depId)
-                    .Select(s => new ManufactureDepartmentUserModel
-                    {
-                        BuildRate = s.BuildRate,
-                        Check = true,
-                        ManufactureDepartmentId = s.ManufactureDepartmentId,
-                        Name = s.User.Name,
-                        UserId = s.UserId
-                    }).ToList();
+                return (from mdu in _context.ManufactureDepartmentUsers
+                        join md in _context.ManufactureDepartments on mdu.ManufactureDepartmentId equals md.Id
+                        join u in _context.Users on mdu.UserId equals u.Id
+                        where md.ManufactureId == manufactureId && md.DepartmentId == departmentId
+                        select new ManufactureDepartmentUserModel
+                        {
+                            Check = true,
+                            UserId = mdu.UserId,
+                            Name = u.Name + (string.IsNullOrEmpty(u.Company) ? "" : " - " + u.Company),
+                            BuildRate = mdu.BuildRate,
+                            ManufactureDepartmentId = mdu.ManufactureDepartmentId,
+
+                        }).ToList();
+                //return _context.ManufactureDepartmentUsers
+                //    .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == departmentId)
+                //    .Select(s => new ManufactureDepartmentUserModel
+                //    {
+                //        BuildRate = s.BuildRate,
+                //        Check = true,
+                //        ManufactureDepartmentId = s.ManufactureDepartmentId,
+                //        Name = s.User.Name,
+                //        UserId = s.UserId,
+
+                //    }).ToList();
 
             }
         }
@@ -402,7 +452,7 @@ namespace Service.Core
                         ProductName = s.Product.Name,
                         Quantity = s.Quantity,
                         UserId = s.ManufactureDepartmentUser.UserId,
-                        
+
                     }).ToList();
 
             }
@@ -433,12 +483,99 @@ namespace Service.Core
                 {
                     BuildRate = model.BuildRate,
                     Date = model.Date,
-                    //ManufactureDepartmentUserId = model.ManufactureDepartmentUserId,
+                    // ManufactureDepartmentUserId = model.ManufactureDepartmentUserId,
                     InOut = model.InOut,
                     ProductId = model.ProductId,
                     Quantity = model.Quantity,
                 };
+                    var product = _context.Products.FirstOrDefault(x => x.Id == model.ProductId);
+                if(model.Quantity > model.NextProductOwners.Sum(x => x.Quantity))
+                {
+                    var qty = model.Quantity = model.NextProductOwners.Sum(x => x.Quantity);
+                    var po = _context.ProductOwners.FirstOrDefault(x => x.DepartmentId == model.DepartmentId);
+                    var packageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).Id;
+                    if (po == null)
+                    {
+                        po = new ProductOwner
+                        {
+                            DepartmentId = model.DepartmentId,
+                            PackageId = packageId,
+                            ProductId = model.ProductId,
+                            UserId = null,
+                        };
+                        _context.ProductOwners.Add(po);
+                    }
+                    po.Quantity += _uomService.ConvertUom(model.PackageId, packageId, model.ProductId, qty);
+                    po.UpdatedAt = DateTime.Now;
+                }
                 manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
+                var poHistoryAddSameDep = new ProductOwnerHistory()
+                {
+                    DepartmentId = model.DepartmentId,
+                    InOut = true,
+                    Quantity = model.Quantity,
+                    UpdatedAt = DateTime.Now,
+                    Remarks = "Direct Transfer to same department after manufacture",
+                    UserId = null,
+                    ProductId = model.ProductId,
+                    PackageId = model.PackageId,
+                };
+                _context.ProductOwnerHistories.Add(poHistoryAddSameDep);
+
+
+
+                if (model.NextProductOwners != null && model.NextProductOwners.Count > 0)
+                {
+                   
+
+                    foreach (var poModel in model.NextProductOwners)
+                    {
+                        var po = _context.ProductOwners.FirstOrDefault(x => x.DepartmentId == poModel.DepartmentId);
+                        var packageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).Id;
+                        if (po == null)
+                        {
+                            po = new ProductOwner
+                            {
+                                DepartmentId = poModel.DepartmentId,
+                                PackageId = packageId,
+                                ProductId = model.ProductId,
+                                UserId = null,
+                            };
+                            _context.ProductOwners.Add(po);
+                        }
+                        po.Quantity += _uomService.ConvertUom(model.PackageId, packageId, model.ProductId, po.Quantity);
+                        po.UpdatedAt = DateTime.Now;
+                        // add to next department
+                        var poHistory = new ProductOwnerHistory()
+                        {
+                            DepartmentId = poModel.DepartmentId,
+                            InOut = true,
+                            Quantity = poModel.Quantity,
+                            UpdatedAt = DateTime.Now,
+                            Remarks = "Direct Transfer to another department after manufacture",
+                            UserId = null,
+                            ProductId = poModel.ProductId,
+                            PackageId = poModel.PackageId,
+                        };
+                        _context.ProductOwnerHistories.Add(poHistory);
+
+                        // subtract from same department
+                        var poHistorySubtractSameDep = new ProductOwnerHistory()
+                        {
+                            DepartmentId = model.DepartmentId,
+                            InOut = false,
+                            Quantity = poModel.Quantity,
+                            UpdatedAt = DateTime.Now,
+                            Remarks = "Direct Transfer to another department after manufacture",
+                            UserId = null,
+                            ProductId = poModel.ProductId,
+                            PackageId = poModel.PackageId,
+                        };
+                        _context.ProductOwnerHistories.Add(poHistorySubtractSameDep);
+                    }
+                }
+
+
                 _context.SaveChanges();
                 var manufacture = _context.ManufactureDepartmentUsers.FirstOrDefault(x => x.Id == model.ManufactureDepartmentUserId)
                     .ManufactureDepartment.Manufacture.MapToModel();

@@ -169,17 +169,31 @@ namespace Service.Core.Users
                         }).ToList();
                 if (manufactureId > 0)
                 {
-                    var manufactureDepUsers =  _context.ManufactureDepartmentUsers
-                        .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == departmentId)
-                        .Select(x => new ManufactureDepartmentUserModel
-                        {
-                            Check = true,
-                            UserId = x.UserId,
-                            Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
-                            BuildRate = x.BuildRate,
-                            //ManufactureDepartmentId = x.ManufactureDepartmentId
-                        })
-                        .ToList();
+                    var manufactureDepUsers = (from mdu in _context.ManufactureDepartmentUsers
+                               join md in _context.ManufactureDepartments on mdu.ManufactureDepartmentId equals md.Id
+                               join u in _context.Users on mdu.UserId equals u.Id
+                               where md.ManufactureId == manufactureId && md.DepartmentId == departmentId
+                               select new ManufactureDepartmentUserModel
+                               {
+                                   Check = true,
+                                   UserId = mdu.UserId,
+                                   Name = u.Name + (string.IsNullOrEmpty(u.Company) ? "" : " - " + u.Company),
+                                   BuildRate = mdu.BuildRate,
+                                   ManufactureDepartmentId = mdu.ManufactureDepartmentId,
+                                   
+                               }).ToList();
+
+                    //var manufactureDepUsers =  _context.ManufactureDepartmentUsers
+                    //    .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == departmentId)
+                    //    .Select(x => new ManufactureDepartmentUserModel
+                    //    {
+                    //        Check = true,
+                    //        UserId = x.UserId,
+                    //        Name = x.User.Name + (string.IsNullOrEmpty(x.User.Company) ? "" : " - " + x.User.Company),
+                    //        BuildRate = x.BuildRate,
+                    //        //ManufactureDepartmentId = x.ManufactureDepartmentId
+                    //    })
+                    //    .ToList();
                     foreach(var depUser in departmentUsers)
                     {
                         depUser.Check = false; // uncheck the unselected cause we are in edit mode
@@ -191,6 +205,7 @@ namespace Service.Core.Users
                 return departmentUsers;
             }
         }
+
 
         public List<IdNamePair> GetUserListWithCompanyForCombo(UserTypeEnum userType, int[] includeUserList)
         {

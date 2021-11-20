@@ -264,7 +264,7 @@ namespace Service.Core
                 }
             }
         }
-        public List<IdNamePair> GetProductListForCombo(int categoryId = 0)
+        public List<IdNamePair> GetProductListForCombo(int categoryId = 0, List<ProductTypeEnum> productTypes = null)
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -272,6 +272,28 @@ namespace Service.Core
                     .Where(x => x.Use && !x.IsDiscontinued);
                 if (categoryId > 0)
                     query = query.Where(x => x.CategoryId == categoryId);
+                if (productTypes != null && productTypes.Count > 0)
+                {
+                    foreach (var pt in productTypes)
+                    {
+                        switch (pt)
+                        {
+                            case ProductTypeEnum.Build:
+                                query = query.Where(x => x.IsBuild == true);
+                                break;
+                            case ProductTypeEnum.Buy:
+                                query = query.Where(x => x.IsBuy == true);
+                                break;
+                            //case ProductTypeEnum.Intermediate:
+                            //    //uery = query.Where(x => x.is == true);
+                            //    break;
+                            case ProductTypeEnum.Sell:
+                                query = query.Where(x => x.IsSell == true);
+                                break;
+
+                        }
+                    }
+                }
                 var products = query.Select(x => new IdNamePair()
                 {
                     Id = x.Id,
@@ -302,7 +324,7 @@ namespace Service.Core
                 //.Where(x => x.DeletedAt == null);
             }
         }
-        
+
 
         public int GetAllProductsCount(int categoryId, string searchText)
         {
@@ -428,7 +450,7 @@ namespace Service.Core
             {
                 var entity = _context.Products.Find(id);
                 var model = entity == null ? null : ProductMapper.MapToProductModel(entity);
-               // model.InStockQuantity = AssignInStockQuantityBasedOnOrderForTxnEdit(_context, model, orderId, null);
+                // model.InStockQuantity = AssignInStockQuantityBasedOnOrderForTxnEdit(_context, model, orderId, null);
                 return model;
             }
         }
@@ -852,7 +874,7 @@ namespace Service.Core
 
         public List<IdNamePair> GetPackagesOfProduct(int productId)
         {
-            using(var _context = DatabaseContext.Context)
+            using (var _context = DatabaseContext.Context)
             {
                 return _context.ProductPackages.Where(x => x.ProductId == productId && x.Package.Use)
                     .Select(x => new IdNamePair

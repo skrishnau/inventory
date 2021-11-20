@@ -800,6 +800,26 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             
         }
 
+        //
+        // Direct Receive designs
+        //
+        public void DesignForManufactureProposedProducts()
+        {
+            _movementType = ViewModel.Enums.MovementTypeEnum.POReceive;
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.AllowUserToAddRows = true;
+            this.AllowUserToDeleteRows = true;
+            colProductId.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colPackage.Visible = true;
+            colInStockQuantity.Visible = false;
+            colRate.Visible = false;
+            colDelete.Visible = true;
+            HideUnusedDefaults();
+        }
+
         private void MakeAllColumnsReadOnly()
         {
             foreach (DataGridViewColumn column in this.Columns)

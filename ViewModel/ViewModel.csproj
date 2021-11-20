@@ -76,6 +76,7 @@
     <Compile Include="Core\Inventory\UomModel.cs" />
     <Compile Include="Core\Inventory\WarehouseProductModel.cs" />
     <Compile Include="Core\ManufactureDepartmentModel.cs" />
+    <Compile Include="Core\ManufactureDepartmentProductModel.cs" />
     <Compile Include="Core\ManufactureDepartmentUserModel.cs" />
     <Compile Include="Core\ManufactureModel.cs" />
     <Compile Include="Core\ManufactureProductModel.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Core\Orders\PaymentModel.cs" />
     <Compile Include="Core\Orders\SalePurchaseAmountModel.cs" />
     <Compile Include="Core\Orders\TransactionSummaryModel.cs" />
+    <Compile Include="Core\ProductOwnerModel.cs" />
     <Compile Include="Core\Reports\ProductLedgerModel.cs" />
     <Compile Include="Core\Reports\LedgerModel.cs" />
     <Compile Include="Core\Reports\ProfitAndLossModel.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Enums\DepartmentTypeEnum.cs" />
     <Compile Include="Enums\ManufactureStatusEnum.cs" />
     <Compile Include="Enums\PriceTypeEnum.cs" />
+    <Compile Include="Enums\ProductTypeEnum.cs" />
     <Compile Include="Enums\TransactionTypeEnum.cs" />
     <Compile Include="Enums\UserTypeEnum.cs" />
     <Compile Include="Enums\InventoryActionEnum.cs" />

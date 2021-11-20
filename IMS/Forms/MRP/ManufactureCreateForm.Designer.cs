@@ -47,9 +47,16 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.pnlBasic = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnEditManufactureInputs = new System.Windows.Forms.Button();
+            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.label9 = new System.Windows.Forms.Label();
             this.pnlDepartments = new System.Windows.Forms.Panel();
             this.btnDepartmentAdd = new System.Windows.Forms.Button();
             this.dgvDepartments = new System.Windows.Forms.DataGridView();
+            this.colDepartmentName = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colDepartmentPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeparmentDelete = new System.Windows.Forms.DataGridViewImageColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
@@ -60,26 +67,44 @@
             this.lblEmployees = new System.Windows.Forms.Label();
             this.pnlExtra = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.pnlDepartmentProducts = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnEditDepartmentOutputs = new System.Windows.Forms.Button();
+            this.lblDepartmentProductOutput = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnEditDepartmentInputs = new System.Windows.Forms.Button();
+            this.lblDepartmentProductInput = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
+            this.lbManufactureRawInputs = new System.Windows.Forms.ListBox();
+            this.lbDepartmentProductInputs = new System.Windows.Forms.ListBox();
+            this.lbDepartmentProductOutputs = new System.Windows.Forms.ListBox();
+            this.pnlDepartmentDetail = new System.Windows.Forms.Panel();
+            this.lblDepartmentName = new System.Windows.Forms.Label();
             this.colEmployeesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmployeesCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colEmployeesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmployeesRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDepartmentName = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colDepartmentPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeparmentDelete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.splitter5 = new System.Windows.Forms.Splitter();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFinalQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlFooter.SuspendLayout();
             this.pnlBasic.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.pnlDepartments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.pnlEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
             this.pnlExtra.SuspendLayout();
+            this.pnlDepartmentProducts.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.pnlDepartmentDetail.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -88,7 +113,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.25952F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.74049F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 209F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
             this.tableLayoutPanel1.Controls.Add(this.txtFinalQuantity, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.cbFinalPackage, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtRemarks, 1, 2);
@@ -108,12 +133,12 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 97);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(572, 112);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // txtFinalQuantity
             // 
-            this.txtFinalQuantity.Location = new System.Drawing.Point(365, 67);
+            this.txtFinalQuantity.Location = new System.Drawing.Point(362, 77);
             this.txtFinalQuantity.Name = "txtFinalQuantity";
             this.txtFinalQuantity.Size = new System.Drawing.Size(170, 20);
             this.txtFinalQuantity.TabIndex = 7;
@@ -122,21 +147,21 @@
             // 
             this.cbFinalPackage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFinalPackage.FormattingEnabled = true;
-            this.cbFinalPackage.Location = new System.Drawing.Point(365, 35);
+            this.cbFinalPackage.Location = new System.Drawing.Point(362, 40);
             this.cbFinalPackage.Name = "cbFinalPackage";
             this.cbFinalPackage.Size = new System.Drawing.Size(169, 21);
             this.cbFinalPackage.TabIndex = 8;
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(70, 67);
+            this.txtRemarks.Location = new System.Drawing.Point(70, 77);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(170, 20);
             this.txtRemarks.TabIndex = 5;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 32);
+            this.label2.Location = new System.Drawing.Point(3, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 25);
             this.label2.TabIndex = 1;
@@ -154,7 +179,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(3, 64);
+            this.label3.Location = new System.Drawing.Point(3, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 20);
             this.label3.TabIndex = 2;
@@ -171,7 +196,7 @@
             // txtLotNo
             // 
             this.txtLotNo.Enabled = false;
-            this.txtLotNo.Location = new System.Drawing.Point(70, 35);
+            this.txtLotNo.Location = new System.Drawing.Point(70, 40);
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.Size = new System.Drawing.Size(170, 20);
             this.txtLotNo.TabIndex = 6;
@@ -179,7 +204,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(271, 0);
+            this.label6.Location = new System.Drawing.Point(268, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 25);
             this.label6.TabIndex = 1;
@@ -189,14 +214,14 @@
             // cbFinalProduct
             // 
             this.cbFinalProduct.FormattingEnabled = true;
-            this.cbFinalProduct.Location = new System.Drawing.Point(365, 3);
+            this.cbFinalProduct.Location = new System.Drawing.Point(362, 3);
             this.cbFinalProduct.Name = "cbFinalProduct";
             this.cbFinalProduct.Size = new System.Drawing.Size(169, 21);
             this.cbFinalProduct.TabIndex = 7;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(271, 64);
+            this.label7.Location = new System.Drawing.Point(268, 74);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 25);
             this.label7.TabIndex = 8;
@@ -205,7 +230,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(271, 32);
+            this.label8.Location = new System.Drawing.Point(268, 37);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(85, 25);
             this.label8.TabIndex = 9;
@@ -215,7 +240,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(533, 7);
+            this.btnSave.Location = new System.Drawing.Point(882, 7);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -226,7 +251,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(625, 7);
+            this.btnCancel.Location = new System.Drawing.Point(974, 7);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -242,19 +267,62 @@
             this.pnlFooter.Controls.Add(this.btnCancel);
             this.pnlFooter.Controls.Add(this.btnSave);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(5, 392);
+            this.pnlFooter.Location = new System.Drawing.Point(5, 375);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(711, 35);
+            this.pnlFooter.Size = new System.Drawing.Size(1060, 35);
             this.pnlFooter.TabIndex = 3;
             // 
             // pnlBasic
             // 
+            this.pnlBasic.Controls.Add(this.panel2);
             this.pnlBasic.Controls.Add(this.tableLayoutPanel1);
             this.pnlBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBasic.Location = new System.Drawing.Point(5, 5);
             this.pnlBasic.Name = "pnlBasic";
-            this.pnlBasic.Size = new System.Drawing.Size(711, 97);
+            this.pnlBasic.Size = new System.Drawing.Size(1060, 112);
             this.pnlBasic.TabIndex = 4;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lbManufactureRawInputs);
+            this.panel2.Controls.Add(this.btnEditManufactureInputs);
+            this.panel2.Controls.Add(this.splitter4);
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(572, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(488, 112);
+            this.panel2.TabIndex = 1;
+            // 
+            // btnEditManufactureInputs
+            // 
+            this.btnEditManufactureInputs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditManufactureInputs.Location = new System.Drawing.Point(147, 2);
+            this.btnEditManufactureInputs.Name = "btnEditManufactureInputs";
+            this.btnEditManufactureInputs.Size = new System.Drawing.Size(37, 23);
+            this.btnEditManufactureInputs.TabIndex = 11;
+            this.btnEditManufactureInputs.Text = "Edit";
+            this.btnEditManufactureInputs.UseVisualStyleBackColor = true;
+            // 
+            // splitter4
+            // 
+            this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter4.Enabled = false;
+            this.splitter4.Location = new System.Drawing.Point(0, 23);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(488, 5);
+            this.splitter4.TabIndex = 10;
+            this.splitter4.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label9.Location = new System.Drawing.Point(0, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(488, 23);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Manufacture Raw Materials";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlDepartments
             // 
@@ -263,16 +331,16 @@
             this.pnlDepartments.Controls.Add(this.dgvDepartments);
             this.pnlDepartments.Controls.Add(this.flowLayoutPanel1);
             this.pnlDepartments.Controls.Add(this.label4);
-            this.pnlDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDepartments.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDepartments.Location = new System.Drawing.Point(0, 0);
             this.pnlDepartments.Name = "pnlDepartments";
-            this.pnlDepartments.Size = new System.Drawing.Size(368, 287);
+            this.pnlDepartments.Size = new System.Drawing.Size(348, 255);
             this.pnlDepartments.TabIndex = 5;
             // 
             // btnDepartmentAdd
             // 
             this.btnDepartmentAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDepartmentAdd.Location = new System.Drawing.Point(293, 2);
+            this.btnDepartmentAdd.Location = new System.Drawing.Point(273, 2);
             this.btnDepartmentAdd.Name = "btnDepartmentAdd";
             this.btnDepartmentAdd.Size = new System.Drawing.Size(39, 23);
             this.btnDepartmentAdd.TabIndex = 3;
@@ -290,8 +358,33 @@
             this.dgvDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDepartments.Location = new System.Drawing.Point(0, 26);
             this.dgvDepartments.Name = "dgvDepartments";
-            this.dgvDepartments.Size = new System.Drawing.Size(329, 261);
+            this.dgvDepartments.Size = new System.Drawing.Size(309, 229);
             this.dgvDepartments.TabIndex = 1;
+            // 
+            // colDepartmentName
+            // 
+            this.colDepartmentName.DataPropertyName = "Name";
+            this.colDepartmentName.HeaderText = "Name";
+            this.colDepartmentName.Name = "colDepartmentName";
+            this.colDepartmentName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDepartmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colDepartmentName.Width = 180;
+            // 
+            // colDepartmentPosition
+            // 
+            this.colDepartmentPosition.DataPropertyName = "Position";
+            this.colDepartmentPosition.HeaderText = "Sequence";
+            this.colDepartmentPosition.Name = "colDepartmentPosition";
+            this.colDepartmentPosition.Width = 60;
+            // 
+            // colDeparmentDelete
+            // 
+            this.colDeparmentDelete.HeaderText = "";
+            this.colDeparmentDelete.Image = global::IMS.Properties.Resources.icons8_Delete_Red_16px;
+            this.colDeparmentDelete.Name = "colDeparmentDelete";
+            this.colDeparmentDelete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDeparmentDelete.ToolTipText = "Remove";
+            this.colDeparmentDelete.Width = 26;
             // 
             // flowLayoutPanel1
             // 
@@ -299,10 +392,10 @@
             this.flowLayoutPanel1.Controls.Add(this.btnMoveDown);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(329, 26);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(309, 26);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(39, 261);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(39, 229);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnMoveUp
@@ -332,7 +425,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(368, 26);
+            this.label4.Size = new System.Drawing.Size(348, 26);
             this.label4.TabIndex = 0;
             this.label4.Text = "Departments";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -342,10 +435,10 @@
             this.pnlEmployees.BackColor = System.Drawing.SystemColors.Control;
             this.pnlEmployees.Controls.Add(this.dgvEmployees);
             this.pnlEmployees.Controls.Add(this.lblEmployees);
-            this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlEmployees.Location = new System.Drawing.Point(368, 0);
+            this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlEmployees.Location = new System.Drawing.Point(0, 23);
             this.pnlEmployees.Name = "pnlEmployees";
-            this.pnlEmployees.Size = new System.Drawing.Size(343, 287);
+            this.pnlEmployees.Size = new System.Drawing.Size(308, 232);
             this.pnlEmployees.TabIndex = 6;
             // 
             // dgvEmployees
@@ -359,7 +452,7 @@
             this.dgvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEmployees.Location = new System.Drawing.Point(0, 26);
             this.dgvEmployees.Name = "dgvEmployees";
-            this.dgvEmployees.Size = new System.Drawing.Size(343, 261);
+            this.dgvEmployees.Size = new System.Drawing.Size(308, 206);
             this.dgvEmployees.TabIndex = 2;
             // 
             // lblEmployees
@@ -367,41 +460,191 @@
             this.lblEmployees.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEmployees.Location = new System.Drawing.Point(0, 0);
             this.lblEmployees.Name = "lblEmployees";
-            this.lblEmployees.Size = new System.Drawing.Size(343, 26);
+            this.lblEmployees.Size = new System.Drawing.Size(308, 26);
             this.lblEmployees.TabIndex = 1;
-            this.lblEmployees.Text = "Employees of ______";
+            this.lblEmployees.Text = "Employees";
             this.lblEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlExtra
             // 
             this.pnlExtra.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pnlExtra.Controls.Add(this.pnlDepartmentDetail);
             this.pnlExtra.Controls.Add(this.splitter1);
             this.pnlExtra.Controls.Add(this.pnlDepartments);
-            this.pnlExtra.Controls.Add(this.pnlEmployees);
+            this.pnlExtra.Controls.Add(this.splitter5);
             this.pnlExtra.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlExtra.Location = new System.Drawing.Point(5, 105);
+            this.pnlExtra.Location = new System.Drawing.Point(5, 120);
             this.pnlExtra.Name = "pnlExtra";
-            this.pnlExtra.Size = new System.Drawing.Size(711, 287);
+            this.pnlExtra.Size = new System.Drawing.Size(1060, 255);
             this.pnlExtra.TabIndex = 7;
             // 
             // splitter1
             // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter1.Enabled = false;
-            this.splitter1.Location = new System.Drawing.Point(363, 0);
+            this.splitter1.Location = new System.Drawing.Point(348, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(5, 287);
+            this.splitter1.Size = new System.Drawing.Size(5, 255);
             this.splitter1.TabIndex = 7;
             this.splitter1.TabStop = false;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Enabled = false;
+            this.splitter3.Location = new System.Drawing.Point(308, 23);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(5, 232);
+            this.splitter3.TabIndex = 9;
+            this.splitter3.TabStop = false;
+            // 
+            // pnlDepartmentProducts
+            // 
+            this.pnlDepartmentProducts.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDepartmentProducts.Controls.Add(this.tableLayoutPanel2);
+            this.pnlDepartmentProducts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDepartmentProducts.Location = new System.Drawing.Point(313, 23);
+            this.pnlDepartmentProducts.Name = "pnlDepartmentProducts";
+            this.pnlDepartmentProducts.Size = new System.Drawing.Size(389, 232);
+            this.pnlDepartmentProducts.TabIndex = 8;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.panel3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel4, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(389, 232);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lbDepartmentProductOutputs);
+            this.panel3.Controls.Add(this.btnEditDepartmentOutputs);
+            this.panel3.Controls.Add(this.lblDepartmentProductOutput);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(197, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(189, 226);
+            this.panel3.TabIndex = 1;
+            // 
+            // btnEditDepartmentOutputs
+            // 
+            this.btnEditDepartmentOutputs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditDepartmentOutputs.Location = new System.Drawing.Point(144, 2);
+            this.btnEditDepartmentOutputs.Name = "btnEditDepartmentOutputs";
+            this.btnEditDepartmentOutputs.Size = new System.Drawing.Size(37, 23);
+            this.btnEditDepartmentOutputs.TabIndex = 2;
+            this.btnEditDepartmentOutputs.Text = "Edit";
+            this.btnEditDepartmentOutputs.UseVisualStyleBackColor = true;
+            // 
+            // lblDepartmentProductOutput
+            // 
+            this.lblDepartmentProductOutput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDepartmentProductOutput.Location = new System.Drawing.Point(0, 0);
+            this.lblDepartmentProductOutput.Name = "lblDepartmentProductOutput";
+            this.lblDepartmentProductOutput.Size = new System.Drawing.Size(189, 26);
+            this.lblDepartmentProductOutput.TabIndex = 0;
+            this.lblDepartmentProductOutput.Text = "Manufacture Outputs";
+            this.lblDepartmentProductOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.lbDepartmentProductInputs);
+            this.panel4.Controls.Add(this.btnEditDepartmentInputs);
+            this.panel4.Controls.Add(this.lblDepartmentProductInput);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(188, 226);
+            this.panel4.TabIndex = 2;
+            // 
+            // btnEditDepartmentInputs
+            // 
+            this.btnEditDepartmentInputs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditDepartmentInputs.Location = new System.Drawing.Point(148, -1);
+            this.btnEditDepartmentInputs.Name = "btnEditDepartmentInputs";
+            this.btnEditDepartmentInputs.Size = new System.Drawing.Size(37, 23);
+            this.btnEditDepartmentInputs.TabIndex = 1;
+            this.btnEditDepartmentInputs.Text = "Edit";
+            this.btnEditDepartmentInputs.UseVisualStyleBackColor = true;
+            // 
+            // lblDepartmentProductInput
+            // 
+            this.lblDepartmentProductInput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDepartmentProductInput.Location = new System.Drawing.Point(0, 0);
+            this.lblDepartmentProductInput.Name = "lblDepartmentProductInput";
+            this.lblDepartmentProductInput.Size = new System.Drawing.Size(188, 26);
+            this.lblDepartmentProductInput.TabIndex = 0;
+            this.lblDepartmentProductInput.Text = "Inputs for Manufacture";
+            this.lblDepartmentProductInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(5, 102);
+            this.splitter2.Enabled = false;
+            this.splitter2.Location = new System.Drawing.Point(5, 117);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(711, 3);
+            this.splitter2.Size = new System.Drawing.Size(1060, 3);
             this.splitter2.TabIndex = 1;
             this.splitter2.TabStop = false;
+            // 
+            // lbManufactureRawInputs
+            // 
+            this.lbManufactureRawInputs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbManufactureRawInputs.FormattingEnabled = true;
+            this.lbManufactureRawInputs.HorizontalScrollbar = true;
+            this.lbManufactureRawInputs.Location = new System.Drawing.Point(0, 28);
+            this.lbManufactureRawInputs.Name = "lbManufactureRawInputs";
+            this.lbManufactureRawInputs.Size = new System.Drawing.Size(488, 84);
+            this.lbManufactureRawInputs.TabIndex = 12;
+            // 
+            // lbDepartmentProductInputs
+            // 
+            this.lbDepartmentProductInputs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDepartmentProductInputs.FormattingEnabled = true;
+            this.lbDepartmentProductInputs.HorizontalScrollbar = true;
+            this.lbDepartmentProductInputs.Location = new System.Drawing.Point(0, 26);
+            this.lbDepartmentProductInputs.Name = "lbDepartmentProductInputs";
+            this.lbDepartmentProductInputs.Size = new System.Drawing.Size(188, 200);
+            this.lbDepartmentProductInputs.TabIndex = 13;
+            // 
+            // lbDepartmentProductOutputs
+            // 
+            this.lbDepartmentProductOutputs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDepartmentProductOutputs.FormattingEnabled = true;
+            this.lbDepartmentProductOutputs.HorizontalScrollbar = true;
+            this.lbDepartmentProductOutputs.Location = new System.Drawing.Point(0, 26);
+            this.lbDepartmentProductOutputs.Name = "lbDepartmentProductOutputs";
+            this.lbDepartmentProductOutputs.Size = new System.Drawing.Size(189, 200);
+            this.lbDepartmentProductOutputs.TabIndex = 13;
+            // 
+            // pnlDepartmentDetail
+            // 
+            this.pnlDepartmentDetail.Controls.Add(this.pnlDepartmentProducts);
+            this.pnlDepartmentDetail.Controls.Add(this.splitter3);
+            this.pnlDepartmentDetail.Controls.Add(this.pnlEmployees);
+            this.pnlDepartmentDetail.Controls.Add(this.lblDepartmentName);
+            this.pnlDepartmentDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDepartmentDetail.Location = new System.Drawing.Point(353, 0);
+            this.pnlDepartmentDetail.Name = "pnlDepartmentDetail";
+            this.pnlDepartmentDetail.Size = new System.Drawing.Size(702, 255);
+            this.pnlDepartmentDetail.TabIndex = 3;
+            // 
+            // lblDepartmentName
+            // 
+            this.lblDepartmentName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDepartmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentName.Location = new System.Drawing.Point(0, 0);
+            this.lblDepartmentName.Name = "lblDepartmentName";
+            this.lblDepartmentName.Size = new System.Drawing.Size(702, 23);
+            this.lblDepartmentName.TabIndex = 3;
+            this.lblDepartmentName.Text = "label11";
+            this.lblDepartmentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // colEmployeesId
             // 
@@ -425,7 +668,7 @@
             this.colEmployeesName.HeaderText = "Name";
             this.colEmployeesName.Name = "colEmployeesName";
             this.colEmployeesName.ReadOnly = true;
-            this.colEmployeesName.Width = 180;
+            this.colEmployeesName.Width = 150;
             // 
             // colEmployeesRate
             // 
@@ -434,30 +677,15 @@
             this.colEmployeesRate.Name = "colEmployeesRate";
             this.colEmployeesRate.Width = 70;
             // 
-            // colDepartmentName
+            // splitter5
             // 
-            this.colDepartmentName.DataPropertyName = "Name";
-            this.colDepartmentName.HeaderText = "Name";
-            this.colDepartmentName.Name = "colDepartmentName";
-            this.colDepartmentName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDepartmentName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colDepartmentName.Width = 180;
-            // 
-            // colDepartmentPosition
-            // 
-            this.colDepartmentPosition.DataPropertyName = "Position";
-            this.colDepartmentPosition.HeaderText = "Sequence";
-            this.colDepartmentPosition.Name = "colDepartmentPosition";
-            this.colDepartmentPosition.Width = 60;
-            // 
-            // colDeparmentDelete
-            // 
-            this.colDeparmentDelete.HeaderText = "";
-            this.colDeparmentDelete.Image = global::IMS.Properties.Resources.icons8_Delete_Red_16px;
-            this.colDeparmentDelete.Name = "colDeparmentDelete";
-            this.colDeparmentDelete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDeparmentDelete.ToolTipText = "Remove";
-            this.colDeparmentDelete.Width = 26;
+            this.splitter5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter5.Enabled = false;
+            this.splitter5.Location = new System.Drawing.Point(1055, 0);
+            this.splitter5.Name = "splitter5";
+            this.splitter5.Size = new System.Drawing.Size(5, 255);
+            this.splitter5.TabIndex = 8;
+            this.splitter5.TabStop = false;
             // 
             // ManufactureCreateForm
             // 
@@ -465,7 +693,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(721, 432);
+            this.ClientSize = new System.Drawing.Size(1070, 415);
             this.Controls.Add(this.pnlExtra);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.pnlBasic);
@@ -482,12 +710,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlBasic.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.pnlDepartments.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.pnlEmployees.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
             this.pnlExtra.ResumeLayout(false);
+            this.pnlDepartmentProducts.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.pnlDepartmentDetail.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -526,12 +760,31 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colDepartmentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentPosition;
+        private System.Windows.Forms.DataGridViewImageColumn colDeparmentDelete;
+        private System.Windows.Forms.Panel pnlDepartmentProducts;
+        private System.Windows.Forms.Label lblDepartmentProductOutput;
+        private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblDepartmentProductInput;
+        private System.Windows.Forms.Splitter splitter4;
+        private System.Windows.Forms.Button btnEditDepartmentOutputs;
+        private System.Windows.Forms.Button btnEditDepartmentInputs;
+        private System.Windows.Forms.Button btnEditManufactureInputs;
+        private System.Windows.Forms.ListBox lbManufactureRawInputs;
+        private System.Windows.Forms.ListBox lbDepartmentProductOutputs;
+        private System.Windows.Forms.ListBox lbDepartmentProductInputs;
+        private System.Windows.Forms.Panel pnlDepartmentDetail;
+        private System.Windows.Forms.Label lblDepartmentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesId;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colEmployeesCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeesRate;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colDepartmentName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentPosition;
-        private System.Windows.Forms.DataGridViewImageColumn colDeparmentDelete;
+        private System.Windows.Forms.Splitter splitter5;
     }
 }

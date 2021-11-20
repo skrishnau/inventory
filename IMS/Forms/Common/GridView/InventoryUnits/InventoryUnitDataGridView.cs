@@ -58,12 +58,12 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
 
 
-        public void InitializeGridViewControls(IInventoryService inventoryService, IProductService productService, IUomService uomService)
+        public void InitializeGridViewControls(IInventoryService inventoryService, IProductService productService, IUomService uomService, List<ProductTypeEnum> productTypes = null)
         {
             _inventoryService = inventoryService;
             _productService = productService;
             _uomService = uomService;
-            _productList = _productService.GetProductListForCombo();
+            _productList = _productService.GetProductListForCombo(productTypes: productTypes);
             _packageList = _inventoryService.GetPackageListForCombo();
             //
             // Columns
@@ -147,6 +147,15 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     || _movementType == MovementTypeEnum.SOIssueEditItems);
 
                 var productModel = row.Cells[colProduct.Index].Tag as ProductModel;
+                if(productModel == null)
+                {
+                    if (product.Id > 0)
+                        productModel = _productService.GetProduct(product.Id);
+                    else if (!string.IsNullOrWhiteSpace(product.Name))
+                        productModel = _productService.GetProductByNameOrSKU(product.Name.Trim());
+                    if (productModel != null)
+                        row.Cells[colProduct.Index].Tag = productModel;
+                }
 
                 var package = GetPackage(row, productModel);
                 var packageFromDB = _inventoryService.GetPackageByName(package.Name);
@@ -185,6 +194,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                         Package = package.Name,
                         //  UomId = uomId,
                         IsHold = isHold == null ? false : bool.Parse(isHold.ToString()),
+                        ProductModel = productModel
                     });
                 }
                 else
@@ -252,8 +262,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             if (colProductId.Visible)
             {
                 var productId = 0;
+
                 int.TryParse(productIdCell.Value == null ? "0" : productIdCell.Value.ToString(), out productId);
                 model.Id = productId;
+                model.Name = _productList.FirstOrDefault(x => x.Id == productId)?.Name;
             }
             else
             {

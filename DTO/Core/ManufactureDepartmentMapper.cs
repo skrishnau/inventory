@@ -37,7 +37,8 @@ namespace DTO.Core
         public ManufactureDepartmentProfile()
         {
             CreateMap<ManufactureDepartment, ManufactureDepartmentModel>()
-                .ForMember(dest => dest.ManufactureDepartmentUsers, opt => opt.MapFrom(src=>src.ManufactureDepartmentUsers))
+                .ForMember(dest => dest.ManufactureDepartmentUsers, opt => opt.Ignore())//.MapFrom(src=>src.ManufactureDepartmentUsers))
+                .ForMember(dest => dest.ManufactureDepartmentProducts, opt => opt.Ignore())//.MapFrom(src=>src.ManufactureDepartmentUsers))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src=>src.Department.Name))
                 ;
             CreateMap<ManufactureDepartmentModel, ManufactureDepartment>()
@@ -48,6 +49,7 @@ namespace DTO.Core
                 .ForMember(dest => dest.StartedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.StartedByUserId, opt => opt.Ignore())
                 .ForMember(dest=> dest.ManufactureDepartmentUsers, opt=>opt.Ignore())
+                .ForMember(dest=> dest.ManufactureDepartmentProducts, opt=>opt.Ignore())
 
                 ;
         }

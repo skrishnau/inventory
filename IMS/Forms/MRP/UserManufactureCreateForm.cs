@@ -20,12 +20,14 @@ namespace IMS.Forms.MRP
         private int _manufactureId;
         private int _departmentId;
         private int _userId;
+        private bool _inOut;
 
         private readonly IManufactureService _manufactureService;
 
-        private ManufactureDepartmentUserModel _manufactureDepartmentUserModel;
         private ManufactureModel _manufactureModel;
-        private ManufactureProductModel _manufactureProductModel;
+        private ManufactureDepartmentModel _manufactureDepartmentModel;
+        private ManufactureDepartmentUserModel _manufactureDepartmentUserModel;
+        private List<ManufactureDepartmentProductModel> _departmentProductModels;
 
         public UserManufactureCreateForm(IManufactureService manufactureService)
         {
@@ -35,21 +37,52 @@ namespace IMS.Forms.MRP
             this.Load += UserManufactureCreateForm_Load;
         }
 
+        public void SetDataForEdit(int userManufacureId, int manufactureId, int departmentId, int userId, bool inOut)
+        {
+            _departmentId = departmentId;
+            _userId = userId;
+            _manufactureId = manufactureId;
+            _userManufacureId = userManufacureId;
+            _inOut = inOut;
+        }
 
         private void UserManufactureCreateForm_Load(object sender, EventArgs e)
         {
             btnSave.Click += BtnSave_Click;
+            chkAssignToNextDepartment.CheckedChanged += ChkAssignToNextDepartment_CheckedChanged;
+
+            dgvDepartments.AutoGenerateColumns = false;
 
             txtQuantity.Maximum = Int16.MaxValue;
+
             _manufactureModel = _manufactureService.GetManufacture(_manufactureId);
-            _manufactureDepartmentUserModel = _manufactureService.GetManufactureDepartmentUser(_manufactureId, _departmentId, _userId);
-            _manufactureProductModel = _manufactureModel.ManufactureProducts.FirstOrDefault();
+            _manufactureDepartmentModel = _manufactureModel.ManufactureDepartments
+                .FirstOrDefault(x => x.DepartmentId == _departmentId);
+            _manufactureDepartmentUserModel = _manufactureDepartmentModel
+                .ManufactureDepartmentUsers.FirstOrDefault(x => x.UserId == _userId);
+
+            lblEmployeeName.Text = _manufactureDepartmentUserModel.Name + " (" + _manufactureDepartmentModel.Name + ")";
+
+            dgvDepartments.Enabled = false;
+
+            _departmentProductModels = _manufactureDepartmentModel.ManufactureDepartmentProducts
+                .Where(x => x.InOut == _inOut)
+                .ToList();
+            cbProduct.DataSource = _departmentProductModels;
+            cbProduct.DisplayMember = "ProductName";
+            cbProduct.ValueMember = "ProductId";
+            dgvDepartments.DataSource = _manufactureModel.ManufactureDepartments.Where(x => x.Position > _manufactureDepartmentModel.Position).ToList();
+
+        }
+
+        private void ChkAssignToNextDepartment_CheckedChanged(object sender, EventArgs e)
+        {
+            dgvDepartments.Enabled = chkAssignToNextDepartment.Checked;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             errorProvider1.SetError(cbProduct, string.Empty);
-            errorProvider1.SetError(cbPackage, string.Empty);
             errorProvider1.SetError(txtQuantity, string.Empty);
             var isValid = true;
             var message = string.Empty;
@@ -59,18 +92,51 @@ namespace IMS.Forms.MRP
                 isValid = false;
                 errorProvider1.SetError(cbProduct, "Required");
             }
-
-            var packageId = cbPackage.SelectedValue as int?;
-            if (!(packageId > 0))
+            int packageId = 0;
+            var depProduct = _departmentProductModels.FirstOrDefault(x => x.ProductId == productId);
+            if (depProduct != null)
             {
-                isValid = false;
-                errorProvider1.SetError(cbPackage, "Required");
+                packageId = depProduct.PackageId;
             }
+            //var packageId = cbPackage.SelectedValue as int?;
+            //if (!(packageId > 0))
+            //{
+            //    isValid = false;
+            //    errorProvider1.SetError(cbPackage, "Required");
+            //}
             if (txtQuantity.Value <= 0)
             {
                 isValid = false;
                 errorProvider1.SetError(txtQuantity, "Required");
             }
+            
+            List<ProductOwnerModel> newOwners = new List<ProductOwnerModel>();
+            if (chkAssignToNextDepartment.Checked)
+            {
+                foreach (DataGridViewRow row in dgvDepartments.Rows)
+                {
+                    row.Cells[colDepartmentQuantity.Index].ErrorText = string.Empty;
+                    var manufactureDepartmentId = row.Cells[colManufactureDepartmentId.Index].Value as int?;
+                    var departmentId = row.Cells[colDepartmentId.Index].Value as int?;
+                    decimal.TryParse(row.Cells[colDepartmentQuantity.Index].Value.ToString(), out decimal quantity);
+                    
+                    var departmentProduct = new ProductOwnerModel()
+                    {
+                        DepartmentId = departmentId,
+                        PackageId = packageId,
+                        ProductId = productId ?? 0,
+                        Quantity = quantity,
+                        UpdatedAt = DateTime.Now,
+                    };
+                    newOwners.Add(departmentProduct);
+                }
+                if(newOwners.Count == 0 || newOwners.Sum(x=>x.Quantity) == 0)
+                {
+                    isValid = false;
+                    message += "At least one department's assign quantity is required.";
+                }
+            }
+
             if (!isValid)
                 return;
             if (!string.IsNullOrEmpty(message))
@@ -86,16 +152,13 @@ namespace IMS.Forms.MRP
                 UserId = _userId,
                 Date = DateTime.Now,
                 InOut = false,
-                ProductId = _manufactureProductModel.ProductId,
+                ProductId = productId ?? 0,//_manufactureProductModel.ProductId,
                 Quantity = txtQuantity.Value,
+                NextProductOwners = newOwners,
+                DepartmentId = _manufactureDepartmentModel.DepartmentId,
             };
             var response = _manufactureService.AddUserManufacture(userManufactureModel);
         }
 
-        public void SetDataForEdit(int userManufacureId, int manufactureId, int departmentId, int userId)
-        {
-            _departmentId = departmentId;
-            _userId = userId;
-        }
     }
 }

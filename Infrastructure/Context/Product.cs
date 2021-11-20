@@ -24,13 +24,13 @@ namespace Infrastructure.Context
             this.OrderItems = new HashSet<OrderItem>();
             this.PriceHistories = new HashSet<PriceHistory>();
             this.ProductAttributes = new HashSet<ProductAttribute>();
+            this.ProductOwnerHistories = new HashSet<ProductOwnerHistory>();
+            this.ProductOwners = new HashSet<ProductOwner>();
             this.ProductPackages = new HashSet<ProductPackage>();
             this.Products1 = new HashSet<Product>();
             this.Uoms = new HashSet<Uom>();
             this.WarehouseProducts = new HashSet<WarehouseProduct>();
             this.UserManufactures = new HashSet<UserManufacture>();
-            this.UserProductHistories = new HashSet<UserProductHistory>();
-            this.UserProducts = new HashSet<UserProduct>();
         }
     
         public int Id { get; set; }
@@ -87,6 +87,10 @@ namespace Infrastructure.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductOwnerHistory> ProductOwnerHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductOwner> ProductOwners { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPackage> ProductPackages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products1 { get; set; }
@@ -98,9 +102,5 @@ namespace Infrastructure.Context
         public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserManufacture> UserManufactures { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProductHistory> UserProductHistories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProduct> UserProducts { get; set; }
     }
 }

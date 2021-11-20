@@ -1,7 +1,9 @@
 /*
 --all  drop queries
-drop table UserProductHistories
-drop table UserProducts
+drop table ProductOwners
+drop table ProductOwnerHistories
+--drop table UserProductHistories
+--drop table UserProducts
 drop table UserManufactures
 drop table ManufactureDepartmentProducts
 drop table ManufactureDepartmentUsers
@@ -117,21 +119,23 @@ create table UserManufactures(
 
 -- User Possessions
 
-create table UserProducts (
+create table ProductOwners (
 	Id int not null primary key identity(1,1),
-	UserId int not null constraint FK_UserProducts_Users_UserId foreign key references Users(Id),
-	ProductId int not null constraint FK_UserProducts_Products_ProductId foreign key references Products(Id),
-	PackageId int not null constraint FK_UserProducts_Packages_PackageId foreign key references Packages(Id),
+	UserId int null constraint FK_ProductOwners_Users_UserId foreign key references Users(Id),
+	DepartmentId int null constraint FK_ProductOwners_Departments_DepartmentId foreign key references Departments(Id),
+	ProductId int not null constraint FK_ProductOwners_Products_ProductId foreign key references Products(Id),
+	PackageId int not null constraint FK_ProductOwners_Packages_PackageId foreign key references Packages(Id),
 	Quantity decimal (9,2) not null,
 	UpdatedAt datetime not null
 );
-create table UserProductHistories(
+create table ProductOwnerHistories(
 	Id int not null primary key identity(1,1),
-	UserId int not null constraint FK_UserProductHistories_Users_UserId foreign key references Users(Id),
-	ProductId int not null constraint FK_UserProductHistories_Products_ProductId foreign key references Products(Id),
-	PackageId int not null constraint FK_UserProductHistories_Packages_PackageId foreign key references Packages(Id),
+	UserId int null constraint FK_ProductOwnerHistories_Users_UserId foreign key references Users(Id),
+	DepartmentId int null constraint FK_ProductOwnerHistories_Departments_DepartmentId foreign key references Departments(Id),
+	ProductId int not null constraint FK_ProductOwnerHistories_Products_ProductId foreign key references Products(Id),
+	PackageId int not null constraint FK_ProductOwnerHistories_Packages_PackageId foreign key references Packages(Id),
 	Quantity decimal (18,9) not null,
-	FromToUserId int null constraint FK_UserProductHistories_Users_FromUserId foreign key references Users(Id),
+	FromToUserId int null constraint FK_ProductOwnerHistories_Users_FromUserId foreign key references Users(Id),
 	InOut bit not null, -- in=1 , out=0
 	Remarks nvarchar(256) null,
 	UpdatedAt datetime not null

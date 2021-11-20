@@ -55,7 +55,7 @@ namespace IMS.Forms.MRP
                     using (AsyncScopedLifestyle.BeginScope(Program.container))
                     {
                         var productCreate = Program.container.GetInstance<UserManufactureCreateForm>();
-                        //productCreate.SetDataForEdit(0, departmentId ?? 0, userId ?? 0);
+                        productCreate.SetDataForEdit(0, _model.Id, departmentId ?? 0, userId ?? 0, false);
                         productCreate.ShowDialog();
                     }
                 }
@@ -157,7 +157,7 @@ namespace IMS.Forms.MRP
             {
                 lblFinalProduct.Text = _model.ManufactureProducts[0].ProductName;
                 lblFinalPackage.Text = _model.ManufactureProducts[0].PackageName;
-                lblFinalQuantity.Text = _model.ManufactureProducts[0].Quantity.Value.ToString("0.00");
+                lblFinalQuantity.Text = _model.ManufactureProducts[0].Quantity.ToString("0.00");
                 lblLotNo.Text = _model.LotNo.ToString();
                 lblManufactureName.Text = _model.Name;
                 lblStatus.Text = _model.Status;
@@ -182,8 +182,6 @@ namespace IMS.Forms.MRP
                     }
                 }
                 dgvDepartments.DataSource = model.ManufactureDepartments;
-
-
 
             }
         }

@@ -15,7 +15,7 @@ namespace Service.Interfaces
         Task<ProductListModel> GetAllProducts(int categoryId, string searchText, int pageSize, int offset);
         Task<ProductListModel> GetAllProducts();
 
-        List<IdNamePair> GetProductListForCombo(int categoryId = 0);
+        List<IdNamePair> GetProductListForCombo(int categoryId = 0, List<ProductTypeEnum> productTypes = null);
         List<IdNamePair> GetBuildProductListForCombo(int categoryId = 0);
 
         ProductModel GetProduct(int productId);

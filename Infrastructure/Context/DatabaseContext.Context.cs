@@ -47,6 +47,8 @@ namespace Infrastructure.Context
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<PriceHistory> PriceHistories { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
+        public virtual DbSet<ProductOwnerHistory> ProductOwnerHistories { get; set; }
+        public virtual DbSet<ProductOwner> ProductOwners { get; set; }
         public virtual DbSet<ProductPackage> ProductPackages { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<TransactionItem> TransactionItems { get; set; }
@@ -54,8 +56,6 @@ namespace Infrastructure.Context
         public virtual DbSet<Transfer> Transfers { get; set; }
         public virtual DbSet<Uom> Uoms { get; set; }
         public virtual DbSet<UserManufacture> UserManufactures { get; set; }
-        public virtual DbSet<UserProductHistory> UserProductHistories { get; set; }
-        public virtual DbSet<UserProduct> UserProducts { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WarehouseProduct> WarehouseProducts { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
