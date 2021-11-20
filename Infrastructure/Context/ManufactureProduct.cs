@@ -16,9 +16,8 @@ namespace Infrastructure.Context
     {
         public int Id { get; set; }
         public int ManufactureId { get; set; }
-        public bool ProposedOrProduction { get; set; }
         public int ProductId { get; set; }
-        public Nullable<decimal> Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public int PackageId { get; set; }
         public bool InOut { get; set; }
         public Nullable<decimal> CostRate { get; set; }

@@ -112,6 +112,7 @@ create table UserManufactures(
 	Quantity decimal (11, 2) not null,
 	InOut bit not null, -- Consume or Build or Damage 
 	BuildRate decimal (9, 2) null,
+	Remarks nvarchar(250) null
 );
 
 -- User Possessions

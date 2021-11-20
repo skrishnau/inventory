@@ -53,7 +53,6 @@ namespace Infrastructure.Context
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<Transfer> Transfers { get; set; }
         public virtual DbSet<Uom> Uoms { get; set; }
-        public virtual DbSet<UserManufactureProduct> UserManufactureProducts { get; set; }
         public virtual DbSet<UserManufacture> UserManufactures { get; set; }
         public virtual DbSet<UserProductHistory> UserProductHistories { get; set; }
         public virtual DbSet<UserProduct> UserProducts { get; set; }

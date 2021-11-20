@@ -25,6 +25,9 @@ namespace Infrastructure.Context
             this.ManufactureDepartments2 = new HashSet<ManufactureDepartment>();
             this.ManufactureDepartments3 = new HashSet<ManufactureDepartment>();
             this.ManufactureDepartmentUsers = new HashSet<ManufactureDepartmentUser>();
+            this.ManufactureDepartmentUsers1 = new HashSet<ManufactureDepartmentUser>();
+            this.ManufactureDepartmentUsers2 = new HashSet<ManufactureDepartmentUser>();
+            this.ManufactureDepartmentUsers3 = new HashSet<ManufactureDepartmentUser>();
             this.Manufactures = new HashSet<Manufacture>();
             this.Manufactures1 = new HashSet<Manufacture>();
             this.Manufactures2 = new HashSet<Manufacture>();
@@ -81,6 +84,12 @@ namespace Infrastructure.Context
         public virtual ICollection<ManufactureDepartment> ManufactureDepartments3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ManufactureDepartmentUser> ManufactureDepartmentUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartmentUser> ManufactureDepartmentUsers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartmentUser> ManufactureDepartmentUsers2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManufactureDepartmentUser> ManufactureDepartmentUsers3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Manufacture> Manufactures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

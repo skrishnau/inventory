@@ -14,22 +14,16 @@ namespace Infrastructure.Context
     
     public partial class UserManufacture
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserManufacture()
-        {
-            this.UserManufactureProducts = new HashSet<UserManufactureProduct>();
-        }
-    
         public int Id { get; set; }
+        public System.DateTime Date { get; set; }
         public int ManufactureDepartmentUserId { get; set; }
-        public Nullable<System.DateTime> StartedAt { get; set; }
-        public Nullable<System.DateTime> CompletedAt { get; set; }
-        public Nullable<System.DateTime> CancelledAt { get; set; }
+        public int ProductId { get; set; }
+        public decimal Quantity { get; set; }
+        public bool InOut { get; set; }
         public Nullable<decimal> BuildRate { get; set; }
         public string Remarks { get; set; }
     
         public virtual ManufactureDepartmentUser ManufactureDepartmentUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserManufactureProduct> UserManufactureProducts { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

@@ -5,41 +5,40 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="516187f134c34ea58536b7aa5cb2a8f8" Name="Diagram1">
-        <EntityTypeShape EntityType="Entities.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Entities.AdjustmentCode" Width="1.5" PointX="0.75" PointY="11.75" />
-        <EntityTypeShape EntityType="Entities.AppSetting" Width="1.5" PointX="11.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Entities.Bill" Width="1.5" PointX="11.75" PointY="8.75" />
-        <EntityTypeShape EntityType="Entities.Branch" Width="1.5" PointX="11.75" PointY="1.125" />
-        <EntityTypeShape EntityType="Entities.Category" Width="1.5" PointX="1.5" PointY="2.875" />
-        <EntityTypeShape EntityType="Entities.Counter" Width="1.5" PointX="14" PointY="1" />
-        <EntityTypeShape EntityType="Entities.Department" Width="1.5" PointX="3" PointY="23.125" />
-        <EntityTypeShape EntityType="Entities.DepartmentUser" Width="1.5" PointX="5.25" PointY="26.25" />
-        <EntityTypeShape EntityType="Entities.InventoryUnit" Width="1.5" PointX="8" PointY="24.125" />
-        <EntityTypeShape EntityType="Entities.ManufactureDepartmentProduct" Width="1.5" PointX="7.5" PointY="41.75" />
-        <EntityTypeShape EntityType="Entities.ManufactureDepartment" Width="1.5" PointX="5.25" PointY="40.75" />
-        <EntityTypeShape EntityType="Entities.ManufactureDepartmentUser" Width="1.5" PointX="7.5" PointY="36.125" />
-        <EntityTypeShape EntityType="Entities.ManufactureProduct" Width="1.5" PointX="5.25" PointY="60" />
-        <EntityTypeShape EntityType="Entities.Manufacture" Width="1.5" PointX="3" PointY="59.125" />
-        <EntityTypeShape EntityType="Entities.Movement" Width="1.5" PointX="6" PointY="11.875" />
-        <EntityTypeShape EntityType="Entities.OrderItem" Width="1.5" PointX="5.25" PointY="30" />
-        <EntityTypeShape EntityType="Entities.Order" Width="1.5" PointX="3" PointY="26.75" />
-        <EntityTypeShape EntityType="Entities.Package" Width="1.5" PointX="3.75" PointY="13.5" />
-        <EntityTypeShape EntityType="Entities.Payment" Width="1.5" PointX="12.5" PointY="27" />
-        <EntityTypeShape EntityType="Entities.PriceHistory" Width="1.5" PointX="9" PointY="4.75" />
-        <EntityTypeShape EntityType="Entities.ProductAttribute" Width="1.5" PointX="6" PointY="4.125" />
-        <EntityTypeShape EntityType="Entities.ProductPackage" Width="1.5" PointX="9" PointY="9" />
-        <EntityTypeShape EntityType="Entities.Product" Width="1.5" PointX="3.75" PointY="0.875" />
-        <EntityTypeShape EntityType="Entities.TransactionItem" Width="1.5" PointX="12.5" PointY="32.5" />
-        <EntityTypeShape EntityType="Entities.Transaction" Width="1.5" PointX="10.25" PointY="27.25" />
-        <EntityTypeShape EntityType="Entities.Transfer" Width="1.5" PointX="3.75" PointY="18.125" />
-        <EntityTypeShape EntityType="Entities.Uom" Width="1.5" PointX="6" PointY="7.625" />
-        <EntityTypeShape EntityType="Entities.UserManufactureProduct" Width="1.5" PointX="12" PointY="36.875" />
-        <EntityTypeShape EntityType="Entities.UserManufacture" Width="1.5" PointX="9.75" PointY="36.875" />
-        <EntityTypeShape EntityType="Entities.UserProductHistory" Width="1.5" PointX="8" PointY="31.625" />
-        <EntityTypeShape EntityType="Entities.UserProduct" Width="1.5" PointX="6" PointY="20" />
-        <EntityTypeShape EntityType="Entities.User" Width="1.5" PointX="0.75" PointY="22.5" />
-        <EntityTypeShape EntityType="Entities.WarehouseProduct" Width="1.5" PointX="9" PointY="1.375" />
-        <EntityTypeShape EntityType="Entities.Warehouse" Width="1.5" PointX="1.5" PointY="6.375" />
+        <EntityTypeShape EntityType="Entities.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Entities.AdjustmentCode" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Entities.AppSetting" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Entities.Bill" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Entities.Branch" Width="1.5" PointX="8.75" PointY="1.125" />
+        <EntityTypeShape EntityType="Entities.Category" Width="1.5" PointX="3.75" PointY="10.25" />
+        <EntityTypeShape EntityType="Entities.Counter" Width="1.5" PointX="11" PointY="1" />
+        <EntityTypeShape EntityType="Entities.Department" Width="1.5" PointX="3" PointY="56.375" />
+        <EntityTypeShape EntityType="Entities.DepartmentUser" Width="1.5" PointX="5.25" PointY="39.875" />
+        <EntityTypeShape EntityType="Entities.InventoryUnit" Width="1.5" PointX="3" PointY="18.875" />
+        <EntityTypeShape EntityType="Entities.ManufactureDepartmentProduct" Width="1.5" PointX="7.5" PointY="44.5" />
+        <EntityTypeShape EntityType="Entities.ManufactureDepartment" Width="1.5" PointX="5.25" PointY="43.375" />
+        <EntityTypeShape EntityType="Entities.ManufactureDepartmentUser" Width="1.5" PointX="7.5" PointY="33.625" />
+        <EntityTypeShape EntityType="Entities.ManufactureProduct" Width="1.5" PointX="5.25" PointY="60.75" />
+        <EntityTypeShape EntityType="Entities.Manufacture" Width="1.5" PointX="3" PointY="59.875" />
+        <EntityTypeShape EntityType="Entities.Movement" Width="1.5" PointX="8.25" PointY="16.875" />
+        <EntityTypeShape EntityType="Entities.OrderItem" Width="1.5" PointX="8.25" PointY="24.875" />
+        <EntityTypeShape EntityType="Entities.Order" Width="1.5" PointX="6" PointY="23.5" />
+        <EntityTypeShape EntityType="Entities.Package" Width="1.5" PointX="6" PointY="19" />
+        <EntityTypeShape EntityType="Entities.Payment" Width="1.5" PointX="11.25" PointY="25.75" />
+        <EntityTypeShape EntityType="Entities.PriceHistory" Width="1.5" PointX="8.25" PointY="12.875" />
+        <EntityTypeShape EntityType="Entities.ProductAttribute" Width="1.5" PointX="8.25" PointY="9" />
+        <EntityTypeShape EntityType="Entities.ProductPackage" Width="1.5" PointX="11.25" PointY="14.125" />
+        <EntityTypeShape EntityType="Entities.Product" Width="1.5" PointX="6" PointY="5.875" />
+        <EntityTypeShape EntityType="Entities.TransactionItem" Width="1.5" PointX="13.5" PointY="24.25" />
+        <EntityTypeShape EntityType="Entities.Transaction" Width="1.5" PointX="11.25" PointY="20.125" />
+        <EntityTypeShape EntityType="Entities.Transfer" Width="1.5" PointX="6" PointY="1.875" />
+        <EntityTypeShape EntityType="Entities.Uom" Width="1.5" PointX="11.25" PointY="9.875" />
+        <EntityTypeShape EntityType="Entities.UserManufacture" Width="1.5" PointX="9.75" PointY="34.375" />
+        <EntityTypeShape EntityType="Entities.UserProductHistory" Width="1.5" PointX="3" PointY="30.375" />
+        <EntityTypeShape EntityType="Entities.UserProduct" Width="1.5" PointX="3" PointY="26.75" />
+        <EntityTypeShape EntityType="Entities.User" Width="1.5" PointX="0.75" PointY="23" />
+        <EntityTypeShape EntityType="Entities.WarehouseProduct" Width="1.5" PointX="11.25" PointY="5.875" />
+        <EntityTypeShape EntityType="Entities.Warehouse" Width="1.5" PointX="3.75" PointY="5.125" />
         <AssociationConnector Association="Entities.FK_dbo_Counters_dbo_Branches_BranchId" />
         <AssociationConnector Association="Entities.FK_dbo_Categories_dbo_Categories_ParentCategoryId" />
         <AssociationConnector Association="Entities.FK_dbo_Products_dbo_Categories_CategoryId" />
@@ -61,6 +60,9 @@
         <AssociationConnector Association="Entities.FK_ManufactureDepartments_Users_StartedByUserId" />
         <AssociationConnector Association="Entities.FK_ManufactureDepartments_Users_UserId" />
         <AssociationConnector Association="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentUsers_Users_CancelledByUserId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentUsers_Users_CompletedByUserId" />
+        <AssociationConnector Association="Entities.FK_ManufactureDepartmentUsers_Users_StartedByUserId" />
         <AssociationConnector Association="Entities.FK_ManufactureDepartmentUsers_Users_UserId" />
         <AssociationConnector Association="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" />
         <AssociationConnector Association="Entities.FK_ManufactureProducts_Manufatures_ManufactureId" />
@@ -89,7 +91,6 @@
         <AssociationConnector Association="Entities.FK_dbo_ProductPackages_dbo_Packages_PackageId" />
         <AssociationConnector Association="Entities.FK_dbo_Uoms_dbo_Packages_PackageId" />
         <AssociationConnector Association="Entities.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" />
-        <AssociationConnector Association="Entities.FK_UserManufactureProducts_Packages_PackageId" />
         <AssociationConnector Association="Entities.FK_UserProductHistories_Packages_PackageId" />
         <AssociationConnector Association="Entities.FK_UserProducts_Packages_PackageId" />
         <AssociationConnector Association="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId" />
@@ -108,7 +109,6 @@
         <AssociationConnector Association="Entities.FK_dbo_Transactions_dbo_Users_UserId" />
         <AssociationConnector Association="Entities.FK_dbo_Transfers_dbo_Warehouses_FromWarehouseId" />
         <AssociationConnector Association="Entities.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" />
-        <AssociationConnector Association="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" />
         <AssociationConnector Association="Entities.FK_UserProductHistories_Users_FromUserId" />
         <AssociationConnector Association="Entities.FK_UserProductHistories_Users_UserId" />
         <AssociationConnector Association="Entities.FK_UserProducts_Users_UserId" />

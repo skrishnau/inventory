@@ -28,7 +28,7 @@ namespace Infrastructure.Context
             this.Products1 = new HashSet<Product>();
             this.Uoms = new HashSet<Uom>();
             this.WarehouseProducts = new HashSet<WarehouseProduct>();
-            this.UserManufactureProducts = new HashSet<UserManufactureProduct>();
+            this.UserManufactures = new HashSet<UserManufacture>();
             this.UserProductHistories = new HashSet<UserProductHistory>();
             this.UserProducts = new HashSet<UserProduct>();
         }
@@ -97,7 +97,7 @@ namespace Infrastructure.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseProduct> WarehouseProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserManufactureProduct> UserManufactureProducts { get; set; }
+        public virtual ICollection<UserManufacture> UserManufactures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProductHistory> UserProductHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

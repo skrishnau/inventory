@@ -24,9 +24,19 @@ namespace Infrastructure.Context
         public int ManufactureDepartmentId { get; set; }
         public int UserId { get; set; }
         public Nullable<decimal> BuildRate { get; set; }
+        public Nullable<System.DateTime> StartedAt { get; set; }
+        public Nullable<int> StartedByUserId { get; set; }
+        public Nullable<System.DateTime> CompletedAt { get; set; }
+        public Nullable<int> CompletedByUserId { get; set; }
+        public Nullable<System.DateTime> CancelledAt { get; set; }
+        public Nullable<int> CancelledByUserId { get; set; }
+        public string Remarks { get; set; }
     
         public virtual ManufactureDepartment ManufactureDepartment { get; set; }
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
+        public virtual User User2 { get; set; }
+        public virtual User User3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserManufacture> UserManufactures { get; set; }
     }

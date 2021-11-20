@@ -97,7 +97,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="decimal" Precision="9" Scale="2" />
           <Property Name="DeletedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="InventoryUnits">
@@ -135,12 +135,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ManufactureDepartmentId" Type="int" Nullable="false" />
-          <Property Name="ProposedOrProduction" Type="bit" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="PackageId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="11" Scale="2" Nullable="false" />
           <Property Name="InOut" Type="bit" Nullable="false" />
-          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="decimal" Precision="9" Scale="2" />
         </EntityType>
         <EntityType Name="ManufactureDepartments">
           <Key>
@@ -168,7 +167,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ManufactureDepartmentId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="StartedAt" Type="datetime" />
+          <Property Name="StartedByUserId" Type="int" />
+          <Property Name="CompletedAt" Type="datetime" />
+          <Property Name="CompletedByUserId" Type="int" />
+          <Property Name="CancelledAt" Type="datetime" />
+          <Property Name="CancelledByUserId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="ManufactureProducts">
           <Key>
@@ -176,13 +182,12 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ManufactureId" Type="int" Nullable="false" />
-          <Property Name="ProposedOrProduction" Type="bit" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="11" Scale="2" Nullable="false" />
           <Property Name="PackageId" Type="int" Nullable="false" />
           <Property Name="InOut" Type="bit" Nullable="false" />
-          <Property Name="CostRate" Type="decimal" Precision="11" Scale="4" />
-          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="CostRate" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="BuildRate" Type="decimal" Precision="9" Scale="2" />
         </EntityType>
         <EntityType Name="Manufactures">
           <Key>
@@ -431,27 +436,17 @@
           <Property Name="RelatedPackageId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" />
         </EntityType>
-        <EntityType Name="UserManufactureProducts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserManufactureId" Type="int" Nullable="false" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="PackageId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="InOut" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="UserManufactures">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="ManufactureDepartmentUserId" Type="int" Nullable="false" />
-          <Property Name="StartedAt" Type="datetime" />
-          <Property Name="CompletedAt" Type="datetime" />
-          <Property Name="CancelledAt" Type="datetime" />
-          <Property Name="BuildRate" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="InOut" Type="bit" Nullable="false" />
+          <Property Name="BuildRate" Type="decimal" Precision="9" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="UserProductHistories">
@@ -476,7 +471,7 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="PackageId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
@@ -1169,6 +1164,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_CancelledByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ManufactureDepartmentUsers" Type="Self.ManufactureDepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUsers">
+              <PropertyRef Name="CancelledByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_CompletedByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ManufactureDepartmentUsers" Type="Self.ManufactureDepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUsers">
+              <PropertyRef Name="CompletedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_StartedByUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ManufactureDepartmentUsers" Type="Self.ManufactureDepartmentUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUsers">
+              <PropertyRef Name="StartedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ManufactureDepartmentUsers_Users_UserId">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="ManufactureDepartmentUsers" Type="Self.ManufactureDepartmentUsers" Multiplicity="*" />
@@ -1277,39 +1308,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserManufactureProducts_Packages_PackageId">
-          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
-          <End Role="UserManufactureProducts" Type="Self.UserManufactureProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Packages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserManufactureProducts">
-              <PropertyRef Name="PackageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserManufactureProducts_Products_ProductId">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="UserManufactureProducts" Type="Self.UserManufactureProducts" Multiplicity="*" />
+          <End Role="UserManufactures" Type="Self.UserManufactures" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserManufactureProducts">
+            <Dependent Role="UserManufactures">
               <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
-          <End Role="UserManufactures" Type="Self.UserManufactures" Multiplicity="1" />
-          <End Role="UserManufactureProducts" Type="Self.UserManufactureProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserManufactures">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserManufactureProducts">
-              <PropertyRef Name="UserManufactureId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1438,7 +1445,6 @@
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transfers" EntityType="Self.Transfers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Uoms" EntityType="Self.Uoms" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserManufactureProducts" EntityType="Self.UserManufactureProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserManufactures" EntityType="Self.UserManufactures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProductHistories" EntityType="Self.UserProductHistories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProducts" EntityType="Self.UserProducts" Schema="dbo" store:Type="Tables" />
@@ -1657,6 +1663,18 @@
             <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
             <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_CancelledByUserId" Association="Self.FK_ManufactureDepartmentUsers_Users_CancelledByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_CompletedByUserId" Association="Self.FK_ManufactureDepartmentUsers_Users_CompletedByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_StartedByUserId" Association="Self.FK_ManufactureDepartmentUsers_Users_StartedByUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_UserId" Association="Self.FK_ManufactureDepartmentUsers_Users_UserId">
             <End Role="Users" EntitySet="Users" />
             <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
@@ -1693,17 +1711,9 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Manufactures" EntitySet="Manufactures" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserManufactureProducts_Packages_PackageId" Association="Self.FK_UserManufactureProducts_Packages_PackageId">
-            <End Role="Packages" EntitySet="Packages" />
-            <End Role="UserManufactureProducts" EntitySet="UserManufactureProducts" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserManufactureProducts_Products_ProductId" Association="Self.FK_UserManufactureProducts_Products_ProductId">
             <End Role="Products" EntitySet="Products" />
-            <End Role="UserManufactureProducts" EntitySet="UserManufactureProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" Association="Self.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
             <End Role="UserManufactures" EntitySet="UserManufactures" />
-            <End Role="UserManufactureProducts" EntitySet="UserManufactureProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" Association="Self.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId">
             <End Role="ManufactureDepartmentUsers" EntitySet="ManufactureDepartmentUsers" />
@@ -1771,7 +1781,6 @@
           <EntitySet Name="Transactions" EntityType="Entities.Transaction" />
           <EntitySet Name="Transfers" EntityType="Entities.Transfer" />
           <EntitySet Name="Uoms" EntityType="Entities.Uom" />
-          <EntitySet Name="UserManufactureProducts" EntityType="Entities.UserManufactureProduct" />
           <EntitySet Name="UserManufactures" EntityType="Entities.UserManufacture" />
           <EntitySet Name="UserProductHistories" EntityType="Entities.UserProductHistory" />
           <EntitySet Name="UserProducts" EntityType="Entities.UserProduct" />
@@ -1860,6 +1869,18 @@
           </AssociationSet>
           <AssociationSet Name="FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" Association="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId">
             <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
+            <End Role="ManufactureDepartmentUser" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_CancelledByUserId" Association="Entities.FK_ManufactureDepartmentUsers_Users_CancelledByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureDepartmentUser" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_CompletedByUserId" Association="Entities.FK_ManufactureDepartmentUsers_Users_CompletedByUserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureDepartmentUser" EntitySet="ManufactureDepartmentUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_StartedByUserId" Association="Entities.FK_ManufactureDepartmentUsers_Users_StartedByUserId">
+            <End Role="User" EntitySet="Users" />
             <End Role="ManufactureDepartmentUser" EntitySet="ManufactureDepartmentUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_ManufactureDepartmentUsers_Users_UserId" Association="Entities.FK_ManufactureDepartmentUsers_Users_UserId">
@@ -1974,10 +1995,6 @@
             <End Role="Package" EntitySet="Packages" />
             <End Role="Uom" EntitySet="Uoms" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserManufactureProducts_Packages_PackageId" Association="Entities.FK_UserManufactureProducts_Packages_PackageId">
-            <End Role="Package" EntitySet="Packages" />
-            <End Role="UserManufactureProduct" EntitySet="UserManufactureProducts" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserProductHistories_Packages_PackageId" Association="Entities.FK_UserProductHistories_Packages_PackageId">
             <End Role="Package" EntitySet="Packages" />
             <End Role="UserProductHistory" EntitySet="UserProductHistories" />
@@ -2024,7 +2041,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_UserManufactureProducts_Products_ProductId" Association="Entities.FK_UserManufactureProducts_Products_ProductId">
             <End Role="Product" EntitySet="Products" />
-            <End Role="UserManufactureProduct" EntitySet="UserManufactureProducts" />
+            <End Role="UserManufacture" EntitySet="UserManufactures" />
           </AssociationSet>
           <AssociationSet Name="FK_UserProductHistories_Products_ProductId" Association="Entities.FK_UserProductHistories_Products_ProductId">
             <End Role="Product" EntitySet="Products" />
@@ -2049,10 +2066,6 @@
           <AssociationSet Name="FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId" Association="Entities.FK_dbo_Transfers_dbo_Warehouses_ToWarehouseId">
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="Transfer" EntitySet="Transfers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" Association="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
-            <End Role="UserManufacture" EntitySet="UserManufactures" />
-            <End Role="UserManufactureProduct" EntitySet="UserManufactureProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_UserProductHistories_Users_FromUserId" Association="Entities.FK_UserProductHistories_Users_FromUserId">
             <End Role="User" EntitySet="Users" />
@@ -2171,7 +2184,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Department" Relationship="Entities.FK_DepartmentUsers_Departments_DepartmentId" FromRole="DepartmentUser" ToRole="Department" />
           <NavigationProperty Name="User" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="DepartmentUser" ToRole="User" />
@@ -2216,12 +2229,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ManufactureDepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="ProposedOrProduction" Type="Boolean" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="PackageId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="11" Scale="2" />
           <Property Name="InOut" Type="Boolean" Nullable="false" />
-          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="Decimal" Precision="9" Scale="2" />
           <NavigationProperty Name="ManufactureDepartment" Relationship="Entities.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" FromRole="ManufactureDepartmentProduct" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="Package" Relationship="Entities.FK_ManufactureDepartmentProducts_Packages_PackageId" FromRole="ManufactureDepartmentProduct" ToRole="Package" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_ManufactureDepartmentProducts_Products_ProductId" FromRole="ManufactureDepartmentProduct" ToRole="Product" />
@@ -2260,9 +2272,19 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ManufactureDepartmentId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="BuildRate" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="StartedAt" Type="DateTime" Precision="3" />
+          <Property Name="StartedByUserId" Type="Int32" />
+          <Property Name="CompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="CompletedByUserId" Type="Int32" />
+          <Property Name="CancelledAt" Type="DateTime" Precision="3" />
+          <Property Name="CancelledByUserId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ManufactureDepartment" Relationship="Entities.FK_ManufactureDepartmentUsers_ManufactureDepartments_ManufactureDepartmentId" FromRole="ManufactureDepartmentUser" ToRole="ManufactureDepartment" />
-          <NavigationProperty Name="User" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_UserId" FromRole="ManufactureDepartmentUser" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_CancelledByUserId" FromRole="ManufactureDepartmentUser" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_CompletedByUserId" FromRole="ManufactureDepartmentUser" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_StartedByUserId" FromRole="ManufactureDepartmentUser" ToRole="User" />
+          <NavigationProperty Name="User3" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_UserId" FromRole="ManufactureDepartmentUser" ToRole="User" />
           <NavigationProperty Name="UserManufactures" Relationship="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" FromRole="ManufactureDepartmentUser" ToRole="UserManufacture" />
         </EntityType>
         <EntityType Name="ManufactureProduct">
@@ -2271,13 +2293,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ManufactureId" Type="Int32" Nullable="false" />
-          <Property Name="ProposedOrProduction" Type="Boolean" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="11" Scale="2" />
           <Property Name="PackageId" Type="Int32" Nullable="false" />
           <Property Name="InOut" Type="Boolean" Nullable="false" />
-          <Property Name="CostRate" Type="Decimal" Precision="11" Scale="4" />
-          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="CostRate" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="BuildRate" Type="Decimal" Precision="9" Scale="2" />
           <NavigationProperty Name="Manufacture" Relationship="Entities.FK_ManufactureProducts_Manufatures_ManufactureId" FromRole="ManufactureProduct" ToRole="Manufacture" />
           <NavigationProperty Name="Package" Relationship="Entities.FK_ManufactureProducts_Packages_PackageId" FromRole="ManufactureProduct" ToRole="Package" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_ManufactureProducts_Products_ProductId" FromRole="ManufactureProduct" ToRole="Product" />
@@ -2418,7 +2439,6 @@
           <NavigationProperty Name="ProductPackages" Relationship="Entities.FK_dbo_ProductPackages_dbo_Packages_PackageId" FromRole="Package" ToRole="ProductPackage" />
           <NavigationProperty Name="Uoms" Relationship="Entities.FK_dbo_Uoms_dbo_Packages_PackageId" FromRole="Package" ToRole="Uom" />
           <NavigationProperty Name="Uoms1" Relationship="Entities.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" FromRole="Package" ToRole="Uom" />
-          <NavigationProperty Name="UserManufactureProducts" Relationship="Entities.FK_UserManufactureProducts_Packages_PackageId" FromRole="Package" ToRole="UserManufactureProduct" />
           <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Packages_PackageId" FromRole="Package" ToRole="UserProductHistory" />
           <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Packages_PackageId" FromRole="Package" ToRole="UserProduct" />
         </EntityType>
@@ -2534,7 +2554,7 @@
           <NavigationProperty Name="Warehouse" Relationship="Entities.FK_dbo_Products_dbo_Warehouses_WarehouseId" FromRole="Product" ToRole="Warehouse" />
           <NavigationProperty Name="Uoms" Relationship="Entities.FK_dbo_Uoms_dbo_Products_ProductId" FromRole="Product" ToRole="Uom" />
           <NavigationProperty Name="WarehouseProducts" Relationship="Entities.FK_dbo_WarehouseProducts_dbo_Products_ProductId" FromRole="Product" ToRole="WarehouseProduct" />
-          <NavigationProperty Name="UserManufactureProducts" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="Product" ToRole="UserManufactureProduct" />
+          <NavigationProperty Name="UserManufactures" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="Product" ToRole="UserManufacture" />
           <NavigationProperty Name="UserProductHistories" Relationship="Entities.FK_UserProductHistories_Products_ProductId" FromRole="Product" ToRole="UserProductHistory" />
           <NavigationProperty Name="UserProducts" Relationship="Entities.FK_UserProducts_Products_ProductId" FromRole="Product" ToRole="UserProduct" />
         </EntityType>
@@ -2601,33 +2621,20 @@
           <NavigationProperty Name="Package1" Relationship="Entities.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" FromRole="Uom" ToRole="Package" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_dbo_Uoms_dbo_Products_ProductId" FromRole="Uom" ToRole="Product" />
         </EntityType>
-        <EntityType Name="UserManufactureProduct">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserManufactureId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="PackageId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="InOut" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Package" Relationship="Entities.FK_UserManufactureProducts_Packages_PackageId" FromRole="UserManufactureProduct" ToRole="Package" />
-          <NavigationProperty Name="Product" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="UserManufactureProduct" ToRole="Product" />
-          <NavigationProperty Name="UserManufacture" Relationship="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" FromRole="UserManufactureProduct" ToRole="UserManufacture" />
-        </EntityType>
         <EntityType Name="UserManufacture">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ManufactureDepartmentUserId" Type="Int32" Nullable="false" />
-          <Property Name="StartedAt" Type="DateTime" Precision="3" />
-          <Property Name="CompletedAt" Type="DateTime" Precision="3" />
-          <Property Name="CancelledAt" Type="DateTime" Precision="3" />
-          <Property Name="BuildRate" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="11" Scale="2" />
+          <Property Name="InOut" Type="Boolean" Nullable="false" />
+          <Property Name="BuildRate" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ManufactureDepartmentUser" Relationship="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" FromRole="UserManufacture" ToRole="ManufactureDepartmentUser" />
-          <NavigationProperty Name="UserManufactureProducts" Relationship="Entities.FK_UserManufactureProducts_UserManufactures_UserProductManufactureId" FromRole="UserManufacture" ToRole="UserManufactureProduct" />
+          <NavigationProperty Name="Product" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="UserManufacture" ToRole="Product" />
         </EntityType>
         <EntityType Name="UserProductHistory">
           <Key>
@@ -2655,7 +2662,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="PackageId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Package" Relationship="Entities.FK_UserProducts_Packages_PackageId" FromRole="UserProduct" ToRole="Package" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_UserProducts_Products_ProductId" FromRole="UserProduct" ToRole="Product" />
@@ -2697,7 +2704,10 @@
           <NavigationProperty Name="ManufactureDepartments1" Relationship="Entities.FK_ManufactureDepartments_Users_CompletedByUserId" FromRole="User" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="ManufactureDepartments2" Relationship="Entities.FK_ManufactureDepartments_Users_StartedByUserId" FromRole="User" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="ManufactureDepartments3" Relationship="Entities.FK_ManufactureDepartments_Users_UserId" FromRole="User" ToRole="ManufactureDepartment" />
-          <NavigationProperty Name="ManufactureDepartmentUsers" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_UserId" FromRole="User" ToRole="ManufactureDepartmentUser" />
+          <NavigationProperty Name="ManufactureDepartmentUsers" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_CancelledByUserId" FromRole="User" ToRole="ManufactureDepartmentUser" />
+          <NavigationProperty Name="ManufactureDepartmentUsers1" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_CompletedByUserId" FromRole="User" ToRole="ManufactureDepartmentUser" />
+          <NavigationProperty Name="ManufactureDepartmentUsers2" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_StartedByUserId" FromRole="User" ToRole="ManufactureDepartmentUser" />
+          <NavigationProperty Name="ManufactureDepartmentUsers3" Relationship="Entities.FK_ManufactureDepartmentUsers_Users_UserId" FromRole="User" ToRole="ManufactureDepartmentUser" />
           <NavigationProperty Name="Manufactures" Relationship="Entities.FK_Manufactures_Users_CancelledByUserId" FromRole="User" ToRole="Manufacture" />
           <NavigationProperty Name="Manufactures1" Relationship="Entities.FK_Manufactures_Users_CompletedByUserId" FromRole="User" ToRole="Manufacture" />
           <NavigationProperty Name="Manufactures2" Relationship="Entities.FK_Manufactures_Users_CreatedByUserId" FromRole="User" ToRole="Manufacture" />
@@ -2994,6 +3004,42 @@
             </Principal>
             <Dependent Role="ManufactureDepartmentUser">
               <PropertyRef Name="ManufactureDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_CancelledByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ManufactureDepartmentUser" Role="ManufactureDepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUser">
+              <PropertyRef Name="CancelledByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_CompletedByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ManufactureDepartmentUser" Role="ManufactureDepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUser">
+              <PropertyRef Name="CompletedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureDepartmentUsers_Users_StartedByUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.ManufactureDepartmentUser" Role="ManufactureDepartmentUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ManufactureDepartmentUser">
+              <PropertyRef Name="StartedByUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3333,18 +3379,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserManufactureProducts_Packages_PackageId">
-          <End Type="Entities.Package" Role="Package" Multiplicity="1" />
-          <End Type="Entities.UserManufactureProduct" Role="UserManufactureProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Package">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserManufactureProduct">
-              <PropertyRef Name="PackageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserProductHistories_Packages_PackageId">
           <End Type="Entities.Package" Role="Package" Multiplicity="1" />
           <End Type="Entities.UserProductHistory" Role="UserProductHistory" Multiplicity="*" />
@@ -3479,12 +3513,12 @@
         </Association>
         <Association Name="FK_UserManufactureProducts_Products_ProductId">
           <End Type="Entities.Product" Role="Product" Multiplicity="1" />
-          <End Type="Entities.UserManufactureProduct" Role="UserManufactureProduct" Multiplicity="*" />
+          <End Type="Entities.UserManufacture" Role="UserManufacture" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserManufactureProduct">
+            <Dependent Role="UserManufacture">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3558,18 +3592,6 @@
             </Principal>
             <Dependent Role="Transfer">
               <PropertyRef Name="ToWarehouseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserManufactureProducts_UserManufactures_UserProductManufactureId">
-          <End Type="Entities.UserManufacture" Role="UserManufacture" Multiplicity="1" />
-          <End Type="Entities.UserManufactureProduct" Role="UserManufactureProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserManufacture">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserManufactureProduct">
-              <PropertyRef Name="UserManufactureId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3768,7 +3790,6 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProposedOrProduction" ColumnName="ProposedOrProduction" />
                 <ScalarProperty Name="ManufactureDepartmentId" ColumnName="ManufactureDepartmentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -3797,6 +3818,13 @@
           <EntitySetMapping Name="ManufactureDepartmentUsers">
             <EntityTypeMapping TypeName="Entities.ManufactureDepartmentUser">
               <MappingFragment StoreEntitySet="ManufactureDepartmentUsers">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CancelledByUserId" ColumnName="CancelledByUserId" />
+                <ScalarProperty Name="CancelledAt" ColumnName="CancelledAt" />
+                <ScalarProperty Name="CompletedByUserId" ColumnName="CompletedByUserId" />
+                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
+                <ScalarProperty Name="StartedByUserId" ColumnName="StartedByUserId" />
+                <ScalarProperty Name="StartedAt" ColumnName="StartedAt" />
                 <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ManufactureDepartmentId" ColumnName="ManufactureDepartmentId" />
@@ -3813,7 +3841,6 @@
                 <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProposedOrProduction" ColumnName="ProposedOrProduction" />
                 <ScalarProperty Name="ManufactureId" ColumnName="ManufactureId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -4080,27 +4107,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserManufactureProducts">
-            <EntityTypeMapping TypeName="Entities.UserManufactureProduct">
-              <MappingFragment StoreEntitySet="UserManufactureProducts">
-                <ScalarProperty Name="InOut" ColumnName="InOut" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="UserManufactureId" ColumnName="UserManufactureId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserManufactures">
             <EntityTypeMapping TypeName="Entities.UserManufacture">
               <MappingFragment StoreEntitySet="UserManufactures">
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
-                <ScalarProperty Name="CancelledAt" ColumnName="CancelledAt" />
-                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
-                <ScalarProperty Name="StartedAt" ColumnName="StartedAt" />
+                <ScalarProperty Name="InOut" ColumnName="InOut" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ManufactureDepartmentUserId" ColumnName="ManufactureDepartmentUserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
