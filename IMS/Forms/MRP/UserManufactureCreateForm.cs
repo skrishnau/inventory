@@ -84,16 +84,10 @@ namespace IMS.Forms.MRP
                 BuildRate = _manufactureDepartmentUserModel.BuildRate,
                 ManufactureDepartmentUserId = _manufactureDepartmentUserModel.Id,
                 UserId = _userId,
-                UserManufactureProducts = new List<UserManufactureProductModel>
-                {
-                    new UserManufactureProductModel{
-                        ProductId = _manufactureProductModel.ProductId,
-                        InOut = false,
-                        PackageId = _manufactureProductModel.PackageId,
-                        Quantity = txtQuantity.Value,
-                        //UserId = _userId,
-                    }
-                }
+                Date = DateTime.Now,
+                InOut = false,
+                ProductId = _manufactureProductModel.ProductId,
+                Quantity = txtQuantity.Value,
             };
             var response = _manufactureService.AddUserManufacture(userManufactureModel);
         }

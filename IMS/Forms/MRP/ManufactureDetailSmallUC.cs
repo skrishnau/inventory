@@ -125,7 +125,7 @@ namespace IMS.Forms.MRP
                     var departmentId = GetSelectedDepartmentId();
                     if (departmentId > 0)
                     {
-                        var userId = employee.UserId;//
+                        var userId = employee.UserId;
                         if (userId > 0)
                         {
                             var employeHistory = _manufactureService.GetEmployeesHistoryOfManufactureDepartment(_model.Id, departmentId ?? 0, userId);

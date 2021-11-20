@@ -156,9 +156,6 @@
     <Compile Include="Context\UserManufacture.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\UserManufactureProduct.cs">
-      <DependentUpon>DatabaseContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\UserProduct.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>

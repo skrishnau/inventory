@@ -38,11 +38,9 @@ namespace DTO.Core
         {
             CreateMap<UserManufacture, UserManufactureModel>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src=>src.ManufactureDepartmentUser.UserId))
-                .ForMember(dest => dest.UserManufactureProducts, opt => opt.Ignore())
                 ;
             CreateMap<UserManufactureModel, UserManufacture>()
                 .ForMember(dest => dest.ManufactureDepartmentUser, opt => opt.Ignore())
-                .ForMember(dest => dest.UserManufactureProducts, opt => opt.Ignore())
                 ;
         }
     }

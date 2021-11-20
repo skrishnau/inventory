@@ -385,24 +385,24 @@ namespace Service.Core
             }
         }
 
-        public List<UserManufactureProductModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId)
+        public List<UserManufactureModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId)
         {
             using (var _context = DatabaseContext.Context)
             {
-                return _context.UserManufactureProducts
-                    .Where(x => x.UserManufacture.ManufactureDepartmentUser.ManufactureDepartment.ManufactureId == manufactureId
-                                && x.UserManufacture.ManufactureDepartmentUser.ManufactureDepartment.DepartmentId == departmentId
+                return _context.UserManufactures
+                    .Where(x => x.ManufactureDepartmentUser.ManufactureDepartment.ManufactureId == manufactureId
+                                && x.ManufactureDepartmentUser.ManufactureDepartment.DepartmentId == departmentId
                                 && x.InOut == false /*only out*/)
-                    .Select(s => new UserManufactureProductModel
+                    .Select(s => new UserManufactureModel
                     {
                         InOut = s.InOut,
-                        PackageId = s.PackageId,
-                        PackageName = s.Package.Name,
+                        PackageId = s.ManufactureDepartmentUser.ManufactureDepartment.Manufacture.ManufactureProducts.FirstOrDefault().PackageId,
+                        PackageName = s.ManufactureDepartmentUser.ManufactureDepartment.Manufacture.ManufactureProducts.FirstOrDefault().Package.Name,
                         ProductId = s.ProductId,
                         ProductName = s.Product.Name,
                         Quantity = s.Quantity,
-                        UserId = s.UserManufacture.ManufactureDepartmentUser.UserId,
-                        UserManufactureId = s.UserManufactureId
+                        UserId = s.ManufactureDepartmentUser.UserId,
+                        
                     }).ToList();
 
             }
@@ -418,35 +418,32 @@ namespace Service.Core
             }
         }
 
-        public ResponseModel<UserManufactureModel> AddUserManufacture(UserManufactureModel userManufactureModel)
+        public ResponseModel<UserManufactureModel> AddUserManufacture(UserManufactureModel model)
         {
             using (var _context = DatabaseContext.Context)
             {
-                var userManufactureEntity = _context.UserManufactures.FirstOrDefault(x => x.ManufactureDepartmentUserId == userManufactureModel.ManufactureDepartmentUserId);
-                if (userManufactureEntity == null)
+                var manufactureDepartmentUser = _context.ManufactureDepartmentUsers.FirstOrDefault(x => x.Id == model.ManufactureDepartmentUserId);
+                if (manufactureDepartmentUser == null)
                 {
-                    userManufactureEntity = new UserManufacture
-                    {
-                        BuildRate = userManufactureModel.BuildRate,
-                        StartedAt = DateTime.Now,
-                        ManufactureDepartmentUserId = userManufactureModel.ManufactureDepartmentUserId,
-
-                    };
+                    return new ResponseModel<UserManufactureModel> { Success = false, Message = "User not found!" };
                 }
-                foreach (var uProd in userManufactureModel.UserManufactureProducts)
+                if (manufactureDepartmentUser.StartedAt == null)
+                    manufactureDepartmentUser.StartedAt = DateTime.Now;
+                var userManufactureEntity = new UserManufacture
                 {
-                    var userManufactureProduct = new UserManufactureProduct
-                    {
-                        InOut = false,
-                        PackageId = uProd.PackageId,
-                        ProductId = uProd.ProductId,
-                        Quantity = uProd.Quantity,
-                        
-
-                    };
-                    userManufactureEntity.UserManufactureProducts.Add(userManufactureProduct);
-                }
-                return new ResponseModel<UserManufactureModel> { Message = Constants.SAVED_SUCCESSFULLY, Data = userManufactureModel, Success = true };
+                    BuildRate = model.BuildRate,
+                    Date = model.Date,
+                    //ManufactureDepartmentUserId = model.ManufactureDepartmentUserId,
+                    InOut = model.InOut,
+                    ProductId = model.ProductId,
+                    Quantity = model.Quantity,
+                };
+                manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
+                _context.SaveChanges();
+                var manufacture = _context.ManufactureDepartmentUsers.FirstOrDefault(x => x.Id == model.ManufactureDepartmentUserId)
+                    .ManufactureDepartment.Manufacture.MapToModel();
+                _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(manufacture, Utility.UpdateMode.ADD));
+                return new ResponseModel<UserManufactureModel> { Message = Constants.SAVED_SUCCESSFULLY, Data = model, Success = true };
             }
         }
 

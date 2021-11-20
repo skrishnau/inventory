@@ -24,7 +24,7 @@ namespace Service.Interfaces
         ResponseModel<bool> SetManufactureStart(int id);
         List<ManufactureDepartmentUserModel> GetEmployeesOfManufactureDepartment(int manufactureId, int depId);
         ManufactureDepartmentUserModel GetManufactureDepartmentUser(int manufactureId, int departmentId, int userId);
-        List<UserManufactureProductModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId);
         ResponseModel<UserManufactureModel> AddUserManufacture(UserManufactureModel userManufactureModel);
+        List<UserManufactureModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId);
     }
 }
