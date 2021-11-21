@@ -188,6 +188,8 @@
             // chkAssignToNextDepartment
             // 
             this.chkAssignToNextDepartment.AutoSize = true;
+            this.chkAssignToNextDepartment.Checked = true;
+            this.chkAssignToNextDepartment.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAssignToNextDepartment.Location = new System.Drawing.Point(3, 6);
             this.chkAssignToNextDepartment.Name = "chkAssignToNextDepartment";
             this.chkAssignToNextDepartment.Size = new System.Drawing.Size(152, 17);

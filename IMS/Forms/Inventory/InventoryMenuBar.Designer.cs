@@ -55,6 +55,7 @@
             this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnPOS = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -86,7 +87,6 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.splitter8 = new System.Windows.Forms.Splitter();
             this.pnlManufacture = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.splitter9 = new System.Windows.Forms.Splitter();
             this.panel1.SuspendLayout();
@@ -226,6 +226,7 @@
             this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnVendor, "Inventory Units");
             this.btnVendor.UseVisualStyleBackColor = true;
+            this.btnVendor.Visible = false;
             // 
             // btnDepartment
             // 
@@ -242,6 +243,7 @@
             this.btnDepartment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnDepartment, "Inventory Units");
             this.btnDepartment.UseVisualStyleBackColor = true;
+            this.btnDepartment.Visible = false;
             // 
             // btnManufacturings
             // 
@@ -510,6 +512,18 @@
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnHome, "Go to Dashboard");
             this.btnHome.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(235, 15);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "MRP";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label8, "Manufacture Resource Planning");
             // 
             // panel1
             // 
@@ -845,18 +859,6 @@
             this.pnlManufacture.Name = "pnlManufacture";
             this.pnlManufacture.Size = new System.Drawing.Size(235, 68);
             this.pnlManufacture.TabIndex = 60;
-            // 
-            // label8
-            // 
-            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(0, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(235, 15);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "MRP";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label8, "Manufacture Resource Planning");
             // 
             // panel11
             // 

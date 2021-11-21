@@ -63,7 +63,7 @@ namespace IMS.Forms.MRP
 
             lblEmployeeName.Text = _manufactureDepartmentUserModel.Name + " (" + _manufactureDepartmentModel.Name + ")";
 
-            dgvDepartments.Enabled = false;
+            //dgvDepartments.Enabled = false;
 
             _departmentProductModels = _manufactureDepartmentModel.ManufactureDepartmentProducts
                 .Where(x => x.InOut == _inOut)
@@ -156,8 +156,15 @@ namespace IMS.Forms.MRP
                 Quantity = txtQuantity.Value,
                 NextProductOwners = newOwners,
                 DepartmentId = _manufactureDepartmentModel.DepartmentId,
+                PackageId = packageId,
             };
             var response = _manufactureService.AddUserManufacture(userManufactureModel);
+            PopupMessage.ShowMessage(response.Success, response.Message);
+            if (response.Success)
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
     }

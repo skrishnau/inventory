@@ -3,6 +3,7 @@ using Infrastructure.Context;
 using Service.Core.Settings;
 using Service.Interfaces;
 using Service.Listeners;
+using Service.Listeners.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core;
+using ViewModel.Core.Inventory;
 using ViewModel.Enums;
 using ViewModel.Utility;
 
@@ -439,7 +441,7 @@ namespace Service.Core
         {
             using (var _context = DatabaseContext.Context)
             {
-                return _context.UserManufactures
+                var manu = _context.UserManufactures
                     .Where(x => x.ManufactureDepartmentUser.ManufactureDepartment.ManufactureId == manufactureId
                                 && x.ManufactureDepartmentUser.ManufactureDepartment.DepartmentId == departmentId
                                 && x.InOut == false /*only out*/)
@@ -452,9 +454,9 @@ namespace Service.Core
                         ProductName = s.Product.Name,
                         Quantity = s.Quantity,
                         UserId = s.ManufactureDepartmentUser.UserId,
-
                     }).ToList();
-
+                manu.ForEach(x => x.DateString = DateConverter.Instance.ToBS(x.Date).ToString());
+                return manu;
             }
         }
 
@@ -488,25 +490,32 @@ namespace Service.Core
                     ProductId = model.ProductId,
                     Quantity = model.Quantity,
                 };
-                    var product = _context.Products.FirstOrDefault(x => x.Id == model.ProductId);
+                 var product = _context.Products.FirstOrDefault(x => x.Id == model.ProductId);
+                 var basePackageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).PackageId;
+                var convertedQuantityManufactured = _uomService.ConvertUom(model.PackageId, basePackageId, model.ProductId, model.Quantity);
+                if (convertedQuantityManufactured == 0)
+                    return new ResponseModel<UserManufactureModel> { Success = false, Message = "Couldn't convert the manufactured Unit to Base Unit of the product!"};
+                product.InStockQuantity += convertedQuantityManufactured;
                 if(model.Quantity > model.NextProductOwners.Sum(x => x.Quantity))
                 {
                     var qty = model.Quantity = model.NextProductOwners.Sum(x => x.Quantity);
-                    var po = _context.ProductOwners.FirstOrDefault(x => x.DepartmentId == model.DepartmentId);
-                    var packageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).Id;
-                    if (po == null)
+                    if (qty > 0)
                     {
-                        po = new ProductOwner
+                        var po = _context.ProductOwners.FirstOrDefault(x => x.DepartmentId == model.DepartmentId);
+                        if (po == null)
                         {
-                            DepartmentId = model.DepartmentId,
-                            PackageId = packageId,
-                            ProductId = model.ProductId,
-                            UserId = null,
-                        };
-                        _context.ProductOwners.Add(po);
+                            po = new ProductOwner
+                            {
+                                DepartmentId = model.DepartmentId,
+                                PackageId = basePackageId,
+                                ProductId = model.ProductId,
+                                UserId = null,
+                            };
+                            _context.ProductOwners.Add(po);
+                        }
+                        po.Quantity += _uomService.ConvertUom(model.PackageId, basePackageId, model.ProductId, qty); ;
+                        po.UpdatedAt = DateTime.Now;
                     }
-                    po.Quantity += _uomService.ConvertUom(model.PackageId, packageId, model.ProductId, qty);
-                    po.UpdatedAt = DateTime.Now;
                 }
                 manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
                 var poHistoryAddSameDep = new ProductOwnerHistory()
@@ -526,60 +535,59 @@ namespace Service.Core
 
                 if (model.NextProductOwners != null && model.NextProductOwners.Count > 0)
                 {
-                   
-
                     foreach (var poModel in model.NextProductOwners)
                     {
-                        var po = _context.ProductOwners.FirstOrDefault(x => x.DepartmentId == poModel.DepartmentId);
-                        var packageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).Id;
-                        if (po == null)
+                        if (poModel.Quantity > 0)
                         {
-                            po = new ProductOwner
+                            var po = _context.ProductOwners.FirstOrDefault(x => x.DepartmentId == poModel.DepartmentId);
+                            if (po == null)
+                            {
+                                po = new ProductOwner
+                                {
+                                    DepartmentId = poModel.DepartmentId,
+                                    PackageId = basePackageId,
+                                    ProductId = model.ProductId,
+                                    UserId = null,
+                                };
+                                _context.ProductOwners.Add(po);
+                            }
+                            po.Quantity += _uomService.ConvertUom(model.PackageId, basePackageId, model.ProductId, po.Quantity);
+                            po.UpdatedAt = DateTime.Now;
+                            // add to next department
+                            var poHistory = new ProductOwnerHistory()
                             {
                                 DepartmentId = poModel.DepartmentId,
-                                PackageId = packageId,
-                                ProductId = model.ProductId,
+                                InOut = true,
+                                Quantity = poModel.Quantity,
+                                UpdatedAt = DateTime.Now,
+                                Remarks = "Direct Transfer to another department after manufacture",
                                 UserId = null,
+                                ProductId = poModel.ProductId,
+                                PackageId = poModel.PackageId,
                             };
-                            _context.ProductOwners.Add(po);
-                        }
-                        po.Quantity += _uomService.ConvertUom(model.PackageId, packageId, model.ProductId, po.Quantity);
-                        po.UpdatedAt = DateTime.Now;
-                        // add to next department
-                        var poHistory = new ProductOwnerHistory()
-                        {
-                            DepartmentId = poModel.DepartmentId,
-                            InOut = true,
-                            Quantity = poModel.Quantity,
-                            UpdatedAt = DateTime.Now,
-                            Remarks = "Direct Transfer to another department after manufacture",
-                            UserId = null,
-                            ProductId = poModel.ProductId,
-                            PackageId = poModel.PackageId,
-                        };
-                        _context.ProductOwnerHistories.Add(poHistory);
+                            _context.ProductOwnerHistories.Add(poHistory);
 
-                        // subtract from same department
-                        var poHistorySubtractSameDep = new ProductOwnerHistory()
-                        {
-                            DepartmentId = model.DepartmentId,
-                            InOut = false,
-                            Quantity = poModel.Quantity,
-                            UpdatedAt = DateTime.Now,
-                            Remarks = "Direct Transfer to another department after manufacture",
-                            UserId = null,
-                            ProductId = poModel.ProductId,
-                            PackageId = poModel.PackageId,
-                        };
-                        _context.ProductOwnerHistories.Add(poHistorySubtractSameDep);
+                            // subtract from same department
+                            var poHistorySubtractSameDep = new ProductOwnerHistory()
+                            {
+                                DepartmentId = model.DepartmentId,
+                                InOut = false,
+                                Quantity = poModel.Quantity,
+                                UpdatedAt = DateTime.Now,
+                                Remarks = "Direct Transfer to another department after manufacture",
+                                UserId = null,
+                                ProductId = poModel.ProductId,
+                                PackageId = poModel.PackageId,
+                            };
+                            _context.ProductOwnerHistories.Add(poHistorySubtractSameDep);
+                        }
                     }
                 }
-
-
                 _context.SaveChanges();
                 var manufacture = _context.ManufactureDepartmentUsers.FirstOrDefault(x => x.Id == model.ManufactureDepartmentUserId)
                     .ManufactureDepartment.Manufacture.MapToModel();
                 _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(manufacture, Utility.UpdateMode.ADD));
+                _listener.TriggerProductUpdateEvent(null, new ProductEventArgs(null));
                 return new ResponseModel<UserManufactureModel> { Message = Constants.SAVED_SUCCESSFULLY, Data = model, Success = true };
             }
         }

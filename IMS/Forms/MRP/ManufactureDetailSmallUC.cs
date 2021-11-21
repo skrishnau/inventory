@@ -56,7 +56,11 @@ namespace IMS.Forms.MRP
                     {
                         var productCreate = Program.container.GetInstance<UserManufactureCreateForm>();
                         productCreate.SetDataForEdit(0, _model.Id, departmentId ?? 0, userId ?? 0, false);
-                        productCreate.ShowDialog();
+                        var dialogResult = productCreate.ShowDialog();
+                        if(dialogResult == DialogResult.OK)
+                        {
+                            PopulateEmployeesHistory();
+                        }
                     }
                 }
             }
