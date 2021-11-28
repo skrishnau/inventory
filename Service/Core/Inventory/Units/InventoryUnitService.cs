@@ -9,6 +9,7 @@ using System.Data.Entity;
 using Service.Utility;
 using Service.DbEventArgs;
 using Service.Interfaces;
+using ViewModel.Enums;
 
 namespace Service.Core.Inventory.Units
 {
@@ -452,15 +453,22 @@ namespace Service.Core.Inventory.Units
             var unitEntity = unit.MapToEntity();
             unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
             unitEntity.ReceiveAdjustment = adjustmentCode;
-            unitEntity.User = orderItem.User;
-            unitEntity.SupplierId = orderItem.SupplierId;
+            if (orderItem != null)
+            {
+                unitEntity.User = orderItem.User;
+                unitEntity.SupplierId = orderItem.SupplierId;
+            }
             unitEntity.ReceiveReceipt = unit.ReceiveReceipt;//reference;
             _context.InventoryUnits.Add(unitEntity);
 
             if (product == null)
                 product = _context.Products.Find(unit.ProductId);
-
-            var description = $"Received {Math.Round(unit.UnitQuantity, 2)} {package?.Name ?? ""} of {product.Name} @ {Math.Round(unit.Rate, 2)}";
+            var actionType = "Received";
+            if (adjustmentCode == MovementTypeEnum.Manufacture.ToString())
+            {
+                actionType = "Manufactured";
+            }
+            var description = $"{actionType} {Math.Round(unit.UnitQuantity, 2)} {package?.Name ?? ""} of {product.Name} @ {Math.Round(unit.Rate, 2)}";
             AddMovementWithoutCoomit(_context, description, reference, adjustmentCode, unit.UnitQuantity, movementDate, unit.ProductId);//"Direct Receive"
             var invMovement = new InventoryMovementModel
             {
@@ -468,11 +476,12 @@ namespace Service.Core.Inventory.Units
                 UnitQuantity = unit.UnitQuantity,
                 SourceWarehouseId = null,
                 TargetWarehouseId = unit.WarehouseId,
-                InventoryUnit = unit
+                InventoryUnit = unit,
             };
 
             UpdateWarehouseProductWithoutCommit(_context, invMovement, product);
-            unitEntity.OrderItem = orderItem;
+            if(orderItem != null && orderItem.Id > 0)
+                unitEntity.OrderItem = orderItem;
             return unitEntity;
         }
         public string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode)

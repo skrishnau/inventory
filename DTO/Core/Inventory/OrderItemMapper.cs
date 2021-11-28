@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Context;
 using System.Collections.Generic;
 using System.Linq;
+using ViewModel.Core;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
 using ViewModel.Enums;
@@ -193,6 +194,30 @@ namespace DTO.Core.Inventory
                 Rate = orderType == OrderTypeEnum.Sale? (model.CostPriceRate ?? 0): model.Rate,
 
 
+            };
+        }
+
+        public static InventoryUnitModel MapToInventoryUnitModel(this UserManufactureModel model)
+        {
+            return new InventoryUnitModel()
+            {
+                Id = model.Id,
+                UnitQuantity = model.Quantity,
+                Product = model.ProductName ?? "",
+                //SKU = model.Product?.SKU ?? "",
+                //IsHold = model.IsHold,
+                ProductId = model.ProductId,
+                //WarehouseId = model.WarehouseId ?? 0,
+                //Warehouse = model.Warehouse?.Name ?? "",
+                //SupplierId = model.SupplierId,
+                //Supplier = model.User?.Name ?? "",
+                //GrossWeight = model.GrossWeight,
+                //LotNumber = model.LotNumber,
+                //NetWeight = model.NetWeight,
+                Package = model.PackageName ?? "",
+                PackageId = model.PackageId,
+                //PackageQuantity = model.PackageQuantity,
+                Rate = model.BuildRate ?? 0,//orderType == OrderTypeEnum.Sale ? (model.CostPriceRate ?? 0) : model.Rate,
             };
         }
 

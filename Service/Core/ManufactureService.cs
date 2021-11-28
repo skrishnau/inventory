@@ -1,5 +1,7 @@
 ﻿using DTO.Core;
+using DTO.Core.Inventory;
 using Infrastructure.Context;
+using Service.Core.Inventory.Units;
 using Service.Core.Settings;
 using Service.Interfaces;
 using Service.Listeners;
@@ -22,12 +24,14 @@ namespace Service.Core
         private readonly IDatabaseChangeListener _listener;
         private readonly IAppSettingService _appSettingService;
         private readonly IUomService _uomService;
+        private readonly IInventoryUnitService _inventoryUnitService;
 
-        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService, IUomService uomService)
+        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService, IUomService uomService, IInventoryUnitService inventoryUnitService)
         {
             _listener = listener;
             _appSettingService = appSettingService;
             _uomService = uomService;
+            _inventoryUnitService = inventoryUnitService;
         }
 
         #region Manufacture
@@ -454,6 +458,7 @@ namespace Service.Core
                         ProductName = s.Product.Name,
                         Quantity = s.Quantity,
                         UserId = s.ManufactureDepartmentUser.UserId,
+                        Date = s.Date
                     }).ToList();
                 manu.ForEach(x => x.DateString = DateConverter.Instance.ToBS(x.Date).ToString());
                 return manu;
@@ -489,14 +494,23 @@ namespace Service.Core
                     InOut = model.InOut,
                     ProductId = model.ProductId,
                     Quantity = model.Quantity,
+
                 };
-                 var product = _context.Products.FirstOrDefault(x => x.Id == model.ProductId);
-                 var basePackageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).PackageId;
+                var adjustment = MovementTypeEnum.Manufacture.ToString();
+                var message = string.Empty;
+                var orderItem = new OrderItem
+                {
+                    User = _context.Users.Find(manufactureDepartmentUser.UserId)
+                };
+                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, model.MapToInventoryUnitModel(), DateTime.Now, adjustment, ref message, null, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
+
+                var product = _context.Products.FirstOrDefault(x => x.Id == model.ProductId);
+                var basePackageId = product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).PackageId;
                 var convertedQuantityManufactured = _uomService.ConvertUom(model.PackageId, basePackageId, model.ProductId, model.Quantity);
                 if (convertedQuantityManufactured == 0)
-                    return new ResponseModel<UserManufactureModel> { Success = false, Message = "Couldn't convert the manufactured Unit to Base Unit of the product!"};
+                    return new ResponseModel<UserManufactureModel> { Success = false, Message = "Couldn't convert the manufactured Unit to Base Unit of the product!" };
                 product.InStockQuantity += convertedQuantityManufactured;
-                if(model.Quantity > model.NextProductOwners.Sum(x => x.Quantity))
+                if (model.Quantity > model.NextProductOwners.Sum(x => x.Quantity))
                 {
                     var qty = model.Quantity = model.NextProductOwners.Sum(x => x.Quantity);
                     if (qty > 0)

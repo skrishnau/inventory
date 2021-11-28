@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using ViewModel.Core.Inventory;
+using ViewModel.Enums;
 
 namespace Service.Core.Inventory.Units
 {

@@ -41,10 +41,10 @@ namespace IMS.Forms.MRP
             btnComplete.Click += BtnComplete_Click;
             dgvDepartments.SelectionChanged += DgvDepartments_SelectionChanged;
             dgvEmployees.SelectionChanged += DgvEmployees_SelectionChanged;
-            btnAddQuantity.Click += BtnAddQuantity_Click;
+            btnAddManufacture.Click += BtnAddManufacture_Click;
         }
 
-        private void BtnAddQuantity_Click(object sender, EventArgs e)
+        private void BtnAddManufacture_Click(object sender, EventArgs e)
         {
             var departmentId = GetSelectedDepartmentId();
             if(departmentId > 0)
@@ -178,6 +178,8 @@ namespace IMS.Forms.MRP
                         case ManufactureStatusEnum.Deleted:
                             break;
                         case ManufactureStatusEnum.In_Process:
+                            btnCancel.Visible = true;
+                            btnComplete.Visible = true;
                             // if final product's quantity is equal to the proposed product's quantity then show complete button
                             break;
                         case ManufactureStatusEnum.New:

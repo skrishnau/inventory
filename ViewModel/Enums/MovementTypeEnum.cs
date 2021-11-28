@@ -37,6 +37,6 @@ namespace ViewModel.Enums
         DirectMoveInventoryUnit,
         DirectMoveAny,
         Merge,
-
+        Manufacture
     }
 }

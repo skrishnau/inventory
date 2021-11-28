@@ -34,7 +34,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void SupplierCreate_Load(object sender, EventArgs e)
         {
-            this.Text = (_userType!= UserTypeEnum.All ? _userType.ToString() : "") + "Create";
+            this.Text = (_userType!= UserTypeEnum.All ? _userType == UserTypeEnum.User ? "Employee" : _userType.ToString() : "") + " Create";
             InitializeEvents();
             this.ActiveControl = tbName;
             PopulateUserType();
@@ -57,8 +57,18 @@ namespace IMS.Forms.Inventory.Suppliers
             else if(_userType == UserTypeEnum.Vendor)
             {
                 var vendor = UserTypeEnum.Vendor.ToString();
-                list.Add(new NameValuePair("--- Select ---", ""));
+                //list.Add(new NameValuePair("--- Select ---", ""));
+                lblName.Text = "Contact Person Name";
                 list.Add(new NameValuePair(vendor, vendor));
+            }
+            else if(_userType == UserTypeEnum.User)
+            {
+                var user = UserTypeEnum.User.ToString();
+                //list.Add(new NameValuePair("--- Select ---", ""));
+                list.Add(new NameValuePair("Employee", user));
+
+                tbCompany.Visible = false;
+                lblCompany.Visible = false;
             }
             cbUserType.DataSource = list;
             cbUserType.ValueMember = "Value";
