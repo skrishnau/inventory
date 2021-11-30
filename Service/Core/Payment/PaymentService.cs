@@ -5,14 +5,10 @@ using Service.Core.Settings;
 using Service.DbEventArgs;
 using Service.Listeners;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ViewModel.Core;
 using ViewModel.Core.Orders;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace Service.Core.Payment

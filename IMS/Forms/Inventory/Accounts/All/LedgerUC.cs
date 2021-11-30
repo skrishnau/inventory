@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Service.Core.Reports;
 using Service.Core.Users;
@@ -17,6 +13,7 @@ using Service.Core.Settings;
 using IMS.Forms.Common;
 using ViewModel.Enums;
 using ViewModel.Utility;
+using ViewModel.Core;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -125,7 +122,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         }
 
-        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
+        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
             AddListenerAction(PopulateCustomer, e);
         }

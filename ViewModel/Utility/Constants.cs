@@ -52,9 +52,9 @@ namespace ViewModel.Utility
         public const string TAB_SETTINGS = "Settings";
         public const string TAB_REPORTS = "Reports";
         public const string TAB_ACCOUNTS = "Accounts";
-        public const string TAB_MANUFACTURE = "Manufacture";
-        public const string TAB_DEPARTMENT = "Department";
-        public const string TAB_VENDOR = "Vendor";
+        public const string TAB_MANUFACTURE = "Manufactures";
+        public const string TAB_DEPARTMENT = "Departments";
+        public const string TAB_VENDOR = "Vendors";
 
 
         public const string NAME_INVENTORY_MANAGE = "Inventory Manage";
@@ -75,6 +75,7 @@ namespace ViewModel.Utility
 
         public const string KEY_MANUFACTURE_LOT_NO_START_FROM = "manufacture_lot_no_start_from";
         public const string SAVED_SUCCESSFULLY = "Saved Successfully!";
+        public const string DELETED_SUCCESSFULLY = "Deleted Successfully!";
         public const string COULDNT_SAVE_CONTACT_ADMIN = "Couln't save! Please contact administrator.";
     }
 }

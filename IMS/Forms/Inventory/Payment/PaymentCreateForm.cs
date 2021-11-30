@@ -5,17 +5,12 @@ using Service.Core.Settings;
 using Service.Core.Users;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Payment

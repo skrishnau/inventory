@@ -8,7 +8,6 @@ using ViewModel.Core.Business;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
 using ViewModel.Core.Settings;
-using ViewModel.Core.Users;
 
 namespace Service.Listeners
 {
@@ -23,8 +22,8 @@ namespace Service.Listeners
         void TriggerCategoryUpdateEvent(object sender, CategoryEventArgs eventArgs);
 
         // category event and invoker
-        event EventHandler<ProductEventArgs> ProductUpdated;
-        void TriggerProductUpdateEvent(object sender, ProductEventArgs eventArgs);
+        event EventHandler<BaseEventArgs<ProductModel>> ProductUpdated;
+        void TriggerProductUpdateEvent(object sender, BaseEventArgs<ProductModel> eventArgs);
 
         // Warehouse
         event EventHandler<BaseEventArgs<WarehouseModel>> WarehouseUpdated;
@@ -64,5 +63,7 @@ namespace Service.Listeners
         event EventHandler<BaseEventArgs<ManufactureModel>> ManufactureUpdated;
         void TriggerManufactureUpdateEvent(object p, BaseEventArgs<ManufactureModel> eventArgs);
 
+        event EventHandler<BaseEventArgs<DepartmentModel>> DepartmentUpdated;
+        void TriggerDepartmentUpdateEvent(object p, BaseEventArgs<DepartmentModel> eventArgs);
     }
 }

@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using Service.DbEventArgs;
-using ViewModel.Core.Users;
 using Service.Core.Users;
 using ViewModel.Enums;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using System.Linq;
 using IMS.Forms.Inventory.Payment;
 using IMS.Forms.Common.Pagination;
 using IMS.Forms.Common;
+using ViewModel.Core;
 
 namespace IMS.Forms.Inventory.Suppliers
 {

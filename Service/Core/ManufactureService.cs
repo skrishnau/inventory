@@ -3,6 +3,7 @@ using DTO.Core.Inventory;
 using Infrastructure.Context;
 using Service.Core.Inventory.Units;
 using Service.Core.Settings;
+using Service.DbEventArgs;
 using Service.Interfaces;
 using Service.Listeners;
 using Service.Listeners.Inventory;
@@ -34,8 +35,8 @@ namespace Service.Core
             _inventoryUnitService = inventoryUnitService;
         }
 
-        #region Manufacture
 
+        #region Manufacture
 
 
         public ManufactureModel GetManufacture(int id)
@@ -257,109 +258,7 @@ namespace Service.Core
                 return new ResponseModel<bool> { Message = "Delete Sucess!", Success = true };
             }
         }
-        #endregion
 
-        #region Department
-
-        public List<ManufactureDepartmentModel> GetDepartmentListForManufacture()
-        {
-            using (var _context = DatabaseContext.Context)
-            {
-                return _context.Departments.Where(x => x.DeletedAt == null)
-                    .Select(s => new ManufactureDepartmentModel
-                    {
-                        IsVendor = s.IsVendor,
-                        Name = s.Name,
-                        DepartmentId = s.Id,
-                        HeadUserId = s.HeadUserId,
-                    }).ToList();
-            }
-        }
-
-        public DepartmentModel GetDepartment(int departmentId)
-        {
-            using (var _context = DatabaseContext.Context)
-            {
-                var department = _context.Departments.Find(departmentId);
-                if (department == null) return null;
-                var model = department.MapToModel();
-                model.DepartmentUsers = department.DepartmentUsers.ToList()
-                    .Select(x => new ViewModel.Core.Users.UserModel
-                    {
-                        Id = x.UserId,
-                        Name = _context.Users.Where(y => y.Id == x.UserId).Select(y => y.Name).FirstOrDefault()
-                    }).ToList();
-                return model;
-            }
-        }
-
-        public ResponseModel<DepartmentModel> SaveDepartment(DepartmentModel model)
-        {
-            var isEdit = model.Id > 0;
-            using (var _context = DatabaseContext.Context)
-            {
-                Department entity = null;
-                if (isEdit)
-                {
-                    entity = _context.Departments.Find(model.Id);
-                }
-                entity = model.MapToEntity(entity);
-                if (_context.Departments.Any(x => x.Id != model.Id && x.Name == model.Name))
-                    return new ResponseModel<DepartmentModel> { Message = "Another department with same name already exists. Please enter unique name", Success = false };
-                if (model.DepartmentUsers != null && model.DepartmentUsers.Any())
-                {
-
-                }
-                if (!isEdit)
-                {
-                    // add
-                    foreach (var us in model.DepartmentUsers)
-                    {
-                        // add
-                        var du = new DepartmentUser
-                        {
-                            UserId = us.Id,
-                        };
-                        entity.DepartmentUsers.Add(du);
-                    }
-                    _context.Departments.Add(entity);
-                }
-                else
-                {
-                    // edit
-                    var allUserIds = model.DepartmentUsers?.Select(x => x.Id).ToList();
-                    foreach (var us in entity.DepartmentUsers)
-                    {
-                        if (!(model.DepartmentUsers?.Any(x => x.Id == us.UserId) ?? false))
-                        {
-                            // delete
-                            us.DeletedAt = DateTime.Now;
-                        }
-                    }
-
-                    foreach (var us in model.DepartmentUsers)
-                    {
-                        if (!entity.DepartmentUsers.Any(x => x.UserId == us.Id))
-                        {
-                            // add
-                            var du = new DepartmentUser
-                            {
-                                UserId = us.Id,
-                            };
-                            entity.DepartmentUsers.Add(du);
-                        }
-                    }
-                }
-                _context.SaveChanges();
-                model.Id = entity.Id;
-                return new ResponseModel<DepartmentModel>
-                {
-                    Message = Constants.SAVED_SUCCESSFULLY,
-                    Success = true,
-                    Data = model
-                };
-            }
-        }
 
         public ResponseModel<bool> SetManufactureComplete(int id)
         {
@@ -406,6 +305,189 @@ namespace Service.Core
                     return new ResponseModel<bool> { Message = "Manufacture Plan started successfully!", Success = true };
                 }
                 return new ResponseModel<bool> { Message = "Couldn't find the Manufacture Plan", Success = false };
+            }
+        }
+
+
+        #endregion
+
+        #region Department
+
+        public List<ManufactureDepartmentModel> GetDepartmentListForManufacture()
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                return _context.Departments.Where(x => x.DeletedAt == null)
+                    .Select(s => new ManufactureDepartmentModel
+                    {
+                        IsVendor = s.IsVendor,
+                        Name = s.Name,
+                        DepartmentId = s.Id,
+                        HeadUserId = s.HeadUserId,
+                    }).ToList();
+            }
+        }
+
+        public DepartmentModel GetDepartment(int departmentId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var department = _context.Departments.Find(departmentId);
+                if (department == null) return null;
+                var model = department.MapToModel();
+                model.DepartmentUsers = department.DepartmentUsers.ToList()
+                    .Select(x => new DepartmentUserModel
+                    {
+                        UserId = x.UserId,
+                        User = _context.Users.Where(y => y.Id == x.UserId).Select(y => y.Name).FirstOrDefault(),
+                        BuildRate = x.BuildRate,
+                        DepartmentId = x.DepartmentId,
+                        DeletedAt = x.DeletedAt
+                    }).ToList();
+                return model;
+            }
+        }
+
+        public ResponseModel<DepartmentModel> SaveDepartment(DepartmentModel model)
+        {
+            var isEdit = model.Id > 0;
+            using (var _context = DatabaseContext.Context)
+            {
+                Department entity = null;
+                if (isEdit)
+                {
+                    entity = _context.Departments.Find(model.Id);
+                }
+                entity = model.MapToEntity(entity);
+                if (_context.Departments.Any(x => x.Id != model.Id && x.Name == model.Name))
+                    return new ResponseModel<DepartmentModel> { Message = "Another department with same name already exists. Please enter unique name", Success = false };
+                //if (model.DepartmentUsers != null && model.DepartmentUsers.Any())
+                //{
+
+                //}
+                if (!isEdit)
+                {
+                    // add
+                    foreach (var us in model.DepartmentUsers)
+                    {
+                        // add
+                        var du = new DepartmentUser
+                        {
+                            UserId = us.UserId ?? 0,
+                        };
+                        entity.DepartmentUsers.Add(du);
+                    }
+                    _context.Departments.Add(entity);
+                }
+                else
+                {
+                    // edit
+                    var allUserIds = model.DepartmentUsers?.Select(x => x.UserId).ToList();
+                    foreach (var us in entity.DepartmentUsers)
+                    {
+                        if (!(model.DepartmentUsers?.Any(x => x.UserId == us.UserId) ?? false))
+                        {
+                            // delete
+                            us.DeletedAt = DateTime.Now;
+                        }
+                    }
+
+                    foreach (var us in model.DepartmentUsers)
+                    {
+                        var du = entity.DepartmentUsers.FirstOrDefault(x => x.UserId == us.UserId);
+                        if (du == null)
+                        {
+                            // add
+                            du = new DepartmentUser
+                            {
+                                UserId = us.UserId ?? 0,
+                            };
+                            entity.DepartmentUsers.Add(du);
+                        }
+                        else
+                        {
+                            du.BuildRate = us.BuildRate;
+                        }
+                    }
+                }
+                _context.SaveChanges();
+                model.Id = entity.Id;
+                _listener.TriggerDepartmentUpdateEvent(null, new BaseEventArgs<DepartmentModel>(model));
+                return new ResponseModel<DepartmentModel>
+                {
+                    Message = Constants.SAVED_SUCCESSFULLY,
+                    Success = true,
+                    Data = model
+                };
+            }
+        }
+
+
+        private IQueryable<Department> GetDepartmentListQuery(DatabaseContext _context, string searchText)
+        {
+            var departments = _context.Departments
+                                //.Include(x => x.ProductAttributes)
+                                .Where(x => x.DeletedAt == null)
+                               ;
+            if (!string.IsNullOrEmpty(searchText))
+                departments = departments.Where(x => x.Name.Contains(searchText));
+            return departments.OrderBy(o => o.Name);
+        }
+
+        public int GetAllDepartmentsCount(string searchText)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var query = GetDepartmentListQuery(_context, searchText);
+                return query.Count();
+            }
+        }
+
+        public async Task<ViewListModel<DepartmentModel>> GetAllDepartments(string searchText, int pageSize, int offset)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var departments = GetDepartmentListQuery(_context, searchText);
+                var totalCount = departments.Count();
+                if (pageSize > 0 && offset >= 0)
+                {
+                    departments = departments.Skip(offset).Take(pageSize);
+                }
+                var list = await departments.ToListAsync();
+
+                return new ViewListModel<DepartmentModel>
+                {
+                    DataList = list.MapToModel(),
+                    Offset = offset,
+                    PageSize = pageSize,
+                    TotalCount = totalCount,
+                };
+            }
+        }
+        public ResponseModel<bool> DeleteDepartment(int departmentId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var entity = _context.Departments.Find(departmentId);
+                if (entity == null)
+                    return new ResponseModel<bool>(false, "Department not found");
+                _context.Departments.Remove(entity);
+                _context.SaveChanges();
+                return new ResponseModel<bool>(true, Constants.DELETED_SUCCESSFULLY);
+            }
+        }
+        public List<DepartmentUserModel> GetEmployeesOfDepartment(int departmentId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                return _context.DepartmentUsers.Where(x => x.DeletedAt == null && x.DepartmentId == departmentId)
+                    .Select(x => new DepartmentUserModel
+                    {
+                        UserId = x.UserId,
+                        //Department = x.Department.Name,
+                        User = x.User.Name,
+                        BuildRate = x.BuildRate,
+                    }).ToList();
             }
         }
 
@@ -601,7 +683,7 @@ namespace Service.Core
                 var manufacture = _context.ManufactureDepartmentUsers.FirstOrDefault(x => x.Id == model.ManufactureDepartmentUserId)
                     .ManufactureDepartment.Manufacture.MapToModel();
                 _listener.TriggerManufactureUpdateEvent(null, new DbEventArgs.BaseEventArgs<ManufactureModel>(manufacture, Utility.UpdateMode.ADD));
-                _listener.TriggerProductUpdateEvent(null, new ProductEventArgs(null));
+                _listener.TriggerProductUpdateEvent(null, new BaseEventArgs<ProductModel>(null));
                 return new ResponseModel<UserManufactureModel> { Message = Constants.SAVED_SUCCESSFULLY, Data = model, Success = true };
             }
         }

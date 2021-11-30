@@ -12,8 +12,8 @@ namespace Service.Interfaces
     public interface IProductService
     {
         int GetAllProductsCount(int categoryId, string searchText);
-        Task<ProductListModel> GetAllProducts(int categoryId, string searchText, int pageSize, int offset);
-        Task<ProductListModel> GetAllProducts();
+        Task<ViewListModel<ProductModel>> GetAllProducts(int categoryId, string searchText, int pageSize, int offset);
+        Task<ViewListModel<ProductModel>> GetAllProducts();
 
         List<IdNamePair> GetProductListForCombo(int categoryId = 0, List<ProductTypeEnum> productTypes = null);
         List<IdNamePair> GetBuildProductListForCombo(int categoryId = 0);

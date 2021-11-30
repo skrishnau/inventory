@@ -5,8 +5,8 @@ using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
 using Service.Core.Users;
 using Service.Listeners;
+using ViewModel.Core;
 using ViewModel.Core.Common;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Suppliers

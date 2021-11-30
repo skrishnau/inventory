@@ -128,7 +128,7 @@ namespace IMS.Forms.Inventory.Products
         {
             PopulatePriceData();
         }
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             PopulatePriceData();
         }

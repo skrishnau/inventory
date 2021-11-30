@@ -484,6 +484,12 @@
     <Compile Include="Forms\MRP\Departments\DepartmentCreateForm.Designer.cs">
       <DependentUpon>DepartmentCreateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MRP\Departments\DepartmentListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\MRP\Departments\DepartmentListUC.Designer.cs">
+      <DependentUpon>DepartmentListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MRP\ManufactureCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -989,6 +995,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\Departments\DepartmentCreateForm.resx">
       <DependentUpon>DepartmentCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MRP\Departments\DepartmentListUC.resx">
+      <DependentUpon>DepartmentListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\ManufactureCreateForm.resx">
       <DependentUpon>ManufactureCreateForm.cs</DependentUpon>

@@ -8,7 +8,6 @@ using ViewModel.Core.Business;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
 using ViewModel.Core.Settings;
-using ViewModel.Core.Users;
 
 namespace Service.Listeners
 {
@@ -17,7 +16,7 @@ namespace Service.Listeners
         // ======================= Events ======================== //
         public event EventHandler<BranchEventArgs> BranchUpdated;
         public event EventHandler<CategoryEventArgs> CategoryUpdated;
-        public event EventHandler<ProductEventArgs> ProductUpdated;
+        public event EventHandler<BaseEventArgs<ProductModel>> ProductUpdated;
         public event EventHandler<BaseEventArgs<WarehouseModel>> WarehouseUpdated;
         public event EventHandler<BaseEventArgs<UomModel>> UomUpdated;
         public event EventHandler<BaseEventArgs<PackageModel>> PackageUpdated;
@@ -31,6 +30,7 @@ namespace Service.Listeners
         public event EventHandler<BaseEventArgs<PriceHistoryModel>> PriceHistoryUpdated;
         public event EventHandler<BaseEventArgs<List<BillSettingsModel>>> BillSettingUpdated;
         public event EventHandler<BaseEventArgs<ManufactureModel>> ManufactureUpdated;
+        public event EventHandler<BaseEventArgs<DepartmentModel>> DepartmentUpdated;
 
 
         // ======================== Invoker ========================== //
@@ -48,7 +48,7 @@ namespace Service.Listeners
             CategoryUpdated?.Invoke(sender, args);
         }
 
-        public void TriggerProductUpdateEvent(object sender, ProductEventArgs eventArgs)
+        public void TriggerProductUpdateEvent(object sender, BaseEventArgs<ProductModel> eventArgs)
         {
             ProductUpdated?.Invoke(sender, eventArgs);
         }
@@ -121,6 +121,10 @@ namespace Service.Listeners
         public void TriggerManufactureUpdateEvent(object p, BaseEventArgs<ManufactureModel> eventArgs)
         {
             ManufactureUpdated?.Invoke(p, eventArgs);
+        }
+        public void TriggerDepartmentUpdateEvent(object p, BaseEventArgs<DepartmentModel> eventArgs)
+        {
+            DepartmentUpdated?.Invoke(p, eventArgs);
         }
     }
 }

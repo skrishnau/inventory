@@ -14,6 +14,8 @@ using Service.Core.Business;
 using ViewModel.Core.Business;
 using ViewModel.Core.Common;
 using Service.Interfaces;
+using Service.DbEventArgs;
+using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Units.Details
 {
@@ -67,7 +69,7 @@ namespace IMS.Forms.Inventory.Units.Details
         //{
         //    PopulateWarehouses();
         //}
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             PopulateProducts();
         }

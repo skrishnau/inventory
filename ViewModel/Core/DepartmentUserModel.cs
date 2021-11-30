@@ -10,5 +10,8 @@ namespace ViewModel.Core
     {
         public int DepartmentId { get; set; }
         public Nullable<int> UserId { get; set; }
+        public string User { get; set; }
+        public Nullable<decimal> BuildRate { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     }
 }

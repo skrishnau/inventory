@@ -12,6 +12,7 @@ using Service.Listeners;
 using ViewModel.Core.Inventory;
 using IMS.Forms.Inventory.Units;
 using Service.Interfaces;
+using Service.DbEventArgs;
 
 namespace IMS.Forms.Inventory.InventoryDetail
 {
@@ -69,7 +70,7 @@ namespace IMS.Forms.Inventory.InventoryDetail
             ShowSelectedProductDetail();
         }
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             PopulateProductList();
         }

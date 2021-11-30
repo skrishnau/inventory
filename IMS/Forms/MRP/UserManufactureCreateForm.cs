@@ -71,7 +71,11 @@ namespace IMS.Forms.MRP
             cbProduct.DataSource = _departmentProductModels;
             cbProduct.DisplayMember = "ProductName";
             cbProduct.ValueMember = "ProductId";
-            dgvDepartments.DataSource = _manufactureModel.ManufactureDepartments.Where(x => x.Position > _manufactureDepartmentModel.Position).ToList();
+            var next = _manufactureModel.ManufactureDepartments.Where(x => x.Position > _manufactureDepartmentModel.Position).OrderBy(x => x.Position).FirstOrDefault();
+            if (next != null)
+                dgvDepartments.DataSource = _manufactureModel.ManufactureDepartments.Where(x => x.Position == next.Position).ToList();
+            else
+                chkAssignToNextDepartment.Checked = chkAssignToNextDepartment.Enabled = false;
 
         }
 
@@ -109,7 +113,7 @@ namespace IMS.Forms.MRP
                 isValid = false;
                 errorProvider1.SetError(txtQuantity, "Required");
             }
-            
+
             List<ProductOwnerModel> newOwners = new List<ProductOwnerModel>();
             if (chkAssignToNextDepartment.Checked)
             {
@@ -119,7 +123,7 @@ namespace IMS.Forms.MRP
                     var manufactureDepartmentId = row.Cells[colManufactureDepartmentId.Index].Value as int?;
                     var departmentId = row.Cells[colDepartmentId.Index].Value as int?;
                     decimal.TryParse(row.Cells[colDepartmentQuantity.Index].Value.ToString(), out decimal quantity);
-                    
+
                     var departmentProduct = new ProductOwnerModel()
                     {
                         DepartmentId = departmentId,
@@ -130,7 +134,7 @@ namespace IMS.Forms.MRP
                     };
                     newOwners.Add(departmentProduct);
                 }
-                if(newOwners.Count == 0 || newOwners.Sum(x=>x.Quantity) == 0)
+                if (newOwners.Count == 0 || newOwners.Sum(x => x.Quantity) == 0)
                 {
                     isValid = false;
                     message += "At least one department's assign quantity is required.";

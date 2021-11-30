@@ -14,6 +14,8 @@ using Service.Interfaces;
 using ViewModel.Core.Common;
 using IMS.Forms.Common.Pagination;
 using IMS.Forms.Common;
+using ViewModel.Core.Inventory;
+using Service.DbEventArgs;
 
 namespace IMS.Forms.Inventory.Units.Details
 {
@@ -69,7 +71,7 @@ namespace IMS.Forms.Inventory.Units.Details
             PopulateMovements();
         }
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             AddListenerAction(PopulateProducts, e);
         }

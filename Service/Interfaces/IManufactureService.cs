@@ -26,5 +26,10 @@ namespace Service.Interfaces
         ManufactureDepartmentUserModel GetManufactureDepartmentUser(int manufactureId, int departmentId, int userId);
         ResponseModel<UserManufactureModel> AddUserManufacture(UserManufactureModel userManufactureModel);
         List<UserManufactureModel> GetEmployeesHistoryOfManufactureDepartment(int manufactureId, int departmentId, int userId);
+
+        int GetAllDepartmentsCount(string searchText);
+        Task<ViewListModel<DepartmentModel>> GetAllDepartments(string searchText, int pageSize, int offset);
+        List<DepartmentUserModel> GetEmployeesOfDepartment(int departmentId);
+        ResponseModel<bool> DeleteDepartment(int departmentId);
     }
 }

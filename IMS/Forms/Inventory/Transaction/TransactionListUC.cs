@@ -20,6 +20,7 @@ using IMS.Forms.Common.Pagination;
 using Service.Core.Users;
 using IMS.Forms.Common;
 using ViewModel.Core.Common;
+using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Transaction
 {
@@ -137,7 +138,7 @@ namespace IMS.Forms.Inventory.Transaction
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
         }
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             AddListenerAction(PopulateProducts, e);
         }

@@ -1,7 +1,6 @@
 ﻿using DTO.Core.Inventory;
 using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
-using IMS.Forms.Inventory.Payment;
 using IMS.Forms.Inventory.Suppliers;
 using Service.Core.Business;
 using Service.Core.Inventory;
@@ -14,14 +13,12 @@ using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 using ViewModel.Utility;
 

@@ -22,6 +22,12 @@ namespace Service.DbEventArgs
             Model = model;
             Mode = mode;
         }
+        public BaseEventArgs(MODEL model)
+        {
+            Model = model;
+            Mode = UpdateMode.EDIT;
+        }
+
         // static Instance generator
         public static BaseEventArgs<MODEL> Instance { get { return new BaseEventArgs<MODEL>(); } }
     }

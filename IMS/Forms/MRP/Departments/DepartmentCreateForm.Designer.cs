@@ -45,8 +45,10 @@
             this.pnlEmployees = new System.Windows.Forms.Panel();
             this.btnAddUser = new System.Windows.Forms.Button();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
-            this.colEmployeeName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lblEmployeesHeader = new System.Windows.Forms.Label();
+            this.colEmployeeName = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDelete = new System.Windows.Forms.DataGridViewImageColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlFooter.SuspendLayout();
@@ -129,7 +131,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(188, 7);
+            this.btnSave.Location = new System.Drawing.Point(193, 7);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -140,7 +142,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(280, 7);
+            this.btnCancel.Location = new System.Drawing.Point(285, 7);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -158,7 +160,7 @@
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlFooter.Location = new System.Drawing.Point(5, 297);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(366, 35);
+            this.pnlFooter.Size = new System.Drawing.Size(371, 35);
             this.pnlFooter.TabIndex = 3;
             // 
             // pnlBasic
@@ -167,7 +169,7 @@
             this.pnlBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBasic.Location = new System.Drawing.Point(5, 5);
             this.pnlBasic.Name = "pnlBasic";
-            this.pnlBasic.Size = new System.Drawing.Size(366, 91);
+            this.pnlBasic.Size = new System.Drawing.Size(371, 91);
             this.pnlBasic.TabIndex = 4;
             // 
             // pnlEmployees
@@ -179,12 +181,13 @@
             this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEmployees.Location = new System.Drawing.Point(5, 96);
             this.pnlEmployees.Name = "pnlEmployees";
-            this.pnlEmployees.Size = new System.Drawing.Size(366, 201);
+            this.pnlEmployees.Size = new System.Drawing.Size(371, 201);
             this.pnlEmployees.TabIndex = 6;
             // 
             // btnAddUser
             // 
-            this.btnAddUser.Location = new System.Drawing.Point(328, 1);
+            this.btnAddUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddUser.Location = new System.Drawing.Point(316, 1);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(48, 23);
             this.btnAddUser.TabIndex = 3;
@@ -195,12 +198,24 @@
             // 
             this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colEmployeeName});
+            this.colEmployeeName,
+            this.colRate,
+            this.colDelete});
             this.dgvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEmployees.Location = new System.Drawing.Point(0, 26);
             this.dgvEmployees.Name = "dgvEmployees";
-            this.dgvEmployees.Size = new System.Drawing.Size(366, 175);
+            this.dgvEmployees.Size = new System.Drawing.Size(371, 175);
             this.dgvEmployees.TabIndex = 2;
+            // 
+            // lblEmployeesHeader
+            // 
+            this.lblEmployeesHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblEmployeesHeader.Location = new System.Drawing.Point(0, 0);
+            this.lblEmployeesHeader.Name = "lblEmployeesHeader";
+            this.lblEmployeesHeader.Size = new System.Drawing.Size(371, 26);
+            this.lblEmployeesHeader.TabIndex = 1;
+            this.lblEmployeesHeader.Text = "Employees";
+            this.lblEmployeesHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // colEmployeeName
             // 
@@ -211,15 +226,19 @@
             this.colEmployeeName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colEmployeeName.Width = 200;
             // 
-            // lblEmployeesHeader
+            // colRate
             // 
-            this.lblEmployeesHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblEmployeesHeader.Location = new System.Drawing.Point(0, 0);
-            this.lblEmployeesHeader.Name = "lblEmployeesHeader";
-            this.lblEmployeesHeader.Size = new System.Drawing.Size(366, 26);
-            this.lblEmployeesHeader.TabIndex = 1;
-            this.lblEmployeesHeader.Text = "Employees";
-            this.lblEmployeesHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.colRate.DataPropertyName = "BuildRate";
+            this.colRate.HeaderText = "Rate";
+            this.colRate.Name = "colRate";
+            this.colRate.ToolTipText = "Build Rate";
+            // 
+            // colDelete
+            // 
+            this.colDelete.HeaderText = "";
+            this.colDelete.Image = global::IMS.Properties.Resources.icons8_Delete_Red_16px;
+            this.colDelete.Name = "colDelete";
+            this.colDelete.Width = 24;
             // 
             // DepartmentCreateForm
             // 
@@ -227,7 +246,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(386, 337);
+            this.ClientSize = new System.Drawing.Size(391, 337);
             this.Controls.Add(this.pnlEmployees);
             this.Controls.Add(this.pnlBasic);
             this.Controls.Add(this.pnlFooter);
@@ -265,7 +284,9 @@
         private System.Windows.Forms.DataGridView dgvEmployees;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbDepartmentType;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colEmployeeName;
         private System.Windows.Forms.Button btnAddUser;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colEmployeeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRate;
+        private System.Windows.Forms.DataGridViewImageColumn colDelete;
     }
 }

@@ -28,6 +28,7 @@ using ViewModel.Utility;
 using ViewModel.Core.Orders;
 using IMS.Forms.Common;
 using IMS.Forms.MRP;
+using IMS.Forms.MRP.Departments;
 
 namespace IMS.Forms.Inventory
 {
@@ -347,9 +348,10 @@ namespace IMS.Forms.Inventory
             _menubar.btnClients.Click += BtnClients_Click;
             _menubar.btnBackup.Click += BtnBackup_Click;
             _menubar.btnManufacturings.Click += BtnManufacturings_Click;
+            _menubar.btnDepartment.Click += BtnDepartment_Click;
             _menubar.btnVendor.Click += BtnVendor_Click;
         }
-
+        
         private void BtnBackup_Click(object sender, EventArgs e)
         {
             //var folder = "D:\\sysBackups";
@@ -501,6 +503,12 @@ namespace IMS.Forms.Inventory
             //var uc = Program.container.GetInstance<ClientListUC>();
             var uc = new ClientListUC(_userService, _listener);
             AddTabPage(Constants.TAB_VENDOR, uc, sender);
+        }
+        private void BtnDepartment_Click(object sender, EventArgs e)
+        {
+            //var uc = Program.container.GetInstance<ClientListUC>();
+            var inventoryUnitList = Program.container.GetInstance<DepartmentListUC>();
+            AddTabPage(Constants.TAB_DEPARTMENT, inventoryUnitList, sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)

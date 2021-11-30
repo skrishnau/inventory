@@ -19,6 +19,7 @@ using ViewModel.Core.Orders;
 using IMS.Forms.Inventory.Payment;
 using SimpleInjector.Lifestyles;
 using IMS.Forms.Common;
+using ViewModel.Core;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -110,7 +111,7 @@ namespace IMS.Forms.Inventory.Reports.All
             PaginationHelper.SetRowNumber(dgvLedger, helper.offset);
         }
 
-        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
+        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
             AddListenerAction(PopulateCustomer, e);
         }

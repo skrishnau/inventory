@@ -18,6 +18,8 @@ using IMS.Forms.Common;
 using ViewModel.Enums;
 using ViewModel.Utility;
 using Service.Interfaces;
+using Service.DbEventArgs;
+using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -78,7 +80,7 @@ namespace IMS.Forms.Inventory.Reports.All
             AddListenerAction(PopulateCategory, e);
         }
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             AddListenerAction(PopulateProducts, e);
         }
@@ -87,7 +89,6 @@ namespace IMS.Forms.Inventory.Reports.All
         {
             dtFrom.Enabled = chkDateFilter.Checked;
             dtTo.Enabled = chkDateFilter.Checked;
-
         }
 
         private void CbCategory_SelectedValueChanged(object sender, EventArgs e)
@@ -96,7 +97,6 @@ namespace IMS.Forms.Inventory.Reports.All
             PopulateProducts();
         }
         
-
         private void BtnPrint_Click(object sender, EventArgs e)
         {
             //var ledgerMaster = GetLedger();

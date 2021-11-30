@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModel.Core.Users;
 
 namespace ViewModel.Core
 {
@@ -16,7 +15,8 @@ namespace ViewModel.Core
         public Nullable<int> HeadUserId { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
 
-        public List<UserModel> DepartmentUsers { get; set; }
+        public List<DepartmentUserModel> DepartmentUsers { get; set; }
+        public string Type { get; set; } // Internal/External
 
     }
 }

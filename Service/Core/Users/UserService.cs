@@ -8,7 +8,6 @@ using Service.Listeners;
 using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Settings;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 using ViewModel.Utility;
 

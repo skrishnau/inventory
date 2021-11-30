@@ -1,7 +1,7 @@
 ﻿using Infrastructure.Context;
 using System.Collections.Generic;
 using System.Linq;
-using ViewModel.Core.Users;
+using ViewModel.Core;
 using ViewModel.Enums;
 using ViewModel.Utility;
 

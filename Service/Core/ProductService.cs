@@ -74,7 +74,7 @@ namespace Service.Core
                         earlierBasePackageId = basePackage?.PackageId;
                         isBasePackageSame = basePackage?.PackageId == model.BasePackageId;
                     }
-                    ProductEventArgs eventArgs = ProductEventArgs.Instance;
+                    var eventArgs = BaseEventArgs<ProductModel>.Instance;
                     entity = ProductMapper.MapToEntity(model, entity);
 
                     var uomEntities = entity.Uoms.ToList();
@@ -204,7 +204,7 @@ namespace Service.Core
 
                     _context.SaveChanges();
                     txn.Commit();
-                    eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
+                    eventArgs.Model = ProductMapper.MapToProductModel(entity);
                     _listener.TriggerProductUpdateEvent(null, eventArgs);
                     return string.Empty;
                 }
@@ -335,7 +335,7 @@ namespace Service.Core
             }
         }
 
-        public async Task<ProductListModel> GetAllProducts(int categoryId, string searchText, int pageSize, int offset)
+        public async Task<ViewListModel<ProductModel>> GetAllProducts(int categoryId, string searchText, int pageSize, int offset)
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -347,7 +347,7 @@ namespace Service.Core
                 }
                 var list = await products.ToListAsync();
 
-                return new ProductListModel
+                return new ViewListModel<ProductModel>
                 {
                     DataList = list.MapToModel(),
                     Offset = offset,
@@ -357,14 +357,14 @@ namespace Service.Core
             }
         }
 
-        public async Task<ProductListModel> GetAllProducts()
+        public async Task<ViewListModel<ProductModel>> GetAllProducts()
         {
             using (var _context = DatabaseContext.Context)
             {
                 var products = GetProductListQuery(_context, 0, string.Empty);
                 var totalCount = products.Count();
                 var list = await products.ToListAsync();
-                return new ProductListModel
+                return new ViewListModel<ProductModel>
                 {
                     DataList = list.MapToModel(),
                     Offset = -1,
@@ -617,9 +617,9 @@ namespace Service.Core
                 }
                 _context.SaveChanges();
 
-                ProductEventArgs eventArgs = ProductEventArgs.Instance;
+                var eventArgs = BaseEventArgs<ProductModel>.Instance;
                 eventArgs.Mode = UpdateMode.DELETE;
-                eventArgs.ProductModel = ProductMapper.MapToProductModel(entity);
+                eventArgs.Model = ProductMapper.MapToProductModel(entity);
                 _listener.TriggerProductUpdateEvent(null, eventArgs);
                 return true;
             }

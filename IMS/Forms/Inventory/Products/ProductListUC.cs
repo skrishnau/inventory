@@ -200,7 +200,7 @@ namespace IMS.Forms.Inventory.Products
             //PopulateCategoryCombo();
         }
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             AddListenerAction(PopulateProductData, e);
             //PopulateProductData();

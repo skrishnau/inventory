@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Settings;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace Service.Core.Users

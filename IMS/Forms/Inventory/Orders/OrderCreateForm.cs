@@ -11,9 +11,9 @@ using Service.Core.Orders;
 using Service.Core.Users;
 using Service.Listeners;
 using SimpleInjector.Lifestyles;
+using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Core.Orders;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace IMS.Forms.Inventory.Orders

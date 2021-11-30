@@ -13,6 +13,18 @@ namespace ViewModel.Core
         {
             Message = string.Empty;
         }
+        public ResponseModel(bool success, string message)
+        {
+            Success = success;
+            Message = message;
+        }
+
+        public ResponseModel(bool success, string message, T data)
+        {
+            Success = success;
+            Message = message;
+            Data = data;
+        }
         public T Data { get; set; }
         public string Message { get; set; }
         public Boolean Success { get; set; }

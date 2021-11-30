@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Service.Core.Inventory;
 using Service.Listeners;
@@ -16,9 +11,10 @@ using SimpleInjector.Lifestyles;
 using Service.Core.Settings;
 using Service.Interfaces;
 using Microsoft.Reporting.WinForms;
-using ViewModel.Utility;
-using IMS.Forms.Common.Date;
 using IMS.Forms.Common;
+using ViewModel.Core;
+using ViewModel.Core.Inventory;
+using Service.DbEventArgs;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
@@ -188,7 +184,7 @@ namespace IMS.Forms.Inventory.Dashboard
         //        _listenerActions.Add(action);
         //}
 
-        private void _listener_ProductUpdated(object sender, Service.Listeners.Inventory.ProductEventArgs e)
+        private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
             AddListenerAction(PopulateUnderstockProducts, e);
             AddListenerAction(PopulateInventorySummary, e);
@@ -201,7 +197,7 @@ namespace IMS.Forms.Inventory.Dashboard
         }
 
 
-        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.Users.UserModel> e)
+        private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
         {
             AddListenerAction(PopulateInventorySummary, e);
         }

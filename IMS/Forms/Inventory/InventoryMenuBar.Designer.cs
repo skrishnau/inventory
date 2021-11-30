@@ -226,7 +226,6 @@
             this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnVendor, "Inventory Units");
             this.btnVendor.UseVisualStyleBackColor = true;
-            this.btnVendor.Visible = false;
             // 
             // btnDepartment
             // 
@@ -243,7 +242,6 @@
             this.btnDepartment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnDepartment, "Inventory Units");
             this.btnDepartment.UseVisualStyleBackColor = true;
-            this.btnDepartment.Visible = false;
             // 
             // btnManufacturings
             // 

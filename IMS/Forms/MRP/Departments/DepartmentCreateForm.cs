@@ -1,4 +1,5 @@
 ﻿using IMS.Forms.Common;
+using IMS.Forms.Common.GridView;
 using IMS.Forms.Inventory.Suppliers;
 using Service.Core.Settings;
 using Service.Core.Users;
@@ -7,16 +8,11 @@ using Service.Listeners;
 using SimpleInjector.Lifestyles;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core;
 using ViewModel.Core.Common;
-using ViewModel.Core.Users;
 using ViewModel.Enums;
 
 namespace IMS.Forms.MRP
@@ -29,6 +25,7 @@ namespace IMS.Forms.MRP
         private readonly IDatabaseChangeListener _databaseChangeListener;
 
         DepartmentModel _model;
+        GridViewColumnDecimalValidator _decimalValidator;
 
         public DepartmentCreateForm(IManufactureService manufactureService, IAppSettingService appSettingService, IUserService userService, IDatabaseChangeListener databaseChangeListener)
         {
@@ -44,6 +41,10 @@ namespace IMS.Forms.MRP
 
         private void DepartmentCreateForm_Load(object sender, EventArgs e)
         {
+            _decimalValidator = new GridViewColumnDecimalValidator(dgvEmployees);
+            _decimalValidator.AddColumn(colRate, ColumnDataType.Decimal);
+            _decimalValidator.Validate();
+
             PopulateDepartmentType();
             InitializeEmployeeGridView();
             btnSave.Click += BtnSave_Click;
@@ -51,14 +52,28 @@ namespace IMS.Forms.MRP
             cbDepartmentType.SelectedIndexChanged += CbDepartmentType_SelectedIndexChanged;
             btnAddUser.Click += BtnAddUser_Click;
             dgvEmployees.DataError += DgvEmployees_DataError;
+            dgvEmployees.CellClick += DgvEmployees_CellClick;
+
+            PopulateEditData();
+        }
+
+        private void DgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == colDelete.Index)
+            {
+                if (!dgvEmployees.Rows[e.RowIndex].IsNewRow)
+                {
+                    dgvEmployees.Rows.RemoveAt(e.RowIndex);
+                }
+            }
         }
 
         private void DgvEmployees_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            foreach(DataGridViewRow row in dgvEmployees.Rows)
+            foreach (DataGridViewRow row in dgvEmployees.Rows)
             {
                 var cell = row.Cells[colEmployeeName.Index] as DataGridViewComboBoxCell;
-                if(cell != null)
+                if (cell != null)
                 {
                     cell.Value = null;
                 }
@@ -116,12 +131,12 @@ namespace IMS.Forms.MRP
 
         private void PopulateEmployeeCombo()
         {
-            var userIds = _model?.DepartmentUsers?.Select(x => x.Id).ToArray() ?? new int[0];
+            var userIds = _model?.DepartmentUsers?.Where(x => x.UserId != null).Select(x => x.UserId.Value).ToArray() ?? new int[0];
             var depType = cbDepartmentType.SelectedItem as IdNamePair;
             var userType = depType.Id == (int)DepartmentTypeEnum.Vendor ? UserTypeEnum.Vendor : ViewModel.Enums.UserTypeEnum.User;
             var users = _userService.GetUserListForCombo(userType, userIds);
             var userColumn = dgvEmployees.Columns[colEmployeeName.Index] as DataGridViewComboBoxColumn;
-            if(userColumn != null)
+            if (userColumn != null)
             {
                 userColumn.DataSource = users;
                 userColumn.ValueMember = "Id";
@@ -141,17 +156,38 @@ namespace IMS.Forms.MRP
         public void SetDataForEdit(int id)
         {
             var model = _manufactureService.GetDepartment(id);
-            if (model != null)
-            {
-                _model = model;
-                txtName.Text = model.Name;
-                txtDescription.Text = model.Description;
-                cbDepartmentType.SelectedValue = model.IsVendor ? (int)DepartmentTypeEnum.Vendor : (int)DepartmentTypeEnum.Internal;
-                lblEmployeesHeader.Text = model.IsVendor ? "Vendors" : "Employees";
-            }
+            _model = model;
+
         }
 
+        private void PopulateEditData()
+        {
+            if (_model != null)
+            {
+                txtName.Text = _model.Name;
+                txtDescription.Text = _model.Description;
+                cbDepartmentType.SelectedValue = _model.IsVendor ? (int)DepartmentTypeEnum.Vendor : (int)DepartmentTypeEnum.Internal;
+                lblEmployeesHeader.Text = _model.IsVendor ? "Vendors" : "Employees";
 
+                
+                var templateRowAdded = false;
+                if (dgvEmployees.Rows.Count == 0)
+                {
+                    dgvEmployees.Rows.Add();
+                    templateRowAdded = true;
+                }
+                cbDepartmentType.Enabled = false;
+                foreach (var du in _model.DepartmentUsers)
+                {
+                    var row = (DataGridViewRow)dgvEmployees.Rows[0].Clone();
+                    row.Cells[colEmployeeName.Index].Value = du.UserId;
+                    row.Cells[colRate.Index].Value = du.BuildRate;
+                    dgvEmployees.Rows.Add(row);
+                }
+                if (templateRowAdded)
+                    dgvEmployees.Rows.RemoveAt(0);
+            }
+        }
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
@@ -159,6 +195,7 @@ namespace IMS.Forms.MRP
 
         private void Save()
         {
+
             string message = string.Empty;
             var isInvalid = false;
             errorProvider1.SetError(txtName, string.Empty);
@@ -171,29 +208,34 @@ namespace IMS.Forms.MRP
             }
 
             var departmentType = cbDepartmentType.SelectedItem as IdNamePair;
-            if(departmentType == null)
+            if (departmentType == null)
             {
                 isInvalid = true;
                 errorProvider1.SetError(cbDepartmentType, "Required");
             }
 
-            var users = new List<UserModel>();
-            foreach(DataGridViewRow r in dgvEmployees.Rows)
+            var users = new List<DepartmentUserModel>();
+            foreach (DataGridViewRow r in dgvEmployees.Rows)
             {
                 var col = r.Cells[colEmployeeName.Index] as DataGridViewComboBoxCell;
-                if(col != null)
+                if (col != null)
                 {
                     var id = col.Value as int?;
                     if (id != null)
                     {
-                        users.Add(new UserModel
+                        var du = new DepartmentUserModel
                         {
-                            Id =  id ?? 0
-                        });
+                            UserId = id ?? 0,
+                        };
+                        if (decimal.TryParse(r.Cells[colRate.Index].Value?.ToString(), out decimal rate))
+                        {
+                            du.BuildRate = rate;
+                        }
+                        users.Add(du);
                     }
                 }
             }
-            if(users.Count == 0)
+            if (users.Count == 0)
             {
                 isInvalid = true;
                 errorProvider1.SetError(dgvEmployees, "At one one required");

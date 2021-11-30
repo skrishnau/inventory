@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Infrastructure.Context;
 
-namespace ViewModel.Core.Users
+namespace ViewModel.Core
 {
 
     public class UserListModel
