@@ -311,6 +311,28 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
             }
+            else if (this.CurrentCell.ColumnIndex == this.colPackageId.Index && e.Control is ComboBox)
+            {
+                var product = this.CurrentRow.Cells[colProduct.Index].Tag as ProductModel;
+                var packageList = product != null && product.Packages != null ? product.Packages : new List<PackageModel>();
+                //TextBox textBox = e.Control as TextBox;
+                //if (textBox != null)
+                //{
+                //    textBox.AutoCompleteCustomSource.Clear();
+                //    textBox.AutoCompleteCustomSource.AddRange(packageList.Select(x => x.Name).ToArray());
+                //    textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                //    textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                //}
+
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+                comboBox.DataSource = packageList;
+                comboBox.DisplayMember = "Name";
+                comboBox.ValueMember = "Id";
+                comboBox.AutoCompleteCustomSource.AddRange(packageList.Select(x => x.Name).ToArray());
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
             else if(this.CurrentCell.ColumnIndex == this.colUnitQuantity.Index && e.Control is TextBox)
             {
                 //TextBox textBox = e.Control as TextBox;

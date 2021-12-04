@@ -101,7 +101,7 @@ namespace IMS.Forms.MRP
                 if (!_departmentOutputs.ContainsKey(departmentId ?? 0))
                     _departmentOutputs.Add(departmentId ?? 0, new List<InventoryUnitModel>());
                 ShowInputOutEditForm(_departmentOutputs[departmentId ?? 0], department.Name + " Department's Outputs", false, true, false);
-                PopulateDepartmentProducts();
+                PopulateDepartmentProducts(null);
             }
             else
             {
@@ -118,7 +118,7 @@ namespace IMS.Forms.MRP
                 if (!_departmentInputs.ContainsKey(departmentId ?? 0))
                     _departmentInputs.Add(departmentId ?? 0, new List<InventoryUnitModel>());
                 ShowInputOutEditForm(_departmentInputs[departmentId ?? 0], department.Name + " Department's Inputs", false, true, true);
-                PopulateDepartmentProducts();
+                PopulateDepartmentProducts(null);
             }
             else
             {
@@ -142,11 +142,12 @@ namespace IMS.Forms.MRP
             lbManufactureRawInputs.Items.AddRange(_manufactureInputs.Select(x => x.Product + ", Unit: " + x.Package + ", Qty: " + x.UnitQuantity).ToArray());
         }
 
-        private void PopulateDepartmentProducts()
+        private void PopulateDepartmentProducts(int? departmentId)
         {
             lbDepartmentProductInputs.Items.Clear();
             lbDepartmentProductOutputs.Items.Clear();
-            var departmentId = GetSelectedDepartmentId();
+            if(departmentId == null)
+                departmentId = GetSelectedDepartmentId();
             if (departmentId != null)
             {
                 if (_departmentInputs.ContainsKey(departmentId ?? 0))
@@ -505,7 +506,8 @@ namespace IMS.Forms.MRP
                         lblEmployees.Text = $"Employees";
                     PopulateEmployeesGridview(depIdInt);
                 }
-                PopulateDepartmentProducts();
+                PopulateDepartmentProducts(depIdInt);
+                SetEmployeesFromGridView(depIdInt);
             }
 
         }
@@ -665,10 +667,16 @@ namespace IMS.Forms.MRP
 
         private void DgvEmployees_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            var depId = GetSelectedDepartmentId();
-            if (depId != null)
+            SetEmployeesFromGridView(null);
+        }
+
+        private void SetEmployeesFromGridView(int? departmentId)
+        {
+            if(departmentId == null)
+                departmentId = GetSelectedDepartmentId();
+            if (departmentId != null)
             {
-                var depIdInt = (int)depId;
+                var depIdInt = (int)departmentId;
                 if (!_employees.ContainsKey(depIdInt))
                     _employees.Add(depIdInt, new List<ManufactureDepartmentUserModel>());
                 _employees[depIdInt].Clear();

@@ -36,7 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtPackage = new System.Windows.Forms.TextBox();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -51,12 +51,21 @@
             this.colDepartmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlInputBase = new System.Windows.Forms.Panel();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.pnlConsumed = new System.Windows.Forms.GroupBox();
+            this.pnlManufactured = new System.Windows.Forms.GroupBox();
+            this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).BeginInit();
+            this.pnlInputBase.SuspendLayout();
+            this.pnlConsumed.SuspendLayout();
+            this.pnlManufactured.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
             // lblEmployeeName
@@ -64,13 +73,13 @@
             this.lblEmployeeName.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEmployeeName.Location = new System.Drawing.Point(5, 5);
             this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(345, 24);
+            this.lblEmployeeName.Size = new System.Drawing.Size(752, 24);
             this.lblEmployeeName.TabIndex = 0;
             this.lblEmployeeName.Text = "Employee Name";
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(133, 59);
+            this.txtQuantity.Location = new System.Drawing.Point(85, 59);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(191, 20);
             this.txtQuantity.TabIndex = 1;
@@ -78,22 +87,22 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.68116F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.31884F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.67857F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.32143F));
             this.tableLayoutPanel1.Controls.Add(this.labelProduct, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtQuantity, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbProduct, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtPackage, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 29);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 85);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(298, 85);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // labelProduct
@@ -118,7 +127,7 @@
             // 
             this.cbProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProduct.FormattingEnabled = true;
-            this.cbProduct.Location = new System.Drawing.Point(133, 3);
+            this.cbProduct.Location = new System.Drawing.Point(85, 3);
             this.cbProduct.Name = "cbProduct";
             this.cbProduct.Size = new System.Drawing.Size(191, 21);
             this.cbProduct.TabIndex = 2;
@@ -132,29 +141,29 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Quantity *";
             // 
-            // textBox1
+            // txtPackage
             // 
-            this.textBox1.Location = new System.Drawing.Point(133, 31);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(191, 20);
-            this.textBox1.TabIndex = 5;
+            this.txtPackage.Location = new System.Drawing.Point(85, 31);
+            this.txtPackage.Name = "txtPackage";
+            this.txtPackage.ReadOnly = true;
+            this.txtPackage.Size = new System.Drawing.Size(191, 20);
+            this.txtPackage.TabIndex = 5;
             // 
             // pnlFooter
             // 
             this.pnlFooter.Controls.Add(this.btnCancel);
             this.pnlFooter.Controls.Add(this.btnSave);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(5, 314);
+            this.pnlFooter.Location = new System.Drawing.Point(5, 416);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(345, 35);
+            this.pnlFooter.Size = new System.Drawing.Size(752, 35);
             this.pnlFooter.TabIndex = 4;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(259, 7);
+            this.btnCancel.Location = new System.Drawing.Point(666, 7);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -164,7 +173,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(167, 7);
+            this.btnSave.Location = new System.Drawing.Point(574, 7);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -179,9 +188,9 @@
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(5, 114);
+            this.splitter1.Location = new System.Drawing.Point(5, 172);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(345, 3);
+            this.splitter1.Size = new System.Drawing.Size(752, 3);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
@@ -201,17 +210,17 @@
             // 
             this.panel1.Controls.Add(this.chkAssignToNextDepartment);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(5, 160);
+            this.panel1.Location = new System.Drawing.Point(5, 218);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(345, 26);
+            this.panel1.Size = new System.Drawing.Size(752, 26);
             this.panel1.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(5, 117);
+            this.label1.Location = new System.Drawing.Point(5, 175);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(345, 40);
+            this.label1.Size = new System.Drawing.Size(752, 40);
             this.label1.TabIndex = 8;
             this.label1.Text = "Note: The manufactured quantity entered above will be assigned to the same depart" +
     "ment. Assign the manufactured product to next department from below section.";
@@ -220,9 +229,9 @@
             // 
             this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(5, 157);
+            this.splitter2.Location = new System.Drawing.Point(5, 215);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(345, 3);
+            this.splitter2.Size = new System.Drawing.Size(752, 3);
             this.splitter2.TabIndex = 9;
             this.splitter2.TabStop = false;
             // 
@@ -235,10 +244,10 @@
             this.colDepartmentName,
             this.colDepartmentQuantity});
             this.dgvDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDepartments.Location = new System.Drawing.Point(5, 186);
+            this.dgvDepartments.Location = new System.Drawing.Point(5, 244);
             this.dgvDepartments.MultiSelect = false;
             this.dgvDepartments.Name = "dgvDepartments";
-            this.dgvDepartments.Size = new System.Drawing.Size(345, 128);
+            this.dgvDepartments.Size = new System.Drawing.Size(752, 172);
             this.dgvDepartments.TabIndex = 10;
             // 
             // colManufactureDepartmentId
@@ -272,21 +281,73 @@
             this.colDepartmentQuantity.Name = "colDepartmentQuantity";
             this.colDepartmentQuantity.Width = 120;
             // 
+            // pnlInputBase
+            // 
+            this.pnlInputBase.Controls.Add(this.pnlConsumed);
+            this.pnlInputBase.Controls.Add(this.splitter3);
+            this.pnlInputBase.Controls.Add(this.pnlManufactured);
+            this.pnlInputBase.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlInputBase.Location = new System.Drawing.Point(5, 29);
+            this.pnlInputBase.Name = "pnlInputBase";
+            this.pnlInputBase.Size = new System.Drawing.Size(752, 143);
+            this.pnlInputBase.TabIndex = 11;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Enabled = false;
+            this.splitter3.Location = new System.Drawing.Point(304, 0);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(5, 143);
+            this.splitter3.TabIndex = 0;
+            this.splitter3.TabStop = false;
+            // 
+            // pnlConsumed
+            // 
+            this.pnlConsumed.Controls.Add(this.dgvItems);
+            this.pnlConsumed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlConsumed.Location = new System.Drawing.Point(309, 0);
+            this.pnlConsumed.Name = "pnlConsumed";
+            this.pnlConsumed.Size = new System.Drawing.Size(443, 143);
+            this.pnlConsumed.TabIndex = 13;
+            this.pnlConsumed.TabStop = false;
+            this.pnlConsumed.Text = "Consumed";
+            // 
+            // pnlManufactured
+            // 
+            this.pnlManufactured.Controls.Add(this.tableLayoutPanel1);
+            this.pnlManufactured.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlManufactured.Location = new System.Drawing.Point(0, 0);
+            this.pnlManufactured.Name = "pnlManufactured";
+            this.pnlManufactured.Size = new System.Drawing.Size(304, 143);
+            this.pnlManufactured.TabIndex = 12;
+            this.pnlManufactured.TabStop = false;
+            this.pnlManufactured.Text = "Manufactured";
+            // 
+            // dgvItems
+            // 
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(3, 16);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.OrderId = 0;
+            this.dgvItems.Size = new System.Drawing.Size(437, 124);
+            this.dgvItems.TabIndex = 6;
+            // 
             // UserManufactureCreateForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(355, 354);
+            this.ClientSize = new System.Drawing.Size(762, 456);
             this.Controls.Add(this.dgvDepartments);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.pnlFooter);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.pnlInputBase);
             this.Controls.Add(this.lblEmployeeName);
+            this.Controls.Add(this.pnlFooter);
             this.Name = "UserManufactureCreateForm";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Text = "Manufactured Quantity";
@@ -298,6 +359,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).EndInit();
+            this.pnlInputBase.ResumeLayout(false);
+            this.pnlConsumed.ResumeLayout(false);
+            this.pnlManufactured.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -320,11 +385,16 @@
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtPackage;
         private System.Windows.Forms.DataGridView dgvDepartments;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufactureDepartmentId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartmentQuantity;
+        private System.Windows.Forms.Panel pnlInputBase;
+        private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.GroupBox pnlConsumed;
+        private System.Windows.Forms.GroupBox pnlManufactured;
+        private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvItems;
     }
 }

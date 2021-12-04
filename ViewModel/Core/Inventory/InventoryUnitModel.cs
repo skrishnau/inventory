@@ -41,7 +41,7 @@ namespace ViewModel.Core.Inventory
         public decimal Total { get; set; }
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
-        
+
         //public int? UomId { get; set; }
         //public string Uom { get; set; }
         public int? PackageId { get; set; }
@@ -53,7 +53,17 @@ namespace ViewModel.Core.Inventory
         public string ExpirationDate { get; set; }
 
         public decimal InStockQuantity { get; set; }
-        public string InStockQuantityWithPackage { get; set; }
+        private string _inStockQuantityWithPackage = string.Empty;
+        public string InStockQuantityWithPackage
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_inStockQuantityWithPackage))
+                    return _inStockQuantityWithPackage;
+                return $"{InStockQuantity } {ProductModel?.BasePackage }";
+            }
+            set { _inStockQuantityWithPackage = value; }
+        }
         public decimal OnHoldQuantity { get; set; }
         public decimal OnOrderQuantity { get; set; }
         public decimal OnComittedQuantity { get; set; }
@@ -66,10 +76,10 @@ namespace ViewModel.Core.Inventory
         /// <summary>
         /// Update Action: "UpdateMode" enum; one of : EDIT, ADD, DELETE
         /// </summary>
-        public string UpdateAction{ get; set; } 
+        public string UpdateAction { get; set; }
 
         public int? PurchaseOrderItemId { get; set; }
-        
+
         public ProductModel ProductModel { get; set; }
     }
 }

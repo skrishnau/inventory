@@ -462,7 +462,13 @@ namespace Service.Core.Inventory.Units
             _context.InventoryUnits.Add(unitEntity);
 
             if (product == null)
-                product = _context.Products.Find(unit.ProductId);
+            {
+                if (unit.ProductId > 0)
+                    product = _context.Products.Find(unit.ProductId);
+                else
+                    product = _context.Products.FirstOrDefault(x => x.Name == unit.Product.Trim() || x.SKU == unit.Product.Trim());
+                unit.ProductId = product?.Id ?? 0;
+            }
             var actionType = "Received";
             if (adjustmentCode == MovementTypeEnum.Manufacture.ToString())
             {
@@ -580,8 +586,8 @@ namespace Service.Core.Inventory.Units
         {
             using (var _context = DatabaseContext.Context)
             {
-
-                var msg = SaveDirectIssueAnyListWithoutCommit(_context, list, adjustmentCode, referenceNo);
+                var msg = string.Empty;
+                 SaveDirectIssueAnyListWithoutCommit(_context, list, adjustmentCode, referenceNo, ref msg);
                 _context.SaveChanges();
                 var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.DELETE);
                 _listener.TriggerInventoryUnitUpdateEvent(null, args);
@@ -589,16 +595,16 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        public string SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo)
+        public List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg)
         {
             var now = DateTime.Now;
-
-            var msg = string.Empty;
+            var returnList = new List<InventoryUnit>();
             foreach (var model in list)
             {
                 var invUnits = SaveDirectIssueAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo);
+                returnList.AddRange(invUnits);
             }
-            return msg;
+            return returnList;
         }
 
         public List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo)
@@ -607,6 +613,8 @@ namespace Service.Core.Inventory.Units
             var list = new List<InventoryUnit>();
 
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, model.WarehouseId);
+            if (model.ProductId == 0)
+                model.ProductId = _context.Products.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
             model.WarehouseId = warehouse.Id;
             var invUnit = _context.InventoryUnits
                 .Include(x => x.Product)

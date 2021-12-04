@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.Core.Inventory;
 
 namespace ViewModel.Core
 {
@@ -22,6 +23,8 @@ namespace ViewModel.Core
         public int PackageId { get; set; }
         public string PackageName { get; set; }
         public string DateString { get; set; }
+
+        public List<InventoryUnitModel> ConsumedProducts { get; set; }
 
         public List<ProductOwnerModel> NextProductOwners { get; set; }
 

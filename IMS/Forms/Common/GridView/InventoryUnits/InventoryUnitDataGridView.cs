@@ -42,6 +42,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private List<IdNamePair> _productList;
         private List<IdNamePair> _packageList;
 
+        private bool _quantityCanBeZero = false;
+
         public InventoryUnitDataGridView()
         {
             // Initialize columns
@@ -158,8 +160,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 }
 
                 var package = GetPackage(row, productModel);
-                var packageFromDB = _inventoryService.GetPackageByName(package.Name);
-                package.Id = packageFromDB?.Id ?? 0;
+                if (package.Id == 0)
+                {
+                    var packageFromDB = _inventoryService.GetPackageByName(package.Name);
+                    package.Id = packageFromDB?.Id ?? 0;
+                }
                 var unitQuantity = GetUnitQuantity(row, null, checkWithInStockQuantity, productModel, package);
                 var rate = GetRate(row);
                 var warehouseId = GetWarehouseId(row);
@@ -296,7 +301,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
 
 
-            if (IgnoreColumnsForErrorList.Contains(colProductId))
+            if (IgnoreColumnsForErrorList.Contains(colProductId) || !colProductId.Visible)
             {
                 return model;
             }
@@ -333,7 +338,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 model.Name = nameCell.Value as string;
             }
 
-            if (IgnoreColumnsForErrorList.Contains(colPackageId))
+            if (IgnoreColumnsForErrorList.Contains(colPackageId) || !colPackageId.Visible)
             {
                 return model;
             }
@@ -374,11 +379,11 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var cell = row?.Cells[this.colUnitQuantity.Index];
             var value = formattedValue == null ? cell?.Value : formattedValue;
             decimal.TryParse(value == null ? "0" : value?.ToString(), out unitQuantity);
-            if (IgnoreColumnsForErrorList.Contains(colUnitQuantity))
+            if (IgnoreColumnsForErrorList.Contains(colUnitQuantity) || !colUnitQuantity.Visible)
             {
                 return unitQuantity;
             }
-            if (unitQuantity <= 0)
+            if (unitQuantity <= 0 && !_quantityCanBeZero)
             {
                 InvalidColumns.Add("Quantity");
                 cell.ErrorText = "Quantity can't be zero or less";
@@ -415,7 +420,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             decimal rate = 0;
             var cell = row.Cells[this.colRate.Index];
             decimal.TryParse(cell.Value == null ? "0" : cell.Value.ToString(), out rate);
-            if (IgnoreColumnsForErrorList.Contains(colRate) && rate >= 0)
+            if ((IgnoreColumnsForErrorList.Contains(colRate) && rate >= 0) || !colRate.Visible)
             {
                 return rate;
             }
@@ -436,7 +441,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         {
             var cell = row.Cells[colWarehouseId.Index];
             var warehouseId = cell.Value == null ? null : (int?)int.Parse(cell.Value.ToString());
-            if (IgnoreColumnsForErrorList.Contains(colWarehouseId))
+            if (IgnoreColumnsForErrorList.Contains(colWarehouseId) || !colWarehouseId.Visible)
             {
                 return warehouseId;
             }
@@ -458,7 +463,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             var cell = row.Cells[colLotNumber.Index];
             var value = formattedValue == null ? cell.Value : formattedValue;
             var lotNumber = value == null ? 0 : int.Parse(value.ToString());
-            if (IgnoreColumnsForErrorList.Contains(colLotNumber) || !_decimalValidator.HasColumn(colLotNumber))
+            if (IgnoreColumnsForErrorList.Contains(colLotNumber) || !_decimalValidator.HasColumn(colLotNumber) || !colLotNumber.Visible)
             {
                 return lotNumber;
             }
@@ -527,7 +532,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             if (string.IsNullOrEmpty(valueString) || string.IsNullOrWhiteSpace(valueString))
                 return "";
             DateTime date;
-            if (IgnoreColumnsForErrorList.Contains(column))
+            if (IgnoreColumnsForErrorList.Contains(column) || !column.Visible)
             {
                 return valueString;
             }

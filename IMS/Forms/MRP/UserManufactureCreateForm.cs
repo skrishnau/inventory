@@ -1,5 +1,7 @@
 ﻿using IMS.Forms.Common;
 using IMS.Forms.Common.Base;
+using IMS.Forms.Common.GridView;
+using Service.Core.Inventory;
 using Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModel.Core;
+using ViewModel.Core.Inventory;
 
 namespace IMS.Forms.MRP
 {
@@ -29,9 +32,19 @@ namespace IMS.Forms.MRP
         private ManufactureDepartmentUserModel _manufactureDepartmentUserModel;
         private List<ManufactureDepartmentProductModel> _departmentProductModels;
 
-        public UserManufactureCreateForm(IManufactureService manufactureService)
+        private GridViewColumnDecimalValidator _departmentDecimalValidator;
+        private GridViewColumnDecimalValidator _consumedDecimalValidator;
+
+        private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
+        private readonly IUomService _uomService;
+
+        public UserManufactureCreateForm(IManufactureService manufactureService, IInventoryService inventoryService, IProductService productService, IUomService uomService)
         {
             _manufactureService = manufactureService;
+            _inventoryService = inventoryService;
+            _productService = productService;
+            _uomService = uomService;
 
             InitializeComponent();
             this.Load += UserManufactureCreateForm_Load;
@@ -48,6 +61,16 @@ namespace IMS.Forms.MRP
 
         private void UserManufactureCreateForm_Load(object sender, EventArgs e)
         {
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            dgvItems.DesignForUserManufactureConsume();
+
+            _departmentDecimalValidator = new GridViewColumnDecimalValidator(dgvDepartments);
+            _departmentDecimalValidator.AddColumn(colDepartmentQuantity, ColumnDataType.Decimal);
+
+            //_consumedDecimalValidator = new GridViewColumnDecimalValidator(dgvItems);
+            //_consumedDecimalValidator.AddColumn(dgvItems, ColumnDataType.Decimal);
+
+
             btnSave.Click += BtnSave_Click;
             chkAssignToNextDepartment.CheckedChanged += ChkAssignToNextDepartment_CheckedChanged;
 
@@ -64,24 +87,43 @@ namespace IMS.Forms.MRP
             lblEmployeeName.Text = _manufactureDepartmentUserModel.Name + " (" + _manufactureDepartmentModel.Name + ")";
 
             //dgvDepartments.Enabled = false;
-
+            cbProduct.SelectedIndexChanged += CbProduct_SelectedIndexChanged;
             _departmentProductModels = _manufactureDepartmentModel.ManufactureDepartmentProducts
                 .Where(x => x.InOut == _inOut)
                 .ToList();
             cbProduct.DataSource = _departmentProductModels;
             cbProduct.DisplayMember = "ProductName";
             cbProduct.ValueMember = "ProductId";
+            CbProduct_SelectedIndexChanged(null, null);
+
             var next = _manufactureModel.ManufactureDepartments.Where(x => x.Position > _manufactureDepartmentModel.Position).OrderBy(x => x.Position).FirstOrDefault();
             if (next != null)
                 dgvDepartments.DataSource = _manufactureModel.ManufactureDepartments.Where(x => x.Position == next.Position).ToList();
             else
                 chkAssignToNextDepartment.Checked = chkAssignToNextDepartment.Enabled = false;
 
+            var consumingProducts = _manufactureService.GetManufactureDepartmentProductsInventoryUnit(_manufactureId, _departmentId);
+            PopulateConsumingProducts(consumingProducts);
+        }
+
+        private void CbProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var productId = cbProduct.SelectedValue as int?;
+            if (productId > 0)
+                txtPackage.Text = _departmentProductModels.FirstOrDefault(x => x.ProductId == productId)?.PackageName;
+        }
+
+        private void PopulateConsumingProducts(List<InventoryUnitModel> _unitList)
+        {
+            if (_unitList != null)
+            {
+                dgvItems.AddRows(_unitList);
+            }
         }
 
         private void ChkAssignToNextDepartment_CheckedChanged(object sender, EventArgs e)
         {
-            dgvDepartments.Enabled = chkAssignToNextDepartment.Checked;
+            dgvDepartments.Visible = chkAssignToNextDepartment.Checked;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -137,17 +179,25 @@ namespace IMS.Forms.MRP
                 if (newOwners.Count == 0 || newOwners.Sum(x => x.Quantity) == 0)
                 {
                     isValid = false;
-                    message += "At least one department's assign quantity is required.";
+                    message += "At least one department's Assign quantity is required.";
                 }
             }
-
-            if (!isValid)
-                return;
+          
             if (!string.IsNullOrEmpty(message))
             {
                 PopupMessage.ShowInfoMessage(message);
                 this.Focus();
             }
+
+            var consumedItems = dgvItems.GetItems();
+            if (consumedItems == null)
+            {
+                this.Focus();
+                return;
+            }
+
+            if (!isValid)
+                return;
 
             var userManufactureModel = new UserManufactureModel
             {
@@ -161,6 +211,7 @@ namespace IMS.Forms.MRP
                 NextProductOwners = newOwners,
                 DepartmentId = _manufactureDepartmentModel.DepartmentId,
                 PackageId = packageId,
+                ConsumedProducts = consumedItems,
             };
             var response = _manufactureService.AddUserManufacture(userManufactureModel);
             PopupMessage.ShowMessage(response.Success, response.Message);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core;
+using ViewModel.Core.Inventory;
 
 namespace Service.Interfaces
 {
@@ -31,5 +32,7 @@ namespace Service.Interfaces
         Task<ViewListModel<DepartmentModel>> GetAllDepartments(string searchText, int pageSize, int offset);
         List<DepartmentUserModel> GetEmployeesOfDepartment(int departmentId);
         ResponseModel<bool> DeleteDepartment(int departmentId);
+        List<ManufactureDepartmentProductModel> GetManufactureDepartmentInProducts(int manufactureId, int departmentId, bool inOut);
+        List<InventoryUnitModel> GetManufactureDepartmentProductsInventoryUnit(int manufactureId, int departmentId);
     }
 }

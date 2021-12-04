@@ -169,7 +169,7 @@ namespace IMS.Forms.Inventory.Units
         {
             dgvInventoryUnit.ResetCheckCount();
             //var warehouseId = int.Parse(cbWarehouse.SelectedValue.ToString());
-            var productId = int.Parse(cbProduct.SelectedValue.ToString());
+            var productId = int.Parse(cbProduct.SelectedValue?.ToString());
             //var inventoryUnits = _inventoryUnitService.GetInventoryUnitList(0, productId, 10, 0);
             //dgvInventoryUnit.DataSource = inventoryUnits.DataList;
             if (helper != null)

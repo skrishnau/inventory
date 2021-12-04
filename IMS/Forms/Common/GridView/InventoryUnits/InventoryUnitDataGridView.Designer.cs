@@ -814,9 +814,31 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colPackage.Visible = true;
-            colInStockQuantity.Visible = false;
+            colInStockQuantityWithPackage.Visible = false;
             colRate.Visible = false;
             colDelete.Visible = true;
+            HideUnusedDefaults();
+        }
+        //
+        // Consume Manufacture designs
+        //
+        public void DesignForUserManufactureConsume()
+        {
+            _quantityCanBeZero = true;
+            _movementType = ViewModel.Enums.MovementTypeEnum.DirectIssueAny;
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.AllowUserToAddRows = true;
+            this.AllowUserToDeleteRows = true;
+            colProduct.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colPackageId.Visible = true;
+            colInStockQuantityWithPackage.Visible = true;
+            //colRate.Visible = false;
+            colProduct.ReadOnly = true;
+            colProductId.ReadOnly = true;
+            AllowUserToAddRows = false;
             HideUnusedDefaults();
         }
 

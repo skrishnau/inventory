@@ -48,7 +48,7 @@ namespace Service.Core.Inventory.Units
         // Direct Issue of any product
         //
         string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode, string referenceNo);
-        string SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo);
+        List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg);
         List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo);
         #endregion
 
