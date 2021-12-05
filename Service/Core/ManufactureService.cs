@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.Core;
+using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 using ViewModel.Enums;
 using ViewModel.Utility;
@@ -26,13 +27,15 @@ namespace Service.Core
         private readonly IAppSettingService _appSettingService;
         private readonly IUomService _uomService;
         private readonly IInventoryUnitService _inventoryUnitService;
+        private readonly IProductOwnerService _productOwnerService;
 
-        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService, IUomService uomService, IInventoryUnitService inventoryUnitService)
+        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService, IUomService uomService, IInventoryUnitService inventoryUnitService, IProductOwnerService productOwnerService)
         {
             _listener = listener;
             _appSettingService = appSettingService;
             _uomService = uomService;
             _inventoryUnitService = inventoryUnitService;
+            _productOwnerService = productOwnerService;
         }
 
 
@@ -312,6 +315,43 @@ namespace Service.Core
         #endregion
 
         #region Department
+
+        // give userId if user's department list is required
+        public List<IdNamePair> GetDepartmentListForCombo(int? manufactureId = null, int? userId = null)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                if (manufactureId > 0)
+                {
+                    var query = _context.ManufactureDepartments.Where(x => x.ManufactureId == manufactureId && x.Department.DeletedAt == null);
+                    if (userId > 0)
+                        query = query.Where(w => w.ManufactureDepartmentUsers.Any(x => x.UserId == userId));
+                    return query
+                        .Select(s => new IdNamePair
+                        {
+                            Id = s.DepartmentId,
+                            Name = s.Department.Name + (s.IsVendor ? " (External)" : " (Internal)"),
+                            ExtraValue = s.IsVendor.ToString(),
+                        }).Distinct().ToList();
+                }
+                if (userId > 0)
+                {
+                    return _context.DepartmentUsers.Where(x => x.Department.DeletedAt == null && x.DeletedAt == null && x.UserId == userId)
+                         .Select(s => new IdNamePair
+                         {
+                             Id = s.DepartmentId,
+                             Name = s.Department.Name + (s.Department.IsVendor ? " (External)" : " (Internal)"),
+                         }).Distinct().ToList();
+                }
+                return _context.Departments.Where(x => x.DeletedAt == null)
+                    .Select(s => new IdNamePair
+                    {
+                        Id = s.Id,
+                        Name = s.Name + (s.IsVendor ? " (External)" : " (Internal)"),
+                        ExtraValue = s.IsVendor.ToString(),
+                    }).ToList();
+            }
+        }
 
         public List<ManufactureDepartmentModel> GetDepartmentListForManufacture()
         {
@@ -613,7 +653,7 @@ namespace Service.Core
                     return new ResponseModel<UserManufactureModel> { Success = false, Message = "Couldn't convert the manufactured Unit to Base Unit of the product!" };
                 manufacturedProduct.InStockQuantity += convertedQuantityManufactured;
                  */
-                
+
 
 
 
@@ -631,7 +671,11 @@ namespace Service.Core
                     manufactureDepartmentUser.UserManufactures.Add(userManufactureConsumeEntity);
                     var basePackage = _context.Products.Find(consumedProduct.ProductId).ProductPackages.FirstOrDefault(x => x.IsBasePackage);
                     // subtract from user product CONSUMED
+
+                    var consumeRemarks = "Consumed during Manufacture";
                     var user = _context.Users.Find(manufactureDepartmentUser.UserId);
+                    var productOwner = _productOwnerService.AssignProductOwnerWithoutCommit(_context, 0, string.Empty, manufactureDepartmentUser.UserId, user.Name, consumedProduct.ProductId, consumedProduct.PackageId ?? 0, consumedProduct.UnitQuantity, false, consumeRemarks);
+                    /*
                     var productOwner = user.ProductOwners.FirstOrDefault(x => x.ProductId == consumedProduct.ProductId);
                     if (productOwner == null)
                     {
@@ -658,6 +702,7 @@ namespace Service.Core
                         Remarks = "Consumed during Manufacture",
                     };
                     _context.ProductOwnerHistories.Add(ownerHisotry);
+                    */
                 }
                 // -- END OF USER CONSUMED PRODUCTS -- //
 
@@ -665,8 +710,13 @@ namespace Service.Core
 
                 // -- ASSIGN TO SELF DEPARTMENT -- //
                 // assign the maufactured quantity to the SELF department 
+                var selfDepartmentName = _context.Departments.Where(x => x.Id == model.DepartmentId).Select(x => x.Name).FirstOrDefault();
                 var qty = model.Quantity;
-                var sameDepartmentOwner = manufactureDepartmentUser.ManufactureDepartment.Department.ProductOwners.FirstOrDefault(x => x.ProductId == model.ProductId);//_context.ProductOwners.FirstOrDefault(x => x.DepartmentId == model.DepartmentId);
+                var selfRemarks = "Assigned directly to Self Department after manufacture by Employee/Vendor";
+                var sameDepartmentOwner = _productOwnerService.AssignProductOwnerWithoutCommit(_context, model.DepartmentId, selfDepartmentName, 0, string.Empty, model.ProductId, model.PackageId, qty, true, selfRemarks);
+
+                /*
+                var sameDepartmentOwner = manufactureDepartmentUser.ManufactureDepartment.Department.ProductOwners.FirstOrDefault(x => x.ProductId == model.ProductId);
                 if (sameDepartmentOwner == null)
                 {
                     sameDepartmentOwner = new ProductOwner
@@ -693,6 +743,7 @@ namespace Service.Core
                     Remarks = "Assigned directly to Self Department after manufacture by Employee/Vendor",
                 };
                 _context.ProductOwnerHistories.Add(sameDepartmentOwnerHisotry);
+                */
 
                 // --- END OF ASSIGN TO SELF DEPARTMENT -- //
 
@@ -705,6 +756,16 @@ namespace Service.Core
                     {
                         if (ownerModel.Quantity > 0)
                         {
+
+                            var productId = model.ProductId;
+                            var packageId = model.PackageId;
+                            var departmentId = ownerModel.DepartmentId;
+                            var quantity = ownerModel.Quantity;
+                            var departmentName = _context.Departments.Where(x => x.Id == departmentId).Select(x => x.Name).FirstOrDefault();
+                            var remarks = "Direct Transfer to another department after manufacture";
+                            var nextDepartmentOwner = _productOwnerService.AssignProductOwnerWithoutCommit(_context, departmentId ?? 0, departmentName, 0, string.Empty, productId, packageId, quantity, true, remarks);
+
+                            /*
                             var nextDepartmentOwner = _context.ProductOwners.FirstOrDefault(x => x.ProductId == model.ProductId && x.DepartmentId == ownerModel.DepartmentId);
                             if (nextDepartmentOwner == null)
                             {
@@ -732,6 +793,8 @@ namespace Service.Core
                                 PackageId = model.PackageId,
                             };
                             _context.ProductOwnerHistories.Add(nextDepartmentOwnerHistory);
+                            */
+
 
                             // subtract from SELF department
                             sameDepartmentOwner.Quantity -= _uomService.ConvertUom(nextDepartmentOwner.PackageId, sameDepartmentOwner.PackageId, model.ProductId, nextDepartmentOwner.Quantity);
@@ -815,5 +878,9 @@ namespace Service.Core
         }
 
         #endregion
+
+        
+
+
     }
 }

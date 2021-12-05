@@ -34,7 +34,7 @@ namespace IMS.Forms.Common.Pagination
     }
     public class ClientListPaginationHelper
     {
-        private UserTypeEnum _userType;
+        private List<UserTypeEnum> _userType;
         private string _searchName;
 
         private int totalRecords = 0;
@@ -47,7 +47,7 @@ namespace IMS.Forms.Common.Pagination
         private readonly IUserService _userService;
 
 
-        public ClientListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IUserService userService, UserTypeEnum userType, string searchName)
+        public ClientListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IUserService userService, List<UserTypeEnum> userType, string searchName)
         {
             this.bindingSource1 = bindingSource;
             this.dataGridView1 = dataGridView;
@@ -108,7 +108,7 @@ namespace IMS.Forms.Common.Pagination
             }
         }
 
-        public void Reset(UserTypeEnum userType, string searchName)
+        public void Reset(List<UserTypeEnum> userType, string searchName)
         {
             _userType = userType;
             _searchName = searchName;

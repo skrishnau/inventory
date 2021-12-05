@@ -104,6 +104,7 @@ namespace DTO.Core.Inventory
                 // Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name,
                 WarehouseId = entity.WarehouseId,
                 OrderItemId = entity.OrderItemId,
+                
             };
         }
         public static List<InventoryUnit> MapToEntity(this List<InventoryUnitModel> modelList)

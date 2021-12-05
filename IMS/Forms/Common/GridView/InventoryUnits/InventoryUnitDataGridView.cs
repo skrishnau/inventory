@@ -1,4 +1,5 @@
-﻿using Service.Core.Inventory;
+﻿using DTO.Core;
+using Service.Core.Inventory;
 using Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         private IInventoryService _inventoryService;
         private IProductService _productService;
+        private IProductOwnerService _productOwnerService;
         private IUomService _uomService;
         private List<DataGridViewColumn> IgnoreColumnsForErrorList = new List<DataGridViewColumn>();
 
@@ -43,6 +45,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         private List<IdNamePair> _packageList;
 
         private bool _quantityCanBeZero = false;
+
+        private AssignReleaseViewModel _assignRelease;
 
         public InventoryUnitDataGridView()
         {
@@ -58,15 +62,37 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
 
         }
 
+        // set product list explicitly (custom)
+        public void SetProductList(List<IdNamePair> productList)
+        {
+            _productList = productList;
+            foreach(DataGridViewRow row in Rows)
+            {
+                if (row.IsNewRow) continue;
+                row.Cells[colProductId.Index].Value = null;
+            }
+            PopulateProduct();
+        }
 
-
-        public void InitializeGridViewControls(IInventoryService inventoryService, IProductService productService, IUomService uomService, List<ProductTypeEnum> productTypes = null)
+        public void InitializeGridViewControls(IInventoryService inventoryService, IProductService productService, IUomService uomService, IProductOwnerService productOwnerService, List<ProductTypeEnum> productTypes = null, List<IdNamePair> productList = null, AssignReleaseViewModel assignRelease = null)
         {
             _inventoryService = inventoryService;
             _productService = productService;
             _uomService = uomService;
-            _productList = _productService.GetProductListForCombo(productTypes: productTypes);
+            _productOwnerService = productOwnerService;
+
+            if (productList != null)
+            {
+                _productList = productList;
+            }
+            else
+            {
+                _productList = _productService.GetProductListForCombo(productTypes: productTypes);
+            }
             _packageList = _inventoryService.GetPackageListForCombo();
+
+            _assignRelease = assignRelease;
+
             //
             // Columns
             //

@@ -20,6 +20,9 @@ using IMS.Forms.Common.Pagination;
 using ViewModel.Core.Common;
 using IMS.Forms.Common;
 using ViewModel.Core;
+using IMS.Forms.MRP.ProductOwners;
+using ViewModel.Utility;
+using DTO.Core;
 
 namespace IMS.Forms.MRP.Departments
 {
@@ -29,6 +32,7 @@ namespace IMS.Forms.MRP.Departments
 
         private readonly IManufactureService _manufactureService;
         private readonly IDatabaseChangeListener _listener;
+        private readonly IProductOwnerService _productOwnerService;
 
         //private DepartmentModel _selectedDepartment;
         // private HeaderTemplate _header;
@@ -39,9 +43,10 @@ namespace IMS.Forms.MRP.Departments
 
         private List<DepartmentModel> _departmentList;
 
-        public DepartmentListUC(IManufactureService manufactureService, IDatabaseChangeListener listener)
+        public DepartmentListUC(IManufactureService manufactureService, IDatabaseChangeListener listener, IProductOwnerService productOwnerService)
         {
             this._manufactureService = manufactureService;
+            _productOwnerService = productOwnerService;
             this._listener = listener;
 
             InitializeComponent();
@@ -71,6 +76,7 @@ namespace IMS.Forms.MRP.Departments
         private void InitializeGridView()
         {
             dgvDepartmentList.AutoGenerateColumns = false;
+            dgvDepartmentProducts.AutoGenerateColumns = false;
             helper = new DepartmentListPaginationHelper(_bindingSource, dgvDepartmentList, bindingNavigator1, _manufactureService);
 
         }
@@ -88,6 +94,87 @@ namespace IMS.Forms.MRP.Departments
             //cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
             txtName.TextChanged += TxtName_TextChanged;
             dgvDepartmentList.DataSourceChanged += DgvDepartmentList_DataSourceChanged;
+
+            btnAssignProducts.Click += BtnAssignProducts_Click;
+            btnReleaseProducts.Click += BtnReleaseProducts_Click;
+            dgvEmployees.CellClick += DgvEmployees_CellClick;
+        }
+
+        private void DgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colEmployeeAssign.Index || e.ColumnIndex == colEmployeeRelease.Index)
+            {
+                var userId = dgvEmployees.Rows[e.RowIndex].Cells[colEmployeeId.Index].Value as int?;
+                if (userId > 0)
+                {
+                    ShowAssignDialog(0, userId ?? 0, e.ColumnIndex == colEmployeeAssign.Index);
+                }
+            }
+        }
+
+        private void BtnReleaseProducts_Click(object sender, EventArgs e)
+        {
+            var department = GetSelectedDepartment();
+            if (department != null)
+                ShowAssignDialog(department.Id, 0, Constants.OUT);
+        }
+
+        private void BtnAssignProducts_Click(object sender, EventArgs e)
+        {
+            var department = GetSelectedDepartment();
+            if (department != null)
+                ShowAssignDialog(department.Id, 0, Constants.IN);
+        }
+
+        private void ShowAssignDialog(int departmentId, int userId, bool inOut)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var manufactureId = 0;
+                var productOwnerForm = Program.container.GetInstance<ProductOwnerAssignForm>();
+                var assignReleaseModel = new AssignReleaseViewModel
+                {
+                    ManufactureId = manufactureId,
+                    AssignReleaseText = inOut ? "Assign " : "Release",
+
+                };
+
+
+                if (inOut)
+                {
+                    if (departmentId > 0)
+                    {
+                        assignReleaseModel.ToId = departmentId;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.WarehouseToDepartment;
+
+                    }
+                    else if (userId > 0)
+                    {
+                        var selectedDepartment = GetSelectedDepartment();
+                        assignReleaseModel.ToId = userId;
+                        assignReleaseModel.FromId = selectedDepartment.Id;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.DepartmentToUser;
+                    }
+                }
+                else
+                {
+                    if (departmentId > 0)
+                    {
+                        assignReleaseModel.FromId = departmentId;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.DepartmentToWarehouse;
+                    }
+                    else if (userId > 0)
+                    {
+                        var selectedDepartment = GetSelectedDepartment();
+                        assignReleaseModel.FromId = userId;
+                        assignReleaseModel.ToId = selectedDepartment.Id;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.UserToDepartment;
+                    }
+                }
+                productOwnerForm.SetDataForEdit(assignReleaseModel);
+                productOwnerForm.ShowDialog();
+                this.Focus();
+            }
         }
 
         private void DgvDepartmentList_DataSourceChanged(object sender, EventArgs e)
@@ -125,7 +212,7 @@ namespace IMS.Forms.MRP.Departments
         private void ShowDeleteDialog(DepartmentModel model)
         {
             var dialogResult = MessageBox.Show(this, "You won't be able to retrieve the department after you delete it."
-                +" Are you sure to permanently delete the department '" +
+                + " Are you sure to permanently delete the department '" +
                 model.Name +
                 "'?",
                "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -181,6 +268,8 @@ namespace IMS.Forms.MRP.Departments
             {
                 // show edit and delete buttons
                 btnEdit.Visible = true;
+                btnAssignProducts.Visible = true;
+                btnReleaseProducts.Visible = true;
                 btnDelete.Visible = true;
                 // btnDelete.Visible = true;
                 var data = (DepartmentModel)dgvDepartmentList.SelectedRows[0].DataBoundItem;
@@ -192,8 +281,20 @@ namespace IMS.Forms.MRP.Departments
                     lblEmployeesVendors.Text = "Vendors";
                 else
                     lblEmployeesVendors.Text = "Employees";
+
+                lblProductsOnHold.Text = "Products on Hold by " + data.Name;
+                PopulateProductsOnHold(data);
             }
 
+        }
+
+        private void PopulateProductsOnHold(DepartmentModel dep)
+        {
+            if (dep != null)
+            {
+                var list = _productOwnerService.GetProductOnwerList(dep.Id, 0);
+                dgvDepartmentProducts.DataSource = list;
+            }
         }
 
         private void PopulateEmployeesData(DepartmentModel data)
@@ -231,7 +332,7 @@ namespace IMS.Forms.MRP.Departments
                 ShowDeleteDialog(department);
             }
         }
-        
+
 
         #endregion
 

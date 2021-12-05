@@ -101,7 +101,7 @@ namespace Service.Core.Users
             }
         }
 
-        public int GetAllUsersCount(UserTypeEnum userType, string searchName = "")
+        public int GetAllUsersCount(List<UserTypeEnum> userType, string searchName = "")
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -110,7 +110,7 @@ namespace Service.Core.Users
             }
         }
 
-        public UserListModel GetAllUsers(UserTypeEnum userType, int pageSize, int offset, string searchName = "")
+        public UserListModel GetAllUsers(List<UserTypeEnum> userType, int pageSize, int offset, string searchName = "")
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -132,13 +132,13 @@ namespace Service.Core.Users
         }
 
         // includeUserList : includes the given users even if Use property is false
-        public List<IdNamePair> GetUserListForCombo(UserTypeEnum userType, int[] includeUserList)
+        public List<IdNamePair> GetUserListForCombo(List<UserTypeEnum> userTypes, int[] includeUserList)
         {
             if (includeUserList == null)
                 includeUserList = new int[0];
             using (var _context = DatabaseContext.Context)
             {
-                var query = GetUserQueryable(_context, userType, string.Empty);
+                var query = GetUserQueryable(_context, userTypes, string.Empty);
 
                 return query
                     .Where(x => x.Use || (!x.Use && includeUserList.Contains(x.Id)))
@@ -206,7 +206,7 @@ namespace Service.Core.Users
         }
 
 
-        public List<IdNamePair> GetUserListWithCompanyForCombo(UserTypeEnum userType, int[] includeUserList)
+        public List<IdNamePair> GetUserListWithCompanyForCombo(List<UserTypeEnum> userType, int[] includeUserList)
         {
             if (includeUserList == null)
                 includeUserList = new int[0];
@@ -224,24 +224,28 @@ namespace Service.Core.Users
             }
         }
 
-        private IQueryable<User> GetUserQueryable(DatabaseContext _context, UserTypeEnum userType, string searchName)
+        private IQueryable<User> GetUserQueryable(DatabaseContext _context, List<UserTypeEnum> userTypes, string searchName)
         {
             var split = string.IsNullOrEmpty(searchName) ? new string[0] : searchName.Split(new char[] { '-' });
             var name = split.Length > 0 ? split[0].Trim() : "";
             var company = split.Length > 1 ? split[1].Trim() : "";
 
-            var query = _context.Users
-                    .Where(x => x.DeletedAt == null);
+            var query = _context.Users.Where(x => x.DeletedAt == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
-            if (userType == UserTypeEnum.All) // client means both Customer and Supplier
+            if (userTypes.Contains(UserTypeEnum.All)) // client means both Customer and Supplier
             {
                 query = query.Where(x => x.UserType == customer || x.UserType == supplier);
             }
-            else //if (userType != UserTypeEnum.All)
+            else
             {
-                var userTypeStr = userType.ToString();
-                query = query.Where(x => x.UserType == userTypeStr);
+                if(userTypes.Count > 0)
+                {
+                    foreach (var userTypeStr in userTypes.Select(u => u.ToString()))
+                    {
+                        query = query.Where(x => x.UserType.Contains(userTypeStr));
+                    }
+                }
             }
             if (!string.IsNullOrEmpty(searchName))
                 query = query.Where(x => x.Name.Contains(name) || x.Company.Contains(name));

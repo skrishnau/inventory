@@ -144,7 +144,7 @@ namespace IMS.Forms.Inventory.Orders
             }
             var includeUserList = new int[] { _purchaseOrderModel?.UserId ?? 0 };
             
-            list = _userService.GetUserListForCombo(userType, includeUserList);
+            list = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, includeUserList);
             if (list != null)
             {
                 list.Insert(0, new IdNamePair

@@ -14,8 +14,8 @@ namespace Service.Core.Users
         UserModel GetUserWithTotalAndPaidAmounts(int userId);
         void DeleteUser(UserModel user);
 
-        int GetAllUsersCount(UserTypeEnum userType, string searchName = "");
-        UserListModel GetAllUsers(UserTypeEnum userType, int pageSize, int offset, string searchName = "");
+        int GetAllUsersCount(List<UserTypeEnum> userType, string searchName = "");
+        UserListModel GetAllUsers(List<UserTypeEnum> userType, int pageSize, int offset, string searchName = "");
         
         /// <summary>
         /// 
@@ -23,9 +23,9 @@ namespace Service.Core.Users
         /// <param name="userType"></param>
         /// <param name="includeUserList">Includes the given users even if Use property is false</param>
         /// <returns></returns>
-        List<IdNamePair> GetUserListForCombo(UserTypeEnum userType, int[] includeUserList);
+        List<IdNamePair> GetUserListForCombo(List<UserTypeEnum> userTypes, int[] includeUserList);
         bool IsAnyUser();
-        List<IdNamePair> GetUserListWithCompanyForCombo(UserTypeEnum userType, int[] includeUserList);
+        List<IdNamePair> GetUserListWithCompanyForCombo(List<UserTypeEnum> userTypes, int[] includeUserList);
 
         UserModel GetTransactionSumOfUser(int userId);
         UserModel Authenticate(string username, string password);

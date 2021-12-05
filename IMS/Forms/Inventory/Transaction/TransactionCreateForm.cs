@@ -34,6 +34,9 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IProductService _productService;
         private readonly IAppSettingService _appSettingService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
+             
+
         private RequiredFieldValidator _requiredFieldValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
 
@@ -55,7 +58,8 @@ namespace IMS.Forms.Inventory.Transaction
             IOrderService purchaseService,
             IDatabaseChangeListener listener,
             IAppSettingService appSettingService,
-            IUomService uomService)
+            IUomService uomService,
+            IProductOwnerService productOwnerService)
         {
             _listener = listener;
             this._businessService = businessService;
@@ -65,6 +69,7 @@ namespace IMS.Forms.Inventory.Transaction
             this._productService = productService;
             this._appSettingService = appSettingService;
             this._uomService = uomService;
+            _productOwnerService = productOwnerService;
             InitializeComponent();
             this.Load += TransactionCreateForm_Load;
         }
@@ -86,7 +91,7 @@ namespace IMS.Forms.Inventory.Transaction
             
             _orderModel = _orderService.GetOrderForDetailView(_orderId, withProductModel: true);
 
-            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             InitializeValidation();
             InitializeEvents();
             InitializeDataGridView();
@@ -307,7 +312,7 @@ namespace IMS.Forms.Inventory.Transaction
                     break;
             }
             var includeUserList = new int[] { _orderModel?.UserId ?? 0 };
-            list = _userService.GetUserListWithCompanyForCombo(userType, includeUserList);
+            list = _userService.GetUserListWithCompanyForCombo(new List<UserTypeEnum> { userType }, includeUserList);
             if (list != null)
             {
                 list.Insert(0, new IdNamePair

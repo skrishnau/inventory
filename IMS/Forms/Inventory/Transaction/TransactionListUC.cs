@@ -35,6 +35,7 @@ namespace IMS.Forms.Inventory.Transaction
         private readonly IProductService _productService;
         private readonly IUserService _userService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
 
         int _previousSelectedIndex = -1;
         BindingSource _bindingSource = new BindingSource();
@@ -42,7 +43,7 @@ namespace IMS.Forms.Inventory.Transaction
 
         OrderListTypeEnum _orderListTypeEnum;
 
-        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType, OrderListTypeEnum orderListTypeEnum, IUomService uomService)
+        public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType, OrderListTypeEnum orderListTypeEnum, IUomService uomService, IProductOwnerService productOwnerService)
         {
             _orderService = orderService;
             _inventoryService = inventoryService;
@@ -52,13 +53,15 @@ namespace IMS.Forms.Inventory.Transaction
             _userService = userService;
             _orderListTypeEnum = orderListTypeEnum;
             _uomService = uomService;
+            _productOwnerService = productOwnerService;
+
             InitializeComponent();
             this.Load += OrderListUC_Load;
         }
 
         private void OrderListUC_Load(object sender, EventArgs e)
         {
-            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             dgvItems.DesignForTransactionItemListing(false);
 
             this.Dock = DockStyle.Fill;
@@ -89,7 +92,7 @@ namespace IMS.Forms.Inventory.Transaction
         }
         private void InitializeSearchTextBox()
         {
-            var users = _userService.GetUserListWithCompanyForCombo(UserTypeEnum.All, new int[0]);
+            var users = _userService.GetUserListWithCompanyForCombo(new List<UserTypeEnum> { UserTypeEnum.All }, new int[0]);
             txtSearchClient.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
             txtSearchClient.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtSearchClient.AutoCompleteMode = AutoCompleteMode.SuggestAppend;

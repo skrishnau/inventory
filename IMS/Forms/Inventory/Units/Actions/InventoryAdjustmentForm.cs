@@ -25,6 +25,7 @@ namespace IMS.Forms.Inventory.Units.Actions
         private readonly IBusinessService _businessService;
         private readonly IOrderService _orderService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
 
         //private bool _isCellDirty;
 
@@ -39,7 +40,8 @@ namespace IMS.Forms.Inventory.Units.Actions
             IBusinessService businessService,
             IOrderService purchaseService,
             IInventoryUnitService inventoryUnitService,
-            IUomService uomService)
+            IUomService uomService,
+            IProductOwnerService productOwnerService)
         {
             _inventoryService = inventoryService;
             _productService = productService;
@@ -47,6 +49,7 @@ namespace IMS.Forms.Inventory.Units.Actions
             _orderService = purchaseService;
             _inventoryUnitService = inventoryUnitService;
             _uomService = uomService;
+            _productOwnerService = productOwnerService;
 
             InitializeComponent();
 
@@ -57,7 +60,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void InventoryReceiveForm_Load(object sender, EventArgs e)
         {
-            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             dtReceivedDate.SetValue(DateTime.Now);
 
             PopulateAdjustmentCodeCombo();

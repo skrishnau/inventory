@@ -1,4 +1,5 @@
-﻿using Infrastructure.Context;
+﻿using DTO.Core;
+using Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using ViewModel.Core.Inventory;
@@ -48,8 +49,8 @@ namespace Service.Core.Inventory.Units
         // Direct Issue of any product
         //
         string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode, string referenceNo);
-        List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg);
-        List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo);
+        List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg, AssignReleaseViewModel assignRelease = null);
+        List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, AssignReleaseViewModel assignRelease = null);
         #endregion
 
 

@@ -16,5 +16,8 @@ namespace ViewModel.Core
         public decimal Quantity { get; set; }
         public System.DateTime UpdatedAt { get; set; }
 
+        public string ProductName { get; set; }
+        public string PackageName { get; set; }
+        
     }
 }

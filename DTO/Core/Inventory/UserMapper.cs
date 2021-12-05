@@ -58,7 +58,7 @@ namespace DTO.Core.Inventory
             return list;
         }
 
-        public static UserModel MapToUserModel(User x, decimal totalAmount=0, decimal paidAmount =0)
+        public static UserModel MapToUserModel(this User x, decimal totalAmount=0, decimal paidAmount =0)
         {
             return new UserModel()
             {

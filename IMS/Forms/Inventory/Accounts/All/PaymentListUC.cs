@@ -191,7 +191,7 @@ namespace IMS.Forms.Inventory.Reports.All
             if (item != null)
             {
                 var userType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), item.Value);
-                var customers = _userService.GetUserListForCombo(userType, new int[0]);
+                var customers = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, new int[0]);
                 customers.Insert(0, new IdNamePair(0, "--- All ---"));
                 cbCustomer.DataSource = customers;
 

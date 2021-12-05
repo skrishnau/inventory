@@ -38,13 +38,15 @@ namespace IMS.Forms.MRP
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
 
-        public UserManufactureCreateForm(IManufactureService manufactureService, IInventoryService inventoryService, IProductService productService, IUomService uomService)
+        public UserManufactureCreateForm(IManufactureService manufactureService, IInventoryService inventoryService, IProductService productService, IUomService uomService, IProductOwnerService productOwnerService)
         {
             _manufactureService = manufactureService;
             _inventoryService = inventoryService;
             _productService = productService;
             _uomService = uomService;
+            _productOwnerService = productOwnerService;
 
             InitializeComponent();
             this.Load += UserManufactureCreateForm_Load;
@@ -61,7 +63,7 @@ namespace IMS.Forms.MRP
 
         private void UserManufactureCreateForm_Load(object sender, EventArgs e)
         {
-            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             dgvItems.DesignForUserManufactureConsume();
 
             _departmentDecimalValidator = new GridViewColumnDecimalValidator(dgvDepartments);

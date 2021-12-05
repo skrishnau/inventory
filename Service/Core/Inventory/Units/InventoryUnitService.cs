@@ -10,6 +10,7 @@ using Service.Utility;
 using Service.DbEventArgs;
 using Service.Interfaces;
 using ViewModel.Enums;
+using DTO.Core;
 
 namespace Service.Core.Inventory.Units
 {
@@ -595,19 +596,39 @@ namespace Service.Core.Inventory.Units
             }
         }
 
-        public List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="list"></param>
+        /// <param name="adjustmentCode"></param>
+        /// <param name="referenceNo"></param>
+        /// <param name="msg"></param>
+        /// <param name="dontRemoveButHold">Either to completely remove from inv. unit list or to seprate it as another unit and set it as hold</param>
+        /// <returns></returns>
+        public List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg, AssignReleaseViewModel assignRelease = null)
         {
             var now = DateTime.Now;
             var returnList = new List<InventoryUnit>();
             foreach (var model in list)
             {
-                var invUnits = SaveDirectIssueAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo);
+                var invUnits = SaveDirectIssueAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo, assignRelease);
                 returnList.AddRange(invUnits);
             }
             return returnList;
         }
 
-        public List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_context"></param>
+        /// <param name="model"></param>
+        /// <param name="adjustmentCode"></param>
+        /// <param name="msg"></param>
+        /// <param name="referenceNo"></param>
+        /// <param name="dontRemoveButHold">Either to completely remove from inv. unit list or to seprate it as another unit and set it as hold</param>
+        /// <returns></returns>
+        public List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, AssignReleaseViewModel assignRelease )
         {
             var now = DateTime.Now;
             var list = new List<InventoryUnit>();
@@ -685,9 +706,18 @@ namespace Service.Core.Inventory.Units
                     // don't remove; just decrement
                     //earlier: issuedQuantity = remainingQty;
                     issuedQuantity = remainInvunitQty;
+                    if (assignRelease != null)
+                    {
+                        var cloned = dbEntity.CloneEntity();
+                        cloned.UnitQuantity = remainInvunitQty;
+                        cloned.IsHold = true;
+                        
+                        _context.InventoryUnits.Add(cloned);
+                    }
                     //earlier : dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainingQty;
                     dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainInvunitQty;
                     //dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
+                   
                 }
                 else
                 {
@@ -696,14 +726,22 @@ namespace Service.Core.Inventory.Units
                     // case is : model.UnitQuantity >= entity.UnitQuantity
                     // remove the InventoryUnit
                     remainingQty -= dbEntity.UnitQuantity / conversion;
-                    _context.InventoryUnits.Remove(dbEntity);
+
+                    if(assignRelease != null)
+                        dbEntity.IsHold = true;
+                    else
+                        _context.InventoryUnits.Remove(dbEntity);
                 }
                 // note : don't use dbEntity below this comment line. if you want to use the dbentity then assign it's value to another var before remove() func.
                 list.Add(new InventoryUnit { Rate = rate * conversion, UnitQuantity = issuedQuantity / conversion, PackageId = model.PackageId, OrderItemId = orderItemId });
                 //
                 // Movement
                 //
-                var description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                var description = string.Empty;
+                if(assignRelease!=null)
+                    description = $"Assigned to {assignRelease.FromName} ({assignRelease.ToType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                else
+                    description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {

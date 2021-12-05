@@ -27,6 +27,7 @@ namespace IMS.Forms.MRP
         private readonly IProductService _productService;
         private readonly IAppSettingService _appSettingService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
         private RequiredFieldValidator _requiredFieldValidator;
         private GreaterThanZeroFieldValidator _greaterThanZeroFieldValidator;
 
@@ -43,7 +44,8 @@ namespace IMS.Forms.MRP
             IOrderService purchaseService,
             IDatabaseChangeListener listener,
             IAppSettingService appSettingService,
-            IUomService uomService)
+            IUomService uomService, 
+            IProductOwnerService productOwnerService)
         {
             _listener = listener;
             this._businessService = businessService;
@@ -53,6 +55,7 @@ namespace IMS.Forms.MRP
             this._productService = productService;
             this._appSettingService = appSettingService;
             this._uomService = uomService;
+            _productOwnerService = productOwnerService;
             InitializeComponent();
             this.Load += TransactionCreateForm_Load;
         }
@@ -67,7 +70,7 @@ namespace IMS.Forms.MRP
                 productTypes.Add(ProductTypeEnum.Build);
             }
 
-            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, productTypes);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService, productTypes);
             InitializeValidation();
             InitializeEvents();
             InitializeDataGridView();

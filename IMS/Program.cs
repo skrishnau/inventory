@@ -111,6 +111,7 @@ namespace IMS
             container.Register<IUomService, UomService>(Lifestyle.Singleton);
 
             container.Register<IManufactureService, ManufactureService>(Lifestyle.Singleton);
+            container.Register<IProductOwnerService, ProductOwnerService>(Lifestyle.Singleton);
 
             // ==== NOTE: use Container.RegisterSingleton<>() for registration of forms and UCs ==== //
             // --- main form --- //

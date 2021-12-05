@@ -14,6 +14,7 @@ using IMS.Forms.Common;
 using ViewModel.Enums;
 using ViewModel.Utility;
 using ViewModel.Core;
+using System.Collections.Generic;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -161,7 +162,7 @@ namespace IMS.Forms.Inventory.Reports.All
             if (item != null)
             {
                 var userType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), item.Value);
-                var customers = _userService.GetUserListForCombo(userType, new int[0]);
+                var customers = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, new int[0]);
                 customers.Insert(0, new IdNamePair(0, ""));
                 cbCustomer.DataSource = customers;
 

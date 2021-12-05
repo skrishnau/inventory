@@ -23,15 +23,17 @@ namespace IMS.Forms.Inventory.Units.Actions
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IProductService _productService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
 
         private List<InventoryUnitModel> _dataList;
 
-        public InventoryMergeForm(IInventoryService inventoryService, IInventoryUnitService inventoryUnitService, IProductService productService, IUomService uomService)
+        public InventoryMergeForm(IInventoryService inventoryService, IInventoryUnitService inventoryUnitService, IProductService productService, IUomService uomService, IProductOwnerService productOwnerService)
         {
             _inventoryService = inventoryService;
             _inventoryUnitService = inventoryUnitService;
             _productService = productService;
             _uomService = uomService;
+            _productOwnerService = productOwnerService;
 
             InitializeComponent();
 
@@ -40,7 +42,7 @@ namespace IMS.Forms.Inventory.Units.Actions
 
         private void InventoryMergeForm_Load(object sender, EventArgs e)
         {
-            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             dgvItems.MovementType = MovementTypeEnum.Merge;
             dgvItems.DesignForMerging();
             PopulateData();

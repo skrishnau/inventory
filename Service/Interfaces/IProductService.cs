@@ -45,5 +45,7 @@ namespace Service.Interfaces
         List<IdNamePair> GetPackagesOfProduct(int productId);
         // for assigning product's instock quantity from order items while editing completed transaction
         //decimal AssignInStockQuantityBasedOnOrderForTxnEdit(DatabaseContext _context, ProductModel product, int orderId, Order order);
+
     }
 }
+

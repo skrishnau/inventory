@@ -77,5 +77,8 @@ namespace ViewModel.Utility
         public const string SAVED_SUCCESSFULLY = "Saved Successfully!";
         public const string DELETED_SUCCESSFULLY = "Deleted Successfully!";
         public const string COULDNT_SAVE_CONTACT_ADMIN = "Couln't save! Please contact administrator.";
+
+        public const bool OUT = false;
+        public const bool IN = true;
     }
 }

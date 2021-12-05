@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,5 +39,21 @@ namespace ViewModel.Enums
         DirectMoveAny,
         Merge,
         Manufacture
+    }
+
+    public enum TransferTypeEnum
+    {
+        WarehouseToWarehouse, // transfer
+        WarehouseToDepartment, // assign
+        DepartmentToWarehouse, // release
+        DepartmentToDepartment, // transfer
+        DepartmentToUser, // assign
+        UserToDepartment, // release
+    }
+    public enum FromToType
+    {
+        Warehouse,
+        Department,
+        Employee
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTO.Core;
 using ViewModel.Core;
+using ViewModel.Core.Common;
 using ViewModel.Core.Inventory;
 
 namespace Service.Interfaces
@@ -17,6 +19,7 @@ namespace Service.Interfaces
         int GetAllManufacturesCount(int categoryId, string searchText);
         Task<ViewListModel<ManufactureModel>> GetAllManufactures(int categoryId, string searchText, int pageSize, int offset);
         ResponseModel<bool> DeleteManufacture(int id);
+        List<IdNamePair> GetDepartmentListForCombo(int? manufactureId = null, int? userId = null);
         List<ManufactureDepartmentModel> GetDepartmentListForManufacture();
         DepartmentModel GetDepartment(int departmentId);
         ResponseModel<DepartmentModel> SaveDepartment(DepartmentModel model);

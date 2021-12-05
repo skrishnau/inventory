@@ -29,6 +29,7 @@ namespace IMS.Forms.Inventory.Units
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IBusinessService _businessService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
 
         // private HeaderTemplate _header;
         // private int checkCount;
@@ -42,7 +43,8 @@ namespace IMS.Forms.Inventory.Units
             IProductService productService,
             IInventoryUnitService inventoryUnitService,
             IBusinessService businessService,
-            IUomService uomService)
+            IUomService uomService,
+            IProductOwnerService productOwnerService)
         {
             _listener = listener;
             _inventoryService = inventoryService;
@@ -50,10 +52,11 @@ namespace IMS.Forms.Inventory.Units
             _inventoryUnitService = inventoryUnitService;
             _businessService = businessService;
             _uomService = uomService;
+            _productOwnerService = productOwnerService;
 
             InitializeComponent();
             this.Dock = DockStyle.Fill; ;
-            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
 
             this.Load += InventoryUnitListUC_Load;
         }

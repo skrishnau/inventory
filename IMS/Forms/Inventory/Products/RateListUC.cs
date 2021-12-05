@@ -28,13 +28,15 @@ namespace IMS.Forms.Inventory.Products
         private readonly IProductService _productService;
         private readonly IInventoryService _inventoryService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
         private readonly IDatabaseChangeListener _listener;
 
-        public RateListUC(IProductService productService, IInventoryService inventoryService, IUomService uomService, IDatabaseChangeListener listener)
+        public RateListUC(IProductService productService, IInventoryService inventoryService, IUomService uomService, IDatabaseChangeListener listener, IProductOwnerService productOwnerService)
         {
             this._productService = productService;
             this._inventoryService = inventoryService;
             this._uomService = uomService;
+            _productOwnerService = productOwnerService;
             this._listener = listener;
 
             InitializeComponent();
@@ -50,7 +52,7 @@ namespace IMS.Forms.Inventory.Products
             InitializeEvents();
             PopulateOrderType();
 
-            rateDataGridView.dgvRates.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            rateDataGridView.dgvRates.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             rateDataGridView.dgvRates.DesignForPriceHistory(false, true);
             PopulatePriceData();
         }
@@ -142,7 +144,7 @@ namespace IMS.Forms.Inventory.Products
 
         private void BtnUpdatePrice_Click(object sender, EventArgs e)
         {
-            var rateUpdate = new RateCreateForm(_productService, _inventoryService, _uomService);
+            var rateUpdate = new RateCreateForm(_productService, _inventoryService, _uomService, _productOwnerService);
             rateUpdate.SetData(GetOrderType(), dtDate.GetValue());
             rateUpdate.ShowDialog(this);
         }

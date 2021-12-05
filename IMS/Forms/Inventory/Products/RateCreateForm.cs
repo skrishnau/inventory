@@ -21,11 +21,12 @@ namespace IMS.Forms.Inventory.Products
         private readonly IProductService _productService;
         private readonly IInventoryService _inventoryService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
         private OrderTypeEnum _orderType;
         private DateTime _date;
 
 
-        public RateCreateForm(IProductService productService, IInventoryService inventoryService, IUomService uomService)
+        public RateCreateForm(IProductService productService, IInventoryService inventoryService, IUomService uomService, IProductOwnerService productOwnerService)
         {
             _productService = productService;
             _inventoryService = inventoryService;
@@ -33,7 +34,7 @@ namespace IMS.Forms.Inventory.Products
             InitializeComponent();
 
             this.Load += RateCreateForm_Load;
-            rateDataGridView.dgvRates.InitializeGridViewControls(_inventoryService, _productService, _uomService);
+            rateDataGridView.dgvRates.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             rateDataGridView.dgvRates.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
         

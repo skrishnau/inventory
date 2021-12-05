@@ -828,7 +828,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             _movementType = ViewModel.Enums.MovementTypeEnum.DirectIssueAny;
             this.RowHeadersVisible = true;
             this.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.AllowUserToAddRows = true;
+            this.AllowUserToAddRows = false;
             this.AllowUserToDeleteRows = true;
             colProduct.Visible = true;
             colSKU.Visible = true;
@@ -838,7 +838,24 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             //colRate.Visible = false;
             colProduct.ReadOnly = true;
             colProductId.ReadOnly = true;
-            AllowUserToAddRows = false;
+            HideUnusedDefaults();
+        }
+        //
+        // Consume Manufacture designs
+        //
+        public void DesignForAssignRelease()
+        {
+            _movementType = ViewModel.Enums.MovementTypeEnum.DirectIssueAny;
+            this.RowHeadersVisible = true;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.AllowUserToAddRows = true;
+            this.AllowUserToDeleteRows = true;
+            colProductId.Visible = true;
+            colSKU.Visible = true;
+            colUnitQuantity.Visible = true;
+            colPackageId.Visible = true;
+            colInStockQuantityWithPackage.Visible = true;
+            //colRate.Visible = false;
             HideUnusedDefaults();
         }
 

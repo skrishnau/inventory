@@ -134,7 +134,7 @@ namespace IMS.Forms.MRP
             var userIds = _model?.DepartmentUsers?.Where(x => x.UserId != null).Select(x => x.UserId.Value).ToArray() ?? new int[0];
             var depType = cbDepartmentType.SelectedItem as IdNamePair;
             var userType = depType.Id == (int)DepartmentTypeEnum.Vendor ? UserTypeEnum.Vendor : ViewModel.Enums.UserTypeEnum.User;
-            var users = _userService.GetUserListForCombo(userType, userIds);
+            var users = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, userIds);
             var userColumn = dgvEmployees.Columns[colEmployeeName.Index] as DataGridViewComboBoxColumn;
             if (userColumn != null)
             {

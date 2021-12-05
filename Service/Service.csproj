@@ -58,6 +58,7 @@
     <Compile Include="Core\ManufactureService.cs" />
     <Compile Include="Core\Payment\IPaymentService.cs" />
     <Compile Include="Core\Payment\PaymentService.cs" />
+    <Compile Include="Core\ProductOwnerService.cs" />
     <Compile Include="Core\ProductService.cs" />
     <Compile Include="Core\Settings\AppSettingService.cs" />
     <Compile Include="Core\Settings\IAppSettingService.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="DbEventArgs\IdEventArgs.cs" />
     <Compile Include="Interfaces\IBackupService.cs" />
     <Compile Include="Interfaces\IManufactureService.cs" />
+    <Compile Include="Interfaces\IProductOwnerService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Interfaces\IUomService.cs" />
     <Compile Include="Listeners\Business\BranchListener.cs" />

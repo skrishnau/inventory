@@ -11,7 +11,7 @@ using ViewModel.Core.Settings;
 
 namespace Service.Listeners
 {
-    public class DatabaseChangeListener:IDatabaseChangeListener
+    public class DatabaseChangeListener : IDatabaseChangeListener
     {
         // ======================= Events ======================== //
         public event EventHandler<BranchEventArgs> BranchUpdated;

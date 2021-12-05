@@ -106,11 +106,33 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 {
                     _isCellDirty = false;
 
-                    if (e.ColumnIndex == colProduct.Index)
+                    if(e.ColumnIndex == colProduct.Index || e.ColumnIndex == this.colSKU.Index)
                     {
-                        var productModel = _productService.GetProductByNameOrSKU(e.FormattedValue as string);
-                        UpdateProductInfo(this.Rows[e.RowIndex], productModel, e.RowIndex, e.ColumnIndex, null);
+                        ProductModel productModel = null;
+                        if (e.ColumnIndex == colProduct.Index)
+                        {
+                            productModel = _productService.GetProductByNameOrSKU(e.FormattedValue as string);
+                        }
+                        else if (e.ColumnIndex == this.colSKU.Index)
+                        {
+                            productModel = _productService.GetProductBySKU(e.FormattedValue.ToString());
+                        }
+
+                        if (productModel == null)
+                        {
+                            row.Cells[e.ColumnIndex].ErrorText = "Invalid Name/SKU";
+                        }
+                        else
+                        {
+                            row.Cells[e.ColumnIndex].ErrorText = string.Empty;
+                            // check for on hold quantity and set it in InStockQuantity
+                            UpdateInStockForAssignRelease(ref productModel);
+                            // populate
+                            UpdateProductInfo(row, productModel, e.RowIndex, e.ColumnIndex, null);
+                        }
+                        
                     }
+                    
                     //else if(e.ColumnIndex == colPackage.Index)
                     //{
                     //    var product = this.Rows[e.RowIndex].Cells[colProduct.Index].Tag as ProductModel;
@@ -123,22 +145,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     //        }
                     //    }
                     //}
-                    else if (e.ColumnIndex == this.colSKU.Index)
-                    {
-                        // check if the sku is valid
-                        var product = _productService.GetProductBySKU(e.FormattedValue.ToString());
-                        if (product == null)
-                        {
-                            row.Cells[e.ColumnIndex].ErrorText = "Invalid SKU";
-                        }
-                        else
-                        {
-                            row.Cells[e.ColumnIndex].ErrorText = string.Empty;
-                            // populate
-                            UpdateProductInfo(row, product, e.RowIndex, e.ColumnIndex, e.FormattedValue);
-
-                        }
-                    }
+                   
 
 
                     // handle rate and quantity change to update Total
@@ -151,6 +158,22 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     {
                         SetRateAsPerDate(row);
                     }
+                }
+            }
+        }
+
+        private void UpdateInStockForAssignRelease(ref ProductModel productModel)
+        {
+            if (_assignRelease != null && _assignRelease.FromId > 0)
+            {
+                switch (_assignRelease.FromType)
+                {
+                    case ViewModel.Enums.FromToType.Department:
+                        productModel.InStockQuantity = _productOwnerService.GetOnHoldProductQuantityOfOwner(_assignRelease.FromId, 0, productModel.Id, productModel.BasePackageId ?? 0);
+                        break;
+                    case ViewModel.Enums.FromToType.Employee:
+                        productModel.InStockQuantity = _productOwnerService.GetOnHoldProductQuantityOfOwner(0, _assignRelease.FromId, productModel.Id, productModel.BasePackageId ?? 0);
+                        break;
                 }
             }
         }
@@ -387,7 +410,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                     var row = this.CurrentRow;
                     var productId = int.Parse(selectedItem.Id.ToString());
                     var productModel = _productService.GetProductById(productId);
-
+                    UpdateInStockForAssignRelease(ref productModel);
                     UpdateProductInfo(row, productModel, this.CurrentRow.Index, this.colProductId.Index, productId);
                 }
 

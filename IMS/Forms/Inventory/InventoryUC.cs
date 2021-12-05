@@ -48,6 +48,7 @@ namespace IMS.Forms.Inventory
         private readonly IUserService _userService;
         private readonly IAppSettingService _appSettingService;
         private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
 
         private Transaction.TransactionListUC _transactionListUC;
         private Transaction.TransactionListUC _orderListUC;
@@ -59,7 +60,7 @@ namespace IMS.Forms.Inventory
         private Dictionary<string, Button> menuButtonsDictionary = new Dictionary<string, Button>();
 
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService)
+        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService)
         {
             _orderService = orderService;
             _productService = productService;
@@ -69,6 +70,7 @@ namespace IMS.Forms.Inventory
             _menubar = menubar;
             _appSettingService = appSettingService;
             _uomService = uomService;
+            _productOwnerService = productOwnerService;
 
             InitializeComponent();
 
@@ -687,7 +689,8 @@ namespace IMS.Forms.Inventory
                     _listener,
                     orderType,
                     OrderListTypeEnum.Transaction,
-                    _uomService
+                    _uomService,
+                    _productOwnerService
                     );
             }
             AddTabPage(Constants.TAB_TRANSACTIONS, _transactionListUC, sender);
@@ -705,7 +708,8 @@ namespace IMS.Forms.Inventory
                     _listener,
                     orderType,
                     OrderListTypeEnum.Order,
-                    _uomService
+                    _uomService,
+                    _productOwnerService
                     );
             }
             AddTabPage(Constants.TAB_ORDERS, _orderListUC, sender);

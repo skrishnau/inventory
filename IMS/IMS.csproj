@@ -520,6 +520,12 @@
     <Compile Include="Forms\MRP\ManufactureProductCreateForm.Designer.cs">
       <DependentUpon>ManufactureProductCreateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MRP\ProductOwners\ProductOwnerAssignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MRP\ProductOwners\ProductOwnerAssignForm.Designer.cs">
+      <DependentUpon>ProductOwnerAssignForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MRP\UserManufactureCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1013,6 +1019,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\ManufactureProductCreateForm.resx">
       <DependentUpon>ManufactureProductCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MRP\ProductOwners\ProductOwnerAssignForm.resx">
+      <DependentUpon>ProductOwnerAssignForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MRP\UserManufactureCreateForm.resx">
       <DependentUpon>UserManufactureCreateForm.cs</DependentUpon>

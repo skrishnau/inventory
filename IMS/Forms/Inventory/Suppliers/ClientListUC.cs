@@ -58,7 +58,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private void InitializeSearchTextBox()
         {
             txtName.AutoCompleteCustomSource.Clear();
-            var users = _userService.GetUserListWithCompanyForCombo(_userType, new int[0]);
+            var users = _userService.GetUserListWithCompanyForCombo(new List<UserTypeEnum> { _userType }, new int[0]);
             txtName.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
             txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -73,7 +73,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             dgvSuppliers.AutoGenerateColumns = false;
             dgvSuppliers.AllowUserToOrderColumns = true;
-            helper = new ClientListPaginationHelper(_bindingSource, dgvSuppliers, bindingNavigator1, _userService, _userType, txtName?.Text);
+            helper = new ClientListPaginationHelper(_bindingSource, dgvSuppliers, bindingNavigator1, _userService, new List<UserTypeEnum> { _userType }, txtName?.Text);
         }
 
         private void InitializeEvents()
@@ -111,7 +111,7 @@ namespace IMS.Forms.Inventory.Suppliers
             //var supplier = _userService.GetUserList(_userType, txtName.Text);
             //_bindingSource.DataSource = supplier;
             //_bindingSource.ResetBindings(false);
-            helper.Reset(_userType, txtName?.Text);
+            helper.Reset(new List<UserTypeEnum> { _userType }, txtName?.Text);
         }
 
         private void ShowAddEditDialog(bool isEditMode)
