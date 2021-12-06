@@ -268,10 +268,10 @@ namespace Service.Core.Inventory.Units
                     if (fromWp != null)
                     {
                         // update FromWarehouse
-                        fromWp.InStockQuantity -= entityQty;//iuModel.UnitQuantity;
+                        fromWp.InStockQuantity -= moveModel.InventoryUnit.IsHold ? 0 : entityQty;//iuModel.UnitQuantity;
                         fromWp.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? entityQty : 0; //iuModel.OnHoldQuantity : 0;
                         fromWp.UpdatedAt = moveModel.Date;
-                        product.InStockQuantity -= entityQty;// iuModel.UnitQuantity;
+                        product.InStockQuantity -= moveModel.InventoryUnit.IsHold ? 0 : entityQty;// iuModel.UnitQuantity;
                         product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? entityQty : 0;// iuModel.OnHoldQuantity : 0;
                     }
                 }
@@ -302,11 +302,11 @@ namespace Service.Core.Inventory.Units
                     //else
                     //{
                     // update
-                    toWp.InStockQuantity += modelQty;
+                    toWp.InStockQuantity += moveModel.InventoryUnit.IsHold ? 0 : modelQty;
                     toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
                     toWp.UpdatedAt = moveModel.Date;
                     // }
-                    product.InStockQuantity += modelQty;
+                    product.InStockQuantity += moveModel.InventoryUnit.IsHold ? 0 : modelQty;
                     product.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity* conversion : 0;
                 }
             }
@@ -637,13 +637,15 @@ namespace Service.Core.Inventory.Units
             if (model.ProductId == 0)
                 model.ProductId = _context.Products.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
             model.WarehouseId = warehouse.Id;
-            var invUnit = _context.InventoryUnits
+            var query = _context.InventoryUnits
                 .Include(x => x.Product)
                 .Include(x => x.Warehouse)
                 .Where(x => x.WarehouseId == model.WarehouseId
                                 && x.ProductId == model.ProductId
                                 && x.PackageId != null
-                                && x.IsHold == model.IsHold)
+                                && x.IsHold == model.IsHold);
+            
+            var invUnit = query
                 .OrderBy(x => x.ReceiveDate)
                 .ToList();
             decimal qtySum = 0;

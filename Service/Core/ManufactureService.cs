@@ -625,8 +625,26 @@ namespace Service.Core
 
                 };
                 manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
-
-
+                var invUnit = new InventoryUnitModel
+                {
+                    IsHold = true,
+                    UnitQuantity = model.Quantity,
+                    ProductId = model.ProductId,
+                    PackageId = model.PackageId,
+                    //ReceiveDate = model.Date,
+                    SupplierId = manufactureDepartmentUser.UserId,
+                    //EmployeeId = manufactureDepartmentUser.UserId,
+                };
+                var user = _context.Users.Find(manufactureDepartmentUser.UserId);
+                var orderItem = new OrderItem
+                {
+                    User = manufactureDepartmentUser.User,
+                    SupplierId = null,
+                };
+                var msg = string.Empty;
+                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
+                if (!string.IsNullOrWhiteSpace(msg))
+                    return new ResponseModel<UserManufactureModel> { Success = false, Message = msg };
 
                 /*
                 // NOTE: since we do not add/subtract from InStockQuantity, we need not do any of the below calculation
@@ -673,7 +691,6 @@ namespace Service.Core
                     // subtract from user product CONSUMED
 
                     var consumeRemarks = "Consumed during Manufacture";
-                    var user = _context.Users.Find(manufactureDepartmentUser.UserId);
                     var productOwner = _productOwnerService.AssignProductOwnerWithoutCommit(_context, 0, string.Empty, manufactureDepartmentUser.UserId, user.Name, consumedProduct.ProductId, consumedProduct.PackageId ?? 0, consumedProduct.UnitQuantity, false, consumeRemarks);
                     /*
                     var productOwner = user.ProductOwners.FirstOrDefault(x => x.ProductId == consumedProduct.ProductId);
@@ -704,6 +721,16 @@ namespace Service.Core
                     _context.ProductOwnerHistories.Add(ownerHisotry);
                     */
                 }
+
+                // should issue from holding stock only
+                model.ConsumedProducts.ForEach(x =>
+                {
+                    x.IsHold = true;
+                   // x.EmployeeId = manufactureDepartmentUser.UserId;
+                });
+                _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, model.ConsumedProducts, "Consumed", "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, ref msg);
+
+
                 // -- END OF USER CONSUMED PRODUCTS -- //
 
 
@@ -879,7 +906,7 @@ namespace Service.Core
 
         #endregion
 
-        
+
 
 
     }
