@@ -907,6 +907,43 @@ namespace Service.Core
         #endregion
 
 
+        public ResponseModel<bool> IsManufactureAndDepartmentsInOutProuductsDefined(int manufactureId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var manufactureAllProcutsDefined = _context.ManufactureProducts
+                    .Where(x => x.ManufactureId == manufactureId)
+                    .Select(x => x.InOut)
+                    .Distinct()
+                    .Count() == 2;
+                if (!manufactureAllProcutsDefined)
+                {
+                    return new ResponseModel<bool>(false, "Manufacture plan doesn't have consume/manufacture products defined");
+                }
+                var departmentIds = _context.ManufactureDepartments
+                    .Where(x => x.ManufactureId == manufactureId)
+                    .Select(x => x.DepartmentId)
+                    .Distinct()
+                    .ToList();
+                var allManuDepProducts = _context.ManufactureDepartmentProducts
+                    .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId)
+                    .ToList();
+                foreach (var depId in departmentIds)
+                {
+                    var depAllPruductsDefined = allManuDepProducts
+                        .Where(x => x.ManufactureDepartment.DepartmentId == depId)
+                        .Select(x => x.InOut)
+                        .Distinct()
+                        .Count() == 2;
+                    if (!depAllPruductsDefined)
+                    {
+                        return new ResponseModel<bool>(false, "Some departments don't have consume/manufacture products defined");
+                    }
+                }
+                return new ResponseModel<bool> ( true, "All Defined" );
+            }
+        }
+
 
 
     }

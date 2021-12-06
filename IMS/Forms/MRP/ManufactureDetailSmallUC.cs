@@ -43,6 +43,50 @@ namespace IMS.Forms.MRP
             dgvEmployees.SelectionChanged += DgvEmployees_SelectionChanged;
             btnAddManufacture.Click += BtnAddManufacture_Click;
         }
+        public void PopulateData(ManufactureModel model)
+        {
+            _model = model;
+
+            btnCancel.Visible = false;
+            btnComplete.Visible = false;
+            btnStart.Visible = false;
+
+            if (_model != null)
+            {
+                lblFinalProduct.Text = _model.ManufactureProducts[0].ProductName;
+                lblFinalPackage.Text = _model.ManufactureProducts[0].PackageName;
+                lblFinalQuantity.Text = _model.ManufactureProducts[0].Quantity.ToString("0.00");
+                lblLotNo.Text = _model.LotNo.ToString();
+                lblManufactureName.Text = _model.Name;
+                lblStatus.Text = _model.Status;
+
+
+                if (Enum.TryParse(_model.Status, out ManufactureStatusEnum statusEnum))
+                {
+                    switch (statusEnum)
+                    {
+                        case ManufactureStatusEnum.Cancelled:
+                            break;
+                        case ManufactureStatusEnum.Completed:
+                            break;
+                        case ManufactureStatusEnum.Deleted:
+                            break;
+                        case ManufactureStatusEnum.In_Process:
+                            btnCancel.Visible = true;
+                            btnComplete.Visible = true;
+                            btnAssignProduct.Visible = true;
+                            btnAddManufacture.Visible = true;
+                            // if final product's quantity is equal to the proposed product's quantity then show complete button
+                            break;
+                        case ManufactureStatusEnum.New:
+                            btnStart.Visible = true;
+                            break;
+                    }
+                }
+                dgvDepartments.DataSource = model.ManufactureDepartments;
+
+            }
+        }
 
         private void BtnAddManufacture_Click(object sender, EventArgs e)
         {
@@ -149,48 +193,6 @@ namespace IMS.Forms.MRP
             return dgvDepartments.SelectedRows.Count > 0 ? dgvDepartments.SelectedRows[0].Cells[colDepartmentId.Index].Value as int? : null;
         }
 
-        public void PopulateData(ManufactureModel model)
-        {
-            _model = model;
-
-            btnCancel.Visible = false;
-            btnComplete.Visible = false;
-            btnStart.Visible = false;
-
-            if (_model != null)
-            {
-                lblFinalProduct.Text = _model.ManufactureProducts[0].ProductName;
-                lblFinalPackage.Text = _model.ManufactureProducts[0].PackageName;
-                lblFinalQuantity.Text = _model.ManufactureProducts[0].Quantity.ToString("0.00");
-                lblLotNo.Text = _model.LotNo.ToString();
-                lblManufactureName.Text = _model.Name;
-                lblStatus.Text = _model.Status;
-
-
-                if (Enum.TryParse(_model.Status, out ManufactureStatusEnum statusEnum))
-                {
-                    switch (statusEnum)
-                    {
-                        case ManufactureStatusEnum.Cancelled:
-                            break;
-                        case ManufactureStatusEnum.Completed:
-                            break;
-                        case ManufactureStatusEnum.Deleted:
-                            break;
-                        case ManufactureStatusEnum.In_Process:
-                            btnCancel.Visible = true;
-                            btnComplete.Visible = true;
-                            // if final product's quantity is equal to the proposed product's quantity then show complete button
-                            break;
-                        case ManufactureStatusEnum.New:
-                            btnStart.Visible = true;
-                            break;
-                    }
-                }
-                dgvDepartments.DataSource = model.ManufactureDepartments;
-
-            }
-        }
 
 
 
@@ -218,6 +220,14 @@ namespace IMS.Forms.MRP
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
+            // check for in/out products of manufacture and each department
+            var allDefined = _manufactureService.IsManufactureAndDepartmentsInOutProuductsDefined(_model.Id);
+            if(!allDefined.Success)
+            {
+                PopupMessage.ShowMessage(allDefined);
+                this.Focus();
+                return;
+            }
             DialogResult result = MessageBox.Show(this, "Are you sure to start this Manufacture Plan?", "Start?", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
