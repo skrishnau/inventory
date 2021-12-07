@@ -292,6 +292,7 @@ namespace IMS.Forms.MRP
             errorProvider1.SetError(txtFinalQuantity, string.Empty);
             errorProvider1.SetError(dgvDepartments, string.Empty);
             errorProvider1.SetError(dgvEmployees, string.Empty);
+            
             if (string.IsNullOrEmpty(txtName.Text))
             {
                 isInvalid = true;

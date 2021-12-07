@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DepartmentListUC));
             this.dgvDepartmentList = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,6 +41,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnReleaseProducts = new System.Windows.Forms.Button();
             this.btnAssignProducts = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
@@ -56,33 +61,28 @@
             this.pnlSideGridView = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvDepartmentProducts = new System.Windows.Forms.DataGridView();
-            this.lblProductsOnHold = new System.Windows.Forms.Label();
-            this.dgvEmployees = new System.Windows.Forms.DataGridView();
-            this.lblEmployeesVendors = new System.Windows.Forms.Label();
-            this.lblDepartmentName = new System.Windows.Forms.Label();
             this.colOwnerProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwnerPackage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnReleaseProducts = new System.Windows.Forms.Button();
+            this.lblProductsOnHold = new System.Windows.Forms.Label();
+            this.dgvEmployees = new System.Windows.Forms.DataGridView();
             this.colEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmployeeRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmployeeAssign = new System.Windows.Forms.DataGridViewImageColumn();
             this.colEmployeeRelease = new System.Windows.Forms.DataGridViewImageColumn();
+            this.lblEmployeesVendors = new System.Windows.Forms.Label();
+            this.lblDepartmentName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartmentList)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.pnlSideGridView.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartmentProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvDepartmentList
@@ -90,29 +90,30 @@
             this.dgvDepartmentList.AllowUserToAddRows = false;
             this.dgvDepartmentList.AllowUserToDeleteRows = false;
             this.dgvDepartmentList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDepartmentList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDepartmentList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDepartmentList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDepartmentList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
             this.colInStockQuantity});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDepartmentList.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDepartmentList.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDepartmentList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDepartmentList.Location = new System.Drawing.Point(0, 56);
+            this.dgvDepartmentList.MultiSelect = false;
             this.dgvDepartmentList.Name = "dgvDepartmentList";
             this.dgvDepartmentList.ReadOnly = true;
             this.dgvDepartmentList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -131,8 +132,8 @@
             // colName
             // 
             this.colName.DataPropertyName = "Name";
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colName.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colName.DefaultCellStyle = dataGridViewCellStyle2;
             this.colName.HeaderText = "Name";
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
@@ -184,6 +185,78 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(124, 20);
             this.txtName.TabIndex = 8;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnNew);
+            this.flowLayoutPanel1.Controls.Add(this.btnEdit);
+            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
+            this.flowLayoutPanel1.Controls.Add(this.btnReleaseProducts);
+            this.flowLayoutPanel1.Controls.Add(this.btnAssignProducts);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(473, 4);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(433, 45);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
+            // btnNew
+            // 
+            this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
+            this.btnNew.Location = new System.Drawing.Point(388, 3);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(42, 40);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "New";
+            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNew.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(340, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(42, 40);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Visible = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
+            this.btnDelete.Location = new System.Drawing.Point(285, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(49, 40);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Visible = false;
+            // 
+            // btnReleaseProducts
+            // 
+            this.btnReleaseProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReleaseProducts.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnReleaseProducts.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnReleaseProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReleaseProducts.Image = global::IMS.Properties.Resources.icons8_Forward_Arrow_16px;
+            this.btnReleaseProducts.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnReleaseProducts.Location = new System.Drawing.Point(172, 3);
+            this.btnReleaseProducts.Name = "btnReleaseProducts";
+            this.btnReleaseProducts.Size = new System.Drawing.Size(107, 39);
+            this.btnReleaseProducts.TabIndex = 4;
+            this.btnReleaseProducts.Text = "Release Products";
+            this.btnReleaseProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnReleaseProducts.UseVisualStyleBackColor = false;
+            this.btnReleaseProducts.Visible = false;
             // 
             // btnAssignProducts
             // 
@@ -339,11 +412,31 @@
             this.colOwnerPackage});
             this.dgvDepartmentProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDepartmentProducts.Location = new System.Drawing.Point(0, 35);
+            this.dgvDepartmentProducts.MultiSelect = false;
             this.dgvDepartmentProducts.Name = "dgvDepartmentProducts";
             this.dgvDepartmentProducts.RowHeadersVisible = false;
             this.dgvDepartmentProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDepartmentProducts.Size = new System.Drawing.Size(360, 109);
             this.dgvDepartmentProducts.TabIndex = 1;
+            // 
+            // colOwnerProduct
+            // 
+            this.colOwnerProduct.DataPropertyName = "ProductName";
+            this.colOwnerProduct.HeaderText = "Product";
+            this.colOwnerProduct.Name = "colOwnerProduct";
+            this.colOwnerProduct.Width = 150;
+            // 
+            // colOwnerQuantity
+            // 
+            this.colOwnerQuantity.DataPropertyName = "Quantity";
+            this.colOwnerQuantity.HeaderText = "Quantity";
+            this.colOwnerQuantity.Name = "colOwnerQuantity";
+            // 
+            // colOwnerPackage
+            // 
+            this.colOwnerPackage.DataPropertyName = "PackageName";
+            this.colOwnerPackage.HeaderText = "Unit";
+            this.colOwnerPackage.Name = "colOwnerPackage";
             // 
             // lblProductsOnHold
             // 
@@ -367,123 +460,12 @@
             this.colEmployeeRelease});
             this.dgvEmployees.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvEmployees.Location = new System.Drawing.Point(5, 40);
+            this.dgvEmployees.MultiSelect = false;
             this.dgvEmployees.Name = "dgvEmployees";
             this.dgvEmployees.RowHeadersVisible = false;
             this.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEmployees.Size = new System.Drawing.Size(360, 191);
             this.dgvEmployees.TabIndex = 0;
-            // 
-            // lblEmployeesVendors
-            // 
-            this.lblEmployeesVendors.AutoSize = true;
-            this.lblEmployeesVendors.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblEmployeesVendors.Location = new System.Drawing.Point(5, 27);
-            this.lblEmployeesVendors.Name = "lblEmployeesVendors";
-            this.lblEmployeesVendors.Size = new System.Drawing.Size(10, 13);
-            this.lblEmployeesVendors.TabIndex = 2;
-            this.lblEmployeesVendors.Text = "-";
-            // 
-            // lblDepartmentName
-            // 
-            this.lblDepartmentName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDepartmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDepartmentName.Location = new System.Drawing.Point(5, 0);
-            this.lblDepartmentName.Name = "lblDepartmentName";
-            this.lblDepartmentName.Size = new System.Drawing.Size(360, 27);
-            this.lblDepartmentName.TabIndex = 1;
-            this.lblDepartmentName.Text = "-";
-            this.lblDepartmentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // colOwnerProduct
-            // 
-            this.colOwnerProduct.DataPropertyName = "ProductName";
-            this.colOwnerProduct.HeaderText = "Product";
-            this.colOwnerProduct.Name = "colOwnerProduct";
-            this.colOwnerProduct.Width = 150;
-            // 
-            // colOwnerQuantity
-            // 
-            this.colOwnerQuantity.DataPropertyName = "Quantity";
-            this.colOwnerQuantity.HeaderText = "Quantity";
-            this.colOwnerQuantity.Name = "colOwnerQuantity";
-            // 
-            // colOwnerPackage
-            // 
-            this.colOwnerPackage.DataPropertyName = "PackageName";
-            this.colOwnerPackage.HeaderText = "Unit";
-            this.colOwnerPackage.Name = "colOwnerPackage";
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnDelete.Location = new System.Drawing.Point(285, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(49, 40);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Visible = false;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(340, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(42, 40);
-            this.btnEdit.TabIndex = 1;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Visible = false;
-            // 
-            // btnNew
-            // 
-            this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnNew.Location = new System.Drawing.Point(388, 3);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(42, 40);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNew.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.btnNew);
-            this.flowLayoutPanel1.Controls.Add(this.btnEdit);
-            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
-            this.flowLayoutPanel1.Controls.Add(this.btnReleaseProducts);
-            this.flowLayoutPanel1.Controls.Add(this.btnAssignProducts);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(473, 4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(433, 45);
-            this.flowLayoutPanel1.TabIndex = 3;
-            // 
-            // btnReleaseProducts
-            // 
-            this.btnReleaseProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReleaseProducts.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnReleaseProducts.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnReleaseProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReleaseProducts.Image = global::IMS.Properties.Resources.icons8_Forward_Arrow_16px;
-            this.btnReleaseProducts.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnReleaseProducts.Location = new System.Drawing.Point(172, 3);
-            this.btnReleaseProducts.Name = "btnReleaseProducts";
-            this.btnReleaseProducts.Size = new System.Drawing.Size(107, 39);
-            this.btnReleaseProducts.TabIndex = 4;
-            this.btnReleaseProducts.Text = "Release Products";
-            this.btnReleaseProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnReleaseProducts.UseVisualStyleBackColor = false;
-            this.btnReleaseProducts.Visible = false;
             // 
             // colEmployeeId
             // 
@@ -523,6 +505,27 @@
             this.colEmployeeRelease.ToolTipText = "Release";
             this.colEmployeeRelease.Width = 52;
             // 
+            // lblEmployeesVendors
+            // 
+            this.lblEmployeesVendors.AutoSize = true;
+            this.lblEmployeesVendors.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblEmployeesVendors.Location = new System.Drawing.Point(5, 27);
+            this.lblEmployeesVendors.Name = "lblEmployeesVendors";
+            this.lblEmployeesVendors.Size = new System.Drawing.Size(10, 13);
+            this.lblEmployeesVendors.TabIndex = 2;
+            this.lblEmployeesVendors.Text = "-";
+            // 
+            // lblDepartmentName
+            // 
+            this.lblDepartmentName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDepartmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDepartmentName.Location = new System.Drawing.Point(5, 0);
+            this.lblDepartmentName.Name = "lblDepartmentName";
+            this.lblDepartmentName.Size = new System.Drawing.Size(360, 27);
+            this.lblDepartmentName.TabIndex = 1;
+            this.lblDepartmentName.Text = "-";
+            this.lblDepartmentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // DepartmentListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -538,6 +541,7 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
@@ -546,7 +550,6 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartmentProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

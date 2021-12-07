@@ -475,6 +475,7 @@
           <Property Name="InOut" Type="bit" Nullable="false" />
           <Property Name="BuildRate" Type="decimal" Precision="9" Scale="2" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+          <Property Name="PackageId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -1418,6 +1419,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserManufactureProducts_Packages_PackageId">
+          <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
+          <End Role="UserManufactures" Type="Self.UserManufactures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufactures">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserManufactureProducts_Products_ProductId">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="UserManufactures" Type="Self.UserManufactures" Multiplicity="*" />
@@ -1773,6 +1786,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="ProductOwners" EntitySet="ProductOwners" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_Packages_PackageId" Association="Self.FK_UserManufactureProducts_Packages_PackageId">
+            <End Role="Packages" EntitySet="Packages" />
+            <End Role="UserManufactures" EntitySet="UserManufactures" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserManufactureProducts_Products_ProductId" Association="Self.FK_UserManufactureProducts_Products_ProductId">
             <End Role="Products" EntitySet="Products" />
             <End Role="UserManufactures" EntitySet="UserManufactures" />
@@ -2044,6 +2061,10 @@
           <AssociationSet Name="FK_ProductOwners_Packages_PackageId" Association="Entities.FK_ProductOwners_Packages_PackageId">
             <End Role="Package" EntitySet="Packages" />
             <End Role="ProductOwner" EntitySet="ProductOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserManufactureProducts_Packages_PackageId" Association="Entities.FK_UserManufactureProducts_Packages_PackageId">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="UserManufacture" EntitySet="UserManufactures" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Payments_dbo_Transactions_TransactionId" Association="Entities.FK_dbo_Payments_dbo_Transactions_TransactionId">
             <End Role="Transaction" EntitySet="Transactions" />
@@ -2485,6 +2506,7 @@
           <NavigationProperty Name="Uoms1" Relationship="Entities.FK_dbo_Uoms_dbo_Packages_RelatedPackageId" FromRole="Package" ToRole="Uom" />
           <NavigationProperty Name="ProductOwnerHistories" Relationship="Entities.FK_ProductOwnerHistories_Packages_PackageId" FromRole="Package" ToRole="ProductOwnerHistory" />
           <NavigationProperty Name="ProductOwners" Relationship="Entities.FK_ProductOwners_Packages_PackageId" FromRole="Package" ToRole="ProductOwner" />
+          <NavigationProperty Name="UserManufactures" Relationship="Entities.FK_UserManufactureProducts_Packages_PackageId" FromRole="Package" ToRole="UserManufacture" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -2713,7 +2735,9 @@
           <Property Name="InOut" Type="Boolean" Nullable="false" />
           <Property Name="BuildRate" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ManufactureDepartmentUser" Relationship="Entities.FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId" FromRole="UserManufacture" ToRole="ManufactureDepartmentUser" />
+          <NavigationProperty Name="Package" Relationship="Entities.FK_UserManufactureProducts_Packages_PackageId" FromRole="UserManufacture" ToRole="Package" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_UserManufactureProducts_Products_ProductId" FromRole="UserManufacture" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
@@ -3475,6 +3499,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserManufactureProducts_Packages_PackageId">
+          <End Type="Entities.Package" Role="Package" Multiplicity="1" />
+          <End Type="Entities.UserManufacture" Role="UserManufacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserManufacture">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Payments_dbo_Transactions_TransactionId">
           <End Type="Entities.Transaction" Role="Transaction" Multiplicity="0..1" />
           <End Type="Entities.Payment" Role="Payment" Multiplicity="*" />
@@ -4211,6 +4247,7 @@
           <EntitySetMapping Name="UserManufactures">
             <EntityTypeMapping TypeName="Entities.UserManufacture">
               <MappingFragment StoreEntitySet="UserManufactures">
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="BuildRate" ColumnName="BuildRate" />
                 <ScalarProperty Name="InOut" ColumnName="InOut" />

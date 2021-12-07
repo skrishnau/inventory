@@ -207,10 +207,10 @@
             this.flowLayoutPanel1.Controls.Add(this.btnEdit);
             this.flowLayoutPanel1.Controls.Add(this.btnDelete);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(822, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(819, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(216, 45);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(219, 45);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnNew
@@ -218,7 +218,7 @@
             this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnNew.Location = new System.Drawing.Point(171, 3);
+            this.btnNew.Location = new System.Drawing.Point(174, 3);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(42, 40);
             this.btnNew.TabIndex = 0;
@@ -231,7 +231,7 @@
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(123, 3);
+            this.btnEdit.Location = new System.Drawing.Point(126, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(42, 40);
             this.btnEdit.TabIndex = 1;
@@ -245,7 +245,7 @@
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
-            this.btnDelete.Location = new System.Drawing.Point(68, 3);
+            this.btnDelete.Location = new System.Drawing.Point(71, 3);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(49, 40);
             this.btnDelete.TabIndex = 2;

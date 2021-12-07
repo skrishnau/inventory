@@ -20,6 +20,7 @@ using IMS.Forms.Common.Pagination;
 using ViewModel.Core.Common;
 using IMS.Forms.Common;
 using ViewModel.Core;
+using ViewModel.Enums;
 
 namespace IMS.Forms.MRP
 {
@@ -205,15 +206,25 @@ namespace IMS.Forms.MRP
             if (dgvProductList.SelectedRows.Count > 0)
             {
                 // show edit and delete buttons
-                btnEdit.Visible = true;
-                btnDelete.Visible = true;
+                
                 // btnDelete.Visible = true;
                 var data = dgvProductList.SelectedRows[0].DataBoundItem as ManufactureModel;
                 if (data != null)
                 {
+
                     var manufactureModel = _manufactureService.GetManufacture(data.Id);
                     if (manufactureModel != null)
                     {
+                        if(manufactureModel.Status == ManufactureStatusEnum.New.ToString())
+                        {
+                            btnEdit.Visible = true;
+                            btnDelete.Visible = true;
+                        }
+                        else
+                        {
+                            btnEdit.Visible = false;
+                            btnDelete.Visible = false;
+                        }
                         if (_manufactureDetailSmallUC == null)
                         {
                             _manufactureDetailSmallUC = Program.container.GetInstance<ManufactureDetailSmallUC>();

@@ -222,9 +222,9 @@
             this.btnVendor.Name = "btnVendor";
             this.btnVendor.Size = new System.Drawing.Size(76, 53);
             this.btnVendor.TabIndex = 47;
-            this.btnVendor.Text = "Vendor";
+            this.btnVendor.Text = "Employees";
             this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnVendor, "Inventory Units");
+            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
             this.btnVendor.UseVisualStyleBackColor = true;
             // 
             // btnDepartment
@@ -240,7 +240,7 @@
             this.btnDepartment.TabIndex = 18;
             this.btnDepartment.Text = "Department";
             this.btnDepartment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnDepartment, "Inventory Units");
+            this.toolTip1.SetToolTip(this.btnDepartment, "Departments");
             this.btnDepartment.UseVisualStyleBackColor = true;
             // 
             // btnManufacturings

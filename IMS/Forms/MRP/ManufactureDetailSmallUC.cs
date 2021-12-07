@@ -50,6 +50,8 @@ namespace IMS.Forms.MRP
             btnCancel.Visible = false;
             btnComplete.Visible = false;
             btnStart.Visible = false;
+            btnAssignProduct.Visible = false;
+            btnAddManufacture.Visible = false;
 
             if (_model != null)
             {
@@ -236,7 +238,7 @@ namespace IMS.Forms.MRP
                 this.Focus();
                 return;
             }
-            DialogResult result = MessageBox.Show(this, "Are you sure to start this Manufacture Plan?", "Start?", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show(this, "You won't be able to edit this plan after starting it. Are you sure to start this Manufacture Plan?", "Start?", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 ResponseModel<bool> response = _manufactureService.SetManufactureStart(_model.Id);
