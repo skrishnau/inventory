@@ -726,7 +726,7 @@ namespace Service.Core
                 model.ConsumedProducts.ForEach(x =>
                 {
                     x.IsHold = true;
-                   // x.EmployeeId = manufactureDepartmentUser.UserId;
+                    // x.EmployeeId = manufactureDepartmentUser.UserId;
                 });
                 _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, model.ConsumedProducts, "Consumed", "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, ref msg);
 
@@ -940,11 +940,73 @@ namespace Service.Core
                         return new ResponseModel<bool>(false, "Some departments don't have consume/manufacture products defined");
                     }
                 }
-                return new ResponseModel<bool> ( true, "All Defined" );
+                return new ResponseModel<bool>(true, "All Defined");
             }
         }
 
-
-
+        public ResponseModel<bool> AreAllProductsManufactured(int manufactureId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                if (!_context.ManufactureDepartments.Where(x => x.ManufactureId == manufactureId).Any())
+                {
+                    return new ResponseModel<bool>(false, "There aren't any department");
+                }
+                var maxPosition = _context.ManufactureDepartments.Where(x => x.ManufactureId == manufactureId).Max(x => x.Position);
+                var manufactureDepartmentUsersOfLastDepartment = _context.ManufactureDepartmentUsers
+                    .Where(x => x.ManufactureDepartment.Position == maxPosition)
+                    .Select(x => x.Id)
+                    .ToList();
+                var allFinalProduced = _context.UserManufactures
+                    .Where(x => x.ManufactureDepartmentUser.ManufactureDepartment.ManufactureId == manufactureId && x.InOut == false && manufactureDepartmentUsersOfLastDepartment.Contains(x.ManufactureDepartmentUserId))
+                    .ToList();
+                var proposedProducts = _context.ManufactureProducts
+                    .Where(x => x.ManufactureId == manufactureId && x.InOut == false)
+                    .ToList();
+               //var proposedProductQuantities = new Dictionary<int, decimal>();
+                foreach(var proposed in proposedProducts)
+                {
+                    //if (!proposedProductQuantities.ContainsKey(proposed.ProductId))
+                    //    proposedProductQuantities.Add(proposed.ProductId, 0);
+                    //var basePackage = proposed.Product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).Package;
+                    //var qty = _uomService.ConvertUom(proposed.PackageId, basePackage.Id, proposed.ProductId, proposed.Quantity);
+                    //proposedProductQuantities[proposed.ProductId] += qty;
+                }
+                var producedProductQuantities = new Dictionary<int, decimal>();
+                foreach(var proposed in allFinalProduced)
+                {
+                    //if (!producedProductQuantities.ContainsKey(proposed.ProductId))
+                    //    producedProductQuantities.Add(proposed.ProductId, 0);
+                    //var basePackage = proposed.Product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).Package;
+                    //var qty = _uomService.ConvertUom(proposed.PackageId, basePackage.Id, proposed.ProductId, proposed.Quantity);
+                    //producedProductQuantities[proposed.ProductId] += qty;
+                }
+                //if (!manufactureAllProcutsDefined)
+                //{
+                //    return new ResponseModel<bool>(false, "Manufacture plan doesn't have consume/manufacture products defined");
+                //}
+                //var departmentIds = _context.ManufactureDepartments
+                //    .Where(x => x.ManufactureId == manufactureId)
+                //    .Select(x => x.DepartmentId)
+                //    .Distinct()
+                //    .ToList();
+                //var allManuDepProducts = _context.ManufactureDepartmentProducts
+                //    .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId)
+                //    .ToList();
+                //foreach (var depId in departmentIds)
+                //{
+                //    var depAllPruductsDefined = allManuDepProducts
+                //        .Where(x => x.ManufactureDepartment.DepartmentId == depId)
+                //        .Select(x => x.InOut)
+                //        .Distinct()
+                //        .Count() == 2;
+                //    if (!depAllPruductsDefined)
+                //    {
+                //        return new ResponseModel<bool>(false, "Some departments don't have consume/manufacture products defined");
+                //    }
+                //}
+                return new ResponseModel<bool>(true, "All Defined");
+            }
+        }
     }
 }

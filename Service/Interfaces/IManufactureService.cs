@@ -38,5 +38,6 @@ namespace Service.Interfaces
         List<ManufactureDepartmentProductModel> GetManufactureDepartmentInProducts(int manufactureId, int departmentId, bool inOut);
         List<InventoryUnitModel> GetManufactureDepartmentProductsInventoryUnit(int manufactureId, int departmentId);
         ResponseModel<bool> IsManufactureAndDepartmentsInOutProuductsDefined(int manufactureId);
+        ResponseModel<bool> AreAllProductsManufactured(int manufactureId);
     }
 }

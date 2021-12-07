@@ -110,7 +110,8 @@ create table UserManufactures(
 	[Date] datetime not null,
 	ManufactureDepartmentUserId int not null constraint FK_UserManufactures_ManufactureDepartmentUsers_ManufactureDepartmentUserId foreign key references ManufactureDepartmentUsers(Id),
 	ProductId int not null constraint FK_UserManufactureProducts_Products_ProductId foreign key references Products(Id),
-	-- PackageId  will always be taken from ManufactureProducts table, it won't change after that
+	-- PackageId  should be added from another query as it's already gone to client
+	--PackageId int not null constraint FK_UserManufactureProducts_Packages_PackageId foreign key references Packages(Id),
 	Quantity decimal (11, 2) not null,
 	InOut bit not null, -- Consume or Build or Damage 
 	BuildRate decimal (9, 2) null,

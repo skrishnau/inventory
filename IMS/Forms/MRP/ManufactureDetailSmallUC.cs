@@ -198,6 +198,14 @@ namespace IMS.Forms.MRP
 
         private void BtnComplete_Click(object sender, EventArgs e)
         {
+            // check for in/out products of manufacture and each department
+            var allDefined = _manufactureService.AreAllProductsManufactured(_model.Id);
+            if (!allDefined.Success)
+            {
+                PopupMessage.ShowMessage(allDefined);
+                this.Focus();
+                return;
+            }
             DialogResult result = MessageBox.Show(this, "Are you sure to complete this Manufacture Plan?", "Complete?", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
