@@ -38,11 +38,15 @@ namespace Infrastructure.Context
         public string Remark { get; set; }
         public string Notes { get; set; }
         public Nullable<int> OrderItemId { get; set; }
+        public Nullable<int> AssignedToUserId { get; set; }
+        public Nullable<int> AssignedToDepartmentId { get; set; }
     
+        public virtual Department Department { get; set; }
         public virtual OrderItem OrderItem { get; set; }
         public virtual Package Package { get; set; }
         public virtual Product Product { get; set; }
         public virtual User User { get; set; }
         public virtual Warehouse Warehouse { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

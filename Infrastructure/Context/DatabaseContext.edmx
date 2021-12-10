@@ -128,6 +128,8 @@
           <Property Name="Remark" Type="nvarchar(max)" />
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="OrderItemId" Type="int" />
+          <Property Name="AssignedToUserId" Type="int" />
+          <Property Name="AssignedToDepartmentId" Type="int" />
         </EntityType>
         <EntityType Name="ManufactureDepartmentProducts">
           <Key>
@@ -1047,6 +1049,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InventoryUnits_Users_AssignedToDepartmentId">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="AssignedToDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryUnits_Users_AssignedToUserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="InventoryUnits" Type="Self.InventoryUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnits">
+              <PropertyRef Name="AssignedToUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
           <End Role="ManufactureDepartments" Type="Self.ManufactureDepartments" Multiplicity="1" />
           <End Role="ManufactureDepartmentProducts" Type="Self.ManufactureDepartmentProducts" Multiplicity="*" />
@@ -1662,6 +1688,14 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="DepartmentUsers" EntitySet="DepartmentUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_InventoryUnits_Users_AssignedToDepartmentId" Association="Self.FK_InventoryUnits_Users_AssignedToDepartmentId">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryUnits_Users_AssignedToUserId" Association="Self.FK_InventoryUnits_Users_AssignedToUserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="InventoryUnits" EntitySet="InventoryUnits" />
+          </AssociationSet>
           <AssociationSet Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" Association="Self.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
             <End Role="ManufactureDepartments" EntitySet="ManufactureDepartments" />
             <End Role="ManufactureDepartmentProducts" EntitySet="ManufactureDepartmentProducts" />
@@ -1858,6 +1892,10 @@
             <End Role="Department" EntitySet="Departments" />
             <End Role="DepartmentUser" EntitySet="DepartmentUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_InventoryUnits_Users_AssignedToDepartmentId" Association="Entities.FK_InventoryUnits_Users_AssignedToDepartmentId">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="InventoryUnit" EntitySet="InventoryUnits" />
+          </AssociationSet>
           <AssociationSet Name="FK_ManufactureDepartments_Departments_DepartmentId" Association="Entities.FK_ManufactureDepartments_Departments_DepartmentId">
             <End Role="Department" EntitySet="Departments" />
             <End Role="ManufactureDepartment" EntitySet="ManufactureDepartments" />
@@ -1892,6 +1930,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId" Association="Entities.FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId">
             <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="InventoryUnit" EntitySet="InventoryUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryUnits_Users_AssignedToUserId" Association="Entities.FK_InventoryUnits_Users_AssignedToUserId">
+            <End Role="User" EntitySet="Users" />
             <End Role="InventoryUnit" EntitySet="InventoryUnits" />
           </AssociationSet>
           <AssociationSet Name="FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId" Association="Entities.FK_ManufactureDepartmentProducts_ManufactureDepartments_ManufactureDepartmentId">
@@ -2238,6 +2280,7 @@
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="Entities.FK_Departments_Users_HeadUserId" FromRole="Department" ToRole="User" />
           <NavigationProperty Name="DepartmentUsers" Relationship="Entities.FK_DepartmentUsers_Departments_DepartmentId" FromRole="Department" ToRole="DepartmentUser" />
+          <NavigationProperty Name="InventoryUnits" Relationship="Entities.FK_InventoryUnits_Users_AssignedToDepartmentId" FromRole="Department" ToRole="InventoryUnit" />
           <NavigationProperty Name="ManufactureDepartments" Relationship="Entities.FK_ManufactureDepartments_Departments_DepartmentId" FromRole="Department" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="ProductOwnerHistories" Relationship="Entities.FK_ProductOwnerHistories_Departments_DepartmentId" FromRole="Department" ToRole="ProductOwnerHistory" />
           <NavigationProperty Name="ProductOwners" Relationship="Entities.FK_ProductOwners_Departments_DepartmentId" FromRole="Department" ToRole="ProductOwner" />
@@ -2282,11 +2325,15 @@
           <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="OrderItemId" Type="Int32" />
+          <Property Name="AssignedToUserId" Type="Int32" />
+          <Property Name="AssignedToDepartmentId" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Entities.FK_InventoryUnits_Users_AssignedToDepartmentId" FromRole="InventoryUnit" ToRole="Department" />
           <NavigationProperty Name="OrderItem" Relationship="Entities.FK_dbo_InventoryUnits_dbo_OrderItems_OrderItemId" FromRole="InventoryUnit" ToRole="OrderItem" />
           <NavigationProperty Name="Package" Relationship="Entities.FK_dbo_InventoryUnits_dbo_Packages_PackageId" FromRole="InventoryUnit" ToRole="Package" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_dbo_InventoryUnits_dbo_Products_ProductId" FromRole="InventoryUnit" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="Entities.FK_dbo_InventoryUnits_dbo_Users_SupplierId" FromRole="InventoryUnit" ToRole="User" />
           <NavigationProperty Name="Warehouse" Relationship="Entities.FK_dbo_InventoryUnits_dbo_Warehouses_WarehouseId" FromRole="InventoryUnit" ToRole="Warehouse" />
+          <NavigationProperty Name="User1" Relationship="Entities.FK_InventoryUnits_Users_AssignedToUserId" FromRole="InventoryUnit" ToRole="User" />
         </EntityType>
         <EntityType Name="ManufactureDepartmentProduct">
           <Key>
@@ -2772,6 +2819,7 @@
           <NavigationProperty Name="Departments" Relationship="Entities.FK_Departments_Users_HeadUserId" FromRole="User" ToRole="Department" />
           <NavigationProperty Name="DepartmentUsers" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="User" ToRole="DepartmentUser" />
           <NavigationProperty Name="InventoryUnits" Relationship="Entities.FK_dbo_InventoryUnits_dbo_Users_SupplierId" FromRole="User" ToRole="InventoryUnit" />
+          <NavigationProperty Name="InventoryUnits1" Relationship="Entities.FK_InventoryUnits_Users_AssignedToUserId" FromRole="User" ToRole="InventoryUnit" />
           <NavigationProperty Name="ManufactureDepartments" Relationship="Entities.FK_ManufactureDepartments_Users_CancelledByUserId" FromRole="User" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="ManufactureDepartments1" Relationship="Entities.FK_ManufactureDepartments_Users_CompletedByUserId" FromRole="User" ToRole="ManufactureDepartment" />
           <NavigationProperty Name="ManufactureDepartments2" Relationship="Entities.FK_ManufactureDepartments_Users_StartedByUserId" FromRole="User" ToRole="ManufactureDepartment" />
@@ -2887,6 +2935,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InventoryUnits_Users_AssignedToDepartmentId">
+          <End Type="Entities.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="Entities.InventoryUnit" Role="InventoryUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnit">
+              <PropertyRef Name="AssignedToDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ManufactureDepartments_Departments_DepartmentId">
           <End Type="Entities.Department" Role="Department" Multiplicity="1" />
           <End Type="Entities.ManufactureDepartment" Role="ManufactureDepartment" Multiplicity="*" />
@@ -2992,6 +3052,18 @@
             </Principal>
             <Dependent Role="InventoryUnit">
               <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryUnits_Users_AssignedToUserId">
+          <End Type="Entities.User" Role="User" Multiplicity="0..1" />
+          <End Type="Entities.InventoryUnit" Role="InventoryUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryUnit">
+              <PropertyRef Name="AssignedToUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3863,6 +3935,8 @@
           <EntitySetMapping Name="InventoryUnits">
             <EntityTypeMapping TypeName="Entities.InventoryUnit">
               <MappingFragment StoreEntitySet="InventoryUnits">
+                <ScalarProperty Name="AssignedToDepartmentId" ColumnName="AssignedToDepartmentId" />
+                <ScalarProperty Name="AssignedToUserId" ColumnName="AssignedToUserId" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />

@@ -20,6 +20,7 @@ namespace Infrastructure.Context
             this.Departments = new HashSet<Department>();
             this.DepartmentUsers = new HashSet<DepartmentUser>();
             this.InventoryUnits = new HashSet<InventoryUnit>();
+            this.InventoryUnits1 = new HashSet<InventoryUnit>();
             this.ManufactureDepartments = new HashSet<ManufactureDepartment>();
             this.ManufactureDepartments1 = new HashSet<ManufactureDepartment>();
             this.ManufactureDepartments2 = new HashSet<ManufactureDepartment>();
@@ -74,6 +75,8 @@ namespace Infrastructure.Context
         public virtual ICollection<DepartmentUser> DepartmentUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventoryUnit> InventoryUnits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InventoryUnit> InventoryUnits1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ManufactureDepartment> ManufactureDepartments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
