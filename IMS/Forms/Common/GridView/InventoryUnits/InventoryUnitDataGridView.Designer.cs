@@ -57,6 +57,8 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colPackageQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
             this.colNetWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGrossWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
@@ -123,6 +125,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colPackageQuantity,
             this.colRate,
             this.colTotal,
+            this.colStatus,
             this.colNetWeight,
             this.colGrossWeight,
             this.colWarehouseId,
@@ -296,6 +299,18 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colTotal.Visible = false;
             this.colTotal.Width = 90;
             this.colTotal.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "Status";
+            this.colStatus.HeaderText = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.Visible = false;
+            this.colStatus.Width = 70;
+            this.colStatus.ReadOnly = true;
+            this.colStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
             // 
             // colNetWeight
             // 
@@ -472,6 +487,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colProduct.Visible = true;
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
+            colStatus.Visible = true;
             //colPackageId.Visible = true;
             //colWarehouseId.Visible = true;
             //colWarehouse.Visible = true;
@@ -599,6 +615,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colSKU.Visible = true;
             colUnitQuantity.Visible = true;
             colRate.Visible = true;
+            colStatus.Visible = true;
             //colTotal.Visible = true;
             //colDelete.Visible = _isEditable;
             //colPackageId.Visible = true;
@@ -893,6 +910,9 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
         public System.Windows.Forms.DataGridViewTextBoxColumn colPackageQuantity;
         public System.Windows.Forms.DataGridViewTextBoxColumn colRate;
         public System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        public System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+
+
         public System.Windows.Forms.DataGridViewTextBoxColumn colNetWeight;
         public System.Windows.Forms.DataGridViewTextBoxColumn colGrossWeight;
 

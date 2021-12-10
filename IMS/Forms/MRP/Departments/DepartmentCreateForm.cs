@@ -59,7 +59,7 @@ namespace IMS.Forms.MRP
 
         private void DgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == colDelete.Index)
+            if (e.ColumnIndex == colDelete.Index)
             {
                 if (!dgvEmployees.Rows[e.RowIndex].IsNewRow)
                 {
@@ -85,7 +85,7 @@ namespace IMS.Forms.MRP
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var type = GetSelectedDepartmentType();
-                var userType = type == null ? UserTypeEnum.User : GetUserTypeFromDepartmentType((DepartmentTypeEnum)type);
+                var userType = type == null ? new List<UserTypeEnum> { UserTypeEnum.Employee } : new List<UserTypeEnum> { GetUserTypeFromDepartmentType((DepartmentTypeEnum)type) };
                 var form = Program.container.GetInstance<ClientCreateForm>();
                 form.SetDataForEdit(0, userType);
                 form.ShowDialog();
@@ -103,7 +103,7 @@ namespace IMS.Forms.MRP
         }
         private UserTypeEnum GetUserTypeFromDepartmentType(DepartmentTypeEnum departmentType)
         {
-            return departmentType == DepartmentTypeEnum.Vendor ? UserTypeEnum.Vendor : UserTypeEnum.User;
+            return departmentType == DepartmentTypeEnum.Vendor ? UserTypeEnum.Vendor : UserTypeEnum.Employee;
         }
 
         private void CbDepartmentType_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,7 +133,7 @@ namespace IMS.Forms.MRP
         {
             var userIds = _model?.DepartmentUsers?.Where(x => x.UserId != null).Select(x => x.UserId.Value).ToArray() ?? new int[0];
             var depType = cbDepartmentType.SelectedItem as IdNamePair;
-            var userType = depType.Id == (int)DepartmentTypeEnum.Vendor ? UserTypeEnum.Vendor : ViewModel.Enums.UserTypeEnum.User;
+            var userType = depType.Id == (int)DepartmentTypeEnum.Vendor ? UserTypeEnum.Vendor : ViewModel.Enums.UserTypeEnum.Employee;
             var users = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, userIds);
             var userColumn = dgvEmployees.Columns[colEmployeeName.Index] as DataGridViewComboBoxColumn;
             if (userColumn != null)
@@ -169,7 +169,7 @@ namespace IMS.Forms.MRP
                 cbDepartmentType.SelectedValue = _model.IsVendor ? (int)DepartmentTypeEnum.Vendor : (int)DepartmentTypeEnum.Internal;
                 lblEmployeesHeader.Text = _model.IsVendor ? "Vendors" : "Employees";
 
-                
+
                 var templateRowAdded = false;
                 if (dgvEmployees.Rows.Count == 0)
                 {

@@ -64,7 +64,7 @@ namespace IMS.Forms.Inventory.Reports.All
         {
             //dgvLedger.DataSource = _bindingSource;
             dgvLedger.AutoGenerateColumns = false;
-            helper = new PaymentListPaginationHelper(_bindingSource, dgvLedger, bindingNavigator1, _paymentService, ClientTypeEnum.All, string.Empty);
+            helper = new PaymentListPaginationHelper(_bindingSource, dgvLedger, bindingNavigator1, _paymentService, UserTypeEnumHelper.CustomerSupplier, string.Empty);
         }
 
         private void InitializeEvents()
@@ -176,9 +176,10 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void PopulateType()
         {
-            var values = Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
+            var values = UserTypeEnumHelper.CustomerSupplier//Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
                 .Select(x => new NameValuePair(x.ToString(), x.ToString()))
                 .ToList();
+            values.Insert(0, new NameValuePair("All", "All"));
             cbType.ValueMember = "Value";
             cbType.DisplayMember = "Name";
             cbType.DataSource = values;
@@ -219,7 +220,15 @@ namespace IMS.Forms.Inventory.Reports.All
             var item = cbType.SelectedItem as NameValuePair;
             if (item != null)
             {
-                var userType = (ClientTypeEnum)Enum.Parse(typeof(ClientTypeEnum), item.Value);
+                List<UserTypeEnum> userType = new List<UserTypeEnum>();
+                if(Enum.TryParse(item.Value, out UserTypeEnum usertp))
+                {
+                    userType.Add(usertp);
+                }
+                else
+                {
+                    userType = UserTypeEnumHelper.CustomerSupplier;
+                }
                 dgvLedger.SelectionChanged -= DgvLedger_SelectionChanged;
                 helper.Reset(userType, cbCustomer.Text);
                 dgvLedger.SelectionChanged += DgvLedger_SelectionChanged;

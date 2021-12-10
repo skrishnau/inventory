@@ -36,7 +36,7 @@ namespace Service.Interfaces
         List<DepartmentUserModel> GetEmployeesOfDepartment(int departmentId);
         ResponseModel<bool> DeleteDepartment(int departmentId);
         List<ManufactureDepartmentProductModel> GetManufactureDepartmentInProducts(int manufactureId, int departmentId, bool inOut);
-        List<InventoryUnitModel> GetManufactureDepartmentProductsInventoryUnit(int manufactureId, int departmentId);
+        List<InventoryUnitModel> GetManufactureDepartmentProductsInventoryUnit(int manufactureId, int departmentId, int userId);
         ResponseModel<bool> IsManufactureAndDepartmentsInOutProuductsDefined(int manufactureId);
         ResponseModel<bool> AreAllProductsManufactured(int manufactureId);
     }

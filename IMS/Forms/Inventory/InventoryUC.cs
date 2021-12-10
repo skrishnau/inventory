@@ -497,6 +497,7 @@ namespace IMS.Forms.Inventory
         private void BtnClients_Click(object sender, EventArgs e)
         {
             var uc = Program.container.GetInstance<ClientListUC>();
+            uc.SetData(UserTypeCategoryEnum.CustomerAndSupplier);
             AddTabPage(Constants.TAB_CLIENTS, uc, sender);
         }
 
@@ -504,11 +505,11 @@ namespace IMS.Forms.Inventory
         {
             //var uc = Program.container.GetInstance<ClientListUC>();
             var uc = new ClientListUC(_userService, _listener);
+            uc.SetData(UserTypeCategoryEnum.UserAndVendor);
             AddTabPage(Constants.TAB_VENDOR, uc, sender);
         }
         private void BtnDepartment_Click(object sender, EventArgs e)
         {
-            //var uc = Program.container.GetInstance<ClientListUC>();
             var inventoryUnitList = Program.container.GetInstance<DepartmentListUC>();
             AddTabPage(Constants.TAB_DEPARTMENT, inventoryUnitList, sender);
         }

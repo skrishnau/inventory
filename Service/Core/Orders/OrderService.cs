@@ -505,7 +505,7 @@ namespace Service.Core.Orders
                                 Total = unitQuantity * purchaseitem.Rate,
                                 ReceiveDateDate = purchaseitem?.Order?.CompletedDate ?? DateTime.Now,
                         };
-                            _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, receiveDate, adjCode, ref message, oitem.Product, reference, purchaseitem);
+                            _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, receiveDate, adjCode, ref message, oitem.Product, reference, purchaseitem, null);
                         }
                         else
                         {
@@ -781,7 +781,7 @@ namespace Service.Core.Orders
                         var invModel = entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType));
                         invModel.ReceiveReceipt = order.ReferenceNumber;
                         invModel.ReceiveDateDate = order.CompletedDate;
-                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invModel, order.CompletedDate ?? DateTime.Now, adjustment, ref message, product, order.ReferenceNumber, entity);
+                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invModel, order.CompletedDate ?? DateTime.Now, adjustment, ref message, product, order.ReferenceNumber, entity, null);
                     }
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {

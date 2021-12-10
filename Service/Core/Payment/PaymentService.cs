@@ -5,6 +5,7 @@ using Service.Core.Settings;
 using Service.DbEventArgs;
 using Service.Listeners;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using ViewModel.Core;
@@ -23,7 +24,7 @@ namespace Service.Core.Payment
             _listener = listener;
         }
 
-        public int GetAllPaymentsCount(ClientTypeEnum clientType, string searchName = "")
+        public int GetAllPaymentsCount(List<UserTypeEnum> clientType, string searchName = "")
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -32,7 +33,7 @@ namespace Service.Core.Payment
             }
         }
         
-        public PaymentListModel GetAllPayments(ClientTypeEnum clientType, int pageSize, int offset, string searchName = "")
+        public PaymentListModel GetAllPayments(List<UserTypeEnum> clientType, int pageSize, int offset, string searchName = "")
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -53,17 +54,17 @@ namespace Service.Core.Payment
             }
         }
 
-        private IQueryable<Infrastructure.Context.Payment> GetPaymentQueryable(DatabaseContext _context, ClientTypeEnum clientType, string searchName)
+        private IQueryable<Infrastructure.Context.Payment> GetPaymentQueryable(DatabaseContext _context, List<UserTypeEnum> userTypes, string searchName)
         {
             var query = _context.Payments.AsQueryable().Where(x=>!x.IsVoid);
                     //.Where(x => x. == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
 
-            var clientTypeStr = clientType.ToString();
-            if(clientType != ClientTypeEnum.All)
+            foreach(var userType in userTypes)
             {
-                query = query.Where(x => x.User.UserType == clientTypeStr);
+                var userTypeStr = userType.ToString();
+                query = query.Where(x => x.User.UserType == userTypeStr);
             }
             if (!string.IsNullOrEmpty(searchName))
             {

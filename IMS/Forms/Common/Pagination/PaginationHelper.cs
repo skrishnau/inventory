@@ -282,7 +282,7 @@ namespace IMS.Forms.Common.Pagination
 
     public class PaymentListPaginationHelper
     {
-        private ClientTypeEnum _clientType;
+        private List<UserTypeEnum> _clientType;
         private string _searchName;
 
         private int totalRecords = 0;
@@ -295,7 +295,7 @@ namespace IMS.Forms.Common.Pagination
         private readonly IPaymentService _paymentService;
 
 
-        public PaymentListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IPaymentService paymentService, ClientTypeEnum clientType, string searchName)
+        public PaymentListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IPaymentService paymentService, List<UserTypeEnum> clientType, string searchName)
         {
             this.bindingSource1 = bindingSource;
             this.dataGridView1 = dataGridView;
@@ -352,7 +352,7 @@ namespace IMS.Forms.Common.Pagination
             }
         }
 
-        public void Reset(ClientTypeEnum userType, string searchName)
+        public void Reset(List<UserTypeEnum> userType, string searchName)
         {
             _clientType = userType;
             _searchName = searchName;

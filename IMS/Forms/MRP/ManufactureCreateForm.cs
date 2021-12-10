@@ -41,6 +41,8 @@ namespace IMS.Forms.MRP
         Dictionary<int, List<InventoryUnitModel>> _departmentInputs = new Dictionary<int, List<InventoryUnitModel>>();
         Dictionary<int, List<InventoryUnitModel>> _departmentOutputs = new Dictionary<int, List<InventoryUnitModel>>();
 
+
+        private List<ManufactureDepartmentModel> _departmentList = new List<ManufactureDepartmentModel>();
         public ManufactureCreateForm(IManufactureService manufactureService, IAppSettingService appSettingService, IProductService productService, IDatabaseChangeListener databaseChangeListener, IUserService userService, IInventoryService inventoryService)
         {
             _manufactureService = manufactureService;
@@ -57,6 +59,8 @@ namespace IMS.Forms.MRP
 
         private void ManufactureCreateForm_Load(object sender, EventArgs e)
         {
+            dgvDepartmentsForProducts.AutoGenerateColumns = false;
+
             txtFinalQuantity.Maximum = Int16.MaxValue;
             InitializeGridView();
             btnSave.Click += BtnSave_Click;
@@ -77,6 +81,8 @@ namespace IMS.Forms.MRP
             btnEditDepartmentInputs.Click += BtnEditDepartmentInputs_Click;
             btnEditDepartmentOutputs.Click += BtnEditDepartmentOutputs_Click;
             btnEditManufactureInputs.Click += BtnEditManufactureInputs_Click;
+            dgvDepartmentsForProducts.SelectionChanged += DgvDepartmentSelectForProducts_SelectionChanged;
+            tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
 
             PopulateDataForEdit();
 
@@ -84,6 +90,14 @@ namespace IMS.Forms.MRP
             _decimalValidator = new GridViewColumnDecimalValidator(dgvEmployees);
             _decimalValidator.AddColumn(this.colEmployeesRate, ColumnDataType.Decimal);
             _decimalValidator.Validate();
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tpDepartmentProducts)
+            {
+                PopulateDepartmentSelectGridView();
+            }
         }
 
         private void BtnEditManufactureInputs_Click(object sender, EventArgs e)
@@ -94,7 +108,7 @@ namespace IMS.Forms.MRP
 
         private void BtnEditDepartmentOutputs_Click(object sender, EventArgs e)
         {
-            var departmentId = GetSelectedDepartmentId();
+            var departmentId = GetSelectedDepartmentIdForPrducts();
             if (departmentId != null)
             {
                 var department = _manufactureService.GetDepartment(departmentId ?? 0);
@@ -111,7 +125,7 @@ namespace IMS.Forms.MRP
 
         private void BtnEditDepartmentInputs_Click(object sender, EventArgs e)
         {
-            var departmentId = GetSelectedDepartmentId();
+            var departmentId = GetSelectedDepartmentIdForPrducts();
             if (departmentId != null)
             {
                 var department = _manufactureService.GetDepartment(departmentId ?? 0);
@@ -147,7 +161,7 @@ namespace IMS.Forms.MRP
             lbDepartmentProductInputs.Items.Clear();
             lbDepartmentProductOutputs.Items.Clear();
             if(departmentId == null)
-                departmentId = GetSelectedDepartmentId();
+                departmentId = GetSelectedDepartmentIdForPrducts();
             if (departmentId != null)
             {
                 if (_departmentInputs.ContainsKey(departmentId ?? 0))
@@ -163,7 +177,7 @@ namespace IMS.Forms.MRP
             {
                 if (!dgvDepartments.Rows[e.RowIndex].IsNewRow)
                 {
-                    var selectedDepartment = GetSelectedDepartmentId();
+                    var selectedDepartment = GetSelectedDepartmentIdForEmployees();
                     if (selectedDepartment != null)
                     {
                         dgvDepartments.Rows.RemoveAt(e.RowIndex);
@@ -303,60 +317,7 @@ namespace IMS.Forms.MRP
                 isInvalid = true;
                 errorProvider1.SetError(txtLotNo, "Should be greater than zero");
             }
-            var departments = new List<ManufactureDepartmentModel>();
-            var i = 1;
-            foreach (DataGridViewRow row in dgvDepartments.Rows)
-            {
-                if (row.IsNewRow)
-                    continue;
-
-                var depCell = row.Cells[colDepartmentName.Index];
-                var posCell = row.Cells[colDepartmentPosition.Index];
-                depCell.ErrorText = string.Empty;
-                posCell.ErrorText = string.Empty;
-                if (!int.TryParse(depCell.Value?.ToString(), out int depIdInt))
-                {
-                    depCell.ErrorText = "Required";
-                    isInvalid = true;
-                }
-                if (departments.Any(x => x.DepartmentId == depIdInt))
-                {
-                    depCell.ErrorText = "Duplicate";
-                    isInvalid = true;
-                }
-                var employees = new List<ManufactureDepartmentUserModel>();
-                if (_employees.ContainsKey(depIdInt))
-                    employees = _employees[depIdInt].Where(x => x.Check).ToList();
-                if (employees.Count == 0)
-                {
-                    isInvalid = true;
-                    message.Add("At least one employee/vendor required in each department");
-                }
-                if (employees.Any(x => x.BuildRate == null || x.BuildRate == 0))
-                {
-                    isInvalid = true;
-                    message.Add("Rates of some employees/vendors are not defined. Please enter rates.");
-                }
-                if (!int.TryParse(posCell.Value?.ToString(), out int position))
-                {
-                    isInvalid = true;
-                    posCell.ErrorText = "Required";
-                }
-                var depProducts = new List<ManufactureDepartmentProductModel>();
-                if (_departmentInputs.ContainsKey(depIdInt))
-                    depProducts.AddRange(_departmentInputs[depIdInt].MapToManufactureDepartmentProductModel(depIdInt, true));
-                if (_departmentOutputs.ContainsKey(depIdInt))
-                    depProducts.AddRange(_departmentOutputs[depIdInt].MapToManufactureDepartmentProductModel(depIdInt, false));
-                var dep = new ManufactureDepartmentModel()
-                {
-                    Position = position,
-                    DepartmentId = depIdInt,
-                    ManufactureDepartmentUsers = employees,
-                    ManufactureDepartmentProducts = depProducts
-                };
-                departments.Add(dep);
-                i++;
-            }
+            var departments = GetDepartments(ref isInvalid, ref message);
 
             if (departments.Count == 0)
             {
@@ -434,6 +395,67 @@ namespace IMS.Forms.MRP
                 this.Close();
         }
 
+        private List<ManufactureDepartmentModel> GetDepartments(ref bool isInvalid, ref List<string> message)
+        {
+
+            var departments = new List<ManufactureDepartmentModel>();
+            var i = 1;
+            foreach (DataGridViewRow row in dgvDepartments.Rows)
+            {
+                if (row.IsNewRow)
+                    continue;
+
+                var depCell = row.Cells[colDepartmentName.Index];
+                var posCell = row.Cells[colDepartmentPosition.Index];
+                depCell.ErrorText = string.Empty;
+                posCell.ErrorText = string.Empty;
+                if (!int.TryParse(depCell.Value?.ToString(), out int depIdInt))
+                {
+                    depCell.ErrorText = "Required";
+                    isInvalid = true;
+                }
+                if (departments.Any(x => x.DepartmentId == depIdInt))
+                {
+                    depCell.ErrorText = "Duplicate";
+                    isInvalid = true;
+                }
+                var employees = new List<ManufactureDepartmentUserModel>();
+                if (_employees.ContainsKey(depIdInt))
+                    employees = _employees[depIdInt].Where(x => x.Check).ToList();
+                if (employees.Count == 0)
+                {
+                    isInvalid = true;
+                    message.Add("At least one employee/vendor required in each department");
+                }
+                if (employees.Any(x => x.BuildRate == null || x.BuildRate == 0))
+                {
+                    isInvalid = true;
+                    message.Add("Rates of some employees/vendors are not defined. Please enter rates.");
+                }
+                if (!int.TryParse(posCell.Value?.ToString(), out int position))
+                {
+                    isInvalid = true;
+                    posCell.ErrorText = "Required";
+                }
+                var depProducts = new List<ManufactureDepartmentProductModel>();
+                if (_departmentInputs.ContainsKey(depIdInt))
+                    depProducts.AddRange(_departmentInputs[depIdInt].MapToManufactureDepartmentProductModel(depIdInt, true));
+                if (_departmentOutputs.ContainsKey(depIdInt))
+                    depProducts.AddRange(_departmentOutputs[depIdInt].MapToManufactureDepartmentProductModel(depIdInt, false));
+                var dep = new ManufactureDepartmentModel()
+                {
+                    Position = position,
+                    DepartmentId = depIdInt,
+                    ManufactureDepartmentUsers = employees,
+                    ManufactureDepartmentProducts = depProducts,
+                    Name = _departmentList.FirstOrDefault(x=>x.DepartmentId == depIdInt)?.Name
+                };
+                departments.Add(dep);
+                i++;
+            }
+            return departments;
+        }
+
         private void PopulateFinalProduct()
         {
             var products = _productService.GetBuildProductListForCombo();
@@ -457,16 +479,16 @@ namespace IMS.Forms.MRP
 
         private void PopulateDepartmentCombo()
         {
-            var departments = _manufactureService.GetDepartmentListForManufacture();
+            _departmentList = _manufactureService.GetDepartmentListForManufacture();
             var departmentColumn = dgvDepartments.Columns[colDepartmentName.Index] as DataGridViewComboBoxColumn;
             if (departmentColumn != null)
             {
-                departmentColumn.DataSource = departments;
+                departmentColumn.DataSource = _departmentList;
                 departmentColumn.ValueMember = "DepartmentId";
                 departmentColumn.DisplayMember = "Name";
             }
         }
-        private int? GetSelectedDepartmentId(int? rowIndex = null)
+        private int? GetSelectedDepartmentIdForEmployees(int? rowIndex = null)
         {
             DataGridViewRow selectedRow = null;
             if (rowIndex == null)
@@ -488,11 +510,33 @@ namespace IMS.Forms.MRP
             }
             return null;
         }
+        private int? GetSelectedDepartmentIdForPrducts(int? rowIndex = null)
+        {
+            DataGridViewRow selectedRow = null;
+            if (rowIndex == null)
+            {
+                selectedRow = dgvDepartmentsForProducts.CurrentRow;
+            }
+            else
+            {
+                selectedRow = dgvDepartmentsForProducts.Rows[rowIndex ?? 0];
+            }
+            if (selectedRow != null)
+            {
+                var cell = dgvDepartmentsForProducts.Rows[selectedRow.Index].Cells[colDepartmentForSelectDepartmentId.Index] as DataGridViewTextBoxCell;
+                if (cell != null)
+                {
+                    var depId = cell.Value as int?;
+                    return depId;
+                }
+            }
+            return null;
+        }
 
-        private void PopulateDepartmentDetail(int? depId = null)
+        private void PopulateDepartmentDetailForEmployees(int? depId = null)
         {
             if (depId == null)
-                depId = GetSelectedDepartmentId();
+                depId = GetSelectedDepartmentIdForEmployees();
 
             if (depId != null)
             {
@@ -507,11 +551,26 @@ namespace IMS.Forms.MRP
                         lblEmployees.Text = $"Employees";
                     PopulateEmployeesGridview(depIdInt);
                 }
-                PopulateDepartmentProducts(depIdInt);
                 SetEmployeesFromGridView(depIdInt);
             }
-
         }
+        private void PopulateDepartmentDetailForProducts(int? depId = null)
+        {
+            if (depId == null)
+                depId = GetSelectedDepartmentIdForPrducts();
+
+            if (depId != null)
+            {
+                var depIdInt = (int)depId;
+                var department = _manufactureService.GetDepartment(depIdInt);
+                if (department != null)
+                {
+                    lblDepartmentNameForSelect.Text = department.Name;
+                }
+                PopulateDepartmentProducts(depIdInt);
+            }
+        }
+
         private void PopulateEmployeesGridview(int depId)
         {
             try
@@ -660,7 +719,7 @@ namespace IMS.Forms.MRP
                 if (selectedItem != null)
                 {
                     var depId = int.Parse(selectedItem.DepartmentId.ToString());
-                    PopulateDepartmentDetail(depId);
+                    PopulateDepartmentDetailForEmployees(depId);
                 }
 
             }
@@ -674,7 +733,7 @@ namespace IMS.Forms.MRP
         private void SetEmployeesFromGridView(int? departmentId)
         {
             if(departmentId == null)
-                departmentId = GetSelectedDepartmentId();
+                departmentId = GetSelectedDepartmentIdForEmployees();
             if (departmentId != null)
             {
                 var depIdInt = (int)departmentId;
@@ -718,7 +777,7 @@ namespace IMS.Forms.MRP
 
         private void DgvDepartments_SelectionChanged(object sender, EventArgs e)
         {
-            PopulateDepartmentDetail();
+            PopulateDepartmentDetailForEmployees();
             var selectedRowIndex = dgvDepartments.SelectedCells.Count > 0 ? dgvDepartments.SelectedCells[0].RowIndex : 0;
             foreach (DataGridViewRow row in dgvDepartments.Rows)
             {
@@ -727,8 +786,21 @@ namespace IMS.Forms.MRP
                 else
                     row.DefaultCellStyle.BackColor = Color.White;
             }
+            
         }
 
+        private void PopulateDepartmentSelectGridView()
+        {
+            bool isInvalid = false;
+            var message = new List<string>();
+            var list = GetDepartments(ref isInvalid, ref message);
+            dgvDepartmentsForProducts.DataSource = list;
+        }
+
+        private void DgvDepartmentSelectForProducts_SelectionChanged(object sender, EventArgs e)
+        {
+            PopulateDepartmentDetailForProducts();
+        }
 
         private void DgvDepartments_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {

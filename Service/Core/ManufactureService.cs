@@ -28,14 +28,16 @@ namespace Service.Core
         private readonly IUomService _uomService;
         private readonly IInventoryUnitService _inventoryUnitService;
         private readonly IProductOwnerService _productOwnerService;
+        private readonly IProductService _productService;
 
-        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService, IUomService uomService, IInventoryUnitService inventoryUnitService, IProductOwnerService productOwnerService)
+        public ManufactureService(IDatabaseChangeListener listener, IAppSettingService appSettingService, IUomService uomService, IInventoryUnitService inventoryUnitService, IProductOwnerService productOwnerService, IProductService productService)
         {
             _listener = listener;
             _appSettingService = appSettingService;
             _uomService = uomService;
             _inventoryUnitService = inventoryUnitService;
             _productOwnerService = productOwnerService;
+            _productService = productService;
         }
 
 
@@ -182,7 +184,7 @@ namespace Service.Core
         }
         private int GetAdminId(DatabaseContext _context)
         {
-            var userTypeEnum = UserTypeEnum.User.ToString();
+            var userTypeEnum = UserTypeEnum.Employee.ToString();
             return _context.Users.Where(x => x.Username == "admin" && x.UserType == userTypeEnum).Select(x => x.Id).FirstOrDefault();
         }
 
@@ -361,7 +363,7 @@ namespace Service.Core
                     .Select(s => new ManufactureDepartmentModel
                     {
                         IsVendor = s.IsVendor,
-                        Name = s.Name,
+                        Name = s.Name + " (" + (s.IsVendor ? "Vendor" : "Internal") + ")",
                         DepartmentId = s.Id,
                         HeadUserId = s.HeadUserId,
                     }).ToList();
@@ -622,7 +624,7 @@ namespace Service.Core
                     InOut = model.InOut,
                     ProductId = model.ProductId,
                     Quantity = model.Quantity,
-
+                    PackageId = model.PackageId,
                 };
                 manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
                 var invUnit = new InventoryUnitModel
@@ -642,7 +644,7 @@ namespace Service.Core
                     SupplierId = null,
                 };
                 var msg = string.Empty;
-                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
+                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem, null);
                 if (!string.IsNullOrWhiteSpace(msg))
                     return new ResponseModel<UserManufactureModel> { Success = false, Message = msg };
 
@@ -678,14 +680,30 @@ namespace Service.Core
                 // -- USER CONSUMED PRODUCTS -- //
                 foreach (var consumedProduct in model.ConsumedProducts)
                 {
+                    if (consumedProduct.ProductId <= 0)
+                    {
+                        var product = _productService.GetProductByNameOrSKU(consumedProduct.Product);
+                        if (product == null)
+                            return new ResponseModel<UserManufactureModel>(false, $"Product not found : {consumedProduct.Product}");
+                        consumedProduct.ProductId = product.Id;
+                    }
+                    if(consumedProduct.PackageId <= 0)
+                    {
+                        var package = _context.Packages.FirstOrDefault(x => x.Name.ToLower() == consumedProduct.Package.ToLower());
+                        if (package == null)
+                            return new ResponseModel<UserManufactureModel>(false, $"Package not found: {consumedProduct.Package}");
+                        consumedProduct.PackageId = package.Id;
+                    }
                     var userManufactureConsumeEntity = new UserManufacture
                     {
                         //BuildRate = consumedProduct.BuildRate,
                         Date = model.Date,
                         InOut = true,
                         ProductId = consumedProduct.ProductId,
+                        PackageId = consumedProduct.PackageId ?? 0,
                         Quantity = consumedProduct.UnitQuantity,
                     };
+                    
                     manufactureDepartmentUser.UserManufactures.Add(userManufactureConsumeEntity);
                     var basePackage = _context.Products.Find(consumedProduct.ProductId).ProductPackages.FirstOrDefault(x => x.IsBasePackage);
                     // subtract from user product CONSUMED
@@ -871,7 +889,7 @@ namespace Service.Core
             }
         }
 
-        public List<InventoryUnitModel> GetManufactureDepartmentProductsInventoryUnit(int manufactureId, int departmentId)
+        public List<InventoryUnitModel> GetManufactureDepartmentProductsInventoryUnit(int manufactureId, int departmentId, int userId)
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -895,7 +913,7 @@ namespace Service.Core
                         //ProductName = s.Product.Name,
                         //Quantity = s.Quantity,
                         ProductModel = s.Product.MapToProductModel(),
-                        InStockQuantity = s.Product.InStockQuantity,
+                        InStockQuantity = _productOwnerService.GetOnHoldProductQuantityOfOwner(0, userId, s.ProductId, s.Product.ProductPackages.FirstOrDefault(y=>y.IsBasePackage).PackageId),//s.Product.InStockQuantity, _context.ProductOwners.Where(x=>x.ProductId == s.ProductId && x.UserId == userId).
                         Product = s.Product.Name,
                         Package = s.Package.Name,
 
@@ -963,17 +981,17 @@ namespace Service.Core
                 var proposedProducts = _context.ManufactureProducts
                     .Where(x => x.ManufactureId == manufactureId && x.InOut == false)
                     .ToList();
-               var proposedProductQuantities = new Dictionary<int, UserManufactureModel>();
-                foreach(var proposed in proposedProducts)
+                var proposedProductQuantities = new Dictionary<int, UserManufactureModel>();
+                foreach (var proposed in proposedProducts)
                 {
                     if (!proposedProductQuantities.ContainsKey(proposed.ProductId))
-                        proposedProductQuantities.Add(proposed.ProductId, new UserManufactureModel { ProductName = proposed.Product.Name});
+                        proposedProductQuantities.Add(proposed.ProductId, new UserManufactureModel { ProductName = proposed.Product.Name });
                     var basePackage = proposed.Product.ProductPackages.FirstOrDefault(x => x.IsBasePackage).Package;
                     var qty = _uomService.ConvertUom(proposed.PackageId, basePackage.Id, proposed.ProductId, proposed.Quantity);
                     proposedProductQuantities[proposed.ProductId].Quantity += qty;
                 }
                 var producedProductQuantities = new Dictionary<int, UserManufactureModel>();
-                foreach(var produced in allFinalProduced)
+                foreach (var produced in allFinalProduced)
                 {
                     if (!producedProductQuantities.ContainsKey(produced.ProductId))
                         producedProductQuantities.Add(produced.ProductId, new UserManufactureModel { ProductName = produced.Product.Name });
@@ -982,10 +1000,10 @@ namespace Service.Core
                     producedProductQuantities[produced.ProductId].Quantity += qty;
                 }
                 var message = string.Empty;
-                foreach(var proposed in proposedProductQuantities)
+                foreach (var proposed in proposedProductQuantities)
                 {
                     var producedQty = 0M;
-                    if(producedProductQuantities.ContainsKey(proposed.Key))
+                    if (producedProductQuantities.ContainsKey(proposed.Key))
                         producedQty = producedProductQuantities[proposed.Key].Quantity;
                     if (producedQty < proposed.Value.Quantity)
                         message += proposed.Value.ProductName + " isn't produced enough. Proposed: " + proposed.Value.Quantity + ", Produced: " + producedQty + "\r\n";
@@ -994,7 +1012,7 @@ namespace Service.Core
                 {
                     return new ResponseModel<bool>(false, message);
                 }
-                
+
                 return new ResponseModel<bool>(true, "All Defined");
             }
         }

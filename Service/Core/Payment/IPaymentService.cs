@@ -12,8 +12,8 @@ namespace Service.Core.Payment
     public interface IPaymentService
     {
         ResponseModel<PaymentModel> Save(PaymentModel model);
-        int GetAllPaymentsCount(ClientTypeEnum clientType, string searchName);
-        PaymentListModel GetAllPayments(ClientTypeEnum clientType, int pageSize, int offset, string searchName);
+        int GetAllPaymentsCount(List<UserTypeEnum> clientType, string searchName);
+        PaymentListModel GetAllPayments(List<UserTypeEnum> clientType, int pageSize, int offset, string searchName);
         PaymentModel GetPayment(int paymentId);
         bool CancelPayment(int paymentId);
     }

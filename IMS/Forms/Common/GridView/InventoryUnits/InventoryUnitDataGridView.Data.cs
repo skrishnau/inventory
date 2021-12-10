@@ -215,6 +215,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
                 row.Cells[colPackageQuantity.Index].Value = model.PackageQuantity;
                 row.Cells[colRate.Index].Value = model.Rate;
                 row.Cells[colTotal.Index].Value = model.Total;
+                row.Cells[colStatus.Index].Value = model.Status;
                 row.Cells[colNetWeight.Index].Value = model.NetWeight;
                 row.Cells[colGrossWeight.Index].Value = model.GrossWeight;
                 row.Cells[colWarehouseId.Index].Value = model.WarehouseId;

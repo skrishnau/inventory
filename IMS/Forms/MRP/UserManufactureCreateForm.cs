@@ -104,7 +104,7 @@ namespace IMS.Forms.MRP
             else
                 chkAssignToNextDepartment.Checked = chkAssignToNextDepartment.Enabled = false;
 
-            var consumingProducts = _manufactureService.GetManufactureDepartmentProductsInventoryUnit(_manufactureId, _departmentId);
+            var consumingProducts = _manufactureService.GetManufactureDepartmentProductsInventoryUnit(_manufactureId, _departmentId, _userId);
             PopulateConsumingProducts(consumingProducts);
         }
 

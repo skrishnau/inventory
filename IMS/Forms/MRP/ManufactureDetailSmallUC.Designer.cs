@@ -59,11 +59,6 @@
             this.splitter5 = new System.Windows.Forms.Splitter();
             this.pnlEmployeesHisotory = new System.Windows.Forms.Panel();
             this.dgvEmployeeHistory = new System.Windows.Forms.DataGridView();
-            this.colHistoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHistoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHistoryProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHistoryPackageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHistoryQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAssignProduct = new System.Windows.Forms.Button();
             this.btnAddManufacture = new System.Windows.Forms.Button();
@@ -76,6 +71,11 @@
             this.lblEmployeesVendor = new System.Windows.Forms.Label();
             this.lblIntermediateProducts = new System.Windows.Forms.Label();
             this.lblEmployees = new System.Windows.Forms.Label();
+            this.colHistoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHistoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHistoryProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHistoryQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHistoryPackageName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlDepartments.SuspendLayout();
@@ -99,7 +99,7 @@
             this.panel1.Location = new System.Drawing.Point(5, 5);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(492, 41);
+            this.panel1.Size = new System.Drawing.Size(475, 41);
             this.panel1.TabIndex = 0;
             // 
             // lblManufactureName
@@ -119,7 +119,7 @@
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnStart.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Location = new System.Drawing.Point(262, 5);
+            this.btnStart.Location = new System.Drawing.Point(245, 5);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 31);
             this.btnStart.TabIndex = 11;
@@ -132,7 +132,7 @@
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(337, 5);
+            this.btnCancel.Location = new System.Drawing.Point(320, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 31);
             this.btnCancel.TabIndex = 10;
@@ -145,7 +145,7 @@
             this.btnComplete.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnComplete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnComplete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnComplete.Location = new System.Drawing.Point(412, 5);
+            this.btnComplete.Location = new System.Drawing.Point(395, 5);
             this.btnComplete.Name = "btnComplete";
             this.btnComplete.Size = new System.Drawing.Size(75, 31);
             this.btnComplete.TabIndex = 9;
@@ -155,7 +155,7 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(73, 0);
+            this.lblStatus.Location = new System.Drawing.Point(70, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(37, 13);
             this.lblStatus.TabIndex = 4;
@@ -186,13 +186,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(492, 63);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(475, 63);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(250, 0);
+            this.label3.Location = new System.Drawing.Point(241, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 21);
             this.label3.TabIndex = 1;
@@ -201,7 +201,7 @@
             // lblFinalProduct
             // 
             this.lblFinalProduct.AutoSize = true;
-            this.lblFinalProduct.Location = new System.Drawing.Point(321, 0);
+            this.lblFinalProduct.Location = new System.Drawing.Point(310, 0);
             this.lblFinalProduct.Name = "lblFinalProduct";
             this.lblFinalProduct.Size = new System.Drawing.Size(35, 13);
             this.lblFinalProduct.TabIndex = 5;
@@ -210,7 +210,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(250, 21);
+            this.label4.Location = new System.Drawing.Point(241, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 2;
@@ -219,7 +219,7 @@
             // lblFinalPackage
             // 
             this.lblFinalPackage.AutoSize = true;
-            this.lblFinalPackage.Location = new System.Drawing.Point(321, 21);
+            this.lblFinalPackage.Location = new System.Drawing.Point(310, 21);
             this.lblFinalPackage.Name = "lblFinalPackage";
             this.lblFinalPackage.Size = new System.Drawing.Size(35, 13);
             this.lblFinalPackage.TabIndex = 6;
@@ -228,7 +228,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(250, 42);
+            this.label5.Location = new System.Drawing.Point(241, 42);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 3;
@@ -237,7 +237,7 @@
             // lblFinalQuantity
             // 
             this.lblFinalQuantity.AutoSize = true;
-            this.lblFinalQuantity.Location = new System.Drawing.Point(321, 42);
+            this.lblFinalQuantity.Location = new System.Drawing.Point(310, 42);
             this.lblFinalQuantity.Name = "lblFinalQuantity";
             this.lblFinalQuantity.Size = new System.Drawing.Size(35, 13);
             this.lblFinalQuantity.TabIndex = 7;
@@ -255,7 +255,7 @@
             // lblLotNo
             // 
             this.lblLotNo.AutoSize = true;
-            this.lblLotNo.Location = new System.Drawing.Point(73, 21);
+            this.lblLotNo.Location = new System.Drawing.Point(70, 21);
             this.lblLotNo.Name = "lblLotNo";
             this.lblLotNo.Size = new System.Drawing.Size(35, 13);
             this.lblLotNo.TabIndex = 4;
@@ -276,7 +276,7 @@
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter1.Location = new System.Drawing.Point(5, 46);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(492, 3);
+            this.splitter1.Size = new System.Drawing.Size(475, 3);
             this.splitter1.TabIndex = 7;
             this.splitter1.TabStop = false;
             // 
@@ -286,7 +286,7 @@
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter2.Location = new System.Drawing.Point(5, 291);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(492, 3);
+            this.splitter2.Size = new System.Drawing.Size(475, 3);
             this.splitter2.TabIndex = 8;
             this.splitter2.TabStop = false;
             // 
@@ -299,7 +299,7 @@
             this.pnlDepartments.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDepartments.Location = new System.Drawing.Point(5, 112);
             this.pnlDepartments.Name = "pnlDepartments";
-            this.pnlDepartments.Size = new System.Drawing.Size(492, 179);
+            this.pnlDepartments.Size = new System.Drawing.Size(475, 179);
             this.pnlDepartments.TabIndex = 5;
             // 
             // dgvDepartments
@@ -316,7 +316,7 @@
             this.dgvDepartments.Name = "dgvDepartments";
             this.dgvDepartments.RowHeadersVisible = false;
             this.dgvDepartments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDepartments.Size = new System.Drawing.Size(453, 153);
+            this.dgvDepartments.Size = new System.Drawing.Size(436, 153);
             this.dgvDepartments.TabIndex = 1;
             // 
             // colManufactureDepartmentId
@@ -355,7 +355,7 @@
             // 
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(453, 26);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(436, 26);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(39, 153);
@@ -367,7 +367,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(492, 26);
+            this.label6.Size = new System.Drawing.Size(475, 26);
             this.label6.TabIndex = 0;
             this.label6.Text = "Departments";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -380,7 +380,7 @@
             this.pnlDepartmentSingle.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlDepartmentSingle.Location = new System.Drawing.Point(5, 294);
             this.pnlDepartmentSingle.Name = "pnlDepartmentSingle";
-            this.pnlDepartmentSingle.Size = new System.Drawing.Size(492, 287);
+            this.pnlDepartmentSingle.Size = new System.Drawing.Size(475, 287);
             this.pnlDepartmentSingle.TabIndex = 9;
             // 
             // panel2
@@ -391,13 +391,13 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(492, 248);
+            this.panel2.Size = new System.Drawing.Size(475, 248);
             this.panel2.TabIndex = 2;
             // 
             // splitter5
             // 
             this.splitter5.Enabled = false;
-            this.splitter5.Location = new System.Drawing.Point(229, 0);
+            this.splitter5.Location = new System.Drawing.Point(206, 0);
             this.splitter5.Name = "splitter5";
             this.splitter5.Size = new System.Drawing.Size(5, 248);
             this.splitter5.TabIndex = 9;
@@ -410,9 +410,9 @@
             this.pnlEmployeesHisotory.Controls.Add(this.panel3);
             this.pnlEmployeesHisotory.Controls.Add(this.lblEmployeeName);
             this.pnlEmployeesHisotory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEmployeesHisotory.Location = new System.Drawing.Point(229, 0);
+            this.pnlEmployeesHisotory.Location = new System.Drawing.Point(206, 0);
             this.pnlEmployeesHisotory.Name = "pnlEmployeesHisotory";
-            this.pnlEmployeesHisotory.Size = new System.Drawing.Size(263, 248);
+            this.pnlEmployeesHisotory.Size = new System.Drawing.Size(269, 248);
             this.pnlEmployeesHisotory.TabIndex = 8;
             // 
             // dgvEmployeeHistory
@@ -422,55 +422,16 @@
             this.colHistoryId,
             this.colHistoryDate,
             this.colHistoryProduct,
-            this.colHistoryPackageName,
-            this.colHistoryQuantity});
+            this.colHistoryQuantity,
+            this.colHistoryPackageName});
             this.dgvEmployeeHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEmployeeHistory.Location = new System.Drawing.Point(0, 54);
             this.dgvEmployeeHistory.MultiSelect = false;
             this.dgvEmployeeHistory.Name = "dgvEmployeeHistory";
             this.dgvEmployeeHistory.RowHeadersVisible = false;
             this.dgvEmployeeHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEmployeeHistory.Size = new System.Drawing.Size(263, 194);
+            this.dgvEmployeeHistory.Size = new System.Drawing.Size(269, 194);
             this.dgvEmployeeHistory.TabIndex = 2;
-            // 
-            // colHistoryId
-            // 
-            this.colHistoryId.DataPropertyName = "UserId";
-            this.colHistoryId.HeaderText = "Id";
-            this.colHistoryId.Name = "colHistoryId";
-            this.colHistoryId.ReadOnly = true;
-            this.colHistoryId.Visible = false;
-            // 
-            // colHistoryDate
-            // 
-            this.colHistoryDate.DataPropertyName = "DateString";
-            this.colHistoryDate.HeaderText = "Date";
-            this.colHistoryDate.Name = "colHistoryDate";
-            this.colHistoryDate.ReadOnly = true;
-            this.colHistoryDate.Width = 70;
-            // 
-            // colHistoryProduct
-            // 
-            this.colHistoryProduct.DataPropertyName = "ProductName";
-            this.colHistoryProduct.HeaderText = "Product";
-            this.colHistoryProduct.Name = "colHistoryProduct";
-            this.colHistoryProduct.ReadOnly = true;
-            // 
-            // colHistoryPackageName
-            // 
-            this.colHistoryPackageName.DataPropertyName = "PackageName";
-            this.colHistoryPackageName.HeaderText = "Unit";
-            this.colHistoryPackageName.Name = "colHistoryPackageName";
-            this.colHistoryPackageName.ReadOnly = true;
-            this.colHistoryPackageName.Width = 70;
-            // 
-            // colHistoryQuantity
-            // 
-            this.colHistoryQuantity.DataPropertyName = "Quantity";
-            this.colHistoryQuantity.HeaderText = "Quantity";
-            this.colHistoryQuantity.Name = "colHistoryQuantity";
-            this.colHistoryQuantity.ReadOnly = true;
-            this.colHistoryQuantity.Width = 60;
             // 
             // panel3
             // 
@@ -479,13 +440,13 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 26);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(263, 28);
+            this.panel3.Size = new System.Drawing.Size(269, 28);
             this.panel3.TabIndex = 4;
             // 
             // btnAssignProduct
             // 
             this.btnAssignProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAssignProduct.Location = new System.Drawing.Point(42, 3);
+            this.btnAssignProduct.Location = new System.Drawing.Point(48, 3);
             this.btnAssignProduct.Name = "btnAssignProduct";
             this.btnAssignProduct.Size = new System.Drawing.Size(105, 23);
             this.btnAssignProduct.TabIndex = 4;
@@ -496,7 +457,7 @@
             // btnAddManufacture
             // 
             this.btnAddManufacture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddManufacture.Location = new System.Drawing.Point(153, 3);
+            this.btnAddManufacture.Location = new System.Drawing.Point(159, 3);
             this.btnAddManufacture.Name = "btnAddManufacture";
             this.btnAddManufacture.Size = new System.Drawing.Size(105, 23);
             this.btnAddManufacture.TabIndex = 3;
@@ -510,7 +471,7 @@
             this.lblEmployeeName.Location = new System.Drawing.Point(0, 0);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.lblEmployeeName.Size = new System.Drawing.Size(263, 26);
+            this.lblEmployeeName.Size = new System.Drawing.Size(269, 26);
             this.lblEmployeeName.TabIndex = 1;
             this.lblEmployeeName.Text = "Manufacture History of ______";
             this.lblEmployeeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -523,7 +484,7 @@
             this.pnlEmployees.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlEmployees.Location = new System.Drawing.Point(0, 0);
             this.pnlEmployees.Name = "pnlEmployees";
-            this.pnlEmployees.Size = new System.Drawing.Size(229, 248);
+            this.pnlEmployees.Size = new System.Drawing.Size(206, 248);
             this.pnlEmployees.TabIndex = 6;
             // 
             // dgvEmployees
@@ -539,7 +500,7 @@
             this.dgvEmployees.Name = "dgvEmployees";
             this.dgvEmployees.RowHeadersVisible = false;
             this.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEmployees.Size = new System.Drawing.Size(229, 222);
+            this.dgvEmployees.Size = new System.Drawing.Size(206, 222);
             this.dgvEmployees.TabIndex = 2;
             // 
             // colEmployeesUserId
@@ -571,7 +532,7 @@
             this.lblEmployeesVendor.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEmployeesVendor.Location = new System.Drawing.Point(0, 0);
             this.lblEmployeesVendor.Name = "lblEmployeesVendor";
-            this.lblEmployeesVendor.Size = new System.Drawing.Size(229, 26);
+            this.lblEmployeesVendor.Size = new System.Drawing.Size(206, 26);
             this.lblEmployeesVendor.TabIndex = 3;
             this.lblEmployeesVendor.Text = "Employees";
             this.lblEmployeesVendor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -592,10 +553,52 @@
             this.lblEmployees.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmployees.Location = new System.Drawing.Point(0, 0);
             this.lblEmployees.Name = "lblEmployees";
-            this.lblEmployees.Size = new System.Drawing.Size(492, 26);
+            this.lblEmployees.Size = new System.Drawing.Size(475, 26);
             this.lblEmployees.TabIndex = 1;
             this.lblEmployees.Text = "Department Name";
             this.lblEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // colHistoryId
+            // 
+            this.colHistoryId.DataPropertyName = "UserId";
+            this.colHistoryId.HeaderText = "Id";
+            this.colHistoryId.Name = "colHistoryId";
+            this.colHistoryId.ReadOnly = true;
+            this.colHistoryId.Visible = false;
+            // 
+            // colHistoryDate
+            // 
+            this.colHistoryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colHistoryDate.DataPropertyName = "DateString";
+            this.colHistoryDate.HeaderText = "Date";
+            this.colHistoryDate.Name = "colHistoryDate";
+            this.colHistoryDate.ReadOnly = true;
+            this.colHistoryDate.Width = 55;
+            // 
+            // colHistoryProduct
+            // 
+            this.colHistoryProduct.DataPropertyName = "ProductName";
+            this.colHistoryProduct.HeaderText = "Product";
+            this.colHistoryProduct.Name = "colHistoryProduct";
+            this.colHistoryProduct.ReadOnly = true;
+            // 
+            // colHistoryQuantity
+            // 
+            this.colHistoryQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colHistoryQuantity.DataPropertyName = "Quantity";
+            this.colHistoryQuantity.HeaderText = "Qty. ";
+            this.colHistoryQuantity.Name = "colHistoryQuantity";
+            this.colHistoryQuantity.ReadOnly = true;
+            this.colHistoryQuantity.Width = 51;
+            // 
+            // colHistoryPackageName
+            // 
+            this.colHistoryPackageName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colHistoryPackageName.DataPropertyName = "PackageName";
+            this.colHistoryPackageName.HeaderText = "Unit";
+            this.colHistoryPackageName.Name = "colHistoryPackageName";
+            this.colHistoryPackageName.ReadOnly = true;
+            this.colHistoryPackageName.Width = 51;
             // 
             // ManufactureDetailSmallUC
             // 
@@ -610,7 +613,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "ManufactureDetailSmallUC";
             this.Padding = new System.Windows.Forms.Padding(5);
-            this.Size = new System.Drawing.Size(502, 530);
+            this.Size = new System.Drawing.Size(485, 530);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -676,7 +679,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHistoryId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHistoryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHistoryProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHistoryPackageName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHistoryQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHistoryPackageName;
     }
 }

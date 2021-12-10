@@ -132,19 +132,19 @@ namespace IMS.Forms.Inventory.Orders
         private void PopulateClientCombo()
         {
             List<IdNamePair> list = null;
-            var userType = UserTypeEnum.All;
+            var userType = UserTypeEnumHelper.CustomerSupplier;//.Client;
             switch (_orderType)
             {
                 case OrderTypeEnum.Purchase:
-                    userType = UserTypeEnum.Supplier;
+                    userType = new List<UserTypeEnum> { UserTypeEnum.Supplier };
                     break;
                 case OrderTypeEnum.Sale:
-                    userType = UserTypeEnum.Customer;
+                    userType = new List<UserTypeEnum> { UserTypeEnum.Customer };
                     break;
             }
             var includeUserList = new int[] { _purchaseOrderModel?.UserId ?? 0 };
             
-            list = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, includeUserList);
+            list = _userService.GetUserListForCombo(userType, includeUserList);
             if (list != null)
             {
                 list.Insert(0, new IdNamePair

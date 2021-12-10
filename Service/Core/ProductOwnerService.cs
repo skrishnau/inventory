@@ -91,7 +91,7 @@ namespace Service.Core
                     // assign
                     if (assignReleaseModel.ToType == FromToType.Warehouse)
                     {
-                        _inventoryUnitService.SaveDirectReceiveListWithoutCommit(_context, assignReleaseModel.inventoryUnitList, DateTime.Now, "Department Release");
+                        _inventoryUnitService.SaveDirectReceiveListWithoutCommit(_context, assignReleaseModel.inventoryUnitList, DateTime.Now, "Department Release", assignReleaseModel);
                     }
                     else if (assignReleaseModel.ToType == FromToType.Department)
                     {
@@ -126,6 +126,7 @@ namespace Service.Core
                 }
                 _context.SaveChanges();
 
+                // triggers
                 if (assignReleaseModel.FromType == FromToType.Department || assignReleaseModel.ToType == FromToType.Department)
                 {
                     Department department;
@@ -139,7 +140,7 @@ namespace Service.Core
                     }
                     _databaseChangeListener.TriggerDepartmentUpdateEvent(null, new DbEventArgs.BaseEventArgs<DepartmentModel>(department.MapToModel(), Utility.UpdateMode.EDIT));
                 }
-                else if(assignReleaseModel.FromType == FromToType.Employee || assignReleaseModel.ToType == FromToType.Employee)
+                if(assignReleaseModel.FromType == FromToType.Employee || assignReleaseModel.ToType == FromToType.Employee)
                 {
                     User user;
                     if (assignReleaseModel.FromType == FromToType.Employee)
@@ -152,7 +153,7 @@ namespace Service.Core
                     }
                     _databaseChangeListener.TriggerUserUpdateEvent(null, new DbEventArgs.BaseEventArgs<UserModel>(user.MapToUserModel(), Utility.UpdateMode.EDIT));
                 }
-                else if (assignReleaseModel.FromType == FromToType.Warehouse || assignReleaseModel.ToType == FromToType.Warehouse)
+                if (assignReleaseModel.FromType == FromToType.Warehouse || assignReleaseModel.ToType == FromToType.Warehouse)
                 {
                     User user;
                     if (assignReleaseModel.FromType == FromToType.Employee)
@@ -167,7 +168,7 @@ namespace Service.Core
                     _databaseChangeListener.TriggerProductUpdateEvent(null, null);
                     _databaseChangeListener.TriggerInventoryUnitUpdateEvent(null, new DbEventArgs.BaseEventArgs<List<ViewModel.Core.Inventory.InventoryUnitModel>>(assignReleaseModel.inventoryUnitList, Utility.UpdateMode.EDIT));
                 }
-
+                
                 return new ResponseModel<bool>(true, Constants.SAVED_SUCCESSFULLY);
             }
 

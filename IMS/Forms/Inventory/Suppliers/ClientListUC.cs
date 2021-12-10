@@ -23,7 +23,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         UserModel _selectedSupplierModel;
 
-        UserTypeEnum _userType = UserTypeEnum.All;//Client;
+        List<UserTypeEnum> _userType = new List<UserTypeEnum>();//.Customer;//Client;
         BindingSource _bindingSource = new BindingSource();
 
         private int _previousIndex;
@@ -31,6 +31,8 @@ namespace IMS.Forms.Inventory.Suppliers
         //HeaderTemplate _header;
 
         private ClientListPaginationHelper helper;
+
+        private UserTypeCategoryEnum _userTypeCategory;
 
 
         public ClientListUC(IUserService userService, IDatabaseChangeListener listener)
@@ -51,19 +53,56 @@ namespace IMS.Forms.Inventory.Suppliers
             InitializeGridView();
             InitializeSearchTextBox();
             InitializeEvents();
-            PopulateUserList();
+            PopulateData();
+            PopulateList();
             
+        }
+
+        private void PopulateData()
+        {
+            switch (_userTypeCategory)
+            {
+                case UserTypeCategoryEnum.CustomerAndSupplier:
+                    rbCustomer.Text = UserTypeEnum.Customer.ToString();
+                    rbSupplier.Text = UserTypeEnum.Supplier.ToString();
+                    break;
+                case UserTypeCategoryEnum.UserAndVendor:
+                    btnPayment.Visible = false;
+                    rbCustomer.Text = UserTypeEnum.Employee.ToString();
+                    rbSupplier.Text = UserTypeEnum.Vendor.ToString();
+                    // columns
+                    colCompany.Visible = false;
+                    colTotalAmount.Visible = false;
+                    colPaidAmount.Visible = false;
+                    colAllDuesClearDate.Visible = false;
+                    colPaymentDueDate.Visible = false;
+                    colRemainAmount.Visible = false;
+                    break;
+            }
         }
 
         private void InitializeSearchTextBox()
         {
             txtName.AutoCompleteCustomSource.Clear();
-            var users = _userService.GetUserListWithCompanyForCombo(new List<UserTypeEnum> { _userType }, new int[0]);
+            var users = _userService.GetUserListWithCompanyForCombo( _userType, new int[0]);
             txtName.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
             txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
 
+        public void SetData(UserTypeCategoryEnum userTypeCategory)
+        {
+            _userTypeCategory = userTypeCategory;
+            switch (_userTypeCategory)
+            {
+                case UserTypeCategoryEnum.CustomerAndSupplier:
+                    _userType = UserTypeEnumHelper.CustomerSupplier;// UserTypeEnum.Customer;
+                    break;
+                case UserTypeCategoryEnum.UserAndVendor:
+                    _userType = UserTypeEnumHelper.UserAndVendor;// UserTypeEnum.User;
+                    break;
+            }
+        }
 
 
         #region Initialization Functions
@@ -73,7 +112,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             dgvSuppliers.AutoGenerateColumns = false;
             dgvSuppliers.AllowUserToOrderColumns = true;
-            helper = new ClientListPaginationHelper(_bindingSource, dgvSuppliers, bindingNavigator1, _userService, new List<UserTypeEnum> { _userType }, txtName?.Text);
+            helper = new ClientListPaginationHelper(_bindingSource, dgvSuppliers, bindingNavigator1, _userService, _userType , txtName?.Text);
         }
 
         private void InitializeEvents()
@@ -106,12 +145,12 @@ namespace IMS.Forms.Inventory.Suppliers
 
         #region Population Functions
 
-        private void PopulateUserList()
+        private void PopulateList()
         {
             //var supplier = _userService.GetUserList(_userType, txtName.Text);
             //_bindingSource.DataSource = supplier;
             //_bindingSource.ResetBindings(false);
-            helper.Reset(new List<UserTypeEnum> { _userType }, txtName?.Text);
+            helper.Reset(_userType, txtName?.Text);
         }
 
         private void ShowAddEditDialog(bool isEditMode)
@@ -142,7 +181,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void TxtName_TextChanged(object sender, EventArgs e)
         {
-            PopulateUserList();
+            PopulateList();
         }
 
         private void _listener_SupplierUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)
@@ -150,7 +189,7 @@ namespace IMS.Forms.Inventory.Suppliers
             //InitializeSearchTextBox();
             //PopulateUserList();
             AddListenerAction(InitializeSearchTextBox, e);
-            AddListenerAction(PopulateUserList, e);
+            AddListenerAction(PopulateList, e);
         }
 
         private void DgvSuppliers_SelectionChanged(object sender, EventArgs e)
@@ -205,20 +244,27 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             if (rbCustomer.Checked)
             {
-                _userType = UserTypeEnum.Customer;
+                if (_userTypeCategory == UserTypeCategoryEnum.CustomerAndSupplier)
+                    _userType = new List<UserTypeEnum> { UserTypeEnum.Customer };
+                else if (_userTypeCategory == UserTypeCategoryEnum.UserAndVendor)
+                    _userType = new List<UserTypeEnum> { UserTypeEnum.Employee };
                 // btnNew.Visible = true;
             }
             else if (rbSupplier.Checked)
             {
-                _userType = UserTypeEnum.Supplier;
+                if (_userTypeCategory == UserTypeCategoryEnum.CustomerAndSupplier)
+                    _userType = new List<UserTypeEnum> { UserTypeEnum.Supplier };
+                else if (_userTypeCategory == UserTypeCategoryEnum.UserAndVendor)
+                    _userType = new List<UserTypeEnum> { UserTypeEnum.Vendor };
                 //btnNew.Visible = true;
             }
             else
             {
-                _userType = UserTypeEnum.All;// Client;
+                _userType = UserTypeEnumHelper.ConvertToUserTypeEnum(_userTypeCategory);
+                //_userType = UserTypeEnum.All;// Client;
                 //btnNew.Visible = false;
             }
-            PopulateUserList();
+            PopulateList();
         }
 
         private void DgvSuppliers_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -248,11 +294,11 @@ namespace IMS.Forms.Inventory.Suppliers
                 }
             }
         }
-
+        
         #endregion
 
 
 
-      
+
     }
 }

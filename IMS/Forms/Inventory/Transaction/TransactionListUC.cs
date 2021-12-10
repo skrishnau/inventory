@@ -92,7 +92,7 @@ namespace IMS.Forms.Inventory.Transaction
         }
         private void InitializeSearchTextBox()
         {
-            var users = _userService.GetUserListWithCompanyForCombo(new List<UserTypeEnum> { UserTypeEnum.All }, new int[0]);
+            var users = _userService.GetUserListWithCompanyForCombo(UserTypeEnumHelper.CustomerSupplier, new int[0]);
             txtSearchClient.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
             txtSearchClient.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtSearchClient.AutoCompleteMode = AutoCompleteMode.SuggestAppend;

@@ -149,9 +149,11 @@ namespace IMS.Forms.Inventory.Reports.All
         }
         private void PopulateType()
         {
-            var values = Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
+            var values = UserTypeEnumHelper.CustomerSupplier
+                //Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
                 .Select(x => new NameValuePair(x.ToString(), x.ToString()))
                 .ToList();
+            values.Insert(0, new NameValuePair("All", "All"));
             cbType.ValueMember = "Value";
             cbType.DisplayMember = "Name";
             cbType.DataSource = values;

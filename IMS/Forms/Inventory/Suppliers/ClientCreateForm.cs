@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using IMS.Forms.Common;
 using IMS.Forms.Common.Validations;
@@ -16,7 +17,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private readonly IUserService _supplierService;
         private readonly IDatabaseChangeListener _listener;
 
-        private UserTypeEnum _userType;
+        private List<UserTypeEnum> _userType;
 
         private int _supplierId;
         private int _userId;
@@ -27,14 +28,14 @@ namespace IMS.Forms.Inventory.Suppliers
             _listener = listener;
             InitializeComponent();
 
-           
+
 
             this.Load += SupplierCreate_Load;
         }
 
         private void SupplierCreate_Load(object sender, EventArgs e)
         {
-            this.Text = (_userType!= UserTypeEnum.All ? _userType == UserTypeEnum.User ? "Employee" : _userType.ToString() : "") + " Create";
+            this.Text = (_userType.Count == 1 ? _userType.Contains(UserTypeEnum.Employee) ? "Employee" : _userType.Count == 1 ? _userType[0].ToString() : "" : "") + " Create";
             InitializeEvents();
             this.ActiveControl = tbName;
             PopulateUserType();
@@ -46,7 +47,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private void PopulateUserType()
         {
             var list = new List<NameValuePair>();
-            if (_userType == UserTypeEnum.Customer || _userType == UserTypeEnum.Supplier)
+            if (_userType.Contains(UserTypeEnum.Customer) || _userType.Contains(UserTypeEnum.Supplier))
             {
                 var customer = UserTypeEnum.Customer.ToString();
                 var supplier = UserTypeEnum.Supplier.ToString();
@@ -54,44 +55,84 @@ namespace IMS.Forms.Inventory.Suppliers
                 list.Add(new NameValuePair(customer, customer));
                 list.Add(new NameValuePair(supplier, supplier));
             }
-            else if(_userType == UserTypeEnum.Vendor)
+            if (_userType.Contains(UserTypeEnum.Vendor))
             {
                 var vendor = UserTypeEnum.Vendor.ToString();
                 //list.Add(new NameValuePair("--- Select ---", ""));
-                lblName.Text = "Contact Person Name";
                 list.Add(new NameValuePair(vendor, vendor));
             }
-            else if(_userType == UserTypeEnum.User)
+            if (_userType.Contains(UserTypeEnum.Employee))
             {
-                var user = UserTypeEnum.User.ToString();
+                var user = UserTypeEnum.Employee.ToString();
                 //list.Add(new NameValuePair("--- Select ---", ""));
                 list.Add(new NameValuePair("Employee", user));
 
-                tbCompany.Visible = false;
-                lblCompany.Visible = false;
             }
             cbUserType.DataSource = list;
             cbUserType.ValueMember = "Value";
             cbUserType.DisplayMember = "name";
             try
             {
-                cbUserType.SelectedValue = _userType.ToString();
+                if (_userType.Count == 1)
+                {
+                    cbUserType.SelectedValue = _userType.First().ToString();
+                    //cbUserType.Enabled = false;
+                }
+
             }
             catch (Exception) { }
+            UpdateViewAsPerUserType(_userType);
+
         }
+
+
 
         private void InitializeEvents()
         {
             btnSave.Click += btnSave_Click;
+            cbUserType.SelectedValueChanged += CbUserType_SelectedValueChanged;
         }
 
-        public void SetDataForEdit(int userId, UserTypeEnum userType)
+        private void CbUserType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var value = cbUserType.SelectedValue as string;
+            if (value != null)
+            {
+                if (Enum.TryParse<UserTypeEnum>(value, out UserTypeEnum userType))
+                {
+                    UpdateViewAsPerUserType(new List<UserTypeEnum> { userType });
+                }
+            }
+        }
+
+        private void UpdateViewAsPerUserType(List<UserTypeEnum> _userType)
+        {
+            if (_userType.Contains(UserTypeEnum.Customer) || _userType.Contains(UserTypeEnum.Supplier))
+            {
+                lblName.Text = "Name";
+                tbCompany.Visible = true;
+                lblCompany.Visible = true;
+            }
+            if (_userType.Contains(UserTypeEnum.Vendor))
+            {
+                lblName.Text = "Contact Person Name";
+                tbCompany.Visible = true;
+                lblCompany.Visible = true;
+            }
+            if (_userType.Contains(UserTypeEnum.Employee))
+            {
+                lblName.Text = "Name";
+                tbCompany.Visible = false;
+                lblCompany.Visible = false;
+            }
+        }
+        public void SetDataForEdit(int userId, List<UserTypeEnum> userType)
         {
             _userType = userType;
             _userId = userId;
         }
 
-        
+
         public void SetDataForEdit(UserModel model)
         {
             if (model != null)
@@ -106,7 +147,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 tbNotes.Text = model.Notes;
                 tbPhone.Text = model.Phone;
                 //tbSalesperson.Text = model.SalesPerson;
-               // tbWebsite.Text = model.Website;
+                // tbWebsite.Text = model.Website;
                 tbCompany.Text = model.Company;
                 chkUse.Checked = model.Use;
                 _supplierId = model.Id;
@@ -116,7 +157,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private void btnSave_Click(object sender, EventArgs e)
         {
             var msg = ValidateControls();
-            if(!string.IsNullOrEmpty(msg))
+            if (!string.IsNullOrEmpty(msg))
             {
                 PopupMessage.ShowInfoMessage(msg);
                 this.Focus();
@@ -133,7 +174,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 Id = _supplierId,
                 Notes = tbNotes.Text,
                 //RegisteredAt = cbtbRegisteredDate.Value,
-               // SalesPerson = tbSalesperson.Text,
+                // SalesPerson = tbSalesperson.Text,
                 //Website = tbWebsite.Text,
                 Company = tbCompany.Text,
                 Use = chkUse.Checked,
@@ -172,14 +213,14 @@ namespace IMS.Forms.Inventory.Suppliers
             switch (orderType)
             {
                 case OrderTypeEnum.Sale:
-                    _userType = UserTypeEnum.Customer;
+                    _userType = new List<UserTypeEnum> { UserTypeEnum.Customer };
                     break;
                 case OrderTypeEnum.Purchase:
-                    _userType = UserTypeEnum.Supplier;
+                    _userType = new List<UserTypeEnum> { UserTypeEnum.Supplier };
                     break;
-                //case OrderTypeEnum.All:
-                //    _userType = 
-                //    break;
+                    //case OrderTypeEnum.All:
+                    //    _userType = 
+                    //    break;
             }
         }
     }

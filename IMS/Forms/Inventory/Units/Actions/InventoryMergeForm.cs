@@ -58,9 +58,9 @@ namespace IMS.Forms.Inventory.Units.Actions
         {
             string message = "";
             var displayList = new List<InventoryUnitModel>();
-            foreach (var productWiseGroup in _dataList.GroupBy(x => x.ProductId))
+            foreach (var productWiseGroup in _dataList.GroupBy(x => new { x.ProductId , x.IsHold}))
             {
-                var product = _productService.GetProduct(productWiseGroup.Key);
+                var product = _productService.GetProduct(productWiseGroup.Key.ProductId);
                 foreach (var warehouseWiseGroup1 in productWiseGroup.GroupBy(x => x.WarehouseId))
                 {
                     var zeroRateOrderItemIdGroup = warehouseWiseGroup1.Where(x => x.Rate == 0).GroupBy(x => x.PurchaseOrderItemId);

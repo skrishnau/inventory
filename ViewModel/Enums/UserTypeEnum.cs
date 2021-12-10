@@ -10,22 +10,28 @@ namespace ViewModel.Enums
     {
         Customer,
         Supplier,
-        User,
+        Employee,
         Vendor,
         //Client = 4, // Customer and Suppliers are Clients but User isn't
-        All,
+        //All,
 
     }
 
-
-    public enum ClientTypeEnum
+    public enum UserTypeCategoryEnum
     {
         All,
-        Customer,
-        Supplier,
+        CustomerAndSupplier,
+        UserAndVendor,
     }
 
-    public class UserTypeEnumHelper
+    //public enum ClientTypeEnum
+    //{
+    //    All,
+    //    Customer,
+    //    Supplier,
+    //}
+
+    public static class UserTypeEnumHelper
     {
         public static List<UserTypeEnum> Vendor = new List<UserTypeEnum>
         {
@@ -36,5 +42,23 @@ namespace ViewModel.Enums
             UserTypeEnum.Customer,
             UserTypeEnum.Supplier,
         };
+        public static List<UserTypeEnum> UserAndVendor = new List<UserTypeEnum>
+        {
+            UserTypeEnum.Employee,
+            UserTypeEnum.Vendor
+        };
+        public static List<UserTypeEnum> ConvertToUserTypeEnum(this UserTypeCategoryEnum userCategory)
+        {
+            switch (userCategory)
+            {
+                case UserTypeCategoryEnum.All:
+                    return Enum.GetValues(typeof(UserTypeEnum)).Cast<UserTypeEnum>().ToList();
+                case UserTypeCategoryEnum.CustomerAndSupplier:
+                    return CustomerSupplier;
+                case UserTypeCategoryEnum.UserAndVendor:
+                    return UserAndVendor;
+            }
+            return new List<UserTypeEnum>();
+        }
     }
 }

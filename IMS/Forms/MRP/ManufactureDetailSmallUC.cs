@@ -12,6 +12,8 @@ using ViewModel.Enums;
 using Service.Interfaces;
 using IMS.Forms.Common;
 using SimpleInjector.Lifestyles;
+using IMS.Forms.MRP.ProductOwners;
+using DTO.Core;
 
 namespace IMS.Forms.MRP
 {
@@ -42,7 +44,69 @@ namespace IMS.Forms.MRP
             dgvDepartments.SelectionChanged += DgvDepartments_SelectionChanged;
             dgvEmployees.SelectionChanged += DgvEmployees_SelectionChanged;
             btnAddManufacture.Click += BtnAddManufacture_Click;
+            btnAssignProduct.Click += BtnAssignProduct_Click;
         }
+
+        private void BtnAssignProduct_Click(object sender, EventArgs e)
+        {
+            //var departmentId = GetSelectedDepartmentId();
+            var userId = GetSelectedEmployee();
+            bool inOut = true;
+            if(userId != null)
+                ShowAssignDialog( 0, userId ?? 0, inOut);
+        }
+
+        private void ShowAssignDialog(int departmentId, int userId, bool inOut)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var manufactureId = 0;
+                var productOwnerForm = Program.container.GetInstance<ProductOwnerAssignForm>();
+                var assignReleaseModel = new AssignReleaseViewModel
+                {
+                    ManufactureId = manufactureId,
+                    AssignReleaseText = inOut ? "Assign " : "Release",
+
+                };
+
+
+                if (inOut)
+                {
+                    if (departmentId > 0)
+                    {
+                        assignReleaseModel.ToId = departmentId;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.WarehouseToDepartment;
+
+                    }
+                    else if (userId > 0)
+                    {
+                        var selectedDepartment = GetSelectedDepartmentId();
+                        assignReleaseModel.ToId = userId;
+                        assignReleaseModel.FromId = selectedDepartment ?? 0;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.DepartmentToUser;
+                    }
+                }
+                else
+                {
+                    if (departmentId > 0)
+                    {
+                        assignReleaseModel.FromId = departmentId;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.DepartmentToWarehouse;
+                    }
+                    else if (userId > 0)
+                    {
+                        var selectedDepartment = GetSelectedDepartmentId();
+                        assignReleaseModel.FromId = userId;
+                        assignReleaseModel.ToId = selectedDepartment?? 0;
+                        assignReleaseModel.TransferType = ViewModel.Enums.TransferTypeEnum.UserToDepartment;
+                    }
+                }
+                productOwnerForm.SetDataForEdit(assignReleaseModel);
+                productOwnerForm.ShowDialog();
+                this.Focus();
+            }
+        }
+
         public void PopulateData(ManufactureModel model)
         {
             _model = model;

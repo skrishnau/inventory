@@ -39,6 +39,8 @@ namespace ViewModel.Core.Inventory
         public decimal PackageQuantity { get; set; }
         public decimal Rate { get; set; }
         public decimal Total { get; set; }
+        public string Status { get { return this.IsHold ? "On Hold" : "In Stock"; } }
+
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
 

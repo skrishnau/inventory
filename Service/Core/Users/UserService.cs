@@ -169,18 +169,18 @@ namespace Service.Core.Users
                 if (manufactureId > 0)
                 {
                     var manufactureDepUsers = (from mdu in _context.ManufactureDepartmentUsers
-                               join md in _context.ManufactureDepartments on mdu.ManufactureDepartmentId equals md.Id
-                               join u in _context.Users on mdu.UserId equals u.Id
-                               where md.ManufactureId == manufactureId && md.DepartmentId == departmentId
-                               select new ManufactureDepartmentUserModel
-                               {
-                                   Check = true,
-                                   UserId = mdu.UserId,
-                                   Name = u.Name + (string.IsNullOrEmpty(u.Company) ? "" : " - " + u.Company),
-                                   BuildRate = mdu.BuildRate,
-                                   ManufactureDepartmentId = mdu.ManufactureDepartmentId,
-                                   
-                               }).ToList();
+                                               join md in _context.ManufactureDepartments on mdu.ManufactureDepartmentId equals md.Id
+                                               join u in _context.Users on mdu.UserId equals u.Id
+                                               where md.ManufactureId == manufactureId && md.DepartmentId == departmentId
+                                               select new ManufactureDepartmentUserModel
+                                               {
+                                                   Check = true,
+                                                   UserId = mdu.UserId,
+                                                   Name = u.Name + (string.IsNullOrEmpty(u.Company) ? "" : " - " + u.Company),
+                                                   BuildRate = mdu.BuildRate,
+                                                   ManufactureDepartmentId = mdu.ManufactureDepartmentId,
+
+                                               }).ToList();
 
                     //var manufactureDepUsers =  _context.ManufactureDepartmentUsers
                     //    .Where(x => x.ManufactureDepartment.ManufactureId == manufactureId && x.ManufactureDepartment.DepartmentId == departmentId)
@@ -193,7 +193,7 @@ namespace Service.Core.Users
                     //        //ManufactureDepartmentId = x.ManufactureDepartmentId
                     //    })
                     //    .ToList();
-                    foreach(var depUser in departmentUsers)
+                    foreach (var depUser in departmentUsers)
                     {
                         depUser.Check = false; // uncheck the unselected cause we are in edit mode
                         if (!manufactureDepUsers.Any(x => x.UserId == depUser.UserId))
@@ -233,20 +233,20 @@ namespace Service.Core.Users
             var query = _context.Users.Where(x => x.DeletedAt == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
-            if (userTypes.Contains(UserTypeEnum.All)) // client means both Customer and Supplier
+            //if (userTypes.Contains(UserTypeEnum.All)) // client means both Customer and Supplier
+            //{
+            //    query = query.Where(x => x.UserType == customer || x.UserType == supplier);
+            //}
+            //else
+            //{
+            if (userTypes.Count > 0)
             {
-                query = query.Where(x => x.UserType == customer || x.UserType == supplier);
-            }
-            else
-            {
-                if(userTypes.Count > 0)
+                foreach (var userTypeStr in userTypes.Select(u => u.ToString()))
                 {
-                    foreach (var userTypeStr in userTypes.Select(u => u.ToString()))
-                    {
-                        query = query.Where(x => x.UserType.Contains(userTypeStr));
-                    }
+                    query = query.Where(x => x.UserType.Contains(userTypeStr));
                 }
             }
+            //}
             if (!string.IsNullOrEmpty(searchName))
                 query = query.Where(x => x.Name.Contains(name) || x.Company.Contains(name));
             return query.OrderBy(x => x.Name);
@@ -301,7 +301,7 @@ namespace Service.Core.Users
                             UpdatedAt = DateTime.Now,
                             Use = true,
                             Name = Constants.ADMIN_NAME,
-                            UserType = UserTypeEnum.User.ToString(),
+                            UserType = UserTypeEnum.Employee.ToString(),
                         };
                         _context.Users.Add(adminUser);
                         _context.SaveChanges();
