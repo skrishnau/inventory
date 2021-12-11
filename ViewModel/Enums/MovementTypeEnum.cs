@@ -49,6 +49,7 @@ namespace ViewModel.Enums
         DepartmentToDepartment, // transfer
         DepartmentToUser, // assign
         UserToDepartment, // release
+        UserManufactureConsumed // only in case of consumed products which needs to removed from inventory unit
     }
     public enum FromToType
     {

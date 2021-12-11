@@ -52,10 +52,11 @@
             this.colDepartmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlInputBase = new System.Windows.Forms.Panel();
-            this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlConsumed = new System.Windows.Forms.GroupBox();
-            this.pnlManufactured = new System.Windows.Forms.GroupBox();
             this.dgvItems = new IMS.Forms.Common.GridView.InventoryUnits.InventoryUnitDataGridView();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.pnlManufactured = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlFooter.SuspendLayout();
@@ -64,8 +65,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).BeginInit();
             this.pnlInputBase.SuspendLayout();
             this.pnlConsumed.SuspendLayout();
-            this.pnlManufactured.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            this.pnlManufactured.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblEmployeeName
@@ -154,7 +155,7 @@
             this.pnlFooter.Controls.Add(this.btnCancel);
             this.pnlFooter.Controls.Add(this.btnSave);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(5, 416);
+            this.pnlFooter.Location = new System.Drawing.Point(5, 230);
             this.pnlFooter.Name = "pnlFooter";
             this.pnlFooter.Size = new System.Drawing.Size(752, 35);
             this.pnlFooter.TabIndex = 4;
@@ -197,20 +198,19 @@
             // chkAssignToNextDepartment
             // 
             this.chkAssignToNextDepartment.AutoSize = true;
-            this.chkAssignToNextDepartment.Checked = true;
-            this.chkAssignToNextDepartment.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAssignToNextDepartment.Location = new System.Drawing.Point(3, 6);
             this.chkAssignToNextDepartment.Name = "chkAssignToNextDepartment";
             this.chkAssignToNextDepartment.Size = new System.Drawing.Size(152, 17);
             this.chkAssignToNextDepartment.TabIndex = 0;
             this.chkAssignToNextDepartment.Text = "Assign to Next Department";
             this.chkAssignToNextDepartment.UseVisualStyleBackColor = true;
+            this.chkAssignToNextDepartment.Visible = false;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.chkAssignToNextDepartment);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(5, 218);
+            this.panel1.Location = new System.Drawing.Point(5, 212);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(752, 26);
             this.panel1.TabIndex = 6;
@@ -220,16 +220,16 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Location = new System.Drawing.Point(5, 175);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(752, 40);
+            this.label1.Size = new System.Drawing.Size(752, 18);
             this.label1.TabIndex = 8;
             this.label1.Text = "Note: The manufactured quantity entered above will be assigned to the same depart" +
-    "ment. Assign the manufactured product to next department from below section.";
+    "ment. ";
             // 
             // splitter2
             // 
             this.splitter2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(5, 215);
+            this.splitter2.Location = new System.Drawing.Point(5, 209);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(752, 3);
             this.splitter2.TabIndex = 9;
@@ -244,11 +244,12 @@
             this.colDepartmentName,
             this.colDepartmentQuantity});
             this.dgvDepartments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDepartments.Location = new System.Drawing.Point(5, 244);
+            this.dgvDepartments.Location = new System.Drawing.Point(5, 238);
             this.dgvDepartments.MultiSelect = false;
             this.dgvDepartments.Name = "dgvDepartments";
-            this.dgvDepartments.Size = new System.Drawing.Size(752, 172);
+            this.dgvDepartments.Size = new System.Drawing.Size(752, 0);
             this.dgvDepartments.TabIndex = 10;
+            this.dgvDepartments.Visible = false;
             // 
             // colManufactureDepartmentId
             // 
@@ -292,15 +293,6 @@
             this.pnlInputBase.Size = new System.Drawing.Size(752, 143);
             this.pnlInputBase.TabIndex = 11;
             // 
-            // splitter3
-            // 
-            this.splitter3.Enabled = false;
-            this.splitter3.Location = new System.Drawing.Point(304, 0);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(5, 143);
-            this.splitter3.TabIndex = 0;
-            this.splitter3.TabStop = false;
-            // 
             // pnlConsumed
             // 
             this.pnlConsumed.Controls.Add(this.dgvItems);
@@ -311,6 +303,25 @@
             this.pnlConsumed.TabIndex = 13;
             this.pnlConsumed.TabStop = false;
             this.pnlConsumed.Text = "Consumed";
+            // 
+            // dgvItems
+            // 
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(3, 16);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.OrderId = 0;
+            this.dgvItems.Size = new System.Drawing.Size(437, 124);
+            this.dgvItems.TabIndex = 6;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Enabled = false;
+            this.splitter3.Location = new System.Drawing.Point(304, 0);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(5, 143);
+            this.splitter3.TabIndex = 0;
+            this.splitter3.TabStop = false;
             // 
             // pnlManufactured
             // 
@@ -323,15 +334,15 @@
             this.pnlManufactured.TabStop = false;
             this.pnlManufactured.Text = "Manufactured";
             // 
-            // dgvItems
+            // label4
             // 
-            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(3, 16);
-            this.dgvItems.Name = "dgvItems";
-            this.dgvItems.OrderId = 0;
-            this.dgvItems.Size = new System.Drawing.Size(437, 124);
-            this.dgvItems.TabIndex = 6;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Location = new System.Drawing.Point(5, 193);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(752, 16);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Assign the manufactured product to next department from below section.";
+            this.label4.Visible = false;
             // 
             // UserManufactureCreateForm
             // 
@@ -339,10 +350,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(762, 456);
+            this.ClientSize = new System.Drawing.Size(762, 270);
             this.Controls.Add(this.dgvDepartments);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitter2);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlInputBase);
@@ -361,8 +373,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartments)).EndInit();
             this.pnlInputBase.ResumeLayout(false);
             this.pnlConsumed.ResumeLayout(false);
-            this.pnlManufactured.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
+            this.pnlManufactured.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -396,5 +408,6 @@
         private System.Windows.Forms.GroupBox pnlConsumed;
         private System.Windows.Forms.GroupBox pnlManufactured;
         private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvItems;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -70,8 +70,10 @@ namespace IMS.Forms.Common.Pagination
             //var records = new List<OrderModel>();
             //for (int i = offset; i < offset + pageSize && i < totalRecords; i++)
             //    records.Add(new OrderModel { ReferenceNumber = "This is rtest " + i });
+            bindingSource1.CurrentChanged -= bindingSource1_CurrentChanged;
             var records = _userService.GetAllUsers(_userType, pageSize, offset, _searchName);
             dataGridView1.DataSource = records.DataList;
+            bindingSource1.CurrentChanged += bindingSource1_CurrentChanged;
             this.totalRecords = records.TotalCount;
         }
 

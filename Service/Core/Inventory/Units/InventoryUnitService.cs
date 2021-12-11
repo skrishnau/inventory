@@ -280,7 +280,10 @@ namespace Service.Core.Inventory.Units
                         case TransferTypeEnum.DepartmentToUser:
                         case TransferTypeEnum.UserToDepartment:
                             return;
-
+                        case TransferTypeEnum.UserManufactureConsumed:
+                            // note: in case of UserManufactureConsumed with ToId = 0, it means consumed product during manufacture
+                            product.OnHoldQuantity -= entityQty;
+                            return;
                     }
                 }
 
@@ -686,6 +689,7 @@ namespace Service.Core.Inventory.Units
                         query = query.Where(x => x.IsHold == true && x.AssignedToDepartmentId == assignRelease.FromId && x.AssignedToUserId == null);
                         break;
                     case TransferTypeEnum.UserToDepartment:
+                    case TransferTypeEnum.UserManufactureConsumed:
                         query = query.Where(x => x.IsHold == true && x.AssignedToUserId == assignRelease.FromId);
                         break;
                 }
@@ -759,8 +763,11 @@ namespace Service.Core.Inventory.Units
                     {
                         var cloned = dbEntity.CloneEntity();
                         cloned.UnitQuantity = remainInvunitQty;
-                        SetAssignTo(ref cloned, assignRelease.ToType, assignRelease.ToId);
-                        _context.InventoryUnits.Add(cloned);
+                        if (assignRelease.ToId > 0)
+                        {
+                            SetAssignTo(ref cloned, assignRelease.ToType, assignRelease.ToId);
+                            _context.InventoryUnits.Add(cloned);
+                        }
                     }
                     // subtract unit quantity from remaining quantity and leave the unit as it is
                     dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainInvunitQty;
@@ -777,7 +784,15 @@ namespace Service.Core.Inventory.Units
 
                     if (assignRelease != null)
                     {
-                        SetAssignTo(ref dbEntity, assignRelease.ToType, assignRelease.ToId);
+                        if (assignRelease.ToId > 0)
+                        {
+                            SetAssignTo(ref dbEntity, assignRelease.ToType, assignRelease.ToId);
+                        }
+                        else
+                        {
+                            // if there's no one to assign the remove the entity
+                            _context.InventoryUnits.Remove(dbEntity);
+                        }
                     }
                     else
                     {
@@ -792,7 +807,12 @@ namespace Service.Core.Inventory.Units
                 //
                 var description = string.Empty;
                 if (assignRelease != null)
-                    description = $"Assigned from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) to {assignRelease.ToName} ({assignRelease.ToType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                {
+                    if(assignRelease.ToId > 0)
+                        description = $"Assigned from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) to {assignRelease.ToName} ({assignRelease.ToType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                    else 
+                        description = $"Issued from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                }
                 else
                     description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"

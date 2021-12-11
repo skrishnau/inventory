@@ -141,7 +141,7 @@ namespace Service.Core.Users
                 var query = GetUserQueryable(_context, userTypes, string.Empty);
 
                 return query
-                    .Where(x => x.Use || (!x.Use && includeUserList.Contains(x.Id)))
+                    .Where(x => ( x.Use || (!x.Use && includeUserList.Contains(x.Id))))
                     .Select(x => new IdNamePair()
                     {
                         Name = x.Name + (string.IsNullOrEmpty(x.Company) ? "" : " - " + x.Company),
@@ -171,7 +171,7 @@ namespace Service.Core.Users
                     var manufactureDepUsers = (from mdu in _context.ManufactureDepartmentUsers
                                                join md in _context.ManufactureDepartments on mdu.ManufactureDepartmentId equals md.Id
                                                join u in _context.Users on mdu.UserId equals u.Id
-                                               where md.ManufactureId == manufactureId && md.DepartmentId == departmentId
+                                               where u.Username != Constants.ADMIN_USERNAME && md.ManufactureId == manufactureId && md.DepartmentId == departmentId
                                                select new ManufactureDepartmentUserModel
                                                {
                                                    Check = true,
@@ -230,7 +230,7 @@ namespace Service.Core.Users
             var name = split.Length > 0 ? split[0].Trim() : "";
             var company = split.Length > 1 ? split[1].Trim() : "";
 
-            var query = _context.Users.Where(x => x.DeletedAt == null);
+            var query = _context.Users.Where(x => x.Username != Constants.ADMIN_USERNAME && x.DeletedAt == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
             //if (userTypes.Contains(UserTypeEnum.All)) // client means both Customer and Supplier

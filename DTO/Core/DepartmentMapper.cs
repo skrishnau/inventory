@@ -39,7 +39,7 @@ namespace DTO.Core
             CreateMap<Department, DepartmentModel>()
                 .ForMember(dest => dest.DepartmentUsers, opt => opt.Ignore())
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src=>src.IsVendor ? "External": "Internal"))
-                .ForMember (dest=>dest.Name , opt=>opt.MapFrom(src=> src.Name + " (" + (src.IsVendor ? "External" : "Internal") + ")"))
+                .ForMember (dest=> dest.Name , opt=>opt.MapFrom(src=> src.Name + " (" + (src.IsVendor ? "External" : "Internal") + ")"))
                 ;
             CreateMap<DepartmentModel, Department>()
                 .ForMember(dest => dest.User, opt => opt.Ignore())

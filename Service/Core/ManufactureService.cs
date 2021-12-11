@@ -603,6 +603,8 @@ namespace Service.Core
         {
             using (var _context = DatabaseContext.Context)
             {
+                var date = DateTime.Now;
+                var msg = string.Empty;
                 var manufactureDepartmentUser = _context.ManufactureDepartmentUsers.FirstOrDefault(x => x.Id == model.ManufactureDepartmentUserId);
                 if (manufactureDepartmentUser == null)
                 {
@@ -611,42 +613,11 @@ namespace Service.Core
                 if (manufactureDepartmentUser.StartedAt == null)
                     manufactureDepartmentUser.StartedAt = DateTime.Now;
 
+                var user = _context.Users.Find(manufactureDepartmentUser.UserId);
+
                 // manufactured product data
                 var manufacturedProduct = _context.Products.FirstOrDefault(x => x.Id == model.ProductId);
                 var manufacturedBasePackageId = manufacturedProduct.ProductPackages.FirstOrDefault(x => x.IsBasePackage).PackageId;
-
-                // -- USER MANUFACTURE -- //
-                var userManufactureEntity = new UserManufacture
-                {
-                    BuildRate = model.BuildRate,
-                    Date = model.Date,
-                    // ManufactureDepartmentUserId = model.ManufactureDepartmentUserId,
-                    InOut = model.InOut,
-                    ProductId = model.ProductId,
-                    Quantity = model.Quantity,
-                    PackageId = model.PackageId,
-                };
-                manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
-                var invUnit = new InventoryUnitModel
-                {
-                    IsHold = true,
-                    UnitQuantity = model.Quantity,
-                    ProductId = model.ProductId,
-                    PackageId = model.PackageId,
-                    //ReceiveDate = model.Date,
-                    SupplierId = manufactureDepartmentUser.UserId,
-                    //EmployeeId = manufactureDepartmentUser.UserId,
-                };
-                var user = _context.Users.Find(manufactureDepartmentUser.UserId);
-                var orderItem = new OrderItem
-                {
-                    User = manufactureDepartmentUser.User,
-                    SupplierId = null,
-                };
-                var msg = string.Empty;
-                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
-                if (!string.IsNullOrWhiteSpace(msg))
-                    return new ResponseModel<UserManufactureModel> { Success = false, Message = msg };
 
                 /*
                 // NOTE: since we do not add/subtract from InStockQuantity, we need not do any of the below calculation
@@ -746,10 +717,53 @@ namespace Service.Core
                     x.IsHold = true;
                     // x.EmployeeId = manufactureDepartmentUser.UserId;
                 });
-                _inventoryUnitService.SaveDirectIssueAndAssignAnyListWithoutCommit(_context, model.ConsumedProducts, "Consumed", "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, ref msg);
-
-
+                var assignRelease = new AssignReleaseViewModel
+                {
+                    FromId = manufactureDepartmentUser.UserId,
+                    FromName = user.Name,
+                    ManufactureId = manufactureDepartmentUser.ManufactureDepartment.ManufactureId,
+                    TransferType = TransferTypeEnum.UserManufactureConsumed
+                };
+                var list = _inventoryUnitService.SaveDirectIssueAndAssignAnyListWithoutCommit(_context, model.ConsumedProducts, "Consumed", "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, ref msg, assignRelease);
                 // -- END OF USER CONSUMED PRODUCTS -- //
+
+
+                // -- USER MANUFACTURE -- //
+                var userManufactureEntity = new UserManufacture
+                {
+                    BuildRate = model.BuildRate,
+                    Date = model.Date,
+                    // ManufactureDepartmentUserId = model.ManufactureDepartmentUserId,
+                    InOut = model.InOut,
+                    ProductId = model.ProductId,
+                    Quantity = model.Quantity,
+                    PackageId = model.PackageId,
+                };
+                manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
+                var totalConsumedCost = list.Sum(item => item.Rate * item.UnitQuantity);
+                var invUnit = new InventoryUnitModel
+                {
+                    IsHold = true,
+                    UnitQuantity = model.Quantity,
+                    ProductId = model.ProductId,
+                    PackageId = model.PackageId,
+                    //ReceiveDate = model.Date,
+                    ReceiveDateDate = date,
+                    //EmployeeId = manufactureDepartmentUser.UserId,
+                    AssignedToDepartmentId = manufactureDepartmentUser.ManufactureDepartment.DepartmentId,
+                    Rate = (model.BuildRate ?? 0) + (totalConsumedCost/model.Quantity)
+                };
+                var orderItem = new OrderItem
+                {
+                    User = manufactureDepartmentUser.User,
+                    SupplierId = null,
+                };
+                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
+
+                if (!string.IsNullOrWhiteSpace(msg))
+                    return new ResponseModel<UserManufactureModel> { Success = false, Message = msg };
+
+
 
 
 
