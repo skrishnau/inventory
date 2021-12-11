@@ -58,7 +58,7 @@ namespace IMS.Forms.Inventory.Units.Actions
         {
             string message = "";
             var displayList = new List<InventoryUnitModel>();
-            foreach (var productWiseGroup in _dataList.GroupBy(x => new { x.ProductId , x.IsHold}))
+            foreach (var productWiseGroup in _dataList.GroupBy(x => new { x.ProductId , x.IsHold, x.AssignedToDepartmentId, x.AssignedToUserId}))
             {
                 var product = _productService.GetProduct(productWiseGroup.Key.ProductId);
                 foreach (var warehouseWiseGroup1 in productWiseGroup.GroupBy(x => x.WarehouseId))
@@ -141,6 +141,9 @@ namespace IMS.Forms.Inventory.Units.Actions
                 //UomId = last.UomId,
                 Rate = rate,
                 Total = rate * unitQuantity,
+                AssignedTo = last.AssignedTo,
+                AssignedToUserId = last.AssignedToUserId,
+                AssignedToDepartmentId = last.AssignedToDepartmentId
             };
             return model;
         }

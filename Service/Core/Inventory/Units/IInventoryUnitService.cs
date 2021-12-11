@@ -39,8 +39,8 @@ namespace Service.Core.Inventory.Units
         #region Adjustments
 
         string SaveDirectReceive(List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode);
-        string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode, AssignReleaseViewModel assignRelease);
-        InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime movementDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem, AssignReleaseViewModel assignRelease);
+        string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode);
+        InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime movementDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem);
         //
         // Direct Issue of whole Inventory-Unit
         //
@@ -49,8 +49,8 @@ namespace Service.Core.Inventory.Units
         // Direct Issue of any product
         //
         string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode, string referenceNo);
-        List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg, AssignReleaseViewModel assignRelease = null);
-        List<InventoryUnit> SaveDirectIssueAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, AssignReleaseViewModel assignRelease = null);
+        List<InventoryUnit> SaveDirectIssueAndAssignAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg, AssignReleaseViewModel assignRelease = null);
+        List<InventoryUnit> SaveDirectIssueAndAssignAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, AssignReleaseViewModel assignRelease = null);
         #endregion
 
 

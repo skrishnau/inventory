@@ -505,7 +505,7 @@ namespace Service.Core.Orders
                                 Total = unitQuantity * purchaseitem.Rate,
                                 ReceiveDateDate = purchaseitem?.Order?.CompletedDate ?? DateTime.Now,
                         };
-                            _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, receiveDate, adjCode, ref message, oitem.Product, reference, purchaseitem, null);
+                            _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, receiveDate, adjCode, ref message, oitem.Product, reference, purchaseitem);
                         }
                         else
                         {
@@ -529,7 +529,7 @@ namespace Service.Core.Orders
                         ProductId = oitem.ProductId,
                         PurchaseOrderItemId = oitem.Id, // give priority to purchase order item for deducting inv unit
                     };
-                    _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, invModel, adjCode, ref message , order.ReferenceNumber);
+                    _inventoryUnitService.SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, invModel, adjCode, ref message , order.ReferenceNumber);
                 }
                 //message += _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Sale), adjCode, order.ReferenceNumber);
             }
@@ -781,14 +781,14 @@ namespace Service.Core.Orders
                         var invModel = entity.MapToInventoryUnitModel((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType));
                         invModel.ReceiveReceipt = order.ReferenceNumber;
                         invModel.ReceiveDateDate = order.CompletedDate;
-                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invModel, order.CompletedDate ?? DateTime.Now, adjustment, ref message, product, order.ReferenceNumber, entity, null);
+                        var invUnit = _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invModel, order.CompletedDate ?? DateTime.Now, adjustment, ref message, product, order.ReferenceNumber, entity);
                     }
                     else if (order.OrderType == OrderTypeEnum.Sale.ToString())
                     {
                         var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "SO Issue" : adjustmentCode;
                         var invUnit = entity.MapToInventoryUnitModel(OrderTypeEnum.Sale);
                         invUnit.Rate = entity.Rate;
-                        invUnits = _inventoryUnitService.SaveDirectIssueAnyItemWithoutCommit(_context, invUnit, adjustment, ref message, order.ReferenceNumber);
+                        invUnits = _inventoryUnitService.SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, invUnit, adjustment, ref message, order.ReferenceNumber);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
                         if ((invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0)) || (orderOrDirect == OrderOrDirectEnum.Direct && invUnitsQty > 0))
                         {

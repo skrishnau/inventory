@@ -39,8 +39,6 @@ namespace ViewModel.Core.Inventory
         public decimal PackageQuantity { get; set; }
         public decimal Rate { get; set; }
         public decimal Total { get; set; }
-        public string Status { get { return this.IsHold ? "On Hold" : "In Stock"; } }
-
         public decimal NetWeight { get; set; }
         public decimal GrossWeight { get; set; }
 
@@ -74,6 +72,16 @@ namespace ViewModel.Core.Inventory
         public bool IsHold { get; set; }
         public string Remark { get; set; }
         public string Notes { get; set; }
+
+
+        public Nullable<int> AssignedToUserId { get; set; }
+        //public string AssignedToUser { get; set; }
+
+        public Nullable<int> AssignedToDepartmentId { get; set; }
+        //public string AssignedToDepartment { get; set; }
+
+        public string Status { get { return this.IsHold ? "On Hold" : "In Stock"; } }
+        public string AssignedTo { get; set; }
 
         /// <summary>
         /// Update Action: "UpdateMode" enum; one of : EDIT, ADD, DELETE

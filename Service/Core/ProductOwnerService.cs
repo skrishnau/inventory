@@ -71,13 +71,17 @@ namespace Service.Core
                 var msg = string.Empty;
                 if (assignReleaseModel.FromType == FromToType.Warehouse)
                 {
-                    _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, assignReleaseModel.inventoryUnitList, "Assign to " + assignReleaseModel.ToType.ToString(), "Department Assign", ref msg, assignReleaseModel);
+                    _inventoryUnitService.SaveDirectIssueAndAssignAnyListWithoutCommit(_context, assignReleaseModel.inventoryUnitList, "Assign to " + assignReleaseModel.ToType.ToString(), "Department Assign", ref msg, assignReleaseModel);
                     if (assignReleaseModel.ToType == FromToType.Department)
                     {
                         foreach (var item in assignReleaseModel.inventoryUnitList)
                         {
                             AssignProductOwnerWithoutCommit(_context, assignReleaseModel.ToId, assignReleaseModel.ToName, 0, string.Empty, item.ProductId, item.PackageId ?? 0, item.UnitQuantity, true, string.Empty);
                         }
+                    }
+                    else if(assignReleaseModel.ToType == FromToType.Warehouse)
+                    {
+                        // TODO
                     }
                 }
 
@@ -89,11 +93,8 @@ namespace Service.Core
                         AssignProductOwnerWithoutCommit(_context, assignReleaseModel.FromId, assignReleaseModel.FromName, 0, string.Empty, item.ProductId, item.PackageId ?? 0, item.UnitQuantity, false, string.Empty);
                     }
                     // assign
-                    if (assignReleaseModel.ToType == FromToType.Warehouse)
-                    {
-                        _inventoryUnitService.SaveDirectReceiveListWithoutCommit(_context, assignReleaseModel.inventoryUnitList, DateTime.Now, "Department Release", assignReleaseModel);
-                    }
-                    else if (assignReleaseModel.ToType == FromToType.Department)
+                    _inventoryUnitService.SaveDirectIssueAndAssignAnyListWithoutCommit(_context, assignReleaseModel.inventoryUnitList, "Assign to " + assignReleaseModel.ToType.ToString(), "Assign", ref msg, assignReleaseModel);
+                    if (assignReleaseModel.ToType == FromToType.Department)
                     {
                         foreach (var item in assignReleaseModel.inventoryUnitList)
                         {
@@ -116,6 +117,7 @@ namespace Service.Core
                         AssignProductOwnerWithoutCommit(_context, 0, string.Empty, assignReleaseModel.FromId, assignReleaseModel.FromName, item.ProductId, item.PackageId ?? 0, item.UnitQuantity, false, string.Empty);
                     }
                     // assign
+                    _inventoryUnitService.SaveDirectIssueAndAssignAnyListWithoutCommit(_context, assignReleaseModel.inventoryUnitList, "Assign to " + assignReleaseModel.ToType.ToString(), "Assign", ref msg, assignReleaseModel);
                     if (assignReleaseModel.ToType == FromToType.Department)
                     {
                         foreach (var item in assignReleaseModel.inventoryUnitList)

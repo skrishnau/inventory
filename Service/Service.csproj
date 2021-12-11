@@ -54,7 +54,6 @@
     <Compile Include="Core\BackupService.cs" />
     <Compile Include="Core\Inventory\Units\IInventoryUnitService.cs" />
     <Compile Include="Core\Inventory\Units\InventoryUnitService.cs" />
-    <Compile Include="Core\Inventory\Units\InventoryUpdate.cs" />
     <Compile Include="Core\ManufactureService.cs" />
     <Compile Include="Core\Payment\IPaymentService.cs" />
     <Compile Include="Core\Payment\PaymentService.cs" />

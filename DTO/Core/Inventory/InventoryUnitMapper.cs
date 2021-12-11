@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Infrastructure.Context;
 using ViewModel.Core.Inventory;
 using ViewModel.Core.Orders;
@@ -11,27 +12,29 @@ namespace DTO.Core.Inventory
     {
 
 
-        public static List<InventoryUnitModel> MapToModel(this IEnumerable<InventoryUnit> query)
+        public static List<InventoryUnitModel> MapToModel(this IEnumerable<InventoryUnit> query, DatabaseContext context)
         {
             var list = new List<InventoryUnitModel>();
             foreach (var entity in query)
             {
-                list.Add(MapToModel(entity));
+                list.Add(MapToModel(entity, context));
             }
             return list;
         }
-        public static List<InventoryUnitModel> MapToModel(this List<InventoryUnit> query)
+        public static List<InventoryUnitModel> MapToModel(this List<InventoryUnit> query, DatabaseContext context)
         {
             var list = new List<InventoryUnitModel>();
             foreach (var entity in query)
             {
-                list.Add(MapToModel(entity));
+                list.Add(MapToModel(entity, context));
             }
             return list;
         }
 
-        public static InventoryUnitModel MapToModel(this InventoryUnit entity)
+        public static InventoryUnitModel MapToModel(this InventoryUnit entity, DatabaseContext _context)
         {
+            var assignedToUser = entity.AssignedToUserId == null ? null : _context.Users.Where(x => x.Id == entity.AssignedToUserId).FirstOrDefault();
+            var assignedToDepartment = entity.AssignedToDepartmentId == null ? null : _context.Departments.Where(x => x.Id == entity.AssignedToDepartmentId).FirstOrDefault();
             return new InventoryUnitModel()
             {
                 ExpirationDate = entity.ExpirationDate.HasValue ? entity.ExpirationDate.Value.ToShortDateString() : "",
@@ -56,7 +59,7 @@ namespace DTO.Core.Inventory
                 ReceiveReceipt = entity.ReceiveReceipt,
                 Remark = entity.Remark,
                 SKU = entity.Product == null ? "" : entity.Product.SKU,
-                Supplier = entity.User == null ? "" : entity.User.Name,
+                Supplier = entity.SupplierId == null ? "" : _context.Users.Where(x => x.Id == entity.SupplierId).Select(x => x.Name).FirstOrDefault(),//entity.User == null ? "" : entity.User.Name,
                 SupplierId = entity.SupplierId,
                 Rate = entity.Rate,
                 UnitQuantity = entity.UnitQuantity,
@@ -66,6 +69,11 @@ namespace DTO.Core.Inventory
                 Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name,
                 WarehouseId = entity.WarehouseId,
                 PurchaseOrderItemId = entity.OrderItemId,
+                AssignedToDepartmentId = entity.AssignedToDepartmentId,
+                AssignedToUserId = entity.AssignedToUserId,
+                //AssignedToUser = assignedToUser?.Name,//entity.AssignedToUserId == null ? string.Empty: _context.Users.Where(x=>x.Id == entity.AssignedToUserId).Select(x=>x.Name).FirstOrDefault(),
+                //AssignedToDepartment = assignedToDepartment?.Name,//entity.AssignedToDepartmentId == null ? string.Empty: _context.Departments.Where(x=>x.Id == entity.AssignedToDepartmentId).Select(x=>x.Name).FirstOrDefault(),
+                AssignedTo = assignedToUser != null ? $"{assignedToUser.Name} ({assignedToUser.UserType})" : assignedToDepartment != null ? $"{assignedToDepartment.Name} (Department)" : string.Empty,
             };
         }
 
@@ -104,6 +112,8 @@ namespace DTO.Core.Inventory
                 // Warehouse = entity.Warehouse == null ? "" : entity.Warehouse.Name,
                 WarehouseId = entity.WarehouseId,
                 OrderItemId = entity.OrderItemId,
+                AssignedToDepartmentId = entity.AssignedToDepartmentId,
+                AssignedToUserId = entity.AssignedToUserId,
                 
             };
         }

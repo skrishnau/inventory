@@ -644,7 +644,7 @@ namespace Service.Core
                     SupplierId = null,
                 };
                 var msg = string.Empty;
-                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem, null);
+                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
                 if (!string.IsNullOrWhiteSpace(msg))
                     return new ResponseModel<UserManufactureModel> { Success = false, Message = msg };
 
@@ -746,7 +746,7 @@ namespace Service.Core
                     x.IsHold = true;
                     // x.EmployeeId = manufactureDepartmentUser.UserId;
                 });
-                _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, model.ConsumedProducts, "Consumed", "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, ref msg);
+                _inventoryUnitService.SaveDirectIssueAndAssignAnyListWithoutCommit(_context, model.ConsumedProducts, "Consumed", "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, ref msg);
 
 
                 // -- END OF USER CONSUMED PRODUCTS -- //

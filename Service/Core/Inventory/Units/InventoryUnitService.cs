@@ -48,7 +48,7 @@ namespace Service.Core.Inventory.Units
                 {
                     query = query.Skip(offset).Take(pageSize);
                 }
-                var list = InventoryUnitMapper.MapToModel(query);
+                var list = InventoryUnitMapper.MapToModel(query, _context);
                 return new InventoryUnitListModel
                 {
                     DataList = list,
@@ -63,7 +63,7 @@ namespace Service.Core.Inventory.Units
             return _context.InventoryUnits
                     .Include(x => x.Product)
                     .Include(x => x.Package)
-                    .Include(x => x.User)
+                    //.Include(x => x.User)
                     // .Include(x => x.Uom)
                     .Include(x => x.Warehouse)
                     .Where(x => (warehouseId == 0 || x.WarehouseId == warehouseId)
@@ -82,7 +82,7 @@ namespace Service.Core.Inventory.Units
                 using (var txn = _context.Database.BeginTransaction())
                 {
                     DateTime now = DateTime.Now;
-                    foreach (var productWiseGroup in list.GroupBy(x => new { x.ProductId, x.IsHold }))
+                    foreach (var productWiseGroup in list.GroupBy(x => new { x.ProductId, x.IsHold, x.AssignedToDepartmentId, x.AssignedToUserId }))
                     {
                         var product = _context.Products.Find(productWiseGroup.Key.ProductId);
 
@@ -238,7 +238,7 @@ namespace Service.Core.Inventory.Units
                                 }
                             }
                             _context.SaveChanges();
-                            var list = InventoryUnitMapper.MapToModel(updatedEntryList);
+                            var list = InventoryUnitMapper.MapToModel(updatedEntryList, _context);
                             var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.EDIT);
                             _listener.TriggerInventoryUnitUpdateEvent(null, args);
                         }
@@ -261,32 +261,49 @@ namespace Service.Core.Inventory.Units
             {
                 var entityQty = moveModel.UnitQuantity * entityToBase;
                 var modelQty = moveModel.InventoryUnit.UnitQuantity * modelToBase;
+
+                if (assignRelease != null)
+                {
+                    // NOTE: if it's 'from' warehouse or 'to' warehouse then we need to add subtract InStock quantity
+                    //      but if it's other than warehouse then we need not update Instock quantity or on hold quanitity
+                    switch (assignRelease.TransferType)
+                    {
+                        case TransferTypeEnum.WarehouseToDepartment:
+                            product.OnHoldQuantity += entityQty;
+                            product.InStockQuantity -= entityQty;
+                            break;
+                        case TransferTypeEnum.DepartmentToWarehouse:
+                            product.OnHoldQuantity -= entityQty;
+                            product.InStockQuantity += entityQty;
+                            break;
+                        case TransferTypeEnum.DepartmentToDepartment:
+                        case TransferTypeEnum.DepartmentToUser:
+                        case TransferTypeEnum.UserToDepartment:
+                            return;
+
+                    }
+                }
+
                 // subtract from source warehouse (fromWarehouse)
                 if (moveModel.SourceWarehouseId != null)
                 {
                     var fromWp = product.WarehouseProducts.FirstOrDefault(x => x.WarehouseId == moveModel.SourceWarehouseId);
                     if (fromWp != null)
                     {
+                        //var convertedQty = _uomService.ConvertUom(moveModel.InventoryUnit.PackageId, fromWp.pack)
                         // update FromWarehouse
                         fromWp.InStockQuantity -= moveModel.InventoryUnit.IsHold ? 0 : entityQty;//iuModel.UnitQuantity;
                         fromWp.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? entityQty : 0; //iuModel.OnHoldQuantity : 0;
                         fromWp.UpdatedAt = moveModel.Date;
-                        product.InStockQuantity -= moveModel.InventoryUnit.IsHold ? 0 : entityQty;// iuModel.UnitQuantity;
-                        product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? entityQty : 0;// iuModel.OnHoldQuantity : 0;
+                        // NOte: update product only if assign release is not given cause we already updated product above when assignrelease is not null
+                        if (assignRelease == null)
+                        {
+                            product.InStockQuantity -= moveModel.InventoryUnit.IsHold ? 0 : entityQty;// iuModel.UnitQuantity;
+                            product.OnHoldQuantity -= moveModel.InventoryUnit.IsHold ? entityQty : 0;// iuModel.OnHoldQuantity : 0;
+                        }
                     }
                 }
-                if (assignRelease != null)
-                {
-                    switch (assignRelease.TransferType)
-                    {
-                        case TransferTypeEnum.WarehouseToDepartment:
-                            product.OnHoldQuantity += entityQty;
-                            break;
-                        case TransferTypeEnum.DepartmentToWarehouse:
-                            product.OnHoldQuantity -= entityQty;
-                            break;
-                    }
-                }
+
                 if (moveModel.TargetWarehouseId != null)
                 {
 
@@ -311,15 +328,15 @@ namespace Service.Core.Inventory.Units
                         product.WarehouseProducts.Add(toWp);
                         //}
                     }
-                    //else
-                    //{
-                    // update
                     toWp.InStockQuantity += moveModel.InventoryUnit.IsHold ? 0 : modelQty;
                     toWp.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity : 0;
                     toWp.UpdatedAt = moveModel.Date;
-                    // }
-                    product.InStockQuantity += moveModel.InventoryUnit.IsHold ? 0 : modelQty;
-                    product.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity* conversion : 0;
+                    // NOte: update product only if assign release is not given cause we already updated product above when assignrelease is not null
+                    if (assignRelease == null)
+                    {
+                        product.InStockQuantity += moveModel.InventoryUnit.IsHold ? 0 : modelQty;
+                        product.OnHoldQuantity += moveModel.InventoryUnit.IsHold ? modelQty : 0;//moveModel.InventoryUnit.OnHoldQuantity* conversion : 0;
+                    }
                 }
             }
 
@@ -449,7 +466,7 @@ namespace Service.Core.Inventory.Units
                 return msg;
             }
         }
-        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime movementDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem, AssignReleaseViewModel assignRelease)
+        public InventoryUnit SaveDirectReceiveItemWithoutCommit(DatabaseContext _context, InventoryUnitModel unit, DateTime movementDate, string adjustmentCode, ref string msg, Product product, string reference, OrderItem orderItem)
         {
             var warehouse = FindWarehouseOrReturnMainWarehouse(_context, unit.WarehouseId);
             unit.WarehouseId = warehouse.Id;
@@ -464,24 +481,17 @@ namespace Service.Core.Inventory.Units
                 package = _context.Packages.Find(unit.PackageId);
             }
             InventoryUnit unitEntity = null;
-            if (assignRelease != null)
+
+            unitEntity = unit.MapToEntity();
+            unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
+            unitEntity.ReceiveAdjustment = adjustmentCode;
+            if (orderItem != null)
             {
-                // get the user's assigned inventory and subtract from that inventory only
-                //SaveDirectIssueAnyItemWithoutCommit()
+                unitEntity.SupplierId = orderItem.User?.Id;
+                unitEntity.SupplierId = orderItem.SupplierId;
             }
-            else
-            {
-                unitEntity = unit.MapToEntity();
-                unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
-                unitEntity.ReceiveAdjustment = adjustmentCode;
-                if (orderItem != null)
-                {
-                    unitEntity.User = orderItem.User;
-                    unitEntity.SupplierId = orderItem.SupplierId;
-                }
-                unitEntity.ReceiveReceipt = unit.ReceiveReceipt;//reference;
-                _context.InventoryUnits.Add(unitEntity);
-            }
+            unitEntity.ReceiveReceipt = unit.ReceiveReceipt;//reference;
+            _context.InventoryUnits.Add(unitEntity);
 
             if (product == null)
             {
@@ -507,12 +517,12 @@ namespace Service.Core.Inventory.Units
                 InventoryUnit = unit,
             };
 
-            UpdateWarehouseProductWithoutCommit(_context, invMovement, product, assignRelease);
+            UpdateWarehouseProductWithoutCommit(_context, invMovement, product, null);
             if (orderItem != null && orderItem.Id > 0)
                 unitEntity.OrderItem = orderItem;
             return unitEntity;
         }
-        public string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode, AssignReleaseViewModel assignRelease = null)
+        public string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode)
         {
             var now = DateTime.Now;
             var msg = string.Empty;
@@ -530,7 +540,7 @@ namespace Service.Core.Inventory.Units
             foreach (var unit in list)
             {
                 unit.ReceiveDateDate = receivedDate;
-                SaveDirectReceiveItemWithoutCommit(_context, unit, receivedDate, adjustmentCode, ref msg, null, "----------------", null, assignRelease);
+                SaveDirectReceiveItemWithoutCommit(_context, unit, receivedDate, adjustmentCode, ref msg, null, "----------------", null);
             }
             return msg;
         }
@@ -609,7 +619,7 @@ namespace Service.Core.Inventory.Units
             using (var _context = DatabaseContext.Context)
             {
                 var msg = string.Empty;
-                SaveDirectIssueAnyListWithoutCommit(_context, list, adjustmentCode, referenceNo, ref msg);
+                SaveDirectIssueAndAssignAnyListWithoutCommit(_context, list, adjustmentCode, referenceNo, ref msg);
                 _context.SaveChanges();
                 var args = new BaseEventArgs<List<InventoryUnitModel>>(list, UpdateMode.DELETE);
                 _listener.TriggerInventoryUnitUpdateEvent(null, args);
@@ -627,18 +637,211 @@ namespace Service.Core.Inventory.Units
         /// <param name="msg"></param>
         /// <param name="dontRemoveButHold">Either to completely remove from inv. unit list or to seprate it as another unit and set it as hold</param>
         /// <returns></returns>
-        public List<InventoryUnit> SaveDirectIssueAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg, AssignReleaseViewModel assignRelease = null)
+        public List<InventoryUnit> SaveDirectIssueAndAssignAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg, AssignReleaseViewModel assignRelease = null)
         {
             var now = DateTime.Now;
             var returnList = new List<InventoryUnit>();
             foreach (var model in list)
             {
-                var invUnits = SaveDirectIssueAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo, assignRelease);
+                var invUnits = SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo, assignRelease);
                 returnList.AddRange(invUnits);
             }
             return returnList;
         }
 
+        // Handles Sale/Issue/Assign/Release
+        public List<InventoryUnit> SaveDirectIssueAndAssignAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, AssignReleaseViewModel assignRelease)
+        {
+            var now = DateTime.Now;
+            var list = new List<InventoryUnit>();
+
+            var warehouse = FindWarehouseOrReturnMainWarehouse(_context, model.WarehouseId);
+            if (model.ProductId == 0)
+                model.ProductId = _context.Products.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
+            model.WarehouseId = warehouse.Id;
+
+            var query = _context.InventoryUnits
+                .Include(x => x.Product)
+                .Include(x => x.Warehouse)
+                .Where(x => x.ProductId == model.ProductId
+                                && x.PackageId != null
+                                );
+
+            if (assignRelease == null)
+            {
+                // if no assign-release then warehouseId should be checked against model's warehouseId
+                query = query.Where(x => x.WarehouseId == model.WarehouseId && x.IsHold == model.IsHold);
+            }
+            if (assignRelease != null)
+            {
+                switch (assignRelease.TransferType)
+                {
+                    case TransferTypeEnum.WarehouseToWarehouse:
+                    case TransferTypeEnum.WarehouseToDepartment:
+                        query = query.Where(x => x.WarehouseId == assignRelease.FromId && x.AssignedToDepartmentId == null && x.AssignedToUserId == null);
+                        break;
+                    case TransferTypeEnum.DepartmentToWarehouse:
+                    case TransferTypeEnum.DepartmentToDepartment:
+                    case TransferTypeEnum.DepartmentToUser:
+                        query = query.Where(x => x.IsHold == true && x.AssignedToDepartmentId == assignRelease.FromId && x.AssignedToUserId == null);
+                        break;
+                    case TransferTypeEnum.UserToDepartment:
+                        query = query.Where(x => x.IsHold == true && x.AssignedToUserId == assignRelease.FromId);
+                        break;
+                }
+            }
+
+            var invUnit = query
+                .OrderBy(x => x.ReceiveDate)
+                .ToList();
+            decimal qtySum = 0;
+            var fulfilledIndex = -1;
+            if (model.PurchaseOrderItemId > 0)
+            {
+                // in case of cancelling purchase txn we need to prioritize the one inv units of the given purchase order item.
+                invUnit = invUnit.OrderBy(x => x.OrderItemId != model.PurchaseOrderItemId).ToList();
+            }
+
+            for (var i = 0; i < invUnit.Count(); i++)
+            {
+                var conversion = _uomService.ConvertUom(invUnit[i].PackageId ?? 0, model.PackageId ?? 0, model.ProductId);
+                if (conversion == 0)
+                {
+                    msg += $"Conversion failed for Unit : {invUnit[i].UnitQuantity} {invUnit[i].Package?.Name ?? ""} of {invUnit[i].Product?.Name ?? ""}\n";
+                    continue;
+                }
+                var invunitqty = invUnit[i].UnitQuantity * conversion;
+                qtySum += invunitqty;
+
+                /*
+                // earlier 
+                qtySum += invUnit[i].UnitQuantity;
+                */
+                if (qtySum >= model.UnitQuantity)
+                {
+                    fulfilledIndex = i;
+                    break;
+                }
+            }
+            if (fulfilledIndex < 0)
+            {
+                msg += "Some of the products are insufficient to issue. Please verify again.\n";
+                return list;
+            }
+
+            // start issue 
+            decimal remainingQty = model.UnitQuantity;
+            for (var i = 0; i <= fulfilledIndex; i++)
+            {
+                var dbEntity = invUnit[i];
+                var productName = dbEntity.Product.Name;
+                var warehouseName = dbEntity.Warehouse.Name;
+                var issuedQuantity = 0M;
+                // we shouldn't use dbEntity once it's removed from _context.InventoryUnits so assign the values here before removing
+                var warehouseId = dbEntity.WarehouseId;
+                var product = dbEntity.Product;
+                var productId = dbEntity.ProductId;
+                var rate = dbEntity.Rate;
+                var orderItemId = dbEntity.OrderItemId;
+                var packageId = dbEntity.PackageId;
+                var packagename = dbEntity.Package.Name;
+
+                var conversion = _uomService.ConvertUom(model.PackageId ?? 0, dbEntity.PackageId ?? 0, model.ProductId);
+                var remainInvunitQty = remainingQty * conversion;
+
+                //earlier : if (remainingQty < dbEntity.UnitQuantity)
+                if (remainInvunitQty < dbEntity.UnitQuantity)
+                {
+                    // don't remove; just decrement
+                    //earlier: issuedQuantity = remainingQty;
+                    issuedQuantity = remainInvunitQty;
+                    if (assignRelease != null)
+                    {
+                        var cloned = dbEntity.CloneEntity();
+                        cloned.UnitQuantity = remainInvunitQty;
+                        SetAssignTo(ref cloned, assignRelease.ToType, assignRelease.ToId);
+                        _context.InventoryUnits.Add(cloned);
+                    }
+                    // subtract unit quantity from remaining quantity and leave the unit as it is
+                    dbEntity.UnitQuantity = dbEntity.UnitQuantity - remainInvunitQty;
+                    //dbEntity.PackageQuantity = GetPackageQuantity(dbEntity.UnitQuantity, dbEntity.Product.UnitsInPackage);
+
+                }
+                else
+                {
+                    issuedQuantity = dbEntity.UnitQuantity;
+                    //dbEntity.UnitQuantity = 0;
+                    // case is : model.UnitQuantity >= entity.UnitQuantity
+                    // remove the InventoryUnit
+                    remainingQty -= dbEntity.UnitQuantity / conversion;
+
+                    if (assignRelease != null)
+                    {
+                        SetAssignTo(ref dbEntity, assignRelease.ToType, assignRelease.ToId);
+                    }
+                    else
+                    {
+                        _context.InventoryUnits.Remove(dbEntity);
+                    }
+                }
+
+                // note : don't use dbEntity below this comment line. if you want to use the dbentity then assign it's value to another var before remove() func.
+                list.Add(new InventoryUnit { Rate = rate * conversion, UnitQuantity = issuedQuantity / conversion, PackageId = model.PackageId, OrderItemId = orderItemId });
+                //
+                // Movement
+                //
+                var description = string.Empty;
+                if (assignRelease != null)
+                    description = $"Assigned from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) to {assignRelease.ToName} ({assignRelease.ToType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                else
+                    description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
+                var invMovement = new InventoryMovementModel
+                {
+                    Date = now,
+                    UnitQuantity = issuedQuantity,
+                    PackageId = packageId ?? 0, //dbEntity.PackageId ?? 0,
+                    SourceWarehouseId = null,//dbEntity.WarehouseId,
+                    TargetWarehouseId = null,
+                    InventoryUnit = model
+                };
+                if(assignRelease != null)
+                {
+                    if (assignRelease.FromType == FromToType.Warehouse)
+                        invMovement.SourceWarehouseId = warehouseId;
+                    if (assignRelease.ToType == FromToType.Warehouse)
+                        invMovement.TargetWarehouseId = warehouseId;
+                }
+                else
+                {
+                    invMovement.SourceWarehouseId = warehouseId;
+                }
+
+                UpdateWarehouseProductWithoutCommit(_context, invMovement, product, assignRelease);
+            }
+            return list;
+        }
+        private void SetAssignTo(ref InventoryUnit dbEntity, FromToType to, int toId)
+        {
+            switch (to)
+            {
+                case FromToType.Department:
+                    dbEntity.IsHold = true;
+                    dbEntity.AssignedToDepartmentId = toId;
+                    break;
+                case FromToType.Employee:
+                    dbEntity.IsHold = true;
+                    dbEntity.AssignedToDepartmentId = null;
+                    dbEntity.AssignedToUserId = toId;
+                    break;
+                case FromToType.Warehouse:
+                    dbEntity.IsHold = false;
+                    dbEntity.AssignedToUserId = null;
+                    dbEntity.AssignedToDepartmentId = null;
+                    break;
+            }
+        }
+        /*
         /// <summary>
         /// 
         /// </summary>
@@ -687,10 +890,10 @@ namespace Service.Core.Inventory.Units
                 var invunitqty = invUnit[i].UnitQuantity * conversion;
                 qtySum += invunitqty;
 
-                /*
-                // earlier 
-                qtySum += invUnit[i].UnitQuantity;
-                */
+                
+                //// earlier 
+                //qtySum += invUnit[i].UnitQuantity;
+                
                 if (qtySum >= model.UnitQuantity)
                 {
                     fulfilledIndex = i;
@@ -779,7 +982,7 @@ namespace Service.Core.Inventory.Units
             }
             return list;
         }
-
+        */
         public string MoveInventoryUnits(int warehouseId, List<InventoryUnitModel> list)
         {
             using (var _context = DatabaseContext.Context)
