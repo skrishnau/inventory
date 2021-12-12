@@ -120,7 +120,7 @@ namespace Service.Core.Users
                 {
                     query = query.Skip(offset).Take(pageSize);
                 }
-                var list = query.MapToUserModel();// UserMapper.MapToUserModel(query);
+                var list = query.MapToUserModel(_context);// UserMapper.MapToUserModel(query);
                 return new UserListModel
                 {
                     DataList = list,

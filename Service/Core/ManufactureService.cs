@@ -403,10 +403,7 @@ namespace Service.Core
                 entity = model.MapToEntity(entity);
                 if (_context.Departments.Any(x => x.Id != model.Id && x.Name == model.Name))
                     return new ResponseModel<DepartmentModel> { Message = "Another department with same name already exists. Please enter unique name", Success = false };
-                //if (model.DepartmentUsers != null && model.DepartmentUsers.Any())
-                //{
-
-                //}
+                
                 if (!isEdit)
                 {
                     // add
@@ -416,6 +413,7 @@ namespace Service.Core
                         var du = new DepartmentUser
                         {
                             UserId = us.UserId ?? 0,
+                            BuildRate = us.BuildRate,
                         };
                         entity.DepartmentUsers.Add(du);
                     }

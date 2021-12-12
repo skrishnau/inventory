@@ -326,22 +326,34 @@ namespace IMS.Forms.MRP
                 message.Add("At least one department is required");
             }
             // products
+            var finalPrductMissingMessage = string.Empty;
             var productIdObj = cbFinalProduct.SelectedValue?.ToString();
             if (!int.TryParse(productIdObj, out int productId) || productId <= 0)
             {
                 isInvalid = true;
                 errorProvider1.SetError(cbFinalProduct, "Required");
+                finalPrductMissingMessage += "Final Product, ";
             }
 
             if (!int.TryParse(cbFinalPackage.SelectedValue?.ToString(), out int packageId))
             {
                 isInvalid = true;
                 errorProvider1.SetError(cbFinalPackage, "Required");
+                finalPrductMissingMessage += "Final Product's Package, ";
             }
             if (txtFinalQuantity.Value <= 0)
             {
                 isInvalid = true;
                 errorProvider1.SetError(txtFinalQuantity, "Should be greater than zero");
+                finalPrductMissingMessage += "Final Product's Quantity";
+            }
+            if (!string.IsNullOrEmpty(finalPrductMissingMessage))
+            {
+                finalPrductMissingMessage = "Following fields are missing: \r\n" + finalPrductMissingMessage;
+                finalPrductMissingMessage += "\r\nIn \"Manufacture Product\" tab.";
+                PopupMessage.ShowInfoMessage(finalPrductMissingMessage);
+                this.Focus();
+                return;
             }
             var products = new List<ManufactureProductModel>
             {

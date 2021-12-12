@@ -62,6 +62,7 @@
             this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colManufacturedAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemainAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAllDuesClearDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,6 +90,7 @@
             this.colUserType,
             this.colTotalAmount,
             this.colPaidAmount,
+            this.colManufacturedAmount,
             this.colRemainAmount,
             this.colPaymentDueDate,
             this.colAllDuesClearDate,
@@ -408,9 +410,18 @@
             this.colPaidAmount.Name = "colPaidAmount";
             this.colPaidAmount.ReadOnly = true;
             // 
+            // colManufacturedAmount
+            // 
+            this.colManufacturedAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colManufacturedAmount.DataPropertyName = "ManufacturedAmount";
+            this.colManufacturedAmount.HeaderText = "Manufactured Amt.";
+            this.colManufacturedAmount.Name = "colManufacturedAmount";
+            this.colManufacturedAmount.ReadOnly = true;
+            this.colManufacturedAmount.Width = 112;
+            // 
             // colRemainAmount
             // 
-            this.colRemainAmount.DataPropertyName = "DueAmount";
+            this.colRemainAmount.DataPropertyName = "DueAmountString";
             this.colRemainAmount.HeaderText = "Balance";
             this.colRemainAmount.Name = "colRemainAmount";
             this.colRemainAmount.ReadOnly = true;
@@ -503,6 +514,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaidAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colManufacturedAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemainAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAllDuesClearDate;

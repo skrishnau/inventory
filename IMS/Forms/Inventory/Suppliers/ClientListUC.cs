@@ -65,6 +65,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 case UserTypeCategoryEnum.CustomerAndSupplier:
                     rbCustomer.Text = UserTypeEnum.Customer.ToString();
                     rbSupplier.Text = UserTypeEnum.Supplier.ToString();
+                    colManufacturedAmount.Visible = false;
                     break;
                 case UserTypeCategoryEnum.UserAndVendor:
                     btnPayment.Visible = false;
@@ -74,8 +75,8 @@ namespace IMS.Forms.Inventory.Suppliers
                     colCompany.Visible = false;
                     //colTotalAmount.Visible = false;
                     //colPaidAmount.Visible = false;
-                    //colAllDuesClearDate.Visible = false;
-                    //colPaymentDueDate.Visible = false;
+                    colAllDuesClearDate.Visible = false;
+                    colPaymentDueDate.Visible = false;
                     //colRemainAmount.Visible = false;
                     break;
             }
