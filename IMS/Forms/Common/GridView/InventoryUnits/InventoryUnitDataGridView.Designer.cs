@@ -322,7 +322,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             this.colAssignedTo.Visible = false;
             this.colAssignedTo.Width = 100;
             this.colAssignedTo.ReadOnly = true;
-            this.colAssignedTo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            //this.colAssignedTo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             //this.colStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
             // 
@@ -889,6 +889,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             colPackageId.Visible = true;
             colInStockQuantityWithPackage.Visible = true;
             //colRate.Visible = false;
+            colDelete.Visible = true;
             HideUnusedDefaults();
         }
 

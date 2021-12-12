@@ -486,6 +486,12 @@ namespace Service.Core.Inventory.Units
             InventoryUnit unitEntity = null;
 
             unitEntity = unit.MapToEntity();
+            // assign to department/user if it's hold
+            if (unit.IsHold && unit.AssignedToDepartmentId > 0)
+                unitEntity.AssignedToDepartmentId = unit.AssignedToDepartmentId;
+            if (unit.IsHold && unit.AssignedToUserId > 0)
+                unitEntity.AssignedToUserId = unit.AssignedToUserId;
+
             unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
             unitEntity.ReceiveAdjustment = adjustmentCode;
             if (orderItem != null)

@@ -381,7 +381,7 @@ namespace IMS.Forms.MRP
                     InOut = true, // in = 1, out = 0
                     ProductId = inv.ProductId,
                     PackageId = inv.PackageId ?? 0,
-                    Quantity = txtFinalQuantity.Value,
+                    Quantity = inv.UnitQuantity,
                 });
             }
             if (isInvalid)
