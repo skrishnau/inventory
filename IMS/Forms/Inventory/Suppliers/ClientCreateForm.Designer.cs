@@ -68,7 +68,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(295, 30);
+            this.label4.Location = new System.Drawing.Point(294, 30);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
@@ -78,7 +78,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(295, 0);
+            this.label5.Location = new System.Drawing.Point(294, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
@@ -102,7 +102,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.7232F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.74298F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.83195F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.lblName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
@@ -150,6 +150,7 @@
             // 
             // cbUserType
             // 
+            this.cbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUserType.FormattingEnabled = true;
             this.cbUserType.Location = new System.Drawing.Point(118, 3);
             this.cbUserType.Name = "cbUserType";
@@ -182,14 +183,14 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(363, 3);
+            this.tbPhone.Location = new System.Drawing.Point(362, 3);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(141, 20);
             this.tbPhone.TabIndex = 5;
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(363, 33);
+            this.tbEmail.Location = new System.Drawing.Point(362, 33);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(141, 20);
             this.tbEmail.TabIndex = 6;
@@ -197,7 +198,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(295, 60);
+            this.label2.Location = new System.Drawing.Point(294, 60);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
@@ -206,7 +207,7 @@
             // 
             // tbNotes
             // 
-            this.tbNotes.Location = new System.Drawing.Point(363, 63);
+            this.tbNotes.Location = new System.Drawing.Point(362, 63);
             this.tbNotes.Multiline = true;
             this.tbNotes.Name = "tbNotes";
             this.tbNotes.Size = new System.Drawing.Size(141, 24);
@@ -215,7 +216,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(296, 90);
+            this.label9.Location = new System.Drawing.Point(295, 90);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(26, 13);
             this.label9.TabIndex = 76;
@@ -226,7 +227,7 @@
             this.chkUse.AutoSize = true;
             this.chkUse.Checked = true;
             this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUse.Location = new System.Drawing.Point(363, 93);
+            this.chkUse.Location = new System.Drawing.Point(362, 93);
             this.chkUse.Name = "chkUse";
             this.chkUse.Size = new System.Drawing.Size(15, 14);
             this.chkUse.TabIndex = 8;

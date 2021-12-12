@@ -233,19 +233,28 @@ namespace Service.Core.Users
             var query = _context.Users.Where(x => x.Username != Constants.ADMIN_USERNAME && x.DeletedAt == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
+            var vendor = UserTypeEnum.Vendor.ToString();
+            var employee = UserTypeEnum.Employee.ToString();
+            var allTypes = string.Join(",", userTypes.Select(x => x.ToString()));
+            query = query.Where(x =>
+                (allTypes.Contains(customer) && x.UserType.Contains(customer))
+                || (allTypes.Contains(supplier) && x.UserType.Contains(supplier))
+                || (allTypes.Contains(vendor) && x.UserType.Contains(vendor))
+                || (allTypes.Contains(employee) && x.UserType.Contains(employee))
+            );
             //if (userTypes.Contains(UserTypeEnum.All)) // client means both Customer and Supplier
             //{
             //    query = query.Where(x => x.UserType == customer || x.UserType == supplier);
             //}
             //else
             //{
-            if (userTypes.Count > 0)
-            {
-                foreach (var userTypeStr in userTypes.Select(u => u.ToString()))
-                {
-                    query = query.Where(x => x.UserType.Contains(userTypeStr));
-                }
-            }
+            //if (userTypes.Count > 0)
+            //{
+            //    foreach (var userTypeStr in userTypes.Select(u => u.ToString()))
+            //    {
+            //        query = query.Where(x => x.UserType.Contains(userTypeStr));
+            //    }
+            //}
             //}
             if (!string.IsNullOrEmpty(searchName))
                 query = query.Where(x => x.Name.Contains(name) || x.Company.Contains(name));

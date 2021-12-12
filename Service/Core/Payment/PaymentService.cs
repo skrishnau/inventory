@@ -57,15 +57,24 @@ namespace Service.Core.Payment
         private IQueryable<Infrastructure.Context.Payment> GetPaymentQueryable(DatabaseContext _context, List<UserTypeEnum> userTypes, string searchName)
         {
             var query = _context.Payments.AsQueryable().Where(x=>!x.IsVoid);
-                    //.Where(x => x. == null);
+            //.Where(x => x. == null);
             var customer = UserTypeEnum.Customer.ToString();
             var supplier = UserTypeEnum.Supplier.ToString();
+            var vendor = UserTypeEnum.Vendor.ToString();
+            var employee = UserTypeEnum.Employee.ToString();
 
-            foreach(var userType in userTypes)
-            {
-                var userTypeStr = userType.ToString();
-                query = query.Where(x => x.User.UserType == userTypeStr);
-            }
+            var allTypes = string.Join(",", userTypes.Select(x => x.ToString()));
+            query = query.Where(x =>
+                (allTypes.Contains(customer) && x.User.UserType.Contains(customer))
+                || (allTypes.Contains(supplier) && x.User.UserType.Contains(supplier))
+                || (allTypes.Contains(vendor) && x.User.UserType.Contains(vendor))
+                || (allTypes.Contains(employee) && x.User.UserType.Contains(employee))
+            );
+            //foreach(var userType in userTypes)
+            //{
+            //    var userTypeStr = userType.ToString();
+            //    query = query.Where(x => x.User.UserType == userTypeStr);
+            //}
             if (!string.IsNullOrEmpty(searchName))
             {
                 var split = searchName.Split(new char[] { '-' });

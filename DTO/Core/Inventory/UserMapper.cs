@@ -42,23 +42,25 @@ namespace DTO.Core.Inventory
             foreach (var user in users)
             {
                 var transactions = user.Transactions.Where(x=>!x.IsVoid).ToList();
-                decimal total = 0, paid = 0;
-                if(user.UserType == UserTypeEnum.Customer.ToString())
-                {
-                    total = transactions.Sum(x => x.Debit);
-                    paid = transactions.Sum(x => x.Credit);
-                }
-                else if(user.UserType == UserTypeEnum.Supplier.ToString())
-                {
-                    total = transactions.Sum(x => x.Debit); // incomming stock amount
-                    paid = transactions.Sum(x => x.Credit); // outgoing paid amount
-                }
-                list.Add(MapToUserModel(user, total, paid));
+                decimal debit = 0, credit = 0;
+                debit = transactions.Sum(x => x.Debit);
+                credit = transactions.Sum(x => x.Credit);
+                //if(user.UserType == UserTypeEnum.Customer.ToString())
+                //{
+                //    debit = transactions.Sum(x => x.Debit);
+                //    credit = transactions.Sum(x => x.Credit);
+                //}
+                //else if(user.UserType == UserTypeEnum.Supplier.ToString())
+                //{
+                //    debit = transactions.Sum(x => x.Debit); // incomming stock amount
+                //    credit = transactions.Sum(x => x.Credit); // outgoing paid amount
+                //}
+                list.Add(MapToUserModel(user, debit, credit));
             }
             return list;
         }
 
-        public static UserModel MapToUserModel(this User x, decimal totalAmount=0, decimal paidAmount =0)
+        public static UserModel MapToUserModel(this User x, decimal debit=0, decimal credit =0)
         {
             return new UserModel()
             {
@@ -81,11 +83,11 @@ namespace DTO.Core.Inventory
                 Password = x.Password,
                 Username = x.Username,
                 UserType = x.UserType,
-
+                
                 IsMarried = x.IsMarried,
                 Gender = x.Gender,
-                TotalAmount = totalAmount,
-                PaidAmount = paidAmount,
+                TotalAmount = debit,
+                PaidAmount = credit,
                 Company = x.Company,
                 PaymentDueDate = x.PaymentDueDate,
                 AllDuesClearDate = x.AllDuesClearDate,

@@ -2,7 +2,7 @@ USE [master]
 GO
 /****** Object:  Database [IMS]    Script Date: 5/22/2021 6:20:13 PM ******/
 CREATE DATABASE [IMS]
- CONTAINMENT = NONE
+ /*CONTAINMENT = NONE
  ON  PRIMARY 
 ( NAME = N'IMS', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.SQLEXPRESS\MSSQL\DATA\IMS.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON 
@@ -74,7 +74,7 @@ GO
 ALTER DATABASE [IMS] SET DELAYED_DURABILITY = DISABLED 
 GO
 ALTER DATABASE [IMS] SET QUERY_STORE = OFF
-GO
+GO*/
 USE [IMS]
 GO
 /****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 5/22/2021 6:20:14 PM ******/

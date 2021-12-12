@@ -72,11 +72,11 @@ namespace IMS.Forms.Inventory.Suppliers
                     rbSupplier.Text = UserTypeEnum.Vendor.ToString();
                     // columns
                     colCompany.Visible = false;
-                    colTotalAmount.Visible = false;
-                    colPaidAmount.Visible = false;
-                    colAllDuesClearDate.Visible = false;
-                    colPaymentDueDate.Visible = false;
-                    colRemainAmount.Visible = false;
+                    //colTotalAmount.Visible = false;
+                    //colPaidAmount.Visible = false;
+                    //colAllDuesClearDate.Visible = false;
+                    //colPaymentDueDate.Visible = false;
+                    //colRemainAmount.Visible = false;
                     break;
             }
         }

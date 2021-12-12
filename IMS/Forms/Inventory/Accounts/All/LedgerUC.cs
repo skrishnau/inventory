@@ -163,8 +163,16 @@ namespace IMS.Forms.Inventory.Reports.All
             var item = cbType.SelectedItem as NameValuePair;
             if (item != null)
             {
-                var userType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), item.Value);
-                var customers = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, new int[0]);
+                List<UserTypeEnum> userTypeList;
+                if(Enum.TryParse<UserTypeEnum>(item.Value, out UserTypeEnum userType))
+                {
+                    userTypeList = new List<UserTypeEnum> { userType };
+                }
+                else
+                {
+                    userTypeList = UserTypeEnumHelper.CustomerSupplier;
+                }
+                var customers = _userService.GetUserListForCombo(userTypeList, new int[0]);
                 customers.Insert(0, new IdNamePair(0, ""));
                 cbCustomer.DataSource = customers;
 

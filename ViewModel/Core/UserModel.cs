@@ -50,8 +50,8 @@ namespace ViewModel.Core
 
         public decimal TotalAmount { get; set; }
         public decimal PaidAmount { get; set; }
-        public decimal DueAmount { get { return TotalAmount - PaidAmount; } }
-
+        public decimal DueAmount { get { return PaidAmount - TotalAmount; } }
+        public string DueAmountString { get { return DueAmount > 0 ? (DueAmount).ToString("0.00") : $"({DueAmount.ToString("0.00")})"; } }
         // 
         // extra
         //

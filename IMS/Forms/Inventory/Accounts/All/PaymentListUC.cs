@@ -176,7 +176,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void PopulateType()
         {
-            var values = UserTypeEnumHelper.CustomerSupplier//Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
+            var values = UserTypeEnumHelper.All//Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
                 .Select(x => new NameValuePair(x.ToString(), x.ToString()))
                 .ToList();
             values.Insert(0, new NameValuePair("All", "All"));
@@ -191,8 +191,18 @@ namespace IMS.Forms.Inventory.Reports.All
             var item = cbType.SelectedItem as NameValuePair;
             if (item != null)
             {
-                var userType = (UserTypeEnum)Enum.Parse(typeof(UserTypeEnum), item.Value);
-                var customers = _userService.GetUserListForCombo(new List<UserTypeEnum> { userType }, new int[0]);
+                List<UserTypeEnum> userTypes = null;
+
+                if (Enum.TryParse<UserTypeEnum>(item.Value, out UserTypeEnum userType))
+                {
+                    userTypes = new List<UserTypeEnum> { userType };
+                }
+                else
+                {
+                    userTypes = UserTypeEnumHelper.All;
+                }
+
+                var customers = _userService.GetUserListForCombo(userTypes, new int[0]);
                 customers.Insert(0, new IdNamePair(0, "--- All ---"));
                 cbCustomer.DataSource = customers;
 
@@ -221,7 +231,7 @@ namespace IMS.Forms.Inventory.Reports.All
             if (item != null)
             {
                 List<UserTypeEnum> userType = new List<UserTypeEnum>();
-                if(Enum.TryParse(item.Value, out UserTypeEnum usertp))
+                if (Enum.TryParse(item.Value, out UserTypeEnum usertp))
                 {
                     userType.Add(usertp);
                 }

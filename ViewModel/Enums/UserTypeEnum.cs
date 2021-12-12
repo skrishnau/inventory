@@ -33,6 +33,8 @@ namespace ViewModel.Enums
 
     public static class UserTypeEnumHelper
     {
+        public static List<UserTypeEnum> All = Enum.GetValues(typeof(UserTypeEnum)).Cast<UserTypeEnum>().ToList();
+
         public static List<UserTypeEnum> Vendor = new List<UserTypeEnum>
         {
             UserTypeEnum.Vendor
