@@ -483,9 +483,7 @@ namespace Service.Core.Inventory.Units
             {
                 package = _context.Packages.Find(unit.PackageId);
             }
-            InventoryUnit unitEntity = null;
-
-            unitEntity = unit.MapToEntity();
+            InventoryUnit unitEntity = unit.MapToEntity();
             // assign to department/user if it's hold
             if (unit.IsHold && unit.AssignedToDepartmentId > 0)
                 unitEntity.AssignedToDepartmentId = unit.AssignedToDepartmentId;
@@ -494,11 +492,12 @@ namespace Service.Core.Inventory.Units
 
             unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
             unitEntity.ReceiveAdjustment = adjustmentCode;
-            if (orderItem != null)
-            {
-                unitEntity.SupplierId = orderItem.User?.Id;
-                unitEntity.SupplierId = orderItem.SupplierId;
-            }
+            // Order item should always be given
+            //if (orderItem != null)
+            //{
+            unitEntity.User = orderItem.User;
+            unitEntity.SupplierId = orderItem.SupplierId;
+            //}
             unitEntity.ReceiveReceipt = unit.ReceiveReceipt;//reference;
             _context.InventoryUnits.Add(unitEntity);
 
@@ -527,8 +526,9 @@ namespace Service.Core.Inventory.Units
             };
 
             UpdateWarehouseProductWithoutCommit(_context, invMovement, product, null);
-            if (orderItem != null && orderItem.Id > 0)
-                unitEntity.OrderItem = orderItem;
+            // order item should always be given
+            //if (orderItem != null && orderItem.Id > 0)
+            unitEntity.OrderItem = orderItem;
             return unitEntity;
         }
         public string SaveDirectReceiveListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, DateTime receivedDate, string adjustmentCode)

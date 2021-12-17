@@ -480,6 +480,7 @@ namespace Service.Core.Orders
                     foreach (var ti in txnItems)
                     {
                         var purchaseitem = ti.OrderItem;
+                        //var purchaseitem = _context.OrderItems.Find(ti.PurchaseOrderItemId);
                         if (purchaseitem != null)
                         {
                             var receiveDate = order.CancelledDate ?? DateTime.Now;//purchaseitem?.Order?.CompletedDate ?? DateTime.Now;
