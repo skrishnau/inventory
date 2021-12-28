@@ -84,7 +84,6 @@
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(127, 20);
             this.tbUsername.TabIndex = 1;
-            this.tbUsername.Text = "admin";
             // 
             // tableLayoutPanel2
             // 
@@ -115,7 +114,6 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(127, 20);
             this.tbPassword.TabIndex = 2;
-            this.tbPassword.Text = "1";
             // 
             // panel3
             // 

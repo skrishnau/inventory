@@ -87,6 +87,19 @@ namespace IMS.Forms.MRP
             //cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
             txtName.TextChanged += TxtName_TextChanged;
             dgvProductList.DataSourceChanged += DgvProductList_DataSourceChanged;
+            dgvProductList.CellClick += DgvProductList_CellClick;
+        }
+
+        private void DgvProductList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == colView.Index)
+            {
+                var manufactureModel = dgvProductList.Rows[e.RowIndex].DataBoundItem as ManufactureModel;
+                if(RowSelected != null)
+                {
+                    RowSelected.Invoke(this, new BaseEventArgs<ManufactureModel>(manufactureModel));
+                }
+            }
         }
 
         private void DgvProductList_DataSourceChanged(object sender, EventArgs e)

@@ -505,7 +505,7 @@ namespace Service.Core.Orders
                                 SupplierId = purchaseitem.Order.UserId,
                                 Total = unitQuantity * purchaseitem.Rate,
                                 ReceiveDateDate = purchaseitem?.Order?.CompletedDate ?? DateTime.Now,
-                        };
+                            };
                             _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, receiveDate, adjCode, ref message, oitem.Product, reference, purchaseitem);
                         }
                         else
@@ -519,6 +519,9 @@ namespace Service.Core.Orders
             else if (order.OrderType == OrderTypeEnum.Purchase.ToString())
             {
                 var adjCode = "Re-issued for cancelled purchase transaction";
+
+                var inventoryUnitModelList = new List<InventoryUnitModel>();
+
                 //purchase ko nai inventory unit bhetera tesbata ghataune pahile ani napugeko chai aru bata ghataune
                 foreach (var oitem in order.OrderItems)
                 {
@@ -529,10 +532,16 @@ namespace Service.Core.Orders
                         PackageId = oitem.PackageId,
                         ProductId = oitem.ProductId,
                         PurchaseOrderItemId = oitem.Id, // give priority to purchase order item for deducting inv unit
+                        Product = oitem.Product?.Name
                     };
-                    _inventoryUnitService.SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, invModel, adjCode, ref message , order.ReferenceNumber);
+                    inventoryUnitModelList.Add(invModel);
                 }
-                //message += _inventoryUnitService.SaveDirectIssueAnyListWithoutCommit(_context, order.OrderItems.MapToInventoryUnitModel(OrderTypeEnum.Sale), adjCode, order.ReferenceNumber);
+                var allInventoryUnitList = _inventoryUnitService.GetInventoryUnitListForUpdate(_context, inventoryUnitModelList);
+
+                foreach (var invModel in inventoryUnitModelList)
+                {
+                    _inventoryUnitService.SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, invModel, adjCode, ref message, order.ReferenceNumber, ref allInventoryUnitList);
+                }
             }
         }
 
@@ -690,6 +699,18 @@ namespace Service.Core.Orders
                     //order.OrderItems.Remove(entity);
                 }
             }
+            foreach (var item in items)
+            {
+                if (item.ProductId == 0)
+                {
+                    var product = _context.Products.FirstOrDefault(x => x.Name.Equals(item.Product, StringComparison.OrdinalIgnoreCase));
+                    if (product == null)
+                    {
+                        item.ProductId = product.Id;
+                    }
+                }
+            }
+            var allInventoryUnitList = _inventoryUnitService.GetInventoryUnitListForUpdate(_context, items.Select(x=>x.ProductId).ToList());
             // second add/update
             foreach (var item in items)
             {
@@ -789,7 +810,7 @@ namespace Service.Core.Orders
                         var adjustment = string.IsNullOrEmpty(adjustmentCode) ? "SO Issue" : adjustmentCode;
                         var invUnit = entity.MapToInventoryUnitModel(OrderTypeEnum.Sale);
                         invUnit.Rate = entity.Rate;
-                        invUnits = _inventoryUnitService.SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, invUnit, adjustment, ref message, order.ReferenceNumber);
+                        invUnits = _inventoryUnitService.SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, invUnit, adjustment, ref message, order.ReferenceNumber, ref allInventoryUnitList);
                         var invUnitsQty = invUnits.Sum(x => x.UnitQuantity);
                         if ((invUnits.Count > 0 && invUnitsQty > 0 && !invUnits.Any(x => x.Rate == 0)) || (orderOrDirect == OrderOrDirectEnum.Direct && invUnitsQty > 0))
                         {

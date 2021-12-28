@@ -23,7 +23,7 @@ namespace Infrastructure.Context
         }
     
         public int Id { get; set; }
-        public int OrderId { get; set; }
+        public Nullable<int> OrderId { get; set; }
         public int ProductId { get; set; }
         public Nullable<int> WarehouseId { get; set; }
         public decimal UnitQuantity { get; set; }

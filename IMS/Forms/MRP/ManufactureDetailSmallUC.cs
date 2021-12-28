@@ -17,7 +17,7 @@ using DTO.Core;
 
 namespace IMS.Forms.MRP
 {
-    public partial class ManufactureDetailSmallUC : UserControl
+    public partial class ManufactureDetailSmallUC : BaseUserControl
     {
 
         private readonly IManufactureService _manufactureService;

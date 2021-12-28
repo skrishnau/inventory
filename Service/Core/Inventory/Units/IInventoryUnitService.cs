@@ -50,10 +50,13 @@ namespace Service.Core.Inventory.Units
         //
         string SaveDirectIssueAny(List<InventoryUnitModel> list, string adjustmentCode, string referenceNo);
         List<InventoryUnit> SaveDirectIssueAndAssignAnyListWithoutCommit(DatabaseContext _context, List<InventoryUnitModel> list, string adjustmentCode, string referenceNo, ref string msg, AssignReleaseViewModel assignRelease = null);
-        List<InventoryUnit> SaveDirectIssueAndAssignAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, AssignReleaseViewModel assignRelease = null);
+        List<InventoryUnit> SaveDirectIssueAndAssignAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, ref List<InventoryUnit> allInventoryUnits, AssignReleaseViewModel assignRelease = null);
         #endregion
-
-
+        //
+        //  call this function before calling SaveDirectIssueAndAssignAnyItemWithoutCommit
+        //
+        List<InventoryUnit> GetInventoryUnitListForUpdate(DatabaseContext _context, List<InventoryUnitModel> list);
+        List<InventoryUnit> GetInventoryUnitListForUpdate(DatabaseContext _context, List<int> productIdList);
         //PriceHistory GetRate(int productId, DateTime? completedDate);
 
     }

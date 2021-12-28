@@ -87,7 +87,7 @@
             this.pnlManufactureOutputs = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblFinalProduct = new System.Windows.Forms.Label();
             this.cbFinalProduct = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cbFinalPackage = new System.Windows.Forms.ComboBox();
@@ -96,9 +96,9 @@
             this.tpDepartmentProducts = new System.Windows.Forms.TabPage();
             this.pnlDepartmentsListForView = new System.Windows.Forms.Panel();
             this.dgvDepartmentsForProducts = new System.Windows.Forms.DataGridView();
-            this.label10 = new System.Windows.Forms.Label();
             this.colDepartmentForSelectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartmentForSelectDepartmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -699,7 +699,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.66463F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.33537F));
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblFinalProduct, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.cbFinalProduct, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.cbFinalPackage, 1, 1);
@@ -723,15 +723,15 @@
             this.label7.Text = "Quantity *";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label6
+            // lblFinalProduct
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 25);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Final Product *";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblFinalProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinalProduct.Location = new System.Drawing.Point(3, 0);
+            this.lblFinalProduct.Name = "lblFinalProduct";
+            this.lblFinalProduct.Size = new System.Drawing.Size(85, 25);
+            this.lblFinalProduct.TabIndex = 2;
+            this.lblFinalProduct.Text = "Final Product *";
+            this.lblFinalProduct.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbFinalProduct
             // 
@@ -812,17 +812,6 @@
             this.dgvDepartmentsForProducts.Size = new System.Drawing.Size(238, 354);
             this.dgvDepartmentsForProducts.TabIndex = 2;
             // 
-            // label10
-            // 
-            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(0, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(238, 23);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Select Department";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // colDepartmentForSelectName
             // 
             this.colDepartmentForSelectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -838,6 +827,17 @@
             this.colDepartmentForSelectDepartmentId.HeaderText = "Id";
             this.colDepartmentForSelectDepartmentId.Name = "colDepartmentForSelectDepartmentId";
             this.colDepartmentForSelectDepartmentId.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(238, 23);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Select Department";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ManufactureCreateForm
             // 
@@ -933,7 +933,7 @@
         private System.Windows.Forms.Panel pnlManufactureOutputs;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblFinalProduct;
         private System.Windows.Forms.ComboBox cbFinalProduct;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbFinalPackage;

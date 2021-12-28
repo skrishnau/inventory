@@ -10,4 +10,13 @@ namespace ViewModel.Enums
     {
         Positive, Negative
     }
+
+    public enum AdjustmentCodeEnum
+    {
+        PO_Receive,
+        Damage,
+        Cancelled,
+        Disassembled,
+        Consumed,
+    }
 }

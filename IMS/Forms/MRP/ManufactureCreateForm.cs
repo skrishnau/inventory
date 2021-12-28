@@ -1,6 +1,7 @@
 ﻿using DTO.Core;
 using IMS.Forms.Common;
 using IMS.Forms.Common.GridView;
+using IMS.Forms.Inventory.Products;
 using Service.Core.Inventory;
 using Service.Core.Settings;
 using Service.Core.Users;
@@ -83,6 +84,8 @@ namespace IMS.Forms.MRP
             btnEditManufactureInputs.Click += BtnEditManufactureInputs_Click;
             dgvDepartmentsForProducts.SelectionChanged += DgvDepartmentSelectForProducts_SelectionChanged;
             tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
+            lblFinalProduct.DoubleClick += LblFinalProduct_DoubleClick;
+
 
             PopulateDataForEdit();
 
@@ -90,6 +93,17 @@ namespace IMS.Forms.MRP
             _decimalValidator = new GridViewColumnDecimalValidator(dgvEmployees);
             _decimalValidator.AddColumn(this.colEmployeesRate, ColumnDataType.Decimal);
             _decimalValidator.Validate();
+        }
+
+        private void LblFinalProduct_DoubleClick(object sender, EventArgs e)
+        {
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var productCreate = Program.container.GetInstance<ProductCreateBasicForm>();
+                productCreate.SetDataForEdit(0);
+                productCreate.ShowDialog();
+                PopulateFinalProduct();
+            }
         }
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)

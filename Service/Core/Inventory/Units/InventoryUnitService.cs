@@ -650,31 +650,44 @@ namespace Service.Core.Inventory.Units
         {
             var now = DateTime.Now;
             var returnList = new List<InventoryUnit>();
+            var allProductIds = list.Select(x => x.ProductId).ToList();
+            var allInventoryUnitList = GetInventoryUnitListForUpdate(_context, list);
             foreach (var model in list)
             {
-                var invUnits = SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo, assignRelease);
+                var invUnits = SaveDirectIssueAndAssignAnyItemWithoutCommit(_context, model, adjustmentCode, ref msg, referenceNo, ref allInventoryUnitList, assignRelease);
                 returnList.AddRange(invUnits);
             }
             return returnList;
         }
+        public List<InventoryUnit> GetInventoryUnitListForUpdate(DatabaseContext _context, List<InventoryUnitModel> list)
+        {
+            foreach(var model in list)
+            {
+                var warehouse = FindWarehouseOrReturnMainWarehouse(_context, model.WarehouseId);
+                if (model.ProductId == 0)
+                    model.ProductId = _context.Products.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
+                model.WarehouseId = warehouse.Id;
+            }
+            var productIdList = list.Select(x => x.ProductId).ToList();
+            return GetInventoryUnitListForUpdate(_context, productIdList);
+        }
+
+        public List<InventoryUnit> GetInventoryUnitListForUpdate(DatabaseContext _context, List<int> productIdList)
+        {
+            return _context.InventoryUnits
+                   .Include(x => x.Product)
+                   .Include(x => x.Warehouse)
+                   .Where(x => productIdList.Contains(x.ProductId) && x.PackageId != null)
+                   .ToList();
+        }
 
         // Handles Sale/Issue/Assign/Release
-        public List<InventoryUnit> SaveDirectIssueAndAssignAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, AssignReleaseViewModel assignRelease)
+        public List<InventoryUnit> SaveDirectIssueAndAssignAnyItemWithoutCommit(DatabaseContext _context, InventoryUnitModel model, string adjustmentCode, ref string msg, string referenceNo, ref List<InventoryUnit> allInventoryUnitLIst, AssignReleaseViewModel assignRelease)
         {
             var now = DateTime.Now;
             var list = new List<InventoryUnit>();
 
-            var warehouse = FindWarehouseOrReturnMainWarehouse(_context, model.WarehouseId);
-            if (model.ProductId == 0)
-                model.ProductId = _context.Products.FirstOrDefault(x => x.Name == model.Product || x.SKU == model.Product)?.Id ?? 0;
-            model.WarehouseId = warehouse.Id;
-
-            var query = _context.InventoryUnits
-                .Include(x => x.Product)
-                .Include(x => x.Warehouse)
-                .Where(x => x.ProductId == model.ProductId
-                                && x.PackageId != null
-                                );
+            var query = allInventoryUnitLIst.Where(x=>x.ProductId == model.ProductId).AsQueryable();
 
             if (assignRelease == null)
             {
@@ -735,15 +748,23 @@ namespace Service.Core.Inventory.Units
             }
             if (fulfilledIndex < 0)
             {
-                msg += "Some of the products are insufficient to issue. Please verify again.\n";
+                var productName = string.IsNullOrEmpty(model.Product) ? _context.Products.Find(model.ProductId)?.Name : model.Product;
+                msg += $"'{productName}' is insufficient to issue. In-Stock Qty: {qtySum}, Issuing Qty.: {model.UnitQuantity}. Please verify again.\n";
                 return list;
             }
-
+            if (!string.IsNullOrEmpty(msg))
+                return list;
             // start issue 
             decimal remainingQty = model.UnitQuantity;
             for (var i = 0; i <= fulfilledIndex; i++)
             {
                 var dbEntity = invUnit[i];
+                if (dbEntity.Product == null) // sometines prduct is null eventhough productid is not null
+                    dbEntity.Product = _context.Products.Find(dbEntity.ProductId);
+                if (dbEntity.Warehouse == null)
+                    dbEntity.Warehouse = _context.Warehouses.Find(dbEntity.WarehouseId);
+                if (dbEntity.Package == null)
+                    dbEntity.Package = _context.Packages.Find(dbEntity.PackageId);
                 var productName = dbEntity.Product.Name;
                 var warehouseName = dbEntity.Warehouse.Name;
                 var issuedQuantity = 0M;
@@ -758,7 +779,7 @@ namespace Service.Core.Inventory.Units
 
                 var conversion = _uomService.ConvertUom(model.PackageId ?? 0, dbEntity.PackageId ?? 0, model.ProductId);
                 var remainInvunitQty = remainingQty * conversion;
-
+               
                 //earlier : if (remainingQty < dbEntity.UnitQuantity)
                 if (remainInvunitQty < dbEntity.UnitQuantity)
                 {
@@ -797,15 +818,17 @@ namespace Service.Core.Inventory.Units
                         else
                         {
                             // if there's no one to assign the remove the entity
+                            allInventoryUnitLIst.Remove(dbEntity);
                             _context.InventoryUnits.Remove(dbEntity);
                         }
                     }
                     else
                     {
+                        allInventoryUnitLIst.Remove(dbEntity);
                         _context.InventoryUnits.Remove(dbEntity);
                     }
                 }
-
+            
                 // note : don't use dbEntity below this comment line. if you want to use the dbentity then assign it's value to another var before remove() func.
                 list.Add(new InventoryUnit { Rate = rate * conversion, UnitQuantity = issuedQuantity / conversion, PackageId = model.PackageId, OrderItemId = orderItemId });
                 //
@@ -816,9 +839,13 @@ namespace Service.Core.Inventory.Units
                 {
                     if(assignRelease.ToId > 0)
                         description = $"Assigned from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) to {assignRelease.ToName} ({assignRelease.ToType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
-                    else 
+                    else if (adjustmentCode == AdjustmentCodeEnum.Consumed.ToString())
+                        description = $"Consumed by {assignRelease.FromName} ({assignRelease.FromType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                    else
                         description = $"Issued from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 }
+                else if (adjustmentCode == AdjustmentCodeEnum.Consumed.ToString())
+                    description = $"Consumed {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 else
                     description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"

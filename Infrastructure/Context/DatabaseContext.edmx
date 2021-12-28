@@ -227,7 +227,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="WarehouseId" Type="int" />
           <Property Name="UnitQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -323,10 +323,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="PriceType" Type="nvarchar(max)" />
           <Property Name="PackageId" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductAttributes">
           <Key>
@@ -630,7 +630,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_OrderItems_dbo_Orders_OrderId">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -2459,7 +2459,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="WarehouseId" Type="Int32" />
           <Property Name="UnitQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
@@ -2585,10 +2585,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PriceType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PackageId" Type="Int32" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="Package" Relationship="Entities.FK_dbo_PriceHistories_dbo_Packages_PackageId" FromRole="PriceHistory" ToRole="Package" />
           <NavigationProperty Name="Product" Relationship="Entities.FK_dbo_PriceHistories_dbo_Products_ProductId" FromRole="PriceHistory" ToRole="Product" />
         </EntityType>
@@ -3344,7 +3344,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_OrderItems_dbo_Orders_OrderId">
-          <End Type="Entities.Order" Role="Order" Multiplicity="1" />
+          <End Type="Entities.Order" Role="Order" Multiplicity="0..1" />
           <End Type="Entities.OrderItem" Role="OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -4163,10 +4163,10 @@
           <EntitySetMapping Name="PriceHistories">
             <EntityTypeMapping TypeName="Entities.PriceHistory">
               <MappingFragment StoreEntitySet="PriceHistories">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="PriceType" ColumnName="PriceType" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

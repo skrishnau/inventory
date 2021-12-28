@@ -49,6 +49,7 @@ namespace IMS.Forms.Inventory
         private readonly IAppSettingService _appSettingService;
         private readonly IUomService _uomService;
         private readonly IProductOwnerService _productOwnerService;
+        private readonly IManufactureService _manufactureService;
 
         private Transaction.TransactionListUC _transactionListUC;
         private Transaction.TransactionListUC _orderListUC;
@@ -60,7 +61,7 @@ namespace IMS.Forms.Inventory
         private Dictionary<string, Button> menuButtonsDictionary = new Dictionary<string, Button>();
 
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService)
+        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService, IManufactureService manufactureService)
         {
             _orderService = orderService;
             _productService = productService;
@@ -71,13 +72,12 @@ namespace IMS.Forms.Inventory
             _appSettingService = appSettingService;
             _uomService = uomService;
             _productOwnerService = productOwnerService;
+            _manufactureService = manufactureService;
 
             InitializeComponent();
 
             this.Load += InventoryUC_Load;
-
-
-
+            
         }
 
         private async void InventoryUC_Load(object sender, EventArgs e)
@@ -139,7 +139,8 @@ namespace IMS.Forms.Inventory
             {
                 menuButtonsDictionary[buttonText].BackColor = Color.Transparent;
             }
-            menuButtonsDictionary[tabControl.SelectedTab.Text].BackColor = Color.Gainsboro;
+            if(menuButtonsDictionary.ContainsKey(tabControl.SelectedTab.Text))
+                menuButtonsDictionary[tabControl.SelectedTab.Text].BackColor = Color.Gainsboro;
             var baseUc = tabControl.Controls.Count > 0 ? tabControl.SelectedTab.Controls[0] as BaseUserControl : null;
             if (baseUc != null)
             {
@@ -384,7 +385,10 @@ namespace IMS.Forms.Inventory
             if (alreadyExistingTab == null)
             {
                 alreadyExistingTab = new TabPage(text);
-                AddToButtonsDictionary(text, (Button)sender);
+                if (sender is Button)
+                {
+                    AddToButtonsDictionary(text, (Button)sender);
+                }
                 currentUserControl = userControlToAdd as BaseUserControl;
                 if (currentUserControl != null)
                 {
@@ -599,7 +603,16 @@ namespace IMS.Forms.Inventory
         private void BtnManufacturings_Click(object sender, EventArgs e)
         {
             var uc = Program.container.GetInstance<ManufactureListUC>();
+            uc.RowSelected -= Uc_RowSelected;
+            uc.RowSelected += Uc_RowSelected;
             AddTabPage(Constants.TAB_MANUFACTURE, uc, sender);
+        }
+
+        private void Uc_RowSelected(object sender, Service.DbEventArgs.BaseEventArgs<ViewModel.Core.ManufactureModel> e)
+        {
+            var uc = new ManufactureDetailSmallUC(_manufactureService);
+            uc.PopulateData(e.Model);
+            AddTabPage(e.Model.Name + "-" + e.Model.LotNo, uc, sender);
         }
 
         #region Transactions

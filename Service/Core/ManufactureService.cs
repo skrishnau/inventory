@@ -258,7 +258,8 @@ namespace Service.Core
                     return new ResponseModel<bool> { Message = "Manufacture not found", Success = false };
                 if (manufacture.StartedAt != null)
                     return new ResponseModel<bool> { Message = "Manufacture already started. You can't delete but you may cancel it.", Success = false };
-                _context.Manufactures.Remove(manufacture);
+                manufacture.DeletedAt = DateTime.Now;
+                manufacture.LotNo = -1;
                 _context.SaveChanges();
                 return new ResponseModel<bool> { Message = "Delete Sucess!", Success = true };
             }
@@ -272,11 +273,11 @@ namespace Service.Core
                 var entity = _context.Manufactures.Find(manufactureId);
                 if (entity != null)
                 {
-                    /*
                     if (!_context.ManufactureDepartments.Where(x => x.ManufactureId == manufactureId).Any())
                     {
                         return new ResponseModel<bool>(false, "There aren't any department");
                     }
+                    /*
                     var maxPosition = _context.ManufactureDepartments.Where(x => x.ManufactureId == manufactureId).Max(x => x.Position);
                     var manufactureDepUsers = _context.ManufactureDepartmentUsers
                         .Where(x => x.ManufactureDepartment.Position == maxPosition);
@@ -802,6 +803,8 @@ namespace Service.Core
                 };
                 manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
                 var totalConsumedCost = list.Sum(item => item.Rate * item.UnitQuantity);
+                var rate = (model.BuildRate ?? 0) + (totalConsumedCost / model.Quantity);
+                
                 var invUnit = new InventoryUnitModel
                 {
                     IsHold = true,
@@ -812,12 +815,24 @@ namespace Service.Core
                     ReceiveDateDate = date,
                     //EmployeeId = manufactureDepartmentUser.UserId,
                     AssignedToDepartmentId = manufactureDepartmentUser.ManufactureDepartment.DepartmentId,
-                    Rate = (model.BuildRate ?? 0) + (totalConsumedCost / model.Quantity)
+                    Rate = rate,
                 };
                 var orderItem = new OrderItem
                 {
                     User = manufactureDepartmentUser.User,
                     SupplierId = null,
+                    ProductId = model.ProductId,
+                    PackageId = model.PackageId,
+                    CostPriceRate = rate,
+                    CostPriceTotal = rate * model.Quantity,
+                    IsHold = true,
+                    IsReceived = true,
+                    ProductionDate = DateTime.Now,
+                    Rate = rate,
+                    Reference = "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo,
+                    Total = rate * model.Quantity,
+                    UnitQuantity = model.Quantity,
+                    //OrderId
                 };
                 _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
 

@@ -8,7 +8,6 @@ using DTO.Core.Inventory;
 using Service.Listeners;
 using Service.DbEventArgs;
 using ViewModel.Core.Common;
-using ViewModel.Enums.Inventory;
 using ViewModel.Core.Business;
 using ViewModel.Enums;
 using ViewModel.Core.Orders;
@@ -181,7 +180,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = DatabaseContext.Context)
             {
-                var positive = AdjustmentType.Positive.ToString();
+                var positive = AdjustmentTypeEnum.Positive.ToString();
                 if (_context.AdjustmentCodes.Count() == 0)
                     SeedAdjustmentCodes(_context);
                 return _context.AdjustmentCodes
@@ -200,7 +199,7 @@ namespace Service.Core.Inventory
         {
             using (var _context = DatabaseContext.Context)
             {
-                var negative = AdjustmentType.Negative.ToString();
+                var negative = AdjustmentTypeEnum.Negative.ToString();
                 if (_context.AdjustmentCodes.Count() == 0)
                     SeedAdjustmentCodes(_context);
                 return _context.AdjustmentCodes
