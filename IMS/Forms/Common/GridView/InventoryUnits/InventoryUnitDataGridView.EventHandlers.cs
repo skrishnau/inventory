@@ -457,13 +457,16 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             {
                 rateVal = formattedValue;
             }
-            decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out decimal quantity);
-            decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out decimal rate);
-            row.Cells[colTotal.Index].Value = quantity * rate;
+            if (formattedValue != null)
+            {
+                decimal.TryParse(qtyVal == null ? "0" : qtyVal.ToString(), out decimal quantity);
+                decimal.TryParse(rateVal == null ? "0" : rateVal.ToString(), out decimal rate);
+                row.Cells[colTotal.Index].Value = quantity * rate;
 
-            //GetItems();
-            if (AmountChanged != null)
-                AmountChanged(GetTotalSumAmount());
+                //GetItems();
+                if (AmountChanged != null)
+                    AmountChanged(GetTotalSumAmount());
+            }
         }
     }
 }

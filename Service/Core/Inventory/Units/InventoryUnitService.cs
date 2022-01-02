@@ -838,16 +838,16 @@ namespace Service.Core.Inventory.Units
                 if (assignRelease != null)
                 {
                     if(assignRelease.ToId > 0)
-                        description = $"Assigned from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) to {assignRelease.ToName} ({assignRelease.ToType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                        description = $"Assigned from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) to {assignRelease.ToName} ({assignRelease.ToType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' C.P. {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                     else if (adjustmentCode == AdjustmentCodeEnum.Consumed.ToString())
-                        description = $"Consumed by {assignRelease.FromName} ({assignRelease.FromType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                        description = $"Consumed by {assignRelease.FromName} ({assignRelease.FromType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' C.P. {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                     else
-                        description = $"Issued from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                        description = $"Issued from {assignRelease.FromName} ({assignRelease.FromType.ToString()}) {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' C.P. {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 }
                 else if (adjustmentCode == AdjustmentCodeEnum.Consumed.ToString())
-                    description = $"Consumed {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                    description = $"Consumed {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' C.P. {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 else
-                    description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' @ {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
+                    description = $"Issued {Math.Round(issuedQuantity, 2)} {packagename} of '{productName}' C.P. {Math.Round(rate * conversion, 2)}";// from {warehouseName} warehouse.";
                 AddMovementWithoutCoomit(_context, description, referenceNo, adjustmentCode, issuedQuantity, now, productId);//"Direct Issue"
                 var invMovement = new InventoryMovementModel
                 {

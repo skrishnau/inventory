@@ -195,7 +195,7 @@ namespace Service.Core
             {
                 try
                 {
-                    var lotNo = _context.Manufactures.Max(x => x.LotNo);
+                    var lotNo = _context.Manufactures.Where(x=>x.DeletedAt != null).Max(x => x.LotNo);
                     if (lotNo == 0)
                     {
                         throw new Exception("No Manufactures yet");
