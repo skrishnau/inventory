@@ -508,6 +508,7 @@
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="PaymentDueDate" Type="datetime" />
           <Property Name="AllDuesClearDate" Type="datetime" />
+          <Property Name="LastLedgerPrintDate" Type="datetime" />
         </EntityType>
         <EntityType Name="WarehouseProducts">
           <Key>
@@ -2816,6 +2817,7 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PaymentDueDate" Type="DateTime" Precision="3" />
           <Property Name="AllDuesClearDate" Type="DateTime" Precision="3" />
+          <Property Name="LastLedgerPrintDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Departments" Relationship="Entities.FK_Departments_Users_HeadUserId" FromRole="User" ToRole="Department" />
           <NavigationProperty Name="DepartmentUsers" Relationship="Entities.FK_DepartmentUsers_Users_UserId" FromRole="User" ToRole="DepartmentUser" />
           <NavigationProperty Name="InventoryUnits" Relationship="Entities.FK_dbo_InventoryUnits_dbo_Users_SupplierId" FromRole="User" ToRole="InventoryUnit" />
@@ -4336,6 +4338,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Entities.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="LastLedgerPrintDate" ColumnName="LastLedgerPrintDate" />
                 <ScalarProperty Name="AllDuesClearDate" ColumnName="AllDuesClearDate" />
                 <ScalarProperty Name="PaymentDueDate" ColumnName="PaymentDueDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />

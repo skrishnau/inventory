@@ -104,7 +104,8 @@ namespace DTO.Core.Inventory
                 Company = x.Company,
                 PaymentDueDate = x.PaymentDueDate,
                 AllDuesClearDate = x.AllDuesClearDate,
-                AllDuesClearDateBS = x.AllDuesClearDate.HasValue ? DateConverter.Instance.ToBS(x.AllDuesClearDate.Value).ToString(): ""
+                AllDuesClearDateBS = x.AllDuesClearDate.HasValue ? DateConverter.Instance.ToBS(x.AllDuesClearDate.Value).ToString(): "",
+                LastLedgerPrintDate = x.LastLedgerPrintDate,
             };
         }
 

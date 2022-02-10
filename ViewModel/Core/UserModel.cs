@@ -76,14 +76,14 @@ namespace ViewModel.Core
         // ============= Table objects ===============//
         //public virtual Role Role { get; set; }
 
-
+        public DateTime? LastLedgerPrintDate { get; set; }
 
 
         public User ToEntity()
         {
             return new User
             {
-                
+
                 Address = Address,
                 CreatedAt = CreatedAt,
                 DOB = DOB,

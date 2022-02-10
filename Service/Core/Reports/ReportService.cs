@@ -134,6 +134,7 @@ namespace Service.Core.Reports
                         User = user.Name,
                         FromDate = DateConverter.Instance.ToBS(from).ToString(),//from.ToString("yyyy/MM/dd"),
                         ToDate = DateConverter.Instance.ToBS(to.AddDays(-1)).ToString(), //to.AddDays(-1).ToString("yyyy/MM/dd"),
+                        UserId = model.CustomerId
                     };
                     return master;
                 }

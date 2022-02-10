@@ -42,6 +42,9 @@
             this.colDrCr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.chkDateFilter = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dtFrom = new IMS.Forms.Common.Date.NepaliDateTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -54,18 +57,17 @@
             this.cbType = new System.Windows.Forms.ComboBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.chkDateFilter = new System.Windows.Forms.CheckBox();
+            this.lblLastLedgerPrintDate = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLastClearanceDate
@@ -200,6 +202,33 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(903, 50);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.chkDateFilter);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(60, 27);
+            this.panel2.TabIndex = 5;
+            // 
+            // chkDateFilter
+            // 
+            this.chkDateFilter.AutoSize = true;
+            this.chkDateFilter.Location = new System.Drawing.Point(40, 6);
+            this.chkDateFilter.Name = "chkDateFilter";
+            this.chkDateFilter.Size = new System.Drawing.Size(15, 14);
+            this.chkDateFilter.TabIndex = 1;
+            this.chkDateFilter.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Date";
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.dtFrom);
@@ -258,6 +287,8 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.label7);
+            this.panel7.Controls.Add(this.lblLastLedgerPrintDate);
             this.panel7.Controls.Add(this.cbCustomer);
             this.panel7.Controls.Add(this.label1);
             this.panel7.Controls.Add(this.label4);
@@ -319,32 +350,23 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.UseVisualStyleBackColor = false;
             // 
-            // panel2
+            // lblLastLedgerPrintDate
             // 
-            this.panel2.Controls.Add(this.chkDateFilter);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(60, 27);
-            this.panel2.TabIndex = 5;
+            this.lblLastLedgerPrintDate.AutoSize = true;
+            this.lblLastLedgerPrintDate.Location = new System.Drawing.Point(554, 8);
+            this.lblLastLedgerPrintDate.Name = "lblLastLedgerPrintDate";
+            this.lblLastLedgerPrintDate.Size = new System.Drawing.Size(10, 13);
+            this.lblLastLedgerPrintDate.TabIndex = 9;
+            this.lblLastLedgerPrintDate.Text = "-";
             // 
-            // label5
+            // label7
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Date";
-            // 
-            // chkDateFilter
-            // 
-            this.chkDateFilter.AutoSize = true;
-            this.chkDateFilter.Location = new System.Drawing.Point(40, 6);
-            this.chkDateFilter.Name = "chkDateFilter";
-            this.chkDateFilter.Size = new System.Drawing.Size(15, 14);
-            this.chkDateFilter.TabIndex = 1;
-            this.chkDateFilter.UseVisualStyleBackColor = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(446, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(102, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Ledger Printed On : ";
             // 
             // LedgerUC
             // 
@@ -356,6 +378,8 @@
             this.Size = new System.Drawing.Size(991, 468);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLedger)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -366,8 +390,6 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -402,5 +424,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox chkDateFilter;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblLastLedgerPrintDate;
     }
 }

@@ -31,5 +31,6 @@ namespace Service.Core.Users
         UserModel Authenticate(string username, string password);
         bool SavePassword(PasswordModel model);
         List<ManufactureDepartmentUserModel> GetUserListForComboByDepartmentId(int manufactureId, int departmentId, int[] includeUserList);
+        bool SaveLedgerPrintDate(int userId);
     }
 }

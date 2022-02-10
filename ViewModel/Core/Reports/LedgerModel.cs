@@ -26,6 +26,8 @@ namespace ViewModel.Core.Reports
         public string FromDate { get; set; }
         public string ToDate { get; set; }
 
+        public int UserId { get; set; }
+
     }
     public class LedgerModel
     {

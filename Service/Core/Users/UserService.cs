@@ -359,6 +359,21 @@ namespace Service.Core.Users
             }
 
         }
+
+        public bool SaveLedgerPrintDate(int userId)
+        {
+            using (var _context = DatabaseContext.Context)
+            {
+                var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+                if (user != null)
+                {
+                    user.LastLedgerPrintDate = DateTime.Now;
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 
 }

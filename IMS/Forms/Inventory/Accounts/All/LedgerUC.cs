@@ -89,13 +89,19 @@ namespace IMS.Forms.Inventory.Reports.All
             //var ledgerMaster = GetLedger();
             if (_ledgerMasterForPrint != null)
             {
-                var form = new LedgerPrintForm(_appSettingService, _ledgerMasterForPrint);
+                var form = new LedgerPrintForm(_appSettingService, _ledgerMasterForPrint, _userService);
+                form.LedgerPrinted += Form_LedgerPrinted;
                 form.ShowDialog();
             }
             else
             {
                 PopupMessage.ShowInfoMessage("Empty ledger!");
             }
+        }
+
+        private void Form_LedgerPrinted(object sender, EventArgs e)
+        {
+            ShowLastLedgerPrintDate(DateTime.Now);
         }
 
         private void ChkOnlyShowAfterLastClearance_CheckedChanged(object sender, EventArgs e)
@@ -115,12 +121,19 @@ namespace IMS.Forms.Inventory.Reports.All
             if (userItem != null)
             {
                 var user = _userService.GetUser(userItem.Id);
-                if (user != null)
-                    lblLastClearanceDate.Text = user.AllDuesClearDate.HasValue
+                lblLastClearanceDate.Text = (user?.AllDuesClearDate.HasValue ?? false)
                         ? DateConverter.Instance.ToBS(user.AllDuesClearDate.Value).ToString()//.ToString("(yyyy/MM/dd HH:mm:ss)")
                         : "";
+                ShowLastLedgerPrintDate(user?.LastLedgerPrintDate);
+                
             }
 
+        }
+        private void ShowLastLedgerPrintDate(DateTime? lastLedgerPrintDate)
+        {
+            lblLastLedgerPrintDate.Text = lastLedgerPrintDate.HasValue
+                       ? DateConverter.Instance.ToBS(lastLedgerPrintDate.Value).ToString()
+                       : "-";
         }
 
         private void _listener_UserUpdated(object sender, Service.DbEventArgs.BaseEventArgs<UserModel> e)

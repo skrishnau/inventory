@@ -6,3 +6,7 @@ alter table InventoryUnits add AssignedToDepartmentId int null constraint FK_Inv
 
 -- 2021-12-18
 alter table OrderItems alter column OrderId int null
+
+
+-- 2022-02-10 -- last ledger print date
+alter table Users add LastLedgerPrintDate Datetime null

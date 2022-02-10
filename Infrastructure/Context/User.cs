@@ -68,6 +68,7 @@ namespace Infrastructure.Context
         public string Notes { get; set; }
         public Nullable<System.DateTime> PaymentDueDate { get; set; }
         public Nullable<System.DateTime> AllDuesClearDate { get; set; }
+        public Nullable<System.DateTime> LastLedgerPrintDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Departments { get; set; }

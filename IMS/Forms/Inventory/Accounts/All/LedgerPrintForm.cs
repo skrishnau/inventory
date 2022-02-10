@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using Service.Core.Settings;
+using Service.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +16,18 @@ namespace IMS.Forms.Inventory.Accounts.All
 {
     public partial class LedgerPrintForm : Form
     {
+        public event EventHandler LedgerPrinted;
+
         private readonly IAppSettingService _settingService;
+        private readonly IUserService _userService;
         private LedgerMasterModel _ledgerMasterModel;
 
-        public LedgerPrintForm(IAppSettingService appSettingService, LedgerMasterModel ledgerMasterModel)
+
+        public LedgerPrintForm(IAppSettingService appSettingService, LedgerMasterModel ledgerMasterModel, IUserService userService)
         {
             this._settingService = appSettingService;
             this._ledgerMasterModel = ledgerMasterModel;
+            _userService = userService;
 
             InitializeComponent();
 
@@ -39,7 +45,20 @@ namespace IMS.Forms.Inventory.Accounts.All
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 
             this.reportViewer1.RefreshReport();
+            
+            this.reportViewer1.PrintingBegin += ReportViewer1_PrintingBegin;
+            
         }
+
+        private void ReportViewer1_PrintingBegin(object sender, ReportPrintEventArgs e)
+        {
+            var printed = _userService.SaveLedgerPrintDate(_ledgerMasterModel.UserId);
+            if (printed)
+            {
+                LedgerPrinted?.Invoke(this, new EventArgs());
+            }
+        }
+
 
         public IEnumerable<ReportParameter> GetReportParametersForSaleTransaction(LedgerMasterModel model)
         {
