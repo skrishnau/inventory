@@ -172,6 +172,12 @@
     </Compile>
     <Compile Include="Forms\Common\GridView\GridViewHelper.cs" />
     <Compile Include="Forms\Common\Pagination\PaginationHelper.cs" />
+    <Compile Include="Forms\Inventory\Accounts\All\ClientListPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Accounts\All\ClientListPrintForm.Designer.cs">
+      <DependentUpon>ClientListPrintForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Accounts\All\ProductLedgerPrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -858,6 +864,9 @@
     <EmbeddedResource Include="Forms\Common\Display\SaveFooterUC.resx">
       <DependentUpon>SaveFooterUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Accounts\All\ClientListPrintForm.resx">
+      <DependentUpon>ClientListPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Accounts\All\ProductLedgerPrintForm.resx">
       <DependentUpon>ProductLedgerPrintForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1170,6 +1179,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ClientListReport.rdlc" />
     <EmbeddedResource Include="Reports\LedgerReport.rdlc" />
     <EmbeddedResource Include="Reports\SalesTransactionReport_DoublePrint.rdlc" />
     <EmbeddedResource Include="Reports\SalesTransactionReport.rdlc" />
@@ -1185,6 +1195,7 @@
     <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderItemModel.datasource" />
     <None Include="Properties\DataSources\ViewModel.Core.Orders.OrderModel.datasource" />
     <None Include="Properties\DataSources\ViewModel.Core.Orders.SalePurchaseAmountModel.datasource" />
+    <None Include="Properties\DataSources\ViewModel.Core.Reports.ClientListPrintModel.datasource" />
     <None Include="Properties\DataSources\ViewModel.Core.Reports.LedgerModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

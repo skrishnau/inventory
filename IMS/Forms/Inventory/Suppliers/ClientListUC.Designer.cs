@@ -43,6 +43,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnPayment = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -54,6 +55,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -195,6 +197,7 @@
             this.flowLayoutPanel2.Controls.Add(this.btnNew);
             this.flowLayoutPanel2.Controls.Add(this.btnEdit);
             this.flowLayoutPanel2.Controls.Add(this.btnPayment);
+            this.flowLayoutPanel2.Controls.Add(this.btnPrint);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(723, 4);
@@ -243,6 +246,20 @@
             this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPayment.UseVisualStyleBackColor = false;
             this.btnPayment.Visible = false;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Image = global::IMS.Properties.Resources.icons8_print_16px;
+            this.btnPrint.Location = new System.Drawing.Point(51, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(83, 39);
+            this.btnPrint.TabIndex = 17;
+            this.btnPrint.Text = "Print This List";
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.UseVisualStyleBackColor = false;
             // 
             // bindingNavigator1
             // 
@@ -349,6 +366,14 @@
             this.listHeaderTemplate1.Size = new System.Drawing.Size(1044, 32);
             this.listHeaderTemplate1.TabIndex = 14;
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 30;
+            // 
             // colId
             // 
             this.colId.DataPropertyName = "Id";
@@ -417,7 +442,8 @@
             this.colManufacturedAmount.HeaderText = "Manufactured Amt.";
             this.colManufacturedAmount.Name = "colManufacturedAmount";
             this.colManufacturedAmount.ReadOnly = true;
-            this.colManufacturedAmount.Width = 112;
+            this.colManufacturedAmount.Visible = false;
+            this.colManufacturedAmount.Width = 122;
             // 
             // colRemainAmount
             // 
@@ -428,7 +454,7 @@
             // 
             // colPaymentDueDate
             // 
-            this.colPaymentDueDate.DataPropertyName = "PaymentDueDate";
+            this.colPaymentDueDate.DataPropertyName = "PaymentDueDateBS";
             this.colPaymentDueDate.HeaderText = "Due Date";
             this.colPaymentDueDate.Name = "colPaymentDueDate";
             this.colPaymentDueDate.ReadOnly = true;
@@ -506,6 +532,8 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private Common.Buttons.MenuButton btnPrint;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SupplierName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCompany;

@@ -52,7 +52,7 @@ namespace ViewModel.Core
         public decimal PaidAmount { get; set; }
         public decimal ManufacturedAmount { get; set; }
         public decimal DueAmount { get { return PaidAmount - TotalAmount + ManufacturedAmount; } }
-        public string DueAmountString { get { return DueAmount > 0 ? (DueAmount).ToString("0.00") : $"({Math.Abs(DueAmount).ToString("0.00")})"; } }
+        public string DueAmountString { get { return DueAmount >= 0 ? (DueAmount).ToString("0.00") : $"({Math.Abs(DueAmount).ToString("0.00")})"; } }
         // 
         // extra
         //
@@ -70,6 +70,7 @@ namespace ViewModel.Core
         public string Notes { get; set; }
 
         public DateTime? PaymentDueDate { get; set; }
+        public string PaymentDueDateBS { get; set; }
         public DateTime? AllDuesClearDate { get; set; }
         public string AllDuesClearDateBS { get; set; }
 

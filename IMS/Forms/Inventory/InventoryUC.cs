@@ -508,7 +508,7 @@ namespace IMS.Forms.Inventory
         private void BtnVendor_Click(object sender, EventArgs e)
         {
             //var uc = Program.container.GetInstance<ClientListUC>();
-            var uc = new ClientListUC(_userService, _listener);
+            var uc = new ClientListUC(_userService, _listener, _appSettingService);
             uc.SetData(UserTypeCategoryEnum.UserAndVendor);
             AddTabPage(Constants.TAB_VENDOR, uc, sender);
         }
