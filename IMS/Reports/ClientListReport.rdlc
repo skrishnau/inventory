@@ -94,7 +94,7 @@
                   <TextRun>
                     <Value>Type</Value>
                     <Style>
-                      <FontSize>8.4pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -102,7 +102,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>0.4675in</Top>
+            <Top>0.43in</Top>
             <Height>0.1875in</Height>
             <Width>0.55208in</Width>
             <Style>
@@ -124,7 +124,7 @@
                   <TextRun>
                     <Value>=Parameters!UserType.Value</Value>
                     <Style>
-                      <FontSize>8.4pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -132,10 +132,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>0.4675in</Top>
+            <Top>0.43in</Top>
             <Left>0.61542in</Left>
             <Height>0.1875in</Height>
-            <Width>2.53269in</Width>
+            <Width>1.58358in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -160,7 +160,7 @@
                   <TextRun>
                     <Value>Search Text :</Value>
                     <Style>
-                      <FontSize>8.4pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -168,7 +168,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>0.4675in</Top>
+            <Top>0.43in</Top>
             <Left>4.42848in</Left>
             <Height>0.1875in</Height>
             <Width>0.80208in</Width>
@@ -192,7 +192,7 @@
                   <TextRun>
                     <Value>=Parameters!SearchText.Value</Value>
                     <Style>
-                      <FontSize>8.4pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -200,7 +200,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>0.4675in</Top>
+            <Top>0.43in</Top>
             <Left>5.2625in</Left>
             <Height>0.1875in</Height>
             <Width>1.79583in</Width>
@@ -1483,10 +1483,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ClientListDataset</DataSetName>
-            <Top>0.69668in</Top>
+            <Top>0.65918in</Top>
             <Left>0.01424in</Left>
             <Height>0.69792in</Height>
-            <Width>7.08576in</Width>
+            <Width>7.08575in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -1496,7 +1496,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>1.43418in</Height>
+        <Height>1.39251in</Height>
         <Style />
       </Body>
       <Width>7.13819in</Width>
