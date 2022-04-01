@@ -56,17 +56,17 @@ namespace IMS.Forms.Inventory.Units
 
             InitializeComponent();
             this.Dock = DockStyle.Fill; ;
-            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
 
             this.Load += InventoryUnitListUC_Load;
         }
 
         private void InventoryUnitListUC_Load(object sender, EventArgs e)
         {
+            dgvInventoryUnit.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             // InitializeHeader();  
             //_listener.WarehouseUpdated += _listener_WarehouseUpdated;
             // InitializeHeader();
-           // PopulateWarehouses();
+            // PopulateWarehouses();
             PopulateProducts();
             InitializeGridView();
 

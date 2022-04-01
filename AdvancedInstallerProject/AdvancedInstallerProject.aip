@@ -61,10 +61,10 @@
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="Manufacturer" Value="SKU"/>
-    <ROW Property="ProductCode" Value="1033:{958E1DAF-3539-49FF-9E11-D2FC1369853C} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{A7AC1E23-6031-4963-B5BD-A182BA05B3C8} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="MAX IMS"/>
-    <ROW Property="ProductVersion" Value="2.0.8" Type="32"/>
+    <ROW Property="ProductVersion" Value="2.1.1" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{851D37BB-FFFB-47F0-AE39-ACEC8CCA2735}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>

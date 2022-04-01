@@ -195,8 +195,11 @@ namespace IMS.Forms.MRP.Departments
 
         private void PopulateDepartmentData()
         {
+            dgvDepartmentList.SelectionChanged -= DgvDepartmentList_SelectionChanged;
             if (helper != null)
                 helper.Reset(txtName.Text);
+            dgvDepartmentList.SelectionChanged += DgvDepartmentList_SelectionChanged;
+
         }
 
         private void ShowDepartmentAddEditDialog(int departmentId)
@@ -262,44 +265,68 @@ namespace IMS.Forms.MRP.Departments
 
         private void DgvDepartmentList_SelectionChanged(object sender, EventArgs e)
         {
+
             // populate detail 
-            //PopulateDepartmentDetail();
-            if (dgvDepartmentList.SelectedRows.Count > 0)
+            PopulateDepartmentDetail();
+
+
+        }
+
+        private void PopulateDepartmentDetail()
+        {
+            var visible = dgvDepartmentList.SelectedRows.Count > 0;
+            // show edit and delete buttons
+            btnEdit.Visible = visible;
+            btnAssignProducts.Visible = visible;
+            btnReleaseProducts.Visible = visible;
+            btnDelete.Visible = visible;
+
+            // btnDelete.Visible = true;
+            var data = visible ? (DepartmentModel)dgvDepartmentList.SelectedRows[0].DataBoundItem : null;
+            //_selectedDepartment = data;
+            lblDepartmentName.Text = data?.Name ?? "";
+            //var model = _inventoryService.GetDepartmentForEdit(data.Id);
+            PopulateEmployeesData(data);
+            if (data != null)
             {
-                // show edit and delete buttons
-                btnEdit.Visible = true;
-                btnAssignProducts.Visible = true;
-                btnReleaseProducts.Visible = true;
-                btnDelete.Visible = true;
-                // btnDelete.Visible = true;
-                var data = (DepartmentModel)dgvDepartmentList.SelectedRows[0].DataBoundItem;
-                //_selectedDepartment = data;
-                lblDepartmentName.Text = data.Name;
-                //var model = _inventoryService.GetDepartmentForEdit(data.Id);
-                PopulateEmployeesData(data);
                 if (data.IsVendor)
                     lblEmployeesVendors.Text = "Vendors";
                 else
                     lblEmployeesVendors.Text = "Employees";
-
-                lblProductsOnHold.Text = "Products on Hold by " + data.Name;
-                PopulateProductsOnHold(data);
             }
-
+            else
+            {
+                lblEmployeesVendors.Text = "";
+            }
+            lblProductsOnHold.Text = "Products on Hold by " + (data?.Name ?? string.Empty);
+            PopulateProductsOnHold(data);
         }
 
         private void PopulateProductsOnHold(DepartmentModel dep)
         {
+            List<ProductOwnerModel> list;
             if (dep != null)
             {
-                var list = _productOwnerService.GetProductOnwerList(dep.Id, 0);
-                dgvDepartmentProducts.DataSource = list;
+                list = _productOwnerService.GetProductOnwerList(dep.Id, 0);
             }
+            else
+            {
+                list = new List<ProductOwnerModel>();
+            }
+                dgvDepartmentProducts.DataSource = list;
         }
 
         private void PopulateEmployeesData(DepartmentModel data)
         {
-            List<DepartmentUserModel> history = _manufactureService.GetEmployeesOfDepartment(data.Id);
+            List<DepartmentUserModel> history;
+            if (data != null)
+            {
+                history = _manufactureService.GetEmployeesOfDepartment(data.Id);
+            }
+            else
+            {
+                history = new List<DepartmentUserModel>();
+            }
             dgvEmployees.DataSource = history;
         }
 
@@ -320,7 +347,9 @@ namespace IMS.Forms.MRP.Departments
 
         private DepartmentModel GetSelectedDepartment()
         {
-            return ((DepartmentModel)dgvDepartmentList.SelectedRows[0].DataBoundItem);
+            if (dgvDepartmentList.SelectedRows.Count > 0)
+                return ((DepartmentModel)dgvDepartmentList.SelectedRows[0].DataBoundItem);
+            return null;
         }
 
 

@@ -492,6 +492,7 @@ namespace Service.Core.Inventory.Units
 
             unitEntity.ReceiveDate = unit.ReceiveDateDate;//receivedDate;
             unitEntity.ReceiveAdjustment = adjustmentCode;
+            
             // Order item should always be given
             //if (orderItem != null)
             //{

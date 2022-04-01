@@ -68,6 +68,10 @@ namespace IMS
             Bootstrap();
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
+                //using (var _context = DatabaseContext.Context)
+                //{
+                //    container.GetInstance<IInventoryUnitService>().FindWarehouseOrReturnMainWarehouse(_context, null);
+                //}
                 Application.Run(container.GetInstance<Form1>());
             }
 

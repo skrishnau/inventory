@@ -857,7 +857,6 @@
             this.pnlManufacture.Name = "pnlManufacture";
             this.pnlManufacture.Size = new System.Drawing.Size(235, 68);
             this.pnlManufacture.TabIndex = 60;
-            this.pnlManufacture.Visible = false;
             // 
             // panel11
             // 
@@ -868,7 +867,6 @@
             this.panel11.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel11.Size = new System.Drawing.Size(11, 68);
             this.panel11.TabIndex = 61;
-            this.panel11.Visible = false;
             // 
             // splitter9
             // 

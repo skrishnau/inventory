@@ -12,6 +12,10 @@ using IMS.Forms.Inventory.Transaction;
 using System.IO;
 using Service;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using IMS.Forms.Backup;
+using System.Linq;
+using Service.Utility;
 
 namespace IMS
 {
@@ -38,32 +42,64 @@ namespace IMS
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = Constants.APP_NAME;
-            //GetDatabaseConnection();
-            //if (string.IsNullOrEmpty(UserSession.Database))
-            //{
-
-            //}
-            //else
-            //{
+            var databaseConnectionSuccess = SetDatabaseConnection();
+            if (databaseConnectionSuccess)
+            {
                 ShowLoginFormOrLogin();
-            //}
+            }
         }
 
-        private void GetDatabaseConnection()
+        private bool SetDatabaseConnection()
+        {
+            UserSession.ConnectionStrings = GetConnectionStringFromFile();
+            if (UserSession.ConnectionStrings != null)
+            {
+                var testSuccess = DatabaseHelper.TestDatabaseConnection(UserSession.ConnectionStrings);
+                if (testSuccess)
+                {
+                    return true;
+                }
+            }
+            // show database configuation page
+            var databaseConfigForm = new DatabaseConfigForm();
+            var dialogResult = databaseConfigForm.ShowDialog();
+            if (dialogResult == DialogResult.Yes || dialogResult == DialogResult.OK)
+            {
+               return true;
+            }
+            return false;
+        }
+        private ConnectionStrings GetConnectionStringFromFile()
         {
             // get connection string
+            var settings = GetSettingsFromFile();
+            return DatabaseHelper.GetConnectionString(settings.DatabaseServer, settings.DatabaseName);
+        }
+        private ApplicationSettings GetSettingsFromFile()
+        {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var lines = File.ReadAllText(Path.Combine(path, Constants.DATABASE_CONFIG_FILENAME));
-            var obj = JsonConvert.DeserializeObject<ApplicationSettings>(lines);
-            if (obj != null)
+            var fileFullPath = Path.Combine(path, Constants.APP_NAME, Constants.DATABASE_CONFIG_FILENAME);
+            List<ConfigKeyValue> settingsDictionary = new List<ConfigKeyValue>();
+
+            if (File.Exists(fileFullPath))
             {
-                UserSession.Database = obj.ConnectionString;
+                var lines = File.ReadAllLines(fileFullPath);
+                foreach (var l in lines)
+                {
+                    var keyValue = ApplicationSettings.TrimAndGetSettingsKeyAndValue(l);
+                    if (keyValue == null)
+                        continue;
+                    settingsDictionary.Add(keyValue);
+                }
             }
-            if (string.IsNullOrWhiteSpace(UserSession.Database))
-            {
-                // show database configuation page
-               // var databaseConfigForm = new DatabaseConfigForm();
-            }
+            // convert to class for easy access
+            var settings = new ApplicationSettings();
+            if (settingsDictionary.Any(x=>x.Key == ApplicationSettingsEnum.DB_Server))
+                settings.DatabaseServer = settingsDictionary.First(x=>x.Key == ApplicationSettingsEnum.DB_Server).Value;
+            if (settingsDictionary.Any(x=> x.Key  == ApplicationSettingsEnum.DB_Name))
+                settings.DatabaseName = settingsDictionary.First(x=> x.Key == ApplicationSettingsEnum.DB_Name).Value;
+
+            return settings;
         }
 
         private async void ShowLoginFormOrLogin()

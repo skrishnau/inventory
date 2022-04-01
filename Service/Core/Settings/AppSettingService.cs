@@ -609,7 +609,7 @@ namespace Service.Core.Settings
                 Value = encrypted,
             };
             SaveAppSetting(expireModel);
-
+            /*
             // save in registry
             Microsoft.Win32.RegistryKey key;
             key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("win_security_001783463");
@@ -618,6 +618,7 @@ namespace Service.Core.Settings
                 key.SetValue("win_security_001783463_update3", encrypted);
                 key.Close();
             }
+            */
         }
 
         public async Task<DateTime?[]> GetLicenseStartDate()
@@ -633,11 +634,14 @@ namespace Service.Core.Settings
                     var decrypt = StringCipher.Decrypt(validity.Value);
                     expireAtDbParsed = DateTime.TryParse(decrypt, out expireAtDb);
                     if (expireAtDbParsed)
+                    {
                         array[0] = expireAtDb;
+                        array[1] = expireAtDb;
+                    }
                 }
                 catch (Exception) { }
             }
-
+            /*
             DateTime expireAtReg;
             bool expireAtRegParsed;
             Microsoft.Win32.RegistryKey key;
@@ -658,7 +662,7 @@ namespace Service.Core.Settings
                         array[1] = expireAtReg;
                 }
                 catch (Exception) { }
-            }
+            }*/
             return array;
         }
 

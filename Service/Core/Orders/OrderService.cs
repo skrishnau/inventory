@@ -501,8 +501,8 @@ namespace Service.Core.Orders
                                 ProductId = purchaseitem.ProductId,
                                 PackageId = purchaseitem.PackageId,
                                 //ReceiveDate = receiveDate,
-                                ReceiveReceipt = purchaseitem.Order.ReferenceNumber, // inv unit should have purchase receipt restored
-                                SupplierId = purchaseitem.Order.UserId,
+                                ReceiveReceipt = purchaseitem.Order?.ReferenceNumber ?? purchaseitem.Reference, // inv unit should have purchase receipt restored
+                                SupplierId = purchaseitem.Order?.UserId ?? purchaseitem.SupplierId,
                                 Total = unitQuantity * purchaseitem.Rate,
                                 ReceiveDateDate = purchaseitem?.Order?.CompletedDate ?? DateTime.Now,
                             };

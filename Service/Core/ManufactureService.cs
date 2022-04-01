@@ -529,7 +529,6 @@ namespace Service.Core
         private IQueryable<Department> GetDepartmentListQuery(DatabaseContext _context, string searchText)
         {
             var departments = _context.Departments
-                                //.Include(x => x.ProductAttributes)
                                 .Where(x => x.DeletedAt == null)
                                ;
             if (!string.IsNullOrEmpty(searchText))
@@ -574,8 +573,9 @@ namespace Service.Core
                 var entity = _context.Departments.Find(departmentId);
                 if (entity == null)
                     return new ResponseModel<bool>(false, "Department not found");
-                _context.Departments.Remove(entity);
+                entity.DeletedAt = DateTime.Now;
                 _context.SaveChanges();
+                _listener.TriggerDepartmentUpdateEvent(null, BaseEventArgs<DepartmentModel>.Instance);
                 return new ResponseModel<bool>(true, Constants.DELETED_SUCCESSFULLY);
             }
         }
@@ -804,6 +804,8 @@ namespace Service.Core
                 manufactureDepartmentUser.UserManufactures.Add(userManufactureEntity);
                 var totalConsumedCost = list.Sum(item => item.Rate * item.UnitQuantity);
                 var rate = (model.BuildRate ?? 0) + (totalConsumedCost / model.Quantity);
+
+                var receiptNo = "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo;
                 
                 var invUnit = new InventoryUnitModel
                 {
@@ -816,6 +818,7 @@ namespace Service.Core
                     //EmployeeId = manufactureDepartmentUser.UserId,
                     AssignedToDepartmentId = manufactureDepartmentUser.ManufactureDepartment.DepartmentId,
                     Rate = rate,
+                    ReceiveReceipt = receiptNo,
                 };
                 var orderItem = new OrderItem
                 {
@@ -829,12 +832,12 @@ namespace Service.Core
                     IsReceived = true,
                     ProductionDate = DateTime.Now,
                     Rate = rate,
-                    Reference = "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo,
+                    Reference = receiptNo,
                     Total = rate * model.Quantity,
                     UnitQuantity = model.Quantity,
                     //OrderId
                 };
-                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, "MANU-" + manufactureDepartmentUser.ManufactureDepartment.Manufacture.LotNo, orderItem);
+                _inventoryUnitService.SaveDirectReceiveItemWithoutCommit(_context, invUnit, model.Date, "Manufactured", ref msg, manufacturedProduct, receiptNo, orderItem);
 
                 if (!string.IsNullOrWhiteSpace(msg))
                     return new ResponseModel<UserManufactureModel> { Success = false, Message = msg };
