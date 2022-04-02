@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using DTO.Core.Inventory;
 using Infrastructure.Context;
 using Service.DbEventArgs;
@@ -37,7 +38,7 @@ namespace Service.Core.Users
             }
         }
 
-        public void AddOrUpdateUser(UserModel supplierModel)
+        public ResponseModel<bool> AddOrUpdateUser(UserModel supplierModel)
         {
             using (var _context = DatabaseContext.Context)
             {
@@ -46,6 +47,10 @@ namespace Service.Core.Users
                 var dbEntity = _context.Users
                     .FirstOrDefault(x => x.Id == supplierModel.Id);
                 BaseEventArgs<UserModel> eventArgs = BaseEventArgs<UserModel>.Instance;
+                if (_context.Users.Any(x => x.Username == supplierModel.Username && x.Id != supplierModel.Id))
+                    return ResponseModel<bool>.GetError("Username already exists. Couldn't save.");
+                if (!string.IsNullOrEmpty(supplierModel.Password))
+                    supplierModel.Password = GeneratePasswordHash(supplierModel.Password);
                 dbEntity = UserMapper.MapToEntity(supplierModel, dbEntity);
                 if (dbEntity.Id == 0)
                 {
@@ -64,6 +69,7 @@ namespace Service.Core.Users
                 _context.SaveChanges();
                 eventArgs.Model = UserMapper.MapToUserModel(dbEntity);
                 _listener.TriggerUserUpdateEvent(null, eventArgs);
+                return ResponseModel<bool>.GetSaveSuccess(true);
             }
         }
 
@@ -297,13 +303,13 @@ namespace Service.Core.Users
             {
                 if (username == Constants.ADMIN_USERNAME)
                 {
-                    var adminExists = _context.Users.Any(x => x.Username == username);
-                    if (!adminExists)
+                    var adminUser = _context.Users.FirstOrDefault(x => x.Username == username);
+                    if (adminUser == null)
                     {
-                        var adminUser = new User
+                        adminUser = new User
                         {
                             Username = username,
-                            Password = StringCipher.Encrypt(password),
+                            Password = GeneratePasswordHash(password),//StringCipher.Encrypt(password),
                             CanLogin = true,
                             CreatedAt = DateTime.Now,
                             IsCompany = false,
@@ -315,31 +321,72 @@ namespace Service.Core.Users
                         _context.Users.Add(adminUser);
                         _context.SaveChanges();
                     }
+                    else if (string.IsNullOrEmpty(adminUser.Password))
+                    {
+                        adminUser.Password = GeneratePasswordHash(password);
+                        _context.SaveChanges();
+                    }
                 }
-                var passwordEncrypt = StringCipher.Encrypt(password);
+                //var passwordEncrypt = StringCipher.Encrypt(password);
                 var user = _context.Users.FirstOrDefault(x =>
                     x.Username == username
                     && x.CanLogin
                     && x.DeletedAt == null
-                    && x.Use == true
-                    );
-                if (password == StringCipher.Decrypt(user?.Password))
+                    && x.Use == true);
+                if (user != null  && VerifyPassword(user.Password, password))//password == StringCipher.Decrypt(user?.Password))
                 {
                     return UserMapper.MapToUserModel(user);
                 }
                 return null;
             }
         }
+        private string GeneratePasswordHash(string password)
+        {
+            //STEP 1 Create the salt value with a cryptographic PRNG:
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            //STEP 2 Create the Rfc2898DeriveBytes and get the hash value:
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            //STEP 3 Combine the salt and password bytes for later use:
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            //STEP 4 Turn the combined salt+hash into a string for storage
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+            return savedPasswordHash;
+
+        }
+        private bool VerifyPassword(string savedPasswordHash, string password)
+        {
+            //* Fetch the stored value */
+            //string savedPasswordHash = DBContext.GetUser(u => u.UserName == user).Password;
+            /* Extract the bytes */
+            byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+            /* Get the salt */
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+            /* Compute the hash on the password the user entered */
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            /* Compare the results */
+            for (int i = 0; i < 20; i++)
+                if (hashBytes[i + 16] != hash[i])
+                    return false; //throw new UnauthorizedAccessException();
+            return true;
+        }
 
         public bool IsAnyUser()
         {
             using (var _context = DatabaseContext.Context)
             {
-                return _context.Users.Any(x => (x.Username == Constants.ADMIN_USERNAME)
-                    || (x.CanLogin
+                return _context.Users.Any(x =>  x.Password != null && x.Password != "" && 
+                ((x.Username == Constants.ADMIN_USERNAME)
+                    || 
+                    (x.CanLogin
                         && x.DeletedAt == null
-                        && x.Use == true
-                    ));
+                        && x.Use == true))
+                );
             }
 
         }
@@ -351,7 +398,7 @@ namespace Service.Core.Users
                 var user = _context.Users.FirstOrDefault(x => x.Username == model.Username);
                 if (user != null)
                 {
-                    user.Password = StringCipher.Encrypt(model.Password);
+                    user.Password = GeneratePasswordHash(model.Password);//StringCipher.Encrypt(model.Password);
                     _context.SaveChanges();
                     return true;
                 }

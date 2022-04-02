@@ -34,10 +34,12 @@ namespace IMS.Forms.Inventory.Settings.General
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            ClearData();
             _isAnyUserInSystem = _userService.IsAnyUser();
             if (!_isAnyUserInSystem)
             {
                 tbUsername.Text = Constants.ADMIN_USERNAME;
+                tbUsername.Enabled = false;
                 tbPassword.Focus();
             }
             else
@@ -46,9 +48,18 @@ namespace IMS.Forms.Inventory.Settings.General
             }
             tbConfirmPassword.Visible = !_isAnyUserInSystem;
             lblConfirmPassword.Visible = !_isAnyUserInSystem;
+            //btnSaveProfile.Click -= BtnSave_Click;
             btnSaveProfile.Click += BtnSave_Click;
         }
-       
+
+        private void ClearData()
+        {
+            tbConfirmPassword.Text = "";
+            tbPassword.Text = "";
+            tbUsername.Text = "";
+            
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();

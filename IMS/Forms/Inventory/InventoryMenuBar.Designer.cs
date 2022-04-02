@@ -31,13 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryMenuBar));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnBackup = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
             this.btnAccounts = new System.Windows.Forms.Button();
             this.btnClients = new System.Windows.Forms.Button();
-            this.btnVendor = new System.Windows.Forms.Button();
             this.btnDepartment = new System.Windows.Forms.Button();
             this.btnManufacturings = new System.Windows.Forms.Button();
             this.btnInventoryUnits = new System.Windows.Forms.Button();
@@ -55,7 +56,6 @@
             this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnPOS = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -79,16 +79,17 @@
             this.pnlOrders = new System.Windows.Forms.Panel();
             this.pnlAdjustments = new System.Windows.Forms.Panel();
             this.pnlInventory = new System.Windows.Forms.Panel();
-            this.pnlMisc = new System.Windows.Forms.Panel();
+            this.pnlGeneral = new System.Windows.Forms.Panel();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel8 = new System.Windows.Forms.Panel();
+            this.pnlMisc = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.splitter8 = new System.Windows.Forms.Splitter();
             this.pnlManufacture = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.splitter9 = new System.Windows.Forms.Splitter();
+            this.btnVendor = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -100,13 +101,42 @@
             this.pnlOrders.SuspendLayout();
             this.pnlAdjustments.SuspendLayout();
             this.pnlInventory.SuspendLayout();
-            this.pnlMisc.SuspendLayout();
+            this.pnlGeneral.SuspendLayout();
             this.pnlHome.SuspendLayout();
-            this.panel8.SuspendLayout();
+            this.pnlMisc.SuspendLayout();
             this.panel9.SuspendLayout();
             this.pnlManufacture.SuspendLayout();
             this.panel11.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // label8
+            // 
+            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(159, 15);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "MRP";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label8, "Manufacture Resource Planning");
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Image = global::IMS.Properties.Resources.icons8_logout_24;
+            this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLogout.Location = new System.Drawing.Point(97, 15);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(54, 53);
+            this.btnLogout.TabIndex = 50;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnLogout, "Help and Support");
+            this.btnLogout.UseVisualStyleBackColor = false;
             // 
             // btnHelp
             // 
@@ -210,22 +240,6 @@
             this.btnClients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnClients, "Settings");
             this.btnClients.UseVisualStyleBackColor = true;
-            // 
-            // btnVendor
-            // 
-            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnVendor.FlatAppearance.BorderSize = 0;
-            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVendor.Image = ((System.Drawing.Image)(resources.GetObject("btnVendor.Image")));
-            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVendor.Location = new System.Drawing.Point(159, 15);
-            this.btnVendor.Name = "btnVendor";
-            this.btnVendor.Size = new System.Drawing.Size(76, 53);
-            this.btnVendor.TabIndex = 47;
-            this.btnVendor.Text = "Employees";
-            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
-            this.btnVendor.UseVisualStyleBackColor = true;
             // 
             // btnDepartment
             // 
@@ -511,18 +525,6 @@
             this.toolTip1.SetToolTip(this.btnHome, "Go to Dashboard");
             this.btnHome.UseVisualStyleBackColor = true;
             // 
-            // label8
-            // 
-            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(0, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(235, 15);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "MRP";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label8, "Manufacture Resource Planning");
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitter1);
@@ -708,7 +710,7 @@
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(252, 15);
+            this.label6.Size = new System.Drawing.Size(328, 15);
             this.label6.TabIndex = 5;
             this.label6.Text = "General";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -769,19 +771,20 @@
             this.pnlInventory.Size = new System.Drawing.Size(125, 68);
             this.pnlInventory.TabIndex = 55;
             // 
-            // pnlMisc
+            // pnlGeneral
             // 
-            this.pnlMisc.AutoSize = true;
-            this.pnlMisc.Controls.Add(this.btnSettings);
-            this.pnlMisc.Controls.Add(this.btnReports);
-            this.pnlMisc.Controls.Add(this.btnAccounts);
-            this.pnlMisc.Controls.Add(this.btnClients);
-            this.pnlMisc.Controls.Add(this.label6);
-            this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMisc.Location = new System.Drawing.Point(1286, 2);
-            this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(252, 68);
-            this.pnlMisc.TabIndex = 56;
+            this.pnlGeneral.AutoSize = true;
+            this.pnlGeneral.Controls.Add(this.btnVendor);
+            this.pnlGeneral.Controls.Add(this.btnSettings);
+            this.pnlGeneral.Controls.Add(this.btnReports);
+            this.pnlGeneral.Controls.Add(this.btnAccounts);
+            this.pnlGeneral.Controls.Add(this.btnClients);
+            this.pnlGeneral.Controls.Add(this.label6);
+            this.pnlGeneral.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlGeneral.Location = new System.Drawing.Point(1210, 2);
+            this.pnlGeneral.Name = "pnlGeneral";
+            this.pnlGeneral.Size = new System.Drawing.Size(328, 68);
+            this.pnlGeneral.TabIndex = 56;
             // 
             // pnlHome
             // 
@@ -803,17 +806,18 @@
             this.label1.TabIndex = 38;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel8
+            // pnlMisc
             // 
-            this.panel8.AutoSize = true;
-            this.panel8.Controls.Add(this.btnHelp);
-            this.panel8.Controls.Add(this.btnBackup);
-            this.panel8.Controls.Add(this.label7);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(1549, 2);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(97, 68);
-            this.panel8.TabIndex = 58;
+            this.pnlMisc.AutoSize = true;
+            this.pnlMisc.Controls.Add(this.btnLogout);
+            this.pnlMisc.Controls.Add(this.btnHelp);
+            this.pnlMisc.Controls.Add(this.btnBackup);
+            this.pnlMisc.Controls.Add(this.label7);
+            this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlMisc.Location = new System.Drawing.Point(1549, 2);
+            this.pnlMisc.Name = "pnlMisc";
+            this.pnlMisc.Size = new System.Drawing.Size(151, 68);
+            this.pnlMisc.TabIndex = 58;
             // 
             // label7
             // 
@@ -821,7 +825,7 @@
             this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 15);
+            this.label7.Size = new System.Drawing.Size(151, 15);
             this.label7.TabIndex = 5;
             this.label7.Text = "Misc";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -830,7 +834,7 @@
             // 
             this.panel9.Controls.Add(this.splitter8);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(1646, 2);
+            this.panel9.Location = new System.Drawing.Point(1700, 2);
             this.panel9.Name = "panel9";
             this.panel9.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel9.Size = new System.Drawing.Size(11, 68);
@@ -848,21 +852,20 @@
             // pnlManufacture
             // 
             this.pnlManufacture.AutoSize = true;
-            this.pnlManufacture.Controls.Add(this.btnVendor);
             this.pnlManufacture.Controls.Add(this.btnDepartment);
             this.pnlManufacture.Controls.Add(this.btnManufacturings);
             this.pnlManufacture.Controls.Add(this.label8);
             this.pnlManufacture.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlManufacture.Location = new System.Drawing.Point(1040, 2);
             this.pnlManufacture.Name = "pnlManufacture";
-            this.pnlManufacture.Size = new System.Drawing.Size(235, 68);
+            this.pnlManufacture.Size = new System.Drawing.Size(159, 68);
             this.pnlManufacture.TabIndex = 60;
             // 
             // panel11
             // 
             this.panel11.Controls.Add(this.splitter9);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel11.Location = new System.Drawing.Point(1275, 2);
+            this.panel11.Location = new System.Drawing.Point(1199, 2);
             this.panel11.Name = "panel11";
             this.panel11.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel11.Size = new System.Drawing.Size(11, 68);
@@ -877,14 +880,30 @@
             this.splitter9.TabIndex = 0;
             this.splitter9.TabStop = false;
             // 
+            // btnVendor
+            // 
+            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnVendor.FlatAppearance.BorderSize = 0;
+            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVendor.Image = ((System.Drawing.Image)(resources.GetObject("btnVendor.Image")));
+            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVendor.Location = new System.Drawing.Point(252, 15);
+            this.btnVendor.Name = "btnVendor";
+            this.btnVendor.Size = new System.Drawing.Size(76, 53);
+            this.btnVendor.TabIndex = 49;
+            this.btnVendor.Text = "Employees";
+            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
+            this.btnVendor.UseVisualStyleBackColor = true;
+            // 
             // InventoryMenuBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel9);
-            this.Controls.Add(this.panel8);
-            this.Controls.Add(this.panel6);
             this.Controls.Add(this.pnlMisc);
+            this.Controls.Add(this.panel6);
+            this.Controls.Add(this.pnlGeneral);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.pnlManufacture);
             this.Controls.Add(this.panel4);
@@ -901,7 +920,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "InventoryMenuBar";
             this.Padding = new System.Windows.Forms.Padding(2);
-            this.Size = new System.Drawing.Size(1672, 72);
+            this.Size = new System.Drawing.Size(1741, 72);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -913,9 +932,9 @@
             this.pnlOrders.ResumeLayout(false);
             this.pnlAdjustments.ResumeLayout(false);
             this.pnlInventory.ResumeLayout(false);
-            this.pnlMisc.ResumeLayout(false);
+            this.pnlGeneral.ResumeLayout(false);
             this.pnlHome.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
+            this.pnlMisc.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.pnlManufacture.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
@@ -964,7 +983,7 @@
         private System.Windows.Forms.Panel pnlOrders;
         private System.Windows.Forms.Panel pnlAdjustments;
         private System.Windows.Forms.Panel pnlInventory;
-        private System.Windows.Forms.Panel pnlMisc;
+        private System.Windows.Forms.Panel pnlGeneral;
         private System.Windows.Forms.Panel pnlHome;
         private System.Windows.Forms.Label label1;
         protected internal System.Windows.Forms.Button btnSaleTransactionList;
@@ -973,16 +992,17 @@
         protected internal System.Windows.Forms.Button btnOrders;
         protected internal System.Windows.Forms.Button btnBackup;
         protected internal System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel pnlMisc;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Splitter splitter8;
         private System.Windows.Forms.Panel pnlManufacture;
-        protected internal System.Windows.Forms.Button btnVendor;
         protected internal System.Windows.Forms.Button btnDepartment;
         protected internal System.Windows.Forms.Button btnManufacturings;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Splitter splitter9;
+        protected internal System.Windows.Forms.Button btnLogout;
+        protected internal System.Windows.Forms.Button btnVendor;
     }
 }

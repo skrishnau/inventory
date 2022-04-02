@@ -33,6 +33,12 @@ namespace DTO.Core.Inventory
             entity.Use = model.Use;
             entity.UserType = model.UserType;
             entity.Company = model.Company;
+            entity.CanLogin = model.CanLogin;
+            if (model.CanLogin)
+            {
+                entity.Username = model.Username;
+                entity.Password = model.Password;
+            }
             return entity;
         }
 
@@ -92,7 +98,7 @@ namespace DTO.Core.Inventory
                 Use = x.Use,
 
                 CanLogin = x.CanLogin,
-                Password = x.Password,
+                //Password = x.Password,
                 Username = x.Username,
                 UserType = x.UserType,
                 

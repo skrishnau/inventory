@@ -473,6 +473,7 @@ namespace IMS.Forms.Inventory.Transaction
                     OrderId = orderId
                 };
                 orderForm.SetDataForEdit(orderEditModel, saveOrderImmediatelyAfterLoading);//orderType, orderId
+                orderForm.SavedOrderImmediatelyAfterLoading -= OrderForm_SavedOrderImmediatelyAfterLoading;
                 orderForm.SavedOrderImmediatelyAfterLoading += OrderForm_SavedOrderImmediatelyAfterLoading;
                 orderForm.ShowDialog(this);
             }

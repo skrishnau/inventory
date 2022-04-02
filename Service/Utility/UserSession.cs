@@ -7,6 +7,15 @@ namespace Service
     public class UserSession
     {
         public static UserModel User { get; set; }
+        public static void Logout()
+        {
+            if (User != null)
+                User = null;
+        }
+        public static bool IsLoggedIn()
+        {
+            return User != null;
+        }
 
         private static ConnectionStrings _connectionStrings;
         // db connection

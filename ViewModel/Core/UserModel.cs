@@ -99,7 +99,7 @@ namespace ViewModel.Core
                 Website = Website,
 
                 CanLogin = CanLogin,
-                Password = Password,
+                //Password = Password,
                 Username = Username,
                 UserType = UserType,
             };

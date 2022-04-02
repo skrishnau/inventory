@@ -8,7 +8,7 @@ namespace Service.Core.Users
 {
     public interface IUserService
     {
-        void AddOrUpdateUser(UserModel userModel);
+        ResponseModel<bool> AddOrUpdateUser(UserModel userModel);
 
         UserModel GetUser(int supplierId);
         UserModel GetUserWithTotalAndPaidAmounts(int userId);

@@ -2,14 +2,26 @@
 <DOCUMENT Type="Advanced Installer" CreateVersion="17.8" version="17.8" Modules="simple" RootPath="." Language="en" Id="{52017368-27FD-4AF0-A212-C7F0366BB65E}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoMapper.dll" Value="..\DTO\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DTO.dll" Value="..\DTO\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AutoMapper.dll" Value="..\DTO\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Azure.Core.dll" Value="..\packages\Azure.Core.1.20.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Azure.Identity.dll" Value="..\packages\Azure.Identity.1.5.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DTO.dll" Value="..\DTO\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.2.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.2.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EnvDTE.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe" Value="..\IMS\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe.config" Value="..\IMS\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Infrastructure.dll" Value="..\Infrastructure\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe" Value="..\IMS\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IMS.exe.config" Value="..\IMS\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Infrastructure.dll" Value="..\Infrastructure\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll" Value="..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.SqlClient.dll" Value="..\packages\Microsoft.Data.SqlClient.3.0.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.Tools.Sql.BatchParser.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Identity.Client.Extensions.Msal.dll" Value="..\packages\Microsoft.Identity.Client.Extensions.Msal.2.18.4\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Identity.Client.dll" Value="..\packages\Microsoft.Identity.Client.4.35.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.JsonWebTokens.dll" Value="..\packages\Microsoft.IdentityModel.JsonWebTokens.6.8.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Logging.dll" Value="..\packages\Microsoft.IdentityModel.Logging.6.8.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" Value="..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.8.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Protocols.dll" Value="..\packages\Microsoft.IdentityModel.Protocols.6.8.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Tokens.dll" Value="..\packages\Microsoft.IdentityModel.Tokens.6.8.0\lib\net461"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.MSXML.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.Common.dll" Value="..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.DataVisualization.dll" Value="..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40"/>
@@ -17,6 +29,29 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.ProcessingObjectModel.dll" Value="..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.WebForms.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.WinForms.dll" Value="..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1427.0\lib\net40"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Assessment.Types.dll" Value="..\packages\Microsoft.SqlServer.Assessment.Authoring.1.0.282\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Assessment.dll" Value="..\packages\Microsoft.SqlServer.Assessment.1.0.305\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.ConnectionInfo.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Dmf.Common.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Dmf.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.Assessment.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.Collector.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.CollectorEnum.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.HadrData.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.HadrModel.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.RegisteredServers.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.Sdk.Sfc.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.SqlScriptPublish.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEvent.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEventDbScoped.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEventDbScopedEnum.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEventEnum.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.PolicyEnum.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.ServiceBrokerEnum.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Smo.Notebook.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Smo.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.SmoExtended.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.SqlEnum.dll" Value="..\packages\Microsoft.SqlServer.SqlManagementObjects.161.47008.0\lib\netstandard2.0"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Types.dll" Value="..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.OLE.Interop.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.Shell.Interop.8.0.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
@@ -24,13 +59,31 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.8.0.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.TextManager.Interop.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="..\packages\Newtonsoft.Json.13.0.1\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Service.dll" Value="..\Service\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Service.dll" Value="..\Service\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_SimpleInjector.dll" Value="..\packages\SimpleInjector.4.4.3\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.ValueTuple.dll" Value="..\DTO\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Buffers.dll" Value="..\packages\System.Buffers.4.5.1\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Configuration.ConfigurationManager.dll" Value="..\packages\System.Configuration.ConfigurationManager.4.7.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Data.OleDb.dll" Value="..\packages\System.Data.OleDb.4.7.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Diagnostics.DiagnosticSource.dll" Value="..\packages\System.Diagnostics.DiagnosticSource.4.7.0\lib\net46"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.IdentityModel.Tokens.Jwt.dll" Value="..\packages\System.IdentityModel.Tokens.Jwt.6.8.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Memory.Data.dll" Value="..\packages\System.Memory.Data.1.0.2\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Memory.dll" Value="..\packages\System.Memory.4.5.4\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Numerics.Vectors.dll" Value="..\packages\System.Numerics.Vectors.4.5.0\lib\net46"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll" Value="..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Security.AccessControl.dll" Value="..\packages\System.Security.AccessControl.4.7.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Security.Cryptography.ProtectedData.dll" Value="..\packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Security.Permissions.dll" Value="..\packages\System.Security.Permissions.4.7.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Security.Principal.Windows.dll" Value="..\packages\System.Security.Principal.Windows.4.7.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Text.Encodings.Web.dll" Value="..\packages\System.Text.Encodings.Web.4.7.2\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Text.Json.dll" Value="..\packages\System.Text.Json.4.6.0\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Threading.Tasks.Extensions.dll" Value="..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.ValueTuple.dll" Value="..\packages\System.ValueTuple.4.5.0\lib\net461"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Tulpep.NotificationWindow.dll" Value="..\packages\Tulpep.NotificationWindow.1.1.25\lib\net40"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ViewModel.dll" Value="..\ViewModel\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ViewModel.dll" Value="..\ViewModel\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_stdole.dll" Value="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AutoMapper.dll" Value="AutoMapper.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Azure.Core.dll" Value="Azure.Core.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Azure.Identity.dll" Value="Azure.Identity.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DTO.dll" Value="DTO.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll" Value="EntityFramework.SqlServer.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll" Value="EntityFramework.dll"/>
@@ -38,6 +91,16 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IMS.exe" Value="IMS.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IMS.exe.config" Value="IMS.exe.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Infrastructure.dll" Value="Infrastructure.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll" Value="Microsoft.Bcl.AsyncInterfaces.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.SqlClient.dll" Value="Microsoft.Data.SqlClient.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Tools.Sql.BatchParser.dll" Value="Microsoft.Data.Tools.Sql.BatchParser.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Identity.Client.Extensions.Msal.dll" Value="Microsoft.Identity.Client.Extensions.Msal.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Identity.Client.dll" Value="Microsoft.Identity.Client.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.JsonWebTokens.dll" Value="Microsoft.IdentityModel.JsonWebTokens.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Logging.dll" Value="Microsoft.IdentityModel.Logging.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" Value="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Protocols.dll" Value="Microsoft.IdentityModel.Protocols.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Tokens.dll" Value="Microsoft.IdentityModel.Tokens.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.MSXML.dll" Value="Microsoft.MSXML.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.Common.dll" Value="Microsoft.ReportViewer.Common.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.DataVisualization.dll" Value="Microsoft.ReportViewer.DataVisualization.dll"/>
@@ -45,6 +108,29 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.ProcessingObjectModel.dll" Value="Microsoft.ReportViewer.ProcessingObjectModel.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.WebForms.dll" Value="Microsoft.ReportViewer.WebForms.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.WinForms.dll" Value="Microsoft.ReportViewer.WinForms.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Assessment.Types.dll" Value="Microsoft.SqlServer.Assessment.Types.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Assessment.dll" Value="Microsoft.SqlServer.Assessment.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.ConnectionInfo.dll" Value="Microsoft.SqlServer.ConnectionInfo.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Dmf.Common.dll" Value="Microsoft.SqlServer.Dmf.Common.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Dmf.dll" Value="Microsoft.SqlServer.Dmf.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Assessment.dll" Value="Microsoft.SqlServer.Management.Assessment.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Collector.dll" Value="Microsoft.SqlServer.Management.Collector.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.CollectorEnum.dll" Value="Microsoft.SqlServer.Management.CollectorEnum.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.HadrData.dll" Value="Microsoft.SqlServer.Management.HadrData.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.HadrModel.dll" Value="Microsoft.SqlServer.Management.HadrModel.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.RegisteredServers.dll" Value="Microsoft.SqlServer.Management.RegisteredServers.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Sdk.Sfc.dll" Value="Microsoft.SqlServer.Management.Sdk.Sfc.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.SqlScriptPublish.dll" Value="Microsoft.SqlServer.Management.SqlScriptPublish.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEvent.dll" Value="Microsoft.SqlServer.Management.XEvent.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventDbScoped.dll" Value="Microsoft.SqlServer.Management.XEventDbScoped.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventDbScopedEnum.dll" Value="Microsoft.SqlServer.Management.XEventDbScopedEnum.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventEnum.dll" Value="Microsoft.SqlServer.Management.XEventEnum.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.PolicyEnum.dll" Value="Microsoft.SqlServer.PolicyEnum.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.ServiceBrokerEnum.dll" Value="Microsoft.SqlServer.ServiceBrokerEnum.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Smo.Notebook.dll" Value="Microsoft.SqlServer.Smo.Notebook.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Smo.dll" Value="Microsoft.SqlServer.Smo.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.SmoExtended.dll" Value="Microsoft.SqlServer.SmoExtended.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.SqlEnum.dll" Value="Microsoft.SqlServer.SqlEnum.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Types.dll" Value="Microsoft.SqlServer.Types.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.OLE.Interop.dll" Value="Microsoft.VisualStudio.OLE.Interop.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.Shell.Interop.8.0.dll" Value="Microsoft.VisualStudio.Shell.Interop.8.0.dll"/>
@@ -54,6 +140,22 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll" Value="Newtonsoft.Json.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Service.dll" Value="Service.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SimpleInjector.dll" Value="SimpleInjector.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Buffers.dll" Value="System.Buffers.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Configuration.ConfigurationManager.dll" Value="System.Configuration.ConfigurationManager.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Data.OleDb.dll" Value="System.Data.OleDb.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Diagnostics.DiagnosticSource.dll" Value="System.Diagnostics.DiagnosticSource.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.IdentityModel.Tokens.Jwt.dll" Value="System.IdentityModel.Tokens.Jwt.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Memory.Data.dll" Value="System.Memory.Data.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Memory.dll" Value="System.Memory.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Numerics.Vectors.dll" Value="System.Numerics.Vectors.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll" Value="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Security.AccessControl.dll" Value="System.Security.AccessControl.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Security.Cryptography.ProtectedData.dll" Value="System.Security.Cryptography.ProtectedData.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Security.Permissions.dll" Value="System.Security.Permissions.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Security.Principal.Windows.dll" Value="System.Security.Principal.Windows.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Text.Encodings.Web.dll" Value="System.Text.Encodings.Web.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Text.Json.dll" Value="System.Text.Json.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Threading.Tasks.Extensions.dll" Value="System.Threading.Tasks.Extensions.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.ValueTuple.dll" Value="System.ValueTuple.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Tulpep.NotificationWindow.dll" Value="Tulpep.NotificationWindow.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ViewModel.dll" Value="ViewModel.dll"/>
@@ -87,7 +189,7 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="APPDIR" ComponentId="{3D7DBECB-8961-4DC3-9C87-8CC0D6922978}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="IMS_PrimaryOutput" ComponentId="{9A0B2B7B-2973-416A-B932-B6CABCC4978A}" Directory_="IMS_Dir" Attributes="0" KeyPath="IMS.exe"/>
-    <ROW Component="IMS_References" ComponentId="{96A9EE17-28AE-4BC3-A904-44E3431079D0}" Directory_="IMS_Dir" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
+    <ROW Component="IMS_References" ComponentId="{96A9EE17-28AE-4BC3-A904-44E3431079D0}" Directory_="IMS_Dir" Attributes="0" KeyPath="System.Threading.Tasks.Extensions.dll"/>
     <ROW Component="ProductInformation" ComponentId="{C580526D-B4C8-415D-8245-F10E5A7B826F}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{57E21F78-3339-4358-AC4E-2A7189BBB217}" Directory_="SHORTCUTDIR" Attributes="0"/>
   </COMPONENT>
@@ -124,9 +226,62 @@
     <ROW File="AutoMapper.dll" Component_="IMS_References" FileName="AUTOMA~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AutoMapper.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AutoMapper.dll&gt;" SelfReg="false"/>
     <ROW File="System.ValueTuple.dll" Component_="IMS_References" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.ValueTuple.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.ValueTuple.dll&gt;" SelfReg="false"/>
     <ROW File="Newtonsoft.Json.dll" Component_="IMS_References" FileName="NEWTON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Newtonsoft.Json.dll&gt;" SelfReg="false"/>
+    <ROW File="Azure.Core.dll" Component_="IMS_References" FileName="AZUREC~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Azure.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Azure.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="Azure.Identity.dll" Component_="IMS_References" FileName="AZUREI~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Azure.Identity.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Azure.Identity.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Bcl.AsyncInterfaces.dll" Component_="IMS_References" FileName="MICRO~15.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Data.SqlClient.dll" Component_="IMS_References" FileName="MICRO~16.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.SqlClient.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Data.SqlClient.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Data.Tools.Sql.BatchParser.dll" Component_="IMS_References" FileName="MICRO~17.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Tools.Sql.BatchParser.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Data.Tools.Sql.BatchParser.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Identity.Client.dll" Component_="IMS_References" FileName="MICRO~18.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Identity.Client.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Identity.Client.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.Identity.Client.Extensions.Msal.dll" Component_="IMS_References" FileName="MICRO~19.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Identity.Client.Extensions.Msal.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Identity.Client.Extensions.Msal.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.IdentityModel.JsonWebTokens.dll" Component_="IMS_References" FileName="MICRO~20.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.JsonWebTokens.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.IdentityModel.JsonWebTokens.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.IdentityModel.Logging.dll" Component_="IMS_References" FileName="MICRO~21.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Logging.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Logging.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.IdentityModel.Protocols.dll" Component_="IMS_References" FileName="MICRO~22.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Protocols.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Protocols.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" Component_="IMS_References" FileName="MICRO~23.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Protocols.OpenIdConnect.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Protocols.OpenIdConnect.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.IdentityModel.Tokens.dll" Component_="IMS_References" FileName="MICRO~24.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Tokens.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Tokens.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Assessment.dll" Component_="IMS_References" FileName="MICRO~25.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Assessment.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Assessment.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Assessment.Types.dll" Component_="IMS_References" FileName="MICRO~26.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Assessment.Types.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Assessment.Types.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.ConnectionInfo.dll" Component_="IMS_References" FileName="MICRO~27.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.ConnectionInfo.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.ConnectionInfo.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Dmf.Common.dll" Component_="IMS_References" FileName="MICRO~28.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Dmf.Common.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Dmf.Common.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Dmf.dll" Component_="IMS_References" FileName="MICRO~29.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Dmf.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Dmf.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.Assessment.dll" Component_="IMS_References" FileName="MICRO~30.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Assessment.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.Assessment.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.Collector.dll" Component_="IMS_References" FileName="MICRO~31.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Collector.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.Collector.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.CollectorEnum.dll" Component_="IMS_References" FileName="MICRO~32.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.CollectorEnum.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.CollectorEnum.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.HadrData.dll" Component_="IMS_References" FileName="MICRO~33.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.HadrData.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.HadrData.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.HadrModel.dll" Component_="IMS_References" FileName="MICRO~34.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.HadrModel.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.HadrModel.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.RegisteredServers.dll" Component_="IMS_References" FileName="MICRO~35.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.RegisteredServers.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.RegisteredServers.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.Sdk.Sfc.dll" Component_="IMS_References" FileName="MICRO~36.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Sdk.Sfc.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.Sdk.Sfc.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.SqlScriptPublish.dll" Component_="IMS_References" FileName="MICRO~37.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.SqlScriptPublish.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.SqlScriptPublish.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.XEvent.dll" Component_="IMS_References" FileName="MICRO~38.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEvent.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEvent.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.XEventDbScoped.dll" Component_="IMS_References" FileName="MICRO~39.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventDbScoped.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEventDbScoped.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.XEventDbScopedEnum.dll" Component_="IMS_References" FileName="MICRO~40.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventDbScopedEnum.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEventDbScopedEnum.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Management.XEventEnum.dll" Component_="IMS_References" FileName="MICRO~41.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventEnum.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEventEnum.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.PolicyEnum.dll" Component_="IMS_References" FileName="MICRO~42.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.PolicyEnum.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.PolicyEnum.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.ServiceBrokerEnum.dll" Component_="IMS_References" FileName="MICRO~43.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.ServiceBrokerEnum.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.ServiceBrokerEnum.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Smo.dll" Component_="IMS_References" FileName="MICRO~44.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Smo.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Smo.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Smo.Notebook.dll" Component_="IMS_References" FileName="MICRO~45.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Smo.Notebook.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.Smo.Notebook.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.SmoExtended.dll" Component_="IMS_References" FileName="MICRO~46.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.SmoExtended.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.SmoExtended.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.SqlEnum.dll" Component_="IMS_References" FileName="MICRO~47.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.SqlEnum.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.SqlServer.SqlEnum.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Buffers.dll" Component_="IMS_References" FileName="SYSTEM~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Buffers.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Buffers.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Configuration.ConfigurationManager.dll" Component_="IMS_References" FileName="SYSTEM~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Configuration.ConfigurationManager.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Configuration.ConfigurationManager.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Data.OleDb.dll" Component_="IMS_References" FileName="SYSTEM~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.OleDb.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Data.OleDb.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Diagnostics.DiagnosticSource.dll" Component_="IMS_References" FileName="SYSTEM~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Diagnostics.DiagnosticSource.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Diagnostics.DiagnosticSource.dll&gt;" SelfReg="false"/>
+    <ROW File="System.IdentityModel.Tokens.Jwt.dll" Component_="IMS_References" FileName="SYSTEM~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.IdentityModel.Tokens.Jwt.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.IdentityModel.Tokens.Jwt.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Memory.Data.dll" Component_="IMS_References" FileName="SYSTEM~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Memory.Data.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Memory.Data.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Memory.dll" Component_="IMS_References" FileName="SYSTEM~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Memory.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Memory.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Numerics.Vectors.dll" Component_="IMS_References" FileName="SYSTE~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Numerics.Vectors.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Numerics.Vectors.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Runtime.CompilerServices.Unsafe.dll" Component_="IMS_References" FileName="SYSTE~11.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Security.AccessControl.dll" Component_="IMS_References" FileName="SYSTE~12.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.AccessControl.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Security.AccessControl.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Security.Cryptography.ProtectedData.dll" Component_="IMS_References" FileName="SYSTE~13.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.Cryptography.ProtectedData.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Security.Cryptography.ProtectedData.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Security.Permissions.dll" Component_="IMS_References" FileName="SYSTE~14.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.Permissions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Security.Permissions.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Security.Principal.Windows.dll" Component_="IMS_References" FileName="SYSTE~15.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.Principal.Windows.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Security.Principal.Windows.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Text.Encodings.Web.dll" Component_="IMS_References" FileName="SYSTE~16.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Text.Encodings.Web.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Text.Encodings.Web.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Text.Json.dll" Component_="IMS_References" FileName="SYSTE~17.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Text.Json.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Text.Json.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.Extensions.dll" Component_="IMS_References" FileName="SYSTE~18.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Threading.Tasks.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Threading.Tasks.Extensions.dll&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_AutoMapper.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AutoMapper.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AutoMapper.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Azure.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Azure.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Azure.Core.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Azure.Identity.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Azure.Identity.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Azure.Identity.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DTO.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DTO.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DTO.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Type="2" Content="0"/>
@@ -134,6 +289,16 @@
     <ROW Name="AI_APPPATH_PERBUILD_IMS.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_IMS.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_IMS.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_IMS.exe.config" Path="[|AI_PROPPATH_DIR_PERBUILD_IMS.exe.config]\[|AI_PROPPATH_FILENAME_PERBUILD_IMS.exe.config]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Infrastructure.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Infrastructure.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Infrastructure.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Bcl.AsyncInterfaces.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Data.SqlClient.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.SqlClient.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.SqlClient.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Data.Tools.Sql.BatchParser.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Data.Tools.Sql.BatchParser.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Data.Tools.Sql.BatchParser.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Identity.Client.Extensions.Msal.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Identity.Client.Extensions.Msal.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Identity.Client.Extensions.Msal.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Identity.Client.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Identity.Client.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Identity.Client.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IdentityModel.JsonWebTokens.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.JsonWebTokens.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.JsonWebTokens.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Logging.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Logging.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Logging.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Protocols.OpenIdConnect.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Protocols.OpenIdConnect.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Protocols.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Protocols.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Protocols.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IdentityModel.Tokens.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IdentityModel.Tokens.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IdentityModel.Tokens.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.MSXML.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.MSXML.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.MSXML.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.ReportViewer.Common.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.Common.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.Common.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.ReportViewer.DataVisualization.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.DataVisualization.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.DataVisualization.dll]" Type="2" Content="0"/>
@@ -141,6 +306,29 @@
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.ReportViewer.ProcessingObjectModel.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.ProcessingObjectModel.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.ProcessingObjectModel.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.ReportViewer.WebForms.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.WebForms.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.WebForms.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.ReportViewer.WinForms.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.ReportViewer.WinForms.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.ReportViewer.WinForms.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Assessment.Types.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Assessment.Types.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Assessment.Types.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Assessment.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Assessment.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Assessment.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.ConnectionInfo.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.ConnectionInfo.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.ConnectionInfo.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Dmf.Common.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Dmf.Common.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Dmf.Common.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Dmf.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Dmf.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Dmf.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.Assessment.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.Assessment.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Assessment.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.Collector.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.Collector.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Collector.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.CollectorEnum.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.CollectorEnum.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.CollectorEnum.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.HadrData.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.HadrData.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.HadrData.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.HadrModel.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.HadrModel.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.HadrModel.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.RegisteredServers.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.RegisteredServers.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.RegisteredServers.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.Sdk.Sfc.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.Sdk.Sfc.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.Sdk.Sfc.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.SqlScriptPublish.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.SqlScriptPublish.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.SqlScriptPublish.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEvent.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEvent.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEvent.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEventDbScoped.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEventDbScoped.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventDbScoped.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEventDbScopedEnum.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEventDbScopedEnum.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventDbScopedEnum.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Management.XEventEnum.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Management.XEventEnum.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Management.XEventEnum.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.PolicyEnum.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.PolicyEnum.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.PolicyEnum.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.ServiceBrokerEnum.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.ServiceBrokerEnum.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.ServiceBrokerEnum.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Smo.Notebook.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Smo.Notebook.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Smo.Notebook.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Smo.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Smo.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Smo.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.SmoExtended.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.SmoExtended.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.SmoExtended.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.SqlEnum.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.SqlEnum.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.SqlEnum.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.SqlServer.Types.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.SqlServer.Types.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.SqlServer.Types.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.VisualStudio.OLE.Interop.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.OLE.Interop.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.OLE.Interop.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.VisualStudio.Shell.Interop.8.0.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.VisualStudio.Shell.Interop.8.0.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.VisualStudio.Shell.Interop.8.0.dll]" Type="2" Content="0"/>
@@ -150,6 +338,22 @@
     <ROW Name="AI_APPPATH_PERBUILD_Newtonsoft.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Service.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Service.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Service.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_SimpleInjector.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_SimpleInjector.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_SimpleInjector.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Buffers.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Buffers.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Buffers.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Configuration.ConfigurationManager.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Configuration.ConfigurationManager.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Configuration.ConfigurationManager.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Data.OleDb.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Data.OleDb.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Data.OleDb.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Diagnostics.DiagnosticSource.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Diagnostics.DiagnosticSource.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Diagnostics.DiagnosticSource.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.IdentityModel.Tokens.Jwt.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.IdentityModel.Tokens.Jwt.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.IdentityModel.Tokens.Jwt.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Memory.Data.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Memory.Data.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Memory.Data.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Memory.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Memory.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Memory.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Numerics.Vectors.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Numerics.Vectors.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Numerics.Vectors.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Security.AccessControl.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Security.AccessControl.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.AccessControl.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Security.Cryptography.ProtectedData.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Security.Cryptography.ProtectedData.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.Cryptography.ProtectedData.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Security.Permissions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Security.Permissions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.Permissions.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Security.Principal.Windows.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Security.Principal.Windows.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Security.Principal.Windows.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Text.Encodings.Web.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Text.Encodings.Web.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Text.Encodings.Web.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Text.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Text.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Text.Json.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Threading.Tasks.Extensions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Threading.Tasks.Extensions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Threading.Tasks.Extensions.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_System.ValueTuple.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.ValueTuple.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.ValueTuple.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Tulpep.NotificationWindow.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Tulpep.NotificationWindow.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Tulpep.NotificationWindow.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ViewModel.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ViewModel.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ViewModel.dll]" Type="2" Content="0"/>
@@ -296,5 +500,56 @@
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="AutoMapper.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.ValueTuple.dll"/>
     <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Newtonsoft.Json.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Azure.Core.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Azure.Identity.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.Bcl.AsyncInterfaces.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.Data.SqlClient.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.Data.Tools.Sql.BatchParser.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.Identity.Client.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.Identity.Client.Extensions.Msal.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.IdentityModel.JsonWebTokens.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.IdentityModel.Logging.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.IdentityModel.Protocols.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.IdentityModel.Tokens.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Assessment.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Assessment.Types.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.ConnectionInfo.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Dmf.Common.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Dmf.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.Assessment.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.Collector.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.CollectorEnum.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.HadrData.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.HadrModel.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.RegisteredServers.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.Sdk.Sfc.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.SqlScriptPublish.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.XEvent.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.XEventDbScoped.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.XEventDbScopedEnum.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Management.XEventEnum.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.PolicyEnum.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.ServiceBrokerEnum.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Smo.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.Smo.Notebook.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.SmoExtended.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="Microsoft.SqlServer.SqlEnum.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Buffers.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Configuration.ConfigurationManager.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Data.OleDb.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Diagnostics.DiagnosticSource.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.IdentityModel.Tokens.Jwt.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Memory.Data.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Memory.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Numerics.Vectors.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Security.AccessControl.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Security.Cryptography.ProtectedData.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Security.Permissions.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Security.Principal.Windows.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Text.Encodings.Web.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Text.Json.dll"/>
+    <ROW ProjectId="{34f90c0e-389f-4414-bc25-004f00017b85}" ProjectName="IMS" OutputGroup="References" OutputFile="System.Threading.Tasks.Extensions.dll"/>
   </COMPONENT>
 </DOCUMENT>

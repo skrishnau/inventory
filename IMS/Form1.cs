@@ -16,18 +16,40 @@ using System.Collections.Generic;
 using IMS.Forms.Backup;
 using System.Linq;
 using Service.Utility;
+using SimpleInjector.Lifestyles;
+using Service.Core.Orders;
+using Service.Interfaces;
+using Service.Listeners;
+using Service.Core.Inventory;
+using Service.Core.Users;
 
 namespace IMS
 {
     public partial class Form1 : Form
     {
+        private readonly IOrderService _orderService;
+        private readonly IInventoryService _inventoryService;
+        private readonly IProductService _productService;
+        private readonly IDatabaseChangeListener _listener;
+        private readonly IUserService _userService;
         private readonly IAppSettingService _appSettingService;
+        private readonly IUomService _uomService;
+        private readonly IProductOwnerService _productOwnerService;
+        private readonly IManufactureService _manufactureService;
 
         private TransactionCreateLargeForm form;
 
-        public Form1(IAppSettingService appSettingService)
+        public Form1(IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService, IManufactureService manufactureService)
         {
+            _orderService = orderService;
+            _productService = productService;
+            _inventoryService = inventoryService;
+            _userService = userService;
+            _listener = listener;
             _appSettingService = appSettingService;
+            _uomService = uomService;
+            _productOwnerService = productOwnerService;
+            _manufactureService = manufactureService;
 
             InitializeComponent();
 
@@ -116,12 +138,14 @@ namespace IMS
                     CloseTheApp();
                 }
             }
-
+            DialogResult result = DialogResult.Abort;
             // ask for password
-            var loginForm = Program.container.GetInstance<LoginForm>();//new InventoryUC();
-
-            DialogResult result = loginForm.ShowDialog();
-            if (result == DialogResult.OK)
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            {
+                var loginForm = Program.container.GetInstance<LoginForm>();//new InventoryUC();
+                result = loginForm.ShowDialog();
+            }
+            if (result == DialogResult.OK && UserSession.IsLoggedIn())
             {
                 DisplayInventory();
             }
@@ -145,7 +169,6 @@ namespace IMS
             }
             catch (Exception) { }
         }
-
         private async void DisplayInventory()
         {
             /*
@@ -172,10 +195,22 @@ namespace IMS
             else
             {
             */
-            var productListUC = Program.container.GetInstance<InventoryUC>();//new InventoryUC();
-            this.Controls.Add(productListUC);
+            this.Controls.Clear();
+            var inventoryUc = //Program.container.GetInstance<InventoryUC>();//new InventoryUC();
+                    new InventoryUC(new InventoryMenuBar(), _orderService, _productService, _listener, _inventoryService, _userService, _appSettingService, _uomService, _productOwnerService, _manufactureService);
+            this.Controls.Add(inventoryUc);
+            inventoryUc.LogoutClicked -= ProductListUC_LogoutClicked;
+            inventoryUc.LogoutClicked += ProductListUC_LogoutClicked;
             /* }*/
         }
+
+        private void ProductListUC_LogoutClicked(object sender, EventArgs e)
+        {
+            UserSession.Logout();
+            this.Controls.Clear();
+            ShowLoginFormOrLogin();
+        }
+
         private async void TransactionCreateLargeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (form != null)

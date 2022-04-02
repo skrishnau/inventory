@@ -9,6 +9,7 @@ using Service.Listeners;
 using ViewModel.Core;
 using ViewModel.Core.Common;
 using ViewModel.Enums;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
@@ -42,6 +43,25 @@ namespace IMS.Forms.Inventory.Suppliers
 
             var supplier = _supplierService.GetUser(_userId);
             SetDataForEdit(supplier);
+        }
+
+        private void InitializeEvents()
+        {
+            btnSave.Click += btnSave_Click;
+            cbUserType.SelectedValueChanged += CbUserType_SelectedValueChanged;
+            chkLoginEnabled.CheckedChanged += ChkLoginEnabled_CheckedChanged;
+        }
+
+        private void ChkLoginEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowHideUserNamePassword();
+        }
+
+        private void ShowHideUserNamePassword()
+        {
+            var isChecked = chkLoginEnabled.Checked;
+            var isChkLoginShown = tbIsLoginEnabled.Visible;
+            tblUsernamePassword.Visible = isChecked && isChkLoginShown;
         }
 
         private void PopulateUserType()
@@ -87,11 +107,6 @@ namespace IMS.Forms.Inventory.Suppliers
 
 
 
-        private void InitializeEvents()
-        {
-            btnSave.Click += btnSave_Click;
-            cbUserType.SelectedValueChanged += CbUserType_SelectedValueChanged;
-        }
 
         private void CbUserType_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -112,19 +127,25 @@ namespace IMS.Forms.Inventory.Suppliers
                 lblName.Text = "Name";
                 tbCompany.Visible = true;
                 lblCompany.Visible = true;
+                tbIsLoginEnabled.Visible = false;
+                chkLoginEnabled.Checked = false;
             }
             if (_userType.Contains(UserTypeEnum.Vendor))
             {
                 lblName.Text = "Contact Person Name";
                 tbCompany.Visible = true;
                 lblCompany.Visible = true;
+                tbIsLoginEnabled.Visible = false;
+                chkLoginEnabled.Checked = false;
             }
             if (_userType.Contains(UserTypeEnum.Employee))
             {
                 lblName.Text = "Name";
                 tbCompany.Visible = false;
                 lblCompany.Visible = false;
+                tbIsLoginEnabled.Visible = true;
             }
+            ShowHideUserNamePassword();
         }
         public void SetDataForEdit(int userId, List<UserTypeEnum> userType)
         {
@@ -151,10 +172,21 @@ namespace IMS.Forms.Inventory.Suppliers
                 tbCompany.Text = model.Company;
                 chkUse.Checked = model.Use;
                 _supplierId = model.Id;
+
+                chkLoginEnabled.Checked = model.CanLogin;
+                tbIsLoginEnabled.Visible = model.UserType == UserTypeEnum.Employee.ToString();
+                tblUsernamePassword.Visible = model.CanLogin && model.UserType == UserTypeEnum.Employee.ToString();
+                tbUsername.Text = model.Username;
+                tbPassword.Text = model.Password;
             }
+            ShowHideUserNamePassword();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+        private void Save()
         {
             var msg = ValidateControls();
             if (!string.IsNullOrEmpty(msg))
@@ -179,9 +211,23 @@ namespace IMS.Forms.Inventory.Suppliers
                 Company = tbCompany.Text,
                 Use = chkUse.Checked,
                 UserType = cbUserType.SelectedValue.ToString(),
+                CanLogin = tbIsLoginEnabled.Visible && chkLoginEnabled.Checked,
             };
-            _supplierService.AddOrUpdateUser(model);
-            this.Close();
+            if (model.CanLogin)
+            {
+                model.Username = tbUsername.Text;
+                model.Password = tbPassword.Text;
+            }
+            var response = _supplierService.AddOrUpdateUser(model);
+            if (response.Success)
+            {
+                this.Close();
+            }
+            else
+            {
+                PopupMessage.ShowErrorMessage(response.Message);
+                this.Focus();
+            }
         }
 
         private string ValidateControls()
@@ -204,6 +250,27 @@ namespace IMS.Forms.Inventory.Suppliers
             else
             {
                 errorProvider1.SetError(cbUserType, string.Empty);
+            }
+            if (tbIsLoginEnabled.Visible && chkLoginEnabled.Checked)
+            {
+                if (string.IsNullOrEmpty(tbUsername.Text.Trim()))
+                {
+                    errorProvider1.SetError(tbUsername, RequiredFieldValidator.REQUIRED);
+                    msg += "Username is required.\n";
+                }
+                else
+                {
+                    errorProvider1.SetError(tbUsername, string.Empty);
+                }
+                if (string.IsNullOrEmpty(tbPassword.Text.Trim()))
+                {
+                    errorProvider1.SetError(tbPassword, RequiredFieldValidator.REQUIRED);
+                    msg += "Password is required.\n";
+                }
+                else
+                {
+                    errorProvider1.SetError(tbPassword, string.Empty);
+                }
             }
             return msg;
         }

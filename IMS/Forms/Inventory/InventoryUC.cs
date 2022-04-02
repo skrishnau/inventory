@@ -60,6 +60,7 @@ namespace IMS.Forms.Inventory
 
         private Dictionary<string, Button> menuButtonsDictionary = new Dictionary<string, Button>();
 
+        public event EventHandler LogoutClicked;
         // dependency injection
         public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService, IManufactureService manufactureService)
         {
@@ -353,8 +354,14 @@ namespace IMS.Forms.Inventory
             _menubar.btnManufacturings.Click += BtnManufacturings_Click;
             _menubar.btnDepartment.Click += BtnDepartment_Click;
             _menubar.btnVendor.Click += BtnVendor_Click;
+            _menubar.btnLogout.Click += BtnLogout_Click;
         }
-        
+
+        private void BtnLogout_Click(object sender, EventArgs e)
+        {
+            LogoutClicked?.Invoke(this, EventArgs.Empty);
+        }
+
         private void BtnBackup_Click(object sender, EventArgs e)
         {
             //var folder = "D:\\sysBackups";
@@ -422,14 +429,10 @@ namespace IMS.Forms.Inventory
         private DashboardUC dashboard;
         private void BtnHome_Click(object sender, EventArgs e)
         {
-            dashboard = Program.container.GetInstance<DashboardUC>();
-
-            //pnlBody.Controls.Clear();
-            //pnlBody.Controls.Add(dashboard);
+            dashboard = //Program.container.GetInstance<DashboardUC>();
+                Program.container.GetNewInstanceOfDashboardUC();
+            
             var tabPage = AddTabPage(Constants.TAB_DASHBOARD, dashboard, sender);
-            //dashboard.MyTabTitle = tabControl.SelectedTab.Text;//SelectedIndex;
-
-            //_menubar.SetSelection(sender);
         }
 
         private void BtnPurchaseOrder_Click(object sender, EventArgs e)
@@ -437,13 +440,11 @@ namespace IMS.Forms.Inventory
             var orderType = OrderTypeEnum.Purchase;
             if (purchaseOrderUC == null)
             {
-                // var purchaseOrderDetailUC = Program.container.GetInstance<OrderDetailUC>();
                 purchaseOrderUC = new OrderUC(_orderService, _inventoryService,
                     _listener, orderType
                     );
             }
 
-            //var purchaseOrderUC = Program.container.GetInstance<OrderUC>();
             AddTabPage(Constants.TAB_PURCHASES, purchaseOrderUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(purchaseOrderUC);
@@ -457,10 +458,6 @@ namespace IMS.Forms.Inventory
             var orderType = OrderTypeEnum.Sale;
             if (saleOrderUC == null)
             {
-
-                // var orderDetailUC = new OrderDetailUC(_orderService,
-                //   _listener);
-                //Program.container.GetInstance<OrderDetailUC>();
                 saleOrderUC = new OrderUC(_orderService, _inventoryService,
                     _listener,
                     orderType

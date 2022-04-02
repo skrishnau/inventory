@@ -65,6 +65,8 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblCompanyName = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lblUserName = new System.Windows.Forms.Label();
             this.pnlTopUnderstockProducts.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -77,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDueReceivables)).BeginInit();
             this.pnlCompany.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopUnderstockProducts
@@ -133,6 +136,7 @@
             this.dtEnd.Name = "dtEnd";
             this.dtEnd.Size = new System.Drawing.Size(100, 20);
             this.dtEnd.TabIndex = 6;
+            this.dtEnd.Validate = false;
             // 
             // dtStart
             // 
@@ -140,6 +144,7 @@
             this.dtStart.Name = "dtStart";
             this.dtStart.Size = new System.Drawing.Size(100, 20);
             this.dtStart.TabIndex = 5;
+            this.dtStart.Validate = false;
             // 
             // label2
             // 
@@ -439,6 +444,7 @@
             // pnlCompany
             // 
             this.pnlCompany.BackColor = System.Drawing.Color.Gray;
+            this.pnlCompany.Controls.Add(this.panel5);
             this.pnlCompany.Controls.Add(this.panel9);
             this.pnlCompany.Controls.Add(this.lblCompanyName);
             this.pnlCompany.Dock = System.Windows.Forms.DockStyle.Top;
@@ -496,6 +502,26 @@
             this.lblCompanyName.Text = "My Company";
             this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.lblUserName);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel5.Location = new System.Drawing.Point(4, 4);
+            this.panel5.Name = "panel5";
+            this.panel5.Padding = new System.Windows.Forms.Padding(0, 13, 0, 0);
+            this.panel5.Size = new System.Drawing.Size(200, 41);
+            this.panel5.TabIndex = 3;
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblUserName.Location = new System.Drawing.Point(0, 13);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(35, 13);
+            this.lblUserName.TabIndex = 0;
+            this.lblUserName.Text = "label6";
+            // 
             // DashboardUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,6 +546,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDueReceivables)).EndInit();
             this.pnlCompany.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -563,5 +591,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDueDays;
         private Common.Date.NepaliDateTextBox dtStart;
         private Common.Date.NepaliDateTextBox dtEnd;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label lblUserName;
     }
 }

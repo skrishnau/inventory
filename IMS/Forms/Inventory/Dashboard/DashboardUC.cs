@@ -15,6 +15,7 @@ using IMS.Forms.Common;
 using ViewModel.Core;
 using ViewModel.Core.Inventory;
 using Service.DbEventArgs;
+using Service;
 
 namespace IMS.Forms.Inventory.Dashboard
 {
@@ -27,7 +28,7 @@ namespace IMS.Forms.Inventory.Dashboard
         private readonly IAppSettingService _appSettingService;
         //public TabPage TabPage { get; set; }
         //public TabControl TabControl { get; set; }
-       // public string MyTabTitle { get; set; }
+        // public string MyTabTitle { get; set; }
         //private bool _listenerFired = false;
 
         //List<Action> _listenerActions = new List<Action>();
@@ -67,8 +68,13 @@ namespace IMS.Forms.Inventory.Dashboard
 
             PopulateBarDiagram();
 
+            PopulateUserName();
         }
 
+        private void PopulateUserName()
+        {
+            lblUserName.Text = UserSession.User?.Username;
+        }
 
         private void PopulateBarDiagram()
         {
