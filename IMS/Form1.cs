@@ -64,10 +64,19 @@ namespace IMS
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = Constants.APP_NAME;
+            InitLoad();
+        }
+
+        private void InitLoad()
+        {
             var databaseConnectionSuccess = SetDatabaseConnection();
             if (databaseConnectionSuccess)
             {
                 ShowLoginFormOrLogin();
+            }
+            else
+            {
+                CloseTheApp();
             }
         }
 
@@ -82,12 +91,24 @@ namespace IMS
                     return true;
                 }
             }
-            // show database configuation page
-            var databaseConfigForm = new DatabaseConfigForm();
-            var dialogResult = databaseConfigForm.ShowDialog();
-            if (dialogResult == DialogResult.Yes || dialogResult == DialogResult.OK)
+            if(UserSession.ConnectionStrings == null || string.IsNullOrWhiteSpace(UserSession.ConnectionStrings.EDMXConnectionString))
             {
-               return true;
+                // show database configuation page
+                var databaseConfigForm = new DatabaseConfigForm();
+                var dialogResult = databaseConfigForm.ShowDialog();
+                if (dialogResult == DialogResult.Yes || dialogResult == DialogResult.OK)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                var result = MessageBox.Show(this, "Database Offline", "Database Offline", MessageBoxButtons.RetryCancel);
+                if(result == DialogResult.Retry)
+                {
+                    InitLoad();
+                }
             }
             return false;
         }
@@ -95,7 +116,9 @@ namespace IMS
         {
             // get connection string
             var settings = GetSettingsFromFile();
-            return DatabaseHelper.GetConnectionString(settings.DatabaseServer, settings.DatabaseName);
+            if(settings!=null && !string.IsNullOrEmpty(settings.DatabaseName) && !string.IsNullOrEmpty(settings.DatabaseServer))
+                return DatabaseHelper.GetConnectionString(settings.DatabaseServer, settings.DatabaseName);
+            return null;
         }
         private ApplicationSettings GetSettingsFromFile()
         {
@@ -218,8 +241,7 @@ namespace IMS
             var lockTxnCreate = await _appSettingService.GetIsTransactionCreatePageLocked();
             if (lockTxnCreate)
             {
-                this.Close();
-                this?.Dispose();
+                CloseTheApp();
             }
             else
             {

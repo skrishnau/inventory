@@ -37,12 +37,12 @@ namespace IMS.Forms.Inventory.Suppliers
         private void SupplierCreate_Load(object sender, EventArgs e)
         {
             this.Text = (_userType.Count == 1 ? _userType.Contains(UserTypeEnum.Employee) ? "Employee" : _userType.Count == 1 ? _userType[0].ToString() : "" : "") + " Create";
-            InitializeEvents();
             this.ActiveControl = tbName;
             PopulateUserType();
 
             var supplier = _supplierService.GetUser(_userId);
             SetDataForEdit(supplier);
+            InitializeEvents();
         }
 
         private void InitializeEvents()
@@ -59,7 +59,9 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void ShowHideUserNamePassword()
         {
+            var showLoginRelated = cbUserType.SelectedValue == UserTypeEnum.Employee.ToString();
             var isChecked = chkLoginEnabled.Checked;
+            tbIsLoginEnabled.Visible = showLoginRelated;
             var isChkLoginShown = tbIsLoginEnabled.Visible;
             tblUsernamePassword.Visible = isChecked && isChkLoginShown;
         }
@@ -101,7 +103,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
             }
             catch (Exception) { }
-            UpdateViewAsPerUserType(_userType);
+            //UpdateViewAsPerUserType();// (_userType);
 
         }
 
@@ -115,14 +117,15 @@ namespace IMS.Forms.Inventory.Suppliers
             {
                 if (Enum.TryParse<UserTypeEnum>(value, out UserTypeEnum userType))
                 {
-                    UpdateViewAsPerUserType(new List<UserTypeEnum> { userType });
+                    UpdateViewAsPerUserType();//(new List<UserTypeEnum> { userType });
                 }
             }
         }
 
-        private void UpdateViewAsPerUserType(List<UserTypeEnum> _userType)
+        private void UpdateViewAsPerUserType()//(List<UserTypeEnum> _userType)
         {
-            if (_userType.Contains(UserTypeEnum.Customer) || _userType.Contains(UserTypeEnum.Supplier))
+            Enum.TryParse(cbUserType.SelectedValue as string, out UserTypeEnum userType);
+            if (userType == UserTypeEnum.Customer || userType == UserTypeEnum.Supplier)
             {
                 lblName.Text = "Name";
                 tbCompany.Visible = true;
@@ -130,7 +133,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 tbIsLoginEnabled.Visible = false;
                 chkLoginEnabled.Checked = false;
             }
-            if (_userType.Contains(UserTypeEnum.Vendor))
+            if (userType == UserTypeEnum.Vendor)
             {
                 lblName.Text = "Contact Person Name";
                 tbCompany.Visible = true;
@@ -138,7 +141,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 tbIsLoginEnabled.Visible = false;
                 chkLoginEnabled.Checked = false;
             }
-            if (_userType.Contains(UserTypeEnum.Employee))
+            if (userType == UserTypeEnum.Employee)
             {
                 lblName.Text = "Name";
                 tbCompany.Visible = false;
@@ -149,7 +152,7 @@ namespace IMS.Forms.Inventory.Suppliers
         }
         public void SetDataForEdit(int userId, List<UserTypeEnum> userType)
         {
-            _userType = userType;
+            _userType = userType;//new List<UserTypeEnum> { userType.Any() ? userType.First() :  UserTypeEnum.Customer };
             _userId = userId;
         }
 
@@ -177,7 +180,10 @@ namespace IMS.Forms.Inventory.Suppliers
                 tbIsLoginEnabled.Visible = model.UserType == UserTypeEnum.Employee.ToString();
                 tblUsernamePassword.Visible = model.CanLogin && model.UserType == UserTypeEnum.Employee.ToString();
                 tbUsername.Text = model.Username;
-                tbPassword.Text = model.Password;
+                //tbPassword.Text = model.Password;
+                // dont' show password in edit mode
+                lblPassword.Visible = false;
+                tbPassword.Visible = false;
             }
             ShowHideUserNamePassword();
         }

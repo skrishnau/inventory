@@ -70,6 +70,7 @@
             this.colAllDuesClearDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colEdit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colResetPassword = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -97,7 +98,8 @@
             this.colPaymentDueDate,
             this.colAllDuesClearDate,
             this.colUse,
-            this.colEdit});
+            this.colEdit,
+            this.colResetPassword});
             this.dgvSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSuppliers.Location = new System.Drawing.Point(0, 85);
             this.dgvSuppliers.Margin = new System.Windows.Forms.Padding(2);
@@ -483,6 +485,14 @@
             this.colEdit.ReadOnly = true;
             this.colEdit.Width = 30;
             // 
+            // colResetPassword
+            // 
+            this.colResetPassword.HeaderText = "";
+            this.colResetPassword.Image = global::IMS.Properties.Resources.icons8_Access_16px;
+            this.colResetPassword.Name = "colResetPassword";
+            this.colResetPassword.ReadOnly = true;
+            this.colResetPassword.ToolTipText = "Reset Password";
+            // 
             // ClientListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -548,5 +558,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAllDuesClearDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colUse;
         private System.Windows.Forms.DataGridViewImageColumn colEdit;
+        private System.Windows.Forms.DataGridViewImageColumn colResetPassword;
     }
 }

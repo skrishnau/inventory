@@ -61,7 +61,7 @@ namespace IMS.Forms.Inventory.Suppliers
             InitializeEvents();
             PopulateData();
             PopulateList();
-            
+
         }
 
         private void PopulateData()
@@ -91,7 +91,7 @@ namespace IMS.Forms.Inventory.Suppliers
         private void InitializeSearchTextBox()
         {
             txtName.AutoCompleteCustomSource.Clear();
-            var users = _userService.GetUserListWithCompanyForCombo( _userType, new int[0]);
+            var users = _userService.GetUserListWithCompanyForCombo(_userType, new int[0]);
             txtName.AutoCompleteCustomSource.AddRange(users.Select(x => x.Name).ToArray());
             txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             txtName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -119,7 +119,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             dgvSuppliers.AutoGenerateColumns = false;
             dgvSuppliers.AllowUserToOrderColumns = true;
-            helper = new ClientListPaginationHelper(_bindingSource, dgvSuppliers, bindingNavigator1, _userService, _userType , txtName?.Text);
+            helper = new ClientListPaginationHelper(_bindingSource, dgvSuppliers, bindingNavigator1, _userService, _userType, txtName?.Text);
         }
 
         private void InitializeEvents()
@@ -145,7 +145,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             PaginationHelper.SetRowNumber(dgvSuppliers, helper.offset);
         }
-        
+
 
 
         #endregion
@@ -192,22 +192,22 @@ namespace IMS.Forms.Inventory.Suppliers
             var usersForPrint = _userService.GetAllUsers(_userType, 0, 0, txtName?.Text);
             var lengthToTruncate = 15;
             var dataList = usersForPrint.DataList.Select(x => new ClientListPrintModel
-                {
-                    Address = x.Address?.Length > lengthToTruncate ? $"{x.Address.Substring(0, lengthToTruncate)}..." : x.Address,
-                    Balance = x.DueAmountString, //x.DueAmount.ToString("0.00"),
-                    Company = x.Company?.Length > lengthToTruncate ? $"{x.Company.Substring(0, lengthToTruncate)}..." : x.Company,
-                    Credit = x.PaidAmount.ToString("0.00"),
-                    Debit = x.TotalAmount.ToString("0.00"),
-                    DrCr = Math.Sign(x.DueAmount),
-                    DrCrString = x.DueAmount > 0 ? "Dr" : x.DueAmount < 0 ? "Cr": "",
-                    DueDateBS = x.PaymentDueDateBS,//x.PaymentDueDate.HasValue ? DateConverter.Instance.ToBS(x.PaymentDueDate.Value).ToString() : string.Empty,//x.PaymentDueDate.ToString(), // should be in bs
-                    IsManualNewRow = false,
-                    LastFullClearDateBS = x.AllDuesClearDateBS,
-                    Name= x.Name,
-                    Phone = x.Phone,
-                    Type = x.UserType,
-                    Use = x.Use,
-                }).ToList();
+            {
+                Address = x.Address?.Length > lengthToTruncate ? $"{x.Address.Substring(0, lengthToTruncate)}..." : x.Address,
+                Balance = x.DueAmountString, //x.DueAmount.ToString("0.00"),
+                Company = x.Company?.Length > lengthToTruncate ? $"{x.Company.Substring(0, lengthToTruncate)}..." : x.Company,
+                Credit = x.PaidAmount.ToString("0.00"),
+                Debit = x.TotalAmount.ToString("0.00"),
+                DrCr = Math.Sign(x.DueAmount),
+                DrCrString = x.DueAmount > 0 ? "Dr" : x.DueAmount < 0 ? "Cr" : "",
+                DueDateBS = x.PaymentDueDateBS,//x.PaymentDueDate.HasValue ? DateConverter.Instance.ToBS(x.PaymentDueDate.Value).ToString() : string.Empty,//x.PaymentDueDate.ToString(), // should be in bs
+                IsManualNewRow = false,
+                LastFullClearDateBS = x.AllDuesClearDateBS,
+                Name = x.Name,
+                Phone = x.Phone,
+                Type = x.UserType,
+                Use = x.Use,
+            }).ToList();
             if (usersForPrint != null)
             {
                 var debit = usersForPrint.DataList.Sum(x => x.TotalAmount);
@@ -220,8 +220,8 @@ namespace IMS.Forms.Inventory.Suppliers
                     CreditSum = credit.ToString("0.00"),
                     DebitSum = debit.ToString("0.00"),
                     DrCr = total > 0 ? -1 : 1,
-                    DrCrString = total > 0 ? "Dr": total < 0? "Cr": "",
-                    UserType = string.Join(", ", _userType.Select(x=>x.ToString())),
+                    DrCrString = total > 0 ? "Dr" : total < 0 ? "Cr" : "",
+                    UserType = string.Join(", ", _userType.Select(x => x.ToString())),
                     SearchText = txtName?.Text,
                 };
                 var form = new ClientListPrintForm(_appSettingService, model, _userService);
@@ -271,14 +271,17 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             if (e.RowIndex >= 0)
             {
-                if (e.ColumnIndex == colEdit.Index)
+                var data = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
+                if (data != null)
                 {
-                    var data = dgvSuppliers.Rows[e.RowIndex].DataBoundItem as UserModel;
-                    if (data != null)
+                    if (e.ColumnIndex == colEdit.Index)
                     {
                         ShowAddEditDialog(true);
                     }
+                    else if (e.ColumnIndex == colResetPassword.Index)
+                    {
 
+                    }
                 }
             }
         }
@@ -292,7 +295,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
             _previousIndex = e.ColumnIndex;
         }
-       
+
 
         private void UserType_CheckedChanged(object sender, EventArgs e)
         {
@@ -348,7 +351,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 }
             }
         }
-        
+
         #endregion
 
 

@@ -49,7 +49,7 @@ namespace Service.Core.Users
                 BaseEventArgs<UserModel> eventArgs = BaseEventArgs<UserModel>.Instance;
                 if (_context.Users.Any(x => x.Username == supplierModel.Username && x.Id != supplierModel.Id))
                     return ResponseModel<bool>.GetError("Username already exists. Couldn't save.");
-                if (!string.IsNullOrEmpty(supplierModel.Password))
+                if (supplierModel.Id == 0 && !string.IsNullOrEmpty(supplierModel.Password))
                     supplierModel.Password = GeneratePasswordHash(supplierModel.Password);
                 dbEntity = UserMapper.MapToEntity(supplierModel, dbEntity);
                 if (dbEntity.Id == 0)

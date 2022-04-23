@@ -1384,7 +1384,6 @@
   <ItemGroup>
     <Folder Include="Forms\Bills\" />
     <Folder Include="Forms\Inventory\Reports\All\" />
-    <Folder Include="License\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj">
@@ -1879,6 +1878,7 @@
     <None Include="Resources\icons8-department-24.png" />
     <None Include="Resources\icons8-vendor-24px.png" />
     <None Include="Resources\icons8-logout-24.png" />
+    <Content Include="License\AuthCodeGenerator.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
