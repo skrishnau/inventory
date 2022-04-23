@@ -27,29 +27,32 @@ namespace IMS
 {
     public partial class Form1 : Form
     {
-        private readonly IOrderService _orderService;
-        private readonly IInventoryService _inventoryService;
-        private readonly IProductService _productService;
-        private readonly IDatabaseChangeListener _listener;
-        private readonly IUserService _userService;
+        //private readonly IOrderService _orderService;
+        //private readonly IInventoryService _inventoryService;
+        //private readonly IProductService _productService;
+        //private readonly IDatabaseChangeListener _listener;
+        //private readonly IUserService _userService;
+        //private readonly IUomService _uomService;
+        //private readonly IProductOwnerService _productOwnerService;
+        //private readonly IManufactureService _manufactureService;
+        private readonly IDIServiceInstance _dIServiceInstance;
         private readonly IAppSettingService _appSettingService;
-        private readonly IUomService _uomService;
-        private readonly IProductOwnerService _productOwnerService;
-        private readonly IManufactureService _manufactureService;
 
         private TransactionCreateLargeForm form;
 
-        public Form1(IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService, IManufactureService manufactureService)
+        public Form1(IDIServiceInstance dIServiceInstance, IAppSettingService appSettingService)//, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IUomService uomService, IProductOwnerService productOwnerService, IManufactureService manufactureService)
         {
-            _orderService = orderService;
-            _productService = productService;
-            _inventoryService = inventoryService;
-            _userService = userService;
-            _listener = listener;
+            _dIServiceInstance = dIServiceInstance;
             _appSettingService = appSettingService;
-            _uomService = uomService;
-            _productOwnerService = productOwnerService;
-            _manufactureService = manufactureService;
+            //_orderService = orderService;
+            //_productService = productService;
+            //_inventoryService = inventoryService;
+            //_userService = userService;
+            //_listener = listener;
+            //_appSettingService = appSettingService;
+            //_uomService = uomService;
+            //_productOwnerService = productOwnerService;
+            //_manufactureService = manufactureService;
 
             InitializeComponent();
 
@@ -219,8 +222,8 @@ namespace IMS
             {
             */
             this.Controls.Clear();
-            var inventoryUc = //Program.container.GetInstance<InventoryUC>();//new InventoryUC();
-                    new InventoryUC(new InventoryMenuBar(), _orderService, _productService, _listener, _inventoryService, _userService, _appSettingService, _uomService, _productOwnerService, _manufactureService);
+            var inventoryUc = _dIServiceInstance.GetInventoryUC(); //Program.container.GetInstance<InventoryUC>();//new InventoryUC();
+                    //new InventoryUC(new InventoryMenuBar(), _orderService, _productService, _listener, _inventoryService, _userService, _appSettingService, _uomService, _productOwnerService, _manufactureService);
             this.Controls.Add(inventoryUc);
             inventoryUc.LogoutClicked -= ProductListUC_LogoutClicked;
             inventoryUc.LogoutClicked += ProductListUC_LogoutClicked;

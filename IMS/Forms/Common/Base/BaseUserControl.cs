@@ -11,13 +11,17 @@ namespace IMS.Forms.Common
 {
     public class BaseUserControl : UserControl
     {
+
         public string MyTabTitle { get; set; }
         public string MySubTabTitle { get; set; }
         Dictionary<Action, EventArgs> _listenerActions = new Dictionary<Action, EventArgs>();
 
         public BaseUserControl()
         {
-            
+            //InitializeComponent();
+
+            // get form dimensions
+            //this.menuButton1.Location = new Point(this.Width - 40, 40);
         }
 
         protected void AddListenerAction(Action action, EventArgs e)
@@ -41,6 +45,17 @@ namespace IMS.Forms.Common
             }
             _listenerActions.Clear();
         }
-        
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseUserControl
+            // 
+            this.Name = "BaseUserControl";
+            this.Size = new System.Drawing.Size(752, 339);
+            this.ResumeLayout(false);
+
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace IMS.Forms.Common.Display
 
         public override string Text { get { return lblText.Text; } set { lblText.Text = value; } }
 
-        public string HeadingText{ get { return lblText.Text; } set { lblText.Text = value; } }
+        public string HeadingText{ get { return Text; } set { Text = value; } }
 
 
     }

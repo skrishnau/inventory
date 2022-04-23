@@ -56,6 +56,8 @@
             this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnPOS = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
+            this.btnVendor = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -89,7 +91,6 @@
             this.pnlManufacture = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.splitter9 = new System.Windows.Forms.Splitter();
-            this.btnVendor = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -129,7 +130,7 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Image = global::IMS.Properties.Resources.icons8_logout_24;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLogout.Location = new System.Drawing.Point(97, 15);
+            this.btnLogout.Location = new System.Drawing.Point(156, 15);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(54, 53);
             this.btnLogout.TabIndex = 50;
@@ -525,6 +526,39 @@
             this.toolTip1.SetToolTip(this.btnHome, "Go to Dashboard");
             this.btnHome.UseVisualStyleBackColor = true;
             // 
+            // btnVendor
+            // 
+            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnVendor.FlatAppearance.BorderSize = 0;
+            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVendor.Image = ((System.Drawing.Image)(resources.GetObject("btnVendor.Image")));
+            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVendor.Location = new System.Drawing.Point(252, 15);
+            this.btnVendor.Name = "btnVendor";
+            this.btnVendor.Size = new System.Drawing.Size(76, 53);
+            this.btnVendor.TabIndex = 49;
+            this.btnVendor.Text = "Employees";
+            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
+            this.btnVendor.UseVisualStyleBackColor = true;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefresh.Location = new System.Drawing.Point(97, 15);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(59, 53);
+            this.btnRefresh.TabIndex = 51;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnRefresh, "Help and Support");
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitter1);
@@ -810,13 +844,14 @@
             // 
             this.pnlMisc.AutoSize = true;
             this.pnlMisc.Controls.Add(this.btnLogout);
+            this.pnlMisc.Controls.Add(this.btnRefresh);
             this.pnlMisc.Controls.Add(this.btnHelp);
             this.pnlMisc.Controls.Add(this.btnBackup);
             this.pnlMisc.Controls.Add(this.label7);
             this.pnlMisc.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMisc.Location = new System.Drawing.Point(1549, 2);
             this.pnlMisc.Name = "pnlMisc";
-            this.pnlMisc.Size = new System.Drawing.Size(151, 68);
+            this.pnlMisc.Size = new System.Drawing.Size(210, 68);
             this.pnlMisc.TabIndex = 58;
             // 
             // label7
@@ -825,7 +860,7 @@
             this.label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(151, 15);
+            this.label7.Size = new System.Drawing.Size(210, 15);
             this.label7.TabIndex = 5;
             this.label7.Text = "Misc";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -834,7 +869,7 @@
             // 
             this.panel9.Controls.Add(this.splitter8);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(1700, 2);
+            this.panel9.Location = new System.Drawing.Point(1759, 2);
             this.panel9.Name = "panel9";
             this.panel9.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel9.Size = new System.Drawing.Size(11, 68);
@@ -879,22 +914,6 @@
             this.splitter9.Size = new System.Drawing.Size(2, 60);
             this.splitter9.TabIndex = 0;
             this.splitter9.TabStop = false;
-            // 
-            // btnVendor
-            // 
-            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnVendor.FlatAppearance.BorderSize = 0;
-            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVendor.Image = ((System.Drawing.Image)(resources.GetObject("btnVendor.Image")));
-            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVendor.Location = new System.Drawing.Point(252, 15);
-            this.btnVendor.Name = "btnVendor";
-            this.btnVendor.Size = new System.Drawing.Size(76, 53);
-            this.btnVendor.TabIndex = 49;
-            this.btnVendor.Text = "Employees";
-            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
-            this.btnVendor.UseVisualStyleBackColor = true;
             // 
             // InventoryMenuBar
             // 
@@ -1004,5 +1023,6 @@
         private System.Windows.Forms.Splitter splitter9;
         protected internal System.Windows.Forms.Button btnLogout;
         protected internal System.Windows.Forms.Button btnVendor;
+        protected internal System.Windows.Forms.Button btnRefresh;
     }
 }

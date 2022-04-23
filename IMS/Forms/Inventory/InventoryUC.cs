@@ -50,6 +50,7 @@ namespace IMS.Forms.Inventory
         private readonly IUomService _uomService;
         private readonly IProductOwnerService _productOwnerService;
         private readonly IManufactureService _manufactureService;
+        private readonly IDIServiceInstance _dIServiceInstance;
 
         private Transaction.TransactionListUC _transactionListUC;
         private Transaction.TransactionListUC _orderListUC;
@@ -62,7 +63,7 @@ namespace IMS.Forms.Inventory
 
         public event EventHandler LogoutClicked;
         // dependency injection
-        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService, IManufactureService manufactureService)
+        public InventoryUC(InventoryMenuBar menubar, IOrderService orderService, IProductService productService, IDatabaseChangeListener listener, IInventoryService inventoryService, IUserService userService, IAppSettingService appSettingService, IUomService uomService, IProductOwnerService productOwnerService, IManufactureService manufactureService, IDIServiceInstance dIServiceInstance)
         {
             _orderService = orderService;
             _productService = productService;
@@ -74,11 +75,12 @@ namespace IMS.Forms.Inventory
             _uomService = uomService;
             _productOwnerService = productOwnerService;
             _manufactureService = manufactureService;
+            _dIServiceInstance = dIServiceInstance;
 
             InitializeComponent();
 
             this.Load += InventoryUC_Load;
-            
+
         }
 
         private async void InventoryUC_Load(object sender, EventArgs e)
@@ -140,7 +142,7 @@ namespace IMS.Forms.Inventory
             {
                 menuButtonsDictionary[buttonText].BackColor = Color.Transparent;
             }
-            if(menuButtonsDictionary.ContainsKey(tabControl.SelectedTab.Text))
+            if (menuButtonsDictionary.ContainsKey(tabControl.SelectedTab.Text))
                 menuButtonsDictionary[tabControl.SelectedTab.Text].BackColor = Color.Gainsboro;
             var baseUc = tabControl.Controls.Count > 0 ? tabControl.SelectedTab.Controls[0] as BaseUserControl : null;
             if (baseUc != null)
@@ -355,6 +357,61 @@ namespace IMS.Forms.Inventory
             _menubar.btnDepartment.Click += BtnDepartment_Click;
             _menubar.btnVendor.Click += BtnVendor_Click;
             _menubar.btnLogout.Click += BtnLogout_Click;
+            _menubar.btnRefresh.Click += BtnRefresh_Click;
+        }
+
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshCurrentTab();
+        }
+
+        private void RefreshCurrentTab()
+        {
+            var tab = tabControl.SelectedTab;
+
+            var menuAction = GetMenuAction(CurrentTabTitle?.Trim());
+            menuAction?.Invoke(_menubar.btnRefresh, EventArgs.Empty);
+
+
+        }
+        private Action<object, EventArgs> GetMenuAction(string tabTitle)
+        {
+            switch (tabTitle)
+            {
+                case Constants.TAB_DASHBOARD:
+                    return BtnHome_Click;// (_menubar.btnRefresh, EventArgs.Empty);
+                case Constants.TAB_PURCHASES:
+                    return BtnPurchaseOrder_Click;// (_menubar.btnRefresh, EventArgs.Empty);
+                case Constants.TAB_SALES:
+                    return BtnSellOrder_Click;// (_menubar.btnRefresh, EventArgs.Empty);
+                case Constants.TAB_TRANSFERS:
+                    return BtnTransferOrder_Click;// (_menubar.btnRefresh, EventArgs.Empty);
+                case Constants.TAB_CLIENTS:
+                    return BtnClients_Click;// (_menubar.btnRefresh, EventArgs.Empty);
+                case Constants.TAB_VENDOR:
+                    return BtnVendor_Click;
+                case Constants.TAB_DEPARTMENT:
+                    return BtnDepartment_Click;
+                case Constants.TAB_INVENTORY_UNITS:
+                    return BtnInventoryUnits_Click;
+                case Constants.TAB_POS:
+                    return BtnPOS_Click;
+                case Constants.TAB_PRODUCTS:
+                    return BtnProductList_Click;
+                case Constants.TAB_MANUFACTURE:
+                    return BtnManufacturings_Click;
+                case Constants.TAB_TRANSACTIONS:
+                    return BtnTransactionList_Click;
+                case Constants.TAB_ORDERS:
+                    return BtnOrders_Click;
+                case Constants.TAB_SETTINGS:
+                    return BtnSettings_Click;
+                case Constants.TAB_REPORTS:
+                    return BtnReports_Click;
+                case Constants.TAB_ACCOUNTS:
+                    return BtnAccounts_Click;
+            }
+            return null;
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
@@ -388,6 +445,9 @@ namespace IMS.Forms.Inventory
                     break;
                 }
             }
+
+            bool replacePageContent = (sender as Button)?.Name == _menubar.btnRefresh.Name;
+
             BaseUserControl currentUserControl;
             if (alreadyExistingTab == null)
             {
@@ -407,6 +467,11 @@ namespace IMS.Forms.Inventory
             else
             {
                 currentUserControl = alreadyExistingTab.Controls.Count > 0 ? alreadyExistingTab.Controls[0] as BaseUserControl : null;
+                if (replacePageContent)
+                {
+                    alreadyExistingTab.Controls.Clear();
+                    alreadyExistingTab.Controls.Add(userControlToAdd);
+                }
             }
             //if (currentUserControl != null)
             //{
@@ -430,39 +495,39 @@ namespace IMS.Forms.Inventory
         private void BtnHome_Click(object sender, EventArgs e)
         {
             dashboard = //Program.container.GetInstance<DashboardUC>();
-                Program.container.GetNewInstanceOfDashboardUC();
-            
+                        //Program.container.GetNewInstanceOfDashboardUC();
+                _dIServiceInstance.GetDashboardUC();
+
             var tabPage = AddTabPage(Constants.TAB_DASHBOARD, dashboard, sender);
         }
-
         private void BtnPurchaseOrder_Click(object sender, EventArgs e)
         {
-            var orderType = OrderTypeEnum.Purchase;
-            if (purchaseOrderUC == null)
-            {
-                purchaseOrderUC = new OrderUC(_orderService, _inventoryService,
-                    _listener, orderType
-                    );
-            }
+            //if (purchaseOrderUC == null)
+            //{
 
+            //}
+            //var purchaseOrderUC = new OrderUC(_orderService, _inventoryService,
+            //        _listener, orderType
+            //        );
+            var purchaseOrderUc = _dIServiceInstance.GetOrderUC(OrderTypeEnum.Purchase);
             AddTabPage(Constants.TAB_PURCHASES, purchaseOrderUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(purchaseOrderUC);
             // set selection
             //_menubar.SetSelection(sender);
         }
-
-
         private void BtnSellOrder_Click(object sender, EventArgs e)
         {
-            var orderType = OrderTypeEnum.Sale;
-            if (saleOrderUC == null)
-            {
-                saleOrderUC = new OrderUC(_orderService, _inventoryService,
-                    _listener,
-                    orderType
-                    );
-            }
+            //var orderType = OrderTypeEnum.Sale;
+            //if (saleOrderUC == null)
+            //{
+
+            //}
+            //var saleOrderUC = new OrderUC(_orderService, _inventoryService,
+            //        _listener,
+            //        orderType
+            //        );
+            var saleOrderUC = _dIServiceInstance.GetOrderUC(OrderTypeEnum.Sale);
 
             // var saleOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
@@ -471,21 +536,22 @@ namespace IMS.Forms.Inventory
             // set selection
             // _menubar.SetSelection(sender);
         }
-
         private void BtnTransferOrder_Click(object sender, EventArgs e)
         {
-            var orderType = OrderTypeEnum.Move;
-            if (transferOrderUC == null)
-            {
+            //var orderType = OrderTypeEnum.Move;
+            //if (transferOrderUC == null)
+            //{
 
-                // var orderDetailUC = new OrderDetailUC(_orderService,
-                //   _listener);
-                //Program.container.GetInstance<OrderDetailUC>();
-                transferOrderUC = new OrderUC(_orderService, _inventoryService,
-                    _listener,
-                    orderType
-                    );
-            }
+            //    // var orderDetailUC = new OrderDetailUC(_orderService,
+            //    //   _listener);
+            //    //Program.container.GetInstance<OrderDetailUC>();
+
+            //}
+            var transferOrderUC = _dIServiceInstance.GetOrderUC(OrderTypeEnum.Move);
+            //new OrderUC(_orderService, _inventoryService,
+            //    _listener,
+            //    orderType
+            //    );
 
             // var transferOrderUC = Program.container.GetInstance<OrderUC>();
             //pnlBody.Controls.Clear();
@@ -497,7 +563,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnClients_Click(object sender, EventArgs e)
         {
-            var uc = Program.container.GetInstance<ClientListUC>();
+            var uc = _dIServiceInstance.GetClientListUc();//Program.container.GetInstance<ClientListUC>();
             uc.SetData(UserTypeCategoryEnum.CustomerAndSupplier);
             AddTabPage(Constants.TAB_CLIENTS, uc, sender);
         }
@@ -505,19 +571,19 @@ namespace IMS.Forms.Inventory
         private void BtnVendor_Click(object sender, EventArgs e)
         {
             //var uc = Program.container.GetInstance<ClientListUC>();
-            var uc = new ClientListUC(_userService, _listener, _appSettingService);
+            var uc = _dIServiceInstance.GetClientListUc();//new ClientListUC(_userService, _listener, _appSettingService);
             uc.SetData(UserTypeCategoryEnum.UserAndVendor);
             AddTabPage(Constants.TAB_VENDOR, uc, sender);
         }
         private void BtnDepartment_Click(object sender, EventArgs e)
         {
-            var inventoryUnitList = Program.container.GetInstance<DepartmentListUC>();
+            var inventoryUnitList = _dIServiceInstance.GetDepartmentListUC();//Program.container.GetInstance<DepartmentListUC>();
             AddTabPage(Constants.TAB_DEPARTMENT, inventoryUnitList, sender);
         }
 
         private void BtnInventoryUnits_Click(object sender, EventArgs e)
         {
-            var inventoryUnitList = Program.container.GetInstance<InventoryUnitListUC>();
+            var inventoryUnitList = _dIServiceInstance.GetInventoryUnitListUC();//Program.container.GetInstance<InventoryUnitListUC>();
             AddTabPage(Constants.TAB_INVENTORY_UNITS, inventoryUnitList, sender);
 
             //var inventoryDetailUC = Program.container.GetInstance<InventoryDetailUC>();
@@ -532,7 +598,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnPOS_Click(object sender, EventArgs e)
         {
-            var posUC = Program.container.GetInstance<PosUC>();
+            var posUC = _dIServiceInstance.GetPosUC();//Program.container.GetInstance<PosUC>();
             AddTabPage(Constants.TAB_POS, posUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(posUC);
@@ -542,15 +608,13 @@ namespace IMS.Forms.Inventory
         #region Products
         private void BtnProductList_Click(object sender, EventArgs e)
         {
-            var productUC = Program.container.GetInstance<ProductUC>();
+            var productUC = _dIServiceInstance.GetProductUC();//Program.container.GetInstance<ProductUC>();
             AddTabPage(Constants.TAB_PRODUCTS, productUC, sender);
             //pnlBody.Controls.Clear();
             //pnlBody.Controls.Add(productListUC);
 
             // _menubar.SetSelection(sender);
         }
-
-
 
         #endregion
 
@@ -581,8 +645,6 @@ namespace IMS.Forms.Inventory
 
         #endregion
 
-
-
         #region Supplier
 
         //private void BtnSupplierList_Click(object sender, EventArgs e)
@@ -599,7 +661,7 @@ namespace IMS.Forms.Inventory
 
         private void BtnManufacturings_Click(object sender, EventArgs e)
         {
-            var uc = Program.container.GetInstance<ManufactureListUC>();
+            var uc = _dIServiceInstance.GetManufactureListUC();//Program.container.GetInstance<ManufactureListUC>();
             uc.RowSelected -= Uc_RowSelected;
             uc.RowSelected += Uc_RowSelected;
             AddTabPage(Constants.TAB_MANUFACTURE, uc, sender);
@@ -619,7 +681,7 @@ namespace IMS.Forms.Inventory
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-               
+
                 var form = Program.container.GetInstance<Transaction.TransactionCreateForm>();
                 var orderEditModel = new OrderEditModel
                 {
@@ -629,7 +691,7 @@ namespace IMS.Forms.Inventory
                 };
                 form.SetDataForEdit(orderEditModel); //OrderTypeEnum.Sale, 0
                 form.ShowDialog();
-               
+
                 /*
                 var form = Program.container.GetInstance<Transaction.TransactionCreateLargeForm>();
                 var orderEditModel = new OrderEditModel
@@ -691,9 +753,11 @@ namespace IMS.Forms.Inventory
         private void BtnTransactionList_Click(object sender, EventArgs e)
         {
             var orderType = OrderTypeEnum.All;
-            if (_transactionListUC == null)
-            {
-                _transactionListUC = new Transaction.TransactionListUC(_orderService,
+            //if (_transactionListUC == null)
+            //{
+
+            //}
+            var _transactionListUC = new Transaction.TransactionListUC(_orderService,
                     _inventoryService,
                     _userService,
                     _productService,
@@ -703,26 +767,22 @@ namespace IMS.Forms.Inventory
                     _uomService,
                     _productOwnerService
                     );
-            }
             AddTabPage(Constants.TAB_TRANSACTIONS, _transactionListUC, sender);
         }
 
         private void BtnOrders_Click(object sender, EventArgs e)
         {
             var orderType = OrderTypeEnum.All;
-            if (_orderListUC == null)
-            {
-                _orderListUC = new Transaction.TransactionListUC(_orderService,
-                    _inventoryService,
-                    _userService,
-                    _productService,
-                    _listener,
-                    orderType,
-                    OrderListTypeEnum.Order,
-                    _uomService,
-                    _productOwnerService
-                    );
-            }
+            var _orderListUC = new Transaction.TransactionListUC(_orderService,
+                _inventoryService,
+                _userService,
+                _productService,
+                _listener,
+                orderType,
+                OrderListTypeEnum.Order,
+                _uomService,
+                _productOwnerService
+                );
             AddTabPage(Constants.TAB_ORDERS, _orderListUC, sender);
         }
 
@@ -785,27 +845,27 @@ namespace IMS.Forms.Inventory
         private void BtnSettings_Click(object sender, EventArgs e)
         {
             // using (AsyncScopedLifestyle.BeginScope(Program.container))
-            {
-                var settingsUC = Program.container.GetInstance<InventorySettingsUC>();
-                AddTabPage(Constants.TAB_SETTINGS, settingsUC, sender);
-                //pnlBody.Controls.Clear();
-                //pnlBody.Controls.Add(settingsUC);
-                // set selection
-                // _menubar.SetSelection(sender);
-            }
+            //{
+            var settingsUC = _dIServiceInstance.GetInventorySettingsUC();//Program.container.GetInstance<InventorySettingsUC>();
+            AddTabPage(Constants.TAB_SETTINGS, settingsUC, sender);
+            //pnlBody.Controls.Clear();
+            //pnlBody.Controls.Add(settingsUC);
+            // set selection
+            // _menubar.SetSelection(sender);
+            //}
         }
 
 
         private void BtnReports_Click(object sender, EventArgs e)
         {
-            var reportUc = Program.container.GetInstance<ReportsUC>();
+            var reportUc = _dIServiceInstance.GetReportsUC();//Program.container.GetInstance<ReportsUC>();
             AddTabPage(Constants.TAB_REPORTS, reportUc, sender);
         }
 
 
         private void BtnAccounts_Click(object sender, EventArgs e)
         {
-            var reportUc = Program.container.GetInstance<AccountsUC>();
+            var reportUc = _dIServiceInstance.GetAccountsUC();//Program.container.GetInstance<AccountsUC>();
             AddTabPage(Constants.TAB_ACCOUNTS, reportUc, sender);
         }
 
