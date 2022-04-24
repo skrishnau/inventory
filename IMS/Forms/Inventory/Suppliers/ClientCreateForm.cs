@@ -268,7 +268,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 {
                     errorProvider1.SetError(tbUsername, string.Empty);
                 }
-                if (string.IsNullOrEmpty(tbPassword.Text.Trim()))
+                if (_supplierId == 0 && string.IsNullOrEmpty(tbPassword.Text.Trim()))
                 {
                     errorProvider1.SetError(tbPassword, RequiredFieldValidator.REQUIRED);
                     msg += "Password is required.\n";

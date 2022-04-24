@@ -7,6 +7,10 @@ namespace Service
     public class UserSession
     {
         public static UserModel User { get; set; }
+        public static bool IsTrial { get; set; } = false;
+
+
+
         public static void Logout()
         {
             if (User != null)

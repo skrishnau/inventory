@@ -182,7 +182,7 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             var visible = _selectedSupplierModel != null;
             btnEdit.Visible = visible;
-            btnPayment.Visible = visible;
+            btnPayment.Visible = _userType.Contains(UserTypeEnum.Employee) ? false : visible;
             //  btnDelete.Visible = visible;
         }
 
@@ -286,6 +286,11 @@ namespace IMS.Forms.Inventory.Suppliers
                     }
                     else if (e.ColumnIndex == colResetPassword.Index)
                     {
+                        if (!data.CanLogin)
+                        {
+                            PopupMessage.ShowInfoMessage($"Please set {data.Name} 's Username from edit page.");
+                            return;
+                        }
                         var loginUserCreateForm = new PasswordEditForm(_userService);
                         loginUserCreateForm.SetData(data.Username);
                         loginUserCreateForm.ShowDialog(this);

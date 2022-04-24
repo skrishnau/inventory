@@ -80,7 +80,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(290, 30);
+            this.label4.Location = new System.Drawing.Point(289, 30);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
@@ -90,7 +90,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(290, 0);
+            this.label5.Location = new System.Drawing.Point(289, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
@@ -114,7 +114,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.7232F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.74298F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.83195F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.Controls.Add(this.lblName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
@@ -195,14 +195,14 @@
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(357, 3);
+            this.tbPhone.Location = new System.Drawing.Point(356, 3);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(141, 20);
             this.tbPhone.TabIndex = 5;
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(357, 33);
+            this.tbEmail.Location = new System.Drawing.Point(356, 33);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(141, 20);
             this.tbEmail.TabIndex = 6;
@@ -210,7 +210,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(290, 60);
+            this.label2.Location = new System.Drawing.Point(289, 60);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
@@ -219,7 +219,7 @@
             // 
             // tbNotes
             // 
-            this.tbNotes.Location = new System.Drawing.Point(357, 63);
+            this.tbNotes.Location = new System.Drawing.Point(356, 63);
             this.tbNotes.Multiline = true;
             this.tbNotes.Name = "tbNotes";
             this.tbNotes.Size = new System.Drawing.Size(141, 24);
@@ -228,7 +228,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(291, 90);
+            this.label9.Location = new System.Drawing.Point(290, 90);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(26, 13);
             this.label9.TabIndex = 76;
@@ -239,7 +239,7 @@
             this.chkUse.AutoSize = true;
             this.chkUse.Checked = true;
             this.chkUse.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUse.Location = new System.Drawing.Point(357, 93);
+            this.chkUse.Location = new System.Drawing.Point(356, 93);
             this.chkUse.Name = "chkUse";
             this.chkUse.Size = new System.Drawing.Size(15, 14);
             this.chkUse.TabIndex = 8;
@@ -288,7 +288,7 @@
             this.tblUsernamePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.7232F));
             this.tblUsernamePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.74298F));
             this.tblUsernamePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.83195F));
-            this.tblUsernamePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblUsernamePassword.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tblUsernamePassword.Controls.Add(this.label1, 0, 0);
             this.tblUsernamePassword.Controls.Add(this.lblPassword, 0, 1);
             this.tblUsernamePassword.Controls.Add(this.tbUsername, 1, 0);
@@ -365,7 +365,7 @@
             this.tbIsLoginEnabled.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.7232F));
             this.tbIsLoginEnabled.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.74298F));
             this.tbIsLoginEnabled.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.83195F));
-            this.tbIsLoginEnabled.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tbIsLoginEnabled.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tbIsLoginEnabled.Controls.Add(this.chkLoginEnabled, 1, 0);
             this.tbIsLoginEnabled.Controls.Add(this.label7, 0, 0);
             this.tbIsLoginEnabled.Dock = System.Windows.Forms.DockStyle.Top;
@@ -376,7 +376,6 @@
             this.tbIsLoginEnabled.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tbIsLoginEnabled.Size = new System.Drawing.Size(548, 25);
             this.tbIsLoginEnabled.TabIndex = 101;
-            this.tbIsLoginEnabled.Visible = false;
             // 
             // pnlEmployeeType
             // 

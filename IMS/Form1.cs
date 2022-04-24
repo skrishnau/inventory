@@ -72,7 +72,8 @@ namespace IMS
 
         private void InitLoad()
         {
-            var databaseConnectionSuccess = SetDatabaseConnection();
+            var settings = GetSettingsFromFile();
+            var databaseConnectionSuccess = SetDatabaseConnection(settings);
             if (databaseConnectionSuccess)
             {
                 ShowLoginFormOrLogin();
@@ -83,9 +84,9 @@ namespace IMS
             }
         }
 
-        private bool SetDatabaseConnection()
+        private bool SetDatabaseConnection(ApplicationSettings settings)
         {
-            UserSession.ConnectionStrings = GetConnectionStringFromFile();
+            UserSession.ConnectionStrings = GetConnectionStringFromSettings(settings);
             if (UserSession.ConnectionStrings != null)
             {
                 var testSuccess = DatabaseHelper.TestDatabaseConnection(UserSession.ConnectionStrings);
@@ -115,10 +116,9 @@ namespace IMS
             }
             return false;
         }
-        private ConnectionStrings GetConnectionStringFromFile()
+        private ConnectionStrings GetConnectionStringFromSettings(ApplicationSettings settings)
         {
             // get connection string
-            var settings = GetSettingsFromFile();
             if(settings!=null && !string.IsNullOrEmpty(settings.DatabaseName) && !string.IsNullOrEmpty(settings.DatabaseServer))
                 return DatabaseHelper.GetConnectionString(settings.DatabaseServer, settings.DatabaseName);
             return null;
@@ -155,7 +155,7 @@ namespace IMS
             // DisplayInventory();
 
             // check for trial
-            if (Constants.IS_TRIAL)
+            if (UserSession.IsTrial)
             {
                 bool expired = await _appSettingService.IsLicenseExpired();
                 if (expired)

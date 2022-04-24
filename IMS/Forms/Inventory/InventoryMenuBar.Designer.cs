@@ -36,10 +36,10 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnBackup = new System.Windows.Forms.Button();
-            this.btnVendor = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
             this.btnAccounts = new System.Windows.Forms.Button();
+            this.btnVendor = new System.Windows.Forms.Button();
             this.btnClients = new System.Windows.Forms.Button();
             this.btnDepartment = new System.Windows.Forms.Button();
             this.btnManufacturings = new System.Windows.Forms.Button();
@@ -136,7 +136,7 @@
             this.btnLogout.TabIndex = 50;
             this.btnLogout.Text = "Logout";
             this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnLogout, "Help and Support");
+            this.toolTip1.SetToolTip(this.btnLogout, "Logout");
             this.btnLogout.UseVisualStyleBackColor = false;
             // 
             // btnRefresh
@@ -153,7 +153,7 @@
             this.btnRefresh.TabIndex = 51;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnRefresh, "Help and Support");
+            this.toolTip1.SetToolTip(this.btnRefresh, "Refresh/Reload Current Page");
             this.btnRefresh.UseVisualStyleBackColor = false;
             // 
             // btnHelp
@@ -189,24 +189,8 @@
             this.btnBackup.TabIndex = 49;
             this.btnBackup.Text = "Backup";
             this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnBackup, "Help and Support");
+            this.toolTip1.SetToolTip(this.btnBackup, "Database Backup");
             this.btnBackup.UseVisualStyleBackColor = false;
-            // 
-            // btnVendor
-            // 
-            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnVendor.FlatAppearance.BorderSize = 0;
-            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVendor.Image = ((System.Drawing.Image)(resources.GetObject("btnVendor.Image")));
-            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVendor.Location = new System.Drawing.Point(252, 15);
-            this.btnVendor.Name = "btnVendor";
-            this.btnVendor.Size = new System.Drawing.Size(76, 53);
-            this.btnVendor.TabIndex = 49;
-            this.btnVendor.Text = "Employees";
-            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
-            this.btnVendor.UseVisualStyleBackColor = true;
             // 
             // btnSettings
             // 
@@ -215,7 +199,7 @@
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Image = global::IMS.Properties.Resources.icons8_Administrative_Tools_24px;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnSettings.Location = new System.Drawing.Point(188, 15);
+            this.btnSettings.Location = new System.Drawing.Point(264, 15);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(64, 53);
             this.btnSettings.TabIndex = 20;
@@ -232,7 +216,7 @@
             this.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReports.Image = global::IMS.Properties.Resources.icons8_Pie_Chart_24px;
             this.btnReports.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnReports.Location = new System.Drawing.Point(129, 15);
+            this.btnReports.Location = new System.Drawing.Point(205, 15);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(59, 53);
             this.btnReports.TabIndex = 21;
@@ -250,7 +234,7 @@
             this.btnAccounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAccounts.Image = global::IMS.Properties.Resources.icons8_Calculator_24px;
             this.btnAccounts.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAccounts.Location = new System.Drawing.Point(64, 15);
+            this.btnAccounts.Location = new System.Drawing.Point(140, 15);
             this.btnAccounts.Name = "btnAccounts";
             this.btnAccounts.Size = new System.Drawing.Size(65, 53);
             this.btnAccounts.TabIndex = 47;
@@ -258,6 +242,22 @@
             this.btnAccounts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnAccounts, "Accounts");
             this.btnAccounts.UseVisualStyleBackColor = false;
+            // 
+            // btnVendor
+            // 
+            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnVendor.FlatAppearance.BorderSize = 0;
+            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVendor.Image = global::IMS.Properties.Resources.icons8_engineer_24;
+            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVendor.Location = new System.Drawing.Point(64, 15);
+            this.btnVendor.Name = "btnVendor";
+            this.btnVendor.Size = new System.Drawing.Size(76, 53);
+            this.btnVendor.TabIndex = 49;
+            this.btnVendor.Text = "Employees";
+            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
+            this.btnVendor.UseVisualStyleBackColor = true;
             // 
             // btnClients
             // 
@@ -808,10 +808,10 @@
             // pnlGeneral
             // 
             this.pnlGeneral.AutoSize = true;
-            this.pnlGeneral.Controls.Add(this.btnVendor);
             this.pnlGeneral.Controls.Add(this.btnSettings);
             this.pnlGeneral.Controls.Add(this.btnReports);
             this.pnlGeneral.Controls.Add(this.btnAccounts);
+            this.pnlGeneral.Controls.Add(this.btnVendor);
             this.pnlGeneral.Controls.Add(this.btnClients);
             this.pnlGeneral.Controls.Add(this.label6);
             this.pnlGeneral.Dock = System.Windows.Forms.DockStyle.Left;
@@ -941,7 +941,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "InventoryMenuBar";
             this.Padding = new System.Windows.Forms.Padding(2);
-            this.Size = new System.Drawing.Size(1741, 72);
+            this.Size = new System.Drawing.Size(1780, 72);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

@@ -35,8 +35,6 @@
             this.btnPurchaseTransaction = new System.Windows.Forms.Button();
             this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,7 +45,7 @@
             this.rbSale = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.rbAll = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlTransactionActions = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
             this.btnCancel = new System.Windows.Forms.Button();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
@@ -82,10 +80,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnViewParentOrder = new System.Windows.Forms.Button();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.pnlNewTransaction.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.pnlTransactionActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
@@ -94,15 +95,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.panel5.SuspendLayout();
             this.pnlEditedOrder.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 107);
+            this.splitter1.Location = new System.Drawing.Point(0, 69);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1068, 3);
+            this.splitter1.Size = new System.Drawing.Size(1076, 3);
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
@@ -156,7 +162,7 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEdit.Location = new System.Drawing.Point(88, 5);
+            this.btnEdit.Location = new System.Drawing.Point(226, 5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(105, 28);
             this.btnEdit.TabIndex = 1;
@@ -164,41 +170,11 @@
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = false;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.flowLayoutPanel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 35);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1068, 72);
-            this.panel1.TabIndex = 14;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.cbProduct);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.txtSearchReceiptNo);
-            this.panel3.Controls.Add(this.lblSearchClient);
-            this.panel3.Controls.Add(this.txtSearchClient);
-            this.panel3.Controls.Add(this.rbPurchase);
-            this.panel3.Controls.Add(this.rbSale);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.rbAll);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(4, 4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(711, 64);
-            this.panel3.TabIndex = 4;
-            // 
             // cbProduct
             // 
             this.cbProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProduct.FormattingEnabled = true;
-            this.cbProduct.Location = new System.Drawing.Point(62, 35);
+            this.cbProduct.Location = new System.Drawing.Point(53, 3);
             this.cbProduct.Name = "cbProduct";
             this.cbProduct.Size = new System.Drawing.Size(121, 21);
             this.cbProduct.TabIndex = 13;
@@ -206,7 +182,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 38);
+            this.label4.Location = new System.Drawing.Point(3, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 12;
@@ -215,7 +191,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(456, 10);
+            this.label2.Location = new System.Drawing.Point(3, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 11;
@@ -223,7 +199,7 @@
             // 
             // txtSearchReceiptNo
             // 
-            this.txtSearchReceiptNo.Location = new System.Drawing.Point(563, 6);
+            this.txtSearchReceiptNo.Location = new System.Drawing.Point(110, 3);
             this.txtSearchReceiptNo.Name = "txtSearchReceiptNo";
             this.txtSearchReceiptNo.Size = new System.Drawing.Size(108, 20);
             this.txtSearchReceiptNo.TabIndex = 10;
@@ -231,7 +207,7 @@
             // lblSearchClient
             // 
             this.lblSearchClient.AutoSize = true;
-            this.lblSearchClient.Location = new System.Drawing.Point(234, 10);
+            this.lblSearchClient.Location = new System.Drawing.Point(3, 6);
             this.lblSearchClient.Name = "lblSearchClient";
             this.lblSearchClient.Size = new System.Drawing.Size(70, 13);
             this.lblSearchClient.TabIndex = 9;
@@ -239,7 +215,7 @@
             // 
             // txtSearchClient
             // 
-            this.txtSearchClient.Location = new System.Drawing.Point(327, 6);
+            this.txtSearchClient.Location = new System.Drawing.Point(89, 3);
             this.txtSearchClient.Name = "txtSearchClient";
             this.txtSearchClient.Size = new System.Drawing.Size(108, 20);
             this.txtSearchClient.TabIndex = 8;
@@ -247,7 +223,7 @@
             // rbPurchase
             // 
             this.rbPurchase.AutoSize = true;
-            this.rbPurchase.Location = new System.Drawing.Point(150, 7);
+            this.rbPurchase.Location = new System.Drawing.Point(134, 5);
             this.rbPurchase.Name = "rbPurchase";
             this.rbPurchase.Size = new System.Drawing.Size(70, 17);
             this.rbPurchase.TabIndex = 3;
@@ -257,7 +233,7 @@
             // rbSale
             // 
             this.rbSale.AutoSize = true;
-            this.rbSale.Location = new System.Drawing.Point(98, 7);
+            this.rbSale.Location = new System.Drawing.Point(82, 5);
             this.rbSale.Name = "rbSale";
             this.rbSale.Size = new System.Drawing.Size(46, 17);
             this.rbSale.TabIndex = 2;
@@ -267,7 +243,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(3, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 1;
@@ -277,7 +253,7 @@
             // 
             this.rbAll.AutoSize = true;
             this.rbAll.Checked = true;
-            this.rbAll.Location = new System.Drawing.Point(56, 7);
+            this.rbAll.Location = new System.Drawing.Point(40, 5);
             this.rbAll.Name = "rbAll";
             this.rbAll.Size = new System.Drawing.Size(36, 17);
             this.rbAll.TabIndex = 0;
@@ -285,18 +261,18 @@
             this.rbAll.Text = "All";
             this.rbAll.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel2
+            // pnlTransactionActions
             // 
-            this.flowLayoutPanel2.Controls.Add(this.btnPrint);
-            this.flowLayoutPanel2.Controls.Add(this.btnEdit);
-            this.flowLayoutPanel2.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(761, 4);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 2, 5, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(303, 64);
-            this.flowLayoutPanel2.TabIndex = 17;
+            this.pnlTransactionActions.Controls.Add(this.btnPrint);
+            this.pnlTransactionActions.Controls.Add(this.btnEdit);
+            this.pnlTransactionActions.Controls.Add(this.btnCancel);
+            this.pnlTransactionActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTransactionActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.pnlTransactionActions.Location = new System.Drawing.Point(0, 0);
+            this.pnlTransactionActions.Name = "pnlTransactionActions";
+            this.pnlTransactionActions.Padding = new System.Windows.Forms.Padding(0, 2, 5, 0);
+            this.pnlTransactionActions.Size = new System.Drawing.Size(441, 38);
+            this.pnlTransactionActions.TabIndex = 17;
             // 
             // btnPrint
             // 
@@ -305,7 +281,7 @@
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.Location = new System.Drawing.Point(199, 5);
+            this.btnPrint.Location = new System.Drawing.Point(337, 5);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(96, 28);
             this.btnPrint.TabIndex = 16;
@@ -320,7 +296,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(10, 5);
+            this.btnCancel.Location = new System.Drawing.Point(148, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 28);
             this.btnCancel.TabIndex = 17;
@@ -349,7 +325,7 @@
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.ReadOnly = true;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(622, 382);
+            this.dgvOrders.Size = new System.Drawing.Size(630, 420);
             this.dgvOrders.TabIndex = 13;
             // 
             // colOrderNumber
@@ -438,9 +414,9 @@
             this.panel2.Controls.Add(this.splitter2);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 110);
+            this.panel2.Location = new System.Drawing.Point(0, 72);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1068, 407);
+            this.panel2.Size = new System.Drawing.Size(1076, 445);
             this.panel2.TabIndex = 16;
             // 
             // bindingNavigator1
@@ -459,14 +435,14 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 382);
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 420);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(622, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(630, 25);
             this.bindingNavigator1.TabIndex = 17;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -540,9 +516,9 @@
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(622, 0);
+            this.splitter2.Location = new System.Drawing.Point(630, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(5, 407);
+            this.splitter2.Size = new System.Drawing.Size(5, 445);
             this.splitter2.TabIndex = 15;
             this.splitter2.TabStop = false;
             // 
@@ -551,10 +527,11 @@
             this.panel4.Controls.Add(this.dgvItems);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.pnlEditedOrder);
+            this.panel4.Controls.Add(this.pnlTransactionActions);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(627, 0);
+            this.panel4.Location = new System.Drawing.Point(635, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(441, 407);
+            this.panel4.Size = new System.Drawing.Size(441, 445);
             this.panel4.TabIndex = 16;
             // 
             // dgvItems
@@ -562,7 +539,7 @@
             this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(0, 64);
+            this.dgvItems.Location = new System.Drawing.Point(0, 102);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.OrderId = 0;
             this.dgvItems.Size = new System.Drawing.Size(441, 343);
@@ -574,7 +551,7 @@
             this.panel5.Controls.Add(this.lblCustomer);
             this.panel5.Controls.Add(this.lblReferenceNo);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 25);
+            this.panel5.Location = new System.Drawing.Point(0, 63);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(441, 39);
             this.panel5.TabIndex = 15;
@@ -606,7 +583,7 @@
             this.pnlEditedOrder.Controls.Add(this.label3);
             this.pnlEditedOrder.Controls.Add(this.btnViewParentOrder);
             this.pnlEditedOrder.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlEditedOrder.Location = new System.Drawing.Point(0, 0);
+            this.pnlEditedOrder.Location = new System.Drawing.Point(0, 38);
             this.pnlEditedOrder.Name = "pnlEditedOrder";
             this.pnlEditedOrder.Size = new System.Drawing.Size(441, 25);
             this.pnlEditedOrder.TabIndex = 19;
@@ -642,8 +619,59 @@
             this.listHeaderTemplate1.Location = new System.Drawing.Point(0, 0);
             this.listHeaderTemplate1.Name = "listHeaderTemplate1";
             this.listHeaderTemplate1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.listHeaderTemplate1.Size = new System.Drawing.Size(1068, 35);
+            this.listHeaderTemplate1.Size = new System.Drawing.Size(1076, 35);
             this.listHeaderTemplate1.TabIndex = 17;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.panel7);
+            this.flowLayoutPanel1.Controls.Add(this.panel8);
+            this.flowLayoutPanel1.Controls.Add(this.panel9);
+            this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 35);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1076, 34);
+            this.flowLayoutPanel1.TabIndex = 18;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label1);
+            this.panel7.Controls.Add(this.rbAll);
+            this.panel7.Controls.Add(this.rbSale);
+            this.panel7.Controls.Add(this.rbPurchase);
+            this.panel7.Location = new System.Drawing.Point(3, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(221, 28);
+            this.panel7.TabIndex = 19;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.lblSearchClient);
+            this.panel8.Controls.Add(this.txtSearchClient);
+            this.panel8.Location = new System.Drawing.Point(230, 3);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(200, 28);
+            this.panel8.TabIndex = 19;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.txtSearchReceiptNo);
+            this.panel9.Controls.Add(this.label2);
+            this.panel9.Location = new System.Drawing.Point(436, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(223, 28);
+            this.panel9.TabIndex = 19;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.cbProduct);
+            this.panel6.Controls.Add(this.label4);
+            this.panel6.Location = new System.Drawing.Point(665, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(179, 28);
+            this.panel6.TabIndex = 19;
             // 
             // TransactionListUC
             // 
@@ -652,15 +680,12 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlNewTransaction);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.listHeaderTemplate1);
             this.Name = "TransactionListUC";
-            this.Size = new System.Drawing.Size(1068, 517);
+            this.Size = new System.Drawing.Size(1076, 517);
             this.pnlNewTransaction.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
+            this.pnlTransactionActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -672,7 +697,17 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.pnlEditedOrder.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -681,12 +716,10 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.FlowLayoutPanel pnlNewTransaction;
         protected internal System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvOrders;
         private System.Windows.Forms.Panel panel2;
         private Common.GridView.InventoryUnits.InventoryUnitDataGridView dgvItems;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RadioButton rbPurchase;
         private System.Windows.Forms.RadioButton rbSale;
         private System.Windows.Forms.Label label1;
@@ -696,7 +729,7 @@
         private System.Windows.Forms.Label lblReferenceNo;
         private Common.Display.ListHeaderTemplate listHeaderTemplate1;
         private Common.Buttons.MenuButton btnPrint;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel pnlTransactionActions;
         private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
@@ -730,5 +763,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.ComboBox cbProduct;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel6;
     }
 }

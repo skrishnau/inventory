@@ -29,6 +29,7 @@ using ViewModel.Core.Orders;
 using IMS.Forms.Common;
 using IMS.Forms.MRP;
 using IMS.Forms.MRP.Departments;
+using Service;
 
 namespace IMS.Forms.Inventory
 {
@@ -99,7 +100,7 @@ namespace IMS.Forms.Inventory
         private async void InitializeLicense()
         {
             var text = string.Empty;
-            if (Constants.IS_TRIAL)
+            if (UserSession.IsTrial)
             {
                 var date = await _appSettingService.GetLicenseStartDate();
                 try
@@ -369,7 +370,7 @@ namespace IMS.Forms.Inventory
         {
             var tab = tabControl.SelectedTab;
 
-            var menuAction = GetMenuAction(CurrentTabTitle?.Trim());
+            var menuAction = GetMenuAction(tab.Text?.Trim());
             menuAction?.Invoke(_menubar.btnRefresh, EventArgs.Empty);
 
 

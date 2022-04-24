@@ -1881,6 +1881,7 @@
     <Content Include="License\AuthCodeGenerator.js" />
     <None Include="Resources\icons8-restart-16.png" />
     <None Include="Resources\icons8-restart-24.png" />
+    <None Include="Resources\icons8-engineer-24.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

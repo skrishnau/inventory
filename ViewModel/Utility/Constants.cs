@@ -21,7 +21,7 @@ namespace ViewModel.Utility
         public const string DISPLAY_IS_TRANSACTION_CRETE_PAGE_LOCKED = "Is Transaction Create Page Locked";
 
         // region: for Bibek Client Kalimati
-        public const bool IS_TRIAL = false;
+        
         public const bool HAS_STOCK_MANAGEMENT = true;
         // later convert it to appsettings and give on/off feature to user
         public const bool LEDGER_DISPLAY_TRANSACTION_ITEMS_ALSO = true;
@@ -54,7 +54,7 @@ namespace ViewModel.Utility
         public const string TAB_ACCOUNTS = "Accounts";
         public const string TAB_MANUFACTURE = "Manufactures";
         public const string TAB_DEPARTMENT = "Departments";
-        public const string TAB_VENDOR = "Vendors";
+        public const string TAB_VENDOR = "Employees";
 
 
         public const string NAME_INVENTORY_MANAGE = "Inventory Manage";

@@ -328,7 +328,7 @@ namespace Service.Core.Reports
                 var openingBalanceSum = model.YearlyData ? 0 : openingBalanceQuery.Sum(x => (decimal?)(x.Debit - x.CostPriceTotal)) ?? 0;
                 var openingBalanceModel = new ProfitAndLossModel
                 {
-                    Balance = openingBalanceSum >= 0 ? openingBalanceSum.ToString("0.00") : "(" + openingBalanceSum.ToString("0.00") + ")",
+                    Balance = openingBalanceSum >= 0 ? openingBalanceSum.ToString("0.00") : "(" + Math.Abs(openingBalanceSum).ToString("0.00") + ")",
                     Particulars = "Opening Balance",
                 };
                 list.Insert(0, openingBalanceModel);
