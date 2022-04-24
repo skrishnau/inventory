@@ -37,12 +37,13 @@ namespace IMS.Forms.POS.Branches
 
             InitializeEvents();
 
-            _listener.BranchUpdated += _listener_OnBranchUpdate;
         }
 
         private void InitializeEvents()
         {
             dgvBranch.SelectionChanged += DgvBranch_SelectionChanged;
+            _listener.BranchUpdated += _listener_OnBranchUpdate;
+
         }
 
         private void DgvBranch_SelectionChanged(object sender, EventArgs e)

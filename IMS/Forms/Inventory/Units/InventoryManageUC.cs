@@ -70,9 +70,10 @@ namespace IMS.Forms.Inventory.Units
             PopulateProducts();
             InitializeGridView();
 
-            InitializeEvents();
             PopulateInventoryUnits();
 
+            // events should be at the last
+            InitializeEvents();
             InitializeListeners();
         }
 

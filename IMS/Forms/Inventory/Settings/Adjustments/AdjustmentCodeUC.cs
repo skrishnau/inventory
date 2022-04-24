@@ -35,9 +35,10 @@ namespace IMS.Forms.Inventory.Settings.Adjustments
         private void AdjustmentUC_Load(object sender, EventArgs e)
         {
            // InitializeHeader();
-            InitializeEvents();
 
             PopulateAdjustmentData();
+
+            InitializeEvents();
         }
 
         private void PopulateAdjustmentData()

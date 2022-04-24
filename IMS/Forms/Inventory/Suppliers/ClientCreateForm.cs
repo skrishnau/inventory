@@ -42,6 +42,7 @@ namespace IMS.Forms.Inventory.Suppliers
 
             var supplier = _supplierService.GetUser(_userId);
             SetDataForEdit(supplier);
+
             InitializeEvents();
         }
 
@@ -54,16 +55,15 @@ namespace IMS.Forms.Inventory.Suppliers
 
         private void ChkLoginEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            ShowHideUserNamePassword();
+            ShowHideUserNamePassword(chkLoginEnabled.Checked);
         }
 
-        private void ShowHideUserNamePassword()
+        private void ShowHideUserNamePassword(bool show)
         {
-            var showLoginRelated = cbUserType.SelectedValue == UserTypeEnum.Employee.ToString();
-            var isChecked = chkLoginEnabled.Checked;
-            tbIsLoginEnabled.Visible = showLoginRelated;
-            var isChkLoginShown = tbIsLoginEnabled.Visible;
-            tblUsernamePassword.Visible = isChecked && isChkLoginShown;
+            var showLoginRelated = cbUserType.SelectedValue?.ToString() == UserTypeEnum.Employee.ToString();
+            //var isChecked = chkLoginEnabled.Checked;
+            //var isChkLoginShown = showLoginRelated;//tbIsLoginEnabled.Visible;
+            tblUsernamePassword.Visible = show;//showLoginRelated && chkLoginEnabled.Checked;
         }
 
         private void PopulateUserType()
@@ -118,6 +118,7 @@ namespace IMS.Forms.Inventory.Suppliers
                 if (Enum.TryParse<UserTypeEnum>(value, out UserTypeEnum userType))
                 {
                     UpdateViewAsPerUserType();//(new List<UserTypeEnum> { userType });
+                    ShowHideUserNamePassword(chkLoginEnabled.Checked);
                 }
             }
         }
@@ -148,7 +149,6 @@ namespace IMS.Forms.Inventory.Suppliers
                 lblCompany.Visible = false;
                 tbIsLoginEnabled.Visible = true;
             }
-            ShowHideUserNamePassword();
         }
         public void SetDataForEdit(int userId, List<UserTypeEnum> userType)
         {
@@ -185,7 +185,8 @@ namespace IMS.Forms.Inventory.Suppliers
                 lblPassword.Visible = false;
                 tbPassword.Visible = false;
             }
-            ShowHideUserNamePassword();
+            UpdateViewAsPerUserType();
+            ShowHideUserNamePassword(model?.CanLogin??false);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -27,6 +27,8 @@ namespace IMS.Forms.Inventory.Settings.General
         private void ProfileEditForm_Load(object sender, EventArgs e)
         {
             PopulateCompanyInfoSetting();
+
+            // events should be at the last
             btnSaveProfile.Click += BtnSave_Click;
         }
 

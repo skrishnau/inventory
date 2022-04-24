@@ -49,12 +49,13 @@ namespace IMS.Forms.Inventory.Products
 
         private void RateListUC_Load(object sender, EventArgs e)
         {
-            InitializeEvents();
             PopulateOrderType();
 
             rateDataGridView.dgvRates.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             rateDataGridView.dgvRates.DesignForPriceHistory(false, true);
             PopulatePriceData();
+
+            InitializeEvents();
         }
 
         private void PopulateOrderType()

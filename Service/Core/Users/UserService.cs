@@ -333,7 +333,8 @@ namespace Service.Core.Users
                     && x.CanLogin
                     && x.DeletedAt == null
                     && x.Use == true);
-                if (user != null && user.CanLogin && VerifyPassword(user.Password, password))//password == StringCipher.Decrypt(user?.Password))
+                
+                if (user != null && user.CanLogin && !string.IsNullOrWhiteSpace(user.Password) && VerifyPassword(user.Password, password))//password == StringCipher.Decrypt(user?.Password))
                 {
                     return UserMapper.MapToUserModel(user);
                 }

@@ -73,11 +73,7 @@ namespace IMS.Forms.MRP
             //_consumedDecimalValidator.AddColumn(dgvItems, ColumnDataType.Decimal);
 
 
-            btnSave.Click += BtnSave_Click;
-            chkAssignToNextDepartment.CheckedChanged += ChkAssignToNextDepartment_CheckedChanged;
-
             dgvDepartments.AutoGenerateColumns = false;
-
             txtQuantity.Maximum = Int16.MaxValue;
 
             _manufactureModel = _manufactureService.GetManufacture(_manufactureId);
@@ -89,7 +85,6 @@ namespace IMS.Forms.MRP
             lblEmployeeName.Text = _manufactureDepartmentUserModel.Name + " (" + _manufactureDepartmentModel.Name + ")";
 
             //dgvDepartments.Enabled = false;
-            cbProduct.SelectedIndexChanged += CbProduct_SelectedIndexChanged;
             _departmentProductModels = _manufactureDepartmentModel.ManufactureDepartmentProducts
                 .Where(x => x.InOut == _inOut)
                 .ToList();
@@ -106,6 +101,13 @@ namespace IMS.Forms.MRP
 
             var consumingProducts = _manufactureService.GetManufactureDepartmentProductsInventoryUnit(_manufactureId, _departmentId, _userId);
             PopulateConsumingProducts(consumingProducts);
+
+
+            // events should be at the last
+            btnSave.Click += BtnSave_Click;
+            chkAssignToNextDepartment.CheckedChanged += ChkAssignToNextDepartment_CheckedChanged;
+
+            cbProduct.SelectedIndexChanged += CbProduct_SelectedIndexChanged;
         }
 
         private void CbProduct_SelectedIndexChanged(object sender, EventArgs e)

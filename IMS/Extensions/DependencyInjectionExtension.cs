@@ -150,6 +150,10 @@ namespace IMS
         {
             return new InventoryUC(new InventoryMenuBar(), _orderService, _productService, _databaseChangeListener, _inventoryService, _userService, _appSettingService, _uomService, _productOwnerService, _manufactureService, (IDIServiceInstance) this);
         }
+        public Form1 GetForm1()
+        {
+            return new Form1((IDIServiceInstance)this, _appSettingService);
+        }
     }
 
     public interface IDIServiceInstance
@@ -169,5 +173,6 @@ namespace IMS
         ReportsUC GetReportsUC();
         AccountsUC GetAccountsUC();
         InventoryUC GetInventoryUC();
+        Form1 GetForm1();
     }
 }

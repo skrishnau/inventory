@@ -66,7 +66,6 @@ namespace IMS.Forms.Inventory.Transaction
 
             this.Dock = DockStyle.Fill;
             InitializeGridView();
-            InitializeEvents();
             PopulateProducts();
             PopulateOrders();
 
@@ -89,6 +88,7 @@ namespace IMS.Forms.Inventory.Transaction
                 colCreatedDate.Width = 0;
             }
 
+            InitializeEvents();
         }
         private void InitializeSearchTextBox()
         {

@@ -34,9 +34,9 @@ namespace IMS.Forms.Inventory.Purchases
         {
             this.Dock = DockStyle.Fill;
             InitializeGridView();
-            InitializeEvents();
 
             PopulateOrders();
+            InitializeEvents();
         }
 
         private void InitializeGridView()

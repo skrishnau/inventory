@@ -89,12 +89,13 @@ namespace IMS.Forms.Inventory
             InitializeLicense();
             this.Dock = DockStyle.Fill;
             // InitializeRootTemplate();
-            InitializeMenubarButtonEvents();
             InitializeTabControl();
             ShowDashboard();
             var lockTxnCreate = await _appSettingService.GetIsTransactionCreatePageLocked();
             if (lockTxnCreate)
                 BtnSaleTransaction_Click(_menubar.btnSaleTransaction, EventArgs.Empty);
+
+            InitializeMenubarButtonEvents();
         }
 
         private async void InitializeLicense()
@@ -125,7 +126,10 @@ namespace IMS.Forms.Inventory
 
             // this.tabControl.SizeMode = TabSizeMode.Fixed;
 
+            this.tabControl.DrawItem -= tabControl_DrawItem;
             this.tabControl.DrawItem += tabControl_DrawItem;
+
+            this.tabControl.MouseDown -= tabControl_MouseDown;
             this.tabControl.MouseDown += tabControl_MouseDown;
             // this.tabControl.Selecting += tabControl_Selecting;
             // this.tabControl.HandleCreated += tabControl_HandleCreated;
@@ -462,8 +466,15 @@ namespace IMS.Forms.Inventory
                 {
                     currentUserControl.MyTabTitle = alreadyExistingTab.Text;
                 }
-                alreadyExistingTab.Controls.Add(userControlToAdd);
-                tabControl.TabPages.Add(alreadyExistingTab);
+                try
+                {
+                    alreadyExistingTab.Controls.Add(userControlToAdd);
+                    tabControl.TabPages.Add(alreadyExistingTab);
+                }
+                catch (Exception ex)
+                {
+                    PopupMessage.ShowErrorMessage(ex.Message);
+                }
             }
             else
             {

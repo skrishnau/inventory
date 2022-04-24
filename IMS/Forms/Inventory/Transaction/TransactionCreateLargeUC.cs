@@ -100,7 +100,6 @@ namespace IMS.Forms.Inventory.Transaction
 
             dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             InitializeValidation();
-            InitializeEvents();
             InitializeDataGridView();
             InitializeSaveFooter();
 
@@ -109,9 +108,8 @@ namespace IMS.Forms.Inventory.Transaction
             PopulateReceiptNumber();
             PopulateAdjustmentCodeCombo();
 
-            dtCompletedDate.TextChanged -= DtCompletedDate_TextChanged;
             PopulateModel(_orderModel);
-            dtCompletedDate.TextChanged += DtCompletedDate_TextChanged;
+            
             // Note: when editing a txn we cancel the txn and populate its' data in create view then save the data and close the form
             if (_saveOrderImmediatelyAfterLoading)
             {
@@ -122,6 +120,8 @@ namespace IMS.Forms.Inventory.Transaction
             MakeColumnsAutoSize();
             _showTransactionCreateInFullPage = await _appSettingService.GetShowTransactionCreateInFullPage();
             UpdateLock(null);
+
+            InitializeEvents();
         }
 
         #region Functions
@@ -222,6 +222,9 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void InitializeEvents()
         {
+            dtCompletedDate.TextChanged -= DtCompletedDate_TextChanged;
+            dtCompletedDate.TextChanged += DtCompletedDate_TextChanged;
+
             saveFooterUC1.btnSave.Click += BtnSave_Click;
             saveFooterUC1.btnCancel.Click += BtnCancel_Click;
             saveFooterUC1.btnCheckoutAndPrint.Click += BtnCheckoutAndPrint_Click;

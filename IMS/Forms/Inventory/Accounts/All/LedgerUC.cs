@@ -50,10 +50,11 @@ namespace IMS.Forms.Inventory.Reports.All
             dtFrom.SetValue(DateTime.Now.AddDays(-7));
             dtTo.SetValue(DateTime.Now);
 
-            InitializeEvents();
             PopulateType();
             PopulateCustomer();
             //PopulateLedger();
+
+            InitializeEvents();
 
         }
 

@@ -330,6 +330,7 @@ namespace Service.Core.Orders
                     //UndoOrderTransactionsWithoutCommit(_context, entity.ParentOrderId);
                     //UndoInventoryItemsWithoutCommit(_context, entity.ParentOrderId);
                     var parentOrder = _context.Orders.Find(entity.ParentOrderId ?? 0);
+                    // donot uncomment below: this task is already done while loading edit of checked-out transacton
                     //CancelCompletedTransactionWithoutCommit(_context, parentOrder, ref message);
                     if (!string.IsNullOrEmpty(message))
                     {

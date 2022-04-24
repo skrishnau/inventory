@@ -64,6 +64,7 @@ namespace IMS.Forms.Inventory.Orders
 
             InitializeValidation();
 
+            // events should be at the last
             _listener.UserUpdated += _listener_UserUpdated;
             _listener.WarehouseUpdated += _listener_WarehouseUpdated;
 

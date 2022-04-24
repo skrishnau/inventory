@@ -47,14 +47,17 @@ namespace IMS.Forms.MRP
 
             PopulateDepartmentType();
             InitializeEmployeeGridView();
-            btnSave.Click += BtnSave_Click;
             PopulateEmployeeCombo();
+
+            PopulateEditData();
+
+            // events should be at the last
+            btnSave.Click += BtnSave_Click;
             cbDepartmentType.SelectedIndexChanged += CbDepartmentType_SelectedIndexChanged;
             btnAddUser.Click += BtnAddUser_Click;
             dgvEmployees.DataError += DgvEmployees_DataError;
             dgvEmployees.CellClick += DgvEmployees_CellClick;
 
-            PopulateEditData();
         }
 
         private void DgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)

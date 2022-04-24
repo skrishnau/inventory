@@ -60,6 +60,8 @@ namespace IMS.Forms.Inventory.Transaction
             uc.SetDataForEdit(_editModel);//OrderTypeEnum.Purchase, 0
             //uc.ShowDialog();
             this.Controls.Add(uc);
+
+            // events shudl be at the last
             uc.CloseParentForm -= Uc_CloseParentForm;
             uc.CloseParentForm += Uc_CloseParentForm;
         }

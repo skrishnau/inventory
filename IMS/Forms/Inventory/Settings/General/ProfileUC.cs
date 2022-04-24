@@ -31,6 +31,8 @@ namespace IMS.Forms.Inventory.Settings.General
            // btnSaveAppearance.Click += BtnSaveAppearance_Click;
 
             PopulateCompanyInfoSetting();
+
+            // events should be at the last
             btnEdit.Click += BtnEdit_Click;
             btnChangePassword.Click += BtnChangePassword_Click;
         }

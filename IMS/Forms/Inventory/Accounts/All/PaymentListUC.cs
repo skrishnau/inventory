@@ -20,6 +20,7 @@ using IMS.Forms.Inventory.Payment;
 using SimpleInjector.Lifestyles;
 using IMS.Forms.Common;
 using ViewModel.Core;
+using ViewModel.Utility;
 
 namespace IMS.Forms.Inventory.Reports.All
 {
@@ -51,12 +52,13 @@ namespace IMS.Forms.Inventory.Reports.All
             this.Dock = DockStyle.Fill;
 
             InitializeGridView();
-            InitializeEvents();
 
             PopulateType();
             PopulateCustomer();
             // InitializeSearchTextBox();
             PopulatePayments();
+
+            InitializeEvents();
 
         }
 
@@ -176,7 +178,7 @@ namespace IMS.Forms.Inventory.Reports.All
 
         private void PopulateType()
         {
-            var values = UserTypeEnumHelper.All//Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
+            var values = (Constants.IS_MANUFACTURE_REQUIRED ? UserTypeEnumHelper.All : UserTypeEnumHelper.CustomerSupplier)//Enum.GetValues(typeof(ClientTypeEnum)).Cast<ClientTypeEnum>()
                 .Select(x => new NameValuePair(x.ToString(), x.ToString()))
                 .ToList();
             values.Insert(0, new NameValuePair("All", "All"));
@@ -199,7 +201,7 @@ namespace IMS.Forms.Inventory.Reports.All
                 }
                 else
                 {
-                    userTypes = UserTypeEnumHelper.All;
+                    userTypes = Constants.IS_MANUFACTURE_REQUIRED ? UserTypeEnumHelper.All : UserTypeEnumHelper.CustomerSupplier;
                 }
 
                 var customers = _userService.GetUserListForCombo(userTypes, new int[0]);
@@ -237,7 +239,7 @@ namespace IMS.Forms.Inventory.Reports.All
                 }
                 else
                 {
-                    userType = UserTypeEnumHelper.CustomerSupplier;
+                    userType = (Constants.IS_MANUFACTURE_REQUIRED ? UserTypeEnumHelper.All : UserTypeEnumHelper.CustomerSupplier);
                 }
                 dgvLedger.SelectionChanged -= DgvLedger_SelectionChanged;
                 helper.Reset(userType, cbCustomer.Text);

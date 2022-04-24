@@ -43,9 +43,9 @@ namespace IMS.Forms.Inventory.Settings
 
             InitializeBody();
 
-            InitializeEvents();
-
             SelectGeneralLink();
+
+            InitializeEvents();
         }
 
         private void InitializeBody()

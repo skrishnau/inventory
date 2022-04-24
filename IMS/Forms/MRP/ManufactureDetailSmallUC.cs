@@ -38,6 +38,8 @@ namespace IMS.Forms.MRP
             dgvEmployees.AutoGenerateColumns = false;
             dgvEmployeeHistory.AutoGenerateColumns = false;
 
+
+            // events should be at the last
             btnStart.Click += BtnStart_Click;
             btnCancel.Click += BtnCancel_Click;
             btnComplete.Click += BtnComplete_Click;

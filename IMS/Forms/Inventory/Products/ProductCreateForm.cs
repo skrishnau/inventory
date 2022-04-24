@@ -55,8 +55,6 @@ namespace IMS.Forms.Inventory.Products
 
         private void ProductCreate_Load(object sender, EventArgs e)
         {
-            InitializeEvents();
-            InitializeDatabaseChangeListeners();
 
             numSupplyPrice.Maximum = Int32.MaxValue;
             numRetailPrice.Maximum = Int32.MaxValue;
@@ -71,6 +69,8 @@ namespace IMS.Forms.Inventory.Products
 
             PopulateDataForEdit(_product);
 
+            InitializeEvents();
+            InitializeDatabaseChangeListeners();
         }
 
 

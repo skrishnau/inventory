@@ -38,10 +38,12 @@ namespace IMS.Forms.Inventory.Warehouses
         {
             InitializeSubBody();
             _linkManager = new LinkManager(_warehouseSideBarUC.pnlLinkList, _subBodyTemplate.toolTip1);
+            
+            ShowUI(_warehouseSideBarUC.lnkList, 0);
+
             _warehouseSideBarUC.lnkList.LinkClicked += _linkManager.Link_Click;
             _warehouseSideBarUC.lnkTransfers.LinkClicked += LnkTransfers_LinkClicked;
             _linkManager.LinkClicked += _linkManager_LinkClicked;
-            ShowUI(_warehouseSideBarUC.lnkList, 0);
         }
 
         private void LnkTransfers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

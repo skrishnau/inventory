@@ -39,17 +39,15 @@ namespace IMS.Forms.Inventory.UOM
         private void UomUC_Load(object sender, EventArgs e)
         {
            // InitializeHeader();
-            InitializeEvents();
             PopulateUomData();
             PopulatePackage();
 
-            dgvUom.SelectionChanged += DgvUom_SelectionChanged;
-            _listener.UomUpdated += _listener_UomUpdated;
 
             txtValue.Minimum = Int32.MinValue;
             txtValue.Maximum = Int32.MaxValue;
             txtValue.Value = 1;
             
+            InitializeEvents();
         }
 
         private void DgvUom_SelectionChanged(object sender, EventArgs e)
@@ -62,6 +60,10 @@ namespace IMS.Forms.Inventory.UOM
             btnNew.Click += BtnNew_Click;
             btnEdit.Click += BtnEdit_Click;
             btnConvert.Click += BtnConvert_Click;
+
+
+            dgvUom.SelectionChanged += DgvUom_SelectionChanged;
+            _listener.UomUpdated += _listener_UomUpdated;
         }
 
         private void BtnConvert_Click(object sender, EventArgs e)

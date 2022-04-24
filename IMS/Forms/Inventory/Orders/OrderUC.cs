@@ -46,10 +46,10 @@ namespace IMS.Forms.Inventory.Orders
 
            // _linkManager = new LinkManager(_sidebar.pnlLinkList, _body.toolTip1);
 
-            InitializeEvents();
            // InitializeLinkLabels();
             ShowData();
 
+            InitializeEvents();
         }
 
         private void InitializeBody()

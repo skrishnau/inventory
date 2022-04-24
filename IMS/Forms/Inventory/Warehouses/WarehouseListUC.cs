@@ -44,12 +44,11 @@ namespace IMS.Forms.Inventory.Warehouses
         private void WarehouseListUC_Load(object sender, EventArgs e)
         {
             //InitializeHeader();
+            PopulateWarehouseData();
+
 
             InitializeControlEvents();
-
             InitializeListeners();
-
-            PopulateWarehouseData();
         }
 
         #region Population Funcions

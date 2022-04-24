@@ -48,9 +48,9 @@ namespace IMS.Forms.Inventory.Accounts.All
             dtFrom.SetValue(DateTime.Now);// (DateTime.Now.AddDays(-7));
             dtTo.SetValue(DateTime.Now);
 
-            InitializeEvents();
             PopulateProfitAndLoss();
 
+            InitializeEvents();
         }
 
         private void InitializeEvents()

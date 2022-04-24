@@ -38,10 +38,9 @@ namespace IMS.Forms.Inventory.Categories
         private void CategoryListUC_Load(object sender, EventArgs e)
         {
             InitializeHeader();
-            InitializeEvents();
             PopulateCategoryData();
 
-            _databaseChangeListener.CategoryUpdated += _databaseChangeListener_CategoryUpdated;
+            InitializeEvents();
         }
 
         private void _databaseChangeListener_CategoryUpdated(object sender, Service.Listeners.Inventory.CategoryEventArgs e)
@@ -68,9 +67,10 @@ namespace IMS.Forms.Inventory.Categories
             treeView.NodeDeleteClick += TreeView_NodeDeleteClick;
 
             treeView.AfterCollapse += TreeView_AfterCollapse;
+            _databaseChangeListener.CategoryUpdated += _databaseChangeListener_CategoryUpdated;
         }
 
-       
+
 
         private void TreeView_NodeCreateSubClick(CategoryModel categoryModel)
         {

@@ -93,7 +93,6 @@ namespace IMS.Forms.Inventory.Transaction
 
             dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService);
             InitializeValidation();
-            InitializeEvents();
             InitializeDataGridView();
             InitializeSaveFooter();
 
@@ -101,15 +100,17 @@ namespace IMS.Forms.Inventory.Transaction
             PopulateReceiptNumber();
             PopulateAdjustmentCodeCombo();
 
-            dtCompletedDate.TextChanged -= DtCompletedDate_TextChanged;
             PopulateModel(_orderModel);
-            dtCompletedDate.TextChanged += DtCompletedDate_TextChanged;
             // Note: when editing a txn we cancel the txn and populate its' data in create view then save the data and close the form
             if (_saveOrderImmediatelyAfterLoading)
             {
                 var savedOrder = Save(false, true);
-                SavedOrderImmediatelyAfterLoading?.Invoke(this, new BaseEventArgs<OrderModel>(savedOrder, Service.Utility.UpdateMode.ADD));
+                if(savedOrder != null)
+                    SavedOrderImmediatelyAfterLoading?.Invoke(this, new BaseEventArgs<OrderModel>(savedOrder, Service.Utility.UpdateMode.ADD));
             }
+
+
+            InitializeEvents();
         }
 
         #region Functions
@@ -171,6 +172,9 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void InitializeEvents()
         {
+            dtCompletedDate.TextChanged -= DtCompletedDate_TextChanged;
+            dtCompletedDate.TextChanged += DtCompletedDate_TextChanged;
+
             saveFooterUC1.btnSave.Click += BtnSave_Click;
             saveFooterUC1.btnCancel.Click += BtnCancel_Click;
             saveFooterUC1.btnCheckoutAndPrint.Click += BtnCheckoutAndPrint_Click;
@@ -424,6 +428,7 @@ namespace IMS.Forms.Inventory.Transaction
                     //    break;
             }
             DesignViewForOrderOrDirect();
+            SetSumAmount();
         }
 
         private void DesignViewForOrderOrDirect()
@@ -506,7 +511,7 @@ namespace IMS.Forms.Inventory.Transaction
                 msg.Message += "Some required Fields are empty\n";
             if (!_greaterThanZeroFieldValidator.IsValid())
                 msg.Message += "Some Fields are zero or less.\n";
-            if (txtPaidAmount.Value > txtSum.Value)
+            if (txtPaidAmount.Value >  txtSum.Value)
                 msg.Message += "Paid amount cannot be greater than total amount";
 
             if (rbCredit.Checked && string.IsNullOrEmpty(cbClient.Text))

@@ -15,6 +15,8 @@ namespace ViewModel.Utility
         public const string GROUP_BACKUP = "Backup";
         public const string GROUP_SYSTEM = "System";
 
+        public const bool IS_MANUFACTURE_REQUIRED = false;
+
         public const string KEY_BACKUP_FOLDER_PATH = "BackupFolderPath";
         public const string KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE = "show_transaction_create_in_full_page";
         public const string KEY_IS_TRANSACTION_CRETE_PAGE_LOCKED = "is_transaction_create_page_locked";

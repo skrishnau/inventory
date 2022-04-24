@@ -63,11 +63,12 @@ namespace IMS.Forms.MRP.Departments
             // this.heading.Text = "Department List";
             this.Dock = DockStyle.Fill;
             InitializeGridView();
-            InitializeEvents();
-            InitializeListeners();
             //PopulateCategoryCombo();
             PopulateDepartmentData();
 
+
+            InitializeEvents();
+            InitializeListeners();
         }
 
         #region Initialize Functions

@@ -48,11 +48,11 @@ namespace IMS.Forms.Inventory.Units
 
             InitializeBody();
 
-            InitializeEvents();
 
             ShowInventoryUnitList();
             this.headingControl.HeadingText = "Inventory";
 
+            InitializeEvents();
         }
         public override void ExecuteActions()
         {

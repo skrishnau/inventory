@@ -38,9 +38,10 @@ namespace IMS.Forms.Inventory.Settings.References
         private void ReferenceCreateForm_Load(object sender, EventArgs e)
         {
             PopulateBillSetting();
+
+            // events shlud be at the last
             btnSave.Click += BtnSave_Click;
             //btnCancel.Click += BtnCancel_Click;
-            
             tbSaleBody.TextChanged += TbSale_TextChanged;
             tbSalePrefix.TextChanged += TbSale_TextChanged;
             tbSaleSuffix.TextChanged += TbSale_TextChanged;

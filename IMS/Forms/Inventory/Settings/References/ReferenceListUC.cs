@@ -34,9 +34,11 @@ namespace IMS.Forms.Inventory.Settings.References
 
         private void ReferenceSettingsUC_Load(object sender, EventArgs e)
         {
+            PopulateBillSetting();
+
+            // events should be at the last
             _databaseChangeListener.BillSettingUpdated += _databaseChangeListener_BillSettingUpdated;
             _databaseChangeListener.OrderUpdated += _databaseChangeListener_OrderUpdated;
-            PopulateBillSetting();
             //btnSave.Click += BtnSave_Click;
             //btnCancel.Click += BtnCancel_Click;
 

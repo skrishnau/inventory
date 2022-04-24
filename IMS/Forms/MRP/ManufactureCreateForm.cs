@@ -61,14 +61,22 @@ namespace IMS.Forms.MRP
         private void ManufactureCreateForm_Load(object sender, EventArgs e)
         {
             dgvDepartmentsForProducts.AutoGenerateColumns = false;
-
             txtFinalQuantity.Maximum = Int16.MaxValue;
             InitializeGridView();
-            btnSave.Click += BtnSave_Click;
             PopulateFinalProduct();
             PopulateFinalPackage();
-            cbFinalProduct.SelectedValueChanged += CbFinalProduct_SelectedValueChanged;
             PopulateDepartmentCombo();
+            PopulateDataForEdit();
+
+
+            // decimal validator
+            _decimalValidator = new GridViewColumnDecimalValidator(dgvEmployees);
+            _decimalValidator.AddColumn(this.colEmployeesRate, ColumnDataType.Decimal);
+            _decimalValidator.Validate();
+
+            // events should be at the last
+            btnSave.Click += BtnSave_Click;
+            cbFinalProduct.SelectedValueChanged += CbFinalProduct_SelectedValueChanged;
             btnDepartmentAdd.Click += BtnDepartmentAdd_Click;
             dgvDepartments.DataError += DgvDepartments_DataError;
             dgvEmployees.DataError += DgvEmployees_DataError;
@@ -86,13 +94,6 @@ namespace IMS.Forms.MRP
             tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             lblFinalProduct.DoubleClick += LblFinalProduct_DoubleClick;
 
-
-            PopulateDataForEdit();
-
-            // decimal validator
-            _decimalValidator = new GridViewColumnDecimalValidator(dgvEmployees);
-            _decimalValidator.AddColumn(this.colEmployeesRate, ColumnDataType.Decimal);
-            _decimalValidator.Validate();
         }
 
         private void LblFinalProduct_DoubleClick(object sender, EventArgs e)

@@ -50,13 +50,13 @@ namespace IMS.Forms.Inventory.Payment
             txtAmount.Maximum = Int32.MaxValue;
             txtAmount.Minimum = Int32.MinValue;
 
-            InitializeEvents();
             InitializeValidation();
             PopulatePaymentTypeCombo();
             PopulatePaymentMethodCombo();
             PopulatePaymentData();
             PopulateReceiptNumber();
 
+            InitializeEvents();
         }
 
         private void PopulateReceiptNumber()

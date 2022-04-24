@@ -72,7 +72,8 @@ namespace IMS
                 //{
                 //    container.GetInstance<IInventoryUnitService>().FindWarehouseOrReturnMainWarehouse(_context, null);
                 //}
-                Application.Run(container.GetInstance<Form1>());
+                var form = container.GetInstance<IDIServiceInstance>().GetForm1();
+                Application.Run(form);// container.GetInstance<Form1>());
             }
 
             

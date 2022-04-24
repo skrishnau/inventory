@@ -41,6 +41,8 @@ namespace IMS.Forms.Inventory.Settings.General
                 lblOldPassword.Visible = false;
                 tbOldPassword.Visible = false;
             }
+
+            // events should be at the last
             btnSaveProfile.Click += BtnSave_Click;
         }
         public void SetData(string username)

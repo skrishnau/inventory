@@ -60,10 +60,10 @@ namespace IMS.Forms.Inventory.Suppliers
             //dgvSuppliers.DataSource = _bindingSource;
             InitializeGridView();
             InitializeSearchTextBox();
-            InitializeEvents();
             PopulateData();
             PopulateList();
 
+            InitializeEvents();
         }
 
         private void PopulateData()
@@ -77,18 +77,28 @@ namespace IMS.Forms.Inventory.Suppliers
                     colResetPassword.Visible = false;
                     break;
                 case UserTypeCategoryEnum.UserAndVendor:
-                    btnPayment.Visible = false;
+                    colResetPassword.Visible = true;
                     rbCustomer.Text = UserTypeEnum.Employee.ToString();
                     rbSupplier.Text = UserTypeEnum.Vendor.ToString();
                     rbSupplier.Visible = false;
                     // columns
-                    colCompany.Visible = false;
                     //colTotalAmount.Visible = false;
                     //colPaidAmount.Visible = false;
                     colAllDuesClearDate.Visible = false;
                     colPaymentDueDate.Visible = false;
-                    colResetPassword.Visible = true;
+
                     //colRemainAmount.Visible = false;
+                    if (!Constants.IS_MANUFACTURE_REQUIRED || _userType.All(x=>x == UserTypeEnum.Employee))
+                    {
+                        btnPrint.Visible = false;
+                        btnPayment.Visible = false;
+
+                        this.colCompany.Visible = false;
+                        this.colManufacturedAmount.Visible = false;
+                        this.colPaidAmount.Visible = false;
+                        this.colRemainAmount.Visible = false;
+                        this.colTotalAmount.Visible = false;
+                    }
                     break;
             }
         }
@@ -171,16 +181,18 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var withoutVendor = _userType.Where(x => x != UserTypeEnum.Vendor).ToList();
+                var withoutVendor = Constants.IS_MANUFACTURE_REQUIRED ? _userType : _userType.Where(x => x != UserTypeEnum.Vendor).ToList();
                 var supplierCreate = new ClientCreateForm(_userService, _listener);//Program.container.GetInstance<ClientCreateForm>();// (supplier);
-                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, withoutVendor);
+                var user = GetSelectedUser();
+                supplierCreate.SetDataForEdit(isEditMode ? user == null ? 0 : user.Id : 0, withoutVendor);
                 supplierCreate.ShowDialog();
             }
         }
 
         private void ShowEditDeleteButtons()
         {
-            var visible = _selectedSupplierModel != null;
+            var user = GetSelectedUser();
+            var visible = user != null;//_selectedSupplierModel != null;
             btnEdit.Visible = visible;
             btnPayment.Visible = _userType.Contains(UserTypeEnum.Employee) ? false : visible;
             //  btnDelete.Visible = visible;
@@ -252,9 +264,13 @@ namespace IMS.Forms.Inventory.Suppliers
             AddListenerAction(PopulateList, e);
         }
 
+        private UserModel GetSelectedUser()
+        {
+            return dgvSuppliers.SelectedRows.Count > 0 ? dgvSuppliers.SelectedRows[0].DataBoundItem as UserModel : null;
+        }
         private void DgvSuppliers_SelectionChanged(object sender, EventArgs e)
         {
-            _selectedSupplierModel = dgvSuppliers.SelectedRows.Count > 0 ? dgvSuppliers.SelectedRows[0].DataBoundItem as UserModel : null;
+            _selectedSupplierModel = GetSelectedUser();
             ShowEditDeleteButtons();
         }
 

@@ -147,7 +147,7 @@ namespace Service.Core.Reports
             
             return new LedgerModel
             {
-                Balance = x.DrCr < 0 ? $"({x.Balance})" : x.DrCr > 0 ? $"{x.Balance}" : "",//.ToString("#.00"),
+                Balance = x.DrCr < 0 ? $"({Math.Abs(x.Balance).ToString("0.00")})" : x.DrCr > 0 ? $"{x.Balance}" : "",//.ToString("#.00"),
                 Credit = x.Credit == 0 ? "" : $"{x.Credit}",//.ToString("#.00"),
                 Debit = x.Debit == 0 ? "" : $"{x.Debit}",//.ToString("#.00"),
                 DrCr = x.DrCr,
@@ -273,7 +273,7 @@ namespace Service.Core.Reports
                     var profit = debitSum - costPriceSum;
                     var pl = new ProfitAndLossModel
                     {
-                        Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
+                        Balance = profit < 0 ? $"({Math.Abs(profit).ToString("0.00")})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
                         Revenue = $"{debitSum}",//.ToString("#.00"),
                         Expense = $"{costPriceSum}",//.ToString("#.00"),
                         ProfitLoss = Math.Sign(profit),
@@ -292,7 +292,7 @@ namespace Service.Core.Reports
                             var profit = txn.Debit - (txn.CostPriceTotal ?? 0);
                             var pl = new ProfitAndLossModel
                             {
-                                Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
+                                Balance = profit < 0 ? $"({Math.Abs(profit).ToString("0.00")})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
                                 Revenue = $"{txn.Debit}",//.ToString("#.00"),
                                 Expense = $"{txn.CostPriceTotal}",//.ToString("#.00"),
                                 ProfitLoss = Math.Sign(profit),
@@ -312,7 +312,7 @@ namespace Service.Core.Reports
                             var profit = debitSum - costPriceSum;
                             var pl = new ProfitAndLossModel
                             {
-                                Balance = profit < 0 ? $"({profit})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
+                                Balance = profit < 0 ? $"({Math.Abs(profit).ToString("0.00")})" : profit > 0 ? $"{profit}" : "",//.ToString("#.00"),
                                 Revenue = $"{debitSum}",//.ToString("#.00"),
                                 Expense = $"{costPriceSum}",//.ToString("#.00"),
                                 ProfitLoss = Math.Sign(profit),
@@ -336,7 +336,7 @@ namespace Service.Core.Reports
                 var profitLoss = Math.Sign(balance);
                 var master = new ProfitAndLossMasterModel
                 {
-                    BalanceSum = profitLoss < 0 ? $"({Math.Abs(balance)})" : balance.ToString(),
+                    BalanceSum = profitLoss < 0 ? $"({Math.Abs(balance).ToString("0.00")})" : balance.ToString(),
                     ProfitAndLossData = list,
                     RevenueSum = "" + transactions.Sum(x => x.Debit),
                     ExpenseSum = "" + transactions.Sum(x => x.CostPriceTotal),

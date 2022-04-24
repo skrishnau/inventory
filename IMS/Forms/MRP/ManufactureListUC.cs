@@ -58,11 +58,12 @@ namespace IMS.Forms.MRP
             //dgvPriceHistory.AutoGenerateColumns = false;
             this.Dock = DockStyle.Fill;
             InitializeGridView();
-            InitializeEvents();
-            InitializeListeners();
             //PopulateCategoryCombo();
             PopulateManufactureData();
 
+
+            InitializeEvents();
+            InitializeListeners();
         }
         
 

@@ -61,7 +61,6 @@ namespace IMS.Forms.Inventory.Products
             //tbInStockQuantity.Minimum = decimal.MinValue;
             //tbInStockQuantity.Maximum = decimal.MaxValue;
 
-            InitializeEvents();
 
             //numSupplyPrice.Maximum = Int32.MaxValue;
             //numRetailPrice.Maximum = Int32.MaxValue;
@@ -77,6 +76,7 @@ namespace IMS.Forms.Inventory.Products
             if (_product != null && _product.BasePackageId != null)
                 cbPackage.SelectedValue = _product.BasePackageId;
 
+            InitializeEvents();
         }
 
 

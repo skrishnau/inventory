@@ -34,6 +34,7 @@ namespace IMS.Forms.Inventory.UOM
             txtQuantity.Minimum = 0;
             PopulateUomData();
             PopulateBaseUomCombo();
+
             InitializeEvents();
             
         }

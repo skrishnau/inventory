@@ -48,14 +48,16 @@ namespace IMS.Forms.Inventory.Units.Details
 
         private void WarehouseProductListUC_Load(object sender, EventArgs e)
         {
-            _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
-           // _listener.WarehouseUpdated += _listener_WarehouseUpdated;
-            _listener.ProductUpdated += _listener_ProductUpdated;
            // PopulateWarehouses();
             PopulateProducts();
             PopulateWarehouseProducts();
 
+
+            // events should be at the last
             InitializeComboBoxEvents();
+            _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
+            // _listener.WarehouseUpdated += _listener_WarehouseUpdated;
+            _listener.ProductUpdated += _listener_ProductUpdated;
         }
 
 

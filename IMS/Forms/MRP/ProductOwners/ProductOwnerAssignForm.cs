@@ -71,10 +71,10 @@ namespace IMS.Forms.MRP.ProductOwners
         {
             dgvItems.InitializeGridViewControls(_inventoryService, _productService, _uomService, _productOwnerService, assignRelease: _assignRelease);
             InitializeValidation();
-            InitializeEvents();
             InitializeDataGridView();
             PopulateModel();
 
+            InitializeEvents();
         }
 
         #region Functions

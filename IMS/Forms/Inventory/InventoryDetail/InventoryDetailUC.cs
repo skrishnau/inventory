@@ -48,6 +48,8 @@ namespace IMS.Forms.Inventory.InventoryDetail
             this.dgvWarehouseProducts.AutoGenerateColumns = false;
 
             PopulateProductList();
+
+            // events should be at the last
             _listener.ProductUpdated += _listener_ProductUpdated;
             _listener.WarehouseUpdated += _listener_WarehouseUpdated;
 

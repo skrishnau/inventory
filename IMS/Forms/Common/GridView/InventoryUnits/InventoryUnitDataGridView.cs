@@ -97,10 +97,7 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // Columns
             //
             InitializeColumns();
-            // 
-            // Events
-            //
-            InitializeEvents();
+            
             //
             // Data Populate
             //
@@ -109,6 +106,10 @@ namespace IMS.Forms.Common.GridView.InventoryUnits
             // Validations
             //
             InitializeValidations();
+            // 
+            // Events
+            //
+            InitializeEvents();
         }
 
 

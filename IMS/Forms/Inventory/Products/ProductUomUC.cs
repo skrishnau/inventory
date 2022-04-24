@@ -40,6 +40,7 @@ namespace IMS.Forms.Inventory.Products
             PopulatePackage();
             PopulateUomData();
 
+            // events shuld be at the last
             this.btnDelete.Click += BtnDelete_Click;
             cbRelatedPackage.SelectedValueChanged += CbRelatedPackage_SelectedValueChanged;
             cbPackage.SelectedValueChanged += CbPackage_SelectedValueChanged;

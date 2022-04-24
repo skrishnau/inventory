@@ -57,11 +57,11 @@ namespace IMS.Forms.Inventory.Products
             // this.heading.Text = "Product List";
             this.Dock = DockStyle.Fill;
             InitializeGridView();
-            InitializeEvents();
-            InitializeListeners();
             PopulateCategoryCombo();
             PopulateProductData();
 
+            InitializeEvents();
+            InitializeListeners();
         }
 
         private void PopulateCategoryCombo()

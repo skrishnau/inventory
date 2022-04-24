@@ -52,23 +52,19 @@ namespace IMS.Forms.Inventory.Dashboard
         {
             this.dtEnd.SetValue(DateTime.Now);
             this.dtStart.SetValue(DateTime.Now);
-            _listener.ProductUpdated += _listener_ProductUpdated;
-            _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
-            _listener.UserUpdated += _listener_UserUpdated;
-            _listener.OrderUpdated += _listener_OrderUpdated;
-            _listener.CompanyUpdated += _listener_CompanyUpdated;
-            _listener.PaymentUpdated += _listener_PaymentUpdated;
+            
 
             PopulateUnderstockProducts();
             PopulateDueReceivables();
             PopulateTransactionSummary();
             PopulateInventorySummary();
-            InitializeEvents();
             PopulateCompany();
 
             PopulateBarDiagram();
 
             PopulateUserName();
+
+            InitializeEvents();
         }
 
         private void PopulateUserName()
@@ -124,6 +120,13 @@ namespace IMS.Forms.Inventory.Dashboard
         {
             dtEnd.TextChanged += Date_ValueChanged;
             dtStart.TextChanged += Date_ValueChanged;
+
+            _listener.ProductUpdated += _listener_ProductUpdated;
+            _listener.InventoryUnitUpdated += _listener_InventoryUnitUpdated;
+            _listener.UserUpdated += _listener_UserUpdated;
+            _listener.OrderUpdated += _listener_OrderUpdated;
+            _listener.CompanyUpdated += _listener_CompanyUpdated;
+            _listener.PaymentUpdated += _listener_PaymentUpdated;
             //  dgvDueReceivables.CellDoubleClick += DgvDueReceivables_CellDoubleClick;
             //TabControl.TabIndexChanged += TabControl_TabIndexChanged;
         }

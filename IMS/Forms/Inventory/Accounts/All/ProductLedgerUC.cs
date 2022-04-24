@@ -55,11 +55,11 @@ namespace IMS.Forms.Inventory.Reports.All
             dtFrom.SetValue(DateTime.Now.AddDays(-7));
             dtTo.SetValue(DateTime.Now);
 
-            InitializeEvents();
             PopulateCategory();
             PopulateProducts();
             //PopulateLedger();
 
+            InitializeEvents();
         }
 
         private void InitializeEvents()

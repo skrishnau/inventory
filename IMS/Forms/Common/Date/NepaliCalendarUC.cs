@@ -58,11 +58,11 @@ namespace IMS.Forms.Common.Date
 
         private void NepaliCalendar_Load(object sender, EventArgs e)
         {
-            InitializeEvents();
-
             PopulateWeeks();
 
             Populate(_converter.GetCalendarFromNepaliDate(_selectedDate.Year, _selectedDate.Month));
+
+            InitializeEvents();
         }
 
         internal void ResetDate(string date)
