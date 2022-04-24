@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewModel.Core;
 using ViewModel.Core.Settings;
 
 namespace IMS.Forms.Inventory.Settings.General
@@ -19,7 +20,7 @@ namespace IMS.Forms.Inventory.Settings.General
     public partial class PasswordEditForm : Form
     {
         private readonly IUserService _userService;
-        
+        private string _userName;
         public PasswordEditForm(IUserService userService)
         {
             _userService = userService;
@@ -30,11 +31,23 @@ namespace IMS.Forms.Inventory.Settings.General
 
         private void ProfileEditForm_Load(object sender, EventArgs e)
         {
-            tbUsername.Text = UserSession.User.Username;
+            tbUsername.Text = string.IsNullOrEmpty(_userName) ? UserSession.User.Username : _userName;
             tbUsername.Enabled = false;
             tbNewPassword.Focus();
+
+            // Note: don't show old password if we are resetting another user's password
+            if (!string.IsNullOrEmpty(_userName))
+            {
+                lblOldPassword.Visible = false;
+                tbOldPassword.Visible = false;
+            }
             btnSaveProfile.Click += BtnSave_Click;
         }
+        public void SetData(string username)
+        {
+            _userName = username;
+        }
+
       
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -55,7 +68,10 @@ namespace IMS.Forms.Inventory.Settings.General
                 };
                 var success = false;
                 // save the password
-                var isAuthorized = _userService.Authenticate(tbUsername.Text, tbOldPassword.Text);
+                UserModel isAuthorized = null;
+                if (string.IsNullOrEmpty(_userName))
+                    isAuthorized = _userService.Authenticate(tbUsername.Text, tbOldPassword.Text);
+                else isAuthorized = new UserModel();
                 if(isAuthorized == null)
                 {
                     PopupMessage.ShowInfoMessage("Invalid password!");

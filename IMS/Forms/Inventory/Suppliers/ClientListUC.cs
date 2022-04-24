@@ -15,6 +15,8 @@ using IMS.Forms.Inventory.Accounts.All;
 using ViewModel.Core.Reports;
 using Service.Core.Settings;
 using ViewModel.Utility;
+using IMS.Forms.Accounts;
+using IMS.Forms.Inventory.Settings.General;
 
 namespace IMS.Forms.Inventory.Suppliers
 {
@@ -72,17 +74,20 @@ namespace IMS.Forms.Inventory.Suppliers
                     rbCustomer.Text = UserTypeEnum.Customer.ToString();
                     rbSupplier.Text = UserTypeEnum.Supplier.ToString();
                     colManufacturedAmount.Visible = false;
+                    colResetPassword.Visible = false;
                     break;
                 case UserTypeCategoryEnum.UserAndVendor:
                     btnPayment.Visible = false;
                     rbCustomer.Text = UserTypeEnum.Employee.ToString();
                     rbSupplier.Text = UserTypeEnum.Vendor.ToString();
+                    rbSupplier.Visible = false;
                     // columns
                     colCompany.Visible = false;
                     //colTotalAmount.Visible = false;
                     //colPaidAmount.Visible = false;
                     colAllDuesClearDate.Visible = false;
                     colPaymentDueDate.Visible = false;
+                    colResetPassword.Visible = true;
                     //colRemainAmount.Visible = false;
                     break;
             }
@@ -166,8 +171,9 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
-                var supplierCreate = Program.container.GetInstance<ClientCreateForm>();// (supplier);
-                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, _userType);
+                var withoutVendor = _userType.Where(x => x != UserTypeEnum.Vendor).ToList();
+                var supplierCreate = new ClientCreateForm(_userService, _listener);//Program.container.GetInstance<ClientCreateForm>();// (supplier);
+                supplierCreate.SetDataForEdit(isEditMode ? _selectedSupplierModel == null ? 0 : _selectedSupplierModel.Id : 0, withoutVendor);
                 supplierCreate.ShowDialog();
             }
         }
@@ -280,7 +286,9 @@ namespace IMS.Forms.Inventory.Suppliers
                     }
                     else if (e.ColumnIndex == colResetPassword.Index)
                     {
-
+                        var loginUserCreateForm = new PasswordEditForm(_userService);
+                        loginUserCreateForm.SetData(data.Username);
+                        loginUserCreateForm.ShowDialog(this);
                     }
                 }
             }

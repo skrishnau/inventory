@@ -47,7 +47,7 @@ namespace Service.Core.Users
                 var dbEntity = _context.Users
                     .FirstOrDefault(x => x.Id == supplierModel.Id);
                 BaseEventArgs<UserModel> eventArgs = BaseEventArgs<UserModel>.Instance;
-                if (_context.Users.Any(x => x.Username == supplierModel.Username && x.Id != supplierModel.Id))
+                if (!string.IsNullOrEmpty(supplierModel.Username) && _context.Users.Any(x => x.Username == supplierModel.Username && x.Id != supplierModel.Id))
                     return ResponseModel<bool>.GetError("Username already exists. Couldn't save.");
                 if (supplierModel.Id == 0 && !string.IsNullOrEmpty(supplierModel.Password))
                     supplierModel.Password = GeneratePasswordHash(supplierModel.Password);

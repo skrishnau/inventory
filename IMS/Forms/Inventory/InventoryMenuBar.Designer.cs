@@ -33,8 +33,10 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnBackup = new System.Windows.Forms.Button();
+            this.btnVendor = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
             this.btnAccounts = new System.Windows.Forms.Button();
@@ -56,8 +58,6 @@
             this.btnSaleTransaction = new System.Windows.Forms.Button();
             this.btnPOS = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.btnVendor = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -139,6 +139,23 @@
             this.toolTip1.SetToolTip(this.btnLogout, "Help and Support");
             this.btnLogout.UseVisualStyleBackColor = false;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Image = global::IMS.Properties.Resources.icons8_restart_24;
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefresh.Location = new System.Drawing.Point(97, 15);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(59, 53);
+            this.btnRefresh.TabIndex = 51;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnRefresh, "Help and Support");
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
             // btnHelp
             // 
             this.btnHelp.BackColor = System.Drawing.Color.Transparent;
@@ -174,6 +191,22 @@
             this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.btnBackup, "Help and Support");
             this.btnBackup.UseVisualStyleBackColor = false;
+            // 
+            // btnVendor
+            // 
+            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnVendor.FlatAppearance.BorderSize = 0;
+            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVendor.Image = ((System.Drawing.Image)(resources.GetObject("btnVendor.Image")));
+            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnVendor.Location = new System.Drawing.Point(252, 15);
+            this.btnVendor.Name = "btnVendor";
+            this.btnVendor.Size = new System.Drawing.Size(76, 53);
+            this.btnVendor.TabIndex = 49;
+            this.btnVendor.Text = "Employees";
+            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
+            this.btnVendor.UseVisualStyleBackColor = true;
             // 
             // btnSettings
             // 
@@ -526,39 +559,6 @@
             this.toolTip1.SetToolTip(this.btnHome, "Go to Dashboard");
             this.btnHome.UseVisualStyleBackColor = true;
             // 
-            // btnVendor
-            // 
-            this.btnVendor.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnVendor.FlatAppearance.BorderSize = 0;
-            this.btnVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVendor.Image = ((System.Drawing.Image)(resources.GetObject("btnVendor.Image")));
-            this.btnVendor.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVendor.Location = new System.Drawing.Point(252, 15);
-            this.btnVendor.Name = "btnVendor";
-            this.btnVendor.Size = new System.Drawing.Size(76, 53);
-            this.btnVendor.TabIndex = 49;
-            this.btnVendor.Text = "Employees";
-            this.btnVendor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnVendor, "Employees/Vendors");
-            this.btnVendor.UseVisualStyleBackColor = true;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
-            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRefresh.FlatAppearance.BorderSize = 0;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRefresh.Location = new System.Drawing.Point(97, 15);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(59, 53);
-            this.btnRefresh.TabIndex = 51;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolTip1.SetToolTip(this.btnRefresh, "Help and Support");
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitter1);
@@ -895,6 +895,7 @@
             this.pnlManufacture.Name = "pnlManufacture";
             this.pnlManufacture.Size = new System.Drawing.Size(159, 68);
             this.pnlManufacture.TabIndex = 60;
+            this.pnlManufacture.Visible = false;
             // 
             // panel11
             // 
@@ -905,6 +906,7 @@
             this.panel11.Padding = new System.Windows.Forms.Padding(5, 4, 4, 4);
             this.panel11.Size = new System.Drawing.Size(11, 68);
             this.panel11.TabIndex = 61;
+            this.panel11.Visible = false;
             // 
             // splitter9
             // 

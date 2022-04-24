@@ -53,7 +53,7 @@ namespace IMS.Forms.Common
             // BaseUserControl
             // 
             this.Name = "BaseUserControl";
-            this.Size = new System.Drawing.Size(752, 339);
+            this.Size = new System.Drawing.Size(755, 371);
             this.ResumeLayout(false);
 
         }

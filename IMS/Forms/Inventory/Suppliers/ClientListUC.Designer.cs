@@ -31,6 +31,21 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientListUC));
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colManufacturedAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemainAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAllDuesClearDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colEdit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colResetPassword = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,21 +71,6 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.listHeaderTemplate1 = new IMS.Forms.Common.Display.ListHeaderTemplate();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaidAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colManufacturedAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemainAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAllDuesClearDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colEdit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.colResetPassword = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -110,6 +110,123 @@
             this.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSuppliers.Size = new System.Drawing.Size(1044, 399);
             this.dgvSuppliers.TabIndex = 11;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "Id";
+            this.colId.HeaderText = "Id";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            this.colId.Visible = false;
+            // 
+            // SupplierName
+            // 
+            this.SupplierName.DataPropertyName = "Name";
+            this.SupplierName.HeaderText = "Name";
+            this.SupplierName.Name = "SupplierName";
+            this.SupplierName.ReadOnly = true;
+            this.SupplierName.Width = 140;
+            // 
+            // colCompany
+            // 
+            this.colCompany.DataPropertyName = "Company";
+            this.colCompany.HeaderText = "Company";
+            this.colCompany.Name = "colCompany";
+            this.colCompany.ReadOnly = true;
+            this.colCompany.Width = 110;
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            this.Address.Width = 150;
+            // 
+            // Phone
+            // 
+            this.Phone.DataPropertyName = "Phone";
+            this.Phone.HeaderText = "Phone";
+            this.Phone.Name = "Phone";
+            this.Phone.ReadOnly = true;
+            // 
+            // colUserType
+            // 
+            this.colUserType.DataPropertyName = "UserType";
+            this.colUserType.HeaderText = "Type";
+            this.colUserType.Name = "colUserType";
+            this.colUserType.ReadOnly = true;
+            // 
+            // colTotalAmount
+            // 
+            this.colTotalAmount.DataPropertyName = "TotalAmount";
+            this.colTotalAmount.HeaderText = "Debit (दिएको)";
+            this.colTotalAmount.Name = "colTotalAmount";
+            this.colTotalAmount.ReadOnly = true;
+            this.colTotalAmount.Width = 120;
+            // 
+            // colPaidAmount
+            // 
+            this.colPaidAmount.DataPropertyName = "PaidAmount";
+            this.colPaidAmount.HeaderText = "Credit (लिएको)";
+            this.colPaidAmount.Name = "colPaidAmount";
+            this.colPaidAmount.ReadOnly = true;
+            // 
+            // colManufacturedAmount
+            // 
+            this.colManufacturedAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colManufacturedAmount.DataPropertyName = "ManufacturedAmount";
+            this.colManufacturedAmount.HeaderText = "Manufactured Amt.";
+            this.colManufacturedAmount.Name = "colManufacturedAmount";
+            this.colManufacturedAmount.ReadOnly = true;
+            this.colManufacturedAmount.Visible = false;
+            // 
+            // colRemainAmount
+            // 
+            this.colRemainAmount.DataPropertyName = "DueAmountString";
+            this.colRemainAmount.HeaderText = "Balance";
+            this.colRemainAmount.Name = "colRemainAmount";
+            this.colRemainAmount.ReadOnly = true;
+            // 
+            // colPaymentDueDate
+            // 
+            this.colPaymentDueDate.DataPropertyName = "PaymentDueDateBS";
+            this.colPaymentDueDate.HeaderText = "Due Date";
+            this.colPaymentDueDate.Name = "colPaymentDueDate";
+            this.colPaymentDueDate.ReadOnly = true;
+            this.colPaymentDueDate.Width = 90;
+            // 
+            // colAllDuesClearDate
+            // 
+            this.colAllDuesClearDate.DataPropertyName = "AllDuesClearDateBS";
+            this.colAllDuesClearDate.HeaderText = "Last Full Clear";
+            this.colAllDuesClearDate.Name = "colAllDuesClearDate";
+            this.colAllDuesClearDate.ReadOnly = true;
+            // 
+            // colUse
+            // 
+            this.colUse.DataPropertyName = "Use";
+            this.colUse.HeaderText = "Use";
+            this.colUse.Name = "colUse";
+            this.colUse.ReadOnly = true;
+            this.colUse.Width = 40;
+            // 
+            // colEdit
+            // 
+            this.colEdit.HeaderText = "";
+            this.colEdit.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
+            this.colEdit.Name = "colEdit";
+            this.colEdit.ReadOnly = true;
+            this.colEdit.Width = 30;
+            // 
+            // colResetPassword
+            // 
+            this.colResetPassword.HeaderText = "";
+            this.colResetPassword.Image = global::IMS.Properties.Resources.icons8_Access_16px;
+            this.colResetPassword.Name = "colResetPassword";
+            this.colResetPassword.ReadOnly = true;
+            this.colResetPassword.ToolTipText = "Reset Password";
+            this.colResetPassword.Width = 30;
             // 
             // panel2
             // 
@@ -202,9 +319,9 @@
             this.flowLayoutPanel2.Controls.Add(this.btnPrint);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(723, 4);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(713, 4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(317, 45);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(327, 45);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
             // btnNew
@@ -212,7 +329,7 @@
             this.btnNew.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::IMS.Properties.Resources.icons8_Plus_Math_16px;
-            this.btnNew.Location = new System.Drawing.Point(272, 3);
+            this.btnNew.Location = new System.Drawing.Point(282, 3);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(42, 40);
             this.btnNew.TabIndex = 0;
@@ -225,7 +342,7 @@
             this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(224, 3);
+            this.btnEdit.Location = new System.Drawing.Point(234, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(42, 40);
             this.btnEdit.TabIndex = 1;
@@ -240,7 +357,7 @@
             this.btnPayment.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPayment.Image = global::IMS.Properties.Resources.icons8_Lease_16px;
-            this.btnPayment.Location = new System.Drawing.Point(140, 3);
+            this.btnPayment.Location = new System.Drawing.Point(150, 3);
             this.btnPayment.Name = "btnPayment";
             this.btnPayment.Size = new System.Drawing.Size(78, 40);
             this.btnPayment.TabIndex = 16;
@@ -255,7 +372,7 @@
             this.btnPrint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Image = global::IMS.Properties.Resources.icons8_print_16px;
-            this.btnPrint.Location = new System.Drawing.Point(51, 3);
+            this.btnPrint.Location = new System.Drawing.Point(61, 3);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(83, 39);
             this.btnPrint.TabIndex = 17;
@@ -375,123 +492,6 @@
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.ReadOnly = true;
             this.dataGridViewImageColumn1.Width = 30;
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "Id";
-            this.colId.HeaderText = "Id";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Visible = false;
-            // 
-            // SupplierName
-            // 
-            this.SupplierName.DataPropertyName = "Name";
-            this.SupplierName.HeaderText = "Name";
-            this.SupplierName.Name = "SupplierName";
-            this.SupplierName.ReadOnly = true;
-            this.SupplierName.Width = 140;
-            // 
-            // colCompany
-            // 
-            this.colCompany.DataPropertyName = "Company";
-            this.colCompany.HeaderText = "Company";
-            this.colCompany.Name = "colCompany";
-            this.colCompany.ReadOnly = true;
-            this.colCompany.Width = 110;
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            this.Address.Width = 150;
-            // 
-            // Phone
-            // 
-            this.Phone.DataPropertyName = "Phone";
-            this.Phone.HeaderText = "Phone";
-            this.Phone.Name = "Phone";
-            this.Phone.ReadOnly = true;
-            // 
-            // colUserType
-            // 
-            this.colUserType.DataPropertyName = "UserType";
-            this.colUserType.HeaderText = "Type";
-            this.colUserType.Name = "colUserType";
-            this.colUserType.ReadOnly = true;
-            // 
-            // colTotalAmount
-            // 
-            this.colTotalAmount.DataPropertyName = "TotalAmount";
-            this.colTotalAmount.HeaderText = "Debit (दिएको)";
-            this.colTotalAmount.Name = "colTotalAmount";
-            this.colTotalAmount.ReadOnly = true;
-            this.colTotalAmount.Width = 120;
-            // 
-            // colPaidAmount
-            // 
-            this.colPaidAmount.DataPropertyName = "PaidAmount";
-            this.colPaidAmount.HeaderText = "Credit (लिएको)";
-            this.colPaidAmount.Name = "colPaidAmount";
-            this.colPaidAmount.ReadOnly = true;
-            // 
-            // colManufacturedAmount
-            // 
-            this.colManufacturedAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colManufacturedAmount.DataPropertyName = "ManufacturedAmount";
-            this.colManufacturedAmount.HeaderText = "Manufactured Amt.";
-            this.colManufacturedAmount.Name = "colManufacturedAmount";
-            this.colManufacturedAmount.ReadOnly = true;
-            this.colManufacturedAmount.Visible = false;
-            this.colManufacturedAmount.Width = 122;
-            // 
-            // colRemainAmount
-            // 
-            this.colRemainAmount.DataPropertyName = "DueAmountString";
-            this.colRemainAmount.HeaderText = "Balance";
-            this.colRemainAmount.Name = "colRemainAmount";
-            this.colRemainAmount.ReadOnly = true;
-            // 
-            // colPaymentDueDate
-            // 
-            this.colPaymentDueDate.DataPropertyName = "PaymentDueDateBS";
-            this.colPaymentDueDate.HeaderText = "Due Date";
-            this.colPaymentDueDate.Name = "colPaymentDueDate";
-            this.colPaymentDueDate.ReadOnly = true;
-            this.colPaymentDueDate.Width = 90;
-            // 
-            // colAllDuesClearDate
-            // 
-            this.colAllDuesClearDate.DataPropertyName = "AllDuesClearDateBS";
-            this.colAllDuesClearDate.HeaderText = "Last Full Clear";
-            this.colAllDuesClearDate.Name = "colAllDuesClearDate";
-            this.colAllDuesClearDate.ReadOnly = true;
-            // 
-            // colUse
-            // 
-            this.colUse.DataPropertyName = "Use";
-            this.colUse.HeaderText = "Use";
-            this.colUse.Name = "colUse";
-            this.colUse.ReadOnly = true;
-            this.colUse.Width = 40;
-            // 
-            // colEdit
-            // 
-            this.colEdit.HeaderText = "";
-            this.colEdit.Image = global::IMS.Properties.Resources.icons8_Edit_16px;
-            this.colEdit.Name = "colEdit";
-            this.colEdit.ReadOnly = true;
-            this.colEdit.Width = 30;
-            // 
-            // colResetPassword
-            // 
-            this.colResetPassword.HeaderText = "";
-            this.colResetPassword.Image = global::IMS.Properties.Resources.icons8_Access_16px;
-            this.colResetPassword.Name = "colResetPassword";
-            this.colResetPassword.ReadOnly = true;
-            this.colResetPassword.ToolTipText = "Reset Password";
             // 
             // ClientListUC
             // 
