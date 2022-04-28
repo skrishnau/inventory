@@ -18,7 +18,9 @@ namespace ViewModel.Utility
     public class ApplicationSettings
     {
         public string DatabaseServer { get; set; }
-        public string DatabaseName { get; set; }
+        public string DatabaseDatabase { get; set; }
+        public string DatabaseUsername { get; set; }
+        public string DatabasePassword { get; set; }
 
         public static ConfigKeyValue TrimAndGetSettingsKeyAndValue(string l)
         {
@@ -52,7 +54,9 @@ namespace ViewModel.Utility
     public enum ApplicationSettingsEnum
     {
         DB_Server,
-        DB_Name,
+        DB_Database,
+        DB_Username,
+        DB_Password
     }
 
     public class ConnectionStrings

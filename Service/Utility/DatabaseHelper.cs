@@ -10,7 +10,7 @@ namespace Service.Utility
 {
     public static class DatabaseHelper
     {
-        public static ConnectionStrings GetConnectionString(string serverName, string databaseName)
+        public static ConnectionStrings GetConnectionString(string serverName, string databaseName, string username, string password)
         {
 
             if (!string.IsNullOrEmpty(databaseName) && !string.IsNullOrEmpty(serverName))
@@ -19,9 +19,9 @@ namespace Service.Utility
                 // create connection string and store it in UserSession
                 var connectionString = new ConnectionStrings();
                 connectionString.EDMXConnectionString = "metadata=res://*/Context.DatabaseContext.csdl|res://*/Context.DatabaseContext.ssdl|res://*/Context.DatabaseContext.msl;provider=System.Data.SqlClient;provider connection string=&quot;" +
-                    $"data source={serverName};initial catalog={databaseName};integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;";
+                    $"data source={serverName};initial catalog={databaseName};User ID={username};Password={password};integrated security=False;MultipleActiveResultSets=True;App=EntityFramework&quot;";
                 //DESKTOP-AK7BNHA\SQLEXPRESS
-                connectionString.CodeFirstConnectionString = $"data source={serverName};initial catalog={databaseName};integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
+                connectionString.CodeFirstConnectionString = $"data source={serverName};initial catalog={databaseName};User ID={username};Password={password};integrated security=False;MultipleActiveResultSets=True;App=EntityFramework";
                 return connectionString;
             }
             return null;

@@ -119,8 +119,8 @@ namespace IMS
         private ConnectionStrings GetConnectionStringFromSettings(ApplicationSettings settings)
         {
             // get connection string
-            if(settings!=null && !string.IsNullOrEmpty(settings.DatabaseName) && !string.IsNullOrEmpty(settings.DatabaseServer))
-                return DatabaseHelper.GetConnectionString(settings.DatabaseServer, settings.DatabaseName);
+            if(settings!=null && !string.IsNullOrEmpty(settings.DatabaseDatabase) && !string.IsNullOrEmpty(settings.DatabaseServer))
+                return DatabaseHelper.GetConnectionString(settings.DatabaseServer, settings.DatabaseDatabase, settings.DatabaseUsername, settings.DatabasePassword);
             return null;
         }
         private ApplicationSettings GetSettingsFromFile()
@@ -144,8 +144,12 @@ namespace IMS
             var settings = new ApplicationSettings();
             if (settingsDictionary.Any(x=>x.Key == ApplicationSettingsEnum.DB_Server))
                 settings.DatabaseServer = settingsDictionary.First(x=>x.Key == ApplicationSettingsEnum.DB_Server).Value;
-            if (settingsDictionary.Any(x=> x.Key  == ApplicationSettingsEnum.DB_Name))
-                settings.DatabaseName = settingsDictionary.First(x=> x.Key == ApplicationSettingsEnum.DB_Name).Value;
+            if (settingsDictionary.Any(x=> x.Key  == ApplicationSettingsEnum.DB_Database))
+                settings.DatabaseDatabase = settingsDictionary.First(x=> x.Key == ApplicationSettingsEnum.DB_Database).Value;
+            if (settingsDictionary.Any(x=> x.Key  == ApplicationSettingsEnum.DB_Username))
+                settings.DatabaseUsername = settingsDictionary.First(x=> x.Key == ApplicationSettingsEnum.DB_Username).Value;
+            if (settingsDictionary.Any(x=> x.Key  == ApplicationSettingsEnum.DB_Password))
+                settings.DatabasePassword = settingsDictionary.First(x=> x.Key == ApplicationSettingsEnum.DB_Password).Value;
 
             return settings;
         }
