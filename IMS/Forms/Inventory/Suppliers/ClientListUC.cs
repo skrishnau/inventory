@@ -285,6 +285,7 @@ namespace IMS.Forms.Inventory.Suppliers
         }
         public List<UserModel> SortData(List<UserModel> list, string column, bool ascending)
         {
+            if (string.IsNullOrWhiteSpace(column)) return list;
             return ascending ?
                 list.OrderBy(_ => _.GetType().GetProperty(column).GetValue(_)).ToList() :
                 list.OrderByDescending(_ => _.GetType().GetProperty(column).GetValue(_)).ToList();
@@ -319,8 +320,9 @@ namespace IMS.Forms.Inventory.Suppliers
         {
             if (e.ColumnIndex == _previousIndex)
                 _sortDirection ^= true; // toggle direction
-
-            dgvSuppliers.DataSource = SortData((List<UserModel>)dgvSuppliers.DataSource, dgvSuppliers.Columns[e.ColumnIndex].DataPropertyName, _sortDirection);
+            var column = dgvSuppliers.Columns[e.ColumnIndex].DataPropertyName;
+            if (string.IsNullOrWhiteSpace(column)) return;
+            dgvSuppliers.DataSource = SortData((List<UserModel>)dgvSuppliers.DataSource, column, _sortDirection);
 
             _previousIndex = e.ColumnIndex;
         }

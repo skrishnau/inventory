@@ -20,10 +20,25 @@ namespace Service
         {
             return User != null;
         }
+        private static DatabaseConnectionModel _databaseConnectionModel;
+        public static DatabaseConnectionModel DatabaseConnectionModel
+        {
+            get { return _databaseConnectionModel; }
+            set
+            {
+                _databaseConnectionModel = value;
+                if (value != null)
+                {
+                    var connStr = value.GetConnectionString();
+                    DatabaseContext.EDMXConnectionString = connStr.EDMXConnectionString;
+                    DatabaseContext.CodeFirstConnectionString = connStr.CodeFirstConnectionString;
+                }
+            }
+        }
 
         private static ConnectionStrings _connectionStrings;
         // db connection
-        public static ConnectionStrings ConnectionStrings
+        private static ConnectionStrings ConnectionStrings
         {
             get { return _connectionStrings; }
             set

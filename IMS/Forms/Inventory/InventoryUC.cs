@@ -426,10 +426,6 @@ namespace IMS.Forms.Inventory
 
         private void BtnBackup_Click(object sender, EventArgs e)
         {
-            //var folder = "D:\\sysBackups";
-            //var conn = System.Configuration.ConfigurationManager.ConnectionStrings["DatabaseContextBackup"].ConnectionString;
-            //var backupService = new Service.Core.BackupService(conn, folder);
-            //backupService.BackupDatabase("IMS");
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 var transferForm = Program.container.GetInstance<Backup.DatabaseBackupForm>();

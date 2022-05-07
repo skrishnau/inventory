@@ -22,6 +22,7 @@ using Service.Interfaces;
 using Service.Listeners;
 using Service.Core.Inventory;
 using Service.Core.Users;
+using DTO;
 
 namespace IMS
 {
@@ -84,18 +85,31 @@ namespace IMS
             }
         }
 
-        private bool SetDatabaseConnection(ApplicationSettings settings)
+        private bool SetDatabaseConnection(ApplicationSettingsModel settings)
         {
-            UserSession.ConnectionStrings = GetConnectionStringFromSettings(settings);
-            if (UserSession.ConnectionStrings != null)
+            var isValidDbConnection = settings != null
+                && string.IsNullOrEmpty(settings.DatabaseServer)
+                && string.IsNullOrEmpty(settings.DatabaseDatabase)
+                && string.IsNullOrEmpty(settings.DatabaseUsername)
+                && string.IsNullOrEmpty(settings.DatabasePassword);
+            UserSession.DatabaseConnectionModel = settings.ToDatabaseConnectionModel();
+            if (isValidDbConnection)
             {
-                var testSuccess = DatabaseHelper.TestDatabaseConnection(UserSession.ConnectionStrings);
+                var testSuccess = DatabaseHelper.TestDatabaseConnection(UserSession.DatabaseConnectionModel.GetConnectionString());
                 if (testSuccess)
                 {
                     return true;
                 }
+                else
+                {
+                    var result = MessageBox.Show(this, "Database Offline", "Database Offline", MessageBoxButtons.RetryCancel);
+                    if (result == DialogResult.Retry)
+                    {
+                        InitLoad();
+                    }
+                }
             }
-            if(UserSession.ConnectionStrings == null || string.IsNullOrWhiteSpace(UserSession.ConnectionStrings.EDMXConnectionString))
+            else 
             {
                 // show database configuation page
                 var databaseConfigForm = new DatabaseConfigForm();
@@ -106,24 +120,9 @@ namespace IMS
                 }
                 return false;
             }
-            else
-            {
-                var result = MessageBox.Show(this, "Database Offline", "Database Offline", MessageBoxButtons.RetryCancel);
-                if(result == DialogResult.Retry)
-                {
-                    InitLoad();
-                }
-            }
             return false;
         }
-        private ConnectionStrings GetConnectionStringFromSettings(ApplicationSettings settings)
-        {
-            // get connection string
-            if(settings!=null && !string.IsNullOrEmpty(settings.DatabaseDatabase) && !string.IsNullOrEmpty(settings.DatabaseServer))
-                return DatabaseHelper.GetConnectionString(settings.DatabaseServer, settings.DatabaseDatabase, settings.DatabaseUsername, settings.DatabasePassword);
-            return null;
-        }
-        private ApplicationSettings GetSettingsFromFile()
+        private ApplicationSettingsModel GetSettingsFromFile()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var fileFullPath = Path.Combine(path, Constants.APP_NAME, Constants.DATABASE_CONFIG_FILENAME);
@@ -134,14 +133,14 @@ namespace IMS
                 var lines = File.ReadAllLines(fileFullPath);
                 foreach (var l in lines)
                 {
-                    var keyValue = ApplicationSettings.TrimAndGetSettingsKeyAndValue(l);
+                    var keyValue = ApplicationSettingsModel.TrimAndGetSettingsKeyAndValue(l);
                     if (keyValue == null)
                         continue;
                     settingsDictionary.Add(keyValue);
                 }
             }
             // convert to class for easy access
-            var settings = new ApplicationSettings();
+            var settings = new ApplicationSettingsModel();
             if (settingsDictionary.Any(x=>x.Key == ApplicationSettingsEnum.DB_Server))
                 settings.DatabaseServer = settingsDictionary.First(x=>x.Key == ApplicationSettingsEnum.DB_Server).Value;
             if (settingsDictionary.Any(x=> x.Key  == ApplicationSettingsEnum.DB_Database))

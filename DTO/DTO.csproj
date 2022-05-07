@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperBase\Mappings.cs" />
+    <Compile Include="Common\ApplicationSettingsMapper.cs" />
     <Compile Include="Core\AssignReleaseViewModel.cs" />
     <Compile Include="Core\Business\BranchMapper.cs" />
     <Compile Include="Core\Business\CounterMapper.cs" />
@@ -97,7 +98,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
     <Folder Include="Core\Purchases\" />
     <Folder Include="Core\Users\" />
   </ItemGroup>
