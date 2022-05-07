@@ -88,10 +88,10 @@ namespace IMS
         private bool SetDatabaseConnection(ApplicationSettingsModel settings)
         {
             var isValidDbConnection = settings != null
-                && string.IsNullOrEmpty(settings.DatabaseServer)
-                && string.IsNullOrEmpty(settings.DatabaseDatabase)
-                && string.IsNullOrEmpty(settings.DatabaseUsername)
-                && string.IsNullOrEmpty(settings.DatabasePassword);
+                && !string.IsNullOrEmpty(settings.DatabaseServer)
+                && !string.IsNullOrEmpty(settings.DatabaseDatabase)
+                && !string.IsNullOrEmpty(settings.DatabaseUsername)
+                && !string.IsNullOrEmpty(settings.DatabasePassword);
             UserSession.DatabaseConnectionModel = settings.ToDatabaseConnectionModel();
             if (isValidDbConnection)
             {

@@ -49,6 +49,7 @@ using IMS.Forms.Inventory.Reports.All;
 using IMS.Forms.Inventory.Units;
 using IMS.Forms.Inventory.Transaction;
 using IMS.Forms.MRP;
+using IMS.Forms.Common;
 
 namespace IMS
 {
@@ -64,9 +65,10 @@ namespace IMS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             //Application.Run(new Form1());
             Bootstrap();
-            using (AsyncScopedLifestyle.BeginScope(Program.container))
+            //using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 //using (var _context = DatabaseContext.Context)
                 //{
@@ -75,10 +77,10 @@ namespace IMS
                 var form = container.GetInstance<IDIServiceInstance>().GetForm1();
                 Application.Run(form);// container.GetInstance<Form1>());
             }
-
             
 
         }
+        
 
         public static void Bootstrap()
         {
