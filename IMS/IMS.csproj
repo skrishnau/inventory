@@ -508,6 +508,12 @@
     <Compile Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.Designer.cs">
       <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Settings\Preferences\PreferenceSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Settings\Preferences\PreferenceSettingsForm.Designer.cs">
+      <DependentUpon>PreferenceSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Settings\References\ReferenceCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1116,6 +1122,9 @@
     <EmbeddedResource Include="Forms\Inventory\Settings\InventorySettingsSidebarUC.resx">
       <DependentUpon>InventorySettingsSidebarUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Settings\Preferences\PreferenceSettingsForm.resx">
+      <DependentUpon>PreferenceSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceCreateForm.resx">
       <DependentUpon>ReferenceCreateForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1349,6 +1358,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ClientListReport.rdlc" />
     <EmbeddedResource Include="Reports\LedgerReport.rdlc" />
+    <EmbeddedResource Include="Reports\SalesTransactionReport_SingleHalfPrint.rdlc" />
     <EmbeddedResource Include="Reports\SalesTransactionReport_DoublePrint.rdlc" />
     <EmbeddedResource Include="Reports\SalesTransactionReport.rdlc" />
     <EmbeddedResource Include="Reports\TransactionBarReportUC.rdlc" />

@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Enums
 {
+    public enum AppSettingsKeys
+    {
+        TXN_BILL_PRINT_FORMAT,
+
+    }
+    public enum TransactionBillPrintFormat
+    {
+        Single,
+        SingleHalf,
+        Double,
+    }
    public enum BillSettingsEnum
     {
         BILL_SUFFIX, 

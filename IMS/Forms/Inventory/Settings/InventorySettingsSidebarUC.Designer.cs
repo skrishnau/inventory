@@ -102,7 +102,6 @@
             this.lnkPreferences.TabIndex = 20;
             this.lnkPreferences.TabStop = true;
             this.lnkPreferences.Text = "      Preferences";
-            this.lnkPreferences.Visible = false;
             this.lnkPreferences.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // lnkReferences
@@ -116,10 +115,10 @@
             this.lnkReferences.Location = new System.Drawing.Point(5, 59);
             this.lnkReferences.Margin = new System.Windows.Forms.Padding(5);
             this.lnkReferences.Name = "lnkReferences";
-            this.lnkReferences.Size = new System.Drawing.Size(105, 17);
+            this.lnkReferences.Size = new System.Drawing.Size(146, 17);
             this.lnkReferences.TabIndex = 8;
             this.lnkReferences.TabStop = true;
-            this.lnkReferences.Text = "      References";
+            this.lnkReferences.Text = "      Voucher Numbers";
             this.lnkReferences.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // splitter2

@@ -16,6 +16,7 @@ namespace ViewModel.Utility
         public const string GROUP_SYSTEM = "System";
 
         public const bool IS_MANUFACTURE_REQUIRED = false;
+        public const TransactionBillPrintFormat TXN_BILL_PRINT_FORMAT = TransactionBillPrintFormat.SingleHalf;
 
         public const string KEY_BACKUP_FOLDER_PATH = "BackupFolderPath";
         public const string KEY_SHOW_TRANSACTION_CREATE_IN_FULL_PAGE = "show_transaction_create_in_full_page";
@@ -82,5 +83,6 @@ namespace ViewModel.Utility
 
         public const bool OUT = false;
         public const bool IN = true;
+
     }
 }

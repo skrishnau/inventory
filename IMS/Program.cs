@@ -68,7 +68,7 @@ namespace IMS
 
             //Application.Run(new Form1());
             Bootstrap();
-            //using (AsyncScopedLifestyle.BeginScope(Program.container))
+            using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
                 //using (var _context = DatabaseContext.Context)
                 //{
