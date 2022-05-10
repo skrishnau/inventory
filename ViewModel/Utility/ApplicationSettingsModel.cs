@@ -36,19 +36,7 @@ namespace ViewModel.Utility
                 return null;
             if (!Enum.TryParse<ApplicationSettingsEnum>(split[0], out ApplicationSettingsEnum settingEnum))
                 return null;
-            var settingValue = string.Empty;
-            if (split.Length > 2)
-            {
-                var valueList = new List<string>();
-                split[1] = split[1].TrimStart(); // trim left part of first value
-                for (var i = 1; i < split.Length; i++)
-                    valueList.Add(split[i]);
-                string.Join("=", valueList);
-            }
-            else
-            {
-                settingValue = split[1];
-            }
+            var settingValue = string.Join("=", split.Skip(1)).Trim(); // the value at split[0] is the key
             return new ConfigKeyValue { Key = settingEnum, Value = settingValue };
         }
     }
