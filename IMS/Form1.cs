@@ -92,9 +92,9 @@ namespace IMS
                 && !string.IsNullOrEmpty(settings.DatabaseDatabase)
                 && !string.IsNullOrEmpty(settings.DatabaseUsername)
                 && !string.IsNullOrEmpty(settings.DatabasePassword);
-            UserSession.DatabaseConnectionModel = settings.ToDatabaseConnectionModel();
             if (isValidDbConnection)
             {
+                UserSession.DatabaseConnectionModel = settings.ToDatabaseConnectionModel();
                 var testSuccess = DatabaseHelper.TestDatabaseConnection(UserSession.DatabaseConnectionModel.GetConnectionString());
                 if (testSuccess)
                 {
@@ -111,6 +111,7 @@ namespace IMS
             }
             else 
             {
+                UserSession.DatabaseConnectionModel = null;
                 // show database configuation page
                 var databaseConfigForm = new DatabaseConfigForm();
                 var dialogResult = databaseConfigForm.ShowDialog();

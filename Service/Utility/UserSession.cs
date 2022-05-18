@@ -27,15 +27,18 @@ namespace Service
             set
             {
                 _databaseConnectionModel = value;
-                if (value != null)
+                if (value != null && value.ServerName != null && value.DatabaseName != null && value.Password != null && value.Username != null)
                 {
                     var connStr = value.GetConnectionString();
-                    DatabaseContext.EDMXConnectionString = connStr.EDMXConnectionString;
-                    DatabaseContext.CodeFirstConnectionString = connStr.CodeFirstConnectionString;
+                    if (connStr != null)
+                    {
+                        DatabaseContext.EDMXConnectionString = connStr.EDMXConnectionString;
+                        DatabaseContext.CodeFirstConnectionString = connStr.CodeFirstConnectionString;
+                    }
                 }
             }
         }
-
+        /*
         private static ConnectionStrings _connectionStrings;
         // db connection
         private static ConnectionStrings ConnectionStrings
@@ -50,7 +53,7 @@ namespace Service
                 }
                 _connectionStrings = value;
             }
-        }
+        }*/
 
     }
 }

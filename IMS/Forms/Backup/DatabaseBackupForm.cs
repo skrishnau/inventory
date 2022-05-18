@@ -68,12 +68,12 @@ namespace IMS.Forms.Backup
                 message += "File Name is requried \n";
             }
 
-            var di = new DirectoryInfo(folder);
+            /*var di = new DirectoryInfo(folder);
             if (!di.Exists)
             {
                 message += "Folder path doesn't exist\n";
                 errorProvider1.SetError(txtFolderPath, "Folder path doesn't exist");
-            }
+            }*/
             if (!string.IsNullOrEmpty(message))
             {
                 PopupMessage.ShowInfoMessage(message);

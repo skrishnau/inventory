@@ -63,7 +63,7 @@ namespace ViewModel.Utility
 
         public ConnectionStrings GetConnectionString()//string ServerName, string DatabaseName, string Username, string Password
         {
-            if (!string.IsNullOrEmpty(DatabaseName) && !string.IsNullOrEmpty(ServerName))
+            if (!string.IsNullOrWhiteSpace(DatabaseName) && !string.IsNullOrWhiteSpace(ServerName) && !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password))
             {
                 //DESKTOP-AK7BNHA\\SQLEXPRESS;;; IMS
                 // create connection string and store it in UserSession
