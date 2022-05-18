@@ -33,6 +33,7 @@
             this.btnProfitAndLoss = new System.Windows.Forms.LinkLabel();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlLinks = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnDaywiseTxn = new System.Windows.Forms.LinkLabel();
             this.btnProductLedger = new System.Windows.Forms.LinkLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLinks.SuspendLayout();
@@ -93,9 +94,9 @@
             // 
             this.splitter3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter3.Location = new System.Drawing.Point(3, 84);
+            this.splitter3.Location = new System.Drawing.Point(3, 111);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(134, 3);
+            this.splitter3.Size = new System.Drawing.Size(174, 3);
             this.splitter3.TabIndex = 20;
             this.splitter3.TabStop = false;
             // 
@@ -104,6 +105,7 @@
             this.pnlLinks.Controls.Add(this.btnPayments);
             this.pnlLinks.Controls.Add(this.btnLedger);
             this.pnlLinks.Controls.Add(this.btnProfitAndLoss);
+            this.pnlLinks.Controls.Add(this.btnDaywiseTxn);
             this.pnlLinks.Controls.Add(this.splitter3);
             this.pnlLinks.Controls.Add(this.btnProductLedger);
             this.pnlLinks.Controls.Add(this.splitter1);
@@ -111,9 +113,27 @@
             this.pnlLinks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlLinks.Location = new System.Drawing.Point(0, 0);
             this.pnlLinks.Name = "pnlLinks";
-            this.pnlLinks.Size = new System.Drawing.Size(178, 436);
+            this.pnlLinks.Size = new System.Drawing.Size(209, 436);
             this.pnlLinks.TabIndex = 21;
             this.pnlLinks.WrapContents = false;
+            // 
+            // btnDaywiseTxn
+            // 
+            this.btnDaywiseTxn.AutoSize = true;
+            this.btnDaywiseTxn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDaywiseTxn.Image = global::IMS.Properties.Resources.icons8_Combo_Chart_16px;
+            this.btnDaywiseTxn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDaywiseTxn.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.btnDaywiseTxn.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnDaywiseTxn.Location = new System.Drawing.Point(5, 86);
+            this.btnDaywiseTxn.Margin = new System.Windows.Forms.Padding(5);
+            this.btnDaywiseTxn.Name = "btnDaywiseTxn";
+            this.btnDaywiseTxn.Size = new System.Drawing.Size(170, 17);
+            this.btnDaywiseTxn.TabIndex = 23;
+            this.btnDaywiseTxn.TabStop = true;
+            this.btnDaywiseTxn.Text = "      Daywise Transactions";
+            this.btnDaywiseTxn.Visible = false;
+            this.btnDaywiseTxn.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // btnProductLedger
             // 
@@ -123,7 +143,7 @@
             this.btnProductLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProductLedger.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.btnProductLedger.LinkColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnProductLedger.Location = new System.Drawing.Point(5, 95);
+            this.btnProductLedger.Location = new System.Drawing.Point(5, 122);
             this.btnProductLedger.Margin = new System.Windows.Forms.Padding(5);
             this.btnProductLedger.Name = "btnProductLedger";
             this.btnProductLedger.Size = new System.Drawing.Size(130, 17);
@@ -137,9 +157,9 @@
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(3, 120);
+            this.splitter1.Location = new System.Drawing.Point(3, 147);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(134, 3);
+            this.splitter1.Size = new System.Drawing.Size(174, 3);
             this.splitter1.TabIndex = 22;
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
@@ -150,7 +170,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlLinks);
             this.Name = "AccountsSidebarUC";
-            this.Size = new System.Drawing.Size(178, 436);
+            this.Size = new System.Drawing.Size(209, 436);
             this.pnlLinks.ResumeLayout(false);
             this.pnlLinks.PerformLayout();
             this.ResumeLayout(false);
@@ -165,5 +185,6 @@
         private System.Windows.Forms.FlowLayoutPanel pnlLinks;
         protected internal System.Windows.Forms.LinkLabel btnProductLedger;
         private System.Windows.Forms.Splitter splitter1;
+        protected internal System.Windows.Forms.LinkLabel btnDaywiseTxn;
     }
 }

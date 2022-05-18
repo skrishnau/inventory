@@ -34,7 +34,8 @@ namespace IMS.Forms.Inventory.Reports
         private readonly AccountsSidebarUC sidebarUc;
         private readonly ProductLedgerUC _productLedgerUC;
 
-        public AccountsUC(//IUserService userService, IReportService reportService, IPaymentService paymentService, IDatabaseChangeListener databaseChangeListener, IAppSettingService appSettingService,
+        public AccountsUC(IDIServiceInstance dIServiceInstance,
+            //IUserService userService, IReportService reportService, IPaymentService paymentService, IDatabaseChangeListener databaseChangeListener, IAppSettingService appSettingService,
             ProfitAndLossUC profitAndLossUC, PaymentListUC paymentListUC, LedgerUC ledgerUC, AccountsSidebarUC sidebarUC, ProductLedgerUC productLedgerUC)
         {
             //this._userService = userService;
@@ -82,9 +83,14 @@ namespace IMS.Forms.Inventory.Reports
             sidebarUc.btnLedger.Click += BtnLedger_Click;
             sidebarUc.btnProductLedger.Click += BtnProductLedger_Click;
             sidebarUc.btnProfitAndLoss.Click += BtnProfitAndLoss_Click;
+            sidebarUc.btnDaywiseTxn.Click += BtnDaywiseTxn_Click;
             BtnPayments_Click(sidebarUc.btnPayments, null);
         }
 
+        private void BtnDaywiseTxn_Click(object sender, EventArgs e)
+        {
+            //var daywiseTxnUc = IDIServiceInstance.GetDayWiseTxnUC();
+        }
 
         private void BtnProfitAndLoss_Click(object sender, EventArgs e)
         {

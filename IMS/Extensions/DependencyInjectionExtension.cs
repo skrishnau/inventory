@@ -144,7 +144,7 @@ namespace IMS
             LedgerUC ledgerUC = new LedgerUC(_reportService, _userService, _appSettingService, _databaseChangeListener);
             AccountsSidebarUC sidebarUC = new AccountsSidebarUC();
             ProductLedgerUC productLedgerUC = new ProductLedgerUC(_reportService, _productService, _appSettingService, _databaseChangeListener);
-            return new AccountsUC(profitAndLossUC, paymentListUC, ledgerUC, sidebarUC, productLedgerUC);
+            return new AccountsUC((IDIServiceInstance)this, profitAndLossUC, paymentListUC, ledgerUC, sidebarUC, productLedgerUC);
         }
         public InventoryUC GetInventoryUC()
         {

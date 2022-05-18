@@ -102,6 +102,7 @@
             this.lnkPreferences.TabIndex = 20;
             this.lnkPreferences.TabStop = true;
             this.lnkPreferences.Text = "      Preferences";
+            this.lnkPreferences.Visible = false;
             this.lnkPreferences.VisitedLinkColor = System.Drawing.Color.Black;
             // 
             // lnkReferences
