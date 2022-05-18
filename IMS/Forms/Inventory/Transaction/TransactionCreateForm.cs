@@ -381,9 +381,8 @@ namespace IMS.Forms.Inventory.Transaction
                     rbCredit.Checked = model.PaymentType == OrderPaymentTypeEnum.Credit.ToString(); // !rbCash.Checked;
                     ShowPaymentDueDateLayout(rbCredit.Checked);
                     txtPaidAmount.Value = model.PaidAmount;
-
-                    var invModel = OrderItemMapper.MapToInventoryUnitModel(model.OrderItems);
-
+                    // we need to assign id also cause we need it for order item update and most importantly on checkout of ZeroRate orders 
+                    var invModel = OrderItemMapper.MapToInventoryUnitModel(model.OrderItems, true);
                     dgvItems.AddRows(invModel);
 
                     if (model.IsVerified && !model.IsCompleted)
