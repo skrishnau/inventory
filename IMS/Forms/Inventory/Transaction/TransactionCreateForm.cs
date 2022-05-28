@@ -51,6 +51,8 @@ namespace IMS.Forms.Inventory.Transaction
 
         private bool _saveOrderImmediatelyAfterLoading;
 
+        private bool _isViewMode;
+
         public TransactionCreateForm(IUserService userService,
             IBusinessService businessService,
             IInventoryService inventoryService,
@@ -115,13 +117,26 @@ namespace IMS.Forms.Inventory.Transaction
 
         #region Functions
 
-        public void SetDataForEdit(OrderEditModel editModel, bool saveOrderImmediatelyAfterLoading = false)//(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
+        public void SetDataForEdit(OrderEditModel editModel, bool saveOrderImmediatelyAfterLoading = false, bool isViewMode = false)//(OrderTypeEnum orderType, int orderId, bool showPrintView = false)
         {
             _orderType = editModel.OrderType;
             _orderId = editModel.OrderId;
             _showPrintView = editModel.ShowPrintView;
             _orderOrDirect = editModel.OrderOrDirect;
             _saveOrderImmediatelyAfterLoading = saveOrderImmediatelyAfterLoading;
+            _isViewMode = isViewMode;
+
+            UpdateViewForViewMode();
+        }
+        private void UpdateViewForViewMode()
+        {
+            if (_isViewMode)
+            {
+                saveFooterUC1.btnCheckout.Visible = false;
+                saveFooterUC1.btnCheckoutAndPrint.Visible = false;
+                saveFooterUC1.btnLock.Visible = false;
+                saveFooterUC1.btnSave.Visible = false;
+            }
         }
 
         private void InitializeDataGridView()
@@ -166,8 +181,11 @@ namespace IMS.Forms.Inventory.Transaction
 
         private void InitializeSaveFooter()
         {
-            saveFooterUC1.pnlCheckout.Visible = true;
-            saveFooterUC1.pnlCheckoutAndPrint.Visible = true;
+            if (!_isViewMode)
+            {
+                saveFooterUC1.pnlCheckout.Visible = true;
+                saveFooterUC1.pnlCheckoutAndPrint.Visible = true;
+            }
         }
 
         private void InitializeEvents()
@@ -412,13 +430,16 @@ namespace IMS.Forms.Inventory.Transaction
             {
                 case OrderTypeEnum.Purchase:
                     lblClient.Text = "Supplier";
-                    this.Text = (model == null ? "Create" : "Edit") + (_orderOrDirect == OrderOrDirectEnum.Order ? " Purchase Transaction" : " Direct Receive");
+                    this.Text = (model == null ? "Create" : _isViewMode ? "View" : "Edit") + (_orderOrDirect == OrderOrDirectEnum.Order ? " Purchase Transaction" : " Direct Receive");
                     saveFooterUC1.btnCheckoutAndPrint.Visible = false;
                     break;
                 case OrderTypeEnum.Sale:
                     lblClient.Text = "Customer";
-                    this.Text = (model == null ? "Create" : "Edit") + (_orderOrDirect == OrderOrDirectEnum.Order ? " Sale Transaction" : " Direct Issue");
-                    saveFooterUC1.btnCheckoutAndPrint.Visible = true;
+                    this.Text = (model == null ? "Create" : _isViewMode ? "View" : "Edit") + (_orderOrDirect == OrderOrDirectEnum.Order ? " Sale Transaction" : " Direct Issue");
+                    if (!_isViewMode)
+                    {
+                        saveFooterUC1.btnCheckoutAndPrint.Visible = true;
+                    }
                     break;
                     //case OrderTypeEnum.Move:
                     //    lblClient.Visible = false;
@@ -460,7 +481,7 @@ namespace IMS.Forms.Inventory.Transaction
             txtTotal.Enabled = enabled;
             rbCash.Enabled = enabled;
             rbCredit.Enabled = enabled;
-            saveFooterUC1.btnSave.Visible = enabled;
+            saveFooterUC1.btnSave.Visible = enabled && !_isViewMode;
             dtCompletedDate.Enabled = enabled;
             dtExpectedDate.Enabled = enabled;
             dtPaymentDueDate.Enabled = enabled;

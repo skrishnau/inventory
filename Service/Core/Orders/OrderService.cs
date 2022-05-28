@@ -104,6 +104,10 @@ namespace Service.Core.Orders
                 orders = orders.Where(x => x.ReferenceNumber == searchModel.ReceiptNo);
             if (searchModel.ProductId > 0)
                 orders = orders.Where(x => x.OrderItems.Any(y => y.ProductId == searchModel.ProductId));
+            if (searchModel.CheckoutDate.HasValue)
+                orders = orders.Where(x => DbFunctions.TruncateTime(x.CompletedDate) == searchModel.CheckoutDate.Value);
+            if (!string.IsNullOrWhiteSpace(searchModel.CashCredit))
+                orders = orders.Where(x => x.PaymentType == searchModel.CashCredit);
             return orders;
         }
 

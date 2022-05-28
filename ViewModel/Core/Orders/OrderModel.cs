@@ -163,6 +163,9 @@ namespace ViewModel.Core.Orders
         public string Client { get; set; }
         public string ReceiptNo { get; set; }
         public int ProductId { get; set; }
+        // advance search
+        public DateTime? CheckoutDate { get; set; }
+        public string CashCredit { get; set; }
     }
 
 }

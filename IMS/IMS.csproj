@@ -526,6 +526,12 @@
     <Compile Include="Forms\Inventory\Settings\References\ReferenceListUC.Designer.cs">
       <DependentUpon>ReferenceListUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionAdvanceSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Transaction\TransactionAdvanceSearchForm.Designer.cs">
+      <DependentUpon>TransactionAdvanceSearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Transaction\TransactionCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1130,6 +1136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Settings\References\ReferenceListUC.resx">
       <DependentUpon>ReferenceListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionAdvanceSearchForm.resx">
+      <DependentUpon>TransactionAdvanceSearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Transaction\TransactionCreateForm.resx">
       <DependentUpon>TransactionCreateForm.cs</DependentUpon>
@@ -1892,6 +1901,7 @@
     <None Include="Resources\icons8-restart-16.png" />
     <None Include="Resources\icons8-restart-24.png" />
     <None Include="Resources\icons8-engineer-24.png" />
+    <None Include="Resources\icons8-eye-16.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -43,6 +43,10 @@ namespace IMS.Forms.Inventory.Transaction
 
         OrderListTypeEnum _orderListTypeEnum;
 
+        // advance search
+        TransactionAdvanceSearchForm _transactionAdvanceSearchForm = new TransactionAdvanceSearchForm();
+        TransactionAdvanceSearchEventArgs _transactionAdvanceSearchEventArgs;
+
         public TransactionListUC(IOrderService orderService, IInventoryService inventoryService, IUserService userService, IProductService productService, IDatabaseChangeListener listener, OrderTypeEnum orderType, OrderListTypeEnum orderListTypeEnum, IUomService uomService, IProductOwnerService productOwnerService)
         {
             _orderService = orderService;
@@ -133,13 +137,56 @@ namespace IMS.Forms.Inventory.Transaction
             // btnPayment.Click += btnPayment_Click;
             btnPrint.Click += BtnPrint_Click;
             btnEdit.Click += BtnEdit_Click;
+            btnView.Click += BtnView_Click;
             btnCancel.Click += BtnCancel_Click;
             dgvOrders.DataBindingComplete += DgvOrders_DataBindingComplete;
             txtSearchClient.TextChanged += TxtName_TextChanged;
             txtSearchReceiptNo.TextChanged += TxtSearchReceiptNo_TextChanged;
             btnViewParentOrder.Click += BtnViewParentOrder_Click;
             cbProduct.SelectedValueChanged += CbProduct_SelectedValueChanged;
+            chkAdvanceSearch.CheckedChanged += ChkAdvanceSearch_CheckedChanged;
+            btnAdvanceSearch.Click += BtnAdvanceSearch_Click;
+            _transactionAdvanceSearchForm.DoneClicked += TransactionAdvanceSearchForm_DoneClicked;
         }
+
+        private void BtnAdvanceSearch_Click(object sender, EventArgs e)
+        {
+            _transactionAdvanceSearchForm.ShowDialog();
+        }
+
+        private void ChkAdvanceSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkAdvanceSearch.Checked)
+            {
+                //_transactionAdvanceSearchEventArgs = null;
+                //lblAdvanceSearchData.Text = string.Empty;
+                //_transactionAdvanceSearchForm.ClearInputs();
+            }
+            if(_transactionAdvanceSearchEventArgs != null && !_transactionAdvanceSearchEventArgs.AreAllDataEmpty())
+            {
+                PopulateOrders();
+            }
+        }
+
+        private void TransactionAdvanceSearchForm_DoneClicked(object sender, TransactionAdvanceSearchEventArgs e)
+        {
+            _transactionAdvanceSearchEventArgs = e;
+            // set text
+            if (e.AreAllDataEmpty())
+            {
+                lblAdvanceSearchData.Text = string.Empty;
+                chkAdvanceSearch.Checked = false;
+                chkAdvanceSearch.Visible = false;
+            }
+            else
+            {
+                lblAdvanceSearchData.Text = $"Advance Search\nDate: {e.NepaliDate}\nCash/Credit: {e.CashCredit}";
+                chkAdvanceSearch.Checked = true;
+                chkAdvanceSearch.Visible = true;
+            }
+            PopulateOrders();
+        }
+
 
         private void _listener_ProductUpdated(object sender, BaseEventArgs<ProductModel> e)
         {
@@ -198,6 +245,11 @@ namespace IMS.Forms.Inventory.Transaction
                     ReceiptNo = txtSearchReceiptNo.Text,
                     ProductId = productId,
                 };
+                if (chkAdvanceSearch.Checked && _transactionAdvanceSearchEventArgs != null)
+                {
+                    orderSearch.CheckoutDate = _transactionAdvanceSearchEventArgs.Date;
+                    orderSearch.CashCredit = _transactionAdvanceSearchEventArgs.CashCredit == "Both" ? null : _transactionAdvanceSearchEventArgs.CashCredit;
+                }
                 helper.Reset(orderSearch);
             }
 
@@ -292,12 +344,14 @@ namespace IMS.Forms.Inventory.Transaction
                 lblReferenceNo.Text = model.ReferenceNumber + "  (" + model.Status + ")";
                 lblCustomer.Text = model.User;
                 pnlEditedOrder.Visible = model.ParentOrderId > 0;
+                btnView.Visible = true;
             }
             else
             {
                 // btnPayment.Visible = false;
                 btnPrint.Visible = false;
                 btnEdit.Visible = false;
+                btnView.Visible = false;
                 btnCancel.Visible = false;
                 dgvItems.DataSource = null;
             }
@@ -393,6 +447,14 @@ namespace IMS.Forms.Inventory.Transaction
             return order;
         }
 
+        private void BtnView_Click(object sender, EventArgs e)
+        {
+            var order = GetRowDataAndStoreSelectedIndex();
+            if (order != null)
+            {
+                ShowAddEditDialog((OrderTypeEnum)Enum.Parse(typeof(OrderTypeEnum), order.OrderType), order?.Id ?? 0, isViewMode: true);
+            }
+        }
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             var order = GetRowDataAndStoreSelectedIndex();
@@ -461,7 +523,7 @@ namespace IMS.Forms.Inventory.Transaction
 
 
         // saveOrderImmediatelyAfterLoading: saves the order after loading the ui without giving user to enter anything
-        private void ShowAddEditDialog(OrderTypeEnum orderType, int orderId = 0, bool saveOrderImmediatelyAfterLoading = false)
+        private void ShowAddEditDialog(OrderTypeEnum orderType, int orderId = 0, bool saveOrderImmediatelyAfterLoading = false, bool isViewMode = false)
         {
             using (AsyncScopedLifestyle.BeginScope(Program.container))
             {
@@ -472,7 +534,7 @@ namespace IMS.Forms.Inventory.Transaction
                     OrderType = orderType,
                     OrderId = orderId
                 };
-                orderForm.SetDataForEdit(orderEditModel, saveOrderImmediatelyAfterLoading);//orderType, orderId
+                orderForm.SetDataForEdit(orderEditModel, saveOrderImmediatelyAfterLoading, isViewMode);//orderType, orderId
                 orderForm.SavedOrderImmediatelyAfterLoading -= OrderForm_SavedOrderImmediatelyAfterLoading;
                 orderForm.SavedOrderImmediatelyAfterLoading += OrderForm_SavedOrderImmediatelyAfterLoading;
                 orderForm.ShowDialog(this);

@@ -34,7 +34,6 @@
             this.pnlNewTransaction = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPurchaseTransaction = new System.Windows.Forms.Button();
             this.btnSaleTransaction = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,6 +46,8 @@
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.pnlTransactionActions = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPrint = new IMS.Forms.Common.Buttons.MenuButton();
+            this.btnView = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +86,10 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAdvanceSearch = new System.Windows.Forms.LinkLabel();
+            this.chkAdvanceSearch = new System.Windows.Forms.CheckBox();
+            this.lblAdvanceSearchData = new System.Windows.Forms.Label();
             this.pnlNewTransaction.SuspendLayout();
             this.pnlTransactionActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
@@ -100,6 +105,7 @@
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitter1
@@ -117,7 +123,7 @@
             this.pnlNewTransaction.Controls.Add(this.btnPurchaseTransaction);
             this.pnlNewTransaction.Controls.Add(this.btnSaleTransaction);
             this.pnlNewTransaction.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.pnlNewTransaction.Location = new System.Drawing.Point(798, 2);
+            this.pnlNewTransaction.Location = new System.Drawing.Point(798, 0);
             this.pnlNewTransaction.Name = "pnlNewTransaction";
             this.pnlNewTransaction.Size = new System.Drawing.Size(263, 36);
             this.pnlNewTransaction.TabIndex = 3;
@@ -154,21 +160,6 @@
             this.btnSaleTransaction.Text = "  New Sale";
             this.btnSaleTransaction.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaleTransaction.UseVisualStyleBackColor = false;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEdit.Location = new System.Drawing.Point(226, 5);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(105, 28);
-            this.btnEdit.TabIndex = 1;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEdit.UseVisualStyleBackColor = false;
             // 
             // cbProduct
             // 
@@ -264,6 +255,7 @@
             // pnlTransactionActions
             // 
             this.pnlTransactionActions.Controls.Add(this.btnPrint);
+            this.pnlTransactionActions.Controls.Add(this.btnView);
             this.pnlTransactionActions.Controls.Add(this.btnEdit);
             this.pnlTransactionActions.Controls.Add(this.btnCancel);
             this.pnlTransactionActions.Dock = System.Windows.Forms.DockStyle.Top;
@@ -289,6 +281,36 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = false;
             // 
+            // btnView
+            // 
+            this.btnView.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnView.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.Image = global::IMS.Properties.Resources.icons8_eye_16;
+            this.btnView.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnView.Location = new System.Drawing.Point(226, 5);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(105, 28);
+            this.btnView.TabIndex = 18;
+            this.btnView.Text = "View";
+            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnView.UseVisualStyleBackColor = false;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnEdit.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEdit.Location = new System.Drawing.Point(115, 5);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(105, 28);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = false;
+            // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -296,7 +318,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Image = global::IMS.Properties.Resources.icons8_Delete_16px_Dark;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(148, 5);
+            this.btnCancel.Location = new System.Drawing.Point(37, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 28);
             this.btnCancel.TabIndex = 17;
@@ -629,6 +651,9 @@
             this.flowLayoutPanel1.Controls.Add(this.panel8);
             this.flowLayoutPanel1.Controls.Add(this.panel9);
             this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Controls.Add(this.chkAdvanceSearch);
+            this.flowLayoutPanel1.Controls.Add(this.lblAdvanceSearchData);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 35);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -673,6 +698,41 @@
             this.panel6.Size = new System.Drawing.Size(179, 28);
             this.panel6.TabIndex = 19;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnAdvanceSearch);
+            this.panel1.Location = new System.Drawing.Point(850, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(97, 24);
+            this.panel1.TabIndex = 19;
+            // 
+            // btnAdvanceSearch
+            // 
+            this.btnAdvanceSearch.AutoSize = true;
+            this.btnAdvanceSearch.Location = new System.Drawing.Point(3, 5);
+            this.btnAdvanceSearch.Name = "btnAdvanceSearch";
+            this.btnAdvanceSearch.Size = new System.Drawing.Size(87, 13);
+            this.btnAdvanceSearch.TabIndex = 18;
+            this.btnAdvanceSearch.TabStop = true;
+            this.btnAdvanceSearch.Text = "Advance Search";
+            // 
+            // chkAdvanceSearch
+            // 
+            this.chkAdvanceSearch.AutoSize = true;
+            this.chkAdvanceSearch.Location = new System.Drawing.Point(953, 3);
+            this.chkAdvanceSearch.Name = "chkAdvanceSearch";
+            this.chkAdvanceSearch.Size = new System.Drawing.Size(15, 14);
+            this.chkAdvanceSearch.TabIndex = 20;
+            this.chkAdvanceSearch.UseVisualStyleBackColor = true;
+            // 
+            // lblAdvanceSearchData
+            // 
+            this.lblAdvanceSearchData.AutoSize = true;
+            this.lblAdvanceSearchData.Location = new System.Drawing.Point(974, 0);
+            this.lblAdvanceSearchData.Name = "lblAdvanceSearchData";
+            this.lblAdvanceSearchData.Size = new System.Drawing.Size(0, 13);
+            this.lblAdvanceSearchData.TabIndex = 21;
+            // 
             // TransactionListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -698,6 +758,7 @@
             this.panel5.PerformLayout();
             this.pnlEditedOrder.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -706,6 +767,8 @@
             this.panel9.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -768,5 +831,10 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.CheckBox chkAdvanceSearch;
+        private System.Windows.Forms.Label lblAdvanceSearchData;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.LinkLabel btnAdvanceSearch;
+        protected internal System.Windows.Forms.Button btnView;
     }
 }
