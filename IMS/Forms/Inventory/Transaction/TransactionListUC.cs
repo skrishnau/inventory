@@ -117,7 +117,7 @@ namespace IMS.Forms.Inventory.Transaction
 
 
             //dgvOrders.DataSource = _bindingSource;
-            helper = new TransactionListPaginationHelper(_bindingSource, dgvOrders, bindingNavigator1, _orderService, _orderType, _orderListTypeEnum);
+            helper = new TransactionListPaginationHelper(_bindingSource, dgvOrders, bindingNavigator1, lblTotalAmount,lblTotalPaidAmount, _orderService, _orderType, _orderListTypeEnum);
         }
 
         private void InitializeEvents()

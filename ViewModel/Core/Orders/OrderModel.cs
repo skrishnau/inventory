@@ -167,5 +167,11 @@ namespace ViewModel.Core.Orders
         public DateTime? CheckoutDate { get; set; }
         public string CashCredit { get; set; }
     }
+    public class TransactionListSummaryModel
+    {
+        public int TotalCount { get; set; }
+        public decimal? TotalTxnAmount { get; set; }
+        public decimal? TotalPaidAmount { get; set; }
+    }
 
 }

@@ -216,11 +216,16 @@ namespace IMS.Forms.Common.Pagination
 
         private OrderSearchModel _orderSearchModel = new OrderSearchModel();
 
-        public TransactionListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, IOrderService orderService, OrderTypeEnum orderType, OrderListTypeEnum orderListType )
+        ToolStripLabel _lblTotalAmount; ToolStripLabel _lblTotalPaidAmount;
+
+        public TransactionListPaginationHelper(BindingSource bindingSource, DataGridView dataGridView, BindingNavigator bindingNavigator, ToolStripLabel lblTotalAmount, ToolStripLabel lblTotalPaidAmount, IOrderService orderService, OrderTypeEnum orderType, OrderListTypeEnum orderListType )
         {
             this.bindingSource1 = bindingSource;
             this.dataGridView1 = dataGridView;
             this.bindingNavigator1 = bindingNavigator;
+            _lblTotalAmount = lblTotalAmount;
+            _lblTotalPaidAmount = lblTotalPaidAmount;
+
             this._orderService = orderService;
             _orderType = orderType;
             _orderListType = orderListType;
@@ -228,7 +233,9 @@ namespace IMS.Forms.Common.Pagination
             bindingNavigator1.BindingSource = bindingSource1;
             bindingSource1.CurrentChanged += new System.EventHandler(bindingSource1_CurrentChanged);
             var totalRecords = _orderService.GetAllOrdersCount(_orderSearchModel);// _orderType, _orderListType, _searchClient, _searchReceiptNo);
-            bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
+            bindingSource1.DataSource = new PageOffsetList(totalRecords.TotalCount, pageSize);
+            _lblTotalPaidAmount.Text = "Total Paid Amount: " + totalRecords.TotalPaidAmount.GetValueOrDefault().ToString("0.00");
+            _lblTotalAmount.Text = "Total Transaction Amount: " + totalRecords.TotalTxnAmount.GetValueOrDefault().ToString("0.00");
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
@@ -278,7 +285,9 @@ namespace IMS.Forms.Common.Pagination
             //_orderListType = searchModel.OrderListType;
             _orderSearchModel = searchModel;
             var totalRecords = _orderService.GetAllOrdersCount(searchModel);// _orderType,  _orderListType, _searchClient, _searchReceiptNo);
-            bindingSource1.DataSource = new PageOffsetList(totalRecords, pageSize);
+            bindingSource1.DataSource = new PageOffsetList(totalRecords.TotalCount, pageSize);
+            _lblTotalPaidAmount.Text = "Total Paid Amount: " + totalRecords.TotalPaidAmount.GetValueOrDefault().ToString("0.00");
+            _lblTotalAmount.Text = "Total Transaction Amount: " + totalRecords.TotalTxnAmount.GetValueOrDefault().ToString("0.00");
         }
     }
 

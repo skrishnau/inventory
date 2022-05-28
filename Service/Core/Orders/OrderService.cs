@@ -48,12 +48,22 @@ namespace Service.Core.Orders
 
         #region Get Functions
 
-        public int GetAllOrdersCount(OrderSearchModel searchModel)//OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
+        public TransactionListSummaryModel GetAllOrdersCount(OrderSearchModel searchModel)//OrderTypeEnum orderType, OrderListTypeEnum orderListType, string userSearchText, string receiptNoSearchText)
         {
             using (var _context = DatabaseContext.Context)
             {
                 var orders = GetAllOrdersQuery(_context, searchModel);// orderType, orderListType, userSearchText, receiptNoSearchText);
-                return orders.Count();
+                var model = new TransactionListSummaryModel();
+                model.TotalCount = orders.Count();
+                var saleStr = OrderTypeEnum.Sale.ToString();
+                if (model.TotalCount > 0)
+                {
+                    //var sumQuery = orders.Select(x => new { x.OrderType, x.PaidAmount, x.TotalAmount }).AsEnumerable();
+                    //model.TotalPaidAmount = sumQuery.Sum(x => x.OrderType == saleStr ? x.PaidAmount : -1*x.PaidAmount);
+                    model.TotalPaidAmount = orders.Sum(x => x.PaidAmount);
+                    model.TotalTxnAmount = orders.Sum(x => x.TotalAmount);
+                }
+                return model;//orders.Count();
             }
         }
 
